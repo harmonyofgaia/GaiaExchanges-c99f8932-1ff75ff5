@@ -34,9 +34,7 @@ export function DimensionalFractureDashboard() {
   const handleInitialize = async () => {
     try {
       await dimensionalFracture.initializeDimensionalFractureSystem();
-      toast.success(
-        "Dimensional Fracture System initialized! Spacetime is now unstable.",
-      );
+      toast.success("Dimensional Fracture System initialized! Spacetime is now unstable.");
     } catch (error) {
       toast.error("Failed to initialize Dimensional Fracture System");
     }
@@ -54,9 +52,7 @@ export function DimensionalFractureDashboard() {
   const handleBreachDimension = async () => {
     try {
       await dimensionalFracture.breachDimension("Parallel-Universe-7");
-      toast.success(
-        "Dimensional breach successful! Parallel reality accessed.",
-      );
+      toast.success("Dimensional breach successful! Parallel reality accessed.");
     } catch (error) {
       toast.error("Failed to breach dimension");
     }
@@ -83,9 +79,7 @@ export function DimensionalFractureDashboard() {
           </div>
           <div className="flex items-center gap-2">
             <Layers className="h-4 w-4 text-red-400" />
-            <span className="text-sm">
-              Dimensional Breaches: {dimensionalBreaches}
-            </span>
+            <span className="text-sm">Dimensional Breaches: {dimensionalBreaches}</span>
           </div>
           <div className="flex items-center gap-2">
             <Clock className="h-4 w-4 text-yellow-400" />
@@ -93,21 +87,15 @@ export function DimensionalFractureDashboard() {
           </div>
           <div className="flex items-center gap-2">
             <Atom className="h-4 w-4 text-purple-400" />
-            <span className="text-sm">
-              Reality Fragments: {realityFragments}
-            </span>
+            <span className="text-sm">Reality Fragments: {realityFragments}</span>
           </div>
           <div className="flex items-center gap-2">
             <Target className="h-4 w-4 text-orange-400" />
-            <span className="text-sm">
-              Fracture Intensity: {fractureIntensity}%
-            </span>
+            <span className="text-sm">Fracture Intensity: {fractureIntensity}%</span>
           </div>
           <div className="flex items-center gap-2">
             <AlertTriangle className="h-4 w-4 text-red-400" />
-            <span className="text-sm">
-              Spacetime Stability: {spacetimeStability}%
-            </span>
+            <span className="text-sm">Spacetime Stability: {spacetimeStability}%</span>
           </div>
         </div>
 
@@ -153,9 +141,7 @@ export function DimensionalFractureDashboard() {
         </div>
 
         <div className="space-y-2">
-          <h4 className="text-sm font-medium text-orange-400">
-            Fracture Capabilities:
-          </h4>
+          <h4 className="text-sm font-medium text-orange-400">Fracture Capabilities:</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
             {capabilities.map((capability) => (
               <div key={capability.id} className="flex justify-between">
@@ -170,8 +156,8 @@ export function DimensionalFractureDashboard() {
 
         <div className="text-xs text-muted-foreground">
           <p className="italic">
-            "When spacetime itself becomes your weapon, reality becomes
-            optional. Every dimension is just another battlefield to conquer."
+            "When spacetime itself becomes your weapon, reality becomes optional. Every dimension is
+            just another battlefield to conquer."
           </p>
         </div>
       </CardContent>

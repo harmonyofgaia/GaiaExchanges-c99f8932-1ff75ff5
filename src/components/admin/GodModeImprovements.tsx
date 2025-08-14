@@ -120,22 +120,15 @@ export function GodModeImprovements() {
         <CardContent>
           <div className="text-center space-y-4">
             <p className="text-xl text-muted-foreground">
-              The most advanced admin system ever created - Invisible,
-              Quantum-Powered, Unstoppable
+              The most advanced admin system ever created - Invisible, Quantum-Powered, Unstoppable
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
-              <Badge className="bg-red-600 text-white px-4 py-2 text-lg">
-                👻 100% INVISIBLE
-              </Badge>
+              <Badge className="bg-red-600 text-white px-4 py-2 text-lg">👻 100% INVISIBLE</Badge>
               <Badge className="bg-purple-600 text-white px-4 py-2 text-lg">
                 🔮 QUANTUM POWERED
               </Badge>
-              <Badge className="bg-blue-600 text-white px-4 py-2 text-lg">
-                🛡️ UNHACKABLE
-              </Badge>
-              <Badge className="bg-green-600 text-white px-4 py-2 text-lg">
-                ⚡ INFINITE SPEED
-              </Badge>
+              <Badge className="bg-blue-600 text-white px-4 py-2 text-lg">🛡️ UNHACKABLE</Badge>
+              <Badge className="bg-green-600 text-white px-4 py-2 text-lg">⚡ INFINITE SPEED</Badge>
             </div>
           </div>
         </CardContent>
@@ -145,10 +138,7 @@ export function GodModeImprovements() {
         {improvementCategories.map((category, index) => {
           const Icon = category.icon;
           return (
-            <Card
-              key={index}
-              className={`${getColorClasses(category.color)} h-full`}
-            >
+            <Card key={index} className={`${getColorClasses(category.color)} h-full`}>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Icon className="h-6 w-6" />
@@ -160,9 +150,7 @@ export function GodModeImprovements() {
                   {category.improvements.map((improvement, idx) => (
                     <li key={idx} className="text-sm flex items-start gap-2">
                       <span className="text-green-400 font-bold">•</span>
-                      <span className="text-muted-foreground">
-                        {improvement}
-                      </span>
+                      <span className="text-muted-foreground">{improvement}</span>
                     </li>
                   ))}
                 </ul>
@@ -175,20 +163,14 @@ export function GodModeImprovements() {
       <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
         <CardContent className="pt-8">
           <div className="text-center space-y-6">
-            <h2 className="text-3xl font-bold text-green-400">
-              🌍 IMPLEMENTATION PRIORITY LIST
-            </h2>
+            <h2 className="text-3xl font-bold text-green-400">🌍 IMPLEMENTATION PRIORITY LIST</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-blue-400">
-                  🚀 HIGH PRIORITY
-                </h3>
+                <h3 className="text-xl font-bold text-blue-400">🚀 HIGH PRIORITY</h3>
                 <ul className="space-y-2 text-left">
                   <li className="flex items-center gap-2">
                     <Badge className="bg-red-600 text-white">1</Badge>
-                    <span className="text-sm">
-                      Enhanced invisible tracking system
-                    </span>
+                    <span className="text-sm">Enhanced invisible tracking system</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Badge className="bg-red-600 text-white">2</Badge>
@@ -205,15 +187,11 @@ export function GodModeImprovements() {
                 </ul>
               </div>
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-purple-400">
-                  ⚡ FUTURE UPGRADES
-                </h3>
+                <h3 className="text-xl font-bold text-purple-400">⚡ FUTURE UPGRADES</h3>
                 <ul className="space-y-2 text-left">
                   <li className="flex items-center gap-2">
                     <Badge className="bg-purple-600 text-white">5</Badge>
-                    <span className="text-sm">
-                      Quantum computing integration
-                    </span>
+                    <span className="text-sm">Quantum computing integration</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Badge className="bg-purple-600 text-white">6</Badge>

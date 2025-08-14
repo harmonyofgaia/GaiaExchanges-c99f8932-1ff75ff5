@@ -53,9 +53,7 @@ export function UniversalDominationDashboard() {
               <Star className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Cosmic Entities</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.cosmicEntities.total}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.cosmicEntities.total}</div>
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
@@ -71,26 +69,20 @@ export function UniversalDominationDashboard() {
               <Zap className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Universal Commands</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.universalCommands.total}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.universalCommands.total}</div>
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Target className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Cosmic Weapons</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.cosmicWeapons.total}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.cosmicWeapons.total}</div>
           </div>
         </div>
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <Crown className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium">
-              Universal Authority Level
-            </span>
+            <span className="text-sm font-medium">Universal Authority Level</span>
           </div>
           <div className="text-3xl font-bold text-primary">
             {status.universalAuthorityLevel.toLocaleString()}
@@ -99,17 +91,11 @@ export function UniversalDominationDashboard() {
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <Star className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium">
-              Galactic Domination Progress
-            </span>
+            <span className="text-sm font-medium">Galactic Domination Progress</span>
           </div>
-          <Progress
-            value={status.galacticDominations.averageDomination * 100}
-            className="mt-2"
-          />
+          <Progress value={status.galacticDominations.averageDomination * 100} className="mt-2" />
           <div className="text-sm text-muted-foreground">
-            {(status.galacticDominations.averageDomination * 100).toFixed(1)}%
-            Complete
+            {(status.galacticDominations.averageDomination * 100).toFixed(1)}% Complete
           </div>
         </div>
         <Button onClick={handleInitialize} size="sm">
@@ -119,8 +105,8 @@ export function UniversalDominationDashboard() {
         <div className="p-4 bg-muted/50 rounded-lg">
           <h4 className="font-medium mb-2">🌌 Cosmic Supremacy Guarantee</h4>
           <p className="text-sm text-muted-foreground">
-            Ultimate authority over all cosmic entities, galactic civilizations,
-            and universal forces across infinite realities.
+            Ultimate authority over all cosmic entities, galactic civilizations, and universal
+            forces across infinite realities.
           </p>
         </div>
       </CardContent>

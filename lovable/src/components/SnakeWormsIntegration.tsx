@@ -3,17 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Gamepad2,
-  Play,
-  Pause,
-  RotateCcw,
-  Target,
-  Zap,
-  Crown,
-  Flame,
-  Shield,
-} from "lucide-react";
+import { Gamepad2, Play, Pause, RotateCcw, Target, Zap, Crown, Flame, Shield } from "lucide-react";
 import { toast } from "sonner";
 
 interface Position {
@@ -37,9 +27,7 @@ interface Weapon {
 }
 
 export function SnakeWormsIntegration() {
-  const [gameState, setGameState] = useState<
-    "menu" | "playing" | "paused" | "gameOver"
-  >("menu");
+  const [gameState, setGameState] = useState<"menu" | "playing" | "paused" | "gameOver">("menu");
   const [snake, setSnake] = useState<Position[]>([{ x: 10, y: 10 }]);
   const [direction, setDirection] = useState<Position>({ x: 0, y: -1 });
   const [worms, setWorms] = useState<Worm[]>([]);
@@ -107,11 +95,7 @@ export function SnakeWormsIntegration() {
 
       // Check worm collision for battle
       worms.forEach((worm) => {
-        if (
-          worm.segments.some(
-            (segment) => segment.x === head.x && segment.y === head.y,
-          )
-        ) {
+        if (worm.segments.some((segment) => segment.x === head.x && segment.y === head.y)) {
           initiateWormBattle(worm);
         }
       });
@@ -154,11 +138,8 @@ export function SnakeWormsIntegration() {
                 setTimeout(() => {
                   setExplosions((prev) =>
                     prev.filter(
-                      (pos) =>
-                        !w.segments.some(
-                          (seg) => seg.x === pos.x && seg.y === pos.y,
-                        ),
-                    ),
+                      (pos) => !w.segments.some((seg) => seg.x === pos.x && seg.y === pos.y)
+                    )
                   );
                 }, 1000);
 
@@ -168,7 +149,7 @@ export function SnakeWormsIntegration() {
             }
             return w;
           })
-          .filter(Boolean) as Worm[],
+          .filter(Boolean) as Worm[]
     );
   };
 
@@ -180,8 +161,8 @@ export function SnakeWormsIntegration() {
       worm.segments.some(
         (segment) =>
           Math.abs(segment.x - targetX) <= selectedWeapon.radius &&
-          Math.abs(segment.y - targetY) <= selectedWeapon.radius,
-      ),
+          Math.abs(segment.y - targetY) <= selectedWeapon.radius
+      )
     );
 
     hitWorms.forEach((worm) => {
@@ -260,17 +241,13 @@ export function SnakeWormsIntegration() {
       const x = index % BOARD_SIZE;
       const y = Math.floor(index / BOARD_SIZE);
 
-      const isSnake = snake.some(
-        (segment) => segment.x === x && segment.y === y,
-      );
+      const isSnake = snake.some((segment) => segment.x === x && segment.y === y);
       const isSnakeHead = snake[0]?.x === x && snake[0]?.y === y;
       const isWorm = worms.some((worm) =>
-        worm.segments.some((segment) => segment.x === x && segment.y === y),
+        worm.segments.some((segment) => segment.x === x && segment.y === y)
       );
       const isExplosion = explosions.some((pos) => pos.x === x && pos.y === y);
-      const worm = worms.find((w) =>
-        w.segments.some((s) => s.x === x && s.y === y),
-      );
+      const worm = worms.find((w) => w.segments.some((s) => s.x === x && s.y === y));
 
       return (
         <div
@@ -301,43 +278,26 @@ export function SnakeWormsIntegration() {
           🐍⚔️ Snake vs Worms - Live Battle Arena
         </CardTitle>
         <div className="flex gap-4 flex-wrap">
-          <Badge className="bg-green-600 text-white">
-            Score: {gameStats.score}
-          </Badge>
-          <Badge className="bg-red-600 text-white">
-            Worms: {gameStats.wormsDestroyed}
-          </Badge>
+          <Badge className="bg-green-600 text-white">Score: {gameStats.score}</Badge>
+          <Badge className="bg-red-600 text-white">Worms: {gameStats.wormsDestroyed}</Badge>
           <Badge className="bg-blue-600 text-white">
             GAiA: {gameStats.gaiaTokensEarned.toFixed(1)}
           </Badge>
-          <Badge className="bg-purple-600 text-white">
-            Round: {gameStats.battleRound}
-          </Badge>
+          <Badge className="bg-purple-600 text-white">Round: {gameStats.battleRound}</Badge>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Game Controls */}
         <div className="flex gap-2 justify-center flex-wrap">
-          <Button
-            onClick={startGame}
-            className="bg-green-600 hover:bg-green-700"
-          >
+          <Button onClick={startGame} className="bg-green-600 hover:bg-green-700">
             <Play className="h-4 w-4 mr-2" />
             Start Battle
           </Button>
-          <Button
-            onClick={pauseGame}
-            disabled={gameState === "menu"}
-            variant="outline"
-          >
+          <Button onClick={pauseGame} disabled={gameState === "menu"} variant="outline">
             <Pause className="h-4 w-4 mr-2" />
             {gameState === "paused" ? "Resume" : "Pause"}
           </Button>
-          <Button
-            onClick={spawnWorms}
-            variant="outline"
-            disabled={gameState === "playing"}
-          >
+          <Button onClick={spawnWorms} variant="outline" disabled={gameState === "playing"}>
             <RotateCcw className="h-4 w-4 mr-2" />
             New Worms
           </Button>
@@ -349,15 +309,11 @@ export function SnakeWormsIntegration() {
             <Button
               key={weapon.name}
               onClick={() => setSelectedWeapon(weapon)}
-              variant={
-                selectedWeapon.name === weapon.name ? "default" : "outline"
-              }
+              variant={selectedWeapon.name === weapon.name ? "default" : "outline"}
               size="sm"
             >
               {weapon.icon} {weapon.name}
-              <Badge className="ml-2 bg-red-600 text-white">
-                {weapon.damage}
-              </Badge>
+              <Badge className="ml-2 bg-red-600 text-white">{weapon.damage}</Badge>
             </Button>
           ))}
         </div>
@@ -379,9 +335,7 @@ export function SnakeWormsIntegration() {
         {/* Game Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center">
-            <div className="text-lg font-bold text-green-400">
-              {gameStats.snakeHealth}%
-            </div>
+            <div className="text-lg font-bold text-green-400">{gameStats.snakeHealth}%</div>
             <div className="text-sm text-muted-foreground">Snake Health</div>
             <Progress value={gameStats.snakeHealth} className="h-2 mt-1" />
           </div>
@@ -390,15 +344,11 @@ export function SnakeWormsIntegration() {
             <div className="text-sm text-muted-foreground">Worms Alive</div>
           </div>
           <div className="text-center">
-            <div className="text-lg font-bold text-purple-400">
-              {selectedWeapon.damage}
-            </div>
+            <div className="text-lg font-bold text-purple-400">{selectedWeapon.damage}</div>
             <div className="text-sm text-muted-foreground">Weapon Power</div>
           </div>
           <div className="text-center">
-            <div className="text-lg font-bold text-yellow-400">
-              {selectedWeapon.radius}
-            </div>
+            <div className="text-lg font-bold text-yellow-400">{selectedWeapon.radius}</div>
             <div className="text-sm text-muted-foreground">Blast Radius</div>
           </div>
         </div>
@@ -419,10 +369,7 @@ export function SnakeWormsIntegration() {
             <p className="text-green-400">
               GAiA Tokens Earned: {gameStats.gaiaTokensEarned.toFixed(1)}
             </p>
-            <Button
-              onClick={spawnWorms}
-              className="mt-2 bg-green-600 hover:bg-green-700"
-            >
+            <Button onClick={spawnWorms} className="mt-2 bg-green-600 hover:bg-green-700">
               <Flame className="h-4 w-4 mr-2" />
               Next Wave
             </Button>

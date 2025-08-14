@@ -4,14 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Coins,
-  TrendingUp,
-  Users,
-  DollarSign,
-  PlusCircle,
-  Settings,
-} from "lucide-react";
+import { Coins, TrendingUp, Users, DollarSign, PlusCircle, Settings } from "lucide-react";
 import { toast } from "sonner";
 
 export function TokenManagement() {
@@ -72,9 +65,7 @@ export function TokenManagement() {
 
               <div className="text-center p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg">
                 <Users className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-purple-400">
-                  125,847
-                </div>
+                <div className="text-2xl font-bold text-purple-400">125,847</div>
                 <p className="text-sm text-muted-foreground">Token Holders</p>
                 <Badge className="mt-2 bg-purple-600">Growing Daily</Badge>
               </div>
@@ -91,9 +82,7 @@ export function TokenManagement() {
           <TabsContent value="mint" className="space-y-6">
             <div className="max-w-md mx-auto space-y-4">
               <div className="text-center">
-                <h3 className="text-lg font-bold text-green-400">
-                  Mint New GAiA Tokens
-                </h3>
+                <h3 className="text-lg font-bold text-green-400">Mint New GAiA Tokens</h3>
                 <p className="text-sm text-muted-foreground">
                   Add tokens to circulation for community rewards
                 </p>
@@ -123,9 +112,7 @@ export function TokenManagement() {
           <TabsContent value="burn" className="space-y-6">
             <div className="max-w-md mx-auto space-y-4">
               <div className="text-center">
-                <h3 className="text-lg font-bold text-red-400">
-                  Burn GAiA Tokens
-                </h3>
+                <h3 className="text-lg font-bold text-red-400">Burn GAiA Tokens</h3>
                 <p className="text-sm text-muted-foreground">
                   Remove tokens from circulation permanently
                 </p>
@@ -155,9 +142,7 @@ export function TokenManagement() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card className="border-green-500/20">
                 <CardHeader>
-                  <CardTitle className="text-green-400">
-                    Community Rewards
-                  </CardTitle>
+                  <CardTitle className="text-green-400">Community Rewards</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
@@ -183,9 +168,7 @@ export function TokenManagement() {
 
               <Card className="border-blue-500/20">
                 <CardHeader>
-                  <CardTitle className="text-blue-400">
-                    Distribution Controls
-                  </CardTitle>
+                  <CardTitle className="text-blue-400">Distribution Controls</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <Button className="w-full bg-blue-600 hover:bg-blue-700">

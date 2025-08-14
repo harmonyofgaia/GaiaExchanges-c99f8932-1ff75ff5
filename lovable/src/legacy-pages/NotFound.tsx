@@ -13,19 +13,16 @@ const NotFound = () => {
               <CardTitle className="text-center text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-purple-400 mb-4">
                 404
               </CardTitle>
-              <p className="text-center text-2xl text-muted-foreground">
-                Page Not Found
-              </p>
+              <p className="text-center text-2xl text-muted-foreground">Page Not Found</p>
             </CardHeader>
             <CardContent className="text-center space-y-6">
               <div className="text-8xl mb-6">🌍</div>
               <p className="text-lg text-muted-foreground">
-                Oops! The page you're looking for doesn't exist in the GAiA
-                universe.
+                Oops! The page you're looking for doesn't exist in the GAiA universe.
               </p>
               <p className="text-muted-foreground">
-                Don't worry, even in our vast digital ecosystem, sometimes paths
-                get lost. Let's get you back to familiar territory.
+                Don't worry, even in our vast digital ecosystem, sometimes paths get lost. Let's get
+                you back to familiar territory.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/">

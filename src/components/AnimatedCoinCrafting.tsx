@@ -84,9 +84,7 @@ export function AnimatedCoinCrafting() {
             <div className="text-6xl mb-4">🧑‍🔧</div>
             <div
               className={`absolute -top-2 -right-2 text-4xl transition-all duration-300 ${
-                isCrafting && hammerStrikes > 0
-                  ? "scale-125 rotate-45"
-                  : "scale-100 rotate-0"
+                isCrafting && hammerStrikes > 0 ? "scale-125 rotate-45" : "scale-100 rotate-0"
               }`}
             >
               🔨
@@ -130,24 +128,16 @@ export function AnimatedCoinCrafting() {
         {/* Crafting Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center p-4 bg-green-900/20 rounded-lg border border-green-500/20">
-            <div className="text-2xl font-bold text-green-400">
-              {totalCrafted.toLocaleString()}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Total GAiA Crafted
-            </div>
+            <div className="text-2xl font-bold text-green-400">{totalCrafted.toLocaleString()}</div>
+            <div className="text-sm text-muted-foreground">Total GAiA Crafted</div>
           </div>
           <div className="text-center p-4 bg-orange-900/20 rounded-lg border border-orange-500/20">
-            <div className="text-2xl font-bold text-orange-400">
-              {coinsBeingCrafted}
-            </div>
+            <div className="text-2xl font-bold text-orange-400">{coinsBeingCrafted}</div>
             <div className="text-sm text-muted-foreground">Current Batch</div>
           </div>
           <div className="text-center p-4 bg-blue-900/20 rounded-lg border border-blue-500/20">
             <div className="text-2xl font-bold text-blue-400">5</div>
-            <div className="text-sm text-muted-foreground">
-              Strikes Per Coin
-            </div>
+            <div className="text-sm text-muted-foreground">Strikes Per Coin</div>
           </div>
         </div>
 
@@ -171,10 +161,7 @@ export function AnimatedCoinCrafting() {
             </div>
           </div>
           <div className="mt-3 text-center">
-            <Button
-              onClick={openPumpFun}
-              className="bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={openPumpFun} className="bg-purple-600 hover:bg-purple-700">
               <ExternalLink className="h-4 w-4 mr-2" />
               Trade GAiA on PumpFun
             </Button>
@@ -187,16 +174,13 @@ export function AnimatedCoinCrafting() {
             🔨 Original Simple Crafting Process
           </h4>
           <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-            Our simple craftsperson uses a hammer to forge new GAiA coins. Each
-            coin requires exactly 5 precise strikes. The process repeats every 8
-            seconds, continuously supplying the official GAiA ecosystem
-            connected to PumpFun.
+            Our simple craftsperson uses a hammer to forge new GAiA coins. Each coin requires
+            exactly 5 precise strikes. The process repeats every 8 seconds, continuously supplying
+            the official GAiA ecosystem connected to PumpFun.
           </p>
           <div className="flex items-center justify-center gap-2 mt-4 text-sm">
             <Zap className="h-4 w-4 text-yellow-400" />
-            <span className="text-yellow-400">
-              Connected to all major exchanges
-            </span>
+            <span className="text-yellow-400">Connected to all major exchanges</span>
           </div>
         </div>
       </CardContent>

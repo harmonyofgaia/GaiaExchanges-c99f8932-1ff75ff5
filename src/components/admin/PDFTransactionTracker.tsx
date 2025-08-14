@@ -204,8 +204,8 @@ export function PDFTransactionTracker() {
             📊 PDF TRANSACTION DATABASE SYSTEM
           </CardTitle>
           <p className="text-muted-foreground">
-            Complete transaction tracking with automated PDF generation
-            organized by project and source
+            Complete transaction tracking with automated PDF generation organized by project and
+            source
           </p>
         </CardHeader>
       </Card>
@@ -220,9 +220,7 @@ export function PDFTransactionTracker() {
                 <div className="text-2xl font-bold text-green-400">
                   {totalIncome.toLocaleString()} GAIA
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Total Income
-                </div>
+                <div className="text-sm text-muted-foreground">Total Income</div>
               </div>
             </div>
           </CardContent>
@@ -236,9 +234,7 @@ export function PDFTransactionTracker() {
                 <div className="text-2xl font-bold text-red-400">
                   {totalOutcome.toLocaleString()} GAIA
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Total Outcome
-                </div>
+                <div className="text-sm text-muted-foreground">Total Outcome</div>
               </div>
             </div>
           </CardContent>
@@ -263,12 +259,8 @@ export function PDFTransactionTracker() {
             <div className="flex items-center gap-2">
               <Database className="h-5 w-5 text-purple-400" />
               <div>
-                <div className="text-2xl font-bold text-purple-400">
-                  {transactions.length}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Total Transactions
-                </div>
+                <div className="text-2xl font-bold text-purple-400">{transactions.length}</div>
+                <div className="text-sm text-muted-foreground">Total Transactions</div>
               </div>
             </div>
           </CardContent>
@@ -279,15 +271,9 @@ export function PDFTransactionTracker() {
       <Card className="bg-gradient-to-br from-gray-900/30 to-slate-900/30 border border-gray-500/30">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle className="text-lg text-gray-200">
-              Control Panel
-            </CardTitle>
+            <CardTitle className="text-lg text-gray-200">Control Panel</CardTitle>
             <div className="flex gap-2">
-              <Button
-                onClick={refreshData}
-                size="sm"
-                className="bg-blue-600 hover:bg-blue-700"
-              >
+              <Button onClick={refreshData} size="sm" className="bg-blue-600 hover:bg-blue-700">
                 <RefreshCw className="h-4 w-4 mr-2" />
                 Refresh Data
               </Button>
@@ -330,16 +316,12 @@ export function PDFTransactionTracker() {
         <TabsContent value="overview" className="space-y-4">
           <Card className="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border border-cyan-500/30">
             <CardHeader>
-              <CardTitle className="text-lg text-cyan-400">
-                💰 Financial Overview
-              </CardTitle>
+              <CardTitle className="text-lg text-cyan-400">💰 Financial Overview</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <h4 className="text-sm font-semibold text-muted-foreground">
-                    INCOME SOURCES
-                  </h4>
+                  <h4 className="text-sm font-semibold text-muted-foreground">INCOME SOURCES</h4>
                   {walletSummaries
                     .filter((w) => w.totalIncome > 0)
                     .sort((a, b) => b.totalIncome - a.totalIncome)
@@ -426,26 +408,17 @@ export function PDFTransactionTracker() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">
-                      Net Balance:
-                    </span>
+                    <span className="text-sm text-muted-foreground">Net Balance:</span>
                     <span
                       className={`font-medium ${wallet.totalIncome - wallet.totalOutcome >= 0 ? "text-green-400" : "text-red-400"}`}
                     >
-                      {(
-                        wallet.totalIncome - wallet.totalOutcome
-                      ).toLocaleString()}{" "}
-                      GAIA
+                      {(wallet.totalIncome - wallet.totalOutcome).toLocaleString()} GAIA
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">
-                      Transactions:
-                    </span>
-                    <Badge className="bg-blue-600">
-                      {wallet.transactionCount}
-                    </Badge>
+                    <span className="text-sm text-muted-foreground">Transactions:</span>
+                    <Badge className="bg-blue-600">{wallet.transactionCount}</Badge>
                   </div>
 
                   <Button
@@ -466,34 +439,23 @@ export function PDFTransactionTracker() {
         <TabsContent value="transactions" className="space-y-4">
           <Card className="bg-gradient-to-br from-violet-900/20 to-purple-900/20 border border-violet-500/30">
             <CardHeader>
-              <CardTitle className="text-lg text-violet-400">
-                📝 Recent Transactions
-              </CardTitle>
+              <CardTitle className="text-lg text-violet-400">📝 Recent Transactions</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 {transactions.map((tx) => (
-                  <Card
-                    key={tx.id}
-                    className="bg-gray-800/50 border border-gray-700/50"
-                  >
+                  <Card key={tx.id} className="bg-gray-800/50 border border-gray-700/50">
                     <CardContent className="p-4">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
                             <Calendar className="h-4 w-4 text-blue-400" />
-                            <span className="text-sm text-muted-foreground">
-                              {tx.timestamp}
-                            </span>
-                            <Badge className={getStatusColor(tx.status)}>
-                              {tx.status}
-                            </Badge>
+                            <span className="text-sm text-muted-foreground">{tx.timestamp}</span>
+                            <Badge className={getStatusColor(tx.status)}>{tx.status}</Badge>
                           </div>
                           <div className="mb-2">
                             <span className="font-medium">{tx.source}</span>
-                            <p className="text-sm text-muted-foreground">
-                              {tx.description}
-                            </p>
+                            <p className="text-sm text-muted-foreground">{tx.description}</p>
                           </div>
                           <div className="flex items-center gap-4 text-xs text-muted-foreground">
                             <span>Wallet: {tx.walletAddress}</span>
@@ -501,19 +463,11 @@ export function PDFTransactionTracker() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div
-                            className={`text-lg font-bold ${getTypeColor(tx.type)}`}
-                          >
+                          <div className={`text-lg font-bold ${getTypeColor(tx.type)}`}>
                             {tx.type === "income" ? "+" : "-"}
                             {tx.amount.toLocaleString()} {tx.currency}
                           </div>
-                          <Badge
-                            className={
-                              tx.type === "income"
-                                ? "bg-green-600"
-                                : "bg-red-600"
-                            }
-                          >
+                          <Badge className={tx.type === "income" ? "bg-green-600" : "bg-red-600"}>
                             {tx.type}
                           </Badge>
                         </div>
@@ -570,14 +524,10 @@ export function PDFTransactionTracker() {
               </div>
 
               <div className="p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
-                <h4 className="text-blue-400 font-semibold mb-2">
-                  📋 PDF Report Features
-                </h4>
+                <h4 className="text-blue-400 font-semibold mb-2">📋 PDF Report Features</h4>
                 <ul className="text-sm text-muted-foreground space-y-1">
                   <li>• Complete transaction history with wallet addresses</li>
-                  <li>
-                    • Organized by project/source with detailed breakdowns
-                  </li>
+                  <li>• Organized by project/source with detailed breakdowns</li>
                   <li>• Income/outcome categorization with visual charts</li>
                   <li>• Customer support database integration</li>
                   <li>• Automatic backup and archival system</li>

@@ -47,8 +47,7 @@ export function ensureCrossBrowserCompatibility(): boolean {
     webSockets: typeof WebSocket !== "undefined",
     audioContext: !!(
       window.AudioContext ||
-      (window as unknown as { webkitAudioContext?: AudioContext })
-        .webkitAudioContext
+      (window as unknown as { webkitAudioContext?: AudioContext }).webkitAudioContext
     ),
     deviceOrientation: "DeviceOrientationEvent" in window,
     geolocation: "geolocation" in navigator,
@@ -57,7 +56,7 @@ export function ensureCrossBrowserCompatibility(): boolean {
 
   const requiredFeatures = ["webGL", "canvas", "localStorage", "webSockets"];
   const supportedFeatures = requiredFeatures.filter(
-    (feature) => features[feature as keyof typeof features],
+    (feature) => features[feature as keyof typeof features]
   );
 
   return supportedFeatures.length === requiredFeatures.length;

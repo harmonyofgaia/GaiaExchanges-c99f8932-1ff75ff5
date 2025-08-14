@@ -108,11 +108,7 @@ export default function MobileDashboard() {
       {/* Mobile Header */}
       <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b">
         <div className="flex items-center justify-between p-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setSidebarOpen(true)}
-          >
+          <Button variant="ghost" size="sm" onClick={() => setSidebarOpen(true)}>
             <Menu className="h-6 w-6" />
           </Button>
 
@@ -134,30 +130,17 @@ export default function MobileDashboard() {
       {/* Mobile Sidebar */}
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div
-            className="fixed inset-0 bg-black/50"
-            onClick={() => setSidebarOpen(false)}
-          />
+          <div className="fixed inset-0 bg-black/50" onClick={() => setSidebarOpen(false)} />
           <div className="fixed left-0 top-0 h-full w-64 bg-background border-r p-4 space-y-4">
             <div className="flex items-center justify-between mb-6">
               <h2 className="font-bold">Navigation</h2>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setSidebarOpen(false)}
-              >
+              <Button variant="ghost" size="sm" onClick={() => setSidebarOpen(false)}>
                 <X className="h-5 w-5" />
               </Button>
             </div>
 
             <nav className="space-y-2">
-              {[
-                "Dashboard",
-                "Activities",
-                "Rewards",
-                "Profile",
-                "Settings",
-              ].map((item) => (
+              {["Dashboard", "Activities", "Rewards", "Profile", "Settings"].map((item) => (
                 <Button
                   key={item}
                   variant="ghost"
@@ -178,9 +161,7 @@ export default function MobileDashboard() {
           <CardContent className="pt-6">
             <div className="text-center">
               <div className="text-3xl mb-2">👋</div>
-              <h2 className="text-xl font-bold mb-1">
-                Welcome back, EcoWarrior!
-              </h2>
+              <h2 className="text-xl font-bold mb-1">Welcome back, EcoWarrior!</h2>
               <p className="text-sm text-muted-foreground">
                 You're on a {stats.streak} day streak!
               </p>
@@ -193,9 +174,7 @@ export default function MobileDashboard() {
           <Card className="border-green-500/30 bg-green-900/20">
             <CardContent className="pt-4 text-center">
               <Coins className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {stats.totalTokens}
-              </div>
+              <div className="text-2xl font-bold text-green-400">{stats.totalTokens}</div>
               <div className="text-xs text-muted-foreground">Total GAIA</div>
             </CardContent>
           </Card>
@@ -203,12 +182,8 @@ export default function MobileDashboard() {
           <Card className="border-blue-500/30 bg-blue-900/20">
             <CardContent className="pt-4 text-center">
               <TrendingUp className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                +{stats.todayTokens}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Today's Earnings
-              </div>
+              <div className="text-2xl font-bold text-blue-400">+{stats.todayTokens}</div>
+              <div className="text-xs text-muted-foreground">Today's Earnings</div>
             </CardContent>
           </Card>
         </div>
@@ -302,9 +277,7 @@ export default function MobileDashboard() {
                 >
                   <div className="flex-1">
                     <p className="text-sm">{notification.message}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {notification.time}
-                    </p>
+                    <p className="text-xs text-muted-foreground">{notification.time}</p>
                   </div>
                 </div>
               ))}
@@ -330,9 +303,7 @@ export default function MobileDashboard() {
               key={index}
               variant="ghost"
               className={`h-16 flex flex-col gap-1 text-xs ${
-                item.active
-                  ? "text-green-400 bg-green-900/20"
-                  : "text-muted-foreground"
+                item.active ? "text-green-400 bg-green-900/20" : "text-muted-foreground"
               }`}
             >
               <item.icon className="h-5 w-5" />

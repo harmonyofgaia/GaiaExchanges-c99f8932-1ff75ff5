@@ -39,12 +39,8 @@ interface ImprovementTask {
 }
 
 export function QuantumTechnologyPlan() {
-  const [quantumTechnologies, setQuantumTechnologies] = useState<
-    QuantumTechnology[]
-  >([]);
-  const [improvementTasks, setImprovementTasks] = useState<ImprovementTask[]>(
-    [],
-  );
+  const [quantumTechnologies, setQuantumTechnologies] = useState<QuantumTechnology[]>([]);
+  const [improvementTasks, setImprovementTasks] = useState<ImprovementTask[]>([]);
   const [planGenerated, setPlanGenerated] = useState(false);
 
   useEffect(() => {
@@ -53,8 +49,7 @@ export function QuantumTechnologyPlan() {
         {
           id: "quantum-computers",
           name: "20 Quantum Computer Network",
-          description:
-            "Synchronized quantum computers working in perfect harmony",
+          description: "Synchronized quantum computers working in perfect harmony",
           powerLevel: 100,
           availability: "available",
           category: "quantum",
@@ -146,8 +141,7 @@ export function QuantumTechnologyPlan() {
           id: "exchange-listings",
           priority: "critical",
           task: "Complete exchange compliance documentation",
-          description:
-            "Finalize all legal documents for Binance and Revolut listings",
+          description: "Finalize all legal documents for Binance and Revolut listings",
           impact: "Direct access to millions of potential investors",
           timeframe: "2-4 weeks",
           quantumPrediction:
@@ -158,12 +152,10 @@ export function QuantumTechnologyPlan() {
           id: "investor-presentation",
           priority: "high",
           task: "Create comprehensive investor presentation",
-          description:
-            "Professional presentation showcasing GAiA potential and ROI projections",
+          description: "Professional presentation showcasing GAiA potential and ROI projections",
           impact: "Attract major institutional investors and partnerships",
           timeframe: "1 week",
-          quantumPrediction:
-            "Quantum modeling predicts 300% increase in investor interest",
+          quantumPrediction: "Quantum modeling predicts 300% increase in investor interest",
           status: "pending",
         },
         {
@@ -174,21 +166,17 @@ export function QuantumTechnologyPlan() {
             "Multi-platform marketing strategy targeting crypto and environmental investors",
           impact: "Massive brand awareness and community growth",
           timeframe: "2-3 weeks",
-          quantumPrediction:
-            "Quantum algorithms predict viral spread across 50+ countries",
+          quantumPrediction: "Quantum algorithms predict viral spread across 50+ countries",
           status: "pending",
         },
         {
           id: "security-audit",
           priority: "high",
           task: "Complete security audit certification",
-          description:
-            "Third-party security audit for maximum investor confidence",
-          impact:
-            "Essential for major exchange listings and institutional investment",
+          description: "Third-party security audit for maximum investor confidence",
+          impact: "Essential for major exchange listings and institutional investment",
           timeframe: "1-2 weeks",
-          quantumPrediction:
-            "Quantum security already exceeds all industry standards",
+          quantumPrediction: "Quantum security already exceeds all industry standards",
           status: "in-progress",
         },
         {
@@ -198,20 +186,17 @@ export function QuantumTechnologyPlan() {
           description: "iOS and Android apps for wallet management and trading",
           impact: "Increased accessibility and user engagement",
           timeframe: "4-6 weeks",
-          quantumPrediction:
-            "Quantum UX analysis shows 85% user retention potential",
+          quantumPrediction: "Quantum UX analysis shows 85% user retention potential",
           status: "pending",
         },
         {
           id: "partnerships",
           priority: "medium",
           task: "Establish strategic partnerships",
-          description:
-            "Partner with environmental organizations and tech companies",
+          description: "Partner with environmental organizations and tech companies",
           impact: "Credibility boost and expanded market reach",
           timeframe: "3-4 weeks",
-          quantumPrediction:
-            "Quantum networking identifies 12 high-probability partnerships",
+          quantumPrediction: "Quantum networking identifies 12 high-probability partnerships",
           status: "pending",
         },
         {
@@ -221,8 +206,7 @@ export function QuantumTechnologyPlan() {
           description: "Interactive community features for GAiA holders",
           impact: "Stronger community bonds and increased token utility",
           timeframe: "2-3 weeks",
-          quantumPrediction:
-            "Quantum social analysis predicts 400% engagement increase",
+          quantumPrediction: "Quantum social analysis predicts 400% engagement increase",
           status: "pending",
         },
       ];
@@ -236,20 +220,15 @@ export function QuantumTechnologyPlan() {
   }, []);
 
   const executeQuantumAnalysis = () => {
+    console.log("🧠 QUANTUM ANALYSIS INITIATED - 20 QUANTUM COMPUTERS CALCULATING");
     console.log(
-      "🧠 QUANTUM ANALYSIS INITIATED - 20 QUANTUM COMPUTERS CALCULATING",
+      "⚡ ANALYZING: Global market conditions, investor psychology, technical feasibility"
     );
-    console.log(
-      "⚡ ANALYZING: Global market conditions, investor psychology, technical feasibility",
-    );
-    console.log(
-      "🔮 PREDICTING: Optimal execution paths and success probabilities",
-    );
+    console.log("🔮 PREDICTING: Optimal execution paths and success probabilities");
     console.log("🎯 RESULT: Maximum efficiency improvement plan generated");
 
     toast.success("🧠 Quantum Analysis Complete!", {
-      description:
-        "All 20 quantum computers have calculated the optimal improvement path",
+      description: "All 20 quantum computers have calculated the optimal improvement path",
       duration: 8000,
     });
 
@@ -258,7 +237,7 @@ export function QuantumTechnologyPlan() {
       prev.map((task) => ({
         ...task,
         quantumPrediction: `${task.quantumPrediction} - Updated with real-time quantum analysis`,
-      })),
+      }))
     );
   };
 
@@ -315,9 +294,7 @@ export function QuantumTechnologyPlan() {
           </CardTitle>
           <div className="flex justify-between items-center">
             <div className="flex gap-2">
-              <Badge className="bg-purple-600 animate-pulse">
-                🧠 Quantum Analysis: ACTIVE
-              </Badge>
+              <Badge className="bg-purple-600 animate-pulse">🧠 Quantum Analysis: ACTIVE</Badge>
               <Badge className="bg-green-600">
                 📋 Plan Status: {planGenerated ? "GENERATED" : "GENERATING"}
               </Badge>
@@ -334,32 +311,22 @@ export function QuantumTechnologyPlan() {
         <CardContent className="space-y-6">
           {/* Available Quantum Technologies */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-blue-400">
-              ⚡ Available Quantum Technologies
-            </h3>
+            <h3 className="text-xl font-bold text-blue-400">⚡ Available Quantum Technologies</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {quantumTechnologies.map((tech) => (
                 <Card key={tech.id} className="bg-black/40 border-gray-600">
                   <CardContent className="p-4">
                     <div className="flex justify-between items-start mb-3">
-                      <h4 className="font-semibold text-white text-sm">
-                        {tech.name}
-                      </h4>
-                      <Badge
-                        className={`text-xs ${getCategoryColor(tech.category)}`}
-                      >
+                      <h4 className="font-semibold text-white text-sm">{tech.name}</h4>
+                      <Badge className={`text-xs ${getCategoryColor(tech.category)}`}>
                         {tech.category.toUpperCase()}
                       </Badge>
                     </div>
-                    <p className="text-xs text-muted-foreground mb-3">
-                      {tech.description}
-                    </p>
+                    <p className="text-xs text-muted-foreground mb-3">{tech.description}</p>
                     <div className="space-y-2">
                       <div className="flex justify-between text-xs">
                         <span>Power Level</span>
-                        <span className="text-green-400">
-                          {tech.powerLevel}%
-                        </span>
+                        <span className="text-green-400">{tech.powerLevel}%</span>
                       </div>
                       <Progress value={tech.powerLevel} className="h-2" />
                       <div className="flex justify-between text-xs">
@@ -397,40 +364,26 @@ export function QuantumTechnologyPlan() {
                   <CardContent className="p-4">
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex items-center gap-2">
-                        <Badge
-                          className={`text-xs ${getPriorityColor(task.priority)}`}
-                        >
+                        <Badge className={`text-xs ${getPriorityColor(task.priority)}`}>
                           {task.priority.toUpperCase()}
                         </Badge>
-                        <h4 className="font-semibold text-white">
-                          {task.task}
-                        </h4>
+                        <h4 className="font-semibold text-white">{task.task}</h4>
                       </div>
-                      <Badge
-                        className={`text-xs ${getStatusColor(task.status)}`}
-                      >
+                      <Badge className={`text-xs ${getStatusColor(task.status)}`}>
                         {task.status.replace("-", " ").toUpperCase()}
                       </Badge>
                     </div>
 
-                    <p className="text-sm text-muted-foreground mb-2">
-                      {task.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground mb-2">{task.description}</p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3 text-sm">
                       <div>
-                        <span className="text-blue-400 font-semibold">
-                          Impact:
-                        </span>
+                        <span className="text-blue-400 font-semibold">Impact:</span>
                         <p className="text-muted-foreground">{task.impact}</p>
                       </div>
                       <div>
-                        <span className="text-green-400 font-semibold">
-                          Timeframe:
-                        </span>
-                        <p className="text-muted-foreground">
-                          {task.timeframe}
-                        </p>
+                        <span className="text-green-400 font-semibold">Timeframe:</span>
+                        <p className="text-muted-foreground">{task.timeframe}</p>
                       </div>
                     </div>
 
@@ -438,9 +391,7 @@ export function QuantumTechnologyPlan() {
                       <span className="text-purple-400 font-semibold text-sm">
                         🔮 Quantum Prediction:
                       </span>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {task.quantumPrediction}
-                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">{task.quantumPrediction}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -452,39 +403,28 @@ export function QuantumTechnologyPlan() {
           <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border-green-500/30">
             <CardContent className="p-6 text-center">
               <Rocket className="h-12 w-12 mx-auto text-green-400 mb-4" />
-              <h3 className="text-2xl font-bold text-green-400 mb-2">
-                🚀 READY FOR BIG UPDATE!
-              </h3>
+              <h3 className="text-2xl font-bold text-green-400 mb-2">🚀 READY FOR BIG UPDATE!</h3>
               <p className="text-muted-foreground mb-4">
-                All 20 quantum computers have synchronized and analyzed the
-                optimal path forward. The community protection systems are at
-                maximum efficiency. Ready to execute the next phase of global
-                expansion.
+                All 20 quantum computers have synchronized and analyzed the optimal path forward.
+                The community protection systems are at maximum efficiency. Ready to execute the
+                next phase of global expansion.
               </p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-green-400">100%</div>
-                  <div className="text-xs text-muted-foreground">
-                    System Readiness
-                  </div>
+                  <div className="text-xs text-muted-foreground">System Readiness</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-blue-400">20</div>
-                  <div className="text-xs text-muted-foreground">
-                    Quantum Computers
-                  </div>
+                  <div className="text-xs text-muted-foreground">Quantum Computers</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-purple-400">∞</div>
-                  <div className="text-xs text-muted-foreground">
-                    Processing Power
-                  </div>
+                  <div className="text-xs text-muted-foreground">Processing Power</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-red-400">🌍</div>
-                  <div className="text-xs text-muted-foreground">
-                    Global Reach
-                  </div>
+                  <div className="text-xs text-muted-foreground">Global Reach</div>
                 </div>
               </div>
             </CardContent>

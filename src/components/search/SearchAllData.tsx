@@ -67,10 +67,8 @@ export function SearchAllData() {
         totalRecords: prev.totalRecords + Math.floor(Math.random() * 50),
         activeScans: Math.floor(Math.random() * 25) + 10,
         threatsDetected: prev.threatsDetected + Math.floor(Math.random() * 3),
-        locationsTracked:
-          prev.locationsTracked + Math.floor(Math.random() * 10),
-        transactionsMonitored:
-          prev.transactionsMonitored + Math.floor(Math.random() * 100),
+        locationsTracked: prev.locationsTracked + Math.floor(Math.random() * 10),
+        transactionsMonitored: prev.transactionsMonitored + Math.floor(Math.random() * 100),
         lastUpdate: new Date(),
       }));
     }, 2000);
@@ -150,13 +148,10 @@ export function SearchAllData() {
       ];
 
       setResults(mockResults);
-      toast.success(
-        `🔍 Search completed: ${mockResults.length} results found`,
-        {
-          description: `Scanned across all GAIA databases and networks`,
-          duration: 3000,
-        },
-      );
+      toast.success(`🔍 Search completed: ${mockResults.length} results found`, {
+        description: `Scanned across all GAIA databases and networks`,
+        duration: 3000,
+      });
     } catch (error) {
       toast.error("Search failed", {
         description: "Please try again",
@@ -203,7 +198,7 @@ export function SearchAllData() {
   };
 
   const filteredResults = results.filter(
-    (result) => selectedFilter === "all" || result.type === selectedFilter,
+    (result) => selectedFilter === "all" || result.type === selectedFilter
   );
 
   return (
@@ -225,26 +220,20 @@ export function SearchAllData() {
               <div className="text-sm text-muted-foreground">Total Records</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                {realTimeMetrics.activeScans}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{realTimeMetrics.activeScans}</div>
               <div className="text-sm text-muted-foreground">Active Scans</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-red-400">
                 {realTimeMetrics.threatsDetected}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Detected
-              </div>
+              <div className="text-sm text-muted-foreground">Threats Detected</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-400">
                 {realTimeMetrics.locationsTracked.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Locations Tracked
-              </div>
+              <div className="text-sm text-muted-foreground">Locations Tracked</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-400">
@@ -262,13 +251,9 @@ export function SearchAllData() {
               variant="outline"
               size="sm"
               onClick={() => setAutoRefresh(!autoRefresh)}
-              className={
-                autoRefresh ? "border-green-500/50" : "border-gray-500/50"
-              }
+              className={autoRefresh ? "border-green-500/50" : "border-gray-500/50"}
             >
-              <RefreshCw
-                className={`h-4 w-4 mr-2 ${autoRefresh ? "animate-spin" : ""}`}
-              />
+              <RefreshCw className={`h-4 w-4 mr-2 ${autoRefresh ? "animate-spin" : ""}`} />
               Auto Refresh: {autoRefresh ? "ON" : "OFF"}
             </Button>
           </div>
@@ -304,14 +289,7 @@ export function SearchAllData() {
 
             {/* Search Filters */}
             <div className="flex gap-2 flex-wrap">
-              {[
-                "all",
-                "user",
-                "transaction",
-                "location",
-                "project",
-                "threat",
-              ].map((filter) => (
+              {["all", "user", "transaction", "location", "project", "threat"].map((filter) => (
                 <Button
                   key={filter}
                   variant={selectedFilter === filter ? "default" : "outline"}
@@ -346,34 +324,21 @@ export function SearchAllData() {
           <CardContent>
             <div className="space-y-4">
               {filteredResults.map((result) => (
-                <Card
-                  key={result.id}
-                  className="border-gray-500/20 bg-black/20"
-                >
+                <Card key={result.id} className="border-gray-500/20 bg-black/20">
                   <CardContent className="pt-4">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
                           {getTypeIcon(result.type)}
-                          <h3 className="font-semibold text-white">
-                            {result.title}
-                          </h3>
-                          <Badge
-                            variant="outline"
-                            className={getStatusColor(result.status)}
-                          >
+                          <h3 className="font-semibold text-white">{result.title}</h3>
+                          <Badge variant="outline" className={getStatusColor(result.status)}>
                             {result.status}
                           </Badge>
-                          <Badge
-                            variant="outline"
-                            className="border-blue-500/50 text-blue-400"
-                          >
+                          <Badge variant="outline" className="border-blue-500/50 text-blue-400">
                             {result.relevance}% match
                           </Badge>
                         </div>
-                        <p className="text-muted-foreground mb-2">
-                          {result.description}
-                        </p>
+                        <p className="text-muted-foreground mb-2">{result.description}</p>
                         {result.location && (
                           <div className="flex items-center gap-1 text-sm text-muted-foreground mb-2">
                             <MapPin className="h-3 w-3" />
@@ -426,9 +391,7 @@ export function SearchAllData() {
                 <div className="text-lg font-bold text-green-400">
                   {results.filter((r) => r.type === "transaction").length}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Transactions
-                </div>
+                <div className="text-sm text-muted-foreground">Transactions</div>
               </div>
               <div>
                 <div className="text-lg font-bold text-blue-400">

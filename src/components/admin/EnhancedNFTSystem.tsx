@@ -24,14 +24,7 @@ interface EnhancedNFT {
   id: string;
   name: string;
   type: "Attack" | "Defense" | "Special" | "Ultimate";
-  element:
-    | "Fire"
-    | "Water"
-    | "Earth"
-    | "Air"
-    | "Lightning"
-    | "Shadow"
-    | "Light";
+  element: "Fire" | "Water" | "Earth" | "Air" | "Lightning" | "Shadow" | "Light";
   rarity: "Common" | "Rare" | "Epic" | "Legendary" | "Mythical" | "Divine";
   sprite: string;
   stats: {
@@ -99,18 +92,9 @@ export function EnhancedNFTSystem() {
         },
         descriptions: {
           lore: "Forged in the heart of ancient volcanoes, this mystical force harnesses pure flame energy.",
-          combatStyle:
-            "Aggressive frontal assault with devastating area damage",
-          strengths: [
-            "Massive AOE damage",
-            "Burns through armor",
-            "Fear inducement",
-          ],
-          weaknesses: [
-            "Water-based attacks",
-            "High energy consumption",
-            "Slow recovery",
-          ],
+          combatStyle: "Aggressive frontal assault with devastating area damage",
+          strengths: ["Massive AOE damage", "Burns through armor", "Fear inducement"],
+          weaknesses: ["Water-based attacks", "High energy consumption", "Slow recovery"],
         },
         elementalProperties: {
           resistant: ["Fire", "Earth"],
@@ -143,16 +127,8 @@ export function EnhancedNFTSystem() {
         descriptions: {
           lore: "Born from the deepest mountain cores, this defensive marvel absorbs and redirects all attacks.",
           combatStyle: "Immovable defense with counter-attack capabilities",
-          strengths: [
-            "Absorbs physical damage",
-            "Reflects projectiles",
-            "Self-repair ability",
-          ],
-          weaknesses: [
-            "Lightning attacks",
-            "Mobility limitations",
-            "Long activation time",
-          ],
+          strengths: ["Absorbs physical damage", "Reflects projectiles", "Self-repair ability"],
+          weaknesses: ["Lightning attacks", "Mobility limitations", "Long activation time"],
         },
         elementalProperties: {
           resistant: ["Fire", "Air"],
@@ -186,11 +162,7 @@ export function EnhancedNFTSystem() {
           lore: "Captured from the essence of the first thunderstorm, this power moves at the speed of light.",
           combatStyle: "Lightning-fast strikes with chain damage effects",
           strengths: ["Instant activation", "Chain lightning", "Stun effects"],
-          weaknesses: [
-            "Water conductivity danger",
-            "Energy drain",
-            "Limited range",
-          ],
+          weaknesses: ["Water conductivity danger", "Energy drain", "Limited range"],
         },
         elementalProperties: {
           resistant: ["Air", "Light"],
@@ -223,16 +195,8 @@ export function EnhancedNFTSystem() {
         descriptions: {
           lore: "Blessed by ancient sea spirits, this essence brings life and renewal to all it touches.",
           combatStyle: "Support-based healing with defensive capabilities",
-          strengths: [
-            "Continuous healing",
-            "Purification effects",
-            "Team support",
-          ],
-          weaknesses: [
-            "Fire evaporation",
-            "Freezing vulnerability",
-            "Low direct damage",
-          ],
+          strengths: ["Continuous healing", "Purification effects", "Team support"],
+          weaknesses: ["Fire evaporation", "Freezing vulnerability", "Low direct damage"],
         },
         elementalProperties: {
           resistant: ["Fire"],
@@ -266,11 +230,7 @@ export function EnhancedNFTSystem() {
           lore: "Summoned from the void between worlds, this ultimate power bends reality itself.",
           combatStyle: "Stealth-based attacks with reality manipulation",
           strengths: ["Invisibility", "Ignore defenses", "Fear effects"],
-          weaknesses: [
-            "Light attacks",
-            "High energy cost",
-            "Unpredictable nature",
-          ],
+          weaknesses: ["Light attacks", "High energy cost", "Unpredictable nature"],
         },
         elementalProperties: {
           resistant: ["Shadow", "Earth"],
@@ -287,8 +247,7 @@ export function EnhancedNFTSystem() {
 
   const generatePDFDocumentation = () => {
     toast.info("📄 Generating PDF Documentation...", {
-      description:
-        "Creating comprehensive NFT abilities and capabilities guide",
+      description: "Creating comprehensive NFT abilities and capabilities guide",
       duration: 3000,
     });
 
@@ -334,7 +293,7 @@ ELEMENTAL PROPERTIES:
 - Super effective against: ${nft.elementalProperties.superEffective.join(", ")}
 
 -------------------
-    `,
+    `
       )
       .join("\n");
 
@@ -411,12 +370,8 @@ ELEMENTAL PROPERTIES:
       <Card className="border-2 border-red-500/50">
         <CardContent className="p-8 text-center">
           <Crown className="h-16 w-16 text-red-400 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-red-400">
-            Admin Access Required
-          </h3>
-          <p className="text-muted-foreground">
-            Enhanced NFT System requires admin privileges
-          </p>
+          <h3 className="text-xl font-bold text-red-400">Admin Access Required</h3>
+          <p className="text-muted-foreground">Enhanced NFT System requires admin privileges</p>
         </CardContent>
       </Card>
     );
@@ -432,25 +387,19 @@ ELEMENTAL PROPERTIES:
             🎴 ENHANCED NFT COLLECTION MANAGEMENT
           </CardTitle>
           <p className="text-muted-foreground">
-            Advanced NFT system with elemental properties, comprehensive
-            documentation, and admin reordering
+            Advanced NFT system with elemental properties, comprehensive documentation, and admin
+            reordering
           </p>
         </CardHeader>
         <CardContent>
           <div className="flex gap-4">
-            <Button
-              onClick={generatePDFDocumentation}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
+            <Button onClick={generatePDFDocumentation} className="bg-blue-600 hover:bg-blue-700">
               <FileText className="h-4 w-4 mr-2" />
               Generate PDF Documentation
             </Button>
 
             {pdfGenerated && (
-              <Button
-                onClick={downloadPDF}
-                className="bg-green-600 hover:bg-green-700"
-              >
+              <Button onClick={downloadPDF} className="bg-green-600 hover:bg-green-700">
                 <Download className="h-4 w-4 mr-2" />
                 Download Complete Guide (Admin Only)
               </Button>
@@ -472,23 +421,17 @@ ELEMENTAL PROPERTIES:
                 <div className="text-6xl mb-2">{nft.sprite}</div>
                 <h3 className="font-bold text-white text-lg">{nft.name}</h3>
                 <div className="flex items-center justify-center gap-2 mt-2">
-                  <Badge
-                    className={`bg-gradient-to-r ${getRarityColor(nft.rarity)} text-white`}
-                  >
+                  <Badge className={`bg-gradient-to-r ${getRarityColor(nft.rarity)} text-white`}>
                     {nft.rarity}
                   </Badge>
-                  <Badge
-                    className={`${getElementColor(nft.element)} bg-black/20`}
-                  >
+                  <Badge className={`${getElementColor(nft.element)} bg-black/20`}>
                     {nft.element}
                   </Badge>
                 </div>
               </div>
 
               <div className="text-center space-y-1">
-                <div
-                  className={`text-sm font-bold ${getElementColor(nft.element)}`}
-                >
+                <div className={`text-sm font-bold ${getElementColor(nft.element)}`}>
                   {nft.type}
                 </div>
                 <div className="text-xs text-muted-foreground">
@@ -498,21 +441,15 @@ ELEMENTAL PROPERTIES:
 
               <div className="grid grid-cols-3 gap-1 text-xs">
                 <div className="text-center">
-                  <div className="text-red-400 font-bold">
-                    {nft.stats.attackPower}
-                  </div>
+                  <div className="text-red-400 font-bold">{nft.stats.attackPower}</div>
                   <div className="text-muted-foreground">ATK</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-blue-400 font-bold">
-                    {nft.stats.defensePower}
-                  </div>
+                  <div className="text-blue-400 font-bold">{nft.stats.defensePower}</div>
                   <div className="text-muted-foreground">DEF</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-green-400 font-bold">
-                    {nft.stats.speed}
-                  </div>
+                  <div className="text-green-400 font-bold">{nft.stats.speed}</div>
                   <div className="text-muted-foreground">SPD</div>
                 </div>
               </div>
@@ -545,9 +482,7 @@ ELEMENTAL PROPERTIES:
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div>
-                  <h4 className="text-lg font-bold text-white mb-2">
-                    Combat Abilities
-                  </h4>
+                  <h4 className="text-lg font-bold text-white mb-2">Combat Abilities</h4>
                   <div className="space-y-2 text-sm">
                     <div>
                       <span className="text-yellow-400">Primary:</span>{" "}
@@ -565,9 +500,7 @@ ELEMENTAL PROPERTIES:
                 </div>
 
                 <div>
-                  <h4 className="text-lg font-bold text-white mb-2">
-                    Combat Style
-                  </h4>
+                  <h4 className="text-lg font-bold text-white mb-2">Combat Style</h4>
                   <p className="text-sm text-muted-foreground">
                     {selectedNFT.descriptions.combatStyle}
                   </p>
@@ -576,9 +509,7 @@ ELEMENTAL PROPERTIES:
 
               <div className="space-y-4">
                 <div>
-                  <h4 className="text-lg font-bold text-white mb-2">
-                    Elemental Properties
-                  </h4>
+                  <h4 className="text-lg font-bold text-white mb-2">Elemental Properties</h4>
                   <div className="space-y-2 text-sm">
                     <div>
                       <span className="text-green-400">Resistant:</span>{" "}
@@ -590,17 +521,13 @@ ELEMENTAL PROPERTIES:
                     </div>
                     <div>
                       <span className="text-yellow-400">Super Effective:</span>{" "}
-                      {selectedNFT.elementalProperties.superEffective.join(
-                        ", ",
-                      )}
+                      {selectedNFT.elementalProperties.superEffective.join(", ")}
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h4 className="text-lg font-bold text-white mb-2">
-                    Tactical Analysis
-                  </h4>
+                  <h4 className="text-lg font-bold text-white mb-2">Tactical Analysis</h4>
                   <div className="space-y-2 text-sm">
                     <div>
                       <span className="text-green-400">Strengths:</span>{" "}

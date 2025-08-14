@@ -37,11 +37,8 @@ export function QuantumEvolutionMonitor() {
 
       // Verify legitimate admin access
       const isLegitimateAdmin = () => {
-        const isFirefoxBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
-        const hasAdminSession =
-          sessionStorage.getItem("admin-session-active") === "true";
+        const isFirefoxBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+        const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
 
         return isFirefoxBrowser && hasAdminSession;
       };
@@ -70,8 +67,7 @@ export function QuantumEvolutionMonitor() {
     <Card className="border-2 border-purple-500/50 bg-gradient-to-br from-purple-900/30 to-blue-900/30">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-purple-400">
-          <Zap className="h-6 w-6 animate-pulse" />⚡ QUANTUM EVOLUTION MONITOR
-          - ADMIN EXCLUSIVE
+          <Zap className="h-6 w-6 animate-pulse" />⚡ QUANTUM EVOLUTION MONITOR - ADMIN EXCLUSIVE
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -103,9 +99,7 @@ export function QuantumEvolutionMonitor() {
           <div>
             <div className="flex justify-between mb-2">
               <span className="text-sm text-green-300">System Integrity</span>
-              <span className="text-sm text-green-400">
-                {evolution.systemIntegrity}%
-              </span>
+              <span className="text-sm text-green-400">{evolution.systemIntegrity}%</span>
             </div>
             <Progress value={evolution.systemIntegrity} className="h-2" />
           </div>
@@ -113,9 +107,7 @@ export function QuantumEvolutionMonitor() {
           <div>
             <div className="flex justify-between mb-2">
               <span className="text-sm text-blue-300">Cloud Optimization</span>
-              <span className="text-sm text-blue-400">
-                {evolution.cloudOptimization}%
-              </span>
+              <span className="text-sm text-blue-400">{evolution.cloudOptimization}%</span>
             </div>
             <Progress value={evolution.cloudOptimization} className="h-2" />
           </div>
@@ -127,8 +119,7 @@ export function QuantumEvolutionMonitor() {
               🌍 HARMONY OF GAIA TECHNOLOGY
             </div>
             <div className="text-sm text-muted-foreground">
-              Protected by Quantum Evolution • Admin-Only Access • Global
-              Compatibility
+              Protected by Quantum Evolution • Admin-Only Access • Global Compatibility
             </div>
           </div>
         </div>

@@ -45,8 +45,7 @@ interface MarketCosts {
 }
 
 export function GaiaFeeManager() {
-  const [selectedFeeOption, setSelectedFeeOption] =
-    useState<string>("zero-fee");
+  const [selectedFeeOption, setSelectedFeeOption] = useState<string>("zero-fee");
   const [customFeeAmount, setCustomFeeAmount] = useState<number>(0);
   const [marketCosts, setMarketCosts] = useState<MarketCosts>({
     network: 0.00001,
@@ -108,14 +107,8 @@ export function GaiaFeeManager() {
   useEffect(() => {
     const interval = setInterval(() => {
       setMarketCosts((prev) => ({
-        network: Math.max(
-          0.000005,
-          prev.network + (Math.random() - 0.5) * 0.000002,
-        ),
-        exchange: Math.max(
-          0.0005,
-          prev.exchange + (Math.random() - 0.5) * 0.0002,
-        ),
+        network: Math.max(0.000005, prev.network + (Math.random() - 0.5) * 0.000002),
+        exchange: Math.max(0.0005, prev.exchange + (Math.random() - 0.5) * 0.0002),
         total: 0,
         lastUpdated: new Date(),
       }));
@@ -145,19 +138,14 @@ export function GaiaFeeManager() {
   };
 
   const getTotalCost = () => {
-    const selectedOption = feeOptions.find(
-      (opt) => opt.id === selectedFeeOption,
-    );
+    const selectedOption = feeOptions.find((opt) => opt.id === selectedFeeOption);
     if (!selectedOption) return marketCosts.total;
 
     if (selectedOption.id === "zero-fee") {
       return marketCosts.total;
     }
 
-    return (
-      marketCosts.total +
-      (customFeeAmount > 0 ? customFeeAmount : selectedOption.percentage)
-    );
+    return marketCosts.total + (customFeeAmount > 0 ? customFeeAmount : selectedOption.percentage);
   };
 
   return (
@@ -195,19 +183,9 @@ export function GaiaFeeManager() {
                     {option.icon}
                     <div className="flex-1">
                       <h4 className="font-semibold">{option.name}</h4>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {option.description}
-                      </p>
-                      <Badge
-                        variant={
-                          selectedFeeOption === option.id
-                            ? "default"
-                            : "outline"
-                        }
-                      >
-                        {option.percentage === 0
-                          ? "FREE"
-                          : `${option.percentage}% fee`}
+                      <p className="text-sm text-muted-foreground mb-2">{option.description}</p>
+                      <Badge variant={selectedFeeOption === option.id ? "default" : "outline"}>
+                        {option.percentage === 0 ? "FREE" : `${option.percentage}% fee`}
                       </Badge>
                     </div>
                   </div>
@@ -216,9 +194,7 @@ export function GaiaFeeManager() {
             </div>
 
             <div className="mt-6 p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
-              <h4 className="font-semibold text-green-400 mb-2">
-                Custom Fee Amount
-              </h4>
+              <h4 className="font-semibold text-green-400 mb-2">Custom Fee Amount</h4>
               <div className="flex items-center gap-4">
                 <Input
                   type="number"
@@ -226,9 +202,7 @@ export function GaiaFeeManager() {
                   min="0"
                   max="1"
                   value={customFeeAmount}
-                  onChange={(e) =>
-                    setCustomFeeAmount(parseFloat(e.target.value) || 0)
-                  }
+                  onChange={(e) => setCustomFeeAmount(parseFloat(e.target.value) || 0)}
                   placeholder="Enter custom fee amount"
                 />
                 <Badge className="bg-blue-600 text-white">
@@ -246,12 +220,8 @@ export function GaiaFeeManager() {
                     <div className="text-2xl font-bold text-green-400">
                       {marketCosts.network.toFixed(6)}
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                      Network Cost
-                    </div>
-                    <div className="text-xs text-green-400 mt-1">
-                      Live Updates
-                    </div>
+                    <div className="text-sm text-muted-foreground">Network Cost</div>
+                    <div className="text-xs text-green-400 mt-1">Live Updates</div>
                   </div>
                 </CardContent>
               </Card>
@@ -262,9 +232,7 @@ export function GaiaFeeManager() {
                     <div className="text-2xl font-bold text-blue-400">
                       {marketCosts.exchange.toFixed(6)}
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                      Exchange Cost
-                    </div>
+                    <div className="text-sm text-muted-foreground">Exchange Cost</div>
                     <div className="text-xs text-blue-400 mt-1">Optimized</div>
                   </div>
                 </CardContent>
@@ -276,12 +244,8 @@ export function GaiaFeeManager() {
                     <div className="text-2xl font-bold text-purple-400">
                       {getTotalCost().toFixed(6)}
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                      Total Cost
-                    </div>
-                    <div className="text-xs text-purple-400 mt-1">
-                      Your Choice
-                    </div>
+                    <div className="text-sm text-muted-foreground">Total Cost</div>
+                    <div className="text-xs text-purple-400 mt-1">Your Choice</div>
                   </div>
                 </CardContent>
               </Card>
@@ -290,9 +254,7 @@ export function GaiaFeeManager() {
             <div className="text-center text-sm text-muted-foreground">
               <Clock className="h-4 w-4 inline mr-1" />
               Last updated: {marketCosts.lastUpdated.toLocaleTimeString()}
-              <div className="text-green-400 mt-1">
-                ⚡ Updates every second for optimal costs
-              </div>
+              <div className="text-green-400 mt-1">⚡ Updates every second for optimal costs</div>
             </div>
           </TabsContent>
 
@@ -302,9 +264,7 @@ export function GaiaFeeManager() {
                 <div className="text-2xl font-bold text-purple-400">
                   {specialRewards.vaultBalance.toLocaleString()}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Vault Balance
-                </div>
+                <div className="text-sm text-muted-foreground">Vault Balance</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-yellow-400">
@@ -322,24 +282,18 @@ export function GaiaFeeManager() {
                 <div className="text-2xl font-bold text-blue-400">
                   {specialRewards.participantsCount}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Participants
-                </div>
+                <div className="text-sm text-muted-foreground">Participants</div>
               </div>
             </div>
 
             <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-4">
-              <h4 className="font-semibold text-purple-400 mb-2">
-                🎁 Special Vault Rewards
-              </h4>
+              <h4 className="font-semibold text-purple-400 mb-2">🎁 Special Vault Rewards</h4>
               <p className="text-sm text-muted-foreground mb-3">
-                Contribute fees to the vault for chances to win special rewards
-                including rare GAiA bonuses!
+                Contribute fees to the vault for chances to win special rewards including rare GAiA
+                bonuses!
               </p>
               <Progress value={67} className="h-2 mb-2" />
-              <div className="text-xs text-center">
-                Next reward draw in 2 hours 15 minutes
-              </div>
+              <div className="text-xs text-center">Next reward draw in 2 hours 15 minutes</div>
             </div>
           </TabsContent>
         </Tabs>

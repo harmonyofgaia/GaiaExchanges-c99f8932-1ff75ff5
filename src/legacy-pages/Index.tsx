@@ -2,15 +2,7 @@ import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Globe,
-  Heart,
-  Zap,
-  Users,
-  Shield,
-  Gamepad2,
-  Wallet,
-} from "lucide-react";
+import { Globe, Heart, Zap, Users, Shield, Gamepad2, Wallet } from "lucide-react";
 import { GAIA_TOKEN } from "@/constants/gaia";
 import { WalletConnection } from "@/components/WalletConnection";
 import { Navbar } from "@/components/Navbar";
@@ -84,9 +76,7 @@ const Index = () => {
           </CardHeader>
           <CardContent>
             <div className="text-center space-y-4">
-              <Badge className="bg-green-600 text-lg px-6 py-2">
-                Official GAiA Token Platform
-              </Badge>
+              <Badge className="bg-green-600 text-lg px-6 py-2">Official GAiA Token Platform</Badge>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                 <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 h-12">
                   <Gamepad2 className="h-5 w-5 mr-2" />
@@ -115,8 +105,7 @@ const Index = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Every transaction contributes to real-world environmental
-                restoration projects.
+                Every transaction contributes to real-world environmental restoration projects.
               </p>
             </CardContent>
           </Card>
@@ -130,8 +119,7 @@ const Index = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Play games, earn tokens, and compete in tournaments while
-                helping the planet.
+                Play games, earn tokens, and compete in tournaments while helping the planet.
               </p>
             </CardContent>
           </Card>
@@ -145,8 +133,7 @@ const Index = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Advanced security protocols protect your assets and
-                transactions.
+                Advanced security protocols protect your assets and transactions.
               </p>
             </CardContent>
           </Card>

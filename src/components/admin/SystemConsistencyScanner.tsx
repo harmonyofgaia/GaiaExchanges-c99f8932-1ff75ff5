@@ -4,13 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { verifyTokenConsistency } from "@/utils/tokenUtils";
-import {
-  CheckCircle,
-  AlertTriangle,
-  RefreshCw,
-  Database,
-  Shield,
-} from "lucide-react";
+import { CheckCircle, AlertTriangle, RefreshCw, Database, Shield } from "lucide-react";
 
 export function SystemConsistencyScanner() {
   const [scanResults, setScanResults] = useState({
@@ -32,8 +26,7 @@ export function SystemConsistencyScanner() {
       const dbIntegrity = Math.random() > 0.1 ? 100 : 95.5;
 
       // Calculate system health
-      const systemHealth =
-        (tokenResults.isConsistent ? 50 : 0) + dbIntegrity / 2;
+      const systemHealth = (tokenResults.isConsistent ? 50 : 0) + dbIntegrity / 2;
 
       setScanResults({
         tokenConsistency: tokenResults,
@@ -64,9 +57,7 @@ export function SystemConsistencyScanner() {
           <CardTitle className="flex items-center gap-2 text-blue-400">
             <Database className="h-6 w-6" />
             🔍 SYSTEM CONSISTENCY SCANNER
-            <Badge className="bg-blue-600 text-white">
-              CONTINUOUS MONITORING
-            </Badge>
+            <Badge className="bg-blue-600 text-white">CONTINUOUS MONITORING</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -76,9 +67,7 @@ export function SystemConsistencyScanner() {
               <div className="text-2xl font-bold text-green-400">
                 {scanResults.tokenConsistency?.isConsistent ? "PASS" : "FAIL"}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Token Consistency
-              </div>
+              <div className="text-sm text-muted-foreground">Token Consistency</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-blue-900/30 border border-blue-500/20">
@@ -86,9 +75,7 @@ export function SystemConsistencyScanner() {
               <div className="text-2xl font-bold text-blue-400">
                 {scanResults.databaseIntegrity}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Database Integrity
-              </div>
+              <div className="text-sm text-muted-foreground">Database Integrity</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-purple-900/30 border border-purple-500/20">
@@ -102,9 +89,7 @@ export function SystemConsistencyScanner() {
 
           {scanResults.tokenConsistency && (
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-white">
-                Token Consistency Details
-              </h3>
+              <h3 className="text-lg font-semibold text-white">Token Consistency Details</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="p-3 bg-gray-800/50 rounded-lg">
                   <div className="text-sm text-gray-400">Total Supply</div>

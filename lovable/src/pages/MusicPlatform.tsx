@@ -28,12 +28,9 @@ export default function MusicPlatform() {
   const earnTokensForListening = () => {
     const tokensEarned = Math.floor(Math.random() * 10) + 5;
     setUserTokens((prev) => prev + tokensEarned);
-    toast.success(
-      `🎵 Earned ${tokensEarned} ${GAIA_TOKEN.SYMBOL} tokens for listening!`,
-      {
-        description: "Keep supporting eco-conscious music to earn more",
-      },
-    );
+    toast.success(`🎵 Earned ${tokensEarned} ${GAIA_TOKEN.SYMBOL} tokens for listening!`, {
+      description: "Keep supporting eco-conscious music to earn more",
+    });
   };
 
   const playlists = [
@@ -76,12 +73,9 @@ export default function MusicPlatform() {
             🎵 Music Platform
           </h1>
           <p className="text-xl text-muted-foreground">
-            Discover and stream eco-conscious music • Earn {GAIA_TOKEN.SYMBOL}{" "}
-            tokens for listening
+            Discover and stream eco-conscious music • Earn {GAIA_TOKEN.SYMBOL} tokens for listening
             <br />
-            <span className="text-sm">
-              Connected to Official {GAIA_TOKEN.NAME}
-            </span>
+            <span className="text-sm">Connected to Official {GAIA_TOKEN.NAME}</span>
           </p>
         </div>
 
@@ -94,9 +88,7 @@ export default function MusicPlatform() {
                   <div className="flex items-center gap-3">
                     <Coins className="h-6 w-6 text-green-400" />
                     <div>
-                      <div className="text-2xl font-bold text-green-400">
-                        {userTokens}
-                      </div>
+                      <div className="text-2xl font-bold text-green-400">{userTokens}</div>
                       <div className="text-sm text-muted-foreground">
                         {GAIA_TOKEN.SYMBOL} Tokens Earned
                       </div>
@@ -126,12 +118,8 @@ export default function MusicPlatform() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold">{currentTrack.title}</h3>
-                    <p className="text-muted-foreground">
-                      {currentTrack.artist}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {currentTrack.album}
-                    </p>
+                    <p className="text-muted-foreground">{currentTrack.artist}</p>
+                    <p className="text-sm text-muted-foreground">{currentTrack.album}</p>
                   </div>
                 </div>
 
@@ -167,11 +155,7 @@ export default function MusicPlatform() {
                     }}
                     className="bg-purple-600 hover:bg-purple-700 rounded-full w-12 h-12"
                   >
-                    {isPlaying ? (
-                      <Pause className="h-6 w-6" />
-                    ) : (
-                      <Play className="h-6 w-6" />
-                    )}
+                    {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
                   </Button>
                   <Button variant="ghost" size="sm">
                     <SkipForward className="h-5 w-5" />
@@ -219,15 +203,11 @@ export default function MusicPlatform() {
                         </div>
                         <div>
                           <p className="font-medium">Ocean Waves {i + 1}</p>
-                          <p className="text-sm text-muted-foreground">
-                            Nature Sounds
-                          </p>
+                          <p className="text-sm text-muted-foreground">Nature Sounds</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-muted-foreground">
-                          3:45
-                        </span>
+                        <span className="text-sm text-muted-foreground">3:45</span>
                         <Button variant="ghost" size="sm">
                           <Play className="h-4 w-4" />
                         </Button>
@@ -277,9 +257,7 @@ export default function MusicPlatform() {
             {/* Stats */}
             <Card className="border-yellow-500/30 mt-6">
               <CardHeader>
-                <CardTitle className="text-yellow-400">
-                  Listening Stats
-                </CardTitle>
+                <CardTitle className="text-yellow-400">Listening Stats</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between">

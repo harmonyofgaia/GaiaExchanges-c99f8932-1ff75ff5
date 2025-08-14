@@ -16,12 +16,7 @@ import {
   ExternalLink,
   BarChart3,
 } from "lucide-react";
-import {
-  GAIA_TOKEN,
-  GAIA_METRICS,
-  formatGaiaPrice,
-  formatGaiaNumber,
-} from "@/constants/gaia";
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from "@/constants/gaia";
 import { toast } from "sonner";
 
 export function GaiaCoinCrafter() {
@@ -34,14 +29,12 @@ export function GaiaCoinCrafter() {
   useEffect(() => {
     console.log(
       "🏭 GAiA Coin Crafter: Connected to official token address:",
-      GAIA_TOKEN.WALLET_ADDRESS,
+      GAIA_TOKEN.WALLET_ADDRESS
     );
     const interval = setInterval(() => {
       setMonthlyProgress((prev) => Math.min(prev + 0.15, 100));
       setTotalCrafted((prev) => prev + Math.floor(Math.random() * 12) + 5);
-      setBurnedForReinvestment(
-        (prev) => prev + Math.floor(Math.random() * 4) + 1,
-      );
+      setBurnedForReinvestment((prev) => prev + Math.floor(Math.random() * 4) + 1);
     }, 8000);
 
     return () => clearInterval(interval);
@@ -86,9 +79,7 @@ export function GaiaCoinCrafter() {
             {/* Official Wallet Address */}
             <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-blue-400 font-bold">
-                  Official GAiA Wallet:
-                </span>
+                <span className="text-blue-400 font-bold">Official GAiA Wallet:</span>
                 <div className="flex gap-2">
                   <Button
                     onClick={copyOfficialWalletAddress}
@@ -118,9 +109,7 @@ export function GaiaCoinCrafter() {
             {/* Official Contract Address */}
             <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-purple-400 font-bold">
-                  Official GAiA Contract:
-                </span>
+                <span className="text-purple-400 font-bold">Official GAiA Contract:</span>
                 <Button
                   onClick={copyOfficialContractAddress}
                   variant="outline"
@@ -182,8 +171,7 @@ export function GaiaCoinCrafter() {
             🏭 OFFICIAL GAiA COIN CRAFTER - Connected to Official Token
           </CardTitle>
           <p className="text-muted-foreground">
-            Automatically fills market supply connected to official GAiA token
-            address
+            Automatically fills market supply connected to official GAiA token address
           </p>
         </CardHeader>
 
@@ -191,9 +179,7 @@ export function GaiaCoinCrafter() {
           {/* Monthly Progress */}
           <div className="space-y-3">
             <div className="flex justify-between items-center">
-              <span className="font-bold text-purple-400">
-                Official Token Crafting Progress
-              </span>
+              <span className="font-bold text-purple-400">Official Token Crafting Progress</span>
               <Badge className="bg-purple-600 text-white">
                 {monthlyProgress.toFixed(1)}% Complete
               </Badge>
@@ -206,29 +192,21 @@ export function GaiaCoinCrafter() {
                 <div className="text-2xl font-bold text-green-400">
                   {totalCrafted.toLocaleString()}
                 </div>
-                <div className="text-muted-foreground">
-                  Official Tokens Crafted
-                </div>
+                <div className="text-muted-foreground">Official Tokens Crafted</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-orange-400">
                   {burnedForReinvestment.toLocaleString()}
                 </div>
-                <div className="text-muted-foreground">
-                  Burned for Reinvestment
-                </div>
+                <div className="text-muted-foreground">Burned for Reinvestment</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-cyan-400">
-                  {nextCraftingIn}
-                </div>
+                <div className="text-2xl font-bold text-cyan-400">{nextCraftingIn}</div>
                 <div className="text-muted-foreground">Days to Next Craft</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-yellow-400">99.2%</div>
-                <div className="text-muted-foreground">
-                  Official System Efficiency
-                </div>
+                <div className="text-muted-foreground">Official System Efficiency</div>
               </div>
             </div>
           </div>
@@ -245,27 +223,19 @@ export function GaiaCoinCrafter() {
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
                   <span>Official GAiA Stream Viewers:</span>
-                  <span className="text-orange-400 font-bold">
-                    1 GAiA per viewer
-                  </span>
+                  <span className="text-orange-400 font-bold">1 GAiA per viewer</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Official Community Trades:</span>
-                  <span className="text-orange-400 font-bold">
-                    0.15% of volume
-                  </span>
+                  <span className="text-orange-400 font-bold">0.15% of volume</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Official NFT Purchases:</span>
-                  <span className="text-orange-400 font-bold">
-                    7% burn rate
-                  </span>
+                  <span className="text-orange-400 font-bold">7% burn rate</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Official Gaming Rewards:</span>
-                  <span className="text-orange-400 font-bold">
-                    Enhanced burn
-                  </span>
+                  <span className="text-orange-400 font-bold">Enhanced burn</span>
                 </div>
               </CardContent>
             </Card>

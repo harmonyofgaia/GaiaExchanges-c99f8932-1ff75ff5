@@ -4,16 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import {
-  CheckCircle,
-  Clock,
-  Star,
-  Rocket,
-  Zap,
-  Crown,
-  Shield,
-  Globe,
-} from "lucide-react";
+import { CheckCircle, Clock, Star, Rocket, Zap, Crown, Shield, Globe } from "lucide-react";
 import { toast } from "sonner";
 
 interface UpgradeFeature {
@@ -142,8 +133,7 @@ export function ComprehensiveUpgradePlan() {
     {
       id: "biometric-security",
       name: "DNA-Level Biometric Security",
-      description:
-        "Security system that reads DNA, brainwaves, and quantum signatures",
+      description: "Security system that reads DNA, brainwaves, and quantum signatures",
       category: "security",
       priority: "HIGH",
       phase: 1,
@@ -157,8 +147,7 @@ export function ComprehensiveUpgradePlan() {
     {
       id: "reality-mining",
       name: "Reality Mining Protocol",
-      description:
-        "Mine cryptocurrency by solving real-world environmental problems",
+      description: "Mine cryptocurrency by solving real-world environmental problems",
       category: "environmental",
       priority: "CRITICAL",
       phase: 1,
@@ -174,8 +163,7 @@ export function ComprehensiveUpgradePlan() {
     {
       id: "satellite-network",
       name: "Global Satellite Network",
-      description:
-        "Launch our own satellite constellation for ultimate global connectivity",
+      description: "Launch our own satellite constellation for ultimate global connectivity",
       category: "infrastructure",
       priority: "HIGH",
       phase: 2,
@@ -189,8 +177,7 @@ export function ComprehensiveUpgradePlan() {
     {
       id: "universal-translation",
       name: "Universal Language AI",
-      description:
-        "AI that translates any language, including animal communication",
+      description: "AI that translates any language, including animal communication",
       category: "ai",
       priority: "HIGH",
       phase: 2,
@@ -218,8 +205,7 @@ export function ComprehensiveUpgradePlan() {
     {
       id: "crypto-central-banks",
       name: "Replace Central Banks",
-      description:
-        "Become so trusted that countries adopt GAIA as their national currency",
+      description: "Become so trusted that countries adopt GAIA as their national currency",
       category: "economic",
       priority: "HIGH",
       phase: 2,
@@ -233,8 +219,7 @@ export function ComprehensiveUpgradePlan() {
     {
       id: "virtual-earth",
       name: "Virtual Earth Simulation",
-      description:
-        "Perfect 1:1 simulation of Earth for environmental testing and planning",
+      description: "Perfect 1:1 simulation of Earth for environmental testing and planning",
       category: "environmental",
       priority: "MEDIUM",
       phase: 2,
@@ -250,8 +235,7 @@ export function ComprehensiveUpgradePlan() {
     {
       id: "time-travel-trading",
       name: "Temporal Trading Algorithm",
-      description:
-        "AI that can predict market movements by analyzing temporal patterns",
+      description: "AI that can predict market movements by analyzing temporal patterns",
       category: "ai",
       priority: "HIGH",
       phase: 3,
@@ -265,8 +249,7 @@ export function ComprehensiveUpgradePlan() {
     {
       id: "weather-control",
       name: "Weather Manipulation System",
-      description:
-        "Technology to control weather patterns for environmental restoration",
+      description: "Technology to control weather patterns for environmental restoration",
       category: "environmental",
       priority: "CRITICAL",
       phase: 3,
@@ -294,8 +277,7 @@ export function ComprehensiveUpgradePlan() {
     {
       id: "mind-interface",
       name: "Direct Brain Interface",
-      description:
-        "Allow users to interact with the platform using thought alone",
+      description: "Allow users to interact with the platform using thought alone",
       category: "ai",
       priority: "HIGH",
       phase: 3,
@@ -325,8 +307,7 @@ export function ComprehensiveUpgradePlan() {
     {
       id: "matter-compiler",
       name: "Molecular Matter Compiler",
-      description:
-        "Convert energy directly into any material needed for environmental restoration",
+      description: "Convert energy directly into any material needed for environmental restoration",
       category: "infrastructure",
       priority: "CRITICAL",
       phase: 4,
@@ -340,8 +321,7 @@ export function ComprehensiveUpgradePlan() {
     {
       id: "dimension-portal",
       name: "Interdimensional Portal Network",
-      description:
-        "Access parallel universes for unlimited resources and knowledge",
+      description: "Access parallel universes for unlimited resources and knowledge",
       category: "infrastructure",
       priority: "MEDIUM",
       phase: 4,
@@ -357,8 +337,7 @@ export function ComprehensiveUpgradePlan() {
     {
       id: "universal-peace",
       name: "Universal Peace Protocol",
-      description:
-        "Technology that makes war and conflict impossible through neural harmony",
+      description: "Technology that makes war and conflict impossible through neural harmony",
       category: "social",
       priority: "CRITICAL",
       phase: 5,
@@ -381,11 +360,7 @@ export function ComprehensiveUpgradePlan() {
       impact: "revolutionary",
       complexity: "extreme",
       estimatedDays: 3650,
-      dependencies: [
-        "weather-control",
-        "matter-compiler",
-        "ocean-cleanup-bots",
-      ],
+      dependencies: ["weather-control", "matter-compiler", "ocean-cleanup-bots"],
       worldDominationScore: 100,
     },
     {
@@ -421,7 +396,7 @@ export function ComprehensiveUpgradePlan() {
             }
           }
           return feature;
-        }),
+        })
       );
     }, 10000);
 
@@ -480,13 +455,10 @@ export function ComprehensiveUpgradePlan() {
   };
 
   const totalFeatures = upgradeFeatures.length;
-  const completedFeatures = upgradeFeatures.filter(
-    (f) => f.status === "completed",
-  ).length;
+  const completedFeatures = upgradeFeatures.filter((f) => f.status === "completed").length;
   const overallProgress = (completedFeatures / totalFeatures) * 100;
   const averageDominationScore =
-    upgradeFeatures.reduce((sum, f) => sum + f.worldDominationScore, 0) /
-    upgradeFeatures.length;
+    upgradeFeatures.reduce((sum, f) => sum + f.worldDominationScore, 0) / upgradeFeatures.length;
 
   return (
     <div className="space-y-6">
@@ -495,8 +467,7 @@ export function ComprehensiveUpgradePlan() {
           🌍 COMPREHENSIVE WORLD DOMINATION PLAN 🌍
         </h1>
         <p className="text-muted-foreground mt-2">
-          Strategic roadmap to save the world and achieve global environmental
-          supremacy
+          Strategic roadmap to save the world and achieve global environmental supremacy
         </p>
       </div>
 
@@ -505,9 +476,7 @@ export function ComprehensiveUpgradePlan() {
         <Card className="bg-gradient-to-br from-green-900/40 to-emerald-900/40 border-green-500/50">
           <CardContent className="p-4 text-center">
             <div className="text-3xl mb-2">🎯</div>
-            <div className="text-2xl font-bold text-green-400">
-              {overallProgress.toFixed(1)}%
-            </div>
+            <div className="text-2xl font-bold text-green-400">{overallProgress.toFixed(1)}%</div>
             <div className="text-sm text-green-300">Overall Progress</div>
           </CardContent>
         </Card>
@@ -515,9 +484,7 @@ export function ComprehensiveUpgradePlan() {
         <Card className="bg-gradient-to-br from-blue-900/40 to-cyan-900/40 border-blue-500/50">
           <CardContent className="p-4 text-center">
             <div className="text-3xl mb-2">⚡</div>
-            <div className="text-2xl font-bold text-blue-400">
-              {totalFeatures}
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{totalFeatures}</div>
             <div className="text-sm text-blue-300">Total Features</div>
           </CardContent>
         </Card>
@@ -578,34 +545,22 @@ export function ComprehensiveUpgradePlan() {
                   <p className="text-sm text-gray-300">{phase.description}</p>
 
                   <div>
-                    <div className="text-sm text-muted-foreground mb-2">
-                      Primary Goal
-                    </div>
-                    <div className="text-sm font-medium text-blue-400">
-                      {phase.primaryGoal}
-                    </div>
+                    <div className="text-sm text-muted-foreground mb-2">Primary Goal</div>
+                    <div className="text-sm font-medium text-blue-400">{phase.primaryGoal}</div>
                   </div>
 
                   <div>
-                    <div className="text-sm text-muted-foreground mb-2">
-                      Duration
-                    </div>
-                    <div className="text-sm font-medium text-purple-400">
-                      {phase.duration}
-                    </div>
+                    <div className="text-sm text-muted-foreground mb-2">Duration</div>
+                    <div className="text-sm font-medium text-purple-400">{phase.duration}</div>
                   </div>
 
                   <div>
-                    <div className="text-sm text-muted-foreground mb-2">
-                      Progress
-                    </div>
+                    <div className="text-sm text-muted-foreground mb-2">Progress</div>
                     <Progress value={phase.completion} className="h-2" />
                   </div>
 
                   <div>
-                    <div className="text-sm text-muted-foreground mb-2">
-                      Features
-                    </div>
+                    <div className="text-sm text-muted-foreground mb-2">Features</div>
                     <div className="text-2xl font-bold text-cyan-400">
                       {getPhaseFeatures(phase.id).length}
                     </div>
@@ -619,8 +574,7 @@ export function ComprehensiveUpgradePlan() {
           <Card className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 border-gray-700/50">
             <CardHeader>
               <CardTitle className="text-xl text-blue-300">
-                Phase {selectedPhase} Features -{" "}
-                {phases.find((p) => p.id === selectedPhase)?.name}
+                Phase {selectedPhase} Features - {phases.find((p) => p.id === selectedPhase)?.name}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -637,46 +591,30 @@ export function ComprehensiveUpgradePlan() {
                           <span className="text-white">{feature.name}</span>
                         </div>
                         <div className="flex gap-1">
-                          <Badge
-                            className={getPriorityColor(feature.priority)}
-                            variant="secondary"
-                          >
+                          <Badge className={getPriorityColor(feature.priority)} variant="secondary">
                             {feature.priority}
                           </Badge>
-                          <Badge
-                            className={getStatusColor(feature.status)}
-                            variant="secondary"
-                          >
+                          <Badge className={getStatusColor(feature.status)} variant="secondary">
                             {feature.status}
                           </Badge>
                         </div>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
-                      <p className="text-xs text-gray-300">
-                        {feature.description}
-                      </p>
+                      <p className="text-xs text-gray-300">{feature.description}</p>
 
                       <div className="grid grid-cols-2 gap-2 text-xs">
                         <div>
                           <span className="text-muted-foreground">Impact:</span>
-                          <span className="text-green-400 ml-1">
-                            {feature.impact}
-                          </span>
+                          <span className="text-green-400 ml-1">{feature.impact}</span>
                         </div>
                         <div>
                           <span className="text-muted-foreground">Days:</span>
-                          <span className="text-blue-400 ml-1">
-                            {feature.estimatedDays}
-                          </span>
+                          <span className="text-blue-400 ml-1">{feature.estimatedDays}</span>
                         </div>
                         <div>
-                          <span className="text-muted-foreground">
-                            Complexity:
-                          </span>
-                          <span className="text-orange-400 ml-1">
-                            {feature.complexity}
-                          </span>
+                          <span className="text-muted-foreground">Complexity:</span>
+                          <span className="text-orange-400 ml-1">{feature.complexity}</span>
                         </div>
                         <div>
                           <span className="text-muted-foreground">Score:</span>
@@ -688,16 +626,10 @@ export function ComprehensiveUpgradePlan() {
 
                       {feature.dependencies.length > 0 && (
                         <div>
-                          <div className="text-xs text-muted-foreground mb-1">
-                            Dependencies:
-                          </div>
+                          <div className="text-xs text-muted-foreground mb-1">Dependencies:</div>
                           <div className="flex flex-wrap gap-1">
                             {feature.dependencies.map((dep, idx) => (
-                              <Badge
-                                key={idx}
-                                variant="outline"
-                                className="text-xs"
-                              >
+                              <Badge key={idx} variant="outline" className="text-xs">
                                 {dep}
                               </Badge>
                             ))}
@@ -726,15 +658,11 @@ export function ComprehensiveUpgradePlan() {
                       <span className="text-white">{feature.name}</span>
                     </div>
                     <div className="flex gap-2">
-                      <Badge className="bg-blue-600">
-                        Phase {feature.phase}
-                      </Badge>
+                      <Badge className="bg-blue-600">Phase {feature.phase}</Badge>
                       <Badge className={getPriorityColor(feature.priority)}>
                         {feature.priority}
                       </Badge>
-                      <Badge className={getStatusColor(feature.status)}>
-                        {feature.status}
-                      </Badge>
+                      <Badge className={getStatusColor(feature.status)}>{feature.status}</Badge>
                     </div>
                   </CardTitle>
                 </CardHeader>
@@ -744,26 +672,18 @@ export function ComprehensiveUpgradePlan() {
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                     <div>
                       <div className="text-muted-foreground">Impact</div>
-                      <div className="text-green-400 font-medium">
-                        {feature.impact}
-                      </div>
+                      <div className="text-green-400 font-medium">{feature.impact}</div>
                     </div>
                     <div>
                       <div className="text-muted-foreground">Complexity</div>
-                      <div className="text-orange-400 font-medium">
-                        {feature.complexity}
-                      </div>
+                      <div className="text-orange-400 font-medium">{feature.complexity}</div>
                     </div>
                     <div>
                       <div className="text-muted-foreground">Days</div>
-                      <div className="text-blue-400 font-medium">
-                        {feature.estimatedDays}
-                      </div>
+                      <div className="text-blue-400 font-medium">{feature.estimatedDays}</div>
                     </div>
                     <div>
-                      <div className="text-muted-foreground">
-                        Domination Score
-                      </div>
+                      <div className="text-muted-foreground">Domination Score</div>
                       <div className="text-purple-400 font-bold">
                         {feature.worldDominationScore}/100
                       </div>
@@ -772,16 +692,10 @@ export function ComprehensiveUpgradePlan() {
 
                   {feature.dependencies.length > 0 && (
                     <div>
-                      <div className="text-sm text-muted-foreground mb-2">
-                        Dependencies
-                      </div>
+                      <div className="text-sm text-muted-foreground mb-2">Dependencies</div>
                       <div className="flex flex-wrap gap-1">
                         {feature.dependencies.map((dep, idx) => (
-                          <Badge
-                            key={idx}
-                            variant="outline"
-                            className="text-xs"
-                          >
+                          <Badge key={idx} variant="outline" className="text-xs">
                             {dep}
                           </Badge>
                         ))}
@@ -816,37 +730,23 @@ export function ComprehensiveUpgradePlan() {
                     >
                       {phase.id}
                     </div>
-                    {idx < phases.length - 1 && (
-                      <div className="w-0.5 h-16 bg-gray-600 mt-2"></div>
-                    )}
+                    {idx < phases.length - 1 && <div className="w-0.5 h-16 bg-gray-600 mt-2"></div>}
                   </div>
                   <div className="flex-1 pb-8">
-                    <h3 className="text-lg font-bold text-white mb-2">
-                      {phase.name}
-                    </h3>
+                    <h3 className="text-lg font-bold text-white mb-2">{phase.name}</h3>
                     <p className="text-gray-300 mb-3">{phase.description}</p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                       <div>
-                        <span className="text-muted-foreground">
-                          Duration:{" "}
-                        </span>
+                        <span className="text-muted-foreground">Duration: </span>
                         <span className="text-blue-400">{phase.duration}</span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">
-                          Features:{" "}
-                        </span>
-                        <span className="text-green-400">
-                          {getPhaseFeatures(phase.id).length}
-                        </span>
+                        <span className="text-muted-foreground">Features: </span>
+                        <span className="text-green-400">{getPhaseFeatures(phase.id).length}</span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">
-                          Progress:{" "}
-                        </span>
-                        <span className="text-purple-400">
-                          {phase.completion}%
-                        </span>
+                        <span className="text-muted-foreground">Progress: </span>
+                        <span className="text-purple-400">{phase.completion}%</span>
                       </div>
                     </div>
                     <Progress value={phase.completion} className="mt-3" />

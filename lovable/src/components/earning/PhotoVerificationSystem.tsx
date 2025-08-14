@@ -53,9 +53,7 @@ export function PhotoVerificationSystem() {
     };
     setSubmissions((prev) => [newSubmission, ...prev]);
     setUploadCount((prev) => prev + 1);
-    toast.success(
-      "Photo submitted for verification! You'll earn tokens once verified.",
-    );
+    toast.success("Photo submitted for verification! You'll earn tokens once verified.");
   };
 
   const getCategoryColor = (category: PhotoSubmission["category"]) => {
@@ -105,27 +103,20 @@ export function PhotoVerificationSystem() {
               <div className="p-6 border-2 border-dashed border-orange-500/30 rounded-lg text-center space-y-4">
                 <Camera className="h-12 w-12 text-orange-400 mx-auto" />
                 <div>
-                  <h4 className="font-medium text-orange-400 mb-2">
-                    Upload Photo Evidence
-                  </h4>
+                  <h4 className="font-medium text-orange-400 mb-2">Upload Photo Evidence</h4>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Take a photo of your environmental activity to earn GAiA
-                    tokens after verification
+                    Take a photo of your environmental activity to earn GAiA tokens after
+                    verification
                   </p>
                 </div>
-                <Button
-                  onClick={handlePhotoUpload}
-                  className="bg-orange-600 hover:bg-orange-700"
-                >
+                <Button onClick={handlePhotoUpload} className="bg-orange-600 hover:bg-orange-700">
                   <Upload className="h-4 w-4 mr-2" />
                   Upload Photo (+50-100 GAiA)
                 </Button>
               </div>
 
               <div className="p-4 bg-orange-900/20 rounded-lg border border-orange-500/20">
-                <h4 className="font-medium text-orange-400 mb-2">
-                  📋 Verification Guidelines
-                </h4>
+                <h4 className="font-medium text-orange-400 mb-2">📋 Verification Guidelines</h4>
                 <ul className="text-sm text-orange-200/80 space-y-1">
                   <li>• Photo must clearly show the environmental activity</li>
                   <li>• Include a brief description of your action</li>
@@ -137,9 +128,7 @@ export function PhotoVerificationSystem() {
 
             {/* Submissions History */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-orange-400">
-                Your Submissions
-              </h3>
+              <h3 className="text-lg font-semibold text-orange-400">Your Submissions</h3>
 
               <div className="space-y-3">
                 {submissions.map((submission) => (
@@ -151,17 +140,13 @@ export function PhotoVerificationSystem() {
                       <h4 className="font-medium">{submission.title}</h4>
                       <div className="flex items-center gap-1">
                         {getStatusIcon(submission.status)}
-                        <Badge
-                          className={getCategoryColor(submission.category)}
-                        >
+                        <Badge className={getCategoryColor(submission.category)}>
                           {submission.category}
                         </Badge>
                       </div>
                     </div>
 
-                    <p className="text-sm text-muted-foreground mb-3">
-                      {submission.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground mb-3">{submission.description}</p>
 
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-muted-foreground">
@@ -180,17 +165,11 @@ export function PhotoVerificationSystem() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="p-3 bg-green-900/20 rounded-lg border border-green-500/20 text-center">
                   <div className="text-xl font-bold text-green-400">75</div>
-                  <div className="text-xs text-muted-foreground">
-                    Tokens Earned
-                  </div>
+                  <div className="text-xs text-muted-foreground">Tokens Earned</div>
                 </div>
                 <div className="p-3 bg-blue-900/20 rounded-lg border border-blue-500/20 text-center">
-                  <div className="text-xl font-bold text-blue-400">
-                    {uploadCount}
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    Photos Submitted
-                  </div>
+                  <div className="text-xl font-bold text-blue-400">{uploadCount}</div>
+                  <div className="text-xs text-muted-foreground">Photos Submitted</div>
                 </div>
               </div>
             </div>

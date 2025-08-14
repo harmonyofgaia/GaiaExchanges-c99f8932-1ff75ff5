@@ -60,13 +60,7 @@ export function LightningClickEffect() {
                   className="drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]"
                 />
                 <defs>
-                  <linearGradient
-                    id="lightningGradient"
-                    x1="0%"
-                    y1="0%"
-                    x2="0%"
-                    y2="100%"
-                  >
+                  <linearGradient id="lightningGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" stopColor="#60a5fa" />
                     <stop offset="50%" stopColor="#3b82f6" />
                     <stop offset="100%" stopColor="#1d4ed8" />

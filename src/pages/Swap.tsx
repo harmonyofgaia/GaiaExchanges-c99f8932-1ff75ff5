@@ -99,7 +99,7 @@ export default function Swap() {
     setTimeout(() => {
       setIsSwapping(false);
       toast.success(
-        `Successfully swapped ${fromAmount} ${fromToken.symbol} for ${toAmount} ${toToken.symbol}!`,
+        `Successfully swapped ${fromAmount} ${fromToken.symbol} for ${toAmount} ${toToken.symbol}!`
       );
       setFromAmount("");
       setToAmount("");
@@ -147,9 +147,7 @@ export default function Swap() {
                 </div>
                 <div className="ml-auto text-right">
                   <div className="text-sm">{t.balance.toLocaleString()}</div>
-                  <div className="text-xs text-muted-foreground">
-                    ${t.price.toFixed(4)}
-                  </div>
+                  <div className="text-xs text-muted-foreground">${t.price.toFixed(4)}</div>
                 </div>
               </div>
             </SelectItem>
@@ -170,8 +168,7 @@ export default function Swap() {
             </CardTitle>
             <div className="text-center space-y-2">
               <p className="text-xl text-muted-foreground">
-                Instant, secure, and zero-fee token swaps powered by dragon
-                technology
+                Instant, secure, and zero-fee token swaps powered by dragon technology
               </p>
               <div className="flex justify-center gap-4">
                 <Badge className="bg-blue-600">⚡ Instant Swaps</Badge>
@@ -195,11 +192,7 @@ export default function Swap() {
               <CardContent className="space-y-6">
                 {/* From Token */}
                 <div className="space-y-4">
-                  <TokenSelector
-                    token={fromToken}
-                    onSelect={setFromToken}
-                    label="From"
-                  />
+                  <TokenSelector token={fromToken} onSelect={setFromToken} label="From" />
                   <div className="relative">
                     <Input
                       type="number"
@@ -209,9 +202,7 @@ export default function Swap() {
                       className="text-2xl font-bold h-16 pr-20"
                     />
                     <Button
-                      onClick={() =>
-                        handleFromAmountChange(fromToken.balance.toString())
-                      }
+                      onClick={() => handleFromAmountChange(fromToken.balance.toString())}
                       size="sm"
                       variant="outline"
                       className="absolute right-2 top-1/2 transform -translate-y-1/2"
@@ -240,11 +231,7 @@ export default function Swap() {
 
                 {/* To Token */}
                 <div className="space-y-4">
-                  <TokenSelector
-                    token={toToken}
-                    onSelect={setToToken}
-                    label="To"
-                  />
+                  <TokenSelector token={toToken} onSelect={setToToken} label="To" />
                   <Input
                     type="number"
                     placeholder="0.0"
@@ -267,9 +254,7 @@ export default function Swap() {
                         <span>Exchange Rate:</span>
                         <span>
                           1 {fromToken.symbol} ={" "}
-                          {(
-                            parseFloat(toAmount) / parseFloat(fromAmount)
-                          ).toFixed(6)}{" "}
+                          {(parseFloat(toAmount) / parseFloat(fromAmount)).toFixed(6)}{" "}
                           {toToken.symbol}
                         </span>
                       </div>
@@ -362,12 +347,8 @@ export default function Swap() {
                       <div className="flex items-center gap-2">
                         <span className="text-xl">{token.icon}</span>
                         <div>
-                          <div className="font-semibold text-sm">
-                            {token.symbol}
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            {token.name}
-                          </div>
+                          <div className="font-semibold text-sm">{token.symbol}</div>
+                          <div className="text-xs text-muted-foreground">{token.name}</div>
                         </div>
                       </div>
                       <div className="text-right">
@@ -440,9 +421,7 @@ export default function Swap() {
             <CardContent className="p-4 text-center">
               <Shield className="h-6 w-6 text-orange-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-orange-400">100%</div>
-              <div className="text-xs text-muted-foreground">
-                Security Score
-              </div>
+              <div className="text-xs text-muted-foreground">Security Score</div>
             </CardContent>
           </Card>
         </div>

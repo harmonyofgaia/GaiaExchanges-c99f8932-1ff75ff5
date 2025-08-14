@@ -5,14 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
-import {
-  DollarSign,
-  TrendingUp,
-  Users,
-  Handshake,
-  Target,
-  Gift,
-} from "lucide-react";
+import { DollarSign, TrendingUp, Users, Handshake, Target, Gift } from "lucide-react";
 import { RevenueAgreement } from "@/types/ui-types";
 import { toast } from "sonner";
 
@@ -93,10 +86,8 @@ export function FlexibleRevenueAgreements() {
   const toggleAgreement = (id: string) => {
     setAgreements((prev) =>
       prev.map((agreement) =>
-        agreement.id === id
-          ? { ...agreement, isActive: !agreement.isActive }
-          : agreement,
-      ),
+        agreement.id === id ? { ...agreement, isActive: !agreement.isActive } : agreement
+      )
     );
   };
 
@@ -121,9 +112,7 @@ export function FlexibleRevenueAgreements() {
             💰 FLEXIBLE REVENUE AGREEMENTS - Partnership Engine
           </CardTitle>
           <div className="flex gap-2 flex-wrap">
-            <Badge className="bg-green-600 animate-pulse">
-              ACTIVE PARTNERSHIPS
-            </Badge>
+            <Badge className="bg-green-600 animate-pulse">ACTIVE PARTNERSHIPS</Badge>
             <Badge className="bg-blue-600">REVENUE GROWING</Badge>
             <Badge className="bg-purple-600">MUTUAL BENEFITS</Badge>
           </div>
@@ -140,29 +129,21 @@ export function FlexibleRevenueAgreements() {
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
               <TrendingUp className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {monthlyGrowth.toFixed(1)}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Monthly Growth
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{monthlyGrowth.toFixed(1)}%</div>
+              <div className="text-sm text-muted-foreground">Monthly Growth</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
               <Target className="h-8 w-8 mx-auto text-purple-400 mb-2" />
               <div className="text-2xl font-bold text-purple-400">
                 {totalActivePercentage.toFixed(1)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Allocation
-              </div>
+              <div className="text-sm text-muted-foreground">Total Allocation</div>
             </div>
           </div>
 
           {/* Active Agreements */}
           <div className="space-y-4 mb-6">
-            <h3 className="text-lg font-bold text-white">
-              Active Revenue Agreements
-            </h3>
+            <h3 className="text-lg font-bold text-white">Active Revenue Agreements</h3>
             {agreements.map((agreement) => (
               <Card
                 key={agreement.id}
@@ -171,22 +152,14 @@ export function FlexibleRevenueAgreements() {
                 <CardContent className="pt-4">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-white">
-                        {agreement.name}
-                      </h4>
-                      <p className="text-sm text-muted-foreground">
-                        {agreement.description}
-                      </p>
+                      <h4 className="text-lg font-semibold text-white">{agreement.name}</h4>
+                      <p className="text-sm text-muted-foreground">{agreement.description}</p>
                     </div>
                     <Button
                       onClick={() => toggleAgreement(agreement.id)}
                       variant={agreement.isActive ? "default" : "outline"}
                       size="sm"
-                      className={
-                        agreement.isActive
-                          ? "bg-green-600 hover:bg-green-700"
-                          : ""
-                      }
+                      className={agreement.isActive ? "bg-green-600 hover:bg-green-700" : ""}
                     >
                       {agreement.isActive ? "Active" : "Inactive"}
                     </Button>
@@ -194,30 +167,19 @@ export function FlexibleRevenueAgreements() {
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="text-center p-3 bg-blue-900/20 rounded border border-blue-500/20">
-                      <div className="text-sm text-muted-foreground">
-                        Base Percentage
-                      </div>
-                      <div className="text-xl font-bold text-blue-400">
-                        {agreement.percentage}%
-                      </div>
+                      <div className="text-sm text-muted-foreground">Base Percentage</div>
+                      <div className="text-xl font-bold text-blue-400">{agreement.percentage}%</div>
                     </div>
                     <div className="text-center p-3 bg-purple-900/20 rounded border border-purple-500/20">
-                      <div className="text-sm text-muted-foreground">
-                        Bonus Percentage
-                      </div>
+                      <div className="text-sm text-muted-foreground">Bonus Percentage</div>
                       <div className="text-xl font-bold text-purple-400">
                         {agreement.bonusPercentage || 0}%
                       </div>
                     </div>
                     <div className="text-center p-3 bg-green-900/20 rounded border border-green-500/20">
-                      <div className="text-sm text-muted-foreground">
-                        Monthly Revenue
-                      </div>
+                      <div className="text-sm text-muted-foreground">Monthly Revenue</div>
                       <div className="text-xl font-bold text-green-400">
-                        $
-                        {agreement.isActive
-                          ? calculateRevenue(agreement).toLocaleString()
-                          : "0"}
+                        ${agreement.isActive ? calculateRevenue(agreement).toLocaleString() : "0"}
                       </div>
                     </div>
                   </div>
@@ -227,18 +189,11 @@ export function FlexibleRevenueAgreements() {
                       <div className="flex justify-between text-sm mb-1">
                         <span>Revenue Share Progress</span>
                         <span>
-                          {(
-                            agreement.percentage +
-                            (agreement.bonusPercentage || 0)
-                          ).toFixed(1)}
-                          %
+                          {(agreement.percentage + (agreement.bonusPercentage || 0)).toFixed(1)}%
                         </span>
                       </div>
                       <Progress
-                        value={
-                          agreement.percentage +
-                          (agreement.bonusPercentage || 0)
-                        }
+                        value={agreement.percentage + (agreement.bonusPercentage || 0)}
                         className="h-2"
                       />
                     </div>
@@ -251,9 +206,7 @@ export function FlexibleRevenueAgreements() {
           {/* Create New Agreement */}
           <Card className="border-yellow-500/30 bg-gradient-to-r from-yellow-900/20 to-orange-900/20">
             <CardHeader>
-              <CardTitle className="text-yellow-400">
-                Create New Revenue Agreement
-              </CardTitle>
+              <CardTitle className="text-yellow-400">Create New Revenue Agreement</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -327,15 +280,12 @@ export function FlexibleRevenueAgreements() {
               <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/20">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-sm text-muted-foreground">
-                      Estimated Monthly Revenue
-                    </div>
+                    <div className="text-sm text-muted-foreground">Estimated Monthly Revenue</div>
                     <div className="text-2xl font-bold text-green-400">
                       $
                       {(
                         (totalRevenue *
-                          (newAgreement.percentage +
-                            (newAgreement.bonusPercentage || 0))) /
+                          (newAgreement.percentage + (newAgreement.bonusPercentage || 0))) /
                         100
                       ).toLocaleString()}
                     </div>
@@ -358,9 +308,7 @@ export function FlexibleRevenueAgreements() {
           {/* Partnership Benefits */}
           <Card className="border-blue-500/30 bg-gradient-to-r from-blue-900/20 to-cyan-900/20">
             <CardHeader>
-              <CardTitle className="text-blue-400">
-                🤝 Partnership Benefits
-              </CardTitle>
+              <CardTitle className="text-blue-400">🤝 Partnership Benefits</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">

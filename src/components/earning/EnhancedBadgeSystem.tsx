@@ -193,21 +193,15 @@ export function EnhancedBadgeSystem() {
             </div>
             <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/20 text-center">
               <Star className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {totalTokensFromBadges}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                GAiA from Badges
-              </div>
+              <div className="text-2xl font-bold text-green-400">{totalTokensFromBadges}</div>
+              <div className="text-sm text-muted-foreground">GAiA from Badges</div>
             </div>
             <div className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/20 text-center">
               <Target className="h-8 w-8 text-blue-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-blue-400">
                 {Math.round((earnedBadges / badges.length) * 100)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Completion Rate
-              </div>
+              <div className="text-sm text-muted-foreground">Completion Rate</div>
             </div>
           </div>
 
@@ -219,11 +213,7 @@ export function EnhancedBadgeSystem() {
                 variant={selectedCategory === category ? "default" : "outline"}
                 size="sm"
                 onClick={() => setSelectedCategory(category)}
-                className={
-                  selectedCategory === category
-                    ? "bg-purple-600 hover:bg-purple-700"
-                    : ""
-                }
+                className={selectedCategory === category ? "bg-purple-600 hover:bg-purple-700" : ""}
               >
                 {category}
               </Button>
@@ -245,33 +235,21 @@ export function EnhancedBadgeSystem() {
                   <div
                     className={`p-2 rounded-lg ${badge.earned ? getRarityColor(badge.rarity) : "bg-gray-700"}`}
                   >
-                    <div
-                      className={badge.earned ? "text-white" : "text-gray-400"}
-                    >
+                    <div className={badge.earned ? "text-white" : "text-gray-400"}>
                       {badge.icon}
                     </div>
                   </div>
                   <div className="text-right">
-                    <Badge
-                      className={
-                        badge.earned
-                          ? getRarityColor(badge.rarity)
-                          : "bg-gray-600"
-                      }
-                    >
+                    <Badge className={badge.earned ? getRarityColor(badge.rarity) : "bg-gray-600"}>
                       {badge.rarity}
                     </Badge>
                   </div>
                 </div>
 
-                <h4
-                  className={`font-bold mb-1 ${badge.earned ? "text-white" : "text-gray-300"}`}
-                >
+                <h4 className={`font-bold mb-1 ${badge.earned ? "text-white" : "text-gray-300"}`}>
                   {badge.name}
                 </h4>
-                <p
-                  className={`text-sm mb-3 ${badge.earned ? "text-gray-200" : "text-gray-400"}`}
-                >
+                <p className={`text-sm mb-3 ${badge.earned ? "text-gray-200" : "text-gray-400"}`}>
                   {badge.description}
                 </p>
 
@@ -283,10 +261,7 @@ export function EnhancedBadgeSystem() {
                         {badge.progress}/{badge.maxProgress}
                       </span>
                     </div>
-                    <Progress
-                      value={(badge.progress / badge.maxProgress) * 100}
-                      className="h-2"
-                    />
+                    <Progress value={(badge.progress / badge.maxProgress) * 100} className="h-2" />
                   </div>
                 )}
 
@@ -297,12 +272,8 @@ export function EnhancedBadgeSystem() {
                 )}
 
                 <div className="flex justify-between items-center mt-3 text-xs">
-                  <span className="text-muted-foreground">
-                    {badge.requirement}
-                  </span>
-                  <span className="text-green-400 font-bold">
-                    +{badge.tokensReward} GAiA
-                  </span>
+                  <span className="text-muted-foreground">{badge.requirement}</span>
+                  <span className="text-green-400 font-bold">+{badge.tokensReward} GAiA</span>
                 </div>
               </div>
             ))}

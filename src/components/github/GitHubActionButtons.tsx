@@ -7,9 +7,7 @@ interface GitHubActionButtonsProps {
   githubStatus: GitHubStatus;
 }
 
-export function GitHubActionButtons({
-  githubStatus,
-}: GitHubActionButtonsProps) {
+export function GitHubActionButtons({ githubStatus }: GitHubActionButtonsProps) {
   const openGitHubRepo = () => {
     const url = `https://github.com/${githubStatus.organization}/${githubStatus.repository}`;
     window.open(url, "_blank", "noopener,noreferrer");
@@ -32,14 +30,12 @@ export function GitHubActionButtons({
 
   const createSecureGitHubRepo = () => {
     toast.info("Creating Secure GitHub Repository", {
-      description:
-        '📝 Use Lovable\'s "Export to GitHub" - Repository will be private and secured',
+      description: '📝 Use Lovable\'s "Export to GitHub" - Repository will be private and secured',
       duration: 8000,
     });
 
     toast.success("Security Configuration Ready", {
-      description:
-        "🔒 Private repo, branch protection, secrets scanning will be enabled",
+      description: "🔒 Private repo, branch protection, secrets scanning will be enabled",
       duration: 5000,
     });
   };
@@ -81,10 +77,7 @@ export function GitHubActionButtons({
       </Button>
 
       {!githubStatus.isConnected && (
-        <Button
-          onClick={createSecureGitHubRepo}
-          className="bg-green-600 hover:bg-green-700"
-        >
+        <Button onClick={createSecureGitHubRepo} className="bg-green-600 hover:bg-green-700">
           <Lock className="h-4 w-4 mr-2" />
           Create Secure Repo
         </Button>

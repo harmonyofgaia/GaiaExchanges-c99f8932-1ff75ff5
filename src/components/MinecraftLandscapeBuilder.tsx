@@ -29,12 +29,10 @@ export function MinecraftLandscapeBuilder() {
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-green-400">
-            🌍 Minecraft Landscape Builder
-          </h1>
+          <h1 className="text-4xl font-bold text-green-400">🌍 Minecraft Landscape Builder</h1>
           <p className="text-green-300 max-w-2xl mx-auto">
-            Create amazing Minecraft landscapes with game integration and
-            cross-platform compatibility
+            Create amazing Minecraft landscapes with game integration and cross-platform
+            compatibility
           </p>
         </div>
 
@@ -47,10 +45,7 @@ export function MinecraftLandscapeBuilder() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <AgeLandscapeSelector
-              selectedAge={selectedAge}
-              onAgeSelect={setSelectedAge}
-            />
+            <AgeLandscapeSelector selectedAge={selectedAge} onAgeSelect={setSelectedAge} />
           </CardContent>
         </Card>
 
@@ -71,9 +66,7 @@ export function MinecraftLandscapeBuilder() {
                     <div className="text-2xl font-bold text-green-400">
                       MINECRAFT BUILDER ACTIVE
                     </div>
-                    <div className="text-lg text-blue-300">
-                      Age Group: {selectedAge}
-                    </div>
+                    <div className="text-lg text-blue-300">Age Group: {selectedAge}</div>
                   </div>
                 </div>
               ) : (
@@ -109,9 +102,7 @@ export function MinecraftLandscapeBuilder() {
                 <div className="text-center">
                   <div className="text-3xl mb-2">🐛</div>
                   <div className="font-bold">Worms Arena</div>
-                  <div className="text-xs opacity-75">
-                    Use landscape as battlefield
-                  </div>
+                  <div className="text-xs opacity-75">Use landscape as battlefield</div>
                 </div>
               </Button>
 
@@ -123,9 +114,7 @@ export function MinecraftLandscapeBuilder() {
                 <div className="text-center">
                   <div className="text-3xl mb-2">⚔️</div>
                   <div className="font-bold">GAiA Fantasy</div>
-                  <div className="text-xs opacity-75">
-                    Adventure in your world
-                  </div>
+                  <div className="text-xs opacity-75">Adventure in your world</div>
                 </div>
               </Button>
 

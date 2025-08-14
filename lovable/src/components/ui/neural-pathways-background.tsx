@@ -26,26 +26,22 @@ export function NeuralPathwaysBackground({
 
   useEffect(() => {
     // Create neural network nodes
-    const newNodes: NeuralNode[] = Array.from(
-      { length: nodeCount },
-      (_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 8 + 4,
-        pulse: Math.random() * 2 * Math.PI,
-        connections: [],
-        activity: Math.random(),
-      }),
-    );
+    const newNodes: NeuralNode[] = Array.from({ length: nodeCount }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 8 + 4,
+      pulse: Math.random() * 2 * Math.PI,
+      connections: [],
+      activity: Math.random(),
+    }));
 
     // Create connections between nearby nodes
     newNodes.forEach((node, i) => {
       newNodes.forEach((otherNode, j) => {
         if (i !== j) {
           const distance = Math.sqrt(
-            Math.pow(node.x - otherNode.x, 2) +
-              Math.pow(node.y - otherNode.y, 2),
+            Math.pow(node.x - otherNode.x, 2) + Math.pow(node.y - otherNode.y, 2)
           );
           if (distance < 25 && Math.random() > 0.6) {
             node.connections.push(j);
@@ -64,12 +60,9 @@ export function NeuralPathwaysBackground({
       setNodes((prev) =>
         prev.map((node) => ({
           ...node,
-          activity: Math.max(
-            0,
-            Math.min(1, node.activity + (Math.random() - 0.5) * 0.1),
-          ),
+          activity: Math.max(0, Math.min(1, node.activity + (Math.random() - 0.5) * 0.1)),
           pulse: node.pulse + 0.02,
-        })),
+        }))
       );
     }, 50);
 
@@ -108,10 +101,7 @@ export function NeuralPathwaysBackground({
   const colors = getStyleColors();
 
   return (
-    <div
-      className="fixed inset-0 pointer-events-none overflow-hidden"
-      style={{ zIndex: -2 }}
-    >
+    <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: -2 }}>
       {/* Base gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black" />
 
@@ -124,10 +114,7 @@ export function NeuralPathwaysBackground({
       </div>
 
       {/* Animated SVG neural network */}
-      <svg
-        className="absolute inset-0 w-full h-full"
-        style={{ mixBlendMode: "screen" }}
-      >
+      <svg className="absolute inset-0 w-full h-full" style={{ mixBlendMode: "screen" }}>
         {/* Neural connections */}
         {nodes.map((node) =>
           node.connections.map((connectionId) => {
@@ -150,7 +137,7 @@ export function NeuralPathwaysBackground({
                 className="animate-pulse"
               />
             );
-          }),
+          })
         )}
 
         {/* Neural nodes */}
@@ -228,9 +215,7 @@ export function NeuralPathwaysBackground({
         <div className="text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
           GAIA
         </div>
-        <div className="text-sm text-center text-green-400 opacity-60">
-          Neural Exchange Network
-        </div>
+        <div className="text-sm text-center text-green-400 opacity-60">Neural Exchange Network</div>
       </div>
     </div>
   );

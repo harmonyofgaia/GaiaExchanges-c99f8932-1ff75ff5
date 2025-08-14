@@ -96,9 +96,7 @@ export function OptimalTradingCosts() {
           const currentFee = optimization.currentFee;
           const newFee = Math.max(0.0001, currentFee * 0.99); // Reduce by 1% each scan
 
-          console.log(
-            `📉 Gaia's Exchange Fee Optimization: ${currentFee}% → ${newFee}%`,
-          );
+          console.log(`📉 Gaia's Exchange Fee Optimization: ${currentFee}% → ${newFee}%`);
 
           return {
             currentFee: newFee,
@@ -148,8 +146,7 @@ export function OptimalTradingCosts() {
 
           if (Math.random() < 0.2) {
             // 20% chance
-            const opportunity =
-              opportunities[Math.floor(Math.random() * opportunities.length)];
+            const opportunity = opportunities[Math.floor(Math.random() * opportunities.length)];
             toast.success("Trading Optimization Found", {
               description: `💡 ${opportunity}`,
               duration: 3000,
@@ -196,7 +193,7 @@ export function OptimalTradingCosts() {
 
         console.log("🎯 OPTIMAL TRADING COST SCAN COMPLETE");
         console.log(
-          `💰 Current Gaia Fee: ${newOptimization.currentFee}% | Savings: ${newOptimization.savings.toFixed(1)}%`,
+          `💰 Current Gaia Fee: ${newOptimization.currentFee}% | Savings: ${newOptimization.savings.toFixed(1)}%`
         );
       } catch (error) {
         console.log("🔧 Fee optimization system self-healing...", error);
@@ -247,13 +244,8 @@ export function OptimalTradingCosts() {
               <div className="text-4xl font-bold text-green-300">
                 {(optimization.currentFee * 100).toFixed(4)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Current Gaia Fee
-              </div>
-              <Progress
-                value={(1 - optimization.currentFee / 0.1) * 100}
-                className="mt-2"
-              />
+              <div className="text-sm text-muted-foreground">Current Gaia Fee</div>
+              <Progress value={(1 - optimization.currentFee / 0.1) * 100} className="mt-2" />
               <Badge className="mt-2 bg-green-600 text-white">
                 <ArrowDown className="h-3 w-3 mr-1" />
                 DECREASING
@@ -265,9 +257,7 @@ export function OptimalTradingCosts() {
                 {optimization.savings.toFixed(1)}%
               </div>
               <div className="text-sm text-muted-foreground">Total Savings</div>
-              <div className="text-xs text-blue-400 mt-1">
-                vs Industry Average
-              </div>
+              <div className="text-xs text-blue-400 mt-1">vs Industry Average</div>
               <Badge className="mt-2 bg-blue-600 text-white">
                 <DollarSign className="h-3 w-3 mr-1" />
                 MAXIMUM
@@ -278,9 +268,7 @@ export function OptimalTradingCosts() {
               <div className="text-4xl font-bold text-purple-300">
                 {optimization.optimization.toFixed(1)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Optimization Level
-              </div>
+              <div className="text-sm text-muted-foreground">Optimization Level</div>
               <Progress value={optimization.optimization} className="mt-2" />
               <Badge className="mt-2 bg-purple-600 text-white">
                 <Zap className="h-3 w-3 mr-1" />
@@ -290,9 +278,7 @@ export function OptimalTradingCosts() {
 
             <div className="text-center">
               <div className="text-4xl font-bold text-yellow-300">30s</div>
-              <div className="text-sm text-muted-foreground">
-                Update Interval
-              </div>
+              <div className="text-sm text-muted-foreground">Update Interval</div>
               <div className="text-xs text-yellow-400 mt-1">
                 Last: {lastOptimization.toLocaleTimeString()}
               </div>
@@ -323,16 +309,12 @@ export function OptimalTradingCosts() {
                   className="flex items-center justify-between p-4 rounded-lg bg-muted/20 border border-border/50"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="text-2xl font-bold text-muted-foreground">
-                      #{index + 1}
-                    </div>
+                    <div className="text-2xl font-bold text-muted-foreground">#{index + 1}</div>
                     <div>
                       <div className="font-semibold text-lg">
                         {cost.exchange}
                         {cost.exchange === "Gaia's Exchange" && (
-                          <Badge className="ml-2 bg-green-600 text-white text-xs">
-                            LEADER
-                          </Badge>
+                          <Badge className="ml-2 bg-green-600 text-white text-xs">LEADER</Badge>
                         )}
                       </div>
                       <div className="text-sm text-muted-foreground">
@@ -342,17 +324,11 @@ export function OptimalTradingCosts() {
                   </div>
 
                   <div className="text-right">
-                    <div
-                      className={`text-2xl font-bold ${getFeeColor(cost.fee)}`}
-                    >
+                    <div className={`text-2xl font-bold ${getFeeColor(cost.fee)}`}>
                       {(cost.fee * 100).toFixed(4)}%
                     </div>
-                    <div className="text-sm text-muted-foreground capitalize">
-                      {cost.type} Fee
-                    </div>
-                    <Badge
-                      className={`mt-1 text-white text-xs ${getFeeBadgeColor(cost.fee)}`}
-                    >
+                    <div className="text-sm text-muted-foreground capitalize">{cost.type} Fee</div>
+                    <Badge className={`mt-1 text-white text-xs ${getFeeBadgeColor(cost.fee)}`}>
                       {cost.optimization.toFixed(1)}% Optimized
                     </Badge>
                   </div>
@@ -374,9 +350,7 @@ export function OptimalTradingCosts() {
           <div className="space-y-4">
             <div>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm font-medium">
-                  Fee Reduction Progress
-                </span>
+                <span className="text-sm font-medium">Fee Reduction Progress</span>
                 <span className="text-sm text-muted-foreground">
                   {optimization.savings.toFixed(1)}% Complete
                 </span>
@@ -387,27 +361,19 @@ export function OptimalTradingCosts() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
               <div className="text-center p-4 rounded-lg bg-green-900/20 border border-green-500/20">
                 <div className="text-lg font-bold text-green-400">Phase 1</div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  Competitive Rates
-                </div>
+                <div className="text-sm text-muted-foreground mt-1">Competitive Rates</div>
                 <div className="text-xs text-green-300 mt-2">✅ COMPLETED</div>
               </div>
 
               <div className="text-center p-4 rounded-lg bg-yellow-900/20 border border-yellow-500/20">
                 <div className="text-lg font-bold text-yellow-400">Phase 2</div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  Ultra-Low Fees
-                </div>
-                <div className="text-xs text-yellow-300 mt-2">
-                  🔄 IN PROGRESS
-                </div>
+                <div className="text-sm text-muted-foreground mt-1">Ultra-Low Fees</div>
+                <div className="text-xs text-yellow-300 mt-2">🔄 IN PROGRESS</div>
               </div>
 
               <div className="text-center p-4 rounded-lg bg-blue-900/20 border border-blue-500/20">
                 <div className="text-lg font-bold text-blue-400">Phase 3</div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  Zero-Fee Trading
-                </div>
+                <div className="text-sm text-muted-foreground mt-1">Zero-Fee Trading</div>
                 <div className="text-xs text-blue-300 mt-2">🎯 TARGET</div>
               </div>
             </div>
@@ -423,9 +389,7 @@ export function OptimalTradingCosts() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
             <div className="space-y-3">
-              <h4 className="font-semibold text-green-400">
-                ⚡ Real-Time Optimization
-              </h4>
+              <h4 className="font-semibold text-green-400">⚡ Real-Time Optimization</h4>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <TrendingDown className="h-3 w-3 text-green-400" />
@@ -447,9 +411,7 @@ export function OptimalTradingCosts() {
             </div>
 
             <div className="space-y-3">
-              <h4 className="font-semibold text-blue-400">
-                🎯 Zero-Fee Strategies
-              </h4>
+              <h4 className="font-semibold text-blue-400">🎯 Zero-Fee Strategies</h4>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <Target className="h-3 w-3 text-blue-400" />
@@ -477,13 +439,10 @@ export function OptimalTradingCosts() {
                 🎯 GAIA'S EXCHANGE - ZERO-FEE COMMITMENT
               </h4>
               <p className="text-sm text-green-200">
-                Leading the industry towards zero-fee trading - Always providing
-                the best value
+                Leading the industry towards zero-fee trading - Always providing the best value
               </p>
               <div className="flex items-center justify-center gap-6 pt-2 text-xs flex-wrap">
-                <span className="text-green-300">
-                  💰 Lowest Fees Guaranteed
-                </span>
+                <span className="text-green-300">💰 Lowest Fees Guaranteed</span>
                 <span className="text-blue-300">⚡ 30-Second Updates</span>
                 <span className="text-purple-300">🎯 Zero-Fee Target</span>
                 <span className="text-yellow-300">📈 Maximum Savings</span>

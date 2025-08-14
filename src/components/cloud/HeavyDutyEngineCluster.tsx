@@ -163,29 +163,22 @@ export function HeavyDutyEngineCluster() {
           return {
             ...engine,
             powerRating: engine.powerRating * powerMultiplier,
-            performanceScore: Math.min(
-              100,
-              engine.performanceScore + Math.random() * 0.001,
-            ),
+            performanceScore: Math.min(100, engine.performanceScore + Math.random() * 0.001),
             webControlLevel: Math.min(1000000, webControl),
             realityManipulation: Math.min(1000000, realityManip),
             cloudIntegrated: true,
             upgradeReady: true,
           };
-        }),
+        })
       );
 
       setClusterMetrics((prev) => {
         const newCombinedPower =
-          heavyEngines.reduce((sum, engine) => sum + engine.powerRating, 0) +
-          cloudPower;
-        const webDomination = heavyEngines.reduce(
-          (sum, engine) => sum + engine.webControlLevel,
-          0,
-        );
+          heavyEngines.reduce((sum, engine) => sum + engine.powerRating, 0) + cloudPower;
+        const webDomination = heavyEngines.reduce((sum, engine) => sum + engine.webControlLevel, 0);
         const realityControl = heavyEngines.reduce(
           (sum, engine) => sum + engine.realityManipulation,
-          0,
+          0
         );
 
         return {
@@ -202,17 +195,14 @@ export function HeavyDutyEngineCluster() {
 
       // Advanced logging for transcendent cluster status
       if (Math.random() < 0.1) {
-        const totalSystemPower =
-          clusterMetrics.combinedPower + cloudPower + webScanningPower;
+        const totalSystemPower = clusterMetrics.combinedPower + cloudPower + webScanningPower;
         console.log("🏭 TRANSCENDENT CLUSTER STATUS:");
+        console.log(`💪 Combined Power: ${Math.floor(totalSystemPower).toLocaleString()} units`);
         console.log(
-          `💪 Combined Power: ${Math.floor(totalSystemPower).toLocaleString()} units`,
+          `🌐 Web Domination: ${Math.floor(clusterMetrics.webDominationLevel).toLocaleString()} control points`
         );
         console.log(
-          `🌐 Web Domination: ${Math.floor(clusterMetrics.webDominationLevel).toLocaleString()} control points`,
-        );
-        console.log(
-          `🌌 Reality Control: ${Math.floor(clusterMetrics.realityControlIndex).toLocaleString()} manipulation units`,
+          `🌌 Reality Control: ${Math.floor(clusterMetrics.realityControlIndex).toLocaleString()} manipulation units`
         );
         console.log(`☁️ Cloud Sync: TRANSCENDENT`);
         console.log(`🔧 Upgrade Ready: BEYOND CONFIRMED`);
@@ -223,12 +213,8 @@ export function HeavyDutyEngineCluster() {
 
     // Web Domination Operations
     const runWebDomination = () => {
-      const webDominator = heavyEngines.find(
-        (e) => e.category === "web-domination",
-      );
-      const realityController = heavyEngines.find(
-        (e) => e.category === "reality-control",
-      );
+      const webDominator = heavyEngines.find((e) => e.category === "web-domination");
+      const realityController = heavyEngines.find((e) => e.category === "reality-control");
 
       if (webDominator && webDominator.webControlLevel > 100000) {
         console.log("🌐 WEB DOMINATION MATRIX ACTIVE:");
@@ -254,8 +240,7 @@ export function HeavyDutyEngineCluster() {
 
     return () => {
       if (clusterInterval.current) clearInterval(clusterInterval.current);
-      if (webDominationInterval.current)
-        clearInterval(webDominationInterval.current);
+      if (webDominationInterval.current) clearInterval(webDominationInterval.current);
     };
   }, [heavyEngines, cloudProcessor]);
 
@@ -265,9 +250,7 @@ export function HeavyDutyEngineCluster() {
       console.log("🌌 TRANSCENDENT UPGRADE PREPARATION:");
       console.log("✅ Reality-bending architecture for impossible upgrades");
       console.log("✅ Quantum-locked configuration prevents replication");
-      console.log(
-        "✅ Web domination protocols maintain control during upgrades",
-      );
+      console.log("✅ Web domination protocols maintain control during upgrades");
       console.log("✅ Reality manipulation ensures zero-impact transitions");
       console.log("✅ Transcendent performance preservation beyond physics");
       console.log("🚀 UPGRADE SYSTEM: IMPOSSIBLE TO RECREATE BY ANYONE ELSE");
@@ -291,14 +274,11 @@ export function HeavyDutyEngineCluster() {
             godlikeCapabilities: true,
           },
           lastPrepared: Date.now(),
-        }),
+        })
       );
     };
 
-    const preparationTimer = setInterval(
-      prepareTranscendentInfrastructure,
-      15000,
-    ); // Every 15 seconds
+    const preparationTimer = setInterval(prepareTranscendentInfrastructure, 15000); // Every 15 seconds
 
     return () => clearInterval(preparationTimer);
   }, [heavyEngines, clusterMetrics]);
@@ -320,9 +300,7 @@ export function HeavyDutyEngineCluster() {
       return clusterMetrics.combinedPower + cloudPower + scanningPower;
     },
     getTranscendentStatus: () => ({
-      totalPower:
-        clusterMetrics.combinedPower +
-        cloudProcessor.metrics.totalProcessingPower,
+      totalPower: clusterMetrics.combinedPower + cloudProcessor.metrics.totalProcessingPower,
       webDomination: clusterMetrics.webDominationLevel,
       realityControl: clusterMetrics.realityControlIndex,
       webScanning: cloudProcessor.metrics.webScanningRate,

@@ -65,9 +65,7 @@ export function HabboTycoon() {
 
   const [buildings, setBuildings] = useState<Building[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
-  const [gameMode, setGameMode] = useState<"building" | "chatroom" | "world">(
-    "building",
-  );
+  const [gameMode, setGameMode] = useState<"building" | "chatroom" | "world">("building");
   const [onlinePlayers, setOnlinePlayers] = useState(1547);
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [securityLevel, setSecurityLevel] = useState(100);
@@ -86,10 +84,7 @@ export function HabboTycoon() {
 
     // Game loop for passive income and updates
     gameLoopRef.current = setInterval(() => {
-      const income = buildings.reduce(
-        (total, building) => total + building.income,
-        0,
-      );
+      const income = buildings.reduce((total, building) => total + building.income, 0);
 
       setPlayerData((prev) => ({
         ...prev,
@@ -117,13 +112,7 @@ export function HabboTycoon() {
         name: `${type.charAt(0).toUpperCase() + type.slice(1)} ${buildings.length + 1}`,
         level: 1,
         income:
-          type === "hotel"
-            ? 50
-            : type === "restaurant"
-              ? 30
-              : type === "attraction"
-                ? 80
-                : 20,
+          type === "hotel" ? 50 : type === "restaurant" ? 30 : type === "attraction" ? 80 : 20,
         cost,
         x: Math.random() * 300,
         y: Math.random() * 200,
@@ -181,23 +170,11 @@ export function HabboTycoon() {
               <Badge className="bg-green-600">
                 👤 {playerData.name} - Level {playerData.level}
               </Badge>
-              <Badge className="bg-yellow-600">
-                💰 {playerData.coins.toLocaleString()} Coins
-              </Badge>
-              <Badge className="bg-blue-600">
-                🏢 {playerData.buildings} Buildings
-              </Badge>
-              <Badge className="bg-purple-600">
-                🌟 {playerData.reputation}% Reputation
-              </Badge>
-              <Badge className="bg-red-600">
-                👥 {onlinePlayers.toLocaleString()} Online
-              </Badge>
-              {isAdmin && (
-                <Badge className="bg-red-600 animate-pulse">
-                  👑 ADMIN MODE ACTIVE
-                </Badge>
-              )}
+              <Badge className="bg-yellow-600">💰 {playerData.coins.toLocaleString()} Coins</Badge>
+              <Badge className="bg-blue-600">🏢 {playerData.buildings} Buildings</Badge>
+              <Badge className="bg-purple-600">🌟 {playerData.reputation}% Reputation</Badge>
+              <Badge className="bg-red-600">👥 {onlinePlayers.toLocaleString()} Online</Badge>
+              {isAdmin && <Badge className="bg-red-600 animate-pulse">👑 ADMIN MODE ACTIVE</Badge>}
             </div>
           </CardHeader>
         </Card>
@@ -229,9 +206,7 @@ export function HabboTycoon() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card className="md:col-span-2 bg-black/30 border-purple-500/30">
                 <CardHeader>
-                  <CardTitle className="text-purple-400">
-                    🏗️ Your Tycoon Empire
-                  </CardTitle>
+                  <CardTitle className="text-purple-400">🏗️ Your Tycoon Empire</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="relative w-full h-64 bg-gradient-to-b from-green-900/20 to-brown-900/20 rounded-lg border border-green-500/30 overflow-hidden">
@@ -259,8 +234,7 @@ export function HabboTycoon() {
 
                   <div className="mt-4 flex justify-between text-sm">
                     <span>
-                      Total Income:{" "}
-                      {buildings.reduce((sum, b) => sum + b.income, 0)} coins/5s
+                      Total Income: {buildings.reduce((sum, b) => sum + b.income, 0)} coins/5s
                     </span>
                     <span>Buildings: {buildings.length}</span>
                   </div>
@@ -335,40 +309,28 @@ export function HabboTycoon() {
               <div className="text-2xl font-bold text-blue-400">
                 {onlinePlayers.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Players Online
-              </div>
+              <div className="text-sm text-muted-foreground">Players Online</div>
             </CardContent>
           </Card>
 
           <Card className="bg-purple-900/30 border-purple-500/30">
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-purple-400">
-                {playerData.level}
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{playerData.level}</div>
               <div className="text-sm text-muted-foreground">Player Level</div>
             </CardContent>
           </Card>
 
           <Card className="bg-orange-900/30 border-orange-500/30">
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-orange-400">
-                {buildings.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Buildings Built
-              </div>
+              <div className="text-2xl font-bold text-orange-400">{buildings.length}</div>
+              <div className="text-sm text-muted-foreground">Buildings Built</div>
             </CardContent>
           </Card>
 
           <Card className="bg-red-900/30 border-red-500/30">
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-red-400">
-                {securityLevel}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Security Level
-              </div>
+              <div className="text-2xl font-bold text-red-400">{securityLevel}%</div>
+              <div className="text-sm text-muted-foreground">Security Level</div>
             </CardContent>
           </Card>
         </div>

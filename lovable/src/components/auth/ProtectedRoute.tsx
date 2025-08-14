@@ -8,10 +8,7 @@ interface ProtectedRouteProps {
   isAdminRoute?: boolean;
 }
 
-export function ProtectedRoute({
-  children,
-  isAdminRoute = false,
-}: ProtectedRouteProps) {
+export function ProtectedRoute({ children, isAdminRoute = false }: ProtectedRouteProps) {
   const { user, loading } = useAuth();
   const { isAdmin, isValidating } = useSecureAdmin();
 
@@ -24,9 +21,7 @@ export function ProtectedRoute({
             <div className="w-8 h-8 bg-green-400 rounded-full animate-bounce"></div>
           </div>
           <p className="text-green-400 font-medium">
-            {isAdminRoute
-              ? "Validating Admin Access..."
-              : "Loading Harmony of Gaia..."}
+            {isAdminRoute ? "Validating Admin Access..." : "Loading Harmony of Gaia..."}
           </p>
           <p className="text-green-300 text-sm">
             {isAdminRoute

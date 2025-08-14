@@ -15,9 +15,7 @@ export function SmartNotificationManager() {
     securityAlerts: true, // Keep security alerts
   });
 
-  const [lastNotifications, setLastNotifications] = useState<
-    Record<string, number>
-  >({});
+  const [lastNotifications, setLastNotifications] = useState<Record<string, number>>({});
 
   useEffect(() => {
     // Load preferences from localStorage
@@ -35,7 +33,7 @@ export function SmartNotificationManager() {
   const showUpgradeNotification = (
     title: string,
     description: string,
-    upgradeType: "level" | "feature" | "token" | "achievement",
+    upgradeType: "level" | "feature" | "token" | "achievement"
   ) => {
     if (!preferences.upgradeNotifications) return;
 
@@ -57,8 +55,7 @@ export function SmartNotificationManager() {
     toast.success(`${upgradeEmojis[upgradeType]} ${title}`, {
       description,
       duration: 4000,
-      className:
-        "border-l-4 border-l-green-500 bg-green-50 dark:bg-green-900/20",
+      className: "border-l-4 border-l-green-500 bg-green-50 dark:bg-green-900/20",
     });
 
     // Update last shown timestamp
@@ -92,10 +89,7 @@ export function SmartNotificationManager() {
 
   const updatePreferences = (newPreferences: NotificationPreferences) => {
     setPreferences(newPreferences);
-    localStorage.setItem(
-      "notification_preferences",
-      JSON.stringify(newPreferences),
-    );
+    localStorage.setItem("notification_preferences", JSON.stringify(newPreferences));
   };
 
   // Expose methods globally for other components to use

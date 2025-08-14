@@ -25,11 +25,7 @@ interface QuantumPossibility {
 
 interface CausalLoop {
   id: string;
-  loopType:
-    | "temporal_loop"
-    | "causal_paradox"
-    | "bootstrap_loop"
-    | "predestination_loop";
+  loopType: "temporal_loop" | "causal_paradox" | "bootstrap_loop" | "predestination_loop";
   startEvent: string;
   endEvent: string;
   iterations: number;
@@ -74,9 +70,7 @@ class RealityManipulationService {
     this.probabilityMatrices.set(matrix.id, matrix);
 
     // Calculate reality impact
-    const probabilityChange = Math.abs(
-      matrix.modifiedProbability - matrix.originalProbability,
-    );
+    const probabilityChange = Math.abs(matrix.modifiedProbability - matrix.originalProbability);
     this.realityFlexibility *= 1 - probabilityChange * 0.1;
 
     // Generate consequences
@@ -116,9 +110,7 @@ class RealityManipulationService {
     return consequences.slice(0, numConsequences);
   }
 
-  private async enforceProbabilityManipulation(
-    matrixId: string,
-  ): Promise<void> {
+  private async enforceProbabilityManipulation(matrixId: string): Promise<void> {
     const matrix = this.probabilityMatrices.get(matrixId);
     if (!matrix) return;
 
@@ -132,9 +124,7 @@ class RealityManipulationService {
       const enforcementSuccess = Math.random() < matrix.manipulationStrength;
 
       if (enforcementSuccess) {
-        console.log(
-          `✅ Probability enforcement successful for: ${matrix.targetEvent}`,
-        );
+        console.log(`✅ Probability enforcement successful for: ${matrix.targetEvent}`);
 
         // Check for major probability shifts
         if (matrix.manipulationStrength > 0.8) {
@@ -143,9 +133,7 @@ class RealityManipulationService {
           });
         }
       } else {
-        console.log(
-          `❌ Probability enforcement failed for: ${matrix.targetEvent}`,
-        );
+        console.log(`❌ Probability enforcement failed for: ${matrix.targetEvent}`);
         this.realityFlexibility *= 0.99; // Slight reality destabilization
       }
     }, 10000); // Check every 10 seconds
@@ -189,9 +177,7 @@ class RealityManipulationService {
     return possibility;
   }
 
-  private async processQuantumManifestation(
-    possibilityId: string,
-  ): Promise<void> {
+  private async processQuantumManifestation(possibilityId: string): Promise<void> {
     const possibility = this.quantumPossibilities.get(possibilityId);
     if (!possibility) return;
 
@@ -225,11 +211,7 @@ class RealityManipulationService {
 
   // Causal Loop Creation
   async createCausalLoop(config: {
-    loopType:
-      | "temporal_loop"
-      | "causal_paradox"
-      | "bootstrap_loop"
-      | "predestination_loop";
+    loopType: "temporal_loop" | "causal_paradox" | "bootstrap_loop" | "predestination_loop";
     startEvent: string;
     endEvent: string;
   }): Promise<CausalLoop> {
@@ -318,14 +300,8 @@ class RealityManipulationService {
     this.realityAnchors.set(anchor.id, anchor);
 
     // Improve reality stability in anchored area
-    this.realityFlexibility = Math.min(
-      1.0,
-      this.realityFlexibility + config.anchorStrength * 0.1,
-    );
-    this.causalStability = Math.min(
-      1.0,
-      this.causalStability + config.anchorStrength * 0.1,
-    );
+    this.realityFlexibility = Math.min(1.0, this.realityFlexibility + config.anchorStrength * 0.1);
+    this.causalStability = Math.min(1.0, this.causalStability + config.anchorStrength * 0.1);
 
     console.log("⚓ Reality Anchor Deployed:", {
       id: anchor.id,
@@ -362,9 +338,7 @@ class RealityManipulationService {
         description: `${timelineIds.length} timelines now in perfect sync`,
       });
     } else {
-      console.log(
-        "❌ Timeline Synchronization Failed - Insufficient Causal Stability",
-      );
+      console.log("❌ Timeline Synchronization Failed - Insufficient Causal Stability");
       toast.error("❌ Synchronization Failed", {
         description: "Causal instability prevents timeline synchronization",
       });
@@ -415,30 +389,24 @@ class RealityManipulationService {
       causalStability: this.causalStability,
       probabilityMatrices: {
         total: this.probabilityMatrices.size,
-        active: Array.from(this.probabilityMatrices.values()).filter(
-          (m) => m.isActive,
-        ).length,
+        active: Array.from(this.probabilityMatrices.values()).filter((m) => m.isActive).length,
       },
       quantumPossibilities: {
         total: this.quantumPossibilities.size,
-        manifested: Array.from(this.quantumPossibilities.values()).filter(
-          (p) => p.isManifested,
-        ).length,
+        manifested: Array.from(this.quantumPossibilities.values()).filter((p) => p.isManifested)
+          .length,
       },
       causalLoops: {
         total: this.causalLoops.size,
-        active: Array.from(this.causalLoops.values()).filter((l) => l.isActive)
-          .length,
+        active: Array.from(this.causalLoops.values()).filter((l) => l.isActive).length,
         totalIterations: Array.from(this.causalLoops.values()).reduce(
           (sum, l) => sum + l.iterations,
-          0,
+          0
         ),
       },
       realityAnchors: {
         total: this.realityAnchors.size,
-        deployed: Array.from(this.realityAnchors.values()).filter(
-          (a) => a.isDeployed,
-        ).length,
+        deployed: Array.from(this.realityAnchors.values()).filter((a) => a.isDeployed).length,
       },
     };
   }
@@ -476,11 +444,7 @@ class RealityManipulationService {
     // Deploy reality anchors for stability
     await this.deployRealityAnchor({
       anchoredReality: "Core System Operations",
-      stabilizedElements: [
-        "Security Protocols",
-        "Defense Systems",
-        "Control Mechanisms",
-      ],
+      stabilizedElements: ["Security Protocols", "Defense Systems", "Control Mechanisms"],
       anchorStrength: 0.9,
     });
 

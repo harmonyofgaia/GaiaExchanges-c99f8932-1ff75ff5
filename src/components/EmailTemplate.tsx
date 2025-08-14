@@ -7,11 +7,7 @@ interface EmailTemplateProps {
   content: string;
 }
 
-export const EmailTemplate: React.FC<EmailTemplateProps> = ({
-  type,
-  subject,
-  content,
-}) => {
+export const EmailTemplate: React.FC<EmailTemplateProps> = ({ type, subject, content }) => {
   const getBackgroundColor = () => {
     switch (type) {
       case "newsletter":
@@ -33,9 +29,7 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
       <div className="bg-black/50 p-6 text-center">
         <GaiaLogo size="lg" variant="glow" className="mx-auto mb-4" />
         <h1 className="text-2xl font-bold text-white mb-2">Harmony of Gaia</h1>
-        <p className="text-green-300">
-          GAiA Token - The Future of Environmental Cryptocurrency
-        </p>
+        <p className="text-green-300">GAiA Token - The Future of Environmental Cryptocurrency</p>
       </div>
 
       {/* Content */}
@@ -45,9 +39,7 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
 
         {/* Call to Action */}
         <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 text-center">
-          <h3 className="text-green-400 font-semibold mb-2">
-            Ready to Join the Revolution?
-          </h3>
+          <h3 className="text-green-400 font-semibold mb-2">Ready to Join the Revolution?</h3>
           <p className="text-green-300 text-sm mb-4">
             Trade GAiA tokens on the world's most secure cryptocurrency exchange
           </p>
@@ -62,13 +54,11 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
       <div className="bg-black/30 p-4 text-center border-t border-green-500/10">
         <div className="flex items-center justify-center gap-2 mb-2">
           <GaiaLogo size="sm" />
-          <span className="text-green-400 text-sm">
-            info@cultureofharmony.net
-          </span>
+          <span className="text-green-400 text-sm">info@cultureofharmony.net</span>
         </div>
         <p className="text-gray-400 text-xs">
-          © 2024 Harmony of Gaia. Making the world a better place through
-          environmental cryptocurrency.
+          © 2024 Harmony of Gaia. Making the world a better place through environmental
+          cryptocurrency.
         </p>
       </div>
     </div>

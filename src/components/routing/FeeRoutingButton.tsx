@@ -119,19 +119,12 @@ export function FeeRoutingButton({ className = "" }: FeeRoutingButtonProps) {
                       <div className={route.color}>{route.icon}</div>
                     </div>
                     <div>
-                      <CardTitle className={`text-lg ${route.color}`}>
-                        {route.name}
-                      </CardTitle>
-                      <p className="text-sm text-muted-foreground">
-                        {route.description}
-                      </p>
+                      <CardTitle className={`text-lg ${route.color}`}>{route.name}</CardTitle>
+                      <p className="text-sm text-muted-foreground">{route.description}</p>
                     </div>
                   </div>
                   {selectedRoute === route.id && (
-                    <Badge
-                      variant="outline"
-                      className="border-green-500/50 text-green-400"
-                    >
+                    <Badge variant="outline" className="border-green-500/50 text-green-400">
                       Selected
                     </Badge>
                   )}
@@ -141,18 +134,12 @@ export function FeeRoutingButton({ className = "" }: FeeRoutingButtonProps) {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-6">
                     <div className="text-center">
-                      <div className={`text-xl font-bold ${route.color}`}>
-                        {route.fee}
-                      </div>
+                      <div className={`text-xl font-bold ${route.color}`}>{route.fee}</div>
                       <div className="text-xs text-muted-foreground">Fee</div>
                     </div>
                     <div className="text-center">
-                      <div className={`text-lg font-medium ${route.color}`}>
-                        {route.speed}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        Processing
-                      </div>
+                      <div className={`text-lg font-medium ${route.color}`}>{route.speed}</div>
+                      <div className="text-xs text-muted-foreground">Processing</div>
                     </div>
                   </div>
                   <ArrowRight className={`h-5 w-5 ${route.color}`} />
@@ -165,9 +152,7 @@ export function FeeRoutingButton({ className = "" }: FeeRoutingButtonProps) {
         <div className="mt-6 p-4 bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 rounded-lg">
           <div className="flex items-center gap-2 mb-2">
             <TrendingUp className="h-4 w-4 text-green-400" />
-            <h4 className="font-medium text-green-400">
-              Smart Routing Benefits
-            </h4>
+            <h4 className="font-medium text-green-400">Smart Routing Benefits</h4>
           </div>
           <ul className="text-sm text-muted-foreground space-y-1">
             <li>• Automatic fee optimization based on network conditions</li>
@@ -180,14 +165,9 @@ export function FeeRoutingButton({ className = "" }: FeeRoutingButtonProps) {
         <div className="flex items-center justify-between pt-4 border-t border-primary/20">
           <div className="flex items-center gap-2">
             <Wallet className="h-4 w-4 text-blue-400" />
-            <span className="text-sm text-muted-foreground">
-              Connected to Gaia Network
-            </span>
+            <span className="text-sm text-muted-foreground">Connected to Gaia Network</span>
           </div>
-          <Badge
-            variant="outline"
-            className="border-green-500/50 text-green-400"
-          >
+          <Badge variant="outline" className="border-green-500/50 text-green-400">
             <Shield className="h-3 w-3 mr-1" />
             Secure
           </Badge>

@@ -19,8 +19,7 @@ export function EnvironmentalEducationActions() {
   const [topic, setTopic] = useState("");
   const [duration, setDuration] = useState("");
   const [participants, setParticipants] = useState("");
-  const { recordEnvironmentalEducation, loading } =
-    useEarningActivities("user-123");
+  const { recordEnvironmentalEducation, loading } = useEarningActivities("user-123");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,9 +40,7 @@ export function EnvironmentalEducationActions() {
         impactReported: true,
       });
 
-      toast.success(
-        "Environmental education activity recorded! +15 points earned",
-      );
+      toast.success("Environmental education activity recorded! +15 points earned");
       setEducationType("");
       setTopic("");
       setDuration("");
@@ -64,24 +61,16 @@ export function EnvironmentalEducationActions() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Education Type
-            </label>
+            <label className="block text-sm font-medium mb-2">Education Type</label>
             <Select value={educationType} onValueChange={setEducationType}>
               <SelectTrigger>
                 <SelectValue placeholder="Select education type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="course_completion">
-                  Course Completion
-                </SelectItem>
+                <SelectItem value="course_completion">Course Completion</SelectItem>
                 <SelectItem value="teaching">Teaching/Mentoring</SelectItem>
-                <SelectItem value="content_creation">
-                  Content Creation
-                </SelectItem>
-                <SelectItem value="workshop_attendance">
-                  Workshop Attendance
-                </SelectItem>
+                <SelectItem value="content_creation">Content Creation</SelectItem>
+                <SelectItem value="workshop_attendance">Workshop Attendance</SelectItem>
                 <SelectItem value="research">Research Project</SelectItem>
               </SelectContent>
             </Select>
@@ -97,9 +86,7 @@ export function EnvironmentalEducationActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Duration (hours)
-            </label>
+            <label className="block text-sm font-medium mb-2">Duration (hours)</label>
             <Input
               type="number"
               value={duration}
@@ -110,9 +97,7 @@ export function EnvironmentalEducationActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Participants (optional)
-            </label>
+            <label className="block text-sm font-medium mb-2">Participants (optional)</label>
             <Input
               type="number"
               value={participants}
@@ -122,21 +107,15 @@ export function EnvironmentalEducationActions() {
             />
           </div>
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700"
-          >
-            {loading
-              ? "Recording..."
-              : "📚 Record Education Activity (+15 Points)"}
+          <Button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700">
+            {loading ? "Recording..." : "📚 Record Education Activity (+15 Points)"}
           </Button>
         </form>
 
         <div className="mt-4 p-3 bg-blue-900/20 rounded-lg border border-blue-500/30">
           <p className="text-sm text-blue-300">
-            💡 <strong>Bonus:</strong> Teaching others or creating educational
-            content earns extra tokens!
+            💡 <strong>Bonus:</strong> Teaching others or creating educational content earns extra
+            tokens!
           </p>
         </div>
       </CardContent>

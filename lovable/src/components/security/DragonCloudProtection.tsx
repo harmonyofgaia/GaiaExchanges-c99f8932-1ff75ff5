@@ -2,16 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Shield,
-  Cloud,
-  Lock,
-  Eye,
-  FileText,
-  Database,
-  Zap,
-  Sword,
-} from "lucide-react";
+import { Shield, Cloud, Lock, Eye, FileText, Database, Zap, Sword } from "lucide-react";
 import { toast } from "sonner";
 
 export function DragonCloudProtection() {
@@ -31,9 +22,7 @@ export function DragonCloudProtection() {
       setActiveThreats(0); // Dragon eliminates all threats
 
       // Dragon gets stronger with each protection cycle
-      console.log(
-        "🐉 DRAGON ARMOR STRENGTHENED - FULL BODY PROTECTION ENHANCED",
-      );
+      console.log("🐉 DRAGON ARMOR STRENGTHENED - FULL BODY PROTECTION ENHANCED");
 
       if (Math.random() < 0.1) {
         toast.success("🐉 Dragon Cloud Protection Enhanced!", {
@@ -70,37 +59,25 @@ export function DragonCloudProtection() {
               <div className="text-2xl font-bold text-purple-400">
                 {cloudFiles.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Protected Files
-              </div>
+              <div className="text-sm text-muted-foreground">Protected Files</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-blue-900/30 border border-blue-500/20">
               <Shield className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {dragonArmor}%
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{dragonArmor}%</div>
               <div className="text-sm text-muted-foreground">Dragon Armor</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-green-900/30 border border-green-500/20">
               <Lock className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {protectionLevel}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Protection Level
-              </div>
+              <div className="text-2xl font-bold text-green-400">{protectionLevel}</div>
+              <div className="text-sm text-muted-foreground">Protection Level</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-red-900/30 border border-red-500/20">
               <Zap className="h-8 w-8 text-red-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-red-400">
-                {activeThreats}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Threats
-              </div>
+              <div className="text-2xl font-bold text-red-400">{activeThreats}</div>
+              <div className="text-sm text-muted-foreground">Active Threats</div>
             </div>
           </div>
         </CardContent>
@@ -110,9 +87,7 @@ export function DragonCloudProtection() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="bg-red-900/20 border border-red-500/30">
           <CardHeader>
-            <CardTitle className="text-red-400">
-              🛡️ DRAGON FULL BODY ARMOR
-            </CardTitle>
+            <CardTitle className="text-red-400">🛡️ DRAGON FULL BODY ARMOR</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -142,9 +117,7 @@ export function DragonCloudProtection() {
 
         <Card className="bg-blue-900/20 border border-blue-500/30">
           <CardHeader>
-            <CardTitle className="text-blue-400">
-              ☁️ CLOUD FILE PROTECTION
-            </CardTitle>
+            <CardTitle className="text-blue-400">☁️ CLOUD FILE PROTECTION</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -176,9 +149,7 @@ export function DragonCloudProtection() {
       {/* Dragon Actions */}
       <Card className="bg-gradient-to-r from-red-900/20 to-purple-900/20 border border-red-500/20">
         <CardHeader>
-          <CardTitle className="text-red-400">
-            🐉 DRAGON PROTECTION ACTIONS
-          </CardTitle>
+          <CardTitle className="text-red-400">🐉 DRAGON PROTECTION ACTIONS</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -233,8 +204,7 @@ export function DragonCloudProtection() {
               🐉 NO FILE CAN BE ACCESSED WITHOUT DRAGON PERMISSION 🐉
             </div>
             <div className="text-sm text-muted-foreground mt-2">
-              Dragon's full body armor protects every byte of data with maximum
-              security
+              Dragon's full body armor protects every byte of data with maximum security
             </div>
           </div>
         </CardContent>

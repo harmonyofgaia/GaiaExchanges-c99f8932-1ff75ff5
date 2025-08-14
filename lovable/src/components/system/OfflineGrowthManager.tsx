@@ -62,7 +62,7 @@ export function OfflineGrowthManager() {
         });
 
         console.log(
-          `🌙 OFFLINE GROWTH: ${offlineMinutes.toFixed(1)} minutes = ${((offlineMultiplier - 1) * 100).toFixed(2)}% increase`,
+          `🌙 OFFLINE GROWTH: ${offlineMinutes.toFixed(1)} minutes = ${((offlineMultiplier - 1) * 100).toFixed(2)}% increase`
         );
       }
     };
@@ -105,9 +105,7 @@ export function OfflineGrowthManager() {
         lastOfflineCheck: Date.now(),
       };
       localStorage.setItem("offline_growth_state", JSON.stringify(finalState));
-      console.log(
-        "💾 OFFLINE GROWTH STATE SAVED - READY FOR OFFLINE EVOLUTION",
-      );
+      console.log("💾 OFFLINE GROWTH STATE SAVED - READY FOR OFFLINE EVOLUTION");
     };
 
     window.addEventListener("beforeunload", saveBeforeUnload);

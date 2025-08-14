@@ -4,14 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Wallet,
-  Send,
-  Download,
-  Settings,
-  Shield,
-  TrendingUp,
-} from "lucide-react";
+import { Wallet, Send, Download, Settings, Shield, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
 
 export function WalletEngineAdmin() {
@@ -95,12 +88,8 @@ export function WalletEngineAdmin() {
               <Card className="border-blue-500/30 bg-blue-900/10">
                 <CardContent className="pt-6">
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-blue-400 mb-2">
-                      30,372,775.68 GAIA
-                    </div>
-                    <div className="text-lg text-muted-foreground">
-                      Total Treasury Balance
-                    </div>
+                    <div className="text-4xl font-bold text-blue-400 mb-2">30,372,775.68 GAIA</div>
+                    <div className="text-lg text-muted-foreground">Total Treasury Balance</div>
                     <Badge className="mt-2 bg-green-600">+2.3% (24h)</Badge>
                   </div>
                 </CardContent>
@@ -116,12 +105,8 @@ export function WalletEngineAdmin() {
                     <CardContent className="pt-4">
                       <div className="flex justify-between items-start mb-3">
                         <div>
-                          <h3 className="font-semibold text-lg">
-                            {wallet.name}
-                          </h3>
-                          <p className="text-sm text-muted-foreground">
-                            {wallet.address}
-                          </p>
+                          <h3 className="font-semibold text-lg">{wallet.name}</h3>
+                          <p className="text-sm text-muted-foreground">{wallet.address}</p>
                         </div>
                         <Badge
                           className={`${
@@ -139,10 +124,7 @@ export function WalletEngineAdmin() {
                         {wallet.balance} {wallet.currency}
                       </div>
                       <div className="flex gap-2 mt-3">
-                        <Button
-                          size="sm"
-                          className="bg-blue-600 hover:bg-blue-700"
-                        >
+                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
                           <Send className="h-3 w-3 mr-1" />
                           Send
                         </Button>
@@ -160,9 +142,7 @@ export function WalletEngineAdmin() {
             <TabsContent value="transfer" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-orange-400">
-                    Transfer Tokens
-                  </CardTitle>
+                  <CardTitle className="text-orange-400">Transfer Tokens</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
@@ -179,9 +159,7 @@ export function WalletEngineAdmin() {
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium">
-                      Recipient Address
-                    </label>
+                    <label className="text-sm font-medium">Recipient Address</label>
                     <Input
                       placeholder="0x..."
                       value={recipientAddress}
@@ -216,9 +194,7 @@ export function WalletEngineAdmin() {
                   <CardContent className="pt-4 text-center">
                     <TrendingUp className="h-8 w-8 text-green-400 mx-auto mb-2" />
                     <div className="text-2xl font-bold text-green-400">47</div>
-                    <div className="text-sm text-muted-foreground">
-                      Today's Transactions
-                    </div>
+                    <div className="text-sm text-muted-foreground">Today's Transactions</div>
                   </CardContent>
                 </Card>
 
@@ -226,9 +202,7 @@ export function WalletEngineAdmin() {
                   <CardContent className="pt-4 text-center">
                     <Shield className="h-8 w-8 text-blue-400 mx-auto mb-2" />
                     <div className="text-2xl font-bold text-blue-400">100%</div>
-                    <div className="text-sm text-muted-foreground">
-                      Security Score
-                    </div>
+                    <div className="text-sm text-muted-foreground">Security Score</div>
                   </CardContent>
                 </Card>
 
@@ -236,9 +210,7 @@ export function WalletEngineAdmin() {
                   <CardContent className="pt-4 text-center">
                     <Wallet className="h-8 w-8 text-purple-400 mx-auto mb-2" />
                     <div className="text-2xl font-bold text-purple-400">4</div>
-                    <div className="text-sm text-muted-foreground">
-                      Active Wallets
-                    </div>
+                    <div className="text-sm text-muted-foreground">Active Wallets</div>
                   </CardContent>
                 </Card>
               </div>
@@ -246,9 +218,7 @@ export function WalletEngineAdmin() {
               {/* Recent Transactions */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-gray-400">
-                    Recent Transactions
-                  </CardTitle>
+                  <CardTitle className="text-gray-400">Recent Transactions</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
@@ -290,8 +260,7 @@ export function WalletEngineAdmin() {
                           )}
                           <div>
                             <div className="font-medium">
-                              {tx.type === "send" ? "Sent" : "Received"}{" "}
-                              {tx.amount} GAIA
+                              {tx.type === "send" ? "Sent" : "Received"} {tx.amount} GAIA
                             </div>
                             <div className="text-sm text-muted-foreground">
                               {tx.type === "send" ? "To" : "From"}:{" "}
@@ -299,9 +268,7 @@ export function WalletEngineAdmin() {
                             </div>
                           </div>
                         </div>
-                        <span className="text-sm text-muted-foreground">
-                          {tx.time}
-                        </span>
+                        <span className="text-sm text-muted-foreground">{tx.time}</span>
                       </div>
                     ))}
                   </div>
@@ -312,9 +279,7 @@ export function WalletEngineAdmin() {
             <TabsContent value="settings" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-yellow-400">
-                    Wallet Security Settings
-                  </CardTitle>
+                  <CardTitle className="text-yellow-400">Wallet Security Settings</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex justify-between items-center p-3 bg-gray-900/30 rounded-lg">

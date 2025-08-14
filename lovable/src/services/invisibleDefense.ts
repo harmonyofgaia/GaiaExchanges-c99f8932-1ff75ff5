@@ -29,10 +29,7 @@ interface DecoyNode {
 interface QuantumInvisibility {
   id: string;
   targetSystem: string;
-  cloakingMethod:
-    | "quantum_superposition"
-    | "dimensional_shift"
-    | "reality_distortion";
+  cloakingMethod: "quantum_superposition" | "dimensional_shift" | "reality_distortion";
   invisibilityLevel: number;
   detectionRisk: number;
   duration: number;
@@ -49,7 +46,7 @@ class InvisibleDefenseService {
   // Steganographic Communication
   async createStealthMessage(
     message: string,
-    coverType: "image" | "audio" | "text" | "network",
+    coverType: "image" | "audio" | "text" | "network"
   ): Promise<StealthCommunication> {
     const stealthComm: StealthCommunication = {
       id: `stealth-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -64,7 +61,7 @@ class InvisibleDefenseService {
     const hiddenMessage = await this.embedMessage(
       stealthComm.payload,
       stealthComm.coverData,
-      coverType,
+      coverType
     );
     stealthComm.coverData = hiddenMessage;
 
@@ -92,7 +89,7 @@ class InvisibleDefenseService {
 
     for (let i = 0; i < base64.length; i++) {
       xorEncoded += String.fromCharCode(
-        base64.charCodeAt(i) ^ xorKey.charCodeAt(i % xorKey.length),
+        base64.charCodeAt(i) ^ xorKey.charCodeAt(i % xorKey.length)
       );
     }
 
@@ -107,17 +104,13 @@ class InvisibleDefenseService {
         "data:image/png;base64," +
         btoa(
           "fake-image-data-" +
-            Array.from({ length: 1000 }, () => Math.random().toString(36)).join(
-              "",
-            ),
+            Array.from({ length: 1000 }, () => Math.random().toString(36)).join("")
         ),
       audio:
         "data:audio/wav;base64," +
         btoa(
           "fake-audio-data-" +
-            Array.from({ length: 2000 }, () => Math.random().toString(36)).join(
-              "",
-            ),
+            Array.from({ length: 2000 }, () => Math.random().toString(36)).join("")
         ),
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
@@ -132,11 +125,7 @@ class InvisibleDefenseService {
     return coverData[type as keyof typeof coverData] || coverData.text;
   }
 
-  private async embedMessage(
-    payload: string,
-    cover: string,
-    type: string,
-  ): Promise<string> {
+  private async embedMessage(payload: string, cover: string, type: string): Promise<string> {
     // Simulate steganographic embedding
     const embedPositions = [];
     for (let i = 0; i < payload.length; i++) {
@@ -144,9 +133,7 @@ class InvisibleDefenseService {
     }
 
     // In real implementation, this would use LSB embedding or other techniques
-    return (
-      cover + "::HIDDEN::" + payload + "::POS::" + embedPositions.join(",")
-    );
+    return cover + "::HIDDEN::" + payload + "::POS::" + embedPositions.join(",");
   }
 
   async extractStealthMessage(stealthId: string): Promise<string> {
@@ -165,9 +152,7 @@ class InvisibleDefenseService {
 
     let decoded = "";
     for (let i = 0; i < base64.length; i++) {
-      decoded += String.fromCharCode(
-        base64.charCodeAt(i) ^ xorKey.charCodeAt(i % xorKey.length),
-      );
+      decoded += String.fromCharCode(base64.charCodeAt(i) ^ xorKey.charCodeAt(i % xorKey.length));
     }
 
     return atob(decoded);
@@ -176,15 +161,12 @@ class InvisibleDefenseService {
   // Traffic Obfuscation Engine
   async obfuscateNetworkTraffic(
     trafficData: any,
-    obfuscationType: "routing" | "timing" | "volume" | "protocol",
+    obfuscationType: "routing" | "timing" | "volume" | "protocol"
   ): Promise<TrafficObfuscation> {
     const obfuscation: TrafficObfuscation = {
       id: `obf-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       originalTraffic: trafficData,
-      obfuscatedTraffic: await this.applyObfuscation(
-        trafficData,
-        obfuscationType,
-      ),
+      obfuscatedTraffic: await this.applyObfuscation(trafficData, obfuscationType),
       obfuscationType,
       effectiveness: Math.random() * 0.3 + 0.7, // 70-100% effectiveness
     };
@@ -222,9 +204,8 @@ class InvisibleDefenseService {
       case "volume":
         return {
           ...traffic,
-          paddingData: Array.from(
-            { length: Math.floor(Math.random() * 1000) },
-            () => Math.random(),
+          paddingData: Array.from({ length: Math.floor(Math.random() * 1000) }, () =>
+            Math.random()
           ),
           compressedData: "fake-compression-data",
           obfuscated: true,
@@ -245,18 +226,7 @@ class InvisibleDefenseService {
   }
 
   private generateDecoyRoute(): string[] {
-    const countries = [
-      "US",
-      "DE",
-      "JP",
-      "SG",
-      "UK",
-      "CA",
-      "AU",
-      "NL",
-      "SE",
-      "CH",
-    ];
+    const countries = ["US", "DE", "JP", "SG", "UK", "CA", "AU", "NL", "SE", "CH"];
     const route = [];
     const hops = Math.floor(Math.random() * 4) + 2;
 
@@ -269,8 +239,7 @@ class InvisibleDefenseService {
 
   private generateFakeHeaders(): Record<string, string> {
     return {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
       Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       "Accept-Language": "en-US,en;q=0.5",
       "Accept-Encoding": "gzip, deflate",
@@ -332,9 +301,7 @@ class InvisibleDefenseService {
   }
 
   private async setupHoneypot(node: DecoyNode): Promise<void> {
-    console.log(
-      "🍯 Setting up honeypot with fake services and vulnerabilities",
-    );
+    console.log("🍯 Setting up honeypot with fake services and vulnerabilities");
     // Simulate honeypot setup with fake services
   }
 
@@ -361,9 +328,7 @@ class InvisibleDefenseService {
         node.attacksDeflected++;
         node.lastActivity = Date.now();
 
-        console.log(
-          `🛡️ Decoy node ${node.id} deflected attack (total: ${node.attacksDeflected})`,
-        );
+        console.log(`🛡️ Decoy node ${node.id} deflected attack (total: ${node.attacksDeflected})`);
       }
     }, 30000); // Check every 30 seconds
   }
@@ -371,10 +336,7 @@ class InvisibleDefenseService {
   // Quantum Invisibility Cloak
   async activateQuantumCloaking(
     targetSystem: string,
-    cloakingMethod:
-      | "quantum_superposition"
-      | "dimensional_shift"
-      | "reality_distortion",
+    cloakingMethod: "quantum_superposition" | "dimensional_shift" | "reality_distortion"
   ): Promise<QuantumInvisibility> {
     const quantumCloak: QuantumInvisibility = {
       id: `cloak-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -410,9 +372,7 @@ class InvisibleDefenseService {
     return quantumCloak;
   }
 
-  private async implementQuantumCloaking(
-    cloak: QuantumInvisibility,
-  ): Promise<void> {
+  private async implementQuantumCloaking(cloak: QuantumInvisibility): Promise<void> {
     switch (cloak.cloakingMethod) {
       case "quantum_superposition":
         console.log("⚛️ Applying quantum superposition cloaking");
@@ -458,15 +418,11 @@ class InvisibleDefenseService {
       isActive: this.isDefenseActive,
       stealthCommunications: this.stealthCommunications.size,
       obfuscatedTraffic: this.trafficObfuscation.size,
-      activeDecoys: Array.from(this.decoyNodes.values()).filter(
-        (n) => n.isActive,
-      ).length,
-      quantumCloaking: Array.from(this.quantumCloaking.values()).filter(
-        (c) => c.isActive,
-      ).length,
+      activeDecoys: Array.from(this.decoyNodes.values()).filter((n) => n.isActive).length,
+      quantumCloaking: Array.from(this.quantumCloaking.values()).filter((c) => c.isActive).length,
       totalAttacksDeflected: Array.from(this.decoyNodes.values()).reduce(
         (sum, node) => sum + node.attacksDeflected,
-        0,
+        0
       ),
     };
   }

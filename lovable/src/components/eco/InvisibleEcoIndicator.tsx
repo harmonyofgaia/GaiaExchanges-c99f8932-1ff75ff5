@@ -15,16 +15,10 @@ export function InvisibleEcoIndicator() {
 
   return (
     <div className="fixed bottom-4 right-4 z-50 space-y-1">
-      <Badge
-        variant="secondary"
-        className="bg-green-900/80 text-green-100 text-xs"
-      >
+      <Badge variant="secondary" className="bg-green-900/80 text-green-100 text-xs">
         🌱 Eco: {userProfile.totalCarbonReduced.toFixed(1)}kg CO₂
       </Badge>
-      <Badge
-        variant="secondary"
-        className="bg-blue-900/80 text-blue-100 text-xs"
-      >
+      <Badge variant="secondary" className="bg-blue-900/80 text-blue-100 text-xs">
         🪙 {userProfile.totalTokensEarned} GAIA
       </Badge>
     </div>

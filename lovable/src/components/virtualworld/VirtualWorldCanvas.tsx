@@ -91,14 +91,7 @@ export function VirtualWorldCanvas({
     // Weather effects cycle
     const weatherInterval = setInterval(() => {
       setWeatherEffect((prev) => {
-        const effects = [
-          "sunny",
-          "cloudy",
-          "rainy",
-          "snowy",
-          "windy",
-          "stormy",
-        ];
+        const effects = ["sunny", "cloudy", "rainy", "snowy", "windy", "stormy"];
         return effects[Math.floor(Math.random() * effects.length)];
       });
     }, 20000);
@@ -269,17 +262,13 @@ export function VirtualWorldCanvas({
               <div className="text-2xl font-bold text-blue-400">
                 {animalsHelped.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Animals Helped
-              </div>
+              <div className="text-xs text-muted-foreground">Animals Helped</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-400">
                 {playersOnline.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Players Online
-              </div>
+              <div className="text-xs text-muted-foreground">Players Online</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-400">
@@ -289,9 +278,7 @@ export function VirtualWorldCanvas({
             </div>
             <div className="text-center">
               <div className="text-2xl">{getWeatherIcon()}</div>
-              <div className="text-xs text-muted-foreground capitalize">
-                {weatherEffect}
-              </div>
+              <div className="text-xs text-muted-foreground capitalize">{weatherEffect}</div>
             </div>
           </div>
         </CardContent>
@@ -456,9 +443,7 @@ export function VirtualWorldCanvas({
                 >
                   <div className="flex flex-col items-center gap-2 relative z-10">
                     <Icon className="h-6 w-6" />
-                    <span className="text-xs text-center">
-                      {landscape.name}
-                    </span>
+                    <span className="text-xs text-center">{landscape.name}</span>
                     <Badge className="bg-white/20 text-white text-xs">
                       Power: {landscape.power}
                     </Badge>
@@ -494,8 +479,8 @@ export function VirtualWorldCanvas({
               </code>
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              Every interaction burns GAIA tokens for real environmental impact
-              and wildlife conservation
+              Every interaction burns GAIA tokens for real environmental impact and wildlife
+              conservation
             </p>
           </div>
         </CardContent>

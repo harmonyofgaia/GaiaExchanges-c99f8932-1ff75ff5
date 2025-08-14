@@ -110,9 +110,7 @@ export function RuleSystemManagement() {
         priority: "critical",
         isActive: true,
         enforcement: "ban",
-        conditions: [
-          { field: "admin_action", operator: "equals", value: "any" },
-        ],
+        conditions: [{ field: "admin_action", operator: "equals", value: "any" }],
         assignedTo: [{ type: "role", targetName: "Administrators" }],
         createdAt: "2024-01-10T08:00:00Z",
         lastTriggered: null,
@@ -171,14 +169,10 @@ export function RuleSystemManagement() {
 
   const handleToggleRule = (ruleId: string) => {
     setRules(
-      rules.map((rule) =>
-        rule.id === ruleId ? { ...rule, isActive: !rule.isActive } : rule,
-      ),
+      rules.map((rule) => (rule.id === ruleId ? { ...rule, isActive: !rule.isActive } : rule))
     );
     const rule = rules.find((r) => r.id === ruleId);
-    toast.success(
-      `Rule "${rule?.name}" ${rule?.isActive ? "deactivated" : "activated"}`,
-    );
+    toast.success(`Rule "${rule?.name}" ${rule?.isActive ? "deactivated" : "activated"}`);
   };
 
   const handleDeleteRule = (ruleId: string) => {
@@ -224,7 +218,7 @@ export function RuleSystemManagement() {
   const filteredRules = rules.filter(
     (rule) =>
       rule.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      rule.description.toLowerCase().includes(searchTerm.toLowerCase()),
+      rule.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -237,8 +231,7 @@ export function RuleSystemManagement() {
             🔒 RULE SYSTEM MANAGEMENT 24/7 🔒
           </CardTitle>
           <p className="text-purple-300">
-            Comprehensive rule enforcement system with 24/7 monitoring and
-            automatic compliance
+            Comprehensive rule enforcement system with 24/7 monitoring and automatic compliance
           </p>
         </CardHeader>
         <CardContent>
@@ -253,17 +246,13 @@ export function RuleSystemManagement() {
               <div className="text-2xl font-bold text-red-400">
                 {rules.reduce((sum, r) => sum + r.violations, 0)}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Total Violations
-              </div>
+              <div className="text-xs text-muted-foreground">Total Violations</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-400">
                 {rules.filter((r) => r.priority === "critical").length}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Critical Rules
-              </div>
+              <div className="text-xs text-muted-foreground">Critical Rules</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-400">
@@ -292,10 +281,7 @@ export function RuleSystemManagement() {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="max-w-md"
             />
-            <Button
-              onClick={handleCreateRule}
-              className="bg-green-600 hover:bg-green-700"
-            >
+            <Button onClick={handleCreateRule} className="bg-green-600 hover:bg-green-700">
               <Plus className="h-4 w-4 mr-2" />
               Create New Rule
             </Button>
@@ -314,18 +300,12 @@ export function RuleSystemManagement() {
                       <div className="flex items-center gap-3">
                         <CategoryIcon className="h-5 w-5 text-purple-400" />
                         <div>
-                          <h3 className="font-semibold text-white">
-                            {rule.name}
-                          </h3>
-                          <p className="text-sm text-muted-foreground">
-                            {rule.description}
-                          </p>
+                          <h3 className="font-semibold text-white">{rule.name}</h3>
+                          <p className="text-sm text-muted-foreground">{rule.description}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Badge
-                          className={`${getPriorityColor(rule.priority)} text-white`}
-                        >
+                        <Badge className={`${getPriorityColor(rule.priority)} text-white`}>
                           {rule.priority.toUpperCase()}
                         </Badge>
                         <Switch
@@ -338,33 +318,19 @@ export function RuleSystemManagement() {
                   <CardContent>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                       <div>
-                        <div className="text-sm text-muted-foreground">
-                          Category
-                        </div>
-                        <div className="font-medium capitalize">
-                          {rule.category}
-                        </div>
+                        <div className="text-sm text-muted-foreground">Category</div>
+                        <div className="font-medium capitalize">{rule.category}</div>
                       </div>
                       <div>
-                        <div className="text-sm text-muted-foreground">
-                          Enforcement
-                        </div>
-                        <div className="font-medium capitalize">
-                          {rule.enforcement}
-                        </div>
+                        <div className="text-sm text-muted-foreground">Enforcement</div>
+                        <div className="font-medium capitalize">{rule.enforcement}</div>
                       </div>
                       <div>
-                        <div className="text-sm text-muted-foreground">
-                          Violations
-                        </div>
-                        <div className="font-medium text-red-400">
-                          {rule.violations}
-                        </div>
+                        <div className="text-sm text-muted-foreground">Violations</div>
+                        <div className="font-medium text-red-400">{rule.violations}</div>
                       </div>
                       <div>
-                        <div className="text-sm text-muted-foreground">
-                          Status
-                        </div>
+                        <div className="text-sm text-muted-foreground">Status</div>
                         <div className="flex items-center gap-1">
                           {rule.isActive ? (
                             <CheckCircle className="h-4 w-4 text-green-400" />
@@ -379,9 +345,7 @@ export function RuleSystemManagement() {
                     </div>
 
                     <div className="mb-4">
-                      <div className="text-sm text-muted-foreground mb-2">
-                        Assigned To:
-                      </div>
+                      <div className="text-sm text-muted-foreground mb-2">Assigned To:</div>
                       <div className="flex flex-wrap gap-2">
                         {rule.assignedTo.map((assignment, index) => (
                           <Badge
@@ -396,11 +360,7 @@ export function RuleSystemManagement() {
                     </div>
 
                     <div className="flex justify-end gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setSelectedRule(rule)}
-                      >
+                      <Button variant="outline" size="sm" onClick={() => setSelectedRule(rule)}>
                         <Edit className="h-4 w-4 mr-2" />
                         Edit
                       </Button>
@@ -501,9 +461,7 @@ export function RuleSystemManagement() {
                   </div>
                   <div className="text-right">
                     <div className="text-sm text-red-400">RESTRICTED</div>
-                    <div className="text-xs text-muted-foreground">
-                      2 hours ago
-                    </div>
+                    <div className="text-xs text-muted-foreground">2 hours ago</div>
                   </div>
                 </div>
 
@@ -519,9 +477,7 @@ export function RuleSystemManagement() {
                   </div>
                   <div className="text-right">
                     <div className="text-sm text-yellow-400">WARNING</div>
-                    <div className="text-xs text-muted-foreground">
-                      5 hours ago
-                    </div>
+                    <div className="text-xs text-muted-foreground">5 hours ago</div>
                   </div>
                 </div>
               </div>
@@ -534,13 +490,7 @@ export function RuleSystemManagement() {
 }
 
 // Rule Creator Component
-function RuleCreator({
-  rule,
-  onSave,
-}: {
-  rule: Rule | null;
-  onSave: (rule: Rule) => void;
-}) {
+function RuleCreator({ rule, onSave }: { rule: Rule | null; onSave: (rule: Rule) => void }) {
   const [formData, setFormData] = useState<Partial<Rule>>({
     name: "",
     description: "",
@@ -591,9 +541,7 @@ function RuleCreator({
             <label className="text-sm font-medium">Rule Name</label>
             <Input
               value={formData.name || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="Enter rule name..."
             />
           </div>
@@ -601,9 +549,7 @@ function RuleCreator({
             <label className="text-sm font-medium">Category</label>
             <Select
               value={formData.category || "security"}
-              onValueChange={(value: any) =>
-                setFormData({ ...formData, category: value })
-              }
+              onValueChange={(value: any) => setFormData({ ...formData, category: value })}
             >
               <SelectTrigger>
                 <SelectValue />
@@ -623,9 +569,7 @@ function RuleCreator({
           <label className="text-sm font-medium">Description</label>
           <Textarea
             value={formData.description || ""}
-            onChange={(e) =>
-              setFormData({ ...formData, description: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             placeholder="Describe what this rule does..."
           />
         </div>
@@ -635,9 +579,7 @@ function RuleCreator({
             <label className="text-sm font-medium">Priority</label>
             <Select
               value={formData.priority || "medium"}
-              onValueChange={(value: any) =>
-                setFormData({ ...formData, priority: value })
-              }
+              onValueChange={(value: any) => setFormData({ ...formData, priority: value })}
             >
               <SelectTrigger>
                 <SelectValue />
@@ -654,9 +596,7 @@ function RuleCreator({
             <label className="text-sm font-medium">Enforcement</label>
             <Select
               value={formData.enforcement || "warning"}
-              onValueChange={(value: any) =>
-                setFormData({ ...formData, enforcement: value })
-              }
+              onValueChange={(value: any) => setFormData({ ...formData, enforcement: value })}
             >
               <SelectTrigger>
                 <SelectValue />
@@ -672,18 +612,13 @@ function RuleCreator({
           <div className="flex items-center space-x-2">
             <Switch
               checked={formData.isActive ?? true}
-              onCheckedChange={(checked) =>
-                setFormData({ ...formData, isActive: checked })
-              }
+              onCheckedChange={(checked) => setFormData({ ...formData, isActive: checked })}
             />
             <label className="text-sm font-medium">Active 24/7</label>
           </div>
         </div>
 
-        <Button
-          onClick={handleSave}
-          className="bg-green-600 hover:bg-green-700"
-        >
+        <Button onClick={handleSave} className="bg-green-600 hover:bg-green-700">
           {rule ? "Update Rule" : "Create Rule"}
         </Button>
       </CardContent>

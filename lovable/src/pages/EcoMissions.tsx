@@ -50,17 +50,11 @@ export default function EcoMissions() {
             Master Plan v7: AI-Powered Mission Generation and Tracking
           </p>
           <div className="flex gap-4 mt-4">
-            <Badge
-              variant="outline"
-              className="border-green-500/50 text-green-400"
-            >
+            <Badge variant="outline" className="border-green-500/50 text-green-400">
               <Target className="h-3 w-3 mr-1" />
               AI Generated
             </Badge>
-            <Badge
-              variant="outline"
-              className="border-blue-500/50 text-blue-400"
-            >
+            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
               <MapPin className="h-3 w-3 mr-1" />
               Geolocation
             </Badge>
@@ -125,16 +119,12 @@ export default function EcoMissions() {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  {mission.description}
-                </p>
+                <p className="text-muted-foreground mb-4">{mission.description}</p>
 
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Reward</span>
-                    <span className="text-green-400 font-bold">
-                      {mission.reward}
-                    </span>
+                    <span className="text-green-400 font-bold">{mission.reward}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Participants</span>
@@ -144,9 +134,7 @@ export default function EcoMissions() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Time Left</span>
-                    <span className="text-orange-400 font-bold">
-                      {mission.timeLeft}
-                    </span>
+                    <span className="text-orange-400 font-bold">{mission.timeLeft}</span>
                   </div>
                 </div>
 

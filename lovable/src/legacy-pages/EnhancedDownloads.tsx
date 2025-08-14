@@ -13,12 +13,11 @@ const EnhancedDownloads = () => {
             COMMUNITY RESOURCES & GLOBAL DOMINATION
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Generate documents, dominate exchanges, accelerate growth & download
-            apps
+            Generate documents, dominate exchanges, accelerate growth & download apps
           </p>
           <p className="text-sm text-green-400 mt-2">
-            🌍 Breaking all barriers • 100X faster growth • Maximum security •
-            Lions + Dolphins Power
+            🌍 Breaking all barriers • 100X faster growth • Maximum security • Lions + Dolphins
+            Power
           </p>
         </div>
 

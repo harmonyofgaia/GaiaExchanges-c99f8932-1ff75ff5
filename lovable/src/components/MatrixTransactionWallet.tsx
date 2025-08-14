@@ -47,19 +47,17 @@ const mockTransactions: MatrixTransaction[] = [
 ];
 
 export function MatrixTransactionWallet() {
-  const [transactions, setTransactions] =
-    useState<MatrixTransaction[]>(mockTransactions);
+  const [transactions, setTransactions] = useState<MatrixTransaction[]>(mockTransactions);
   const [matrixCode, setMatrixCode] = useState<string[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Generate matrix-style falling code effect
   useEffect(() => {
-    const chars =
-      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()";
+    const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()";
     const interval = setInterval(() => {
       const newCode = Array.from(
         { length: 50 },
-        () => chars[Math.floor(Math.random() * chars.length)],
+        () => chars[Math.floor(Math.random() * chars.length)]
       );
       setMatrixCode(newCode);
     }, 100);
@@ -98,8 +96,7 @@ export function MatrixTransactionWallet() {
       ctx.font = fontSize + "px monospace";
 
       for (let i = 0; i < drops.length; i++) {
-        const text =
-          matrixArray[Math.floor(Math.random() * matrixArray.length)];
+        const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
@@ -173,14 +170,10 @@ export function MatrixTransactionWallet() {
                             }}
                           >
                             <div className="flex items-center gap-1">
-                              <span className="text-gray-500">
-                                [{tx.type.toUpperCase()}]
-                              </span>
+                              <span className="text-gray-500">[{tx.type.toUpperCase()}]</span>
                               <span>{tx.amount} GAiA</span>
                               <span className="text-gray-600">→</span>
-                              <span className="truncate max-w-20">
-                                {tx.hash.slice(0, 8)}...
-                              </span>
+                              <span className="truncate max-w-20">{tx.hash.slice(0, 8)}...</span>
                             </div>
                           </div>
                         ))}
@@ -238,15 +231,11 @@ export function MatrixTransactionWallet() {
                   </div>
 
                   <div className="text-right">
-                    <div
-                      className={`text-lg font-bold font-mono ${getTransactionColor(tx.type)}`}
-                    >
+                    <div className={`text-lg font-bold font-mono ${getTransactionColor(tx.type)}`}>
                       {tx.type === "received" ? "+" : "-"}
                       {tx.amount} GAiA
                     </div>
-                    <div className="text-xs text-gray-400">
-                      {tx.timestamp.toLocaleString()}
-                    </div>
+                    <div className="text-xs text-gray-400">{tx.timestamp.toLocaleString()}</div>
                   </div>
                 </div>
               </div>

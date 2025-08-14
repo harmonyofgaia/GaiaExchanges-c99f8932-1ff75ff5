@@ -18,8 +18,7 @@ export function GuardianDefenseSystem() {
       if (Math.random() < 0.1) {
         setThreatsBlocked((prev) => prev + 1);
         toast.success("🛡️ Guardian Defense: Threat Blocked", {
-          description:
-            "Your guardian protection successfully blocked a security threat",
+          description: "Your guardian protection successfully blocked a security threat",
           duration: 3000,
         });
       }
@@ -45,42 +44,29 @@ export function GuardianDefenseSystem() {
             🛡️ GUARDIAN DEFENSE SYSTEM
           </CardTitle>
           <p className="text-purple-300">
-            Community Guardian Protection • Animal-Focused Security •
-            Environmental Defense
+            Community Guardian Protection • Animal-Focused Security • Environmental Defense
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400">
-                {defenseLevel.toFixed(1)}%
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{defenseLevel.toFixed(1)}%</div>
               <div className="text-sm text-muted-foreground">Defense Level</div>
               <Progress value={defenseLevel} className="mt-2 h-2" />
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                {activeProtections}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Protections
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{activeProtections}</div>
+              <div className="text-sm text-muted-foreground">Active Protections</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">
-                {threatsBlocked}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Blocked
-              </div>
+              <div className="text-2xl font-bold text-green-400">{threatsBlocked}</div>
+              <div className="text-sm text-muted-foreground">Threats Blocked</div>
             </div>
           </div>
 
           <div className="space-y-4">
             <div className="bg-black/50 p-4 rounded-lg">
-              <h4 className="text-purple-400 font-bold mb-2">
-                🌿 Guardian Protection Features:
-              </h4>
+              <h4 className="text-purple-400 font-bold mb-2">🌿 Guardian Protection Features:</h4>
               <ul className="text-sm text-purple-300 space-y-1">
                 <li>• Animal welfare monitoring and alerts</li>
                 <li>• Environmental project protection</li>
@@ -116,9 +102,7 @@ export function GuardianDefenseSystem() {
               <span className="text-blue-400 ml-2 font-bold">Active</span>
             </div>
             <div>
-              <span className="text-muted-foreground">
-                Environmental Projects:
-              </span>
+              <span className="text-muted-foreground">Environmental Projects:</span>
               <span className="text-purple-400 ml-2 font-bold">47</span>
             </div>
             <div>

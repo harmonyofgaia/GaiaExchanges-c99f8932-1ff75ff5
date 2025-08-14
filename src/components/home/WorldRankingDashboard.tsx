@@ -104,7 +104,7 @@ export function WorldRankingDashboard() {
           price: coin.price * (1 + (Math.random() - 0.5) * 0.01),
           change24h: coin.change24h + (Math.random() - 0.5) * 0.5,
           volume: coin.volume * (1 + (Math.random() - 0.5) * 0.05),
-        })),
+        }))
       );
     }, 3000);
 
@@ -133,8 +133,7 @@ export function WorldRankingDashboard() {
             <Trophy className="h-8 w-8 animate-bounce" />
           </CardTitle>
           <div className="text-center text-lg text-yellow-300 mt-2">
-            Real-time market data from global exchanges • Updated every 3
-            seconds
+            Real-time market data from global exchanges • Updated every 3 seconds
           </div>
         </CardHeader>
         <CardContent>
@@ -180,16 +179,12 @@ export function WorldRankingDashboard() {
                             </div>
                           )}
                         </div>
-                        <div className="text-sm text-muted-foreground">
-                          {coin.name}
-                        </div>
+                        <div className="text-sm text-muted-foreground">{coin.name}</div>
                       </div>
                     </div>
 
                     <div className="text-right">
-                      <div className="font-bold text-white text-lg">
-                        {formatPrice(coin.price)}
-                      </div>
+                      <div className="font-bold text-white text-lg">{formatPrice(coin.price)}</div>
                       <div
                         className={`text-sm flex items-center gap-1 ${
                           coin.change24h > 0 ? "text-green-400" : "text-red-400"
@@ -208,28 +203,22 @@ export function WorldRankingDashboard() {
 
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <span className="text-muted-foreground">
-                        Market Cap:{" "}
-                      </span>
+                      <span className="text-muted-foreground">Market Cap: </span>
                       <span className="text-white font-semibold">
                         {formatVolume(coin.marketCap)}
                       </span>
                     </div>
                     <div>
-                      <span className="text-muted-foreground">
-                        24h Volume:{" "}
-                      </span>
-                      <span className="text-white font-semibold">
-                        {formatVolume(coin.volume)}
-                      </span>
+                      <span className="text-muted-foreground">24h Volume: </span>
+                      <span className="text-white font-semibold">{formatVolume(coin.volume)}</span>
                     </div>
                   </div>
 
                   {coin.isOurs && (
                     <div className="mt-3 p-3 bg-green-500/10 rounded border border-green-500/20">
                       <div className="text-center text-green-400 font-bold text-sm">
-                        🌍 OUR TOKEN - Culture of Harmony Powered • Dragon
-                        Protected • Quantum Secure
+                        🌍 OUR TOKEN - Culture of Harmony Powered • Dragon Protected • Quantum
+                        Secure
                       </div>
                       <div className="text-center text-xs text-green-300 mt-1">
                         Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...
@@ -252,8 +241,8 @@ export function WorldRankingDashboard() {
                     📊 Token Integration Status
                   </div>
                   <div className="text-sm text-blue-300">
-                    Correct GAiA Token ({GAIA_TOKEN.SYMBOL}) is being deployed
-                    across all major exchanges
+                    Correct GAiA Token ({GAIA_TOKEN.SYMBOL}) is being deployed across all major
+                    exchanges
                   </div>
                 </div>
               </div>
@@ -265,28 +254,18 @@ export function WorldRankingDashboard() {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="font-bold text-white">
-                        {platform.name}
-                      </div>
+                      <div className="font-bold text-white">{platform.name}</div>
                       {platform.verified ? (
-                        <Badge className="bg-green-600 text-white text-xs">
-                          ✅ VERIFIED
-                        </Badge>
+                        <Badge className="bg-green-600 text-white text-xs">✅ VERIFIED</Badge>
                       ) : (
-                        <Badge className="bg-yellow-600 text-white text-xs">
-                          ⏳ PENDING
-                        </Badge>
+                        <Badge className="bg-yellow-600 text-white text-xs">⏳ PENDING</Badge>
                       )}
                     </div>
 
                     <div className="flex items-center gap-3">
                       <div className="text-right">
-                        <div className="text-sm text-muted-foreground">
-                          24h Volume
-                        </div>
-                        <div className="font-bold text-purple-400">
-                          {platform.volume}
-                        </div>
+                        <div className="text-sm text-muted-foreground">24h Volume</div>
+                        <div className="font-bold text-purple-400">{platform.volume}</div>
                       </div>
 
                       {platform.verified ? (
@@ -295,11 +274,7 @@ export function WorldRankingDashboard() {
                           asChild
                           className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
                         >
-                          <a
-                            href={platform.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
+                          <a href={platform.url} target="_blank" rel="noopener noreferrer">
                             <ExternalLink className="h-3 w-3 mr-1" />
                             Trade
                           </a>
@@ -320,8 +295,7 @@ export function WorldRankingDashboard() {
                     🔐 Token Verification Complete
                   </div>
                   <div className="text-sm text-green-300 mb-2">
-                    Our correct GAiA Token is now attached to all verified
-                    trading platforms
+                    Our correct GAiA Token is now attached to all verified trading platforms
                   </div>
                   <div className="text-xs text-muted-foreground">
                     Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}

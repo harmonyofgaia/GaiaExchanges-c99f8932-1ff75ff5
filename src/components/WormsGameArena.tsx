@@ -51,12 +51,10 @@ interface Explosion {
 
 export function WormsGameArena() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [gameState, setGameState] = useState<
-    "waiting" | "playing" | "paused" | "finished"
-  >("waiting");
-  const [currentPlayer, setCurrentPlayer] = useState<"player" | "enemy">(
-    "player",
+  const [gameState, setGameState] = useState<"waiting" | "playing" | "paused" | "finished">(
+    "waiting"
   );
+  const [currentPlayer, setCurrentPlayer] = useState<"player" | "enemy">("player");
   const [selectedWeapon, setSelectedWeapon] = useState("bazooka");
   const [windStrength, setWindStrength] = useState(0);
   const [turnTimer, setTurnTimer] = useState(45);
@@ -281,7 +279,7 @@ export function WormsGameArena() {
           0,
           explosion.x,
           explosion.y,
-          explosion.radius,
+          explosion.radius
         );
         gradient.addColorStop(0, `rgba(255, 165, 0, ${alpha})`);
         gradient.addColorStop(0.5, `rgba(255, 69, 0, ${alpha * 0.8})`);
@@ -289,13 +287,7 @@ export function WormsGameArena() {
 
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(
-          explosion.x,
-          explosion.y,
-          explosion.radius * (1 - age / maxAge),
-          0,
-          Math.PI * 2,
-        );
+        ctx.arc(explosion.x, explosion.y, explosion.radius * (1 - age / maxAge), 0, Math.PI * 2);
         ctx.fill();
       }
     });
@@ -320,13 +312,8 @@ export function WormsGameArena() {
         const radianAngle = (angle[0] * Math.PI) / 180;
 
         for (let t = 0; t < 100; t += 2) {
-          const x =
-            startX +
-            (powerFactor * 5 * Math.cos(radianAngle) + windStrength * 0.1) * t;
-          const y =
-            startY -
-            powerFactor * 5 * Math.sin(radianAngle) * t +
-            0.5 * 9.8 * t * t * 0.1;
+          const x = startX + (powerFactor * 5 * Math.cos(radianAngle) + windStrength * 0.1) * t;
+          const y = startY - powerFactor * 5 * Math.sin(radianAngle) * t + 0.5 * 9.8 * t * t * 0.1;
 
           if (t === 0) {
             ctx.moveTo(x, y);
@@ -360,7 +347,7 @@ export function WormsGameArena() {
 
       return () => clearInterval(timer);
     }
-  }, [gameState, currentPlayer]);
+  }, [gameState, currentPlayer, switchTurn]);
 
   useEffect(() => {
     // Generate random wind strength every 15 seconds
@@ -374,9 +361,7 @@ export function WormsGameArena() {
   // Clean up old explosions
   useEffect(() => {
     const cleanup = setInterval(() => {
-      setExplosions((prev) =>
-        prev.filter((explosion) => Date.now() - explosion.timestamp < 1000),
-      );
+      setExplosions((prev) => prev.filter((explosion) => Date.now() - explosion.timestamp < 1000));
     }, 100);
 
     return () => clearInterval(cleanup);
@@ -395,7 +380,7 @@ export function WormsGameArena() {
         ...worm,
         health: worm.maxHealth,
         isActive: worm.id === "1", // First player worm is active
-      })),
+      }))
     );
 
     toast.success("🐛 Worms Battle Arena Started!", {
@@ -404,44 +389,38 @@ export function WormsGameArena() {
     });
   };
 
-  const switchTurn = () => {
+  const switchTurn = useCallback(() => {
     setCurrentPlayer((prev) => {
       const newPlayer = prev === "player" ? "enemy" : "player";
 
       // Set next active worm
-      const teamWorms = worms.filter(
-        (w) => w.team === newPlayer && w.health > 0,
-      );
+      const teamWorms = worms.filter((w) => w.team === newPlayer && w.health > 0);
       if (teamWorms.length > 0) {
         setWorms((prev) =>
           prev.map((worm) => ({
             ...worm,
             isActive: worm.team === newPlayer && worm.id === teamWorms[0].id,
-          })),
+          }))
         );
       }
 
       return newPlayer;
     });
     setTurnTimer(45);
-  };
+  }, [worms]);
 
   const fireWeapon = async () => {
     const weapon = weapons.find((w) => w.id === selectedWeapon);
     if (!weapon) return;
 
-    const activeWorm = worms.find(
-      (w) => w.isActive && w.team === currentPlayer,
-    );
+    const activeWorm = worms.find((w) => w.isActive && w.team === currentPlayer);
     if (!activeWorm) return;
 
     // Calculate impact point
     const powerFactor = power[0] / 100;
     const radianAngle = (angle[0] * Math.PI) / 180;
-    const impactX =
-      activeWorm.position.x + powerFactor * 200 * Math.cos(radianAngle);
-    const impactY =
-      activeWorm.position.y - powerFactor * 100 * Math.sin(radianAngle) + 50;
+    const impactX = activeWorm.position.x + powerFactor * 200 * Math.cos(radianAngle);
+    const impactY = activeWorm.position.y - powerFactor * 100 * Math.sin(radianAngle) + 50;
 
     // Add explosion effect
     setExplosions((prev) => [
@@ -461,16 +440,13 @@ export function WormsGameArena() {
     setWorms((prev) =>
       prev.map((worm) => {
         const distance = Math.sqrt(
-          Math.pow(worm.position.x - impactX, 2) +
-            Math.pow(worm.position.y - impactY, 2),
+          Math.pow(worm.position.x - impactX, 2) + Math.pow(worm.position.y - impactY, 2)
         );
 
         if (distance <= weapon.radius && worm.health > 0) {
           const damageFactor = 1 - distance / weapon.radius;
           const damage =
-            Math.floor(weapon.damage * damageFactor) +
-            Math.floor(Math.random() * 20) -
-            10;
+            Math.floor(weapon.damage * damageFactor) + Math.floor(Math.random() * 20) - 10;
           const finalDamage = Math.max(0, Math.min(damage, worm.health));
 
           totalDamage += finalDamage;
@@ -492,7 +468,7 @@ export function WormsGameArena() {
         }
 
         return worm;
-      }),
+      })
     );
 
     if (wormsHit > 0) {
@@ -509,12 +485,8 @@ export function WormsGameArena() {
 
     // Check win conditions
     setTimeout(() => {
-      const playerWorms = worms.filter(
-        (w) => w.team === "player" && w.health > 0,
-      );
-      const enemyWorms = worms.filter(
-        (w) => w.team === "enemy" && w.health > 0,
-      );
+      const playerWorms = worms.filter((w) => w.team === "player" && w.health > 0);
+      const enemyWorms = worms.filter((w) => w.team === "enemy" && w.health > 0);
 
       if (enemyWorms.length === 0) {
         setGameState("finished");
@@ -551,8 +523,7 @@ export function WormsGameArena() {
         </CardTitle>
         <div className="flex justify-between items-center flex-wrap gap-4">
           <p className="text-muted-foreground">
-            Advanced artillery combat with GAiA token rewards • Wind effects •
-            Multiple weapons
+            Advanced artillery combat with GAiA token rewards • Wind effects • Multiple weapons
           </p>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
@@ -564,23 +535,15 @@ export function WormsGameArena() {
             </div>
             <div className="flex items-center gap-2">
               <Trophy className="h-4 w-4 text-yellow-400" />
-              <span className="text-yellow-400 font-bold">
-                Round: {roundNumber}
-              </span>
+              <span className="text-yellow-400 font-bold">Round: {roundNumber}</span>
             </div>
             <div className="flex items-center gap-2">
               <Star className="h-4 w-4 text-green-400" />
-              <span className="text-green-400 font-bold">
-                GAiA: {gaiaEarned.toFixed(1)}
-              </span>
+              <span className="text-green-400 font-bold">GAiA: {gaiaEarned.toFixed(1)}</span>
             </div>
             {gameState === "playing" && (
               <div className="flex items-center gap-2">
-                <Badge
-                  className={
-                    currentPlayer === "player" ? "bg-green-600" : "bg-red-600"
-                  }
-                >
+                <Badge className={currentPlayer === "player" ? "bg-green-600" : "bg-red-600"}>
                   {currentPlayer === "player" ? "YOUR TURN" : "ENEMY TURN"}
                 </Badge>
                 <span className="text-yellow-400 font-bold">{turnTimer}s</span>
@@ -615,9 +578,7 @@ export function WormsGameArena() {
             <div className="absolute inset-0 flex items-center justify-center bg-black/50">
               <div className="text-center">
                 <div className="text-6xl mb-4 animate-bounce">🐛</div>
-                <div className="text-2xl font-bold text-yellow-400 mb-4">
-                  WORMS BATTLE ARENA
-                </div>
+                <div className="text-2xl font-bold text-yellow-400 mb-4">WORMS BATTLE ARENA</div>
                 <div className="text-lg text-muted-foreground mb-6">
                   Strategic artillery combat with environmental physics
                 </div>
@@ -635,13 +596,8 @@ export function WormsGameArena() {
           {gameState === "paused" && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/70">
               <div className="text-center">
-                <div className="text-4xl font-bold text-yellow-400 mb-4">
-                  ⏸️ GAME PAUSED
-                </div>
-                <Button
-                  onClick={pauseGame}
-                  className="bg-green-600 hover:bg-green-700"
-                >
+                <div className="text-4xl font-bold text-yellow-400 mb-4">⏸️ GAME PAUSED</div>
+                <Button onClick={pauseGame} className="bg-green-600 hover:bg-green-700">
                   Resume Battle
                 </Button>
               </div>
@@ -689,9 +645,7 @@ export function WormsGameArena() {
                     <Button
                       key={weapon.id}
                       onClick={() => setSelectedWeapon(weapon.id)}
-                      variant={
-                        selectedWeapon === weapon.id ? "default" : "outline"
-                      }
+                      variant={selectedWeapon === weapon.id ? "default" : "outline"}
                       className={`flex flex-col gap-1 h-20 text-xs ${
                         selectedWeapon === weapon.id
                           ? "bg-gradient-to-r from-red-600 to-orange-600"
@@ -702,9 +656,7 @@ export function WormsGameArena() {
                       {weapon.icon}
                       <div>{weapon.name}</div>
                       <div className="text-red-400">{weapon.damage} DMG</div>
-                      {weapon.cost > 0 && (
-                        <div className="text-yellow-400">{weapon.cost} 💰</div>
-                      )}
+                      {weapon.cost > 0 && <div className="text-yellow-400">{weapon.cost} 💰</div>}
                     </Button>
                   ))}
                 </div>
@@ -721,9 +673,7 @@ export function WormsGameArena() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="text-sm text-blue-300 mb-2 block">
-                    Power: {power[0]}%
-                  </label>
+                  <label className="text-sm text-blue-300 mb-2 block">Power: {power[0]}%</label>
                   <Slider
                     value={power}
                     onValueChange={setPower}
@@ -734,9 +684,7 @@ export function WormsGameArena() {
                 </div>
 
                 <div>
-                  <label className="text-sm text-blue-300 mb-2 block">
-                    Angle: {angle[0]}°
-                  </label>
+                  <label className="text-sm text-blue-300 mb-2 block">Angle: {angle[0]}°</label>
                   <Slider
                     value={angle}
                     onValueChange={setAngle}
@@ -792,20 +740,11 @@ export function WormsGameArena() {
                   className="mb-2 p-2 bg-green-900/20 rounded border border-green-500/20"
                 >
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-green-400 font-semibold">
-                      {worm.name}
-                    </span>
-                    <span className="text-yellow-400">
-                      {worm.gaiaValue} GAiA
-                    </span>
-                    {worm.isActive && (
-                      <Badge className="bg-green-600 text-xs">ACTIVE</Badge>
-                    )}
+                    <span className="text-green-400 font-semibold">{worm.name}</span>
+                    <span className="text-yellow-400">{worm.gaiaValue} GAiA</span>
+                    {worm.isActive && <Badge className="bg-green-600 text-xs">ACTIVE</Badge>}
                   </div>
-                  <Progress
-                    value={(worm.health / worm.maxHealth) * 100}
-                    className="h-3"
-                  />
+                  <Progress value={(worm.health / worm.maxHealth) * 100} className="h-3" />
                   <div className="text-xs text-muted-foreground mt-1">
                     {worm.health}/{worm.maxHealth} HP
                   </div>
@@ -824,20 +763,11 @@ export function WormsGameArena() {
                   className="mb-2 p-2 bg-red-900/20 rounded border border-red-500/20"
                 >
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-red-400 font-semibold">
-                      {worm.name}
-                    </span>
-                    <span className="text-yellow-400">
-                      {worm.gaiaValue} GAiA
-                    </span>
-                    {worm.isActive && (
-                      <Badge className="bg-red-600 text-xs">ACTIVE</Badge>
-                    )}
+                    <span className="text-red-400 font-semibold">{worm.name}</span>
+                    <span className="text-yellow-400">{worm.gaiaValue} GAiA</span>
+                    {worm.isActive && <Badge className="bg-red-600 text-xs">ACTIVE</Badge>}
                   </div>
-                  <Progress
-                    value={(worm.health / worm.maxHealth) * 100}
-                    className="h-3"
-                  />
+                  <Progress value={(worm.health / worm.maxHealth) * 100} className="h-3" />
                   <div className="text-xs text-muted-foreground mt-1">
                     {worm.health}/{worm.maxHealth} HP
                   </div>
@@ -856,15 +786,11 @@ export function WormsGameArena() {
             <div className="text-xs text-green-300">Your Worms</div>
           </div>
           <div className="p-3 bg-red-900/30 rounded border border-red-500/20">
-            <div className="text-lg font-bold text-red-400">
-              {getWormsByTeam("enemy").length}
-            </div>
+            <div className="text-lg font-bold text-red-400">{getWormsByTeam("enemy").length}</div>
             <div className="text-xs text-red-300">Enemy Worms</div>
           </div>
           <div className="p-3 bg-yellow-900/30 rounded border border-yellow-500/20">
-            <div className="text-lg font-bold text-yellow-400">
-              {gaiaEarned.toFixed(1)}
-            </div>
+            <div className="text-lg font-bold text-yellow-400">{gaiaEarned.toFixed(1)}</div>
             <div className="text-xs text-yellow-300">GAiA Earned</div>
           </div>
           <div className="p-3 bg-blue-900/30 rounded border border-blue-500/20">

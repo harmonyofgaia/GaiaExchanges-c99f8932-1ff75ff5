@@ -8,10 +8,7 @@ interface TemplateSelectorProps {
   isLocked?: boolean;
 }
 
-export function TemplateSelector({
-  onTemplateApplied,
-  isLocked = false,
-}: TemplateSelectorProps) {
+export function TemplateSelector({ onTemplateApplied, isLocked = false }: TemplateSelectorProps) {
   const templates = [
     {
       id: "ocean",
@@ -54,17 +51,11 @@ export function TemplateSelector({
             <div key={template.id} className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium">{template.name}</span>
-                <Badge variant="secondary">
-                  {template.colors.length} colors
-                </Badge>
+                <Badge variant="secondary">{template.colors.length} colors</Badge>
               </div>
               <div className="flex gap-1">
                 {template.colors.map((color, index) => (
-                  <div
-                    key={index}
-                    className="w-6 h-6 rounded"
-                    style={{ backgroundColor: color }}
-                  />
+                  <div key={index} className="w-6 h-6 rounded" style={{ backgroundColor: color }} />
                 ))}
               </div>
               <Button

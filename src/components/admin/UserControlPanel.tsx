@@ -49,7 +49,7 @@ export function UserControlPanel() {
   const filteredUsers = users.filter(
     (user) =>
       user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase()),
+      user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -77,9 +77,7 @@ export function UserControlPanel() {
               <div className="flex items-center gap-4">
                 <div>
                   <div className="font-semibold">{user.username}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {user.email}
-                  </div>
+                  <div className="text-sm text-muted-foreground">{user.email}</div>
                   <div className="text-xs text-muted-foreground">
                     IP: {user.ipAddress} • Location: {user.location}
                   </div>

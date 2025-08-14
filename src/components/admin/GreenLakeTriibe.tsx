@@ -10,9 +10,7 @@ export function GreenLakeTriibe() {
   const [projectsCompleted, setProjectsCompleted] = useState(12);
   const [riversCleaned, setRiversCleaned] = useState(47);
   const [waterQuality, setWaterQuality] = useState(78);
-  const [currentProject, setCurrentProject] = useState(
-    "Amazon River Restoration",
-  );
+  const [currentProject, setCurrentProject] = useState("Amazon River Restoration");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -75,8 +73,7 @@ export function GreenLakeTriibe() {
             🌊 GREENLAKE TRIBE - GLOBAL WATER RESTORATION
           </CardTitle>
           <p className="text-emerald-300">
-            Cleaning rivers and dirty pools worldwide • Restoring nature's
-            health • Real impact
+            Cleaning rivers and dirty pools worldwide • Restoring nature's health • Real impact
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -85,9 +82,7 @@ export function GreenLakeTriibe() {
             <Card className="border-blue-500/20 bg-blue-900/20">
               <CardContent className="p-4 text-center">
                 <Droplets className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-blue-400">
-                  {riversCleaned.toFixed(0)}
-                </div>
+                <div className="text-2xl font-bold text-blue-400">{riversCleaned.toFixed(0)}</div>
                 <div className="text-sm text-blue-300">Rivers Cleaned</div>
               </CardContent>
             </Card>
@@ -95,9 +90,7 @@ export function GreenLakeTriibe() {
             <Card className="border-green-500/20 bg-green-900/20">
               <CardContent className="p-4 text-center">
                 <TreePine className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-green-400">
-                  {projectsCompleted}
-                </div>
+                <div className="text-2xl font-bold text-green-400">{projectsCompleted}</div>
                 <div className="text-sm text-green-300">Projects Completed</div>
               </CardContent>
             </Card>
@@ -126,24 +119,17 @@ export function GreenLakeTriibe() {
           {/* Current Project */}
           <Card className="border-green-500/30 bg-green-900/10">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                🚀 CURRENT PROJECT
-              </CardTitle>
+              <CardTitle className="text-green-400">🚀 CURRENT PROJECT</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-center space-y-4">
-                <h3 className="text-2xl font-bold text-green-400">
-                  {currentProject}
-                </h3>
+                <h3 className="text-2xl font-bold text-green-400">{currentProject}</h3>
                 <p className="text-muted-foreground">
-                  Large-scale restoration of polluted water systems using
-                  advanced filtration technology
+                  Large-scale restoration of polluted water systems using advanced filtration
+                  technology
                 </p>
                 <div className="flex justify-center gap-4">
-                  <Button
-                    onClick={donateToProject}
-                    className="bg-emerald-600 hover:bg-emerald-700"
-                  >
+                  <Button onClick={donateToProject} className="bg-emerald-600 hover:bg-emerald-700">
                     <Heart className="h-4 w-4 mr-2" />
                     FUND PROJECT
                   </Button>
@@ -159,26 +145,17 @@ export function GreenLakeTriibe() {
           {/* Dirty Water Monitoring */}
           <Card className="border-red-500/30 bg-red-900/10">
             <CardHeader>
-              <CardTitle className="text-red-400">
-                🚨 GLOBAL WATER POLLUTION MONITORING
-              </CardTitle>
+              <CardTitle className="text-red-400">🚨 GLOBAL WATER POLLUTION MONITORING</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {dirtyWaterLocations.map((location, index) => (
-                  <Card
-                    key={index}
-                    className="border-orange-500/20 bg-orange-900/10"
-                  >
+                  <Card key={index} className="border-orange-500/20 bg-orange-900/10">
                     <CardContent className="p-4">
                       <div className="flex justify-between items-start mb-2">
                         <div>
-                          <h4 className="font-bold text-orange-400">
-                            {location.name}
-                          </h4>
-                          <p className="text-sm text-muted-foreground">
-                            {location.location}
-                          </p>
+                          <h4 className="font-bold text-orange-400">{location.name}</h4>
+                          <p className="text-sm text-muted-foreground">{location.location}</p>
                         </div>
                         <Badge
                           className={`${location.severity === "Critical" ? "bg-red-600" : location.severity === "Severe" ? "bg-orange-600" : "bg-yellow-600"}`}
@@ -188,27 +165,18 @@ export function GreenLakeTriibe() {
                       </div>
                       <div className="text-sm space-y-1">
                         <div>
-                          <span className="text-red-400">Pollution:</span>{" "}
-                          {location.pollution}
+                          <span className="text-red-400">Pollution:</span> {location.pollution}
                         </div>
                         <div>
-                          <span className="text-blue-400">Status:</span>{" "}
-                          {location.status}
+                          <span className="text-blue-400">Status:</span> {location.status}
                         </div>
                       </div>
                       <div className="mt-2 flex gap-2">
-                        <Button
-                          size="sm"
-                          className="bg-green-600 hover:bg-green-700"
-                        >
+                        <Button size="sm" className="bg-green-600 hover:bg-green-700">
                           <Waves className="h-3 w-3 mr-1" />
                           Deploy Cleanup
                         </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="border-blue-500/30"
-                        >
+                        <Button size="sm" variant="outline" className="border-blue-500/30">
                           <Camera className="h-3 w-3 mr-1" />
                           Live Video
                         </Button>
@@ -227,8 +195,7 @@ export function GreenLakeTriibe() {
                 💰 REINVESTMENT WALLET FOR CORAL REEF PROJECTS
               </h4>
               <p className="text-sm text-muted-foreground mb-2">
-                All donations go directly to water restoration and coral reef
-                protection
+                All donations go directly to water restoration and coral reef protection
               </p>
               <div className="text-xs font-mono bg-black/20 px-2 py-1 rounded text-emerald-400">
                 ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7
@@ -241,9 +208,7 @@ export function GreenLakeTriibe() {
       {/* Live Video Feeds Simulation */}
       <Card className="border-blue-500/30 bg-blue-900/10">
         <CardHeader>
-          <CardTitle className="text-blue-400">
-            📹 LIVE WATER RESTORATION FEEDS
-          </CardTitle>
+          <CardTitle className="text-blue-400">📹 LIVE WATER RESTORATION FEEDS</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

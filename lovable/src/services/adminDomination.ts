@@ -33,12 +33,7 @@ interface EmergencyProtocol {
 
 interface RemoteOverride {
   targetSystem: string;
-  commandType:
-    | "shutdown"
-    | "restart"
-    | "quarantine"
-    | "emergency_stop"
-    | "quantum_lock";
+  commandType: "shutdown" | "restart" | "quarantine" | "emergency_stop" | "quantum_lock";
   authorization: string;
   timestamp: number;
   status: "pending" | "executed" | "failed";
@@ -54,12 +49,7 @@ class AdminDominationService {
   // Remote System Override Protocol
   async executeRemoteOverride(override: {
     targetSystem: string;
-    commandType:
-      | "shutdown"
-      | "restart"
-      | "quarantine"
-      | "emergency_stop"
-      | "quantum_lock";
+    commandType: "shutdown" | "restart" | "quarantine" | "emergency_stop" | "quantum_lock";
     adminId: string;
     biometricAuth?: BiometricData;
   }): Promise<RemoteOverride> {
@@ -71,10 +61,7 @@ class AdminDominationService {
     // Verify biometric authentication if provided
     if (
       override.biometricAuth &&
-      !(await this.verifyBiometricAuth(
-        override.adminId,
-        override.biometricAuth,
-      ))
+      !(await this.verifyBiometricAuth(override.adminId, override.biometricAuth))
     ) {
       throw new Error("Biometric authentication failed");
     }
@@ -136,10 +123,7 @@ class AdminDominationService {
   }
 
   // Multi-Factor Biometric Authentication
-  async registerBiometricData(
-    adminId: string,
-    biometricData: BiometricData,
-  ): Promise<void> {
+  async registerBiometricData(adminId: string, biometricData: BiometricData): Promise<void> {
     const session = this.adminSessions.get(adminId);
     if (!session) throw new Error("Admin session not found");
 
@@ -151,7 +135,7 @@ class AdminDominationService {
     console.log("👁️ Biometric Data Registered:", {
       adminId,
       methods: Object.keys(biometricData).filter(
-        (k) => k !== "verified" && biometricData[k as keyof BiometricData],
+        (k) => k !== "verified" && biometricData[k as keyof BiometricData]
       ),
     });
 
@@ -176,10 +160,7 @@ class AdminDominationService {
     return Math.random() > 0.05;
   }
 
-  async verifyBiometricAuth(
-    adminId: string,
-    providedData: BiometricData,
-  ): Promise<boolean> {
+  async verifyBiometricAuth(adminId: string, providedData: BiometricData): Promise<boolean> {
     const session = this.adminSessions.get(adminId);
     if (!session?.biometricData) return false;
 
@@ -279,17 +260,10 @@ class AdminDominationService {
       this.emergencyProtocols.set(protocol.id, protocol);
     });
 
-    console.log(
-      "🚨 Emergency Protocols Initialized:",
-      protocols.length,
-      "protocols armed",
-    );
+    console.log("🚨 Emergency Protocols Initialized:", protocols.length, "protocols armed");
   }
 
-  async triggerEmergencyProtocol(
-    protocolId: string,
-    adminId?: string,
-  ): Promise<void> {
+  async triggerEmergencyProtocol(protocolId: string, adminId?: string): Promise<void> {
     const protocol = this.emergencyProtocols.get(protocolId);
     if (!protocol) throw new Error("Protocol not found");
 
@@ -367,9 +341,7 @@ class AdminDominationService {
     privilegeEscalations: any[];
   }> {
     const sessions = adminId
-      ? Array.from(this.adminSessions.values()).filter(
-          (s) => s.adminId === adminId,
-        )
+      ? Array.from(this.adminSessions.values()).filter((s) => s.adminId === adminId)
       : Array.from(this.adminSessions.values());
 
     const recentActions = this.remoteOverrides.slice(-20); // Last 20 actions
@@ -389,13 +361,9 @@ class AdminDominationService {
   getAdminDominationStatus() {
     return {
       isArmed: this.isSystemArmed,
-      activeSessions: Array.from(this.adminSessions.values()).filter(
-        (s) => s.isActive,
-      ).length,
+      activeSessions: Array.from(this.adminSessions.values()).filter((s) => s.isActive).length,
       totalSessions: this.adminSessions.size,
-      armedProtocols: Array.from(this.emergencyProtocols.values()).filter(
-        (p) => p.isArmed,
-      ).length,
+      armedProtocols: Array.from(this.emergencyProtocols.values()).filter((p) => p.isArmed).length,
       quantumKeys: this.quantumAdminKeys.size,
       recentOverrides: this.remoteOverrides.length,
     };

@@ -27,14 +27,7 @@ import { useSecureAdmin } from "@/hooks/useSecureAdmin";
 interface CreativeNFT {
   id: string;
   name: string;
-  category:
-    | "character"
-    | "weapon"
-    | "armor"
-    | "landscape"
-    | "special"
-    | "decoration"
-    | "tool";
+  category: "character" | "weapon" | "armor" | "landscape" | "special" | "decoration" | "tool";
   rarity: "Common" | "Rare" | "Epic" | "Legendary" | "Mythical" | "Divine";
   price: number;
   image: string;
@@ -87,11 +80,7 @@ export function CreativeNFTGenerator() {
           luck: 90,
           charm: 95,
         },
-        specialAbilities: [
-          "Cosmic Breath",
-          "Dimension Walk",
-          "Time Manipulation",
-        ],
+        specialAbilities: ["Cosmic Breath", "Dimension Walk", "Time Manipulation"],
         tags: ["dragon", "celestial", "warrior", "cosmic"],
         isActive: true,
       },
@@ -152,11 +141,7 @@ export function CreativeNFTGenerator() {
         distributionMode: "sell",
         createdBy: "ai",
         stats: { attack: 100, magic: 95, speed: 90, luck: 80 },
-        specialAbilities: [
-          "Reality Cut",
-          "Quantum Strike",
-          "Dimensional Slash",
-        ],
+        specialAbilities: ["Reality Cut", "Quantum Strike", "Dimensional Slash"],
         tags: ["quantum", "infinity", "blade", "dimensional"],
         isActive: true,
       },
@@ -188,11 +173,7 @@ export function CreativeNFTGenerator() {
         distributionMode: "sell",
         createdBy: "ai",
         stats: { defense: 100, magic: 90, speed: 75, luck: 85 },
-        specialAbilities: [
-          "Galaxy Shield",
-          "Crystal Regeneration",
-          "Stellar Protection",
-        ],
+        specialAbilities: ["Galaxy Shield", "Crystal Regeneration", "Stellar Protection"],
         tags: ["crystal", "galaxy", "armor", "divine"],
         isActive: true,
       },
@@ -224,11 +205,7 @@ export function CreativeNFTGenerator() {
         distributionMode: "sell",
         createdBy: "ai",
         stats: { magic: 95, luck: 90, charm: 100 },
-        specialAbilities: [
-          "Levitation Field",
-          "Crystal Resonance",
-          "Sky Bridge",
-        ],
+        specialAbilities: ["Levitation Field", "Crystal Resonance", "Sky Bridge"],
         tags: ["floating", "crystal", "islands", "mystical"],
         isActive: true,
       },
@@ -275,11 +252,7 @@ export function CreativeNFTGenerator() {
         distributionMode: "gameplay",
         createdBy: "ai",
         stats: { charm: 100, magic: 70 },
-        specialAbilities: [
-          "Portal Travel",
-          "Rainbow Blessing",
-          "Dimensional Bridge",
-        ],
+        specialAbilities: ["Portal Travel", "Rainbow Blessing", "Dimensional Bridge"],
         tags: ["rainbow", "bridge", "portal", "dimensional"],
         isActive: true,
       },
@@ -291,14 +264,7 @@ export function CreativeNFTGenerator() {
     setIsGenerating(true);
 
     // Simulate AI generation with Pinterest-inspired creativity
-    const categories = [
-      "character",
-      "weapon",
-      "armor",
-      "landscape",
-      "special",
-      "decoration",
-    ];
+    const categories = ["character", "weapon", "armor", "landscape", "special", "decoration"];
     const rarities = ["Rare", "Epic", "Legendary", "Mythical", "Divine"];
     const themes = [
       "Celestial",
@@ -311,8 +277,7 @@ export function CreativeNFTGenerator() {
       "Divine",
     ];
 
-    const randomCategory =
-      categories[Math.floor(Math.random() * categories.length)];
+    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
     const randomRarity = rarities[Math.floor(Math.random() * rarities.length)];
     const randomTheme = themes[Math.floor(Math.random() * themes.length)];
 
@@ -322,9 +287,7 @@ export function CreativeNFTGenerator() {
       category: randomCategory as any,
       rarity: randomRarity as any,
       price: Math.floor(Math.random() * 5000) + 500,
-      image: ["🌟", "✨", "💎", "🔥", "⚡", "🌙", "☀️", "🦄"][
-        Math.floor(Math.random() * 8)
-      ],
+      image: ["🌟", "✨", "💎", "🔥", "⚡", "🌙", "☀️", "🦄"][Math.floor(Math.random() * 8)],
       description: `AI-generated ${randomTheme.toLowerCase()} ${randomCategory} with unique properties`,
       distributionMode: "sell",
       createdBy: "ai",
@@ -336,11 +299,7 @@ export function CreativeNFTGenerator() {
         luck: Math.floor(Math.random() * 100),
         charm: Math.floor(Math.random() * 100),
       },
-      specialAbilities: [
-        `${randomTheme} Power`,
-        "Enhanced Stats",
-        "Special Effect",
-      ],
+      specialAbilities: [`${randomTheme} Power`, "Enhanced Stats", "Special Effect"],
       tags: [randomTheme.toLowerCase(), randomCategory, "ai-generated"],
       isActive: true,
     };
@@ -354,14 +313,9 @@ export function CreativeNFTGenerator() {
     });
   };
 
-  const updateDistributionMode = (
-    nftId: string,
-    mode: "sell" | "gift" | "free" | "gameplay",
-  ) => {
+  const updateDistributionMode = (nftId: string, mode: "sell" | "gift" | "free" | "gameplay") => {
     setNfts((prev) =>
-      prev.map((nft) =>
-        nft.id === nftId ? { ...nft, distributionMode: mode } : nft,
-      ),
+      prev.map((nft) => (nft.id === nftId ? { ...nft, distributionMode: mode } : nft))
     );
 
     toast.success("🔄 Distribution Mode Updated!", {
@@ -403,7 +357,7 @@ export function CreativeNFTGenerator() {
   };
 
   const filteredNFTs = nfts.filter(
-    (nft) => selectedCategory === "all" || nft.category === selectedCategory,
+    (nft) => selectedCategory === "all" || nft.category === selectedCategory
   );
 
   if (!isAdmin) {
@@ -411,12 +365,8 @@ export function CreativeNFTGenerator() {
       <Card className="border-2 border-red-500/50">
         <CardContent className="p-8 text-center">
           <Crown className="h-16 w-16 text-red-400 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-red-400">
-            Admin Access Required
-          </h3>
-          <p className="text-muted-foreground">
-            Creative NFT Generator requires admin privileges
-          </p>
+          <h3 className="text-xl font-bold text-red-400">Admin Access Required</h3>
+          <p className="text-muted-foreground">Creative NFT Generator requires admin privileges</p>
         </CardContent>
       </Card>
     );
@@ -432,16 +382,13 @@ export function CreativeNFTGenerator() {
             🎨 CREATIVE NFT GENERATOR - PINTEREST INSPIRED
           </CardTitle>
           <p className="text-muted-foreground">
-            AI-powered creative NFT generation with flexible distribution
-            options
+            AI-powered creative NFT generation with flexible distribution options
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
             <div className="p-3 rounded-lg bg-purple-900/30 border border-purple-500/20">
-              <div className="text-xl font-bold text-purple-400">
-                {nfts.length}
-              </div>
+              <div className="text-xl font-bold text-purple-400">{nfts.length}</div>
               <div className="text-xs text-muted-foreground">Total NFTs</div>
             </div>
             <div className="p-3 rounded-lg bg-green-900/30 border border-green-500/20">
@@ -517,24 +464,18 @@ export function CreativeNFTGenerator() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <h4 className="font-bold text-white text-sm">{nft.name}</h4>
-                  <Badge
-                    className={`bg-gradient-to-r ${getRarityColor(nft.rarity)} text-white`}
-                  >
+                  <Badge className={`bg-gradient-to-r ${getRarityColor(nft.rarity)} text-white`}>
                     {nft.rarity}
                   </Badge>
                 </div>
 
-                <p className="text-xs text-muted-foreground">
-                  {nft.description}
-                </p>
+                <p className="text-xs text-muted-foreground">{nft.description}</p>
 
                 <div className="grid grid-cols-3 gap-1 text-xs">
                   {Object.entries(nft.stats).map(([stat, value]) => (
                     <div key={stat} className="text-center">
                       <div className="text-white font-bold">{value}</div>
-                      <div className="text-muted-foreground capitalize">
-                        {stat}
-                      </div>
+                      <div className="text-muted-foreground capitalize">{stat}</div>
                     </div>
                   ))}
                 </div>
@@ -548,23 +489,17 @@ export function CreativeNFTGenerator() {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-green-400 font-bold">
-                    {nft.price} GAIA
-                  </span>
+                  <span className="text-green-400 font-bold">{nft.price} GAIA</span>
                   <div className="flex items-center gap-1">
                     {getDistributionIcon(nft.distributionMode)}
-                    <span className="text-xs capitalize">
-                      {nft.distributionMode}
-                    </span>
+                    <span className="text-xs capitalize">{nft.distributionMode}</span>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
                   <select
                     value={nft.distributionMode}
-                    onChange={(e) =>
-                      updateDistributionMode(nft.id, e.target.value as any)
-                    }
+                    onChange={(e) => updateDistributionMode(nft.id, e.target.value as any)}
                     className="px-2 py-1 bg-muted border border-border rounded text-xs"
                   >
                     <option value="sell">💰 Sell</option>

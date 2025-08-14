@@ -99,9 +99,7 @@ export function AppSidebar() {
                       className={`${isActive ? "bg-primary/10 text-primary font-semibold" : ""} hover:bg-primary/5`}
                     >
                       <Link to={item.url} className="flex items-center gap-3">
-                        <Icon
-                          className={`h-4 w-4 ${isActive ? "text-primary" : ""}`}
-                        />
+                        <Icon className={`h-4 w-4 ${isActive ? "text-primary" : ""}`} />
                         <span>{item.title}</span>
                       </Link>
                     </SidebarMenuButton>

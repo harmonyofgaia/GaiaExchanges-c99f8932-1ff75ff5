@@ -41,11 +41,9 @@ export function GaiaPrivateBlockchain() {
     const interval = setInterval(() => {
       setBlockchainStats((prev) => ({
         ...prev,
-        currentBlockHeight:
-          prev.currentBlockHeight + Math.floor(Math.random() * 3) + 1,
+        currentBlockHeight: prev.currentBlockHeight + Math.floor(Math.random() * 3) + 1,
         transactionsPerSecond: Math.floor(Math.random() * 10000) + 45000,
-        networkHashRate:
-          prev.networkHashRate + Math.floor(Math.random() * 100000 - 50000),
+        networkHashRate: prev.networkHashRate + Math.floor(Math.random() * 100000 - 50000),
       }));
 
       // Generate latest blocks
@@ -111,9 +109,7 @@ export function GaiaPrivateBlockchain() {
                   <div className="text-2xl font-bold text-green-400">
                     {blockchainStats.totalNodes}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Active Nodes
-                  </div>
+                  <div className="text-sm text-muted-foreground">Active Nodes</div>
                 </div>
               </CardContent>
             </Card>
@@ -125,9 +121,7 @@ export function GaiaPrivateBlockchain() {
                   <div className="text-2xl font-bold text-blue-400">
                     {blockchainStats.currentBlockHeight.toLocaleString()}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Block Height
-                  </div>
+                  <div className="text-sm text-muted-foreground">Block Height</div>
                 </div>
               </CardContent>
             </Card>
@@ -160,9 +154,7 @@ export function GaiaPrivateBlockchain() {
           {/* Network Health */}
           <Card className="border-cyan-500/20 bg-cyan-900/10">
             <CardHeader>
-              <CardTitle className="text-cyan-400">
-                🔋 Network Health Status
-              </CardTitle>
+              <CardTitle className="text-cyan-400">🔋 Network Health Status</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
@@ -207,21 +199,15 @@ export function GaiaPrivateBlockchain() {
                     <div className="flex items-center gap-3">
                       <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
                       <div>
-                        <div className="font-bold text-blue-400">
-                          Block #{block.height}
-                        </div>
+                        <div className="font-bold text-blue-400">Block #{block.height}</div>
                         <div className="text-xs text-muted-foreground">
                           {new Date(block.timestamp).toLocaleTimeString()}
                         </div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-sm text-green-400">
-                        {block.transactions} txs
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        {block.validator}
-                      </div>
+                      <div className="text-sm text-green-400">{block.transactions} txs</div>
+                      <div className="text-xs text-muted-foreground">{block.validator}</div>
                     </div>
                   </div>
                 ))}
@@ -234,9 +220,7 @@ export function GaiaPrivateBlockchain() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="border-green-500/20 bg-green-900/10">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  🖥️ Validator Nodes
-                </CardTitle>
+                <CardTitle className="text-green-400">🖥️ Validator Nodes</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -264,9 +248,7 @@ export function GaiaPrivateBlockchain() {
                 <div className="text-center p-4">
                   <Globe className="h-12 w-12 text-blue-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-blue-400">226</div>
-                  <div className="text-sm text-muted-foreground">
-                    Full Nodes Online
-                  </div>
+                  <div className="text-sm text-muted-foreground">Full Nodes Online</div>
                 </div>
               </CardContent>
             </Card>
@@ -276,9 +258,7 @@ export function GaiaPrivateBlockchain() {
         <TabsContent value="security" className="space-y-4">
           <Card className="border-red-500/20 bg-red-900/10">
             <CardHeader>
-              <CardTitle className="text-red-400">
-                🛡️ Security Protocols
-              </CardTitle>
+              <CardTitle className="text-red-400">🛡️ Security Protocols</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -291,12 +271,8 @@ export function GaiaPrivateBlockchain() {
                 </div>
                 <div className="p-4 bg-black/20 rounded border border-orange-500/20">
                   <Shield className="h-6 w-6 text-orange-400 mb-2" />
-                  <h4 className="font-bold text-orange-400">
-                    Multi-Signature Validation
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    Advanced consensus security
-                  </p>
+                  <h4 className="font-bold text-orange-400">Multi-Signature Validation</h4>
+                  <p className="text-sm text-muted-foreground">Advanced consensus security</p>
                 </div>
               </div>
             </CardContent>
@@ -306,24 +282,18 @@ export function GaiaPrivateBlockchain() {
         <TabsContent value="performance" className="space-y-4">
           <Card className="border-purple-500/20 bg-purple-900/10">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                ⚡ Performance Metrics
-              </CardTitle>
+              <CardTitle className="text-purple-400">⚡ Performance Metrics</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="text-center p-4 bg-black/20 rounded">
                   <Activity className="h-8 w-8 text-purple-400 mx-auto mb-2" />
                   <div className="text-xl font-bold text-purple-400">0.5s</div>
-                  <div className="text-sm text-muted-foreground">
-                    Block Time
-                  </div>
+                  <div className="text-sm text-muted-foreground">Block Time</div>
                 </div>
                 <div className="text-center p-4 bg-black/20 rounded">
                   <Zap className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
-                  <div className="text-xl font-bold text-yellow-400">
-                    0.001s
-                  </div>
+                  <div className="text-xl font-bold text-yellow-400">0.001s</div>
                   <div className="text-sm text-muted-foreground">Finality</div>
                 </div>
                 <div className="text-center p-4 bg-black/20 rounded">
@@ -340,9 +310,7 @@ export function GaiaPrivateBlockchain() {
       {/* Control Actions */}
       <Card className="border-yellow-500/30 bg-yellow-900/20">
         <CardHeader>
-          <CardTitle className="text-yellow-400">
-            🎛️ Blockchain Controls
-          </CardTitle>
+          <CardTitle className="text-yellow-400">🎛️ Blockchain Controls</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

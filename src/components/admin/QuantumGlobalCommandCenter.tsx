@@ -40,9 +40,7 @@ interface CounterAttack {
 }
 
 export function QuantumGlobalCommandCenter() {
-  const [quantumComputers, setQuantumComputers] = useState<QuantumComputer[]>(
-    [],
-  );
+  const [quantumComputers, setQuantumComputers] = useState<QuantumComputer[]>([]);
   const [counterAttacks, setCounterAttacks] = useState<CounterAttack[]>([]);
   const [targetIP, setTargetIP] = useState("");
   const [walletSwapFrom, setWalletSwapFrom] = useState("");
@@ -89,9 +87,7 @@ export function QuantumGlobalCommandCenter() {
 
       setQuantumComputers(computers);
       setGlobalPower(computers.reduce((sum, comp) => sum + comp.power, 0));
-      setSatelliteConnections(
-        computers.reduce((sum, comp) => sum + comp.satelliteConnections, 0),
-      );
+      setSatelliteConnections(computers.reduce((sum, comp) => sum + comp.satelliteConnections, 0));
     };
 
     initializeQuantumNetwork();
@@ -109,9 +105,8 @@ export function QuantumGlobalCommandCenter() {
         prev.map((comp) => ({
           ...comp,
           power: comp.power + Math.floor(Math.random() * 10000),
-          currentTask:
-            Math.random() > 0.7 ? "Scanning for threats" : "Defense monitoring",
-        })),
+          currentTask: Math.random() > 0.7 ? "Scanning for threats" : "Defense monitoring",
+        }))
       );
 
       setGlobalPower((prev) => prev * 1.001);
@@ -163,35 +158,29 @@ export function QuantumGlobalCommandCenter() {
         ...comp,
         status: "attacking" as const,
         currentTask: `Counter-attacking ${targetIP}`,
-      })),
+      }))
     );
 
     toast.error(`💀 COUNTER-ATTACK LAUNCHED: ${targetIP}`, {
-      description:
-        "All quantum computers coordinating high-speed system demolition",
+      description: "All quantum computers coordinating high-speed system demolition",
       duration: 8000,
     });
 
     // Simulate attack progression
     setTimeout(() => {
       setCounterAttacks((prev) =>
-        prev.map((att) =>
-          att.id === attack.id ? { ...att, status: "active" } : att,
-        ),
+        prev.map((att) => (att.id === attack.id ? { ...att, status: "active" } : att))
       );
 
       toast.error("🔥 Target System Under Heavy Attack!", {
-        description:
-          "Quantum demolition in progress - System resources exhausted",
+        description: "Quantum demolition in progress - System resources exhausted",
         duration: 5000,
       });
     }, 3000);
 
     setTimeout(() => {
       setCounterAttacks((prev) =>
-        prev.map((att) =>
-          att.id === attack.id ? { ...att, status: "completed" } : att,
-        ),
+        prev.map((att) => (att.id === attack.id ? { ...att, status: "completed" } : att))
       );
 
       setQuantumComputers((prev) =>
@@ -199,12 +188,11 @@ export function QuantumGlobalCommandCenter() {
           ...comp,
           status: "active" as const,
           currentTask: "Defense monitoring resumed",
-        })),
+        }))
       );
 
       toast.success(`✅ TARGET SYSTEM DEMOLISHED: ${targetIP}`, {
-        description:
-          "Godfather command executed - Target neutralized completely",
+        description: "Godfather command executed - Target neutralized completely",
         duration: 10000,
       });
     }, 8000);
@@ -238,9 +226,7 @@ export function QuantumGlobalCommandCenter() {
     console.log("🌍 GLOBAL QUANTUM TAKEOVER INITIATED BY GODFATHER");
     console.log("⚡ TAKING CONTROL OF ALL GLOBAL COMPUTER SYSTEMS");
     console.log("🛰️ SATELLITE NETWORKS: Under complete admin control");
-    console.log(
-      "💻 WORLDWIDE COMPUTERS: Synchronized for community protection",
-    );
+    console.log("💻 WORLDWIDE COMPUTERS: Synchronized for community protection");
     console.log("👑 GODFATHER MODE: Absolute power activated");
 
     toast.error("🌍 GLOBAL QUANTUM TAKEOVER ACTIVE!", {
@@ -256,7 +242,7 @@ export function QuantumGlobalCommandCenter() {
         status: "active" as const,
         currentTask: "Global system control active",
         satelliteConnections: comp.satelliteConnections * 5,
-      })),
+      }))
     );
   };
 
@@ -298,12 +284,8 @@ export function QuantumGlobalCommandCenter() {
             <Badge className="bg-red-600 animate-pulse">
               ⚡ Global Power: {globalPower.toLocaleString()}
             </Badge>
-            <Badge className="bg-purple-600">
-              🛰️ Satellites: {satelliteConnections}
-            </Badge>
-            <Badge className="bg-green-600">
-              💻 Quantum PCs: {quantumComputers.length}/20
-            </Badge>
+            <Badge className="bg-purple-600">🛰️ Satellites: {satelliteConnections}</Badge>
+            <Badge className="bg-green-600">💻 Quantum PCs: {quantumComputers.length}/20</Badge>
             <Badge className="bg-blue-600">👑 Status: GODFATHER MODE</Badge>
           </div>
         </CardHeader>
@@ -314,36 +296,28 @@ export function QuantumGlobalCommandCenter() {
               <div className="text-center">
                 <Skull className="h-8 w-8 mx-auto text-red-400 mb-2" />
                 <div className="font-bold text-red-400">COUNTER-ATTACK</div>
-                <div className="text-sm text-muted-foreground">
-                  Demolish hacker systems
-                </div>
+                <div className="text-sm text-muted-foreground">Demolish hacker systems</div>
               </div>
             </div>
             <div className="p-4 bg-purple-900/40 rounded-lg border border-purple-500/30">
               <div className="text-center">
                 <Unlock className="h-8 w-8 mx-auto text-purple-400 mb-2" />
                 <div className="font-bold text-purple-400">WALLET CONTROL</div>
-                <div className="text-sm text-muted-foreground">
-                  Ultimate swap power
-                </div>
+                <div className="text-sm text-muted-foreground">Ultimate swap power</div>
               </div>
             </div>
             <div className="p-4 bg-blue-900/40 rounded-lg border border-blue-500/30">
               <div className="text-center">
                 <Globe className="h-8 w-8 mx-auto text-blue-400 mb-2" />
                 <div className="font-bold text-blue-400">GLOBAL TAKEOVER</div>
-                <div className="text-sm text-muted-foreground">
-                  Worldwide system control
-                </div>
+                <div className="text-sm text-muted-foreground">Worldwide system control</div>
               </div>
             </div>
           </div>
 
           {/* Counter-Attack Controls */}
           <div className="space-y-4">
-            <h4 className="text-lg font-bold text-red-400">
-              💀 GODFATHER COUNTER-ATTACK SYSTEM
-            </h4>
+            <h4 className="text-lg font-bold text-red-400">💀 GODFATHER COUNTER-ATTACK SYSTEM</h4>
             <div className="flex gap-4">
               <Input
                 placeholder="Enter target IP address to demolish..."
@@ -351,10 +325,7 @@ export function QuantumGlobalCommandCenter() {
                 onChange={(e) => setTargetIP(e.target.value)}
                 className="flex-1 bg-black/50 border-red-500/30"
               />
-              <Button
-                onClick={executeCounterAttack}
-                className="bg-red-600 hover:bg-red-700 px-8"
-              >
+              <Button onClick={executeCounterAttack} className="bg-red-600 hover:bg-red-700 px-8">
                 <Skull className="h-4 w-4 mr-2" />
                 💀 DEMOLISH TARGET
               </Button>
@@ -363,9 +334,7 @@ export function QuantumGlobalCommandCenter() {
 
           {/* Wallet Swap Controls */}
           <div className="space-y-4">
-            <h4 className="text-lg font-bold text-purple-400">
-              💰 GODFATHER WALLET SWAP SYSTEM
-            </h4>
+            <h4 className="text-lg font-bold text-purple-400">💰 GODFATHER WALLET SWAP SYSTEM</h4>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <Input
                 placeholder="From wallet address..."
@@ -385,10 +354,7 @@ export function QuantumGlobalCommandCenter() {
                 onChange={(e) => setSwapAmount(e.target.value)}
                 className="bg-black/50 border-purple-500/30"
               />
-              <Button
-                onClick={executeWalletSwap}
-                className="bg-purple-600 hover:bg-purple-700"
-              >
+              <Button onClick={executeWalletSwap} className="bg-purple-600 hover:bg-purple-700">
                 <Unlock className="h-4 w-4 mr-2" />
                 💰 SWAP FUNDS
               </Button>
@@ -409,25 +375,19 @@ export function QuantumGlobalCommandCenter() {
           {/* Active Counter-Attacks */}
           {counterAttacks.length > 0 && (
             <div className="space-y-3">
-              <h4 className="text-lg font-bold text-red-400">
-                🔥 Active Counter-Attacks
-              </h4>
+              <h4 className="text-lg font-bold text-red-400">🔥 Active Counter-Attacks</h4>
               {counterAttacks.map((attack) => (
                 <div
                   key={attack.id}
                   className="p-4 bg-black/40 rounded-lg border border-red-500/30"
                 >
                   <div className="flex justify-between items-center mb-2">
-                    <div className="font-bold text-white">
-                      🎯 {attack.targetIP}
-                    </div>
+                    <div className="font-bold text-white">🎯 {attack.targetIP}</div>
                     <Badge className={getAttackStatusColor(attack.status)}>
                       {attack.status.toUpperCase()}
                     </Badge>
                   </div>
-                  <div className="text-sm text-red-400 mb-1">
-                    {attack.attackType}
-                  </div>
+                  <div className="text-sm text-red-400 mb-1">{attack.attackType}</div>
                   <div className="flex justify-between text-xs text-muted-foreground">
                     <span>Intensity: {attack.intensity}%</span>
                     <span>{attack.timestamp.toLocaleString()}</span>
@@ -440,9 +400,7 @@ export function QuantumGlobalCommandCenter() {
 
           {/* Quantum Computer Network Status */}
           <div className="space-y-3">
-            <h4 className="text-lg font-bold text-blue-400">
-              💻 Global Quantum Computer Network
-            </h4>
+            <h4 className="text-lg font-bold text-blue-400">💻 Global Quantum Computer Network</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {quantumComputers.map((computer) => (
                 <div
@@ -450,12 +408,8 @@ export function QuantumGlobalCommandCenter() {
                   className="p-3 bg-black/40 rounded-lg border border-blue-500/30"
                 >
                   <div className="flex justify-between items-center mb-2">
-                    <div className="font-semibold text-white text-sm">
-                      {computer.location}
-                    </div>
-                    <Badge
-                      className={`text-xs ${getStatusColor(computer.status)}`}
-                    >
+                    <div className="font-semibold text-white text-sm">{computer.location}</div>
+                    <Badge className={`text-xs ${getStatusColor(computer.status)}`}>
                       {computer.status.toUpperCase()}
                     </Badge>
                   </div>
@@ -465,9 +419,7 @@ export function QuantumGlobalCommandCenter() {
                   <div className="text-xs text-green-400 mb-1">
                     🛰️ Satellites: {computer.satelliteConnections}
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    Task: {computer.currentTask}
-                  </div>
+                  <div className="text-xs text-muted-foreground">Task: {computer.currentTask}</div>
                 </div>
               ))}
             </div>

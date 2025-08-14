@@ -54,8 +54,7 @@ export function DeploymentAutomation() {
       status: "success",
       progress: 100,
       duration: "1:12",
-      description:
-        "Eco-Metaverse, Regeneration Mining, Rainwater Management, Impact Tracking",
+      description: "Eco-Metaverse, Regeneration Mining, Rainwater Management, Impact Tracking",
     },
     {
       id: "ai-copilot",
@@ -63,8 +62,7 @@ export function DeploymentAutomation() {
       status: "success",
       progress: 100,
       duration: "0:34",
-      description:
-        "AI Task Completer, Database Deep-Dive, SEA GREEN Psychohistorical Engine",
+      description: "AI Task Completer, Database Deep-Dive, SEA GREEN Psychohistorical Engine",
     },
     {
       id: "pre-checks",
@@ -72,8 +70,7 @@ export function DeploymentAutomation() {
       status: "success",
       progress: 100,
       duration: "0:45",
-      description:
-        "Security validation, dependency analysis, code quality checks",
+      description: "Security validation, dependency analysis, code quality checks",
     },
     {
       id: "build",
@@ -81,8 +78,7 @@ export function DeploymentAutomation() {
       status: "success",
       progress: 100,
       duration: "2:14",
-      description:
-        "Compile TypeScript, optimize assets, generate production build",
+      description: "Compile TypeScript, optimize assets, generate production build",
     },
     {
       id: "testing",
@@ -134,10 +130,7 @@ export function DeploymentAutomation() {
       setDeploymentSteps((prev) =>
         prev.map((step) => {
           if (step.status === "running" && step.progress < 100) {
-            const newProgress = Math.min(
-              100,
-              step.progress + Math.random() * 5,
-            );
+            const newProgress = Math.min(100, step.progress + Math.random() * 5);
             if (newProgress === 100) {
               toast.success(`✅ ${step.name} completed successfully!`, {
                 description: step.description,
@@ -164,7 +157,7 @@ export function DeploymentAutomation() {
             }
           }
           return step;
-        }),
+        })
       );
     }, 2000);
 
@@ -207,12 +200,11 @@ export function DeploymentAutomation() {
         ...step,
         status: index === 0 ? "running" : "pending",
         progress: index === 0 ? 0 : 0,
-      })),
+      }))
     );
 
     toast.success("🚀 New deployment started!", {
-      description:
-        "Automated CI/CD pipeline initiated with full security checks.",
+      description: "Automated CI/CD pipeline initiated with full security checks.",
       duration: 5000,
     });
   };
@@ -226,8 +218,7 @@ export function DeploymentAutomation() {
             🚀 GAIA DEPLOYMENT AUTOMATION
           </CardTitle>
           <p className="text-center text-lg text-blue-300">
-            Continuous Integration • Automated Deployment • Zero-Downtime
-            Updates
+            Continuous Integration • Automated Deployment • Zero-Downtime Updates
           </p>
         </CardHeader>
       </Card>
@@ -252,9 +243,7 @@ export function DeploymentAutomation() {
               <CheckCircle className="h-5 w-5 text-blue-400" />
               <span className="font-bold text-blue-400">Success Rate</span>
             </div>
-            <div className="text-2xl font-bold text-blue-400">
-              {deploymentMetrics.successRate}%
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{deploymentMetrics.successRate}%</div>
           </CardContent>
         </Card>
 
@@ -276,9 +265,7 @@ export function DeploymentAutomation() {
               <Activity className="h-5 w-5 text-orange-400" />
               <span className="font-bold text-orange-400">Uptime</span>
             </div>
-            <div className="text-2xl font-bold text-orange-400">
-              {deploymentMetrics.uptime}%
-            </div>
+            <div className="text-2xl font-bold text-orange-400">{deploymentMetrics.uptime}%</div>
           </CardContent>
         </Card>
 
@@ -312,9 +299,7 @@ export function DeploymentAutomation() {
               <Globe className="h-5 w-5 text-gray-400" />
               <span className="font-bold text-gray-400">Last Deploy</span>
             </div>
-            <div className="text-lg font-bold text-gray-400">
-              {deploymentMetrics.lastDeploy}
-            </div>
+            <div className="text-lg font-bold text-gray-400">{deploymentMetrics.lastDeploy}</div>
           </CardContent>
         </Card>
       </div>
@@ -323,13 +308,8 @@ export function DeploymentAutomation() {
       <Card className="border-blue-500/30">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle className="text-blue-400">
-              🔄 Deployment Pipeline Status
-            </CardTitle>
-            <Button
-              onClick={startNewDeployment}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
+            <CardTitle className="text-blue-400">🔄 Deployment Pipeline Status</CardTitle>
+            <Button onClick={startNewDeployment} className="bg-blue-600 hover:bg-blue-700">
               <Rocket className="h-4 w-4 mr-2" />
               Start New Deployment
             </Button>
@@ -345,9 +325,7 @@ export function DeploymentAutomation() {
                       {getStatusIcon(step.status)}
                       <div>
                         <h4 className="font-semibold">{step.name}</h4>
-                        <p className="text-sm text-muted-foreground">
-                          {step.description}
-                        </p>
+                        <p className="text-sm text-muted-foreground">{step.description}</p>
                       </div>
                     </div>
 
@@ -355,9 +333,7 @@ export function DeploymentAutomation() {
                       <Badge className={getStatusColor(step.status)}>
                         {step.status.toUpperCase()}
                       </Badge>
-                      <div className="text-sm text-muted-foreground">
-                        Duration: {step.duration}
-                      </div>
+                      <div className="text-sm text-muted-foreground">Duration: {step.duration}</div>
                     </div>
                   </div>
 
@@ -365,9 +341,7 @@ export function DeploymentAutomation() {
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span>Progress</span>
-                        <span className="text-blue-400">
-                          {step.progress.toFixed(0)}%
-                        </span>
+                        <span className="text-blue-400">{step.progress.toFixed(0)}%</span>
                       </div>
                       <Progress value={step.progress} className="h-2" />
                     </div>
@@ -382,22 +356,16 @@ export function DeploymentAutomation() {
       {/* Infrastructure Status */}
       <Card className="border-green-500/30">
         <CardHeader>
-          <CardTitle className="text-green-400">
-            🏗️ Infrastructure Status
-          </CardTitle>
+          <CardTitle className="text-green-400">🏗️ Infrastructure Status</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/30">
               <div className="flex items-center gap-3 mb-3">
                 <Database className="h-6 w-6 text-green-400" />
-                <h4 className="font-semibold text-green-400">
-                  Database Cluster
-                </h4>
+                <h4 className="font-semibold text-green-400">Database Cluster</h4>
               </div>
-              <div className="text-2xl font-bold text-green-400 mb-1">
-                Operational
-              </div>
+              <div className="text-2xl font-bold text-green-400 mb-1">Operational</div>
               <div className="text-sm text-muted-foreground">
                 3 nodes active • Auto-scaling enabled
               </div>
@@ -408,27 +376,17 @@ export function DeploymentAutomation() {
                 <Globe className="h-6 w-6 text-blue-400" />
                 <h4 className="font-semibold text-blue-400">CDN Network</h4>
               </div>
-              <div className="text-2xl font-bold text-blue-400 mb-1">
-                Global
-              </div>
-              <div className="text-sm text-muted-foreground">
-                15 edge locations • 99.9% uptime
-              </div>
+              <div className="text-2xl font-bold text-blue-400 mb-1">Global</div>
+              <div className="text-sm text-muted-foreground">15 edge locations • 99.9% uptime</div>
             </div>
 
             <div className="p-4 bg-purple-900/20 rounded-lg border border-purple-500/30">
               <div className="flex items-center gap-3 mb-3">
                 <Shield className="h-6 w-6 text-purple-400" />
-                <h4 className="font-semibold text-purple-400">
-                  Security Layer
-                </h4>
+                <h4 className="font-semibold text-purple-400">Security Layer</h4>
               </div>
-              <div className="text-2xl font-bold text-purple-400 mb-1">
-                Protected
-              </div>
-              <div className="text-sm text-muted-foreground">
-                WAF active • DDoS protection
-              </div>
+              <div className="text-2xl font-bold text-purple-400 mb-1">Protected</div>
+              <div className="text-sm text-muted-foreground">WAF active • DDoS protection</div>
             </div>
           </div>
         </CardContent>
@@ -437,9 +395,7 @@ export function DeploymentAutomation() {
       {/* Monitoring & Alerts */}
       <Card className="border-orange-500/30">
         <CardHeader>
-          <CardTitle className="text-orange-400">
-            📊 Real-time Monitoring
-          </CardTitle>
+          <CardTitle className="text-orange-400">📊 Real-time Monitoring</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

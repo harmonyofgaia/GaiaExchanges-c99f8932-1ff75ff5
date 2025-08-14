@@ -84,17 +84,11 @@ export function GamingDifficultySelector() {
                     : `bg-${difficulty.color}-900/30 border-2 border-${difficulty.color}-500/30 hover:scale-105`
                 }`}
               >
-                <Icon
-                  className={`h-12 w-12 ${isSelected ? "animate-pulse" : ""}`}
-                />
+                <Icon className={`h-12 w-12 ${isSelected ? "animate-pulse" : ""}`} />
                 <div className="text-center">
-                  <div className="text-xl font-black mb-2">
-                    {difficulty.name}
-                  </div>
+                  <div className="text-xl font-black mb-2">{difficulty.name}</div>
                   <div className="text-sm mb-2">{difficulty.description}</div>
-                  <Badge className={`bg-${difficulty.color}-600`}>
-                    {difficulty.multiplier}
-                  </Badge>
+                  <Badge className={`bg-${difficulty.color}-600`}>{difficulty.multiplier}</Badge>
                 </div>
                 {isSelected && (
                   <div className="text-center">
@@ -112,9 +106,7 @@ export function GamingDifficultySelector() {
           <div className="text-center">
             <h3 className="text-2xl font-bold text-orange-400 mb-4">
               🎯 CURRENT DIFFICULTY:{" "}
-              {difficulties
-                .find((d) => d.id === selectedDifficulty)
-                ?.name.toUpperCase()}
+              {difficulties.find((d) => d.id === selectedDifficulty)?.name.toUpperCase()}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="text-center p-3 bg-red-900/30 rounded border border-red-500/30">
@@ -137,10 +129,7 @@ export function GamingDifficultySelector() {
               <div className="text-center p-3 bg-green-900/30 rounded border border-green-500/30">
                 <div className="text-sm text-green-300">Rewards</div>
                 <div className="text-xl text-green-400 font-bold">
-                  {
-                    difficulties.find((d) => d.id === selectedDifficulty)
-                      ?.multiplier
-                  }
+                  {difficulties.find((d) => d.id === selectedDifficulty)?.multiplier}
                 </div>
               </div>
 
@@ -176,8 +165,7 @@ export function GamingDifficultySelector() {
             🌟 APPLIES TO ALL GAMES ON GAIA PLATFORM 🌟
           </div>
           <div className="text-lg text-orange-300">
-            Gaia Fighter Pro • Landscape Builder • Habbo Tycoon • All Future
-            Games
+            Gaia Fighter Pro • Landscape Builder • Habbo Tycoon • All Future Games
           </div>
         </div>
       </CardContent>

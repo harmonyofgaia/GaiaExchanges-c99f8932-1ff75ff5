@@ -34,9 +34,7 @@ export function EcoMissionCard({ mission, onJoin }: EcoMissionCardProps) {
           {mission.title}
         </CardTitle>
         <div className="flex gap-2">
-          <Badge className={difficultyColors[mission.difficulty]}>
-            {mission.difficulty}
-          </Badge>
+          <Badge className={difficultyColors[mission.difficulty]}>{mission.difficulty}</Badge>
           <Badge className="bg-emerald-600">
             <Award className="h-3 w-3 mr-1" />
             {mission.reward} GAIA
@@ -53,10 +51,7 @@ export function EcoMissionCard({ mission, onJoin }: EcoMissionCardProps) {
               {mission.progress}/{mission.maxProgress}
             </span>
           </div>
-          <Progress
-            value={(mission.progress / mission.maxProgress) * 100}
-            className="h-2"
-          />
+          <Progress value={(mission.progress / mission.maxProgress) * 100} className="h-2" />
         </div>
 
         <div className="flex items-center justify-between text-sm">

@@ -57,8 +57,7 @@ export function ArtworkUploadProcessor() {
 
     setIsProcessing(false);
     toast.success("🌟 Abstract Variations Created!", {
-      description:
-        "Your uploaded images have been processed into unique artworks",
+      description: "Your uploaded images have been processed into unique artworks",
     });
   };
 
@@ -88,15 +87,8 @@ export function ArtworkUploadProcessor() {
           <div className="space-y-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {uploadedImages.map((img, index) => (
-                <div
-                  key={index}
-                  className="aspect-square rounded-lg overflow-hidden"
-                >
-                  <img
-                    src={img}
-                    alt={`Upload ${index}`}
-                    className="w-full h-full object-cover"
-                  />
+                <div key={index} className="aspect-square rounded-lg overflow-hidden">
+                  <img src={img} alt={`Upload ${index}`} className="w-full h-full object-cover" />
                 </div>
               ))}
             </div>

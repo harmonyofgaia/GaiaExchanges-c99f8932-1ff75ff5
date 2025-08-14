@@ -56,42 +56,26 @@ export function AttackCounterSystem() {
 
       // Update metrics
       setMetrics((prev) => ({
-        totalAttacksBlocked:
-          prev.totalAttacksBlocked + Math.floor(Math.random() * 10),
+        totalAttacksBlocked: prev.totalAttacksBlocked + Math.floor(Math.random() * 10),
         activeCounterMeasures: Math.max(
           5,
-          Math.min(
-            20,
-            prev.activeCounterMeasures + Math.floor((Math.random() - 0.5) * 4),
-          ),
+          Math.min(20, prev.activeCounterMeasures + Math.floor((Math.random() - 0.5) * 4))
         ),
         threatLevel: Math.max(
           0,
-          Math.min(
-            100,
-            prev.threatLevel + Math.floor((Math.random() - 0.5) * 10),
-          ),
+          Math.min(100, prev.threatLevel + Math.floor((Math.random() - 0.5) * 10))
         ),
-        responseTime: Math.max(
-          0.1,
-          prev.responseTime + (Math.random() - 0.5) * 0.1,
-        ),
-        successRate: Math.max(
-          95,
-          Math.min(100, prev.successRate + (Math.random() - 0.5) * 2),
-        ),
+        responseTime: Math.max(0.1, prev.responseTime + (Math.random() - 0.5) * 0.1),
+        successRate: Math.max(95, Math.min(100, prev.successRate + (Math.random() - 0.5) * 2)),
       }));
 
       // Generate counter-attacks
       if (Math.random() < 0.3) {
         const newAttack: CounterAttack = {
           id: Math.random().toString(36).substr(2, 9),
-          type: [
-            "DDoS Reflection",
-            "IP Blacklisting",
-            "Port Flooding",
-            "Honeypot Deployment",
-          ][Math.floor(Math.random() * 4)],
+          type: ["DDoS Reflection", "IP Blacklisting", "Port Flooding", "Honeypot Deployment"][
+            Math.floor(Math.random() * 4)
+          ],
           target: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
           status: "preparing",
           timestamp: new Date(),
@@ -103,10 +87,8 @@ export function AttackCounterSystem() {
         setTimeout(() => {
           setCounterAttacks((prev) =>
             prev.map((attack) =>
-              attack.id === newAttack.id
-                ? { ...attack, status: "executing" as const }
-                : attack,
-            ),
+              attack.id === newAttack.id ? { ...attack, status: "executing" as const } : attack
+            )
           );
         }, 2000);
 
@@ -116,13 +98,10 @@ export function AttackCounterSystem() {
               attack.id === newAttack.id
                 ? {
                     ...attack,
-                    status:
-                      Math.random() > 0.1
-                        ? ("completed" as const)
-                        : ("failed" as const),
+                    status: Math.random() > 0.1 ? ("completed" as const) : ("failed" as const),
                   }
-                : attack,
-            ),
+                : attack
+            )
           );
         }, 5000);
       }
@@ -142,9 +121,7 @@ export function AttackCounterSystem() {
             ip_address: "127.0.0.1",
           });
         } catch (error) {
-          console.log(
-            "🔒 Counter-attack system self-protected from interference",
-          );
+          console.log("🔒 Counter-attack system self-protected from interference");
         }
       }
     };
@@ -153,15 +130,9 @@ export function AttackCounterSystem() {
     runCounterSystem();
 
     return () => {
-      if (counterSystemInterval.current)
-        clearInterval(counterSystemInterval.current);
+      if (counterSystemInterval.current) clearInterval(counterSystemInterval.current);
     };
-  }, [
-    isActive,
-    metrics.activeCounterMeasures,
-    metrics.threatLevel,
-    metrics.successRate,
-  ]);
+  }, [isActive, metrics.activeCounterMeasures, metrics.threatLevel, metrics.successRate]);
 
   const getStatusColor = (status: CounterAttack["status"]) => {
     switch (status) {
@@ -221,9 +192,7 @@ export function AttackCounterSystem() {
             <div className="text-2xl font-bold text-orange-400">
               {metrics.activeCounterMeasures}
             </div>
-            <div className="text-sm text-orange-300">
-              Active Counter-Measures
-            </div>
+            <div className="text-sm text-orange-300">Active Counter-Measures</div>
           </div>
 
           <div className="bg-black/30 p-4 rounded-lg border border-yellow-500/20">
@@ -244,10 +213,7 @@ export function AttackCounterSystem() {
             <div className="text-3xl font-bold text-cyan-400">
               {metrics.responseTime.toFixed(1)}s
             </div>
-            <Progress
-              value={Math.max(0, 100 - metrics.responseTime * 50)}
-              className="mt-2"
-            />
+            <Progress value={Math.max(0, 100 - metrics.responseTime * 50)} className="mt-2" />
           </div>
 
           <div className="bg-black/20 p-4 rounded-lg border border-green-500/20">
@@ -330,9 +296,8 @@ export function AttackCounterSystem() {
         <Alert className="border-red-500/30 bg-red-900/20">
           <AlertTriangle className="h-4 w-4" />
           <AlertDescription className="text-red-300">
-            ⚔️ COUNTER-ATTACK SYSTEM: {isActive ? "ACTIVE" : "INACTIVE"} |
-            AUTO-RETALIATION: {autoRetaliation ? "ENABLED" : "DISABLED"} |
-            DEFENSIVE MATRIX: OPERATIONAL
+            ⚔️ COUNTER-ATTACK SYSTEM: {isActive ? "ACTIVE" : "INACTIVE"} | AUTO-RETALIATION:{" "}
+            {autoRetaliation ? "ENABLED" : "DISABLED"} | DEFENSIVE MATRIX: OPERATIONAL
           </AlertDescription>
         </Alert>
       </CardContent>

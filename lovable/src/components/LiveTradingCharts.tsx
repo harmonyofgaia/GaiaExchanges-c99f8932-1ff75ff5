@@ -73,9 +73,7 @@ export function LiveTradingCharts() {
 
   // GAiA Cloud Engine - Superior Performance System
   const initializeCloudEngine = async () => {
-    console.log(
-      "🚀 INITIALIZING GAiA CLOUD ENGINE - SUPERIOR PERFORMANCE MODE",
-    );
+    console.log("🚀 INITIALIZING GAiA CLOUD ENGINE - SUPERIOR PERFORMANCE MODE");
     console.log("☁️ Cloud Processing: Multi-region data aggregation");
     console.log("⚡ Real-time Updates: WebSocket connections to 15+ exchanges");
     console.log("🔄 Data Fusion: CoinGecko + Binance + Custom algorithms");
@@ -86,8 +84,7 @@ export function LiveTradingCharts() {
     setTimeout(() => {
       setCloudEngineStatus("OPTIMAL");
       toast.success("☁️ GAiA Cloud Engine Active!", {
-        description:
-          "Superior performance mode enabled - Processing 1000+ tokens",
+        description: "Superior performance mode enabled - Processing 1000+ tokens",
         duration: 5000,
       });
     }, 2000);
@@ -133,8 +130,7 @@ export function LiveTradingCharts() {
           market_cap_rank: 1,
           price_history: Array.from({ length: 100 }, (_, i) => ({
             timestamp: Date.now() - (100 - i) * 60000,
-            price:
-              43000 + Math.sin(i * 0.05) * 1000 + (Math.random() - 0.5) * 200,
+            price: 43000 + Math.sin(i * 0.05) * 1000 + (Math.random() - 0.5) * 200,
           })),
         },
         {
@@ -162,20 +158,15 @@ export function LiveTradingCharts() {
       // Set chart data for selected token
       const selectedTokenData = mockTokens.find((t) => t.id === selectedToken);
       if (selectedTokenData) {
-        const chartData: ChartData[] = selectedTokenData.price_history.map(
-          (point, i) => ({
-            timestamp: point.timestamp,
-            price: point.price,
-            volume: Math.random() * 1000000,
-            high: point.price * 1.02,
-            low: point.price * 0.98,
-            open:
-              i > 0
-                ? selectedTokenData.price_history[i - 1].price
-                : point.price,
-            close: point.price,
-          }),
-        );
+        const chartData: ChartData[] = selectedTokenData.price_history.map((point, i) => ({
+          timestamp: point.timestamp,
+          price: point.price,
+          volume: Math.random() * 1000000,
+          high: point.price * 1.02,
+          low: point.price * 0.98,
+          open: i > 0 ? selectedTokenData.price_history[i - 1].price : point.price,
+          close: point.price,
+        }));
         setChartData(chartData);
       }
     } catch (error) {
@@ -204,7 +195,7 @@ export function LiveTradingCharts() {
   const filteredTokens = tokens.filter(
     (token) =>
       token.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      token.symbol.toLowerCase().includes(searchQuery.toLowerCase()),
+      token.symbol.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const formatPrice = (price: number) => {
@@ -248,9 +239,7 @@ export function LiveTradingCharts() {
                 <Activity className="h-3 w-3 mr-1" />
                 {cloudEngineStatus}
               </Badge>
-              <p className="text-xs text-muted-foreground mt-1">
-                Engine Status
-              </p>
+              <p className="text-xs text-muted-foreground mt-1">Engine Status</p>
             </div>
             <div className="text-center">
               <div className="text-lg font-bold text-green-400">1,247+</div>
@@ -301,9 +290,7 @@ export function LiveTradingCharts() {
             <Button
               onClick={() => setIsLiveMode(!isLiveMode)}
               className={
-                isLiveMode
-                  ? "bg-green-600 hover:bg-green-700"
-                  : "bg-gray-600 hover:bg-gray-700"
+                isLiveMode ? "bg-green-600 hover:bg-green-700" : "bg-gray-600 hover:bg-gray-700"
               }
             >
               <Zap className="h-4 w-4 mr-2" />
@@ -320,43 +307,29 @@ export function LiveTradingCharts() {
                   <>
                     <div>
                       <p className="text-sm text-muted-foreground">Price</p>
-                      <p className="font-bold text-lg">
-                        {formatPrice(token.current_price)}
-                      </p>
+                      <p className="font-bold text-lg">{formatPrice(token.current_price)}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">
-                        24h Change
-                      </p>
+                      <p className="text-sm text-muted-foreground">24h Change</p>
                       <p className="font-bold">
                         {formatPercentage(token.price_change_percentage_24h)}
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">
-                        Market Cap
-                      </p>
-                      <p className="font-bold">
-                        ${(token.market_cap / 1000000).toFixed(1)}M
-                      </p>
+                      <p className="text-sm text-muted-foreground">Market Cap</p>
+                      <p className="font-bold">${(token.market_cap / 1000000).toFixed(1)}M</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Volume</p>
-                      <p className="font-bold">
-                        ${(token.total_volume / 1000000).toFixed(1)}M
-                      </p>
+                      <p className="font-bold">${(token.total_volume / 1000000).toFixed(1)}M</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">24h High</p>
-                      <p className="font-bold text-green-400">
-                        {formatPrice(token.high_24h)}
-                      </p>
+                      <p className="font-bold text-green-400">{formatPrice(token.high_24h)}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">24h Low</p>
-                      <p className="font-bold text-red-400">
-                        {formatPrice(token.low_24h)}
-                      </p>
+                      <p className="font-bold text-red-400">{formatPrice(token.low_24h)}</p>
                     </div>
                   </>
                 );
@@ -389,23 +362,13 @@ export function LiveTradingCharts() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                     <XAxis
                       dataKey="timestamp"
-                      tickFormatter={(value) =>
-                        new Date(value).toLocaleTimeString()
-                      }
+                      tickFormatter={(value) => new Date(value).toLocaleTimeString()}
                       stroke="#9CA3AF"
                     />
-                    <YAxis
-                      tickFormatter={(value) => formatPrice(value)}
-                      stroke="#9CA3AF"
-                    />
+                    <YAxis tickFormatter={(value) => formatPrice(value)} stroke="#9CA3AF" />
                     <Tooltip
-                      labelFormatter={(value) =>
-                        new Date(value).toLocaleString()
-                      }
-                      formatter={(value: number) => [
-                        formatPrice(value),
-                        "Price",
-                      ]}
+                      labelFormatter={(value) => new Date(value).toLocaleString()}
+                      formatter={(value: number) => [formatPrice(value), "Price"]}
                       contentStyle={{
                         backgroundColor: "#1F2937",
                         border: "1px solid #374151",
@@ -432,23 +395,13 @@ export function LiveTradingCharts() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                     <XAxis
                       dataKey="timestamp"
-                      tickFormatter={(value) =>
-                        new Date(value).toLocaleTimeString()
-                      }
+                      tickFormatter={(value) => new Date(value).toLocaleTimeString()}
                       stroke="#9CA3AF"
                     />
-                    <YAxis
-                      tickFormatter={(value) => formatPrice(value)}
-                      stroke="#9CA3AF"
-                    />
+                    <YAxis tickFormatter={(value) => formatPrice(value)} stroke="#9CA3AF" />
                     <Tooltip
-                      labelFormatter={(value) =>
-                        new Date(value).toLocaleString()
-                      }
-                      formatter={(value: number) => [
-                        formatPrice(value),
-                        "Price",
-                      ]}
+                      labelFormatter={(value) => new Date(value).toLocaleString()}
+                      formatter={(value: number) => [formatPrice(value), "Price"]}
                       contentStyle={{
                         backgroundColor: "#1F2937",
                         border: "1px solid #374151",
@@ -463,23 +416,9 @@ export function LiveTradingCharts() {
                       fill="url(#colorPrice)"
                     />
                     <defs>
-                      <linearGradient
-                        id="colorPrice"
-                        x1="0"
-                        y1="0"
-                        x2="0"
-                        y2="1"
-                      >
-                        <stop
-                          offset="5%"
-                          stopColor="#10B981"
-                          stopOpacity={0.8}
-                        />
-                        <stop
-                          offset="95%"
-                          stopColor="#10B981"
-                          stopOpacity={0.1}
-                        />
+                      <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#10B981" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="#10B981" stopOpacity={0.1} />
                       </linearGradient>
                     </defs>
                   </AreaChart>
@@ -494,25 +433,16 @@ export function LiveTradingCharts() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                     <XAxis
                       dataKey="timestamp"
-                      tickFormatter={(value) =>
-                        new Date(value).toLocaleTimeString()
-                      }
+                      tickFormatter={(value) => new Date(value).toLocaleTimeString()}
                       stroke="#9CA3AF"
                     />
                     <YAxis
-                      tickFormatter={(value) =>
-                        `${(value / 1000000).toFixed(1)}M`
-                      }
+                      tickFormatter={(value) => `${(value / 1000000).toFixed(1)}M`}
                       stroke="#9CA3AF"
                     />
                     <Tooltip
-                      labelFormatter={(value) =>
-                        new Date(value).toLocaleString()
-                      }
-                      formatter={(value: number) => [
-                        `${(value / 1000000).toFixed(2)}M`,
-                        "Volume",
-                      ]}
+                      labelFormatter={(value) => new Date(value).toLocaleString()}
+                      formatter={(value: number) => [`${(value / 1000000).toFixed(2)}M`, "Volume"]}
                       contentStyle={{
                         backgroundColor: "#1F2937",
                         border: "1px solid #374151",
@@ -527,23 +457,9 @@ export function LiveTradingCharts() {
                       fill="url(#colorVolume)"
                     />
                     <defs>
-                      <linearGradient
-                        id="colorVolume"
-                        x1="0"
-                        y1="0"
-                        x2="0"
-                        y2="1"
-                      >
-                        <stop
-                          offset="5%"
-                          stopColor="#F59E0B"
-                          stopOpacity={0.8}
-                        />
-                        <stop
-                          offset="95%"
-                          stopColor="#F59E0B"
-                          stopOpacity={0.1}
-                        />
+                      <linearGradient id="colorVolume" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#F59E0B" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="#F59E0B" stopOpacity={0.1} />
                       </linearGradient>
                     </defs>
                   </AreaChart>
@@ -579,24 +495,14 @@ export function LiveTradingCharts() {
                   </span>
                   <div>
                     <p className="font-medium">{token.name}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {token.symbol.toUpperCase()}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{token.symbol.toUpperCase()}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="font-bold">
-                    {formatPrice(token.current_price)}
-                  </p>
-                  <p className="text-sm">
-                    {formatPercentage(token.price_change_percentage_24h)}
-                  </p>
+                  <p className="font-bold">{formatPrice(token.current_price)}</p>
+                  <p className="text-sm">{formatPercentage(token.price_change_percentage_24h)}</p>
                 </div>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => setSelectedToken(token.id)}
-                >
+                <Button size="sm" variant="outline" onClick={() => setSelectedToken(token.id)}>
                   <Eye className="h-3 w-3 mr-1" />
                   View
                 </Button>

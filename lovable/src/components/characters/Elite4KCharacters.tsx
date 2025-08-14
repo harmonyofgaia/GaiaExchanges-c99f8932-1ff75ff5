@@ -18,9 +18,7 @@ interface Character {
 }
 
 export function Elite4KCharacters() {
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
-    null,
-  );
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
   const characters: Character[] = [
     {
@@ -29,11 +27,7 @@ export function Elite4KCharacters() {
       class: "Quantum Warrior",
       rarity: "quantum",
       powerLevel: 9999,
-      abilities: [
-        "Dragon Fire Breath",
-        "Cyber Enhancement",
-        "Reality Manipulation",
-      ],
+      abilities: ["Dragon Fire Breath", "Cyber Enhancement", "Reality Manipulation"],
       description:
         "Biomechanical dragon hybrid with quantum consciousness and cyberpunk aesthetics",
       resolution: "4K Ultra HD (3840×2160)",
@@ -57,8 +51,7 @@ export function Elite4KCharacters() {
       rarity: "epic",
       powerLevel: 7200,
       abilities: ["Neural Hacking", "Optical Camouflage", "Quantum Blade"],
-      description:
-        "Elite cybernetic assassin with neural interface capabilities",
+      description: "Elite cybernetic assassin with neural interface capabilities",
       resolution: "4K Ultra HD (3840×2160)",
       fileSize: "2.1 GB",
     },
@@ -69,8 +62,7 @@ export function Elite4KCharacters() {
       rarity: "legendary",
       powerLevel: 8900,
       abilities: ["Tree Communication", "Nature's Wrath", "Healing Aura"],
-      description:
-        "Ancient forest guardian with deep connection to Gaia's life force",
+      description: "Ancient forest guardian with deep connection to Gaia's life force",
       resolution: "4K Ultra HD (3840×2160)",
       fileSize: "2.6 GB",
     },
@@ -81,8 +73,7 @@ export function Elite4KCharacters() {
       rarity: "quantum",
       powerLevel: 9800,
       abilities: ["Quantum Rage", "Reality Tear", "Berserker Mode"],
-      description:
-        "Unstoppable warrior channeling quantum energy through pure rage",
+      description: "Unstoppable warrior channeling quantum energy through pure rage",
       resolution: "4K Ultra HD (3840×2160)",
       fileSize: "3.1 GB",
     },
@@ -93,8 +84,7 @@ export function Elite4KCharacters() {
       rarity: "legendary",
       powerLevel: 8500,
       abilities: ["Energy Shield", "Tactical Command", "Plasma Weapons"],
-      description:
-        "Enhanced super soldier with Halo-inspired armor and weaponry",
+      description: "Enhanced super soldier with Halo-inspired armor and weaponry",
       resolution: "4K Ultra HD (3840×2160)",
       fileSize: "2.9 GB",
     },
@@ -116,8 +106,7 @@ export function Elite4KCharacters() {
       rarity: "legendary",
       powerLevel: 8200,
       abilities: ["Crystal Shield", "Ice Sword", "Frozen Fortress"],
-      description:
-        "Noble knight forged from crystalline ice with unbreakable armor",
+      description: "Noble knight forged from crystalline ice with unbreakable armor",
       resolution: "4K Ultra HD (3840×2160)",
       fileSize: "2.7 GB",
     },
@@ -128,8 +117,7 @@ export function Elite4KCharacters() {
       rarity: "quantum",
       powerLevel: 9500,
       abilities: ["Divine Healing", "Quantum Wings", "Reality Blessing"],
-      description:
-        "Celestial being infused with quantum energy and divine power",
+      description: "Celestial being infused with quantum energy and divine power",
       resolution: "4K Ultra HD (3840×2160)",
       fileSize: "3.0 GB",
     },
@@ -140,8 +128,7 @@ export function Elite4KCharacters() {
       rarity: "epic",
       powerLevel: 7600,
       abilities: ["Pack Leader", "Mechanical Claws", "Cyber Howl"],
-      description:
-        "Enhanced wolf with biomechanical augmentations and AI consciousness",
+      description: "Enhanced wolf with biomechanical augmentations and AI consciousness",
       resolution: "4K Ultra HD (3840×2160)",
       fileSize: "2.5 GB",
     },
@@ -176,15 +163,9 @@ export function Elite4KCharacters() {
           👥 ELITE 4K CHARACTER COLLECTION
         </CardTitle>
         <div className="flex flex-wrap gap-2">
-          <Badge className="bg-purple-600 text-white">
-            📺 4K Ultra HD Resolution
-          </Badge>
-          <Badge className="bg-green-600 text-white">
-            👥 10 Unique Characters
-          </Badge>
-          <Badge className="bg-blue-600 text-white">
-            💾 25+ GB Total Assets
-          </Badge>
+          <Badge className="bg-purple-600 text-white">📺 4K Ultra HD Resolution</Badge>
+          <Badge className="bg-green-600 text-white">👥 10 Unique Characters</Badge>
+          <Badge className="bg-blue-600 text-white">💾 25+ GB Total Assets</Badge>
         </div>
       </CardHeader>
 
@@ -203,15 +184,11 @@ export function Elite4KCharacters() {
             >
               <CardContent className="p-3">
                 <div className="text-center">
-                  <div className="text-3xl mb-2">
-                    {character.name.split(" ")[0]}
-                  </div>
+                  <div className="text-3xl mb-2">{character.name.split(" ")[0]}</div>
                   <h4 className="font-bold text-white text-xs mb-1">
                     {character.name.substring(2)}
                   </h4>
-                  <div className="text-xs text-muted-foreground mb-2">
-                    {character.class}
-                  </div>
+                  <div className="text-xs text-muted-foreground mb-2">{character.class}</div>
                   <Badge
                     className={`bg-gradient-to-r ${getRarityColor(character.rarity)} text-white text-xs`}
                   >
@@ -234,52 +211,36 @@ export function Elite4KCharacters() {
             <CardContent className="p-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-4">
-                    {selectedCharacter.name}
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    {selectedCharacter.description}
-                  </p>
+                  <h3 className="text-2xl font-bold text-white mb-4">{selectedCharacter.name}</h3>
+                  <p className="text-muted-foreground mb-4">{selectedCharacter.description}</p>
 
                   <div className="space-y-2 mb-4">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Class:</span>
-                      <span className="text-blue-400">
-                        {selectedCharacter.class}
-                      </span>
+                      <span className="text-blue-400">{selectedCharacter.class}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">
-                        Power Level:
-                      </span>
+                      <span className="text-muted-foreground">Power Level:</span>
                       <span className="text-green-400">
                         {selectedCharacter.powerLevel.toLocaleString()}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Resolution:</span>
-                      <span className="text-purple-400">
-                        {selectedCharacter.resolution}
-                      </span>
+                      <span className="text-purple-400">{selectedCharacter.resolution}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">File Size:</span>
-                      <span className="text-orange-400">
-                        {selectedCharacter.fileSize}
-                      </span>
+                      <span className="text-orange-400">{selectedCharacter.fileSize}</span>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-bold text-cyan-400">
-                      Special Abilities:
-                    </h4>
+                    <h4 className="font-bold text-cyan-400">Special Abilities:</h4>
                     {selectedCharacter.abilities.map((ability, index) => (
                       <div key={index} className="flex items-center gap-2">
                         <Zap className="h-4 w-4 text-yellow-400" />
-                        <span className="text-sm text-muted-foreground">
-                          {ability}
-                        </span>
+                        <span className="text-sm text-muted-foreground">{ability}</span>
                       </div>
                     ))}
                   </div>
@@ -288,12 +249,8 @@ export function Elite4KCharacters() {
                 <div className="relative h-64 bg-black rounded-lg overflow-hidden">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center">
-                      <div className="text-8xl mb-4">
-                        {selectedCharacter.name.split(" ")[0]}
-                      </div>
-                      <div className="text-xl font-bold text-white mb-2">
-                        4K ULTRA HD
-                      </div>
+                      <div className="text-8xl mb-4">{selectedCharacter.name.split(" ")[0]}</div>
+                      <div className="text-xl font-bold text-white mb-2">4K ULTRA HD</div>
                       <div className="text-lg text-purple-400 animate-pulse">
                         {selectedCharacter.resolution}
                       </div>

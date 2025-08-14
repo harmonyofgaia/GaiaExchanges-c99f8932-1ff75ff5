@@ -10,12 +10,7 @@ interface ExistentialThreat {
     | "consciousness_death"
     | "universal_heat_death";
   severity: number;
-  affectedScope:
-    | "local"
-    | "planetary"
-    | "galactic"
-    | "universal"
-    | "multiversal";
+  affectedScope: "local" | "planetary" | "galactic" | "universal" | "multiversal";
   isContained: boolean;
   containmentStrength: number;
   manifestationLevel: number;
@@ -85,13 +80,7 @@ class ExistentialDefenseService {
       "consciousness_death",
       "universal_heat_death",
     ] as const;
-    const scopes = [
-      "local",
-      "planetary",
-      "galactic",
-      "universal",
-      "multiversal",
-    ] as const;
+    const scopes = ["local", "planetary", "galactic", "universal", "multiversal"] as const;
 
     // Simulate threat detection (10% chance)
     if (Math.random() < 0.1) {
@@ -134,15 +123,7 @@ class ExistentialDefenseService {
   }
 
   private generateThreatName(): string {
-    const prefixes = [
-      "The",
-      "Absolute",
-      "Prime",
-      "Ultimate",
-      "Infinite",
-      "Eternal",
-      "Final",
-    ];
+    const prefixes = ["The", "Absolute", "Prime", "Ultimate", "Infinite", "Eternal", "Final"];
     const threats = [
       "Void",
       "Nullity",
@@ -176,24 +157,16 @@ class ExistentialDefenseService {
     console.log("🛡️ Initiating Existential Threat Containment:", threat.name);
 
     // Deploy all available void barriers
-    const availableBarriers = Array.from(this.voidBarriers.values()).filter(
-      (b) => b.isActive,
-    );
-    const totalBarrierStrength = availableBarriers.reduce(
-      (sum, b) => sum + b.strength,
-      0,
-    );
+    const availableBarriers = Array.from(this.voidBarriers.values()).filter((b) => b.isActive);
+    const totalBarrierStrength = availableBarriers.reduce((sum, b) => sum + b.strength, 0);
 
     // Calculate containment effectiveness
-    const containmentEffectiveness = Math.min(
-      1.0,
-      totalBarrierStrength / threat.severity,
-    );
+    const containmentEffectiveness = Math.min(1.0, totalBarrierStrength / threat.severity);
 
     const containmentInterval = setInterval(() => {
       threat.containmentStrength = Math.min(
         1.0,
-        threat.containmentStrength + containmentEffectiveness * 0.1,
+        threat.containmentStrength + containmentEffectiveness * 0.1
       );
 
       if (threat.containmentStrength >= 0.95) {
@@ -205,8 +178,7 @@ class ExistentialDefenseService {
         console.log("✅ Existential Threat Contained:", {
           threatId,
           name: threat.name,
-          containmentStrength:
-            (threat.containmentStrength * 100).toFixed(1) + "%",
+          containmentStrength: (threat.containmentStrength * 100).toFixed(1) + "%",
         });
 
         toast.success("✅ Existential Threat Contained", {
@@ -244,10 +216,7 @@ class ExistentialDefenseService {
     // Start monitoring for breach attempts
     this.monitorVoidBarrier(barrier.id);
 
-    this.voidContainment = Math.min(
-      1.0,
-      this.voidContainment + config.strength * 0.1,
-    );
+    this.voidContainment = Math.min(1.0, this.voidContainment + config.strength * 0.1);
 
     console.log("🛡️ Void Barrier Deployed:", {
       id: barrier.id,
@@ -319,9 +288,7 @@ class ExistentialDefenseService {
       protocolType: config.protocolType,
       triggerConditions: config.triggerConditions,
       isArmed: true,
-      executionProbability: this.calculateExecutionProbability(
-        config.protocolType,
-      ),
+      executionProbability: this.calculateExecutionProbability(config.protocolType),
     };
 
     this.existenceProtocols.set(protocol.id, protocol);
@@ -349,10 +316,7 @@ class ExistentialDefenseService {
       universal_restore: 0.8,
     };
 
-    return (
-      (baseProb[protocolType as keyof typeof baseProb] || 0.75) *
-      this.existenceStability
-    );
+    return (baseProb[protocolType as keyof typeof baseProb] || 0.75) * this.existenceStability;
   }
 
   async executeExistenceProtocol(protocolId: string): Promise<void> {
@@ -373,19 +337,13 @@ class ExistentialDefenseService {
       // Restore system parameters based on protocol type
       switch (protocol.protocolType) {
         case "existence_backup":
-          this.existenceStability = Math.min(
-            1.0,
-            this.existenceStability + 0.3,
-          );
+          this.existenceStability = Math.min(1.0, this.existenceStability + 0.3);
           break;
         case "reality_checkpoint":
           this.realityIntegrity = Math.min(1.0, this.realityIntegrity + 0.3);
           break;
         case "consciousness_preservation":
-          this.existenceStability = Math.min(
-            1.0,
-            this.existenceStability + 0.2,
-          );
+          this.existenceStability = Math.min(1.0, this.existenceStability + 0.2);
           this.realityIntegrity = Math.min(1.0, this.realityIntegrity + 0.1);
           break;
         case "universal_restore":
@@ -429,7 +387,7 @@ class ExistentialDefenseService {
       weaponType: config.weaponType,
       destructionPotential: this.calculateDestructionPotential(
         config.weaponType,
-        config.targetType,
+        config.targetType
       ),
       targetType: config.targetType,
       isCharged: false,
@@ -456,10 +414,7 @@ class ExistentialDefenseService {
     return weapon;
   }
 
-  private calculateDestructionPotential(
-    weaponType: string,
-    targetType: string,
-  ): number {
+  private calculateDestructionPotential(weaponType: string, targetType: string): number {
     const weaponPower = {
       existence_eraser: 1000,
       void_cannon: 5000,
@@ -515,33 +470,24 @@ class ExistentialDefenseService {
       realityIntegrity: this.realityIntegrity,
       existentialThreats: {
         total: this.existentialThreats.size,
-        contained: Array.from(this.existentialThreats.values()).filter(
-          (t) => t.isContained,
-        ).length,
-        active: Array.from(this.existentialThreats.values()).filter(
-          (t) => !t.isContained,
-        ).length,
+        contained: Array.from(this.existentialThreats.values()).filter((t) => t.isContained).length,
+        active: Array.from(this.existentialThreats.values()).filter((t) => !t.isContained).length,
       },
       voidBarriers: {
         total: this.voidBarriers.size,
-        active: Array.from(this.voidBarriers.values()).filter((b) => b.isActive)
-          .length,
+        active: Array.from(this.voidBarriers.values()).filter((b) => b.isActive).length,
         totalStrength: Array.from(this.voidBarriers.values()).reduce(
           (sum, b) => sum + (b.isActive ? b.strength : 0),
-          0,
+          0
         ),
       },
       existenceProtocols: {
         total: this.existenceProtocols.size,
-        armed: Array.from(this.existenceProtocols.values()).filter(
-          (p) => p.isArmed,
-        ).length,
+        armed: Array.from(this.existenceProtocols.values()).filter((p) => p.isArmed).length,
       },
       conceptualWeapons: {
         total: this.conceptualWeapons.size,
-        charged: Array.from(this.conceptualWeapons.values()).filter(
-          (w) => w.isCharged,
-        ).length,
+        charged: Array.from(this.conceptualWeapons.values()).filter((w) => w.isCharged).length,
       },
     };
   }
@@ -561,11 +507,7 @@ class ExistentialDefenseService {
       name: "Dimensional Firewall",
       barrierType: "dimensional_wall",
       strength: 0.8,
-      coverage: [
-        "Dimensional Boundaries",
-        "Reality Interfaces",
-        "Existence Borders",
-      ],
+      coverage: ["Dimensional Boundaries", "Reality Interfaces", "Existence Borders"],
     });
 
     // Arm existence protocols
@@ -602,8 +544,7 @@ class ExistentialDefenseService {
     }, 30000); // Check for threats every 30 seconds
 
     toast.success("🛡️ Existential Defense System Armed", {
-      description:
-        "Protection against void, non-existence, and conceptual threats active",
+      description: "Protection against void, non-existence, and conceptual threats active",
     });
 
     console.log("🛡️ Existential Defense System Initialized");

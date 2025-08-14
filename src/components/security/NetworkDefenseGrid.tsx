@@ -121,8 +121,7 @@ export function NetworkDefenseGrid() {
     threatsStopped: 1379,
   });
 
-  const [isLaunchingGlobalDefense, setIsLaunchingGlobalDefense] =
-    useState(false);
+  const [isLaunchingGlobalDefense, setIsLaunchingGlobalDefense] = useState(false);
   const networkInterval = useRef<NodeJS.Timeout>(undefined);
 
   // Network Defense Grid Updates - Every 5 seconds
@@ -134,17 +133,16 @@ export function NetworkDefenseGrid() {
         // Update network nodes with realistic activity
         setNetworkNodes((prev) =>
           prev.map((node) => {
-            const statuses: (
-              | "active"
-              | "blocking"
-              | "attacking"
-              | "defending"
-            )[] = ["active", "blocking", "attacking", "defending"];
+            const statuses: ("active" | "blocking" | "attacking" | "defending")[] = [
+              "active",
+              "blocking",
+              "attacking",
+              "defending",
+            ];
 
             // Randomly update node status and metrics
             if (Math.random() < 0.3) {
-              const newStatus =
-                statuses[Math.floor(Math.random() * statuses.length)];
+              const newStatus = statuses[Math.floor(Math.random() * statuses.length)];
               const additionalThreats =
                 newStatus === "blocking" || newStatus === "attacking"
                   ? Math.floor(Math.random() * 5) + 1
@@ -156,17 +154,14 @@ export function NetworkDefenseGrid() {
                 threatsBlocked: node.threatsBlocked + additionalThreats,
                 bandwidthUsed: Math.min(
                   100,
-                  Math.max(50, node.bandwidthUsed + (Math.random() - 0.5) * 10),
+                  Math.max(50, node.bandwidthUsed + (Math.random() - 0.5) * 10)
                 ),
-                uptime: Math.min(
-                  100,
-                  Math.max(95, node.uptime + (Math.random() - 0.5) * 0.2),
-                ),
+                uptime: Math.min(100, Math.max(95, node.uptime + (Math.random() - 0.5) * 0.2)),
               };
             }
 
             return node;
-          }),
+          })
         );
 
         // Update global metrics
@@ -174,12 +169,8 @@ export function NetworkDefenseGrid() {
           setNetworkMetrics((prev) => ({
             ...prev,
             blockedIPs: prev.blockedIPs + Math.floor(Math.random() * 10) + 1,
-            threatsStopped:
-              prev.threatsStopped + Math.floor(Math.random() * 5) + 1,
-            globalCoverage: Math.min(
-              100,
-              prev.globalCoverage + (Math.random() - 0.5) * 2,
-            ),
+            threatsStopped: prev.threatsStopped + Math.floor(Math.random() * 5) + 1,
+            globalCoverage: Math.min(100, prev.globalCoverage + (Math.random() - 0.5) * 2),
           }));
         }
 
@@ -194,8 +185,7 @@ export function NetworkDefenseGrid() {
             "Cryptocurrency exchange hack attempt",
           ];
 
-          const detectedThreat =
-            threatTypes[Math.floor(Math.random() * threatTypes.length)];
+          const detectedThreat = threatTypes[Math.floor(Math.random() * threatTypes.length)];
           console.log(`🚨 MAJOR THREAT DETECTED: ${detectedThreat}`);
 
           toast.warning("🌐 Global Threat Detected", {
@@ -240,7 +230,7 @@ export function NetworkDefenseGrid() {
           status: "defending",
           bandwidthUsed: 100,
           uptime: 100,
-        })),
+        }))
       );
 
       setIsLaunchingGlobalDefense(false);
@@ -323,9 +313,7 @@ export function NetworkDefenseGrid() {
               <div className="text-3xl font-bold text-green-300">
                 {networkMetrics.activeDefenses}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Active Defenses
-              </div>
+              <div className="text-sm text-muted-foreground">Active Defenses</div>
               <Badge className="mt-2 bg-green-600 text-white">
                 <Shield className="h-3 w-3 mr-1" />
                 ONLINE
@@ -347,9 +335,7 @@ export function NetworkDefenseGrid() {
               <div className="text-3xl font-bold text-blue-300">
                 {networkMetrics.bandwidthTotal}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Bandwidth
-              </div>
+              <div className="text-sm text-muted-foreground">Total Bandwidth</div>
               <Badge className="mt-2 bg-blue-600 text-white">
                 <Wifi className="h-3 w-3 mr-1" />
                 CAPACITY
@@ -360,22 +346,15 @@ export function NetworkDefenseGrid() {
               <div className="text-3xl font-bold text-cyan-300">
                 {networkMetrics.globalCoverage}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Global Coverage
-              </div>
-              <Progress
-                value={networkMetrics.globalCoverage}
-                className="mt-2 h-2"
-              />
+              <div className="text-sm text-muted-foreground">Global Coverage</div>
+              <Progress value={networkMetrics.globalCoverage} className="mt-2 h-2" />
             </div>
 
             <div className="text-center">
               <div className="text-3xl font-bold text-yellow-300">
                 {networkMetrics.threatsStopped.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Stopped
-              </div>
+              <div className="text-sm text-muted-foreground">Threats Stopped</div>
               <Badge className="mt-2 bg-yellow-600 text-white">
                 <Zap className="h-3 w-3 mr-1" />
                 DEFEATED
@@ -401,9 +380,7 @@ export function NetworkDefenseGrid() {
                 </>
               )}
             </Button>
-            {isLaunchingGlobalDefense && (
-              <Progress value={65} className="mt-2 h-3" />
-            )}
+            {isLaunchingGlobalDefense && <Progress value={65} className="mt-2 h-3" />}
           </div>
         </CardContent>
       </Card>
@@ -424,36 +401,26 @@ export function NetworkDefenseGrid() {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex items-center justify-between">
-                <Badge
-                  className={`text-white text-xs ${getNodeStatusColor(node.status)}`}
-                >
+                <Badge className={`text-white text-xs ${getNodeStatusColor(node.status)}`}>
                   {getNodeStatusIcon(node.status)}
                   <span className="ml-1">{node.status.toUpperCase()}</span>
                 </Badge>
-                <div className="text-xs text-muted-foreground">
-                  {node.uptime}% uptime
-                </div>
+                <div className="text-xs text-muted-foreground">{node.uptime}% uptime</div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between text-xs">
                   <span>Threats Blocked:</span>
-                  <span className="text-red-400 font-semibold">
-                    {node.threatsBlocked}
-                  </span>
+                  <span className="text-red-400 font-semibold">{node.threatsBlocked}</span>
                 </div>
                 <div className="flex justify-between text-xs">
                   <span>Bandwidth:</span>
-                  <span className="text-blue-400 font-semibold">
-                    {node.bandwidthUsed}%
-                  </span>
+                  <span className="text-blue-400 font-semibold">{node.bandwidthUsed}%</span>
                 </div>
               </div>
 
               <div className="space-y-1">
-                <div className="text-xs text-muted-foreground">
-                  Bandwidth Usage:
-                </div>
+                <div className="text-xs text-muted-foreground">Bandwidth Usage:</div>
                 <Progress value={node.bandwidthUsed} className="h-2" />
               </div>
 
@@ -478,15 +445,11 @@ export function NetworkDefenseGrid() {
           <CardContent className="space-y-3">
             <div className="flex justify-between">
               <span className="text-sm">Total Threats Blocked:</span>
-              <span className="text-green-400 font-semibold">
-                {getTotalThreatsBlocked()}
-              </span>
+              <span className="text-green-400 font-semibold">{getTotalThreatsBlocked()}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-sm">Average Node Uptime:</span>
-              <span className="text-green-400 font-semibold">
-                {getAverageUptime()}%
-              </span>
+              <span className="text-green-400 font-semibold">{getAverageUptime()}%</span>
             </div>
             <div className="flex justify-between">
               <span className="text-sm">Response Time:</span>
@@ -552,15 +515,12 @@ export function NetworkDefenseGrid() {
             </h3>
             <div className="max-w-4xl mx-auto space-y-3 text-cyan-200">
               <p className="text-lg">
-                Our Global Network Defense Grid operates 24/7 across all
-                continents to provide unparalleled protection for the Culture of
-                Harmony community.
+                Our Global Network Defense Grid operates 24/7 across all continents to provide
+                unparalleled protection for the Culture of Harmony community.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                 <div className="p-4 bg-purple-900/30 rounded-lg border border-purple-500/30">
-                  <h4 className="font-bold text-purple-300 mb-3">
-                    🛡️ Network Capabilities:
-                  </h4>
+                  <h4 className="font-bold text-purple-300 mb-3">🛡️ Network Capabilities:</h4>
                   <ul className="text-sm space-y-1">
                     <li>• 50 Tbps total bandwidth capacity</li>
                     <li>• Sub-50ms global response time</li>
@@ -571,9 +531,7 @@ export function NetworkDefenseGrid() {
                   </ul>
                 </div>
                 <div className="p-4 bg-blue-900/30 rounded-lg border border-blue-500/30">
-                  <h4 className="font-bold text-blue-300 mb-3">
-                    🌍 Global Presence:
-                  </h4>
+                  <h4 className="font-bold text-blue-300 mb-3">🌍 Global Presence:</h4>
                   <ul className="text-sm space-y-1">
                     <li>• 8 strategic defense hubs worldwide</li>
                     <li>• Coverage across all 7 continents</li>
@@ -585,8 +543,7 @@ export function NetworkDefenseGrid() {
                 </div>
               </div>
               <p className="text-sm text-cyan-400 font-semibold mt-4">
-                Building the world's most secure and transparent cryptocurrency
-                ecosystem 🛡️
+                Building the world's most secure and transparent cryptocurrency ecosystem 🛡️
               </p>
             </div>
           </div>

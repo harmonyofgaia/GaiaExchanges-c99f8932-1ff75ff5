@@ -104,30 +104,22 @@ export function AdvancedTacticsHub() {
             ⚔️ ADVANCED TACTICS HUB - Strategic Warfare Command
           </CardTitle>
           <p className="text-muted-foreground">
-            Military-grade strategic operations center with advanced
-            psychological and market warfare capabilities
+            Military-grade strategic operations center with advanced psychological and market
+            warfare capabilities
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-red-900/30 border border-red-500/20 rounded-lg">
-              <div className="text-2xl font-bold text-red-400">
-                {activeTactics}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Tactics
-              </div>
+              <div className="text-2xl font-bold text-red-400">{activeTactics}</div>
+              <div className="text-sm text-muted-foreground">Active Tactics</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 border border-green-500/20 rounded-lg">
-              <div className="text-2xl font-bold text-green-400">
-                {successRate}%
-              </div>
+              <div className="text-2xl font-bold text-green-400">{successRate}%</div>
               <div className="text-sm text-muted-foreground">Success Rate</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 border border-blue-500/20 rounded-lg">
-              <div className="text-2xl font-bold text-blue-400">
-                {globalReach}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{globalReach}</div>
               <div className="text-sm text-muted-foreground">Countries</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 border border-purple-500/20 rounded-lg">
@@ -143,14 +135,9 @@ export function AdvancedTacticsHub() {
         {tactics.map((tactic) => {
           const IconComponent = tactic.icon;
           return (
-            <Card
-              key={tactic.id}
-              className={`${tactic.borderColor} ${tactic.bgColor}`}
-            >
+            <Card key={tactic.id} className={`${tactic.borderColor} ${tactic.bgColor}`}>
               <CardHeader>
-                <CardTitle
-                  className={`${tactic.color} flex items-center gap-2`}
-                >
+                <CardTitle className={`${tactic.color} flex items-center gap-2`}>
                   <IconComponent className="h-6 w-6" />
                   {tactic.name}
                 </CardTitle>
@@ -163,9 +150,7 @@ export function AdvancedTacticsHub() {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {tactic.description}
-                </p>
+                <p className="text-sm text-muted-foreground mb-4">{tactic.description}</p>
                 <Button
                   onClick={() => executeAdvancedTactic(tactic.name)}
                   className={`w-full ${tactic.color.replace("text-", "bg-").replace("-400", "-600")} hover:${tactic.color.replace("text-", "bg-").replace("-400", "-700")}`}
@@ -182,9 +167,7 @@ export function AdvancedTacticsHub() {
       {/* Strategic Command Center */}
       <Card className="border-cyan-500/30 bg-gradient-to-r from-cyan-900/30 to-blue-900/30">
         <CardHeader>
-          <CardTitle className="text-cyan-400">
-            🎯 Strategic Command Center
-          </CardTitle>
+          <CardTitle className="text-cyan-400">🎯 Strategic Command Center</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -212,9 +195,7 @@ export function AdvancedTacticsHub() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="border-green-500/30 bg-green-900/20">
           <CardHeader>
-            <CardTitle className="text-green-400">
-              🧠 Intelligence Operations
-            </CardTitle>
+            <CardTitle className="text-green-400">🧠 Intelligence Operations</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -240,9 +221,7 @@ export function AdvancedTacticsHub() {
 
         <Card className="border-blue-500/30 bg-blue-900/20">
           <CardHeader>
-            <CardTitle className="text-blue-400">
-              📊 Tactical Analytics
-            </CardTitle>
+            <CardTitle className="text-blue-400">📊 Tactical Analytics</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">

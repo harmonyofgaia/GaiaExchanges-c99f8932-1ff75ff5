@@ -19,10 +19,7 @@ interface MatrixTransaction {
 const mockTransactions: MatrixTransaction[] = [
   {
     id: "1",
-    hash:
-      GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) +
-      "..." +
-      GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
+    hash: GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) + "..." + GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
     type: "reward",
     amount: 2847.5,
     timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
@@ -33,10 +30,7 @@ const mockTransactions: MatrixTransaction[] = [
   },
   {
     id: "2",
-    hash:
-      GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) +
-      "..." +
-      GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
+    hash: GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) + "..." + GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
     type: "burned",
     amount: 1250.0,
     timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000),
@@ -47,10 +41,7 @@ const mockTransactions: MatrixTransaction[] = [
   },
   {
     id: "3",
-    hash:
-      GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) +
-      "..." +
-      GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
+    hash: GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) + "..." + GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
     type: "ecosystem",
     amount: 1875.25,
     timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
@@ -62,8 +53,7 @@ const mockTransactions: MatrixTransaction[] = [
 ];
 
 export function LiveTransactionMatrix() {
-  const [transactions, setTransactions] =
-    useState<MatrixTransaction[]>(mockTransactions);
+  const [transactions, setTransactions] = useState<MatrixTransaction[]>(mockTransactions);
 
   // Simulate real-time updates
   useEffect(() => {
@@ -80,22 +70,14 @@ export function LiveTransactionMatrix() {
       const newTransaction: MatrixTransaction = {
         id: Date.now().toString(),
         hash:
-          GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) +
-          "..." +
-          GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
+          GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) + "..." + GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
         type: Math.random() > 0.5 ? "reward" : "ecosystem",
         amount: Math.random() * 2000 + 500,
         timestamp: new Date(),
         status: "confirmed",
-        from:
-          Math.random() > 0.5
-            ? "Environmental Reward System"
-            : "Harmony Ecosystem",
+        from: Math.random() > 0.5 ? "Environmental Reward System" : "Harmony Ecosystem",
         to: GAIA_TOKEN.WALLET_ADDRESS,
-        purpose:
-          environmentalActions[
-            Math.floor(Math.random() * environmentalActions.length)
-          ],
+        purpose: environmentalActions[Math.floor(Math.random() * environmentalActions.length)],
       };
 
       setTransactions((prev) => [newTransaction, ...prev.slice(0, 4)]);
@@ -132,9 +114,7 @@ export function LiveTransactionMatrix() {
         </CardTitle>
         <div className="flex items-center gap-2 text-sm">
           <Shield className="h-4 w-4 text-green-400" />
-          <span className="text-green-400">
-            Real-time GAiA transactions • 100% Transparent
-          </span>
+          <span className="text-green-400">Real-time GAiA transactions • 100% Transparent</span>
           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
         </div>
       </CardHeader>
@@ -160,13 +140,9 @@ export function LiveTransactionMatrix() {
                     >
                       {tx.type.toUpperCase()}
                     </Badge>
-                    <span className="text-white">
-                      {tx.amount.toFixed(2)} GAiA
-                    </span>
+                    <span className="text-white">{tx.amount.toFixed(2)} GAiA</span>
                   </div>
-                  <span className="text-gray-400">
-                    {tx.timestamp.toLocaleTimeString()}
-                  </span>
+                  <span className="text-gray-400">{tx.timestamp.toLocaleTimeString()}</span>
                 </div>
                 <div className="text-gray-400 mt-1">
                   {tx.purpose} • {tx.hash.slice(0, 16)}...
@@ -178,12 +154,8 @@ export function LiveTransactionMatrix() {
 
         <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-3">
           <div className="text-sm text-cyan-300 space-y-1 text-center">
-            <div>
-              🔗 Connected to: {GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...
-            </div>
-            <div>
-              💼 Community Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...
-            </div>
+            <div>🔗 Connected to: {GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...</div>
+            <div>💼 Community Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...</div>
             <div>🌍 100% Transparent • Real-time Updates • Community First</div>
           </div>
         </div>

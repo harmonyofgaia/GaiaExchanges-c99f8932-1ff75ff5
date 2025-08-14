@@ -52,36 +52,28 @@ export function QuantumAIDashboard() {
               <Zap className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Quantum Computers</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.quantumComputers.total}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.quantumComputers.total}</div>
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Brain className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">AI Models</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.aiModels.total}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.aiModels.total}</div>
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Cpu className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Supercomputers</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.supercomputers.total}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.supercomputers.total}</div>
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Activity className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Synergies</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.synergies}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.synergies}</div>
           </div>
         </div>
         <Button onClick={handleInitialize} size="sm">
@@ -89,12 +81,10 @@ export function QuantumAIDashboard() {
           Initialize Quantum-AI Supremacy
         </Button>
         <div className="p-4 bg-muted/50 rounded-lg">
-          <h4 className="font-medium mb-2">
-            🌟 Quantum-AI Supremacy Guarantee
-          </h4>
+          <h4 className="font-medium mb-2">🌟 Quantum-AI Supremacy Guarantee</h4>
           <p className="text-sm text-muted-foreground">
-            Ultimate computational dominance through quantum-AI synergy,
-            achieving omnipotent artificial intelligence capabilities.
+            Ultimate computational dominance through quantum-AI synergy, achieving omnipotent
+            artificial intelligence capabilities.
           </p>
         </div>
       </CardContent>

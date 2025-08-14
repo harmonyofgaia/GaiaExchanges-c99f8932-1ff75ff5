@@ -6,14 +6,10 @@ const SUPABASE_URL = "https://slheudxfcqqppyphyobq.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNsaGV1ZHhmY3FxcHB5cGh5b2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwMjIyNjIsImV4cCI6MjA2NjU5ODI2Mn0.qPQ339weTKXapr6JgF_iLHSMtB-KOYi503WQf-QxUCE";
 
-export const supabase = createClient<Database>(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY,
-  {
-    auth: {
-      autoRefreshToken: true,
-      persistSession: true,
-      detectSessionInUrl: true,
-    },
+export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
   },
-);
+});

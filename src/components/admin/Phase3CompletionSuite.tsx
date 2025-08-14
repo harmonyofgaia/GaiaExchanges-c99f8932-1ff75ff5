@@ -136,8 +136,7 @@ export function Phase3CompletionSuite() {
 
   const activateGlobalTracking = () => {
     toast.success("🌍 Global Tracking Activated!", {
-      description:
-        "All GAiA token movements now being tracked across all networks",
+      description: "All GAiA token movements now being tracked across all networks",
       duration: 5000,
     });
     setTrackingActive(true);
@@ -158,9 +157,7 @@ export function Phase3CompletionSuite() {
             <p className="text-green-300 font-mono text-xs">
               Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}
             </p>
-            <p className="text-green-300 font-mono text-xs">
-              Pump.fun: {GAIA_TOKEN.PUMP_FUN_URL}
-            </p>
+            <p className="text-green-300 font-mono text-xs">Pump.fun: {GAIA_TOKEN.PUMP_FUN_URL}</p>
           </div>
         </CardHeader>
         <CardContent>
@@ -180,10 +177,7 @@ export function Phase3CompletionSuite() {
                   placeholder="Enter GAiA token address, transaction hash, or wallet..."
                   className="flex-1"
                 />
-                <Button
-                  onClick={performDeepScan}
-                  className="bg-blue-600 hover:bg-blue-700"
-                >
+                <Button onClick={performDeepScan} className="bg-blue-600 hover:bg-blue-700">
                   <Search className="h-4 w-4 mr-2" />
                   Deep Scan
                 </Button>
@@ -198,32 +192,22 @@ export function Phase3CompletionSuite() {
                     <CardContent className="pt-4">
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
-                          <span className="font-medium text-cyan-400">
-                            {engine.name}
-                          </span>
-                          <Badge className="bg-green-600">
-                            {engine.status}
-                          </Badge>
+                          <span className="font-medium text-cyan-400">{engine.name}</span>
+                          <Badge className="bg-green-600">{engine.status}</Badge>
                         </div>
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between">
                             <span>Accuracy:</span>
-                            <span className="text-green-400">
-                              {engine.accuracy}%
-                            </span>
+                            <span className="text-green-400">{engine.accuracy}%</span>
                           </div>
                           <div className="flex justify-between">
                             <span>Speed:</span>
-                            <span className="text-blue-400">
-                              {engine.speed}
-                            </span>
+                            <span className="text-blue-400">{engine.speed}</span>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                          <span className="text-xs text-green-300">
-                            Online & Scanning
-                          </span>
+                          <span className="text-xs text-green-300">Online & Scanning</span>
                         </div>
                       </div>
                     </CardContent>
@@ -236,9 +220,7 @@ export function Phase3CompletionSuite() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="bg-gradient-to-r from-green-900/20 to-blue-900/20 border-green-500/20">
                   <CardHeader>
-                    <CardTitle className="text-green-400">
-                      🎯 Live Tracking Status
-                    </CardTitle>
+                    <CardTitle className="text-green-400">🎯 Live Tracking Status</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="text-center">
@@ -271,20 +253,13 @@ export function Phase3CompletionSuite() {
 
                 <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-500/20">
                   <CardHeader>
-                    <CardTitle className="text-purple-400">
-                      📡 Network Coverage
-                    </CardTitle>
+                    <CardTitle className="text-purple-400">📡 Network Coverage</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-3">
                       {trackingSystems.slice(0, 4).map((system, index) => (
-                        <div
-                          key={index}
-                          className="flex justify-between items-center"
-                        >
-                          <span className="text-sm text-purple-300">
-                            {system.name}
-                          </span>
+                        <div key={index} className="flex justify-between items-center">
+                          <span className="text-sm text-purple-300">{system.name}</span>
                           <div className="flex items-center gap-2">
                             <span className="text-xs text-green-400">
                               {system.targets.toLocaleString()}
@@ -306,9 +281,7 @@ export function Phase3CompletionSuite() {
                   >
                     <CardContent className="pt-4">
                       <div className="space-y-3">
-                        <div className="font-medium text-indigo-400">
-                          {system.name}
-                        </div>
+                        <div className="font-medium text-indigo-400">{system.name}</div>
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between">
                             <span>Targets:</span>
@@ -318,16 +291,12 @@ export function Phase3CompletionSuite() {
                           </div>
                           <div className="flex justify-between">
                             <span>Threats:</span>
-                            <span className="text-blue-400">
-                              {system.threats}
-                            </span>
+                            <span className="text-blue-400">{system.threats}</span>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
                           <Satellite className="h-4 w-4 text-indigo-400" />
-                          <span className="text-xs text-indigo-300">
-                            Real-Time Monitoring
-                          </span>
+                          <span className="text-xs text-indigo-300">Real-Time Monitoring</span>
                         </div>
                       </div>
                     </CardContent>
@@ -339,24 +308,18 @@ export function Phase3CompletionSuite() {
             <TabsContent value="monitoring" className="space-y-4">
               <Card className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border-orange-500/20">
                 <CardHeader>
-                  <CardTitle className="text-orange-400">
-                    🌐 Global Network Monitor
-                  </CardTitle>
+                  <CardTitle className="text-orange-400">🌐 Global Network Monitor</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                     <div className="p-3 bg-green-900/20 rounded-lg">
                       <Activity className="h-6 w-6 mx-auto text-green-400 mb-2" />
-                      <div className="text-lg font-bold text-green-400">
-                        99.9%
-                      </div>
+                      <div className="text-lg font-bold text-green-400">99.9%</div>
                       <div className="text-sm text-green-300">Uptime</div>
                     </div>
                     <div className="p-3 bg-blue-900/20 rounded-lg">
                       <Radar className="h-6 w-6 mx-auto text-blue-400 mb-2" />
-                      <div className="text-lg font-bold text-blue-400">
-                        1.2M
-                      </div>
+                      <div className="text-lg font-bold text-blue-400">1.2M</div>
                       <div className="text-sm text-blue-300">Scans/Hour</div>
                     </div>
                     <div className="p-3 bg-purple-900/20 rounded-lg">
@@ -366,9 +329,7 @@ export function Phase3CompletionSuite() {
                     </div>
                     <div className="p-3 bg-yellow-900/20 rounded-lg">
                       <Target className="h-6 w-6 mx-auto text-yellow-400 mb-2" />
-                      <div className="text-lg font-bold text-yellow-400">
-                        100%
-                      </div>
+                      <div className="text-lg font-bold text-yellow-400">100%</div>
                       <div className="text-sm text-yellow-300">Coverage</div>
                     </div>
                   </div>
@@ -379,40 +340,30 @@ export function Phase3CompletionSuite() {
             <TabsContent value="analytics" className="space-y-4">
               <Card className="bg-gradient-to-r from-cyan-900/20 to-teal-900/20 border-cyan-500/20">
                 <CardHeader>
-                  <CardTitle className="text-cyan-400">
-                    📊 Advanced Analytics Engine
-                  </CardTitle>
+                  <CardTitle className="text-cyan-400">📊 Advanced Analytics Engine</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="p-4 bg-gradient-to-br from-green-900/30 to-blue-900/30 rounded-lg">
                       <Brain className="h-8 w-8 text-green-400 mb-3" />
-                      <h4 className="font-bold text-green-400 mb-2">
-                        AI Pattern Recognition
-                      </h4>
+                      <h4 className="font-bold text-green-400 mb-2">AI Pattern Recognition</h4>
                       <p className="text-sm text-green-300">
-                        Advanced machine learning algorithms detecting
-                        suspicious patterns in GAiA token transactions
+                        Advanced machine learning algorithms detecting suspicious patterns in GAiA
+                        token transactions
                       </p>
                     </div>
                     <div className="p-4 bg-gradient-to-br from-blue-900/30 to-purple-900/30 rounded-lg">
                       <Cpu className="h-8 w-8 text-blue-400 mb-3" />
-                      <h4 className="font-bold text-blue-400 mb-2">
-                        Quantum Processing
-                      </h4>
+                      <h4 className="font-bold text-blue-400 mb-2">Quantum Processing</h4>
                       <p className="text-sm text-blue-300">
-                        Quantum-enhanced processing for ultra-fast analysis of
-                        blockchain data
+                        Quantum-enhanced processing for ultra-fast analysis of blockchain data
                       </p>
                     </div>
                     <div className="p-4 bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-lg">
                       <Database className="h-8 w-8 text-purple-400 mb-3" />
-                      <h4 className="font-bold text-purple-400 mb-2">
-                        Big Data Analytics
-                      </h4>
+                      <h4 className="font-bold text-purple-400 mb-2">Big Data Analytics</h4>
                       <p className="text-sm text-purple-300">
-                        Processing terabytes of blockchain data for
-                        comprehensive insights
+                        Processing terabytes of blockchain data for comprehensive insights
                       </p>
                     </div>
                   </div>

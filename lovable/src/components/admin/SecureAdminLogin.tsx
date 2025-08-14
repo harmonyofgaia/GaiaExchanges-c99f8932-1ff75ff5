@@ -11,9 +11,9 @@ import { toast } from "sonner";
 export function SecureAdminLogin() {
   const navigate = useNavigate();
   const [showRecovery, setShowRecovery] = useState(false);
-  const [recoveryStep, setRecoveryStep] = useState<
-    "credentials" | "mfa" | "complete"
-  >("credentials");
+  const [recoveryStep, setRecoveryStep] = useState<"credentials" | "mfa" | "complete">(
+    "credentials"
+  );
   const [showCredentials, setShowCredentials] = useState(false);
   const [credentialsVisible, setCredentialsVisible] = useState(false);
   const { isAdmin, grantAdminAccess, revokeAdminAccess } = useSecureAdmin();
@@ -31,10 +31,7 @@ export function SecureAdminLogin() {
       vault: vaultKey,
     };
 
-    if (
-      username === validCredentials.user &&
-      password === validCredentials.pass
-    ) {
+    if (username === validCredentials.user && password === validCredentials.pass) {
       // Immediate secure cleanup
       username = "";
       password = "";
@@ -44,8 +41,7 @@ export function SecureAdminLogin() {
 
       grantAdminAccess();
       toast.success("🌍 GAIA Vault Access Granted!", {
-        description:
-          "Quantum vault security verified - all systems operational",
+        description: "Quantum vault security verified - all systems operational",
         duration: 5000,
       });
       return true;
@@ -72,12 +68,8 @@ export function SecureAdminLogin() {
       setShowCredentials(false);
 
       // Clear all DOM traces
-      const credentialElements = document.querySelectorAll(
-        "[data-credential-display]",
-      );
-      console.log(
-        `🔐 Found ${credentialElements.length} credential elements to remove`,
-      );
+      const credentialElements = document.querySelectorAll("[data-credential-display]");
+      console.log(`🔐 Found ${credentialElements.length} credential elements to remove`);
       credentialElements.forEach((el) => el.remove());
 
       toast.success("🔐 Credentials Auto-Cleared", {
@@ -97,10 +89,7 @@ export function SecureAdminLogin() {
     setShowRecovery(true);
   };
 
-  const handleRecoveryCredentialsSuccess = (
-    username: string,
-    password: string,
-  ) => {
+  const handleRecoveryCredentialsSuccess = (username: string, password: string) => {
     // Same validation for recovery with vault connection
     const vaultKey = btoa("harmony quantum vault access")
       .replace(/[^a-zA-Z0-9]/g, "")
@@ -112,10 +101,7 @@ export function SecureAdminLogin() {
       vault: vaultKey,
     };
 
-    if (
-      username === validCredentials.user &&
-      password === validCredentials.pass
-    ) {
+    if (username === validCredentials.user && password === validCredentials.pass) {
       // Secure cleanup
       username = "";
       password = "";
@@ -156,7 +142,7 @@ export function SecureAdminLogin() {
     "🔐 Admin page render - isAdmin:",
     isAdmin,
     "credentialsVisible:",
-    credentialsVisible,
+    credentialsVisible
   );
 
   if (isAdmin && !showRecovery) {
@@ -173,8 +159,7 @@ export function SecureAdminLogin() {
                     🛡️ GAIA VAULT CONTROL CENTER
                   </h2>
                   <p className="text-green-300">
-                    Quantum Vault Security • Full System Control • Global
-                    Management
+                    Quantum Vault Security • Full System Control • Global Management
                   </p>
                 </div>
               </div>
@@ -200,11 +185,7 @@ export function SecureAdminLogin() {
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Recovery Access
                 </Button>
-                <Button
-                  onClick={handleLogout}
-                  variant="outline"
-                  className="border-red-500/30"
-                >
+                <Button onClick={handleLogout} variant="outline" className="border-red-500/30">
                   <LogOut className="h-4 w-4 mr-2" />
                   Secure Logout
                 </Button>
@@ -226,23 +207,16 @@ export function SecureAdminLogin() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                   <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
-                    <div className="text-yellow-300 font-medium">
-                      Admin Username:
-                    </div>
+                    <div className="text-yellow-300 font-medium">Admin Username:</div>
                     <div className="text-white font-mono text-lg">Synatic</div>
                   </div>
                   <div className="bg-black/40 p-3 rounded border border-yellow-500/30">
-                    <div className="text-yellow-300 font-medium">
-                      Vault Password:
-                    </div>
-                    <div className="text-white font-mono text-lg">
-                      harmonyquantumvaultaccess
-                    </div>
+                    <div className="text-yellow-300 font-medium">Vault Password:</div>
+                    <div className="text-white font-mono text-lg">harmonyquantumvaultaccess</div>
                   </div>
                 </div>
                 <div className="text-xs text-yellow-400">
-                  🔐 This display will auto-destruct and clear all traces in 10
-                  seconds
+                  🔐 This display will auto-destruct and clear all traces in 10 seconds
                 </div>
               </div>
             </CardContent>
@@ -252,9 +226,7 @@ export function SecureAdminLogin() {
         {/* All Admin Features */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <Card className="border-blue-500/20 bg-gradient-to-br from-blue-900/20 to-purple-900/20 p-4">
-            <h3 className="text-blue-400 font-bold mb-2">
-              🌐 Live Blockchain Network
-            </h3>
+            <h3 className="text-blue-400 font-bold mb-2">🌐 Live Blockchain Network</h3>
             <p className="text-sm text-muted-foreground mb-3">
               Real-time Architek Network monitoring
             </p>
@@ -267,9 +239,7 @@ export function SecureAdminLogin() {
           </Card>
 
           <Card className="border-green-500/20 bg-gradient-to-br from-green-900/20 to-emerald-900/20 p-4">
-            <h3 className="text-green-400 font-bold mb-2">
-              👥 User Management
-            </h3>
+            <h3 className="text-green-400 font-bold mb-2">👥 User Management</h3>
             <p className="text-sm text-muted-foreground mb-3">
               Control all user accounts & permissions
             </p>
@@ -282,9 +252,7 @@ export function SecureAdminLogin() {
           </Card>
 
           <Card className="border-purple-500/20 bg-gradient-to-br from-purple-900/20 to-pink-900/20 p-4">
-            <h3 className="text-purple-400 font-bold mb-2">
-              🚀 Marketing Engine
-            </h3>
+            <h3 className="text-purple-400 font-bold mb-2">🚀 Marketing Engine</h3>
             <p className="text-sm text-muted-foreground mb-3">
               Global advertising & investor outreach
             </p>
@@ -310,9 +278,7 @@ export function SecureAdminLogin() {
           </Card>
 
           <Card className="border-orange-500/20 bg-gradient-to-br from-orange-900/20 to-red-900/20 p-4">
-            <h3 className="text-orange-400 font-bold mb-2">
-              🎮 Gaming Controls
-            </h3>
+            <h3 className="text-orange-400 font-bold mb-2">🎮 Gaming Controls</h3>
             <p className="text-sm text-muted-foreground mb-3">
               Game security & tournament management
             </p>
@@ -345,9 +311,7 @@ export function SecureAdminLogin() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900 p-6">
       <div className="max-w-md mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-green-400 mb-2">
-            🌍 GAIA VAULT ACCESS
-          </h1>
+          <h1 className="text-4xl font-bold text-green-400 mb-2">🌍 GAIA VAULT ACCESS</h1>
           <p className="text-green-300">
             {showRecovery
               ? "Vault Recovery System • 4-Step Verification"
@@ -374,9 +338,7 @@ export function SecureAdminLogin() {
               <AdminLogin onLoginSuccess={handleRecoveryCredentialsSuccess} />
             )}
 
-            {recoveryStep === "mfa" && (
-              <AdminMFA onMFASuccess={handleRecoveryMFASuccess} />
-            )}
+            {recoveryStep === "mfa" && <AdminMFA onMFASuccess={handleRecoveryMFASuccess} />}
 
             <div className="mt-4 text-center">
               <Button

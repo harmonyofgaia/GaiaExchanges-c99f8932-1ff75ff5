@@ -151,9 +151,7 @@ export function FullVisualControlPanel({
   const applyCustomCSS = () => {
     if (customCSS.trim()) {
       // Create or update custom style element
-      let styleElement = document.getElementById(
-        "gaia-custom-styles",
-      ) as HTMLStyleElement;
+      let styleElement = document.getElementById("gaia-custom-styles") as HTMLStyleElement;
       if (!styleElement) {
         styleElement = document.createElement("style");
         styleElement.id = "gaia-custom-styles";
@@ -303,9 +301,7 @@ export function FullVisualControlPanel({
           <div className="flex items-center gap-3">
             <Wand2 className="h-8 w-8 text-purple-400" />
             <div>
-              <h2 className="text-2xl font-bold text-primary">
-                Master Visual Control Panel
-              </h2>
+              <h2 className="text-2xl font-bold text-primary">Master Visual Control Panel</h2>
               <p className="text-sm text-muted-foreground">
                 Complete interface customization suite
               </p>
@@ -318,11 +314,7 @@ export function FullVisualControlPanel({
               onClick={() => setIsMaximized(!isMaximized)}
               className="text-muted-foreground hover:text-primary"
             >
-              {isMaximized ? (
-                <Minimize className="h-4 w-4" />
-              ) : (
-                <Maximize className="h-4 w-4" />
-              )}
+              {isMaximized ? <Minimize className="h-4 w-4" /> : <Maximize className="h-4 w-4" />}
             </Button>
             <Button
               variant="ghost"
@@ -342,11 +334,7 @@ export function FullVisualControlPanel({
             maxHeight: isMaximized ? "calc(100vh - 80px)" : "calc(95vh - 80px)",
           }}
         >
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="w-full"
-          >
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-7 m-4">
               <TabsTrigger value="effects" className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4" />
@@ -390,20 +378,15 @@ export function FullVisualControlPanel({
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      {Object.entries(activeEffects).map(
-                        ([effect, enabled]) => (
-                          <div
-                            key={effect}
-                            className="flex items-center justify-between"
-                          >
-                            <Label className="capitalize">{effect}</Label>
-                            <Switch
-                              checked={enabled}
-                              onCheckedChange={() => onEffectToggle(effect)}
-                            />
-                          </div>
-                        ),
-                      )}
+                      {Object.entries(activeEffects).map(([effect, enabled]) => (
+                        <div key={effect} className="flex items-center justify-between">
+                          <Label className="capitalize">{effect}</Label>
+                          <Switch
+                            checked={enabled}
+                            onCheckedChange={() => onEffectToggle(effect)}
+                          />
+                        </div>
+                      ))}
                     </CardContent>
                   </Card>
 
@@ -432,9 +415,7 @@ export function FullVisualControlPanel({
                         />
                       </div>
                       <div>
-                        <Label>
-                          Brightness: {themeConfig.effects.brightness}%
-                        </Label>
+                        <Label>Brightness: {themeConfig.effects.brightness}%</Label>
                         <Slider
                           value={[themeConfig.effects.brightness]}
                           onValueChange={(value) =>
@@ -467,9 +448,7 @@ export function FullVisualControlPanel({
                         />
                       </div>
                       <div>
-                        <Label>
-                          Saturation: {themeConfig.effects.saturation}%
-                        </Label>
+                        <Label>Saturation: {themeConfig.effects.saturation}%</Label>
                         <Slider
                           value={[themeConfig.effects.saturation]}
                           onValueChange={(value) =>
@@ -530,9 +509,7 @@ export function FullVisualControlPanel({
                         />
                       </div>
                       <div>
-                        <Label>
-                          Intensity: {themeConfig.animation.intensity}%
-                        </Label>
+                        <Label>Intensity: {themeConfig.animation.intensity}%</Label>
                         <Slider
                           value={[themeConfig.animation.intensity]}
                           onValueChange={(value) =>
@@ -555,50 +532,46 @@ export function FullVisualControlPanel({
 
               <TabsContent value="colors" className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {Object.entries(themeConfig.colors).map(
-                    ([colorName, colorValue]) => (
-                      <Card key={colorName} className="border-purple-500/30">
-                        <CardHeader>
-                          <CardTitle className="capitalize text-purple-400">
-                            {colorName}
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                          <div
-                            className="w-full h-16 rounded-lg border-2 border-white/20"
-                            style={{ backgroundColor: colorValue }}
-                          />
-                          <Input
-                            type="color"
-                            value={colorValue}
-                            onChange={(e) =>
-                              setThemeConfig((prev) => ({
-                                ...prev,
-                                colors: {
-                                  ...prev.colors,
-                                  [colorName]: e.target.value,
-                                },
-                              }))
-                            }
-                            className="h-10"
-                          />
-                          <Input
-                            value={colorValue}
-                            onChange={(e) =>
-                              setThemeConfig((prev) => ({
-                                ...prev,
-                                colors: {
-                                  ...prev.colors,
-                                  [colorName]: e.target.value,
-                                },
-                              }))
-                            }
-                            placeholder="#000000"
-                          />
-                        </CardContent>
-                      </Card>
-                    ),
-                  )}
+                  {Object.entries(themeConfig.colors).map(([colorName, colorValue]) => (
+                    <Card key={colorName} className="border-purple-500/30">
+                      <CardHeader>
+                        <CardTitle className="capitalize text-purple-400">{colorName}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div
+                          className="w-full h-16 rounded-lg border-2 border-white/20"
+                          style={{ backgroundColor: colorValue }}
+                        />
+                        <Input
+                          type="color"
+                          value={colorValue}
+                          onChange={(e) =>
+                            setThemeConfig((prev) => ({
+                              ...prev,
+                              colors: {
+                                ...prev.colors,
+                                [colorName]: e.target.value,
+                              },
+                            }))
+                          }
+                          className="h-10"
+                        />
+                        <Input
+                          value={colorValue}
+                          onChange={(e) =>
+                            setThemeConfig((prev) => ({
+                              ...prev,
+                              colors: {
+                                ...prev.colors,
+                                [colorName]: e.target.value,
+                              },
+                            }))
+                          }
+                          placeholder="#000000"
+                        />
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
               </TabsContent>
 
@@ -629,9 +602,7 @@ export function FullVisualControlPanel({
                         />
                       </div>
                       <div>
-                        <Label>
-                          Border Radius: {themeConfig.layout.borderRadius}px
-                        </Label>
+                        <Label>Border Radius: {themeConfig.layout.borderRadius}px</Label>
                         <Slider
                           value={[themeConfig.layout.borderRadius]}
                           onValueChange={(value) =>
@@ -660,9 +631,7 @@ export function FullVisualControlPanel({
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div>
-                        <Label>
-                          Font Size: {themeConfig.layout.fontSize}px
-                        </Label>
+                        <Label>Font Size: {themeConfig.layout.fontSize}px</Label>
                         <Slider
                           value={[themeConfig.layout.fontSize]}
                           onValueChange={(value) =>
@@ -677,9 +646,7 @@ export function FullVisualControlPanel({
                         />
                       </div>
                       <div>
-                        <Label>
-                          Line Height: {themeConfig.layout.lineHeight}
-                        </Label>
+                        <Label>Line Height: {themeConfig.layout.lineHeight}</Label>
                         <Slider
                           value={[themeConfig.layout.lineHeight]}
                           onValueChange={(value) =>
@@ -725,10 +692,7 @@ export function FullVisualControlPanel({
                     {mediaFiles.length > 0 && (
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {mediaFiles.map((file, index) => (
-                          <div
-                            key={index}
-                            className="border border-muted rounded-lg p-3"
-                          >
+                          <div key={index} className="border border-muted rounded-lg p-3">
                             <div className="text-sm text-muted-foreground truncate">
                               {file.name}
                             </div>
@@ -802,9 +766,7 @@ export function FullVisualControlPanel({
                       onClick={() => applyPreset(preset)}
                     >
                       <CardHeader>
-                        <CardTitle className="text-purple-400">
-                          {preset.name}
-                        </CardTitle>
+                        <CardTitle className="text-purple-400">{preset.name}</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="flex gap-2 mb-4">
@@ -845,10 +807,7 @@ export function FullVisualControlPanel({
                         <Wand2 className="h-4 w-4 mr-2" />
                         Apply CSS
                       </Button>
-                      <Button
-                        variant="outline"
-                        onClick={() => setCustomCSS("")}
-                      >
+                      <Button variant="outline" onClick={() => setCustomCSS("")}>
                         Clear
                       </Button>
                     </div>
@@ -862,10 +821,7 @@ export function FullVisualControlPanel({
         {/* Footer Actions */}
         <div className="border-t border-primary/20 p-6 bg-gradient-to-r from-purple-900/20 to-indigo-900/20">
           <div className="flex flex-wrap gap-3 justify-center">
-            <Button
-              onClick={exportTheme}
-              className="bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={exportTheme} className="bg-purple-600 hover:bg-purple-700">
               <Download className="h-4 w-4 mr-2" />
               Export Complete Theme
             </Button>

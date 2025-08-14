@@ -140,13 +140,8 @@ export function GlobalLeaderboard() {
           ...entry,
           ecoScore: entry.ecoScore + Math.floor(Math.random() * 20),
           tokensEarned: entry.tokensEarned + Math.floor(Math.random() * 100),
-          trend:
-            Math.random() > 0.7
-              ? Math.random() > 0.5
-                ? "up"
-                : "down"
-              : entry.trend,
-        })),
+          trend: Math.random() > 0.7 ? (Math.random() > 0.5 ? "up" : "down") : entry.trend,
+        }))
       );
     }, 10000);
 
@@ -214,9 +209,7 @@ export function GlobalLeaderboard() {
               <Users className="h-5 w-5 text-green-400" />
               <span className="font-bold text-green-400">Total Players</span>
             </div>
-            <div className="text-2xl font-bold text-green-400">
-              {totalPlayers.toLocaleString()}
-            </div>
+            <div className="text-2xl font-bold text-green-400">{totalPlayers.toLocaleString()}</div>
           </CardContent>
         </Card>
 
@@ -236,9 +229,7 @@ export function GlobalLeaderboard() {
               <Zap className="h-5 w-5 text-purple-400" />
               <span className="font-bold text-purple-400">Season Ends</span>
             </div>
-            <div className="text-2xl font-bold text-purple-400">
-              {seasonEnds}
-            </div>
+            <div className="text-2xl font-bold text-purple-400">{seasonEnds}</div>
           </CardContent>
         </Card>
 
@@ -256,9 +247,7 @@ export function GlobalLeaderboard() {
       {/* Leaderboard */}
       <Card className="border-yellow-500/30">
         <CardHeader>
-          <CardTitle className="text-yellow-400">
-            🌍 Top Environmental Champions
-          </CardTitle>
+          <CardTitle className="text-yellow-400">🌍 Top Environmental Champions</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
@@ -272,24 +261,19 @@ export function GlobalLeaderboard() {
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2">
                         {getRankIcon(entry.rank)}
-                        <span className="text-2xl font-bold">
-                          #{entry.rank}
-                        </span>
+                        <span className="text-2xl font-bold">#{entry.rank}</span>
                       </div>
 
                       <div className="flex items-center gap-3">
                         <div className="text-3xl">{entry.avatar}</div>
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className="font-bold text-lg">
-                              {entry.username}
-                            </span>
+                            <span className="font-bold text-lg">{entry.username}</span>
                             <span className="text-xl">{entry.country}</span>
                             {getTrendIcon(entry.trend)}
                           </div>
                           <div className="text-sm text-muted-foreground">
-                            Level {entry.level} • {entry.missionsCompleted}{" "}
-                            missions
+                            Level {entry.level} • {entry.missionsCompleted} missions
                           </div>
                         </div>
                       </div>
@@ -297,18 +281,14 @@ export function GlobalLeaderboard() {
 
                     <div className="flex items-center gap-6">
                       <div className="text-center">
-                        <div className="text-sm text-muted-foreground">
-                          Eco Score
-                        </div>
+                        <div className="text-sm text-muted-foreground">Eco Score</div>
                         <div className="text-xl font-bold text-green-400">
                           {entry.ecoScore.toLocaleString()}
                         </div>
                       </div>
 
                       <div className="text-center">
-                        <div className="text-sm text-muted-foreground">
-                          GAiA Tokens
-                        </div>
+                        <div className="text-sm text-muted-foreground">GAiA Tokens</div>
                         <div className="text-xl font-bold text-blue-400">
                           {entry.tokensEarned.toLocaleString()}
                         </div>
@@ -327,10 +307,7 @@ export function GlobalLeaderboard() {
                   {/* Progress bar for top 3 */}
                   {entry.rank <= 3 && (
                     <div className="mt-3">
-                      <Progress
-                        value={(entry.ecoScore / 10000) * 100}
-                        className="h-2"
-                      />
+                      <Progress value={(entry.ecoScore / 10000) * 100} className="h-2" />
                     </div>
                   )}
                 </CardContent>

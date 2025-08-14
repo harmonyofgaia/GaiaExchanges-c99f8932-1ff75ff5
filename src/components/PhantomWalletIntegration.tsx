@@ -52,9 +52,7 @@ declare global {
       isPhantom?: boolean;
       connect: () => Promise<{ publicKey: { toString: () => string } }>;
       disconnect: () => Promise<void>;
-      signAndSendTransaction: (
-        transaction: PhantomTransaction,
-      ) => Promise<{ signature: string }>;
+      signAndSendTransaction: (transaction: PhantomTransaction) => Promise<{ signature: string }>;
       publicKey?: { toString: () => string };
       isConnected: boolean;
       request: (options: PhantomRequestOptions) => Promise<unknown>;
@@ -229,8 +227,7 @@ export function PhantomWalletIntegration() {
     } catch (error) {
       console.error("Error disconnecting from Phantom wallet:", error);
       toast.error("Disconnection Failed", {
-        description:
-          "Could not disconnect from Phantom Wallet. Please try again.",
+        description: "Could not disconnect from Phantom Wallet. Please try again.",
         duration: 5000,
       });
     }
@@ -290,10 +287,7 @@ export function PhantomWalletIntegration() {
 
         <div className="flex items-center space-x-2">
           {!connected ? (
-            <Button
-              onClick={connectWallet}
-              className="bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={connectWallet} className="bg-purple-600 hover:bg-purple-700">
               <Zap className="h-4 w-4 mr-2" />
               Connect Wallet
             </Button>
@@ -319,41 +313,27 @@ export function PhantomWalletIntegration() {
         {/* Enhanced features when connected */}
         {connected && accounts.length > 0 && (
           <div className="mt-6 space-y-4">
-            <h3 className="text-lg font-semibold text-green-400">
-              GAiA Wallet Accounts
-            </h3>
+            <h3 className="text-lg font-semibold text-green-400">GAiA Wallet Accounts</h3>
             <div className="grid gap-4">
               {accounts.map((walletAccount, index) => (
-                <Card
-                  key={index}
-                  className="bg-gray-800/50 border-green-500/30"
-                >
+                <Card key={index} className="bg-gray-800/50 border-green-500/30">
                   <CardContent className="p-4">
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <h4 className="font-semibold text-green-300">
-                          {walletAccount.name}
-                        </h4>
+                        <h4 className="font-semibold text-green-300">{walletAccount.name}</h4>
                         <p className="text-sm text-gray-400">
                           {walletAccount.address.slice(0, 8)}...
                           {walletAccount.address.slice(-6)}
                         </p>
                       </div>
                       {walletAccount.isImported && (
-                        <Badge className="bg-orange-600 text-white">
-                          Imported
-                        </Badge>
+                        <Badge className="bg-orange-600 text-white">Imported</Badge>
                       )}
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                       {walletAccount.tokens.map((token, tokenIndex) => (
-                        <div
-                          key={tokenIndex}
-                          className="bg-gray-700/50 rounded p-2 text-center"
-                        >
-                          <div className="text-xs text-gray-400">
-                            {token.symbol}
-                          </div>
+                        <div key={tokenIndex} className="bg-gray-700/50 rounded p-2 text-center">
+                          <div className="text-xs text-gray-400">{token.symbol}</div>
                           <div className="text-sm font-semibold text-white">
                             {token.balance.toFixed(2)}
                           </div>

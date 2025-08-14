@@ -19,17 +19,13 @@ export default function GreenImpactDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card className="border-green-500/20">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-green-400">
-                Carbon Offset
-              </CardTitle>
+              <CardTitle className="text-sm font-medium text-green-400">Carbon Offset</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">
                 <Leaf className="h-8 w-8 text-green-400 mr-3" />
                 <div>
-                  <div className="text-2xl font-bold text-green-400">
-                    127 kg
-                  </div>
+                  <div className="text-2xl font-bold text-green-400">127 kg</div>
                   <p className="text-xs text-muted-foreground">CO₂ reduced</p>
                 </div>
               </div>
@@ -38,18 +34,14 @@ export default function GreenImpactDashboard() {
 
           <Card className="border-blue-500/20">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-blue-400">
-                Trees Planted
-              </CardTitle>
+              <CardTitle className="text-sm font-medium text-blue-400">Trees Planted</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">
                 <TreePine className="h-8 w-8 text-blue-400 mr-3" />
                 <div>
                   <div className="text-2xl font-bold text-blue-400">23</div>
-                  <p className="text-xs text-muted-foreground">
-                    trees sponsored
-                  </p>
+                  <p className="text-xs text-muted-foreground">trees sponsored</p>
                 </div>
               </div>
             </CardContent>
@@ -57,9 +49,7 @@ export default function GreenImpactDashboard() {
 
           <Card className="border-cyan-500/20">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-cyan-400">
-                Ocean Cleanup
-              </CardTitle>
+              <CardTitle className="text-sm font-medium text-cyan-400">Ocean Cleanup</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">
@@ -74,9 +64,7 @@ export default function GreenImpactDashboard() {
 
           <Card className="border-purple-500/20">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-purple-400">
-                Air Quality
-              </CardTitle>
+              <CardTitle className="text-sm font-medium text-purple-400">Air Quality</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">

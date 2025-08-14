@@ -2,16 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Brain,
-  Activity,
-  Database,
-  Shield,
-  Zap,
-  TrendingUp,
-  Eye,
-  Target,
-} from "lucide-react";
+import { Brain, Activity, Database, Shield, Zap, TrendingUp, Eye, Target } from "lucide-react";
 
 interface SystemMetrics {
   performance: number;
@@ -71,9 +62,7 @@ export function AutonomousSystemTracker() {
         <CardTitle className="flex items-center gap-2 text-cyan-400">
           <Activity className="h-6 w-6 animate-pulse" />
           🔄 AUTONOMOUS SYSTEM TRACKER - PHASE 1 ACTIVE
-          <Badge className="bg-cyan-600 text-white animate-pulse">
-            REAL-TIME
-          </Badge>
+          <Badge className="bg-cyan-600 text-white animate-pulse">REAL-TIME</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -88,9 +77,7 @@ export function AutonomousSystemTracker() {
 
           <div className="text-center p-3 rounded-lg bg-red-900/30">
             <Shield className="h-6 w-6 text-red-400 mx-auto mb-2" />
-            <div className="text-xl font-bold text-red-400">
-              {metrics.security}%
-            </div>
+            <div className="text-xl font-bold text-red-400">{metrics.security}%</div>
             <div className="text-xs text-muted-foreground">Security</div>
           </div>
 
@@ -127,27 +114,15 @@ export function AutonomousSystemTracker() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-purple-900/30 rounded-lg p-3">
-            <div className="text-sm font-bold text-purple-400 mb-2">
-              Autonomous Improvements
-            </div>
-            <div className="text-2xl font-bold text-purple-400">
-              {metrics.improvements}
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Applied This Session
-            </div>
+            <div className="text-sm font-bold text-purple-400 mb-2">Autonomous Improvements</div>
+            <div className="text-2xl font-bold text-purple-400">{metrics.improvements}</div>
+            <div className="text-xs text-muted-foreground">Applied This Session</div>
           </div>
 
           <div className="bg-blue-900/30 rounded-lg p-3">
-            <div className="text-sm font-bold text-blue-400 mb-2">
-              System Uptime
-            </div>
-            <div className="text-2xl font-bold text-blue-400">
-              {metrics.uptime}%
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Perfect Reliability
-            </div>
+            <div className="text-sm font-bold text-blue-400 mb-2">System Uptime</div>
+            <div className="text-2xl font-bold text-blue-400">{metrics.uptime}%</div>
+            <div className="text-xs text-muted-foreground">Perfect Reliability</div>
           </div>
         </div>
       </CardContent>

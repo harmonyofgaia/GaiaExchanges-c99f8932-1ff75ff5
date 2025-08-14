@@ -11,14 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Search,
-  Filter,
-  Download,
-  ExternalLink,
-  Eye,
-  Shield,
-} from "lucide-react";
+import { Search, Filter, Download, ExternalLink, Eye, Shield } from "lucide-react";
 import { GAIA_TOKEN, formatGaiaPrice } from "@/constants/gaia";
 
 interface Transaction {
@@ -40,10 +33,7 @@ interface Transaction {
 const harmonyTransactions: Transaction[] = [
   {
     id: "1",
-    hash:
-      GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) +
-      "..." +
-      GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
+    hash: GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) + "..." + GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
     type: "reward",
     token: "GAiA",
     amount: 2847.5,
@@ -58,10 +48,7 @@ const harmonyTransactions: Transaction[] = [
   },
   {
     id: "2",
-    hash:
-      GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) +
-      "..." +
-      GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
+    hash: GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) + "..." + GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
     type: "burned",
     token: "GAiA",
     amount: 1250.0,
@@ -76,10 +63,7 @@ const harmonyTransactions: Transaction[] = [
   },
   {
     id: "3",
-    hash:
-      GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) +
-      "..." +
-      GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
+    hash: GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) + "..." + GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
     type: "ecosystem",
     token: "GAiA",
     amount: 3750.25,
@@ -95,8 +79,7 @@ const harmonyTransactions: Transaction[] = [
 ];
 
 export function TransactionTracker() {
-  const [transactions, setTransactions] =
-    useState<Transaction[]>(harmonyTransactions);
+  const [transactions, setTransactions] = useState<Transaction[]>(harmonyTransactions);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState<string>("all");
 
@@ -120,26 +103,18 @@ export function TransactionTracker() {
       const newTransaction: Transaction = {
         id: Date.now().toString(),
         hash:
-          GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) +
-          "..." +
-          GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
+          GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20) + "..." + GAIA_TOKEN.CONTRACT_ADDRESS.slice(-8),
         type: Math.random() > 0.5 ? "reward" : "ecosystem",
         token: "GAiA",
         amount: Math.random() * 2000 + 500,
-        from:
-          Math.random() > 0.5
-            ? "Environmental Reward System"
-            : "Harmony Ecosystem",
+        from: Math.random() > 0.5 ? "Environmental Reward System" : "Harmony Ecosystem",
         to: GAIA_TOKEN.WALLET_ADDRESS,
         timestamp: new Date(),
         status: "confirmed",
         gasUsed: Math.floor(Math.random() * 50000) + 20000,
         gasFee: Math.random() * 0.001,
         blockNumber: Math.floor(Math.random() * 1000) + 18450000,
-        purpose:
-          environmentalActions[
-            Math.floor(Math.random() * environmentalActions.length)
-          ],
+        purpose: environmentalActions[Math.floor(Math.random() * environmentalActions.length)],
       };
 
       setTransactions((prev) => [newTransaction, ...prev.slice(0, 19)]);
@@ -221,27 +196,17 @@ export function TransactionTracker() {
         <div className="bg-gradient-to-r from-green-900/20 via-blue-900/20 to-purple-900/20 border border-green-500/30 rounded-lg p-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
             <div>
-              <div className="text-sm text-muted-foreground">
-                Contract Address
-              </div>
+              <div className="text-sm text-muted-foreground">Contract Address</div>
               <code className="text-xs text-green-400 break-all">
                 {GAIA_TOKEN.CONTRACT_ADDRESS}
               </code>
             </div>
             <div>
-              <div className="text-sm text-muted-foreground">
-                Official Wallet
-              </div>
-              <code className="text-xs text-blue-400 break-all">
-                {GAIA_TOKEN.WALLET_ADDRESS}
-              </code>
+              <div className="text-sm text-muted-foreground">Official Wallet</div>
+              <code className="text-xs text-blue-400 break-all">{GAIA_TOKEN.WALLET_ADDRESS}</code>
             </div>
             <div>
-              <Button
-                onClick={openPumpFun}
-                size="sm"
-                className="bg-purple-600 hover:bg-purple-700"
-              >
+              <Button onClick={openPumpFun} size="sm" className="bg-purple-600 hover:bg-purple-700">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 View on Pump.fun
               </Button>
@@ -307,25 +272,18 @@ export function TransactionTracker() {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <Badge
-                      variant="outline"
-                      className={`${getTypeColor(tx.type)} border-current`}
-                    >
+                    <Badge variant="outline" className={`${getTypeColor(tx.type)} border-current`}>
                       {tx.type.charAt(0).toUpperCase() + tx.type.slice(1)}
                     </Badge>
                   </TableCell>
                   <TableCell className="font-mono">
-                    <div className="font-semibold">
-                      {formatAmount(tx.amount, tx.token)}
-                    </div>
+                    <div className="font-semibold">{formatAmount(tx.amount, tx.token)}</div>
                   </TableCell>
                   <TableCell className="text-xs">
                     <div className="space-y-1">
                       <div className="text-muted-foreground">From:</div>
                       <div className="bg-muted/30 px-1 rounded text-xs">
-                        {tx.from.length > 20
-                          ? `${tx.from.slice(0, 20)}...`
-                          : tx.from}
+                        {tx.from.length > 20 ? `${tx.from.slice(0, 20)}...` : tx.from}
                       </div>
                       <div className="text-muted-foreground">To:</div>
                       <div className="bg-muted/30 px-1 rounded text-xs">
@@ -334,17 +292,12 @@ export function TransactionTracker() {
                     </div>
                   </TableCell>
                   <TableCell className="text-xs">
-                    <Badge
-                      variant="outline"
-                      className="text-cyan-400 border-cyan-400/50"
-                    >
+                    <Badge variant="outline" className="text-cyan-400 border-cyan-400/50">
                       {tx.purpose || "General"}
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <Badge className={getStatusColor(tx.status)}>
-                      {tx.status}
-                    </Badge>
+                    <Badge className={getStatusColor(tx.status)}>{tx.status}</Badge>
                   </TableCell>
                   <TableCell className="text-xs font-mono">
                     <div className="space-y-1">
@@ -355,9 +308,7 @@ export function TransactionTracker() {
                   </TableCell>
                   <TableCell className="text-xs">
                     <div>{tx.timestamp.toLocaleDateString()}</div>
-                    <div className="text-muted-foreground">
-                      {tx.timestamp.toLocaleTimeString()}
-                    </div>
+                    <div className="text-muted-foreground">{tx.timestamp.toLocaleTimeString()}</div>
                   </TableCell>
                 </TableRow>
               ))}

@@ -6,9 +6,7 @@ export function useAutoIssueResolver() {
   const [issues, setIssues] = useState<Issue[]>([]);
   const [isMonitoring, setIsMonitoring] = useState(true);
   const [lastCheck, setLastCheck] = useState<Date>(new Date());
-  const [securityLevel, setSecurityLevel] = useState<"HIGH" | "MEDIUM" | "LOW">(
-    "HIGH",
-  );
+  const [securityLevel, setSecurityLevel] = useState<"HIGH" | "MEDIUM" | "LOW">("HIGH");
   const { toast } = useToast();
 
   // Advanced security and system monitoring every 3 seconds
@@ -32,9 +30,7 @@ export function useAutoIssueResolver() {
           if (networkMonitor.length > 0) {
             const timing = networkMonitor[0] as PerformanceNavigationTiming;
             if (timing.responseStart - timing.requestStart > 5000) {
-              console.log(
-                "⚠️ Unusual network delay detected - potential attack vector",
-              );
+              console.log("⚠️ Unusual network delay detected - potential attack vector");
               suspiciousRequests++;
             }
           }
@@ -43,11 +39,7 @@ export function useAutoIssueResolver() {
           const scripts = document.querySelectorAll("script[src]");
           scripts.forEach((script) => {
             const src = script.getAttribute("src") || "";
-            if (
-              src.includes("suspicious") ||
-              src.includes("malware") ||
-              src.includes("phishing")
-            ) {
+            if (src.includes("suspicious") || src.includes("malware") || src.includes("phishing")) {
               newIssues.push({
                 id: `security-threat-${Date.now()}`,
                 type: "error",
@@ -120,12 +112,7 @@ export function useAutoIssueResolver() {
           const sessionStorage = window.sessionStorage;
 
           // Check for suspicious wallet-related storage
-          const walletKeys = [
-            "wallet",
-            "private_key",
-            "seed_phrase",
-            "mnemonic",
-          ];
+          const walletKeys = ["wallet", "private_key", "seed_phrase", "mnemonic"];
           walletKeys.forEach((key) => {
             if (localStorage.getItem(key) || sessionStorage.getItem(key)) {
               console.log("🔐 Wallet data detected - ensuring encryption");
@@ -137,8 +124,7 @@ export function useAutoIssueResolver() {
                 newIssues.push({
                   id: `wallet-security-${Date.now()}`,
                   type: "warning",
-                  message:
-                    "⚠️ WALLET SECURITY: Sensitive data detected in storage",
+                  message: "⚠️ WALLET SECURITY: Sensitive data detected in storage",
                   component: "Wallet Security Monitor",
                   resolved: false,
                   timestamp: new Date(),
@@ -159,22 +145,19 @@ export function useAutoIssueResolver() {
         const checkExchangeIntegrity = () => {
           // Monitor trading functions
           const tradingElements = document.querySelectorAll(
-            '[data-testid*="trading"], [class*="trading"]',
+            '[data-testid*="trading"], [class*="trading"]'
           );
 
           // Check for unauthorized trading modifications
           tradingElements.forEach((element) => {
-            if (
-              element.innerHTML.includes("transfer") ||
-              element.innerHTML.includes("withdraw")
-            ) {
+            if (element.innerHTML.includes("transfer") || element.innerHTML.includes("withdraw")) {
               console.log("🔒 Trading interface integrity verified");
             }
           });
 
           // Monitor for price manipulation attempts
           const priceElements = document.querySelectorAll(
-            '[data-testid*="price"], [class*="price"]',
+            '[data-testid*="price"], [class*="price"]'
           );
           priceElements.forEach((element) => {
             const priceText = element.textContent || "";
@@ -182,9 +165,7 @@ export function useAutoIssueResolver() {
               priceText.includes("$") &&
               parseFloat(priceText.replace(/[^0-9.]/g, "")) > 1000000
             ) {
-              console.log(
-                "⚠️ Unusual price data detected - verifying authenticity",
-              );
+              console.log("⚠️ Unusual price data detected - verifying authenticity");
             }
           });
 
@@ -221,7 +202,7 @@ export function useAutoIssueResolver() {
 
           // Check download links specifically
           const downloadLinks = document.querySelectorAll(
-            'a[href*="download"], button[class*="download"]',
+            'a[href*="download"], button[class*="download"]'
           );
           downloadLinks.forEach((link) => {
             const href = link.getAttribute("href");
@@ -239,12 +220,7 @@ export function useAutoIssueResolver() {
           const links = document.querySelectorAll("a[href]");
           links.forEach((link) => {
             const href = link.getAttribute("href") || "";
-            const suspiciousDomains = [
-              "phishing",
-              "scam",
-              "fake-gaia",
-              "malicious",
-            ];
+            const suspiciousDomains = ["phishing", "scam", "fake-gaia", "malicious"];
 
             if (suspiciousDomains.some((domain) => href.includes(domain))) {
               newIssues.push({
@@ -271,7 +247,7 @@ export function useAutoIssueResolver() {
         const checkAdminSecurity = () => {
           // Ensure admin functions are properly isolated
           const adminElements = document.querySelectorAll(
-            '[data-testid*="admin"], [class*="admin"]',
+            '[data-testid*="admin"], [class*="admin"]'
           );
           adminElements.forEach((element) => {
             // Check for proper access controls
@@ -326,9 +302,7 @@ export function useAutoIssueResolver() {
 
         // 🚨 ONLY NOTIFY ON ACTUAL THREATS
         if (newIssues.length > 0) {
-          const criticalIssues = newIssues.filter(
-            (issue) => issue.type === "error",
-          );
+          const criticalIssues = newIssues.filter((issue) => issue.type === "error");
           if (criticalIssues.length > 0) {
             toast({
               title: "🛡️ HARMONY OF GAIA SECURITY",
@@ -353,8 +327,7 @@ export function useAutoIssueResolver() {
             memory?: { usedJSHeapSize: number; totalJSHeapSize: number };
           };
           if (performanceWithMemory.memory) {
-            const { usedJSHeapSize, totalJSHeapSize } =
-              performanceWithMemory.memory;
+            const { usedJSHeapSize, totalJSHeapSize } = performanceWithMemory.memory;
             if (usedJSHeapSize > totalJSHeapSize * 0.9) {
               console.log("🛡️ Memory security cleanup initiated");
               const windowWithGC = window as Window & { gc?: () => void };
@@ -366,19 +339,13 @@ export function useAutoIssueResolver() {
         }
 
         console.log("🌍 Harmony of Gaia - Advanced Security Check Complete");
-        console.log(
-          `🛡️ Security Level: ${securityLevel} | Threats Detected: ${newIssues.length}`,
-        );
-        console.log(
-          `✅ System Status: ${securityPercentage.toFixed(1)}% Secure`,
-        );
+        console.log(`🛡️ Security Level: ${securityLevel} | Threats Detected: ${newIssues.length}`);
+        console.log(`✅ System Status: ${securityPercentage.toFixed(1)}% Secure`);
       } catch (error) {
         console.log("🔒 Security monitor self-healing:", error);
         // Auto-recovery for security monitor
         setTimeout(() => {
-          console.log(
-            "🛡️ Security monitor restored - Harmony of Gaia protection active",
-          );
+          console.log("🛡️ Security monitor restored - Harmony of Gaia protection active");
         }, 1000);
       }
 
@@ -414,10 +381,7 @@ export function useAutoIssueResolver() {
         });
       }
       // Don't spam console with React warnings during security monitoring
-      if (
-        !errorMessage.includes("StrictMode") &&
-        !errorMessage.includes("deprecated")
-      ) {
+      if (!errorMessage.includes("StrictMode") && !errorMessage.includes("deprecated")) {
         originalError.apply(console, args);
       }
     };

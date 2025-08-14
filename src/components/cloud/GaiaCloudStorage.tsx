@@ -236,16 +236,13 @@ export function GaiaCloudStorage({
     if (mimeType.startsWith("image/")) return "image";
     if (mimeType.startsWith("video/")) return "video";
     if (mimeType.startsWith("audio/")) return "audio";
-    if (mimeType.includes("json") || mimeType.includes("template"))
-      return "template";
+    if (mimeType.includes("json") || mimeType.includes("template")) return "template";
     return "text";
   };
 
   const processAssetInCloud = async (asset: CloudAsset) => {
     // Find appropriate engine
-    const engine = engines.find(
-      (e) => e.type === asset.type || e.type === "universal",
-    );
+    const engine = engines.find((e) => e.type === asset.type || e.type === "universal");
 
     if (!engine) return;
 
@@ -265,8 +262,8 @@ export function GaiaCloudStorage({
                 eta: processingTime,
               },
             }
-          : e,
-      ),
+          : e
+      )
     );
 
     // Simulate processing progress
@@ -284,7 +281,7 @@ export function GaiaCloudStorage({
             };
           }
           return e;
-        }),
+        })
       );
     }, processingTime / 10);
 
@@ -313,8 +310,8 @@ export function GaiaCloudStorage({
                   tags: generateSmartTags(a),
                 },
               }
-            : a,
-        ),
+            : a
+        )
       );
 
       // Reset engine
@@ -326,8 +323,8 @@ export function GaiaCloudStorage({
                 status: "idle",
                 currentJob: undefined,
               }
-            : e,
-        ),
+            : e
+        )
       );
 
       toast.success(`Cloud processing completed for ${asset.name}`);
@@ -374,9 +371,7 @@ export function GaiaCloudStorage({
 
     // Update last accessed
     setAssets((prev) =>
-      prev.map((a) =>
-        a.id === asset.id ? { ...a, lastAccessed: new Date() } : a,
-      ),
+      prev.map((a) => (a.id === asset.id ? { ...a, lastAccessed: new Date() } : a))
     );
   };
 
@@ -425,10 +420,7 @@ export function GaiaCloudStorage({
               {storageUsed.toFixed(1)} / {maxStorageGB} GB
             </Badge>
           </CardTitle>
-          <Progress
-            value={(storageUsed / maxStorageGB) * 100}
-            className="h-2"
-          />
+          <Progress value={(storageUsed / maxStorageGB) * 100} className="h-2" />
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="assets" className="w-full">
@@ -444,9 +436,7 @@ export function GaiaCloudStorage({
                 <div className="text-center py-8">
                   <Cloud className="mx-auto w-12 h-12 text-gray-400 mb-4" />
                   <p className="text-gray-400">No assets in cloud storage</p>
-                  <p className="text-sm text-gray-500">
-                    Upload files to get started
-                  </p>
+                  <p className="text-sm text-gray-500">Upload files to get started</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -486,8 +476,7 @@ export function GaiaCloudStorage({
                               className={`text-xs ${
                                 asset.metadata.processingStatus === "completed"
                                   ? "text-green-400 border-green-400"
-                                  : asset.metadata.processingStatus ===
-                                      "processing"
+                                  : asset.metadata.processingStatus === "processing"
                                     ? "text-yellow-400 border-yellow-400"
                                     : "text-gray-400 border-gray-400"
                               }`}
@@ -502,17 +491,11 @@ export function GaiaCloudStorage({
                           </div>
 
                           <div className="flex gap-1 flex-wrap">
-                            {asset.metadata.tags
-                              .slice(0, 3)
-                              .map((tag, index) => (
-                                <Badge
-                                  key={index}
-                                  variant="secondary"
-                                  className="text-xs"
-                                >
-                                  {tag}
-                                </Badge>
-                              ))}
+                            {asset.metadata.tags.slice(0, 3).map((tag, index) => (
+                              <Badge key={index} variant="secondary" className="text-xs">
+                                {tag}
+                              </Badge>
+                            ))}
                           </div>
 
                           <div className="flex gap-2 pt-2">
@@ -562,9 +545,7 @@ export function GaiaCloudStorage({
                     <CardContent className="p-4">
                       <div className="flex items-center gap-2 mb-3">
                         {getEngineIcon(engine.type)}
-                        <h4 className="font-medium text-gray-200">
-                          {engine.name}
-                        </h4>
+                        <h4 className="font-medium text-gray-200">{engine.name}</h4>
                         <Badge
                           variant="outline"
                           className={`ml-auto ${
@@ -585,29 +566,18 @@ export function GaiaCloudStorage({
                             <span>Processing...</span>
                             <span>{engine.currentJob.progress}%</span>
                           </div>
-                          <Progress
-                            value={engine.currentJob.progress}
-                            className="h-2"
-                          />
+                          <Progress value={engine.currentJob.progress} className="h-2" />
                         </div>
                       )}
 
                       <div className="space-y-1">
-                        <p className="text-xs text-gray-400 font-medium">
-                          Capabilities:
-                        </p>
+                        <p className="text-xs text-gray-400 font-medium">Capabilities:</p>
                         <div className="flex flex-wrap gap-1">
-                          {engine.capabilities
-                            .slice(0, 4)
-                            .map((capability, index) => (
-                              <Badge
-                                key={index}
-                                variant="secondary"
-                                className="text-xs"
-                              >
-                                {capability}
-                              </Badge>
-                            ))}
+                          {engine.capabilities.slice(0, 4).map((capability, index) => (
+                            <Badge key={index} variant="secondary" className="text-xs">
+                              {capability}
+                            </Badge>
+                          ))}
                           {engine.capabilities.length > 4 && (
                             <Badge variant="secondary" className="text-xs">
                               +{engine.capabilities.length - 4} more
@@ -627,24 +597,17 @@ export function GaiaCloudStorage({
                   type="file"
                   multiple
                   accept="image/*,video/*,audio/*,.json"
-                  onChange={(e) =>
-                    e.target.files && handleFileUpload(e.target.files)
-                  }
+                  onChange={(e) => e.target.files && handleFileUpload(e.target.files)}
                   className="hidden"
                   id="cloud-upload"
                 />
                 <label htmlFor="cloud-upload" className="cursor-pointer">
                   <Upload className="mx-auto w-12 h-12 text-gray-400 mb-4" />
-                  <p className="text-gray-300 mb-4">
-                    Upload files to GAIA Cloud Storage
-                  </p>
+                  <p className="text-gray-300 mb-4">Upload files to GAIA Cloud Storage</p>
                   <p className="text-sm text-gray-500 mb-4">
                     Supports images, videos, audio, and templates
                   </p>
-                  <Button
-                    disabled={isUploading}
-                    className="bg-cyan-600 hover:bg-cyan-700"
-                  >
+                  <Button disabled={isUploading} className="bg-cyan-600 hover:bg-cyan-700">
                     <Upload className="w-4 h-4 mr-2" />
                     {isUploading ? "Uploading..." : "Select Files"}
                   </Button>
@@ -667,9 +630,7 @@ export function GaiaCloudStorage({
                 <Card className="bg-gray-800/50">
                   <CardContent className="p-4 text-center">
                     <Zap className="mx-auto w-8 h-8 text-yellow-400 mb-2" />
-                    <h4 className="font-medium text-gray-200 mb-1">
-                      Auto-Processing
-                    </h4>
+                    <h4 className="font-medium text-gray-200 mb-1">Auto-Processing</h4>
                     <p className="text-sm text-gray-400">
                       Files are automatically processed upon upload
                     </p>
@@ -679,9 +640,7 @@ export function GaiaCloudStorage({
                 <Card className="bg-gray-800/50">
                   <CardContent className="p-4 text-center">
                     <Database className="mx-auto w-8 h-8 text-green-400 mb-2" />
-                    <h4 className="font-medium text-gray-200 mb-1">
-                      Smart Storage
-                    </h4>
+                    <h4 className="font-medium text-gray-200 mb-1">Smart Storage</h4>
                     <p className="text-sm text-gray-400">
                       Intelligent compression and organization
                     </p>
@@ -691,9 +650,7 @@ export function GaiaCloudStorage({
                 <Card className="bg-gray-800/50">
                   <CardContent className="p-4 text-center">
                     <Lock className="mx-auto w-8 h-8 text-cyan-400 mb-2" />
-                    <h4 className="font-medium text-gray-200 mb-1">
-                      Secure Cloud
-                    </h4>
+                    <h4 className="font-medium text-gray-200 mb-1">Secure Cloud</h4>
                     <p className="text-sm text-gray-400">
                       Enterprise-grade security and encryption
                     </p>
@@ -705,16 +662,12 @@ export function GaiaCloudStorage({
             <TabsContent value="settings" className="space-y-4">
               <Card className="bg-gray-800/50">
                 <CardHeader>
-                  <CardTitle className="text-lg text-gray-200">
-                    Cloud Settings
-                  </CardTitle>
+                  <CardTitle className="text-lg text-gray-200">Cloud Settings</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="font-medium text-gray-200">
-                        Auto-Processing
-                      </h4>
+                      <h4 className="font-medium text-gray-200">Auto-Processing</h4>
                       <p className="text-sm text-gray-400">
                         Automatically process uploads with AI engines
                       </p>
@@ -726,9 +679,7 @@ export function GaiaCloudStorage({
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="font-medium text-gray-200">
-                        Smart Compression
-                      </h4>
+                      <h4 className="font-medium text-gray-200">Smart Compression</h4>
                       <p className="text-sm text-gray-400">
                         Optimize file sizes while maintaining quality
                       </p>
@@ -741,9 +692,7 @@ export function GaiaCloudStorage({
                   <div className="flex items-center justify-between">
                     <div>
                       <h4 className="font-medium text-gray-200">Cloud Sync</h4>
-                      <p className="text-sm text-gray-400">
-                        Sync assets across all devices
-                      </p>
+                      <p className="text-sm text-gray-400">Sync assets across all devices</p>
                     </div>
                     <Button variant="outline" size="sm">
                       <RefreshCw className="w-4 h-4" />

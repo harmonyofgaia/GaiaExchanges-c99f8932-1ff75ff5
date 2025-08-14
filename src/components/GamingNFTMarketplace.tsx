@@ -131,11 +131,8 @@ export function GamingNFTMarketplace() {
   };
 
   const filteredNFTs = landscapeNFTs.filter((nft) => {
-    const matchesSearch = nft.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesRarity =
-      selectedRarity === "All" || nft.rarity === selectedRarity;
+    const matchesSearch = nft.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesRarity = selectedRarity === "All" || nft.rarity === selectedRarity;
     return matchesSearch && matchesRarity;
   });
 
@@ -147,8 +144,8 @@ export function GamingNFTMarketplace() {
           🏪 GAiA LANDSCAPE ATTACK NFT MARKETPLACE
         </CardTitle>
         <p className="text-muted-foreground">
-          Purchase NFT landscapes powered by Harmony of Gaia token • Buy, sell,
-          and trade on our secure platform
+          Purchase NFT landscapes powered by Harmony of Gaia token • Buy, sell, and trade on our
+          secure platform
         </p>
       </CardHeader>
 
@@ -158,16 +155,12 @@ export function GamingNFTMarketplace() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-green-400 text-sm">
               <Crown className="h-4 w-4" />
-              <span className="font-medium">
-                ✅ Connected to Harmony of Gaia Network
-              </span>
+              <span className="font-medium">✅ Connected to Harmony of Gaia Network</span>
             </div>
             <Button
               size="sm"
               variant="outline"
-              onClick={() =>
-                window.open("https://www.gaiaexchange.net", "_blank")
-              }
+              onClick={() => window.open("https://www.gaiaexchange.net", "_blank")}
               className="text-xs"
             >
               <ExternalLink className="h-3 w-3 mr-1" />
@@ -176,12 +169,11 @@ export function GamingNFTMarketplace() {
           </div>
           <div className="mt-2 text-xs text-green-300 space-y-1">
             <p>
-              Token: {GAIA_TOKEN.SYMBOL} | Contract:{" "}
-              {GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...
+              Token: {GAIA_TOKEN.SYMBOL} | Contract: {GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...
             </p>
             <p>
-              Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}... | All
-              transactions secured on Solana network
+              Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}... | All transactions secured on
+              Solana network
             </p>
           </div>
         </div>
@@ -229,9 +221,7 @@ export function GamingNFTMarketplace() {
                 <div className="relative h-32 bg-gradient-to-br from-black/30 to-gray-900/30 rounded-lg overflow-hidden flex items-center justify-center">
                   <div className="text-6xl">{nft.image}</div>
                   <div className="absolute top-2 left-2">
-                    <Badge
-                      className={`bg-gradient-to-r ${getRarityColor(nft.rarity)} text-white`}
-                    >
+                    <Badge className={`bg-gradient-to-r ${getRarityColor(nft.rarity)} text-white`}>
                       {nft.rarity}
                     </Badge>
                   </div>
@@ -242,33 +232,25 @@ export function GamingNFTMarketplace() {
 
                 {/* NFT Details */}
                 <div>
-                  <h3 className="font-bold text-lg text-white mb-2">
-                    {nft.name}
-                  </h3>
+                  <h3 className="font-bold text-lg text-white mb-2">{nft.name}</h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="flex items-center gap-1">
                         <Sword className="h-3 w-3 text-red-400" />
                         Attack:
                       </span>
-                      <span className="text-red-400 font-bold">
-                        {nft.attackPower}
-                      </span>
+                      <span className="text-red-400 font-bold">{nft.attackPower}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="flex items-center gap-1">
                         <Shield className="h-3 w-3 text-blue-400" />
                         Defense:
                       </span>
-                      <span className="text-blue-400 font-bold">
-                        {nft.defenseBonus}
-                      </span>
+                      <span className="text-blue-400 font-bold">{nft.defenseBonus}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-purple-400">Special:</span>
-                      <span className="text-purple-400 font-bold">
-                        {nft.specialAbility}
-                      </span>
+                      <span className="text-purple-400 font-bold">{nft.specialAbility}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">Creator:</span>
@@ -280,12 +262,8 @@ export function GamingNFTMarketplace() {
                 {/* Price and Buy */}
                 <div className="space-y-3">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-400">
-                      {nft.price} GAIA
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      Harmony of Gaia Token
-                    </div>
+                    <div className="text-2xl font-bold text-green-400">{nft.price} GAIA</div>
+                    <div className="text-xs text-muted-foreground">Harmony of Gaia Token</div>
                   </div>
                   <Button
                     onClick={() => buyNFT(nft)}
@@ -306,9 +284,7 @@ export function GamingNFTMarketplace() {
           <CardContent className="p-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div>
-                <div className="text-2xl font-bold text-purple-400">
-                  {landscapeNFTs.length}
-                </div>
+                <div className="text-2xl font-bold text-purple-400">{landscapeNFTs.length}</div>
                 <div className="text-sm text-muted-foreground">Total NFTs</div>
               </div>
               <div>
@@ -325,9 +301,7 @@ export function GamingNFTMarketplace() {
               </div>
               <div>
                 <div className="text-2xl font-bold text-yellow-400">100%</div>
-                <div className="text-sm text-muted-foreground">
-                  GAiA Powered
-                </div>
+                <div className="text-sm text-muted-foreground">GAiA Powered</div>
               </div>
             </div>
           </CardContent>
@@ -342,22 +316,18 @@ export function GamingNFTMarketplace() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-muted-foreground">
               <div>
                 <p>
-                  <span className="text-green-400">Contract:</span>{" "}
-                  {GAIA_TOKEN.CONTRACT_ADDRESS}
+                  <span className="text-green-400">Contract:</span> {GAIA_TOKEN.CONTRACT_ADDRESS}
                 </p>
                 <p>
-                  <span className="text-green-400">Network:</span>{" "}
-                  {GAIA_TOKEN.NETWORK}
+                  <span className="text-green-400">Network:</span> {GAIA_TOKEN.NETWORK}
                 </p>
               </div>
               <div>
                 <p>
-                  <span className="text-green-400">Wallet:</span>{" "}
-                  {GAIA_TOKEN.WALLET_ADDRESS}
+                  <span className="text-green-400">Wallet:</span> {GAIA_TOKEN.WALLET_ADDRESS}
                 </p>
                 <p>
-                  <span className="text-green-400">Website:</span>{" "}
-                  www.gaiaexchange.net
+                  <span className="text-green-400">Website:</span> www.gaiaexchange.net
                 </p>
               </div>
             </div>

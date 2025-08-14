@@ -166,9 +166,7 @@ class WeaponizedCounterAttackService {
     await new Promise((resolve) => setTimeout(resolve, 1500));
   }
 
-  private async executeSocialReversalAttack(
-    attack: CounterAttack,
-  ): Promise<void> {
+  private async executeSocialReversalAttack(attack: CounterAttack): Promise<void> {
     console.log("🎭 Executing Social Engineering Reversal");
 
     // Create counter social engineering campaign
@@ -190,9 +188,7 @@ class WeaponizedCounterAttackService {
     await new Promise((resolve) => setTimeout(resolve, 1800));
   }
 
-  private async executeQuantumRetaliation(
-    attack: CounterAttack,
-  ): Promise<void> {
+  private async executeQuantumRetaliation(attack: CounterAttack): Promise<void> {
     console.log("⚛️ Executing Quantum Retaliation");
 
     // Ultimate quantum-level counter-attack
@@ -235,9 +231,7 @@ class WeaponizedCounterAttackService {
     });
   }
 
-  private async distributeReputationData(
-    weapon: IPReputationWeapon,
-  ): Promise<void> {
+  private async distributeReputationData(weapon: IPReputationWeapon): Promise<void> {
     for (const network of weapon.distributionNetworks) {
       console.log(`📡 Distributing to ${network}:`, weapon.ip);
       // Simulate network distribution
@@ -279,26 +273,19 @@ class WeaponizedCounterAttackService {
       quid_pro_quo: "False reciprocity trap with payload delivery",
     };
 
-    return (
-      strategies[attack.type as keyof typeof strategies] ||
-      "Generic reversal strategy"
-    );
+    return strategies[attack.type as keyof typeof strategies] || "Generic reversal strategy";
   }
 
   private async createReversalContent(attack: any): Promise<string> {
     // Generate convincing counter-content
     const templates = {
-      phishing:
-        "Legitimate-looking response that actually gathers attacker data",
+      phishing: "Legitimate-looking response that actually gathers attacker data",
       pretexting: "Counter-narrative that exposes attacker motivations",
       baiting: "Attractive offer that delivers monitoring payload",
       quid_pro_quo: "Fake reciprocal offer with intelligence gathering",
     };
 
-    return (
-      templates[attack.type as keyof typeof templates] ||
-      "Generic counter-content"
-    );
+    return templates[attack.type as keyof typeof templates] || "Generic counter-content";
   }
 
   async executeSocialReversal(reversalId: string): Promise<void> {
@@ -353,9 +340,7 @@ class WeaponizedCounterAttackService {
     return weaponizedHoneypot;
   }
 
-  private async deployWeaponizedHoneypot(
-    honeypot: WeaponizedHoneypot,
-  ): Promise<void> {
+  private async deployWeaponizedHoneypot(honeypot: WeaponizedHoneypot): Promise<void> {
     // Start monitoring for attackers
     setInterval(() => {
       if (Math.random() > 0.85) {
@@ -369,7 +354,7 @@ class WeaponizedCounterAttackService {
         });
 
         console.log(
-          `🍯 Honeypot ${honeypot.id} trapped attacker (total: ${honeypot.attackersTrapped})`,
+          `🍯 Honeypot ${honeypot.id} trapped attacker (total: ${honeypot.attackersTrapped})`
         );
 
         // Execute weaponization
@@ -378,9 +363,7 @@ class WeaponizedCounterAttackService {
     }, 30000); // Check every 30 seconds
   }
 
-  private async executeHoneypotWeaponization(
-    honeypot: WeaponizedHoneypot,
-  ): Promise<void> {
+  private async executeHoneypotWeaponization(honeypot: WeaponizedHoneypot): Promise<void> {
     switch (honeypot.weaponization) {
       case "data_collection":
         console.log("📊 Collecting attacker intelligence");
@@ -430,10 +413,7 @@ class WeaponizedCounterAttackService {
       attackType: counterAttackType,
       targetIP: threatData.sourceIP,
       intensity,
-      evidence: [
-        `Auto-detected ${threatData.attackType}`,
-        `Severity: ${threatData.severity}`,
-      ],
+      evidence: [`Auto-detected ${threatData.attackType}`, `Severity: ${threatData.severity}`],
     });
   }
 
@@ -442,20 +422,20 @@ class WeaponizedCounterAttackService {
     return {
       isActive: this.isCounterAttackActive,
       autoRetaliationEnabled: this.autoRetaliationEnabled,
-      activeCounterAttacks: Array.from(
-        this.activeCounterAttacks.values(),
-      ).filter((ca) => ca.status === "executing").length,
+      activeCounterAttacks: Array.from(this.activeCounterAttacks.values()).filter(
+        (ca) => ca.status === "executing"
+      ).length,
       completedAttacks: Array.from(this.activeCounterAttacks.values()).filter(
-        (ca) => ca.status === "completed",
+        (ca) => ca.status === "completed"
       ).length,
       weaponizedIPs: this.ipReputationWeapons.size,
       socialReversals: this.socialReversals.size,
-      weaponizedHoneypots: Array.from(this.weaponizedHoneypots.values()).filter(
-        (h) => h.isActive,
-      ).length,
-      totalAttackersTrapped: Array.from(
-        this.weaponizedHoneypots.values(),
-      ).reduce((sum, h) => sum + h.attackersTrapped, 0),
+      weaponizedHoneypots: Array.from(this.weaponizedHoneypots.values()).filter((h) => h.isActive)
+        .length,
+      totalAttackersTrapped: Array.from(this.weaponizedHoneypots.values()).reduce(
+        (sum, h) => sum + h.attackersTrapped,
+        0
+      ),
     };
   }
 

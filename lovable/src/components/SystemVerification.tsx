@@ -163,10 +163,7 @@ export function SystemVerification() {
         // Perform actual checks based on type
         switch (check.id) {
           case "supabase-db": {
-            const { data, error } = await supabase
-              .from("profiles")
-              .select("count")
-              .limit(1);
+            const { data, error } = await supabase.from("profiles").select("count").limit(1);
             if (error) {
               status = "warning";
               details = `DB Warning: ${error.message}`;
@@ -189,10 +186,7 @@ export function SystemVerification() {
           case "github-integration":
             // These would require actual fetch requests in production
             status = Math.random() > 0.1 ? "online" : "warning";
-            details =
-              status === "online"
-                ? "Website accessible"
-                : "Minor connectivity issues";
+            details = status === "online" ? "Website accessible" : "Minor connectivity issues";
             break;
 
           default:
@@ -206,10 +200,8 @@ export function SystemVerification() {
 
       setChecks((prev) =>
         prev.map((c, index) =>
-          index === i
-            ? { ...c, status, responseTime, details, lastChecked: new Date() }
-            : c,
-        ),
+          index === i ? { ...c, status, responseTime, details, lastChecked: new Date() } : c
+        )
       );
     }
 
@@ -291,7 +283,7 @@ export function SystemVerification() {
       acc[check.category].push(check);
       return acc;
     },
-    {} as Record<string, SystemCheck[]>,
+    {} as Record<string, SystemCheck[]>
   );
 
   return (
@@ -315,12 +307,8 @@ export function SystemVerification() {
           {/* Overall Health Score */}
           <div className="bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border border-cyan-500/30 rounded-lg p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-2xl font-bold text-cyan-400">
-                🌍 Overall System Health
-              </h3>
-              <div className="text-4xl font-bold text-cyan-400">
-                {overallHealth}%
-              </div>
+              <h3 className="text-2xl font-bold text-cyan-400">🌍 Overall System Health</h3>
+              <div className="text-4xl font-bold text-cyan-400">{overallHealth}%</div>
             </div>
             <Progress value={overallHealth} className="h-4 mb-4" />
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
@@ -343,9 +331,7 @@ export function SystemVerification() {
                 <div className="text-muted-foreground">Offline</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-400">
-                  {checks.length}
-                </div>
+                <div className="text-2xl font-bold text-blue-400">{checks.length}</div>
                 <div className="text-muted-foreground">Total Systems</div>
               </div>
             </div>
@@ -360,8 +346,7 @@ export function SystemVerification() {
             {isRunningCheck ? (
               <>
                 <RefreshCw className="h-5 w-5 mr-3 animate-spin" />
-                Running System Verification... ({currentCheckIndex + 1}/
-                {checks.length})
+                Running System Verification... ({currentCheckIndex + 1}/{checks.length})
               </>
             ) : (
               <>
@@ -375,9 +360,7 @@ export function SystemVerification() {
           {isRunningCheck && (
             <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-blue-400 font-medium">
-                  Checking Systems...
-                </span>
+                <span className="text-blue-400 font-medium">Checking Systems...</span>
                 <span className="text-blue-400">
                   {currentCheckIndex + 1}/{checks.length}
                 </span>
@@ -387,8 +370,7 @@ export function SystemVerification() {
                 className="h-2 mb-2"
               />
               <div className="text-xs text-muted-foreground">
-                Currently checking:{" "}
-                {checks[currentCheckIndex]?.name || "Initializing..."}
+                Currently checking: {checks[currentCheckIndex]?.name || "Initializing..."}
               </div>
             </div>
           )}
@@ -401,9 +383,7 @@ export function SystemVerification() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 capitalize">
               {getCategoryIcon(category as SystemCheck["category"])}
-              {category
-                .replace(/([A-Z])/g, " $1")
-                .replace(/^./, (str) => str.toUpperCase())}{" "}
+              {category.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())}{" "}
               Systems
             </CardTitle>
           </CardHeader>
@@ -413,8 +393,7 @@ export function SystemVerification() {
                 <div
                   key={check.id}
                   className={`p-4 rounded-lg border transition-all ${
-                    currentCheckIndex ===
-                    checks.findIndex((c) => c.id === check.id)
+                    currentCheckIndex === checks.findIndex((c) => c.id === check.id)
                       ? "border-blue-500/50 bg-blue-900/20"
                       : "border-gray-500/30 bg-black/20"
                   }`}
@@ -422,14 +401,10 @@ export function SystemVerification() {
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       {getStatusIcon(check.status)}
-                      <span className="font-medium text-white">
-                        {check.name}
-                      </span>
+                      <span className="font-medium text-white">{check.name}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Badge
-                        className={`${getStatusColor(check.status)} text-white text-xs`}
-                      >
+                      <Badge className={`${getStatusColor(check.status)} text-white text-xs`}>
                         {check.status.toUpperCase()}
                       </Badge>
                       {check.url && (
@@ -445,23 +420,13 @@ export function SystemVerification() {
                     </div>
                   </div>
 
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {check.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-2">{check.description}</p>
 
-                  {check.details && (
-                    <p className="text-xs text-blue-400 mb-2">
-                      {check.details}
-                    </p>
-                  )}
+                  {check.details && <p className="text-xs text-blue-400 mb-2">{check.details}</p>}
 
                   <div className="flex justify-between text-xs text-gray-500">
-                    <span>
-                      Last checked: {check.lastChecked.toLocaleTimeString()}
-                    </span>
-                    {check.responseTime && (
-                      <span>Response: {check.responseTime}ms</span>
-                    )}
+                    <span>Last checked: {check.lastChecked.toLocaleTimeString()}</span>
+                    {check.responseTime && <span>Response: {check.responseTime}ms</span>}
                   </div>
                 </div>
               ))}
@@ -479,9 +444,7 @@ export function SystemVerification() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
               <div className="p-4 bg-green-900/30 rounded-lg">
-                <h4 className="font-bold text-green-300 mb-2">
-                  🌍 Website & Hosting
-                </h4>
+                <h4 className="font-bold text-green-300 mb-2">🌍 Website & Hosting</h4>
                 <p className="text-muted-foreground">
                   Primary domain: www.gaiaexchange.net
                   <br />
@@ -491,9 +454,7 @@ export function SystemVerification() {
                 </p>
               </div>
               <div className="p-4 bg-blue-900/30 rounded-lg">
-                <h4 className="font-bold text-blue-300 mb-2">
-                  🔧 Backend Systems
-                </h4>
+                <h4 className="font-bold text-blue-300 mb-2">🔧 Backend Systems</h4>
                 <p className="text-muted-foreground">
                   Database: Supabase PostgreSQL
                   <br />
@@ -503,9 +464,7 @@ export function SystemVerification() {
                 </p>
               </div>
               <div className="p-4 bg-purple-900/30 rounded-lg">
-                <h4 className="font-bold text-purple-300 mb-2">
-                  🛡️ Security & Apps
-                </h4>
+                <h4 className="font-bold text-purple-300 mb-2">🛡️ Security & Apps</h4>
                 <p className="text-muted-foreground">
                   Quantum-level protection active
                   <br />
@@ -516,8 +475,7 @@ export function SystemVerification() {
               </div>
             </div>
             <p className="text-lg text-green-400 font-bold">
-              🚀 "All systems verified and operational - Ready for global
-              launch!" 🚀
+              🚀 "All systems verified and operational - Ready for global launch!" 🚀
             </p>
           </div>
         </CardContent>

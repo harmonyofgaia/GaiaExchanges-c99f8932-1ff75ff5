@@ -115,12 +115,7 @@ export function SecureChatIntegration() {
     // Simulate real-time messages
     const interval = setInterval(() => {
       if (Math.random() < 0.3) {
-        const randomUsers = [
-          "GameMaster",
-          "EcoWarrior",
-          "BuilderPro",
-          "ChatModerator",
-        ];
+        const randomUsers = ["GameMaster", "EcoWarrior", "BuilderPro", "ChatModerator"];
         const randomMessages = [
           "Just completed a major building project! 🏗️",
           "Anyone want to form an alliance?",
@@ -132,8 +127,7 @@ export function SecureChatIntegration() {
         const newMsg: ChatMessage = {
           id: Date.now().toString(),
           user: randomUsers[Math.floor(Math.random() * randomUsers.length)],
-          message:
-            randomMessages[Math.floor(Math.random() * randomMessages.length)],
+          message: randomMessages[Math.floor(Math.random() * randomMessages.length)],
           timestamp: new Date(),
           verified: Math.random() > 0.2,
           role: Math.random() > 0.9 ? "moderator" : "user",
@@ -170,14 +164,11 @@ export function SecureChatIntegration() {
 
   const toggleMonitoring = () => {
     setMonitoringMode(!monitoringMode);
-    toast.info(
-      monitoringMode ? "👁️ Monitoring disabled" : "👁️ Admin monitoring enabled",
-      {
-        description: monitoringMode
-          ? "Chat privacy restored for community"
-          : "Full admin oversight active for security",
-      },
-    );
+    toast.info(monitoringMode ? "👁️ Monitoring disabled" : "👁️ Admin monitoring enabled", {
+      description: monitoringMode
+        ? "Chat privacy restored for community"
+        : "Full admin oversight active for security",
+    });
   };
 
   const getRoleIcon = (role: string) => {
@@ -232,11 +223,7 @@ export function SecureChatIntegration() {
         </CardHeader>
       </Card>
 
-      <Tabs
-        value={currentRoom}
-        onValueChange={setCurrentRoom}
-        className="w-full"
-      >
+      <Tabs value={currentRoom} onValueChange={setCurrentRoom} className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           {chatRooms.map((room) => (
             <TabsTrigger key={room.id} value={room.id} className="text-xs">
@@ -261,14 +248,10 @@ export function SecureChatIntegration() {
                         <Badge className={getSecurityBadge(room.securityLevel)}>
                           {room.securityLevel.toUpperCase()}
                         </Badge>
-                        <Badge variant="outline">
-                          {room.memberCount} members
-                        </Badge>
+                        <Badge variant="outline">{room.memberCount} members</Badge>
                       </div>
                     </div>
-                    <p className="text-muted-foreground text-sm">
-                      {room.description}
-                    </p>
+                    <p className="text-muted-foreground text-sm">{room.description}</p>
                   </CardHeader>
                   <CardContent>
                     {/* Messages */}
@@ -276,9 +259,7 @@ export function SecureChatIntegration() {
                       <div className="space-y-3">
                         {messages.map((msg) => (
                           <div key={msg.id} className="flex gap-3">
-                            <div className="text-lg">
-                              {getRoleIcon(msg.role)}
-                            </div>
+                            <div className="text-lg">{getRoleIcon(msg.role)}</div>
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-1">
                                 <span
@@ -292,19 +273,13 @@ export function SecureChatIntegration() {
                                 >
                                   {msg.user}
                                 </span>
-                                {msg.verified && (
-                                  <CheckCircle className="h-3 w-3 text-green-400" />
-                                )}
-                                {msg.encrypted && (
-                                  <Lock className="h-3 w-3 text-purple-400" />
-                                )}
+                                {msg.verified && <CheckCircle className="h-3 w-3 text-green-400" />}
+                                {msg.encrypted && <Lock className="h-3 w-3 text-purple-400" />}
                                 <span className="text-xs text-muted-foreground">
                                   {msg.timestamp.toLocaleTimeString()}
                                 </span>
                               </div>
-                              <p className="text-gray-300 text-sm">
-                                {msg.message}
-                              </p>
+                              <p className="text-gray-300 text-sm">{msg.message}</p>
                             </div>
                           </div>
                         ))}
@@ -321,10 +296,7 @@ export function SecureChatIntegration() {
                         className="flex-1 bg-black/50 border-blue-500/30"
                         onKeyPress={(e) => e.key === "Enter" && sendMessage()}
                       />
-                      <Button
-                        onClick={sendMessage}
-                        className="bg-purple-600 hover:bg-purple-700"
-                      >
+                      <Button onClick={sendMessage} className="bg-purple-600 hover:bg-purple-700">
                         <Send className="h-4 w-4" />
                       </Button>
                     </div>
@@ -354,18 +326,12 @@ export function SecureChatIntegration() {
                       {monitoringMode ? "Disable Monitor" : "Enable Monitor"}
                     </Button>
 
-                    <Button
-                      variant="outline"
-                      className="w-full border-green-500/30"
-                    >
+                    <Button variant="outline" className="w-full border-green-500/30">
                       <Shield className="h-4 w-4 mr-2" />
                       Security Logs
                     </Button>
 
-                    <Button
-                      variant="outline"
-                      className="w-full border-yellow-500/30"
-                    >
+                    <Button variant="outline" className="w-full border-yellow-500/30">
                       <AlertTriangle className="h-4 w-4 mr-2" />
                       Moderation Queue
                     </Button>
@@ -374,9 +340,7 @@ export function SecureChatIntegration() {
 
                 <Card className="bg-black/30 border-green-500/30">
                   <CardHeader>
-                    <CardTitle className="text-green-400 text-sm">
-                      Privacy Settings
-                    </CardTitle>
+                    <CardTitle className="text-green-400 text-sm">Privacy Settings</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2 text-xs">
                     <div className="flex justify-between">
@@ -400,9 +364,7 @@ export function SecureChatIntegration() {
 
                 <Card className="bg-black/30 border-yellow-500/30">
                   <CardHeader>
-                    <CardTitle className="text-yellow-400 text-sm">
-                      Chat Analytics
-                    </CardTitle>
+                    <CardTitle className="text-yellow-400 text-sm">Chat Analytics</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2 text-xs">
                     <div className="flex justify-between">
@@ -411,9 +373,7 @@ export function SecureChatIntegration() {
                     </div>
                     <div className="flex justify-between">
                       <span>Active Users:</span>
-                      <span className="text-green-400">
-                        {onlineUsers.toLocaleString()}
-                      </span>
+                      <span className="text-green-400">{onlineUsers.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Mod Actions:</span>

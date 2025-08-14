@@ -3,13 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Subscription } from "@/types/ui-types";
-import {
-  CheckCircle,
-  AlertTriangle,
-  RotateCcw,
-  UserPlus,
-  UserMinus,
-} from "lucide-react";
+import { CheckCircle, AlertTriangle, RotateCcw, UserPlus, UserMinus } from "lucide-react";
 import { toast } from "sonner";
 
 export function VideoSubscriptionSystem() {
@@ -54,7 +48,7 @@ export function VideoSubscriptionSystem() {
         loading: "Updating subscription...",
         success: (data) => `${data}`,
         error: (err) => `Update failed: ${err}`,
-      },
+      }
     );
 
     // Fix the property access
@@ -91,12 +85,9 @@ export function VideoSubscriptionSystem() {
                 className="flex items-center justify-between rounded-md border p-4"
               >
                 <div>
-                  <h3 className="text-lg font-semibold text-white">
-                    {subscription.tier} Tier
-                  </h3>
+                  <h3 className="text-lg font-semibold text-white">{subscription.tier} Tier</h3>
                   <p className="text-sm text-muted-foreground">
-                    Subscribed on:{" "}
-                    {subscription.subscribedAt.toLocaleDateString()}
+                    Subscribed on: {subscription.subscribedAt.toLocaleDateString()}
                   </p>
                 </div>
                 <Button

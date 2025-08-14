@@ -126,8 +126,7 @@ export const navigationItems: NavigationItem[] = [
       "Achievement System",
       "Real-time Environmental Data",
     ],
-    description:
-      "Master Plan v7: Enhanced environmental impact tracking with AI insights",
+    description: "Master Plan v7: Enhanced environmental impact tracking with AI insights",
     lazyLoaded: true,
   },
   {
@@ -143,8 +142,7 @@ export const navigationItems: NavigationItem[] = [
       "Impact Verification",
       "Community Voting",
     ],
-    description:
-      "Master Plan v7: Advanced decentralized funding with governance",
+    description: "Master Plan v7: Advanced decentralized funding with governance",
     lazyLoaded: true,
   },
   {
@@ -176,8 +174,7 @@ export const navigationItems: NavigationItem[] = [
       "Avatar Customization",
       "Environmental Bonding",
     ],
-    description:
-      "Master Plan v7: Deep spiritual connection with nature through avatars",
+    description: "Master Plan v7: Deep spiritual connection with nature through avatars",
     lazyLoaded: true,
   },
   {
@@ -243,8 +240,7 @@ export const navigationItems: NavigationItem[] = [
       "Impact Verification",
       "Blockchain Integration",
     ],
-    description:
-      "Multi-tier blockchain token system for forest defense funding and governance",
+    description: "Multi-tier blockchain token system for forest defense funding and governance",
     lazyLoaded: true,
   },
   {
@@ -326,8 +322,7 @@ export const navigationItems: NavigationItem[] = [
     to: "/gaia-consistency-status",
     icon: Shield,
     variant: "ghost" as const,
-    description:
-      "GAiA token integration consistency monitoring and system verification",
+    description: "GAiA token integration consistency monitoring and system verification",
     features: [
       "Real-time Consistency Scanning",
       "Component Integration Status",
@@ -353,8 +348,7 @@ export const navigationItems: NavigationItem[] = [
       "AI-Assisted Live Support",
       "Quantum Security Protocols",
     ],
-    description:
-      "Master Plan v7: V2+ Deployment Center with Einstein Copilot assistance",
+    description: "Master Plan v7: V2+ Deployment Center with Einstein Copilot assistance",
     lazyLoaded: true,
   },
   {
@@ -378,8 +372,7 @@ export const navigationItems: NavigationItem[] = [
       "Advanced Validation",
       "Dragon-Level Protection",
     ],
-    description:
-      "Master Plan v7: Enhanced private blockchain with secure token swapping",
+    description: "Master Plan v7: Enhanced private blockchain with secure token swapping",
     lazyLoaded: true,
   },
   {
@@ -400,8 +393,7 @@ export const navigationItems: NavigationItem[] = [
       "Deep Admin Control & Audit",
       "Security, Privacy & Compliance",
     ],
-    description:
-      "Master Plan v7: GAiA Community Video Exchange Outstanding Experience",
+    description: "Master Plan v7: GAiA Community Video Exchange Outstanding Experience",
     lazyLoaded: true,
   },
 ];
@@ -410,8 +402,7 @@ export const navigationItems: NavigationItem[] = [
 export const getMasterPlanV7Items = () =>
   navigationItems.filter((item) => item.masterPlanVersion === "v7");
 
-export const getLazyLoadedItems = () =>
-  navigationItems.filter((item) => item.lazyLoaded);
+export const getLazyLoadedItems = () => navigationItems.filter((item) => item.lazyLoaded);
 
 export const getItemFeatures = (path: string) =>
   navigationItems.find((item) => item.to === path)?.features || [];

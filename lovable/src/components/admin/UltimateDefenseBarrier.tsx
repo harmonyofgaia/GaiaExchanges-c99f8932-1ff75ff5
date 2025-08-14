@@ -2,16 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Shield,
-  AlertTriangle,
-  Zap,
-  Target,
-  Crown,
-  Activity,
-  Flame,
-  Sword,
-} from "lucide-react";
+import { Shield, AlertTriangle, Zap, Target, Crown, Activity, Flame, Sword } from "lucide-react";
 import { toast } from "sonner";
 
 interface DefensiveBarrierAnimal {
@@ -39,9 +30,7 @@ interface DefensiveBarrierAnimal {
 }
 
 export function UltimateDefenseBarrier() {
-  const [barrierAnimals, setBarrierAnimals] = useState<
-    DefensiveBarrierAnimal[]
-  >([
+  const [barrierAnimals, setBarrierAnimals] = useState<DefensiveBarrierAnimal[]>([
     {
       id: "kraken-guardian",
       name: "Kraken Ultimate Guardian",
@@ -74,12 +63,7 @@ export function UltimateDefenseBarrier() {
       threatsBlocked: 0,
       emoji: "🌊🐋",
       status: "defending",
-      specialDefenses: [
-        "Tsunami Wall",
-        "Ocean Fortress",
-        "Water Prison",
-        "Tidal Defense",
-      ],
+      specialDefenses: ["Tsunami Wall", "Ocean Fortress", "Water Prison", "Tidal Defense"],
       lastBreach: null,
     },
     {
@@ -114,12 +98,7 @@ export function UltimateDefenseBarrier() {
       threatsBlocked: 0,
       emoji: "🦅🦁",
       status: "defending",
-      specialDefenses: [
-        "Aerial Fortress",
-        "Wind Barrier",
-        "Sky Domain Lock",
-        "Eagle Eye Grid",
-      ],
+      specialDefenses: ["Aerial Fortress", "Wind Barrier", "Sky Domain Lock", "Eagle Eye Grid"],
       lastBreach: null,
     },
     {
@@ -227,11 +206,10 @@ export function UltimateDefenseBarrier() {
         prev.map((animal) => {
           const strengthIncrease = animal.parabolicPower * 0.1;
           const newBarrierStrength = animal.barrierStrength + strengthIncrease;
-          const newThreatsBlocked =
-            animal.threatsBlocked + Math.floor(Math.random() * 50);
+          const newThreatsBlocked = animal.threatsBlocked + Math.floor(Math.random() * 50);
 
           console.log(
-            `${animal.emoji} ${animal.name}: Barrier ${newBarrierStrength.toLocaleString()} - Blocked: ${newThreatsBlocked}`,
+            `${animal.emoji} ${animal.name}: Barrier ${newBarrierStrength.toLocaleString()} - Blocked: ${newThreatsBlocked}`
           );
 
           return {
@@ -242,7 +220,7 @@ export function UltimateDefenseBarrier() {
             wallIntegrity: 100, // Always perfect integrity
             breachResistance: 100, // Always perfect resistance
           };
-        }),
+        })
       );
 
       // Simulate breach attempts and immediate blocking
@@ -258,15 +236,11 @@ export function UltimateDefenseBarrier() {
           "universal_law_violation",
         ];
 
-        const breachAttempt =
-          breachTypes[Math.floor(Math.random() * breachTypes.length)];
-        const defendingAnimal =
-          barrierAnimals[Math.floor(Math.random() * barrierAnimals.length)];
+        const breachAttempt = breachTypes[Math.floor(Math.random() * breachTypes.length)];
+        const defendingAnimal = barrierAnimals[Math.floor(Math.random() * barrierAnimals.length)];
 
         console.log(`🚨 BREACH ATTEMPT: ${breachAttempt}`);
-        console.log(
-          `🛡️ ${defendingAnimal.name} RESPONSE: BREACH COMPLETELY BLOCKED`,
-        );
+        console.log(`🛡️ ${defendingAnimal.name} RESPONSE: BREACH COMPLETELY BLOCKED`);
         console.log("⚡ WALL INTEGRITY REMAINS PERFECT - UNBREAKABLE");
 
         toast.error("🛡️ BARRIER DEFENSE ACTIVATED!", {
@@ -298,22 +272,10 @@ export function UltimateDefenseBarrier() {
       });
 
       // Update barrier metrics
-      const totalStrength = barrierAnimals.reduce(
-        (sum, animal) => sum + animal.barrierStrength,
-        0,
-      );
-      const totalParabolic = barrierAnimals.reduce(
-        (sum, animal) => sum + animal.parabolicPower,
-        0,
-      );
-      const totalRadius = barrierAnimals.reduce(
-        (sum, animal) => sum + animal.defenseRadius,
-        0,
-      );
-      const totalBlocked = barrierAnimals.reduce(
-        (sum, animal) => sum + animal.threatsBlocked,
-        0,
-      );
+      const totalStrength = barrierAnimals.reduce((sum, animal) => sum + animal.barrierStrength, 0);
+      const totalParabolic = barrierAnimals.reduce((sum, animal) => sum + animal.parabolicPower, 0);
+      const totalRadius = barrierAnimals.reduce((sum, animal) => sum + animal.defenseRadius, 0);
+      const totalBlocked = barrierAnimals.reduce((sum, animal) => sum + animal.threatsBlocked, 0);
 
       setBarrierMetrics((prev) => ({
         ...prev,
@@ -324,9 +286,7 @@ export function UltimateDefenseBarrier() {
         averageWallIntegrity: 100, // Always perfect
       }));
 
-      console.log(
-        "✅ ULTIMATE DEFENSIVE BARRIER CYCLE COMPLETE - UNBREAKABLE WALL MAINTAINED",
-      );
+      console.log("✅ ULTIMATE DEFENSIVE BARRIER CYCLE COMPLETE - UNBREAKABLE WALL MAINTAINED");
     };
 
     // Run every 3 seconds
@@ -345,12 +305,11 @@ export function UltimateDefenseBarrier() {
         status: "defending",
         barrierStrength: animal.barrierStrength * 2,
         parabolicPower: animal.parabolicPower * 1.5,
-      })),
+      }))
     );
 
     toast.success("🛡️ MAXIMUM DEFENSE ACTIVATED!", {
-      description:
-        "All barriers reinforced to ultimate strength - System unbreachable",
+      description: "All barriers reinforced to ultimate strength - System unbreachable",
       duration: 6000,
     });
   };
@@ -379,10 +338,7 @@ export function UltimateDefenseBarrier() {
             🛡️ ULTIMATE DEFENSIVE BARRIER - UNBREAKABLE WALL SYSTEM
           </CardTitle>
           <div className="flex gap-2 flex-wrap">
-            <Button
-              onClick={activateMaximumDefense}
-              className="bg-red-600 hover:bg-red-700"
-            >
+            <Button onClick={activateMaximumDefense} className="bg-red-600 hover:bg-red-700">
               <Sword className="h-4 w-4 mr-2" />
               🛡️ MAXIMUM DEFENSE MODE
             </Button>
@@ -395,9 +351,7 @@ export function UltimateDefenseBarrier() {
               <div className="text-2xl font-bold text-blue-400">
                 {barrierMetrics.totalBarrierStrength.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Barrier Strength
-              </div>
+              <div className="text-sm text-muted-foreground">Total Barrier Strength</div>
             </div>
 
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
@@ -405,9 +359,7 @@ export function UltimateDefenseBarrier() {
               <div className="text-2xl font-bold text-purple-400">
                 {barrierMetrics.combinedParabolicPower.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Parabolic Power
-              </div>
+              <div className="text-sm text-muted-foreground">Parabolic Power</div>
             </div>
 
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
@@ -415,19 +367,13 @@ export function UltimateDefenseBarrier() {
               <div className="text-2xl font-bold text-green-400">
                 {barrierMetrics.threatsBlocked}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Blocked
-              </div>
+              <div className="text-sm text-muted-foreground">Threats Blocked</div>
             </div>
 
             <div className="text-center p-4 bg-red-900/30 rounded-lg">
               <AlertTriangle className="h-8 w-8 mx-auto text-red-400 mb-2" />
-              <div className="text-2xl font-bold text-red-400">
-                {barrierMetrics.breachAttempts}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Breach Attempts
-              </div>
+              <div className="text-2xl font-bold text-red-400">{barrierMetrics.breachAttempts}</div>
+              <div className="text-sm text-muted-foreground">Breach Attempts</div>
             </div>
           </div>
 
@@ -443,9 +389,7 @@ export function UltimateDefenseBarrier() {
                       <span className="text-xl">{animal.emoji}</span>
                       <span className="truncate">{animal.name}</span>
                     </div>
-                    <Badge
-                      className={`${getStatusColor(animal.status)} text-white text-xs`}
-                    >
+                    <Badge className={`${getStatusColor(animal.status)} text-white text-xs`}>
                       {animal.status.toUpperCase()}
                     </Badge>
                   </CardTitle>
@@ -460,9 +404,7 @@ export function UltimateDefenseBarrier() {
                     </div>
                     <div className="flex justify-between">
                       <span>Wall Integrity:</span>
-                      <span className="text-green-400 font-bold">
-                        {animal.wallIntegrity}%
-                      </span>
+                      <span className="text-green-400 font-bold">{animal.wallIntegrity}%</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Parabolic Power:</span>
@@ -478,27 +420,21 @@ export function UltimateDefenseBarrier() {
                     </div>
                     <div className="flex justify-between">
                       <span>Threats Blocked:</span>
-                      <span className="text-red-400 font-bold">
-                        {animal.threatsBlocked}
-                      </span>
+                      <span className="text-red-400 font-bold">{animal.threatsBlocked}</span>
                     </div>
                   </div>
 
                   <div className="pt-2 border-t border-cyan-500/20">
-                    <div className="text-xs text-muted-foreground mb-1">
-                      Special Defenses:
-                    </div>
+                    <div className="text-xs text-muted-foreground mb-1">Special Defenses:</div>
                     <div className="flex flex-wrap gap-1">
-                      {animal.specialDefenses
-                        .slice(0, 2)
-                        .map((defense, index) => (
-                          <span
-                            key={index}
-                            className="px-1 py-0.5 bg-cyan-700/30 rounded text-xs text-cyan-300"
-                          >
-                            {defense}
-                          </span>
-                        ))}
+                      {animal.specialDefenses.slice(0, 2).map((defense, index) => (
+                        <span
+                          key={index}
+                          className="px-1 py-0.5 bg-cyan-700/30 rounded text-xs text-cyan-300"
+                        >
+                          {defense}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </CardContent>
@@ -511,44 +447,34 @@ export function UltimateDefenseBarrier() {
       <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
         <CardContent className="pt-6 text-center">
           <div className="text-6xl mb-4">🛡️</div>
-          <h3 className="text-2xl font-bold text-green-400 mb-4">
-            UNBREAKABLE WALL MANIFESTO
-          </h3>
+          <h3 className="text-2xl font-bold text-green-400 mb-4">UNBREAKABLE WALL MANIFESTO</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-green-200">
             <div className="space-y-2">
               <div>
-                🐙 <strong>Kraken Guardian:</strong> Tentacle wall with ink
-                storm defense
+                🐙 <strong>Kraken Guardian:</strong> Tentacle wall with ink storm defense
               </div>
               <div>
-                🌊 <strong>Leviathan Barrier:</strong> Tsunami wall and ocean
-                fortress
+                🌊 <strong>Leviathan Barrier:</strong> Tsunami wall and ocean fortress
               </div>
               <div>
-                🐍 <strong>Basilisk Fortress:</strong> Petrification barrier
-                with death gaze
+                🐍 <strong>Basilisk Fortress:</strong> Petrification barrier with death gaze
               </div>
               <div>
-                🦅 <strong>Griffin Sky Wall:</strong> Aerial fortress with wind
-                barriers
+                🦅 <strong>Griffin Sky Wall:</strong> Aerial fortress with wind barriers
               </div>
             </div>
             <div className="space-y-2">
               <div>
-                🐲 <strong>Chimera Multi-Wall:</strong> Triple defense matrix
-                system
+                🐲 <strong>Chimera Multi-Wall:</strong> Triple defense matrix system
               </div>
               <div>
-                🐉 <strong>Hydra Regenerative:</strong> Multi-head regenerative
-                barriers
+                🐉 <strong>Hydra Regenerative:</strong> Multi-head regenerative barriers
               </div>
               <div>
-                🔥 <strong>Phoenix Wall:</strong> Resurrection barrier with
-                flame shield
+                🔥 <strong>Phoenix Wall:</strong> Resurrection barrier with flame shield
               </div>
               <div>
-                ⚡ <strong>Parabolic Power:</strong> Universe-level power
-                multiplication
+                ⚡ <strong>Parabolic Power:</strong> Universe-level power multiplication
               </div>
             </div>
           </div>

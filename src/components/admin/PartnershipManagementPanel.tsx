@@ -32,8 +32,7 @@ export function PartnershipManagementPanel() {
     {
       id: 1,
       user: "EcoWarrior23",
-      question:
-        "How can we partner with local schools for environmental education?",
+      question: "How can we partner with local schools for environmental education?",
       timestamp: new Date(),
       status: "pending",
       category: "education",
@@ -56,8 +55,7 @@ export function PartnershipManagementPanel() {
 
     // Here would be the actual submission logic
     toast.success("🤝 Partnership inquiry sent successfully!", {
-      description:
-        "Our team will review your proposal and get back to you within 48 hours.",
+      description: "Our team will review your proposal and get back to you within 48 hours.",
       duration: 5000,
     });
 
@@ -73,7 +71,7 @@ export function PartnershipManagementPanel() {
 
   const answerCommunityQuestion = (questionId: number) => {
     setCommunityQuestions((prev) =>
-      prev.map((q) => (q.id === questionId ? { ...q, status: "answered" } : q)),
+      prev.map((q) => (q.id === questionId ? { ...q, status: "answered" } : q))
     );
     toast.success("Community question answered!", {
       description: "Response sent to community member.",
@@ -97,9 +95,7 @@ export function PartnershipManagementPanel() {
       <Tabs defaultValue="partnerships" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="partnerships">🤝 Partnerships</TabsTrigger>
-          <TabsTrigger value="community-contact">
-            💬 Community Contact
-          </TabsTrigger>
+          <TabsTrigger value="community-contact">💬 Community Contact</TabsTrigger>
           <TabsTrigger value="questions">❓ Community Q&A</TabsTrigger>
           <TabsTrigger value="analytics">📊 Analytics</TabsTrigger>
         </TabsList>
@@ -115,24 +111,18 @@ export function PartnershipManagementPanel() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-white">47</div>
-                <p className="text-xs text-muted-foreground">
-                  +12% from last quarter
-                </p>
+                <p className="text-xs text-muted-foreground">+12% from last quarter</p>
               </CardContent>
             </Card>
 
             <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-blue-400">
-                  Total Revenue
-                </CardTitle>
+                <CardTitle className="text-sm font-medium text-blue-400">Total Revenue</CardTitle>
                 <TrendingUp className="h-4 w-4 text-blue-400" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-white">$2.4M</div>
-                <p className="text-xs text-muted-foreground">
-                  Quarterly partnership revenue
-                </p>
+                <p className="text-xs text-muted-foreground">Quarterly partnership revenue</p>
               </CardContent>
             </Card>
 
@@ -145,9 +135,7 @@ export function PartnershipManagementPanel() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-white">127</div>
-                <p className="text-xs text-muted-foreground">
-                  Environmental initiatives
-                </p>
+                <p className="text-xs text-muted-foreground">Environmental initiatives</p>
               </CardContent>
             </Card>
 
@@ -160,9 +148,7 @@ export function PartnershipManagementPanel() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-white">4.8/5</div>
-                <p className="text-xs text-muted-foreground">
-                  Average satisfaction
-                </p>
+                <p className="text-xs text-muted-foreground">Average satisfaction</p>
               </CardContent>
             </Card>
           </div>
@@ -170,44 +156,36 @@ export function PartnershipManagementPanel() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  Strategic Partners
-                </CardTitle>
+                <CardTitle className="text-green-400">Strategic Partners</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {[
-                    "GreenTech Solutions",
-                    "Ocean Conservancy",
-                    "Wildlife Foundation",
-                  ].map((partner, index) => (
-                    <div
-                      key={partner}
-                      className="p-3 bg-green-900/20 rounded-lg border border-green-500/20"
-                    >
-                      <div className="flex justify-between items-start mb-2">
-                        <h4 className="font-medium text-green-400">
-                          {partner}
-                        </h4>
-                        <Badge
-                          variant="outline"
-                          className="border-green-500/30 text-green-400 text-xs"
-                        >
-                          Tier {index === 2 ? 2 : 1}
-                        </Badge>
+                  {["GreenTech Solutions", "Ocean Conservancy", "Wildlife Foundation"].map(
+                    (partner, index) => (
+                      <div
+                        key={partner}
+                        className="p-3 bg-green-900/20 rounded-lg border border-green-500/20"
+                      >
+                        <div className="flex justify-between items-start mb-2">
+                          <h4 className="font-medium text-green-400">{partner}</h4>
+                          <Badge
+                            variant="outline"
+                            className="border-green-500/30 text-green-400 text-xs"
+                          >
+                            Tier {index === 2 ? 2 : 1}
+                          </Badge>
+                        </div>
+                        <Progress value={95 - index * 10} className="h-2" />
                       </div>
-                      <Progress value={95 - index * 10} className="h-2" />
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
               </CardContent>
             </Card>
 
             <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  Partnership Actions
-                </CardTitle>
+                <CardTitle className="text-blue-400">Partnership Actions</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 gap-4">
@@ -237,16 +215,13 @@ export function PartnershipManagementPanel() {
                 Community Partnership Contact Form
               </CardTitle>
               <p className="text-muted-foreground">
-                Allow community members to reach out for partnership
-                opportunities
+                Allow community members to reach out for partnership opportunities
               </p>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-300 mb-2 block">
-                    Name *
-                  </label>
+                  <label className="text-sm font-medium text-gray-300 mb-2 block">Name *</label>
                   <Input
                     value={contactForm.name}
                     onChange={(e) =>
@@ -260,9 +235,7 @@ export function PartnershipManagementPanel() {
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-300 mb-2 block">
-                    Email *
-                  </label>
+                  <label className="text-sm font-medium text-gray-300 mb-2 block">Email *</label>
                   <Input
                     type="email"
                     value={contactForm.email}
@@ -293,9 +266,7 @@ export function PartnershipManagementPanel() {
                   className="w-full p-2 bg-black/50 border border-blue-500/30 rounded text-white"
                 >
                   <option value="general">General Partnership</option>
-                  <option value="environmental">
-                    Environmental Initiative
-                  </option>
+                  <option value="environmental">Environmental Initiative</option>
                   <option value="technology">Technology Partnership</option>
                   <option value="education">Educational Collaboration</option>
                   <option value="investment">Investment Opportunity</option>
@@ -303,9 +274,7 @@ export function PartnershipManagementPanel() {
               </div>
 
               <div>
-                <label className="text-sm font-medium text-gray-300 mb-2 block">
-                  Subject
-                </label>
+                <label className="text-sm font-medium text-gray-300 mb-2 block">Subject</label>
                 <Input
                   value={contactForm.subject}
                   onChange={(e) =>
@@ -320,9 +289,7 @@ export function PartnershipManagementPanel() {
               </div>
 
               <div>
-                <label className="text-sm font-medium text-gray-300 mb-2 block">
-                  Message *
-                </label>
+                <label className="text-sm font-medium text-gray-300 mb-2 block">Message *</label>
                 <Textarea
                   value={contactForm.message}
                   onChange={(e) =>
@@ -368,14 +335,10 @@ export function PartnershipManagementPanel() {
                   >
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <h4 className="font-medium text-purple-400">
-                          {question.user}
-                        </h4>
+                        <h4 className="font-medium text-purple-400">{question.user}</h4>
                         <Badge
                           className={`text-xs ${
-                            question.status === "answered"
-                              ? "bg-green-600"
-                              : "bg-yellow-600"
+                            question.status === "answered" ? "bg-green-600" : "bg-yellow-600"
                           }`}
                         >
                           {question.status}
@@ -397,11 +360,7 @@ export function PartnershipManagementPanel() {
                           Answer
                         </Button>
                       )}
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="border-purple-500/30"
-                      >
+                      <Button size="sm" variant="outline" className="border-purple-500/30">
                         View Details
                       </Button>
                     </div>
@@ -416,17 +375,13 @@ export function PartnershipManagementPanel() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  Contact Form Analytics
-                </CardTitle>
+                <CardTitle className="text-green-400">Contact Form Analytics</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex justify-between">
                     <span>This Month:</span>
-                    <span className="text-green-400 font-bold">
-                      23 inquiries
-                    </span>
+                    <span className="text-green-400 font-bold">23 inquiries</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Response Rate:</span>
@@ -442,17 +397,13 @@ export function PartnershipManagementPanel() {
 
             <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  Community Engagement
-                </CardTitle>
+                <CardTitle className="text-blue-400">Community Engagement</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex justify-between">
                     <span>Active Questions:</span>
-                    <span className="text-blue-400 font-bold">
-                      {communityQuestions.length}
-                    </span>
+                    <span className="text-blue-400 font-bold">{communityQuestions.length}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Answered Today:</span>

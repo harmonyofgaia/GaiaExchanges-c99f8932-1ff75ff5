@@ -24,14 +24,10 @@ export function ExchangeAnalytics() {
     priceChange24h: hasRealData && tokenData ? tokenData.priceChange24h : 12.5,
     currentPrice: hasRealData && tokenData ? tokenData.price : 0.000125,
     marketCap: hasRealData && tokenData ? tokenData.marketCap : 278687500,
-    liquidityPool:
-      hasRealData && tokenData ? tokenData.marketCap * 0.3 : 83606250,
-    stakingRewards:
-      hasRealData && tokenData ? tokenData.totalBurned * 0.1 : 1425000,
+    liquidityPool: hasRealData && tokenData ? tokenData.marketCap * 0.3 : 83606250,
+    stakingRewards: hasRealData && tokenData ? tokenData.totalBurned * 0.1 : 1425000,
     avgTradeSize:
-      hasRealData && tokenData
-        ? tokenData.volume24h / tokenData.transactions24h
-        : 191.2,
+      hasRealData && tokenData ? tokenData.volume24h / tokenData.transactions24h : 191.2,
   });
 
   const [chartData, setChartData] = useState([
@@ -70,18 +66,9 @@ export function ExchangeAnalytics() {
   const [topTradingPairs, setTopTradingPairs] = useState([
     {
       pair: `${GAIA_TOKEN.SYMBOL}/USDT`,
-      volume:
-        hasRealData && tokenData
-          ? `${(tokenData.volume24h / 1000000).toFixed(1)}M`
-          : "8.7M",
-      change:
-        hasRealData && tokenData
-          ? `+${tokenData.priceChange24h.toFixed(1)}%`
-          : "+12.5%",
-      price:
-        hasRealData && tokenData
-          ? formatGaiaPrice(tokenData.price)
-          : "$0.000125",
+      volume: hasRealData && tokenData ? `${(tokenData.volume24h / 1000000).toFixed(1)}M` : "8.7M",
+      change: hasRealData && tokenData ? `+${tokenData.priceChange24h.toFixed(1)}%` : "+12.5%",
+      price: hasRealData && tokenData ? formatGaiaPrice(tokenData.price) : "$0.000125",
     },
     {
       pair: `${GAIA_TOKEN.SYMBOL}/BTC`,
@@ -90,9 +77,7 @@ export function ExchangeAnalytics() {
           ? `${((tokenData.volume24h * 0.75) / 1000000).toFixed(1)}M`
           : "6.5M",
       change:
-        hasRealData && tokenData
-          ? `+${(tokenData.priceChange24h * 0.8).toFixed(1)}%`
-          : "+10.0%",
+        hasRealData && tokenData ? `+${(tokenData.priceChange24h * 0.8).toFixed(1)}%` : "+10.0%",
       price: `${(0.0000567 * (hasRealData && tokenData ? tokenData.price / 0.000125 : 1)).toFixed(8)} BTC`,
     },
     {
@@ -102,9 +87,7 @@ export function ExchangeAnalytics() {
           ? `${((tokenData.volume24h * 0.5) / 1000000).toFixed(1)}M`
           : "4.4M",
       change:
-        hasRealData && tokenData
-          ? `+${(tokenData.priceChange24h * 0.6).toFixed(1)}%`
-          : "+7.5%",
+        hasRealData && tokenData ? `+${(tokenData.priceChange24h * 0.6).toFixed(1)}%` : "+7.5%",
       price: `${(0.00105 * (hasRealData && tokenData ? tokenData.price / 0.000125 : 1)).toFixed(6)} ETH`,
     },
   ]);
@@ -183,13 +166,10 @@ export function ExchangeAnalytics() {
           📊 {GAIA_TOKEN.SYMBOL} Exchange Analytics
         </h2>
         <p className="text-muted-foreground">
-          Real-time {GAIA_TOKEN.SYMBOL} token data and comprehensive trading
-          insights
+          Real-time {GAIA_TOKEN.SYMBOL} token data and comprehensive trading insights
         </p>
         {hasRealData && (
-          <Badge className="mt-2 bg-green-600 text-white">
-            ✅ Live Data Connected
-          </Badge>
+          <Badge className="mt-2 bg-green-600 text-white">✅ Live Data Connected</Badge>
         )}
       </div>
 
@@ -300,9 +280,7 @@ export function ExchangeAnalytics() {
               <div className="flex justify-between items-center">
                 <span className="text-sm">Total Burned</span>
                 <span className="font-bold text-purple-400">
-                  {hasRealData && tokenData
-                    ? (tokenData.totalBurned / 1000000).toFixed(1)
-                    : "14.3"}
+                  {hasRealData && tokenData ? (tokenData.totalBurned / 1000000).toFixed(1) : "14.3"}
                   M {GAIA_TOKEN.SYMBOL}
                 </span>
               </div>
@@ -337,18 +315,14 @@ export function ExchangeAnalytics() {
                     </Badge>
                     <div>
                       <div className="font-bold text-white">{pair.pair}</div>
-                      <div className="text-xs text-muted-foreground">
-                        Vol: {pair.volume}
-                      </div>
+                      <div className="text-xs text-muted-foreground">Vol: {pair.volume}</div>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="font-bold text-white">{pair.price}</div>
                     <div
                       className={`text-xs ${
-                        pair.change.startsWith("+")
-                          ? "text-green-400"
-                          : "text-red-400"
+                        pair.change.startsWith("+") ? "text-green-400" : "text-red-400"
                       }`}
                     >
                       {pair.change}
@@ -373,34 +347,24 @@ export function ExchangeAnalytics() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center p-4 bg-teal-900/20 rounded-lg">
               <div className="text-2xl font-bold text-teal-400 mb-2">
-                {hasRealData && tokenData
-                  ? tokenData.holders.toLocaleString()
-                  : "12,450"}
+                {hasRealData && tokenData ? tokenData.holders.toLocaleString() : "12,450"}
               </div>
               <div className="text-sm text-muted-foreground">Total Holders</div>
               <Badge className="mt-2 bg-teal-600 text-white">Growing</Badge>
             </div>
             <div className="text-center p-4 bg-blue-900/20 rounded-lg">
               <div className="text-2xl font-bold text-blue-400 mb-2">
-                {hasRealData && tokenData
-                  ? tokenData.transactions24h.toLocaleString()
-                  : "45,780"}
+                {hasRealData && tokenData ? tokenData.transactions24h.toLocaleString() : "45,780"}
               </div>
-              <div className="text-sm text-muted-foreground">
-                24h Transactions
-              </div>
+              <div className="text-sm text-muted-foreground">24h Transactions</div>
               <Badge className="mt-2 bg-blue-600 text-white">Active</Badge>
             </div>
             <div className="text-center p-4 bg-purple-900/20 rounded-lg">
               <div className="text-2xl font-bold text-purple-400 mb-2">
-                {hasRealData && tokenData
-                  ? `${tokenData.burnRate.toFixed(1)}%`
-                  : "3.5%"}
+                {hasRealData && tokenData ? `${tokenData.burnRate.toFixed(1)}%` : "3.5%"}
               </div>
               <div className="text-sm text-muted-foreground">Burn Rate</div>
-              <Badge className="mt-2 bg-purple-600 text-white">
-                Deflationary
-              </Badge>
+              <Badge className="mt-2 bg-purple-600 text-white">Deflationary</Badge>
             </div>
           </div>
         </CardContent>

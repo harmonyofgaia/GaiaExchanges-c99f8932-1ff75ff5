@@ -8,9 +8,7 @@ interface LiveEarningsDisplayProps {
   userId?: string;
 }
 
-export function LiveEarningsDisplay({
-  userId = "default",
-}: LiveEarningsDisplayProps) {
+export function LiveEarningsDisplay({ userId = "default" }: LiveEarningsDisplayProps) {
   const [earnings, setEarnings] = useState({
     totalEarned: 0,
     dailyEarnings: 0,
@@ -22,10 +20,7 @@ export function LiveEarningsDisplay({
       setEarnings((prev) => ({
         totalEarned: prev.totalEarned + Math.floor(Math.random() * 10),
         dailyEarnings: prev.dailyEarnings + Math.floor(Math.random() * 5),
-        currentStreak: Math.max(
-          prev.currentStreak,
-          Math.floor(Math.random() * 30),
-        ),
+        currentStreak: Math.max(prev.currentStreak, Math.floor(Math.random() * 30)),
       }));
     };
 

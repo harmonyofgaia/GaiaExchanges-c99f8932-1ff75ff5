@@ -73,12 +73,9 @@ export default function NFTCardGame() {
         // Update user stats
         const totalCards = mappedCards.length;
         const rareCards = mappedCards.filter((card) =>
-          ["rare", "epic", "legendary"].includes(card.rarity),
+          ["rare", "epic", "legendary"].includes(card.rarity)
         ).length;
-        const powerLevel = mappedCards.reduce(
-          (sum, card) => sum + card.power_level,
-          0,
-        );
+        const powerLevel = mappedCards.reduce((sum, card) => sum + card.power_level, 0);
 
         setUserStats({
           totalCards,
@@ -124,13 +121,7 @@ export default function NFTCardGame() {
       }
 
       // Generate random card attributes
-      const cardTypes = [
-        "creature",
-        "habitat",
-        "conservation",
-        "ecosystem",
-        "climate",
-      ];
+      const cardTypes = ["creature", "habitat", "conservation", "ecosystem", "climate"];
       const rarities = ["common", "rare", "epic", "legendary", "mythical"];
       const rarityWeights = [50, 30, 15, 4, 1]; // Percentage chances
       const biodiversityCategories = [
@@ -157,9 +148,7 @@ export default function NFTCardGame() {
 
       const cardType = cardTypes[Math.floor(Math.random() * cardTypes.length)];
       const biodiversityCategory =
-        biodiversityCategories[
-          Math.floor(Math.random() * biodiversityCategories.length)
-        ];
+        biodiversityCategories[Math.floor(Math.random() * biodiversityCategories.length)];
       const powerLevel =
         Math.floor(Math.random() * 100) +
         (selectedRarity === "legendary"
@@ -171,13 +160,7 @@ export default function NFTCardGame() {
               : 20);
 
       const cardNames = {
-        creature: [
-          "Azure Whale",
-          "Golden Eagle",
-          "Red Panda",
-          "Arctic Fox",
-          "Monarch Butterfly",
-        ],
+        creature: ["Azure Whale", "Golden Eagle", "Red Panda", "Arctic Fox", "Monarch Butterfly"],
         habitat: [
           "Coral Reef Paradise",
           "Ancient Forest",
@@ -210,10 +193,7 @@ export default function NFTCardGame() {
 
       const cardName =
         cardNames[cardType as keyof typeof cardNames][
-          Math.floor(
-            Math.random() *
-              cardNames[cardType as keyof typeof cardNames].length,
-          )
+          Math.floor(Math.random() * cardNames[cardType as keyof typeof cardNames].length)
         ];
 
       const newCardData = {
@@ -301,12 +281,8 @@ export default function NFTCardGame() {
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">
-            ✨ NFT Biodiversity Card Game
-          </h1>
-          <p className="text-xl text-purple-300">
-            Collect, Trade & Protect Nature's Wonders
-          </p>
+          <h1 className="text-4xl font-bold text-white mb-2">✨ NFT Biodiversity Card Game</h1>
+          <p className="text-xl text-purple-300">Collect, Trade & Protect Nature's Wonders</p>
         </div>
 
         {/* Stats Cards */}
@@ -316,9 +292,7 @@ export default function NFTCardGame() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-blue-300 text-sm">Total Cards</p>
-                  <p className="text-2xl font-bold text-white">
-                    {userStats.totalCards}
-                  </p>
+                  <p className="text-2xl font-bold text-white">{userStats.totalCards}</p>
                 </div>
                 <Sparkles className="h-8 w-8 text-blue-400" />
               </div>
@@ -330,9 +304,7 @@ export default function NFTCardGame() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-purple-300 text-sm">Rare Cards</p>
-                  <p className="text-2xl font-bold text-white">
-                    {userStats.rareCards}
-                  </p>
+                  <p className="text-2xl font-bold text-white">{userStats.rareCards}</p>
                 </div>
                 <Crown className="h-8 w-8 text-purple-400" />
               </div>
@@ -344,9 +316,7 @@ export default function NFTCardGame() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-green-300 text-sm">Power Level</p>
-                  <p className="text-2xl font-bold text-white">
-                    {userStats.powerLevel}
-                  </p>
+                  <p className="text-2xl font-bold text-white">{userStats.powerLevel}</p>
                 </div>
                 <Trophy className="h-8 w-8 text-green-400" />
               </div>
@@ -358,9 +328,7 @@ export default function NFTCardGame() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-amber-300 text-sm">Trading Score</p>
-                  <p className="text-2xl font-bold text-white">
-                    {userStats.tradingScore}
-                  </p>
+                  <p className="text-2xl font-bold text-white">{userStats.tradingScore}</p>
                 </div>
                 <Shuffle className="h-8 w-8 text-amber-400" />
               </div>
@@ -378,8 +346,8 @@ export default function NFTCardGame() {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground mb-4">
-              Use AI to generate unique biodiversity cards with real
-              conservation data and stunning visuals.
+              Use AI to generate unique biodiversity cards with real conservation data and stunning
+              visuals.
             </p>
 
             {isGenerating && (
@@ -425,9 +393,7 @@ export default function NFTCardGame() {
                     >
                       <div className="bg-gray-900 rounded-lg p-4 h-full">
                         <div className="flex items-center justify-between mb-2">
-                          <Badge
-                            className={`bg-gradient-to-r ${getRarityColor(card.rarity)}`}
-                          >
+                          <Badge className={`bg-gradient-to-r ${getRarityColor(card.rarity)}`}>
                             {card.rarity.toUpperCase()}
                           </Badge>
                           {getCardIcon(card.card_type)}
@@ -441,9 +407,7 @@ export default function NFTCardGame() {
                           />
                         </div>
 
-                        <h3 className="font-bold text-white mb-1">
-                          {card.card_name}
-                        </h3>
+                        <h3 className="font-bold text-white mb-1">{card.card_name}</h3>
                         <p className="text-xs text-muted-foreground mb-2">
                           {card.card_metadata.description}
                         </p>
@@ -451,9 +415,7 @@ export default function NFTCardGame() {
                         <div className="flex justify-between items-center">
                           <div className="text-sm">
                             <span className="text-purple-300">Power:</span>
-                            <span className="text-white font-bold ml-1">
-                              {card.power_level}
-                            </span>
+                            <span className="text-white font-bold ml-1">{card.power_level}</span>
                           </div>
                           <Badge variant="outline" className="text-xs">
                             {card.biodiversity_category}
@@ -464,8 +426,7 @@ export default function NFTCardGame() {
                           card.card_metadata.abilities.length > 0 && (
                             <div className="mt-2">
                               <p className="text-xs text-green-400">
-                                Abilities:{" "}
-                                {card.card_metadata.abilities.join(", ")}
+                                Abilities: {card.card_metadata.abilities.join(", ")}
                               </p>
                             </div>
                           )}
@@ -484,8 +445,7 @@ export default function NFTCardGame() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-center py-8">
-                  Marketplace coming soon! Trade your cards with other
-                  collectors.
+                  Marketplace coming soon! Trade your cards with other collectors.
                 </p>
               </CardContent>
             </Card>
@@ -498,8 +458,7 @@ export default function NFTCardGame() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-center py-8">
-                  Battle system coming soon! Use your cards to compete and earn
-                  rewards.
+                  Battle system coming soon! Use your cards to compete and earn rewards.
                 </p>
               </CardContent>
             </Card>
@@ -514,9 +473,7 @@ export default function NFTCardGame() {
             >
               <div className="bg-gray-900 rounded-lg p-6">
                 <div className="flex justify-between items-start mb-4">
-                  <h2 className="text-2xl font-bold text-white">
-                    {selectedCard.card_name}
-                  </h2>
+                  <h2 className="text-2xl font-bold text-white">{selectedCard.card_name}</h2>
                   <Button
                     variant="ghost"
                     onClick={() => setSelectedCard(null)}
@@ -534,9 +491,7 @@ export default function NFTCardGame() {
 
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <Badge
-                      className={`bg-gradient-to-r ${getRarityColor(selectedCard.rarity)}`}
-                    >
+                    <Badge className={`bg-gradient-to-r ${getRarityColor(selectedCard.rarity)}`}>
                       {selectedCard.rarity.toUpperCase()}
                     </Badge>
                     <Badge variant="outline">{selectedCard.card_type}</Badge>
@@ -549,24 +504,18 @@ export default function NFTCardGame() {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-purple-300">Power Level</p>
-                      <p className="text-xl font-bold text-white">
-                        {selectedCard.power_level}
-                      </p>
+                      <p className="text-xl font-bold text-white">{selectedCard.power_level}</p>
                     </div>
                     <div>
                       <p className="text-sm text-green-300">Ecosystem</p>
-                      <p className="text-sm text-white">
-                        {selectedCard.biodiversity_category}
-                      </p>
+                      <p className="text-sm text-white">{selectedCard.biodiversity_category}</p>
                     </div>
                   </div>
 
                   {selectedCard.card_metadata.abilities &&
                     selectedCard.card_metadata.abilities.length > 0 && (
                       <div>
-                        <p className="text-sm text-amber-300">
-                          Special Abilities
-                        </p>
+                        <p className="text-sm text-amber-300">Special Abilities</p>
                         <p className="text-sm text-white">
                           {selectedCard.card_metadata.abilities.join(", ")}
                         </p>
@@ -582,8 +531,7 @@ export default function NFTCardGame() {
 
                   <div className="pt-4 border-t border-gray-700">
                     <p className="text-xs text-muted-foreground">
-                      Minted:{" "}
-                      {new Date(selectedCard.minted_at).toLocaleDateString()}
+                      Minted: {new Date(selectedCard.minted_at).toLocaleDateString()}
                     </p>
                   </div>
                 </div>

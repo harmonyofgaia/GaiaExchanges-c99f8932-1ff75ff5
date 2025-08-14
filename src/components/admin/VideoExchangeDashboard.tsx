@@ -129,8 +129,8 @@ export function VideoExchangeDashboard() {
                 🎬 GAiA Community Video & Music Exchange
               </h2>
               <p className="text-green-300">
-                Outstanding Experience Platform • Music & Video Upload • GAiA
-                Token Earning • Subscription System
+                Outstanding Experience Platform • Music & Video Upload • GAiA Token Earning •
+                Subscription System
               </p>
             </div>
           </div>
@@ -249,11 +249,7 @@ export function VideoExchangeDashboard() {
           }}
         >
           {tabs.map((tab) => (
-            <TabsTrigger
-              key={tab.value}
-              value={tab.value}
-              className="p-2 text-center"
-            >
+            <TabsTrigger key={tab.value} value={tab.value} className="p-2 text-center">
               <div className="flex flex-col items-center">
                 {tab.icon}
                 <span className="hidden sm:inline">{tab.label}</span>
@@ -274,11 +270,10 @@ export function VideoExchangeDashboard() {
             <CardContent>
               <div className="space-y-4">
                 <p className="text-muted-foreground">
-                  The GAiA Community Video & Music Exchange is an outstanding
-                  experience platform that combines video sharing, musical
-                  performances, and environmental impact. Creators earn real
-                  GAiA tokens for their content while building communities
-                  around sustainability and harmony.
+                  The GAiA Community Video & Music Exchange is an outstanding experience platform
+                  that combines video sharing, musical performances, and environmental impact.
+                  Creators earn real GAiA tokens for their content while building communities around
+                  sustainability and harmony.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -286,13 +281,11 @@ export function VideoExchangeDashboard() {
                     <CardContent className="p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <Users className="h-5 w-5 text-green-400" />
-                        <h4 className="font-semibold text-green-400">
-                          Personal Channels
-                        </h4>
+                        <h4 className="font-semibold text-green-400">Personal Channels</h4>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Customizable channels with upload storage, subscriber
-                        management, and analytics.
+                        Customizable channels with upload storage, subscriber management, and
+                        analytics.
                       </p>
                     </CardContent>
                   </Card>
@@ -301,13 +294,11 @@ export function VideoExchangeDashboard() {
                     <CardContent className="p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <Music className="h-5 w-5 text-purple-400" />
-                        <h4 className="font-semibold text-purple-400">
-                          Music Upload & Earning
-                        </h4>
+                        <h4 className="font-semibold text-purple-400">Music Upload & Earning</h4>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Upload musical performances and earn GAiA tokens based
-                        on plays and engagement.
+                        Upload musical performances and earn GAiA tokens based on plays and
+                        engagement.
                       </p>
                     </CardContent>
                   </Card>
@@ -316,13 +307,11 @@ export function VideoExchangeDashboard() {
                     <CardContent className="p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <Bell className="h-5 w-5 text-blue-400" />
-                        <h4 className="font-semibold text-blue-400">
-                          Subscription System
-                        </h4>
+                        <h4 className="font-semibold text-blue-400">Subscription System</h4>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Follow favorite creators, get notifications, and build
-                        communities around content.
+                        Follow favorite creators, get notifications, and build communities around
+                        content.
                       </p>
                     </CardContent>
                   </Card>
@@ -331,13 +320,11 @@ export function VideoExchangeDashboard() {
                     <CardContent className="p-4">
                       <div className="flex items-center gap-2 mb-2">
                         <Coins className="h-5 w-5 text-yellow-400" />
-                        <h4 className="font-semibold text-yellow-400">
-                          Token Rewards
-                        </h4>
+                        <h4 className="font-semibold text-yellow-400">Token Rewards</h4>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Earn real GAiA tokens for quality content, engagement,
-                        and community building.
+                        Earn real GAiA tokens for quality content, engagement, and community
+                        building.
                       </p>
                     </CardContent>
                   </Card>

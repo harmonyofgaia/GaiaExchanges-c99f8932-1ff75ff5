@@ -43,14 +43,9 @@ export function EnhancedAdminMenu() {
             <Badge className="bg-red-600">QUANTUM</Badge>
           </div>
           <h3 className="font-bold text-purple-400 mb-2">Quantum Security</h3>
-          <p className="text-xs text-muted-foreground mb-4">
-            Next-gen quantum protection systems
-          </p>
+          <p className="text-xs text-muted-foreground mb-4">Next-gen quantum protection systems</p>
           <Link to="/quantum-security">
-            <Button
-              size="sm"
-              className="w-full bg-purple-600 hover:bg-purple-700"
-            >
+            <Button size="sm" className="w-full bg-purple-600 hover:bg-purple-700">
               Quantum Access
             </Button>
           </Link>
@@ -64,9 +59,7 @@ export function EnhancedAdminMenu() {
             <Badge className="bg-blue-600">125K+</Badge>
           </div>
           <h3 className="font-bold text-green-400 mb-2">User Management</h3>
-          <p className="text-xs text-muted-foreground mb-4">
-            Global user control & analytics
-          </p>
+          <p className="text-xs text-muted-foreground mb-4">Global user control & analytics</p>
           <Button size="sm" className="w-full bg-green-600 hover:bg-green-700">
             Manage Users
           </Button>
@@ -80,13 +73,8 @@ export function EnhancedAdminMenu() {
             <Badge className="bg-green-600">LIVE</Badge>
           </div>
           <h3 className="font-bold text-orange-400 mb-2">Analytics Hub</h3>
-          <p className="text-xs text-muted-foreground mb-4">
-            Real-time platform analytics
-          </p>
-          <Button
-            size="sm"
-            className="w-full bg-orange-600 hover:bg-orange-700"
-          >
+          <p className="text-xs text-muted-foreground mb-4">Real-time platform analytics</p>
+          <Button size="sm" className="w-full bg-orange-600 hover:bg-orange-700">
             View Analytics
           </Button>
         </CardContent>
@@ -99,9 +87,7 @@ export function EnhancedAdminMenu() {
             <Badge className="bg-purple-600">ADMIN</Badge>
           </div>
           <h3 className="font-bold text-cyan-400 mb-2">Database Control</h3>
-          <p className="text-xs text-muted-foreground mb-4">
-            Direct database management
-          </p>
+          <p className="text-xs text-muted-foreground mb-4">Direct database management</p>
           <Button size="sm" className="w-full bg-cyan-600 hover:bg-cyan-700">
             Database Access
           </Button>
@@ -115,13 +101,8 @@ export function EnhancedAdminMenu() {
             <Badge className="bg-blue-600">CONFIG</Badge>
           </div>
           <h3 className="font-bold text-yellow-400 mb-2">System Settings</h3>
-          <p className="text-xs text-muted-foreground mb-4">
-            Platform configuration & tweaks
-          </p>
-          <Button
-            size="sm"
-            className="w-full bg-yellow-600 hover:bg-yellow-700"
-          >
+          <p className="text-xs text-muted-foreground mb-4">Platform configuration & tweaks</p>
+          <Button size="sm" className="w-full bg-yellow-600 hover:bg-yellow-700">
             System Config
           </Button>
         </CardContent>
@@ -134,9 +115,7 @@ export function EnhancedAdminMenu() {
             <Badge className="bg-red-600 animate-pulse">ALERT</Badge>
           </div>
           <h3 className="font-bold text-red-400 mb-2">Emergency Controls</h3>
-          <p className="text-xs text-muted-foreground mb-4">
-            Emergency shutdown & recovery
-          </p>
+          <p className="text-xs text-muted-foreground mb-4">Emergency shutdown & recovery</p>
           <Button size="sm" className="w-full bg-red-600 hover:bg-red-700">
             Emergency Panel
           </Button>
@@ -150,13 +129,8 @@ export function EnhancedAdminMenu() {
             <Badge className="bg-green-600">99.9%</Badge>
           </div>
           <h3 className="font-bold text-indigo-400 mb-2">System Health</h3>
-          <p className="text-xs text-muted-foreground mb-4">
-            Real-time system monitoring
-          </p>
-          <Button
-            size="sm"
-            className="w-full bg-indigo-600 hover:bg-indigo-700"
-          >
+          <p className="text-xs text-muted-foreground mb-4">Real-time system monitoring</p>
+          <Button size="sm" className="w-full bg-indigo-600 hover:bg-indigo-700">
             Health Monitor
           </Button>
         </CardContent>

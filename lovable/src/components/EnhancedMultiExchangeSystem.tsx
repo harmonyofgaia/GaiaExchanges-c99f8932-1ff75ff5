@@ -4,14 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  ArrowUpRight,
-  Clock,
-  CheckCircle,
-  AlertCircle,
-  Zap,
-  Shield,
-} from "lucide-react";
+import { ArrowUpRight, Clock, CheckCircle, AlertCircle, Zap, Shield } from "lucide-react";
 import { toast } from "sonner";
 import { ExchangeListing, AutoApplyStatus } from "@/types/ui-types";
 
@@ -95,11 +88,11 @@ export function EnhancedMultiExchangeSystem() {
           };
         }
         return exchange;
-      }),
+      })
     );
 
     toast.success(
-      `🚀 Application submitted to ${exchanges.find((e) => e.id === exchangeId)?.name}`,
+      `🚀 Application submitted to ${exchanges.find((e) => e.id === exchangeId)?.name}`
     );
   };
 
@@ -107,12 +100,8 @@ export function EnhancedMultiExchangeSystem() {
     setExchanges((prev) =>
       prev.map((exchange) => {
         if (exchange.autoApplyStatus === "in-progress") {
-          const newProgress = Math.min(
-            exchange.progress + Math.random() * 20,
-            100,
-          );
-          const newStatus: AutoApplyStatus =
-            newProgress >= 100 ? "completed" : "in-progress";
+          const newProgress = Math.min(exchange.progress + Math.random() * 20, 100);
+          const newStatus: AutoApplyStatus = newProgress >= 100 ? "completed" : "in-progress";
 
           return {
             ...exchange,
@@ -122,7 +111,7 @@ export function EnhancedMultiExchangeSystem() {
           };
         }
         return exchange;
-      }),
+      })
     );
   };
 
@@ -194,9 +183,7 @@ export function EnhancedMultiExchangeSystem() {
             <div>
               <h3 className="font-semibold text-blue-400">🤖 Auto-Apply</h3>
               <p className="text-sm text-gray-400">
-                {autoApplyEnabled
-                  ? "Automated application active"
-                  : "Click to enable auto-apply"}
+                {autoApplyEnabled ? "Automated application active" : "Click to enable auto-apply"}
               </p>
             </div>
           </div>
@@ -204,9 +191,7 @@ export function EnhancedMultiExchangeSystem() {
             size="sm"
             onClick={toggleAutoApply}
             className={
-              autoApplyEnabled
-                ? "bg-red-600 hover:bg-red-700"
-                : "bg-blue-600 hover:bg-blue-700"
+              autoApplyEnabled ? "bg-red-600 hover:bg-red-700" : "bg-blue-600 hover:bg-blue-700"
             }
           >
             {autoApplyEnabled ? "Disable Auto-Apply" : "Enable Auto-Apply"}
@@ -228,25 +213,17 @@ export function EnhancedMultiExchangeSystem() {
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
                     <div className="space-y-1">
-                      <h4 className="font-semibold text-blue-400">
-                        {exchange.name}
-                      </h4>
-                      <p className="text-sm text-muted-foreground">
-                        {exchange.description}
-                      </p>
+                      <h4 className="font-semibold text-blue-400">{exchange.name}</h4>
+                      <p className="text-sm text-muted-foreground">{exchange.description}</p>
                     </div>
                     <Badge variant="secondary">{exchange.tier}</Badge>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <div className="flex items-center gap-2">
                       <Clock className="h-4 w-4" />
-                      <span>
-                        Last Update: {exchange.lastUpdate.toLocaleTimeString()}
-                      </span>
+                      <span>Last Update: {exchange.lastUpdate.toLocaleTimeString()}</span>
                     </div>
-                    <span
-                      className={`${getStatusColor(exchange.status)} font-bold`}
-                    >
+                    <span className={`${getStatusColor(exchange.status)} font-bold`}>
                       {exchange.status.toUpperCase()}
                     </span>
                   </div>
@@ -267,8 +244,7 @@ export function EnhancedMultiExchangeSystem() {
                       size="sm"
                       onClick={() => applyToExchange(exchange.id)}
                       disabled={
-                        exchange.status === "listed" ||
-                        exchange.autoApplyStatus === "in-progress"
+                        exchange.status === "listed" || exchange.autoApplyStatus === "in-progress"
                       }
                       className="border-blue-500/30 text-blue-400"
                     >
@@ -306,26 +282,17 @@ export function EnhancedMultiExchangeSystem() {
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-2">
                       <div className="space-y-1">
-                        <h4 className="font-semibold text-blue-400">
-                          {exchange.name}
-                        </h4>
-                        <p className="text-sm text-muted-foreground">
-                          {exchange.description}
-                        </p>
+                        <h4 className="font-semibold text-blue-400">{exchange.name}</h4>
+                        <p className="text-sm text-muted-foreground">{exchange.description}</p>
                       </div>
                       <Badge variant="secondary">{exchange.tier}</Badge>
                     </div>
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex items-center gap-2">
                         <Clock className="h-4 w-4" />
-                        <span>
-                          Last Update:{" "}
-                          {exchange.lastUpdate.toLocaleTimeString()}
-                        </span>
+                        <span>Last Update: {exchange.lastUpdate.toLocaleTimeString()}</span>
                       </div>
-                      <span
-                        className={`${getStatusColor(exchange.status)} font-bold`}
-                      >
+                      <span className={`${getStatusColor(exchange.status)} font-bold`}>
                         {exchange.status.toUpperCase()}
                       </span>
                     </div>
@@ -346,8 +313,7 @@ export function EnhancedMultiExchangeSystem() {
                         size="sm"
                         onClick={() => applyToExchange(exchange.id)}
                         disabled={
-                          exchange.status === "listed" ||
-                          exchange.autoApplyStatus === "in-progress"
+                          exchange.status === "listed" || exchange.autoApplyStatus === "in-progress"
                         }
                         className="border-blue-500/30 text-blue-400"
                       >
@@ -385,26 +351,17 @@ export function EnhancedMultiExchangeSystem() {
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-2">
                       <div className="space-y-1">
-                        <h4 className="font-semibold text-blue-400">
-                          {exchange.name}
-                        </h4>
-                        <p className="text-sm text-muted-foreground">
-                          {exchange.description}
-                        </p>
+                        <h4 className="font-semibold text-blue-400">{exchange.name}</h4>
+                        <p className="text-sm text-muted-foreground">{exchange.description}</p>
                       </div>
                       <Badge variant="secondary">{exchange.tier}</Badge>
                     </div>
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex items-center gap-2">
                         <Clock className="h-4 w-4" />
-                        <span>
-                          Last Update:{" "}
-                          {exchange.lastUpdate.toLocaleTimeString()}
-                        </span>
+                        <span>Last Update: {exchange.lastUpdate.toLocaleTimeString()}</span>
                       </div>
-                      <span
-                        className={`${getStatusColor(exchange.status)} font-bold`}
-                      >
+                      <span className={`${getStatusColor(exchange.status)} font-bold`}>
                         {exchange.status.toUpperCase()}
                       </span>
                     </div>
@@ -425,8 +382,7 @@ export function EnhancedMultiExchangeSystem() {
                         size="sm"
                         onClick={() => applyToExchange(exchange.id)}
                         disabled={
-                          exchange.status === "listed" ||
-                          exchange.autoApplyStatus === "in-progress"
+                          exchange.status === "listed" || exchange.autoApplyStatus === "in-progress"
                         }
                         className="border-blue-500/30 text-blue-400"
                       >
@@ -464,26 +420,17 @@ export function EnhancedMultiExchangeSystem() {
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-2">
                       <div className="space-y-1">
-                        <h4 className="font-semibold text-blue-400">
-                          {exchange.name}
-                        </h4>
-                        <p className="text-sm text-muted-foreground">
-                          {exchange.description}
-                        </p>
+                        <h4 className="font-semibold text-blue-400">{exchange.name}</h4>
+                        <p className="text-sm text-muted-foreground">{exchange.description}</p>
                       </div>
                       <Badge variant="secondary">{exchange.tier}</Badge>
                     </div>
                     <div className="flex items-center justify-between text-sm">
                       <div className="flex items-center gap-2">
                         <Clock className="h-4 w-4" />
-                        <span>
-                          Last Update:{" "}
-                          {exchange.lastUpdate.toLocaleTimeString()}
-                        </span>
+                        <span>Last Update: {exchange.lastUpdate.toLocaleTimeString()}</span>
                       </div>
-                      <span
-                        className={`${getStatusColor(exchange.status)} font-bold`}
-                      >
+                      <span className={`${getStatusColor(exchange.status)} font-bold`}>
                         {exchange.status.toUpperCase()}
                       </span>
                     </div>
@@ -504,8 +451,7 @@ export function EnhancedMultiExchangeSystem() {
                         size="sm"
                         onClick={() => applyToExchange(exchange.id)}
                         disabled={
-                          exchange.status === "listed" ||
-                          exchange.autoApplyStatus === "in-progress"
+                          exchange.status === "listed" || exchange.autoApplyStatus === "in-progress"
                         }
                         className="border-blue-500/30 text-blue-400"
                       >

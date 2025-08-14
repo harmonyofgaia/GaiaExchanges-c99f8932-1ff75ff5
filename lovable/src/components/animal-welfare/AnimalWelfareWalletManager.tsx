@@ -15,15 +15,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Heart,
-  DollarSign,
-  Percent,
-  Zap,
-  Shield,
-  TrendingUp,
-  Globe,
-} from "lucide-react";
+import { Heart, DollarSign, Percent, Zap, Shield, TrendingUp, Globe } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -66,8 +58,7 @@ export function AnimalWelfareWalletManager() {
     {
       id: "1",
       name: "🐾 Global Animal Rescue Network",
-      description:
-        "Emergency rescue operations for animals in crisis worldwide",
+      description: "Emergency rescue operations for animals in crisis worldwide",
       wallet_address: "AW1o9xG7pQzRbVx8uT9wE6cJdL3vF1sA2rP5qW8xN9kM",
       allocation_percentage: 30,
       total_received: 15847.92,
@@ -97,8 +88,7 @@ export function AnimalWelfareWalletManager() {
     {
       id: "4",
       name: "🚫 Anti-Poaching Operations",
-      description:
-        "Advanced technology to stop illegal hunting and trafficking",
+      description: "Advanced technology to stop illegal hunting and trafficking",
       wallet_address: "AW4VbN8jK5sT9eR4wQ7xL3mP1yC6zA5dH9uI4oE8nF7r",
       allocation_percentage: 15,
       total_received: 8429.12,
@@ -120,10 +110,7 @@ export function AnimalWelfareWalletManager() {
   useEffect(() => {
     fetchUserConfig();
 
-    const total = animalProjects.reduce(
-      (sum, project) => sum + project.total_received,
-      0,
-    );
+    const total = animalProjects.reduce((sum, project) => sum + project.total_received, 0);
     setTotalAllocated(total);
 
     // Simulate live fee processing
@@ -181,8 +168,7 @@ export function AnimalWelfareWalletManager() {
       }
 
       toast.success("🐾 Animal Welfare Configuration Saved!", {
-        description:
-          "Your fees will now support animal rescue and protection automatically.",
+        description: "Your fees will now support animal rescue and protection automatically.",
         duration: 4000,
       });
     } catch (error) {
@@ -224,8 +210,8 @@ export function AnimalWelfareWalletManager() {
             🐾 Animal Welfare Fee Configuration
           </CardTitle>
           <p className="text-pink-300">
-            Configure how your transaction fees automatically support global
-            animal welfare initiatives
+            Configure how your transaction fees automatically support global animal welfare
+            initiatives
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -236,8 +222,7 @@ export function AnimalWelfareWalletManager() {
                 🐾 Animal Welfare Support (Recommended)
               </Label>
               <p className="text-sm text-muted-foreground">
-                All fees automatically go to verified animal rescue and
-                protection projects
+                All fees automatically go to verified animal rescue and protection projects
               </p>
             </div>
             <Switch
@@ -245,9 +230,7 @@ export function AnimalWelfareWalletManager() {
               onCheckedChange={(checked) =>
                 setConfig({
                   ...config,
-                  preferred_fee_destination: checked
-                    ? "animal_welfare"
-                    : "vault",
+                  preferred_fee_destination: checked ? "animal_welfare" : "vault",
                   zero_fee_enabled: false,
                 })
               }
@@ -257,19 +240,14 @@ export function AnimalWelfareWalletManager() {
           {/* Zero Fee Option */}
           <div className="flex items-center justify-between p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
             <div>
-              <Label className="text-base font-medium text-blue-400">
-                Zero Fee Mode
-              </Label>
+              <Label className="text-base font-medium text-blue-400">Zero Fee Mode</Label>
               <p className="text-sm text-muted-foreground">
-                Enable completely free transactions (no animal welfare
-                contribution)
+                Enable completely free transactions (no animal welfare contribution)
               </p>
             </div>
             <Switch
               checked={config.zero_fee_enabled}
-              onCheckedChange={(checked) =>
-                setConfig({ ...config, zero_fee_enabled: checked })
-              }
+              onCheckedChange={(checked) => setConfig({ ...config, zero_fee_enabled: checked })}
             />
           </div>
 
@@ -319,15 +297,11 @@ export function AnimalWelfareWalletManager() {
                     <SelectItem value="animal_welfare">
                       🐾 Animal Welfare (Recommended - Save Animals)
                     </SelectItem>
-                    <SelectItem value="vault">
-                      🏦 Community Vault (Admin Surprises)
-                    </SelectItem>
+                    <SelectItem value="vault">🏦 Community Vault (Admin Surprises)</SelectItem>
                     <SelectItem value="green_projects">
                       🌱 Green Projects (Environmental)
                     </SelectItem>
-                    <SelectItem value="humanity">
-                      ❤️ Humanity Fund (Global Aid)
-                    </SelectItem>
+                    <SelectItem value="humanity">❤️ Humanity Fund (Global Aid)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -370,16 +344,13 @@ export function AnimalWelfareWalletManager() {
             🐾 Animal Welfare Project Distribution System
           </CardTitle>
           <p className="text-purple-300">
-            All community fees are automatically reinvested into global animal
-            welfare projects
+            All community fees are automatically reinvested into global animal welfare projects
           </p>
           <div className="bg-black/30 p-3 rounded-lg">
             <div className="text-sm text-muted-foreground mb-1">
               Official Animal Welfare Wallet:
             </div>
-            <div className="font-mono text-pink-400 text-sm break-all">
-              {GAIA_TOKEN.address}
-            </div>
+            <div className="font-mono text-pink-400 text-sm break-all">{GAIA_TOKEN.address}</div>
           </div>
         </CardHeader>
         <CardContent>
@@ -388,27 +359,17 @@ export function AnimalWelfareWalletManager() {
               <div className="text-2xl font-bold text-pink-400">
                 {totalAllocated.toLocaleString()} GAIA
               </div>
-              <div className="text-xs text-muted-foreground">
-                Total Allocated
-              </div>
+              <div className="text-xs text-muted-foreground">Total Allocated</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-blue-900/30">
-              <div className="text-2xl font-bold text-blue-400">
-                {animalProjects.length}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Active Projects
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{animalProjects.length}</div>
+              <div className="text-xs text-muted-foreground">Active Projects</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-green-900/30">
               <div className="text-2xl font-bold text-green-400">
-                {animalProjects
-                  .reduce((sum, p) => sum + p.animal_count, 0)
-                  .toLocaleString()}
+                {animalProjects.reduce((sum, p) => sum + p.animal_count, 0).toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Animals Protected
-              </div>
+              <div className="text-xs text-muted-foreground">Animals Protected</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-orange-900/30">
               <div className="text-2xl font-bold text-orange-400">
@@ -425,8 +386,7 @@ export function AnimalWelfareWalletManager() {
                 <div className="flex items-center justify-center gap-2 text-yellow-400">
                   <Zap className="h-5 w-5 animate-bounce" />
                   <span className="font-bold">
-                    LIVE FEE PROCESSING - Distributing to Animal Welfare
-                    Projects
+                    LIVE FEE PROCESSING - Distributing to Animal Welfare Projects
                   </span>
                   <Zap className="h-5 w-5 animate-bounce" />
                 </div>
@@ -444,12 +404,8 @@ export function AnimalWelfareWalletManager() {
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h3 className="font-bold text-lg text-pink-400">
-                        {project.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {project.description}
-                      </p>
+                      <h3 className="font-bold text-lg text-pink-400">{project.name}</h3>
+                      <p className="text-sm text-muted-foreground mb-2">{project.description}</p>
                       {project.animal_count > 0 && (
                         <Badge className="bg-green-600 text-white">
                           <Heart className="h-3 w-3 mr-1" />
@@ -457,32 +413,23 @@ export function AnimalWelfareWalletManager() {
                         </Badge>
                       )}
                     </div>
-                    <Badge
-                      className={`${getStatusColor(project.project_status)} text-white`}
-                    >
+                    <Badge className={`${getStatusColor(project.project_status)} text-white`}>
                       {project.project_status.toUpperCase()}
                     </Badge>
                   </div>
 
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">
-                        Allocation:
-                      </span>
+                      <span className="text-sm text-muted-foreground">Allocation:</span>
                       <span className="font-bold text-pink-400">
                         {project.allocation_percentage}%
                       </span>
                     </div>
 
-                    <Progress
-                      value={project.allocation_percentage}
-                      className="h-2"
-                    />
+                    <Progress value={project.allocation_percentage} className="h-2" />
 
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">
-                        Total Received:
-                      </span>
+                      <span className="text-sm text-muted-foreground">Total Received:</span>
                       <span className="font-bold">
                         {project.total_received.toLocaleString()} GAIA
                       </span>
@@ -501,16 +448,13 @@ export function AnimalWelfareWalletManager() {
           <div className="text-center space-y-4">
             <div className="flex items-center justify-center gap-2">
               <Shield className="h-6 w-6 text-blue-400" />
-              <h3 className="text-xl font-bold text-blue-400">
-                Automatic Animal Welfare System
-              </h3>
+              <h3 className="text-xl font-bold text-blue-400">Automatic Animal Welfare System</h3>
               <Globe className="h-6 w-6 text-pink-400" />
             </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              All transaction fees are automatically distributed to verified
-              animal welfare projects according to the allocation percentages
-              shown above. This creates a sustainable ecosystem where every
-              trade helps protect and save animals worldwide.
+              All transaction fees are automatically distributed to verified animal welfare projects
+              according to the allocation percentages shown above. This creates a sustainable
+              ecosystem where every trade helps protect and save animals worldwide.
             </p>
             <div className="flex justify-center gap-4 text-xs flex-wrap">
               <Badge className="bg-pink-600 text-white">

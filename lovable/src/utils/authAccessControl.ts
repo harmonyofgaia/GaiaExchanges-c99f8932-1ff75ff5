@@ -97,8 +97,7 @@ export const getAuthAccessState = (): AuthAccessState => {
   // 1. User has visited homepage AND
   // 2. Admin dev mode is NOT enabled AND
   // 3. Either in production OR admin dev mode is explicitly disabled
-  const canAccessUserAuth =
-    hasVisited && !isAdminDev && (isProd || !isAdminDev);
+  const canAccessUserAuth = hasVisited && !isAdminDev && (isProd || !isAdminDev);
 
   return {
     hasVisitedHomepage: hasVisited,

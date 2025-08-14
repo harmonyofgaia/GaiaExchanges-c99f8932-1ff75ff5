@@ -46,9 +46,7 @@ const Pricing = () => {
                 <li>✅ Environmental Impact</li>
                 <li>✅ Basic Security</li>
               </ul>
-              <Button className="w-full bg-green-600 hover:bg-green-700">
-                Join Free
-              </Button>
+              <Button className="w-full bg-green-600 hover:bg-green-700">Join Free</Button>
             </CardContent>
           </Card>
 
@@ -69,9 +67,7 @@ const Pricing = () => {
                 <li>✅ Enhanced Security</li>
                 <li>✅ Trading Features</li>
               </ul>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                Upgrade Now
-              </Button>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700">Upgrade Now</Button>
             </CardContent>
           </Card>
 
@@ -94,12 +90,9 @@ const Pricing = () => {
                 <li>✅ Enhanced Environmental Tools</li>
                 <li>✅ Community Leadership Access</li>
               </ul>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                Become Guardian
-              </Button>
+              <Button className="w-full bg-purple-600 hover:bg-purple-700">Become Guardian</Button>
               <p className="text-xs text-purple-300">
-                *Guardian Defense: Specialized protection system for community
-                guardians
+                *Guardian Defense: Specialized protection system for community guardians
               </p>
             </CardContent>
           </Card>
@@ -108,29 +101,21 @@ const Pricing = () => {
         <div className="mt-8 text-center">
           <Card className="border-yellow-500/30 bg-yellow-900/20">
             <CardContent className="pt-6">
-              <h3 className="text-xl font-bold text-yellow-400 mb-4">
-                🌟 Special Features
-              </h3>
+              <h3 className="text-xl font-bold text-yellow-400 mb-4">🌟 Special Features</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div>
-                  <h4 className="font-bold text-green-400">
-                    Environmental Impact
-                  </h4>
+                  <h4 className="font-bold text-green-400">Environmental Impact</h4>
                   <p className="text-muted-foreground">
                     Track and contribute to real environmental projects
                   </p>
                 </div>
                 <div>
                   <h4 className="font-bold text-blue-400">NFT Integration</h4>
-                  <p className="text-muted-foreground">
-                    Create and trade animal protection NFTs
-                  </p>
+                  <p className="text-muted-foreground">Create and trade animal protection NFTs</p>
                 </div>
                 <div>
                   <h4 className="font-bold text-purple-400">Community Power</h4>
-                  <p className="text-muted-foreground">
-                    Join forces with guardians worldwide
-                  </p>
+                  <p className="text-muted-foreground">Join forces with guardians worldwide</p>
                 </div>
               </div>
             </CardContent>

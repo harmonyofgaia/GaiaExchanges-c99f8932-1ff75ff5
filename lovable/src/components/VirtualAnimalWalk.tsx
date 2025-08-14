@@ -3,23 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import {
-  MapPin,
-  Navigation,
-  Globe,
-  Camera,
-  Heart,
-  Compass,
-} from "lucide-react";
+import { MapPin, Navigation, Globe, Camera, Heart, Compass } from "lucide-react";
 import { toast } from "sonner";
 
 export function VirtualAnimalWalk() {
-  const [selectedAnimal, setSelectedAnimal] = useState(
-    "Thunder - The Majestic Eagle",
-  );
-  const [currentLocation, setCurrentLocation] = useState(
-    "Rocky Mountain Sanctuary, Colorado",
-  );
+  const [selectedAnimal, setSelectedAnimal] = useState("Thunder - The Majestic Eagle");
+  const [currentLocation, setCurrentLocation] = useState("Rocky Mountain Sanctuary, Colorado");
   const [destinationSearch, setDestinationSearch] = useState("");
   const [walkingMode, setWalkingMode] = useState(false);
   const [animalMood, setAnimalMood] = useState(85);
@@ -87,17 +76,12 @@ export function VirtualAnimalWalk() {
           <div className="text-center space-y-4">
             <div className="text-6xl animate-bounce">🦅🌍</div>
             <p className="text-muted-foreground text-lg">
-              Experience the world through your animal's eyes without plane
-              tickets!
+              Experience the world through your animal's eyes without plane tickets!
             </p>
             <div className="flex items-center justify-center gap-4">
-              <Badge className="bg-green-600 text-white">
-                Real Environments
-              </Badge>
+              <Badge className="bg-green-600 text-white">Real Environments</Badge>
               <Badge className="bg-blue-600 text-white">Live Weather</Badge>
-              <Badge className="bg-purple-600 text-white">
-                Animal Perspective
-              </Badge>
+              <Badge className="bg-purple-600 text-white">Animal Perspective</Badge>
             </div>
           </div>
         </CardContent>
@@ -115,9 +99,7 @@ export function VirtualAnimalWalk() {
           <CardContent className="space-y-4">
             <div className="text-center">
               <div className="text-4xl mb-2">🦅</div>
-              <h3 className="text-xl font-bold text-blue-400">
-                {selectedAnimal}
-              </h3>
+              <h3 className="text-xl font-bold text-blue-400">{selectedAnimal}</h3>
               <p className="text-muted-foreground">Ready for adventure</p>
             </div>
 
@@ -188,15 +170,11 @@ export function VirtualAnimalWalk() {
               <div
                 key={index}
                 className="p-4 bg-muted/30 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-colors cursor-pointer"
-                onClick={() =>
-                  !walkingMode && startVirtualWalk(destination.name)
-                }
+                onClick={() => !walkingMode && startVirtualWalk(destination.name)}
               >
                 <div className="space-y-3">
                   <div className="flex justify-between items-start">
-                    <h4 className="font-bold text-green-400 text-sm">
-                      {destination.name}
-                    </h4>
+                    <h4 className="font-bold text-green-400 text-sm">{destination.name}</h4>
                     <Badge variant="outline" className="text-xs">
                       {destination.type}
                     </Badge>
@@ -206,12 +184,7 @@ export function VirtualAnimalWalk() {
                     <span className="text-xs text-muted-foreground">
                       Difficulty: {destination.difficulty}
                     </span>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      disabled={walkingMode}
-                      className="text-xs"
-                    >
+                    <Button size="sm" variant="outline" disabled={walkingMode} className="text-xs">
                       <Camera className="h-3 w-3 mr-1" />
                       Explore
                     </Button>
@@ -229,12 +202,9 @@ export function VirtualAnimalWalk() {
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <div className="text-8xl animate-bounce">🌍🦅</div>
-              <h3 className="text-2xl font-bold text-yellow-400">
-                Exploring {currentLocation}
-              </h3>
+              <h3 className="text-2xl font-bold text-yellow-400">Exploring {currentLocation}</h3>
               <p className="text-muted-foreground">
-                Your animal is experiencing the sights, sounds, and
-                environment...
+                Your animal is experiencing the sights, sounds, and environment...
               </p>
               <div className="flex justify-center gap-4 text-2xl">
                 <span className="animate-pulse">👁️</span>

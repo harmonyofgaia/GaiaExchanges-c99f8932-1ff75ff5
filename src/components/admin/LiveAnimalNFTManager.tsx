@@ -121,8 +121,8 @@ export function LiveAnimalNFTManager() {
               nftGenerated: true,
               walletAddress: "5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh",
             }
-          : animal,
-      ),
+          : animal
+      )
     );
 
     toast.success("🎨 NFT Generated Successfully!", {
@@ -133,9 +133,7 @@ export function LiveAnimalNFTManager() {
 
   const updateGoalAmount = (animalId: string, newGoal: number) => {
     setAnimals((prev) =>
-      prev.map((animal) =>
-        animal.id === animalId ? { ...animal, goalAmount: newGoal } : animal,
-      ),
+      prev.map((animal) => (animal.id === animalId ? { ...animal, goalAmount: newGoal } : animal))
     );
 
     toast.success("💎 Goal Amount Updated!", {
@@ -184,47 +182,32 @@ export function LiveAnimalNFTManager() {
             🦋 LIVE ANIMAL NFT MANAGER - FULL ADMIN CONTROL
           </CardTitle>
           <p className="text-muted-foreground">
-            Generate NFT personages for registered animals with real-life stats,
-            wallets, and goals
+            Generate NFT personages for registered animals with real-life stats, wallets, and goals
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-emerald-900/30 border border-emerald-500/20 rounded-lg">
-              <div className="text-2xl font-bold text-emerald-400">
-                {animals.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Registered Animals
-              </div>
+              <div className="text-2xl font-bold text-emerald-400">{animals.length}</div>
+              <div className="text-sm text-muted-foreground">Registered Animals</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 border border-blue-500/20 rounded-lg">
               <div className="text-2xl font-bold text-blue-400">
                 {animals.filter((a) => a.nftGenerated).length}
               </div>
-              <div className="text-sm text-muted-foreground">
-                NFTs Generated
-              </div>
+              <div className="text-sm text-muted-foreground">NFTs Generated</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 border border-purple-500/20 rounded-lg">
               <div className="text-2xl font-bold text-purple-400">
-                {animals
-                  .reduce((sum, a) => sum + a.currentAmount, 0)
-                  .toLocaleString()}
+                {animals.reduce((sum, a) => sum + a.currentAmount, 0).toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Raised (GAiA)
-              </div>
+              <div className="text-sm text-muted-foreground">Total Raised (GAiA)</div>
             </div>
             <div className="text-center p-4 bg-yellow-900/30 border border-yellow-500/20 rounded-lg">
               <div className="text-2xl font-bold text-yellow-400">
-                {animals
-                  .reduce((sum, a) => sum + a.goalAmount, 0)
-                  .toLocaleString()}
+                {animals.reduce((sum, a) => sum + a.goalAmount, 0).toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Goals (GAiA)
-              </div>
+              <div className="text-sm text-muted-foreground">Total Goals (GAiA)</div>
             </div>
           </div>
         </CardContent>
@@ -248,17 +231,11 @@ export function LiveAnimalNFTManager() {
                 <CardContent className="p-4 space-y-4">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="font-bold text-lg text-white">
-                        {animal.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {animal.species}
-                      </p>
+                      <h3 className="font-bold text-lg text-white">{animal.name}</h3>
+                      <p className="text-sm text-muted-foreground">{animal.species}</p>
                     </div>
                     <div className="flex flex-col items-end gap-2">
-                      <Badge
-                        className={`${getStatusColor(animal.status)} text-white`}
-                      >
+                      <Badge className={`${getStatusColor(animal.status)} text-white`}>
                         {animal.status}
                       </Badge>
                       <Badge
@@ -278,34 +255,24 @@ export function LiveAnimalNFTManager() {
                     <div className="grid grid-cols-2 gap-2 text-xs">
                       <div className="flex justify-between">
                         <span>Health:</span>
-                        <span className="text-green-400">
-                          {animal.stats.health}%
-                        </span>
+                        <span className="text-green-400">{animal.stats.health}%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Activity:</span>
-                        <span className="text-blue-400">
-                          {animal.stats.activity}%
-                        </span>
+                        <span className="text-blue-400">{animal.stats.activity}%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Protection:</span>
-                        <span className="text-purple-400">
-                          {animal.stats.protection}%
-                        </span>
+                        <span className="text-purple-400">{animal.stats.protection}%</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Popularity:</span>
-                        <span className="text-yellow-400">
-                          {animal.stats.popularity}%
-                        </span>
+                        <span className="text-yellow-400">{animal.stats.popularity}%</span>
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <div className="text-sm font-medium">
-                        Funding Progress:
-                      </div>
+                      <div className="text-sm font-medium">Funding Progress:</div>
                       <div className="w-full bg-gray-700 rounded-full h-2">
                         <div
                           className="bg-gradient-to-r from-green-400 to-emerald-500 h-2 rounded-full"
@@ -315,9 +282,7 @@ export function LiveAnimalNFTManager() {
                         ></div>
                       </div>
                       <div className="flex justify-between text-xs">
-                        <span className="text-green-400">
-                          {animal.currentAmount} GAiA
-                        </span>
+                        <span className="text-green-400">{animal.currentAmount} GAiA</span>
                         <span className="text-muted-foreground">
                           Goal: {animal.goalAmount} GAiA
                         </span>
@@ -326,11 +291,7 @@ export function LiveAnimalNFTManager() {
 
                     <div className="flex flex-wrap gap-1">
                       {animal.traits.slice(0, 3).map((trait) => (
-                        <Badge
-                          key={trait}
-                          variant="outline"
-                          className="text-xs"
-                        >
+                        <Badge key={trait} variant="outline" className="text-xs">
                           {trait}
                         </Badge>
                       ))}
@@ -352,10 +313,7 @@ export function LiveAnimalNFTManager() {
                           ✅ NFT Generated & Live on Marketplace
                         </div>
                         <div className="flex gap-2">
-                          <Button
-                            size="sm"
-                            className="flex-1 bg-blue-600 hover:bg-blue-700"
-                          >
+                          <Button size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700">
                             <Wallet className="h-3 w-3 mr-1" />
                             Wallet
                           </Button>
@@ -380,16 +338,12 @@ export function LiveAnimalNFTManager() {
         <TabsContent value="nft-generator">
           <Card className="border-purple-500/30">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                🎨 NFT Generator Dashboard
-              </CardTitle>
+              <CardTitle className="text-purple-400">🎨 NFT Generator Dashboard</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <h3 className="text-lg font-bold text-white">
-                    Batch NFT Generation
-                  </h3>
+                  <h3 className="text-lg font-bold text-white">Batch NFT Generation</h3>
                   <Button className="w-full bg-purple-600 hover:bg-purple-700">
                     <Zap className="h-4 w-4 mr-2" />
                     Generate All Missing NFTs
@@ -405,13 +359,9 @@ export function LiveAnimalNFTManager() {
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className="text-lg font-bold text-white">
-                    Global Settings
-                  </h3>
+                  <h3 className="text-lg font-bold text-white">Global Settings</h3>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">
-                      Default Goal Amount (GAiA):
-                    </label>
+                    <label className="text-sm font-medium">Default Goal Amount (GAiA):</label>
                     <Input
                       type="number"
                       value={goalAmount}
@@ -436,8 +386,7 @@ export function LiveAnimalNFTManager() {
               Animal NFT Marketplace Integration
             </h3>
             <p className="text-muted-foreground mb-4">
-              All generated animal NFTs are automatically available in the GAiA
-              NFT Marketplace
+              All generated animal NFTs are automatically available in the GAiA NFT Marketplace
             </p>
             <Button className="bg-yellow-600 hover:bg-yellow-700">
               <Gift className="h-4 w-4 mr-2" />
@@ -450,9 +399,7 @@ export function LiveAnimalNFTManager() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="border-red-500/30 bg-red-900/20">
               <CardHeader>
-                <CardTitle className="text-red-400">
-                  🔥 Critical Controls
-                </CardTitle>
+                <CardTitle className="text-red-400">🔥 Critical Controls</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button className="w-full bg-red-600 hover:bg-red-700">
@@ -472,9 +419,7 @@ export function LiveAnimalNFTManager() {
 
             <Card className="border-blue-500/30 bg-blue-900/20">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  💰 Financial Controls
-                </CardTitle>
+                <CardTitle className="text-blue-400">💰 Financial Controls</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700">
@@ -494,9 +439,7 @@ export function LiveAnimalNFTManager() {
 
             <Card className="border-green-500/30 bg-green-900/20">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  🌍 Conservation Impact
-                </CardTitle>
+                <CardTitle className="text-green-400">🌍 Conservation Impact</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button className="w-full bg-green-600 hover:bg-green-700">
@@ -528,9 +471,7 @@ export function LiveAnimalNFTManager() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="text-sm font-medium">
-                  New Goal Amount (GAiA):
-                </label>
+                <label className="text-sm font-medium">New Goal Amount (GAiA):</label>
                 <Input
                   type="number"
                   value={goalAmount}

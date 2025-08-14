@@ -37,17 +37,10 @@ export function GlobalCommandCenter() {
         ...prev,
         globalNodes: prev.globalNodes + Math.floor(Math.random() * 3),
         activeConnections: Math.floor(Math.random() * 2000 + 1500),
-        networkStrength: Math.min(
-          100,
-          prev.networkStrength + Math.random() * 0.5,
-        ),
-        commandsExecuted:
-          prev.commandsExecuted + Math.floor(Math.random() * 10),
+        networkStrength: Math.min(100, prev.networkStrength + Math.random() * 0.5),
+        commandsExecuted: prev.commandsExecuted + Math.floor(Math.random() * 10),
         securityLevel: Math.min(100, prev.securityLevel + Math.random() * 0.1),
-        globalCoverage: Math.min(
-          100,
-          prev.globalCoverage + Math.random() * 0.2,
-        ),
+        globalCoverage: Math.min(100, prev.globalCoverage + Math.random() * 0.2),
       }));
     }, 3000);
 
@@ -74,12 +67,8 @@ export function GlobalCommandCenter() {
             </div>
             <div className="flex justify-center gap-2 flex-wrap">
               <Badge className="bg-cyan-600 animate-pulse">GLOBAL REACH</Badge>
-              <Badge className="bg-blue-600 animate-pulse">
-                COMMAND CONTROL
-              </Badge>
-              <Badge className="bg-purple-600 animate-pulse">
-                SECURE NETWORK
-              </Badge>
+              <Badge className="bg-blue-600 animate-pulse">COMMAND CONTROL</Badge>
+              <Badge className="bg-purple-600 animate-pulse">SECURE NETWORK</Badge>
             </div>
           </div>
         </CardHeader>
@@ -90,9 +79,7 @@ export function GlobalCommandCenter() {
         <Card className="border-green-500/30 bg-green-900/20">
           <CardContent className="p-4 text-center">
             <Globe className="h-8 w-8 mx-auto text-green-400 mb-2" />
-            <div className="text-2xl font-bold text-green-400">
-              {commandStats.globalNodes}
-            </div>
+            <div className="text-2xl font-bold text-green-400">{commandStats.globalNodes}</div>
             <div className="text-sm text-muted-foreground">Global Nodes</div>
           </CardContent>
         </Card>
@@ -103,9 +90,7 @@ export function GlobalCommandCenter() {
             <div className="text-2xl font-bold text-blue-400">
               {commandStats.activeConnections.toLocaleString()}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Active Connections
-            </div>
+            <div className="text-sm text-muted-foreground">Active Connections</div>
           </CardContent>
         </Card>
 
@@ -115,9 +100,7 @@ export function GlobalCommandCenter() {
             <div className="text-2xl font-bold text-purple-400">
               {commandStats.networkStrength.toFixed(1)}%
             </div>
-            <div className="text-sm text-muted-foreground">
-              Network Strength
-            </div>
+            <div className="text-sm text-muted-foreground">Network Strength</div>
           </CardContent>
         </Card>
 
@@ -127,9 +110,7 @@ export function GlobalCommandCenter() {
             <div className="text-2xl font-bold text-yellow-400">
               {commandStats.commandsExecuted.toLocaleString()}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Commands Executed
-            </div>
+            <div className="text-sm text-muted-foreground">Commands Executed</div>
           </CardContent>
         </Card>
 
@@ -157,9 +138,7 @@ export function GlobalCommandCenter() {
       {/* Command Control Panel */}
       <Card className="border-red-500/30 bg-red-900/20">
         <CardHeader>
-          <CardTitle className="text-red-400">
-            🎯 Global Command Control
-          </CardTitle>
+          <CardTitle className="text-red-400">🎯 Global Command Control</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -200,9 +179,7 @@ export function GlobalCommandCenter() {
       {/* Network Status Map */}
       <Card className="border-purple-500/30 bg-purple-900/20">
         <CardHeader>
-          <CardTitle className="text-purple-400">
-            🗺️ Global Network Status
-          </CardTitle>
+          <CardTitle className="text-purple-400">🗺️ Global Network Status</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -218,9 +195,7 @@ export function GlobalCommandCenter() {
                   <Badge className="bg-green-600">ONLINE</Badge>
                 </div>
                 <Progress value={97} className="h-2" />
-                <div className="text-xs text-muted-foreground">
-                  Coverage: 97%
-                </div>
+                <div className="text-xs text-muted-foreground">Coverage: 97%</div>
               </div>
             </div>
 
@@ -236,9 +211,7 @@ export function GlobalCommandCenter() {
                   <Badge className="bg-yellow-600">EXPANDING</Badge>
                 </div>
                 <Progress value={89} className="h-2" />
-                <div className="text-xs text-muted-foreground">
-                  Coverage: 89%
-                </div>
+                <div className="text-xs text-muted-foreground">Coverage: 89%</div>
               </div>
             </div>
 
@@ -254,9 +227,7 @@ export function GlobalCommandCenter() {
                   <Badge className="bg-green-600">ONLINE</Badge>
                 </div>
                 <Progress value={93} className="h-2" />
-                <div className="text-xs text-muted-foreground">
-                  Coverage: 93%
-                </div>
+                <div className="text-xs text-muted-foreground">Coverage: 93%</div>
               </div>
             </div>
           </div>
@@ -266,26 +237,19 @@ export function GlobalCommandCenter() {
       {/* Advanced Operations */}
       <Card className="border-orange-500/30 bg-orange-900/20">
         <CardHeader>
-          <CardTitle className="text-orange-400">
-            ⚡ Advanced Global Operations
-          </CardTitle>
+          <CardTitle className="text-orange-400">⚡ Advanced Global Operations</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center space-y-4">
             <div className="text-6xl mb-4">🌍⚡</div>
-            <h3 className="text-2xl font-bold text-orange-400">
-              GLOBAL COMMAND AUTHORITY
-            </h3>
+            <h3 className="text-2xl font-bold text-orange-400">GLOBAL COMMAND AUTHORITY</h3>
             <p className="text-orange-300">
-              Complete control over worldwide network operations and command
-              execution
+              Complete control over worldwide network operations and command execution
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <h4 className="text-orange-400 font-bold">
-                  🎯 COMMAND CAPABILITIES:
-                </h4>
+                <h4 className="text-orange-400 font-bold">🎯 COMMAND CAPABILITIES:</h4>
                 <div className="text-sm space-y-1">
                   <div>✅ Global Network Scanning</div>
                   <div>✅ Remote Node Control</div>
@@ -296,9 +260,7 @@ export function GlobalCommandCenter() {
               </div>
 
               <div className="space-y-2">
-                <h4 className="text-orange-400 font-bold">
-                  ⚡ NETWORK FEATURES:
-                </h4>
+                <h4 className="text-orange-400 font-bold">⚡ NETWORK FEATURES:</h4>
                 <div className="text-sm space-y-1">
                   <div>🔴 Emergency Override Protocol</div>
                   <div>🔴 Global Communication Hub</div>

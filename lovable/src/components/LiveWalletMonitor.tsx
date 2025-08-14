@@ -2,15 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Activity,
-  DollarSign,
-  ArrowUpRight,
-  ArrowDownLeft,
-  Clock,
-  Eye,
-  Tv,
-} from "lucide-react";
+import { Activity, DollarSign, ArrowUpRight, ArrowDownLeft, Clock, Eye, Tv } from "lucide-react";
 import { GAIA_TOKEN } from "@/constants/gaia";
 
 interface Transaction {
@@ -61,19 +53,13 @@ export function LiveWalletMonitor() {
       // Add vintage TV noise
       if (Math.random() > 0.95) {
         ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
-        ctx.fillRect(
-          Math.random() * canvas.width,
-          Math.random() * canvas.height,
-          2,
-          2,
-        );
+        ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 2, 2);
       }
 
       ctx.font = fontSize + "px monospace";
 
       for (let i = 0; i < drops.length; i++) {
-        const text =
-          matrixArray[Math.floor(Math.random() * matrixArray.length)];
+        const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
 
         // Vintage green with slight flicker
         const alpha = 0.8 + Math.random() * 0.2;
@@ -125,8 +111,7 @@ export function LiveWalletMonitor() {
         setTransactions((prev) => [newTx, ...prev.slice(0, 9)]);
 
         setBalance((prev) => {
-          const change =
-            newTx.type === "incoming" ? newTx.amount : -newTx.amount;
+          const change = newTx.type === "incoming" ? newTx.amount : -newTx.amount;
           return Math.max(0, prev + change);
         });
       }
@@ -165,9 +150,7 @@ export function LiveWalletMonitor() {
                 >
                   {isLive ? "●REC LIVE" : "●OFFLINE"}
                 </Badge>
-                <Badge className="bg-blue-600 text-white font-mono">
-                  PUMP.FUN CONNECTED
-                </Badge>
+                <Badge className="bg-blue-600 text-white font-mono">PUMP.FUN CONNECTED</Badge>
               </div>
               <div className="text-sm text-green-300 font-mono">
                 WALLET: {formatAddress(GAIA_TOKEN.WALLET_ADDRESS)}
@@ -220,9 +203,7 @@ export function LiveWalletMonitor() {
                           )}
                           <span
                             className={`font-bold text-xs ${
-                              tx.type === "incoming"
-                                ? "text-green-400"
-                                : "text-red-400"
+                              tx.type === "incoming" ? "text-green-400" : "text-red-400"
                             }`}
                           >
                             {tx.type === "incoming" ? "[IN]" : "[OUT]"}
@@ -230,9 +211,7 @@ export function LiveWalletMonitor() {
                         </div>
                         <Badge
                           className={`text-xs ${
-                            tx.status === "confirmed"
-                              ? "bg-green-600"
-                              : "bg-yellow-600"
+                            tx.status === "confirmed" ? "bg-green-600" : "bg-yellow-600"
                           } text-white font-mono`}
                         >
                           {tx.status.toUpperCase()}

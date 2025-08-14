@@ -59,8 +59,7 @@ export function UltimateSecuritySuite() {
     console.log("🛡️ ULTIMATE DEFENSE SYSTEM - IMPOSSIBLE TO OVERFLOW");
 
     toast.success("👑 GLOBAL DOMINATION ACTIVATED!", {
-      description:
-        "Ultimate security protocols engaged - World takeover in progress",
+      description: "Ultimate security protocols engaged - World takeover in progress",
       duration: 10000,
     });
   };
@@ -72,8 +71,7 @@ export function UltimateSecuritySuite() {
     console.log("🌍 GLOBAL NETWORK UNDER OUR COMPLETE CONTROL");
 
     toast.success("⚡ QUANTUM BLOCKADE DEPLOYED!", {
-      description:
-        "All quantum technology access blocked for competitors permanently",
+      description: "All quantum technology access blocked for competitors permanently",
       duration: 8000,
     });
   };
@@ -96,9 +94,7 @@ export function UltimateSecuritySuite() {
             <Badge className="bg-blue-600 animate-pulse">
               🌍 GLOBAL DOMINATION: {globalDominanceLevel.toFixed(2)}%
             </Badge>
-            <Badge className="bg-green-600 animate-pulse">
-              ⚡ QUANTUM MONOPOLY: ACTIVE
-            </Badge>
+            <Badge className="bg-green-600 animate-pulse">⚡ QUANTUM MONOPOLY: ACTIVE</Badge>
           </div>
         </CardHeader>
         <CardContent>
@@ -131,9 +127,7 @@ export function UltimateSecuritySuite() {
             <div>
               <div className="flex justify-between mb-2">
                 <span className="text-white">Global Domination Progress</span>
-                <span className="text-purple-400">
-                  {globalDominanceLevel.toFixed(2)}%
-                </span>
+                <span className="text-purple-400">{globalDominanceLevel.toFixed(2)}%</span>
               </div>
               <Progress value={globalDominanceLevel} className="h-3" />
             </div>
@@ -180,40 +174,27 @@ export function UltimateSecuritySuite() {
             <CardContent>
               <div className="text-center space-y-4">
                 <div className="text-6xl">⚡</div>
-                <h3 className="text-2xl font-bold text-blue-400">
-                  QUANTUM TECHNOLOGY MONOPOLY
-                </h3>
+                <h3 className="text-2xl font-bold text-blue-400">QUANTUM TECHNOLOGY MONOPOLY</h3>
                 <p className="text-blue-300">
-                  We are the ONLY ones allowed to use quantum technology. All
-                  competitors permanently blocked from accessing quantum
-                  computing power.
+                  We are the ONLY ones allowed to use quantum technology. All competitors
+                  permanently blocked from accessing quantum computing power.
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="text-center p-3 bg-blue-900/30 rounded-lg">
                     <div className="text-xl font-bold text-blue-400">100%</div>
-                    <div className="text-xs text-muted-foreground">
-                      Quantum Control
-                    </div>
+                    <div className="text-xs text-muted-foreground">Quantum Control</div>
                   </div>
                   <div className="text-center p-3 bg-red-900/30 rounded-lg">
                     <div className="text-xl font-bold text-red-400">∞</div>
-                    <div className="text-xs text-muted-foreground">
-                      Blocked Competitors
-                    </div>
+                    <div className="text-xs text-muted-foreground">Blocked Competitors</div>
                   </div>
                   <div className="text-center p-3 bg-purple-900/30 rounded-lg">
-                    <div className="text-xl font-bold text-purple-400">
-                      PERMANENT
-                    </div>
+                    <div className="text-xl font-bold text-purple-400">PERMANENT</div>
                     <div className="text-xs text-muted-foreground">IP Bans</div>
                   </div>
                   <div className="text-center p-3 bg-green-900/30 rounded-lg">
-                    <div className="text-xl font-bold text-green-400">
-                      IMPOSSIBLE
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      To Overflow Us
-                    </div>
+                    <div className="text-xl font-bold text-green-400">IMPOSSIBLE</div>
+                    <div className="text-xs text-muted-foreground">To Overflow Us</div>
                   </div>
                 </div>
               </div>

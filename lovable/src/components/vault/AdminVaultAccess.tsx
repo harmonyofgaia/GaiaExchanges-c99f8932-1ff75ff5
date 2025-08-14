@@ -154,8 +154,7 @@ export function AdminVaultAccess() {
       setCurrentStep(5);
 
       toast.success("🎉 VAULT ACCESS GRANTED!", {
-        description:
-          "All security steps completed. Full admin access activated.",
+        description: "All security steps completed. Full admin access activated.",
         duration: 5000,
       });
     } catch (error) {
@@ -218,8 +217,7 @@ export function AdminVaultAccess() {
             <div className="space-y-2">
               <Progress value={getProgressPercentage()} className="h-2" />
               <p className="text-sm text-muted-foreground">
-                Verification Progress: {Math.round(getProgressPercentage())}%
-                Complete
+                Verification Progress: {Math.round(getProgressPercentage())}% Complete
               </p>
             </div>
           )}
@@ -230,13 +228,9 @@ export function AdminVaultAccess() {
               <AlertTriangle className="h-16 w-16 text-yellow-400 mx-auto" />
               <h3 className="text-xl font-bold">Admin Verification Required</h3>
               <p className="text-muted-foreground">
-                Access to the vault requires completing our ultra-secure 4-step
-                verification process
+                Access to the vault requires completing our ultra-secure 4-step verification process
               </p>
-              <Button
-                onClick={startVerificationProcess}
-                className="bg-red-600 hover:bg-red-700"
-              >
+              <Button onClick={startVerificationProcess} className="bg-red-600 hover:bg-red-700">
                 <Shield className="h-4 w-4 mr-2" />
                 Start Security Verification
               </Button>
@@ -244,12 +238,9 @@ export function AdminVaultAccess() {
           ) : access.access_granted ? (
             <div className="text-center space-y-4">
               <CheckCircle className="h-16 w-16 text-green-400 mx-auto" />
-              <h3 className="text-xl font-bold text-green-400">
-                🎉 VAULT ACCESS GRANTED
-              </h3>
+              <h3 className="text-xl font-bold text-green-400">🎉 VAULT ACCESS GRANTED</h3>
               <p className="text-muted-foreground">
-                All security steps completed. You now have full administrative
-                access to the vault.
+                All security steps completed. You now have full administrative access to the vault.
               </p>
               <div className="grid grid-cols-2 gap-4 mt-6">
                 <Button className="bg-green-600 hover:bg-green-700">
@@ -272,9 +263,7 @@ export function AdminVaultAccess() {
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       {getStepIcon(1, access.step_1_verified)}
-                      <span className="font-medium">
-                        Step 1: Master Password
-                      </span>
+                      <span className="font-medium">Step 1: Master Password</span>
                     </div>
                     <Badge
                       className={
@@ -325,9 +314,7 @@ export function AdminVaultAccess() {
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       {getStepIcon(2, access.step_2_verified)}
-                      <span className="font-medium">
-                        Step 2: Two-Factor Authentication
-                      </span>
+                      <span className="font-medium">Step 2: Two-Factor Authentication</span>
                     </div>
                     <Badge
                       className={
@@ -379,9 +366,7 @@ export function AdminVaultAccess() {
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       {getStepIcon(3, access.step_3_verified)}
-                      <span className="font-medium">
-                        Step 3: Biometric Verification
-                      </span>
+                      <span className="font-medium">Step 3: Biometric Verification</span>
                     </div>
                     <Badge
                       className={
@@ -402,8 +387,7 @@ export function AdminVaultAccess() {
                   {currentStep === 3 && !access.step_3_verified && (
                     <div className="space-y-3">
                       <p className="text-sm text-muted-foreground">
-                        Please complete biometric verification (fingerprint or
-                        face scan)
+                        Please complete biometric verification (fingerprint or face scan)
                       </p>
                       <Button
                         onClick={() => simulateStepVerification(3)}
@@ -446,8 +430,7 @@ export function AdminVaultAccess() {
                   {currentStep === 4 && !access.step_4_verified && (
                     <div className="space-y-3">
                       <p className="text-sm text-muted-foreground">
-                        Final security step: Advanced retinal pattern
-                        verification
+                        Final security step: Advanced retinal pattern verification
                       </p>
                       <Button
                         onClick={() => simulateStepVerification(4)}
@@ -470,13 +453,10 @@ export function AdminVaultAccess() {
         <CardContent className="pt-6">
           <div className="text-center space-y-2">
             <Shield className="h-8 w-8 text-yellow-400 mx-auto" />
-            <h4 className="font-bold text-yellow-400">
-              Maximum Security Protocol Active
-            </h4>
+            <h4 className="font-bold text-yellow-400">Maximum Security Protocol Active</h4>
             <p className="text-sm text-muted-foreground">
-              This 4-step verification ensures that only authorized
-              administrators can access vault funds for humanitarian projects
-              and community surprises.
+              This 4-step verification ensures that only authorized administrators can access vault
+              funds for humanitarian projects and community surprises.
             </p>
           </div>
         </CardContent>

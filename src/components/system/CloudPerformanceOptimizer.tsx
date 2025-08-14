@@ -32,19 +32,10 @@ export function CloudPerformanceOptimizer() {
 
       // Simulate cloud optimization improvements
       setMetrics((prev) => ({
-        connectionSpeed: Math.min(
-          100,
-          prev.connectionSpeed + Math.random() * 0.5,
-        ),
+        connectionSpeed: Math.min(100, prev.connectionSpeed + Math.random() * 0.5),
         loadBalancing: Math.min(100, prev.loadBalancing + Math.random() * 0.3),
-        cacheOptimization: Math.min(
-          100,
-          prev.cacheOptimization + Math.random() * 0.4,
-        ),
-        serverResponse: Math.min(
-          100,
-          prev.serverResponse + Math.random() * 0.6,
-        ),
+        cacheOptimization: Math.min(100, prev.cacheOptimization + Math.random() * 0.4),
+        serverResponse: Math.min(100, prev.serverResponse + Math.random() * 0.6),
         overallPerformance: 0,
       }));
 
@@ -56,7 +47,7 @@ export function CloudPerformanceOptimizer() {
             prev.loadBalancing +
             prev.cacheOptimization +
             prev.serverResponse) /
-            4,
+            4
         ),
       }));
     };
@@ -92,9 +83,7 @@ export function CloudPerformanceOptimizer() {
           <div>
             <div className="flex justify-between mb-2">
               <span className="text-sm text-cyan-300">Connection Speed</span>
-              <span className="text-sm text-cyan-400">
-                {metrics.connectionSpeed.toFixed(1)}%
-              </span>
+              <span className="text-sm text-cyan-400">{metrics.connectionSpeed.toFixed(1)}%</span>
             </div>
             <Progress value={metrics.connectionSpeed} className="h-2" />
           </div>
@@ -102,9 +91,7 @@ export function CloudPerformanceOptimizer() {
           <div>
             <div className="flex justify-between mb-2">
               <span className="text-sm text-blue-300">Load Balancing</span>
-              <span className="text-sm text-blue-400">
-                {metrics.loadBalancing.toFixed(1)}%
-              </span>
+              <span className="text-sm text-blue-400">{metrics.loadBalancing.toFixed(1)}%</span>
             </div>
             <Progress value={metrics.loadBalancing} className="h-2" />
           </div>
@@ -122,21 +109,15 @@ export function CloudPerformanceOptimizer() {
           <div>
             <div className="flex justify-between mb-2">
               <span className="text-sm text-yellow-300">Server Response</span>
-              <span className="text-sm text-yellow-400">
-                {metrics.serverResponse.toFixed(1)}%
-              </span>
+              <span className="text-sm text-yellow-400">{metrics.serverResponse.toFixed(1)}%</span>
             </div>
             <Progress value={metrics.serverResponse} className="h-2" />
           </div>
 
           <div className="pt-4 border-t border-cyan-500/20">
             <div className="flex justify-between mb-2">
-              <span className="text-lg font-bold text-cyan-300">
-                Overall Performance
-              </span>
-              <span className="text-lg font-bold text-cyan-400">
-                {metrics.overallPerformance}%
-              </span>
+              <span className="text-lg font-bold text-cyan-300">Overall Performance</span>
+              <span className="text-lg font-bold text-cyan-400">{metrics.overallPerformance}%</span>
             </div>
             <Progress value={metrics.overallPerformance} className="h-4" />
           </div>

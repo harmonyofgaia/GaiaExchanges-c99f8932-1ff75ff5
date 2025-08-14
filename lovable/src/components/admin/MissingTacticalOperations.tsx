@@ -23,13 +23,7 @@ import { toast } from "sonner";
 interface TacticalOperation {
   id: string;
   name: string;
-  type:
-    | "attack"
-    | "defense"
-    | "surveillance"
-    | "infiltration"
-    | "psychological"
-    | "quantum";
+  type: "attack" | "defense" | "surveillance" | "infiltration" | "psychological" | "quantum";
   status: "active" | "scheduled" | "completed" | "failed" | "upgrading";
   lastExecution: Date;
   nextExecution: Date;
@@ -45,13 +39,7 @@ interface DailyEngineTask {
   id: string;
   engineName: string;
   taskName: string;
-  category:
-    | "evolution"
-    | "scanning"
-    | "protection"
-    | "training"
-    | "hunting"
-    | "analysis";
+  category: "evolution" | "scanning" | "protection" | "training" | "hunting" | "analysis";
   frequency: string;
   lastRun: Date;
   nextRun: Date;
@@ -61,9 +49,7 @@ interface DailyEngineTask {
 }
 
 export function MissingTacticalOperations() {
-  const [tacticalOperations, setTacticalOperations] = useState<
-    TacticalOperation[]
-  >([
+  const [tacticalOperations, setTacticalOperations] = useState<TacticalOperation[]>([
     {
       id: "shadow-infiltration",
       name: "Shadow Web Infiltration",
@@ -74,8 +60,7 @@ export function MissingTacticalOperations() {
       frequency: "continuous",
       successRate: 99.8,
       powerLevel: 2500000,
-      description:
-        "Infiltrate competitor platforms and neutralize threats before they form",
+      description: "Infiltrate competitor platforms and neutralize threats before they form",
       targetsNeutralized: 47382,
       threatsDetected: 89234,
     },
@@ -89,8 +74,7 @@ export function MissingTacticalOperations() {
       frequency: "hourly",
       successRate: 100,
       powerLevel: 8750000,
-      description:
-        "Implant subconscious desires for environmental protection in target audiences",
+      description: "Implant subconscious desires for environmental protection in target audiences",
       targetsNeutralized: 12847,
       threatsDetected: 23847,
     },
@@ -104,8 +88,7 @@ export function MissingTacticalOperations() {
       frequency: "continuous",
       successRate: 100,
       powerLevel: 15000000,
-      description:
-        "Warp reality around our systems to make them impossible to attack",
+      description: "Warp reality around our systems to make them impossible to attack",
       targetsNeutralized: 234782,
       threatsDetected: 578234,
     },
@@ -133,8 +116,7 @@ export function MissingTacticalOperations() {
       frequency: "continuous",
       successRate: 98.9,
       powerLevel: 12000000,
-      description:
-        "Deploy viral thoughts that make people want to protect the environment",
+      description: "Deploy viral thoughts that make people want to protect the environment",
       targetsNeutralized: 1847293,
       threatsDetected: 2847392,
     },
@@ -148,8 +130,7 @@ export function MissingTacticalOperations() {
       frequency: "continuous",
       successRate: 100,
       powerLevel: 50000000,
-      description:
-        "Monitor all digital activity across infinite parallel universes",
+      description: "Monitor all digital activity across infinite parallel universes",
       targetsNeutralized: 5847392,
       threatsDetected: 8472938,
     },
@@ -261,8 +242,7 @@ export function MissingTacticalOperations() {
         prev.map((op) => {
           if (op.status === "active" && new Date() >= op.nextExecution) {
             // Execute operation
-            const newTargetsNeutralized =
-              Math.floor(Math.random() * 1000) + 500;
+            const newTargetsNeutralized = Math.floor(Math.random() * 1000) + 500;
             const newThreatsDetected = Math.floor(Math.random() * 2000) + 1000;
 
             toast.success(`🎯 ${op.name} Executed!`, {
@@ -274,9 +254,7 @@ export function MissingTacticalOperations() {
             let nextExecution = new Date();
             switch (op.frequency) {
               case "continuous":
-                nextExecution = new Date(
-                  Date.now() + Math.random() * 1800000 + 900000,
-                ); // 15-45 min
+                nextExecution = new Date(Date.now() + Math.random() * 1800000 + 900000); // 15-45 min
                 break;
               case "hourly":
                 nextExecution = new Date(Date.now() + 3600000);
@@ -296,7 +274,7 @@ export function MissingTacticalOperations() {
             };
           }
           return op;
-        }),
+        })
       );
 
       // Update daily tasks
@@ -315,7 +293,7 @@ export function MissingTacticalOperations() {
             };
           }
           return task;
-        }),
+        })
       );
     }, 5000);
 
@@ -382,16 +360,13 @@ export function MissingTacticalOperations() {
   };
 
   const totalOperations = tacticalOperations.length;
-  const activeOperations = tacticalOperations.filter(
-    (op) => op.status === "active",
-  ).length;
+  const activeOperations = tacticalOperations.filter((op) => op.status === "active").length;
   const totalTargetsNeutralized = tacticalOperations.reduce(
     (sum, op) => sum + op.targetsNeutralized,
-    0,
+    0
   );
   const averageSuccessRate =
-    tacticalOperations.reduce((sum, op) => sum + op.successRate, 0) /
-    totalOperations;
+    tacticalOperations.reduce((sum, op) => sum + op.successRate, 0) / totalOperations;
 
   return (
     <div className="space-y-6">
@@ -429,9 +404,7 @@ export function MissingTacticalOperations() {
         <Card className="bg-gradient-to-br from-blue-900/40 to-cyan-900/40 border-blue-500/50">
           <CardContent className="p-4 text-center">
             <div className="text-3xl mb-2">💯</div>
-            <div className="text-2xl font-bold text-blue-400">
-              {averageSuccessRate.toFixed(1)}%
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{averageSuccessRate.toFixed(1)}%</div>
             <div className="text-sm text-blue-300">Success Rate</div>
           </CardContent>
         </Card>
@@ -464,20 +437,14 @@ export function MissingTacticalOperations() {
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="text-2xl">
-                        {getOperationIcon(operation.type)}
-                      </div>
+                      <div className="text-2xl">{getOperationIcon(operation.type)}</div>
                       <div>
-                        <CardTitle className="text-lg text-white">
-                          {operation.name}
-                        </CardTitle>
+                        <CardTitle className="text-lg text-white">{operation.name}</CardTitle>
                         <div className="flex items-center gap-2 mt-1">
                           <Badge className={getStatusColor(operation.status)}>
                             {operation.status.toUpperCase()}
                           </Badge>
-                          <Badge className="bg-gray-700">
-                            {operation.type.toUpperCase()}
-                          </Badge>
+                          <Badge className="bg-gray-700">{operation.type.toUpperCase()}</Badge>
                         </div>
                       </div>
                     </div>
@@ -485,23 +452,17 @@ export function MissingTacticalOperations() {
                       <div className="text-2xl font-bold text-red-400">
                         {operation.powerLevel.toLocaleString()}
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        Power Level
-                      </div>
+                      <div className="text-xs text-muted-foreground">Power Level</div>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm text-gray-300">
-                    {operation.description}
-                  </p>
+                  <p className="text-sm text-gray-300">{operation.description}</p>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-xs text-muted-foreground">
-                          Success Rate
-                        </span>
+                        <span className="text-xs text-muted-foreground">Success Rate</span>
                         <span className="text-xs font-medium">
                           {operation.successRate.toFixed(1)}%
                         </span>
@@ -510,9 +471,7 @@ export function MissingTacticalOperations() {
                     </div>
 
                     <div className="space-y-1">
-                      <div className="text-xs text-muted-foreground">
-                        Frequency
-                      </div>
+                      <div className="text-xs text-muted-foreground">Frequency</div>
                       <div className="text-sm font-medium text-orange-400">
                         {operation.frequency}
                       </div>
@@ -521,17 +480,13 @@ export function MissingTacticalOperations() {
 
                   <div className="grid grid-cols-2 gap-4 text-xs">
                     <div>
-                      <span className="text-muted-foreground">
-                        Targets Neutralized:{" "}
-                      </span>
+                      <span className="text-muted-foreground">Targets Neutralized: </span>
                       <span className="text-red-400 font-medium">
                         {operation.targetsNeutralized.toLocaleString()}
                       </span>
                     </div>
                     <div>
-                      <span className="text-muted-foreground">
-                        Threats Detected:{" "}
-                      </span>
+                      <span className="text-muted-foreground">Threats Detected: </span>
                       <span className="text-yellow-400 font-medium">
                         {operation.threatsDetected.toLocaleString()}
                       </span>
@@ -539,12 +494,8 @@ export function MissingTacticalOperations() {
                   </div>
 
                   <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>
-                      Last: {operation.lastExecution.toLocaleTimeString()}
-                    </span>
-                    <span>
-                      Next: {operation.nextExecution.toLocaleTimeString()}
-                    </span>
+                    <span>Last: {operation.lastExecution.toLocaleTimeString()}</span>
+                    <span>Next: {operation.nextExecution.toLocaleTimeString()}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -562,24 +513,16 @@ export function MissingTacticalOperations() {
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="text-xl">
-                        {getCategoryIcon(task.category)}
-                      </div>
+                      <div className="text-xl">{getCategoryIcon(task.category)}</div>
                       <div>
-                        <h4 className="font-medium text-white">
-                          {task.taskName}
-                        </h4>
-                        <p className="text-sm text-muted-foreground">
-                          {task.engineName}
-                        </p>
+                        <h4 className="font-medium text-white">{task.taskName}</h4>
+                        <p className="text-sm text-muted-foreground">{task.engineName}</p>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-4">
                       <div className="text-right">
-                        <div className="text-sm font-medium text-blue-400">
-                          {task.frequency}
-                        </div>
+                        <div className="text-sm font-medium text-blue-400">{task.frequency}</div>
                         <div className="text-xs text-muted-foreground">
                           Next: {task.nextRun.toLocaleTimeString()}
                         </div>
@@ -589,9 +532,7 @@ export function MissingTacticalOperations() {
                         <div className="text-lg font-bold text-green-400">
                           {task.completionRate}%
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          Completion
-                        </div>
+                        <div className="text-xs text-muted-foreground">Completion</div>
                       </div>
 
                       <Badge className={getStatusColor(task.status)}>
@@ -609,9 +550,7 @@ export function MissingTacticalOperations() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="border-cyan-500/20">
               <CardHeader>
-                <CardTitle className="text-cyan-400">
-                  Immediate Execution Queue
-                </CardTitle>
+                <CardTitle className="text-cyan-400">Immediate Execution Queue</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {[...tacticalOperations, ...dailyTasks]
@@ -621,10 +560,8 @@ export function MissingTacticalOperations() {
                     return isOperation || isTask;
                   })
                   .sort((a, b) => {
-                    const aTime =
-                      "nextExecution" in a ? a.nextExecution : a.nextRun;
-                    const bTime =
-                      "nextExecution" in b ? b.nextExecution : b.nextRun;
+                    const aTime = "nextExecution" in a ? a.nextExecution : a.nextRun;
+                    const bTime = "nextExecution" in b ? b.nextExecution : b.nextRun;
                     return aTime.getTime() - bTime.getTime();
                   })
                   .slice(0, 8)
@@ -633,9 +570,7 @@ export function MissingTacticalOperations() {
                       key={index}
                       className="flex justify-between items-center p-2 bg-gray-800/50 rounded"
                     >
-                      <span className="text-sm">
-                        {"name" in item ? item.name : item.taskName}
-                      </span>
+                      <span className="text-sm">{"name" in item ? item.name : item.taskName}</span>
                       <span className="text-xs text-cyan-400">
                         {("nextExecution" in item
                           ? item.nextExecution
@@ -649,9 +584,7 @@ export function MissingTacticalOperations() {
 
             <Card className="border-purple-500/20">
               <CardHeader>
-                <CardTitle className="text-purple-400">
-                  Critical Priority Queue
-                </CardTitle>
+                <CardTitle className="text-purple-400">Critical Priority Queue</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {dailyTasks
@@ -662,16 +595,10 @@ export function MissingTacticalOperations() {
                       className="flex justify-between items-center p-2 bg-gray-800/50 rounded"
                     >
                       <div>
-                        <div className="text-sm font-medium">
-                          {task.taskName}
-                        </div>
-                        <div className="text-xs text-muted-foreground">
-                          {task.engineName}
-                        </div>
+                        <div className="text-sm font-medium">{task.taskName}</div>
+                        <div className="text-xs text-muted-foreground">{task.engineName}</div>
                       </div>
-                      <Badge className={getStatusColor(task.status)}>
-                        {task.status}
-                      </Badge>
+                      <Badge className={getStatusColor(task.status)}>{task.status}</Badge>
                     </div>
                   ))}
               </CardContent>

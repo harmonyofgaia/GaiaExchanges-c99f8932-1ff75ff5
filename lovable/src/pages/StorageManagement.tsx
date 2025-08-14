@@ -70,8 +70,7 @@ export default function StorageManagement() {
               name: file.name,
               size: file.metadata?.size || 0,
               type: getFileType(file.name),
-              url: supabase.storage.from(bucket.id).getPublicUrl(file.name).data
-                .publicUrl,
+              url: supabase.storage.from(bucket.id).getPublicUrl(file.name).data.publicUrl,
               bucket: bucket.id,
               created_at: file.created_at || new Date().toISOString(),
               metadata: file.metadata,
@@ -93,16 +92,13 @@ export default function StorageManagement() {
 
   const getFileType = (fileName: string): StorageFile["type"] => {
     const ext = fileName.split(".").pop()?.toLowerCase();
-    if (["jpg", "jpeg", "png", "gif", "webp", "svg"].includes(ext || ""))
-      return "image";
+    if (["jpg", "jpeg", "png", "gif", "webp", "svg"].includes(ext || "")) return "image";
     if (["mp4", "mov", "avi", "webm"].includes(ext || "")) return "video";
     if (["mp3", "wav", "ogg", "m4a"].includes(ext || "")) return "audio";
     return "document";
   };
 
-  const handleFileUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
@@ -121,9 +117,7 @@ export default function StorageManagement() {
 
       try {
         const fileName = `${Date.now()}-${file.name}`;
-        const { error } = await supabase.storage
-          .from(bucketId)
-          .upload(fileName, file);
+        const { error } = await supabase.storage.from(bucketId).upload(fileName, file);
 
         if (error) throw error;
 
@@ -143,9 +137,7 @@ export default function StorageManagement() {
 
   const deleteFile = async (file: StorageFile) => {
     try {
-      const { error } = await supabase.storage
-        .from(file.bucket)
-        .remove([file.name]);
+      const { error } = await supabase.storage.from(file.bucket).remove([file.name]);
 
       if (error) throw error;
 
@@ -158,7 +150,7 @@ export default function StorageManagement() {
   };
 
   const filteredFiles = files.filter((file) =>
-    file.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    file.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const getStorageStats = () => {
@@ -168,7 +160,7 @@ export default function StorageManagement() {
         acc[file.type] = (acc[file.type] || 0) + 1;
         return acc;
       },
-      {} as Record<string, number>,
+      {} as Record<string, number>
     );
 
     return { totalSize, typeStats, totalFiles: files.length };
@@ -193,9 +185,7 @@ export default function StorageManagement() {
         <Card className="border-blue-500/30 bg-blue-900/10">
           <CardContent className="p-4 text-center">
             <Database className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-blue-400">
-              {stats.totalFiles}
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{stats.totalFiles}</div>
             <div className="text-sm text-muted-foreground">Total Files</div>
           </CardContent>
         </Card>
@@ -213,9 +203,7 @@ export default function StorageManagement() {
         <Card className="border-purple-500/30 bg-purple-900/10">
           <CardContent className="p-4 text-center">
             <Image className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-purple-400">
-              {stats.typeStats.image || 0}
-            </div>
+            <div className="text-2xl font-bold text-purple-400">{stats.typeStats.image || 0}</div>
             <div className="text-sm text-muted-foreground">Images</div>
           </CardContent>
         </Card>
@@ -223,9 +211,7 @@ export default function StorageManagement() {
         <Card className="border-orange-500/30 bg-orange-900/10">
           <CardContent className="p-4 text-center">
             <Video className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-orange-400">
-              {stats.typeStats.video || 0}
-            </div>
+            <div className="text-2xl font-bold text-orange-400">{stats.typeStats.video || 0}</div>
             <div className="text-sm text-muted-foreground">Videos</div>
           </CardContent>
         </Card>
@@ -243,9 +229,7 @@ export default function StorageManagement() {
           <div className="space-y-4">
             <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-8 text-center">
               <Cloud className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-              <p className="text-lg font-semibold mb-2">
-                Drop files here or click to browse
-              </p>
+              <p className="text-lg font-semibold mb-2">Drop files here or click to browse</p>
               <p className="text-muted-foreground mb-4">
                 Images, videos, audio, and documents supported
               </p>
@@ -340,10 +324,7 @@ export default function StorageManagement() {
                     </div>
 
                     <div className="space-y-2">
-                      <h4
-                        className="font-medium text-sm truncate"
-                        title={file.name}
-                      >
+                      <h4 className="font-medium text-sm truncate" title={file.name}>
                         {file.name}
                       </h4>
 
@@ -357,11 +338,7 @@ export default function StorageManagement() {
                       </div>
 
                       <div className="flex gap-1">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="flex-1 text-xs"
-                        >
+                        <Button size="sm" variant="outline" className="flex-1 text-xs">
                           <Download className="h-3 w-3 mr-1" />
                           Download
                         </Button>

@@ -6,9 +6,7 @@ export function InvisibleSecurityCore() {
 
   useEffect(() => {
     const activateInvisibleSecurity = () => {
-      console.log(
-        "👻 INVISIBLE SECURITY CORE - QUANTUM DEFENSE MATRIX ACTIVATED",
-      );
+      console.log("👻 INVISIBLE SECURITY CORE - QUANTUM DEFENSE MATRIX ACTIVATED");
       console.log("🛡️ COMPLETE INVISIBILITY PROTOCOLS ENGAGED");
       console.log("🚫 ALL UNAUTHORIZED ACCESS ATTEMPTS WILL BE NEUTRALIZED");
 
@@ -16,27 +14,19 @@ export function InvisibleSecurityCore() {
 
       // Advanced invisible tracking and blocking
       const trackAndBlock = () => {
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
-        const hasAdminSession =
-          sessionStorage.getItem("admin-session-active") === "true";
+        const isAdminBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+        const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
         const isAuthorized = isAdminBrowser && hasAdminSession;
 
         if (!isAuthorized) {
           threatCounter.current++;
-          console.log(
-            `🚨 THREAT #${threatCounter.current} DETECTED AND BLOCKED`,
-          );
+          console.log(`🚨 THREAT #${threatCounter.current} DETECTED AND BLOCKED`);
           console.log("👻 INVISIBLE BARRIERS ACTIVE - HACKER CANNOT PROCEED");
 
           // Make everything invisible to unauthorized users
           const elements = document.querySelectorAll("*");
           elements.forEach((el) => {
-            if (
-              el instanceof HTMLElement &&
-              !el.classList.contains("invisible-shield")
-            ) {
+            if (el instanceof HTMLElement && !el.classList.contains("invisible-shield")) {
               el.style.visibility = "hidden";
               el.style.opacity = "0";
               el.style.pointerEvents = "none";
@@ -110,22 +100,17 @@ export function InvisibleSecurityCore() {
               return false;
             }
           },
-          true,
+          true
         );
       });
 
       // Monitor for breakthrough attempts
       const monitorBreakthroughAttempts = setInterval(() => {
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
-        const hasAdminSession =
-          sessionStorage.getItem("admin-session-active") === "true";
+        const isAdminBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+        const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
 
         if (!isAdminBrowser || !hasAdminSession) {
-          console.log(
-            "🚨 BREAKTHROUGH ATTEMPT DETECTED - ACTIVATING COUNTERMEASURES",
-          );
+          console.log("🚨 BREAKTHROUGH ATTEMPT DETECTED - ACTIVATING COUNTERMEASURES");
           console.log("👻 INVISIBLE DEFENSE SYSTEMS REPELLING ATTACK");
 
           // Advanced countermeasures
@@ -150,18 +135,13 @@ export function InvisibleSecurityCore() {
       // Advanced network monitoring
       const originalFetch = window.fetch;
       window.fetch = async (...args) => {
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
-        const hasAdminSession =
-          sessionStorage.getItem("admin-session-active") === "true";
+        const isAdminBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+        const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
 
         if (!isAdminBrowser || !hasAdminSession) {
           console.log("🚨 UNAUTHORIZED NETWORK REQUEST BLOCKED");
           console.log("🌐 INVISIBLE NETWORK PROTECTION ACTIVE");
-          throw new Error(
-            "Network access denied - Invisible protection active",
-          );
+          throw new Error("Network access denied - Invisible protection active");
         }
 
         console.log("👑 ADMIN NETWORK REQUEST APPROVED");

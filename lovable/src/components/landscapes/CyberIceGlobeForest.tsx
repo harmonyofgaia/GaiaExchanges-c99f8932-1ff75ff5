@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Mountain,
-  Snowflake,
-  TreePine,
-  Zap,
-  Eye,
-  Crown,
-  Rocket,
-  Shield,
-} from "lucide-react";
+import { Mountain, Snowflake, TreePine, Zap, Eye, Crown, Rocket, Shield } from "lucide-react";
 import { toast } from "sonner";
 
 export function CyberIceGlobeForest() {
@@ -81,15 +72,9 @@ export function CyberIceGlobeForest() {
           {landscapeSpecs.name}
         </CardTitle>
         <div className="flex flex-wrap gap-2">
-          <Badge className="bg-cyan-600 text-white">
-            💾 {landscapeSpecs.capacity}
-          </Badge>
-          <Badge className="bg-purple-600 text-white">
-            🎨 {landscapeSpecs.style}
-          </Badge>
-          <Badge className="bg-blue-600 text-white">
-            ❄️ {landscapeSpecs.environment}
-          </Badge>
+          <Badge className="bg-cyan-600 text-white">💾 {landscapeSpecs.capacity}</Badge>
+          <Badge className="bg-purple-600 text-white">🎨 {landscapeSpecs.style}</Badge>
+          <Badge className="bg-blue-600 text-white">❄️ {landscapeSpecs.environment}</Badge>
         </div>
       </CardHeader>
 
@@ -102,10 +87,7 @@ export function CyberIceGlobeForest() {
             </h3>
             <div className="space-y-2">
               {landscapeSpecs.biomes.map((biome, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 p-2 bg-black/30 rounded"
-                >
+                <div key={index} className="flex items-center gap-2 p-2 bg-black/30 rounded">
                   <TreePine className="h-4 w-4 text-green-400" />
                   <span className="text-sm text-muted-foreground">{biome}</span>
                 </div>
@@ -121,9 +103,7 @@ export function CyberIceGlobeForest() {
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center p-3 bg-cyan-900/40 rounded border border-cyan-500/30">
                 <div className="text-2xl font-bold text-cyan-400">1000 TB</div>
-                <div className="text-xs text-muted-foreground">
-                  Max Capacity
-                </div>
+                <div className="text-xs text-muted-foreground">Max Capacity</div>
               </div>
               <div className="text-center p-3 bg-purple-900/40 rounded border border-purple-500/30">
                 <div className="text-2xl font-bold text-purple-400">8K</div>
@@ -131,9 +111,7 @@ export function CyberIceGlobeForest() {
               </div>
               <div className="text-center p-3 bg-blue-900/40 rounded border border-blue-500/30">
                 <div className="text-2xl font-bold text-blue-400">∞</div>
-                <div className="text-xs text-muted-foreground">
-                  Possibilities
-                </div>
+                <div className="text-xs text-muted-foreground">Possibilities</div>
               </div>
               <div className="text-center p-3 bg-green-900/40 rounded border border-green-500/30">
                 <div className="text-2xl font-bold text-green-400">100%</div>
@@ -147,15 +125,12 @@ export function CyberIceGlobeForest() {
         {isLoading && (
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-cyan-300">
-                Loading Cyber Ice Globe Forest...
-              </span>
+              <span className="text-cyan-300">Loading Cyber Ice Globe Forest...</span>
               <span className="text-cyan-400">{loadingProgress}%</span>
             </div>
             <Progress value={loadingProgress} className="h-3" />
             <div className="text-xs text-muted-foreground text-center">
-              Processing {landscapeSpecs.capacity} of ultra-high quality
-              landscape data...
+              Processing {landscapeSpecs.capacity} of ultra-high quality landscape data...
             </div>
           </div>
         )}
@@ -184,9 +159,7 @@ export function CyberIceGlobeForest() {
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
               <div className="text-6xl mb-4">❄️🌲🏙️</div>
-              <div className="text-2xl font-bold text-cyan-400 mb-2">
-                CYBER ICE GLOBE FOREST
-              </div>
+              <div className="text-2xl font-bold text-cyan-400 mb-2">CYBER ICE GLOBE FOREST</div>
               <div className="text-lg text-purple-400 animate-pulse">
                 Halo × Rage × Cyberpunk • 1000 TB Capacity
               </div>

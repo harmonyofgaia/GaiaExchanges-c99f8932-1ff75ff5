@@ -73,20 +73,13 @@ export default function SnakeArenaGame() {
       }
 
       // Check wall collision
-      if (
-        head.x < 0 ||
-        head.x >= gridSize ||
-        head.y < 0 ||
-        head.y >= gridSize
-      ) {
+      if (head.x < 0 || head.x >= gridSize || head.y < 0 || head.y >= gridSize) {
         toast.error("💥 Game Over! Hit the wall!");
         return { ...prev, gameOver: true, isPlaying: false };
       }
 
       // Check self collision
-      if (
-        newSnake.some((segment) => segment.x === head.x && segment.y === head.y)
-      ) {
+      if (newSnake.some((segment) => segment.x === head.x && segment.y === head.y)) {
         toast.error("💥 Game Over! Hit yourself!");
         return { ...prev, gameOver: true, isPlaying: false };
       }
@@ -128,21 +121,13 @@ export default function SnakeArenaGame() {
       setGameState((prev) => {
         switch (e.key) {
           case "ArrowUp":
-            return prev.direction !== "DOWN"
-              ? { ...prev, direction: "UP" }
-              : prev;
+            return prev.direction !== "DOWN" ? { ...prev, direction: "UP" } : prev;
           case "ArrowDown":
-            return prev.direction !== "UP"
-              ? { ...prev, direction: "DOWN" }
-              : prev;
+            return prev.direction !== "UP" ? { ...prev, direction: "DOWN" } : prev;
           case "ArrowLeft":
-            return prev.direction !== "RIGHT"
-              ? { ...prev, direction: "LEFT" }
-              : prev;
+            return prev.direction !== "RIGHT" ? { ...prev, direction: "LEFT" } : prev;
           case "ArrowRight":
-            return prev.direction !== "LEFT"
-              ? { ...prev, direction: "RIGHT" }
-              : prev;
+            return prev.direction !== "LEFT" ? { ...prev, direction: "RIGHT" } : prev;
           default:
             return prev;
         }
@@ -157,12 +142,9 @@ export default function SnakeArenaGame() {
     const board = [];
     for (let y = 0; y < gridSize; y++) {
       for (let x = 0; x < gridSize; x++) {
-        const isSnake = gameState.snake.some(
-          (segment) => segment.x === x && segment.y === y,
-        );
+        const isSnake = gameState.snake.some((segment) => segment.x === x && segment.y === y);
         const isFood = gameState.food.x === x && gameState.food.y === y;
-        const isHead =
-          gameState.snake[0]?.x === x && gameState.snake[0]?.y === y;
+        const isHead = gameState.snake[0]?.x === x && gameState.snake[0]?.y === y;
 
         board.push(
           <div
@@ -176,7 +158,7 @@ export default function SnakeArenaGame() {
                     ? "bg-red-500"
                     : "bg-gray-800"
             }`}
-          />,
+          />
         );
       }
     }
@@ -196,12 +178,8 @@ export default function SnakeArenaGame() {
               <Badge className="bg-green-600">
                 👥 {playersOnline.toLocaleString()} Players Online
               </Badge>
-              <Badge className="bg-yellow-600">
-                🏆 High Score: {highScore}
-              </Badge>
-              <Badge className="bg-blue-600">
-                🎯 Current Score: {gameState.score}
-              </Badge>
+              <Badge className="bg-yellow-600">🏆 High Score: {highScore}</Badge>
+              <Badge className="bg-blue-600">🎯 Current Score: {gameState.score}</Badge>
             </div>
           </CardHeader>
         </Card>
@@ -216,16 +194,11 @@ export default function SnakeArenaGame() {
               {!gameState.isPlaying && !gameState.gameOver ? (
                 <div className="text-center space-y-4">
                   <div className="text-6xl animate-bounce">🐍</div>
-                  <h3 className="text-xl font-bold text-green-400">
-                    Snake Arena
-                  </h3>
+                  <h3 className="text-xl font-bold text-green-400">Snake Arena</h3>
                   <p className="text-muted-foreground">
                     Collect environmental power-ups and grow your snake!
                   </p>
-                  <Button
-                    onClick={resetGame}
-                    className="bg-green-600 hover:bg-green-700"
-                  >
+                  <Button onClick={resetGame} className="bg-green-600 hover:bg-green-700">
                     🎮 Start Game
                   </Button>
                 </div>
@@ -240,16 +213,9 @@ export default function SnakeArenaGame() {
 
                   {gameState.gameOver && (
                     <div className="text-center space-y-4">
-                      <h3 className="text-xl font-bold text-red-400">
-                        Game Over!
-                      </h3>
-                      <p className="text-yellow-400">
-                        Final Score: {gameState.score}
-                      </p>
-                      <Button
-                        onClick={resetGame}
-                        className="bg-green-600 hover:bg-green-700"
-                      >
+                      <h3 className="text-xl font-bold text-red-400">Game Over!</h3>
+                      <p className="text-yellow-400">Final Score: {gameState.score}</p>
+                      <Button onClick={resetGame} className="bg-green-600 hover:bg-green-700">
                         🔄 Play Again
                       </Button>
                     </div>
@@ -262,33 +228,21 @@ export default function SnakeArenaGame() {
           {/* Game Info */}
           <Card className="border-purple-500/30 bg-purple-900/20">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                🎯 Game Controls & Info
-              </CardTitle>
+              <CardTitle className="text-purple-400">🎯 Game Controls & Info</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
                 <h4 className="text-green-400 font-bold mb-2">🕹️ Controls:</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  <Badge className="bg-blue-600 justify-center py-2">
-                    ↑ Up Arrow
-                  </Badge>
-                  <Badge className="bg-blue-600 justify-center py-2">
-                    ↓ Down Arrow
-                  </Badge>
-                  <Badge className="bg-blue-600 justify-center py-2">
-                    ← Left Arrow
-                  </Badge>
-                  <Badge className="bg-blue-600 justify-center py-2">
-                    → Right Arrow
-                  </Badge>
+                  <Badge className="bg-blue-600 justify-center py-2">↑ Up Arrow</Badge>
+                  <Badge className="bg-blue-600 justify-center py-2">↓ Down Arrow</Badge>
+                  <Badge className="bg-blue-600 justify-center py-2">← Left Arrow</Badge>
+                  <Badge className="bg-blue-600 justify-center py-2">→ Right Arrow</Badge>
                 </div>
               </div>
 
               <div>
-                <h4 className="text-yellow-400 font-bold mb-2">
-                  🌟 Game Rules:
-                </h4>
+                <h4 className="text-yellow-400 font-bold mb-2">🌟 Game Rules:</h4>
                 <ul className="text-sm text-muted-foreground space-y-1">
                   <li>• Collect red environmental power-ups to grow</li>
                   <li>• Avoid hitting walls or your own body</li>
@@ -302,9 +256,7 @@ export default function SnakeArenaGame() {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span>Snake Length:</span>
-                    <span className="text-green-400">
-                      {gameState.snake.length}
-                    </span>
+                    <span className="text-green-400">{gameState.snake.length}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Current Score:</span>
@@ -318,12 +270,10 @@ export default function SnakeArenaGame() {
               </div>
 
               <div className="p-4 bg-green-900/20 border border-green-500/30 rounded-lg">
-                <h4 className="text-green-400 font-bold mb-2">
-                  🌱 Environmental Message
-                </h4>
+                <h4 className="text-green-400 font-bold mb-2">🌱 Environmental Message</h4>
                 <p className="text-sm text-green-300">
-                  Each power-up you collect represents saving an endangered
-                  species! Keep playing to make a positive environmental impact.
+                  Each power-up you collect represents saving an endangered species! Keep playing to
+                  make a positive environmental impact.
                 </p>
               </div>
             </CardContent>

@@ -6,12 +6,8 @@ const Docs = () => {
     <div className="min-h-screen bg-gradient-to-br from-black via-blue-900/20 to-purple-900/20">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-blue-400 mb-4">
-            🐉 DRAGON DOCUMENTATION 🐉
-          </h1>
-          <p className="text-blue-300">
-            Complete guide to the Dragon-Protected Ecosystem
-          </p>
+          <h1 className="text-4xl font-bold text-blue-400 mb-4">🐉 DRAGON DOCUMENTATION 🐉</h1>
+          <p className="text-blue-300">Complete guide to the Dragon-Protected Ecosystem</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -45,9 +41,7 @@ const Docs = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-green-300">
-                Built on cutting-edge technology stack:
-              </p>
+              <p className="text-green-300">Built on cutting-edge technology stack:</p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                 <li>🔮 Quantum Security Core</li>
                 <li>🐉 Trained Dragon AI</li>
@@ -67,9 +61,7 @@ const Docs = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-purple-300">
-                How to use the Dragon-Protected System:
-              </p>
+              <p className="text-purple-300">How to use the Dragon-Protected System:</p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                 <li>📱 Setup Google Authenticator</li>
                 <li>🔐 Secure Account Registration</li>
@@ -104,13 +96,11 @@ const Docs = () => {
 
         <Card className="mt-8 border-yellow-500/30 bg-yellow-900/20">
           <CardContent className="p-8 text-center">
-            <h3 className="text-2xl font-bold text-yellow-400 mb-4">
-              🚨 SECURITY WARNING 🚨
-            </h3>
+            <h3 className="text-2xl font-bold text-yellow-400 mb-4">🚨 SECURITY WARNING 🚨</h3>
             <p className="text-yellow-300 mb-4">
-              The Dragon Security System is extremely powerful and will
-              automatically protect all assets. Any attempt to breach the system
-              will result in immediate and permanent consequences.
+              The Dragon Security System is extremely powerful and will automatically protect all
+              assets. Any attempt to breach the system will result in immediate and permanent
+              consequences.
             </p>
             <p className="text-red-400 font-bold">
               🐉 THE DRAGON NEVER SLEEPS - FULL PROTECTION ACTIVE 24/7 🐉

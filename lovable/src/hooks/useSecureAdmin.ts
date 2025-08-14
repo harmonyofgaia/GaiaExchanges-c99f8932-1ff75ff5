@@ -18,9 +18,7 @@ export function useSecureAdmin() {
   const validateAdminSession = () => {
     try {
       // Check both new optimized keys and old keys for backward compatibility
-      const newSession =
-        localStorage.getItem("gaia-admin") ||
-        sessionStorage.getItem("gaia-admin");
+      const newSession = localStorage.getItem("gaia-admin") || sessionStorage.getItem("gaia-admin");
       const oldSession = localStorage.getItem("gaia-admin-session");
       const adminActive = sessionStorage.getItem("admin-active");
 
@@ -73,9 +71,7 @@ export function useSecureAdmin() {
   const grantAdminAccess = (): boolean => {
     try {
       // Check if another admin session exists (both new and old formats)
-      const newSession =
-        localStorage.getItem("gaia-admin") ||
-        sessionStorage.getItem("gaia-admin");
+      const newSession = localStorage.getItem("gaia-admin") || sessionStorage.getItem("gaia-admin");
       const oldSession = localStorage.getItem("gaia-admin-session");
 
       if (newSession || oldSession) {
@@ -98,9 +94,7 @@ export function useSecureAdmin() {
       try {
         localStorage.setItem("gaia-admin", JSON.stringify(sessionData));
       } catch (storageError) {
-        console.warn(
-          "LocalStorage full, using sessionStorage for admin session",
-        );
+        console.warn("LocalStorage full, using sessionStorage for admin session");
         sessionStorage.setItem("gaia-admin", JSON.stringify(sessionData));
       }
 

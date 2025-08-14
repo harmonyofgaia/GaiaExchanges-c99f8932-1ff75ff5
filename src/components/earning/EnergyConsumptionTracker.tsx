@@ -56,10 +56,7 @@ export function EnergyConsumptionTracker() {
       setLiveData((prev) => ({
         currentPower: 2.5 + Math.random() * 2,
         dailyUsage: prev.dailyUsage + (Math.random() - 0.5) * 0.1,
-        efficiency: Math.min(
-          100,
-          Math.max(70, prev.efficiency + (Math.random() - 0.5) * 2),
-        ),
+        efficiency: Math.min(100, Math.max(70, prev.efficiency + (Math.random() - 0.5) * 2)),
         co2Emissions: prev.co2Emissions + (Math.random() - 0.5) * 0.2,
         costSavings: prev.costSavings + Math.random() * 0.1,
       }));
@@ -97,15 +94,11 @@ export function EnergyConsumptionTracker() {
       return;
     }
 
-    const reductionAmount =
-      parseFloat(previousUsage) - parseFloat(currentUsage);
-    const reductionPercent =
-      (reductionAmount / parseFloat(previousUsage)) * 100;
+    const reductionAmount = parseFloat(previousUsage) - parseFloat(currentUsage);
+    const reductionPercent = (reductionAmount / parseFloat(previousUsage)) * 100;
 
     if (reductionAmount <= 0) {
-      toast.error(
-        "Current usage must be less than previous usage to earn rewards",
-      );
+      toast.error("Current usage must be less than previous usage to earn rewards");
       return;
     }
 
@@ -126,14 +119,11 @@ export function EnergyConsumptionTracker() {
 
     const basePoints = reductionAmount * 10;
     const timeframeBonus =
-      basePoints *
-      (timeframeMult[timeframe as keyof typeof timeframeMult] || 1);
+      basePoints * (timeframeMult[timeframe as keyof typeof timeframeMult] || 1);
     const sourceBonus = energySource
-      ? timeframeBonus *
-        (sourceMult[energySource as keyof typeof sourceMult] || 1)
+      ? timeframeBonus * (sourceMult[energySource as keyof typeof sourceMult] || 1)
       : timeframeBonus;
-    const efficiencyBonus =
-      reductionPercent > 20 ? sourceBonus * 1.5 : sourceBonus;
+    const efficiencyBonus = reductionPercent > 20 ? sourceBonus * 1.5 : sourceBonus;
 
     const totalPoints = Math.floor(efficiencyBonus);
     const tokens = Math.floor(totalPoints * 0.4);
@@ -162,7 +152,7 @@ export function EnergyConsumptionTracker() {
 
     addActivity(activity);
     toast.success(
-      `⚡ Energy reduction recorded! +${totalPoints} points earned for ${reductionPercent.toFixed(1)}% efficiency gain!`,
+      `⚡ Energy reduction recorded! +${totalPoints} points earned for ${reductionPercent.toFixed(1)}% efficiency gain!`
     );
     setEnergyType("");
     setCurrentUsage("");
@@ -228,20 +218,14 @@ export function EnergyConsumptionTracker() {
 
         {/* Monthly Impact Summary */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-orange-400">
-            📊 This Month's Impact
-          </h3>
+          <h3 className="text-lg font-semibold text-orange-400">📊 This Month's Impact</h3>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
             <div className="text-center p-4 bg-orange-900/30 rounded-lg border border-orange-500/20">
-              <div className="text-xl font-bold text-orange-400">
-                {monthlyStats.totalReduction}
-              </div>
+              <div className="text-xl font-bold text-orange-400">{monthlyStats.totalReduction}</div>
               <div className="text-xs text-muted-foreground">kWh Reduced</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg border border-green-500/20">
-              <div className="text-xl font-bold text-green-400">
-                {monthlyStats.efficiencyGain}%
-              </div>
+              <div className="text-xl font-bold text-green-400">{monthlyStats.efficiencyGain}%</div>
               <div className="text-xs text-muted-foreground">Efficiency +</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
@@ -251,21 +235,15 @@ export function EnergyConsumptionTracker() {
               <div className="text-xs text-muted-foreground">Renewable</div>
             </div>
             <div className="text-center p-4 bg-yellow-900/30 rounded-lg border border-yellow-500/20">
-              <div className="text-xl font-bold text-yellow-400">
-                ${monthlyStats.costSaved}
-              </div>
+              <div className="text-xl font-bold text-yellow-400">${monthlyStats.costSaved}</div>
               <div className="text-xs text-muted-foreground">Money Saved</div>
             </div>
             <div className="text-center p-4 bg-red-900/30 rounded-lg border border-red-500/20">
-              <div className="text-xl font-bold text-red-400">
-                {monthlyStats.co2Reduced}kg
-              </div>
+              <div className="text-xl font-bold text-red-400">{monthlyStats.co2Reduced}kg</div>
               <div className="text-xs text-muted-foreground">CO2 Reduced</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
-              <div className="text-xl font-bold text-purple-400">
-                {monthlyStats.tokensEarned}
-              </div>
+              <div className="text-xl font-bold text-purple-400">{monthlyStats.tokensEarned}</div>
               <div className="text-xs text-muted-foreground">GAiA Earned</div>
             </div>
           </div>
@@ -285,19 +263,15 @@ export function EnergyConsumptionTracker() {
               <div className="flex items-center gap-3">
                 <TrendingDown className="h-5 w-5 text-green-400" />
                 <div>
-                  <div className="font-medium text-yellow-300">
-                    {effort.action}
-                  </div>
+                  <div className="font-medium text-yellow-300">{effort.action}</div>
                   <div className="text-sm text-muted-foreground">
-                    -{effort.reduction}kWh {effort.timeframe} • $
-                    {effort.savings} saved • {effort.date}
+                    -{effort.reduction}kWh {effort.timeframe} • ${effort.savings} saved •{" "}
+                    {effort.date}
                   </div>
                 </div>
               </div>
               <div className="text-right">
-                <div className="font-bold text-yellow-400">
-                  +{effort.tokens} GAiA
-                </div>
+                <div className="font-bold text-yellow-400">+{effort.tokens} GAiA</div>
                 <Badge className="bg-green-600">Verified</Badge>
               </div>
             </div>
@@ -316,9 +290,7 @@ export function EnergyConsumptionTracker() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Energy Type
-              </label>
+              <label className="block text-sm font-medium mb-2">Energy Type</label>
               <Select value={energyType} onValueChange={setEnergyType}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select energy category" />
@@ -330,17 +302,13 @@ export function EnergyConsumptionTracker() {
                   <SelectItem value="hot_water">🚿 Hot Water</SelectItem>
                   <SelectItem value="lighting">💡 Lighting</SelectItem>
                   <SelectItem value="appliances">📱 Appliances</SelectItem>
-                  <SelectItem value="total_home">
-                    🏠 Total Home Usage
-                  </SelectItem>
+                  <SelectItem value="total_home">🏠 Total Home Usage</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Timeframe
-              </label>
+              <label className="block text-sm font-medium mb-2">Timeframe</label>
               <Select value={timeframe} onValueChange={setTimeframe}>
                 <SelectTrigger>
                   <SelectValue placeholder="Comparison period" />
@@ -355,9 +323,7 @@ export function EnergyConsumptionTracker() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Previous Usage (kWh)
-              </label>
+              <label className="block text-sm font-medium mb-2">Previous Usage (kWh)</label>
               <Input
                 type="number"
                 step="0.1"
@@ -369,9 +335,7 @@ export function EnergyConsumptionTracker() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Current Usage (kWh)
-              </label>
+              <label className="block text-sm font-medium mb-2">Current Usage (kWh)</label>
               <Input
                 type="number"
                 step="0.1"
@@ -383,27 +347,17 @@ export function EnergyConsumptionTracker() {
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium mb-2">
-                Energy Source (Optional)
-              </label>
+              <label className="block text-sm font-medium mb-2">Energy Source (Optional)</label>
               <Select value={energySource} onValueChange={setEnergySource}>
                 <SelectTrigger>
                   <SelectValue placeholder="Your energy source for bonus multiplier" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="renewable">
-                    🌞 100% Renewable (2x multiplier)
-                  </SelectItem>
-                  <SelectItem value="mixed_grid">
-                    ⚡ Mixed Grid (1.5x multiplier)
-                  </SelectItem>
-                  <SelectItem value="natural_gas">
-                    🔥 Natural Gas (1.2x multiplier)
-                  </SelectItem>
+                  <SelectItem value="renewable">🌞 100% Renewable (2x multiplier)</SelectItem>
+                  <SelectItem value="mixed_grid">⚡ Mixed Grid (1.5x multiplier)</SelectItem>
+                  <SelectItem value="natural_gas">🔥 Natural Gas (1.2x multiplier)</SelectItem>
                   <SelectItem value="oil">🛢️ Oil (1x multiplier)</SelectItem>
-                  <SelectItem value="coal">
-                    ⚫ Coal (0.8x multiplier)
-                  </SelectItem>
+                  <SelectItem value="coal">⚫ Coal (0.8x multiplier)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -422,11 +376,7 @@ export function EnergyConsumptionTracker() {
                 </div>
                 <div className="text-sm text-green-300">Reduction Achieved</div>
                 <div className="text-xs text-muted-foreground">
-                  Saved{" "}
-                  {(
-                    parseFloat(previousUsage) - parseFloat(currentUsage)
-                  ).toFixed(1)}{" "}
-                  kWh
+                  Saved {(parseFloat(previousUsage) - parseFloat(currentUsage)).toFixed(1)} kWh
                 </div>
               </div>
             </div>
@@ -437,17 +387,14 @@ export function EnergyConsumptionTracker() {
             disabled={loading}
             className="w-full bg-yellow-600 hover:bg-yellow-700"
           >
-            {loading
-              ? "Recording..."
-              : "⚡ Record Energy Efficiency (+10 pts per kWh saved)"}
+            {loading ? "Recording..." : "⚡ Record Energy Efficiency (+10 pts per kWh saved)"}
           </Button>
         </form>
 
         <div className="p-4 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-lg border border-yellow-500/20">
           <p className="text-sm text-yellow-300">
-            💡 <strong>Efficiency Master:</strong> Large percentage reductions
-            earn 1.5x bonus! Renewable energy sources provide multiplied rewards
-            for sustainable living!
+            💡 <strong>Efficiency Master:</strong> Large percentage reductions earn 1.5x bonus!
+            Renewable energy sources provide multiplied rewards for sustainable living!
           </p>
         </div>
       </CardContent>

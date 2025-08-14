@@ -294,16 +294,12 @@ export function GhostAnimalArmyOrchestrator() {
 
   const selectGhostAnimals = useCallback(
     (threat: ThreatData, currentAnimals: GhostAnimal[]): GhostAnimal[] => {
-      const availableAnimals = currentAnimals.filter(
-        (animal) => animal.status === "available",
-      );
+      const availableAnimals = currentAnimals.filter((animal) => animal.status === "available");
       const selectedAnimals: GhostAnimal[] = [];
 
       // Select primary defender based on threat level
       if (threat.severity >= 9) {
-        const ultimate = availableAnimals.filter(
-          (a) => a.type === "ultimate",
-        )[0];
+        const ultimate = availableAnimals.filter((a) => a.type === "ultimate")[0];
         if (ultimate) selectedAnimals.push(ultimate);
       } else if (threat.severity >= 7) {
         const elite = availableAnimals.filter((a) => a.type === "elite")[0];
@@ -312,9 +308,7 @@ export function GhostAnimalArmyOrchestrator() {
         const defense = availableAnimals.filter((a) => a.type === "defense")[0];
         if (defense) selectedAnimals.push(defense);
       } else {
-        const recon = availableAnimals.filter(
-          (a) => a.type === "reconnaissance",
-        )[0];
+        const recon = availableAnimals.filter((a) => a.type === "reconnaissance")[0];
         if (recon) selectedAnimals.push(recon);
       }
 
@@ -328,7 +322,7 @@ export function GhostAnimalArmyOrchestrator() {
 
       return selectedAnimals;
     },
-    [],
+    []
   );
 
   const deployGhostAnimals = useCallback(
@@ -351,14 +345,12 @@ export function GhostAnimalArmyOrchestrator() {
                 status: "deployed" as const,
                 deploymentCount: animal.deploymentCount + 1,
               }
-            : animal,
+            : animal
         );
 
         // Update threat status
         setThreats((prev) =>
-          prev.map((t) =>
-            t.id === threat.id ? { ...t, status: "deploying" as const } : t,
-          ),
+          prev.map((t) => (t.id === threat.id ? { ...t, status: "deploying" as const } : t))
         );
 
         // Log deployment
@@ -377,7 +369,7 @@ export function GhostAnimalArmyOrchestrator() {
         setActiveDeployments((prev) => prev + 1);
 
         toast.success(
-          `Deployed ${selectedAnimals.length} ghost animals in ${deploymentTime.toFixed(0)}ms`,
+          `Deployed ${selectedAnimals.length} ghost animals in ${deploymentTime.toFixed(0)}ms`
         );
 
         // Simulate threat neutralization
@@ -386,10 +378,8 @@ export function GhostAnimalArmyOrchestrator() {
 
           setThreats((prev) =>
             prev.map((t) =>
-              t.id === threat.id
-                ? { ...t, status: success ? "resolved" : "analyzing" }
-                : t,
-            ),
+              t.id === threat.id ? { ...t, status: success ? "resolved" : "analyzing" } : t
+            )
           );
 
           setGhostAnimals((prev) =>
@@ -398,12 +388,10 @@ export function GhostAnimalArmyOrchestrator() {
                 ? {
                     ...animal,
                     status: "available" as const,
-                    successRate: success
-                      ? animal.successRate + 0.1
-                      : animal.successRate - 0.5,
+                    successRate: success ? animal.successRate + 0.1 : animal.successRate - 0.5,
                   }
-                : animal,
-            ),
+                : animal
+            )
           );
 
           setDeploymentLogs((prev) =>
@@ -414,8 +402,8 @@ export function GhostAnimalArmyOrchestrator() {
                     status: success ? "successful" : "failed",
                     threatsNeutralized: success ? 1 : 0,
                   }
-                : log,
-            ),
+                : log
+            )
           );
 
           setActiveDeployments((prev) => prev - 1);
@@ -426,14 +414,14 @@ export function GhostAnimalArmyOrchestrator() {
           toast[success ? "success" : "error"](
             success
               ? "Threat successfully neutralized!"
-              : "Threat neutralization failed - escalating response",
+              : "Threat neutralization failed - escalating response"
           );
         }, deploymentTime + 2000);
 
         return updatedAnimals;
       });
     },
-    [selectGhostAnimals],
+    [selectGhostAnimals]
   );
 
   // Real-time threat monitoring simulation
@@ -463,15 +451,9 @@ export function GhostAnimalArmyOrchestrator() {
           ][Math.floor(Math.random() * 5)],
           description: "Automated threat detection triggered",
           systemsAffected: [
-            ["Authentication", "Data Storage", "Network Security"][
-              Math.floor(Math.random() * 3)
-            ],
+            ["Authentication", "Data Storage", "Network Security"][Math.floor(Math.random() * 3)],
           ],
-          attackVectors: [
-            ["Network", "Application", "Database"][
-              Math.floor(Math.random() * 3)
-            ],
-          ],
+          attackVectors: [["Network", "Application", "Database"][Math.floor(Math.random() * 3)]],
           confidence: 85 + Math.random() * 15,
           status: "detected",
         };
@@ -485,12 +467,8 @@ export function GhostAnimalArmyOrchestrator() {
       }
 
       // Update system metrics
-      setSystemIntegrity((prev) =>
-        Math.max(95, prev + (Math.random() - 0.5) * 0.5),
-      );
-      setAverageResponseTime((prev) =>
-        Math.max(0.1, prev + (Math.random() - 0.5) * 0.1),
-      );
+      setSystemIntegrity((prev) => Math.max(95, prev + (Math.random() - 0.5) * 0.5));
+      setAverageResponseTime((prev) => Math.max(0.1, prev + (Math.random() - 0.5) * 0.1));
     }, 3000);
 
     return () => clearInterval(monitorThreats);
@@ -550,9 +528,7 @@ export function GhostAnimalArmyOrchestrator() {
           <Ghost className="h-8 w-8 text-purple-500" />
           <div>
             <h2 className="text-2xl font-bold">GAIA Ghost Animal Army</h2>
-            <p className="text-muted-foreground">
-              Autonomous Infrastructure Protection System
-            </p>
+            <p className="text-muted-foreground">Autonomous Infrastructure Protection System</p>
           </div>
         </div>
         <div className="flex items-center space-x-4">
@@ -560,11 +536,7 @@ export function GhostAnimalArmyOrchestrator() {
             <label htmlFor="ghost-army-active" className="text-sm font-medium">
               Active Monitoring
             </label>
-            <Switch
-              id="ghost-army-active"
-              checked={isActive}
-              onCheckedChange={setIsActive}
-            />
+            <Switch id="ghost-army-active" checked={isActive} onCheckedChange={setIsActive} />
           </div>
           <Badge variant={isActive ? "default" : "secondary"}>
             {isActive ? "ACTIVE" : "STANDBY"}
@@ -578,9 +550,7 @@ export function GhostAnimalArmyOrchestrator() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Active Deployments
-                </p>
+                <p className="text-sm text-muted-foreground">Active Deployments</p>
                 <p className="text-2xl font-bold">{activeDeployments}</p>
               </div>
               <Activity className="h-8 w-8 text-blue-500" />
@@ -592,12 +562,8 @@ export function GhostAnimalArmyOrchestrator() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Threats Neutralized
-                </p>
-                <p className="text-2xl font-bold">
-                  {threatsNeutralized.toLocaleString()}
-                </p>
+                <p className="text-sm text-muted-foreground">Threats Neutralized</p>
+                <p className="text-2xl font-bold">{threatsNeutralized.toLocaleString()}</p>
               </div>
               <Target className="h-8 w-8 text-green-500" />
             </div>
@@ -608,12 +574,8 @@ export function GhostAnimalArmyOrchestrator() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Avg Response Time
-                </p>
-                <p className="text-2xl font-bold">
-                  {averageResponseTime.toFixed(2)}s
-                </p>
+                <p className="text-sm text-muted-foreground">Avg Response Time</p>
+                <p className="text-2xl font-bold">{averageResponseTime.toFixed(2)}s</p>
               </div>
               <Timer className="h-8 w-8 text-orange-500" />
             </div>
@@ -624,12 +586,8 @@ export function GhostAnimalArmyOrchestrator() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
-                  System Integrity
-                </p>
-                <p className="text-2xl font-bold">
-                  {systemIntegrity.toFixed(1)}%
-                </p>
+                <p className="text-sm text-muted-foreground">System Integrity</p>
+                <p className="text-2xl font-bold">{systemIntegrity.toFixed(1)}%</p>
               </div>
               <Shield className="h-8 w-8 text-purple-500" />
             </div>
@@ -650,9 +608,7 @@ export function GhostAnimalArmyOrchestrator() {
             {threats.length === 0 ? (
               <Alert>
                 <CheckCircle className="h-4 w-4" />
-                <AlertDescription>
-                  No active threats detected. System is secure.
-                </AlertDescription>
+                <AlertDescription>No active threats detected. System is secure.</AlertDescription>
               </Alert>
             ) : (
               threats.map((threat) => (
@@ -672,11 +628,7 @@ export function GhostAnimalArmyOrchestrator() {
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Badge
-                      variant={
-                        threat.status === "resolved" ? "default" : "secondary"
-                      }
-                    >
+                    <Badge variant={threat.status === "resolved" ? "default" : "secondary"}>
                       {threat.status.toUpperCase()}
                     </Badge>
                     <span className="text-xs text-muted-foreground">
@@ -707,14 +659,10 @@ export function GhostAnimalArmyOrchestrator() {
                     <span className="text-2xl">{animal.emoji}</span>
                     <div>
                       <h4 className="font-medium text-sm">{animal.name}</h4>
-                      <p className="text-xs text-muted-foreground">
-                        Level {animal.level}
-                      </p>
+                      <p className="text-xs text-muted-foreground">Level {animal.level}</p>
                     </div>
                   </div>
-                  <div
-                    className={`w-2 h-2 rounded-full ${getStatusColor(animal.status)}`}
-                  />
+                  <div className={`w-2 h-2 rounded-full ${getStatusColor(animal.status)}`} />
                 </div>
 
                 <div className="space-y-2">
@@ -723,10 +671,7 @@ export function GhostAnimalArmyOrchestrator() {
                       <span>Power</span>
                       <span>{animal.power.toLocaleString()}</span>
                     </div>
-                    <Progress
-                      value={(animal.power / 10000) * 100}
-                      className="h-1"
-                    />
+                    <Progress value={(animal.power / 10000) * 100} className="h-1" />
                   </div>
 
                   <div>
@@ -750,9 +695,7 @@ export function GhostAnimalArmyOrchestrator() {
                   onClick={() => manualDeploy(animal.id)}
                   disabled={animal.status !== "available"}
                 >
-                  {animal.status === "available"
-                    ? "Deploy"
-                    : animal.status.toUpperCase()}
+                  {animal.status === "available" ? "Deploy" : animal.status.toUpperCase()}
                 </Button>
               </div>
             ))}
@@ -771,9 +714,7 @@ export function GhostAnimalArmyOrchestrator() {
         <CardContent>
           <div className="space-y-3">
             {deploymentLogs.length === 0 ? (
-              <p className="text-muted-foreground text-center py-4">
-                No deployments recorded yet
-              </p>
+              <p className="text-muted-foreground text-center py-4">No deployments recorded yet</p>
             ) : (
               deploymentLogs.map((log) => (
                 <div
@@ -785,8 +726,7 @@ export function GhostAnimalArmyOrchestrator() {
                       Deployed {log.animalsDeployed.length} ghost animals
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      {log.animalsDeployed.join(", ")} • {log.deploymentTime}ms
-                      response
+                      {log.animalsDeployed.join(", ")} • {log.deploymentTime}ms response
                     </p>
                   </div>
                   <div className="flex items-center space-x-2">

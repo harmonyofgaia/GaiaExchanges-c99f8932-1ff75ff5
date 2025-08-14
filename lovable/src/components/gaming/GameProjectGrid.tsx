@@ -2,16 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Crown,
-  TreePine,
-  Mountain,
-  Waves,
-  Flame,
-  Sparkles,
-  Target,
-  Zap,
-} from "lucide-react";
+import { Crown, TreePine, Mountain, Waves, Flame, Sparkles, Target, Zap } from "lucide-react";
 
 interface GameProject {
   id: string;
@@ -176,26 +167,14 @@ export function GameProjectGrid() {
           }}
         >
           <div className="absolute top-2 right-2 opacity-20">
-            <div
-              className="text-4xl animate-bounce"
-              style={{ animationDelay: `${index * 0.2}s` }}
-            >
+            <div className="text-4xl animate-bounce" style={{ animationDelay: `${index * 0.2}s` }}>
               {project.icon}
             </div>
           </div>
 
           <div className="absolute bottom-2 left-2 opacity-30">
-            <div
-              className="text-2xl animate-pulse"
-              style={{ animationDelay: `${index * 0.3}s` }}
-            >
-              {index % 4 === 0
-                ? "🦅"
-                : index % 4 === 1
-                  ? "🐺"
-                  : index % 4 === 2
-                    ? "🦋"
-                    : "🐸"}
+            <div className="text-2xl animate-pulse" style={{ animationDelay: `${index * 0.3}s` }}>
+              {index % 4 === 0 ? "🦅" : index % 4 === 1 ? "🐺" : index % 4 === 2 ? "🦋" : "🐸"}
             </div>
           </div>
 
@@ -226,9 +205,7 @@ export function GameProjectGrid() {
           </CardHeader>
 
           <CardContent className="space-y-4">
-            <p className="text-sm text-muted-foreground">
-              {project.description}
-            </p>
+            <p className="text-sm text-muted-foreground">{project.description}</p>
 
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
@@ -237,15 +214,11 @@ export function GameProjectGrid() {
               </div>
               <div className="flex justify-between">
                 <span>Rewards:</span>
-                <span className="text-green-400 font-bold">
-                  {project.rewards}
-                </span>
+                <span className="text-green-400 font-bold">{project.rewards}</span>
               </div>
               <div className="flex justify-between">
                 <span>Players:</span>
-                <span className="text-blue-400">
-                  {project.participants.toLocaleString()}
-                </span>
+                <span className="text-blue-400">{project.participants.toLocaleString()}</span>
               </div>
             </div>
 

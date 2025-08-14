@@ -71,9 +71,7 @@ export default function DecentralizedProjectFundingPools() {
   const [projects, setProjects] = useState<GreenProject[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [fundingAmount, setFundingAmount] = useState<{ [key: string]: string }>(
-    {},
-  );
+  const [fundingAmount, setFundingAmount] = useState<{ [key: string]: string }>({});
   const [proposals, setProposals] = useState<GovernanceProposal[]>([]);
   const [poolStats, setPoolStats] = useState({
     totalFunds: 2400000,
@@ -133,8 +131,7 @@ export default function DecentralizedProjectFundingPools() {
         project_id: "proj_1",
         proposal_type: "funding_milestone",
         title: "Release Phase 2 Funding for Amazon Reforestation",
-        description:
-          "Approve release of $50,000 for Phase 2 tree planting activities",
+        description: "Approve release of $50,000 for Phase 2 tree planting activities",
         votes_for: 8420,
         votes_against: 1230,
         status: "active",
@@ -145,8 +142,7 @@ export default function DecentralizedProjectFundingPools() {
         project_id: "proj_2",
         proposal_type: "project_approval",
         title: "New Ocean Cleanup Initiative - Pacific Gyre",
-        description:
-          "Approve new project targeting plastic waste in Pacific Ocean",
+        description: "Approve new project targeting plastic waste in Pacific Ocean",
         votes_for: 12560,
         votes_against: 890,
         status: "active",
@@ -163,8 +159,7 @@ export default function DecentralizedProjectFundingPools() {
         ...prev,
         totalFunds: prev.totalFunds + Math.floor(Math.random() * 1000),
         activeProjects: prev.activeProjects + (Math.random() > 0.8 ? 1 : 0),
-        communityMembers:
-          prev.communityMembers + Math.floor(Math.random() * 10),
+        communityMembers: prev.communityMembers + Math.floor(Math.random() * 10),
       }));
     }, 10000);
 
@@ -254,8 +249,7 @@ export default function DecentralizedProjectFundingPools() {
           🌱 Decentralized Project Funding v7
         </h1>
         <p className="text-xl text-muted-foreground">
-          Advanced decentralized governance with multi-signature security and
-          satellite verification
+          Advanced decentralized governance with multi-signature security and satellite verification
         </p>
         <Badge className="mt-2 bg-purple-600 text-white">
           <Shield className="h-3 w-3 mr-1" />
@@ -277,17 +271,11 @@ export default function DecentralizedProjectFundingPools() {
               <div className="text-3xl font-bold text-green-400">
                 {poolStats.totalFunds.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total GAiA Raised
-              </div>
+              <div className="text-sm text-muted-foreground">Total GAiA Raised</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400">
-                {poolStats.activeProjects}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Projects
-              </div>
+              <div className="text-3xl font-bold text-blue-400">{poolStats.activeProjects}</div>
+              <div className="text-sm text-muted-foreground">Active Projects</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-400">
@@ -296,26 +284,18 @@ export default function DecentralizedProjectFundingPools() {
               <div className="text-sm text-muted-foreground">DAO Members</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">
-                {poolStats.successRate}%
-              </div>
+              <div className="text-3xl font-bold text-yellow-400">{poolStats.successRate}%</div>
               <div className="text-sm text-muted-foreground">Success Rate</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-cyan-400">
-                {poolStats.avgFundingTime}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Avg. Funding Days
-              </div>
+              <div className="text-3xl font-bold text-cyan-400">{poolStats.avgFundingTime}</div>
+              <div className="text-sm text-muted-foreground">Avg. Funding Days</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-pink-400">
                 {poolStats.verificationAccuracy}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Verification Accuracy
-              </div>
+              <div className="text-sm text-muted-foreground">Verification Accuracy</div>
             </div>
           </div>
         </CardContent>
@@ -341,45 +321,31 @@ export default function DecentralizedProjectFundingPools() {
                   className="p-4 rounded-lg border border-purple-500/20 bg-purple-900/10"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <h4 className="font-medium text-purple-400">
-                      {proposal.title}
-                    </h4>
-                    <Badge
-                      className={
-                        approvalRate > 70 ? "bg-green-600" : "bg-yellow-600"
-                      }
-                    >
+                    <h4 className="font-medium text-purple-400">{proposal.title}</h4>
+                    <Badge className={approvalRate > 70 ? "bg-green-600" : "bg-yellow-600"}>
                       {approvalRate.toFixed(1)}% Approval
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {proposal.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-3">{proposal.description}</p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <div className="text-sm text-muted-foreground">
-                        Votes For
-                      </div>
+                      <div className="text-sm text-muted-foreground">Votes For</div>
                       <div className="text-lg font-bold text-green-400">
                         {proposal.votes_for.toLocaleString()}
                       </div>
                     </div>
                     <div>
-                      <div className="text-sm text-muted-foreground">
-                        Votes Against
-                      </div>
+                      <div className="text-sm text-muted-foreground">Votes Against</div>
                       <div className="text-lg font-bold text-red-400">
                         {proposal.votes_against.toLocaleString()}
                       </div>
                     </div>
                     <div>
-                      <div className="text-sm text-muted-foreground">
-                        Deadline
-                      </div>
+                      <div className="text-sm text-muted-foreground">Deadline</div>
                       <div className="text-lg font-bold text-blue-400">
                         {Math.ceil(
                           (new Date(proposal.deadline).getTime() - Date.now()) /
-                            (24 * 60 * 60 * 1000),
+                            (24 * 60 * 60 * 1000)
                         )}{" "}
                         days
                       </div>
@@ -387,17 +353,10 @@ export default function DecentralizedProjectFundingPools() {
                   </div>
                   <Progress value={approvalRate} className="mt-3 h-2" />
                   <div className="flex gap-2 mt-3">
-                    <Button
-                      size="sm"
-                      className="bg-green-600 hover:bg-green-700"
-                    >
+                    <Button size="sm" className="bg-green-600 hover:bg-green-700">
                       Vote For
                     </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="border-red-500 text-red-400"
-                    >
+                    <Button size="sm" variant="outline" className="border-red-500 text-red-400">
                       Vote Against
                     </Button>
                   </div>
@@ -429,7 +388,7 @@ export default function DecentralizedProjectFundingPools() {
           const CategoryIcon = getCategoryIcon(project.category);
           const progressPercentage = getProgressPercentage(
             project.funding_raised,
-            project.funding_goal,
+            project.funding_goal
           );
 
           return (
@@ -456,20 +415,14 @@ export default function DecentralizedProjectFundingPools() {
                     </Badge>
                   </div>
                 </div>
-                <CardTitle className="text-lg text-green-400">
-                  {project.title}
-                </CardTitle>
+                <CardTitle className="text-lg text-green-400">{project.title}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm text-muted-foreground line-clamp-3">
-                  {project.description}
-                </p>
+                <p className="text-sm text-muted-foreground line-clamp-3">{project.description}</p>
 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">
-                      Funding Progress
-                    </span>
+                    <span className="text-muted-foreground">Funding Progress</span>
                     <span className="font-medium">
                       {project.funding_raised.toLocaleString()} /{" "}
                       {project.funding_goal.toLocaleString()} GAiA
@@ -485,14 +438,11 @@ export default function DecentralizedProjectFundingPools() {
                   <div>
                     <div className="text-muted-foreground">Carbon Impact</div>
                     <div className="font-medium text-green-400">
-                      {project.carbon_impact_target?.toLocaleString() || "N/A"}{" "}
-                      kg CO₂
+                      {project.carbon_impact_target?.toLocaleString() || "N/A"} kg CO₂
                     </div>
                   </div>
                   <div>
-                    <div className="text-muted-foreground">
-                      Governance Score
-                    </div>
+                    <div className="text-muted-foreground">Governance Score</div>
                     <div className="font-medium text-purple-400">
                       {project.governance_score || 0}/100
                     </div>
@@ -556,9 +506,7 @@ export default function DecentralizedProjectFundingPools() {
       {projects.length === 0 && (
         <div className="text-center py-12">
           <div className="text-6xl mb-4">🌱</div>
-          <h3 className="text-xl font-semibold text-muted-foreground mb-2">
-            No projects found
-          </h3>
+          <h3 className="text-xl font-semibold text-muted-foreground mb-2">No projects found</h3>
           <p className="text-muted-foreground">
             {selectedCategory === "all"
               ? "No verified projects available at the moment."
@@ -587,14 +535,10 @@ export default function DecentralizedProjectFundingPools() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-blue-400 mb-2">
-                Your Voting Power
-              </h4>
+              <h4 className="font-semibold text-blue-400 mb-2">Your Voting Power</h4>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    GAiA Tokens Staked:
-                  </span>
+                  <span className="text-muted-foreground">GAiA Tokens Staked:</span>
                   <span className="font-medium">0</span>
                 </div>
                 <div className="flex justify-between">

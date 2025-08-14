@@ -22,10 +22,7 @@ export function QuantumPerformanceEngine() {
     console.log("🛡️ UNTOUCHABLE STATUS - IMPOSSIBLE TO DEFEAT");
 
     const performanceEvolution = setInterval(() => {
-      metrics.current.processingSpeed = Math.min(
-        10000,
-        metrics.current.processingSpeed * 1.001,
-      );
+      metrics.current.processingSpeed = Math.min(10000, metrics.current.processingSpeed * 1.001);
       console.log("🚀 PERFORMANCE EVOLVING - BECOMING UNSTOPPABLE");
     }, 3000);
 

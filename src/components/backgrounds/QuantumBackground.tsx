@@ -28,8 +28,7 @@ export function QuantumBackground({
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    const particleCount =
-      intensity === "low" ? 30 : intensity === "high" ? 80 : 50;
+    const particleCount = intensity === "low" ? 30 : intensity === "high" ? 80 : 50;
     const particles: Array<{
       x: number;
       y: number;
@@ -78,13 +77,7 @@ export function QuantumBackground({
         ctx.globalAlpha = alpha;
         ctx.fillStyle = color;
         ctx.beginPath();
-        ctx.arc(
-          particle.x + uncertainty,
-          particle.y + uncertainty,
-          particle.size,
-          0,
-          Math.PI * 2,
-        );
+        ctx.arc(particle.x + uncertainty, particle.y + uncertainty, particle.size, 0, Math.PI * 2);
         ctx.fill();
 
         // Quantum entanglement lines

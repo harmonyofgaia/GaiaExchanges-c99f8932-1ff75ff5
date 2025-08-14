@@ -172,12 +172,8 @@ export function LiveArtistHub() {
               Live Streaming • Artist Platform Management • Content Control
             </div>
             <div className="flex justify-center gap-2 flex-wrap">
-              <Badge className="bg-purple-600 animate-pulse">
-                LIVE STREAMING
-              </Badge>
-              <Badge className="bg-pink-600 animate-pulse">
-                ARTIST PLATFORM
-              </Badge>
+              <Badge className="bg-purple-600 animate-pulse">LIVE STREAMING</Badge>
+              <Badge className="bg-pink-600 animate-pulse">ARTIST PLATFORM</Badge>
               <Badge className="bg-blue-600 animate-pulse">FULL CONTROL</Badge>
             </div>
           </div>
@@ -189,12 +185,8 @@ export function LiveArtistHub() {
         <Card className="border-red-500/30 bg-red-900/20">
           <CardContent className="p-4 text-center">
             <Video className="h-8 w-8 mx-auto text-red-400 mb-2" />
-            <div className="text-2xl font-bold text-red-400">
-              {streamingStats.activeLiveShows}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Active Live Shows
-            </div>
+            <div className="text-2xl font-bold text-red-400">{streamingStats.activeLiveShows}</div>
+            <div className="text-sm text-muted-foreground">Active Live Shows</div>
           </CardContent>
         </Card>
 
@@ -214,9 +206,7 @@ export function LiveArtistHub() {
             <div className="text-2xl font-bold text-green-400">
               {streamingStats.registeredArtists}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Registered Artists
-            </div>
+            <div className="text-sm text-muted-foreground">Registered Artists</div>
           </CardContent>
         </Card>
 
@@ -242,9 +232,7 @@ export function LiveArtistHub() {
         <TabsContent value="live-streaming" className="space-y-4">
           <Card className="border-red-500/30 bg-red-900/20">
             <CardHeader>
-              <CardTitle className="text-red-400">
-                🎬 Live Streaming Management
-              </CardTitle>
+              <CardTitle className="text-red-400">🎬 Live Streaming Management</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <Button
@@ -256,14 +244,9 @@ export function LiveArtistHub() {
               </Button>
 
               <div className="space-y-4">
-                <h4 className="text-red-400 font-bold">
-                  📺 Active Live Shows:
-                </h4>
+                <h4 className="text-red-400 font-bold">📺 Active Live Shows:</h4>
                 {liveShows.map((show) => (
-                  <Card
-                    key={show.id}
-                    className="border-gray-500/30 bg-gray-900/20"
-                  >
+                  <Card key={show.id} className="border-gray-500/30 bg-gray-900/20">
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -271,12 +254,8 @@ export function LiveArtistHub() {
                             <Video className="h-6 w-6 text-white" />
                           </div>
                           <div>
-                            <h5 className="font-bold text-white">
-                              {show.title}
-                            </h5>
-                            <p className="text-sm text-muted-foreground">
-                              by {show.artist}
-                            </p>
+                            <h5 className="font-bold text-white">{show.title}</h5>
+                            <p className="text-sm text-muted-foreground">by {show.artist}</p>
                             <div className="flex items-center gap-2 mt-1">
                               <Badge
                                 className={
@@ -320,9 +299,7 @@ export function LiveArtistHub() {
         <TabsContent value="artist-platform" className="space-y-4">
           <Card className="border-purple-500/30 bg-purple-900/20">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                🎭 Artist Platform Management
-              </CardTitle>
+              <CardTitle className="text-purple-400">🎭 Artist Platform Management</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -337,14 +314,9 @@ export function LiveArtistHub() {
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-purple-400 font-bold">
-                  🎨 Registered Artists:
-                </h4>
+                <h4 className="text-purple-400 font-bold">🎨 Registered Artists:</h4>
                 {artistPlatforms.map((artist) => (
-                  <Card
-                    key={artist.id}
-                    className="border-gray-500/30 bg-gray-900/20"
-                  >
+                  <Card key={artist.id} className="border-gray-500/30 bg-gray-900/20">
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -353,18 +325,13 @@ export function LiveArtistHub() {
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <h5 className="font-bold text-white">
-                                {artist.name}
-                              </h5>
+                              <h5 className="font-bold text-white">{artist.name}</h5>
                               {artist.isVerified && (
-                                <Badge className="bg-blue-600">
-                                  ✓ VERIFIED
-                                </Badge>
+                                <Badge className="bg-blue-600">✓ VERIFIED</Badge>
                               )}
                             </div>
                             <p className="text-sm text-muted-foreground">
-                              {artist.genre} •{" "}
-                              {artist.followers.toLocaleString()} followers
+                              {artist.genre} • {artist.followers.toLocaleString()} followers
                             </p>
                             <div className="flex items-center gap-2 mt-1">
                               <span className="text-sm text-yellow-400 flex items-center gap-1">
@@ -413,9 +380,7 @@ export function LiveArtistHub() {
         <TabsContent value="content-control" className="space-y-4">
           <Card className="border-orange-500/30 bg-orange-900/20">
             <CardHeader>
-              <CardTitle className="text-orange-400">
-                ⚙️ Content & Stream Control
-              </CardTitle>
+              <CardTitle className="text-orange-400">⚙️ Content & Stream Control</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -441,15 +406,11 @@ export function LiveArtistHub() {
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-orange-400 font-bold">
-                  🎛️ Stream Controls:
-                </h4>
+                <h4 className="text-orange-400 font-bold">🎛️ Stream Controls:</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-3">
                     <div>
-                      <label className="text-sm text-orange-300 mb-2 block">
-                        Stream Quality
-                      </label>
+                      <label className="text-sm text-orange-300 mb-2 block">Stream Quality</label>
                       <select className="w-full p-2 bg-black/30 border border-orange-500/30 rounded">
                         <option>1080p HD</option>
                         <option>720p</option>
@@ -458,9 +419,7 @@ export function LiveArtistHub() {
                     </div>
 
                     <div>
-                      <label className="text-sm text-orange-300 mb-2 block">
-                        Audio Bitrate
-                      </label>
+                      <label className="text-sm text-orange-300 mb-2 block">Audio Bitrate</label>
                       <select className="w-full p-2 bg-black/30 border border-orange-500/30 rounded">
                         <option>320 kbps</option>
                         <option>256 kbps</option>
@@ -471,25 +430,15 @@ export function LiveArtistHub() {
 
                   <div className="space-y-3">
                     <div>
-                      <label className="text-sm text-orange-300 mb-2 block">
-                        Max Viewers
-                      </label>
-                      <Input
-                        type="number"
-                        defaultValue="5000"
-                        className="bg-black/30"
-                      />
+                      <label className="text-sm text-orange-300 mb-2 block">Max Viewers</label>
+                      <Input type="number" defaultValue="5000" className="bg-black/30" />
                     </div>
 
                     <div>
                       <label className="text-sm text-orange-300 mb-2 block">
                         Stream Duration (hours)
                       </label>
-                      <Input
-                        type="number"
-                        defaultValue="12"
-                        className="bg-black/30"
-                      />
+                      <Input type="number" defaultValue="12" className="bg-black/30" />
                     </div>
                   </div>
                 </div>
@@ -501,16 +450,12 @@ export function LiveArtistHub() {
         <TabsContent value="analytics" className="space-y-4">
           <Card className="border-green-500/30 bg-green-900/20">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                📊 Live Artist Analytics
-              </CardTitle>
+              <CardTitle className="text-green-400">📊 Live Artist Analytics</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <h4 className="text-green-400 font-bold">
-                    📈 Performance Metrics:
-                  </h4>
+                  <h4 className="text-green-400 font-bold">📈 Performance Metrics:</h4>
                   <div className="space-y-3">
                     <div>
                       <div className="flex justify-between mb-2">
@@ -539,35 +484,25 @@ export function LiveArtistHub() {
                 </div>
 
                 <div className="space-y-4">
-                  <h4 className="text-blue-400 font-bold">
-                    🎯 Revenue Analytics:
-                  </h4>
+                  <h4 className="text-blue-400 font-bold">🎯 Revenue Analytics:</h4>
                   <div className="space-y-3">
                     <div className="p-3 bg-black/30 rounded">
-                      <div className="text-sm text-muted-foreground">
-                        Today's Revenue
-                      </div>
+                      <div className="text-sm text-muted-foreground">Today's Revenue</div>
                       <div className="text-2xl font-bold text-green-400">
                         ${(streamingStats.totalRevenue * 0.1).toFixed(2)}
                       </div>
                     </div>
 
                     <div className="p-3 bg-black/30 rounded">
-                      <div className="text-sm text-muted-foreground">
-                        Monthly Revenue
-                      </div>
+                      <div className="text-sm text-muted-foreground">Monthly Revenue</div>
                       <div className="text-2xl font-bold text-blue-400">
                         ${streamingStats.totalRevenue.toFixed(2)}
                       </div>
                     </div>
 
                     <div className="p-3 bg-black/30 rounded">
-                      <div className="text-sm text-muted-foreground">
-                        Growth Rate
-                      </div>
-                      <div className="text-2xl font-bold text-purple-400">
-                        +23.7%
-                      </div>
+                      <div className="text-sm text-muted-foreground">Growth Rate</div>
+                      <div className="text-2xl font-bold text-purple-400">+23.7%</div>
                     </div>
                   </div>
                 </div>

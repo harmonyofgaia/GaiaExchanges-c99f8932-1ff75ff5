@@ -80,9 +80,7 @@ export function InvestorScoutingSystem() {
         ];
 
         const randomInvestor =
-          investorCategories[
-            Math.floor(Math.random() * investorCategories.length)
-          ];
+          investorCategories[Math.floor(Math.random() * investorCategories.length)];
 
         const newLead: InvestorLead = {
           id: `investor-${Date.now()}`,
@@ -98,9 +96,7 @@ export function InvestorScoutingSystem() {
 
         setInvestorLeads((prev) => [newLead, ...prev.slice(0, 9)]); // Keep last 10 leads
 
-        console.log(
-          `👑 NEW INVESTOR LEAD: ${newLead.name} - ${newLead.interestLevel}% interested`,
-        );
+        console.log(`👑 NEW INVESTOR LEAD: ${newLead.name} - ${newLead.interestLevel}% interested`);
 
         // Show notification for high-value leads
         if (newLead.interestLevel > 85) {
@@ -123,22 +119,16 @@ export function InvestorScoutingSystem() {
 
   const activateAdvertising = () => {
     toast.success("📢 ADVERTISING ACTIVATED!", {
-      description:
-        "Dragon Security value now broadcasting to attract perfect investors",
+      description: "Dragon Security value now broadcasting to attract perfect investors",
       duration: 10000,
     });
 
-    console.log(
-      "📢 ADVERTISING SYSTEM ACTIVATED - DEMONSTRATING PRICELESS VALUE",
-    );
-    console.log(
-      "🎯 TARGET INVESTORS: High-Quality • Perfect Fit • Revolutionary Vision",
-    );
+    console.log("📢 ADVERTISING SYSTEM ACTIVATED - DEMONSTRATING PRICELESS VALUE");
+    console.log("🎯 TARGET INVESTORS: High-Quality • Perfect Fit • Revolutionary Vision");
   };
 
   const getInterestBadge = (level: number) => {
-    if (level >= 90)
-      return <Badge className="bg-green-600">EXTREMELY HIGH</Badge>;
+    if (level >= 90) return <Badge className="bg-green-600">EXTREMELY HIGH</Badge>;
     if (level >= 80) return <Badge className="bg-blue-600">VERY HIGH</Badge>;
     if (level >= 70) return <Badge className="bg-yellow-600">HIGH</Badge>;
     return <Badge className="bg-gray-600">MODERATE</Badge>;
@@ -172,9 +162,7 @@ export function InvestorScoutingSystem() {
         <div className="grid grid-cols-3 gap-4 mb-6">
           <div className="text-center p-3 rounded-lg bg-green-900/20 border border-green-500/30">
             <Users className="h-6 w-6 mx-auto text-green-400 mb-1" />
-            <div className="text-lg font-bold text-green-400">
-              {investorLeads.length}
-            </div>
+            <div className="text-lg font-bold text-green-400">{investorLeads.length}</div>
             <div className="text-xs text-muted-foreground">Active Leads</div>
           </div>
 
@@ -183,10 +171,8 @@ export function InvestorScoutingSystem() {
             <div className="text-lg font-bold text-blue-400">
               {investorLeads.length > 0
                 ? Math.round(
-                    investorLeads.reduce(
-                      (sum, lead) => sum + lead.interestLevel,
-                      0,
-                    ) / investorLeads.length,
+                    investorLeads.reduce((sum, lead) => sum + lead.interestLevel, 0) /
+                      investorLeads.length
                   )
                 : 0}
               %
@@ -208,9 +194,7 @@ export function InvestorScoutingSystem() {
           {investorLeads.length === 0 ? (
             <div className="text-center py-8 text-green-400">
               <div className="text-6xl mb-4">🎯</div>
-              <div className="font-semibold">
-                Scouting for Perfect Investors
-              </div>
+              <div className="font-semibold">Scouting for Perfect Investors</div>
               <div className="text-sm text-muted-foreground">
                 Dragon Security attracting high-quality investment opportunities
               </div>
@@ -225,15 +209,9 @@ export function InvestorScoutingSystem() {
                   <div className="flex items-center gap-3">
                     {getCategoryIcon(lead.category)}
                     <div>
-                      <div className="font-semibold text-green-300">
-                        {lead.name}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        {lead.specialization}
-                      </div>
-                      <div className="text-xs text-blue-400">
-                        {lead.investmentCapacity}
-                      </div>
+                      <div className="font-semibold text-green-300">{lead.name}</div>
+                      <div className="text-sm text-muted-foreground">{lead.specialization}</div>
+                      <div className="text-xs text-blue-400">{lead.investmentCapacity}</div>
                     </div>
                   </div>
                   <div className="text-right space-y-1">
@@ -241,9 +219,7 @@ export function InvestorScoutingSystem() {
                     <div className="text-xs text-muted-foreground">
                       {lead.interestLevel}% Interest
                     </div>
-                    <div className="text-xs text-purple-400">
-                      Dragon: {lead.dragonAttraction}%
-                    </div>
+                    <div className="text-xs text-purple-400">Dragon: {lead.dragonAttraction}%</div>
                   </div>
                 </div>
               </div>
@@ -266,18 +242,10 @@ export function InvestorScoutingSystem() {
             🎯 Perfect Investor Attraction Strategy
           </h4>
           <div className="text-sm text-green-200 space-y-1">
-            <div>
-              • Attract investors who understand revolutionary technology
-            </div>
-            <div>
-              • Demonstrate priceless value through Dragon Security performance
-            </div>
-            <div>
-              • Focus on quality over quantity - perfect fit investors only
-            </div>
-            <div>
-              • Show boundaries being broken and impossible being achieved
-            </div>
+            <div>• Attract investors who understand revolutionary technology</div>
+            <div>• Demonstrate priceless value through Dragon Security performance</div>
+            <div>• Focus on quality over quantity - perfect fit investors only</div>
+            <div>• Show boundaries being broken and impossible being achieved</div>
             <div>• Prove endless growth potential and community impact</div>
           </div>
         </div>

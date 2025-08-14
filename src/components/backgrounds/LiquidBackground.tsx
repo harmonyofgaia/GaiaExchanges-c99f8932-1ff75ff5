@@ -65,10 +65,7 @@ export function LiquidBackground({
         ctx.moveTo(0, canvas.height);
 
         for (let x = 0; x <= canvas.width; x += 2) {
-          const y =
-            wave.y +
-            Math.sin(x * wave.length + time * speed + wave.phase) *
-              wave.amplitude;
+          const y = wave.y + Math.sin(x * wave.length + time * speed + wave.phase) * wave.amplitude;
           ctx.lineTo(x, y);
         }
 

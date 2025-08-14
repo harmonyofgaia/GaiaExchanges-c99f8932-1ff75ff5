@@ -131,9 +131,7 @@ export function AdvancedThreatTracker() {
             console.log("🛡️ Location tracking protected");
           }
 
-          throw new Error(
-            "Screen recording blocked by Harmony of Gaia Quantum Protection",
-          );
+          throw new Error("Screen recording blocked by Harmony of Gaia Quantum Protection");
         };
       }
 
@@ -174,7 +172,7 @@ export function AdvancedThreatTracker() {
           ...monkey,
           level: Math.min(100, monkey.level + 0.01),
           power: Math.min(10000, monkey.power + Math.floor(Math.random() * 10)),
-        })),
+        }))
       );
 
       setDolphinDefense((prev) => ({
@@ -197,8 +195,7 @@ export function AdvancedThreatTracker() {
     console.log("🌍 GLOBAL DEFENSE MATRIX ONLINE");
 
     toast.success("🐬 HEAVENLY DOLPHIN FORCE ACTIVATED!", {
-      description:
-        "Ultimate protection protocols engaged - All systems secured",
+      description: "Ultimate protection protocols engaged - All systems secured",
       duration: 10000,
     });
   };
@@ -208,41 +205,27 @@ export function AdvancedThreatTracker() {
       {/* Screen Recording Protection Status */}
       <Card className="border-red-500/50 bg-red-900/20">
         <CardHeader>
-          <CardTitle className="text-red-400">
-            🚫 ANTI-SCREEN RECORDING FORTRESS
-          </CardTitle>
+          <CardTitle className="text-red-400">🚫 ANTI-SCREEN RECORDING FORTRESS</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-red-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-red-400">
-                {screenRecordingAttempts}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Recording Attempts Blocked
-              </div>
+              <div className="text-3xl font-bold text-red-400">{screenRecordingAttempts}</div>
+              <div className="text-sm text-muted-foreground">Recording Attempts Blocked</div>
             </div>
             <div className="text-center p-4 bg-orange-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-orange-400">
-                {attackerLocations.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Attackers Located & Logged
-              </div>
+              <div className="text-3xl font-bold text-orange-400">{attackerLocations.length}</div>
+              <div className="text-sm text-muted-foreground">Attackers Located & Logged</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
               <div className="text-3xl font-bold text-green-400">100%</div>
-              <div className="text-sm text-muted-foreground">
-                Protection Success Rate
-              </div>
+              <div className="text-sm text-muted-foreground">Protection Success Rate</div>
             </div>
           </div>
 
           {attackerLocations.length > 0 && (
             <div className="mt-4">
-              <h4 className="text-red-400 font-bold mb-2">
-                🎯 TRACKED ATTACKER LOCATIONS:
-              </h4>
+              <h4 className="text-red-400 font-bold mb-2">🎯 TRACKED ATTACKER LOCATIONS:</h4>
               <div className="space-y-1">
                 {attackerLocations.slice(-5).map((location, index) => (
                   <Badge key={index} className="bg-red-600 mr-2 mb-1">
@@ -258,9 +241,7 @@ export function AdvancedThreatTracker() {
       {/* 7 Training Monkeys Defense Wall */}
       <Card className="border-purple-500/50 bg-purple-900/20">
         <CardHeader>
-          <CardTitle className="text-purple-400">
-            🐵 7 SELF-TRAINING DEFENSE MONKEYS
-          </CardTitle>
+          <CardTitle className="text-purple-400">🐵 7 SELF-TRAINING DEFENSE MONKEYS</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -273,27 +254,19 @@ export function AdvancedThreatTracker() {
                   <div className="text-center">
                     <div className="text-2xl mb-2">🐵</div>
                     <h4 className="font-bold text-purple-400">{monkey.name}</h4>
-                    <p className="text-xs text-muted-foreground mb-2">
-                      {monkey.skill}
-                    </p>
+                    <p className="text-xs text-muted-foreground mb-2">{monkey.skill}</p>
                     <div className="space-y-2">
                       <div>
                         <div className="flex justify-between text-xs">
                           <span>Level</span>
-                          <span className="text-purple-400">
-                            {monkey.level.toFixed(1)}
-                          </span>
+                          <span className="text-purple-400">{monkey.level.toFixed(1)}</span>
                         </div>
                         <Progress value={monkey.level} className="h-1" />
                       </div>
                       <div className="text-xs">
                         <div>🔋 Power: {monkey.power}</div>
                         <div>📍 Location: {monkey.location}</div>
-                        <Badge
-                          className={
-                            monkey.defending ? "bg-green-600" : "bg-yellow-600"
-                          }
-                        >
+                        <Badge className={monkey.defending ? "bg-green-600" : "bg-yellow-600"}>
                           {monkey.defending ? "🛡️ DEFENDING" : "⚡ TRAINING"}
                         </Badge>
                       </div>
@@ -309,21 +282,15 @@ export function AdvancedThreatTracker() {
       {/* Heavenly Dolphin Defense System */}
       <Card className="border-cyan-500/50 bg-cyan-900/20">
         <CardHeader>
-          <CardTitle className="text-cyan-400">
-            🐬 HEAVENLY DOLPHIN DEFENSE SYSTEM
-          </CardTitle>
+          <CardTitle className="text-cyan-400">🐬 HEAVENLY DOLPHIN DEFENSE SYSTEM</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div className="text-center">
                 <div className="text-6xl mb-4">🐬</div>
-                <h3 className="text-2xl font-bold text-cyan-400">
-                  QUANTUM DOLPHIN FORCE
-                </h3>
-                <p className="text-cyan-300">
-                  Self-training heavenly protection
-                </p>
+                <h3 className="text-2xl font-bold text-cyan-400">QUANTUM DOLPHIN FORCE</h3>
+                <p className="text-cyan-300">Self-training heavenly protection</p>
               </div>
 
               <div className="space-y-3">
@@ -334,39 +301,18 @@ export function AdvancedThreatTracker() {
                       {dolphinDefense.heavenlyForce.toFixed(3)}%
                     </span>
                   </div>
-                  <Progress
-                    value={dolphinDefense.heavenlyForce}
-                    className="h-2"
-                  />
+                  <Progress value={dolphinDefense.heavenlyForce} className="h-2" />
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 text-xs">
-                  <Badge
-                    className={
-                      dolphinDefense.active ? "bg-green-600" : "bg-red-600"
-                    }
-                  >
+                  <Badge className={dolphinDefense.active ? "bg-green-600" : "bg-red-600"}>
                     Status: {dolphinDefense.active ? "ACTIVE" : "INACTIVE"}
                   </Badge>
-                  <Badge
-                    className={
-                      dolphinDefense.quantumShield
-                        ? "bg-blue-600"
-                        : "bg-gray-600"
-                    }
-                  >
-                    Quantum Shield:{" "}
-                    {dolphinDefense.quantumShield ? "ON" : "OFF"}
+                  <Badge className={dolphinDefense.quantumShield ? "bg-blue-600" : "bg-gray-600"}>
+                    Quantum Shield: {dolphinDefense.quantumShield ? "ON" : "OFF"}
                   </Badge>
-                  <Badge
-                    className={
-                      dolphinDefense.selfTraining
-                        ? "bg-purple-600"
-                        : "bg-gray-600"
-                    }
-                  >
-                    Self-Training:{" "}
-                    {dolphinDefense.selfTraining ? "ACTIVE" : "INACTIVE"}
+                  <Badge className={dolphinDefense.selfTraining ? "bg-purple-600" : "bg-gray-600"}>
+                    Self-Training: {dolphinDefense.selfTraining ? "ACTIVE" : "INACTIVE"}
                   </Badge>
                   <Badge className="bg-cyan-600">
                     Defenders: {dolphinDefense.defendersActive}/7
@@ -385,25 +331,13 @@ export function AdvancedThreatTracker() {
               </Button>
 
               <div className="text-center space-y-2">
-                <h4 className="text-cyan-400 font-bold">
-                  PROTECTION COVERAGE:
-                </h4>
+                <h4 className="text-cyan-400 font-bold">PROTECTION COVERAGE:</h4>
                 <div className="grid grid-cols-1 gap-1 text-xs">
-                  <Badge className="bg-green-600">
-                    🔒 RedMi Tablet: SECURED
-                  </Badge>
-                  <Badge className="bg-green-600">
-                    📶 All WiFi Networks: PROTECTED
-                  </Badge>
-                  <Badge className="bg-green-600">
-                    ☁️ Cloud Files: ENCRYPTED
-                  </Badge>
-                  <Badge className="bg-green-600">
-                    💻 All Platforms: DEFENDED
-                  </Badge>
-                  <Badge className="bg-green-600">
-                    🌐 Global Access: MONITORED
-                  </Badge>
+                  <Badge className="bg-green-600">🔒 RedMi Tablet: SECURED</Badge>
+                  <Badge className="bg-green-600">📶 All WiFi Networks: PROTECTED</Badge>
+                  <Badge className="bg-green-600">☁️ Cloud Files: ENCRYPTED</Badge>
+                  <Badge className="bg-green-600">💻 All Platforms: DEFENDED</Badge>
+                  <Badge className="bg-green-600">🌐 Global Access: MONITORED</Badge>
                 </div>
               </div>
             </div>
@@ -414,42 +348,29 @@ export function AdvancedThreatTracker() {
       {/* Einstein-Level Defense Stats */}
       <Card className="border-yellow-500/50 bg-yellow-900/20">
         <CardHeader>
-          <CardTitle className="text-yellow-400">
-            🧠 EINSTEIN-LEVEL DEFENSE ANALYTICS
-          </CardTitle>
+          <CardTitle className="text-yellow-400">🧠 EINSTEIN-LEVEL DEFENSE ANALYTICS</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center space-y-4">
             <div className="text-4xl">🧠⚡</div>
-            <h3 className="text-2xl font-bold text-yellow-400">
-              BEYOND EINSTEIN'S IMAGINATION
-            </h3>
+            <h3 className="text-2xl font-bold text-yellow-400">BEYOND EINSTEIN'S IMAGINATION</h3>
             <p className="text-yellow-300">
-              Our defense system has surpassed what even Dr. Einstein could have
-              imagined or created. Self-improving quantum protection that grows
-              stronger every second.
+              Our defense system has surpassed what even Dr. Einstein could have imagined or
+              created. Self-improving quantum protection that grows stronger every second.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center p-4 bg-yellow-900/30 rounded-lg">
                 <div className="text-3xl font-bold text-yellow-400">∞</div>
-                <div className="text-sm text-muted-foreground">
-                  Self-Training Iterations
-                </div>
+                <div className="text-sm text-muted-foreground">Self-Training Iterations</div>
               </div>
               <div className="text-center p-4 bg-orange-900/30 rounded-lg">
                 <div className="text-3xl font-bold text-orange-400">999%</div>
-                <div className="text-sm text-muted-foreground">
-                  Beyond Bank Security
-                </div>
+                <div className="text-sm text-muted-foreground">Beyond Bank Security</div>
               </div>
               <div className="text-center p-4 bg-red-900/30 rounded-lg">
-                <div className="text-3xl font-bold text-red-400">
-                  IMPOSSIBLE
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  To Break or Trace
-                </div>
+                <div className="text-3xl font-bold text-red-400">IMPOSSIBLE</div>
+                <div className="text-sm text-muted-foreground">To Break or Trace</div>
               </div>
             </div>
           </div>

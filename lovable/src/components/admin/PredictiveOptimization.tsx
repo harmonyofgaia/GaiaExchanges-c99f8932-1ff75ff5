@@ -30,8 +30,7 @@ export function PredictiveOptimization() {
     {
       id: "1",
       type: "performance",
-      prediction:
-        "Database query optimization will improve response time by 45%",
+      prediction: "Database query optimization will improve response time by 45%",
       confidence: 94.7,
       impact: "high",
       autoApply: true,
@@ -40,8 +39,7 @@ export function PredictiveOptimization() {
     {
       id: "2",
       type: "security",
-      prediction:
-        "Potential security vulnerability detected - preemptive patch available",
+      prediction: "Potential security vulnerability detected - preemptive patch available",
       confidence: 89.2,
       impact: "critical",
       autoApply: true,
@@ -67,21 +65,14 @@ export function PredictiveOptimization() {
       // Auto-apply high confidence predictions
       setInsights((prev) =>
         prev.map((insight) => {
-          if (
-            insight.status === "predicted" &&
-            insight.confidence > 85 &&
-            insight.autoApply
-          ) {
-            toast.success(
-              `🎯 Auto-Applied: ${insight.prediction.slice(0, 50)}...`,
-              {
-                duration: 3000,
-              },
-            );
+          if (insight.status === "predicted" && insight.confidence > 85 && insight.autoApply) {
+            toast.success(`🎯 Auto-Applied: ${insight.prediction.slice(0, 50)}...`, {
+              duration: 3000,
+            });
             return { ...insight, status: "applied" as const };
           }
           return insight;
-        }),
+        })
       );
 
       // Generate new predictions
@@ -99,12 +90,9 @@ export function PredictiveOptimization() {
           type: ["optimization", "security", "performance", "user_experience"][
             Math.floor(Math.random() * 4)
           ] as any,
-          prediction:
-            newPredictions[Math.floor(Math.random() * newPredictions.length)],
+          prediction: newPredictions[Math.floor(Math.random() * newPredictions.length)],
           confidence: 80 + Math.random() * 20,
-          impact: ["medium", "high", "critical"][
-            Math.floor(Math.random() * 3)
-          ] as any,
+          impact: ["medium", "high", "critical"][Math.floor(Math.random() * 3)] as any,
           autoApply: true,
           status: "predicted",
         };
@@ -113,9 +101,7 @@ export function PredictiveOptimization() {
       }
 
       console.log("🔮 PREDICTIVE AI: Analyzing future system needs");
-      console.log(
-        "🎯 AUTONOMOUS OPTIMIZATION: Applying improvements automatically",
-      );
+      console.log("🎯 AUTONOMOUS OPTIMIZATION: Applying improvements automatically");
     }, 5000);
 
     return () => clearInterval(interval);
@@ -170,18 +156,14 @@ export function PredictiveOptimization() {
         <CardTitle className="flex items-center gap-2 text-blue-400">
           <Brain className="h-6 w-6 animate-pulse" />
           🔮 PREDICTIVE OPTIMIZATION ENGINE - PHASE 4 ACTIVE
-          <Badge className="bg-blue-600 text-white animate-pulse">
-            AUTONOMOUS
-          </Badge>
+          <Badge className="bg-blue-600 text-white animate-pulse">AUTONOMOUS</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Autonomous Mode Control */}
         <div className="flex items-center justify-between p-4 bg-green-900/30 border border-green-500/30 rounded-lg">
           <div>
-            <h4 className="font-semibold text-green-400">
-              🤖 Autonomous Optimization Mode
-            </h4>
+            <h4 className="font-semibold text-green-400">🤖 Autonomous Optimization Mode</h4>
             <p className="text-sm text-muted-foreground">
               AI automatically applies high-confidence improvements
             </p>
@@ -189,9 +171,7 @@ export function PredictiveOptimization() {
           <Button
             onClick={() => setAutonomousMode(!autonomousMode)}
             className={
-              autonomousMode
-                ? "bg-green-600 hover:bg-green-700"
-                : "bg-red-600 hover:bg-red-700"
+              autonomousMode ? "bg-green-600 hover:bg-green-700" : "bg-red-600 hover:bg-red-700"
             }
           >
             {autonomousMode ? "AUTONOMOUS ON" : "AUTONOMOUS OFF"}
@@ -206,26 +186,17 @@ export function PredictiveOptimization() {
           </h4>
 
           {insights.map((insight) => (
-            <div
-              key={insight.id}
-              className="p-4 bg-black/40 rounded-lg border border-blue-500/30"
-            >
+            <div key={insight.id} className="p-4 bg-black/40 rounded-lg border border-blue-500/30">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-2">
                   {getTypeIcon(insight.type)}
-                  <span className="font-semibold text-white text-sm">
-                    {insight.prediction}
-                  </span>
+                  <span className="font-semibold text-white text-sm">{insight.prediction}</span>
                 </div>
                 <div className="flex gap-2">
-                  <Badge
-                    className={`${getImpactColor(insight.impact)} text-white text-xs`}
-                  >
+                  <Badge className={`${getImpactColor(insight.impact)} text-white text-xs`}>
                     {insight.impact.toUpperCase()}
                   </Badge>
-                  <Badge
-                    className={`${getStatusColor(insight.status)} text-white text-xs`}
-                  >
+                  <Badge className={`${getStatusColor(insight.status)} text-white text-xs`}>
                     {insight.status.toUpperCase()}
                   </Badge>
                 </div>
@@ -234,9 +205,7 @@ export function PredictiveOptimization() {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Confidence Level</span>
-                  <span className="text-green-400">
-                    {insight.confidence.toFixed(1)}%
-                  </span>
+                  <span className="text-green-400">{insight.confidence.toFixed(1)}%</span>
                 </div>
                 <Progress value={insight.confidence} className="h-2" />
               </div>
@@ -276,9 +245,7 @@ export function PredictiveOptimization() {
 
           <div className="text-center p-3 rounded-lg bg-green-900/30">
             <div className="text-2xl font-bold text-green-400">24/7</div>
-            <div className="text-xs text-muted-foreground">
-              Active Monitoring
-            </div>
+            <div className="text-xs text-muted-foreground">Active Monitoring</div>
           </div>
         </div>
       </CardContent>

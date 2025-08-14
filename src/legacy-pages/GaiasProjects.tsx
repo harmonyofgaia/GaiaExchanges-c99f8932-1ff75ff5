@@ -10,8 +10,7 @@ export default function GaiasProjects() {
     {
       id: 1,
       name: "Coral Reef Restoration",
-      description:
-        "Restoring damaged coral reefs worldwide using sound technology",
+      description: "Restoring damaged coral reefs worldwide using sound technology",
       funding: 250000,
       target: 500000,
       impact: "Ocean Protection",
@@ -52,11 +51,8 @@ export default function GaiasProjects() {
       setProjects((prev) =>
         prev.map((project) => ({
           ...project,
-          funding: Math.min(
-            project.target,
-            project.funding + Math.floor(Math.random() * 5000),
-          ),
-        })),
+          funding: Math.min(project.target, project.funding + Math.floor(Math.random() * 5000)),
+        }))
       );
     }, 10000);
 
@@ -89,19 +85,14 @@ export default function GaiasProjects() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center p-4 bg-green-900/50 rounded-lg border-2 border-green-500/50">
                 <Leaf className="h-8 w-8 text-green-400 mx-auto mb-2 animate-pulse" />
-                <div className="text-2xl font-black text-green-400">
-                  {projects.length}
-                </div>
+                <div className="text-2xl font-black text-green-400">{projects.length}</div>
                 <div className="text-sm text-green-300">Active Projects</div>
               </div>
 
               <div className="text-center p-4 bg-blue-900/50 rounded-lg border-2 border-blue-500/50">
                 <DollarSign className="h-8 w-8 text-blue-400 mx-auto mb-2 animate-bounce" />
                 <div className="text-2xl font-black text-blue-400">
-                  $
-                  {projects
-                    .reduce((sum, p) => sum + p.funding, 0)
-                    .toLocaleString()}
+                  ${projects.reduce((sum, p) => sum + p.funding, 0).toLocaleString()}
                 </div>
                 <div className="text-sm text-blue-300">Total Funding</div>
               </div>
@@ -133,25 +124,14 @@ export default function GaiasProjects() {
                     <CardContent className="p-6">
                       <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                          <h4 className="text-xl font-bold text-green-400">
-                            {project.name}
-                          </h4>
-                          <Badge className="bg-green-600 text-white">
-                            {project.status}
-                          </Badge>
+                          <h4 className="text-xl font-bold text-green-400">{project.name}</h4>
+                          <Badge className="bg-green-600 text-white">{project.status}</Badge>
                         </div>
-                        <p className="text-muted-foreground">
-                          {project.description}
-                        </p>
+                        <p className="text-muted-foreground">{project.description}</p>
                         <div className="space-y-2">
                           <div className="flex justify-between text-sm">
                             <span>Progress</span>
-                            <span>
-                              {Math.round(
-                                (project.funding / project.target) * 100,
-                              )}
-                              %
-                            </span>
+                            <span>{Math.round((project.funding / project.target) * 100)}%</span>
                           </div>
                           <div className="w-full bg-gray-700 rounded-full h-3">
                             <div
@@ -185,8 +165,7 @@ export default function GaiasProjects() {
                 🌱 BUILDING A GREENER TOMORROW 🌱
               </div>
               <div className="text-xl text-green-300">
-                Every Transaction • Every Choice • Every Project • Makes a
-                Difference
+                Every Transaction • Every Choice • Every Project • Makes a Difference
               </div>
             </div>
           </CardContent>

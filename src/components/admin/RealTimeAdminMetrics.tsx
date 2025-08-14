@@ -37,7 +37,7 @@ export function RealTimeAdminMetrics() {
           schema: "public",
           table: "admin_metrics",
         },
-        () => loadMetrics(),
+        () => loadMetrics()
       )
       .subscribe();
 
@@ -133,17 +133,9 @@ export function RealTimeAdminMetrics() {
       case "security_threats":
         return value === 0 ? "text-green-400" : "text-red-400";
       case "server_uptime":
-        return value >= 99
-          ? "text-green-400"
-          : value >= 95
-            ? "text-yellow-400"
-            : "text-red-400";
+        return value >= 99 ? "text-green-400" : value >= 95 ? "text-yellow-400" : "text-red-400";
       case "system_load":
-        return value <= 30
-          ? "text-green-400"
-          : value <= 70
-            ? "text-yellow-400"
-            : "text-red-400";
+        return value <= 30 ? "text-green-400" : value <= 70 ? "text-yellow-400" : "text-red-400";
       default:
         return "text-blue-400";
     }
@@ -201,19 +193,14 @@ export function RealTimeAdminMetrics() {
                 ? "percentage"
                 : "counter";
             return (
-              <div
-                key={name}
-                className="bg-black/30 rounded-lg p-4 border border-gray-700"
-              >
+              <div key={name} className="bg-black/30 rounded-lg p-4 border border-gray-700">
                 <div className="flex items-center gap-2 mb-2">
                   {getMetricIcon(name)}
                   <span className="text-sm text-gray-400 capitalize">
                     {name.replace(/_/g, " ")}
                   </span>
                 </div>
-                <div
-                  className={`text-xl font-bold ${getMetricColor(name, value)}`}
-                >
+                <div className={`text-xl font-bold ${getMetricColor(name, value)}`}>
                   {formatNumber(value, metricType)}
                 </div>
                 {(name === "system_load" || name === "server_uptime") && (
@@ -228,9 +215,7 @@ export function RealTimeAdminMetrics() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-green-400 font-medium text-sm">
-                REAL-TIME DATA STREAMING
-              </span>
+              <span className="text-green-400 font-medium text-sm">REAL-TIME DATA STREAMING</span>
             </div>
             <span className="text-green-300 text-xs">
               Last Update: {lastUpdate.toLocaleTimeString()}

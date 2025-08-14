@@ -59,21 +59,15 @@ export function BlockchainStatus() {
                 className="text-center p-3 bg-black/20 rounded-lg border border-gray-700"
               >
                 <Icon className={`h-6 w-6 mx-auto mb-2 ${stat.color}`} />
-                <div className={`text-lg font-bold ${stat.color}`}>
-                  {stat.value}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {stat.label}
-                </div>
+                <div className={`text-lg font-bold ${stat.color}`}>{stat.value}</div>
+                <div className="text-xs text-muted-foreground">{stat.label}</div>
               </div>
             );
           })}
         </div>
 
         <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-          <h4 className="font-bold text-green-400 mb-2">
-            🌍 Motherboard Integration:
-          </h4>
+          <h4 className="font-bold text-green-400 mb-2">🌍 Motherboard Integration:</h4>
           <div className="text-sm text-green-300 grid grid-cols-1 md:grid-cols-2 gap-2">
             <div>• Token system core infrastructure</div>
             <div>• Gaming rewards processing</div>

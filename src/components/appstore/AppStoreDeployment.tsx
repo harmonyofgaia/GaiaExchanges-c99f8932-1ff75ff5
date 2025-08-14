@@ -81,10 +81,7 @@ export function AppStoreDeployment() {
       setDeploymentStatus((prev) =>
         prev.map((store) => {
           if (store.progress < 100) {
-            const newProgress = Math.min(
-              100,
-              store.progress + Math.random() * 3,
-            );
+            const newProgress = Math.min(100, store.progress + Math.random() * 3);
             let newStatus = store.status;
 
             if (newProgress >= 100 && store.status === "preparing") {
@@ -98,7 +95,7 @@ export function AppStoreDeployment() {
             return { ...store, progress: newProgress, status: newStatus };
           }
           return store;
-        }),
+        })
       );
     }, 2000);
 
@@ -107,10 +104,7 @@ export function AppStoreDeployment() {
 
   // Calculate overall progress
   useEffect(() => {
-    const totalProgress = deploymentStatus.reduce(
-      (sum, store) => sum + store.progress,
-      0,
-    );
+    const totalProgress = deploymentStatus.reduce((sum, store) => sum + store.progress, 0);
     setOverallProgress(totalProgress / deploymentStatus.length);
   }, [deploymentStatus]);
 
@@ -125,7 +119,7 @@ export function AppStoreDeployment() {
           return { ...store, status: "submitted", progress: 100 };
         }
         return store;
-      }),
+      })
     );
   };
 
@@ -140,7 +134,7 @@ export function AppStoreDeployment() {
         ...store,
         progress: Math.min(100, store.progress + 15),
         buildNumber: store.buildNumber + 1,
-      })),
+      }))
     );
   };
 
@@ -181,35 +175,25 @@ export function AppStoreDeployment() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center mb-6">
             <div>
-              <div className="text-3xl font-bold text-blue-400">
-                {overallProgress.toFixed(1)}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Overall Progress
-              </div>
+              <div className="text-3xl font-bold text-blue-400">{overallProgress.toFixed(1)}%</div>
+              <div className="text-sm text-muted-foreground">Overall Progress</div>
               <Progress value={overallProgress} className="mt-2" />
             </div>
             <div>
-              <div className="text-3xl font-bold text-green-400">
-                {securityCompliance}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Security Compliance
-              </div>
+              <div className="text-3xl font-bold text-green-400">{securityCompliance}%</div>
+              <div className="text-sm text-muted-foreground">Security Compliance</div>
               <Progress value={securityCompliance} className="mt-2" />
             </div>
             <div>
               <div className="text-3xl font-bold text-purple-400">
                 {
                   deploymentStatus.filter(
-                    (s) => s.status === "submitted" || s.status === "approved",
+                    (s) => s.status === "submitted" || s.status === "approved"
                   ).length
                 }
                 /4
               </div>
-              <div className="text-sm text-muted-foreground">
-                Stores Submitted
-              </div>
+              <div className="text-sm text-muted-foreground">Stores Submitted</div>
             </div>
           </div>
 
@@ -234,9 +218,7 @@ export function AppStoreDeployment() {
                   <div className="text-purple-400">{store.icon}</div>
                   <span className="text-lg">{store.name}</span>
                 </div>
-                <Badge className={getStatusColor(store.status)}>
-                  {store.status}
-                </Badge>
+                <Badge className={getStatusColor(store.status)}>{store.status}</Badge>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -286,9 +268,7 @@ export function AppStoreDeployment() {
                 disabled={store.status === "submitted"}
                 className={`w-full ${store.color} hover:opacity-90`}
               >
-                {store.status === "submitted"
-                  ? "Submitted"
-                  : `Submit to ${store.name}`}
+                {store.status === "submitted" ? "Submitted" : `Submit to ${store.name}`}
               </Button>
             </CardContent>
           </Card>
@@ -297,18 +277,12 @@ export function AppStoreDeployment() {
 
       {/* Deployment Actions */}
       <div className="flex gap-4 flex-wrap">
-        <Button
-          onClick={generateAppBundle}
-          className="bg-blue-600 hover:bg-blue-700"
-        >
+        <Button onClick={generateAppBundle} className="bg-blue-600 hover:bg-blue-700">
           <Package className="h-4 w-4 mr-2" />
           Generate All App Bundles
         </Button>
 
-        <Button
-          onClick={runSecurityAudit}
-          className="bg-green-600 hover:bg-green-700"
-        >
+        <Button onClick={runSecurityAudit} className="bg-green-600 hover:bg-green-700">
           <Shield className="h-4 w-4 mr-2" />
           Run Security Audit
         </Button>

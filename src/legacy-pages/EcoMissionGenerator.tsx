@@ -101,7 +101,7 @@ export default function EcoMissionGenerator() {
         },
         () => {
           setUserLocation("Location unavailable");
-        },
+        }
       );
     }
   };
@@ -111,8 +111,7 @@ export default function EcoMissionGenerator() {
     const insights = [
       {
         type: "weather",
-        message:
-          "Optimal tree planting conditions detected for the next 72 hours",
+        message: "Optimal tree planting conditions detected for the next 72 hours",
         confidence: 94,
         action: "Generate tree planting missions",
       },
@@ -124,8 +123,7 @@ export default function EcoMissionGenerator() {
       },
       {
         type: "seasonal",
-        message:
-          "Wildlife migration season - biodiversity missions recommended",
+        message: "Wildlife migration season - biodiversity missions recommended",
         confidence: 91,
         action: "Create wildlife monitoring tasks",
       },
@@ -139,13 +137,10 @@ export default function EcoMissionGenerator() {
       setMissionMetrics((prev) => ({
         ...prev,
         totalGenerated: prev.totalGenerated + Math.floor(Math.random() * 3),
-        completionRate: Math.min(
-          100,
-          prev.completionRate + (Math.random() - 0.5) * 0.1,
-        ),
+        completionRate: Math.min(100, prev.completionRate + (Math.random() - 0.5) * 0.1),
         communityParticipation: Math.min(
           100,
-          prev.communityParticipation + (Math.random() - 0.5) * 0.2,
+          prev.communityParticipation + (Math.random() - 0.5) * 0.2
         ),
       }));
     }, 10000);
@@ -199,11 +194,7 @@ export default function EcoMissionGenerator() {
           ai_generated: true,
           geolocation_required: true,
           verification_method: "gps_photo",
-          optimal_conditions: [
-            "sunny",
-            "moderate_humidity",
-            "soil_moisture_optimal",
-          ],
+          optimal_conditions: ["sunny", "moderate_humidity", "soil_moisture_optimal"],
         },
         {
           type: "smart_waste_cleanup",
@@ -260,9 +251,7 @@ export default function EcoMissionGenerator() {
       ];
 
       const template =
-        advancedMissionTemplates[
-          Math.floor(Math.random() * advancedMissionTemplates.length)
-        ];
+        advancedMissionTemplates[Math.floor(Math.random() * advancedMissionTemplates.length)];
       const variations = {
         "{count}": Math.floor(Math.random() * 15) + 5,
         "{amount}": Math.floor(Math.random() * 25) + 10,
@@ -295,10 +284,7 @@ export default function EcoMissionGenerator() {
         optimal_conditions: template.optimal_conditions || [],
       };
 
-      const { data, error } = await supabase
-        .from("eco_missions")
-        .insert([missionData])
-        .select();
+      const { data, error } = await supabase.from("eco_missions").insert([missionData]).select();
 
       if (error) throw error;
 
@@ -426,8 +412,7 @@ export default function EcoMissionGenerator() {
           🎯 AI Eco-Mission Generator v7
         </h1>
         <p className="text-xl text-muted-foreground">
-          Advanced AI-powered missions with geolocation, IoT integration, and
-          community challenges
+          Advanced AI-powered missions with geolocation, IoT integration, and community challenges
         </p>
         <Badge className="mt-2 bg-purple-600 text-white">
           <Brain className="h-3 w-3 mr-1" />
@@ -446,21 +431,15 @@ export default function EcoMissionGenerator() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400">
-                {activeMissions.length}
-              </div>
+              <div className="text-3xl font-bold text-blue-400">{activeMissions.length}</div>
               <div className="text-sm text-muted-foreground">Available</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">
-                {inProgressMissions.length}
-              </div>
+              <div className="text-3xl font-bold text-yellow-400">{inProgressMissions.length}</div>
               <div className="text-sm text-muted-foreground">In Progress</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">
-                {completedMissions.length}
-              </div>
+              <div className="text-3xl font-bold text-green-400">{completedMissions.length}</div>
               <div className="text-sm text-muted-foreground">Completed</div>
             </div>
             <div className="text-center">
@@ -479,9 +458,7 @@ export default function EcoMissionGenerator() {
               <div className="text-3xl font-bold text-pink-400">
                 {missionMetrics.communityParticipation.toFixed(1)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Community Rate
-              </div>
+              <div className="text-sm text-muted-foreground">Community Rate</div>
             </div>
           </div>
         </CardContent>
@@ -511,12 +488,8 @@ export default function EcoMissionGenerator() {
                     {insight.confidence}% confidence
                   </Badge>
                 </div>
-                <p className="text-sm text-muted-foreground mb-2">
-                  {insight.message}
-                </p>
-                <p className="text-xs text-purple-300 font-medium">
-                  {insight.action}
-                </p>
+                <p className="text-sm text-muted-foreground mb-2">{insight.message}</p>
+                <p className="text-xs text-purple-300 font-medium">{insight.action}</p>
               </div>
             ))}
           </div>
@@ -534,46 +507,34 @@ export default function EcoMissionGenerator() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h4 className="font-semibold text-blue-400 mb-2">
-                Your Location
-              </h4>
+              <h4 className="font-semibold text-blue-400 mb-2">Your Location</h4>
               <div className="flex items-center gap-2 mb-2">
                 <Smartphone className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm font-mono">{userLocation}</span>
               </div>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    Weather Conditions:
-                  </span>
+                  <span className="text-muted-foreground">Weather Conditions:</span>
                   <span className="font-medium text-green-400">
                     {missionMetrics.optimalWeather ? "Optimal" : "Moderate"}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    Community Activity:
-                  </span>
+                  <span className="text-muted-foreground">Community Activity:</span>
                   <span className="font-medium text-blue-400">High</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    Environmental Priority:
-                  </span>
-                  <span className="font-medium text-yellow-400">
-                    Tree Planting
-                  </span>
+                  <span className="text-muted-foreground">Environmental Priority:</span>
+                  <span className="font-medium text-yellow-400">Tree Planting</span>
                 </div>
               </div>
             </div>
             <div>
-              <h4 className="font-semibold text-blue-400 mb-2">
-                AI Mission Generator v7
-              </h4>
+              <h4 className="font-semibold text-blue-400 mb-2">AI Mission Generator v7</h4>
               <p className="text-muted-foreground text-sm mb-4">
-                Advanced AI analyzes your location, weather patterns, community
-                needs, and environmental data to generate personalized
-                eco-missions with maximum impact potential.
+                Advanced AI analyzes your location, weather patterns, community needs, and
+                environmental data to generate personalized eco-missions with maximum impact
+                potential.
               </p>
               <Button
                 onClick={generateAIMission}
@@ -600,15 +561,9 @@ export default function EcoMissionGenerator() {
       {/* Mission Tabs */}
       <Tabs defaultValue="available" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="available">
-            Available ({activeMissions.length})
-          </TabsTrigger>
-          <TabsTrigger value="progress">
-            In Progress ({inProgressMissions.length})
-          </TabsTrigger>
-          <TabsTrigger value="completed">
-            Completed ({completedMissions.length})
-          </TabsTrigger>
+          <TabsTrigger value="available">Available ({activeMissions.length})</TabsTrigger>
+          <TabsTrigger value="progress">In Progress ({inProgressMissions.length})</TabsTrigger>
+          <TabsTrigger value="completed">Completed ({completedMissions.length})</TabsTrigger>
         </TabsList>
 
         <TabsContent value="available" className="space-y-4">
@@ -635,10 +590,7 @@ export default function EcoMissionGenerator() {
                             {mission.status.replace("_", " ")}
                           </Badge>
                           {mission.ai_generated && (
-                            <Badge
-                              variant="outline"
-                              className="text-purple-400"
-                            >
+                            <Badge variant="outline" className="text-purple-400">
                               <Brain className="h-3 w-3 mr-1" />
                               AI Generated
                             </Badge>
@@ -652,9 +604,7 @@ export default function EcoMissionGenerator() {
                         </div>
                         <Badge
                           variant="outline"
-                          className={getDifficultyColor(
-                            mission.difficulty_level,
-                          )}
+                          className={getDifficultyColor(mission.difficulty_level)}
                         >
                           {getDifficultyName(mission.difficulty_level)}
                         </Badge>
@@ -665,9 +615,7 @@ export default function EcoMissionGenerator() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <p className="text-sm text-muted-foreground">
-                        {mission.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{mission.description}</p>
 
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
@@ -677,9 +625,7 @@ export default function EcoMissionGenerator() {
                           </div>
                         </div>
                         <div>
-                          <div className="text-muted-foreground">
-                            Carbon Impact
-                          </div>
+                          <div className="text-muted-foreground">Carbon Impact</div>
                           <div className="font-medium text-blue-400">
                             {mission.carbon_impact} kg CO₂
                           </div>
@@ -687,14 +633,11 @@ export default function EcoMissionGenerator() {
                       </div>
 
                       {/* Enhanced v7 features */}
-                      {(mission.verification_method ||
-                        mission.predicted_completion_time) && (
+                      {(mission.verification_method || mission.predicted_completion_time) && (
                         <div className="grid grid-cols-2 gap-4 text-sm">
                           {mission.verification_method && (
                             <div>
-                              <div className="text-muted-foreground">
-                                Verification
-                              </div>
+                              <div className="text-muted-foreground">Verification</div>
                               <div className="font-medium text-purple-400 capitalize">
                                 {mission.verification_method.replace("_", " ")}
                               </div>
@@ -702,41 +645,30 @@ export default function EcoMissionGenerator() {
                           )}
                           {mission.predicted_completion_time && (
                             <div>
-                              <div className="text-muted-foreground">
-                                Est. Time
-                              </div>
+                              <div className="text-muted-foreground">Est. Time</div>
                               <div className="font-medium text-cyan-400">
-                                {Math.floor(
-                                  mission.predicted_completion_time / 24,
-                                )}
-                                d {mission.predicted_completion_time % 24}h
+                                {Math.floor(mission.predicted_completion_time / 24)}d{" "}
+                                {mission.predicted_completion_time % 24}h
                               </div>
                             </div>
                           )}
                         </div>
                       )}
 
-                      {mission.optimal_conditions &&
-                        mission.optimal_conditions.length > 0 && (
-                          <div>
-                            <div className="text-sm text-muted-foreground mb-2">
-                              Optimal Conditions:
-                            </div>
-                            <div className="flex flex-wrap gap-1">
-                              {mission.optimal_conditions.map(
-                                (condition, index) => (
-                                  <Badge
-                                    key={index}
-                                    variant="secondary"
-                                    className="text-xs"
-                                  >
-                                    {condition.replace("_", " ")}
-                                  </Badge>
-                                ),
-                              )}
-                            </div>
+                      {mission.optimal_conditions && mission.optimal_conditions.length > 0 && (
+                        <div>
+                          <div className="text-sm text-muted-foreground mb-2">
+                            Optimal Conditions:
                           </div>
-                        )}
+                          <div className="flex flex-wrap gap-1">
+                            {mission.optimal_conditions.map((condition, index) => (
+                              <Badge key={index} variant="secondary" className="text-xs">
+                                {condition.replace("_", " ")}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      )}
 
                       <Button
                         onClick={() => acceptMission(mission.id)}
@@ -776,9 +708,7 @@ export default function EcoMissionGenerator() {
                         </Badge>
                         <Badge
                           variant="outline"
-                          className={getDifficultyColor(
-                            mission.difficulty_level,
-                          )}
+                          className={getDifficultyColor(mission.difficulty_level)}
                         >
                           {getDifficultyName(mission.difficulty_level)}
                         </Badge>
@@ -789,9 +719,7 @@ export default function EcoMissionGenerator() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <p className="text-sm text-muted-foreground">
-                        {mission.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{mission.description}</p>
 
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
@@ -801,9 +729,7 @@ export default function EcoMissionGenerator() {
                           </div>
                         </div>
                         <div>
-                          <div className="text-muted-foreground">
-                            Carbon Impact
-                          </div>
+                          <div className="text-muted-foreground">Carbon Impact</div>
                           <div className="font-medium text-blue-400">
                             {mission.carbon_impact} kg CO₂
                           </div>
@@ -831,9 +757,7 @@ export default function EcoMissionGenerator() {
               <h3 className="text-xl font-semibold text-muted-foreground mb-2">
                 No completed missions yet
               </h3>
-              <p className="text-muted-foreground">
-                Complete your first mission to see it here!
-              </p>
+              <p className="text-muted-foreground">Complete your first mission to see it here!</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -849,9 +773,7 @@ export default function EcoMissionGenerator() {
                         </Badge>
                         <Badge
                           variant="outline"
-                          className={getDifficultyColor(
-                            mission.difficulty_level,
-                          )}
+                          className={getDifficultyColor(mission.difficulty_level)}
                         >
                           {getDifficultyName(mission.difficulty_level)}
                         </Badge>
@@ -862,23 +784,17 @@ export default function EcoMissionGenerator() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <p className="text-sm text-muted-foreground">
-                        {mission.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{mission.description}</p>
 
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                          <div className="text-muted-foreground">
-                            Tokens Earned
-                          </div>
+                          <div className="text-muted-foreground">Tokens Earned</div>
                           <div className="font-medium text-green-400">
                             {mission.tokens_reward} GAiA
                           </div>
                         </div>
                         <div>
-                          <div className="text-muted-foreground">
-                            Carbon Impact
-                          </div>
+                          <div className="text-muted-foreground">Carbon Impact</div>
                           <div className="font-medium text-blue-400">
                             {mission.carbon_impact} kg CO₂
                           </div>
@@ -887,8 +803,7 @@ export default function EcoMissionGenerator() {
 
                       <div className="text-xs text-muted-foreground">
                         <Clock className="h-3 w-3 inline mr-1" />
-                        Completed:{" "}
-                        {new Date(mission.completed_at!).toLocaleDateString()}
+                        Completed: {new Date(mission.completed_at!).toLocaleDateString()}
                       </div>
                     </CardContent>
                   </Card>

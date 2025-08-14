@@ -11,9 +11,7 @@ interface ProjectDataRestorerProps {
   onDataRestored: (projectData: any) => void;
 }
 
-export function ProjectDataRestorer({
-  onDataRestored,
-}: ProjectDataRestorerProps) {
+export function ProjectDataRestorer({ onDataRestored }: ProjectDataRestorerProps) {
   const [apiKey, setApiKey] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -40,23 +38,20 @@ export function ProjectDataRestorer({
     setCrawlResult(null);
 
     try {
-      const url =
-        "https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/soul-projects";
+      const url = "https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/soul-projects";
       console.log("🌍 Starting to restore GAiA project data from:", url);
 
       const result = await FirecrawlService.crawlWebsite(url);
 
       if (result.success) {
         toast.success("✨ Project data restored successfully!", {
-          description:
-            "Your original GAiA project information has been retrieved",
+          description: "Your original GAiA project information has been retrieved",
         });
         setCrawlResult(result.data);
         onDataRestored(result.data);
       } else {
         toast.error("❌ Failed to restore project data", {
-          description:
-            result.error || "Unable to access the project information",
+          description: result.error || "Unable to access the project information",
         });
       }
     } catch (error) {
@@ -78,8 +73,7 @@ export function ProjectDataRestorer({
           🌱 Restore Original GAiA Project Data
         </CardTitle>
         <p className="text-green-300/80 text-sm">
-          Restore your original project information from your Culture of Harmony
-          website
+          Restore your original project information from your Culture of Harmony website
         </p>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -100,10 +94,7 @@ export function ProjectDataRestorer({
                 onChange={(e) => setApiKey(e.target.value)}
                 className="flex-1"
               />
-              <Button
-                onClick={handleApiKeySubmit}
-                className="bg-green-600 hover:bg-green-700"
-              >
+              <Button onClick={handleApiKeySubmit} className="bg-green-600 hover:bg-green-700">
                 <Key className="h-4 w-4 mr-1" />
                 Save Key
               </Button>
@@ -128,18 +119,14 @@ export function ProjectDataRestorer({
               className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
             >
               <Download className="h-4 w-4 mr-2" />
-              {isLoading
-                ? "Restoring Project Data..."
-                : "Restore Original GAiA Projects"}
+              {isLoading ? "Restoring Project Data..." : "Restore Original GAiA Projects"}
             </Button>
           </div>
         )}
 
         {crawlResult && (
           <Card className="mt-4 p-4 bg-emerald-900/20 border-emerald-500/30">
-            <h4 className="text-emerald-400 font-semibold mb-2">
-              ✨ Restoration Complete!
-            </h4>
+            <h4 className="text-emerald-400 font-semibold mb-2">✨ Restoration Complete!</h4>
             <div className="space-y-2 text-sm text-emerald-300/80">
               <p>Status: {crawlResult.status}</p>
               <p>Pages Processed: {crawlResult.completed}</p>
@@ -148,9 +135,7 @@ export function ProjectDataRestorer({
                 <div className="mt-3">
                   <p className="font-semibold mb-1">Project Data Retrieved:</p>
                   <div className="bg-black/30 p-2 rounded text-xs max-h-32 overflow-auto">
-                    <pre>
-                      {JSON.stringify(crawlResult.data.slice(0, 2), null, 2)}
-                    </pre>
+                    <pre>{JSON.stringify(crawlResult.data.slice(0, 2), null, 2)}</pre>
                   </div>
                 </div>
               )}

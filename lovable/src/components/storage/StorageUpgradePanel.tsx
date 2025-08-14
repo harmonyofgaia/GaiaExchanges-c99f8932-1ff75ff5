@@ -2,14 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import {
-  HardDrive,
-  Zap,
-  Database,
-  Server,
-  CloudUpload,
-  BarChart3,
-} from "lucide-react";
+import { HardDrive, Zap, Database, Server, CloudUpload, BarChart3 } from "lucide-react";
 
 export const StorageUpgradePanel = () => {
   const storageStats = [
@@ -75,8 +68,7 @@ export const StorageUpgradePanel = () => {
             💾 GAIA Storage Management Hub
           </CardTitle>
           <p className="text-muted-foreground">
-            Manage and upgrade your storage infrastructure across the GAIA
-            ecosystem
+            Manage and upgrade your storage infrastructure across the GAIA ecosystem
           </p>
         </CardHeader>
       </Card>
@@ -87,14 +79,10 @@ export const StorageUpgradePanel = () => {
           <Card key={index} className="bg-black/20 border-gray-700/30">
             <CardContent className="p-4">
               <div className="flex items-center justify-between mb-2">
-                <div className="text-sm text-muted-foreground">
-                  {stat.label}
-                </div>
+                <div className="text-sm text-muted-foreground">{stat.label}</div>
                 <Badge className="text-xs">{stat.usage}%</Badge>
               </div>
-              <div className="text-2xl font-bold text-white mb-2">
-                {stat.value}
-              </div>
+              <div className="text-2xl font-bold text-white mb-2">{stat.value}</div>
               <Progress value={stat.usage} className="h-2" />
             </CardContent>
           </Card>
@@ -113,31 +101,23 @@ export const StorageUpgradePanel = () => {
                 <Server className="h-5 w-5" />
                 {option.title}
               </CardTitle>
-              <p className="text-sm text-muted-foreground">
-                {option.description}
-              </p>
+              <p className="text-sm text-muted-foreground">{option.description}</p>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Current:</span>
                   <span className="text-white">
-                    {option.currentSpeed ||
-                      option.currentCapacity ||
-                      option.currentNodes}
+                    {option.currentSpeed || option.currentCapacity || option.currentNodes}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Upgraded:</span>
                   <span className="text-green-400">
-                    {option.upgradedSpeed ||
-                      option.upgradedCapacity ||
-                      option.upgradedNodes}
+                    {option.upgradedSpeed || option.upgradedCapacity || option.upgradedNodes}
                   </span>
                 </div>
-                <Button
-                  className={`w-full bg-gradient-to-r ${option.color} text-white font-bold`}
-                >
+                <Button className={`w-full bg-gradient-to-r ${option.color} text-white font-bold`}>
                   <CloudUpload className="h-4 w-4 mr-2" />
                   Upgrade - {option.price}
                 </Button>
@@ -160,16 +140,12 @@ export const StorageUpgradePanel = () => {
             <div className="text-center p-4 bg-green-900/20 rounded-lg">
               <BarChart3 className="h-8 w-8 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">99.7%</div>
-              <div className="text-sm text-muted-foreground">
-                Network Uptime
-              </div>
+              <div className="text-sm text-muted-foreground">Network Uptime</div>
             </div>
             <div className="text-center p-4 bg-blue-900/20 rounded-lg">
               <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-blue-400">2.4ms</div>
-              <div className="text-sm text-muted-foreground">
-                Average Latency
-              </div>
+              <div className="text-sm text-muted-foreground">Average Latency</div>
             </div>
             <div className="text-center p-4 bg-purple-900/20 rounded-lg">
               <Server className="h-8 w-8 text-purple-400 mx-auto mb-2" />
@@ -181,9 +157,7 @@ export const StorageUpgradePanel = () => {
       </Card>
 
       <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-        <h4 className="font-medium text-green-400 mb-2">
-          ⛓️ Blockchain-Powered Storage
-        </h4>
+        <h4 className="font-medium text-green-400 mb-2">⛓️ Blockchain-Powered Storage</h4>
         <div className="text-sm text-green-300">
           ✅ Decentralized storage across GAIA network
           <br />

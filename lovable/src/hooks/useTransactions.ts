@@ -50,7 +50,7 @@ export function useTransactions() {
                   ? (tx.metadata as Record<string, unknown>)
                   : {},
               created_at: tx.created_at ?? "",
-            })),
+            }))
           );
         }
       } catch (error) {
@@ -75,7 +75,7 @@ export function useTransactions() {
         },
         (payload) => {
           setTransactions((prev) => [payload.new as Transaction, ...prev]);
-        },
+        }
       )
       .subscribe();
 

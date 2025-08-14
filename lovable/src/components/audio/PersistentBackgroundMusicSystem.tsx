@@ -126,9 +126,7 @@ export function PersistentBackgroundMusicSystem() {
     },
   ]);
 
-  const [activePlaylist, setActivePlaylist] = useState<string | null>(
-    "playlist-1",
-  );
+  const [activePlaylist, setActivePlaylist] = useState<string | null>("playlist-1");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -215,9 +213,7 @@ export function PersistentBackgroundMusicSystem() {
   const nextTrack = () => {
     if (!currentTrack || musicLibrary.length === 0) return;
 
-    const currentIndex = musicLibrary.findIndex(
-      (track) => track.id === currentTrack.id,
-    );
+    const currentIndex = musicLibrary.findIndex((track) => track.id === currentTrack.id);
     let nextIndex = (currentIndex + 1) % musicLibrary.length;
 
     if (isShuffled) {
@@ -234,11 +230,8 @@ export function PersistentBackgroundMusicSystem() {
   const previousTrack = () => {
     if (!currentTrack || musicLibrary.length === 0) return;
 
-    const currentIndex = musicLibrary.findIndex(
-      (track) => track.id === currentTrack.id,
-    );
-    const prevIndex =
-      currentIndex === 0 ? musicLibrary.length - 1 : currentIndex - 1;
+    const currentIndex = musicLibrary.findIndex((track) => track.id === currentTrack.id);
+    const prevIndex = currentIndex === 0 ? musicLibrary.length - 1 : currentIndex - 1;
 
     const prevTrack = musicLibrary[prevIndex];
     setCurrentTrack(prevTrack);
@@ -247,9 +240,7 @@ export function PersistentBackgroundMusicSystem() {
     toast.success("⏮️ Previous: " + prevTrack.title, { duration: 2000 });
   };
 
-  const handleFileUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
     if (files.length === 0) return;
 
@@ -284,22 +275,17 @@ export function PersistentBackgroundMusicSystem() {
     setIsUploading(false);
     setUploadProgress(0);
 
-    toast.success(
-      `🎵 Uploaded ${files.length} track(s) to your music library!`,
-      {
-        description: "Tracks are now available for background music",
-        duration: 4000,
-      },
-    );
+    toast.success(`🎵 Uploaded ${files.length} track(s) to your music library!`, {
+      description: "Tracks are now available for background music",
+      duration: 4000,
+    });
   };
 
   const deleteTrack = (trackId: string) => {
     setMusicLibrary((prev) => prev.filter((track) => track.id !== trackId));
 
     if (currentTrack?.id === trackId) {
-      const remainingTracks = musicLibrary.filter(
-        (track) => track.id !== trackId,
-      );
+      const remainingTracks = musicLibrary.filter((track) => track.id !== trackId);
       setCurrentTrack(remainingTracks.length > 0 ? remainingTracks[0] : null);
     }
 
@@ -330,8 +316,7 @@ export function PersistentBackgroundMusicSystem() {
             🎵 PERSISTENT BACKGROUND MUSIC SYSTEM
           </CardTitle>
           <p className="text-muted-foreground">
-            Upload, manage, and play background music that persists across all
-            pages
+            Upload, manage, and play background music that persists across all pages
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -343,15 +328,10 @@ export function PersistentBackgroundMusicSystem() {
               </div>
 
               <div className="flex-1 min-w-0">
-                <div className="font-bold text-lg truncate">
-                  {currentTrack.title}
-                </div>
-                <div className="text-muted-foreground truncate">
-                  {currentTrack.artist}
-                </div>
+                <div className="font-bold text-lg truncate">{currentTrack.title}</div>
+                <div className="text-muted-foreground truncate">{currentTrack.artist}</div>
                 <div className="text-sm text-purple-400">
-                  {formatTime(currentTime)} /{" "}
-                  {formatTime(currentTrack.duration)}
+                  {formatTime(currentTime)} / {formatTime(currentTrack.duration)}
                 </div>
               </div>
 
@@ -386,11 +366,7 @@ export function PersistentBackgroundMusicSystem() {
               onClick={togglePlayPause}
               className="bg-purple-600 hover:bg-purple-700"
             >
-              {isPlaying ? (
-                <Pause className="h-6 w-6" />
-              ) : (
-                <Play className="h-6 w-6" />
-              )}
+              {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
             </Button>
 
             <Button variant="outline" size="sm" onClick={nextTrack}>
@@ -410,11 +386,7 @@ export function PersistentBackgroundMusicSystem() {
           {/* Volume Control */}
           <div className="flex items-center gap-4">
             <Button variant="outline" size="sm" onClick={toggleMute}>
-              {isMuted ? (
-                <VolumeX className="h-4 w-4" />
-              ) : (
-                <Volume2 className="h-4 w-4" />
-              )}
+              {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
             </Button>
 
             <div className="flex-1">
@@ -427,9 +399,7 @@ export function PersistentBackgroundMusicSystem() {
               />
             </div>
 
-            <span className="text-sm text-muted-foreground w-12">
-              {volume}%
-            </span>
+            <span className="text-sm text-muted-foreground w-12">{volume}%</span>
           </div>
         </CardContent>
       </Card>
@@ -452,12 +422,8 @@ export function PersistentBackgroundMusicSystem() {
               onClick={() => fileInputRef.current?.click()}
             >
               <Music className="h-12 w-12 mx-auto text-green-400 mb-4" />
-              <div className="text-lg font-bold text-green-400 mb-2">
-                Drop music files here
-              </div>
-              <div className="text-muted-foreground">
-                MP3, WAV, OGG supported
-              </div>
+              <div className="text-lg font-bold text-green-400 mb-2">Drop music files here</div>
+              <div className="text-muted-foreground">MP3, WAV, OGG supported</div>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -503,15 +469,10 @@ export function PersistentBackgroundMusicSystem() {
                 }`}
                 onClick={() => setActivePlaylist(playlist.id)}
               >
-                <div className="font-semibold text-blue-400">
-                  {playlist.name}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {playlist.description}
-                </div>
+                <div className="font-semibold text-blue-400">{playlist.name}</div>
+                <div className="text-sm text-muted-foreground">{playlist.description}</div>
                 <div className="text-xs text-muted-foreground mt-1">
-                  {playlist.tracks.length} tracks •{" "}
-                  {playlist.isPublic ? "Public" : "Private"}
+                  {playlist.tracks.length} tracks • {playlist.isPublic ? "Public" : "Private"}
                 </div>
               </div>
             ))}
@@ -567,11 +528,7 @@ export function PersistentBackgroundMusicSystem() {
                   </Badge>
 
                   {track.isUserUploaded && (
-                    <Button
-                      size="sm"
-                      variant="destructive"
-                      onClick={() => deleteTrack(track.id)}
-                    >
+                    <Button size="sm" variant="destructive" onClick={() => deleteTrack(track.id)}>
                       <Trash2 className="h-3 w-3" />
                     </Button>
                   )}

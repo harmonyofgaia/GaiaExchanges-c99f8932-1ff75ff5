@@ -70,9 +70,7 @@ export function GlobalSurveillanceDashboard() {
               <Satellite className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Satellites</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.satelliteNetwork.total}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.satelliteNetwork.total}</div>
           </div>
 
           <div className="space-y-2">
@@ -80,9 +78,7 @@ export function GlobalSurveillanceDashboard() {
               <Globe className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Active Nodes</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.satelliteNetwork.active}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.satelliteNetwork.active}</div>
           </div>
 
           <div className="space-y-2">
@@ -90,9 +86,7 @@ export function GlobalSurveillanceDashboard() {
               <Eye className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Threats Detected</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.satelliteNetwork.threats}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.satelliteNetwork.threats}</div>
           </div>
         </div>
 
@@ -102,9 +96,7 @@ export function GlobalSurveillanceDashboard() {
               <Activity className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Deep Web Layers</span>
             </div>
-            <div className="text-xl font-bold">
-              {status.deepWebMonitoring.layers}
-            </div>
+            <div className="text-xl font-bold">{status.deepWebMonitoring.layers}</div>
           </div>
 
           <div className="space-y-2">
@@ -112,9 +104,7 @@ export function GlobalSurveillanceDashboard() {
               <Database className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Gov Agencies</span>
             </div>
-            <div className="text-xl font-bold">
-              {status.governmentIntegration.agencies}
-            </div>
+            <div className="text-xl font-bold">{status.governmentIntegration.agencies}</div>
           </div>
 
           <div className="space-y-2">
@@ -134,20 +124,12 @@ export function GlobalSurveillanceDashboard() {
             Initialize Global Surveillance
           </Button>
 
-          <Button
-            onClick={handleDeploySatelliteNetwork}
-            variant="outline"
-            size="sm"
-          >
+          <Button onClick={handleDeploySatelliteNetwork} variant="outline" size="sm">
             <Globe className="h-4 w-4 mr-2" />
             Deploy Satellite Network
           </Button>
 
-          <Button
-            onClick={handleCreateDeepWebMonitor}
-            variant="outline"
-            size="sm"
-          >
+          <Button onClick={handleCreateDeepWebMonitor} variant="outline" size="sm">
             <Radar className="h-4 w-4 mr-2" />
             Deploy Deep Web Monitor
           </Button>
@@ -165,13 +147,11 @@ export function GlobalSurveillanceDashboard() {
         </div>
 
         <div className="p-4 bg-muted/50 rounded-lg">
-          <h4 className="font-medium mb-2">
-            🛰️ Total Global Awareness Guarantee
-          </h4>
+          <h4 className="font-medium mb-2">🛰️ Total Global Awareness Guarantee</h4>
           <p className="text-sm text-muted-foreground">
-            Our global surveillance system provides complete planetary
-            monitoring through quantum radar, satellite networks, and predictive
-            intelligence. Total situational awareness achieved.
+            Our global surveillance system provides complete planetary monitoring through quantum
+            radar, satellite networks, and predictive intelligence. Total situational awareness
+            achieved.
           </p>
         </div>
       </CardContent>

@@ -113,11 +113,7 @@ export default function GaiaPrivateBlockchainSwapToken() {
   };
 
   // Swap validation function
-  const validateSwap = (
-    fromAmount: string,
-    toAmount: string,
-    swapRate: number,
-  ) => {
+  const validateSwap = (fromAmount: string, toAmount: string, swapRate: number) => {
     const parsedFromAmount = parseFloat(fromAmount);
     const parsedToAmount = parseFloat(toAmount);
 
@@ -168,7 +164,7 @@ export default function GaiaPrivateBlockchainSwapToken() {
         return;
       }
       toast.success(
-        `Successfully swapped ${fromAmount} ${fromToken.symbol} for ${toAmount} ${toToken.symbol}`,
+        `Successfully swapped ${fromAmount} ${fromToken.symbol} for ${toAmount} ${toToken.symbol}`
       );
       setIsSwapping(false);
       setFromAmount("");
@@ -184,8 +180,8 @@ export default function GaiaPrivateBlockchainSwapToken() {
             🔗 GAiA PRIVATE BLOCKCHAIN SWAP TOKEN
           </h1>
           <p className="text-xl text-muted-foreground mb-6">
-            The World's Most Secure • Dragon-Protected • Quantum-Resistant
-            Blockchain with Advanced Token Swapping
+            The World's Most Secure • Dragon-Protected • Quantum-Resistant Blockchain with Advanced
+            Token Swapping
           </p>
 
           {/* Enhanced Features Tabs */}
@@ -231,10 +227,9 @@ export default function GaiaPrivateBlockchainSwapToken() {
                         </div>
 
                         <div className="text-sm text-muted-foreground max-w-md mx-auto">
-                          Our private blockchain combines quantum security,
-                          dragon-level protection, and eco-friendly consensus to
-                          create the most advanced blockchain network ever
-                          built.
+                          Our private blockchain combines quantum security, dragon-level protection,
+                          and eco-friendly consensus to create the most advanced blockchain network
+                          ever built.
                         </div>
                       </div>
                     </div>
@@ -243,30 +238,18 @@ export default function GaiaPrivateBlockchainSwapToken() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="text-center p-4 bg-green-900/30 rounded-lg">
                       <Shield className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                      <div className="font-bold text-green-400">
-                        Quantum Secure
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Unbreakable encryption
-                      </div>
+                      <div className="font-bold text-green-400">Quantum Secure</div>
+                      <div className="text-sm text-muted-foreground">Unbreakable encryption</div>
                     </div>
                     <div className="text-center p-4 bg-blue-900/30 rounded-lg">
                       <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                      <div className="font-bold text-blue-400">
-                        Lightning Fast
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        100,000 TPS
-                      </div>
+                      <div className="font-bold text-blue-400">Lightning Fast</div>
+                      <div className="text-sm text-muted-foreground">100,000 TPS</div>
                     </div>
                     <div className="text-center p-4 bg-purple-900/30 rounded-lg">
                       <Heart className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                      <div className="font-bold text-purple-400">
-                        Eco-Friendly
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Zero carbon footprint
-                      </div>
+                      <div className="font-bold text-purple-400">Eco-Friendly</div>
+                      <div className="text-sm text-muted-foreground">Zero carbon footprint</div>
                     </div>
                   </div>
                 </CardContent>
@@ -286,10 +269,7 @@ export default function GaiaPrivateBlockchainSwapToken() {
                   <div className="max-w-md mx-auto space-y-6">
                     {/* From Token */}
                     <div className="space-y-2">
-                      <label
-                        id="from-token-label"
-                        className="text-sm text-muted-foreground"
-                      >
+                      <label id="from-token-label" className="text-sm text-muted-foreground">
                         From
                       </label>
                       <div className="flex gap-2">
@@ -298,9 +278,8 @@ export default function GaiaPrivateBlockchainSwapToken() {
                           value={fromToken.symbol}
                           onChange={(e) =>
                             setFromToken(
-                              supportedTokens.find(
-                                (t) => t.symbol === e.target.value,
-                              ) || supportedTokens[0],
+                              supportedTokens.find((t) => t.symbol === e.target.value) ||
+                                supportedTokens[0]
                             )
                           }
                           aria-labelledby="from-token-label"
@@ -334,18 +313,15 @@ export default function GaiaPrivateBlockchainSwapToken() {
 
                     {/* To Token */}
                     <div className="space-y-2">
-                      <label className="text-sm text-muted-foreground">
-                        To
-                      </label>
+                      <label className="text-sm text-muted-foreground">To</label>
                       <div className="flex gap-2">
                         <select
                           className="flex h-10 w-32 rounded-md border border-input bg-background px-3 py-2 text-sm"
                           value={toToken.symbol}
                           onChange={(e) =>
                             setToToken(
-                              supportedTokens.find(
-                                (t) => t.symbol === e.target.value,
-                              ) || supportedTokens[0],
+                              supportedTokens.find((t) => t.symbol === e.target.value) ||
+                                supportedTokens[0]
                             )
                           }
                         >
@@ -366,8 +342,7 @@ export default function GaiaPrivateBlockchainSwapToken() {
 
                     {/* Swap Rate */}
                     <div className="text-center text-sm text-muted-foreground">
-                      Rate: 1 {fromToken.symbol} = {swapRate.toFixed(6)}{" "}
-                      {toToken.symbol}
+                      Rate: 1 {fromToken.symbol} = {swapRate.toFixed(6)} {toToken.symbol}
                     </div>
 
                     {/* Execute Swap */}
@@ -393,9 +368,7 @@ export default function GaiaPrivateBlockchainSwapToken() {
               <div className="text-2xl font-bold text-green-400">
                 {blockchainHealth.toFixed(1)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Network Health
-              </div>
+              <div className="text-sm text-muted-foreground">Network Health</div>
             </CardContent>
           </Card>
 
@@ -405,18 +378,14 @@ export default function GaiaPrivateBlockchainSwapToken() {
               <div className="text-2xl font-bold text-blue-400">
                 {totalTransactions.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Transactions
-              </div>
+              <div className="text-sm text-muted-foreground">Total Transactions</div>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-purple-500/50">
             <CardContent className="p-6 text-center">
               <Globe className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-              <div className="text-2xl font-bold text-purple-400">
-                {networkNodes}
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{networkNodes}</div>
               <div className="text-sm text-muted-foreground">Network Nodes</div>
             </CardContent>
           </Card>
@@ -424,12 +393,8 @@ export default function GaiaPrivateBlockchainSwapToken() {
           <Card className="bg-gradient-to-br from-red-900/30 to-orange-900/30 border-red-500/50">
             <CardContent className="p-6 text-center">
               <Shield className="h-8 w-8 mx-auto text-red-400 mb-2" />
-              <div className="text-2xl font-bold text-red-400">
-                {securityLevel}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Security Level
-              </div>
+              <div className="text-2xl font-bold text-red-400">{securityLevel}%</div>
+              <div className="text-sm text-muted-foreground">Security Level</div>
             </CardContent>
           </Card>
         </div>
@@ -443,9 +408,7 @@ export default function GaiaPrivateBlockchainSwapToken() {
           </CardHeader>
           <CardContent>
             <div className="text-center mb-6">
-              <div className="text-2xl font-bold text-green-400 mb-2">
-                www.gaiaexchanges.com
-              </div>
+              <div className="text-2xl font-bold text-green-400 mb-2">www.gaiaexchanges.com</div>
               <div className="text-lg text-blue-400 mb-4">
                 Our Private Hosting Infrastructure - Coming Online Soon
               </div>
@@ -459,25 +422,17 @@ export default function GaiaPrivateBlockchainSwapToken() {
               <div className="text-center p-4 bg-green-900/30 rounded-lg">
                 <Rocket className="h-8 w-8 text-green-400 mx-auto mb-2" />
                 <div className="font-bold text-green-400">99.99% Uptime</div>
-                <div className="text-sm text-muted-foreground">
-                  Guaranteed availability
-                </div>
+                <div className="text-sm text-muted-foreground">Guaranteed availability</div>
               </div>
               <div className="text-center p-4 bg-blue-900/30 rounded-lg">
                 <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
                 <div className="font-bold text-blue-400">Global CDN</div>
-                <div className="text-sm text-muted-foreground">
-                  Lightning fast worldwide
-                </div>
+                <div className="text-sm text-muted-foreground">Lightning fast worldwide</div>
               </div>
               <div className="text-center p-4 bg-purple-900/30 rounded-lg">
                 <Shield className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                <div className="font-bold text-purple-400">
-                  Fort Knox Security
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Military-grade protection
-                </div>
+                <div className="font-bold text-purple-400">Fort Knox Security</div>
+                <div className="text-sm text-muted-foreground">Military-grade protection</div>
               </div>
             </div>
           </CardContent>

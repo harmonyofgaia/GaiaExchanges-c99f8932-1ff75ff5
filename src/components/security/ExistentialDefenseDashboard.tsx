@@ -57,8 +57,7 @@ export function ExistentialDefenseDashboard() {
               <span className="text-sm font-medium">Ontological Weapons</span>
             </div>
             <div className="text-2xl font-bold text-primary">
-              {status.conceptualWeapons.charged}/
-              {status.conceptualWeapons.total}
+              {status.conceptualWeapons.charged}/{status.conceptualWeapons.total}
             </div>
           </div>
           <div className="space-y-2">
@@ -66,9 +65,7 @@ export function ExistentialDefenseDashboard() {
               <Shield className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Conceptual Shields</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.voidBarriers.active}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.voidBarriers.active}</div>
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
@@ -85,17 +82,13 @@ export function ExistentialDefenseDashboard() {
               <Star className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Reality Ward Fields</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.existenceProtocols.armed}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.existenceProtocols.armed}</div>
           </div>
         </div>
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <Shield className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium">
-              Existential Threat Level
-            </span>
+            <span className="text-sm font-medium">Existential Threat Level</span>
           </div>
           <Progress value={status.existenceStability * 100} className="mt-2" />
           <div className="text-sm text-muted-foreground">
@@ -107,12 +100,10 @@ export function ExistentialDefenseDashboard() {
           Initialize Existential Defense
         </Button>
         <div className="p-4 bg-muted/50 rounded-lg">
-          <h4 className="font-medium mb-2">
-            🛡️ Existence Protection Guarantee
-          </h4>
+          <h4 className="font-medium mb-2">🛡️ Existence Protection Guarantee</h4>
           <p className="text-sm text-muted-foreground">
-            Ultimate defense against existential threats through ontological
-            warfare, conceptual shields, and reality anchor systems.
+            Ultimate defense against existential threats through ontological warfare, conceptual
+            shields, and reality anchor systems.
           </p>
         </div>
       </CardContent>

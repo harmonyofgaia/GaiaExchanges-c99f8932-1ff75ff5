@@ -26,13 +26,7 @@ import { toast } from "sonner";
 interface QuantumCore {
   id: string;
   name: string;
-  type:
-    | "Combat"
-    | "World Generation"
-    | "AI Behavior"
-    | "Physics"
-    | "Graphics"
-    | "Networking";
+  type: "Combat" | "World Generation" | "AI Behavior" | "Physics" | "Graphics" | "Networking";
   performance: number;
   trainingLevel: number;
   isActive: boolean;
@@ -128,29 +122,18 @@ export function HarmonyGamingEngineAdvanced() {
           ...core,
           performance: Math.min(99.9, core.performance + Math.random() * 0.3),
           trainingLevel: core.trainingLevel + Math.floor(Math.random() * 5),
-          selfImprovement: Math.min(
-            99.9,
-            core.selfImprovement + Math.random() * 0.2,
-          ),
-        })),
+          selfImprovement: Math.min(99.9, core.selfImprovement + Math.random() * 0.2),
+        }))
       );
 
       // Update engine stats
       setEngineStats((prev) => ({
         ...prev,
-        totalPerformance: Math.min(
-          99.9,
-          prev.totalPerformance + Math.random() * 0.1,
-        ),
-        playersSupported:
-          prev.playersSupported + Math.floor(Math.random() * 100),
+        totalPerformance: Math.min(99.9, prev.totalPerformance + Math.random() * 0.1),
+        playersSupported: prev.playersSupported + Math.floor(Math.random() * 100),
         worldsGenerated: prev.worldsGenerated + Math.floor(Math.random() * 50),
-        aiEntitiesManaged:
-          prev.aiEntitiesManaged + Math.floor(Math.random() * 200),
-        frameRate: Math.max(
-          240,
-          prev.frameRate + Math.floor(Math.random() * 10 - 5),
-        ),
+        aiEntitiesManaged: prev.aiEntitiesManaged + Math.floor(Math.random() * 200),
+        frameRate: Math.max(240, prev.frameRate + Math.floor(Math.random() * 10 - 5)),
         latency: Math.max(0.5, prev.latency + (Math.random() * 0.2 - 0.1)),
         selfImprovementRate: prev.selfImprovementRate + Math.random() * 2,
       }));
@@ -166,8 +149,7 @@ export function HarmonyGamingEngineAdvanced() {
           "✨ AI Behavior Engine developed emotional intelligence!",
           "🔥 All cores synchronized for 200% performance boost!",
         ];
-        const randomBreakthrough =
-          breakthroughs[Math.floor(Math.random() * breakthroughs.length)];
+        const randomBreakthrough = breakthroughs[Math.floor(Math.random() * breakthroughs.length)];
         toast.success("🚀 QUANTUM BREAKTHROUGH!", {
           description: randomBreakthrough,
           duration: 5000,
@@ -189,7 +171,7 @@ export function HarmonyGamingEngineAdvanced() {
         trainingLevel: core.trainingLevel + 50,
         performance: Math.min(99.9, core.performance + 1),
         selfImprovement: Math.min(99.9, core.selfImprovement + 2),
-      })),
+      }))
     );
 
     toast.success("🧬 FORCED EVOLUTION ACTIVATED!", {
@@ -218,9 +200,7 @@ export function HarmonyGamingEngineAdvanced() {
               <div className="text-2xl font-bold text-green-400">
                 {engineStats.totalPerformance.toFixed(1)}%
               </div>
-              <div className="text-xs text-muted-foreground">
-                Total Performance
-              </div>
+              <div className="text-xs text-muted-foreground">Total Performance</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-blue-900/40 border border-blue-500/30">
@@ -228,16 +208,12 @@ export function HarmonyGamingEngineAdvanced() {
               <div className="text-2xl font-bold text-blue-400">
                 {engineStats.playersSupported.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Players Supported
-              </div>
+              <div className="text-xs text-muted-foreground">Players Supported</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-purple-900/40 border border-purple-500/30">
               <Monitor className="h-6 w-6 text-purple-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-purple-400">
-                {engineStats.frameRate}
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{engineStats.frameRate}</div>
               <div className="text-xs text-muted-foreground">FPS Ultra</div>
             </div>
 
@@ -246,9 +222,7 @@ export function HarmonyGamingEngineAdvanced() {
               <div className="text-2xl font-bold text-yellow-400">
                 {engineStats.latency.toFixed(1)}ms
               </div>
-              <div className="text-xs text-muted-foreground">
-                Quantum Latency
-              </div>
+              <div className="text-xs text-muted-foreground">Quantum Latency</div>
             </div>
           </div>
         </CardContent>
@@ -296,10 +270,7 @@ export function HarmonyGamingEngineAdvanced() {
           };
 
           return (
-            <Card
-              key={core.id}
-              className={`${getTypeColor(core.type)} relative overflow-hidden`}
-            >
+            <Card key={core.id} className={`${getTypeColor(core.type)} relative overflow-hidden`}>
               <CardContent className="p-6">
                 <div className="text-center space-y-4">
                   {getTypeIcon(core.type)}
@@ -310,9 +281,7 @@ export function HarmonyGamingEngineAdvanced() {
                     <div className="space-y-1">
                       <div className="flex justify-between text-sm">
                         <span>Performance:</span>
-                        <span className="text-green-400">
-                          {core.performance.toFixed(1)}%
-                        </span>
+                        <span className="text-green-400">{core.performance.toFixed(1)}%</span>
                       </div>
                       <Progress value={core.performance} className="h-2" />
                     </div>
@@ -320,20 +289,14 @@ export function HarmonyGamingEngineAdvanced() {
                     <div className="space-y-1">
                       <div className="flex justify-between text-sm">
                         <span>Self-Improvement:</span>
-                        <span className="text-blue-400">
-                          {core.selfImprovement.toFixed(1)}%
-                        </span>
+                        <span className="text-blue-400">{core.selfImprovement.toFixed(1)}%</span>
                       </div>
                       <Progress value={core.selfImprovement} className="h-2" />
                     </div>
 
                     <div className="text-center">
-                      <div className="text-lg font-bold text-purple-400">
-                        {core.trainingLevel}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        Training Level
-                      </div>
+                      <div className="text-lg font-bold text-purple-400">{core.trainingLevel}</div>
+                      <div className="text-xs text-muted-foreground">Training Level</div>
                     </div>
                   </div>
 
@@ -378,9 +341,7 @@ export function HarmonyGamingEngineAdvanced() {
             </div>
 
             <div className="space-y-3">
-              <h4 className="font-bold text-orange-400">
-                Action Game Superiority
-              </h4>
+              <h4 className="font-bold text-orange-400">Action Game Superiority</h4>
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span>vs Unreal Tournament:</span>
@@ -403,12 +364,8 @@ export function HarmonyGamingEngineAdvanced() {
                 <div className="text-3xl font-bold text-green-400 mb-2">
                   {competitionAnalysis.overallLeadership}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Industry Average
-                </div>
-                <div className="text-xs text-green-400 mt-2">
-                  Always Growing
-                </div>
+                <div className="text-sm text-muted-foreground">Industry Average</div>
+                <div className="text-xs text-green-400 mt-2">Always Growing</div>
               </div>
             </div>
           </div>
@@ -457,8 +414,7 @@ export function HarmonyGamingEngineAdvanced() {
               </span>
             </div>
             <div className="text-xs text-purple-400">
-              🧬 This engine continuously evolves to stay ahead of all
-              competition
+              🧬 This engine continuously evolves to stay ahead of all competition
             </div>
           </div>
         </CardContent>
@@ -468,37 +424,28 @@ export function HarmonyGamingEngineAdvanced() {
       <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-blue-900/20">
         <CardContent className="p-6">
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-green-400 mb-4">
-              🌍 POWERED BY PURPOSE
-            </h3>
+            <h3 className="text-2xl font-bold text-green-400 mb-4">🌍 POWERED BY PURPOSE</h3>
             <p className="text-muted-foreground mb-4">
-              Every quantum calculation contributes to environmental and animal
-              welfare projects
+              Every quantum calculation contributes to environmental and animal welfare projects
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
                 <div className="text-3xl mb-2">🌊</div>
                 <div className="font-bold text-blue-400">Coral Reef AI</div>
                 <div className="text-sm text-muted-foreground">
-                  {engineStats.worldsGenerated.toLocaleString()} virtual reefs
-                  created
+                  {engineStats.worldsGenerated.toLocaleString()} virtual reefs created
                 </div>
               </div>
               <div className="text-center">
                 <div className="text-3xl mb-2">🌱</div>
                 <div className="font-bold text-green-400">Green Computing</div>
-                <div className="text-sm text-muted-foreground">
-                  100% renewable quantum energy
-                </div>
+                <div className="text-sm text-muted-foreground">100% renewable quantum energy</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl mb-2">🐾</div>
-                <div className="font-bold text-orange-400">
-                  Animal Liberation
-                </div>
+                <div className="font-bold text-orange-400">Animal Liberation</div>
                 <div className="text-sm text-muted-foreground">
-                  {engineStats.aiEntitiesManaged.toLocaleString()} AI animals
-                  freed virtually
+                  {engineStats.aiEntitiesManaged.toLocaleString()} AI animals freed virtually
                 </div>
               </div>
             </div>

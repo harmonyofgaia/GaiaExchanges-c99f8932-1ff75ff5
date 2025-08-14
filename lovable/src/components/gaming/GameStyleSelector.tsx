@@ -52,9 +52,7 @@ export function GameStyleSelector() {
   return (
     <Card className="border-green-500/30 bg-green-900/20">
       <CardHeader>
-        <CardTitle className="text-green-400">
-          🎨 Advanced Game Style Selection
-        </CardTitle>
+        <CardTitle className="text-green-400">🎨 Advanced Game Style Selection</CardTitle>
         <p className="text-muted-foreground text-sm">
           Transform your gaming experience with unique visual styles
         </p>
@@ -70,19 +68,13 @@ export function GameStyleSelector() {
                 <Palette className="h-4 w-4" />
                 {style.name}
               </h4>
-              <p className="text-sm text-muted-foreground mb-3">
-                {style.description}
-              </p>
+              <p className="text-sm text-muted-foreground mb-3">{style.description}</p>
 
               <div className="mb-3">
                 <h5 className="text-xs font-bold text-white mb-1">Features:</h5>
                 <div className="flex flex-wrap gap-1">
                   {style.features.map((feature, featureIndex) => (
-                    <Badge
-                      key={featureIndex}
-                      variant="outline"
-                      className="text-xs"
-                    >
+                    <Badge key={featureIndex} variant="outline" className="text-xs">
                       {feature}
                     </Badge>
                   ))}
@@ -92,13 +84,9 @@ export function GameStyleSelector() {
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-1">
                   <Star className="h-4 w-4 text-yellow-400" />
-                  <span className="text-yellow-400 text-sm">
-                    {style.popularity}
-                  </span>
+                  <span className="text-yellow-400 text-sm">{style.popularity}</span>
                 </div>
-                <Badge className={`bg-gradient-to-r ${style.color}`}>
-                  Available
-                </Badge>
+                <Badge className={`bg-gradient-to-r ${style.color}`}>Available</Badge>
               </div>
 
               <Button

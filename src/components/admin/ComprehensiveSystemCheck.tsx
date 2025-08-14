@@ -38,8 +38,7 @@ export function ComprehensiveSystemCheck() {
       name: "Artwork Generation & Cloud Storage",
       status: "active",
       priority: "critical",
-      description:
-        "AI-powered artwork generation with cloud storage and email notifications",
+      description: "AI-powered artwork generation with cloud storage and email notifications",
       completionPercentage: 100,
       lastChecked: new Date(),
       actionRequired: "SQL migration needed for storage bucket",
@@ -48,8 +47,7 @@ export function ComprehensiveSystemCheck() {
       name: "3D Creative Tools",
       status: "completed",
       priority: "high",
-      description:
-        "Advanced 3D design tools with green snail glue effects and animations",
+      description: "Advanced 3D design tools with green snail glue effects and animations",
       completionPercentage: 100,
       lastChecked: new Date(),
     },
@@ -65,8 +63,7 @@ export function ComprehensiveSystemCheck() {
       name: "Token Supply Maximization",
       status: "completed",
       priority: "critical",
-      description:
-        "GAiA token supply set to maximum possible value with proper decimals",
+      description: "GAiA token supply set to maximum possible value with proper decimals",
       completionPercentage: 100,
       lastChecked: new Date(),
     },
@@ -74,8 +71,7 @@ export function ComprehensiveSystemCheck() {
       name: "Cross-Platform Compatibility",
       status: "completed",
       priority: "critical",
-      description:
-        "Full compatibility including BlackBerry OS 10.3+ and all modern platforms",
+      description: "Full compatibility including BlackBerry OS 10.3+ and all modern platforms",
       completionPercentage: 100,
       lastChecked: new Date(),
     },
@@ -83,8 +79,7 @@ export function ComprehensiveSystemCheck() {
       name: "Ultimate Security Wall",
       status: "active",
       priority: "critical",
-      description:
-        "Quantum-resistant encryption, AI threat detection, real-time monitoring",
+      description: "Quantum-resistant encryption, AI threat detection, real-time monitoring",
       completionPercentage: 100,
       lastChecked: new Date(),
     },
@@ -92,8 +87,7 @@ export function ComprehensiveSystemCheck() {
       name: "Download System & App Stores",
       status: "active",
       priority: "high",
-      description:
-        "Direct download links, app store connections, installation packages",
+      description: "Direct download links, app store connections, installation packages",
       completionPercentage: 95,
       lastChecked: new Date(),
       actionRequired: "App store submission contracts needed",
@@ -102,8 +96,7 @@ export function ComprehensiveSystemCheck() {
       name: "GitHub Integration",
       status: "active",
       priority: "high",
-      description:
-        "Private repository, security features, automated deployments",
+      description: "Private repository, security features, automated deployments",
       completionPercentage: 98,
       lastChecked: new Date(),
     },
@@ -111,8 +104,7 @@ export function ComprehensiveSystemCheck() {
       name: "Supabase Backend",
       status: "active",
       priority: "critical",
-      description:
-        "Database, authentication, real-time features, edge functions",
+      description: "Database, authentication, real-time features, edge functions",
       completionPercentage: 100,
       lastChecked: new Date(),
     },
@@ -120,8 +112,7 @@ export function ComprehensiveSystemCheck() {
       name: "Email System (info@cultureofharmony.net)",
       status: "active",
       priority: "high",
-      description:
-        "Automated email notifications for artwork generation and downloads",
+      description: "Automated email notifications for artwork generation and downloads",
       completionPercentage: 100,
       lastChecked: new Date(),
     },
@@ -129,8 +120,7 @@ export function ComprehensiveSystemCheck() {
       name: "Security Monitoring (Every Second)",
       status: "active",
       priority: "critical",
-      description:
-        "Background security checks, intelligent notifications, threat prevention",
+      description: "Background security checks, intelligent notifications, threat prevention",
       completionPercentage: 100,
       lastChecked: new Date(),
     },
@@ -138,8 +128,7 @@ export function ComprehensiveSystemCheck() {
       name: "Global Threat Intelligence",
       status: "active",
       priority: "high",
-      description:
-        "Daily worldwide scans, staying 2+ years ahead of competition",
+      description: "Daily worldwide scans, staying 2+ years ahead of competition",
       completionPercentage: 100,
       lastChecked: new Date(),
     },
@@ -156,7 +145,7 @@ export function ComprehensiveSystemCheck() {
     // Calculate overall health
     const totalPercentage = systemComponents.reduce(
       (sum, comp) => sum + comp.completionPercentage,
-      0,
+      0
     );
     const avgPercentage = totalPercentage / systemComponents.length;
     setOverallHealth(avgPercentage);
@@ -177,21 +166,19 @@ export function ComprehensiveSystemCheck() {
         lastChecked: new Date(),
         completionPercentage: Math.min(
           100,
-          check.completionPercentage + (Math.random() > 0.8 ? 1 : 0),
+          check.completionPercentage + (Math.random() > 0.8 ? 1 : 0)
         ),
-      })),
+      }))
     );
 
     toast.success("🔍 System Check Complete", {
-      description:
-        "All systems monitored and updated - Fast Growing Stable Ship Ready!",
+      description: "All systems monitored and updated - Fast Growing Stable Ship Ready!",
     });
   };
 
   const prepareAppStoreSubmission = () => {
     toast.success("🚀 App Store Preparation Complete!", {
-      description:
-        "Ready for Google Play and Apple Store - Acting as Fast Growing Stable Ship",
+      description: "Ready for Google Play and Apple Store - Acting as Fast Growing Stable Ship",
     });
 
     setAppStoreStatus({
@@ -221,8 +208,7 @@ export function ComprehensiveSystemCheck() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          basePrompt:
-            "System test artwork with harmonious green and blue colors",
+          basePrompt: "System test artwork with harmonious green and blue colors",
           artworkType: "system_test",
           style: "test_generation",
         }),
@@ -230,8 +216,7 @@ export function ComprehensiveSystemCheck() {
 
       if (response.ok) {
         toast.success("✅ Artwork Generation Working!", {
-          description:
-            "AI artwork creation and cloud storage fully operational",
+          description: "AI artwork creation and cloud storage fully operational",
         });
       }
     } catch (error) {
@@ -305,42 +290,28 @@ export function ComprehensiveSystemCheck() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center space-y-2">
-              <div className="text-4xl font-bold text-green-400">
-                {overallHealth.toFixed(1)}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Overall Health
-              </div>
+              <div className="text-4xl font-bold text-green-400">{overallHealth.toFixed(1)}%</div>
+              <div className="text-sm text-muted-foreground">Overall Health</div>
               <Progress value={overallHealth} className="h-3" />
             </div>
             <div className="text-center space-y-2">
               <div className="text-4xl font-bold text-blue-400">
                 {
-                  systemComponents.filter(
-                    (s) => s.status === "active" || s.status === "completed",
-                  ).length
-                }
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Systems Online
-              </div>
-            </div>
-            <div className="text-center space-y-2">
-              <div className="text-4xl font-bold text-purple-400">
-                {
-                  systemComponents.filter((s) => s.priority === "critical")
+                  systemComponents.filter((s) => s.status === "active" || s.status === "completed")
                     .length
                 }
               </div>
-              <div className="text-sm text-muted-foreground">
-                Critical Systems
+              <div className="text-sm text-muted-foreground">Systems Online</div>
+            </div>
+            <div className="text-center space-y-2">
+              <div className="text-4xl font-bold text-purple-400">
+                {systemComponents.filter((s) => s.priority === "critical").length}
               </div>
+              <div className="text-sm text-muted-foreground">Critical Systems</div>
             </div>
             <div className="text-center space-y-2">
               <div className="text-4xl font-bold text-cyan-400">100%</div>
-              <div className="text-sm text-muted-foreground">
-                Ready for Launch
-              </div>
+              <div className="text-sm text-muted-foreground">Ready for Launch</div>
             </div>
           </div>
 
@@ -389,10 +360,7 @@ export function ComprehensiveSystemCheck() {
                   <Badge className={getStatusColor(component.status)}>
                     {component.status.toUpperCase()}
                   </Badge>
-                  <Badge
-                    variant="outline"
-                    className={getPriorityColor(component.priority)}
-                  >
+                  <Badge variant="outline" className={getPriorityColor(component.priority)}>
                     {component.priority.toUpperCase()}
                   </Badge>
                 </div>
@@ -404,9 +372,7 @@ export function ComprehensiveSystemCheck() {
 
               {component.actionRequired && (
                 <div className="mb-3 p-2 bg-yellow-900/20 rounded border border-yellow-500/20">
-                  <p className="text-xs text-yellow-400">
-                    ⚠️ {component.actionRequired}
-                  </p>
+                  <p className="text-xs text-yellow-400">⚠️ {component.actionRequired}</p>
                 </div>
               )}
 
@@ -417,10 +383,7 @@ export function ComprehensiveSystemCheck() {
                     {component.completionPercentage}%
                   </span>
                 </div>
-                <Progress
-                  value={component.completionPercentage}
-                  className="h-2"
-                />
+                <Progress value={component.completionPercentage} className="h-2" />
                 <div className="text-xs text-muted-foreground">
                   Last checked: {component.lastChecked.toLocaleTimeString()}
                 </div>
@@ -451,9 +414,7 @@ export function ComprehensiveSystemCheck() {
             <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border border-green-500/30">
               <CardContent className="p-4 text-center">
                 <Smartphone className="h-8 w-8 mx-auto mb-2 text-green-400" />
-                <h4 className="font-bold text-green-400 mb-2">
-                  Google Play Store
-                </h4>
+                <h4 className="font-bold text-green-400 mb-2">Google Play Store</h4>
                 <Badge
                   className={`${
                     appStoreStatus.googlePlay === "ready"
@@ -465,18 +426,14 @@ export function ComprehensiveSystemCheck() {
                 >
                   {appStoreStatus.googlePlay.toUpperCase()}
                 </Badge>
-                <p className="text-xs text-muted-foreground">
-                  Android optimization complete
-                </p>
+                <p className="text-xs text-muted-foreground">Android optimization complete</p>
               </CardContent>
             </Card>
 
             <Card className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 border border-blue-500/30">
               <CardContent className="p-4 text-center">
                 <Globe className="h-8 w-8 mx-auto mb-2 text-blue-400" />
-                <h4 className="font-bold text-blue-400 mb-2">
-                  Apple App Store
-                </h4>
+                <h4 className="font-bold text-blue-400 mb-2">Apple App Store</h4>
                 <Badge
                   className={`${
                     appStoreStatus.appleStore === "ready"
@@ -488,18 +445,14 @@ export function ComprehensiveSystemCheck() {
                 >
                   {appStoreStatus.appleStore.toUpperCase()}
                 </Badge>
-                <p className="text-xs text-muted-foreground">
-                  iOS app ready for review
-                </p>
+                <p className="text-xs text-muted-foreground">iOS app ready for review</p>
               </CardContent>
             </Card>
 
             <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/30">
               <CardContent className="p-4 text-center">
                 <Shield className="h-8 w-8 mx-auto mb-2 text-purple-400" />
-                <h4 className="font-bold text-purple-400 mb-2">
-                  Legal Contracts
-                </h4>
+                <h4 className="font-bold text-purple-400 mb-2">Legal Contracts</h4>
                 <Badge
                   className={`${
                     appStoreStatus.contract === "ready"
@@ -511,9 +464,7 @@ export function ComprehensiveSystemCheck() {
                 >
                   {appStoreStatus.contract.toUpperCase()}
                 </Badge>
-                <p className="text-xs text-muted-foreground">
-                  All agreements prepared
-                </p>
+                <p className="text-xs text-muted-foreground">All agreements prepared</p>
               </CardContent>
             </Card>
           </div>
@@ -524,8 +475,7 @@ export function ComprehensiveSystemCheck() {
                 🌟 "SEEDS WILL FORM INTO MUSIC" - Culture of Harmony 🌟
               </h4>
               <p className="text-sm text-muted-foreground mb-2">
-                🦁🐬 Lions + Dolphins Power = Fast Growing Stable Ship Ready for
-                Global Success!
+                🦁🐬 Lions + Dolphins Power = Fast Growing Stable Ship Ready for Global Success!
               </p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs mt-4">
                 <div className="text-center">
@@ -563,21 +513,16 @@ export function ComprehensiveSystemCheck() {
             <div className="flex items-center gap-3 p-3 bg-yellow-900/20 rounded border border-yellow-500/20">
               <Database className="h-5 w-5 text-yellow-400" />
               <div>
-                <h4 className="font-semibold text-yellow-400">
-                  Database Setup Required
-                </h4>
+                <h4 className="font-semibold text-yellow-400">Database Setup Required</h4>
                 <p className="text-sm text-muted-foreground">
-                  Run SQL migration to create artwork storage bucket and
-                  database table
+                  Run SQL migration to create artwork storage bucket and database table
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-3 bg-blue-900/20 rounded border border-blue-500/20">
               <Store className="h-5 w-5 text-blue-400" />
               <div>
-                <h4 className="font-semibold text-blue-400">
-                  App Store Contracts
-                </h4>
+                <h4 className="font-semibold text-blue-400">App Store Contracts</h4>
                 <p className="text-sm text-muted-foreground">
                   Prepare and sign Google Play and Apple App Store agreements
                 </p>
@@ -586,12 +531,9 @@ export function ComprehensiveSystemCheck() {
             <div className="flex items-center gap-3 p-3 bg-green-900/20 rounded border border-green-500/20">
               <Mail className="h-5 w-5 text-green-400" />
               <div>
-                <h4 className="font-semibold text-green-400">
-                  Email Configuration
-                </h4>
+                <h4 className="font-semibold text-green-400">Email Configuration</h4>
                 <p className="text-sm text-muted-foreground">
-                  Verify Resend API key for artwork email notifications to
-                  info@cultureofharmony.net
+                  Verify Resend API key for artwork email notifications to info@cultureofharmony.net
                 </p>
               </div>
             </div>

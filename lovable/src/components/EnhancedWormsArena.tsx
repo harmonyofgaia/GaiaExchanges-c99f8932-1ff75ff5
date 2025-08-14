@@ -149,19 +149,10 @@ export function EnhancedWormsArena() {
       const battleActivity = Math.floor(Math.random() * 10) + 1;
 
       if (battleActivity > 7) {
-        const opponents = [
-          "Fire Worm",
-          "Ice Serpent",
-          "Shadow Crawler",
-          "Golden Beast",
-        ];
-        const opponent =
-          opponents[Math.floor(Math.random() * opponents.length)];
+        const opponents = ["Fire Worm", "Ice Serpent", "Shadow Crawler", "Golden Beast"];
+        const opponent = opponents[Math.floor(Math.random() * opponents.length)];
 
-        console.log(
-          "⚔️ Battle Notification: New opponent available -",
-          opponent,
-        );
+        console.log("⚔️ Battle Notification: New opponent available -", opponent);
 
         if (Math.random() > 0.8) {
           toast.success("🎯 Battle Opportunity!", {
@@ -177,9 +168,9 @@ export function EnhancedWormsArena() {
           ...tournament,
           participants: Math.min(
             tournament.participants + Math.floor(Math.random() * 3),
-            tournament.maxParticipants,
+            tournament.maxParticipants
           ),
-        })),
+        }))
       );
     }, 5000);
 
@@ -222,8 +213,8 @@ export function EnhancedWormsArena() {
           prev.map((worm) =>
             worm.id === selectedWorm.id
               ? { ...worm, experience: worm.experience + experienceGained }
-              : worm,
-          ),
+              : worm
+          )
         );
 
         toast.success("🏆 Victory!", {
@@ -297,9 +288,7 @@ export function EnhancedWormsArena() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Selected Worm Display */}
                 <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-white">
-                    Your Champion
-                  </h3>
+                  <h3 className="text-xl font-bold text-white">Your Champion</h3>
                   {selectedWorm ? (
                     <Card
                       className={`border-2 ${selectedWorm.rarity === "legendary" ? "border-yellow-500/50 bg-gradient-to-br from-yellow-900/20" : selectedWorm.rarity === "epic" ? "border-purple-500/50 bg-gradient-to-br from-purple-900/20" : selectedWorm.rarity === "rare" ? "border-blue-500/50 bg-gradient-to-br from-blue-900/20" : "border-gray-500/50 bg-gradient-to-br from-gray-900/20"}`}
@@ -312,49 +301,33 @@ export function EnhancedWormsArena() {
                           >
                             {selectedWorm.name}
                           </h4>
-                          <Badge
-                            className={getRarityBadge(selectedWorm.rarity)}
-                          >
+                          <Badge className={getRarityBadge(selectedWorm.rarity)}>
                             {selectedWorm.rarity.toUpperCase()}
                           </Badge>
 
                           <div className="grid grid-cols-2 gap-4 text-sm">
                             <div>
                               <div className="text-muted-foreground">Level</div>
-                              <div className="font-bold text-yellow-400">
-                                {selectedWorm.level}
-                              </div>
+                              <div className="font-bold text-yellow-400">{selectedWorm.level}</div>
                             </div>
                             <div>
-                              <div className="text-muted-foreground">
-                                Health
-                              </div>
+                              <div className="text-muted-foreground">Health</div>
                               <div className="font-bold text-red-400">
                                 {selectedWorm.health}/{selectedWorm.maxHealth}
                               </div>
                             </div>
                             <div>
-                              <div className="text-muted-foreground">
-                                Attack
-                              </div>
-                              <div className="font-bold text-orange-400">
-                                {selectedWorm.attack}
-                              </div>
+                              <div className="text-muted-foreground">Attack</div>
+                              <div className="font-bold text-orange-400">{selectedWorm.attack}</div>
                             </div>
                             <div>
-                              <div className="text-muted-foreground">
-                                Defense
-                              </div>
-                              <div className="font-bold text-blue-400">
-                                {selectedWorm.defense}
-                              </div>
+                              <div className="text-muted-foreground">Defense</div>
+                              <div className="font-bold text-blue-400">{selectedWorm.defense}</div>
                             </div>
                           </div>
 
                           <div className="space-y-1">
-                            <div className="text-sm text-muted-foreground">
-                              Experience
-                            </div>
+                            <div className="text-sm text-muted-foreground">Experience</div>
                             <Progress
                               value={(selectedWorm.experience % 1000) / 10}
                               className="h-2"
@@ -365,16 +338,10 @@ export function EnhancedWormsArena() {
                           </div>
 
                           <div className="space-y-2">
-                            <div className="text-sm font-medium">
-                              Abilities:
-                            </div>
+                            <div className="text-sm font-medium">Abilities:</div>
                             <div className="flex flex-wrap gap-1">
                               {selectedWorm.abilities.map((ability, index) => (
-                                <Badge
-                                  key={index}
-                                  variant="outline"
-                                  className="text-xs"
-                                >
+                                <Badge key={index} variant="outline" className="text-xs">
                                   {ability}
                                 </Badge>
                               ))}
@@ -412,12 +379,9 @@ export function EnhancedWormsArena() {
                             {index < 2 ? "🔥" : index < 4 ? "⚡" : "👑"}
                           </div>
                           <div>
-                            <div className="font-medium text-white">
-                              {opponent}
-                            </div>
+                            <div className="font-medium text-white">{opponent}</div>
                             <div className="text-sm text-muted-foreground">
-                              Level {15 + index * 2} • Reward:{" "}
-                              {100 + index * 50} GAiA
+                              Level {15 + index * 2} • Reward: {100 + index * 50} GAiA
                             </div>
                           </div>
                         </div>
@@ -446,9 +410,7 @@ export function EnhancedWormsArena() {
               {battleResults.length > 0 && (
                 <Card className="border-green-500/30">
                   <CardHeader>
-                    <CardTitle className="text-green-400">
-                      🏆 Recent Battle Results
-                    </CardTitle>
+                    <CardTitle className="text-green-400">🏆 Recent Battle Results</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">
@@ -460,18 +422,13 @@ export function EnhancedWormsArena() {
                           <div className="flex items-center gap-2">
                             <Trophy className="h-4 w-4 text-yellow-400" />
                             <span className="text-sm">
-                              <span className="font-medium text-green-400">
-                                {result.winner}
-                              </span>
+                              <span className="font-medium text-green-400">{result.winner}</span>
                               {" defeated "}
-                              <span className="text-red-400">
-                                {result.loser}
-                              </span>
+                              <span className="text-red-400">{result.loser}</span>
                             </span>
                           </div>
                           <div className="text-sm text-yellow-400">
-                            +{result.tokensWon} GAiA, +{result.experienceGained}{" "}
-                            XP
+                            +{result.tokensWon} GAiA, +{result.experienceGained} XP
                           </div>
                         </div>
                       ))}
@@ -483,9 +440,7 @@ export function EnhancedWormsArena() {
 
             <TabsContent value="worms" className="space-y-4">
               <div className="flex justify-between items-center">
-                <h3 className="text-xl font-bold text-white">
-                  Your Worm Collection
-                </h3>
+                <h3 className="text-xl font-bold text-white">Your Worm Collection</h3>
                 <div className="flex items-center gap-2">
                   <Coins className="h-4 w-4 text-yellow-400" />
                   <span className="font-bold text-yellow-400">
@@ -508,9 +463,7 @@ export function EnhancedWormsArena() {
                     <CardContent className="pt-6">
                       <div className="text-center space-y-3">
                         <div className="text-4xl">🪱</div>
-                        <h4
-                          className={`text-lg font-bold ${getRarityColor(worm.rarity)}`}
-                        >
+                        <h4 className={`text-lg font-bold ${getRarityColor(worm.rarity)}`}>
                           {worm.name}
                         </h4>
                         <Badge className={getRarityBadge(worm.rarity)}>
@@ -534,9 +487,7 @@ export function EnhancedWormsArena() {
 
                         <div className="text-sm">
                           <div className="text-muted-foreground">Value</div>
-                          <div className="font-bold text-green-400">
-                            {worm.tokenValue} GAiA
-                          </div>
+                          <div className="font-bold text-green-400">{worm.tokenValue} GAiA</div>
                         </div>
                       </div>
                     </CardContent>
@@ -555,9 +506,7 @@ export function EnhancedWormsArena() {
                     <CardContent className="pt-6">
                       <div className="flex items-center justify-between">
                         <div className="space-y-2">
-                          <h4 className="text-xl font-bold text-purple-400">
-                            {tournament.name}
-                          </h4>
+                          <h4 className="text-xl font-bold text-purple-400">{tournament.name}</h4>
                           <div className="flex items-center gap-4 text-sm text-muted-foreground">
                             <div className="flex items-center gap-1">
                               <Coins className="h-4 w-4" />
@@ -565,13 +514,11 @@ export function EnhancedWormsArena() {
                             </div>
                             <div className="flex items-center gap-1">
                               <Trophy className="h-4 w-4" />
-                              Prize: {tournament.prizePool.toLocaleString()}{" "}
-                              GAiA
+                              Prize: {tournament.prizePool.toLocaleString()} GAiA
                             </div>
                             <div className="flex items-center gap-1">
                               <Users className="h-4 w-4" />
-                              {tournament.participants}/
-                              {tournament.maxParticipants}
+                              {tournament.participants}/{tournament.maxParticipants}
                             </div>
                           </div>
                         </div>
@@ -594,18 +541,12 @@ export function EnhancedWormsArena() {
                               playerTokens < tournament.entryFee
                             }
                           >
-                            {tournament.status === "active"
-                              ? "Join Battle"
-                              : "Register"}
+                            {tournament.status === "active" ? "Join Battle" : "Register"}
                           </Button>
                         </div>
                       </div>
                       <Progress
-                        value={
-                          (tournament.participants /
-                            tournament.maxParticipants) *
-                          100
-                        }
+                        value={(tournament.participants / tournament.maxParticipants) * 100}
                         className="mt-4"
                       />
                     </CardContent>
@@ -626,9 +567,7 @@ export function EnhancedWormsArena() {
                   <div className="text-center p-8 text-muted-foreground">
                     <Crown className="h-16 w-16 mx-auto mb-4 text-yellow-400" />
                     <p className="text-lg">Leaderboard Loading...</p>
-                    <p className="text-sm">
-                      Battle more to climb the rankings!
-                    </p>
+                    <p className="text-sm">Battle more to climb the rankings!</p>
                   </div>
                 </CardContent>
               </Card>
@@ -646,9 +585,7 @@ export function EnhancedWormsArena() {
                   <div className="text-center p-8 text-muted-foreground">
                     <div className="text-4xl mb-4">🏪</div>
                     <p className="text-lg">Shop Coming Soon!</p>
-                    <p className="text-sm">
-                      Buy new worms, upgrades, and special abilities
-                    </p>
+                    <p className="text-sm">Buy new worms, upgrades, and special abilities</p>
                   </div>
                 </CardContent>
               </Card>
@@ -662,15 +599,11 @@ export function EnhancedWormsArena() {
         <CardContent className="pt-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div>
-              <div className="text-2xl font-bold text-cyan-400">
-                {playerWorms.length}
-              </div>
+              <div className="text-2xl font-bold text-cyan-400">{playerWorms.length}</div>
               <div className="text-sm text-muted-foreground">Worms Owned</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-green-400">
-                {battleResults.length}
-              </div>
+              <div className="text-2xl font-bold text-green-400">{battleResults.length}</div>
               <div className="text-sm text-muted-foreground">Battles Won</div>
             </div>
             <div>
@@ -681,13 +614,9 @@ export function EnhancedWormsArena() {
             </div>
             <div>
               <div className="text-2xl font-bold text-purple-400">
-                {playerWorms
-                  .reduce((sum, worm) => sum + worm.tokenValue, 0)
-                  .toLocaleString()}
+                {playerWorms.reduce((sum, worm) => sum + worm.tokenValue, 0).toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Collection Value
-              </div>
+              <div className="text-sm text-muted-foreground">Collection Value</div>
             </div>
           </div>
         </CardContent>

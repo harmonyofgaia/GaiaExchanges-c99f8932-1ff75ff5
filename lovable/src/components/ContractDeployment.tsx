@@ -27,8 +27,7 @@ interface ContractTemplate {
 }
 
 export function ContractDeployment() {
-  const [selectedContract, setSelectedContract] =
-    useState<string>("gaia-token");
+  const [selectedContract, setSelectedContract] = useState<string>("gaia-token");
   const [deploymentStatus, setDeploymentStatus] = useState<
     "ready" | "deploying" | "deployed" | "error"
   >("ready");
@@ -37,8 +36,7 @@ export function ContractDeployment() {
   const contractTemplates: Record<string, ContractTemplate> = {
     "gaia-token": {
       name: "GAiA Token (ERC-20)",
-      description:
-        "Advanced ERC-20 token with burning, staking, and governance features",
+      description: "Advanced ERC-20 token with burning, staking, and governance features",
       features: [
         "ERC-20 Standard Compliance",
         "Automatic Burning Mechanism",
@@ -360,16 +358,11 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
                       {contract.securityLevel}
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {contract.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">{contract.description}</p>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
                     {contract.features.map((feature, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-2 text-sm"
-                      >
+                      <div key={index} className="flex items-center gap-2 text-sm">
                         <CheckCircle className="h-3 w-3 text-green-400" />
                         <span>{feature}</span>
                       </div>
@@ -384,10 +377,7 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
                       <Download className="h-4 w-4 mr-2" />
                       Download .sol
                     </Button>
-                    <Button
-                      onClick={() => handleCopyContract(key)}
-                      variant="outline"
-                    >
+                    <Button onClick={() => handleCopyContract(key)} variant="outline">
                       <Copy className="h-4 w-4 mr-2" />
                       Copy Code
                     </Button>
@@ -418,17 +408,11 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
             <div className="mt-4 p-4 rounded-lg bg-green-900/20 border border-green-500/20">
               <div className="flex items-center gap-2 mb-2">
                 <CheckCircle className="h-5 w-5 text-green-400" />
-                <h4 className="font-semibold text-green-400">
-                  Contract Deployed Successfully
-                </h4>
+                <h4 className="font-semibold text-green-400">Contract Deployed Successfully</h4>
               </div>
               <div className="text-sm">
-                <span className="text-muted-foreground">
-                  Contract Address:{" "}
-                </span>
-                <code className="text-green-400 font-mono">
-                  {contractAddress}
-                </code>
+                <span className="text-muted-foreground">Contract Address: </span>
+                <code className="text-green-400 font-mono">{contractAddress}</code>
               </div>
             </div>
           )}
@@ -446,9 +430,7 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-4 rounded-lg bg-muted/20 border border-border/50">
-              <h4 className="font-semibold text-blue-400 mb-2">
-                Regulatory Compliance
-              </h4>
+              <h4 className="font-semibold text-blue-400 mb-2">Regulatory Compliance</h4>
               <ul className="text-sm space-y-1 text-muted-foreground">
                 <li>• SEC Token Registration Framework</li>
                 <li>• CFTC Derivatives Compliance</li>
@@ -459,9 +441,7 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
             </div>
 
             <div className="p-4 rounded-lg bg-muted/20 border border-border/50">
-              <h4 className="font-semibold text-purple-400 mb-2">
-                Security Audits
-              </h4>
+              <h4 className="font-semibold text-purple-400 mb-2">Security Audits</h4>
               <ul className="text-sm space-y-1 text-muted-foreground">
                 <li>• OpenZeppelin Security Standards</li>
                 <li>• Certik Smart Contract Audit</li>
@@ -476,13 +456,11 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
             <div className="flex items-start gap-2">
               <AlertTriangle className="h-5 w-5 text-yellow-400 mt-0.5" />
               <div>
-                <h4 className="font-semibold text-yellow-400">
-                  Important Legal Notice
-                </h4>
+                <h4 className="font-semibold text-yellow-400">Important Legal Notice</h4>
                 <p className="text-sm text-muted-foreground mt-1">
-                  These smart contracts are templates and require proper legal
-                  review, regulatory compliance verification, and professional
-                  audit before deployment to mainnet for commercial use.
+                  These smart contracts are templates and require proper legal review, regulatory
+                  compliance verification, and professional audit before deployment to mainnet for
+                  commercial use.
                 </p>
               </div>
             </div>
@@ -510,11 +488,7 @@ contract GaiaExchange is ReentrancyGuard, Ownable {
               </a>
             </Button>
             <Button variant="outline" className="border-purple-500/20" asChild>
-              <a
-                href="https://github.com/crytic/slither"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://github.com/crytic/slither" target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Slither Analysis Tool
               </a>

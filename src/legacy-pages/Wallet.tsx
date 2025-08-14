@@ -1,15 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Wallet,
-  Send,
-  Download,
-  History,
-  Shield,
-  Copy,
-  ExternalLink,
-} from "lucide-react";
+import { Wallet, Send, Download, History, Shield, Copy, ExternalLink } from "lucide-react";
 import { MatrixWalletDisplay } from "@/components/MatrixWalletDisplay";
 import { MatrixTransactionWallet } from "@/components/MatrixTransactionWallet";
 import { GAIA_TOKEN } from "@/constants/gaia";
@@ -75,9 +67,7 @@ const WalletPage = () => {
             {/* Matrix Wallet 2 - Coral Reef Investment */}
             <Card className="border-blue-500/30 bg-gradient-to-br from-blue-900/30 to-black">
               <CardHeader>
-                <CardTitle className="text-blue-400 text-center">
-                  🪸 CORAL REEF MATRIX
-                </CardTitle>
+                <CardTitle className="text-blue-400 text-center">🪸 CORAL REEF MATRIX</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -101,8 +91,7 @@ const WalletPage = () => {
                     </Button>
                   </div>
                   <div className="text-center text-sm text-blue-300">
-                    Real-time coral reef protection investments with full
-                    transparency
+                    Real-time coral reef protection investments with full transparency
                   </div>
                 </div>
               </CardContent>
@@ -118,9 +107,7 @@ const WalletPage = () => {
               <CardContent>
                 <div className="space-y-4">
                   <div className="text-center">
-                    <div className="text-lg font-bold text-purple-400 mb-2">
-                      COMMUNITY VAULT
-                    </div>
+                    <div className="text-lg font-bold text-purple-400 mb-2">COMMUNITY VAULT</div>
                     <div className="font-mono text-sm bg-purple-900/20 p-2 rounded border border-purple-500/20">
                       {communityVault}
                     </div>
@@ -159,16 +146,12 @@ const WalletPage = () => {
           {/* Official GAiA Wallet Address */}
           <Card className="mb-8 border-green-500/30 bg-green-900/20">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                🌍 Official GAiA Wallet Connection
-              </CardTitle>
+              <CardTitle className="text-green-400">🌍 Official GAiA Wallet Connection</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-blue-400 font-bold">
-                    Official GAiA Wallet Address:
-                  </span>
+                  <span className="text-blue-400 font-bold">Official GAiA Wallet Address:</span>
                   <div className="flex gap-2">
                     <Button
                       onClick={copyWalletAddress}
@@ -197,9 +180,7 @@ const WalletPage = () => {
 
               <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-purple-400 font-bold">
-                    GAiA Contract Address:
-                  </span>
+                  <span className="text-purple-400 font-bold">GAiA Contract Address:</span>
                   <Button
                     onClick={copyContractAddress}
                     variant="outline"
@@ -216,33 +197,23 @@ const WalletPage = () => {
               </div>
 
               <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
-                <h4 className="text-green-400 font-bold mb-2">
-                  Official GAiA Token Details:
-                </h4>
+                <h4 className="text-green-400 font-bold mb-2">Official GAiA Token Details:</h4>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <span className="text-muted-foreground">Symbol:</span>
-                    <span className="text-green-400 font-bold ml-2">
-                      {GAIA_TOKEN.SYMBOL}
-                    </span>
+                    <span className="text-green-400 font-bold ml-2">{GAIA_TOKEN.SYMBOL}</span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Network:</span>
-                    <span className="text-green-400 font-bold ml-2">
-                      {GAIA_TOKEN.NETWORK}
-                    </span>
+                    <span className="text-green-400 font-bold ml-2">{GAIA_TOKEN.NETWORK}</span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Name:</span>
-                    <span className="text-green-400 font-bold ml-2">
-                      {GAIA_TOKEN.NAME}
-                    </span>
+                    <span className="text-green-400 font-bold ml-2">{GAIA_TOKEN.NAME}</span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Decimals:</span>
-                    <span className="text-green-400 font-bold ml-2">
-                      {GAIA_TOKEN.DECIMALS}
-                    </span>
+                    <span className="text-green-400 font-bold ml-2">{GAIA_TOKEN.DECIMALS}</span>
                   </div>
                 </div>
               </div>
@@ -261,20 +232,12 @@ const WalletPage = () => {
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <div className="text-3xl font-bold text-green-400">
-                      Connected
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      to Official GAiA Token
-                    </div>
+                    <div className="text-3xl font-bold text-green-400">Connected</div>
+                    <div className="text-sm text-muted-foreground">to Official GAiA Token</div>
                   </div>
                   <div>
-                    <div className="text-xl font-bold text-blue-400">
-                      Live Trading
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      on Pump.fun
-                    </div>
+                    <div className="text-xl font-bold text-blue-400">Live Trading</div>
+                    <div className="text-sm text-muted-foreground">on Pump.fun</div>
                   </div>
                   <Badge className="bg-green-600">✅ OFFICIAL TOKEN</Badge>
                 </div>
@@ -284,9 +247,7 @@ const WalletPage = () => {
             {/* Quick Actions */}
             <Card className="border-purple-500/30 bg-purple-900/20">
               <CardHeader>
-                <CardTitle className="text-purple-400">
-                  Official GAiA Actions
-                </CardTitle>
+                <CardTitle className="text-purple-400">Official GAiA Actions</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -339,18 +300,12 @@ const WalletPage = () => {
           {/* Official Warning */}
           <Card className="border-yellow-500/30 bg-yellow-900/20">
             <CardHeader>
-              <CardTitle className="text-yellow-400">
-                ⚠️ Official GAiA Token Notice
-              </CardTitle>
+              <CardTitle className="text-yellow-400">⚠️ Official GAiA Token Notice</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <p className="text-yellow-300 font-bold">
-                  {GAIA_TOKEN.OFFICIAL_DISCLAIMER}
-                </p>
-                <p className="text-muted-foreground">
-                  {GAIA_TOKEN.BRAND_STATEMENT}
-                </p>
+                <p className="text-yellow-300 font-bold">{GAIA_TOKEN.OFFICIAL_DISCLAIMER}</p>
+                <p className="text-muted-foreground">{GAIA_TOKEN.BRAND_STATEMENT}</p>
                 <div className="flex gap-2 mt-4">
                   <Button
                     onClick={copyWalletAddress}

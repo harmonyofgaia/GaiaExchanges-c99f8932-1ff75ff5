@@ -28,7 +28,7 @@ export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
     try {
       // Use Supabase authentication
       const { error: authError } = await signIn(credentials.email, credentials.password);
-      
+
       if (authError) {
         toast.error("🚫 Authentication Failed", {
           description: authError.message,
@@ -39,10 +39,10 @@ export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
 
       // Check if user has admin privileges
       const { data: adminAccount, error: adminError } = await supabase
-        .from('admin_users')
-        .select('*')
-        .eq('user_id', (await supabase.auth.getUser()).data.user?.id)
-        .eq('is_active', true)
+        .from("admin_users")
+        .select("*")
+        .eq("user_id", (await supabase.auth.getUser()).data.user?.id)
+        .eq("is_active", true)
         .maybeSingle();
 
       if (adminError || !adminAccount) {
@@ -146,11 +146,7 @@ export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
                   className="absolute right-1 top-1 h-8 w-8 p-0 text-green-400"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </Button>
               </div>
             </div>

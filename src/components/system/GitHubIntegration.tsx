@@ -61,10 +61,7 @@ export function GitHubIntegration() {
           ...prev,
           codeQuality: Math.min(100, prev.codeQuality + Math.random() * 2),
           securityScore: Math.min(100, prev.securityScore + Math.random() * 1),
-          performanceScore: Math.min(
-            100,
-            prev.performanceScore + Math.random() * 3,
-          ),
+          performanceScore: Math.min(100, prev.performanceScore + Math.random() * 3),
           linesOfCode: prev.linesOfCode + Math.floor(Math.random() * 100),
         }));
       }
@@ -77,8 +74,7 @@ export function GitHubIntegration() {
     setAnalysisRunning(true);
 
     toast.success("🔍 GitHub Analysis Started", {
-      description:
-        "Running comprehensive code analysis and optimization checks",
+      description: "Running comprehensive code analysis and optimization checks",
       duration: 3000,
     });
 
@@ -96,8 +92,7 @@ export function GitHubIntegration() {
     setAnalysisRunning(false);
 
     toast.success("✅ Analysis Complete", {
-      description:
-        "All systems optimized and secured. Ready for production deployment!",
+      description: "All systems optimized and secured. Ready for production deployment!",
       duration: 6000,
     });
   };
@@ -117,9 +112,7 @@ export function GitHubIntegration() {
           <CardTitle className="flex items-center gap-3 text-green-400">
             <Github className="h-8 w-8" />
             GitHub Integration Status
-            <Badge className="bg-green-600 text-white animate-pulse">
-              CONNECTED
-            </Badge>
+            <Badge className="bg-green-600 text-white animate-pulse">CONNECTED</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -130,18 +123,14 @@ export function GitHubIntegration() {
                   <GitBranch className="h-4 w-4" />
                   Repository
                 </span>
-                <span className="font-mono text-green-400">
-                  {githubStatus.repository}
-                </span>
+                <span className="font-mono text-green-400">{githubStatus.repository}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm flex items-center gap-2">
                   <GitCommit className="h-4 w-4" />
                   Latest Commit
                 </span>
-                <span className="text-sm text-muted-foreground">
-                  {githubStatus.lastCommit}
-                </span>
+                <span className="text-sm text-muted-foreground">{githubStatus.lastCommit}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm flex items-center gap-2">
@@ -157,17 +146,13 @@ export function GitHubIntegration() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-sm">Code Quality</span>
-                <span className="text-green-400 font-bold">
-                  {githubStatus.codeQuality}%
-                </span>
+                <span className="text-green-400 font-bold">{githubStatus.codeQuality}%</span>
               </div>
               <Progress value={githubStatus.codeQuality} className="h-2" />
 
               <div className="flex items-center justify-between">
                 <span className="text-sm">Security Score</span>
-                <span className="text-green-400 font-bold">
-                  {githubStatus.securityScore}%
-                </span>
+                <span className="text-green-400 font-bold">{githubStatus.securityScore}%</span>
               </div>
               <Progress value={githubStatus.securityScore} className="h-2" />
             </div>
@@ -228,24 +213,16 @@ export function GitHubIntegration() {
               <div className="text-center p-3 bg-pink-500/10 rounded-lg">
                 <Database className="h-8 w-8 mx-auto text-pink-400 mb-2" />
                 <div className="text-lg font-bold text-pink-400">Redis</div>
-                <div className="text-xs text-muted-foreground">
-                  Caching Layer
-                </div>
+                <div className="text-xs text-muted-foreground">Caching Layer</div>
               </div>
               <div className="text-center p-3 bg-indigo-500/10 rounded-lg">
                 <Code className="h-8 w-8 mx-auto text-indigo-400 mb-2" />
-                <div className="text-lg font-bold text-indigo-400">
-                  ML Models
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  AI Processing
-                </div>
+                <div className="text-lg font-bold text-indigo-400">ML Models</div>
+                <div className="text-xs text-muted-foreground">AI Processing</div>
               </div>
               <div className="text-center p-3 bg-cyan-500/10 rounded-lg">
                 <Zap className="h-8 w-8 mx-auto text-cyan-400 mb-2" />
-                <div className="text-lg font-bold text-cyan-400">
-                  WebSockets
-                </div>
+                <div className="text-lg font-bold text-cyan-400">WebSockets</div>
                 <div className="text-xs text-muted-foreground">Real-time</div>
               </div>
             </div>
@@ -261,9 +238,7 @@ export function GitHubIntegration() {
           className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-8"
         >
           <GitPullRequest className="h-6 w-6 mr-3" />
-          {analysisRunning
-            ? "Running Analysis..."
-            : "🔍 Run Full System Analysis"}
+          {analysisRunning ? "Running Analysis..." : "🔍 Run Full System Analysis"}
         </Button>
 
         <Button

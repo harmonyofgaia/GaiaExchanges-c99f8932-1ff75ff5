@@ -102,19 +102,13 @@ export function AdvancedAnalyticsDashboard() {
     const updateMetrics = () => {
       setRealTimeMetrics((prev) => ({
         activeUsers: prev.activeUsers + Math.floor(Math.random() * 20 + 5),
-        transactionsPerSecond: Math.max(
-          20,
-          prev.transactionsPerSecond + (Math.random() * 10 - 5),
-        ),
+        transactionsPerSecond: Math.max(20, prev.transactionsPerSecond + (Math.random() * 10 - 5)),
         globalReach: Math.min(100, prev.globalReach + Math.random() * 0.3),
         securityScore: Math.max(
           99,
-          Math.min(100, prev.securityScore + (Math.random() * 0.1 - 0.05)),
+          Math.min(100, prev.securityScore + (Math.random() * 0.1 - 0.05))
         ),
-        systemLoad: Math.max(
-          10,
-          Math.min(90, prev.systemLoad + (Math.random() * 10 - 5)),
-        ),
+        systemLoad: Math.max(10, Math.min(90, prev.systemLoad + (Math.random() * 10 - 5))),
       }));
     };
 
@@ -143,9 +137,7 @@ export function AdvancedAnalyticsDashboard() {
           <CardTitle className="flex items-center gap-2 text-cyan-400">
             <Brain className="h-6 w-6" />
             🧠 ADVANCED ANALYTICS - AI-POWERED INSIGHTS ENGINE
-            <Badge className="bg-cyan-600 text-white animate-pulse">
-              REAL-TIME
-            </Badge>
+            <Badge className="bg-cyan-600 text-white animate-pulse">REAL-TIME</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -179,9 +171,7 @@ export function AdvancedAnalyticsDashboard() {
               <div className="text-2xl font-bold text-red-400">
                 {realTimeMetrics.securityScore.toFixed(1)}%
               </div>
-              <div className="text-xs text-muted-foreground">
-                Security Score
-              </div>
+              <div className="text-xs text-muted-foreground">Security Score</div>
             </div>
 
             <div className="text-center p-3 rounded-lg bg-yellow-900/30 border border-yellow-500/20">
@@ -207,9 +197,7 @@ export function AdvancedAnalyticsDashboard() {
         <TabsContent value="growth" className="space-y-4">
           <Card className="border-green-500/20">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                User Growth & Revenue Trends
-              </CardTitle>
+              <CardTitle className="text-green-400">User Growth & Revenue Trends</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="h-80">
@@ -225,18 +213,8 @@ export function AdvancedAnalyticsDashboard() {
                         borderRadius: "8px",
                       }}
                     />
-                    <Line
-                      type="monotone"
-                      dataKey="users"
-                      stroke="#10b981"
-                      strokeWidth={3}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="revenue"
-                      stroke="#3b82f6"
-                      strokeWidth={3}
-                    />
+                    <Line type="monotone" dataKey="users" stroke="#10b981" strokeWidth={3} />
+                    <Line type="monotone" dataKey="revenue" stroke="#3b82f6" strokeWidth={3} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -247,9 +225,7 @@ export function AdvancedAnalyticsDashboard() {
         <TabsContent value="geographic" className="space-y-4">
           <Card className="border-blue-500/20">
             <CardHeader>
-              <CardTitle className="text-blue-400">
-                Global User Distribution
-              </CardTitle>
+              <CardTitle className="text-blue-400">Global User Distribution</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="h-80">
@@ -278,35 +254,29 @@ export function AdvancedAnalyticsDashboard() {
 
         <TabsContent value="performance" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {Object.entries(analyticsData.performanceMetrics).map(
-              ([key, value]) => (
-                <Card key={key} className="border-purple-500/20">
-                  <CardContent className="p-4">
-                    <div className="text-center space-y-2">
-                      <Target className="h-8 w-8 text-purple-400 mx-auto" />
-                      <h4 className="font-semibold capitalize">
-                        {key.replace(/([A-Z])/g, " $1").trim()}
-                      </h4>
-                      <div className="text-2xl font-bold text-purple-400">
-                        {typeof value === "number"
-                          ? key.includes("Rate") ||
-                            key.includes("Score") ||
-                            key.includes("Index")
-                            ? `${value.toFixed(1)}%`
-                            : value.toLocaleString()
-                          : value}
-                      </div>
-                      <Progress
-                        value={
-                          typeof value === "number" ? Math.min(100, value) : 0
-                        }
-                        className="h-2"
-                      />
+            {Object.entries(analyticsData.performanceMetrics).map(([key, value]) => (
+              <Card key={key} className="border-purple-500/20">
+                <CardContent className="p-4">
+                  <div className="text-center space-y-2">
+                    <Target className="h-8 w-8 text-purple-400 mx-auto" />
+                    <h4 className="font-semibold capitalize">
+                      {key.replace(/([A-Z])/g, " $1").trim()}
+                    </h4>
+                    <div className="text-2xl font-bold text-purple-400">
+                      {typeof value === "number"
+                        ? key.includes("Rate") || key.includes("Score") || key.includes("Index")
+                          ? `${value.toFixed(1)}%`
+                          : value.toLocaleString()
+                        : value}
                     </div>
-                  </CardContent>
-                </Card>
-              ),
-            )}
+                    <Progress
+                      value={typeof value === "number" ? Math.min(100, value) : 0}
+                      className="h-2"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </TabsContent>
 
@@ -326,9 +296,7 @@ export function AdvancedAnalyticsDashboard() {
                 >
                   <div className="flex items-start justify-between mb-2">
                     <p className="font-medium">{insight.insight}</p>
-                    <Badge
-                      className={`text-xs text-white ${getImpactColor(insight.impact)}`}
-                    >
+                    <Badge className={`text-xs text-white ${getImpactColor(insight.impact)}`}>
                       {insight.impact.toUpperCase()} IMPACT
                     </Badge>
                   </div>
@@ -357,35 +325,29 @@ export function AdvancedAnalyticsDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="p-4 bg-red-900/20 rounded-lg border border-red-500/20">
                 <TrendingUp className="h-6 w-6 text-red-400 mx-auto mb-2" />
-                <h4 className="font-semibold text-red-400 mb-2">
-                  Accelerate Growth
-                </h4>
+                <h4 className="font-semibold text-red-400 mb-2">Accelerate Growth</h4>
                 <p className="text-sm text-muted-foreground">
                   Focus on European market expansion - 340% engagement potential
                 </p>
               </div>
               <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/20">
                 <Users className="h-6 w-6 text-green-400 mx-auto mb-2" />
-                <h4 className="font-semibold text-green-400 mb-2">
-                  Community Power
-                </h4>
+                <h4 className="font-semibold text-green-400 mb-2">Community Power</h4>
                 <p className="text-sm text-muted-foreground">
                   Launch mobile-first features - 23% higher conversion rate
                 </p>
               </div>
               <div className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/20">
                 <DollarSign className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-                <h4 className="font-semibold text-blue-400 mb-2">
-                  Revenue Optimization
-                </h4>
+                <h4 className="font-semibold text-blue-400 mb-2">Revenue Optimization</h4>
                 <p className="text-sm text-muted-foreground">
                   Implement time-sensitive campaigns during peak hours
                 </p>
               </div>
             </div>
             <p className="text-sm text-cyan-400 font-bold">
-              📊 "Data Drives Decisions, Insights Ignite Action" - Every Metric
-              Tells Our Victory Story! 📊
+              📊 "Data Drives Decisions, Insights Ignite Action" - Every Metric Tells Our Victory
+              Story! 📊
             </p>
           </div>
         </CardContent>

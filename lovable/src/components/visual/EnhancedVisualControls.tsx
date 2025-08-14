@@ -45,14 +45,13 @@ interface BackgroundSettings {
 
 export function EnhancedVisualControls() {
   // Background settings state
-  const [backgroundSettings, setBackgroundSettings] =
-    useState<BackgroundSettings>({
-      type: "matrix",
-      intensity: "medium",
-      color: "#00ff00",
-      speed: 1,
-      autoGenerate: false,
-    });
+  const [backgroundSettings, setBackgroundSettings] = useState<BackgroundSettings>({
+    type: "matrix",
+    intensity: "medium",
+    color: "#00ff00",
+    speed: 1,
+    autoGenerate: false,
+  });
 
   // UI control states
   const [fontSize, setFontSize] = useState(16);
@@ -86,16 +85,13 @@ export function EnhancedVisualControls() {
   useEffect(() => {
     if (!isLocked) {
       // Save to localStorage
-      localStorage.setItem(
-        "gaia-background-settings",
-        JSON.stringify(debouncedSettings),
-      );
+      localStorage.setItem("gaia-background-settings", JSON.stringify(debouncedSettings));
 
       // Dispatch custom event to update background
       window.dispatchEvent(
         new CustomEvent("background-settings-changed", {
           detail: debouncedSettings,
-        }),
+        })
       );
     }
   }, [debouncedSettings, isLocked]);
@@ -152,14 +148,12 @@ export function EnhancedVisualControls() {
       autoGenerate: !prev.autoGenerate,
     }));
     toast.success(
-      backgroundSettings.autoGenerate
-        ? "Auto-generation disabled"
-        : "Auto-generation enabled",
+      backgroundSettings.autoGenerate ? "Auto-generation disabled" : "Auto-generation enabled",
       {
         description: backgroundSettings.autoGenerate
           ? "Background will stay fixed"
           : "Background will change automatically",
-      },
+      }
     );
   };
 
@@ -169,9 +163,7 @@ export function EnhancedVisualControls() {
     localStorage.setItem("gaia-background-lock", newLockState.toString());
 
     toast.success(newLockState ? "Background locked" : "Background unlocked", {
-      description: newLockState
-        ? "Settings are now protected"
-        : "Settings can now be modified",
+      description: newLockState ? "Settings are now protected" : "Settings can now be modified",
     });
   };
 
@@ -187,7 +179,7 @@ export function EnhancedVisualControls() {
     window.dispatchEvent(
       new CustomEvent("background-settings-changed", {
         detail: backgroundSettings,
-      }),
+      })
     );
     toast.success("Background settings applied!");
   };
@@ -232,11 +224,7 @@ export function EnhancedVisualControls() {
             <CardHeader>
               <CardTitle className="flex items-center justify-between text-yellow-400">
                 <div className="flex items-center gap-2">
-                  {isLocked ? (
-                    <Lock className="h-5 w-5" />
-                  ) : (
-                    <Unlock className="h-5 w-5" />
-                  )}
+                  {isLocked ? <Lock className="h-5 w-5" /> : <Unlock className="h-5 w-5" />}
                   Background Lock
                 </div>
                 <Badge variant={isLocked ? "destructive" : "secondary"}>
@@ -258,11 +246,7 @@ export function EnhancedVisualControls() {
                   variant={isLocked ? "destructive" : "default"}
                   className="flex items-center gap-2"
                 >
-                  {isLocked ? (
-                    <Lock className="h-4 w-4" />
-                  ) : (
-                    <Unlock className="h-4 w-4" />
-                  )}
+                  {isLocked ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
                   {isLocked ? "Unlock" : "Lock"}
                 </Button>
               </div>
@@ -296,9 +280,7 @@ export function EnhancedVisualControls() {
                     <Button
                       key={type}
                       onClick={() => handleBackgroundTypeChange(type)}
-                      variant={
-                        backgroundSettings.type === type ? "default" : "outline"
-                      }
+                      variant={backgroundSettings.type === type ? "default" : "outline"}
                       size="sm"
                       disabled={isLocked}
                       className="capitalize"
@@ -313,24 +295,18 @@ export function EnhancedVisualControls() {
               <div className="space-y-3">
                 <Label className="text-sm font-medium">Intensity</Label>
                 <div className="grid grid-cols-3 gap-2">
-                  {(["low", "medium", "high"] as BackgroundIntensity[]).map(
-                    (intensity) => (
-                      <Button
-                        key={intensity}
-                        onClick={() => handleIntensityChange(intensity)}
-                        variant={
-                          backgroundSettings.intensity === intensity
-                            ? "default"
-                            : "outline"
-                        }
-                        size="sm"
-                        disabled={isLocked}
-                        className="capitalize"
-                      >
-                        {intensity}
-                      </Button>
-                    ),
-                  )}
+                  {(["low", "medium", "high"] as BackgroundIntensity[]).map((intensity) => (
+                    <Button
+                      key={intensity}
+                      onClick={() => handleIntensityChange(intensity)}
+                      variant={backgroundSettings.intensity === intensity ? "default" : "outline"}
+                      size="sm"
+                      disabled={isLocked}
+                      className="capitalize"
+                    >
+                      {intensity}
+                    </Button>
+                  ))}
                 </div>
               </div>
 
@@ -348,9 +324,7 @@ export function EnhancedVisualControls() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>
-                    Animation Speed: {backgroundSettings.speed.toFixed(1)}x
-                  </Label>
+                  <Label>Animation Speed: {backgroundSettings.speed.toFixed(1)}x</Label>
                   <Slider
                     value={[backgroundSettings.speed]}
                     onValueChange={handleSpeedChange}
@@ -366,9 +340,7 @@ export function EnhancedVisualControls() {
               {/* Auto Generation Toggle */}
               <div className="flex items-center justify-between p-4 border border-muted rounded-lg">
                 <div className="space-y-1">
-                  <Label className="text-sm font-medium">
-                    Auto-Generate Background
-                  </Label>
+                  <Label className="text-sm font-medium">Auto-Generate Background</Label>
                   <p className="text-xs text-muted-foreground">
                     Automatically change background every 30 seconds
                   </p>
@@ -425,9 +397,7 @@ export function EnhancedVisualControls() {
 
               <div className="flex items-center justify-between p-4 border border-muted rounded-lg">
                 <div className="space-y-1">
-                  <Label className="text-sm font-medium">
-                    Particle Effects
-                  </Label>
+                  <Label className="text-sm font-medium">Particle Effects</Label>
                   <p className="text-xs text-muted-foreground">
                     Enable floating particle animations
                   </p>

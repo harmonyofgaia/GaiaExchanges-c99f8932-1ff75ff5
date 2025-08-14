@@ -143,12 +143,7 @@ export function Creative3DTools() {
       const time = Date.now() * 0.001;
       const dripLength = 20 + Math.sin(time + index) * 10;
 
-      const gradient = ctx.createLinearGradient(
-        hole.x,
-        hole.y,
-        hole.x,
-        hole.y + dripLength,
-      );
+      const gradient = ctx.createLinearGradient(hole.x, hole.y, hole.x, hole.y + dripLength);
       gradient.addColorStop(0, "#39ff14");
       gradient.addColorStop(0.5, "#32cd32");
       gradient.addColorStop(1, "rgba(50, 205, 50, 0)");
@@ -323,13 +318,7 @@ export function Creative3DTools() {
   };
 
   const drawFractal = (ctx: CanvasRenderingContext2D, time: number) => {
-    const drawBranch = (
-      x: number,
-      y: number,
-      length: number,
-      angle: number,
-      depth: number,
-    ) => {
+    const drawBranch = (x: number, y: number, length: number, angle: number, depth: number) => {
       if (depth === 0) return;
 
       const endX = x + Math.cos(angle) * length;
@@ -345,20 +334,8 @@ export function Creative3DTools() {
       ctx.lineTo(endX, endY);
       ctx.stroke();
 
-      drawBranch(
-        endX,
-        endY,
-        length * 0.7,
-        angle - 0.5 + Math.sin(time) * 0.3,
-        depth - 1,
-      );
-      drawBranch(
-        endX,
-        endY,
-        length * 0.7,
-        angle + 0.5 + Math.cos(time) * 0.3,
-        depth - 1,
-      );
+      drawBranch(endX, endY, length * 0.7, angle - 0.5 + Math.sin(time) * 0.3, depth - 1);
+      drawBranch(endX, endY, length * 0.7, angle + 0.5 + Math.cos(time) * 0.3, depth - 1);
     };
 
     drawBranch(0, 100, 60, -Math.PI / 2, 8);
@@ -383,18 +360,9 @@ export function Creative3DTools() {
 
   const adjustBrightness = (color: string, amount: number) => {
     const hex = color.replace("#", "");
-    const r = Math.max(
-      0,
-      Math.min(255, parseInt(hex.substr(0, 2), 16) + amount),
-    );
-    const g = Math.max(
-      0,
-      Math.min(255, parseInt(hex.substr(2, 2), 16) + amount),
-    );
-    const b = Math.max(
-      0,
-      Math.min(255, parseInt(hex.substr(4, 2), 16) + amount),
-    );
+    const r = Math.max(0, Math.min(255, parseInt(hex.substr(0, 2), 16) + amount));
+    const g = Math.max(0, Math.min(255, parseInt(hex.substr(2, 2), 16) + amount));
+    const b = Math.max(0, Math.min(255, parseInt(hex.substr(4, 2), 16) + amount));
     return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
   };
 
@@ -492,9 +460,7 @@ export function Creative3DTools() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">
-                Brush Size: {brushSize[0]}
-              </label>
+              <label className="text-sm font-medium">Brush Size: {brushSize[0]}</label>
               <Slider
                 value={brushSize}
                 onValueChange={setBrushSize}
@@ -506,9 +472,7 @@ export function Creative3DTools() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">
-                Rotation Speed: {rotationSpeed[0]}
-              </label>
+              <label className="text-sm font-medium">Rotation Speed: {rotationSpeed[0]}</label>
               <Slider
                 value={rotationSpeed}
                 onValueChange={setRotationSpeed}
@@ -544,12 +508,8 @@ export function Creative3DTools() {
               style={{ maxHeight: "400px" }}
             />
             <div className="absolute top-2 right-2 flex gap-2">
-              <Badge className="bg-cyan-600 text-white">
-                {selectedTool.toUpperCase()}
-              </Badge>
-              <Badge className="bg-purple-600 text-white">
-                {animationStyle.toUpperCase()}
-              </Badge>
+              <Badge className="bg-cyan-600 text-white">{selectedTool.toUpperCase()}</Badge>
+              <Badge className="bg-purple-600 text-white">{animationStyle.toUpperCase()}</Badge>
             </div>
           </div>
 

@@ -82,9 +82,7 @@ const GaiaBikeEcosystem = () => {
   const [isTracking, setIsTracking] = useState(false);
   const [currentSession, setCurrentSession] = useState<any>(null);
   const [totalTokens, setTotalTokens] = useState(0);
-  const [bikeType, setBikeType] = useState<"gaia_bike" | "regular_bike">(
-    "regular_bike",
-  );
+  const [bikeType, setBikeType] = useState<"gaia_bike" | "regular_bike">("regular_bike");
   const [foodPlaces, setFoodPlaces] = useState<FoodPlace[]>([]);
   const [userLocation, setUserLocation] = useState<{
     lat: number;
@@ -186,7 +184,7 @@ const GaiaBikeEcosystem = () => {
           console.log("Location access denied:", error);
           // Use default location
           setUserLocation({ lat: 40.7128, lng: -74.006 });
-        },
+        }
       );
     }
   };
@@ -214,14 +212,8 @@ const GaiaBikeEcosystem = () => {
       }
 
       if (data) {
-        const total = data.reduce(
-          (sum, session) => sum + Number(session.tokens_earned),
-          0,
-        );
-        const totalDistance = data.reduce(
-          (sum, session) => sum + Number(session.distance),
-          0,
-        );
+        const total = data.reduce((sum, session) => sum + Number(session.tokens_earned), 0);
+        const totalDistance = data.reduce((sum, session) => sum + Number(session.distance), 0);
 
         setTotalTokens(total);
         setEcoMetrics({
@@ -326,8 +318,7 @@ const GaiaBikeEcosystem = () => {
         total_distance: prev.total_distance + sessionDistance,
         carbon_offset: prev.carbon_offset + ecoImpact.carbon_saved,
         calories_burned: prev.calories_burned + ecoImpact.health_benefits,
-        air_quality_improvement:
-          prev.air_quality_improvement + ecoImpact.air_quality_points,
+        air_quality_improvement: prev.air_quality_improvement + ecoImpact.air_quality_points,
         trees_equivalent: prev.trees_equivalent + sessionDistance * 0.002,
         eco_score: prev.eco_score + Math.floor(tokensEarned * 0.68),
       }));
@@ -348,7 +339,7 @@ const GaiaBikeEcosystem = () => {
             };
           }
           return challenge;
-        }),
+        })
       );
 
       toast.success(`🎉 Session completed!`, {
@@ -433,8 +424,7 @@ const GaiaBikeEcosystem = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-green-400">
                 <Activity className="h-5 w-5 animate-pulse" />
-                Live Session -{" "}
-                {bikeType === "gaia_bike" ? "GAIA Bike" : "Regular Bike"}
+                Live Session - {bikeType === "gaia_bike" ? "GAIA Bike" : "Regular Bike"}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -455,23 +445,16 @@ const GaiaBikeEcosystem = () => {
                   <div className="text-2xl font-bold text-purple-400">
                     {realTimeData.elevation.toFixed(0)}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Elevation (m)
-                  </div>
+                  <div className="text-sm text-muted-foreground">Elevation (m)</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-red-400">
                     {realTimeData.heartRate.toFixed(0)}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Heart Rate
-                  </div>
+                  <div className="text-sm text-muted-foreground">Heart Rate</div>
                 </div>
               </div>
-              <Button
-                onClick={stopBikeSession}
-                className="w-full bg-red-600 hover:bg-red-700"
-              >
+              <Button onClick={stopBikeSession} className="w-full bg-red-600 hover:bg-red-700">
                 <Target className="h-4 w-4 mr-2" />
                 End Session & Claim Rewards
               </Button>
@@ -499,38 +482,28 @@ const GaiaBikeEcosystem = () => {
                 <div className="text-2xl font-bold text-blue-400">
                   {ecoMetrics.carbon_offset.toFixed(2)}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  kg CO₂ Saved
-                </div>
+                <div className="text-sm text-muted-foreground">kg CO₂ Saved</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-purple-400">
                   {ecoMetrics.calories_burned.toLocaleString()}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Calories Burned
-                </div>
+                <div className="text-sm text-muted-foreground">Calories Burned</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-yellow-400">
                   {ecoMetrics.air_quality_improvement}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Air Quality Points
-                </div>
+                <div className="text-sm text-muted-foreground">Air Quality Points</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-green-500">
                   {ecoMetrics.trees_equivalent.toFixed(1)}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Trees Equivalent
-                </div>
+                <div className="text-sm text-muted-foreground">Trees Equivalent</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-orange-400">
-                  {ecoMetrics.eco_score}
-                </div>
+                <div className="text-2xl font-bold text-orange-400">{ecoMetrics.eco_score}</div>
                 <div className="text-sm text-muted-foreground">Eco Score</div>
               </div>
             </div>
@@ -557,14 +530,10 @@ const GaiaBikeEcosystem = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">
-                      Select Bike Type:
-                    </label>
+                    <label className="text-sm font-medium">Select Bike Type:</label>
                     <div className="grid grid-cols-2 gap-2">
                       <Button
-                        variant={
-                          bikeType === "regular_bike" ? "default" : "outline"
-                        }
+                        variant={bikeType === "regular_bike" ? "default" : "outline"}
                         onClick={() => setBikeType("regular_bike")}
                         className="flex flex-col p-4 h-auto"
                       >
@@ -573,9 +542,7 @@ const GaiaBikeEcosystem = () => {
                         <span className="text-xs">1x tokens</span>
                       </Button>
                       <Button
-                        variant={
-                          bikeType === "gaia_bike" ? "default" : "outline"
-                        }
+                        variant={bikeType === "gaia_bike" ? "default" : "outline"}
                         onClick={() => setBikeType("gaia_bike")}
                         className="flex flex-col p-4 h-auto border-green-500/50"
                       >
@@ -598,12 +565,8 @@ const GaiaBikeEcosystem = () => {
                   ) : (
                     <div className="text-center p-4 border border-green-500/50 rounded-lg">
                       <Activity className="h-8 w-8 text-green-400 mx-auto animate-pulse mb-2" />
-                      <p className="text-green-400 font-semibold">
-                        Session Active
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        Tracking your eco impact
-                      </p>
+                      <p className="text-green-400 font-semibold">Session Active</p>
+                      <p className="text-sm text-muted-foreground">Tracking your eco impact</p>
                     </div>
                   )}
                 </CardContent>
@@ -622,23 +585,17 @@ const GaiaBikeEcosystem = () => {
                     <div className="text-4xl font-bold text-yellow-400 mb-2">
                       {totalTokens.toLocaleString()}
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                      Total GAIA Tokens Earned
-                    </div>
+                    <div className="text-sm text-muted-foreground">Total GAIA Tokens Earned</div>
                   </div>
 
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span>This Week:</span>
-                      <span className="font-bold text-green-400">
-                        +247 tokens
-                      </span>
+                      <span className="font-bold text-green-400">+247 tokens</span>
                     </div>
                     <div className="flex justify-between">
                       <span>This Month:</span>
-                      <span className="font-bold text-blue-400">
-                        +1,050 tokens
-                      </span>
+                      <span className="font-bold text-blue-400">+1,050 tokens</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Bike Multiplier:</span>
@@ -663,21 +620,14 @@ const GaiaBikeEcosystem = () => {
                 <Card key={challenge.id} className="border-purple-500/20">
                   <CardHeader>
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-white">
-                        {challenge.title}
-                      </CardTitle>
-                      <Badge
-                        variant="outline"
-                        className="border-purple-500/50 text-purple-400"
-                      >
+                      <CardTitle className="text-white">{challenge.title}</CardTitle>
+                      <Badge variant="outline" className="border-purple-500/50 text-purple-400">
                         {challenge.reward} tokens
                       </Badge>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-muted-foreground">
-                      {challenge.description}
-                    </p>
+                    <p className="text-muted-foreground">{challenge.description}</p>
 
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
@@ -694,9 +644,7 @@ const GaiaBikeEcosystem = () => {
 
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Timer className="h-3 w-3" />
-                      <span>
-                        Ends: {challenge.deadline.toLocaleDateString()}
-                      </span>
+                      <span>Ends: {challenge.deadline.toLocaleDateString()}</span>
                     </div>
 
                     {challenge.current >= challenge.target ? (
@@ -727,20 +675,14 @@ const GaiaBikeEcosystem = () => {
               <CardContent>
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-white">
-                      Available Rewards
-                    </h3>
+                    <h3 className="text-lg font-semibold text-white">Available Rewards</h3>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between p-3 border border-green-500/30 rounded-lg">
                         <div className="flex items-center gap-3">
                           <TreePine className="h-5 w-5 text-green-400" />
                           <div>
-                            <div className="font-medium text-white">
-                              Plant a Tree
-                            </div>
-                            <div className="text-sm text-muted-foreground">
-                              500 tokens
-                            </div>
+                            <div className="font-medium text-white">Plant a Tree</div>
+                            <div className="text-sm text-muted-foreground">500 tokens</div>
                           </div>
                         </div>
                         <Button size="sm">Redeem</Button>
@@ -750,12 +692,8 @@ const GaiaBikeEcosystem = () => {
                         <div className="flex items-center gap-3">
                           <Shield className="h-5 w-5 text-blue-400" />
                           <div>
-                            <div className="font-medium text-white">
-                              Carbon Offset Certificate
-                            </div>
-                            <div className="text-sm text-muted-foreground">
-                              1,000 tokens
-                            </div>
+                            <div className="font-medium text-white">Carbon Offset Certificate</div>
+                            <div className="text-sm text-muted-foreground">1,000 tokens</div>
                           </div>
                         </div>
                         <Button size="sm">Redeem</Button>
@@ -765,12 +703,8 @@ const GaiaBikeEcosystem = () => {
                         <div className="flex items-center gap-3">
                           <Heart className="h-5 w-5 text-purple-400" />
                           <div>
-                            <div className="font-medium text-white">
-                              Health Benefits Package
-                            </div>
-                            <div className="text-sm text-muted-foreground">
-                              750 tokens
-                            </div>
+                            <div className="font-medium text-white">Health Benefits Package</div>
+                            <div className="text-sm text-muted-foreground">750 tokens</div>
                           </div>
                         </div>
                         <Button size="sm">Redeem</Button>
@@ -779,16 +713,12 @@ const GaiaBikeEcosystem = () => {
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-white">
-                      Recent Achievements
-                    </h3>
+                    <h3 className="text-lg font-semibold text-white">Recent Achievements</h3>
                     <div className="space-y-3">
                       <div className="p-3 bg-green-900/20 border border-green-500/30 rounded-lg">
                         <div className="flex items-center gap-2 mb-1">
                           <Sparkles className="h-4 w-4 text-green-400" />
-                          <span className="font-medium text-green-400">
-                            Eco Warrior
-                          </span>
+                          <span className="font-medium text-green-400">Eco Warrior</span>
                         </div>
                         <p className="text-sm text-muted-foreground">
                           Completed 10 bike sessions this month
@@ -798,13 +728,9 @@ const GaiaBikeEcosystem = () => {
                       <div className="p-3 bg-blue-900/20 border border-blue-500/30 rounded-lg">
                         <div className="flex items-center gap-2 mb-1">
                           <Target className="h-4 w-4 text-blue-400" />
-                          <span className="font-medium text-blue-400">
-                            Distance Champion
-                          </span>
+                          <span className="font-medium text-blue-400">Distance Champion</span>
                         </div>
-                        <p className="text-sm text-muted-foreground">
-                          Traveled 100km this month
-                        </p>
+                        <p className="text-sm text-muted-foreground">Traveled 100km this month</p>
                       </div>
                     </div>
                   </div>
@@ -834,18 +760,13 @@ const GaiaBikeEcosystem = () => {
                             {position}
                           </div>
                           <div>
-                            <div className="font-medium text-white">
-                              EcoRider{position}
-                            </div>
+                            <div className="font-medium text-white">EcoRider{position}</div>
                             <div className="text-sm text-muted-foreground">
                               {150 - position * 15}km this month
                             </div>
                           </div>
                         </div>
-                        <Badge
-                          variant="outline"
-                          className="border-green-500/50 text-green-400"
-                        >
+                        <Badge variant="outline" className="border-green-500/50 text-green-400">
                           {2500 - position * 200} tokens
                         </Badge>
                       </div>
@@ -864,9 +785,7 @@ const GaiaBikeEcosystem = () => {
                 <CardContent>
                   <div className="space-y-4">
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-green-400 mb-2">
-                        2,847
-                      </div>
+                      <div className="text-3xl font-bold text-green-400 mb-2">2,847</div>
                       <div className="text-sm text-muted-foreground">
                         Active GAIA cyclists today
                       </div>
@@ -874,20 +793,12 @@ const GaiaBikeEcosystem = () => {
 
                     <div className="grid grid-cols-2 gap-4 text-center">
                       <div>
-                        <div className="text-xl font-bold text-blue-400">
-                          15,234
-                        </div>
-                        <div className="text-xs text-muted-foreground">
-                          km traveled today
-                        </div>
+                        <div className="text-xl font-bold text-blue-400">15,234</div>
+                        <div className="text-xs text-muted-foreground">km traveled today</div>
                       </div>
                       <div>
-                        <div className="text-xl font-bold text-purple-400">
-                          1,830
-                        </div>
-                        <div className="text-xs text-muted-foreground">
-                          kg CO₂ saved today
-                        </div>
+                        <div className="text-xl font-bold text-purple-400">1,830</div>
+                        <div className="text-xs text-muted-foreground">kg CO₂ saved today</div>
                       </div>
                     </div>
 

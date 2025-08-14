@@ -23,8 +23,7 @@ export function ContractLegalFramework() {
   const legalDocuments: LegalDocument[] = [
     {
       title: "Token Compliance Framework",
-      description:
-        "Comprehensive legal framework for token issuance and trading",
+      description: "Comprehensive legal framework for token issuance and trading",
       category: "compliance",
       content: `
 GAIA TOKEN LEGAL COMPLIANCE FRAMEWORK
@@ -70,8 +69,7 @@ This framework ensures full legal compliance across all jurisdictions where the 
     },
     {
       title: "Security Audit Report",
-      description:
-        "Comprehensive security assessment and vulnerability analysis",
+      description: "Comprehensive security assessment and vulnerability analysis",
       category: "security",
       content: `
 GAIA SMART CONTRACT SECURITY AUDIT REPORT
@@ -211,16 +209,11 @@ This governance structure ensures democratic participation while maintaining ope
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 gap-4">
           {legalDocuments.map((doc, index) => (
-            <div
-              key={index}
-              className="p-4 rounded-lg bg-muted/20 border border-border/50"
-            >
+            <div key={index} className="p-4 rounded-lg bg-muted/20 border border-border/50">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <h3 className="font-semibold text-lg">{doc.title}</h3>
-                  <Badge
-                    className={`${getCategoryColor(doc.category)} text-white`}
-                  >
+                  <Badge className={`${getCategoryColor(doc.category)} text-white`}>
                     {getCategoryIcon(doc.category)}
                     <span className="ml-1 capitalize">{doc.category}</span>
                   </Badge>
@@ -243,13 +236,11 @@ This governance structure ensures democratic participation while maintaining ope
           <div className="flex items-start gap-2">
             <AlertTriangle className="h-5 w-5 text-yellow-400 mt-0.5" />
             <div>
-              <h4 className="font-semibold text-yellow-400">
-                Legal Disclaimer
-              </h4>
+              <h4 className="font-semibold text-yellow-400">Legal Disclaimer</h4>
               <p className="text-sm text-muted-foreground mt-1">
-                These documents are templates and frameworks. Consult with
-                qualified legal professionals before implementing any blockchain
-                project. Regulatory requirements vary by jurisdiction.
+                These documents are templates and frameworks. Consult with qualified legal
+                professionals before implementing any blockchain project. Regulatory requirements
+                vary by jurisdiction.
               </p>
             </div>
           </div>
@@ -277,11 +268,7 @@ This governance structure ensures democratic participation while maintaining ope
             </a>
           </Button>
           <Button variant="outline" className="border-purple-500/20" asChild>
-            <a
-              href="https://gdpr.eu/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://gdpr.eu/" target="_blank" rel="noopener noreferrer">
               <ExternalLink className="h-4 w-4 mr-2" />
               GDPR Compliance
             </a>

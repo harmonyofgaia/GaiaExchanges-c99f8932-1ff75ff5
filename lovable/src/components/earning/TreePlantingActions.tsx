@@ -45,9 +45,7 @@ export function TreePlantingActions() {
     };
 
     addActivity(activity);
-    toast.success(
-      `Tree planting recorded! +${points} points earned for ${quantity} trees`,
-    );
+    toast.success(`Tree planting recorded! +${points} points earned for ${quantity} trees`);
     setTreeType("");
     setQuantity("");
     setLocation("");
@@ -81,9 +79,7 @@ export function TreePlantingActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Number of Trees
-            </label>
+            <label className="block text-sm font-medium mb-2">Number of Trees</label>
             <Input
               type="number"
               value={quantity}
@@ -107,16 +103,14 @@ export function TreePlantingActions() {
             disabled={loading}
             className="w-full bg-green-600 hover:bg-green-700"
           >
-            {loading
-              ? "Recording..."
-              : "🌳 Record Tree Planting (+50 Points per Tree)"}
+            {loading ? "Recording..." : "🌳 Record Tree Planting (+50 Points per Tree)"}
           </Button>
         </form>
 
         <div className="mt-4 p-3 bg-green-900/20 rounded-lg border border-green-500/30">
           <p className="text-sm text-green-300">
-            💡 <strong>Impact:</strong> Each tree planted captures 22kg CO2
-            annually and supports biodiversity!
+            💡 <strong>Impact:</strong> Each tree planted captures 22kg CO2 annually and supports
+            biodiversity!
           </p>
         </div>
       </CardContent>

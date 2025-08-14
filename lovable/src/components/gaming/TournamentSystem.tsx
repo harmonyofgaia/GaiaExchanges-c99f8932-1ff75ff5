@@ -45,9 +45,9 @@ interface Match {
 }
 
 export function TournamentSystem() {
-  const [selectedTab, setSelectedTab] = useState<
-    "browse" | "active" | "brackets" | "history"
-  >("browse");
+  const [selectedTab, setSelectedTab] = useState<"browse" | "active" | "brackets" | "history">(
+    "browse"
+  );
   const [tournaments, setTournaments] = useState<Tournament[]>([
     {
       id: "1",
@@ -90,9 +90,7 @@ export function TournamentSystem() {
     },
   ]);
 
-  const [activeTournament, setActiveTournament] = useState<Tournament | null>(
-    tournaments[0],
-  );
+  const [activeTournament, setActiveTournament] = useState<Tournament | null>(tournaments[0]);
   const [matches, setMatches] = useState<Match[]>([
     {
       id: "1",
@@ -115,11 +113,7 @@ export function TournamentSystem() {
   const joinTournament = (tournament: Tournament) => {
     if (tournament.participants < tournament.maxParticipants) {
       setTournaments((prev) =>
-        prev.map((t) =>
-          t.id === tournament.id
-            ? { ...t, participants: t.participants + 1 }
-            : t,
-        ),
+        prev.map((t) => (t.id === tournament.id ? { ...t, participants: t.participants + 1 } : t))
       );
 
       toast.success("🏆 Tournament Joined!", {
@@ -167,9 +161,7 @@ export function TournamentSystem() {
               <Trophy className="h-8 w-8" />
               🏆 GAIA TOURNAMENT SYSTEM
             </div>
-            <div className="text-lg text-orange-400">
-              Compete • Win Prizes • Become Legend
-            </div>
+            <div className="text-lg text-orange-400">Compete • Win Prizes • Become Legend</div>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -177,33 +169,25 @@ export function TournamentSystem() {
             <div className="text-center p-4 bg-blue-900/30 rounded border border-blue-500/30">
               <Users className="h-6 w-6 text-blue-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-blue-400">2,847</div>
-              <div className="text-xs text-muted-foreground">
-                Active Fighters
-              </div>
+              <div className="text-xs text-muted-foreground">Active Fighters</div>
             </div>
 
             <div className="text-center p-4 bg-green-900/30 rounded border border-green-500/30">
               <Crown className="h-6 w-6 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">15</div>
-              <div className="text-xs text-muted-foreground">
-                Live Tournaments
-              </div>
+              <div className="text-xs text-muted-foreground">Live Tournaments</div>
             </div>
 
             <div className="text-center p-4 bg-yellow-900/30 rounded border border-yellow-500/30">
               <Gift className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-yellow-400">250K</div>
-              <div className="text-xs text-muted-foreground">
-                Total Prizes (GAIA)
-              </div>
+              <div className="text-xs text-muted-foreground">Total Prizes (GAIA)</div>
             </div>
 
             <div className="text-center p-4 bg-purple-900/30 rounded border border-purple-500/30">
               <Medal className="h-6 w-6 text-purple-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-purple-400">1,247</div>
-              <div className="text-xs text-muted-foreground">
-                Champions Crowned
-              </div>
+              <div className="text-xs text-muted-foreground">Champions Crowned</div>
             </div>
           </div>
         </CardContent>
@@ -248,9 +232,7 @@ export function TournamentSystem() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     {getTypeIcon(tournament.type)}
-                    <CardTitle className="text-purple-400 text-lg">
-                      {tournament.name}
-                    </CardTitle>
+                    <CardTitle className="text-purple-400 text-lg">{tournament.name}</CardTitle>
                   </div>
                   <Badge
                     className={`${getTournamentStatusColor(tournament.status)} text-white text-xs`}
@@ -270,9 +252,7 @@ export function TournamentSystem() {
                   </div>
                   <div className="flex justify-between">
                     <span>Entry Fee:</span>
-                    <span className="text-green-400 font-bold">
-                      {tournament.entryFee} GAIA
-                    </span>
+                    <span className="text-green-400 font-bold">{tournament.entryFee} GAIA</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Duration:</span>
@@ -293,10 +273,7 @@ export function TournamentSystem() {
                     </span>
                   </div>
                   <Progress
-                    value={
-                      (tournament.participants / tournament.maxParticipants) *
-                      100
-                    }
+                    value={(tournament.participants / tournament.maxParticipants) * 100}
                     className="h-2"
                   />
                 </div>
@@ -344,25 +321,17 @@ export function TournamentSystem() {
                   <div className="text-lg font-bold text-blue-400">
                     {activeTournament.participants}
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    Participants
-                  </div>
+                  <div className="text-xs text-muted-foreground">Participants</div>
                 </div>
                 <div className="p-3 bg-yellow-900/30 rounded">
                   <div className="text-lg font-bold text-yellow-400">
                     {activeTournament.prizePool.toLocaleString()}
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    Prize Pool (GAIA)
-                  </div>
+                  <div className="text-xs text-muted-foreground">Prize Pool (GAIA)</div>
                 </div>
                 <div className="p-3 bg-green-900/30 rounded">
-                  <div className="text-lg font-bold text-green-400">
-                    Round 1
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    Current Round
-                  </div>
+                  <div className="text-lg font-bold text-green-400">Round 1</div>
+                  <div className="text-xs text-muted-foreground">Current Round</div>
                 </div>
                 <div className="p-3 bg-red-900/30 rounded">
                   <div className="text-lg font-bold text-red-400">LIVE</div>
@@ -372,9 +341,7 @@ export function TournamentSystem() {
 
               {/* Live Matches */}
               <div className="space-y-4">
-                <h3 className="text-lg font-bold text-orange-400">
-                  🔥 Live Matches
-                </h3>
+                <h3 className="text-lg font-bold text-orange-400">🔥 Live Matches</h3>
                 {matches.map((match) => (
                   <div
                     key={match.id}
@@ -389,9 +356,7 @@ export function TournamentSystem() {
                           </AvatarFallback>
                         </Avatar>
                         <div>
-                          <div className="font-semibold">
-                            {match.player1.name}
-                          </div>
+                          <div className="font-semibold">{match.player1.name}</div>
                           <div className="text-xs text-muted-foreground">
                             {match.player1.country} • Rank #{match.player1.rank}
                           </div>
@@ -400,9 +365,7 @@ export function TournamentSystem() {
 
                       {/* VS & Status */}
                       <div className="text-center">
-                        <div className="text-lg font-bold text-red-400 mb-1">
-                          VS
-                        </div>
+                        <div className="text-lg font-bold text-red-400 mb-1">VS</div>
                         <Badge
                           className={`${
                             match.status === "live"
@@ -419,9 +382,7 @@ export function TournamentSystem() {
                       {/* Player 2 */}
                       <div className="flex items-center gap-3">
                         <div className="text-right">
-                          <div className="font-semibold">
-                            {match.player2.name}
-                          </div>
+                          <div className="font-semibold">{match.player2.name}</div>
                           <div className="text-xs text-muted-foreground">
                             {match.player2.country} • Rank #{match.player2.rank}
                           </div>

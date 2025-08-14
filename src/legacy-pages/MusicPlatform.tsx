@@ -60,9 +60,7 @@ export default function MusicPlatform() {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-green-400 bg-clip-text text-transparent mb-4">
             🎵 Music Platform
           </h1>
-          <p className="text-xl text-muted-foreground">
-            Discover and stream eco-conscious music
-          </p>
+          <p className="text-xl text-muted-foreground">Discover and stream eco-conscious music</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -82,12 +80,8 @@ export default function MusicPlatform() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold">{currentTrack.title}</h3>
-                    <p className="text-muted-foreground">
-                      {currentTrack.artist}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {currentTrack.album}
-                    </p>
+                    <p className="text-muted-foreground">{currentTrack.artist}</p>
+                    <p className="text-sm text-muted-foreground">{currentTrack.album}</p>
                   </div>
                 </div>
 
@@ -118,11 +112,7 @@ export default function MusicPlatform() {
                     onClick={() => setIsPlaying(!isPlaying)}
                     className="bg-purple-600 hover:bg-purple-700 rounded-full w-12 h-12"
                   >
-                    {isPlaying ? (
-                      <Pause className="h-6 w-6" />
-                    ) : (
-                      <Play className="h-6 w-6" />
-                    )}
+                    {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
                   </Button>
                   <Button variant="ghost" size="sm">
                     <SkipForward className="h-5 w-5" />
@@ -170,15 +160,11 @@ export default function MusicPlatform() {
                         </div>
                         <div>
                           <p className="font-medium">Ocean Waves {i + 1}</p>
-                          <p className="text-sm text-muted-foreground">
-                            Nature Sounds
-                          </p>
+                          <p className="text-sm text-muted-foreground">Nature Sounds</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-muted-foreground">
-                          3:45
-                        </span>
+                        <span className="text-sm text-muted-foreground">3:45</span>
                         <Button variant="ghost" size="sm">
                           <Play className="h-4 w-4" />
                         </Button>
@@ -228,9 +214,7 @@ export default function MusicPlatform() {
             {/* Stats */}
             <Card className="border-yellow-500/30 mt-6">
               <CardHeader>
-                <CardTitle className="text-yellow-400">
-                  Listening Stats
-                </CardTitle>
+                <CardTitle className="text-yellow-400">Listening Stats</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between">

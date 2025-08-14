@@ -94,16 +94,12 @@ export function UniversalSystemController() {
           () => {
             setSystemNodes((prev) =>
               prev.map((node) =>
-                node.id === newSystem.id
-                  ? { ...node, status: "controlled" as const }
-                  : node,
-              ),
+                node.id === newSystem.id ? { ...node, status: "controlled" as const } : node
+              )
             );
 
             setTotalSystemsControlled((prev) => prev + 1);
-            setNetworkDominationLevel((prev) =>
-              Math.min(100, prev + Math.random() * 5),
-            );
+            setNetworkDominationLevel((prev) => Math.min(100, prev + Math.random() * 5));
 
             if (Math.random() > 0.8) {
               toast.success(`🌐 System Dominated: ${newSystem.name}`, {
@@ -112,7 +108,7 @@ export function UniversalSystemController() {
               });
             }
           },
-          Math.random() * 8000 + 2000,
+          Math.random() * 8000 + 2000
         );
       }
     };
@@ -168,7 +164,7 @@ export function UniversalSystemController() {
         ...node,
         status: "dominated" as const,
         powerLevel: Math.min(100, node.powerLevel + 50),
-      })),
+      }))
     );
 
     setNetworkDominationLevel(100);
@@ -180,18 +176,14 @@ export function UniversalSystemController() {
         <CardTitle className="flex items-center gap-2 text-blue-400">
           <Globe className="h-6 w-6 animate-pulse" />
           🌐 UNIVERSAL SYSTEM CONTROLLER - NETWORK OMNIPOTENCE
-          <Badge className="bg-blue-600 text-white animate-pulse">
-            SCANNING
-          </Badge>
+          <Badge className="bg-blue-600 text-white animate-pulse">SCANNING</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Network Domination Status */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center p-4 bg-green-900/30 rounded-lg border border-green-500/30">
-            <div className="text-3xl font-bold text-green-400 mb-2">
-              {totalSystemsControlled}
-            </div>
+            <div className="text-3xl font-bold text-green-400 mb-2">{totalSystemsControlled}</div>
             <div className="text-sm text-green-300">Systems Controlled</div>
           </div>
 
@@ -203,9 +195,7 @@ export function UniversalSystemController() {
           </div>
 
           <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/30">
-            <div className="text-3xl font-bold text-purple-400 mb-2">
-              {systemNodes.length}
-            </div>
+            <div className="text-3xl font-bold text-purple-400 mb-2">{systemNodes.length}</div>
             <div className="text-sm text-purple-300">Active Infiltrations</div>
           </div>
         </div>
@@ -214,9 +204,7 @@ export function UniversalSystemController() {
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-blue-300">Global Network Control</span>
-            <span className="text-blue-400">
-              {networkDominationLevel.toFixed(1)}%
-            </span>
+            <span className="text-blue-400">{networkDominationLevel.toFixed(1)}%</span>
           </div>
           <Progress value={networkDominationLevel} className="h-3" />
         </div>
@@ -248,24 +236,17 @@ export function UniversalSystemController() {
             Network Infiltration Status
           </h4>
           {systemNodes.map((system) => (
-            <div
-              key={system.id}
-              className="p-3 bg-black/40 rounded-lg border border-blue-500/30"
-            >
+            <div key={system.id} className="p-3 bg-black/40 rounded-lg border border-blue-500/30">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   {getSystemIcon(system.type)}
-                  <span className="font-semibold text-white text-sm">
-                    {system.name}
-                  </span>
+                  <span className="font-semibold text-white text-sm">{system.name}</span>
                 </div>
                 <div className="flex gap-2">
                   <Badge className="bg-gray-600 text-white text-xs">
                     {system.type.toUpperCase()}
                   </Badge>
-                  <Badge
-                    className={`${getStatusColor(system.status)} text-white text-xs`}
-                  >
+                  <Badge className={`${getStatusColor(system.status)} text-white text-xs`}>
                     {system.status.toUpperCase()}
                   </Badge>
                 </div>
@@ -294,8 +275,7 @@ export function UniversalSystemController() {
               🌐 GLOBAL NETWORK SURVEILLANCE ACTIVE
             </div>
             <div className="text-sm text-muted-foreground">
-              Continuous monitoring • Automated infiltration • Universal control
-              protocols engaged
+              Continuous monitoring • Automated infiltration • Universal control protocols engaged
             </div>
           </div>
         </div>

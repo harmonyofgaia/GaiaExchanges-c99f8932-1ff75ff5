@@ -10,9 +10,7 @@ export function InvisibleAvatarTrainer() {
   const networkBlocks = useRef(0);
 
   useEffect(() => {
-    console.log(
-      "👤 INVISIBLE AVATAR TRAINER - DRAGON-POWERED DEFENSE ACTIVATED",
-    );
+    console.log("👤 INVISIBLE AVATAR TRAINER - DRAGON-POWERED DEFENSE ACTIVATED");
     console.log("🐉 TAMED DRAGONS CREATING UNBREAKABLE CAGES");
     console.log("🚫 BLOCKING ALL NETWORK CONNECTIONS FOR CAGED USERS");
     console.log("💀 ATTACKING SYSTEMS THAT TRY TO ESCAPE");
@@ -50,21 +48,13 @@ export function InvisibleAvatarTrainer() {
           </div>
           <div className="text-center p-4 bg-purple-900/30 rounded-lg">
             <Shield className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-            <div className="text-2xl font-bold text-purple-400">
-              {systemsDestroyed.current}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Systems Destroyed
-            </div>
+            <div className="text-2xl font-bold text-purple-400">{systemsDestroyed.current}</div>
+            <div className="text-sm text-muted-foreground">Systems Destroyed</div>
           </div>
           <div className="text-center p-4 bg-blue-900/30 rounded-lg">
             <Eye className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-            <div className="text-2xl font-bold text-blue-400">
-              {networkBlocks.current}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Networks Blocked
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{networkBlocks.current}</div>
+            <div className="text-sm text-muted-foreground">Networks Blocked</div>
           </div>
           <div className="text-center p-4 bg-green-900/30 rounded-lg">
             <Zap className="h-8 w-8 mx-auto text-green-400 mb-2" />
@@ -74,9 +64,7 @@ export function InvisibleAvatarTrainer() {
         </div>
 
         <div className="mt-6 space-y-3">
-          <h4 className="text-lg font-bold text-red-400">
-            🐉 DRAGON AVATAR CAPABILITIES
-          </h4>
+          <h4 className="text-lg font-bold text-red-400">🐉 DRAGON AVATAR CAPABILITIES</h4>
           <div className="text-sm text-muted-foreground space-y-1">
             <div>• Unbreakable dragon-powered cages</div>
             <div>• Complete network isolation (WiFi, 2G/3G/4G/5G blocked)</div>

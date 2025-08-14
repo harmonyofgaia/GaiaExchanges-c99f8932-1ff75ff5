@@ -52,27 +52,19 @@ export function PageSpecificNeuralBackground() {
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black" />
 
       {/* Matrix overlay for matrix or hybrid types */}
-      {(style.backgroundType === "matrix" ||
-        style.backgroundType === "hybrid") && <NeuralElectricMatrix />}
+      {(style.backgroundType === "matrix" || style.backgroundType === "hybrid") && (
+        <NeuralElectricMatrix />
+      )}
 
       {/* Neural pathways for neural or hybrid types */}
-      {(style.backgroundType === "neural" ||
-        style.backgroundType === "hybrid") && (
-        <NeuralElectricBackground
-          style={style.colorScheme}
-          intensity={style.intensity}
-        />
+      {(style.backgroundType === "neural" || style.backgroundType === "hybrid") && (
+        <NeuralElectricBackground style={style.colorScheme} intensity={style.intensity} />
       )}
 
       {/* Flowing electrical currents */}
       <div className="absolute inset-0 overflow-hidden">
         {Array.from({
-          length:
-            style.intensity === "high"
-              ? 8
-              : style.intensity === "medium"
-                ? 5
-                : 3,
+          length: style.intensity === "high" ? 8 : style.intensity === "medium" ? 5 : 3,
         }).map((_, i) => (
           <div
             key={`flow-${i}`}

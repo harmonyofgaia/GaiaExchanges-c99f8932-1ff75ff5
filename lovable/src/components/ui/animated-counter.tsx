@@ -6,11 +6,7 @@ interface AnimatedCounterProps {
   className?: string;
 }
 
-export function AnimatedCounter({
-  value,
-  duration = 2000,
-  className = "",
-}: AnimatedCounterProps) {
+export function AnimatedCounter({ value, duration = 2000, className = "" }: AnimatedCounterProps) {
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {

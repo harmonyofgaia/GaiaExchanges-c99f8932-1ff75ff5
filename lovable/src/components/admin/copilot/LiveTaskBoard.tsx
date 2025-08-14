@@ -139,10 +139,8 @@ export function LiveTaskBoard() {
   const startTask = useCallback((taskId: string) => {
     setTasks((prev) =>
       prev.map((task) =>
-        task.id === taskId
-          ? { ...task, status: "in-progress", startedAt: new Date() }
-          : task,
-      ),
+        task.id === taskId ? { ...task, status: "in-progress", startedAt: new Date() } : task
+      )
     );
   }, []);
 
@@ -167,10 +165,8 @@ export function LiveTaskBoard() {
   const completeTask = (taskId: string) => {
     setTasks((prev) =>
       prev.map((task) =>
-        task.id === taskId
-          ? { ...task, status: "completed", completedAt: new Date() }
-          : task,
-      ),
+        task.id === taskId ? { ...task, status: "completed", completedAt: new Date() } : task
+      )
     );
     toast.success("Task Completed", {
       description: "The task has been marked as completed.",
@@ -180,9 +176,7 @@ export function LiveTaskBoard() {
 
   const blockTask = (taskId: string) => {
     setTasks((prev) =>
-      prev.map((task) =>
-        task.id === taskId ? { ...task, status: "blocked" } : task,
-      ),
+      prev.map((task) => (task.id === taskId ? { ...task, status: "blocked" } : task))
     );
     toast.warning("Task Blocked", {
       description: "The task has been marked as blocked.",
@@ -235,9 +229,7 @@ export function LiveTaskBoard() {
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-3xl font-bold text-gray-900">
-            🚀 Live Task Board
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900">🚀 Live Task Board</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Manage tasks in real-time with Copilot assistance.
           </p>
@@ -270,10 +262,7 @@ export function LiveTaskBoard() {
                 />
               </div>
             </div>
-            <Button
-              onClick={addTask}
-              className="bg-blue-600 hover:bg-blue-700 text-white"
-            >
+            <Button onClick={addTask} className="bg-blue-600 hover:bg-blue-700 text-white">
               Add Task
             </Button>
           </CardContent>
@@ -301,18 +290,12 @@ export function LiveTaskBoard() {
                   <TableRow key={task.id}>
                     <TableCell className="font-medium">{task.title}</TableCell>
                     <TableCell>
-                      {task.status === "pending" && (
-                        <Badge variant="secondary">Pending</Badge>
-                      )}
+                      {task.status === "pending" && <Badge variant="secondary">Pending</Badge>}
                       {task.status === "in-progress" && (
-                        <Badge className="bg-blue-500 text-white">
-                          In Progress
-                        </Badge>
+                        <Badge className="bg-blue-500 text-white">In Progress</Badge>
                       )}
                       {task.status === "completed" && (
-                        <Badge className="bg-green-500 text-white">
-                          Completed
-                        </Badge>
+                        <Badge className="bg-green-500 text-white">Completed</Badge>
                       )}
                       {task.status === "blocked" && (
                         <Badge className="bg-red-500 text-white">Blocked</Badge>
@@ -321,13 +304,8 @@ export function LiveTaskBoard() {
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <Avatar>
-                          <AvatarImage
-                            src={task.assignee.avatar}
-                            alt={task.assignee.name}
-                          />
-                          <AvatarFallback>
-                            {task.assignee.name.slice(0, 2)}
-                          </AvatarFallback>
+                          <AvatarImage src={task.assignee.avatar} alt={task.assignee.name} />
+                          <AvatarFallback>{task.assignee.name.slice(0, 2)}</AvatarFallback>
                         </Avatar>
                         <span>{task.assignee.name}</span>
                       </div>
@@ -348,9 +326,7 @@ export function LiveTaskBoard() {
                             <Clock4 className="h-4 w-4 mr-2" />
                             Start Task
                           </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => completeTask(task.id)}
-                          >
+                          <DropdownMenuItem onClick={() => completeTask(task.id)}>
                             <CheckCircle2 className="h-4 w-4 mr-2" />
                             Complete Task
                           </DropdownMenuItem>
@@ -359,9 +335,7 @@ export function LiveTaskBoard() {
                             Block Task
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem
-                            onClick={() => setSelectedTask(task)}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedTask(task)}>
                             <UserRound className="h-4 w-4 mr-2" />
                             View Details
                           </DropdownMenuItem>

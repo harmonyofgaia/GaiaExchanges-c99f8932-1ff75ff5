@@ -7,10 +7,7 @@ interface AgeLandscapeSelectorProps {
   onAgeSelect: (age: string) => void;
 }
 
-export function AgeLandscapeSelector({
-  selectedAge,
-  onAgeSelect,
-}: AgeLandscapeSelectorProps) {
+export function AgeLandscapeSelector({ selectedAge, onAgeSelect }: AgeLandscapeSelectorProps) {
   const ageGroups = [
     {
       range: "6-8",
@@ -51,9 +48,7 @@ export function AgeLandscapeSelector({
           onClick={() => onAgeSelect(group.range)}
         >
           <CardContent className="p-4 text-center">
-            <Badge className={`${group.color} text-white mb-3`}>
-              Ages {group.range}
-            </Badge>
+            <Badge className={`${group.color} text-white mb-3`}>Ages {group.range}</Badge>
             <h3 className="font-bold text-lg mb-2">{group.title}</h3>
             <p className="text-sm text-muted-foreground">{group.description}</p>
           </CardContent>

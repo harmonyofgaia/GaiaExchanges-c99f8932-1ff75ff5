@@ -35,8 +35,7 @@ export function UltimateWalletProtection() {
 
   const securityEngine = QuantumSecurityEngine();
   const masterOrchestrator = MasterSecurityOrchestrator();
-  const [isLaunchingMaximumProtection, setIsLaunchingMaximumProtection] =
-    useState(false);
+  const [isLaunchingMaximumProtection, setIsLaunchingMaximumProtection] = useState(false);
 
   useEffect(() => {
     console.log("🛡️ ULTIMATE WALLET PROTECTION - 10X STRONGER THAN ANY SYSTEM");
@@ -49,8 +48,7 @@ export function UltimateWalletProtection() {
 
     // Ultimate wallet protection activation
     toast.success("🛡️ ULTIMATE WALLET PROTECTION ACTIVATED!", {
-      description:
-        "👑 Harmony of Gaia and all holders now have MAXIMUM security",
+      description: "👑 Harmony of Gaia and all holders now have MAXIMUM security",
       duration: 8000,
     });
   }, []);
@@ -59,8 +57,7 @@ export function UltimateWalletProtection() {
     setIsLaunchingMaximumProtection(true);
 
     toast.error("👑 MAXIMUM PROTECTION PROTOCOL ACTIVATED!", {
-      description:
-        "Engaging all security systems at 10X capacity - UNBREAKABLE DEFENSE ACTIVE",
+      description: "Engaging all security systems at 10X capacity - UNBREAKABLE DEFENSE ACTIVE",
       duration: 10000,
     });
 
@@ -74,8 +71,7 @@ export function UltimateWalletProtection() {
       setIsLaunchingMaximumProtection(false);
 
       toast.success("🌟 MAXIMUM PROTECTION COMPLETE!", {
-        description:
-          "👑 All wallets now have ULTIMATE security - IMPOSSIBLE TO HACK",
+        description: "👑 All wallets now have ULTIMATE security - IMPOSSIBLE TO HACK",
         duration: 8000,
       });
     }, 6000);
@@ -89,12 +85,10 @@ export function UltimateWalletProtection() {
           <CardTitle className="flex items-center gap-3 text-green-400">
             <Crown className="h-8 w-8 animate-pulse" />
             <div>
-              <div className="text-2xl">
-                ULTIMATE WALLET PROTECTION FORTRESS
-              </div>
+              <div className="text-2xl">ULTIMATE WALLET PROTECTION FORTRESS</div>
               <div className="text-sm font-normal text-green-400">
-                👑 Harmony of Gaia + All Holders • 10X Stronger • Self-Learning
-                AI • Zero Vulnerabilities
+                👑 Harmony of Gaia + All Holders • 10X Stronger • Self-Learning AI • Zero
+                Vulnerabilities
               </div>
             </div>
             <Badge
@@ -111,12 +105,8 @@ export function UltimateWalletProtection() {
             <div className="flex items-center gap-2 p-4 rounded-lg bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-500/30">
               <Crown className="h-5 w-5 text-green-400 animate-pulse" />
               <div>
-                <div className="text-sm font-medium text-green-400">
-                  Harmony of Gaia
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Admin Wallet
-                </div>
+                <div className="text-sm font-medium text-green-400">Harmony of Gaia</div>
+                <div className="text-xs text-muted-foreground">Admin Wallet</div>
               </div>
               <CheckCircle className="h-5 w-5 text-green-400 ml-auto animate-pulse" />
             </div>
@@ -124,9 +114,7 @@ export function UltimateWalletProtection() {
             <div className="flex items-center gap-2 p-4 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30">
               <Shield className="h-5 w-5 text-blue-400 animate-pulse" />
               <div>
-                <div className="text-sm font-medium text-blue-400">
-                  All Holders
-                </div>
+                <div className="text-sm font-medium text-blue-400">All Holders</div>
                 <div className="text-xs text-muted-foreground">Protected</div>
               </div>
               <CheckCircle className="h-5 w-5 text-blue-400 ml-auto animate-pulse" />
@@ -135,12 +123,8 @@ export function UltimateWalletProtection() {
             <div className="flex items-center gap-2 p-4 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30">
               <Brain className="h-5 w-5 text-purple-400 animate-pulse" />
               <div>
-                <div className="text-sm font-medium text-purple-400">
-                  AI Learning
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Self-Improving
-                </div>
+                <div className="text-sm font-medium text-purple-400">AI Learning</div>
+                <div className="text-xs text-muted-foreground">Self-Improving</div>
               </div>
               <CheckCircle className="h-5 w-5 text-purple-400 ml-auto animate-pulse" />
             </div>
@@ -148,12 +132,8 @@ export function UltimateWalletProtection() {
             <div className="flex items-center gap-2 p-4 rounded-lg bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-500/30">
               <Zap className="h-5 w-5 text-orange-400 animate-pulse" />
               <div>
-                <div className="text-sm font-medium text-orange-400">
-                  10X Speed
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Lightning Fast
-                </div>
+                <div className="text-sm font-medium text-orange-400">10X Speed</div>
+                <div className="text-xs text-muted-foreground">Lightning Fast</div>
               </div>
               <CheckCircle className="h-5 w-5 text-orange-400 ml-auto animate-pulse" />
             </div>
@@ -161,9 +141,7 @@ export function UltimateWalletProtection() {
             <div className="flex items-center gap-2 p-4 rounded-lg bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border border-yellow-500/30">
               <Globe className="h-5 w-5 text-yellow-400 animate-pulse" />
               <div>
-                <div className="text-sm font-medium text-yellow-400">
-                  Global Network
-                </div>
+                <div className="text-sm font-medium text-yellow-400">Global Network</div>
                 <div className="text-xs text-muted-foreground">Worldwide</div>
               </div>
               <CheckCircle className="h-5 w-5 text-yellow-400 ml-auto animate-pulse" />
@@ -203,23 +181,15 @@ export function UltimateWalletProtection() {
                   {masterOrchestrator.threatIntel.blockedAttacks}
                 </div>
                 <div className="text-muted-foreground">Attacks Defeated</div>
-                <Badge className="mt-1 bg-orange-600 text-white">
-                  UNBEATABLE
-                </Badge>
+                <Badge className="mt-1 bg-orange-600 text-white">UNBEATABLE</Badge>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-yellow-400 animate-pulse">
-                  ∞
-                </div>
+                <div className="text-2xl font-bold text-yellow-400 animate-pulse">∞</div>
                 <div className="text-muted-foreground">Protection Layers</div>
-                <Badge className="mt-1 bg-yellow-600 text-white">
-                  INFINITE
-                </Badge>
+                <Badge className="mt-1 bg-yellow-600 text-white">INFINITE</Badge>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-cyan-400 animate-pulse">
-                  0
-                </div>
+                <div className="text-2xl font-bold text-cyan-400 animate-pulse">0</div>
                 <div className="text-muted-foreground">Vulnerabilities</div>
                 <Badge className="mt-1 bg-cyan-600 text-white">ZERO</Badge>
               </div>
@@ -249,8 +219,7 @@ export function UltimateWalletProtection() {
               <div className="space-y-2">
                 <Progress value={85} className="h-4" />
                 <p className="text-center text-green-400 font-semibold animate-pulse">
-                  🛡️ Activating all 10X security systems... All wallets being
-                  secured...
+                  🛡️ Activating all 10X security systems... All wallets being secured...
                 </p>
               </div>
             )}
@@ -262,16 +231,10 @@ export function UltimateWalletProtection() {
               🌟 ULTIMATE PROTECTION FEATURES - 10X STRONGER:
             </h4>
             <div className="flex flex-wrap gap-2">
-              <Badge
-                variant="outline"
-                className="border-green-500/20 text-green-400 animate-pulse"
-              >
+              <Badge variant="outline" className="border-green-500/20 text-green-400 animate-pulse">
                 👑 Harmony of Gaia MAXIMUM Security
               </Badge>
-              <Badge
-                variant="outline"
-                className="border-blue-500/20 text-blue-400 animate-pulse"
-              >
+              <Badge variant="outline" className="border-blue-500/20 text-blue-400 animate-pulse">
                 🛡️ All Holders Quantum Protection
               </Badge>
               <Badge
@@ -286,16 +249,10 @@ export function UltimateWalletProtection() {
               >
                 ⚡ 10X Faster Response Time
               </Badge>
-              <Badge
-                variant="outline"
-                className="border-cyan-500/20 text-cyan-400 animate-pulse"
-              >
+              <Badge variant="outline" className="border-cyan-500/20 text-cyan-400 animate-pulse">
                 🌍 Global Intelligence Network
               </Badge>
-              <Badge
-                variant="outline"
-                className="border-pink-500/20 text-pink-400 animate-pulse"
-              >
+              <Badge variant="outline" className="border-pink-500/20 text-pink-400 animate-pulse">
                 🔐 Infinite Security Layers
               </Badge>
               <Badge
@@ -304,10 +261,7 @@ export function UltimateWalletProtection() {
               >
                 💎 Zero Vulnerability Guarantee
               </Badge>
-              <Badge
-                variant="outline"
-                className="border-red-500/20 text-red-400 animate-pulse"
-              >
+              <Badge variant="outline" className="border-red-500/20 text-red-400 animate-pulse">
                 🚨 Instant Threat Neutralization
               </Badge>
             </div>
@@ -325,8 +279,8 @@ export function UltimateWalletProtection() {
             </h3>
             <div className="max-w-5xl mx-auto space-y-4 text-yellow-200">
               <p className="text-xl font-bold">
-                "HARMONY OF GAIA AND ALL HOLDERS ARE NOW PROTECTED BY THE MOST
-                ADVANCED SECURITY SYSTEM EVER CREATED"
+                "HARMONY OF GAIA AND ALL HOLDERS ARE NOW PROTECTED BY THE MOST ADVANCED SECURITY
+                SYSTEM EVER CREATED"
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                 <div className="p-6 bg-green-900/30 rounded-lg border border-green-500/30">
@@ -343,9 +297,7 @@ export function UltimateWalletProtection() {
                   </ul>
                 </div>
                 <div className="p-6 bg-blue-900/30 rounded-lg border border-blue-500/30">
-                  <h4 className="font-bold text-blue-300 mb-3 text-xl">
-                    🛡️ ALL HOLDERS BENEFITS:
-                  </h4>
+                  <h4 className="font-bold text-blue-300 mb-3 text-xl">🛡️ ALL HOLDERS BENEFITS:</h4>
                   <ul className="text-sm space-y-2">
                     <li>• Every wallet: QUANTUM ENCRYPTION PROTECTION</li>
                     <li>• Real-time monitoring: 24/7 THREAT DETECTION</li>
@@ -357,13 +309,11 @@ export function UltimateWalletProtection() {
                 </div>
               </div>
               <p className="text-lg text-yellow-400 font-bold mt-6">
-                🚀 "WE ARE 10X STRONGER, 10X FASTER, AND 10X SMARTER THAN ANY
-                OTHER SYSTEM" 🚀
+                🚀 "WE ARE 10X STRONGER, 10X FASTER, AND 10X SMARTER THAN ANY OTHER SYSTEM" 🚀
               </p>
               <p className="text-base text-yellow-300">
-                Building the world's most secure, transparent, and unbreakable
-                cryptocurrency ecosystem. Your security is our ultimate priority
-                - HARMONY OF GAIA NEVER FAILS! 🛡️
+                Building the world's most secure, transparent, and unbreakable cryptocurrency
+                ecosystem. Your security is our ultimate priority - HARMONY OF GAIA NEVER FAILS! 🛡️
               </p>
             </div>
           </div>

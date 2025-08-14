@@ -31,9 +31,7 @@ interface SuspiciousTransaction {
 }
 
 export function TransactionReversalSystem() {
-  const [suspiciousTransactions, setSuspiciousTransactions] = useState<
-    SuspiciousTransaction[]
-  >([
+  const [suspiciousTransactions, setSuspiciousTransactions] = useState<SuspiciousTransaction[]>([
     {
       id: "tx_suspicious_001",
       fromAddress: "0x1234...malicious",
@@ -62,9 +60,7 @@ export function TransactionReversalSystem() {
     },
   ]);
 
-  const [adminWalletAddress] = useState(
-    "CdWdJHyH6Tss3z1PLGNWtMp8Nst1sU2eSKb4o9P8S6fZ",
-  );
+  const [adminWalletAddress] = useState("CdWdJHyH6Tss3z1PLGNWtMp8Nst1sU2eSKb4o9P8S6fZ");
   const [monitoringActive, setMonitoringActive] = useState(true);
 
   useEffect(() => {
@@ -86,20 +82,14 @@ export function TransactionReversalSystem() {
           timestamp: new Date(),
           status: "SUSPICIOUS",
           riskScore: Math.floor(Math.random() * 30) + 70,
-          location: [
-            "Unknown VPN",
-            "Dark Web",
-            "Suspicious IP",
-            "Blocked Region",
-          ][Math.floor(Math.random() * 4)],
+          location: ["Unknown VPN", "Dark Web", "Suspicious IP", "Blocked Region"][
+            Math.floor(Math.random() * 4)
+          ],
           userAgent: "Suspicious Activity Detected",
           deviceFingerprint: `suspicious_${Date.now()}`,
         };
 
-        setSuspiciousTransactions((prev) => [
-          newSuspiciousTransaction,
-          ...prev.slice(0, 9),
-        ]);
+        setSuspiciousTransactions((prev) => [newSuspiciousTransaction, ...prev.slice(0, 9)]);
 
         toast.error("🚨 SUSPICIOUS TRANSACTION DETECTED!", {
           description: `${newSuspiciousTransaction.amount} ${newSuspiciousTransaction.currency} flagged for review`,
@@ -125,15 +115,11 @@ export function TransactionReversalSystem() {
   };
 
   const handleReverseTransaction = (transactionId: string) => {
-    const transaction = suspiciousTransactions.find(
-      (tx) => tx.id === transactionId,
-    );
+    const transaction = suspiciousTransactions.find((tx) => tx.id === transactionId);
     if (!transaction) return;
 
     setSuspiciousTransactions((prev) =>
-      prev.map((tx) =>
-        tx.id === transactionId ? { ...tx, status: "REVERSED" as const } : tx,
-      ),
+      prev.map((tx) => (tx.id === transactionId ? { ...tx, status: "REVERSED" as const } : tx))
     );
 
     toast.success("⚡ TRANSACTION REVERSED!", {
@@ -171,9 +157,7 @@ export function TransactionReversalSystem() {
 
   const handleApproveTransaction = (transactionId: string) => {
     setSuspiciousTransactions((prev) =>
-      prev.map((tx) =>
-        tx.id === transactionId ? { ...tx, status: "APPROVED" as const } : tx,
-      ),
+      prev.map((tx) => (tx.id === transactionId ? { ...tx, status: "APPROVED" as const } : tx))
     );
 
     toast.success("✅ Transaction Approved", {
@@ -213,9 +197,7 @@ export function TransactionReversalSystem() {
             🚨 TRANSACTION REVERSAL SYSTEM - COMMUNITY PROTECTION
           </CardTitle>
           <div className="flex gap-4 text-sm">
-            <Badge className="bg-red-600 animate-pulse">
-              FRAUD DETECTION: ACTIVE
-            </Badge>
+            <Badge className="bg-red-600 animate-pulse">FRAUD DETECTION: ACTIVE</Badge>
             <Badge className="bg-purple-600">ADMIN WALLET: PROTECTED</Badge>
             <Badge className="bg-green-600">COMMUNITY: SECURED</Badge>
           </div>
@@ -223,9 +205,7 @@ export function TransactionReversalSystem() {
         <CardContent>
           <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-green-400 font-bold">
-                🏦 Admin Protection Wallet:
-              </span>
+              <span className="text-green-400 font-bold">🏦 Admin Protection Wallet:</span>
               <Badge className="bg-green-600 text-white">SECURED</Badge>
             </div>
             <code className="text-green-300 font-mono text-sm break-all block bg-green-900/10 p-2 rounded">
@@ -241,9 +221,7 @@ export function TransactionReversalSystem() {
       {/* Suspicious Transactions */}
       <Card className="bg-black/30 border-red-500/30">
         <CardHeader>
-          <CardTitle className="text-red-400">
-            🚨 SUSPICIOUS TRANSACTIONS - ADMIN CONTROL
-          </CardTitle>
+          <CardTitle className="text-red-400">🚨 SUSPICIOUS TRANSACTIONS - ADMIN CONTROL</CardTitle>
         </CardHeader>
         <CardContent>
           <ScrollArea className="h-96">
@@ -264,9 +242,7 @@ export function TransactionReversalSystem() {
                   <CardContent className="p-4">
                     <div className="flex justify-between items-start mb-3">
                       <div>
-                        <h4 className="font-bold text-sm">
-                          🚨 Transaction ID: {transaction.id}
-                        </h4>
+                        <h4 className="font-bold text-sm">🚨 Transaction ID: {transaction.id}</h4>
                         <p className="text-xs text-muted-foreground">
                           💰 Amount: {transaction.amount} {transaction.currency}
                         </p>
@@ -298,9 +274,7 @@ export function TransactionReversalSystem() {
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock className="h-3 w-3" />
-                        <span>
-                          Time: {transaction.timestamp.toLocaleString()}
-                        </span>
+                        <span>Time: {transaction.timestamp.toLocaleString()}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Eye className="h-3 w-3" />
@@ -314,8 +288,7 @@ export function TransactionReversalSystem() {
                         onClick={() => handleReverseTransaction(transaction.id)}
                         className="bg-purple-600 hover:bg-purple-700 text-xs"
                         disabled={
-                          transaction.status === "REVERSED" ||
-                          transaction.status === "APPROVED"
+                          transaction.status === "REVERSED" || transaction.status === "APPROVED"
                         }
                       >
                         <Undo2 className="h-3 w-3 mr-1" />⚡ Reverse & Secure
@@ -325,8 +298,7 @@ export function TransactionReversalSystem() {
                         onClick={() => handleApproveTransaction(transaction.id)}
                         className="bg-green-600 hover:bg-green-700 text-xs"
                         disabled={
-                          transaction.status === "REVERSED" ||
-                          transaction.status === "APPROVED"
+                          transaction.status === "REVERSED" || transaction.status === "APPROVED"
                         }
                       >
                         ✅ Approve

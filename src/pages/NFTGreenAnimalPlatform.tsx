@@ -18,13 +18,12 @@ const NFTGreenAnimalPlatform = () => {
                 🐾 NFT GREEN ANIMAL PLATFORM
               </CardTitle>
               <p className="text-center text-xl text-muted-foreground">
-                Conservation Through Technology • Real Animals • Real Impact •
-                Real-Time Tracking
+                Conservation Through Technology • Real Animals • Real Impact • Real-Time Tracking
               </p>
               <div className="text-center mt-4 space-y-2">
                 <div className="text-lg text-green-400 font-bold">
-                  🌍 Protecting Wildlife Through Blockchain • GAiA Powered •
-                  Quantum Secured • Investor Ready
+                  🌍 Protecting Wildlife Through Blockchain • GAiA Powered • Quantum Secured •
+                  Investor Ready
                 </div>
               </div>
             </CardHeader>
@@ -32,17 +31,11 @@ const NFTGreenAnimalPlatform = () => {
 
           <Tabs defaultValue="living-animals" className="w-full">
             <TabsList className="grid w-full grid-cols-6">
-              <TabsTrigger value="living-animals">
-                🦋 All Living Animals
-              </TabsTrigger>
+              <TabsTrigger value="living-animals">🦋 All Living Animals</TabsTrigger>
               <TabsTrigger value="marketplace">🏪 NFT Marketplace</TabsTrigger>
-              <TabsTrigger value="tracking">
-                📡 Live Animal Tracking
-              </TabsTrigger>
+              <TabsTrigger value="tracking">📡 Live Animal Tracking</TabsTrigger>
               <TabsTrigger value="creator">🎨 Create Animal NFTs</TabsTrigger>
-              <TabsTrigger value="conservation">
-                🌱 Conservation Hub
-              </TabsTrigger>
+              <TabsTrigger value="conservation">🌱 Conservation Hub</TabsTrigger>
               <TabsTrigger value="investors">💰 Global Investors</TabsTrigger>
             </TabsList>
 

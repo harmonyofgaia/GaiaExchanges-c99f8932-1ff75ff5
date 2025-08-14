@@ -123,9 +123,7 @@ The AdminDashboardTabs system has been thoroughly audited and stabilized with th
 
 ```typescript
 // Correct lazy loading pattern with default exports
-const AdminControlSystem = React.lazy(
-  () => import("@/components/AdminControlSystem"),
-);
+const AdminControlSystem = React.lazy(() => import("@/components/AdminControlSystem"));
 const RefactoredAdminTools = React.lazy(() => import("./RefactoredAdminTools"));
 // ... other components
 ```

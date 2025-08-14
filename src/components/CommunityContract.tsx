@@ -7,15 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { supabase } from "@/integrations/supabase/client";
-import {
-  Leaf,
-  FileText,
-  Shield,
-  Users,
-  DollarSign,
-  Globe,
-  CheckCircle,
-} from "lucide-react";
+import { Leaf, FileText, Shield, Users, DollarSign, Globe, CheckCircle } from "lucide-react";
 
 interface GreenProject {
   id: string;
@@ -199,7 +191,7 @@ Contact: +31687758236 for any questions or concerns
           ...contractData,
           contract_hash: btoa(contractId + Date.now()),
           signed_at: new Date().toISOString(),
-        }),
+        })
       );
 
       // Also save to notifications table which exists
@@ -240,9 +232,7 @@ Contact: +31687758236 for any questions or concerns
       <Card className="border-yellow-500/20">
         <CardContent className="p-8 text-center">
           <Shield className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-yellow-400 mb-2">
-            Authentication Required
-          </h3>
+          <h3 className="text-xl font-semibold text-yellow-400 mb-2">Authentication Required</h3>
           <p className="text-muted-foreground">
             Please log in to access community reinvestment contracts.
           </p>
@@ -260,21 +250,17 @@ Contact: +31687758236 for any questions or concerns
             Contract Signed Successfully!
           </h3>
           <p className="text-muted-foreground mb-6">
-            Thank you for joining our green reinvestment project. Your contract
-            has been submitted for admin approval.
+            Thank you for joining our green reinvestment project. Your contract has been submitted
+            for admin approval.
           </p>
           <div className="bg-muted/30 rounded-lg p-4 space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Project:</span>
-              <span className="text-green-400">
-                {selectedProjectData?.name}
-              </span>
+              <span className="text-green-400">{selectedProjectData?.name}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Investment:</span>
-              <span className="text-green-400">
-                ${formData.investmentAmount}
-              </span>
+              <span className="text-green-400">${formData.investmentAmount}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Status:</span>
@@ -282,8 +268,7 @@ Contact: +31687758236 for any questions or concerns
             </div>
           </div>
           <p className="text-xs text-muted-foreground mt-4">
-            You will receive confirmation once your participation is approved by
-            our admin team.
+            You will receive confirmation once your participation is approved by our admin team.
           </p>
         </CardContent>
       </Card>
@@ -302,9 +287,7 @@ Contact: +31687758236 for any questions or concerns
         </CardHeader>
         <CardContent>
           {projects.length === 0 ? (
-            <p className="text-muted-foreground">
-              Loading available projects...
-            </p>
+            <p className="text-muted-foreground">Loading available projects...</p>
           ) : (
             <div className="space-y-4">
               {projects.map((project) => (
@@ -318,24 +301,18 @@ Contact: +31687758236 for any questions or concerns
                   onClick={() => setSelectedProject(project.id)}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-semibold text-green-400">
-                      {project.name}
-                    </h3>
+                    <h3 className="font-semibold text-green-400">{project.name}</h3>
                     <div className="text-sm text-muted-foreground">
                       Goal: ${project.goal_amount.toLocaleString()}
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {project.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-2">{project.description}</p>
                   <div className="flex items-center gap-4 text-xs">
                     <span className="text-green-400">
                       <DollarSign className="h-3 w-3 inline mr-1" />
                       Raised: ${project.current_amount.toLocaleString()}
                     </span>
-                    <span className="text-blue-400">
-                      Status: {project.status.toUpperCase()}
-                    </span>
+                    <span className="text-blue-400">Status: {project.status.toUpperCase()}</span>
                   </div>
                 </div>
               ))}
@@ -406,9 +383,7 @@ Contact: +31687758236 for any questions or concerns
               min="1"
               step="0.01"
               value={formData.investmentAmount}
-              onChange={(e) =>
-                handleInputChange("investmentAmount", e.target.value)
-              }
+              onChange={(e) => handleInputChange("investmentAmount", e.target.value)}
               placeholder="100.00"
               required
             />
@@ -419,9 +394,7 @@ Contact: +31687758236 for any questions or concerns
             <Textarea
               id="additionalNotes"
               value={formData.additionalNotes}
-              onChange={(e) =>
-                handleInputChange("additionalNotes", e.target.value)
-              }
+              onChange={(e) => handleInputChange("additionalNotes", e.target.value)}
               placeholder="Any additional comments or questions..."
               rows={3}
             />
@@ -446,15 +419,9 @@ Contact: +31687758236 for any questions or concerns
             </h4>
             <ul className="text-sm text-muted-foreground space-y-1">
               <li>• All contracts are legally binding and digitally signed</li>
-              <li>
-                • Funds are protected by international environmental investment
-                standards
-              </li>
+              <li>• Funds are protected by international environmental investment standards</li>
               <li>• Full transparency with quarterly progress reports</li>
-              <li>
-                • Managed by Culture of Harmony - Licensed Environmental
-                Organization
-              </li>
+              <li>• Managed by Culture of Harmony - Licensed Environmental Organization</li>
               <li>• Contact: info@cultureofharmony.net | +31687758236</li>
             </ul>
           </div>
@@ -485,12 +452,9 @@ Contact: +31687758236 for any questions or concerns
 
           <div className="text-center">
             <p className="text-xs text-muted-foreground">
-              By signing this contract, you agree to the terms and conditions
-              outlined above.
+              By signing this contract, you agree to the terms and conditions outlined above.
               <br />
-              <span className="text-green-400">
-                🌱 Together we build a sustainable future
-              </span>
+              <span className="text-green-400">🌱 Together we build a sustainable future</span>
             </p>
           </div>
         </CardContent>

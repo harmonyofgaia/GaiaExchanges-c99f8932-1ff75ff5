@@ -25,9 +25,7 @@ interface ThreatAlert {
 }
 
 export function ThunderstormDefense() {
-  const [defenseMode, setDefenseMode] = useState<
-    "passive" | "active" | "thunderstorm"
-  >("passive");
+  const [defenseMode, setDefenseMode] = useState<"passive" | "active" | "thunderstorm">("passive");
   const [threats, setThreats] = useState<ThreatAlert[]>([]);
   const [systemStatus, setSystemStatus] = useState({
     firewallActive: true,
@@ -55,9 +53,7 @@ export function ThunderstormDefense() {
           type: ["intrusion", "ddos", "malware", "data_breach"][
             Math.floor(Math.random() * 4)
           ] as any,
-          severity: ["low", "medium", "high", "critical"][
-            Math.floor(Math.random() * 4)
-          ] as any,
+          severity: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as any,
           source: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
           timestamp: new Date(),
           blocked: defenseMode !== "passive",
@@ -73,14 +69,9 @@ export function ThunderstormDefense() {
               newThreat.type === "intrusion"
                 ? prev.intrustionAttempts + 1
                 : prev.intrustionAttempts,
-            ddosAttacks:
-              newThreat.type === "ddos"
-                ? prev.ddosAttacks + 1
-                : prev.ddosAttacks,
+            ddosAttacks: newThreat.type === "ddos" ? prev.ddosAttacks + 1 : prev.ddosAttacks,
             malwareDetected:
-              newThreat.type === "malware"
-                ? prev.malwareDetected + 1
-                : prev.malwareDetected,
+              newThreat.type === "malware" ? prev.malwareDetected + 1 : prev.malwareDetected,
             dataBreachPrevented:
               newThreat.type === "data_breach"
                 ? prev.dataBreachPrevented + 1
@@ -134,8 +125,7 @@ export function ThunderstormDefense() {
       <Card className="border-blue-500/30 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
         <CardHeader>
           <CardTitle className="text-blue-400 flex items-center gap-2">
-            <CloudLightning className="h-6 w-6" />⚡ Thunderstorm Defense
-            Mechanism
+            <CloudLightning className="h-6 w-6" />⚡ Thunderstorm Defense Mechanism
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -188,9 +178,7 @@ export function ThunderstormDefense() {
                     key={key}
                     className="flex items-center justify-between p-2 bg-muted/10 rounded"
                   >
-                    <span className="text-sm capitalize">
-                      {key.replace(/([A-Z])/g, " $1")}
-                    </span>
+                    <span className="text-sm capitalize">{key.replace(/([A-Z])/g, " $1")}</span>
                     <Badge className={active ? "bg-green-600" : "bg-red-600"}>
                       {active ? "ACTIVE" : "OFFLINE"}
                     </Badge>
@@ -207,9 +195,7 @@ export function ThunderstormDefense() {
                 <div className="text-2xl font-bold text-green-400">
                   {metrics.threatsBlocked.toLocaleString()}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Threats Blocked
-                </div>
+                <div className="text-xs text-muted-foreground">Threats Blocked</div>
               </CardContent>
             </Card>
 
@@ -218,9 +204,7 @@ export function ThunderstormDefense() {
                 <div className="text-2xl font-bold text-blue-400">
                   {metrics.intrustionAttempts.toLocaleString()}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Intrusions Stopped
-                </div>
+                <div className="text-xs text-muted-foreground">Intrusions Stopped</div>
               </CardContent>
             </Card>
 
@@ -229,9 +213,7 @@ export function ThunderstormDefense() {
                 <div className="text-2xl font-bold text-orange-400">
                   {metrics.ddosAttacks.toLocaleString()}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  DDoS Deflected
-                </div>
+                <div className="text-xs text-muted-foreground">DDoS Deflected</div>
               </CardContent>
             </Card>
 
@@ -240,9 +222,7 @@ export function ThunderstormDefense() {
                 <div className="text-2xl font-bold text-purple-400">
                   {metrics.malwareDetected.toLocaleString()}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Malware Detected
-                </div>
+                <div className="text-xs text-muted-foreground">Malware Detected</div>
               </CardContent>
             </Card>
 
@@ -251,9 +231,7 @@ export function ThunderstormDefense() {
                 <div className="text-2xl font-bold text-red-400">
                   {metrics.dataBreachPrevented.toLocaleString()}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Breaches Prevented
-                </div>
+                <div className="text-xs text-muted-foreground">Breaches Prevented</div>
               </CardContent>
             </Card>
           </div>
@@ -282,20 +260,14 @@ export function ThunderstormDefense() {
                           <div className="font-semibold text-white capitalize">
                             {threat.type.replace("_", " ")}
                           </div>
-                          <div className="text-xs text-muted-foreground">
-                            From: {threat.source}
-                          </div>
+                          <div className="text-xs text-muted-foreground">From: {threat.source}</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
                         <Badge className={getSeverityColor(threat.severity)}>
                           {threat.severity.toUpperCase()}
                         </Badge>
-                        <Badge
-                          className={
-                            threat.blocked ? "bg-green-600" : "bg-red-600"
-                          }
-                        >
+                        <Badge className={threat.blocked ? "bg-green-600" : "bg-red-600"}>
                           {threat.blocked ? "BLOCKED" : "ACTIVE"}
                         </Badge>
                       </div>
@@ -316,8 +288,8 @@ export function ThunderstormDefense() {
                     ⚡ THUNDERSTORM MODE ACTIVE ⚡
                   </h3>
                   <p className="text-yellow-300">
-                    Maximum security protocols engaged. All threats will be
-                    eliminated with extreme prejudice.
+                    Maximum security protocols engaged. All threats will be eliminated with extreme
+                    prejudice.
                   </p>
                   <div className="mt-4 space-y-2 text-sm text-yellow-200">
                     <div>✅ Quantum Shield Activated</div>

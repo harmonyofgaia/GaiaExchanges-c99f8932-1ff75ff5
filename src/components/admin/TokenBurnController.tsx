@@ -59,9 +59,7 @@ export function TokenBurnController() {
           <CardTitle className="text-red-400 flex items-center gap-2">
             <Flame className="h-6 w-6" />
             🔥 Token Burn Control Center
-            <Badge className="bg-red-600 text-white animate-pulse">
-              ADMIN ONLY
-            </Badge>
+            <Badge className="bg-red-600 text-white animate-pulse">ADMIN ONLY</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -81,19 +79,13 @@ export function TokenBurnController() {
             </div>
             <div className="p-4 bg-purple-900/20 rounded-lg text-center">
               <Shield className="h-6 w-6 text-purple-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-purple-400">
-                {deflationRate}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Deflation Rate
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{deflationRate}%</div>
+              <div className="text-sm text-muted-foreground">Deflation Rate</div>
             </div>
             <div className="p-4 bg-yellow-900/20 rounded-lg text-center">
               <AlertTriangle className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-yellow-400">97.3M</div>
-              <div className="text-sm text-muted-foreground">
-                Remaining Supply
-              </div>
+              <div className="text-sm text-muted-foreground">Remaining Supply</div>
             </div>
           </div>
 
@@ -109,9 +101,7 @@ export function TokenBurnController() {
           {/* Manual Burn Controls */}
           <Card className="border-orange-500/30 bg-orange-900/10">
             <CardHeader>
-              <CardTitle className="text-orange-400 text-lg">
-                Manual Token Burn
-              </CardTitle>
+              <CardTitle className="text-orange-400 text-lg">Manual Token Burn</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-4">
@@ -149,8 +139,8 @@ export function TokenBurnController() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">
-                Emergency burn will immediately burn 1% of total token supply to
-                combat inflation or market manipulation.
+                Emergency burn will immediately burn 1% of total token supply to combat inflation or
+                market manipulation.
               </p>
               <Button
                 onClick={emergencyBurn}
@@ -158,9 +148,7 @@ export function TokenBurnController() {
                 className="bg-red-700 hover:bg-red-800 w-full"
               >
                 <AlertTriangle className="h-4 w-4 mr-2" />
-                {isBurning
-                  ? "Emergency Burn in Progress..."
-                  : "Activate Emergency Burn"}
+                {isBurning ? "Emergency Burn in Progress..." : "Activate Emergency Burn"}
               </Button>
             </CardContent>
           </Card>
@@ -168,9 +156,7 @@ export function TokenBurnController() {
           {/* Burn History */}
           <Card className="border-gray-700/50">
             <CardHeader>
-              <CardTitle className="text-gray-400 text-lg">
-                Recent Burn History
-              </CardTitle>
+              <CardTitle className="text-gray-400 text-lg">Recent Burn History</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -191,9 +177,7 @@ export function TokenBurnController() {
                         {burn.type}
                       </Badge>
                     </div>
-                    <span className="text-sm text-muted-foreground">
-                      {burn.date}
-                    </span>
+                    <span className="text-sm text-muted-foreground">{burn.date}</span>
                   </div>
                 ))}
               </div>

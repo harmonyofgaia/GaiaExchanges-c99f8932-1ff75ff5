@@ -9,8 +9,7 @@ export default function Marketplace() {
             🏪 GAiA MARKETPLACE ECOSYSTEM
           </h1>
           <p className="text-muted-foreground text-lg mt-2">
-            Gaming Items • Eco Products • Digital Assets • Cross-Platform
-            Compatible
+            Gaming Items • Eco Products • Digital Assets • Cross-Platform Compatible
           </p>
           <div className="mt-4 flex justify-center gap-4">
             <div className="bg-green-600 px-4 py-2 rounded-lg">

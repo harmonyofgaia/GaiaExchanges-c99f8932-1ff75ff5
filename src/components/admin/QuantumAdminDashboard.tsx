@@ -2,16 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Shield,
-  Zap,
-  Brain,
-  Globe,
-  Target,
-  TrendingUp,
-  Database,
-  Network,
-} from "lucide-react";
+import { Shield, Zap, Brain, Globe, Target, TrendingUp, Database, Network } from "lucide-react";
 import { QuantumSecurityCore } from "../quantum/QuantumSecurityCore";
 import { QuantumPerformanceEngine } from "../performance/QuantumPerformanceEngine";
 import { toast } from "sonner";
@@ -27,7 +18,7 @@ export function QuantumAdminDashboard() {
       duration: 10000,
     });
     console.log(
-      "🌌 QUANTUM GAIA TOKEN: Future token announced - Revolutionary quantum cryptocurrency coming soon",
+      "🌌 QUANTUM GAIA TOKEN: Future token announced - Revolutionary quantum cryptocurrency coming soon"
     );
   };
 
@@ -51,37 +42,27 @@ export function QuantumAdminDashboard() {
         <CardContent>
           <div className="text-center space-y-4">
             <div className="text-4xl">🌌</div>
-            <h3 className="text-2xl font-bold text-purple-400">
-              Quantum Gaia Token
-            </h3>
+            <h3 className="text-2xl font-bold text-purple-400">Quantum Gaia Token</h3>
             <p className="text-purple-300">
-              The revolutionary quantum cryptocurrency of the future! Built on
-              quantum-resistant algorithms and powered by sustainable energy.
+              The revolutionary quantum cryptocurrency of the future! Built on quantum-resistant
+              algorithms and powered by sustainable energy.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
               <div className="text-center">
                 <div className="text-xl font-bold text-green-400">♾️</div>
-                <div className="text-xs text-muted-foreground">
-                  Infinite Supply
-                </div>
+                <div className="text-xs text-muted-foreground">Infinite Supply</div>
               </div>
               <div className="text-center">
                 <div className="text-xl font-bold text-blue-400">🔐</div>
-                <div className="text-xs text-muted-foreground">
-                  Quantum Secure
-                </div>
+                <div className="text-xs text-muted-foreground">Quantum Secure</div>
               </div>
               <div className="text-center">
                 <div className="text-xl font-bold text-green-400">🌱</div>
-                <div className="text-xs text-muted-foreground">
-                  Carbon Negative
-                </div>
+                <div className="text-xs text-muted-foreground">Carbon Negative</div>
               </div>
               <div className="text-center">
                 <div className="text-xl font-bold text-purple-400">🚀</div>
-                <div className="text-xs text-muted-foreground">
-                  Future Ready
-                </div>
+                <div className="text-xs text-muted-foreground">Future Ready</div>
               </div>
             </div>
             <Button
@@ -129,9 +110,7 @@ export function QuantumAdminDashboard() {
               <div className="text-2xl font-bold text-purple-400">
                 {quantumSecurity.metrics.quantumTunnelEncryption}%
               </div>
-              <div className="text-xs text-muted-foreground">
-                Tunnel Encryption
-              </div>
+              <div className="text-xs text-muted-foreground">Tunnel Encryption</div>
               <Progress
                 value={quantumSecurity.metrics.quantumTunnelEncryption}
                 className="mt-2 h-2"
@@ -165,14 +144,9 @@ export function QuantumAdminDashboard() {
               <div className="text-2xl font-bold text-orange-400">
                 {quantumPerformance.metrics.processingSpeed}x
               </div>
-              <div className="text-xs text-muted-foreground">
-                Processing Speed
-              </div>
+              <div className="text-xs text-muted-foreground">Processing Speed</div>
               <Progress
-                value={Math.min(
-                  100,
-                  quantumPerformance.metrics.processingSpeed / 10,
-                )}
+                value={Math.min(100, quantumPerformance.metrics.processingSpeed / 10)}
                 className="mt-2 h-2"
               />
             </div>
@@ -180,33 +154,22 @@ export function QuantumAdminDashboard() {
               <div className="text-2xl font-bold text-red-400">
                 {quantumPerformance.metrics.evolutionRate}%
               </div>
-              <div className="text-xs text-muted-foreground">
-                Evolution Rate
-              </div>
-              <Progress
-                value={quantumPerformance.metrics.evolutionRate}
-                className="mt-2 h-2"
-              />
+              <div className="text-xs text-muted-foreground">Evolution Rate</div>
+              <Progress value={quantumPerformance.metrics.evolutionRate} className="mt-2 h-2" />
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-400">
                 {quantumPerformance.metrics.dominanceLevel}%
               </div>
               <div className="text-xs text-muted-foreground">Dominance</div>
-              <Progress
-                value={quantumPerformance.metrics.dominanceLevel}
-                className="mt-2 h-2"
-              />
+              <Progress value={quantumPerformance.metrics.dominanceLevel} className="mt-2 h-2" />
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-pink-400">
                 {quantumPerformance.metrics.untouchableStatus}%
               </div>
               <div className="text-xs text-muted-foreground">Untouchable</div>
-              <Progress
-                value={quantumPerformance.metrics.untouchableStatus}
-                className="mt-2 h-2"
-              />
+              <Progress value={quantumPerformance.metrics.untouchableStatus} className="mt-2 h-2" />
             </div>
           </div>
         </CardContent>

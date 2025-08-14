@@ -8,9 +8,7 @@ export function verifyTokenConsistency() {
   };
 
   const isConsistent =
-    tokenData.circulatingSupply +
-      tokenData.burnedTokens +
-      tokenData.lockedTokens ===
+    tokenData.circulatingSupply + tokenData.burnedTokens + tokenData.lockedTokens ===
     tokenData.totalSupply;
 
   return {

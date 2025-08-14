@@ -229,8 +229,8 @@ export function MissingFeaturesChecker() {
                   status: "needs_attention" as const,
                   description: "Found legacy rate data - needs migration",
                 }
-              : f,
-        ),
+              : f
+        )
       );
 
       toast.success("✅ Database Check Complete", {
@@ -255,8 +255,8 @@ export function MissingFeaturesChecker() {
                 status: "complete" as const,
                 description: "Legacy data migrated successfully",
               }
-            : f,
-        ),
+            : f
+        )
       );
 
       toast.success("🎯 Legacy System Fixed!", {
@@ -282,28 +282,18 @@ export function MissingFeaturesChecker() {
         </CardHeader>
         <CardContent>
           <div className="text-center space-y-4">
-            <div className="text-4xl font-bold text-blue-400">
-              {completionRate}%
-            </div>
-            <div className="text-xl text-muted-foreground">
-              System Completion Rate
-            </div>
+            <div className="text-4xl font-bold text-blue-400">{completionRate}%</div>
+            <div className="text-xl text-muted-foreground">System Completion Rate</div>
             <div className="text-sm text-blue-300">
               {completeCount} of {totalCount} features operational
             </div>
 
             <div className="flex gap-4 justify-center">
-              <Button
-                onClick={runDatabaseCheck}
-                className="bg-yellow-600 hover:bg-yellow-700"
-              >
+              <Button onClick={runDatabaseCheck} className="bg-yellow-600 hover:bg-yellow-700">
                 <AlertTriangle className="h-4 w-4 mr-2" />
                 Run Database Check
               </Button>
-              <Button
-                onClick={fixLegacyAgreements}
-                className="bg-red-600 hover:bg-red-700"
-              >
+              <Button onClick={fixLegacyAgreements} className="bg-red-600 hover:bg-red-700">
                 <Wrench className="h-4 w-4 mr-2" />
                 Fix Legacy Agreements
               </Button>
@@ -334,25 +324,15 @@ export function MissingFeaturesChecker() {
                   className="flex items-center justify-between p-3 rounded-lg bg-black/20 border border-gray-700/30"
                 >
                   <div className="flex items-center gap-3">
-                    <Badge
-                      className={`${getStatusColor(feature.status)} text-white text-xs`}
-                    >
+                    <Badge className={`${getStatusColor(feature.status)} text-white text-xs`}>
                       {getStatusIcon(feature.status)}
-                      <span className="ml-1">
-                        {feature.status.toUpperCase().replace("_", " ")}
-                      </span>
+                      <span className="ml-1">{feature.status.toUpperCase().replace("_", " ")}</span>
                     </Badge>
                     <div>
-                      <div className="font-medium text-sm text-white">
-                        {feature.name}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        {feature.description}
-                      </div>
+                      <div className="font-medium text-sm text-white">{feature.name}</div>
+                      <div className="text-xs text-muted-foreground">{feature.description}</div>
                       {feature.action && (
-                        <div className="text-xs text-yellow-400 mt-1">
-                          Action: {feature.action}
-                        </div>
+                        <div className="text-xs text-yellow-400 mt-1">Action: {feature.action}</div>
                       )}
                     </div>
                   </div>

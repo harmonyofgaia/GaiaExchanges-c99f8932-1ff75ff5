@@ -27,12 +27,7 @@ import {
   Zap,
   BarChart3,
 } from "lucide-react";
-import {
-  GAIA_TOKEN,
-  GAIA_METRICS,
-  formatGaiaPrice,
-  formatGaiaNumber,
-} from "@/constants/gaia";
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from "@/constants/gaia";
 
 interface NewGAiAChartData {
   time: string;
@@ -55,22 +50,18 @@ interface CurrentNewGAiAMetrics {
 
 export function LiveChartsGrid() {
   const [chartData, setChartData] = useState<NewGAiAChartData[]>([]);
-  const [currentNewGAiAMetrics, setCurrentNewGAiAMetrics] =
-    useState<CurrentNewGAiAMetrics>({
-      price: GAIA_TOKEN.INITIAL_PRICE,
-      volume: GAIA_METRICS.INITIAL_VOLUME,
-      holders: GAIA_METRICS.INITIAL_HOLDERS,
-      transactions: GAIA_METRICS.INITIAL_TRANSACTIONS,
-      marketCap: GAIA_METRICS.INITIAL_MARKET_CAP,
-      change24h: 145.82,
-    });
+  const [currentNewGAiAMetrics, setCurrentNewGAiAMetrics] = useState<CurrentNewGAiAMetrics>({
+    price: GAIA_TOKEN.INITIAL_PRICE,
+    volume: GAIA_METRICS.INITIAL_VOLUME,
+    holders: GAIA_METRICS.INITIAL_HOLDERS,
+    transactions: GAIA_METRICS.INITIAL_TRANSACTIONS,
+    marketCap: GAIA_METRICS.INITIAL_MARKET_CAP,
+    change24h: 145.82,
+  });
 
   // Generate live new GAiA data every 1.5 seconds
   useEffect(() => {
-    console.log(
-      "📊 New GAiA Charts: Connected to wallet:",
-      GAIA_TOKEN.WALLET_ADDRESS,
-    );
+    console.log("📊 New GAiA Charts: Connected to wallet:", GAIA_TOKEN.WALLET_ADDRESS);
 
     const generateNewGAiAData = () => {
       const now = new Date();
@@ -85,16 +76,14 @@ export function LiveChartsGrid() {
         time: timeStr,
         price: Math.max(
           0.00001,
-          currentNewGAiAMetrics.price * (1 + (Math.random() - 0.35) * 0.025),
+          currentNewGAiAMetrics.price * (1 + (Math.random() - 0.35) * 0.025)
         ),
-        volume:
-          currentNewGAiAMetrics.volume * (1 + (Math.random() - 0.5) * 0.15),
+        volume: currentNewGAiAMetrics.volume * (1 + (Math.random() - 0.5) * 0.15),
         holders: currentNewGAiAMetrics.holders + Math.floor(Math.random() * 75),
-        transactions:
-          currentNewGAiAMetrics.transactions + Math.floor(Math.random() * 150),
+        transactions: currentNewGAiAMetrics.transactions + Math.floor(Math.random() * 150),
         marketCap: Math.max(
           1000000,
-          currentNewGAiAMetrics.marketCap * (1 + (Math.random() - 0.5) * 0.025),
+          currentNewGAiAMetrics.marketCap * (1 + (Math.random() - 0.5) * 0.025)
         ),
         engagement: 88 + Math.random() * 12,
       };
@@ -163,15 +152,11 @@ export function LiveChartsGrid() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs text-muted-foreground">
-                  New GAiA Volume 24h
-                </p>
+                <p className="text-xs text-muted-foreground">New GAiA Volume 24h</p>
                 <p className="text-lg font-bold text-blue-400">
                   {formatGaiaPrice(currentNewGAiAMetrics.volume)}
                 </p>
-                <Badge className="text-xs bg-blue-600 text-white">
-                  Connected
-                </Badge>
+                <Badge className="text-xs bg-blue-600 text-white">Connected</Badge>
               </div>
               <Activity className="h-6 w-6 text-blue-400" />
             </div>
@@ -182,15 +167,11 @@ export function LiveChartsGrid() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs text-muted-foreground">
-                  New GAiA Holders
-                </p>
+                <p className="text-xs text-muted-foreground">New GAiA Holders</p>
                 <p className="text-lg font-bold text-purple-400">
                   {currentNewGAiAMetrics.holders.toLocaleString()}
                 </p>
-                <Badge className="text-xs bg-purple-600 text-white">
-                  Enhanced
-                </Badge>
+                <Badge className="text-xs bg-purple-600 text-white">Enhanced</Badge>
               </div>
               <Users className="h-6 w-6 text-purple-400" />
             </div>
@@ -201,9 +182,7 @@ export function LiveChartsGrid() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs text-muted-foreground">
-                  New GAiA Transactions
-                </p>
+                <p className="text-xs text-muted-foreground">New GAiA Transactions</p>
                 <p className="text-lg font-bold text-yellow-400">
                   {currentNewGAiAMetrics.transactions.toLocaleString()}
                 </p>
@@ -218,15 +197,11 @@ export function LiveChartsGrid() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs text-muted-foreground">
-                  New GAiA Market Cap
-                </p>
+                <p className="text-xs text-muted-foreground">New GAiA Market Cap</p>
                 <p className="text-lg font-bold text-emerald-400">
                   {formatGaiaPrice(currentNewGAiAMetrics.marketCap)}
                 </p>
-                <Badge className="text-xs bg-emerald-600 text-white">
-                  Connected
-                </Badge>
+                <Badge className="text-xs bg-emerald-600 text-white">Connected</Badge>
               </div>
               <TrendingUp className="h-6 w-6 text-emerald-400" />
             </div>
@@ -239,9 +214,7 @@ export function LiveChartsGrid() {
               <div>
                 <p className="text-xs text-muted-foreground">Network Speed</p>
                 <p className="text-lg font-bold text-cyan-400">0.08s</p>
-                <Badge className="text-xs bg-cyan-600 text-white">
-                  15x Faster
-                </Badge>
+                <Badge className="text-xs bg-cyan-600 text-white">15x Faster</Badge>
               </div>
               <Activity className="h-6 w-6 text-cyan-400" />
             </div>
@@ -315,19 +288,9 @@ export function LiveChartsGrid() {
                     fill="url(#colorVolume)"
                   />
                   <defs>
-                    <linearGradient
-                      id="colorVolume"
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
-                    >
+                    <linearGradient id="colorVolume" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8} />
-                      <stop
-                        offset="95%"
-                        stopColor="#3b82f6"
-                        stopOpacity={0.1}
-                      />
+                      <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.1} />
                     </linearGradient>
                   </defs>
                 </AreaChart>
@@ -359,16 +322,8 @@ export function LiveChartsGrid() {
                     }}
                   />
                   <Legend />
-                  <Bar
-                    dataKey="holders"
-                    fill="#8b5cf6"
-                    name="New GAiA Holders"
-                  />
-                  <Bar
-                    dataKey="transactions"
-                    fill="#f59e0b"
-                    name="New GAiA Transactions"
-                  />
+                  <Bar dataKey="holders" fill="#8b5cf6" name="New GAiA Holders" />
+                  <Bar dataKey="transactions" fill="#f59e0b" name="New GAiA Transactions" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -394,9 +349,7 @@ export function LiveChartsGrid() {
                     outerRadius={80}
                     fill="#8884d8"
                     dataKey="value"
-                    label={({ name, percent }) =>
-                      `${name} ${(percent * 100).toFixed(0)}%`
-                    }
+                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                   >
                     {pieData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />

@@ -9,13 +9,7 @@ interface MasterplanIdea {
   id: string;
   title: string;
   description: string;
-  category:
-    | "revolutionary"
-    | "marketing"
-    | "technology"
-    | "global"
-    | "finance"
-    | "ecosystem";
+  category: "revolutionary" | "marketing" | "technology" | "global" | "finance" | "ecosystem";
   impact: number;
   feasibility: number;
   innovation: number;
@@ -112,9 +106,7 @@ export function MasterplanEngine() {
     setIsGenerating(true);
 
     setTimeout(() => {
-      const selectedIdeas = masterplanIdeas
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 5);
+      const selectedIdeas = masterplanIdeas.sort(() => Math.random() - 0.5).slice(0, 5);
       setIdeas(selectedIdeas);
       setIsGenerating(false);
 
@@ -197,46 +189,29 @@ export function MasterplanEngine() {
               🌟 Revolutionary Masterplan Ideas:
             </h3>
             {ideas.map((idea) => (
-              <Card
-                key={idea.id}
-                className="bg-black/30 border border-purple-500/20"
-              >
+              <Card key={idea.id} className="bg-black/30 border border-purple-500/20">
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-xl">
-                        {getCategoryIcon(idea.category)}
-                      </span>
-                      <h4 className="font-bold text-purple-300">
-                        {idea.title}
-                      </h4>
+                      <span className="text-xl">{getCategoryIcon(idea.category)}</span>
+                      <h4 className="font-bold text-purple-300">{idea.title}</h4>
                     </div>
-                    <Badge className={getCategoryColor(idea.category)}>
-                      {idea.category}
-                    </Badge>
+                    <Badge className={getCategoryColor(idea.category)}>{idea.category}</Badge>
                   </div>
 
-                  <p className="text-sm text-gray-300 mb-3">
-                    {idea.description}
-                  </p>
+                  <p className="text-sm text-gray-300 mb-3">{idea.description}</p>
 
                   <div className="grid grid-cols-3 gap-2 text-xs">
                     <div className="text-center p-2 bg-green-900/30 rounded">
-                      <div className="text-green-400 font-bold">
-                        {idea.impact}%
-                      </div>
+                      <div className="text-green-400 font-bold">{idea.impact}%</div>
                       <div className="text-muted-foreground">Impact</div>
                     </div>
                     <div className="text-center p-2 bg-blue-900/30 rounded">
-                      <div className="text-blue-400 font-bold">
-                        {idea.feasibility}%
-                      </div>
+                      <div className="text-blue-400 font-bold">{idea.feasibility}%</div>
                       <div className="text-muted-foreground">Feasibility</div>
                     </div>
                     <div className="text-center p-2 bg-purple-900/30 rounded">
-                      <div className="text-purple-400 font-bold">
-                        {idea.innovation}%
-                      </div>
+                      <div className="text-purple-400 font-bold">{idea.innovation}%</div>
                       <div className="text-muted-foreground">Innovation</div>
                     </div>
                   </div>
@@ -247,9 +222,7 @@ export function MasterplanEngine() {
         )}
 
         <div className="bg-gradient-to-r from-purple-900/40 to-pink-900/40 p-4 rounded-lg border border-purple-500/30">
-          <h4 className="font-bold text-purple-400 mb-2">
-            🌟 Masterplan Objectives:
-          </h4>
+          <h4 className="font-bold text-purple-400 mb-2">🌟 Masterplan Objectives:</h4>
           <ul className="text-sm text-purple-300 space-y-1">
             <li>• Reach heights unknown to human mankind</li>
             <li>• Create baby boom explosion beyond imagination</li>

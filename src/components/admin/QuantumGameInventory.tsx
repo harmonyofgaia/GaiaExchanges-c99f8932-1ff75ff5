@@ -63,8 +63,7 @@ export function QuantumGameInventory() {
         rarity: "quantum",
         powerLevel: 9999,
         memorySize: "15.7 TB",
-        description:
-          "Self-evolving biomechanical weapon with quantum DNA integration",
+        description: "Self-evolving biomechanical weapon with quantum DNA integration",
         quantumEnhanced: true,
       },
       {
@@ -74,8 +73,7 @@ export function QuantumGameInventory() {
         rarity: "legendary",
         powerLevel: 8750,
         memorySize: "127.4 TB",
-        description:
-          "Endless underwater realm with 500+ unique species and quantum physics",
+        description: "Endless underwater realm with 500+ unique species and quantum physics",
         quantumEnhanced: true,
       },
       {
@@ -85,8 +83,7 @@ export function QuantumGameInventory() {
         rarity: "quantum",
         powerLevel: 10000,
         memorySize: "23.8 TB",
-        description:
-          "Mythical creature with shapeshifting abilities and quantum fire breath",
+        description: "Mythical creature with shapeshifting abilities and quantum fire breath",
         quantumEnhanced: true,
       },
       {
@@ -96,8 +93,7 @@ export function QuantumGameInventory() {
         rarity: "epic",
         powerLevel: 7200,
         memorySize: "89.2 TB",
-        description:
-          "Floating mountains with gravity-defying waterfalls and crystal caves",
+        description: "Floating mountains with gravity-defying waterfalls and crystal caves",
         quantumEnhanced: true,
       },
       {
@@ -107,8 +103,7 @@ export function QuantumGameInventory() {
         rarity: "legendary",
         powerLevel: 9200,
         memorySize: "31.6 TB",
-        description:
-          "Living spacecraft that grows and adapts to different environments",
+        description: "Living spacecraft that grows and adapts to different environments",
         quantumEnhanced: true,
       },
     ];
@@ -164,17 +159,9 @@ export function QuantumGameInventory() {
     console.log("🎮 QUANTUM ASSET CREATION INITIATED");
     console.log("⚡ ALL 20 QUANTUM COMPUTERS: Synchronized for creation");
     console.log("🎨 AI ART ENGINE: Generating ultra-high quality graphics");
-    console.log(
-      "🧬 BIOMECHANICAL FUSION: Merging organic and digital elements",
-    );
+    console.log("🧬 BIOMECHANICAL FUSION: Merging organic and digital elements");
 
-    const assetTypes = [
-      "weapon",
-      "landscape",
-      "character",
-      "tool",
-      "vehicle",
-    ] as const;
+    const assetTypes = ["weapon", "landscape", "character", "tool", "vehicle"] as const;
     const rarities = ["rare", "epic", "legendary", "quantum"] as const;
 
     // Simulate quantum creation process
@@ -190,8 +177,7 @@ export function QuantumGameInventory() {
       rarity: rarities[Math.floor(Math.random() * rarities.length)],
       powerLevel: Math.floor(Math.random() * 10000) + 5000,
       memorySize: `${(Math.random() * 50 + 10).toFixed(1)} TB`,
-      description:
-        "Quantum AI-generated asset with unlimited potential and evolution capabilities",
+      description: "Quantum AI-generated asset with unlimited potential and evolution capabilities",
       quantumEnhanced: true,
     };
 
@@ -212,8 +198,7 @@ export function QuantumGameInventory() {
     console.log("✨ MAGIC FEELING: Maximum immersion protocols");
 
     toast.success("🎬 280 FPS Movie Created!", {
-      description:
-        "Ultra-high quality cinematic experience with Harmony of Gaia branding",
+      description: "Ultra-high quality cinematic experience with Harmony of Gaia branding",
       duration: 8000,
     });
   };
@@ -225,8 +210,7 @@ export function QuantumGameInventory() {
     console.log("🌍 GLOBAL REACH: All major exchanges targeted");
 
     toast.success("🚀 100X Exchange Boost Activated!", {
-      description:
-        "All quantum computers working to accelerate token acceptance",
+      description: "All quantum computers working to accelerate token acceptance",
       duration: 10000,
     });
   };
@@ -258,15 +242,9 @@ export function QuantumGameInventory() {
             <Badge className="bg-purple-600 animate-pulse">
               💾 Memory: {totalMemoryUsed} / 400 TB
             </Badge>
-            <Badge className="bg-green-600">
-              🎮 Assets: {gameAssets.length}
-            </Badge>
-            <Badge className="bg-blue-600">
-              🌍 Levels: {gameLevels.length}
-            </Badge>
-            <Badge className="bg-red-600">
-              ⚡ Quantum Power: {quantumPowerLevel}%
-            </Badge>
+            <Badge className="bg-green-600">🎮 Assets: {gameAssets.length}</Badge>
+            <Badge className="bg-blue-600">🌍 Levels: {gameLevels.length}</Badge>
+            <Badge className="bg-red-600">⚡ Quantum Power: {quantumPowerLevel}%</Badge>
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -323,18 +301,12 @@ export function QuantumGameInventory() {
                   >
                     <CardContent className="p-4">
                       <div className="flex justify-between items-start mb-2">
-                        <h4 className="font-bold text-white text-sm">
-                          {asset.name}
-                        </h4>
-                        <Badge
-                          className={`bg-gradient-to-r ${getRarityColor(asset.rarity)}`}
-                        >
+                        <h4 className="font-bold text-white text-sm">{asset.name}</h4>
+                        <Badge className={`bg-gradient-to-r ${getRarityColor(asset.rarity)}`}>
                           {asset.rarity.toUpperCase()}
                         </Badge>
                       </div>
-                      <p className="text-xs text-muted-foreground mb-3">
-                        {asset.description}
-                      </p>
+                      <p className="text-xs text-muted-foreground mb-3">{asset.description}</p>
                       <div className="space-y-2">
                         <div className="flex justify-between text-xs">
                           <span>Power Level</span>
@@ -344,14 +316,10 @@ export function QuantumGameInventory() {
                         </div>
                         <div className="flex justify-between text-xs">
                           <span>Memory Size</span>
-                          <span className="text-blue-400">
-                            {asset.memorySize}
-                          </span>
+                          <span className="text-blue-400">{asset.memorySize}</span>
                         </div>
                         {asset.quantumEnhanced && (
-                          <Badge className="bg-purple-600 text-xs">
-                            ⚡ Quantum Enhanced
-                          </Badge>
+                          <Badge className="bg-purple-600 text-xs">⚡ Quantum Enhanced</Badge>
                         )}
                       </div>
                     </CardContent>
@@ -374,12 +342,9 @@ export function QuantumGameInventory() {
                     }`}
                   >
                     <CardContent className="p-3">
-                      <div className="text-sm font-bold text-white mb-1">
-                        {level.name}
-                      </div>
+                      <div className="text-sm font-bold text-white mb-1">{level.name}</div>
                       <div className="text-xs text-muted-foreground mb-2">
-                        Difficulty: {level.difficulty} | Bio-Mech:{" "}
-                        {level.biomechanicalCount}
+                        Difficulty: {level.difficulty} | Bio-Mech: {level.biomechanicalCount}
                       </div>
                       <Badge
                         className={`text-xs ${level.unlocked ? "bg-green-600" : "bg-gray-600"}`}
@@ -391,8 +356,7 @@ export function QuantumGameInventory() {
                 ))}
               </div>
               <div className="text-center text-muted-foreground">
-                Showing first 20 levels. Total: {gameLevels.length} levels
-                available
+                Showing first 20 levels. Total: {gameLevels.length} levels available
               </div>
             </TabsContent>
 
@@ -403,35 +367,25 @@ export function QuantumGameInventory() {
                   BIO-MECHANICAL WEAPONS FORGE
                 </h3>
                 <p className="text-muted-foreground mb-4">
-                  Quantum-powered biomechanical weapon creation system. Fusion
-                  of organic and digital elements for ultimate power.
+                  Quantum-powered biomechanical weapon creation system. Fusion of organic and
+                  digital elements for ultimate power.
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-green-400">847</div>
-                    <div className="text-xs text-muted-foreground">
-                      Bio-Weapons
-                    </div>
+                    <div className="text-xs text-muted-foreground">Bio-Weapons</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-400">
-                      1,247
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      Mechanical Parts
-                    </div>
+                    <div className="text-2xl font-bold text-blue-400">1,247</div>
+                    <div className="text-xs text-muted-foreground">Mechanical Parts</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-purple-400">∞</div>
-                    <div className="text-xs text-muted-foreground">
-                      Combinations
-                    </div>
+                    <div className="text-xs text-muted-foreground">Combinations</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-red-400">100%</div>
-                    <div className="text-xs text-muted-foreground">
-                      Lethality
-                    </div>
+                    <div className="text-xs text-muted-foreground">Lethality</div>
                   </div>
                 </div>
               </div>

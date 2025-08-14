@@ -69,14 +69,9 @@ export function InvestorAcquisitionSystem() {
           id: Date.now(),
           name: `Investor ${investors.length + 1}`,
           amount: 100,
-          source:
-            investorSources[Math.floor(Math.random() * investorSources.length)],
+          source: investorSources[Math.floor(Math.random() * investorSources.length)],
           status:
-            Math.random() > 0.7
-              ? "invested"
-              : Math.random() > 0.5
-                ? "interested"
-                : "contacted",
+            Math.random() > 0.7 ? "invested" : Math.random() > 0.5 ? "interested" : "contacted",
           timestamp: new Date(),
         };
 
@@ -111,8 +106,7 @@ export function InvestorAcquisitionSystem() {
 
   const sendMassInvestorOutreach = () => {
     toast.success("📧 MASS INVESTOR OUTREACH LAUNCHED!", {
-      description:
-        "Professional investment proposals sent to 1000+ high-value investors!",
+      description: "Professional investment proposals sent to 1000+ high-value investors!",
       duration: 6000,
     });
 
@@ -151,8 +145,7 @@ export function InvestorAcquisitionSystem() {
 
   const activateViralGrowth = () => {
     toast.success("🚀 VIRAL GROWTH ACTIVATED!", {
-      description:
-        "Culture of Harmony spreading across all social media platforms!",
+      description: "Culture of Harmony spreading across all social media platforms!",
       duration: 5000,
     });
 
@@ -177,9 +170,7 @@ export function InvestorAcquisitionSystem() {
     return `${minutes}:${secs.toString().padStart(2, "0")}`;
   };
 
-  const investedCount = investors.filter(
-    (inv) => inv.status === "invested",
-  ).length;
+  const investedCount = investors.filter((inv) => inv.status === "invested").length;
   const progressPercentage = (investedCount / 20) * 100;
 
   return (
@@ -201,25 +192,15 @@ export function InvestorAcquisitionSystem() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
             <div className="text-center p-4 rounded-lg bg-green-900/30 border border-green-500/20">
-              <div className="text-3xl font-bold text-green-400">
-                {investedCount}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Investors Secured
-              </div>
+              <div className="text-3xl font-bold text-green-400">{investedCount}</div>
+              <div className="text-sm text-muted-foreground">Investors Secured</div>
             </div>
             <div className="text-center p-4 rounded-lg bg-blue-900/30 border border-blue-500/20">
-              <div className="text-3xl font-bold text-blue-400">
-                €{totalInvestment}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Total Investment
-              </div>
+              <div className="text-3xl font-bold text-blue-400">€{totalInvestment}</div>
+              <div className="text-sm text-muted-foreground">Total Investment</div>
             </div>
             <div className="text-center p-4 rounded-lg bg-purple-900/30 border border-purple-500/20">
-              <div className="text-3xl font-bold text-purple-400">
-                {investors.length}
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{investors.length}</div>
               <div className="text-sm text-muted-foreground">Total Leads</div>
             </div>
             <div className="text-center p-4 rounded-lg bg-orange-900/30 border border-orange-500/20">
@@ -234,12 +215,8 @@ export function InvestorAcquisitionSystem() {
 
           {targetReached && (
             <div className="p-4 rounded-lg bg-gradient-to-r from-green-600 to-blue-600 text-center">
-              <h3 className="text-2xl font-bold text-white">
-                🎉 CONGRATULATIONS! 🎉
-              </h3>
-              <p className="text-green-100">
-                You've successfully reached your investment goal!
-              </p>
+              <h3 className="text-2xl font-bold text-white">🎉 CONGRATULATIONS! 🎉</h3>
+              <p className="text-green-100">You've successfully reached your investment goal!</p>
             </div>
           )}
         </CardContent>
@@ -267,9 +244,7 @@ export function InvestorAcquisitionSystem() {
                     <div className="w-2 h-2 rounded-full bg-green-400"></div>
                     <div>
                       <div className="font-medium">{investor.name}</div>
-                      <div className="text-xs text-muted-foreground">
-                        {investor.source}
-                      </div>
+                      <div className="text-xs text-muted-foreground">{investor.source}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -289,9 +264,7 @@ export function InvestorAcquisitionSystem() {
                           : "📧"}
                       {investor.status.toUpperCase()}
                     </Badge>
-                    <span className="font-bold text-green-400">
-                      €{investor.amount}
-                    </span>
+                    <span className="font-bold text-green-400">€{investor.amount}</span>
                   </div>
                 </div>
               ))}
@@ -326,7 +299,7 @@ export function InvestorAcquisitionSystem() {
           onClick={() =>
             window.open(
               "https://sites.google.com/view/culture-of-harmony/harmony-of-gaia/gaia-s-cex-exchange",
-              "_blank",
+              "_blank"
             )
           }
           className="bg-gradient-to-r from-gold-600 to-orange-600 h-16 text-lg"
@@ -339,9 +312,7 @@ export function InvestorAcquisitionSystem() {
       {/* Investment Proposal */}
       <Card className="border-green-500/20 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
         <CardHeader>
-          <CardTitle className="text-green-400">
-            💰 Investor Proposal Template
-          </CardTitle>
+          <CardTitle className="text-green-400">💰 Investor Proposal Template</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4 text-sm">
@@ -351,8 +322,7 @@ export function InvestorAcquisitionSystem() {
               </h4>
               <ul className="space-y-1 text-muted-foreground">
                 <li>
-                  • <strong>Platform:</strong> World's Greatest Sustainable
-                  Crypto Trading App
+                  • <strong>Platform:</strong> World's Greatest Sustainable Crypto Trading App
                 </li>
                 <li>
                   • <strong>Minimum Investment:</strong> €100
@@ -364,12 +334,11 @@ export function InvestorAcquisitionSystem() {
                   • <strong>Market:</strong> $2.3 Trillion Cryptocurrency Market
                 </li>
                 <li>
-                  • <strong>Unique Selling Point:</strong> Zero-fee GAiA token
-                  trading + Environmental focus
+                  • <strong>Unique Selling Point:</strong> Zero-fee GAiA token trading +
+                  Environmental focus
                 </li>
                 <li>
-                  • <strong>Security:</strong> Military-grade protection with
-                  24/7 admin monitoring
+                  • <strong>Security:</strong> Military-grade protection with 24/7 admin monitoring
                 </li>
                 <li>
                   • <strong>Contact:</strong> info@cultureofharmony.net
@@ -379,8 +348,7 @@ export function InvestorAcquisitionSystem() {
 
             <div className="text-center p-3 rounded-lg bg-gradient-to-r from-gold-900/30 to-yellow-900/30 border border-gold-500/20">
               <p className="font-bold text-gold-400">
-                🌟 "Seeds Will Form Into Music" - Join the Global Happiness
-                Revolution! 🌟
+                🌟 "Seeds Will Form Into Music" - Join the Global Happiness Revolution! 🌟
               </p>
             </div>
           </div>

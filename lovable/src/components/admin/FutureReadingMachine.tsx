@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Brain,
-  Zap,
-  Eye,
-  TrendingUp,
-  Globe,
-  Cpu,
-  Database,
-  Network,
-} from "lucide-react";
+import { Brain, Zap, Eye, TrendingUp, Globe, Cpu, Database, Network } from "lucide-react";
 import { toast } from "sonner";
 
 interface FuturePrediction {
@@ -66,8 +57,7 @@ export function FutureReadingMachine() {
     {
       id: 5,
       category: "Giveaway Impact",
-      prediction:
-        "Community giveaway program will attract 2M+ new environmentally conscious users",
+      prediction: "Community giveaway program will attract 2M+ new environmentally conscious users",
       confidence: 91.3,
       timeline: "4 months",
       impact: "high",
@@ -124,8 +114,7 @@ export function FutureReadingMachine() {
           setPredictions((prev) => [...einsteinPredictions, ...prev]);
 
           toast.success("🔮 Einstein-Level Analysis Complete!", {
-            description:
-              "Revolutionary community predictions generated with quantum accuracy",
+            description: "Revolutionary community predictions generated with quantum accuracy",
             duration: 8000,
           });
 
@@ -141,8 +130,7 @@ export function FutureReadingMachine() {
     console.log("♻️ PREDICTING GREEN ECONOMY TRANSFORMATION");
 
     toast.success("🔮 Einstein Analysis Started!", {
-      description:
-        "Quantum future reading machine analyzing community evolution patterns",
+      description: "Quantum future reading machine analyzing community evolution patterns",
       duration: 5000,
     });
   };
@@ -181,9 +169,7 @@ export function FutureReadingMachine() {
             <Badge className="bg-green-600 animate-pulse">
               ⚡ QUANTUM ACCURACY: EINSTEIN-LEVEL
             </Badge>
-            <Badge className="bg-orange-600 animate-pulse">
-              🌍 GLOBAL REACH: INFINITE
-            </Badge>
+            <Badge className="bg-orange-600 animate-pulse">🌍 GLOBAL REACH: INFINITE</Badge>
           </div>
         </CardHeader>
         <CardContent>
@@ -192,17 +178,11 @@ export function FutureReadingMachine() {
               <div className="text-3xl font-bold text-purple-400">
                 {aiProcessingPower.toFixed(2)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                AI Processing Power
-              </div>
+              <div className="text-sm text-muted-foreground">AI Processing Power</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-blue-400">
-                {predictions.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Predictions
-              </div>
+              <div className="text-3xl font-bold text-blue-400">{predictions.length}</div>
+              <div className="text-sm text-muted-foreground">Active Predictions</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
               <div className="text-3xl font-bold text-green-400">INFINITE</div>
@@ -210,9 +190,7 @@ export function FutureReadingMachine() {
             </div>
             <div className="text-center p-4 bg-orange-900/30 rounded-lg">
               <div className="text-3xl font-bold text-orange-400">EINSTEIN</div>
-              <div className="text-sm text-muted-foreground">
-                Intelligence Level
-              </div>
+              <div className="text-sm text-muted-foreground">Intelligence Level</div>
             </div>
           </div>
 
@@ -230,12 +208,8 @@ export function FutureReadingMachine() {
           {isAnalyzing && (
             <div className="mb-6">
               <div className="flex justify-between mb-2">
-                <span className="text-white">
-                  Deep Community Analysis Progress
-                </span>
-                <span className="text-purple-400">
-                  {analysisProgress.toFixed(1)}%
-                </span>
+                <span className="text-white">Deep Community Analysis Progress</span>
+                <span className="text-purple-400">{analysisProgress.toFixed(1)}%</span>
               </div>
               <Progress value={analysisProgress} className="h-3" />
             </div>
@@ -246,50 +220,36 @@ export function FutureReadingMachine() {
       {/* Community Einstein Insights */}
       <Card className="border-yellow-500/30 bg-yellow-900/20">
         <CardHeader>
-          <CardTitle className="text-yellow-400">
-            🧠 EINSTEIN COMMUNITY INSIGHTS
-          </CardTitle>
+          <CardTitle className="text-yellow-400">🧠 EINSTEIN COMMUNITY INSIGHTS</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-3">
-              <h4 className="text-lg font-bold text-yellow-400">
-                🌍 Global Partnership Evolution
-              </h4>
+              <h4 className="text-lg font-bold text-yellow-400">🌍 Global Partnership Evolution</h4>
               <p className="text-sm text-muted-foreground">
-                The quantum partnership engine will create a revolutionary
-                business ecosystem where environmental impact and profit align
-                perfectly through GAiA token incentives.
+                The quantum partnership engine will create a revolutionary business ecosystem where
+                environmental impact and profit align perfectly through GAiA token incentives.
               </p>
             </div>
             <div className="space-y-3">
-              <h4 className="text-lg font-bold text-yellow-400">
-                🎁 Community Reward Revolution
-              </h4>
+              <h4 className="text-lg font-bold text-yellow-400">🎁 Community Reward Revolution</h4>
               <p className="text-sm text-muted-foreground">
-                Future giveaways will not just reward holders but create a
-                global movement toward sustainable living through tangible
-                eco-friendly products.
+                Future giveaways will not just reward holders but create a global movement toward
+                sustainable living through tangible eco-friendly products.
               </p>
             </div>
             <div className="space-y-3">
-              <h4 className="text-lg font-bold text-yellow-400">
-                🔥 Token Burning Transformation
-              </h4>
+              <h4 className="text-lg font-bold text-yellow-400">🔥 Token Burning Transformation</h4>
               <p className="text-sm text-muted-foreground">
-                Each burned token will directly fund measurable environmental
-                restoration, creating the world's first truly impact-driven
-                cryptocurrency.
+                Each burned token will directly fund measurable environmental restoration, creating
+                the world's first truly impact-driven cryptocurrency.
               </p>
             </div>
             <div className="space-y-3">
-              <h4 className="text-lg font-bold text-yellow-400">
-                🤖 AI-Driven Green Economy
-              </h4>
+              <h4 className="text-lg font-bold text-yellow-400">🤖 AI-Driven Green Economy</h4>
               <p className="text-sm text-muted-foreground">
-                AI partnership matching will accelerate green technology
-                adoption exponentially, making sustainable solutions the most
-                profitable business choice.
+                AI partnership matching will accelerate green technology adoption exponentially,
+                making sustainable solutions the most profitable business choice.
               </p>
             </div>
           </div>
@@ -299,9 +259,7 @@ export function FutureReadingMachine() {
       {/* Future Predictions */}
       <Card className="border-blue-500/30 bg-blue-900/20">
         <CardHeader>
-          <CardTitle className="text-blue-400">
-            🌟 QUANTUM COMMUNITY PREDICTIONS
-          </CardTitle>
+          <CardTitle className="text-blue-400">🌟 QUANTUM COMMUNITY PREDICTIONS</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -313,9 +271,7 @@ export function FutureReadingMachine() {
                 <CardContent className="p-4">
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex gap-2">
-                      <Badge className="bg-blue-600">
-                        {prediction.category}
-                      </Badge>
+                      <Badge className="bg-blue-600">{prediction.category}</Badge>
                       <Badge className={getImpactColor(prediction.impact)}>
                         {prediction.impact.toUpperCase()} IMPACT
                       </Badge>
@@ -324,9 +280,7 @@ export function FutureReadingMachine() {
                       <div className="text-lg font-bold text-green-400">
                         {prediction.confidence}%
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        Confidence
-                      </div>
+                      <div className="text-xs text-muted-foreground">Confidence</div>
                     </div>
                   </div>
 
@@ -352,47 +306,29 @@ export function FutureReadingMachine() {
       {/* Quantum Data Sources */}
       <Card className="border-green-500/30 bg-green-900/20">
         <CardHeader>
-          <CardTitle className="text-green-400">
-            🌐 QUANTUM COMMUNITY DATA SOURCES
-          </CardTitle>
+          <CardTitle className="text-green-400">🌐 QUANTUM COMMUNITY DATA SOURCES</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
               <Globe className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-green-400">
-                Global Partnerships
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Business network analysis
-              </div>
+              <div className="text-lg font-bold text-green-400">Global Partnerships</div>
+              <div className="text-sm text-muted-foreground">Business network analysis</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
               <Network className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-blue-400">
-                Community Behavior
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Engagement patterns
-              </div>
+              <div className="text-lg font-bold text-blue-400">Community Behavior</div>
+              <div className="text-sm text-muted-foreground">Engagement patterns</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
               <Database className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-purple-400">
-                Green Impact Data
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Environmental metrics
-              </div>
+              <div className="text-lg font-bold text-purple-400">Green Impact Data</div>
+              <div className="text-sm text-muted-foreground">Environmental metrics</div>
             </div>
             <div className="text-center p-4 bg-orange-900/30 rounded-lg">
               <Cpu className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-orange-400">
-                Einstein Processing
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Quantum algorithms
-              </div>
+              <div className="text-lg font-bold text-orange-400">Einstein Processing</div>
+              <div className="text-sm text-muted-foreground">Quantum algorithms</div>
             </div>
           </div>
         </CardContent>

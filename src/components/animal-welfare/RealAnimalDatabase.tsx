@@ -77,8 +77,7 @@ const realAnimalsInNeed: Animal[] = [
     fundsNeeded: 300000,
     fundsRaised: 127000,
     lastUpdated: "2024-08-06",
-    description:
-      "Critically endangered great apes living in the cloud forests of Central Africa.",
+    description: "Critically endangered great apes living in the cloud forests of Central Africa.",
     image: "/api/placeholder/300/200",
     organization: "Dian Fossey Gorilla Fund",
     donationWallet: "0x...gorilla",
@@ -162,8 +161,7 @@ const realAnimalsInNeed: Animal[] = [
     fundsNeeded: 1000000,
     fundsRaised: 234000,
     lastUpdated: "2024-08-01",
-    description:
-      "The world's most endangered marine mammal with only 10 individuals remaining.",
+    description: "The world's most endangered marine mammal with only 10 individuals remaining.",
     image: "/api/placeholder/300/200",
     organization: "Vaquita CPR",
     donationWallet: "0x...vaquita",
@@ -214,8 +212,7 @@ export function RealAnimalDatabase() {
       animal.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       animal.species.toLowerCase().includes(searchTerm.toLowerCase()) ||
       animal.location.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesUrgency =
-      filterUrgency === "all" || animal.urgency === filterUrgency;
+    const matchesUrgency = filterUrgency === "all" || animal.urgency === filterUrgency;
     return matchesSearch && matchesUrgency;
   });
 
@@ -249,8 +246,7 @@ export function RealAnimalDatabase() {
             🦎 REAL ANIMALS IN CRITICAL NEED
           </CardTitle>
           <p className="text-center text-muted-foreground">
-            Live database of endangered species requiring immediate conservation
-            support
+            Live database of endangered species requiring immediate conservation support
           </p>
         </CardHeader>
         <CardContent>
@@ -288,16 +284,10 @@ export function RealAnimalDatabase() {
             <CardHeader className="pb-3">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <CardTitle className="text-lg text-green-400">
-                    {animal.name}
-                  </CardTitle>
-                  <p className="text-sm text-muted-foreground italic">
-                    {animal.species}
-                  </p>
+                  <CardTitle className="text-lg text-green-400">{animal.name}</CardTitle>
+                  <p className="text-sm text-muted-foreground italic">{animal.species}</p>
                 </div>
-                <Badge
-                  className={`${getUrgencyColor(animal.urgency)} text-white font-bold`}
-                >
+                <Badge className={`${getUrgencyColor(animal.urgency)} text-white font-bold`}>
                   {animal.urgency.toUpperCase()}
                 </Badge>
               </div>
@@ -326,16 +316,13 @@ export function RealAnimalDatabase() {
                 </div>
               </div>
 
-              <p className="text-sm text-muted-foreground">
-                {animal.description}
-              </p>
+              <p className="text-sm text-muted-foreground">{animal.description}</p>
 
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Funding Progress</span>
                   <span>
-                    ${animal.fundsRaised.toLocaleString()} / $
-                    {animal.fundsNeeded.toLocaleString()}
+                    ${animal.fundsRaised.toLocaleString()} / ${animal.fundsNeeded.toLocaleString()}
                   </span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2">
@@ -377,9 +364,7 @@ export function RealAnimalDatabase() {
       {filteredAnimals.length === 0 && (
         <Card className="border-gray-500/30 text-center py-8">
           <CardContent>
-            <p className="text-muted-foreground">
-              No animals found matching your search criteria.
-            </p>
+            <p className="text-muted-foreground">No animals found matching your search criteria.</p>
           </CardContent>
         </Card>
       )}

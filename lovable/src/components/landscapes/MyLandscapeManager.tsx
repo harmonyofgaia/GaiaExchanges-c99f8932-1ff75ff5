@@ -93,9 +93,7 @@ export function MyLandscapeManager() {
   }, []);
 
   const filteredLandscapes = landscapes.filter((landscape) => {
-    const matchesSearch = landscape.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+    const matchesSearch = landscape.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType = filterType === "all" || landscape.type === filterType;
     return matchesSearch && matchesType;
   });
@@ -116,9 +114,7 @@ export function MyLandscapeManager() {
   };
 
   const togglePublic = (id: string) => {
-    setLandscapes((prev) =>
-      prev.map((l) => (l.id === id ? { ...l, isPublic: !l.isPublic } : l)),
-    );
+    setLandscapes((prev) => prev.map((l) => (l.id === id ? { ...l, isPublic: !l.isPublic } : l)));
     toast.success("🌍 Visibility Updated!", {
       description: "Landscape sharing settings changed.",
       duration: 3000,
@@ -132,9 +128,7 @@ export function MyLandscapeManager() {
           <Settings className="h-6 w-6" />
           🏞️ My Landscape Collection
         </CardTitle>
-        <p className="text-muted-foreground">
-          Manage, edit, and share your created landscapes
-        </p>
+        <p className="text-muted-foreground">Manage, edit, and share your created landscapes</p>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Search and Filter Controls */}
@@ -161,28 +155,17 @@ export function MyLandscapeManager() {
         {/* Landscape Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredLandscapes.map((landscape) => (
-            <Card
-              key={landscape.id}
-              className="border-blue-500/20 bg-blue-900/10"
-            >
+            <Card key={landscape.id} className="border-blue-500/20 bg-blue-900/10">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="text-2xl">{landscape.thumbnail}</div>
                     <div>
-                      <h4 className="font-bold text-blue-400">
-                        {landscape.name}
-                      </h4>
-                      <p className="text-xs text-muted-foreground">
-                        {landscape.size}
-                      </p>
+                      <h4 className="font-bold text-blue-400">{landscape.name}</h4>
+                      <p className="text-xs text-muted-foreground">{landscape.size}</p>
                     </div>
                   </div>
-                  <Badge
-                    className={
-                      landscape.isPublic ? "bg-green-600" : "bg-gray-600"
-                    }
-                  >
+                  <Badge className={landscape.isPublic ? "bg-green-600" : "bg-gray-600"}>
                     {landscape.isPublic ? "Public" : "Private"}
                   </Badge>
                 </div>
@@ -193,25 +176,19 @@ export function MyLandscapeManager() {
                   <div>
                     <div className="flex items-center justify-center gap-1">
                       <Heart className="h-3 w-3 text-red-400" />
-                      <span className="text-sm text-red-400">
-                        {landscape.likes}
-                      </span>
+                      <span className="text-sm text-red-400">{landscape.likes}</span>
                     </div>
                   </div>
                   <div>
                     <div className="flex items-center justify-center gap-1">
                       <Download className="h-3 w-3 text-blue-400" />
-                      <span className="text-sm text-blue-400">
-                        {landscape.downloads}
-                      </span>
+                      <span className="text-sm text-blue-400">{landscape.downloads}</span>
                     </div>
                   </div>
                   <div>
                     <div className="flex items-center justify-center gap-1">
                       <Star className="h-3 w-3 text-yellow-400" />
-                      <span className="text-sm text-yellow-400">
-                        {landscape.rating}
-                      </span>
+                      <span className="text-sm text-yellow-400">{landscape.rating}</span>
                     </div>
                   </div>
                 </div>
@@ -226,11 +203,7 @@ export function MyLandscapeManager() {
                     <Edit className="h-3 w-3 mr-1" />
                     Edit
                   </Button>
-                  <Button
-                    onClick={() => togglePublic(landscape.id)}
-                    size="sm"
-                    variant="outline"
-                  >
+                  <Button onClick={() => togglePublic(landscape.id)} size="sm" variant="outline">
                     <Globe className="h-3 w-3 mr-1" />
                     {landscape.isPublic ? "Make Private" : "Make Public"}
                   </Button>
@@ -264,21 +237,15 @@ export function MyLandscapeManager() {
         {filteredLandscapes.length === 0 && (
           <div className="text-center py-8">
             <div className="text-4xl mb-4">🌍</div>
-            <h3 className="text-lg font-bold text-muted-foreground mb-2">
-              No landscapes found
-            </h3>
-            <p className="text-muted-foreground">
-              Create your first landscape to get started!
-            </p>
+            <h3 className="text-lg font-bold text-muted-foreground mb-2">No landscapes found</h3>
+            <p className="text-muted-foreground">Create your first landscape to get started!</p>
           </div>
         )}
 
         {/* Import/Export Tools */}
         <Card className="border-green-500/20 bg-green-900/10">
           <CardHeader>
-            <CardTitle className="text-green-400">
-              🔄 Import & Export Tools
-            </CardTitle>
+            <CardTitle className="text-green-400">🔄 Import & Export Tools</CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-2 gap-4">
             <Button className="bg-green-600 hover:bg-green-700">

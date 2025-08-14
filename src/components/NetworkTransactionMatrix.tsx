@@ -2,14 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Network,
-  Globe,
-  TrendingUp,
-  TrendingDown,
-  Activity,
-  Eye,
-} from "lucide-react";
+import { Network, Globe, TrendingUp, TrendingDown, Activity, Eye } from "lucide-react";
 import { toast } from "sonner";
 
 interface NetworkTransaction {
@@ -66,9 +59,8 @@ const mockNetworkTransactions: NetworkTransaction[] = [
 
 export function NetworkTransactionMatrix() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [networkTransactions, setNetworkTransactions] = useState<
-    NetworkTransaction[]
-  >(mockNetworkTransactions);
+  const [networkTransactions, setNetworkTransactions] =
+    useState<NetworkTransaction[]>(mockNetworkTransactions);
   const [totalVolume, setTotalVolume] = useState(0);
   const [activeWallets, setActiveWallets] = useState(0);
 
@@ -106,8 +98,7 @@ export function NetworkTransactionMatrix() {
       ctx.font = fontSize + "px monospace";
 
       for (let i = 0; i < drops.length; i++) {
-        const text =
-          matrixArray[Math.floor(Math.random() * matrixArray.length)];
+        const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
         const colorIndex = Math.floor(i / 5) % colors.length;
         ctx.fillStyle = colors[colorIndex];
 
@@ -134,8 +125,7 @@ export function NetworkTransactionMatrix() {
         "burn",
         "mint",
       ];
-      const randomType =
-        transactionTypes[Math.floor(Math.random() * transactionTypes.length)];
+      const randomType = transactionTypes[Math.floor(Math.random() * transactionTypes.length)];
 
       const newTransaction: NetworkTransaction = {
         id: Date.now().toString(),
@@ -159,9 +149,7 @@ export function NetworkTransactionMatrix() {
       setNetworkTransactions((prev) => [newTransaction, ...prev.slice(0, 19)]);
 
       // Update stats
-      setTotalVolume(
-        (prev) => prev + newTransaction.amount * newTransaction.price,
-      );
+      setTotalVolume((prev) => prev + newTransaction.amount * newTransaction.price);
       setActiveWallets((prev) => prev + (Math.random() > 0.7 ? 1 : 0));
 
       toast.success(`🌊 Network ${newTransaction.type.toUpperCase()}`, {
@@ -282,7 +270,7 @@ export function NetworkTransactionMatrix() {
                 onClick={() =>
                   window.open(
                     "https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump",
-                    "_blank",
+                    "_blank"
                   )
                 }
               >
@@ -331,14 +319,10 @@ export function NetworkTransactionMatrix() {
                   </div>
 
                   <div className="text-right">
-                    <div
-                      className={`font-bold font-mono ${getTransactionColor(tx.type)}`}
-                    >
+                    <div className={`font-bold font-mono ${getTransactionColor(tx.type)}`}>
                       ${(tx.amount * tx.price).toLocaleString()}
                     </div>
-                    <div className="text-xs text-gray-400">
-                      @${tx.price.toFixed(3)}
-                    </div>
+                    <div className="text-xs text-gray-400">@${tx.price.toFixed(3)}</div>
                     <Badge
                       className={
                         tx.status === "confirmed"

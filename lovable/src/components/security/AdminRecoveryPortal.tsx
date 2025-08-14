@@ -17,9 +17,9 @@ import {
 import { toast } from "sonner";
 
 function AdminRecoveryPortal() {
-  const [recoveryStep, setRecoveryStep] = useState<
-    "selection" | "verification" | "complete"
-  >("selection");
+  const [recoveryStep, setRecoveryStep] = useState<"selection" | "verification" | "complete">(
+    "selection"
+  );
   const [selectedMethod, setSelectedMethod] = useState<string>("");
   const [verificationCode, setVerificationCode] = useState("");
   const [recoveryPhrase, setRecoveryPhrase] = useState("");
@@ -69,8 +69,7 @@ function AdminRecoveryPortal() {
 
   const verifyRecovery = () => {
     // Simulate verification process
-    const isValid =
-      verificationCode === "123456" || recoveryPhrase.includes("admin");
+    const isValid = verificationCode === "123456" || recoveryPhrase.includes("admin");
 
     if (isValid) {
       setRecoveryStep("complete");
@@ -96,30 +95,19 @@ function AdminRecoveryPortal() {
           <CardTitle className="flex items-center gap-2 text-orange-400">
             <Shield className="h-6 w-6" />
             🔑 ADMIN RECOVERY PORTAL - ACCOUNT & WORK RECOVERY
-            <Badge className="bg-orange-600 text-white">
-              4 METHODS AVAILABLE
-            </Badge>
+            <Badge className="bg-orange-600 text-white">4 METHODS AVAILABLE</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
           <Tabs value={recoveryStep} className="w-full">
             <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger
-                value="selection"
-                disabled={recoveryStep !== "selection"}
-              >
+              <TabsTrigger value="selection" disabled={recoveryStep !== "selection"}>
                 Method Selection
               </TabsTrigger>
-              <TabsTrigger
-                value="verification"
-                disabled={recoveryStep !== "verification"}
-              >
+              <TabsTrigger value="verification" disabled={recoveryStep !== "verification"}>
                 Verification
               </TabsTrigger>
-              <TabsTrigger
-                value="complete"
-                disabled={recoveryStep !== "complete"}
-              >
+              <TabsTrigger value="complete" disabled={recoveryStep !== "complete"}>
                 Recovery Complete
               </TabsTrigger>
             </TabsList>
@@ -143,12 +131,8 @@ function AdminRecoveryPortal() {
                   >
                     <CardContent className="p-6 text-center">
                       <div className="text-orange-400 mb-4">{method.icon}</div>
-                      <h4 className="font-bold text-orange-300 mb-2">
-                        {method.title}
-                      </h4>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        {method.description}
-                      </p>
+                      <h4 className="font-bold text-orange-300 mb-2">{method.title}</h4>
+                      <p className="text-sm text-muted-foreground mb-4">{method.description}</p>
                       <Badge
                         className={`${
                           method.security === "QUANTUM"
@@ -168,17 +152,13 @@ function AdminRecoveryPortal() {
 
             <TabsContent value="verification" className="space-y-6 mt-6">
               <div className="text-center mb-6">
-                <h3 className="text-xl font-bold text-blue-400 mb-2">
-                  Verify Your Identity
-                </h3>
+                <h3 className="text-xl font-bold text-blue-400 mb-2">Verify Your Identity</h3>
                 <p className="text-sm text-muted-foreground">
-                  Complete verification for:{" "}
-                  {selectedMethod.replace("-", " ").toUpperCase()}
+                  Complete verification for: {selectedMethod.replace("-", " ").toUpperCase()}
                 </p>
               </div>
 
-              {(selectedMethod === "email-recovery" ||
-                selectedMethod === "sms-recovery") && (
+              {(selectedMethod === "email-recovery" || selectedMethod === "sms-recovery") && (
                 <div className="space-y-4">
                   <div className="text-center p-4 rounded-lg bg-blue-900/30 border border-blue-500/20">
                     <AlertTriangle className="h-8 w-8 text-blue-400 mx-auto mb-2" />
@@ -189,9 +169,7 @@ function AdminRecoveryPortal() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">
-                      6-Digit Verification Code
-                    </label>
+                    <label className="text-sm font-medium">6-Digit Verification Code</label>
                     <Input
                       type="text"
                       placeholder="Enter 6-digit code"
@@ -206,9 +184,7 @@ function AdminRecoveryPortal() {
               {selectedMethod === "phrase-recovery" && (
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">
-                      12-Word Recovery Phrase
-                    </label>
+                    <label className="text-sm font-medium">12-Word Recovery Phrase</label>
                     <Input
                       type="password"
                       placeholder="Enter your 12-word recovery phrase"
@@ -225,9 +201,7 @@ function AdminRecoveryPortal() {
                   <p className="text-sm mb-4">
                     Place your finger on the sensor and look at the camera
                   </p>
-                  <Badge className="bg-purple-600 text-white">
-                    BIOMETRIC SCAN READY
-                  </Badge>
+                  <Badge className="bg-purple-600 text-white">BIOMETRIC SCAN READY</Badge>
                 </div>
               )}
 
@@ -235,9 +209,7 @@ function AdminRecoveryPortal() {
                 onClick={verifyRecovery}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white h-12"
                 disabled={
-                  !verificationCode &&
-                  !recoveryPhrase &&
-                  selectedMethod !== "biometric-recovery"
+                  !verificationCode && !recoveryPhrase && selectedMethod !== "biometric-recovery"
                 }
               >
                 <Lock className="h-5 w-5 mr-2" />
@@ -252,30 +224,21 @@ function AdminRecoveryPortal() {
                   🎯 ADMIN RECOVERY COMPLETE!
                 </h3>
                 <p className="text-muted-foreground mb-6">
-                  Your admin account and all work have been successfully
-                  recovered
+                  Your admin account and all work have been successfully recovered
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                   <div className="p-4 rounded-lg bg-green-900/20">
                     <h4 className="font-bold text-green-300">Account Access</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Full admin privileges restored
-                    </p>
+                    <p className="text-sm text-muted-foreground">Full admin privileges restored</p>
                   </div>
                   <div className="p-4 rounded-lg bg-blue-900/20">
                     <h4 className="font-bold text-blue-300">Work Recovery</h4>
-                    <p className="text-sm text-muted-foreground">
-                      All projects and data synced
-                    </p>
+                    <p className="text-sm text-muted-foreground">All projects and data synced</p>
                   </div>
                   <div className="p-4 rounded-lg bg-purple-900/20">
-                    <h4 className="font-bold text-purple-300">
-                      Security Status
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      Maximum protection active
-                    </p>
+                    <h4 className="font-bold text-purple-300">Security Status</h4>
+                    <p className="text-sm text-muted-foreground">Maximum protection active</p>
                   </div>
                 </div>
 

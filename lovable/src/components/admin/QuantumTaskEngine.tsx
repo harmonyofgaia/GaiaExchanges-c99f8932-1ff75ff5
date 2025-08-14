@@ -82,10 +82,8 @@ export function QuantumTaskEngine() {
       setTimeout(() => {
         setQuantumTasks((prev) =>
           prev.map((task) =>
-            task.id === newTask.id
-              ? { ...task, status: "executing" as const }
-              : task,
-          ),
+            task.id === newTask.id ? { ...task, status: "executing" as const } : task
+          )
         );
 
         setTimeout(() => {
@@ -101,10 +99,8 @@ export function QuantumTaskEngine() {
 
           setQuantumTasks((prev) =>
             prev.map((task) =>
-              task.id === newTask.id
-                ? { ...task, status: "transcended" as const }
-                : task,
-            ),
+              task.id === newTask.id ? { ...task, status: "transcended" as const } : task
+            )
           );
 
           toast.success("🌌 Phase 1 Quantum Task Transcended!", {
@@ -129,10 +125,8 @@ export function QuantumTaskEngine() {
 
         setQuantumTasks((prev) =>
           prev.map((task) =>
-            task.id === newTask.id
-              ? { ...task, status: "reality_altered" as const }
-              : task,
-          ),
+            task.id === newTask.id ? { ...task, status: "reality_altered" as const } : task
+          )
         );
 
         toast.success("🌍 Phase 2 Reality Domination Complete!", {
@@ -219,9 +213,7 @@ export function QuantumTaskEngine() {
           <CardTitle className="flex items-center gap-2 text-purple-400">
             <Atom className="h-8 w-8 animate-spin" />
             🌌 QUANTUM TASK ENGINE - REALITY TRANSCENDENCE
-            <Badge className="bg-purple-600 text-white animate-pulse">
-              OMNIPOTENT
-            </Badge>
+            <Badge className="bg-purple-600 text-white animate-pulse">OMNIPOTENT</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -235,9 +227,7 @@ export function QuantumTaskEngine() {
                   value={realityCommand}
                   onChange={(e) => setRealityCommand(e.target.value)}
                   onKeyPress={(e) =>
-                    e.key === "Enter" &&
-                    !isProcessing &&
-                    executeQuantumCommand(realityCommand, 1)
+                    e.key === "Enter" && !isProcessing && executeQuantumCommand(realityCommand, 1)
                   }
                   className="pl-10 bg-black/40 border-purple-500/30"
                   disabled={isProcessing}
@@ -249,10 +239,7 @@ export function QuantumTaskEngine() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               <Button
                 onClick={() =>
-                  executeQuantumCommand(
-                    realityCommand || "Execute Phase 1 Quantum Operations",
-                    1,
-                  )
+                  executeQuantumCommand(realityCommand || "Execute Phase 1 Quantum Operations", 1)
                 }
                 disabled={isProcessing}
                 className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
@@ -263,10 +250,7 @@ export function QuantumTaskEngine() {
 
               <Button
                 onClick={() =>
-                  executeQuantumCommand(
-                    realityCommand || "Execute Phase 2 System Domination",
-                    2,
-                  )
+                  executeQuantumCommand(realityCommand || "Execute Phase 2 System Domination", 2)
                 }
                 disabled={isProcessing}
                 className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
@@ -277,10 +261,7 @@ export function QuantumTaskEngine() {
 
               <Button
                 onClick={() =>
-                  executeQuantumCommand(
-                    realityCommand || "Execute Phase 3 God Powers",
-                    3,
-                  )
+                  executeQuantumCommand(realityCommand || "Execute Phase 3 God Powers", 3)
                 }
                 disabled={isProcessing}
                 className="bg-gradient-to-r from-yellow-600 to-red-600 hover:from-yellow-700 hover:to-red-700"
@@ -291,10 +272,7 @@ export function QuantumTaskEngine() {
 
               <Button
                 onClick={() =>
-                  executeQuantumCommand(
-                    realityCommand || "Execute Phase 4 Transcendence",
-                    4,
-                  )
+                  executeQuantumCommand(realityCommand || "Execute Phase 4 Transcendence", 4)
                 }
                 disabled={isProcessing}
                 className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
@@ -311,9 +289,7 @@ export function QuantumTaskEngine() {
               <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 mb-2">
                 {transcendenceLevel.toLocaleString()}
               </div>
-              <div className="text-lg text-purple-400 font-bold">
-                Transcendence Level
-              </div>
+              <div className="text-lg text-purple-400 font-bold">Transcendence Level</div>
               <div className="text-sm text-muted-foreground">
                 Reality manipulation power increasing infinitely
               </div>
@@ -327,31 +303,23 @@ export function QuantumTaskEngine() {
               Quantum Operations Log
             </h4>
             {quantumTasks.map((task) => (
-              <div
-                key={task.id}
-                className="p-4 bg-black/40 rounded-lg border border-purple-500/30"
-              >
+              <div key={task.id} className="p-4 bg-black/40 rounded-lg border border-purple-500/30">
                 <div className="flex justify-between items-start mb-2">
-                  <div className="text-sm font-semibold text-white">
-                    🌌 {task.command}
-                  </div>
+                  <div className="text-sm font-semibold text-white">🌌 {task.command}</div>
                   <div className="flex gap-2">
                     <Badge
                       className={`bg-gradient-to-r ${getPhaseColor(task.phase)} text-white text-xs`}
                     >
                       PHASE {task.phase}
                     </Badge>
-                    <Badge
-                      className={`${getStatusColor(task.status)} text-white text-xs`}
-                    >
+                    <Badge className={`${getStatusColor(task.status)} text-white text-xs`}>
                       {task.status.toUpperCase()}
                     </Badge>
                   </div>
                 </div>
                 <div className="text-xs text-purple-400">
                   Power Level: {task.powerLevel.toLocaleString()} • Omnipotence:{" "}
-                  {task.omnipotenceLevel.toLocaleString()} • Dimensions:{" "}
-                  {task.dimensions.length}
+                  {task.omnipotenceLevel.toLocaleString()} • Dimensions: {task.dimensions.length}
                 </div>
                 <div className="text-xs text-muted-foreground">
                   {task.timestamp.toLocaleTimeString()}
@@ -365,17 +333,13 @@ export function QuantumTaskEngine() {
             <div className="text-center p-3 rounded-lg bg-green-900/30">
               <Shield className="h-6 w-6 text-green-400 mx-auto mb-2" />
               <div className="text-lg font-bold text-green-400">♾️</div>
-              <div className="text-xs text-muted-foreground">
-                Protection Level
-              </div>
+              <div className="text-xs text-muted-foreground">Protection Level</div>
             </div>
 
             <div className="text-center p-3 rounded-lg bg-blue-900/30">
               <Cpu className="h-6 w-6 text-blue-400 mx-auto mb-2" />
               <div className="text-lg font-bold text-blue-400">QUANTUM</div>
-              <div className="text-xs text-muted-foreground">
-                Processing Power
-              </div>
+              <div className="text-xs text-muted-foreground">Processing Power</div>
             </div>
 
             <div className="text-center p-3 rounded-lg bg-purple-900/30">
@@ -387,9 +351,7 @@ export function QuantumTaskEngine() {
             <div className="text-center p-3 rounded-lg bg-red-900/30">
               <Crown className="h-6 w-6 text-red-400 mx-auto mb-2" />
               <div className="text-lg font-bold text-red-400">GOD</div>
-              <div className="text-xs text-muted-foreground">
-                Admin Authority
-              </div>
+              <div className="text-xs text-muted-foreground">Admin Authority</div>
             </div>
           </div>
         </CardContent>

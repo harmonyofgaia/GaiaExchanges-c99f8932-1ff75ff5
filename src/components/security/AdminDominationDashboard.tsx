@@ -51,10 +51,7 @@ export function AdminDominationDashboard() {
 
   const handleTriggerEmergencyProtocol = async () => {
     try {
-      await adminDomination.triggerEmergencyProtocol(
-        "quantum-attack",
-        "synatic",
-      );
+      await adminDomination.triggerEmergencyProtocol("quantum-attack", "synatic");
     } catch (error) {
       toast.error("Failed to trigger emergency protocol");
     }
@@ -78,9 +75,7 @@ export function AdminDominationDashboard() {
               <Users className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Active Sessions</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.activeSessions}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.activeSessions}</div>
           </div>
 
           <div className="space-y-2">
@@ -88,9 +83,7 @@ export function AdminDominationDashboard() {
               <Key className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Quantum Keys</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.quantumKeys}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.quantumKeys}</div>
           </div>
 
           <div className="space-y-2">
@@ -98,9 +91,7 @@ export function AdminDominationDashboard() {
               <AlertTriangle className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Armed Protocols</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.armedProtocols}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.armedProtocols}</div>
           </div>
         </div>
 
@@ -128,20 +119,12 @@ export function AdminDominationDashboard() {
             Initialize Admin Domination
           </Button>
 
-          <Button
-            onClick={handleExecuteRemoteOverride}
-            variant="outline"
-            size="sm"
-          >
+          <Button onClick={handleExecuteRemoteOverride} variant="outline" size="sm">
             <Shield className="h-4 w-4 mr-2" />
             Execute Remote Override
           </Button>
 
-          <Button
-            onClick={handleTriggerEmergencyProtocol}
-            variant="destructive"
-            size="sm"
-          >
+          <Button onClick={handleTriggerEmergencyProtocol} variant="destructive" size="sm">
             <AlertTriangle className="h-4 w-4 mr-2" />
             Trigger Emergency Protocol
           </Button>
@@ -159,13 +142,11 @@ export function AdminDominationDashboard() {
         </div>
 
         <div className="p-4 bg-muted/50 rounded-lg">
-          <h4 className="font-medium mb-2">
-            👑 Supreme Administrative Control
-          </h4>
+          <h4 className="font-medium mb-2">👑 Supreme Administrative Control</h4>
           <p className="text-sm text-muted-foreground">
-            Ultimate administrative privileges with quantum-level security,
-            biometric authentication, remote system control, and emergency
-            protocols. Complete system domination achieved.
+            Ultimate administrative privileges with quantum-level security, biometric
+            authentication, remote system control, and emergency protocols. Complete system
+            domination achieved.
           </p>
         </div>
       </CardContent>

@@ -58,9 +58,7 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
 
           // Auto-resolve issues silently in background
           if (result.lostFeatures.length > 0) {
-            console.log(
-              `🔧 GAIA: Auto-resolving ${result.lostFeatures.length} lost features`,
-            );
+            console.log(`🔧 GAIA: Auto-resolving ${result.lostFeatures.length} lost features`);
             result.lostFeatures.forEach((feature) => {
               console.log(`🛠️ Restoring feature: ${feature.name}`);
               // In a real implementation, this would trigger automated restoration
@@ -73,7 +71,7 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
           console.error("❌ GitHub monitoring error:", error);
         }
       },
-      10 * 60 * 1000,
+      10 * 60 * 1000
     ); // Every 10 minutes
 
     return () => clearInterval(scanInterval);
@@ -117,9 +115,7 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
       // Log evolution progress (only visible to admin)
       if (isAdmin) {
         console.log("📈 GAIA Evolution: All metrics optimal");
-        console.log(
-          `🌱 Eco Impact: ${systemMetrics.ecoImpact.toFixed(2)}kg CO2 reduced`,
-        );
+        console.log(`🌱 Eco Impact: ${systemMetrics.ecoImpact.toFixed(2)}kg CO2 reduced`);
       }
     }, 30000); // Every 30 seconds
   };
@@ -159,10 +155,7 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
       // Store analytics for admin dashboard (invisible to users)
       if (isAdmin) {
         // Analytics are available to admin dashboard
-        localStorage.setItem(
-          "gaia-realtime-analytics",
-          JSON.stringify(analytics),
-        );
+        localStorage.setItem("gaia-realtime-analytics", JSON.stringify(analytics));
       }
     }, 3000);
   };

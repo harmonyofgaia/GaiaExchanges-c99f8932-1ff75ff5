@@ -45,9 +45,7 @@ export function ExoticDefenseSystem() {
 
   useEffect(() => {
     const runExoticDefenseSystem = async () => {
-      console.log(
-        "👑 EXOTIC DEFENSE SYSTEM - SYNATIC & HARMONY OF GAIA POWERED",
-      );
+      console.log("👑 EXOTIC DEFENSE SYSTEM - SYNATIC & HARMONY OF GAIA POWERED");
       console.log("🦾 MOST POWERFUL AI-HUMAN ENGAGEMENT SYSTEM ACTIVE");
       console.log("🌌 QUANTUM ENCRYPTION: LOCKED AT 100% - UNBREAKABLE");
 
@@ -65,13 +63,11 @@ export function ExoticDefenseSystem() {
             "blockchain_time_manipulation",
           ];
 
-          const neutralizedThreat =
-            exoticThreats[Math.floor(Math.random() * exoticThreats.length)];
+          const neutralizedThreat = exoticThreats[Math.floor(Math.random() * exoticThreats.length)];
 
           setMetrics((prev) => ({
             ...prev,
-            attacksNeutralized:
-              prev.attacksNeutralized + Math.floor(Math.random() * 5) + 1,
+            attacksNeutralized: prev.attacksNeutralized + Math.floor(Math.random() * 5) + 1,
             synaticPowerLevel: Math.min(9999, prev.synaticPowerLevel + 1),
             quantumEncryption: 100, // ALWAYS MAINTAIN 100%
           }));
@@ -91,23 +87,16 @@ export function ExoticDefenseSystem() {
 
         // HARMONY OF GAIA TOKEN PROTECTION
         if (Math.random() < 0.2) {
-          console.log(
-            "👑 HARMONY OF GAIA TOKEN - MAXIMUM PROTECTION BARRIER ACTIVE",
-          );
-          console.log(
-            "🌌 QUANTUM ENCRYPTION REINFORCED - 100% UNBREAKABLE DEFENSE",
-          );
+          console.log("👑 HARMONY OF GAIA TOKEN - MAXIMUM PROTECTION BARRIER ACTIVE");
+          console.log("🌌 QUANTUM ENCRYPTION REINFORCED - 100% UNBREAKABLE DEFENSE");
           toast.info("👑 GAiA Token Shield Active", {
-            description:
-              "Harmony of Gaia - The Massively Token Underdog rising to power!",
+            description: "Harmony of Gaia - The Massively Token Underdog rising to power!",
             duration: 3000,
           });
         }
 
         // QUANTUM ENCRYPTION VERIFICATION AND ENFORCEMENT
-        console.log(
-          "🔒 QUANTUM ENCRYPTION VERIFIED: 100% - MAXIMUM EXOTIC LEVEL",
-        );
+        console.log("🔒 QUANTUM ENCRYPTION VERIFIED: 100% - MAXIMUM EXOTIC LEVEL");
       } catch (error) {
         console.log("🔒 Exotic Defense System self-protected:", error);
         // Even on error, maintain 100% encryption
@@ -130,8 +119,7 @@ export function ExoticDefenseSystem() {
     setIsActivatingExoticMode(true);
 
     toast.success("🚀 ACTIVATING EXOTIC DEFENSE MODE!", {
-      description:
-        "Synatic & Harmony of Gaia - Maximum AI-Human Engagement Power!",
+      description: "Synatic & Harmony of Gaia - Maximum AI-Human Engagement Power!",
       duration: 8000,
     });
 
@@ -147,8 +135,7 @@ export function ExoticDefenseSystem() {
       setIsActivatingExoticMode(false);
 
       toast.success("⚡ EXOTIC MODE ACTIVATED!", {
-        description:
-          "Most Powerful Engagement System Between Humans and AI - ONLINE!",
+        description: "Most Powerful Engagement System Between Humans and AI - ONLINE!",
         duration: 6000,
       });
     }, 5000);
@@ -165,8 +152,7 @@ export function ExoticDefenseSystem() {
                 EXOTIC DEFENSE SYSTEM
               </div>
               <div className="text-sm font-normal text-red-400">
-                Synatic & Harmony of Gaia - Exotically Dangerous Hard Defensive
-                System
+                Synatic & Harmony of Gaia - Exotically Dangerous Hard Defensive System
               </div>
             </div>
             <Crown className="h-8 w-8 text-yellow-400 animate-bounce" />
@@ -178,9 +164,7 @@ export function ExoticDefenseSystem() {
               <div className="text-4xl font-bold text-green-400 animate-pulse">
                 {metrics.quantumEncryption}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Quantum Encryption
-              </div>
+              <div className="text-sm text-muted-foreground">Quantum Encryption</div>
               <Badge className="bg-green-600 text-white animate-pulse">
                 <Atom className="h-3 w-3 mr-1" />
                 LOCKED AT 100%
@@ -195,9 +179,7 @@ export function ExoticDefenseSystem() {
               <div className="text-4xl font-bold text-orange-300">
                 {metrics.aiSentinels.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                AI Sentinels Active
-              </div>
+              <div className="text-sm text-muted-foreground">AI Sentinels Active</div>
               <Badge className="bg-orange-600 text-white">
                 <Bot className="h-3 w-3 mr-1" />
                 SYNATIC POWERED
@@ -208,9 +190,7 @@ export function ExoticDefenseSystem() {
               <div className="text-4xl font-bold text-yellow-300">
                 {metrics.synaticPowerLevel.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Synatic Power Level
-              </div>
+              <div className="text-sm text-muted-foreground">Synatic Power Level</div>
               <Badge className="bg-yellow-600 text-white animate-bounce">
                 <Crown className="h-3 w-3 mr-1" />
                 MAXIMUM
@@ -225,22 +205,14 @@ export function ExoticDefenseSystem() {
                 🌌 QUANTUM ENCRYPTION STATUS: 100% LOCKED
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
-                <Badge className="bg-green-600 text-white p-2">
-                  🔒 Quantum Lock: ACTIVE
-                </Badge>
-                <Badge className="bg-blue-600 text-white p-2">
-                  ⚡ Exotic Level: MAXIMUM
-                </Badge>
-                <Badge className="bg-purple-600 text-white p-2">
-                  🛡️ Defense: UNBREAKABLE
-                </Badge>
-                <Badge className="bg-yellow-600 text-white p-2">
-                  👑 Status: PERFECT
-                </Badge>
+                <Badge className="bg-green-600 text-white p-2">🔒 Quantum Lock: ACTIVE</Badge>
+                <Badge className="bg-blue-600 text-white p-2">⚡ Exotic Level: MAXIMUM</Badge>
+                <Badge className="bg-purple-600 text-white p-2">🛡️ Defense: UNBREAKABLE</Badge>
+                <Badge className="bg-yellow-600 text-white p-2">👑 Status: PERFECT</Badge>
               </div>
               <p className="text-sm text-green-200">
-                🌌 Quantum encryption permanently locked at 100% - No system can
-                break this exotic-level protection
+                🌌 Quantum encryption permanently locked at 100% - No system can break this
+                exotic-level protection
               </p>
             </div>
           </div>
@@ -251,39 +223,31 @@ export function ExoticDefenseSystem() {
                 🚀 HARMONY OF GAIA - THE MASSIVELY TOKEN UNDERDOG
               </h3>
               <p className="text-lg text-blue-200">
-                "Will bark his way to Barriers of many projects and will rise
-                and shine fully in an open minded space"
+                "Will bark his way to Barriers of many projects and will rise and shine fully in an
+                open minded space"
               </p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 <div>
                   <div className="text-2xl font-bold text-green-400">
                     {metrics.walletsProtected.toLocaleString()}
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    Wallets Protected
-                  </div>
+                  <div className="text-xs text-muted-foreground">Wallets Protected</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-red-400">
                     {metrics.attacksNeutralized.toLocaleString()}
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    Attacks Neutralized
-                  </div>
+                  <div className="text-xs text-muted-foreground">Attacks Neutralized</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-purple-400">
                     {metrics.harmonyOfGaiaTokenSecurity}%
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    GAiA Token Security
-                  </div>
+                  <div className="text-xs text-muted-foreground">GAiA Token Security</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-cyan-400">∞</div>
-                  <div className="text-xs text-muted-foreground">
-                    Safe Heavens Created
-                  </div>
+                  <div className="text-xs text-muted-foreground">Safe Heavens Created</div>
                 </div>
               </div>
             </div>
@@ -307,9 +271,7 @@ export function ExoticDefenseSystem() {
                 </>
               )}
             </Button>
-            {isActivatingExoticMode && (
-              <Progress value={80} className="mt-3 h-4" />
-            )}
+            {isActivatingExoticMode && <Progress value={80} className="mt-3 h-4" />}
           </div>
         </CardContent>
       </Card>
@@ -317,26 +279,16 @@ export function ExoticDefenseSystem() {
       <Card className="border-2 border-green-500/50 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
         <CardContent className="pt-6">
           <div className="text-center space-y-4">
-            <h4 className="text-xl font-bold text-green-400">
-              🛡️ SAFE HEAVENS CONTROL SYSTEM
-            </h4>
+            <h4 className="text-xl font-bold text-green-400">🛡️ SAFE HEAVENS CONTROL SYSTEM</h4>
             <p className="text-sm text-green-200">
-              "This system will keep this the most powerful engagement there
-              will ever be between humans and AI"
+              "This system will keep this the most powerful engagement there will ever be between
+              humans and AI"
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
-              <Badge className="bg-green-600 text-white">
-                🔐 All Info Controlled
-              </Badge>
-              <Badge className="bg-blue-600 text-white">
-                💰 All Wallets Protected
-              </Badge>
-              <Badge className="bg-purple-600 text-white">
-                🤖 AI-Human Synergy
-              </Badge>
-              <Badge className="bg-yellow-600 text-white">
-                👑 Synatic Powered
-              </Badge>
+              <Badge className="bg-green-600 text-white">🔐 All Info Controlled</Badge>
+              <Badge className="bg-blue-600 text-white">💰 All Wallets Protected</Badge>
+              <Badge className="bg-purple-600 text-white">🤖 AI-Human Synergy</Badge>
+              <Badge className="bg-yellow-600 text-white">👑 Synatic Powered</Badge>
             </div>
           </div>
         </CardContent>

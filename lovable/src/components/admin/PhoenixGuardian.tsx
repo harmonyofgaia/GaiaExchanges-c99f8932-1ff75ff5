@@ -3,17 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Flame,
-  Shield,
-  Zap,
-  Eye,
-  Target,
-  Activity,
-  Sparkles,
-  Crown,
-  Heart,
-} from "lucide-react";
+import { Flame, Shield, Zap, Eye, Target, Activity, Sparkles, Crown, Heart } from "lucide-react";
 import { toast } from "sonner";
 
 interface PhoenixAbility {
@@ -32,48 +22,42 @@ export function PhoenixGuardian() {
   const [abilities, setAbilities] = useState<PhoenixAbility[]>([
     {
       name: "Eternal Flame Shield",
-      description:
-        "Creates an impenetrable barrier of phoenix fire that regenerates continuously",
+      description: "Creates an impenetrable barrier of phoenix fire that regenerates continuously",
       power_level: 98,
       cooldown: 0,
       active: true,
     },
     {
       name: "Resurrection Protocol",
-      description:
-        "Automatically revives and strengthens all defense systems after any breach",
+      description: "Automatically revives and strengthens all defense systems after any breach",
       power_level: 100,
       cooldown: 0,
       active: true,
     },
     {
       name: "Prophetic Vision",
-      description:
-        "Sees all future threats 72 hours in advance with perfect accuracy",
+      description: "Sees all future threats 72 hours in advance with perfect accuracy",
       power_level: 96,
       cooldown: 0,
       active: true,
     },
     {
       name: "Phoenix Rebirth",
-      description:
-        "When threatened, becomes 10x more powerful through rebirth transformation",
+      description: "When threatened, becomes 10x more powerful through rebirth transformation",
       power_level: 100,
       cooldown: 0,
       active: false,
     },
     {
       name: "Healing Flames",
-      description:
-        "Restores and enhances all system components with regenerative fire",
+      description: "Restores and enhances all system components with regenerative fire",
       power_level: 94,
       cooldown: 0,
       active: true,
     },
     {
       name: "Wisdom of Ages",
-      description:
-        "Provides infinite knowledge and strategic insights from past lives",
+      description: "Provides infinite knowledge and strategic insights from past lives",
       power_level: 97,
       cooldown: 0,
       active: true,
@@ -95,9 +79,7 @@ export function PhoenixGuardian() {
 
   const triggerPhoenixRebirth = async () => {
     setIsRebirthing(true);
-    toast.success(
-      "🔥 PHOENIX REBIRTH INITIATED! Power increasing exponentially!",
-    );
+    toast.success("🔥 PHOENIX REBIRTH INITIATED! Power increasing exponentially!");
 
     // Rebirth animation sequence
     for (let i = 0; i < 5; i++) {
@@ -111,26 +93,22 @@ export function PhoenixGuardian() {
         ...ability,
         power_level: Math.min(ability.power_level + 10, 100),
         active: true,
-      })),
+      }))
     );
 
     setIsRebirthing(false);
-    toast.success(
-      "🦅 PHOENIX REBORN! All systems enhanced beyond maximum capacity!",
-    );
+    toast.success("🦅 PHOENIX REBORN! All systems enhanced beyond maximum capacity!");
   };
 
   const activateAbility = (abilityName: string) => {
     setAbilities((prev) =>
       prev.map((ability) =>
-        ability.name === abilityName
-          ? { ...ability, active: !ability.active }
-          : ability,
-      ),
+        ability.name === abilityName ? { ...ability, active: !ability.active } : ability
+      )
     );
 
     toast.success(
-      `🔥 ${abilityName} ${abilities.find((a) => a.name === abilityName)?.active ? "Deactivated" : "Activated"}!`,
+      `🔥 ${abilityName} ${abilities.find((a) => a.name === abilityName)?.active ? "Deactivated" : "Activated"}!`
     );
   };
 
@@ -152,35 +130,23 @@ export function PhoenixGuardian() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center p-3 rounded-lg bg-orange-900/30">
               <Crown className="h-6 w-6 text-orange-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-orange-400">
-                {phoenixLevel}
-              </div>
+              <div className="text-lg font-bold text-orange-400">{phoenixLevel}</div>
               <div className="text-xs text-muted-foreground">Phoenix Level</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-red-900/30">
               <Heart className="h-6 w-6 text-red-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-red-400">
-                {phoenixHealth.toFixed(1)}%
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Eternal Health
-              </div>
+              <div className="text-lg font-bold text-red-400">{phoenixHealth.toFixed(1)}%</div>
+              <div className="text-xs text-muted-foreground">Eternal Health</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-yellow-900/30">
               <Zap className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-yellow-400">
-                {phoenixEnergy.toFixed(1)}%
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Phoenix Energy
-              </div>
+              <div className="text-lg font-bold text-yellow-400">{phoenixEnergy.toFixed(1)}%</div>
+              <div className="text-xs text-muted-foreground">Phoenix Energy</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-purple-900/30">
               <Sparkles className="h-6 w-6 text-purple-400 mx-auto mb-2" />
               <div className="text-lg font-bold text-purple-400">∞</div>
-              <div className="text-xs text-muted-foreground">
-                Rebirth Cycles
-              </div>
+              <div className="text-xs text-muted-foreground">Rebirth Cycles</div>
             </div>
           </div>
 
@@ -208,9 +174,7 @@ export function PhoenixGuardian() {
               className="w-full bg-gradient-to-r from-orange-600 via-red-600 to-yellow-600 hover:from-orange-700 hover:via-red-700 hover:to-yellow-700 text-white font-bold text-xl py-8"
             >
               <Flame className="h-8 w-8 mr-4 animate-spin" />
-              {isRebirthing
-                ? "🔥 REBIRTH IN PROGRESS..."
-                : "🦅 TRIGGER PHOENIX REBIRTH"}
+              {isRebirthing ? "🔥 REBIRTH IN PROGRESS..." : "🦅 TRIGGER PHOENIX REBIRTH"}
             </Button>
           </div>
         </CardContent>
@@ -240,9 +204,7 @@ export function PhoenixGuardian() {
                       </Badge>
                     )}
                   </div>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {ability.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-3">{ability.description}</p>
                   <Progress value={ability.power_level} className="h-2" />
                 </div>
 
@@ -274,41 +236,31 @@ export function PhoenixGuardian() {
           <div className="text-center space-y-4">
             <div className="flex items-center justify-center gap-2">
               <Flame className="h-6 w-6 text-orange-400" />
-              <h3 className="text-xl font-bold text-orange-400">
-                Phoenix Guardian Status Report
-              </h3>
+              <h3 className="text-xl font-bold text-orange-400">Phoenix Guardian Status Report</h3>
               <Eye className="h-6 w-6 text-yellow-400" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
               <div className="p-3 bg-green-900/30 rounded-lg">
                 <div className="text-2xl font-bold text-green-400">∞</div>
-                <div className="text-xs text-muted-foreground">
-                  Threats Neutralized
-                </div>
+                <div className="text-xs text-muted-foreground">Threats Neutralized</div>
               </div>
               <div className="p-3 bg-blue-900/30 rounded-lg">
                 <div className="text-2xl font-bold text-blue-400">0</div>
-                <div className="text-xs text-muted-foreground">
-                  Security Breaches
-                </div>
+                <div className="text-xs text-muted-foreground">Security Breaches</div>
               </div>
               <div className="p-3 bg-purple-900/30 rounded-lg">
                 <div className="text-2xl font-bold text-purple-400">100%</div>
-                <div className="text-xs text-muted-foreground">
-                  System Protection
-                </div>
+                <div className="text-xs text-muted-foreground">System Protection</div>
               </div>
               <div className="p-3 bg-orange-900/30 rounded-lg">
                 <div className="text-2xl font-bold text-orange-400">24/7</div>
-                <div className="text-xs text-muted-foreground">
-                  Eternal Vigilance
-                </div>
+                <div className="text-xs text-muted-foreground">Eternal Vigilance</div>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              🦅 The Phoenix Guardian watches over GAiA with eternal wisdom and
-              infinite power. Through death and rebirth, it grows stronger,
-              ensuring our ecosystem remains protected forever.
+              🦅 The Phoenix Guardian watches over GAiA with eternal wisdom and infinite power.
+              Through death and rebirth, it grows stronger, ensuring our ecosystem remains protected
+              forever.
             </p>
           </div>
         </CardContent>

@@ -107,8 +107,7 @@ export function GaiaFighterGamePro() {
       { name: "👑 Shadow King", avatar: "👑", difficulty: 3.0 },
     ];
 
-    const randomOpponent =
-      opponents[Math.floor(Math.random() * opponents.length)];
+    const randomOpponent = opponents[Math.floor(Math.random() * opponents.length)];
     const playerLevel = gameState.currentFighter.level;
 
     return {
@@ -159,10 +158,7 @@ export function GaiaFighterGamePro() {
         ? Math.floor(player.attack * 1.5)
         : Math.floor(player.attack * (0.8 + Math.random() * 0.4));
 
-    playerDamage = Math.max(
-      1,
-      playerDamage - Math.floor(opponent.defense * 0.5),
-    );
+    playerDamage = Math.max(1, playerDamage - Math.floor(opponent.defense * 0.5));
 
     const newOpponentHealth = Math.max(0, opponent.health - playerDamage);
 
@@ -184,10 +180,7 @@ export function GaiaFighterGamePro() {
       ]);
 
       if (levelUp) {
-        setBattleLog((prev) => [
-          ...prev,
-          `🌟 LEVEL UP! You are now level ${player.level + 1}!`,
-        ]);
+        setBattleLog((prev) => [...prev, `🌟 LEVEL UP! You are now level ${player.level + 1}!`]);
       }
 
       setGameState((prev) => ({
@@ -200,19 +193,12 @@ export function GaiaFighterGamePro() {
           attack: levelUp ? player.attack + 5 : player.attack,
           defense: levelUp ? player.defense + 3 : player.defense,
           maxHealth: levelUp ? player.maxHealth + 10 : player.maxHealth,
-          health: levelUp
-            ? player.maxHealth + 10
-            : Math.min(player.maxHealth, player.health + 20),
+          health: levelUp ? player.maxHealth + 10 : Math.min(player.maxHealth, player.health + 20),
         },
         opponent: null,
         battleInProgress: false,
         wins: prev.wins + 1,
-        rank:
-          prev.wins + 1 >= 10
-            ? "Master"
-            : prev.wins + 1 >= 5
-              ? "Expert"
-              : "Novice",
+        rank: prev.wins + 1 >= 10 ? "Master" : prev.wins + 1 >= 5 ? "Expert" : "Novice",
       }));
 
       toast.success("🏆 Victory!", {
@@ -224,13 +210,8 @@ export function GaiaFighterGamePro() {
 
     // Opponent counter-attack
     setTimeout(() => {
-      let opponentDamage = Math.floor(
-        opponent.attack * (0.8 + Math.random() * 0.4),
-      );
-      opponentDamage = Math.max(
-        1,
-        opponentDamage - Math.floor(player.defense * 0.5),
-      );
+      let opponentDamage = Math.floor(opponent.attack * (0.8 + Math.random() * 0.4));
+      opponentDamage = Math.max(1, opponentDamage - Math.floor(player.defense * 0.5));
 
       const newPlayerHealth = Math.max(0, player.health - opponentDamage);
 
@@ -240,10 +221,7 @@ export function GaiaFighterGamePro() {
       ]);
 
       if (newPlayerHealth <= 0) {
-        setBattleLog((prev) => [
-          ...prev,
-          `💀 Defeat! You have been defeated by ${opponent.name}!`,
-        ]);
+        setBattleLog((prev) => [...prev, `💀 Defeat! You have been defeated by ${opponent.name}!`]);
 
         setGameState((prev) => ({
           ...prev,
@@ -308,10 +286,7 @@ export function GaiaFighterGamePro() {
       },
     }));
 
-    setBattleLog((prev) => [
-      ...prev,
-      `💪 Training complete! Attack increased by ${statBonus}!`,
-    ]);
+    setBattleLog((prev) => [...prev, `💪 Training complete! Attack increased by ${statBonus}!`]);
 
     setIsTraining(false);
 
@@ -333,16 +308,13 @@ export function GaiaFighterGamePro() {
             </CardTitle>
             <div className="flex gap-4 text-sm flex-wrap">
               <Badge className="bg-red-600">
-                🗡️ {gameState.currentFighter.name} - Level{" "}
-                {gameState.currentFighter.level}
+                🗡️ {gameState.currentFighter.name} - Level {gameState.currentFighter.level}
               </Badge>
               <Badge className="bg-green-600">
-                ❤️ {gameState.currentFighter.health}/
-                {gameState.currentFighter.maxHealth} HP
+                ❤️ {gameState.currentFighter.health}/{gameState.currentFighter.maxHealth} HP
               </Badge>
               <Badge className="bg-blue-600">
-                ⚡ {gameState.currentFighter.attack} ATK /{" "}
-                {gameState.currentFighter.defense} DEF
+                ⚡ {gameState.currentFighter.attack} ATK / {gameState.currentFighter.defense} DEF
               </Badge>
               <Badge className="bg-purple-600">
                 🏆 Wins: {gameState.wins} | Losses: {gameState.losses}
@@ -368,15 +340,11 @@ export function GaiaFighterGamePro() {
               {/* Fighter Display */}
               <Card className="bg-black/30 border-green-500/30">
                 <CardHeader>
-                  <CardTitle className="text-green-400">
-                    🛡️ Your Fighter
-                  </CardTitle>
+                  <CardTitle className="text-green-400">🛡️ Your Fighter</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="text-center">
-                    <div className="text-6xl mb-2">
-                      {gameState.currentFighter.avatar}
-                    </div>
+                    <div className="text-6xl mb-2">{gameState.currentFighter.avatar}</div>
                     <div className="text-xl font-bold text-green-400">
                       {gameState.currentFighter.name}
                     </div>
@@ -389,15 +357,12 @@ export function GaiaFighterGamePro() {
                     <div className="flex justify-between text-sm">
                       <span>Health</span>
                       <span className="text-red-400">
-                        {gameState.currentFighter.health}/
-                        {gameState.currentFighter.maxHealth}
+                        {gameState.currentFighter.health}/{gameState.currentFighter.maxHealth}
                       </span>
                     </div>
                     <Progress
                       value={
-                        (gameState.currentFighter.health /
-                          gameState.currentFighter.maxHealth) *
-                        100
+                        (gameState.currentFighter.health / gameState.currentFighter.maxHealth) * 100
                       }
                       className="h-2 bg-red-900/50"
                     />
@@ -405,16 +370,11 @@ export function GaiaFighterGamePro() {
                     <div className="flex justify-between text-sm">
                       <span>Experience</span>
                       <span className="text-blue-400">
-                        {gameState.currentFighter.xp}/
-                        {gameState.currentFighter.maxXp}
+                        {gameState.currentFighter.xp}/{gameState.currentFighter.maxXp}
                       </span>
                     </div>
                     <Progress
-                      value={
-                        (gameState.currentFighter.xp /
-                          gameState.currentFighter.maxXp) *
-                        100
-                      }
+                      value={(gameState.currentFighter.xp / gameState.currentFighter.maxXp) * 100}
                       className="h-2 bg-blue-900/50"
                     />
                   </div>
@@ -424,17 +384,13 @@ export function GaiaFighterGamePro() {
               {/* Battle Arena */}
               <Card className="bg-black/30 border-purple-500/30">
                 <CardHeader>
-                  <CardTitle className="text-purple-400">
-                    ⚔️ Battle Arena
-                  </CardTitle>
+                  <CardTitle className="text-purple-400">⚔️ Battle Arena</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {!gameState.battleInProgress ? (
                     <div className="text-center space-y-4">
                       <div className="text-6xl">🏟️</div>
-                      <div className="text-lg text-purple-400">
-                        Ready for Battle!
-                      </div>
+                      <div className="text-lg text-purple-400">Ready for Battle!</div>
                       <Button
                         onClick={startBattle}
                         className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700"
@@ -446,9 +402,7 @@ export function GaiaFighterGamePro() {
                   ) : (
                     <div className="space-y-4">
                       <div className="text-center">
-                        <div className="text-4xl mb-2">
-                          ⚔️ VS {gameState.opponent?.avatar}
-                        </div>
+                        <div className="text-4xl mb-2">⚔️ VS {gameState.opponent?.avatar}</div>
                         <div className="text-lg font-bold text-red-400">
                           Round {gameState.round}
                         </div>
@@ -459,16 +413,11 @@ export function GaiaFighterGamePro() {
                           <div className="flex justify-between text-sm">
                             <span>{gameState.opponent.name}</span>
                             <span className="text-red-400">
-                              {gameState.opponent.health}/
-                              {gameState.opponent.maxHealth}
+                              {gameState.opponent.health}/{gameState.opponent.maxHealth}
                             </span>
                           </div>
                           <Progress
-                            value={
-                              (gameState.opponent.health /
-                                gameState.opponent.maxHealth) *
-                              100
-                            }
+                            value={(gameState.opponent.health / gameState.opponent.maxHealth) * 100}
                             className="h-2 bg-red-900/50"
                           />
                         </div>
@@ -496,9 +445,7 @@ export function GaiaFighterGamePro() {
               {/* Battle Log */}
               <Card className="bg-black/30 border-yellow-500/30">
                 <CardHeader>
-                  <CardTitle className="text-yellow-400">
-                    📜 Battle Log
-                  </CardTitle>
+                  <CardTitle className="text-yellow-400">📜 Battle Log</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="h-64 overflow-y-auto space-y-1 text-sm">
@@ -532,8 +479,7 @@ export function GaiaFighterGamePro() {
                     ADVANCED COMBAT TRAINING
                   </h3>
                   <p className="text-muted-foreground mb-6">
-                    Enhance your fighter's abilities through quantum training
-                    protocols
+                    Enhance your fighter's abilities through quantum training protocols
                   </p>
 
                   <Button
@@ -557,9 +503,7 @@ export function GaiaFighterGamePro() {
                   <div className="text-2xl font-bold text-red-400">
                     {gameState.currentFighter.attack}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Attack Power
-                  </div>
+                  <div className="text-sm text-muted-foreground">Attack Power</div>
                 </CardContent>
               </Card>
 
@@ -598,45 +542,28 @@ export function GaiaFighterGamePro() {
           <TabsContent value="tournament" className="space-y-6">
             <Card className="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/50">
               <CardHeader>
-                <CardTitle className="text-yellow-400 text-center">
-                  🏆 GLOBAL TOURNAMENT
-                </CardTitle>
+                <CardTitle className="text-yellow-400 text-center">🏆 GLOBAL TOURNAMENT</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center">
                   <div className="text-6xl mb-4 animate-bounce">🏆</div>
-                  <h3 className="text-2xl font-bold text-yellow-400 mb-2">
-                    WORLDWIDE COMPETITION
-                  </h3>
+                  <h3 className="text-2xl font-bold text-yellow-400 mb-2">WORLDWIDE COMPETITION</h3>
                   <p className="text-muted-foreground mb-6">
-                    Compete against {gameState.onlinePlayers.toLocaleString()}{" "}
-                    fighters worldwide
+                    Compete against {gameState.onlinePlayers.toLocaleString()} fighters worldwide
                   </p>
 
                   <div className="grid grid-cols-3 gap-4 mb-6">
                     <div className="text-center p-4 bg-yellow-900/20 rounded-lg">
-                      <div className="text-2xl font-bold text-yellow-400">
-                        {gameState.wins}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        Tournament Wins
-                      </div>
+                      <div className="text-2xl font-bold text-yellow-400">{gameState.wins}</div>
+                      <div className="text-xs text-muted-foreground">Tournament Wins</div>
                     </div>
                     <div className="text-center p-4 bg-red-900/20 rounded-lg">
-                      <div className="text-2xl font-bold text-red-400">
-                        {gameState.losses}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        Losses
-                      </div>
+                      <div className="text-2xl font-bold text-red-400">{gameState.losses}</div>
+                      <div className="text-xs text-muted-foreground">Losses</div>
                     </div>
                     <div className="text-center p-4 bg-purple-900/20 rounded-lg">
-                      <div className="text-2xl font-bold text-purple-400">
-                        {gameState.rank}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        Current Rank
-                      </div>
+                      <div className="text-2xl font-bold text-purple-400">{gameState.rank}</div>
+                      <div className="text-xs text-muted-foreground">Current Rank</div>
                     </div>
                   </div>
 

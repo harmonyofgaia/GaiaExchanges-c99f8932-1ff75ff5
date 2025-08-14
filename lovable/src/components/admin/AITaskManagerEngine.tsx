@@ -47,13 +47,7 @@ interface AITask {
   priority: "low" | "medium" | "high" | "critical";
   status: "pending" | "running" | "completed" | "failed" | "paused";
   progress: number;
-  category:
-    | "security"
-    | "analysis"
-    | "automation"
-    | "monitoring"
-    | "attack"
-    | "defense";
+  category: "security" | "analysis" | "automation" | "monitoring" | "attack" | "defense";
   estimatedTime: string;
   requiredResources: string[];
   createdAt: Date;
@@ -85,8 +79,7 @@ export function AITaskManagerEngine() {
       {
         id: "1",
         name: "Network Perimeter Scan",
-        description:
-          "Comprehensive scan of network boundaries and potential entry points",
+        description: "Comprehensive scan of network boundaries and potential entry points",
         priority: "high",
         status: "running",
         progress: 67,
@@ -145,8 +138,7 @@ export function AITaskManagerEngine() {
       requiredResources: ["To be determined"],
       createdAt: new Date(),
       adminOnly: true,
-      invisible:
-        selectedCategory === "attack" || selectedCategory === "defense",
+      invisible: selectedCategory === "attack" || selectedCategory === "defense",
     };
 
     setTasks((prev) => [newTask, ...prev]);
@@ -160,9 +152,7 @@ export function AITaskManagerEngine() {
 
   const executeTask = (taskId: string) => {
     setTasks((prev) =>
-      prev.map((task) =>
-        task.id === taskId ? { ...task, status: "running" } : task,
-      ),
+      prev.map((task) => (task.id === taskId ? { ...task, status: "running" } : task))
     );
 
     toast.success("⚡ Task Execution Started!", {
@@ -172,9 +162,7 @@ export function AITaskManagerEngine() {
 
   const pauseTask = (taskId: string) => {
     setTasks((prev) =>
-      prev.map((task) =>
-        task.id === taskId ? { ...task, status: "paused" } : task,
-      ),
+      prev.map((task) => (task.id === taskId ? { ...task, status: "paused" } : task))
     );
 
     toast.warning("⏸️ Task Paused", {
@@ -229,15 +217,9 @@ export function AITaskManagerEngine() {
               Autonomous Operations • Background Processing • Full Admin Control
             </div>
             <div className="flex justify-center gap-2 flex-wrap">
-              <Badge className="bg-purple-600 animate-pulse">
-                UNLIMITED BOUNDARIES
-              </Badge>
-              <Badge className="bg-blue-600 animate-pulse">
-                ADMIN GOD MODE
-              </Badge>
-              <Badge className="bg-red-600 animate-pulse">
-                INVISIBLE OPERATIONS
-              </Badge>
+              <Badge className="bg-purple-600 animate-pulse">UNLIMITED BOUNDARIES</Badge>
+              <Badge className="bg-blue-600 animate-pulse">ADMIN GOD MODE</Badge>
+              <Badge className="bg-red-600 animate-pulse">INVISIBLE OPERATIONS</Badge>
             </div>
           </div>
         </CardHeader>
@@ -248,9 +230,7 @@ export function AITaskManagerEngine() {
         <Card className="border-green-500/30 bg-green-900/20">
           <CardContent className="p-4 text-center">
             <Activity className="h-8 w-8 mx-auto text-green-400 mb-2" />
-            <div className="text-2xl font-bold text-green-400">
-              {systemMetrics.activeTasks}
-            </div>
+            <div className="text-2xl font-bold text-green-400">{systemMetrics.activeTasks}</div>
             <div className="text-sm text-muted-foreground">Active Tasks</div>
           </CardContent>
         </Card>
@@ -258,9 +238,7 @@ export function AITaskManagerEngine() {
         <Card className="border-blue-500/30 bg-blue-900/20">
           <CardContent className="p-4 text-center">
             <CheckCircle className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-            <div className="text-2xl font-bold text-blue-400">
-              {systemMetrics.completedTasks}
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{systemMetrics.completedTasks}</div>
             <div className="text-sm text-muted-foreground">Completed</div>
           </CardContent>
         </Card>
@@ -268,9 +246,7 @@ export function AITaskManagerEngine() {
         <Card className="border-yellow-500/30 bg-yellow-900/20">
           <CardContent className="p-4 text-center">
             <Cpu className="h-8 w-8 mx-auto text-yellow-400 mb-2" />
-            <div className="text-2xl font-bold text-yellow-400">
-              {systemMetrics.cpuUsage}%
-            </div>
+            <div className="text-2xl font-bold text-yellow-400">{systemMetrics.cpuUsage}%</div>
             <div className="text-sm text-muted-foreground">CPU Usage</div>
           </CardContent>
         </Card>
@@ -297,9 +273,7 @@ export function AITaskManagerEngine() {
         <TabsContent value="create-task" className="space-y-4">
           <Card className="border-cyan-500/30 bg-cyan-900/20">
             <CardHeader>
-              <CardTitle className="text-cyan-400">
-                🎯 Create New AI Task
-              </CardTitle>
+              <CardTitle className="text-cyan-400">🎯 Create New AI Task</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <Input
@@ -318,9 +292,7 @@ export function AITaskManagerEngine() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm text-cyan-300 mb-2 block">
-                    Category
-                  </label>
+                  <label className="text-sm text-cyan-300 mb-2 block">Category</label>
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
@@ -336,9 +308,7 @@ export function AITaskManagerEngine() {
                 </div>
 
                 <div>
-                  <label className="text-sm text-cyan-300 mb-2 block">
-                    Priority
-                  </label>
+                  <label className="text-sm text-cyan-300 mb-2 block">Priority</label>
                   <select
                     value={selectedPriority}
                     onChange={(e) => setSelectedPriority(e.target.value)}
@@ -372,24 +342,16 @@ export function AITaskManagerEngine() {
                     <div className="flex items-center gap-3">
                       {getCategoryIcon(task.category)}
                       <CardTitle className="text-lg">{task.name}</CardTitle>
-                      {task.invisible && (
-                        <Badge className="bg-purple-600">👻 INVISIBLE</Badge>
-                      )}
-                      {task.adminOnly && (
-                        <Badge className="bg-red-600">👑 ADMIN ONLY</Badge>
-                      )}
+                      {task.invisible && <Badge className="bg-purple-600">👻 INVISIBLE</Badge>}
+                      {task.adminOnly && <Badge className="bg-red-600">👑 ADMIN ONLY</Badge>}
                     </div>
-                    <Badge
-                      className={`${getStatusColor(task.status)} text-white`}
-                    >
+                    <Badge className={`${getStatusColor(task.status)} text-white`}>
                       {task.status.toUpperCase()}
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground">
-                    {task.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{task.description}</p>
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
@@ -441,9 +403,7 @@ export function AITaskManagerEngine() {
         <TabsContent value="system-control" className="space-y-4">
           <Card className="border-orange-500/30 bg-orange-900/20">
             <CardHeader>
-              <CardTitle className="text-orange-400">
-                🔧 System Control Panel
-              </CardTitle>
+              <CardTitle className="text-orange-400">🔧 System Control Panel</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -474,19 +434,14 @@ export function AITaskManagerEngine() {
         <TabsContent value="advanced-ops" className="space-y-4">
           <Card className="border-red-500/30 bg-red-900/20">
             <CardHeader>
-              <CardTitle className="text-red-400">
-                🚀 Advanced Operations
-              </CardTitle>
+              <CardTitle className="text-red-400">🚀 Advanced Operations</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="text-center space-y-4">
                 <div className="text-6xl mb-4">🚀⚡</div>
-                <h3 className="text-2xl font-bold text-red-400">
-                  UNLIMITED AI TASK MANAGEMENT
-                </h3>
+                <h3 className="text-2xl font-bold text-red-400">UNLIMITED AI TASK MANAGEMENT</h3>
                 <p className="text-red-300">
-                  Full administrative control over all AI operations with no
-                  boundaries
+                  Full administrative control over all AI operations with no boundaries
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -502,9 +457,7 @@ export function AITaskManagerEngine() {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="text-red-400 font-bold">
-                      ⚡ ADMIN FEATURES:
-                    </h4>
+                    <h4 className="text-red-400 font-bold">⚡ ADMIN FEATURES:</h4>
                     <div className="text-sm space-y-1">
                       <div>🔴 Emergency Task Override</div>
                       <div>🔴 System Resource Control</div>

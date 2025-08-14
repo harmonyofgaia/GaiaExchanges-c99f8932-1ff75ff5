@@ -134,27 +134,16 @@ export function AdminTycoonControls({
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Button
-              onClick={giveCoins}
-              className="bg-yellow-600 hover:bg-yellow-700"
-            >
+            <Button onClick={giveCoins} className="bg-yellow-600 hover:bg-yellow-700">
               💰 +10K Coins
             </Button>
-            <Button
-              onClick={maxLevel}
-              className="bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={maxLevel} className="bg-purple-600 hover:bg-purple-700">
               ⭐ Max Level
             </Button>
-            <Button
-              onClick={buildMegaStructure}
-              className="bg-red-600 hover:bg-red-700"
-            >
+            <Button onClick={buildMegaStructure} className="bg-red-600 hover:bg-red-700">
               🏗️ Mega Build
             </Button>
-            <Button className="bg-blue-600 hover:bg-blue-700">
-              🌍 World Control
-            </Button>
+            <Button className="bg-blue-600 hover:bg-blue-700">🌍 World Control</Button>
           </div>
         </CardContent>
       </Card>
@@ -170,16 +159,11 @@ export function AdminTycoonControls({
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {trainedAnimals.map((animal) => (
-              <Card
-                key={animal.id}
-                className="bg-black/30 border border-green-500/20"
-              >
+              <Card key={animal.id} className="bg-black/30 border border-green-500/20">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-3">
                     <h4 className="font-bold text-green-400">{animal.name}</h4>
-                    <Badge className="bg-green-600">
-                      Lv.{animal.skillLevel}
-                    </Badge>
+                    <Badge className="bg-green-600">Lv.{animal.skillLevel}</Badge>
                   </div>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
@@ -188,27 +172,18 @@ export function AdminTycoonControls({
                     </div>
                     <div className="flex justify-between">
                       <span>Ability:</span>
-                      <span className="text-blue-400">
-                        {animal.specialAbility}
-                      </span>
+                      <span className="text-blue-400">{animal.specialAbility}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Intelligence:</span>
-                      <span className="text-purple-400">
-                        {animal.intelligence}
-                      </span>
+                      <span className="text-purple-400">{animal.intelligence}</span>
                     </div>
                     <div>
                       <div className="flex justify-between mb-1">
                         <span>Training:</span>
-                        <span className="text-orange-400">
-                          {animal.trainingProgress}%
-                        </span>
+                        <span className="text-orange-400">{animal.trainingProgress}%</span>
                       </div>
-                      <Progress
-                        value={animal.trainingProgress}
-                        className="h-2"
-                      />
+                      <Progress value={animal.trainingProgress} className="h-2" />
                     </div>
                   </div>
                 </CardContent>
@@ -242,19 +217,13 @@ export function AdminTycoonControls({
           </div>
 
           <div className="mt-6 p-4 bg-purple-900/20 rounded-lg border border-purple-500/30">
-            <h4 className="text-lg font-bold text-purple-400 mb-2">
-              🚀 REAL-TIME IMPROVEMENTS
-            </h4>
+            <h4 className="text-lg font-bold text-purple-400 mb-2">🚀 REAL-TIME IMPROVEMENTS</h4>
             <div className="text-sm text-muted-foreground space-y-1">
               <div>• Neural networks expanding by 0.1% every hour</div>
               <div>• Quantum processing efficiency improving daily</div>
               <div>• Pattern recognition learning from 50M+ data points</div>
-              <div>
-                • Behavioral analysis trained on global user interactions
-              </div>
-              <div>
-                • Adaptive learning evolving with every threat encounter
-              </div>
+              <div>• Behavioral analysis trained on global user interactions</div>
+              <div>• Adaptive learning evolving with every threat encounter</div>
             </div>
           </div>
         </CardContent>

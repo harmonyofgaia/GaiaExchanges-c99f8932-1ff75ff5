@@ -94,12 +94,9 @@ export function DAppSystemMonitor() {
 
           const newPerformance = Math.max(
             85,
-            Math.min(100, system.performance + performanceVariation),
+            Math.min(100, system.performance + performanceVariation)
           );
-          const newUptime = Math.max(
-            95,
-            Math.min(100, system.uptime + uptimeVariation),
-          );
+          const newUptime = Math.max(95, Math.min(100, system.uptime + uptimeVariation));
 
           // Auto-fix issues
           let newStatus = system.status;
@@ -115,8 +112,8 @@ export function DAppSystemMonitor() {
                         status: "healthy",
                         performance: Math.min(100, s.performance + 5),
                       }
-                    : s,
-                ),
+                    : s
+                )
               );
               toast.success(`🔧 Auto-Fixed: ${system.component}`, {
                 description: "System automatically resolved performance issues",
@@ -138,7 +135,7 @@ export function DAppSystemMonitor() {
             status: newStatus,
             lastCheck: new Date(),
           };
-        }),
+        })
       );
     };
 
@@ -148,10 +145,7 @@ export function DAppSystemMonitor() {
 
   useEffect(() => {
     // Calculate overall system health
-    const totalPerformance = systemHealth.reduce(
-      (sum, system) => sum + system.performance,
-      0,
-    );
+    const totalPerformance = systemHealth.reduce((sum, system) => sum + system.performance, 0);
     const avgPerformance = totalPerformance / systemHealth.length;
     setOverallHealth(avgPerformance);
   }, [systemHealth]);
@@ -167,7 +161,7 @@ export function DAppSystemMonitor() {
         ...system,
         status: "maintenance",
         lastCheck: new Date(),
-      })),
+      }))
     );
 
     // Simulate comprehensive check
@@ -178,12 +172,11 @@ export function DAppSystemMonitor() {
           status: "healthy",
           performance: Math.min(100, system.performance + 3),
           uptime: Math.min(100, system.uptime + 0.1),
-        })),
+        }))
       );
 
       toast.success("✅ System Health Check Complete", {
-        description:
-          "All components optimized and functioning at peak performance",
+        description: "All components optimized and functioning at peak performance",
         duration: 3000,
       });
     }, 5000);
@@ -191,8 +184,7 @@ export function DAppSystemMonitor() {
 
   const optimizePerformance = () => {
     toast.success("⚡ Performance Optimization Started", {
-      description:
-        "Applying advanced optimization protocols across all systems",
+      description: "Applying advanced optimization protocols across all systems",
       duration: 4000,
     });
 
@@ -201,7 +193,7 @@ export function DAppSystemMonitor() {
         ...system,
         performance: Math.min(100, system.performance + 5),
         status: system.performance < 95 ? "maintenance" : "healthy",
-      })),
+      }))
     );
 
     console.log("🚀 System performance optimization completed");
@@ -263,10 +255,7 @@ export function DAppSystemMonitor() {
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-400">
-                  {
-                    systemHealth.filter((s) => s.status === "maintenance")
-                      .length
-                  }
+                  {systemHealth.filter((s) => s.status === "maintenance").length}
                 </div>
                 <p className="text-muted-foreground">Maintenance</p>
               </div>
@@ -310,9 +299,7 @@ export function DAppSystemMonitor() {
                     >
                       {system.performance.toFixed(1)}%
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      Performance
-                    </div>
+                    <div className="text-xs text-muted-foreground">Performance</div>
                   </div>
 
                   <div className="text-right">
@@ -322,9 +309,7 @@ export function DAppSystemMonitor() {
                     <div className="text-xs text-muted-foreground">Uptime</div>
                   </div>
 
-                  <Badge
-                    className={`${getStatusColor(system.status)} text-white`}
-                  >
+                  <Badge className={`${getStatusColor(system.status)} text-white`}>
                     {system.status}
                   </Badge>
 
@@ -343,18 +328,12 @@ export function DAppSystemMonitor() {
 
       {/* System Actions */}
       <div className="flex gap-4 flex-wrap">
-        <Button
-          onClick={runFullSystemCheck}
-          className="bg-blue-600 hover:bg-blue-700"
-        >
+        <Button onClick={runFullSystemCheck} className="bg-blue-600 hover:bg-blue-700">
           <Activity className="h-4 w-4 mr-2" />
           Run Full System Check
         </Button>
 
-        <Button
-          onClick={optimizePerformance}
-          className="bg-green-600 hover:bg-green-700"
-        >
+        <Button onClick={optimizePerformance} className="bg-green-600 hover:bg-green-700">
           <Zap className="h-4 w-4 mr-2" />
           Optimize Performance
         </Button>

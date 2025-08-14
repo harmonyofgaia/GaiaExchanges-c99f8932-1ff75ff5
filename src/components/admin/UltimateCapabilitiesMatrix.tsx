@@ -87,8 +87,7 @@ export function UltimateCapabilitiesMatrix() {
   const activateUltimateMatrix = () => {
     setMatrixPower(200);
     toast.success("🌌 ULTIMATE CAPABILITIES MATRIX ACTIVATED!", {
-      description:
-        "All AI systems now operating beyond quantum level - Unlimited power engaged",
+      description: "All AI systems now operating beyond quantum level - Unlimited power engaged",
       duration: 15000,
     });
   };
@@ -99,12 +98,9 @@ export function UltimateCapabilitiesMatrix() {
         <CardHeader>
           <CardTitle className="text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400">
             <div className="text-6xl mb-4">🌌</div>
-            <div className="text-4xl font-bold">
-              ULTIMATE AI CAPABILITIES MATRIX
-            </div>
+            <div className="text-4xl font-bold">ULTIMATE AI CAPABILITIES MATRIX</div>
             <div className="text-lg font-normal mt-2">
-              Beyond Quantum • Unlimited Power • Admin-Only Access • Reality
-              Control
+              Beyond Quantum • Unlimited Power • Admin-Only Access • Reality Control
             </div>
           </CardTitle>
         </CardHeader>
@@ -113,9 +109,7 @@ export function UltimateCapabilitiesMatrix() {
             <div className="text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 animate-pulse">
               {matrixPower}%
             </div>
-            <div className="text-2xl text-cyan-400 font-bold">
-              MATRIX POWER LEVEL
-            </div>
+            <div className="text-2xl text-cyan-400 font-bold">MATRIX POWER LEVEL</div>
             <Badge className="mt-2 bg-gradient-to-r from-purple-600 to-cyan-600 text-white text-xl px-8 py-3">
               BEYOND QUANTUM LIMITS
             </Badge>
@@ -124,11 +118,7 @@ export function UltimateCapabilitiesMatrix() {
           <Tabs defaultValue="Neural Processing" className="w-full">
             <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6">
               {Object.keys(capabilities).map((category) => (
-                <TabsTrigger
-                  key={category}
-                  value={category}
-                  className="text-xs"
-                >
+                <TabsTrigger key={category} value={category} className="text-xs">
                   {category.split(" ")[0]}
                 </TabsTrigger>
               ))}
@@ -139,24 +129,12 @@ export function UltimateCapabilitiesMatrix() {
                 <Card className="border-purple-500/30 bg-black/40">
                   <CardHeader>
                     <CardTitle className="text-purple-400 flex items-center gap-2">
-                      {category === "Neural Processing" && (
-                        <Brain className="h-6 w-6" />
-                      )}
-                      {category === "Quantum Systems" && (
-                        <InfinityIcon className="h-6 w-6" />
-                      )}
-                      {category === "Security Arsenal" && (
-                        <Shield className="h-6 w-6" />
-                      )}
-                      {category === "Data Mastery" && (
-                        <Database className="h-6 w-6" />
-                      )}
-                      {category === "Automation Control" && (
-                        <Cpu className="h-6 w-6" />
-                      )}
-                      {category === "Admin Powers" && (
-                        <Zap className="h-6 w-6" />
-                      )}
+                      {category === "Neural Processing" && <Brain className="h-6 w-6" />}
+                      {category === "Quantum Systems" && <InfinityIcon className="h-6 w-6" />}
+                      {category === "Security Arsenal" && <Shield className="h-6 w-6" />}
+                      {category === "Data Mastery" && <Database className="h-6 w-6" />}
+                      {category === "Automation Control" && <Cpu className="h-6 w-6" />}
+                      {category === "Admin Powers" && <Zap className="h-6 w-6" />}
                       {category}
                     </CardTitle>
                   </CardHeader>
@@ -169,9 +147,7 @@ export function UltimateCapabilitiesMatrix() {
                         >
                           <div className="flex items-center gap-2">
                             <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-                            <span className="text-sm text-white">
-                              {feature}
-                            </span>
+                            <span className="text-sm text-white">{feature}</span>
                           </div>
                         </div>
                       ))}

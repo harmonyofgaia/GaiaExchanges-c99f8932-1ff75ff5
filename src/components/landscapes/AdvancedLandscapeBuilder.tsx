@@ -63,14 +63,8 @@ export function AdvancedLandscapeBuilder() {
       name: "🌊 Underwater Realm",
       icon: <Fish className="h-6 w-6" />,
       color: "from-blue-600 to-cyan-600",
-      description:
-        "Deep ocean worlds with coral reefs, underwater cities, and marine life",
-      features: [
-        "Fluid Dynamics",
-        "Marine Ecosystems",
-        "Pressure Physics",
-        "Bioluminescence",
-      ],
+      description: "Deep ocean worlds with coral reefs, underwater cities, and marine life",
+      features: ["Fluid Dynamics", "Marine Ecosystems", "Pressure Physics", "Bioluminescence"],
       difficulty: "Expert",
       memorySize: "145 TB",
       aiGenerated: true,
@@ -81,12 +75,7 @@ export function AdvancedLandscapeBuilder() {
       icon: <Mountain className="h-6 w-6" />,
       color: "from-gray-600 to-stone-600",
       description: "Towering peaks with snow-capped summits and hidden valleys",
-      features: [
-        "Altitude Physics",
-        "Weather Systems",
-        "Avalanche Simulation",
-        "Cliff Dynamics",
-      ],
+      features: ["Altitude Physics", "Weather Systems", "Avalanche Simulation", "Cliff Dynamics"],
       difficulty: "Hard",
       memorySize: "89 TB",
       aiGenerated: true,
@@ -97,12 +86,7 @@ export function AdvancedLandscapeBuilder() {
       icon: <TreePine className="h-6 w-6" />,
       color: "from-green-600 to-emerald-600",
       description: "Ancient forests with sentient trees and magical creatures",
-      features: [
-        "Living Ecosystems",
-        "Seasonal Changes",
-        "Wildlife AI",
-        "Growth Simulation",
-      ],
+      features: ["Living Ecosystems", "Seasonal Changes", "Wildlife AI", "Growth Simulation"],
       difficulty: "Medium",
       memorySize: "67 TB",
       aiGenerated: true,
@@ -112,14 +96,8 @@ export function AdvancedLandscapeBuilder() {
       name: "🚀 Space Station",
       icon: <Rocket className="h-6 w-6" />,
       color: "from-purple-600 to-indigo-600",
-      description:
-        "Futuristic space habitats with zero gravity and cosmic views",
-      features: [
-        "Zero Gravity",
-        "Cosmic Radiation",
-        "Artificial Atmosphere",
-        "Stellar Views",
-      ],
+      description: "Futuristic space habitats with zero gravity and cosmic views",
+      features: ["Zero Gravity", "Cosmic Radiation", "Artificial Atmosphere", "Stellar Views"],
       difficulty: "Legendary",
       memorySize: "234 TB",
       aiGenerated: true,
@@ -129,14 +107,8 @@ export function AdvancedLandscapeBuilder() {
       name: "🏙️ Mega City",
       icon: <Building className="h-6 w-6" />,
       color: "from-yellow-600 to-orange-600",
-      description:
-        "Sprawling cyberpunk metropolis with flying cars and neon lights",
-      features: [
-        "Traffic Simulation",
-        "Population AI",
-        "Light Systems",
-        "Weather Effects",
-      ],
+      description: "Sprawling cyberpunk metropolis with flying cars and neon lights",
+      features: ["Traffic Simulation", "Population AI", "Light Systems", "Weather Effects"],
       difficulty: "Hard",
       memorySize: "198 TB",
       aiGenerated: true,
@@ -147,12 +119,7 @@ export function AdvancedLandscapeBuilder() {
       icon: <Snowflake className="h-6 w-6" />,
       color: "from-cyan-600 to-blue-600",
       description: "Frozen wastelands with ice caves and aurora phenomena",
-      features: [
-        "Ice Physics",
-        "Aurora Effects",
-        "Thermal Dynamics",
-        "Blizzard Systems",
-      ],
+      features: ["Ice Physics", "Aurora Effects", "Thermal Dynamics", "Blizzard Systems"],
       difficulty: "Expert",
       memorySize: "123 TB",
       aiGenerated: true,
@@ -163,12 +130,7 @@ export function AdvancedLandscapeBuilder() {
       icon: <Sun className="h-6 w-6" />,
       color: "from-orange-600 to-red-600",
       description: "Vast sand dunes with hidden oases and ancient ruins",
-      features: [
-        "Sand Physics",
-        "Heat Mirages",
-        "Sandstorm Weather",
-        "Ancient Structures",
-      ],
+      features: ["Sand Physics", "Heat Mirages", "Sandstorm Weather", "Ancient Structures"],
       difficulty: "Hard",
       memorySize: "87 TB",
       aiGenerated: true,
@@ -178,14 +140,8 @@ export function AdvancedLandscapeBuilder() {
       name: "🌋 Volcanic Region",
       icon: <Flame className="h-6 w-6" />,
       color: "from-red-600 to-orange-600",
-      description:
-        "Active volcanic landscapes with lava flows and geothermal features",
-      features: [
-        "Lava Simulation",
-        "Geothermal Effects",
-        "Ash Particles",
-        "Tectonic Activity",
-      ],
+      description: "Active volcanic landscapes with lava flows and geothermal features",
+      features: ["Lava Simulation", "Geothermal Effects", "Ash Particles", "Tectonic Activity"],
       difficulty: "Insane",
       memorySize: "176 TB",
       aiGenerated: true,
@@ -196,12 +152,7 @@ export function AdvancedLandscapeBuilder() {
       icon: <Cloud className="h-6 w-6" />,
       color: "from-purple-600 to-pink-600",
       description: "Mystical floating landmasses connected by energy bridges",
-      features: [
-        "Anti-Gravity",
-        "Energy Bridges",
-        "Sky Physics",
-        "Levitation Fields",
-      ],
+      features: ["Anti-Gravity", "Energy Bridges", "Sky Physics", "Levitation Fields"],
       difficulty: "Legendary",
       memorySize: "267 TB",
       aiGenerated: true,
@@ -212,12 +163,7 @@ export function AdvancedLandscapeBuilder() {
       icon: <Zap className="h-6 w-6" />,
       color: "from-purple-600 to-cyan-600",
       description: "Reality-bending dimension where physics laws are optional",
-      features: [
-        "Reality Shifting",
-        "Quantum Tunneling",
-        "Time Distortion",
-        "Particle Effects",
-      ],
+      features: ["Reality Shifting", "Quantum Tunneling", "Time Distortion", "Particle Effects"],
       difficulty: "Impossible",
       memorySize: "∞ TB",
       aiGenerated: true,
@@ -228,12 +174,7 @@ export function AdvancedLandscapeBuilder() {
       icon: <Moon className="h-6 w-6" />,
       color: "from-gray-600 to-blue-600",
       description: "Moon surface colonies with Earth views and lunar phenomena",
-      features: [
-        "Low Gravity",
-        "Vacuum Physics",
-        "Solar Radiation",
-        "Earth Views",
-      ],
+      features: ["Low Gravity", "Vacuum Physics", "Solar Radiation", "Earth Views"],
       difficulty: "Expert",
       memorySize: "156 TB",
       aiGenerated: true,
@@ -244,12 +185,7 @@ export function AdvancedLandscapeBuilder() {
       icon: <Star className="h-6 w-6" />,
       color: "from-pink-600 to-purple-600",
       description: "Underground crystal formations with magical properties",
-      features: [
-        "Crystal Growth",
-        "Light Refraction",
-        "Resonance Effects",
-        "Energy Fields",
-      ],
+      features: ["Crystal Growth", "Light Refraction", "Resonance Effects", "Energy Fields"],
       difficulty: "Hard",
       memorySize: "134 TB",
       aiGenerated: true,
@@ -327,16 +263,10 @@ export function AdvancedLandscapeBuilder() {
             🌍 ADVANCED LANDSCAPE BUILDER
           </CardTitle>
           <div className="flex items-center gap-4 flex-wrap">
-            <Badge className="bg-green-600 animate-pulse">
-              ✅ AI SYSTEMS ONLINE
-            </Badge>
-            <Badge className="bg-blue-600">
-              🎮 {environments.length} Environments
-            </Badge>
+            <Badge className="bg-green-600 animate-pulse">✅ AI SYSTEMS ONLINE</Badge>
+            <Badge className="bg-blue-600">🎮 {environments.length} Environments</Badge>
             <Badge className="bg-purple-600">🚀 Quantum Enhanced</Badge>
-            <Badge className="bg-cyan-600">
-              ⚡ {builderState.aiToolsUnlocked} AI Tools
-            </Badge>
+            <Badge className="bg-cyan-600">⚡ {builderState.aiToolsUnlocked} AI Tools</Badge>
           </div>
         </CardHeader>
         <CardContent>
@@ -345,23 +275,17 @@ export function AdvancedLandscapeBuilder() {
               <div className="text-2xl font-bold text-green-400">
                 {builderState.environmentsBuilt}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Environments Built
-              </div>
+              <div className="text-sm text-muted-foreground">Environments Built</div>
             </div>
             <div className="text-center p-4 bg-blue-900/20 rounded border border-blue-500/20">
-              <div className="text-2xl font-bold text-blue-400">
-                {builderState.totalMemoryUsed}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{builderState.totalMemoryUsed}</div>
               <div className="text-sm text-muted-foreground">Memory Used</div>
             </div>
             <div className="text-center p-4 bg-purple-900/20 rounded border border-purple-500/20">
               <div className="text-2xl font-bold text-purple-400">
                 {builderState.activeBuilders}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Active Builders
-              </div>
+              <div className="text-sm text-muted-foreground">Active Builders</div>
             </div>
             <div className="text-center p-4 bg-yellow-900/20 rounded border border-yellow-500/20">
               <div className="text-2xl font-bold text-yellow-400">∞</div>
@@ -383,18 +307,13 @@ export function AdvancedLandscapeBuilder() {
             <div className="space-y-4">
               <div>
                 <div className="flex justify-between mb-2">
-                  <span className="text-sm text-green-400">
-                    Generation Progress
-                  </span>
-                  <span className="text-sm text-green-400">
-                    {buildingProgress.toFixed(0)}%
-                  </span>
+                  <span className="text-sm text-green-400">Generation Progress</span>
+                  <span className="text-sm text-green-400">{buildingProgress.toFixed(0)}%</span>
                 </div>
                 <Progress value={buildingProgress} className="h-3" />
               </div>
               <div className="text-sm text-muted-foreground">
-                AI is generating quantum-enhanced landscape with ultra-high
-                detail...
+                AI is generating quantum-enhanced landscape with ultra-high detail...
               </div>
             </div>
           </CardContent>
@@ -418,21 +337,15 @@ export function AdvancedLandscapeBuilder() {
                 </Badge>
                 <Badge className="bg-blue-600">{environment.memorySize}</Badge>
                 {environment.aiGenerated && (
-                  <Badge className="bg-purple-600 animate-pulse">
-                    AI Generated
-                  </Badge>
+                  <Badge className="bg-purple-600 animate-pulse">AI Generated</Badge>
                 )}
               </div>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground mb-3 text-sm">
-                {environment.description}
-              </p>
+              <p className="text-muted-foreground mb-3 text-sm">{environment.description}</p>
 
               <div className="mb-4">
-                <h4 className="text-xs font-bold text-white mb-2">
-                  Advanced Features:
-                </h4>
+                <h4 className="text-xs font-bold text-white mb-2">Advanced Features:</h4>
                 <div className="flex flex-wrap gap-1">
                   {environment.features.map((feature, index) => (
                     <Badge key={index} variant="outline" className="text-xs">
@@ -456,9 +369,7 @@ export function AdvancedLandscapeBuilder() {
       </div>
 
       <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-lg p-4">
-        <h4 className="font-medium text-indigo-400 mb-2">
-          🚀 Advanced Builder Features
-        </h4>
+        <h4 className="font-medium text-indigo-400 mb-2">🚀 Advanced Builder Features</h4>
         <div className="text-sm text-indigo-300">
           ✅ 12 unique environment types available
           <br />

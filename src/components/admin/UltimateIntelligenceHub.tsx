@@ -48,9 +48,7 @@ interface GlobalTarget {
 
 export function UltimateIntelligenceHub() {
   const [isActive, setIsActive] = useState(true);
-  const [intelligenceData, setIntelligenceData] = useState<IntelligenceData[]>(
-    [],
-  );
+  const [intelligenceData, setIntelligenceData] = useState<IntelligenceData[]>([]);
   const [globalTargets, setGlobalTargets] = useState<GlobalTarget[]>([]);
   const [systemStats, setSystemStats] = useState({
     totalSources: 247,
@@ -136,9 +134,7 @@ export function UltimateIntelligenceHub() {
         id: Math.random().toString(36),
         identifier: `TGT-${Math.floor(Math.random() * 99999)}`,
         location: locations[Math.floor(Math.random() * locations.length)],
-        status: ["monitoring", "infiltrated", "controlled"][
-          Math.floor(Math.random() * 3)
-        ] as any,
+        status: ["monitoring", "infiltrated", "controlled"][Math.floor(Math.random() * 3)] as any,
         threat_level: Math.floor(Math.random() * 100),
         last_activity: new Date(),
       };
@@ -151,17 +147,10 @@ export function UltimateIntelligenceHub() {
     setSystemStats((prev) => ({
       totalSources: prev.totalSources + Math.floor(Math.random() * 3),
       dataPoints: prev.dataPoints + Math.floor(Math.random() * 1000),
-      threatsNeutralized:
-        prev.threatsNeutralized + (Math.random() > 0.8 ? 1 : 0),
+      threatsNeutralized: prev.threatsNeutralized + (Math.random() > 0.8 ? 1 : 0),
       globalCoverage: Math.min(100, prev.globalCoverage + Math.random() * 0.1),
-      infiltrationSuccess: Math.min(
-        100,
-        prev.infiltrationSuccess + Math.random() * 0.1,
-      ),
-      quantumProcessing: Math.min(
-        100,
-        prev.quantumProcessing + Math.random() * 0.05,
-      ),
+      infiltrationSuccess: Math.min(100, prev.infiltrationSuccess + Math.random() * 0.1),
+      quantumProcessing: Math.min(100, prev.quantumProcessing + Math.random() * 0.05),
     }));
   };
 
@@ -241,9 +230,7 @@ export function UltimateIntelligenceHub() {
                     <div className="text-2xl font-bold text-green-400">
                       {systemStats.totalSources}
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      Intelligence Sources
-                    </div>
+                    <div className="text-xs text-muted-foreground">Intelligence Sources</div>
                   </CardContent>
                 </Card>
 
@@ -253,9 +240,7 @@ export function UltimateIntelligenceHub() {
                     <div className="text-2xl font-bold text-blue-400">
                       {systemStats.dataPoints.toLocaleString()}
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      Data Points
-                    </div>
+                    <div className="text-xs text-muted-foreground">Data Points</div>
                   </CardContent>
                 </Card>
 
@@ -265,9 +250,7 @@ export function UltimateIntelligenceHub() {
                     <div className="text-2xl font-bold text-red-400">
                       {systemStats.threatsNeutralized}
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      Threats Neutralized
-                    </div>
+                    <div className="text-xs text-muted-foreground">Threats Neutralized</div>
                   </CardContent>
                 </Card>
               </div>
@@ -281,45 +264,30 @@ export function UltimateIntelligenceHub() {
                   <div className="space-y-3">
                     <div>
                       <div className="flex justify-between mb-1">
-                        <span className="text-sm text-purple-300">
-                          Global Coverage
-                        </span>
+                        <span className="text-sm text-purple-300">Global Coverage</span>
                         <span className="text-sm text-purple-400">
                           {systemStats.globalCoverage.toFixed(1)}%
                         </span>
                       </div>
-                      <Progress
-                        value={systemStats.globalCoverage}
-                        className="h-2"
-                      />
+                      <Progress value={systemStats.globalCoverage} className="h-2" />
                     </div>
                     <div>
                       <div className="flex justify-between mb-1">
-                        <span className="text-sm text-purple-300">
-                          Infiltration Success
-                        </span>
+                        <span className="text-sm text-purple-300">Infiltration Success</span>
                         <span className="text-sm text-purple-400">
                           {systemStats.infiltrationSuccess.toFixed(1)}%
                         </span>
                       </div>
-                      <Progress
-                        value={systemStats.infiltrationSuccess}
-                        className="h-2"
-                      />
+                      <Progress value={systemStats.infiltrationSuccess} className="h-2" />
                     </div>
                     <div>
                       <div className="flex justify-between mb-1">
-                        <span className="text-sm text-purple-300">
-                          Quantum Processing
-                        </span>
+                        <span className="text-sm text-purple-300">Quantum Processing</span>
                         <span className="text-sm text-purple-400">
                           {systemStats.quantumProcessing.toFixed(1)}%
                         </span>
                       </div>
-                      <Progress
-                        value={systemStats.quantumProcessing}
-                        className="h-2"
-                      />
+                      <Progress value={systemStats.quantumProcessing} className="h-2" />
                     </div>
                   </div>
                 </CardContent>
@@ -329,17 +297,12 @@ export function UltimateIntelligenceHub() {
             <TabsContent value="intelligence" className="space-y-4">
               <div className="space-y-3 max-h-96 overflow-y-auto">
                 {intelligenceData.map((data) => (
-                  <Card
-                    key={data.id}
-                    className="bg-black/40 border-gray-600/30"
-                  >
+                  <Card key={data.id} className="bg-black/40 border-gray-600/30">
                     <CardContent className="pt-4">
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center gap-2">
                           <Eye className="h-4 w-4 text-cyan-400" />
-                          <span className="font-semibold text-white">
-                            {data.data_type}
-                          </span>
+                          <span className="font-semibold text-white">{data.data_type}</span>
                         </div>
                         <Badge
                           className={`${getClassificationColor(data.classification)} text-white text-xs`}
@@ -348,15 +311,9 @@ export function UltimateIntelligenceHub() {
                         </Badge>
                       </div>
                       <div className="text-sm space-y-1">
-                        <div className="text-cyan-300">
-                          Source: {data.source}
-                        </div>
-                        <div className="text-gray-400">
-                          Target: {data.content.target}
-                        </div>
-                        <div className="text-gray-400">
-                          Location: {data.content.location}
-                        </div>
+                        <div className="text-cyan-300">Source: {data.source}</div>
+                        <div className="text-gray-400">Target: {data.content.target}</div>
+                        <div className="text-gray-400">Location: {data.content.location}</div>
                         <div className="flex justify-between items-center">
                           <span className="text-gray-500">
                             Confidence: {data.confidence_level.toFixed(1)}%
@@ -375,17 +332,12 @@ export function UltimateIntelligenceHub() {
             <TabsContent value="targets" className="space-y-4">
               <div className="space-y-3 max-h-96 overflow-y-auto">
                 {globalTargets.map((target) => (
-                  <Card
-                    key={target.id}
-                    className="bg-black/40 border-gray-600/30"
-                  >
+                  <Card key={target.id} className="bg-black/40 border-gray-600/30">
                     <CardContent className="pt-4">
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center gap-2">
                           <Target className="h-4 w-4 text-red-400" />
-                          <span className="font-semibold text-white">
-                            {target.identifier}
-                          </span>
+                          <span className="font-semibold text-white">{target.identifier}</span>
                         </div>
                         <Badge
                           className={`${getStatusColor(target.status)} border-current`}
@@ -395,15 +347,10 @@ export function UltimateIntelligenceHub() {
                         </Badge>
                       </div>
                       <div className="text-sm space-y-1">
-                        <div className="text-red-300">
-                          Location: {target.location}
-                        </div>
-                        <div className="text-gray-400">
-                          Threat Level: {target.threat_level}%
-                        </div>
+                        <div className="text-red-300">Location: {target.location}</div>
+                        <div className="text-gray-400">Threat Level: {target.threat_level}%</div>
                         <div className="text-gray-500">
-                          Last Activity:{" "}
-                          {target.last_activity.toLocaleTimeString()}
+                          Last Activity: {target.last_activity.toLocaleTimeString()}
                         </div>
                       </div>
                     </CardContent>
@@ -422,9 +369,7 @@ export function UltimateIntelligenceHub() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-400">
-                          Government Networks
-                        </span>
+                        <span className="text-gray-400">Government Networks</span>
                         <span className="text-green-400">87% Infiltrated</span>
                       </div>
                       <div className="flex justify-between text-sm">
@@ -432,9 +377,7 @@ export function UltimateIntelligenceHub() {
                         <span className="text-blue-400">94% Infiltrated</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-400">
-                          Financial Networks
-                        </span>
+                        <span className="text-gray-400">Financial Networks</span>
                         <span className="text-yellow-400">76% Infiltrated</span>
                       </div>
                       <div className="flex justify-between text-sm">
@@ -448,9 +391,7 @@ export function UltimateIntelligenceHub() {
                         <span className="text-red-400">91% Infiltrated</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-400">
-                          Encrypted Channels
-                        </span>
+                        <span className="text-gray-400">Encrypted Channels</span>
                         <span className="text-orange-400">83% Infiltrated</span>
                       </div>
                       <div className="flex justify-between text-sm">
@@ -477,26 +418,16 @@ export function UltimateIntelligenceHub() {
                   <div className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-indigo-400">
-                          ∞
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Processing Power
-                        </div>
+                        <div className="text-3xl font-bold text-indigo-400">∞</div>
+                        <div className="text-sm text-muted-foreground">Processing Power</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-purple-400">
-                          100%
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          Encryption Breaking
-                        </div>
+                        <div className="text-3xl font-bold text-purple-400">100%</div>
+                        <div className="text-sm text-muted-foreground">Encryption Breaking</div>
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <div className="text-sm text-indigo-300">
-                        Quantum Capabilities:
-                      </div>
+                      <div className="text-sm text-indigo-300">Quantum Capabilities:</div>
                       <ul className="text-xs text-muted-foreground space-y-1 ml-4">
                         <li>• Break any encryption in real-time</li>
                         <li>• Process infinite data streams simultaneously</li>

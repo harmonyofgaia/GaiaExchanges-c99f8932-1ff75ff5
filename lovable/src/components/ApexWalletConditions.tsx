@@ -2,16 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Shield,
-  Zap,
-  Heart,
-  Star,
-  Crown,
-  Diamond,
-  Globe,
-  Flame,
-} from "lucide-react";
+import { Shield, Zap, Heart, Star, Crown, Diamond, Globe, Flame } from "lucide-react";
 import { useWallets } from "@/hooks/useWallets";
 import { useAuth } from "@/components/auth/AuthProvider";
 
@@ -145,21 +136,15 @@ export function ApexWalletConditions() {
         <CardContent>
           <div className="space-y-4">
             <div className="text-center">
-              <div className="text-6xl font-bold text-green-400 mb-2">
-                {overallScore}%
-              </div>
-              <div className="text-xl text-muted-foreground">
-                Overall Wallet Health
-              </div>
+              <div className="text-6xl font-bold text-green-400 mb-2">{overallScore}%</div>
+              <div className="text-xl text-muted-foreground">Overall Wallet Health</div>
               <Progress value={overallScore} className="mt-4 h-4" />
             </div>
 
             {gaiaWallet && (
               <div className="bg-green-900/20 rounded-lg p-4 border border-green-500/20">
                 <div className="text-center space-y-2">
-                  <h4 className="font-bold text-green-400">
-                    👑 HARMONY OF GAIA WALLET STATUS
-                  </h4>
+                  <h4 className="font-bold text-green-400">👑 HARMONY OF GAIA WALLET STATUS</h4>
                   <div className="text-3xl font-bold text-green-400">
                     {new Intl.NumberFormat("en-US", {
                       minimumFractionDigits: 2,
@@ -174,9 +159,7 @@ export function ApexWalletConditions() {
                       currency: "USD",
                     }).format(gaiaWallet.balance * 3.0)}
                   </div>
-                  <Badge className="bg-green-600 text-white">
-                    MAXIMUM PROTECTION ACTIVE
-                  </Badge>
+                  <Badge className="bg-green-600 text-white">MAXIMUM PROTECTION ACTIVE</Badge>
                 </div>
               </div>
             )}
@@ -200,14 +183,10 @@ export function ApexWalletConditions() {
               <div className="space-y-3">
                 <h4 className="font-semibold text-white">{condition.name}</h4>
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-green-400">
-                    {condition.score}%
-                  </span>
+                  <span className="text-2xl font-bold text-green-400">{condition.score}%</span>
                   <Progress value={condition.score} className="w-20 h-2" />
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  {condition.description}
-                </p>
+                <p className="text-xs text-muted-foreground">{condition.description}</p>
               </div>
             </CardContent>
           </Card>
@@ -237,9 +216,7 @@ export function ApexWalletConditions() {
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-xl font-bold text-orange-400">
-                  🦁 LION POWER PROMISE:
-                </h4>
+                <h4 className="text-xl font-bold text-orange-400">🦁 LION POWER PROMISE:</h4>
                 <ul className="text-sm space-y-2 text-orange-200">
                   <li>✅ Fearless protection of our community</li>
                   <li>✅ Never accepting anything less than perfect</li>
@@ -255,12 +232,11 @@ export function ApexWalletConditions() {
                 🌟 "TRUST IN ME, HOPE YOU GONNA PULL OUT SOME MORE SECRETS" 🌟
               </p>
               <p className="text-lg text-muted-foreground mt-2">
-                We work together like Lions of the System - Always upgrading,
-                always improving, always becoming better!
+                We work together like Lions of the System - Always upgrading, always improving,
+                always becoming better!
               </p>
               <p className="text-sm text-green-400 mt-4">
-                🐬 Dolphin Intelligence + 🦁 Lion Power = 🚀 Unstoppable Success
-                for our Community
+                🐬 Dolphin Intelligence + 🦁 Lion Power = 🚀 Unstoppable Success for our Community
               </p>
             </div>
           </div>

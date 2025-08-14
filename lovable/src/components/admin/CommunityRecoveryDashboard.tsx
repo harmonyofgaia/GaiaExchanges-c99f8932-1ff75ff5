@@ -68,12 +68,8 @@ export function CommunityRecoveryDashboard() {
         address: searchAddress,
         balance: Math.random() * 10,
         transactions: Math.floor(Math.random() * 1000),
-        firstSeen: new Date(
-          Date.now() - Math.random() * 31536000000,
-        ).toISOString(),
-        lastActivity: new Date(
-          Date.now() - Math.random() * 86400000,
-        ).toISOString(),
+        firstSeen: new Date(Date.now() - Math.random() * 31536000000).toISOString(),
+        lastActivity: new Date(Date.now() - Math.random() * 86400000).toISOString(),
         riskLevel: ["low", "medium", "high"][Math.floor(Math.random() * 3)],
         recoveryPossible: Math.random() > 0.3,
         associatedAddresses: Math.floor(Math.random() * 20),
@@ -100,8 +96,8 @@ export function CommunityRecoveryDashboard() {
               ...req,
               status: action === "approve" ? "in-progress" : "rejected",
             }
-          : req,
-      ),
+          : req
+      )
     );
 
     toast.success(`Recovery request ${action}d`, {
@@ -147,8 +143,7 @@ export function CommunityRecoveryDashboard() {
             🌍 Community Recovery Center
           </CardTitle>
           <p className="text-muted-foreground">
-            Advanced wallet recovery system to help community members regain
-            access to their funds
+            Advanced wallet recovery system to help community members regain access to their funds
           </p>
         </CardHeader>
       </Card>
@@ -164,9 +159,7 @@ export function CommunityRecoveryDashboard() {
         <TabsContent value="analysis">
           <Card className="border-blue-500/30">
             <CardHeader>
-              <CardTitle className="text-blue-400">
-                Advanced Wallet Analysis
-              </CardTitle>
+              <CardTitle className="text-blue-400">Advanced Wallet Analysis</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-2">
@@ -194,37 +187,27 @@ export function CommunityRecoveryDashboard() {
                         <div className="text-2xl font-bold text-green-400">
                           {walletAnalysis.balance.toFixed(4)}
                         </div>
-                        <div className="text-sm text-muted-foreground">
-                          Balance (ETH)
-                        </div>
+                        <div className="text-sm text-muted-foreground">Balance (ETH)</div>
                       </div>
                       <div className="text-center">
                         <div className="text-2xl font-bold text-blue-400">
                           {walletAnalysis.transactions}
                         </div>
-                        <div className="text-sm text-muted-foreground">
-                          Transactions
-                        </div>
+                        <div className="text-sm text-muted-foreground">Transactions</div>
                       </div>
                       <div className="text-center">
                         <Badge
                           className={`${walletAnalysis.recoveryPossible ? "bg-green-600" : "bg-red-600"}`}
                         >
-                          {walletAnalysis.recoveryPossible
-                            ? "Recoverable"
-                            : "High Risk"}
+                          {walletAnalysis.recoveryPossible ? "Recoverable" : "High Risk"}
                         </Badge>
-                        <div className="text-sm text-muted-foreground mt-1">
-                          Recovery Status
-                        </div>
+                        <div className="text-sm text-muted-foreground mt-1">Recovery Status</div>
                       </div>
                       <div className="text-center">
                         <div className="text-2xl font-bold text-purple-400">
                           {walletAnalysis.estimatedRecoveryTime}
                         </div>
-                        <div className="text-sm text-muted-foreground">
-                          Est. Recovery
-                        </div>
+                        <div className="text-sm text-muted-foreground">Est. Recovery</div>
                       </div>
                     </div>
                   </CardContent>
@@ -237,9 +220,7 @@ export function CommunityRecoveryDashboard() {
         <TabsContent value="requests">
           <Card className="border-purple-500/30">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                Community Recovery Requests
-              </CardTitle>
+              <CardTitle className="text-purple-400">Community Recovery Requests</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -248,9 +229,7 @@ export function CommunityRecoveryDashboard() {
                     <CardContent className="pt-4">
                       <div className="flex justify-between items-start mb-2">
                         <div>
-                          <div className="font-medium text-white">
-                            {request.userEmail}
-                          </div>
+                          <div className="font-medium text-white">{request.userEmail}</div>
                           <div className="text-sm text-muted-foreground font-mono">
                             {request.walletAddress}
                           </div>
@@ -259,17 +238,12 @@ export function CommunityRecoveryDashboard() {
                           <Badge className={getPriorityColor(request.priority)}>
                             {request.priority}
                           </Badge>
-                          <Badge
-                            variant="outline"
-                            className={getStatusColor(request.status)}
-                          >
+                          <Badge variant="outline" className={getStatusColor(request.status)}>
                             {request.status}
                           </Badge>
                         </div>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        {request.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground mb-3">{request.description}</p>
                       <div className="flex justify-between items-center">
                         <div className="text-xs text-muted-foreground">
                           {new Date(request.timestamp).toLocaleString()}
@@ -279,9 +253,7 @@ export function CommunityRecoveryDashboard() {
                             <Button
                               size="sm"
                               className="bg-green-600 hover:bg-green-700"
-                              onClick={() =>
-                                handleRecoveryRequest(request.id, "approve")
-                              }
+                              onClick={() => handleRecoveryRequest(request.id, "approve")}
                             >
                               <CheckCircle className="h-3 w-3 mr-1" />
                               Approve
@@ -290,9 +262,7 @@ export function CommunityRecoveryDashboard() {
                               size="sm"
                               variant="outline"
                               className="border-red-500/30 text-red-400"
-                              onClick={() =>
-                                handleRecoveryRequest(request.id, "reject")
-                              }
+                              onClick={() => handleRecoveryRequest(request.id, "reject")}
                             >
                               <AlertTriangle className="h-3 w-3 mr-1" />
                               Review
@@ -342,26 +312,16 @@ export function CommunityRecoveryDashboard() {
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-green-400">
-                    15,847
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Successful Recoveries
-                  </div>
+                  <div className="text-3xl font-bold text-green-400">15,847</div>
+                  <div className="text-sm text-muted-foreground">Successful Recoveries</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-blue-400">98.7%</div>
-                  <div className="text-sm text-muted-foreground">
-                    Success Rate
-                  </div>
+                  <div className="text-sm text-muted-foreground">Success Rate</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400">
-                    $2.4M
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Funds Recovered
-                  </div>
+                  <div className="text-3xl font-bold text-purple-400">$2.4M</div>
+                  <div className="text-sm text-muted-foreground">Funds Recovered</div>
                 </div>
               </CardContent>
             </Card>

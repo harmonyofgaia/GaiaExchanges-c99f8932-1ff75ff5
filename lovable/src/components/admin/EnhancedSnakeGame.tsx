@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Play,
-  Pause,
-  RotateCcw,
-  Trophy,
-  Star,
-  Zap,
-  Rocket,
-  Crown,
-} from "lucide-react";
+import { Play, Pause, RotateCcw, Trophy, Star, Zap, Rocket, Crown } from "lucide-react";
 import { toast } from "sonner";
 
 interface GameState {
@@ -182,7 +173,7 @@ export function EnhancedSnakeGame() {
           break;
       }
     },
-    [gameState.gameRunning, gameState.gameOver, gameState.direction],
+    [gameState.gameRunning, gameState.gameOver, gameState.direction]
   );
 
   // Game loop
@@ -219,11 +210,7 @@ export function EnhancedSnakeGame() {
       }
 
       // Check self collision
-      if (
-        prev.snake.some(
-          (segment) => segment.x === head.x && segment.y === head.y,
-        )
-      ) {
+      if (prev.snake.some((segment) => segment.x === head.x && segment.y === head.y)) {
         return { ...prev, gameOver: true, gameRunning: false };
       }
 
@@ -335,12 +322,7 @@ export function EnhancedSnakeGame() {
       } else {
         ctx.fillStyle = gameState.isSpaceMode ? "#00ffff" : "#4ade80";
       }
-      ctx.fillRect(
-        segment.x * GRID_SIZE,
-        segment.y * GRID_SIZE,
-        GRID_SIZE - 2,
-        GRID_SIZE - 2,
-      );
+      ctx.fillRect(segment.x * GRID_SIZE, segment.y * GRID_SIZE, GRID_SIZE - 2, GRID_SIZE - 2);
     });
 
     // Draw food
@@ -349,18 +331,13 @@ export function EnhancedSnakeGame() {
       gameState.food.x * GRID_SIZE,
       gameState.food.y * GRID_SIZE,
       GRID_SIZE - 2,
-      GRID_SIZE - 2,
+      GRID_SIZE - 2
     );
 
     // Draw GAIA coins
     ctx.fillStyle = "#fbbf24";
     gameState.gaiaCoins.forEach((coin) => {
-      ctx.fillRect(
-        coin.x * GRID_SIZE,
-        coin.y * GRID_SIZE,
-        GRID_SIZE - 2,
-        GRID_SIZE - 2,
-      );
+      ctx.fillRect(coin.x * GRID_SIZE, coin.y * GRID_SIZE, GRID_SIZE - 2, GRID_SIZE - 2);
     });
 
     // Draw grid
@@ -511,8 +488,8 @@ export function EnhancedSnakeGame() {
             🐍 ENHANCED GAIA SNAKE GAME
           </CardTitle>
           <p className="text-muted-foreground">
-            Win 100 GAIA tokens • Space mode at 100 coins • Increasing
-            difficulty after 5 consecutive wins
+            Win 100 GAIA tokens • Space mode at 100 coins • Increasing difficulty after 5
+            consecutive wins
           </p>
         </CardHeader>
       </Card>
@@ -539,8 +516,7 @@ export function EnhancedSnakeGame() {
                     🚀 SPACE MODE ACTIVATED!
                   </div>
                   <div className="text-sm text-purple-400">
-                    You're now in the cosmic battlefield! Prepare for Worms
-                    Arena integration!
+                    You're now in the cosmic battlefield! Prepare for Worms Arena integration!
                   </div>
                 </div>
               )}
@@ -552,18 +528,12 @@ export function EnhancedSnakeGame() {
             <CardContent className="p-4">
               <div className="flex gap-4 justify-center">
                 {!gameState.gameRunning ? (
-                  <Button
-                    onClick={startGame}
-                    className="bg-green-600 hover:bg-green-700"
-                  >
+                  <Button onClick={startGame} className="bg-green-600 hover:bg-green-700">
                     <Play className="h-4 w-4 mr-2" />
                     Start Game
                   </Button>
                 ) : (
-                  <Button
-                    onClick={pauseGame}
-                    className="bg-yellow-600 hover:bg-yellow-700"
-                  >
+                  <Button onClick={pauseGame} className="bg-yellow-600 hover:bg-yellow-700">
                     <Pause className="h-4 w-4 mr-2" />
                     Pause
                   </Button>
@@ -575,10 +545,7 @@ export function EnhancedSnakeGame() {
                 </Button>
 
                 {gameState.score >= 500 && (
-                  <Button
-                    onClick={handleGameWin}
-                    className="bg-purple-600 hover:bg-purple-700"
-                  >
+                  <Button onClick={handleGameWin} className="bg-purple-600 hover:bg-purple-700">
                     <Trophy className="h-4 w-4 mr-2" />
                     Claim Victory
                   </Button>
@@ -586,8 +553,7 @@ export function EnhancedSnakeGame() {
               </div>
 
               <div className="text-center mt-4 text-sm text-muted-foreground">
-                Use arrow keys to control the snake • Collect yellow GAIA coins
-                for tokens!
+                Use arrow keys to control the snake • Collect yellow GAIA coins for tokens!
               </div>
             </CardContent>
           </Card>
@@ -598,58 +564,36 @@ export function EnhancedSnakeGame() {
           {/* Current Game Stats */}
           <Card className="border-blue-500/30">
             <CardHeader>
-              <CardTitle className="text-blue-400 text-sm">
-                📊 Game Stats
-              </CardTitle>
+              <CardTitle className="text-blue-400 text-sm">📊 Game Stats</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div>
-                  Score:{" "}
-                  <span className="text-green-400 font-bold">
-                    {gameState.score}
-                  </span>
+                  Score: <span className="text-green-400 font-bold">{gameState.score}</span>
                 </div>
                 <div>
-                  Level:{" "}
-                  <span className="text-blue-400 font-bold">
-                    {gameState.level}
-                  </span>
+                  Level: <span className="text-blue-400 font-bold">{gameState.level}</span>
                 </div>
                 <div>
-                  GAIA:{" "}
-                  <span className="text-yellow-400 font-bold">
-                    {gameState.gaiaTokens}
-                  </span>
+                  GAIA: <span className="text-yellow-400 font-bold">{gameState.gaiaTokens}</span>
                 </div>
                 <div>
-                  XP:{" "}
-                  <span className="text-purple-400 font-bold">
-                    {gameState.xpPoints}
-                  </span>
+                  XP: <span className="text-purple-400 font-bold">{gameState.xpPoints}</span>
                 </div>
                 <div>
                   Wins:{" "}
-                  <span className="text-orange-400 font-bold">
-                    {gameState.consecutiveWins}
-                  </span>
+                  <span className="text-orange-400 font-bold">{gameState.consecutiveWins}</span>
                 </div>
                 <div>
-                  Speed:{" "}
-                  <span className="text-red-400 font-bold">
-                    {gameState.speed}ms
-                  </span>
+                  Speed: <span className="text-red-400 font-bold">{gameState.speed}ms</span>
                 </div>
               </div>
 
               {gameState.consecutiveWins >= 5 && (
                 <div className="p-2 bg-red-900/30 rounded border border-red-500/20 text-center">
-                  <div className="text-red-400 text-xs font-bold">
-                    🔥 EXTREME MODE
-                  </div>
+                  <div className="text-red-400 text-xs font-bold">🔥 EXTREME MODE</div>
                   <div className="text-xs text-muted-foreground">
-                    Difficulty Multiplier: x
-                    {Math.min(gameState.consecutiveWins / 5, 3).toFixed(1)}
+                    Difficulty Multiplier: x{Math.min(gameState.consecutiveWins / 5, 3).toFixed(1)}
                   </div>
                 </div>
               )}
@@ -671,13 +615,9 @@ export function EnhancedSnakeGame() {
                   className={`flex items-center gap-2 p-2 rounded ${index < 3 ? "bg-yellow-900/20 border border-yellow-500/20" : "bg-muted/20"}`}
                 >
                   <div className="flex items-center gap-1">
-                    {index === 0 && (
-                      <Crown className="h-3 w-3 text-yellow-400" />
-                    )}
+                    {index === 0 && <Crown className="h-3 w-3 text-yellow-400" />}
                     {index === 1 && <Star className="h-3 w-3 text-gray-400" />}
-                    {index === 2 && (
-                      <Star className="h-3 w-3 text-orange-400" />
-                    )}
+                    {index === 2 && <Star className="h-3 w-3 text-orange-400" />}
                     <span className="text-xs font-bold">#{index + 1}</span>
                   </div>
                   <div className="flex-1">
@@ -687,9 +627,7 @@ export function EnhancedSnakeGame() {
                       {player.level}
                     </div>
                   </div>
-                  <Badge className="bg-green-600 text-white text-xs">
-                    {player.xpPoints} XP
-                  </Badge>
+                  <Badge className="bg-green-600 text-white text-xs">{player.xpPoints} XP</Badge>
                 </div>
               ))}
             </CardContent>
@@ -698,9 +636,7 @@ export function EnhancedSnakeGame() {
           {/* Game Progress */}
           <Card className="border-purple-500/30">
             <CardHeader>
-              <CardTitle className="text-purple-400 text-sm">
-                🎯 Progress to Space Mode
-              </CardTitle>
+              <CardTitle className="text-purple-400 text-sm">🎯 Progress to Space Mode</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <div>
@@ -708,18 +644,13 @@ export function EnhancedSnakeGame() {
                   <span>GAIA Coins Collected</span>
                   <span>{gameState.gaiaTokens}/100</span>
                 </div>
-                <Progress
-                  value={(gameState.gaiaTokens / 100) * 100}
-                  className="h-2"
-                />
+                <Progress value={(gameState.gaiaTokens / 100) * 100} className="h-2" />
               </div>
 
               {gameState.gaiaTokens >= 100 && (
                 <div className="text-center p-2 bg-cyan-900/30 rounded border border-cyan-500/20">
                   <Rocket className="h-6 w-6 text-cyan-400 mx-auto mb-1" />
-                  <div className="text-cyan-400 text-xs font-bold">
-                    SPACE MODE READY!
-                  </div>
+                  <div className="text-cyan-400 text-xs font-bold">SPACE MODE READY!</div>
                 </div>
               )}
             </CardContent>

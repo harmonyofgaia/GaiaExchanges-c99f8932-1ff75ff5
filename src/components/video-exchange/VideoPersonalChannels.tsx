@@ -16,8 +16,7 @@ export function VideoPersonalChannels() {
       videos: 89,
       category: "Climate Action",
       verified: true,
-      description:
-        "Sharing sustainable living tips and climate action strategies",
+      description: "Sharing sustainable living tips and climate action strategies",
     },
     {
       id: 2,
@@ -132,24 +131,18 @@ export function VideoPersonalChannels() {
                         </Badge>
                       )}
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      {channel.category}
-                    </p>
+                    <p className="text-xs text-muted-foreground">{channel.category}</p>
                   </div>
                 </div>
 
-                <p className="text-sm text-muted-foreground mb-3">
-                  {channel.description}
-                </p>
+                <p className="text-sm text-muted-foreground mb-3">{channel.description}</p>
 
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex gap-4">
                     <span className="text-muted-foreground">
                       {channel.subscribers.toLocaleString()} subscribers
                     </span>
-                    <span className="text-muted-foreground">
-                      {channel.videos} videos
-                    </span>
+                    <span className="text-muted-foreground">{channel.videos} videos</span>
                   </div>
                   <Button size="sm" variant="outline">
                     Subscribe
@@ -185,12 +178,8 @@ export function VideoPersonalChannels() {
                   </div>
                 </div>
 
-                <h3 className="font-semibold mb-1 line-clamp-2">
-                  {video.title}
-                </h3>
-                <p className="text-xs text-muted-foreground mb-2">
-                  {video.uploadDate}
-                </p>
+                <h3 className="font-semibold mb-1 line-clamp-2">{video.title}</h3>
+                <p className="text-xs text-muted-foreground mb-2">{video.uploadDate}</p>
 
                 <div className="flex items-center gap-4 text-xs text-muted-foreground">
                   <div className="flex items-center gap-1">

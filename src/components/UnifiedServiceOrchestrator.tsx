@@ -53,9 +53,7 @@ export function UnifiedServiceOrchestrator() {
 
   useEffect(() => {
     const runServiceOrchestrator = async () => {
-      console.log(
-        "🎯 UNIFIED SERVICE ORCHESTRATOR - Maximum Coordination Active",
-      );
+      console.log("🎯 UNIFIED SERVICE ORCHESTRATOR - Maximum Coordination Active");
 
       // Update service statuses
       setServices((prev) =>
@@ -64,7 +62,7 @@ export function UnifiedServiceOrchestrator() {
           status: "active" as const,
           uptime: Math.min(100, service.uptime + Math.random() * 0.1),
           lastCheck: new Date(),
-        })),
+        }))
       );
 
       // Check if all services are active
@@ -73,9 +71,7 @@ export function UnifiedServiceOrchestrator() {
 
       // Log coordination status
       if (Math.random() < 0.1) {
-        console.log(
-          "🎯 UNIFIED ORCHESTRATOR: All services coordinated successfully",
-        );
+        console.log("🎯 UNIFIED ORCHESTRATOR: All services coordinated successfully");
 
         try {
           await supabase.from("security_events").insert({
@@ -88,9 +84,7 @@ export function UnifiedServiceOrchestrator() {
             ip_address: "127.0.0.1",
           });
         } catch (error) {
-          console.log(
-            "🔒 Service orchestrator self-protected from interference",
-          );
+          console.log("🔒 Service orchestrator self-protected from interference");
         }
       }
     };
@@ -99,10 +93,9 @@ export function UnifiedServiceOrchestrator() {
     runServiceOrchestrator();
 
     return () => {
-      if (orchestratorInterval.current)
-        clearInterval(orchestratorInterval.current);
+      if (orchestratorInterval.current) clearInterval(orchestratorInterval.current);
     };
-  }, [services.length]);
+  }, [services]);
 
   return {
     services,

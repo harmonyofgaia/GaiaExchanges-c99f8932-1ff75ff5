@@ -24,9 +24,7 @@ export function PureInvestmentExchange() {
             🌱 Pure Investment Exchange - For Believers, Not Traders
           </CardTitle>
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
-            <h3 className="text-blue-400 font-bold mb-2">
-              🏦 All Fees Go to Community Wallet:
-            </h3>
+            <h3 className="text-blue-400 font-bold mb-2">🏦 All Fees Go to Community Wallet:</h3>
             <div className="flex items-center justify-between">
               <code className="text-blue-300 font-mono text-sm break-all bg-blue-900/10 p-2 rounded flex-1 mr-2">
                 {GAIA_TOKEN.WALLET_ADDRESS}

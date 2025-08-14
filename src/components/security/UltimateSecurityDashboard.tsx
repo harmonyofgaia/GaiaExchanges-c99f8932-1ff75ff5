@@ -2,16 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Shield,
-  Crown,
-  Zap,
-  Globe,
-  Target,
-  TrendingUp,
-  Users,
-  Lock,
-} from "lucide-react";
+import { Shield, Crown, Zap, Globe, Target, TrendingUp, Users, Lock } from "lucide-react";
 import { SecurityOrchestrator } from "./SecurityOrchestrator";
 import { toast } from "sonner";
 
@@ -20,8 +11,7 @@ export function UltimateSecurityDashboard() {
 
   const launchEmergencyProtocol = () => {
     toast.error("🚨 EMERGENCY PROTOCOL ACTIVATED", {
-      description:
-        "Maximum security measures engaged - All systems locked down",
+      description: "Maximum security measures engaged - All systems locked down",
       duration: 10000,
     });
     console.log("🚨 EMERGENCY PROTOCOL: All security systems at maximum alert");
@@ -43,40 +33,30 @@ export function UltimateSecurityDashboard() {
           <CardTitle className="flex items-center gap-3 text-2xl text-green-400">
             <Shield className="h-8 w-8" />
             HARMONY OF GAIA - UNBREAKABLE DEFENSE SYSTEM
-            <Badge className="bg-green-600 text-white animate-pulse">
-              HEAVEN LEVEL SECURITY
-            </Badge>
+            <Badge className="bg-green-600 text-white animate-pulse">HEAVEN LEVEL SECURITY</Badge>
           </CardTitle>
           <p className="text-green-300">
-            🌟 The World's Most Secure Cryptocurrency Platform • 100%
-            Trustworthy • Zero Vulnerabilities
+            🌟 The World's Most Secure Cryptocurrency Platform • 100% Trustworthy • Zero
+            Vulnerabilities
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="text-4xl font-bold text-green-400 mb-2">100%</div>
-              <div className="text-sm text-muted-foreground">
-                Security Score
-              </div>
+              <div className="text-sm text-muted-foreground">Security Score</div>
               <Progress value={100} className="mt-2 h-3" />
-              <Badge className="mt-2 bg-green-600 text-white">
-                UNBREAKABLE
-              </Badge>
+              <Badge className="mt-2 bg-green-600 text-white">UNBREAKABLE</Badge>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-blue-400 mb-2">∞</div>
-              <div className="text-sm text-muted-foreground">
-                Protection Layers
-              </div>
+              <div className="text-sm text-muted-foreground">Protection Layers</div>
               <Progress value={100} className="mt-2 h-3" />
               <Badge className="mt-2 bg-blue-600 text-white">INFINITE</Badge>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-purple-400 mb-2">0</div>
-              <div className="text-sm text-muted-foreground">
-                Vulnerabilities
-              </div>
+              <div className="text-sm text-muted-foreground">Vulnerabilities</div>
               <Progress value={100} className="mt-2 h-3" />
               <Badge className="mt-2 bg-purple-600 text-white">PERFECT</Badge>
             </div>
@@ -112,10 +92,7 @@ export function UltimateSecurityDashboard() {
                 <div className="text-xs text-muted-foreground mb-1">
                   Threat Level: {layer.threatLevel}
                 </div>
-                <Progress
-                  value={Math.max(0, 100 - layer.threatLevel * 10)}
-                  className="h-2"
-                />
+                <Progress value={Math.max(0, 100 - layer.threatLevel * 10)} className="h-2" />
               </div>
             </CardContent>
           </Card>
@@ -133,9 +110,7 @@ export function UltimateSecurityDashboard() {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <h4 className="font-semibold text-yellow-400">
-                🛡️ Phantom Wallet Protection:
-              </h4>
+              <h4 className="font-semibold text-yellow-400">🛡️ Phantom Wallet Protection:</h4>
               <ul className="space-y-1 text-sm text-yellow-300">
                 <li>✅ Transaction signing secured with quantum encryption</li>
                 <li>✅ Connection monitoring with real-time alerts</li>
@@ -144,9 +119,7 @@ export function UltimateSecurityDashboard() {
               </ul>
             </div>
             <div className="space-y-2">
-              <h4 className="font-semibold text-yellow-400">
-                🚫 Pump.fun Shield:
-              </h4>
+              <h4 className="font-semibold text-yellow-400">🚫 Pump.fun Shield:</h4>
               <ul className="space-y-1 text-sm text-yellow-300">
                 <li>✅ Rugpull detection and blocking</li>
                 <li>✅ Honeypot trap identification</li>
@@ -204,9 +177,7 @@ export function UltimateSecurityDashboard() {
           </div>
 
           <div className="space-y-2">
-            <h4 className="font-semibold text-purple-400">
-              📢 Recent Investor Leads:
-            </h4>
+            <h4 className="font-semibold text-purple-400">📢 Recent Investor Leads:</h4>
             <div className="max-h-32 overflow-y-auto space-y-2">
               {security.investorLeads.map((lead) => (
                 <div
@@ -214,9 +185,7 @@ export function UltimateSecurityDashboard() {
                   className="flex items-center justify-between p-2 rounded bg-purple-500/10 border border-purple-500/20"
                 >
                   <div className="flex items-center gap-2">
-                    <Badge className="bg-purple-600 text-white text-xs">
-                      {lead.platform}
-                    </Badge>
+                    <Badge className="bg-purple-600 text-white text-xs">{lead.platform}</Badge>
                     <span className="text-sm">{lead.profile}</span>
                   </div>
                   <Badge
@@ -247,35 +216,20 @@ export function UltimateSecurityDashboard() {
               🌟 HARMONY OF GAIA - ULTIMATE PROTECTION ACTIVE
             </h3>
             <p className="text-sm text-muted-foreground max-w-3xl mx-auto">
-              Your platform is now protected by the most advanced security
-              system ever created. With unbreakable defense layers, quantum
-              encryption, and continuous threat monitoring, Harmony of Gaia
-              represents the pinnacle of cryptocurrency security. The automated
-              marketing system is actively finding new investors and promoting
-              the GAiA Token across all major platforms.
+              Your platform is now protected by the most advanced security system ever created. With
+              unbreakable defense layers, quantum encryption, and continuous threat monitoring,
+              Harmony of Gaia represents the pinnacle of cryptocurrency security. The automated
+              marketing system is actively finding new investors and promoting the GAiA Token across
+              all major platforms.
             </p>
             <div className="flex flex-wrap justify-center gap-2 pt-2">
-              <Badge className="bg-green-600 text-white">
-                🛡️ Unbreakable Defense
-              </Badge>
-              <Badge className="bg-blue-600 text-white">
-                🔐 Quantum Security
-              </Badge>
-              <Badge className="bg-purple-600 text-white">
-                👑 Admin Protected
-              </Badge>
-              <Badge className="bg-yellow-600 text-white">
-                🚫 Phantom Secured
-              </Badge>
-              <Badge className="bg-red-600 text-white">
-                🛡️ Pump.fun Blocked
-              </Badge>
-              <Badge className="bg-pink-600 text-white">
-                📢 Marketing Active
-              </Badge>
-              <Badge className="bg-orange-600 text-white">
-                🎯 Investors Found
-              </Badge>
+              <Badge className="bg-green-600 text-white">🛡️ Unbreakable Defense</Badge>
+              <Badge className="bg-blue-600 text-white">🔐 Quantum Security</Badge>
+              <Badge className="bg-purple-600 text-white">👑 Admin Protected</Badge>
+              <Badge className="bg-yellow-600 text-white">🚫 Phantom Secured</Badge>
+              <Badge className="bg-red-600 text-white">🛡️ Pump.fun Blocked</Badge>
+              <Badge className="bg-pink-600 text-white">📢 Marketing Active</Badge>
+              <Badge className="bg-orange-600 text-white">🎯 Investors Found</Badge>
               <Badge className="bg-cyan-600 text-white">🌍 Global Reach</Badge>
             </div>
           </div>

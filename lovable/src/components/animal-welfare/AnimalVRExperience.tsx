@@ -27,8 +27,7 @@ export function AnimalVRExperience({ animals }: VRExperienceProps) {
     setSessionProgress(0);
 
     toast.success(`🥽 Starting VR session with ${animalName}!`, {
-      description:
-        "Put on your VR headset and explore potential new habitats together.",
+      description: "Put on your VR headset and explore potential new habitats together.",
       duration: 4000,
     });
 
@@ -39,8 +38,7 @@ export function AnimalVRExperience({ animals }: VRExperienceProps) {
           clearInterval(interval);
           setActiveSession(null);
           toast.info(`✨ VR session with ${animalName} completed!`, {
-            description:
-              "You helped explore new habitat options for their future release.",
+            description: "You helped explore new habitat options for their future release.",
             duration: 4000,
           });
           return 100;
@@ -61,8 +59,8 @@ export function AnimalVRExperience({ animals }: VRExperienceProps) {
             🥽 VR Habitat Exploration & Rehabilitation
           </CardTitle>
           <p className="text-muted-foreground">
-            Use Virtual Reality to walk with animals and help them explore
-            potential new habitats for their release.
+            Use Virtual Reality to walk with animals and help them explore potential new habitats
+            for their release.
           </p>
         </CardHeader>
       </Card>
@@ -72,13 +70,10 @@ export function AnimalVRExperience({ animals }: VRExperienceProps) {
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <div className="text-4xl">🥽</div>
-              <h3 className="text-xl font-bold text-green-400">
-                VR Session Active
-              </h3>
+              <h3 className="text-xl font-bold text-green-400">VR Session Active</h3>
               <Progress value={sessionProgress} className="w-full" />
               <p className="text-sm text-muted-foreground">
-                Exploring new habitat locations... {sessionProgress.toFixed(0)}%
-                complete
+                Exploring new habitat locations... {sessionProgress.toFixed(0)}% complete
               </p>
             </div>
           </CardContent>
@@ -107,9 +102,7 @@ export function AnimalVRExperience({ animals }: VRExperienceProps) {
                 </div>
 
                 <div className="bg-purple-900/30 p-4 rounded border border-purple-500/20">
-                  <h4 className="font-semibold mb-2">
-                    🌍 Available VR Experiences:
-                  </h4>
+                  <h4 className="font-semibold mb-2">🌍 Available VR Experiences:</h4>
                   <ul className="space-y-1 text-sm">
                     <li>• Explore natural habitat options</li>
                     <li>• Walk through potential release sites</li>
@@ -144,8 +137,7 @@ export function AnimalVRExperience({ animals }: VRExperienceProps) {
                 </Button>
 
                 <div className="text-xs text-muted-foreground text-center">
-                  VR headset required • Compatible with Meta Quest, PSVR2, HTC
-                  Vive
+                  VR headset required • Compatible with Meta Quest, PSVR2, HTC Vive
                 </div>
               </div>
             </CardContent>
@@ -159,8 +151,7 @@ export function AnimalVRExperience({ animals }: VRExperienceProps) {
             <div className="text-4xl mb-4">🔄</div>
             <h3 className="text-xl font-bold mb-2">No VR Sessions Available</h3>
             <p className="text-muted-foreground">
-              VR experiences are being prepared for animals that are ready for
-              release planning.
+              VR experiences are being prepared for animals that are ready for release planning.
             </p>
           </CardContent>
         </Card>

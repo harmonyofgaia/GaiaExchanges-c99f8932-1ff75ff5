@@ -74,12 +74,11 @@ const FeeVault = () => {
       }
 
       // Fetch fee destinations
-      const { data: destinationsData, error: destinationsError } =
-        await supabase
-          .from("fee_destinations")
-          .select("*")
-          .eq("is_active", true)
-          .order("percentage_allocation", { ascending: false });
+      const { data: destinationsData, error: destinationsError } = await supabase
+        .from("fee_destinations")
+        .select("*")
+        .eq("is_active", true)
+        .order("percentage_allocation", { ascending: false });
 
       if (destinationsError) {
         console.error("Destinations fetch error:", destinationsError);
@@ -159,12 +158,11 @@ const FeeVault = () => {
             🏦 {GAIA_TOKEN.SYMBOL} Community Vault - Live Quantum Protected
           </CardTitle>
           <p className="text-muted-foreground">
-            Secure vault for collecting transaction fees to fund humanitarian
-            projects and system improvements
+            Secure vault for collecting transaction fees to fund humanitarian projects and system
+            improvements
             <br />
             <span className="text-xs">
-              Official {GAIA_TOKEN.NAME} - Contract:{" "}
-              {GAIA_TOKEN.CONTRACT_ADDRESS}
+              Official {GAIA_TOKEN.NAME} - Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}
             </span>
           </p>
         </CardHeader>
@@ -172,33 +170,23 @@ const FeeVault = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="p-4 rounded-lg bg-blue-900/30 border border-blue-500/20 text-center">
               <div className="text-2xl font-bold text-blue-400">
-                {vaultBalance
-                  ? vaultBalance.total_balance.toLocaleString()
-                  : "0"}
+                {vaultBalance ? vaultBalance.total_balance.toLocaleString() : "0"}
               </div>
               <div className="text-xs text-muted-foreground">
                 Total {GAIA_TOKEN.SYMBOL} in Vault
               </div>
             </div>
             <div className="p-4 rounded-lg bg-green-900/30 border border-green-500/20 text-center">
-              <div className="text-2xl font-bold text-green-400">
-                {feeDestinations.length}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Active Destinations
-              </div>
+              <div className="text-2xl font-bold text-green-400">{feeDestinations.length}</div>
+              <div className="text-xs text-muted-foreground">Active Destinations</div>
             </div>
             <div className="p-4 rounded-lg bg-purple-900/30 border border-purple-500/20 text-center">
               <div className="text-2xl font-bold text-purple-400">100%</div>
-              <div className="text-xs text-muted-foreground">
-                Quantum Security
-              </div>
+              <div className="text-xs text-muted-foreground">Quantum Security</div>
             </div>
             <div className="p-4 rounded-lg bg-orange-900/30 border border-orange-500/20 text-center">
               <div className="text-2xl font-bold text-orange-400">24/7</div>
-              <div className="text-xs text-muted-foreground">
-                Live Monitoring
-              </div>
+              <div className="text-xs text-muted-foreground">Live Monitoring</div>
             </div>
           </div>
         </CardContent>
@@ -222,18 +210,12 @@ const FeeVault = () => {
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div
-                        className={`p-2 rounded-lg ${getCategoryColor(destination.category)}`}
-                      >
+                      <div className={`p-2 rounded-lg ${getCategoryColor(destination.category)}`}>
                         {getCategoryIcon(destination.category)}
                       </div>
                       <div>
-                        <h3 className="font-bold text-lg">
-                          {destination.name}
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          {destination.description}
-                        </p>
+                        <h3 className="font-bold text-lg">{destination.name}</h3>
+                        <p className="text-sm text-muted-foreground">{destination.description}</p>
                       </div>
                     </div>
                     <Badge className={getCategoryColor(destination.category)}>
@@ -248,33 +230,18 @@ const FeeVault = () => {
                         {destination.percentage_allocation}% of all fees
                       </span>
                     </div>
-                    <Progress
-                      value={destination.percentage_allocation}
-                      className="h-2"
-                    />
+                    <Progress value={destination.percentage_allocation} className="h-2" />
                     {destination.wallet_address && (
                       <div className="text-xs text-muted-foreground">
                         Wallet:{" "}
                         {(() => {
-                          if (
-                            destination.wallet_address ===
-                            GAIA_TOKEN.WALLET_ADDRESS
-                          )
+                          if (destination.wallet_address === GAIA_TOKEN.WALLET_ADDRESS)
                             return "Main Community Wallet";
-                          if (
-                            destination.wallet_address ===
-                            GAIA_TOKEN.GREEN_INVESTMENTS_WALLET
-                          )
+                          if (destination.wallet_address === GAIA_TOKEN.GREEN_INVESTMENTS_WALLET)
                             return "Green Investments Wallet";
-                          if (
-                            destination.wallet_address ===
-                            GAIA_TOKEN.COMMUNITY_VAULT_WALLET
-                          )
+                          if (destination.wallet_address === GAIA_TOKEN.COMMUNITY_VAULT_WALLET)
                             return "Community Vault Wallet";
-                          if (
-                            destination.wallet_address ===
-                            GAIA_TOKEN.ANIMAL_WELFARE_WALLET
-                          )
+                          if (destination.wallet_address === GAIA_TOKEN.ANIMAL_WELFARE_WALLET)
                             return "Animal Welfare Wallet";
                           return "Custom Wallet";
                         })()}{" "}
@@ -309,15 +276,13 @@ const FeeVault = () => {
           <div className="text-center space-y-4">
             <div className="flex items-center justify-center gap-2">
               <Shield className="h-6 w-6 text-green-400" />
-              <h3 className="text-xl font-bold text-green-400">
-                Ultimate Quantum Vault Security
-              </h3>
+              <h3 className="text-xl font-bold text-green-400">Ultimate Quantum Vault Security</h3>
               <Lock className="h-6 w-6 text-blue-400" />
             </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              All vault operations are protected by 4-step admin verification
-              with quantum-level encryption. Every transaction is monitored in
-              real-time with automatic threat detection and response systems.
+              All vault operations are protected by 4-step admin verification with quantum-level
+              encryption. Every transaction is monitored in real-time with automatic threat
+              detection and response systems.
             </p>
             <div className="flex justify-center gap-4 text-xs flex-wrap">
               <Badge className="bg-green-600 text-white">

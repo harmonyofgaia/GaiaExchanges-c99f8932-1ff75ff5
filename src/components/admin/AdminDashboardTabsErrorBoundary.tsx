@@ -62,15 +62,13 @@ export class AdminDashboardTabsErrorBoundary extends Component<Props, State> {
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              This component encountered an error and couldn't be displayed. The
-              error has been logged for investigation.
+              This component encountered an error and couldn't be displayed. The error has been
+              logged for investigation.
             </p>
 
             {this.state.error && (
               <div className="bg-red-950/20 border border-red-500/20 rounded p-3">
-                <p className="text-xs font-mono text-red-300">
-                  {this.state.error.message}
-                </p>
+                <p className="text-xs font-mono text-red-300">{this.state.error.message}</p>
               </div>
             )}
 

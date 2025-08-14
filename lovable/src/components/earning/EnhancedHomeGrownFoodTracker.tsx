@@ -127,11 +127,9 @@ export function EnhancedHomeGrownFoodTracker() {
 
     const basePoints = parseFloat(quantity) * 20;
     const stageBonus =
-      basePoints *
-      (stageMultipliers[growthStage as keyof typeof stageMultipliers] || 1);
+      basePoints * (stageMultipliers[growthStage as keyof typeof stageMultipliers] || 1);
     const methodBonus =
-      stageBonus *
-      (methodMultipliers[growingMethod as keyof typeof methodMultipliers] || 1);
+      stageBonus * (methodMultipliers[growingMethod as keyof typeof methodMultipliers] || 1);
     const weightBonus = harvestWeight ? parseFloat(harvestWeight) * 10 : 0;
 
     const totalPoints = Math.floor(methodBonus + weightBonus);
@@ -149,7 +147,7 @@ export function EnhancedHomeGrownFoodTracker() {
       });
 
       toast.success(
-        `🥕 Home grown food recorded! +${totalPoints} points earned for sustainable growing!`,
+        `🥕 Home grown food recorded! +${totalPoints} points earned for sustainable growing!`
       );
       setCropType("");
       setQuantity("");
@@ -200,44 +198,30 @@ export function EnhancedHomeGrownFoodTracker() {
       <CardContent className="space-y-6">
         {/* Garden Impact Dashboard */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-orange-400">
-            🌱 Your Garden Impact
-          </h3>
+          <h3 className="text-lg font-semibold text-orange-400">🌱 Your Garden Impact</h3>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
             <div className="text-center p-4 bg-orange-900/30 rounded-lg border border-orange-500/20">
-              <div className="text-xl font-bold text-orange-400">
-                {gardenStats.totalHarvests}
-              </div>
+              <div className="text-xl font-bold text-orange-400">{gardenStats.totalHarvests}</div>
               <div className="text-xs text-muted-foreground">Harvests</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg border border-green-500/20">
-              <div className="text-xl font-bold text-green-400">
-                {gardenStats.totalWeight}kg
-              </div>
+              <div className="text-xl font-bold text-green-400">{gardenStats.totalWeight}kg</div>
               <div className="text-xs text-muted-foreground">Total Grown</div>
             </div>
             <div className="text-center p-4 bg-yellow-900/30 rounded-lg border border-yellow-500/20">
-              <div className="text-xl font-bold text-yellow-400">
-                {gardenStats.varietiesGrown}
-              </div>
+              <div className="text-xl font-bold text-yellow-400">{gardenStats.varietiesGrown}</div>
               <div className="text-xs text-muted-foreground">Varieties</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
-              <div className="text-xl font-bold text-blue-400">
-                {gardenStats.seasonalStreak}
-              </div>
+              <div className="text-xl font-bold text-blue-400">{gardenStats.seasonalStreak}</div>
               <div className="text-xs text-muted-foreground">Season Streak</div>
             </div>
             <div className="text-center p-4 bg-cyan-900/30 rounded-lg border border-cyan-500/20">
-              <div className="text-xl font-bold text-cyan-400">
-                {gardenStats.waterSaved}L
-              </div>
+              <div className="text-xl font-bold text-cyan-400">{gardenStats.waterSaved}L</div>
               <div className="text-xs text-muted-foreground">Water Saved</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
-              <div className="text-xl font-bold text-purple-400">
-                {gardenStats.co2Offset}kg
-              </div>
+              <div className="text-xl font-bold text-purple-400">{gardenStats.co2Offset}kg</div>
               <div className="text-xs text-muted-foreground">CO2 Offset</div>
             </div>
           </div>
@@ -257,26 +241,20 @@ export function EnhancedHomeGrownFoodTracker() {
               >
                 <div className="flex justify-between items-start mb-3">
                   <div>
-                    <h4 className="font-semibold text-green-300">
-                      {crop.name}
-                    </h4>
+                    <h4 className="font-semibold text-green-300">{crop.name}</h4>
                     <div className="text-sm text-muted-foreground">
                       {crop.method.replace("_", " ")}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div
-                      className={`text-lg font-bold ${getHealthColor(crop.health)}`}
-                    >
+                    <div className={`text-lg font-bold ${getHealthColor(crop.health)}`}>
                       {crop.health}%
                     </div>
                     <div className="text-xs text-muted-foreground">Health</div>
                   </div>
                 </div>
 
-                <Badge className={getStageColor(crop.stage)}>
-                  {crop.stage.replace("_", " ")}
-                </Badge>
+                <Badge className={getStageColor(crop.stage)}>{crop.stage.replace("_", " ")}</Badge>
 
                 <div className="mt-3 space-y-2">
                   <div className="flex justify-between text-sm">
@@ -285,9 +263,7 @@ export function EnhancedHomeGrownFoodTracker() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Harvest:</span>
-                    <span className="text-yellow-400">
-                      {crop.expectedHarvest}
-                    </span>
+                    <span className="text-yellow-400">{crop.expectedHarvest}</span>
                   </div>
                 </div>
 
@@ -311,22 +287,16 @@ export function EnhancedHomeGrownFoodTracker() {
               <div className="flex items-center gap-3">
                 <Scale className="h-5 w-5 text-orange-400" />
                 <div>
-                  <div className="font-medium text-orange-300">
-                    {harvest.crop}
-                  </div>
+                  <div className="font-medium text-orange-300">{harvest.crop}</div>
                   <div className="text-sm text-muted-foreground">
-                    {harvest.weight}kg • {harvest.method.replace("_", " ")} •{" "}
-                    {harvest.photos} photos
+                    {harvest.weight}kg • {harvest.method.replace("_", " ")} • {harvest.photos}{" "}
+                    photos
                   </div>
                 </div>
               </div>
               <div className="text-right">
-                <div className="font-bold text-yellow-400">
-                  +{harvest.earnings} GAiA
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {harvest.date}
-                </div>
+                <div className="font-bold text-yellow-400">+{harvest.earnings} GAiA</div>
+                <div className="text-xs text-muted-foreground">{harvest.date}</div>
               </div>
             </div>
           ))}
@@ -344,9 +314,7 @@ export function EnhancedHomeGrownFoodTracker() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Crop Type
-              </label>
+              <label className="block text-sm font-medium mb-2">Crop Type</label>
               <Select value={cropType} onValueChange={setCropType}>
                 <SelectTrigger>
                   <SelectValue placeholder="What are you growing?" />
@@ -367,9 +335,7 @@ export function EnhancedHomeGrownFoodTracker() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Plant Quantity
-              </label>
+              <label className="block text-sm font-medium mb-2">Plant Quantity</label>
               <Input
                 type="number"
                 value={quantity}
@@ -380,9 +346,7 @@ export function EnhancedHomeGrownFoodTracker() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Growth Stage
-              </label>
+              <label className="block text-sm font-medium mb-2">Growth Stage</label>
               <Select value={growthStage} onValueChange={setGrowthStage}>
                 <SelectTrigger>
                   <SelectValue placeholder="Current stage" />
@@ -392,45 +356,27 @@ export function EnhancedHomeGrownFoodTracker() {
                   <SelectItem value="growing">🌿 Growing (1x)</SelectItem>
                   <SelectItem value="flowering">🌸 Flowering (1.2x)</SelectItem>
                   <SelectItem value="fruiting">🍎 Fruiting (1.5x)</SelectItem>
-                  <SelectItem value="harvest_ready">
-                    🏆 Ready to Harvest (2x)
-                  </SelectItem>
+                  <SelectItem value="harvest_ready">🏆 Ready to Harvest (2x)</SelectItem>
                   <SelectItem value="harvested">✅ Harvested (2.5x)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Growing Method
-              </label>
+              <label className="block text-sm font-medium mb-2">Growing Method</label>
               <Select value={growingMethod} onValueChange={setGrowingMethod}>
                 <SelectTrigger>
                   <SelectValue placeholder="How are you growing?" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="organic_soil">
-                    🌱 Organic Soil (1.5x)
-                  </SelectItem>
-                  <SelectItem value="hydroponic">
-                    💧 Hydroponic (1.8x)
-                  </SelectItem>
+                  <SelectItem value="organic_soil">🌱 Organic Soil (1.5x)</SelectItem>
+                  <SelectItem value="hydroponic">💧 Hydroponic (1.8x)</SelectItem>
                   <SelectItem value="aquaponic">🐟 Aquaponic (2x)</SelectItem>
-                  <SelectItem value="permaculture">
-                    🌍 Permaculture (2.2x)
-                  </SelectItem>
-                  <SelectItem value="container_garden">
-                    🪴 Container Garden (1.3x)
-                  </SelectItem>
-                  <SelectItem value="raised_bed">
-                    📦 Raised Bed (1.4x)
-                  </SelectItem>
-                  <SelectItem value="windowsill">
-                    🪟 Windowsill (1.2x)
-                  </SelectItem>
-                  <SelectItem value="greenhouse">
-                    🏠 Greenhouse (1.6x)
-                  </SelectItem>
+                  <SelectItem value="permaculture">🌍 Permaculture (2.2x)</SelectItem>
+                  <SelectItem value="container_garden">🪴 Container Garden (1.3x)</SelectItem>
+                  <SelectItem value="raised_bed">📦 Raised Bed (1.4x)</SelectItem>
+                  <SelectItem value="windowsill">🪟 Windowsill (1.2x)</SelectItem>
+                  <SelectItem value="greenhouse">🏠 Greenhouse (1.6x)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -450,9 +396,7 @@ export function EnhancedHomeGrownFoodTracker() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Photo Verification
-              </label>
+              <label className="block text-sm font-medium mb-2">Photo Verification</label>
               <Button
                 type="button"
                 variant="outline"
@@ -465,9 +409,7 @@ export function EnhancedHomeGrownFoodTracker() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Growing Notes
-            </label>
+            <label className="block text-sm font-medium mb-2">Growing Notes</label>
             <Textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
@@ -487,9 +429,9 @@ export function EnhancedHomeGrownFoodTracker() {
 
         <div className="p-4 bg-gradient-to-r from-orange-500/10 to-green-500/10 rounded-lg border border-orange-500/20">
           <p className="text-sm text-orange-300">
-            💡 <strong>Garden Master Bonus:</strong> Different growing methods
-            and stages earn different multipliers! Photo verification and
-            detailed tracking earn the highest rewards!
+            💡 <strong>Garden Master Bonus:</strong> Different growing methods and stages earn
+            different multipliers! Photo verification and detailed tracking earn the highest
+            rewards!
           </p>
         </div>
       </CardContent>

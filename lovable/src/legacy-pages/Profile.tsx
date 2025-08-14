@@ -8,12 +8,8 @@ const Profile = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-green-900/20">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-blue-400 mb-4">
-            👤 USER PROFILE
-          </h1>
-          <p className="text-muted-foreground">
-            Manage your GAIA ecosystem profile and settings
-          </p>
+          <h1 className="text-4xl font-bold text-blue-400 mb-4">👤 USER PROFILE</h1>
+          <p className="text-muted-foreground">Manage your GAIA ecosystem profile and settings</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -26,15 +22,11 @@ const Profile = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="text-sm text-muted-foreground">
-                  Username
-                </label>
+                <label className="text-sm text-muted-foreground">Username</label>
                 <p className="font-medium">GaiaWarrior2024</p>
               </div>
               <div>
-                <label className="text-sm text-muted-foreground">
-                  Member Since
-                </label>
+                <label className="text-sm text-muted-foreground">Member Since</label>
                 <p className="font-medium">January 2024</p>
               </div>
               <div>
@@ -103,18 +95,12 @@ const Profile = () => {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Button className="bg-blue-600 hover:bg-blue-700">
-                Update Profile
-              </Button>
-              <Button className="bg-green-600 hover:bg-green-700">
-                Security Settings
-              </Button>
+              <Button className="bg-blue-600 hover:bg-blue-700">Update Profile</Button>
+              <Button className="bg-green-600 hover:bg-green-700">Security Settings</Button>
               <Button className="bg-purple-600 hover:bg-purple-700">
                 Notification Preferences
               </Button>
-              <Button className="bg-red-600 hover:bg-red-700">
-                Privacy Settings
-              </Button>
+              <Button className="bg-red-600 hover:bg-red-700">Privacy Settings</Button>
             </div>
           </CardContent>
         </Card>

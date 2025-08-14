@@ -11,10 +11,7 @@ interface AdminCredentialsFormProps {
   onLoginSuccess: () => void;
 }
 
-export function AdminCredentialsForm({
-  loginType,
-  onLoginSuccess,
-}: AdminCredentialsFormProps) {
+export function AdminCredentialsForm({ loginType, onLoginSuccess }: AdminCredentialsFormProps) {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -37,9 +34,7 @@ export function AdminCredentialsForm({
         credentials.password === validCredentials.password
       ) {
         const logType = loginType === "system" ? "SYSTEM" : "VAULT";
-        console.log(
-          `🛡️ ${logType} ADMIN ACCESS GRANTED - QUANTUM CONTROL ACTIVE`,
-        );
+        console.log(`🛡️ ${logType} ADMIN ACCESS GRANTED - QUANTUM CONTROL ACTIVE`);
         console.log("👑 ADMIN SYNATIC - SUPREME CONTROLLER");
         console.log("🚫 NO OTHER MACHINE OR CREATOR CAN ACCESS THIS SYSTEM");
         console.log("⚡ ULTIMATE PROTECTION PROTOCOLS ACTIVATED");
@@ -62,9 +57,7 @@ export function AdminCredentialsForm({
         });
       } else {
         const errorMessage =
-          loginType === "system"
-            ? "🚫 SYSTEM ACCESS DENIED"
-            : "🚫 VAULT ACCESS DENIED";
+          loginType === "system" ? "🚫 SYSTEM ACCESS DENIED" : "🚫 VAULT ACCESS DENIED";
 
         toast.error(errorMessage, {
           description: "Invalid admin credentials - Quantum protection active",
@@ -88,31 +81,19 @@ export function AdminCredentialsForm({
   const subtitle = isSystem
     ? "Ultimate admin control • All features • Maximum authority"
     : "Investment oversight • Vault management • Community funds";
-  const buttonText = isSystem
-    ? "ACCESS SUPREME CONTROL"
-    : "ACCESS VAULT CONTROL";
+  const buttonText = isSystem ? "ACCESS SUPREME CONTROL" : "ACCESS VAULT CONTROL";
   const gradientFrom = isSystem ? "from-blue-600" : "from-emerald-600";
   const gradientTo = isSystem ? "to-purple-600" : "to-green-600";
-  const gradientFromHover = isSystem
-    ? "hover:from-blue-700"
-    : "hover:from-emerald-700";
-  const gradientToHover = isSystem
-    ? "hover:to-purple-700"
-    : "hover:to-green-700";
+  const gradientFromHover = isSystem ? "hover:from-blue-700" : "hover:from-emerald-700";
+  const gradientToHover = isSystem ? "hover:to-purple-700" : "hover:to-green-700";
 
   return (
     <div className="space-y-4">
       <div className="text-center mb-4">
-        <h3
-          className={`text-xl font-bold ${isSystem ? "text-blue-400" : "text-emerald-400"}`}
-        >
+        <h3 className={`text-xl font-bold ${isSystem ? "text-blue-400" : "text-emerald-400"}`}>
           {title}
         </h3>
-        <p
-          className={`text-sm ${isSystem ? "text-blue-300" : "text-emerald-300"}`}
-        >
-          {subtitle}
-        </p>
+        <p className={`text-sm ${isSystem ? "text-blue-300" : "text-emerald-300"}`}>{subtitle}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -124,9 +105,7 @@ export function AdminCredentialsForm({
             id={`${loginType}-username`}
             type="text"
             value={credentials.username}
-            onChange={(e) =>
-              setCredentials((prev) => ({ ...prev, username: e.target.value }))
-            }
+            onChange={(e) => setCredentials((prev) => ({ ...prev, username: e.target.value }))}
             className="bg-black/40 border-green-500/30 text-green-400"
             placeholder={`Enter ${loginType} admin username...`}
             autoComplete="off"
@@ -161,11 +140,7 @@ export function AdminCredentialsForm({
               className="absolute right-1 top-1 h-8 w-8 p-0 text-green-400"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? (
-                <EyeOff className="h-4 w-4" />
-              ) : (
-                <Eye className="h-4 w-4" />
-              )}
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </Button>
           </div>
         </div>
@@ -176,9 +151,7 @@ export function AdminCredentialsForm({
           className={`w-full bg-gradient-to-r ${gradientFrom} ${gradientTo} ${gradientFromHover} ${gradientToHover} text-white font-bold py-3`}
         >
           {React.createElement(icon, { className: "h-5 w-5 mr-2" })}
-          {isLoading
-            ? `${isSystem ? "Quantum" : "Vault"} Verification...`
-            : buttonText}
+          {isLoading ? `${isSystem ? "Quantum" : "Vault"} Verification...` : buttonText}
         </Button>
       </form>
     </div>

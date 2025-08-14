@@ -44,10 +44,7 @@ export function BackgroundMusic() {
 
     // Listen for storage changes (when new media is set as background)
     const handleStorageChange = (e: StorageEvent) => {
-      if (
-        e.key === "activeBackgroundMedia" ||
-        e.key === "activeBackgroundMediaData"
-      ) {
+      if (e.key === "activeBackgroundMedia" || e.key === "activeBackgroundMediaData") {
         loadActiveMedia();
       }
     };
@@ -71,9 +68,7 @@ export function BackgroundMusic() {
     const audio = audioRef.current;
 
     if (!currentTrack) {
-      toast.info(
-        "🎵 Upload music files in Admin → Media Library to set background music",
-      );
+      toast.info("🎵 Upload music files in Admin → Media Library to set background music");
       return;
     }
 
@@ -120,9 +115,7 @@ export function BackgroundMusic() {
     <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
       {currentTrack && (
         <div className="bg-background/90 backdrop-blur-sm border border-primary/20 rounded-lg p-2 max-w-48">
-          <div className="text-xs text-muted-foreground truncate">
-            🎵 {currentTrack.name}
-          </div>
+          <div className="text-xs text-muted-foreground truncate">🎵 {currentTrack.name}</div>
         </div>
       )}
 
@@ -131,15 +124,9 @@ export function BackgroundMusic() {
         variant={isMuted || !isPlaying ? "outline" : "default"}
         size="sm"
         className="bg-background/80 backdrop-blur-sm border-primary/20"
-        title={
-          currentTrack ? currentTrack.name : "No background music selected"
-        }
+        title={currentTrack ? currentTrack.name : "No background music selected"}
       >
-        {isMuted || !isPlaying ? (
-          <VolumeX className="h-4 w-4" />
-        ) : (
-          <Volume2 className="h-4 w-4" />
-        )}
+        {isMuted || !isPlaying ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
       </Button>
 
       <audio

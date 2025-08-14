@@ -28,9 +28,7 @@ export function CommunityRecoveryEngine() {
     <div className="space-y-6">
       <Card className="border-green-500/50 bg-green-900/20">
         <CardHeader>
-          <CardTitle className="text-green-400">
-            ❤️ COMMUNITY RECOVERY ENGINE
-          </CardTitle>
+          <CardTitle className="text-green-400">❤️ COMMUNITY RECOVERY ENGINE</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -38,25 +36,17 @@ export function CommunityRecoveryEngine() {
               <div className="text-3xl font-bold text-green-400">
                 {communityStrength.toFixed(1)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Community Strength
-              </div>
+              <div className="text-sm text-muted-foreground">Community Strength</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
               <div className="text-3xl font-bold text-blue-400">
                 {membersProtected.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Members Protected
-              </div>
+              <div className="text-sm text-muted-foreground">Members Protected</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-purple-400">
-                {recoveryMissions}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Recovery Missions
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{recoveryMissions}</div>
+              <div className="text-sm text-muted-foreground">Recovery Missions</div>
             </div>
           </div>
 
@@ -72,24 +62,16 @@ export function CommunityRecoveryEngine() {
             <div>
               <div className="flex justify-between mb-2">
                 <span className="text-white">Community Unity</span>
-                <span className="text-green-400">
-                  {communityStrength.toFixed(1)}%
-                </span>
+                <span className="text-green-400">{communityStrength.toFixed(1)}%</span>
               </div>
               <Progress value={communityStrength} className="h-3" />
             </div>
 
             <div className="space-y-2">
-              <h4 className="text-green-400 font-bold">
-                🌍 GLOBAL COMMUNITY PROTECTION:
-              </h4>
+              <h4 className="text-green-400 font-bold">🌍 GLOBAL COMMUNITY PROTECTION:</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                <Badge className="bg-green-600">
-                  🌱 Environmental Activists
-                </Badge>
-                <Badge className="bg-blue-600">
-                  💚 Green Technology Supporters
-                </Badge>
+                <Badge className="bg-green-600">🌱 Environmental Activists</Badge>
+                <Badge className="bg-blue-600">💚 Green Technology Supporters</Badge>
                 <Badge className="bg-purple-600">🔬 Quantum Researchers</Badge>
                 <Badge className="bg-orange-600">🎮 Gaming Community</Badge>
                 <Badge className="bg-red-600">🛡️ Security Enthusiasts</Badge>

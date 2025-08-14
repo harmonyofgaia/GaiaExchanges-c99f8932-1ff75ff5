@@ -3,14 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Infinity as InfinityIcon,
-  RotateCcw,
-  Zap,
-  Target,
-  AlertCircle,
-  Atom,
-} from "lucide-react";
+import { Infinity as InfinityIcon, RotateCcw, Zap, Target, AlertCircle, Atom } from "lucide-react";
 import { infiniteRecursion } from "@/services/infiniteRecursion";
 import { toast } from "sonner";
 
@@ -21,8 +14,7 @@ export function InfiniteRecursionDashboard() {
   const [infinityEngines, setInfinityEngines] = useState(0);
   const [recursionStability, setRecursionStability] = useState(100);
   const [paradoxIntensity, setParadoxIntensity] = useState(0);
-  const [computationalSingularities, setComputationalSingularities] =
-    useState(0);
+  const [computationalSingularities, setComputationalSingularities] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -42,9 +34,7 @@ export function InfiniteRecursionDashboard() {
   const handleInitialize = async () => {
     try {
       await infiniteRecursion.initializeInfiniteRecursionSystem();
-      toast.success(
-        "Infinite Recursion System activated! Logic is now paradoxical.",
-      );
+      toast.success("Infinite Recursion System activated! Logic is now paradoxical.");
     } catch (error) {
       toast.error("Failed to initialize Infinite Recursion System");
     }
@@ -85,9 +75,7 @@ export function InfiniteRecursionDashboard() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <div className="flex items-center gap-2">
             <InfinityIcon className="h-4 w-4 text-purple-400" />
-            <span className="text-sm">
-              Recursion Depth: {recursionDepth.toLocaleString()}
-            </span>
+            <span className="text-sm">Recursion Depth: {recursionDepth.toLocaleString()}</span>
           </div>
           <div className="flex items-center gap-2">
             <RotateCcw className="h-4 w-4 text-indigo-400" />
@@ -99,15 +87,11 @@ export function InfiniteRecursionDashboard() {
           </div>
           <div className="flex items-center gap-2">
             <Atom className="h-4 w-4 text-purple-400" />
-            <span className="text-sm">
-              Singularities: {computationalSingularities}
-            </span>
+            <span className="text-sm">Singularities: {computationalSingularities}</span>
           </div>
           <div className="flex items-center gap-2">
             <Target className="h-4 w-4 text-indigo-400" />
-            <span className="text-sm">
-              Paradox Intensity: {paradoxIntensity}%
-            </span>
+            <span className="text-sm">Paradox Intensity: {paradoxIntensity}%</span>
           </div>
           <div className="flex items-center gap-2">
             <AlertCircle className="h-4 w-4 text-red-400" />
@@ -157,9 +141,7 @@ export function InfiniteRecursionDashboard() {
         </div>
 
         <div className="space-y-2">
-          <h4 className="text-sm font-medium text-purple-400">
-            Recursion Patterns:
-          </h4>
+          <h4 className="text-sm font-medium text-purple-400">Recursion Patterns:</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
             {patterns.map((pattern) => (
               <div key={pattern.id} className="flex justify-between">
@@ -174,8 +156,8 @@ export function InfiniteRecursionDashboard() {
 
         <div className="text-xs text-muted-foreground">
           <p className="italic">
-            "In infinite recursion, every paradox becomes truth, every
-            impossibility becomes inevitable. Logic itself bends to our will."
+            "In infinite recursion, every paradox becomes truth, every impossibility becomes
+            inevitable. Logic itself bends to our will."
           </p>
         </div>
       </CardContent>

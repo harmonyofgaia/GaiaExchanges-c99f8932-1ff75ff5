@@ -2,17 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Star,
-  Crown,
-  Gem,
-  Sparkles,
-  Eye,
-  Heart,
-  Share2,
-  ShoppingCart,
-  Flame,
-} from "lucide-react";
+import { Star, Crown, Gem, Sparkles, Eye, Heart, Share2, ShoppingCart, Flame } from "lucide-react";
 
 interface NFTData {
   id: string;
@@ -113,8 +103,7 @@ export function ExclusiveNFTShowcase() {
           👑 EXCLUSIVE HARMONY NFT COLLECTION
         </CardTitle>
         <p className="text-muted-foreground">
-          Ultra-rare NFTs with real environmental impact and exclusive gaming
-          powers
+          Ultra-rare NFTs with real environmental impact and exclusive gaming powers
         </p>
       </CardHeader>
 
@@ -172,12 +161,8 @@ export function ExclusiveNFTShowcase() {
 
               <CardContent className="p-4 space-y-3">
                 <div>
-                  <h3 className="font-bold text-lg text-white mb-1">
-                    {nft.name}
-                  </h3>
-                  <div className="text-2xl font-bold text-green-400">
-                    {nft.price}
-                  </div>
+                  <h3 className="font-bold text-lg text-white mb-1">{nft.name}</h3>
+                  <div className="text-2xl font-bold text-green-400">{nft.price}</div>
                 </div>
 
                 {/* Attributes */}
@@ -185,9 +170,7 @@ export function ExclusiveNFTShowcase() {
                   {nft.attributes.map((attr, index) => (
                     <div key={index} className="flex justify-between text-sm">
                       <span className="text-gray-400">{attr.trait}:</span>
-                      <span className="text-cyan-400 font-medium">
-                        {attr.value}
-                      </span>
+                      <span className="text-cyan-400 font-medium">{attr.value}</span>
                     </div>
                   ))}
                 </div>
@@ -200,18 +183,10 @@ export function ExclusiveNFTShowcase() {
                     <ShoppingCart className="w-4 h-4 mr-2" />
                     Buy NFT
                   </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border-gray-500"
-                  >
+                  <Button variant="outline" size="sm" className="border-gray-500">
                     <Heart className="w-4 h-4" />
                   </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border-gray-500"
-                  >
+                  <Button variant="outline" size="sm" className="border-gray-500">
                     <Share2 className="w-4 h-4" />
                   </Button>
                 </div>

@@ -4,16 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Play,
-  Pause,
-  Video,
-  Upload,
-  Users,
-  Heart,
-  Share,
-  Eye,
-} from "lucide-react";
+import { Play, Pause, Video, Upload, Users, Heart, Share, Eye } from "lucide-react";
 import { toast } from "sonner";
 import { GAIA_TOKEN } from "@/constants/gaia";
 
@@ -44,8 +35,7 @@ export function VideoStreamingPlatform() {
     {
       id: "1",
       title: "🌍 Gaia Token Environmental Impact LIVE",
-      description:
-        "Live discussion about how Harmony of Gaia is changing the world",
+      description: "Live discussion about how Harmony of Gaia is changing the world",
       streamUrl: "",
       thumbnailUrl: "/lovable-uploads/78f81378-5535-4da5-bb6c-28f9a9866f3e.png",
       streamer: "EcoMaster",
@@ -93,9 +83,7 @@ export function VideoStreamingPlatform() {
     gaiaRewards: 1250,
   });
 
-  const [selectedStream, setSelectedStream] = useState<VideoStream | null>(
-    null,
-  );
+  const [selectedStream, setSelectedStream] = useState<VideoStream | null>(null);
   const [isStreaming, setIsStreaming] = useState(false);
   const [newStreamTitle, setNewStreamTitle] = useState("");
   const [newStreamDescription, setNewStreamDescription] = useState("");
@@ -112,7 +100,7 @@ export function VideoStreamingPlatform() {
             ? stream.viewers + Math.floor(Math.random() * 10) - 5
             : stream.viewers,
           likes: stream.likes + Math.floor(Math.random() * 3),
-        })),
+        }))
       );
 
       setStats((prev) => ({
@@ -173,10 +161,8 @@ export function VideoStreamingPlatform() {
   const likeStream = (streamId: string) => {
     setStreams((prev) =>
       prev.map((stream) =>
-        stream.id === streamId
-          ? { ...stream, likes: stream.likes + 1 }
-          : stream,
-      ),
+        stream.id === streamId ? { ...stream, likes: stream.likes + 1 } : stream
+      )
     );
     toast.success("❤️ Liked!", { duration: 1000 });
   };
@@ -189,18 +175,10 @@ export function VideoStreamingPlatform() {
           📺 GAIA STREAMING PLATFORM - Environmental & Gaming Content
         </CardTitle>
         <div className="flex flex-wrap gap-2">
-          <Badge className="bg-purple-600 text-white">
-            Live: {stats.liveStreams}
-          </Badge>
-          <Badge className="bg-pink-600 text-white">
-            Streamers: {stats.totalStreamers}
-          </Badge>
-          <Badge className="bg-orange-600 text-white">
-            Views: {stats.totalViews}
-          </Badge>
-          <Badge className="bg-green-600 text-white">
-            GAiA Rewards: {stats.gaiaRewards}
-          </Badge>
+          <Badge className="bg-purple-600 text-white">Live: {stats.liveStreams}</Badge>
+          <Badge className="bg-pink-600 text-white">Streamers: {stats.totalStreamers}</Badge>
+          <Badge className="bg-orange-600 text-white">Views: {stats.totalViews}</Badge>
+          <Badge className="bg-green-600 text-white">GAiA Rewards: {stats.gaiaRewards}</Badge>
         </div>
       </CardHeader>
 
@@ -220,9 +198,7 @@ export function VideoStreamingPlatform() {
               </div>
               <div>
                 <div className="text-muted-foreground">Streaming Rewards:</div>
-                <div className="text-lg font-bold text-green-400">
-                  Earn GAiA tokens!
-                </div>
+                <div className="text-lg font-bold text-green-400">Earn GAiA tokens!</div>
               </div>
             </div>
           </div>
@@ -230,9 +206,7 @@ export function VideoStreamingPlatform() {
 
         {/* Stream Creation */}
         <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
-          <h3 className="text-lg font-bold text-blue-400 mb-4">
-            🎥 Start Your Stream
-          </h3>
+          <h3 className="text-lg font-bold text-blue-400 mb-4">🎥 Start Your Stream</h3>
           <div className="space-y-4">
             <Input
               placeholder="Stream title..."
@@ -249,10 +223,7 @@ export function VideoStreamingPlatform() {
             />
             <div className="flex gap-2">
               {!isStreaming ? (
-                <Button
-                  onClick={startStream}
-                  className="bg-red-600 hover:bg-red-700"
-                >
+                <Button onClick={startStream} className="bg-red-600 hover:bg-red-700">
                   <Video className="h-4 w-4 mr-2" />
                   Go Live
                 </Button>
@@ -273,9 +244,7 @@ export function VideoStreamingPlatform() {
         {/* Video Player */}
         {selectedStream && (
           <div className="bg-black/40 border border-gray-500/30 rounded-lg p-4">
-            <h3 className="text-lg font-bold text-white mb-2">
-              {selectedStream.title}
-            </h3>
+            <h3 className="text-lg font-bold text-white mb-2">{selectedStream.title}</h3>
             <div className="aspect-video bg-black rounded-lg mb-4 flex items-center justify-center">
               <div className="text-center">
                 <Video className="h-16 w-16 text-gray-400 mx-auto mb-2" />
@@ -291,11 +260,7 @@ export function VideoStreamingPlatform() {
                   <Users className="h-4 w-4 inline mr-1" />
                   {selectedStream.viewers} viewers
                 </span>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => likeStream(selectedStream.id)}
-                >
+                <Button size="sm" variant="outline" onClick={() => likeStream(selectedStream.id)}>
                   <Heart className="h-4 w-4 mr-1" />
                   {selectedStream.likes}
                 </Button>
@@ -310,9 +275,7 @@ export function VideoStreamingPlatform() {
 
         {/* Stream Grid */}
         <div className="space-y-4">
-          <h3 className="text-lg font-bold text-purple-400">
-            🌟 Featured Streams
-          </h3>
+          <h3 className="text-lg font-bold text-purple-400">🌟 Featured Streams</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {streams.map((stream) => (
               <div
@@ -344,9 +307,7 @@ export function VideoStreamingPlatform() {
                 <h4 className="font-semibold text-white text-sm mb-1 line-clamp-2">
                   {stream.title}
                 </h4>
-                <p className="text-xs text-gray-400 mb-2 line-clamp-2">
-                  {stream.description}
-                </p>
+                <p className="text-xs text-gray-400 mb-2 line-clamp-2">{stream.description}</p>
 
                 <div className="flex items-center justify-between text-xs text-gray-500">
                   <span>{stream.streamer}</span>
@@ -369,35 +330,23 @@ export function VideoStreamingPlatform() {
         {/* Platform Stats */}
         <div className="bg-gradient-to-r from-purple-900/20 via-pink-900/20 to-orange-900/20 border border-purple-500/30 rounded-lg p-4">
           <div className="text-center">
-            <h4 className="text-xl font-bold text-purple-400 mb-2">
-              📊 Platform Statistics
-            </h4>
+            <h4 className="text-xl font-bold text-purple-400 mb-2">📊 Platform Statistics</h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div>
-                <div className="text-2xl font-bold text-purple-400">
-                  {stats.totalViews}
-                </div>
+                <div className="text-2xl font-bold text-purple-400">{stats.totalViews}</div>
                 <div className="text-xs text-muted-foreground">Total Views</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-pink-400">
-                  {stats.totalStreamers}
-                </div>
+                <div className="text-2xl font-bold text-pink-400">{stats.totalStreamers}</div>
                 <div className="text-xs text-muted-foreground">Streamers</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-orange-400">
-                  {stats.liveStreams}
-                </div>
+                <div className="text-2xl font-bold text-orange-400">{stats.liveStreams}</div>
                 <div className="text-xs text-muted-foreground">Live Now</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-green-400">
-                  {stats.gaiaRewards}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  GAiA Rewards
-                </div>
+                <div className="text-2xl font-bold text-green-400">{stats.gaiaRewards}</div>
+                <div className="text-xs text-muted-foreground">GAiA Rewards</div>
               </div>
             </div>
           </div>

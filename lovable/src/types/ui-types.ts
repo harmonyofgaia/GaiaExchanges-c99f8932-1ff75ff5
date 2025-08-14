@@ -184,12 +184,7 @@ export enum ExchangeStatus {
 }
 
 // Auto apply status types
-export type AutoApplyStatus =
-  | "completed"
-  | "in-progress"
-  | "pending"
-  | "failed"
-  | "queued";
+export type AutoApplyStatus = "completed" | "in-progress" | "pending" | "failed" | "queued";
 
 // Exchange interface
 export interface Exchange {
@@ -263,16 +258,12 @@ export interface WindowWithProviders extends Window {
 }
 
 // Form event handlers
-export type FormEventHandler = (
-  event: React.FormEvent<HTMLFormElement>,
-) => void;
+export type FormEventHandler = (event: React.FormEvent<HTMLFormElement>) => void;
 export type ChangeEventHandler = (
-  event: React.ChangeEvent<
-    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-  >,
+  event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 ) => void;
 export type ClickEventHandler = (
-  event: React.MouseEvent<HTMLButtonElement | HTMLDivElement>,
+  event: React.MouseEvent<HTMLButtonElement | HTMLDivElement>
 ) => void;
 
 // Generic callback types

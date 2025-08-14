@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +21,15 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+
+interface MediaFile {
+  id: string;
+  original_name: string;
+  storage_path: string;
+  mime_type: string;
+  file_size: number;
+  created_at: string;
+}
 import { useQuery } from "@tanstack/react-query";
 
 export function AdminMediaLibrary() {
@@ -31,7 +40,7 @@ export function AdminMediaLibrary() {
   const [isBackgroundMusic, setIsBackgroundMusic] = useState(false);
 
   // Music player state
-  const [currentTrack, setCurrentTrack] = useState<any>(null);
+  const [currentTrack, setCurrentTrack] = useState<MediaFile | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
   const [currentTime, setCurrentTime] = useState(0);
@@ -66,11 +75,8 @@ export function AdminMediaLibrary() {
     const handleEnded = () => {
       setIsPlaying(false);
       // Auto-play next track if available
-      const musicFiles =
-        mediaFiles?.filter((file) => file.is_background_music) || [];
-      const currentIndex = musicFiles.findIndex(
-        (f) => f.id === currentTrack?.id,
-      );
+      const musicFiles = mediaFiles?.filter((file) => file.is_background_music) || [];
+      const currentIndex = musicFiles.findIndex((f) => f.id === currentTrack?.id);
       if (currentIndex >= 0 && currentIndex < musicFiles.length - 1) {
         playTrack(musicFiles[currentIndex + 1]);
       }
@@ -83,7 +89,7 @@ export function AdminMediaLibrary() {
       audio.removeEventListener("timeupdate", updateTime);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, [currentTrack, mediaFiles]);
+  }, [currentTrack, mediaFiles, playTrack]);
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -133,19 +139,16 @@ export function AdminMediaLibrary() {
       if (uploadError) throw uploadError;
 
       // Insert metadata into database
-      const { error: dbError } = await supabase
-        .from("admin_media_library")
-        .insert({
-          filename: fileName,
-          original_name: selectedFile.name,
-          file_type: selectedFile.type.split("/")[0], // 'audio', 'video', 'image', etc.
-          file_size: selectedFile.size,
-          mime_type: selectedFile.type,
-          storage_path: uploadData.path,
-          category: category,
-          is_background_music:
-            isBackgroundMusic && selectedFile.type.startsWith("audio/"),
-        });
+      const { error: dbError } = await supabase.from("admin_media_library").insert({
+        filename: fileName,
+        original_name: selectedFile.name,
+        file_type: selectedFile.type.split("/")[0], // 'audio', 'video', 'image', etc.
+        file_size: selectedFile.size,
+        mime_type: selectedFile.type,
+        storage_path: uploadData.path,
+        category: category,
+        is_background_music: isBackgroundMusic && selectedFile.type.startsWith("audio/"),
+      });
 
       if (dbError) throw dbError;
 
@@ -176,7 +179,7 @@ export function AdminMediaLibrary() {
                   },
                 ],
               },
-            }),
+            })
           );
         }, 1000);
       }
@@ -188,7 +191,7 @@ export function AdminMediaLibrary() {
     }
   };
 
-  const deleteFile = async (file: any) => {
+  const deleteFile = async (file: MediaFile) => {
     if (!confirm(`Are you sure you want to delete "${file.original_name}"?`)) {
       return;
     }
@@ -226,12 +229,11 @@ export function AdminMediaLibrary() {
     }
   };
 
-  const playTrack = async (file: any) => {
+  const playTrack = useCallback(async (file: MediaFile) => {
     if (!file.mime_type.startsWith("audio/")) return;
 
-    const audioUrl = supabase.storage
-      .from("admin-media")
-      .getPublicUrl(file.storage_path).data.publicUrl;
+    const audioUrl = supabase.storage.from("admin-media").getPublicUrl(file.storage_path)
+      .data.publicUrl;
 
     if (audioRef.current) {
       setCurrentTrack(file);
@@ -249,14 +251,14 @@ export function AdminMediaLibrary() {
               action: "play",
               tracks: musicFiles,
             },
-          }),
+          })
         );
       } catch (error) {
         console.error("Play error:", error);
         toast.error("Failed to play audio file");
       }
     }
-  };
+  }, [musicFiles]);
 
   const togglePlayPause = async () => {
     if (audioRef.current) {
@@ -294,10 +296,12 @@ export function AdminMediaLibrary() {
     }
   };
 
-  const musicFiles =
-    mediaFiles?.filter((file) => file.is_background_music) || [];
-  const otherFiles =
-    mediaFiles?.filter((file) => !file.is_background_music) || [];
+  const musicFiles = useMemo(() => 
+    mediaFiles?.filter((file) => file.is_background_music) || [], [mediaFiles]
+  );
+  const otherFiles = useMemo(() => 
+    mediaFiles?.filter((file) => !file.is_background_music) || [], [mediaFiles]
+  );
 
   return (
     <div className="space-y-6">
@@ -317,18 +321,12 @@ export function AdminMediaLibrary() {
             <div className="flex items-center gap-4">
               <div className="flex-1">
                 <h3 className="font-medium">{currentTrack.original_name}</h3>
-                <p className="text-sm text-muted-foreground">
-                  Background Music
-                </p>
+                <p className="text-sm text-muted-foreground">Background Music</p>
               </div>
 
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="sm" onClick={togglePlayPause}>
-                  {isPlaying ? (
-                    <Pause className="h-5 w-5" />
-                  ) : (
-                    <Play className="h-5 w-5" />
-                  )}
+                  {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
                 </Button>
 
                 <div className="flex items-center gap-2">
@@ -349,16 +347,12 @@ export function AdminMediaLibrary() {
                 <span className="text-xs">{formatTime(currentTime)}</span>
                 <Progress
                   value={
-                    audioRef.current?.duration
-                      ? (currentTime / audioRef.current.duration) * 100
-                      : 0
+                    audioRef.current?.duration ? (currentTime / audioRef.current.duration) * 100 : 0
                   }
                   className="w-32"
                 />
                 <span className="text-xs">
-                  {audioRef.current?.duration
-                    ? formatTime(audioRef.current.duration)
-                    : "0:00"}
+                  {audioRef.current?.duration ? formatTime(audioRef.current.duration) : "0:00"}
                 </span>
               </div>
             </div>
@@ -398,9 +392,7 @@ export function AdminMediaLibrary() {
 
               {selectedFile && (
                 <div className="p-4 bg-green-900/30 rounded-lg">
-                  <p className="text-green-400">
-                    Selected: {selectedFile.name}
-                  </p>
+                  <p className="text-green-400">Selected: {selectedFile.name}</p>
                   <p className="text-sm text-muted-foreground">
                     Size: {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
                   </p>
@@ -520,8 +512,8 @@ export function AdminMediaLibrary() {
                 <div className="text-center py-8">
                   <Music className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                   <p className="text-muted-foreground">
-                    No background music uploaded yet. Upload audio files and
-                    mark them as background music.
+                    No background music uploaded yet. Upload audio files and mark them as background
+                    music.
                   </p>
                 </div>
               )}
@@ -552,8 +544,7 @@ export function AdminMediaLibrary() {
                         <div className="flex-1">
                           <h3 className="font-medium">{file.original_name}</h3>
                           <p className="text-sm text-muted-foreground">
-                            {file.category} •{" "}
-                            {(file.file_size / 1024 / 1024).toFixed(2)} MB
+                            {file.category} • {(file.file_size / 1024 / 1024).toFixed(2)} MB
                           </p>
                         </div>
 
@@ -568,11 +559,7 @@ export function AdminMediaLibrary() {
                             <Download className="h-4 w-4" />
                           </Button>
 
-                          <Button
-                            variant="destructive"
-                            size="sm"
-                            onClick={() => deleteFile(file)}
-                          >
+                          <Button variant="destructive" size="sm" onClick={() => deleteFile(file)}>
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
@@ -584,8 +571,7 @@ export function AdminMediaLibrary() {
                 <div className="text-center py-8">
                   <Upload className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                   <p className="text-muted-foreground">
-                    No media files uploaded yet. Use the upload tab to add
-                    files.
+                    No media files uploaded yet. Use the upload tab to add files.
                   </p>
                 </div>
               )}

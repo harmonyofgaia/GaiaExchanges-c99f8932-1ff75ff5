@@ -48,9 +48,7 @@ export function CloudResilienceManager() {
       duration: 6000,
     });
 
-    console.log(
-      `🚨 EMERGENCY EXPANSION: +${expansionAmount / 1000}TB - COMMUNITY NEVER FAILS`,
-    );
+    console.log(`🚨 EMERGENCY EXPANSION: +${expansionAmount / 1000}TB - COMMUNITY NEVER FAILS`);
   };
 
   // Force full system backup
@@ -81,8 +79,7 @@ export function CloudResilienceManager() {
     });
 
     toast.success("🛡️ MAXIMUM RESILIENCE MODE ACTIVATED!", {
-      description:
-        "All protective systems at 100% - Server breakdown is now impossible",
+      description: "All protective systems at 100% - Server breakdown is now impossible",
       duration: 10000,
     });
 
@@ -97,15 +94,12 @@ export function CloudResilienceManager() {
         usedStorage: prev.usedStorage + Math.random() * 50 - 25,
         activeBackupSessions: Math.max(
           20,
-          prev.activeBackupSessions + Math.floor(Math.random() * 6 - 3),
+          prev.activeBackupSessions + Math.floor(Math.random() * 6 - 3)
         ),
-        globalNodeSync: Math.max(
-          95,
-          Math.min(100, prev.globalNodeSync + (Math.random() - 0.5)),
-        ),
+        globalNodeSync: Math.max(95, Math.min(100, prev.globalNodeSync + (Math.random() - 0.5))),
         dataReplicationHealth: Math.max(
           98,
-          Math.min(100, prev.dataReplicationHealth + (Math.random() - 0.5)),
+          Math.min(100, prev.dataReplicationHealth + (Math.random() - 0.5))
         ),
       }));
     }, 3000);
@@ -121,9 +115,7 @@ export function CloudResilienceManager() {
           <CardTitle className="flex items-center gap-2 text-blue-400">
             <CloudLightning className="h-6 w-6" />
             ☁️ CLOUD RESILIENCE COMMAND CENTER
-            <Badge className="bg-blue-600 text-white animate-pulse">
-              ADMIN ONLY
-            </Badge>
+            <Badge className="bg-blue-600 text-white animate-pulse">ADMIN ONLY</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -167,9 +159,7 @@ export function CloudResilienceManager() {
               <div className="text-2xl font-bold text-blue-400">
                 {(cloudMetrics.totalStorageCapacity / 1000).toFixed(0)}TB
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Capacity
-              </div>
+              <div className="text-sm text-muted-foreground">Total Capacity</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-green-900/30 border border-green-500/20">
@@ -177,9 +167,7 @@ export function CloudResilienceManager() {
               <div className="text-2xl font-bold text-green-400">
                 {cloudMetrics.activeBackupSessions}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Active Backups
-              </div>
+              <div className="text-sm text-muted-foreground">Active Backups</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-purple-900/30 border border-purple-500/20">
@@ -195,9 +183,7 @@ export function CloudResilienceManager() {
               <div className="text-2xl font-bold text-yellow-400">
                 {cloudMetrics.dataReplicationHealth.toFixed(1)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Replication Health
-              </div>
+              <div className="text-sm text-muted-foreground">Replication Health</div>
             </div>
           </div>
 
@@ -206,19 +192,12 @@ export function CloudResilienceManager() {
             <div className="flex justify-between items-center">
               <span className="text-lg font-semibold">Cloud Storage Usage</span>
               <span className="text-sm text-green-400">
-                {(
-                  (cloudMetrics.totalStorageCapacity -
-                    cloudMetrics.usedStorage) /
-                  1000
-                ).toFixed(1)}
+                {((cloudMetrics.totalStorageCapacity - cloudMetrics.usedStorage) / 1000).toFixed(1)}
                 TB Available
               </span>
             </div>
             <Progress
-              value={
-                (cloudMetrics.usedStorage / cloudMetrics.totalStorageCapacity) *
-                100
-              }
+              value={(cloudMetrics.usedStorage / cloudMetrics.totalStorageCapacity) * 100}
               className="h-3"
             />
             <div className="text-center text-sm text-muted-foreground">
@@ -229,18 +208,14 @@ export function CloudResilienceManager() {
 
           {/* Emergency Protocols Status */}
           <div className="bg-gradient-to-r from-red-900/20 to-orange-900/20 border border-red-500/20 rounded-lg p-4">
-            <h4 className="text-red-300 font-semibold mb-3">
-              🚨 Emergency Protection Protocols
-            </h4>
+            <h4 className="text-red-300 font-semibold mb-3">🚨 Emergency Protection Protocols</h4>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               {Object.entries(emergencyProtocols).map(([key, value]) => (
                 <div key={key} className="text-center">
                   <div
                     className={`w-4 h-4 rounded-full mx-auto mb-1 ${value ? "bg-green-500" : "bg-red-500"}`}
                   />
-                  <div className="text-xs capitalize">
-                    {key.replace(/([A-Z])/g, " $1").trim()}
-                  </div>
+                  <div className="text-xs capitalize">{key.replace(/([A-Z])/g, " $1").trim()}</div>
                 </div>
               ))}
             </div>
@@ -266,8 +241,7 @@ export function CloudResilienceManager() {
               <div className="text-6xl">☁️</div>
               <div className="font-bold text-blue-400">UNLIMITED BACKUP</div>
               <div className="text-sm text-muted-foreground">
-                310TB+ cloud storage with unlimited emergency expansion
-                capability
+                310TB+ cloud storage with unlimited emergency expansion capability
               </div>
             </div>
           </div>
@@ -276,8 +250,7 @@ export function CloudResilienceManager() {
               🌟 COMMUNITY OPERATIONS PROTECTED AT ALL COSTS 🌟
             </div>
             <div className="text-sm text-muted-foreground mt-2">
-              Server breakdown is mathematically impossible with our resilience
-              architecture
+              Server breakdown is mathematically impossible with our resilience architecture
             </div>
           </div>
         </CardContent>

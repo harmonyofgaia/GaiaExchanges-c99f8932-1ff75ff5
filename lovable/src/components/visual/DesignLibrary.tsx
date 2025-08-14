@@ -155,11 +155,8 @@ export function DesignLibrary({ isLocked }: { isLocked: boolean }) {
   const filteredAssets = designAssets.filter((asset) => {
     const matchesSearch =
       asset.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      asset.tags.some((tag) =>
-        tag.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-    const matchesCategory =
-      selectedCategory === "all" || asset.category === selectedCategory;
+      asset.tags.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+    const matchesCategory = selectedCategory === "all" || asset.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -174,9 +171,7 @@ export function DesignLibrary({ isLocked }: { isLocked: boolean }) {
         ? prev.filter((id) => id !== assetId)
         : [...prev, assetId];
 
-      const action = newFavorites.includes(assetId)
-        ? "added to"
-        : "removed from";
+      const action = newFavorites.includes(assetId) ? "added to" : "removed from";
       toast.success(`Design ${action} favorites`);
 
       return newFavorites;
@@ -219,7 +214,7 @@ export function DesignLibrary({ isLocked }: { isLocked: boolean }) {
     window.dispatchEvent(
       new CustomEvent("apply-design", {
         detail: { asset },
-      }),
+      })
     );
   };
 
@@ -252,9 +247,7 @@ export function DesignLibrary({ isLocked }: { isLocked: boolean }) {
           setCustomAssets((prev) => [...prev, newAsset]);
 
           if (index === files.length - 1) {
-            toast.success(
-              `Uploaded ${files.length} custom design${files.length > 1 ? "s" : ""}`,
-            );
+            toast.success(`Uploaded ${files.length} custom design${files.length > 1 ? "s" : ""}`);
           }
         };
         reader.readAsDataURL(file);
@@ -269,17 +262,11 @@ export function DesignLibrary({ isLocked }: { isLocked: boolean }) {
       customAssets,
       currentStyles: {
         background: getComputedStyle(document.documentElement).getPropertyValue(
-          "--custom-background",
+          "--custom-background"
         ),
-        overlay: getComputedStyle(document.documentElement).getPropertyValue(
-          "--custom-overlay",
-        ),
-        texture: getComputedStyle(document.documentElement).getPropertyValue(
-          "--custom-texture",
-        ),
-        pattern: getComputedStyle(document.documentElement).getPropertyValue(
-          "--custom-pattern",
-        ),
+        overlay: getComputedStyle(document.documentElement).getPropertyValue("--custom-overlay"),
+        texture: getComputedStyle(document.documentElement).getPropertyValue("--custom-texture"),
+        pattern: getComputedStyle(document.documentElement).getPropertyValue("--custom-pattern"),
       },
       timestamp: new Date().toISOString(),
     };
@@ -385,9 +372,7 @@ export function DesignLibrary({ isLocked }: { isLocked: boolean }) {
           <TabsContent value="gallery" className="space-y-4">
             <div
               className={`grid gap-4 ${
-                viewMode === "grid"
-                  ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-                  : "grid-cols-1"
+                viewMode === "grid" ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : "grid-cols-1"
               }`}
             >
               {filteredAssets.map((asset) => (
@@ -438,10 +423,7 @@ export function DesignLibrary({ isLocked }: { isLocked: boolean }) {
                     </div>
                     <div className="flex flex-wrap gap-1">
                       {asset.tags.slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs text-muted-foreground"
-                        >
+                        <span key={tag} className="text-xs text-muted-foreground">
                           #{tag}
                         </span>
                       ))}
@@ -453,9 +435,7 @@ export function DesignLibrary({ isLocked }: { isLocked: boolean }) {
               {filteredAssets.length === 0 && (
                 <div className="col-span-full text-center py-8">
                   <Image className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                  <p className="text-muted-foreground">
-                    No designs found matching your criteria
-                  </p>
+                  <p className="text-muted-foreground">No designs found matching your criteria</p>
                 </div>
               )}
             </div>
@@ -499,12 +479,9 @@ export function DesignLibrary({ isLocked }: { isLocked: boolean }) {
               ) : (
                 <div className="text-center py-8 border-2 border-dashed border-muted rounded-lg">
                   <Image className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                  <p className="text-muted-foreground mb-2">
-                    No custom designs uploaded yet
-                  </p>
+                  <p className="text-muted-foreground mb-2">No custom designs uploaded yet</p>
                   <p className="text-sm text-muted-foreground">
-                    Drag and drop your images or click upload to add custom
-                    designs
+                    Drag and drop your images or click upload to add custom designs
                   </p>
                 </div>
               )}
@@ -516,12 +493,7 @@ export function DesignLibrary({ isLocked }: { isLocked: boolean }) {
               {favorites.length > 0 && (
                 <div className="flex justify-between items-center">
                   <h3 className="text-sm font-medium">Your Favorite Designs</h3>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={clearFavorites}
-                    disabled={isLocked}
-                  >
+                  <Button variant="outline" size="sm" onClick={clearFavorites} disabled={isLocked}>
                     Clear All
                   </Button>
                 </div>

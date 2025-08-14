@@ -2,14 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import {
-  Github,
-  ExternalLink,
-  CheckCircle,
-  Globe,
-  Shield,
-  Star,
-} from "lucide-react";
+import { Github, ExternalLink, CheckCircle, Globe, Shield, Star } from "lucide-react";
 
 export function GitHubIntegration() {
   const cultureOfHarmonyUrl =
@@ -38,8 +31,7 @@ export function GitHubIntegration() {
 
   const handleCreateGitHubRepo = () => {
     toast.info("GitHub Repository Setup", {
-      description:
-        '📝 Use Lovable\'s "Export to GitHub" to create your repository',
+      description: '📝 Use Lovable\'s "Export to GitHub" to create your repository',
       duration: 8000,
     });
 
@@ -66,9 +58,7 @@ export function GitHubIntegration() {
           <div className="flex items-center gap-3">
             <CheckCircle className="h-5 w-5 text-green-400" />
             <div>
-              <div className="font-semibold text-green-400">
-                Website Connected & Working
-              </div>
+              <div className="font-semibold text-green-400">Website Connected & Working</div>
               <div className="text-sm text-muted-foreground">
                 Culture of Harmony - Gaia's Exchanges Platform
               </div>
@@ -160,15 +150,12 @@ export function GitHubIntegration() {
         {/* Culture of Harmony Message */}
         <div className="p-4 rounded-lg bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/20">
           <div className="text-center space-y-2">
-            <h4 className="font-semibold text-green-400">
-              🎵 Culture of Harmony Message
-            </h4>
+            <h4 className="font-semibold text-green-400">🎵 Culture of Harmony Message</h4>
             <p className="text-sm text-muted-foreground">
               "Seeds Will Form Into Music" - Bringing Smiles to Every Soul
             </p>
             <p className="text-xs text-green-400 mt-2">
-              🌍 Building Global Unity - "Doesn't matter if you're Black or
-              White"
+              🌍 Building Global Unity - "Doesn't matter if you're Black or White"
             </p>
             <div className="flex items-center justify-center gap-4 pt-2 text-xs">
               <span className="text-green-400">✅ 100% Working Platform</span>

@@ -319,8 +319,7 @@ export function LiveAnimalNFTs() {
       const newFeeds: { [key: string]: string } = {};
       availableNFTs.forEach((nft) => {
         if (nft.liveFeed) {
-          newFeeds[nft.id] =
-            feedMessages[Math.floor(Math.random() * feedMessages.length)];
+          newFeeds[nft.id] = feedMessages[Math.floor(Math.random() * feedMessages.length)];
         }
       });
       setLiveFeeds(newFeeds);
@@ -349,7 +348,7 @@ export function LiveAnimalNFTs() {
       // Burn tokens for conservation
       const burnSuccess = await gaiaTokenService.burnTokens(
         nft.tokensForConservation,
-        `Conservation for ${nft.name}`,
+        `Conservation for ${nft.name}`
       );
 
       if (burnSuccess) {
@@ -371,7 +370,7 @@ export function LiveAnimalNFTs() {
     try {
       const burnSuccess = await gaiaTokenService.burnTokens(
         upgradeAmount,
-        `Investment upgrade for ${nft.name}`,
+        `Investment upgrade for ${nft.name}`
       );
 
       if (burnSuccess) {
@@ -398,7 +397,7 @@ export function LiveAnimalNFTs() {
     try {
       const burnSuccess = await gaiaTokenService.burnTokens(
         donationAmount,
-        `Relocation fund for ${nft.name}`,
+        `Relocation fund for ${nft.name}`
       );
 
       if (burnSuccess) {
@@ -425,45 +424,26 @@ export function LiveAnimalNFTs() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-pink-400">
-                {myNFTs.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Animals Adopted
-              </div>
+              <div className="text-2xl font-bold text-pink-400">{myNFTs.length}</div>
+              <div className="text-sm text-muted-foreground">Animals Adopted</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">
-                {totalConservationImpact}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                GAiA Burned for Conservation
-              </div>
+              <div className="text-2xl font-bold text-green-400">{totalConservationImpact}</div>
+              <div className="text-sm text-muted-foreground">GAiA Burned for Conservation</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                {availableNFTs.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Animals Available
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{availableNFTs.length}</div>
+              <div className="text-sm text-muted-foreground">Animals Available</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-400">100%</div>
-              <div className="text-sm text-muted-foreground">
-                Live Feed Coverage
-              </div>
+              <div className="text-sm text-muted-foreground">Live Feed Coverage</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-400">
-                {myNFTs
-                  .reduce((sum, nft) => sum + nft.investmentMultiplier, 0)
-                  .toFixed(1)}
-                x
+                {myNFTs.reduce((sum, nft) => sum + nft.investmentMultiplier, 0).toFixed(1)}x
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Investment Multiplier
-              </div>
+              <div className="text-sm text-muted-foreground">Total Investment Multiplier</div>
             </div>
           </div>
         </CardContent>
@@ -476,8 +456,8 @@ export function LiveAnimalNFTs() {
             🌍 Living Animal NFT Collection - All Species Available
           </CardTitle>
           <p className="text-muted-foreground">
-            Own real animals, upgrade your gaming power, and multiply your
-            investment through conservation impact
+            Own real animals, upgrade your gaming power, and multiply your investment through
+            conservation impact
           </p>
         </CardHeader>
         <CardContent>
@@ -486,9 +466,7 @@ export function LiveAnimalNFTs() {
               <Card
                 key={nft.id}
                 className={`bg-gradient-to-br ${getRarityColor(nft.rarity)}/20 border-2 hover:scale-105 transition-all duration-300 ${
-                  exploreMode === nft.id
-                    ? "ring-4 ring-cyan-400 animate-pulse"
-                    : ""
+                  exploreMode === nft.id ? "ring-4 ring-cyan-400 animate-pulse" : ""
                 }`}
               >
                 <CardContent className="p-3 space-y-3">
@@ -511,18 +489,14 @@ export function LiveAnimalNFTs() {
                       </div>
                     )}
                     <div className="absolute bottom-1 right-1">
-                      <Badge className="bg-green-600 text-xs">
-                        {nft.investmentMultiplier}x
-                      </Badge>
+                      <Badge className="bg-green-600 text-xs">{nft.investmentMultiplier}x</Badge>
                     </div>
                   </div>
 
                   {/* Animal Info */}
                   <div>
                     <h4 className="font-bold text-sm text-white">{nft.name}</h4>
-                    <p className="text-xs text-muted-foreground">
-                      {nft.species}
-                    </p>
+                    <p className="text-xs text-muted-foreground">{nft.species}</p>
                     <div className="flex items-center gap-1 text-xs text-blue-400">
                       <MapPin className="h-2 w-2" />
                       {nft.location}
@@ -531,9 +505,7 @@ export function LiveAnimalNFTs() {
 
                   {/* Game Upgrades */}
                   <div className="space-y-1">
-                    <div className="text-xs font-medium text-purple-400">
-                      Game Upgrades:
-                    </div>
+                    <div className="text-xs font-medium text-purple-400">Game Upgrades:</div>
                     <div className="flex flex-wrap gap-1">
                       {nft.gameUpgrades.slice(0, 2).map((upgrade, index) => (
                         <Badge key={index} className="bg-purple-600 text-xs">
@@ -547,9 +519,7 @@ export function LiveAnimalNFTs() {
                   <div className="space-y-1">
                     <div className="flex justify-between text-xs">
                       <span>Health:</span>
-                      <span className="text-green-400 font-bold">
-                        {nft.healthStatus}%
-                      </span>
+                      <span className="text-green-400 font-bold">{nft.healthStatus}%</span>
                     </div>
                     <Progress value={nft.healthStatus} className="h-1" />
                   </div>
@@ -558,9 +528,7 @@ export function LiveAnimalNFTs() {
                   <div className="space-y-1">
                     <div className="flex justify-between text-xs">
                       <span>Investment Multiplier:</span>
-                      <span className="text-yellow-400 font-bold">
-                        {nft.investmentMultiplier}x
-                      </span>
+                      <span className="text-yellow-400 font-bold">{nft.investmentMultiplier}x</span>
                     </div>
                     <div className="flex justify-between text-xs">
                       <span>Conservation Impact:</span>
@@ -576,12 +544,8 @@ export function LiveAnimalNFTs() {
                   {/* Price and Purchase */}
                   <div className="space-y-2 pt-1 border-t border-border/50">
                     <div className="text-center">
-                      <div className="text-lg font-bold text-green-400">
-                        {nft.price} GAiA
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        Adoption Price
-                      </div>
+                      <div className="text-lg font-bold text-green-400">{nft.price} GAiA</div>
+                      <div className="text-xs text-muted-foreground">Adoption Price</div>
                     </div>
                     <div className="flex gap-1">
                       <Button
@@ -613,9 +577,7 @@ export function LiveAnimalNFTs() {
       {myNFTs.length > 0 && (
         <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-pink-900/20">
           <CardHeader>
-            <CardTitle className="text-purple-400">
-              🏠 My Animal Sanctuary - Adopted NFTs
-            </CardTitle>
+            <CardTitle className="text-purple-400">🏠 My Animal Sanctuary - Adopted NFTs</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -623,29 +585,17 @@ export function LiveAnimalNFTs() {
                 <Card key={`owned-${index}`} className="border-green-500/30">
                   <CardContent className="p-3 text-center">
                     <div className="text-3xl mb-1">{nft.emoji}</div>
-                    <h4 className="font-bold text-green-400 text-sm">
-                      {nft.name}
-                    </h4>
-                    <p className="text-xs text-muted-foreground">
-                      {nft.species}
-                    </p>
+                    <h4 className="font-bold text-green-400 text-sm">{nft.name}</h4>
+                    <p className="text-xs text-muted-foreground">{nft.species}</p>
                     <Badge className="mt-1 bg-green-600 text-xs">
                       Investment: {nft.investmentMultiplier}x
                     </Badge>
                     <div className="mt-1 flex gap-1">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="flex-1 text-xs"
-                      >
+                      <Button size="sm" variant="outline" className="flex-1 text-xs">
                         <Camera className="h-2 w-2 mr-1" />
                         Visit
                       </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="flex-1 text-xs"
-                      >
+                      <Button size="sm" variant="outline" className="flex-1 text-xs">
                         <Sparkles className="h-2 w-2 mr-1" />
                         Play
                       </Button>
@@ -680,9 +630,9 @@ export function LiveAnimalNFTs() {
               </code>
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              Every Animal NFT purchase burns GAiA tokens for real conservation
-              and provides gaming upgrades with investment multipliers. Collect
-              all species to maximize your portfolio and save the planet!
+              Every Animal NFT purchase burns GAiA tokens for real conservation and provides gaming
+              upgrades with investment multipliers. Collect all species to maximize your portfolio
+              and save the planet!
             </p>
           </div>
         </CardContent>

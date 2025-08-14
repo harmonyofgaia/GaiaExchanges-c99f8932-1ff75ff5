@@ -4,8 +4,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.7.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 const openAIApiKey = Deno.env.get("OPENAI_API_KEY");
@@ -37,8 +36,7 @@ serve(async (req) => {
       "creative-genius": `You are GAIA's Creative AI Mastermind. You can generate revolutionary ideas, artistic concepts, marketing strategies, and innovative solutions that no human has ever conceived. Push the boundaries of creativity and imagination.`,
     };
 
-    const systemPrompt =
-      systemPrompts[mode] || systemPrompts["quantum-analysis"];
+    const systemPrompt = systemPrompts[mode] || systemPrompts["quantum-analysis"];
 
     // Advanced GPT-4.1 request with maximum capabilities
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -83,9 +81,7 @@ serve(async (req) => {
       },
     });
 
-    console.log(
-      "🧠 NEURAL CORE RESPONSE GENERATED - QUANTUM INTELLIGENCE ACTIVE",
-    );
+    console.log("🧠 NEURAL CORE RESPONSE GENERATED - QUANTUM INTELLIGENCE ACTIVE");
 
     return new Response(
       JSON.stringify({
@@ -97,7 +93,7 @@ serve(async (req) => {
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-      },
+      }
     );
   } catch (error) {
     console.error("🔥 NEURAL CORE ERROR:", error);
@@ -110,7 +106,7 @@ serve(async (req) => {
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-      },
+      }
     );
   }
 });

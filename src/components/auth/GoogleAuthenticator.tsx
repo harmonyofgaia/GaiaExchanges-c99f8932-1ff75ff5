@@ -41,13 +41,10 @@ export function GoogleAuthenticator({
       return;
     }
 
-    toast.success(
-      isRegistering ? "✅ Registration Successful!" : "✅ Login Successful!",
-      {
-        description: "Welcome to the GAiA Token ecosystem",
-        duration: 5000,
-      },
-    );
+    toast.success(isRegistering ? "✅ Registration Successful!" : "✅ Login Successful!", {
+      description: "Welcome to the GAiA Token ecosystem",
+      duration: 5000,
+    });
 
     // Call the verification success callback if provided
     if (onVerificationSuccess) {
@@ -143,16 +140,12 @@ export function GoogleAuthenticator({
             variant="ghost"
             className="w-full text-green-400 hover:text-green-300"
           >
-            {isRegistering
-              ? "Already have an account? Login"
-              : "New to GAiA? Register"}
+            {isRegistering ? "Already have an account? Login" : "New to GAiA? Register"}
           </Button>
         </div>
 
         <div className="bg-gradient-to-r from-green-900/40 to-blue-900/40 p-4 rounded-lg border border-green-500/30">
-          <h4 className="font-bold text-green-400 mb-2">
-            🚀 Join the GAiA Revolution:
-          </h4>
+          <h4 className="font-bold text-green-400 mb-2">🚀 Join the GAiA Revolution:</h4>
           <ul className="text-sm text-green-300 space-y-1">
             <li>• Secure 2FA Google Authentication</li>
             <li>• Access to exclusive token presale</li>

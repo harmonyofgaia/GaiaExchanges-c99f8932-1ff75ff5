@@ -19,54 +19,36 @@ export const CommunityStats = () => {
           <div className="relative">
             <div className="absolute inset-0 bg-green-400/10 rounded-lg blur-sm" />
             <div className="relative p-4">
-              <div className="text-5xl font-bold text-green-400 animate-pulse">
-                87K+
-              </div>
-              <div className="text-muted-foreground text-lg">
-                Dragon Guardians
-              </div>
+              <div className="text-5xl font-bold text-green-400 animate-pulse">87K+</div>
+              <div className="text-muted-foreground text-lg">Dragon Guardians</div>
             </div>
           </div>
           <div className="relative">
             <div className="absolute inset-0 bg-blue-400/10 rounded-lg blur-sm" />
             <div className="relative p-4">
-              <div className="text-5xl font-bold text-blue-400 animate-bounce">
-                ∞
-              </div>
-              <div className="text-muted-foreground text-lg">
-                Security Level
-              </div>
+              <div className="text-5xl font-bold text-blue-400 animate-bounce">∞</div>
+              <div className="text-muted-foreground text-lg">Security Level</div>
             </div>
           </div>
           <div className="relative">
             <div className="absolute inset-0 bg-purple-400/10 rounded-lg blur-sm" />
             <div className="relative p-4">
-              <div className="text-5xl font-bold text-purple-400 animate-pulse">
-                247
-              </div>
+              <div className="text-5xl font-bold text-purple-400 animate-pulse">247</div>
               <div className="text-muted-foreground text-lg">Countries</div>
             </div>
           </div>
           <div className="relative">
             <div className="absolute inset-0 bg-orange-400/10 rounded-lg blur-sm" />
             <div className="relative p-4">
-              <div className="text-5xl font-bold text-orange-400 animate-bounce">
-                24/7
-              </div>
-              <div className="text-muted-foreground text-lg">
-                Dragon Protection
-              </div>
+              <div className="text-5xl font-bold text-orange-400 animate-bounce">24/7</div>
+              <div className="text-muted-foreground text-lg">Dragon Protection</div>
             </div>
           </div>
           <div className="relative">
             <div className="absolute inset-0 bg-red-400/10 rounded-lg blur-sm" />
             <div className="relative p-4">
-              <div className="text-5xl font-bold text-red-400 animate-pulse">
-                ETERNAL
-              </div>
-              <div className="text-muted-foreground text-lg">
-                Dragon Evolution
-              </div>
+              <div className="text-5xl font-bold text-red-400 animate-pulse">ETERNAL</div>
+              <div className="text-muted-foreground text-lg">Dragon Evolution</div>
             </div>
           </div>
         </div>

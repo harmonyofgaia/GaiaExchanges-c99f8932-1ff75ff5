@@ -1,28 +1,11 @@
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import {
-  Bike,
-  MapPin,
-  Leaf,
-  Trophy,
-  Users,
-  Zap,
-  Globe,
-  Star,
-  Target,
-  Award,
-} from "lucide-react";
+import { Bike, MapPin, Leaf, Trophy, Users, Zap, Globe, Star, Target, Award } from "lucide-react";
 
 interface BikeStation {
   id: string;
@@ -99,12 +82,7 @@ export default function GaiaBikeEcosystem() {
     carbonSaved: 78.9,
     tokensEarned: 1247,
     level: 7,
-    achievements: [
-      "Eco Warrior",
-      "Green Commuter",
-      "Energy Producer",
-      "Carbon Saver",
-    ],
+    achievements: ["Eco Warrior", "Green Commuter", "Energy Producer", "Carbon Saver"],
   };
 
   const getStatusColor = (status: string) => {
@@ -148,31 +126,19 @@ export default function GaiaBikeEcosystem() {
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-4 bg-gray-800/50 border border-green-500/20">
-            <TabsTrigger
-              value="overview"
-              className="data-[state=active]:bg-green-600/20"
-            >
+            <TabsTrigger value="overview" className="data-[state=active]:bg-green-600/20">
               <Globe className="w-4 h-4 mr-2" />
               Overview
             </TabsTrigger>
-            <TabsTrigger
-              value="stations"
-              className="data-[state=active]:bg-blue-600/20"
-            >
+            <TabsTrigger value="stations" className="data-[state=active]:bg-blue-600/20">
               <MapPin className="w-4 h-4 mr-2" />
               Stations
             </TabsTrigger>
-            <TabsTrigger
-              value="profile"
-              className="data-[state=active]:bg-purple-600/20"
-            >
+            <TabsTrigger value="profile" className="data-[state=active]:bg-purple-600/20">
               <Users className="w-4 h-4 mr-2" />
               My Profile
             </TabsTrigger>
-            <TabsTrigger
-              value="leaderboard"
-              className="data-[state=active]:bg-yellow-600/20"
-            >
+            <TabsTrigger value="leaderboard" className="data-[state=active]:bg-yellow-600/20">
               <Trophy className="w-4 h-4 mr-2" />
               Leaderboard
             </TabsTrigger>
@@ -188,9 +154,7 @@ export default function GaiaBikeEcosystem() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-white mb-2">
-                    {bikeStations.length}
-                  </div>
+                  <div className="text-3xl font-bold text-white mb-2">{bikeStations.length}</div>
                   <p className="text-green-300 text-sm">Active network nodes</p>
                 </CardContent>
               </Card>
@@ -203,9 +167,7 @@ export default function GaiaBikeEcosystem() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-white mb-2">
-                    2,228 kWh
-                  </div>
+                  <div className="text-3xl font-bold text-white mb-2">2,228 kWh</div>
                   <p className="text-blue-300 text-sm">Clean energy produced</p>
                 </CardContent>
               </Card>
@@ -218,12 +180,8 @@ export default function GaiaBikeEcosystem() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-white mb-2">
-                    871 kg
-                  </div>
-                  <p className="text-purple-300 text-sm">
-                    CO₂ emissions prevented
-                  </p>
+                  <div className="text-3xl font-bold text-white mb-2">871 kg</div>
+                  <p className="text-purple-300 text-sm">CO₂ emissions prevented</p>
                 </CardContent>
               </Card>
 
@@ -235,9 +193,7 @@ export default function GaiaBikeEcosystem() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-3xl font-bold text-white mb-2">
-                    1,847
-                  </div>
+                  <div className="text-3xl font-bold text-white mb-2">1,847</div>
                   <p className="text-yellow-300 text-sm">Community members</p>
                 </CardContent>
               </Card>
@@ -262,19 +218,12 @@ export default function GaiaBikeEcosystem() {
                       onClick={() => setSelectedStation(station.id)}
                     >
                       <div className="flex justify-between items-start mb-3">
-                        <h3 className="font-semibold text-white">
-                          {station.name}
-                        </h3>
-                        <Badge
-                          variant={getStatusBadgeVariant(station.status)}
-                          className="text-xs"
-                        >
+                        <h3 className="font-semibold text-white">{station.name}</h3>
+                        <Badge variant={getStatusBadgeVariant(station.status)} className="text-xs">
                           {station.status}
                         </Badge>
                       </div>
-                      <p className="text-gray-400 text-sm mb-3">
-                        {station.location}
-                      </p>
+                      <p className="text-gray-400 text-sm mb-3">{station.location}</p>
 
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm">
@@ -284,9 +233,7 @@ export default function GaiaBikeEcosystem() {
                           </span>
                         </div>
                         <Progress
-                          value={
-                            (station.availableBikes / station.totalSlots) * 100
-                          }
+                          value={(station.availableBikes / station.totalSlots) * 100}
                           className="h-2 bg-gray-700"
                         />
 
@@ -299,9 +246,7 @@ export default function GaiaBikeEcosystem() {
                           </div>
                           <div>
                             <span className="text-gray-400">Carbon:</span>
-                            <span className="text-green-400 ml-1">
-                              {station.carbonOffset} kg
-                            </span>
+                            <span className="text-green-400 ml-1">{station.carbonOffset} kg</span>
                           </div>
                         </div>
                       </div>
@@ -329,21 +274,14 @@ export default function GaiaBikeEcosystem() {
                     >
                       <div className="flex justify-between items-start mb-4">
                         <div>
-                          <h3 className="text-xl font-semibold text-white mb-1">
-                            {station.name}
-                          </h3>
+                          <h3 className="text-xl font-semibold text-white mb-1">{station.name}</h3>
                           <p className="text-gray-400">{station.location}</p>
                         </div>
                         <div className="text-right">
-                          <Badge
-                            variant={getStatusBadgeVariant(station.status)}
-                            className="mb-2"
-                          >
+                          <Badge variant={getStatusBadgeVariant(station.status)} className="mb-2">
                             {station.status.toUpperCase()}
                           </Badge>
-                          <p
-                            className={`text-sm font-medium ${getStatusColor(station.status)}`}
-                          >
+                          <p className={`text-sm font-medium ${getStatusColor(station.status)}`}>
                             {station.status === "active"
                               ? "Operational"
                               : station.status === "maintenance"
@@ -358,33 +296,25 @@ export default function GaiaBikeEcosystem() {
                           <div className="text-2xl font-bold text-green-400">
                             {station.availableBikes}
                           </div>
-                          <div className="text-xs text-green-300">
-                            Available Bikes
-                          </div>
+                          <div className="text-xs text-green-300">Available Bikes</div>
                         </div>
                         <div className="text-center p-3 bg-blue-900/20 rounded-lg border border-blue-500/20">
                           <div className="text-2xl font-bold text-blue-400">
                             {station.totalSlots}
                           </div>
-                          <div className="text-xs text-blue-300">
-                            Total Slots
-                          </div>
+                          <div className="text-xs text-blue-300">Total Slots</div>
                         </div>
                         <div className="text-center p-3 bg-yellow-900/20 rounded-lg border border-yellow-500/20">
                           <div className="text-2xl font-bold text-yellow-400">
                             {station.energyGenerated}
                           </div>
-                          <div className="text-xs text-yellow-300">
-                            kWh Generated
-                          </div>
+                          <div className="text-xs text-yellow-300">kWh Generated</div>
                         </div>
                         <div className="text-center p-3 bg-purple-900/20 rounded-lg border border-purple-500/20">
                           <div className="text-2xl font-bold text-purple-400">
                             {station.carbonOffset}
                           </div>
-                          <div className="text-xs text-purple-300">
-                            kg CO₂ Offset
-                          </div>
+                          <div className="text-xs text-purple-300">kg CO₂ Offset</div>
                         </div>
                       </div>
 
@@ -433,9 +363,7 @@ export default function GaiaBikeEcosystem() {
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
                       <span className="text-gray-300">Total Rides</span>
-                      <span className="text-white font-semibold">
-                        {userStats.totalRides}
-                      </span>
+                      <span className="text-white font-semibold">{userStats.totalRides}</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-gray-300">Distance Traveled</span>
@@ -480,9 +408,7 @@ export default function GaiaBikeEcosystem() {
                         className="p-3 rounded-lg bg-gray-800/30 border border-gray-600/30 text-center"
                       >
                         <Star className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
-                        <p className="text-sm text-white font-medium">
-                          {achievement}
-                        </p>
+                        <p className="text-sm text-white font-medium">{achievement}</p>
                       </div>
                     ))}
                   </div>
@@ -560,21 +486,13 @@ export default function GaiaBikeEcosystem() {
                           {rider.rank}
                         </div>
                         <div>
-                          <h3 className="text-white font-semibold">
-                            {rider.name}
-                          </h3>
-                          <p className="text-gray-400 text-sm">
-                            Level {rider.level}
-                          </p>
+                          <h3 className="text-white font-semibold">{rider.name}</h3>
+                          <p className="text-gray-400 text-sm">Level {rider.level}</p>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-blue-400 font-semibold">
-                          {rider.distance} km
-                        </div>
-                        <div className="text-purple-400 text-sm">
-                          {rider.tokens} GAT
-                        </div>
+                        <div className="text-blue-400 font-semibold">{rider.distance} km</div>
+                        <div className="text-purple-400 text-sm">{rider.tokens} GAT</div>
                       </div>
                     </div>
                   ))}

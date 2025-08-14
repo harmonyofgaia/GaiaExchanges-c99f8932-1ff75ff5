@@ -46,12 +46,8 @@ interface BlockchainBlock {
 }
 
 export function LiveBlockchainViewer() {
-  const [currentBlock, setCurrentBlock] = useState<BlockchainBlock | null>(
-    null,
-  );
-  const [recentTransactions, setRecentTransactions] = useState<
-    BlockchainTransaction[]
-  >([]);
+  const [currentBlock, setCurrentBlock] = useState<BlockchainBlock | null>(null);
+  const [recentTransactions, setRecentTransactions] = useState<BlockchainTransaction[]>([]);
   const [networkStats, setNetworkStats] = useState({
     totalBlocks: 125849,
     totalTransactions: 15672843,
@@ -85,24 +81,21 @@ export function LiveBlockchainViewer() {
       status: Math.random() > 0.8 ? "pending" : "confirmed",
       blockNumber: networkStats.totalBlocks + Math.floor(Math.random() * 3),
       gasFee: `${(Math.random() * 0.01 + 0.001).toFixed(6)} GAIA`,
-      transactionType:
-        transactionTypes[Math.floor(Math.random() * transactionTypes.length)],
+      transactionType: transactionTypes[Math.floor(Math.random() * transactionTypes.length)],
     };
   };
 
   const generateBlock = (): BlockchainBlock => {
     const transactions = Array.from(
       { length: Math.floor(Math.random() * 10) + 1 },
-      generateTransaction,
+      generateTransaction
     );
     const blockNumber = networkStats.totalBlocks + 1;
 
     return {
       id: blockNumber,
       hash: `ARK_0x${Math.random().toString(16).substring(2, 64)}`,
-      previousHash:
-        currentBlock?.hash ||
-        `ARK_0x${Math.random().toString(16).substring(2, 64)}`,
+      previousHash: currentBlock?.hash || `ARK_0x${Math.random().toString(16).substring(2, 64)}`,
       merkleRoot: `0x${Math.random().toString(16).substring(2, 64)}`,
       timestamp: new Date().toISOString(),
       nonce: Math.floor(Math.random() * 1000000),
@@ -132,8 +125,7 @@ export function LiveBlockchainViewer() {
         setNetworkStats((prev) => ({
           ...prev,
           totalBlocks: prev.totalBlocks + 1,
-          totalTransactions:
-            prev.totalTransactions + newBlock.transactions.length,
+          totalTransactions: prev.totalTransactions + newBlock.transactions.length,
         }));
 
         toast.success("⚡ New Block Mined!", {
@@ -178,8 +170,7 @@ export function LiveBlockchainViewer() {
     URL.revokeObjectURL(url);
 
     toast.success("📊 Secure Live Report Downloaded!", {
-      description:
-        "Real-time blockchain data exported with quantum encryption.",
+      description: "Real-time blockchain data exported with quantum encryption.",
       duration: 4000,
     });
   };
@@ -225,15 +216,11 @@ export function LiveBlockchainViewer() {
                   ⚡ ARCHITEK NETWORK LIVE BLOCKCHAIN ⚡
                 </h1>
                 <p className="text-lg text-green-300">
-                  Real-Time Private Blockchain • Quantum Secured • Admin Only
-                  Access
+                  Real-Time Private Blockchain • Quantum Secured • Admin Only Access
                 </p>
               </div>
             </div>
-            <Button
-              onClick={downloadSecureReport}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
+            <Button onClick={downloadSecureReport} className="bg-blue-600 hover:bg-blue-700">
               <Download className="h-5 w-5 mr-2" />
               Download Live Report
             </Button>
@@ -266,9 +253,7 @@ export function LiveBlockchainViewer() {
               <div className="text-xs text-yellow-300">Block Time</div>
             </div>
             <div className="text-center p-3 bg-cyan-500/10 rounded-lg border border-cyan-500/20">
-              <div className="text-xl font-bold text-cyan-400">
-                {networkStats.totalSupply}
-              </div>
+              <div className="text-xl font-bold text-cyan-400">{networkStats.totalSupply}</div>
               <div className="text-xs text-cyan-300">Total Supply</div>
             </div>
             <div className="text-center p-3 bg-pink-500/10 rounded-lg border border-pink-500/20">
@@ -278,15 +263,11 @@ export function LiveBlockchainViewer() {
               <div className="text-xs text-pink-300">Circulating</div>
             </div>
             <div className="text-center p-3 bg-orange-500/10 rounded-lg border border-orange-500/20">
-              <div className="text-xl font-bold text-orange-400">
-                {networkStats.marketCap}
-              </div>
+              <div className="text-xl font-bold text-orange-400">{networkStats.marketCap}</div>
               <div className="text-xs text-orange-300">Market Cap</div>
             </div>
             <div className="text-center p-3 bg-red-500/10 rounded-lg border border-red-500/20">
-              <div className="text-xl font-bold text-red-400">
-                {networkStats.networkUptime}
-              </div>
+              <div className="text-xl font-bold text-red-400">{networkStats.networkUptime}</div>
               <div className="text-xs text-red-300">Uptime</div>
             </div>
           </div>
@@ -308,9 +289,7 @@ export function LiveBlockchainViewer() {
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <div className="text-muted-foreground">Block Number:</div>
-                    <div className="font-bold text-blue-400">
-                      #{currentBlock.id}
-                    </div>
+                    <div className="font-bold text-blue-400">#{currentBlock.id}</div>
                   </div>
                   <div>
                     <div className="text-muted-foreground">Timestamp:</div>
@@ -326,9 +305,7 @@ export function LiveBlockchainViewer() {
                   </div>
                   <div>
                     <div className="text-muted-foreground">Block Reward:</div>
-                    <div className="font-bold text-yellow-400">
-                      {currentBlock.blockReward}
-                    </div>
+                    <div className="font-bold text-yellow-400">{currentBlock.blockReward}</div>
                   </div>
                   <div className="col-span-2">
                     <div className="text-muted-foreground">Block Hash:</div>
@@ -338,9 +315,7 @@ export function LiveBlockchainViewer() {
                   </div>
                   <div className="col-span-2">
                     <div className="text-muted-foreground">Miner:</div>
-                    <div className="font-mono text-xs text-green-400">
-                      {currentBlock.miner}
-                    </div>
+                    <div className="font-mono text-xs text-green-400">{currentBlock.miner}</div>
                   </div>
                 </div>
 
@@ -353,17 +328,13 @@ export function LiveBlockchainViewer() {
                   <div className="text-xs text-muted-foreground">
                     {currentBlock.gasUsed.toLocaleString()} /{" "}
                     {currentBlock.gasLimit.toLocaleString()} (
-                    {Math.round(
-                      (currentBlock.gasUsed / currentBlock.gasLimit) * 100,
-                    )}
+                    {Math.round((currentBlock.gasUsed / currentBlock.gasLimit) * 100)}
                     %)
                   </div>
                 </div>
               </div>
             ) : (
-              <div className="text-center text-muted-foreground">
-                Waiting for next block...
-              </div>
+              <div className="text-center text-muted-foreground">Waiting for next block...</div>
             )}
           </CardContent>
         </Card>
@@ -379,10 +350,7 @@ export function LiveBlockchainViewer() {
           <CardContent>
             <div className="space-y-3 max-h-96 overflow-y-auto">
               {recentTransactions.map((tx) => (
-                <div
-                  key={tx.id}
-                  className="p-3 rounded-lg bg-muted/20 border border-border/30"
-                >
+                <div key={tx.id} className="p-3 rounded-lg bg-muted/20 border border-border/30">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <Badge
@@ -390,9 +358,7 @@ export function LiveBlockchainViewer() {
                       >
                         {tx.transactionType.toUpperCase()}
                       </Badge>
-                      <Badge
-                        className={`${getStatusColor(tx.status)} text-white text-xs`}
-                      >
+                      <Badge className={`${getStatusColor(tx.status)} text-white text-xs`}>
                         {tx.status.toUpperCase()}
                       </Badge>
                     </div>
@@ -404,9 +370,7 @@ export function LiveBlockchainViewer() {
                   <div className="text-sm space-y-1">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Amount:</span>
-                      <span className="font-bold text-green-400">
-                        {tx.amount}
-                      </span>
+                      <span className="font-bold text-green-400">{tx.amount}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Fee:</span>
@@ -414,9 +378,7 @@ export function LiveBlockchainViewer() {
                     </div>
                     <div>
                       <div className="text-muted-foreground">From:</div>
-                      <div className="font-mono text-xs break-all">
-                        {tx.from}
-                      </div>
+                      <div className="font-mono text-xs break-all">{tx.from}</div>
                     </div>
                     <div>
                       <div className="text-muted-foreground">To:</div>
@@ -473,11 +435,10 @@ export function LiveBlockchainViewer() {
               🔒 ARCHITEK NETWORK - ETERNAL BLOCKCHAIN SUPREMACY 🔒
             </h3>
             <p className="text-center text-red-300 text-sm">
-              This live blockchain represents the pinnacle of decentralized
-              technology. Every transaction is quantum-secured, every block is
-              eternally immutable, and every threat is preemptively neutralized.
-              ARCHITEK NETWORK will forever remain the most powerful and secure
-              blockchain in existence.
+              This live blockchain represents the pinnacle of decentralized technology. Every
+              transaction is quantum-secured, every block is eternally immutable, and every threat
+              is preemptively neutralized. ARCHITEK NETWORK will forever remain the most powerful
+              and secure blockchain in existence.
             </p>
           </div>
         </CardContent>

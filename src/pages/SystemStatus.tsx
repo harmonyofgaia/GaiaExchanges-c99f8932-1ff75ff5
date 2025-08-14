@@ -30,36 +30,28 @@ const SystemStatus = () => {
               <div className="text-center p-6 bg-green-900/30 rounded-lg border border-green-500/30">
                 <Shield className="h-12 w-12 mx-auto text-green-400 animate-pulse mb-4" />
                 <div className="text-2xl font-bold text-green-400">ACTIVE</div>
-                <div className="text-sm text-muted-foreground">
-                  Quantum Defense
-                </div>
+                <div className="text-sm text-muted-foreground">Quantum Defense</div>
                 <Badge className="bg-green-600 mt-2">100% Operational</Badge>
               </div>
 
               <div className="text-center p-6 bg-blue-900/30 rounded-lg border border-blue-500/30">
                 <Zap className="h-12 w-12 mx-auto text-blue-400 animate-pulse mb-4" />
                 <div className="text-2xl font-bold text-blue-400">SUPREME</div>
-                <div className="text-sm text-muted-foreground">
-                  Dragon Power
-                </div>
+                <div className="text-sm text-muted-foreground">Dragon Power</div>
                 <Badge className="bg-blue-600 mt-2">Immortal Status</Badge>
               </div>
 
               <div className="text-center p-6 bg-purple-900/30 rounded-lg border border-purple-500/30">
                 <Globe className="h-12 w-12 mx-auto text-purple-400 animate-pulse mb-4" />
                 <div className="text-2xl font-bold text-purple-400">GLOBAL</div>
-                <div className="text-sm text-muted-foreground">
-                  Network Coverage
-                </div>
+                <div className="text-sm text-muted-foreground">Network Coverage</div>
                 <Badge className="bg-purple-600 mt-2">Worldwide Active</Badge>
               </div>
 
               <div className="text-center p-6 bg-yellow-900/30 rounded-lg border border-yellow-500/30">
                 <Activity className="h-12 w-12 mx-auto text-yellow-400 animate-pulse mb-4" />
                 <div className="text-2xl font-bold text-yellow-400">999M+</div>
-                <div className="text-sm text-muted-foreground">
-                  Active Processes
-                </div>
+                <div className="text-sm text-muted-foreground">Active Processes</div>
                 <Badge className="bg-yellow-600 mt-2">Peak Performance</Badge>
               </div>
             </div>

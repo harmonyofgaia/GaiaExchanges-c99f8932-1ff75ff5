@@ -5,16 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Vault,
-  Shield,
-  Lock,
-  Zap,
-  Eye,
-  Users,
-  DollarSign,
-  Key,
-} from "lucide-react";
+import { Vault, Shield, Lock, Zap, Eye, Users, DollarSign, Key } from "lucide-react";
 import { toast } from "sonner";
 
 export function SecureVaultSystem() {
@@ -45,8 +36,7 @@ export function SecureVaultSystem() {
   const handleVaultAccess = () => {
     if (vaultPassword === "harmonyquantumvaultaccess") {
       toast.success("🔓 COMMUNITY VAULT ACCESS GRANTED!", {
-        description:
-          "Welcome to the Harmony Quantum Vault - Fees can now be directed here",
+        description: "Welcome to the Harmony Quantum Vault - Fees can now be directed here",
         duration: 5000,
       });
       setShowVaultAccess(false);
@@ -70,8 +60,8 @@ export function SecureVaultSystem() {
             🏦 HARMONY OF GAIA - SECURE UNDERGROUND VAULT
           </CardTitle>
           <p className="text-green-300">
-            {vaultDepth} meters underground • Quantum protected • Full
-            transparency • Global community vault
+            {vaultDepth} meters underground • Quantum protected • Full transparency • Global
+            community vault
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -98,12 +88,8 @@ export function SecureVaultSystem() {
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-64 h-32 bg-gradient-to-br from-green-800/40 to-blue-800/40 rounded-lg border-2 border-green-500/50 flex items-center justify-center">
               <div className="text-center">
                 <Vault className="h-12 w-12 text-green-400 mx-auto mb-2 animate-pulse" />
-                <div className="text-lg font-bold text-green-400">
-                  SECURE VAULT
-                </div>
-                <div className="text-sm text-green-300">
-                  ${vaultBalance.toLocaleString()}
-                </div>
+                <div className="text-lg font-bold text-green-400">SECURE VAULT</div>
+                <div className="text-sm text-green-300">${vaultBalance.toLocaleString()}</div>
                 <div className="text-xs text-blue-400">Quantum Encrypted</div>
               </div>
             </div>
@@ -136,9 +122,7 @@ export function SecureVaultSystem() {
             <Card className="border-blue-500/20 bg-blue-900/20">
               <CardContent className="p-4 text-center">
                 <Users className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-blue-400">
-                  {activeInvestors}
-                </div>
+                <div className="text-2xl font-bold text-blue-400">{activeInvestors}</div>
                 <div className="text-sm text-blue-300">Active Investors</div>
               </CardContent>
             </Card>
@@ -157,9 +141,7 @@ export function SecureVaultSystem() {
             <Card className="border-orange-500/20 bg-orange-900/20">
               <CardContent className="p-4 text-center">
                 <Vault className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-orange-400">
-                  {vaultDepth}m
-                </div>
+                <div className="text-2xl font-bold text-orange-400">{vaultDepth}m</div>
                 <div className="text-sm text-orange-300">Underground</div>
               </CardContent>
             </Card>
@@ -171,9 +153,7 @@ export function SecureVaultSystem() {
               <CardContent className="p-4 space-y-4">
                 <div className="text-center">
                   <Key className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
-                  <h3 className="text-lg font-bold text-yellow-400">
-                    Community Vault Access
-                  </h3>
+                  <h3 className="text-lg font-bold text-yellow-400">Community Vault Access</h3>
                   <p className="text-sm text-yellow-300">
                     Enter vault password to direct fees to community vault
                   </p>
@@ -217,10 +197,7 @@ export function SecureVaultSystem() {
 
           {/* Deposit Controls */}
           <div className="flex gap-4 justify-center">
-            <Button
-              onClick={depositToVault}
-              className="bg-green-600 hover:bg-green-700"
-            >
+            <Button onClick={depositToVault} className="bg-green-600 hover:bg-green-700">
               <Lock className="h-4 w-4 mr-2" />
               SECURE DEPOSIT
             </Button>
@@ -250,13 +227,12 @@ export function SecureVaultSystem() {
             🛡️ MAXIMUM SECURITY - UNDERGROUND VAULT 🛡️
           </h4>
           <p className="text-sm text-muted-foreground mb-2">
-            Your investments are secured 2847 meters underground with quantum
-            encryption. Full transparency with live monitoring and instant
-            access when needed.
+            Your investments are secured 2847 meters underground with quantum encryption. Full
+            transparency with live monitoring and instant access when needed.
           </p>
           <p className="text-xs text-yellow-300">
-            🔐 Community Vault Password: Users can direct their fees to the
-            community vault for global pricing benefits
+            🔐 Community Vault Password: Users can direct their fees to the community vault for
+            global pricing benefits
           </p>
         </CardContent>
       </Card>

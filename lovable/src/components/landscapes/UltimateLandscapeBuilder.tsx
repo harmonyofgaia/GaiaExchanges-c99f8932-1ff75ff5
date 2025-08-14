@@ -2,28 +2,14 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Mountain,
-  Waves,
-  TreePine,
-  Building,
-  Globe,
-  Sparkles,
-  Cpu,
-  Crown,
-} from "lucide-react";
+import { Mountain, Waves, TreePine, Building, Globe, Sparkles, Cpu, Crown } from "lucide-react";
 import { toast } from "sonner";
 
 export function UltimateLandscapeBuilder() {
   const [builderState, setBuilderState] = useState({
     isActive: false,
     currentProject: "New Galaxy",
-    landscapes: [
-      "Underwater Paradise",
-      "Jungle Kingdom",
-      "Desert Empire",
-      "Sky Islands",
-    ],
+    landscapes: ["Underwater Paradise", "Jungle Kingdom", "Desert Empire", "Sky Islands"],
     tools: 247,
     planets: 15,
     universes: 3,
@@ -60,10 +46,7 @@ export function UltimateLandscapeBuilder() {
           aiGenerations: prev.aiGenerations + Math.floor(Math.random() * 50),
           landscapes:
             prev.landscapes.length < 20
-              ? [
-                  ...prev.landscapes,
-                  `AI Generated World ${prev.landscapes.length + 1}`,
-                ]
+              ? [...prev.landscapes, `AI Generated World ${prev.landscapes.length + 1}`]
               : prev.landscapes,
         }));
 
@@ -113,33 +96,25 @@ export function UltimateLandscapeBuilder() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center p-4 bg-green-900/50 rounded-lg border-2 border-green-500/50">
             <Sparkles className="h-8 w-8 text-green-400 mx-auto mb-2 animate-spin" />
-            <div className="text-2xl font-black text-green-400">
-              {builderState.tools}
-            </div>
+            <div className="text-2xl font-black text-green-400">{builderState.tools}</div>
             <div className="text-sm text-green-300">AI Tools</div>
           </div>
 
           <div className="text-center p-4 bg-blue-900/50 rounded-lg border-2 border-blue-500/50">
             <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2 animate-pulse" />
-            <div className="text-2xl font-black text-blue-400">
-              {builderState.planets}
-            </div>
+            <div className="text-2xl font-black text-blue-400">{builderState.planets}</div>
             <div className="text-sm text-blue-300">Planets Created</div>
           </div>
 
           <div className="text-center p-4 bg-purple-900/50 rounded-lg border-2 border-purple-500/50">
             <Crown className="h-8 w-8 text-purple-400 mx-auto mb-2 animate-bounce" />
-            <div className="text-2xl font-black text-purple-400">
-              {builderState.universes}
-            </div>
+            <div className="text-2xl font-black text-purple-400">{builderState.universes}</div>
             <div className="text-sm text-purple-300">Universes</div>
           </div>
 
           <div className="text-center p-4 bg-orange-900/50 rounded-lg border-2 border-orange-500/50">
             <Cpu className="h-8 w-8 text-orange-400 mx-auto mb-2 animate-pulse" />
-            <div className="text-2xl font-black text-orange-400">
-              {builderState.aiGenerations}
-            </div>
+            <div className="text-2xl font-black text-orange-400">{builderState.aiGenerations}</div>
             <div className="text-sm text-orange-300">AI Generations</div>
           </div>
         </div>
@@ -163,9 +138,7 @@ export function UltimateLandscapeBuilder() {
                   }`}
                 >
                   <Icon className="h-8 w-8" />
-                  <span className="text-sm font-bold text-center">
-                    {biome.name}
-                  </span>
+                  <span className="text-sm font-bold text-center">{biome.name}</span>
                 </Button>
               );
             })}
@@ -185,8 +158,7 @@ export function UltimateLandscapeBuilder() {
                   Current Project: {builderState.currentProject}
                 </div>
                 <div className="text-lg text-blue-300">
-                  Selected Biome:{" "}
-                  {biomes.find((b) => b.id === selectedBiome)?.name}
+                  Selected Biome: {biomes.find((b) => b.id === selectedBiome)?.name}
                 </div>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>

@@ -165,8 +165,7 @@ const AnimalNFTCommunity = () => {
     {
       id: 3,
       title: "Wild Fruit Tree Corridors",
-      description:
-        "Plant food-bearing trees to create wildlife corridors and feeding stations",
+      description: "Plant food-bearing trees to create wildlife corridors and feeding stations",
       targetAmount: 75000,
       currentAmount: 45620,
       progress: 61,
@@ -216,43 +215,28 @@ const AnimalNFTCommunity = () => {
           ...animal,
           energyLevel: Math.max(
             60,
-            Math.min(
-              100,
-              animal.energyLevel + Math.floor(Math.random() * 6 - 3),
-            ),
+            Math.min(100, animal.energyLevel + Math.floor(Math.random() * 6 - 3))
           ),
           walletBalance: animal.walletBalance + Math.random() * 50,
           emotions: {
             happiness: Math.max(
               60,
-              Math.min(
-                100,
-                animal.emotions.happiness + Math.floor(Math.random() * 6 - 3),
-              ),
+              Math.min(100, animal.emotions.happiness + Math.floor(Math.random() * 6 - 3))
             ),
             trust: Math.max(
               60,
-              Math.min(
-                100,
-                animal.emotions.trust + Math.floor(Math.random() * 4 - 2),
-              ),
+              Math.min(100, animal.emotions.trust + Math.floor(Math.random() * 4 - 2))
             ),
             excitement: Math.max(
               60,
-              Math.min(
-                100,
-                animal.emotions.excitement + Math.floor(Math.random() * 8 - 4),
-              ),
+              Math.min(100, animal.emotions.excitement + Math.floor(Math.random() * 8 - 4))
             ),
             calmness: Math.max(
               60,
-              Math.min(
-                100,
-                animal.emotions.calmness + Math.floor(Math.random() * 4 - 2),
-              ),
+              Math.min(100, animal.emotions.calmness + Math.floor(Math.random() * 4 - 2))
             ),
           },
-        })),
+        }))
       );
 
       setGlobalStats((prev) => ({
@@ -276,8 +260,8 @@ const AnimalNFTCommunity = () => {
               totalInvested: animal.totalInvested + amount,
               investors: animal.investors + 1,
             }
-          : animal,
-      ),
+          : animal
+      )
     );
 
     toast.success("🦅 Investment Successful!", {
@@ -338,9 +322,7 @@ const AnimalNFTCommunity = () => {
               <div className="text-2xl font-bold text-green-400">
                 {globalStats.totalAnimalsRescued.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Animals Rescued
-              </div>
+              <div className="text-xs text-muted-foreground">Animals Rescued</div>
             </CardContent>
           </Card>
 
@@ -350,9 +332,7 @@ const AnimalNFTCommunity = () => {
               <div className="text-2xl font-bold text-blue-400">
                 {globalStats.totalInvestors.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Global Investors
-              </div>
+              <div className="text-xs text-muted-foreground">Global Investors</div>
             </CardContent>
           </Card>
 
@@ -362,9 +342,7 @@ const AnimalNFTCommunity = () => {
               <div className="text-2xl font-bold text-yellow-400">
                 ${(globalStats.totalInvested / 1000000).toFixed(1)}M
               </div>
-              <div className="text-xs text-muted-foreground">
-                Total Invested
-              </div>
+              <div className="text-xs text-muted-foreground">Total Invested</div>
             </CardContent>
           </Card>
 
@@ -374,33 +352,23 @@ const AnimalNFTCommunity = () => {
               <div className="text-2xl font-bold text-purple-400">
                 {globalStats.animalsReleased.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Released to Wild
-              </div>
+              <div className="text-xs text-muted-foreground">Released to Wild</div>
             </CardContent>
           </Card>
 
           <Card className="border-cyan-500/30 bg-gradient-to-br from-cyan-900/30 to-blue-900/30 animate-fade-in">
             <CardContent className="pt-4 text-center">
               <Home className="h-6 w-6 text-cyan-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-cyan-400">
-                {globalStats.sanctuariesBuilt}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Sanctuaries Built
-              </div>
+              <div className="text-2xl font-bold text-cyan-400">{globalStats.sanctuariesBuilt}</div>
+              <div className="text-xs text-muted-foreground">Sanctuaries Built</div>
             </CardContent>
           </Card>
 
           <Card className="border-green-500/30 bg-gradient-to-br from-green-900/30 to-teal-900/30 animate-fade-in">
             <CardContent className="pt-4 text-center">
               <TreePine className="h-6 w-6 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {globalStats.forestsRestored}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Forests Restored
-              </div>
+              <div className="text-2xl font-bold text-green-400">{globalStats.forestsRestored}</div>
+              <div className="text-xs text-muted-foreground">Forests Restored</div>
             </CardContent>
           </Card>
 
@@ -451,9 +419,7 @@ const AnimalNFTCommunity = () => {
                           {animal.rarity}
                         </Badge>
                       </div>
-                      <h3 className="text-2xl font-bold text-green-400">
-                        {animal.name}
-                      </h3>
+                      <h3 className="text-2xl font-bold text-green-400">{animal.name}</h3>
                       <p className="text-muted-foreground">{animal.species}</p>
                       <div className="flex items-center justify-center gap-2 text-sm text-cyan-400">
                         <MapPin className="h-4 w-4" />
@@ -482,13 +448,9 @@ const AnimalNFTCommunity = () => {
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
                             <Wallet className="h-5 w-5 text-green-400" />
-                            <span className="font-bold text-green-400">
-                              Living Wallet
-                            </span>
+                            <span className="font-bold text-green-400">Living Wallet</span>
                           </div>
-                          <Badge className="bg-green-600 text-white">
-                            GROWING
-                          </Badge>
+                          <Badge className="bg-green-600 text-white">GROWING</Badge>
                         </div>
                         <div className="text-3xl font-bold text-green-400 mb-2">
                           ${animal.walletBalance.toFixed(2)}
@@ -508,26 +470,16 @@ const AnimalNFTCommunity = () => {
                           <div className="text-lg font-bold text-blue-400">
                             {animal.energyLevel}%
                           </div>
-                          <div className="text-xs text-muted-foreground">
-                            Energy
-                          </div>
-                          <Progress
-                            value={animal.energyLevel}
-                            className="mt-2 h-2"
-                          />
+                          <div className="text-xs text-muted-foreground">Energy</div>
+                          <Progress value={animal.energyLevel} className="mt-2 h-2" />
                         </div>
                         <div className="text-center p-3 bg-green-900/30 rounded border border-green-500/20">
                           <Heart className="h-5 w-5 text-green-400 mx-auto mb-1" />
                           <div className="text-lg font-bold text-green-400">
                             {animal.moodLevel}%
                           </div>
-                          <div className="text-xs text-muted-foreground">
-                            Mood
-                          </div>
-                          <Progress
-                            value={animal.moodLevel}
-                            className="mt-2 h-2"
-                          />
+                          <div className="text-xs text-muted-foreground">Mood</div>
+                          <Progress value={animal.moodLevel} className="mt-2 h-2" />
                         </div>
                       </div>
 
@@ -540,27 +492,19 @@ const AnimalNFTCommunity = () => {
                         <div className="grid grid-cols-2 gap-2 text-xs">
                           <div className="flex justify-between">
                             <span>😊 Happy:</span>
-                            <span className="text-green-400">
-                              {animal.emotions.happiness}%
-                            </span>
+                            <span className="text-green-400">{animal.emotions.happiness}%</span>
                           </div>
                           <div className="flex justify-between">
                             <span>🤝 Trust:</span>
-                            <span className="text-blue-400">
-                              {animal.emotions.trust}%
-                            </span>
+                            <span className="text-blue-400">{animal.emotions.trust}%</span>
                           </div>
                           <div className="flex justify-between">
                             <span>⚡ Excited:</span>
-                            <span className="text-yellow-400">
-                              {animal.emotions.excitement}%
-                            </span>
+                            <span className="text-yellow-400">{animal.emotions.excitement}%</span>
                           </div>
                           <div className="flex justify-between">
                             <span>😌 Calm:</span>
-                            <span className="text-cyan-400">
-                              {animal.emotions.calmness}%
-                            </span>
+                            <span className="text-cyan-400">{animal.emotions.calmness}%</span>
                           </div>
                         </div>
                       </div>
@@ -572,9 +516,7 @@ const AnimalNFTCommunity = () => {
                           Current Living Situation
                         </h4>
                         <div className="text-sm space-y-1">
-                          <div className="text-cyan-400">
-                            {animal.currentHome}
-                          </div>
+                          <div className="text-cyan-400">{animal.currentHome}</div>
                           <div className="flex items-center gap-2 text-xs text-muted-foreground">
                             <Utensils className="h-3 w-3" />
                             Last fed: {animal.lastFed}
@@ -593,20 +535,12 @@ const AnimalNFTCommunity = () => {
                             <Target className="h-4 w-4" />
                             Release Progress
                           </h4>
-                          <span className="text-yellow-400 text-sm">
-                            {animal.rescueProgress}%
-                          </span>
+                          <span className="text-yellow-400 text-sm">{animal.rescueProgress}%</span>
                         </div>
-                        <Progress
-                          value={animal.rescueProgress}
-                          className="mb-2 h-3"
-                        />
+                        <Progress value={animal.rescueProgress} className="mb-2 h-3" />
                         <div className="text-xs text-muted-foreground">
-                          Goal: ${animal.releaseGoal.toLocaleString()} |
-                          Remaining: $
-                          {(animal.releaseGoal - animal.walletBalance).toFixed(
-                            0,
-                          )}
+                          Goal: ${animal.releaseGoal.toLocaleString()} | Remaining: $
+                          {(animal.releaseGoal - animal.walletBalance).toFixed(0)}
                         </div>
                       </div>
 
@@ -618,10 +552,7 @@ const AnimalNFTCommunity = () => {
                         </h4>
                         <div className="space-y-1">
                           {animal.memories.slice(0, 2).map((memory, index) => (
-                            <div
-                              key={index}
-                              className="text-xs text-muted-foreground"
-                            >
+                            <div key={index} className="text-xs text-muted-foreground">
                               • {memory}
                             </div>
                           ))}
@@ -675,23 +606,15 @@ const AnimalNFTCommunity = () => {
                   className="p-6 bg-gradient-to-br from-green-900/40 to-blue-900/40 rounded-lg border border-green-500/30 space-y-4"
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold text-green-400">
-                      {goal.title}
-                    </h3>
-                    <Badge className="bg-green-600 text-white">
-                      {goal.category}
-                    </Badge>
+                    <h3 className="text-lg font-bold text-green-400">{goal.title}</h3>
+                    <Badge className="bg-green-600 text-white">{goal.category}</Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    {goal.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{goal.description}</p>
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Progress:</span>
-                      <span className="text-green-400 font-bold">
-                        {goal.progress}%
-                      </span>
+                      <span className="text-green-400 font-bold">{goal.progress}%</span>
                     </div>
                     <Progress value={goal.progress} className="h-3" />
                     <div className="flex justify-between text-xs text-muted-foreground">
@@ -701,18 +624,12 @@ const AnimalNFTCommunity = () => {
                   </div>
 
                   <div className="p-3 bg-blue-900/30 rounded border border-blue-500/20">
-                    <div className="text-xs font-bold text-blue-400 mb-1">
-                      Real Impact:
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {goal.impact}
-                    </div>
+                    <div className="text-xs font-bold text-blue-400 mb-1">Real Impact:</div>
+                    <div className="text-xs text-muted-foreground">{goal.impact}</div>
                   </div>
 
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-yellow-400">
-                      ⏱️ {goal.timeRemaining} remaining
-                    </span>
+                    <span className="text-yellow-400">⏱️ {goal.timeRemaining} remaining</span>
                     <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-xs px-4 py-1">
                       INVEST NOW
                     </Button>
@@ -736,52 +653,44 @@ const AnimalNFTCommunity = () => {
               🌍 THE MOST POWERFUL GAME EVER CREATED
             </h3>
             <p className="text-muted-foreground mb-6 text-lg">
-              Experience real animals with real emotions, memories, and living
-              wallets. Every investment creates tangible impact across multiple
-              realities. Build landscapes, save lives, and witness the future of
-              gaming where virtual actions create real-world change.
+              Experience real animals with real emotions, memories, and living wallets. Every
+              investment creates tangible impact across multiple realities. Build landscapes, save
+              lives, and witness the future of gaming where virtual actions create real-world
+              change.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
               <div className="p-6 bg-gradient-to-br from-green-900/40 to-cyan-900/40 rounded-lg border border-green-500/20">
                 <Heart className="h-12 w-12 text-green-400 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-green-400 mb-2">
-                  Living Emotions
-                </h4>
+                <h4 className="text-xl font-bold text-green-400 mb-2">Living Emotions</h4>
                 <p className="text-sm text-muted-foreground">
                   Real animals with genuine feelings and memories
                 </p>
               </div>
               <div className="p-6 bg-gradient-to-br from-blue-900/40 to-purple-900/40 rounded-lg border border-blue-500/20">
                 <Wallet className="h-12 w-12 text-blue-400 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-blue-400 mb-2">
-                  Living Wallets
-                </h4>
+                <h4 className="text-xl font-bold text-blue-400 mb-2">Living Wallets</h4>
                 <p className="text-sm text-muted-foreground">
                   Every animal has their own growing wallet
                 </p>
               </div>
               <div className="p-6 bg-gradient-to-br from-purple-900/40 to-pink-900/40 rounded-lg border border-purple-500/20">
                 <Mountain className="h-12 w-12 text-purple-400 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-purple-400 mb-2">
-                  Minecraft Building
-                </h4>
+                <h4 className="text-xl font-bold text-purple-400 mb-2">Minecraft Building</h4>
                 <p className="text-sm text-muted-foreground">
                   Create realistic landscapes for animals
                 </p>
               </div>
               <div className="p-6 bg-gradient-to-br from-yellow-900/40 to-orange-900/40 rounded-lg border border-yellow-500/20">
                 <Rocket className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-yellow-400 mb-2">
-                  Global Impact
-                </h4>
+                <h4 className="text-xl font-bold text-yellow-400 mb-2">Global Impact</h4>
                 <p className="text-sm text-muted-foreground">
                   Real investments in real animal welfare
                 </p>
               </div>
             </div>
             <p className="text-lg text-green-400 font-bold mt-8">
-              🎵 "Seeds Will Form Into Music" - Every click, every investment,
-              creates harmony across infinite dimensions! 🎵
+              🎵 "Seeds Will Form Into Music" - Every click, every investment, creates harmony
+              across infinite dimensions! 🎵
             </p>
           </div>
         </div>

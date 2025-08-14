@@ -43,8 +43,7 @@ export function AdminEyeRecognition() {
             stream.getTracks().forEach((track) => track.stop());
 
             toast.success("👁️ Admin Eye Recognition Successful!", {
-              description:
-                "Biometric authentication confirmed - Full admin access granted",
+              description: "Biometric authentication confirmed - Full admin access granted",
               duration: 5000,
             });
 
@@ -88,9 +87,7 @@ export function AdminEyeRecognition() {
             👁️ ADMIN EYE RECOGNITION - BIOMETRIC SECURITY SYSTEM
           </CardTitle>
           <div className="flex gap-2">
-            <Badge
-              className={`${isAuthenticated ? "bg-green-600" : "bg-red-600"} animate-pulse`}
-            >
+            <Badge className={`${isAuthenticated ? "bg-green-600" : "bg-red-600"} animate-pulse`}>
               {isAuthenticated ? "✅ AUTHENTICATED" : "🔒 LOCKED"}
             </Badge>
             <Badge className="bg-purple-600">🧬 BIOMETRIC ACTIVE</Badge>
@@ -102,9 +99,7 @@ export function AdminEyeRecognition() {
             <div className="text-center p-4 bg-red-900/40 rounded-lg border border-red-500/30">
               <Lock className="h-8 w-8 mx-auto text-red-400 animate-pulse mb-2" />
               <div className="text-2xl font-bold text-red-400">SECURE</div>
-              <div className="text-sm text-muted-foreground">
-                Biometric Lock
-              </div>
+              <div className="text-sm text-muted-foreground">Biometric Lock</div>
             </div>
             <div className="text-center p-4 bg-purple-900/40 rounded-lg border border-purple-500/30">
               <Eye className="h-8 w-8 mx-auto text-purple-400 animate-pulse mb-2" />
@@ -182,13 +177,11 @@ export function AdminEyeRecognition() {
           {isAuthenticated && (
             <div className="bg-green-900/40 p-4 rounded-lg border border-green-500/30">
               <div className="flex items-center gap-2 text-green-400 font-bold mb-2">
-                <Zap className="h-5 w-5" />✅ ADMIN BIOMETRIC AUTHENTICATION
-                SUCCESSFUL
+                <Zap className="h-5 w-5" />✅ ADMIN BIOMETRIC AUTHENTICATION SUCCESSFUL
               </div>
               <p className="text-green-300 text-sm">
-                Full admin access granted. AI system is now locked to your
-                biometric signature only. No other user or system can access or
-                modify the AI until locked again.
+                Full admin access granted. AI system is now locked to your biometric signature only.
+                No other user or system can access or modify the AI until locked again.
               </p>
             </div>
           )}

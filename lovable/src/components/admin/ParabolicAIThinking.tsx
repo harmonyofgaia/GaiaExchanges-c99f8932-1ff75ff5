@@ -90,9 +90,7 @@ export function ParabolicAIThinking() {
       actionable: Math.random() > 0.3,
       timestamp: new Date(),
       status: autoApprove ? "approved" : "pending",
-      systemImpact: ["low", "medium", "high", "critical"][
-        Math.floor(Math.random() * 4)
-      ] as any,
+      systemImpact: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as any,
     };
 
     setAiResponses((prev) => [newResponse, ...prev]);
@@ -115,9 +113,7 @@ export function ParabolicAIThinking() {
   };
 
   const updateResponseStatus = (id: string, status: AIResponse["status"]) => {
-    setAiResponses((prev) =>
-      prev.map((resp) => (resp.id === id ? { ...resp, status } : resp)),
-    );
+    setAiResponses((prev) => prev.map((resp) => (resp.id === id ? { ...resp, status } : resp)));
 
     const statusMessages = {
       approved: "✅ AI Response Approved - Ready for Implementation",
@@ -180,15 +176,9 @@ export function ParabolicAIThinking() {
               Supreme Intelligence • Boundary Transcendence • Admin God Mode
             </div>
             <div className="flex justify-center gap-2 flex-wrap">
-              <Badge className="bg-purple-600 animate-pulse">
-                QUANTUM PROCESSING
-              </Badge>
-              <Badge className="bg-pink-600 animate-pulse">
-                ETHICAL OVERRIDE
-              </Badge>
-              <Badge className="bg-blue-600 animate-pulse">
-                SUPREME CONTROL
-              </Badge>
+              <Badge className="bg-purple-600 animate-pulse">QUANTUM PROCESSING</Badge>
+              <Badge className="bg-pink-600 animate-pulse">ETHICAL OVERRIDE</Badge>
+              <Badge className="bg-blue-600 animate-pulse">SUPREME CONTROL</Badge>
             </div>
           </div>
         </CardHeader>
@@ -211,9 +201,7 @@ export function ParabolicAIThinking() {
                 onChange={(e) => setAutoApprove(e.target.checked)}
                 className="rounded"
               />
-              <span className="text-sm text-cyan-300">
-                Auto-approve AI responses
-              </span>
+              <span className="text-sm text-cyan-300">Auto-approve AI responses</span>
             </label>
           </div>
 
@@ -246,9 +234,7 @@ export function ParabolicAIThinking() {
 
       {/* AI Responses */}
       <div className="space-y-4">
-        <h3 className="text-2xl font-bold text-purple-400">
-          🎭 AI Responses & Actions
-        </h3>
+        <h3 className="text-2xl font-bold text-purple-400">🎭 AI Responses & Actions</h3>
 
         {aiResponses.map((response) => (
           <Card
@@ -259,14 +245,10 @@ export function ParabolicAIThinking() {
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg">💭 {response.query}</CardTitle>
                 <div className="flex items-center gap-2">
-                  <Badge
-                    className={`${getStatusColor(response.status)} text-white`}
-                  >
+                  <Badge className={`${getStatusColor(response.status)} text-white`}>
                     {response.status.toUpperCase()}
                   </Badge>
-                  <Badge variant="outline">
-                    {response.confidence.toFixed(1)}% confident
-                  </Badge>
+                  <Badge variant="outline">{response.confidence.toFixed(1)}% confident</Badge>
                 </div>
               </div>
               <div className="text-sm text-muted-foreground">
@@ -285,18 +267,14 @@ export function ParabolicAIThinking() {
               {response.actionable && response.status === "pending" && (
                 <div className="flex gap-2">
                   <Button
-                    onClick={() =>
-                      updateResponseStatus(response.id, "approved")
-                    }
+                    onClick={() => updateResponseStatus(response.id, "approved")}
                     className="bg-green-600 hover:bg-green-700"
                   >
                     <CheckCircle className="h-4 w-4 mr-2" />
                     Approve
                   </Button>
                   <Button
-                    onClick={() =>
-                      updateResponseStatus(response.id, "rejected")
-                    }
+                    onClick={() => updateResponseStatus(response.id, "rejected")}
                     variant="destructive"
                   >
                     <AlertTriangle className="h-4 w-4 mr-2" />
@@ -352,13 +330,9 @@ export function ParabolicAIThinking() {
             </div>
             <div className="p-3 bg-cyan-900/30 rounded-lg">
               <div className="text-2xl font-bold text-cyan-400">
-                {aiResponses.reduce((avg, r) => avg + r.confidence, 0) /
-                  aiResponses.length || 0}
-                %
+                {aiResponses.reduce((avg, r) => avg + r.confidence, 0) / aiResponses.length || 0}%
               </div>
-              <div className="text-xs text-muted-foreground">
-                Avg Confidence
-              </div>
+              <div className="text-xs text-muted-foreground">Avg Confidence</div>
             </div>
           </div>
         </CardContent>

@@ -74,9 +74,7 @@ export function DonationWidget({ onDonate }: DonationWidgetProps) {
       <CardContent className="space-y-4">
         {/* Project Selection */}
         <div>
-          <label className="text-sm font-medium mb-2 block">
-            Select Project
-          </label>
+          <label className="text-sm font-medium mb-2 block">Select Project</label>
           <div className="space-y-2">
             {projects.map((project) => (
               <div
@@ -92,9 +90,7 @@ export function DonationWidget({ onDonate }: DonationWidgetProps) {
                   <h4 className="font-semibold">{project.name}</h4>
                   <Badge variant="outline">{project.donors} donors</Badge>
                 </div>
-                <p className="text-sm text-muted-foreground mb-2">
-                  {project.description}
-                </p>
+                <p className="text-sm text-muted-foreground mb-2">{project.description}</p>
                 <div className="space-y-1">
                   <div className="flex justify-between text-sm">
                     <span>Raised: ${project.raised.toLocaleString()}</span>
@@ -116,9 +112,7 @@ export function DonationWidget({ onDonate }: DonationWidgetProps) {
 
         {/* Donation Amount */}
         <div>
-          <label className="text-sm font-medium mb-2 block">
-            Donation Amount ($)
-          </label>
+          <label className="text-sm font-medium mb-2 block">Donation Amount ($)</label>
           <div className="flex gap-2">
             <Input
               type="number"

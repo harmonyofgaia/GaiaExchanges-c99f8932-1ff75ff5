@@ -12,18 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import {
-  Lock,
-  Unlock,
-  Pause,
-  Play,
-  Settings,
-  Zap,
-  Timer,
-  Layers,
-  Eye,
-  EyeOff,
-} from "lucide-react";
+import { Lock, Unlock, Pause, Play, Settings, Zap, Timer, Layers, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 
 interface BackgroundSettings {
@@ -42,11 +31,7 @@ interface BackgroundSettings {
   };
 }
 
-export function AdvancedBackgroundControls({
-  isLocked,
-}: {
-  isLocked: boolean;
-}) {
+export function AdvancedBackgroundControls({ isLocked }: { isLocked: boolean }) {
   const [settings, setSettings] = useState<BackgroundSettings>({
     isLocked: false,
     isAnimated: true,
@@ -104,7 +89,7 @@ export function AdvancedBackgroundControls({
 
   const updateSetting = <K extends keyof BackgroundSettings>(
     key: K,
-    value: BackgroundSettings[K],
+    value: BackgroundSettings[K]
   ) => {
     if (isLocked && key !== "isLocked") return;
 
@@ -130,10 +115,7 @@ export function AdvancedBackgroundControls({
         root.style.setProperty("--animation-speed", `${value}s`);
         break;
       case "isAnimated":
-        root.style.setProperty(
-          "--animation-play-state",
-          value ? "running" : "paused",
-        );
+        root.style.setProperty("--animation-play-state", value ? "running" : "paused");
         break;
       case "type":
         root.setAttribute("data-background-type", value);
@@ -171,7 +153,7 @@ export function AdvancedBackgroundControls({
           ? "Your current background is now fixed"
           : `Background will change every ${settings.changeInterval}s`,
         duration: 3000,
-      },
+      }
     );
   };
 
@@ -184,14 +166,10 @@ export function AdvancedBackgroundControls({
     // Apply layer visibility to DOM
     const layerElement = document.querySelector(`[data-layer="${layer}"]`);
     if (layerElement) {
-      (layerElement as HTMLElement).style.display = newLayers[layer]
-        ? "block"
-        : "none";
+      (layerElement as HTMLElement).style.display = newLayers[layer] ? "block" : "none";
     }
 
-    toast.success(
-      `${layer} layer ${newLayers[layer] ? "enabled" : "disabled"}`,
-    );
+    toast.success(`${layer} layer ${newLayers[layer] ? "enabled" : "disabled"}`);
   };
 
   const shuffleBackground = () => {
@@ -200,12 +178,7 @@ export function AdvancedBackgroundControls({
     // Randomize multiple settings
     const randomIntensity = Math.floor(Math.random() * 100);
     const randomSpeed = Math.random() * 2.5 + 0.5;
-    const types: BackgroundSettings["type"][] = [
-      "matrix",
-      "neural",
-      "particles",
-      "waves",
-    ];
+    const types: BackgroundSettings["type"][] = ["matrix", "neural", "particles", "waves"];
     const randomType = types[Math.floor(Math.random() * types.length)];
 
     updateSetting("intensity", randomIntensity);
@@ -299,11 +272,7 @@ export function AdvancedBackgroundControls({
               className="flex items-center gap-2"
               disabled={isLocked}
             >
-              {settings.isLocked ? (
-                <Lock className="h-4 w-4" />
-              ) : (
-                <Unlock className="h-4 w-4" />
-              )}
+              {settings.isLocked ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
               {settings.isLocked ? "Locked" : "Unlock"}
             </Button>
           </div>
@@ -316,9 +285,7 @@ export function AdvancedBackgroundControls({
             <Switch
               id="auto-change"
               checked={settings.autoChange}
-              onCheckedChange={(checked) =>
-                updateSetting("autoChange", checked)
-              }
+              onCheckedChange={(checked) => updateSetting("autoChange", checked)}
               disabled={isLocked || settings.isLocked}
             />
           </div>
@@ -328,9 +295,7 @@ export function AdvancedBackgroundControls({
               <Label>Change Interval: {settings.changeInterval}s</Label>
               <Slider
                 value={[settings.changeInterval]}
-                onValueChange={([value]) =>
-                  updateSetting("changeInterval", value)
-                }
+                onValueChange={([value]) => updateSetting("changeInterval", value)}
                 min={5}
                 max={300}
                 step={5}
@@ -350,9 +315,7 @@ export function AdvancedBackgroundControls({
           <Label>Background Style</Label>
           <Select
             value={settings.type}
-            onValueChange={(value: BackgroundSettings["type"]) =>
-              updateSetting("type", value)
-            }
+            onValueChange={(value: BackgroundSettings["type"]) => updateSetting("type", value)}
             disabled={isLocked || settings.isLocked}
           >
             <SelectTrigger>
@@ -375,9 +338,7 @@ export function AdvancedBackgroundControls({
             <Switch
               id="animated"
               checked={settings.isAnimated}
-              onCheckedChange={(checked) =>
-                updateSetting("isAnimated", checked)
-              }
+              onCheckedChange={(checked) => updateSetting("isAnimated", checked)}
               disabled={isLocked || settings.isLocked}
             />
           </div>
@@ -420,27 +381,16 @@ export function AdvancedBackgroundControls({
 
           <div className="grid grid-cols-2 gap-3">
             {Object.entries(settings.layers).map(([layer, enabled]) => (
-              <div
-                key={layer}
-                className="flex items-center justify-between p-2 border rounded"
-              >
+              <div key={layer} className="flex items-center justify-between p-2 border rounded">
                 <span className="text-sm capitalize">{layer}</span>
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() =>
-                    toggleLayer(layer as keyof BackgroundSettings["layers"])
-                  }
+                  onClick={() => toggleLayer(layer as keyof BackgroundSettings["layers"])}
                   disabled={isLocked || settings.isLocked}
-                  className={
-                    enabled ? "text-green-400" : "text-muted-foreground"
-                  }
+                  className={enabled ? "text-green-400" : "text-muted-foreground"}
                 >
-                  {enabled ? (
-                    <Eye className="h-4 w-4" />
-                  ) : (
-                    <EyeOff className="h-4 w-4" />
-                  )}
+                  {enabled ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
                 </Button>
               </div>
             ))}
@@ -473,12 +423,7 @@ export function AdvancedBackgroundControls({
             {settings.isAnimated ? "Pause" : "Play"}
           </Button>
 
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={resetToDefaults}
-            disabled={isLocked}
-          >
+          <Button variant="outline" size="sm" onClick={resetToDefaults} disabled={isLocked}>
             Reset Defaults
           </Button>
         </div>

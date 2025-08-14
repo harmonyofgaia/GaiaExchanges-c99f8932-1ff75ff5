@@ -129,8 +129,7 @@ export function OptimizedMouseAttraction() {
           }
 
           // Draw particle
-          const alpha =
-            Math.sin((particle.life / particle.maxLife) * Math.PI) * 0.8;
+          const alpha = Math.sin((particle.life / particle.maxLife) * Math.PI) * 0.8;
           ctx.fillStyle =
             particle.color +
             Math.floor(alpha * 255)
@@ -143,14 +142,7 @@ export function OptimizedMouseAttraction() {
 
         // Draw mouse glow
         if (mouse.active) {
-          const gradient = ctx.createRadialGradient(
-            mouse.x,
-            mouse.y,
-            0,
-            mouse.x,
-            mouse.y,
-            100,
-          );
+          const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 100);
           gradient.addColorStop(0, "rgba(34, 197, 94, 0.3)");
           gradient.addColorStop(1, "transparent");
 

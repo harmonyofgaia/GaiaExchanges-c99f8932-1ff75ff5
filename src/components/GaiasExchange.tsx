@@ -32,12 +32,7 @@ import { CoinGeckoTrading } from "./CoinGeckoTrading";
 import { ChartAnalytics } from "./ChartAnalytics";
 import { SecurityCenter } from "./SecurityCenter";
 import { toast } from "sonner";
-import {
-  GAIA_TOKEN,
-  GAIA_METRICS,
-  formatGaiaPrice,
-  formatGaiaNumber,
-} from "@/constants/gaia";
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from "@/constants/gaia";
 
 interface ExchangeStats {
   totalVolume: number;
@@ -101,7 +96,7 @@ export function GaiasExchange() {
           price: coin.price * (1 + (Math.random() - 0.5) * 0.002),
           change24h: coin.change24h + (Math.random() - 0.5) * 0.1,
           volume: coin.volume * (1 + (Math.random() - 0.5) * 0.05),
-        })),
+        }))
       );
 
       // Update exchange stats
@@ -149,13 +144,10 @@ export function GaiasExchange() {
 
   const handleDownloadApp = (platform: string) => {
     const downloadLinks = {
-      windows:
-        "https://releases.harmonyofgaia.net/gaia-exchanges-windows-x64.exe",
-      macos:
-        "https://releases.harmonyofgaia.net/gaia-exchanges-macos-universal.dmg",
+      windows: "https://releases.harmonyofgaia.net/gaia-exchanges-windows-x64.exe",
+      macos: "https://releases.harmonyofgaia.net/gaia-exchanges-macos-universal.dmg",
       android: "https://releases.harmonyofgaia.net/gaia-exchanges-android.apk",
-      linux:
-        "https://releases.harmonyofgaia.net/gaia-exchanges-linux-amd64.deb",
+      linux: "https://releases.harmonyofgaia.net/gaia-exchanges-linux-amd64.deb",
       ios: "https://apps.apple.com/search?term=gaia+exchanges",
       web: "https://app.gaiaexchanges.com",
     };
@@ -180,17 +172,11 @@ export function GaiasExchange() {
             <div className="flex items-center gap-4">
               <GaiaLogo size="lg" variant="glow" />
               <div>
-                <h1 className="text-2xl font-bold text-primary">
-                  Gaia's Exchanges
-                </h1>
-                <p className="text-sm text-green-400">
-                  World's Most Secure Web3 Trading Platform
-                </p>
+                <h1 className="text-2xl font-bold text-primary">Gaia's Exchanges</h1>
+                <p className="text-sm text-green-400">World's Most Secure Web3 Trading Platform</p>
                 <div className="text-xs text-blue-400 mt-1">
                   Contract:{" "}
-                  <code className="font-mono">
-                    {GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...
-                  </code>
+                  <code className="font-mono">{GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 20)}...</code>
                 </div>
               </div>
             </div>
@@ -262,12 +248,8 @@ export function GaiasExchange() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">
-                    Security Score
-                  </p>
-                  <p className="text-2xl font-bold text-yellow-400">
-                    {stats.securityScore}%
-                  </p>
+                  <p className="text-sm text-muted-foreground">Security Score</p>
+                  <p className="text-2xl font-bold text-yellow-400">{stats.securityScore}%</p>
                 </div>
                 <Shield className="h-8 w-8 text-yellow-400" />
               </div>
@@ -284,9 +266,7 @@ export function GaiasExchange() {
             </CardTitle>
             <div className="text-sm text-blue-400 mt-2">
               <strong>New Contract Address:</strong>{" "}
-              <code className="font-mono text-xs">
-                {GAIA_TOKEN.CONTRACT_ADDRESS}
-              </code>
+              <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
             </div>
           </CardHeader>
           <CardContent>
@@ -354,21 +334,13 @@ export function GaiasExchange() {
                   </a>
                 </Button>
                 <Button variant="outline" size="sm" asChild>
-                  <a
-                    href={GAIA_TOKEN.OFFICIAL_WEBSITE}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={GAIA_TOKEN.OFFICIAL_WEBSITE} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     Official Website
                   </a>
                 </Button>
                 <Button variant="outline" size="sm" asChild>
-                  <a
-                    href={GAIA_TOKEN.PUMP_FUN_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={GAIA_TOKEN.PUMP_FUN_URL} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     Trade on Pump.fun
                   </a>
@@ -423,36 +395,24 @@ export function GaiasExchange() {
           <CardContent>
             <div className="text-center space-y-4">
               <p className="text-muted-foreground">
-                Join our global community of traders and contribute to the
-                Harmony of Gaia ecosystem.
+                Join our global community of traders and contribute to the Harmony of Gaia
+                ecosystem.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                 <div className="p-4 rounded-lg bg-green-900/30 border border-green-500/30">
                   <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                  <h4 className="font-semibold text-green-400 mb-2">
-                    Community Trading
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    Connect with traders worldwide
-                  </p>
+                  <h4 className="font-semibold text-green-400 mb-2">Community Trading</h4>
+                  <p className="text-sm text-muted-foreground">Connect with traders worldwide</p>
                 </div>
                 <div className="p-4 rounded-lg bg-blue-900/30 border border-blue-500/30">
                   <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                  <h4 className="font-semibold text-blue-400 mb-2">
-                    Global Markets
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    Access international exchanges
-                  </p>
+                  <h4 className="font-semibold text-blue-400 mb-2">Global Markets</h4>
+                  <p className="text-sm text-muted-foreground">Access international exchanges</p>
                 </div>
                 <div className="p-4 rounded-lg bg-purple-900/30 border border-purple-500/30">
                   <Shield className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                  <h4 className="font-semibold text-purple-400 mb-2">
-                    Secure Trading
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    Military-grade security
-                  </p>
+                  <h4 className="font-semibold text-purple-400 mb-2">Secure Trading</h4>
+                  <p className="text-sm text-muted-foreground">Military-grade security</p>
                 </div>
               </div>
             </div>

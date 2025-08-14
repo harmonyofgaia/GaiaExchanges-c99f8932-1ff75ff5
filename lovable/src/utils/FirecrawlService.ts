@@ -35,12 +35,9 @@ export class FirecrawlService {
     try {
       console.log("Testing API key with Firecrawl API");
       this.firecrawlApp = new FirecrawlApp({ apiKey });
-      const testResponse = await this.firecrawlApp.crawlUrl(
-        "https://example.com",
-        {
-          limit: 1,
-        },
-      );
+      const testResponse = await this.firecrawlApp.crawlUrl("https://example.com", {
+        limit: 1,
+      });
       return testResponse.success;
     } catch (error) {
       console.error("Error testing API key:", error);
@@ -75,8 +72,7 @@ export class FirecrawlService {
         console.error("Crawl failed:", (crawlResponse as ErrorResponse).error);
         return {
           success: false,
-          error:
-            (crawlResponse as ErrorResponse).error || "Failed to crawl website",
+          error: (crawlResponse as ErrorResponse).error || "Failed to crawl website",
         };
       }
 
@@ -89,10 +85,7 @@ export class FirecrawlService {
       console.error("Error during crawl:", error);
       return {
         success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Failed to connect to Firecrawl API",
+        error: error instanceof Error ? error.message : "Failed to connect to Firecrawl API",
       };
     }
   }

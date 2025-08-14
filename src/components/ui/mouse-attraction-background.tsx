@@ -81,41 +81,32 @@ export function MouseAttractionBackground() {
   // Initialize particles
   useEffect(() => {
     if (dimensions.width && dimensions.height) {
-      const newParticles: AttractedParticle[] = Array.from(
-        { length: 200 },
-        (_, i) => {
-          const types: AttractedParticle["type"][] = [
-            "spark",
-            "glow",
-            "trail",
-            "quantum",
-          ];
-          const type = types[Math.floor(Math.random() * types.length)];
+      const newParticles: AttractedParticle[] = Array.from({ length: 200 }, (_, i) => {
+        const types: AttractedParticle["type"][] = ["spark", "glow", "trail", "quantum"];
+        const type = types[Math.floor(Math.random() * types.length)];
 
-          const colors = {
-            spark: ["#fbbf24", "#f59e0b", "#d97706"],
-            glow: ["#22c55e", "#10b981", "#059669"],
-            trail: ["#3b82f6", "#2563eb", "#1d4ed8"],
-            quantum: ["#a855f7", "#9333ea", "#7c3aed"],
-          };
+        const colors = {
+          spark: ["#fbbf24", "#f59e0b", "#d97706"],
+          glow: ["#22c55e", "#10b981", "#059669"],
+          trail: ["#3b82f6", "#2563eb", "#1d4ed8"],
+          quantum: ["#a855f7", "#9333ea", "#7c3aed"],
+        };
 
-          return {
-            id: i,
-            x: Math.random() * dimensions.width,
-            y: Math.random() * dimensions.height,
-            targetX: Math.random() * dimensions.width,
-            targetY: Math.random() * dimensions.height,
-            size: Math.random() * 4 + 1,
-            speed: Math.random() * 2 + 0.5,
-            color:
-              colors[type][Math.floor(Math.random() * colors[type].length)],
-            type,
-            life: 0,
-            maxLife: 300 + Math.random() * 200,
-            attraction: Math.random() * 100 + 50,
-          };
-        },
-      );
+        return {
+          id: i,
+          x: Math.random() * dimensions.width,
+          y: Math.random() * dimensions.height,
+          targetX: Math.random() * dimensions.width,
+          targetY: Math.random() * dimensions.height,
+          size: Math.random() * 4 + 1,
+          speed: Math.random() * 2 + 0.5,
+          color: colors[type][Math.floor(Math.random() * colors[type].length)],
+          type,
+          life: 0,
+          maxLife: 300 + Math.random() * 200,
+          attraction: Math.random() * 100 + 50,
+        };
+      });
       setParticles(newParticles);
     }
   }, [dimensions]);
@@ -150,7 +141,7 @@ export function MouseAttractionBackground() {
           0,
           mouseAttraction.x,
           mouseAttraction.y,
-          glowRadius,
+          glowRadius
         );
         gradient.addColorStop(0, "rgba(34, 197, 94, 0.3)");
         gradient.addColorStop(0.5, "rgba(59, 130, 246, 0.2)");
@@ -158,13 +149,7 @@ export function MouseAttractionBackground() {
 
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(
-          mouseAttraction.x,
-          mouseAttraction.y,
-          glowRadius,
-          0,
-          Math.PI * 2,
-        );
+        ctx.arc(mouseAttraction.x, mouseAttraction.y, glowRadius, 0, Math.PI * 2);
         ctx.fill();
 
         // Lightning effect from mouse
@@ -177,7 +162,7 @@ export function MouseAttractionBackground() {
           ctx.moveTo(mouseAttraction.x, mouseAttraction.y);
           ctx.lineTo(
             mouseAttraction.x + Math.cos(angle) * length,
-            mouseAttraction.y + Math.sin(angle) * length,
+            mouseAttraction.y + Math.sin(angle) * length
           );
           ctx.stroke();
         }
@@ -195,8 +180,7 @@ export function MouseAttractionBackground() {
             const distance = Math.sqrt(dx * dx + dy * dy);
 
             if (distance < particle.attraction) {
-              const force =
-                (particle.attraction - distance) / particle.attraction;
+              const force = (particle.attraction - distance) / particle.attraction;
               const attractionForce = force * 0.5 * mouseAttraction.intensity;
 
               particle.targetX = mouseAttraction.x + (Math.random() - 0.5) * 20;
@@ -247,11 +231,9 @@ export function MouseAttractionBackground() {
           let proximityMultiplier = 1;
           if (mouseAttraction.isActive) {
             const distanceToMouse = Math.sqrt(
-              (mouseAttraction.x - particle.x) ** 2 +
-                (mouseAttraction.y - particle.y) ** 2,
+              (mouseAttraction.x - particle.x) ** 2 + (mouseAttraction.y - particle.y) ** 2
             );
-            proximityMultiplier =
-              distanceToMouse < 150 ? 2 - distanceToMouse / 150 : 1;
+            proximityMultiplier = distanceToMouse < 150 ? 2 - distanceToMouse / 150 : 1;
           }
 
           const finalSize = particle.size * proximityMultiplier;
@@ -282,22 +264,21 @@ export function MouseAttractionBackground() {
 
             case "glow": {
               // Pulsing glow
-              const glowRadius =
-                finalSize * (1 + Math.sin(time * 4 + particle.id) * 0.3);
+              const glowRadius = finalSize * (1 + Math.sin(time * 4 + particle.id) * 0.3);
               const glowGradient = ctx.createRadialGradient(
                 particle.x,
                 particle.y,
                 0,
                 particle.x,
                 particle.y,
-                glowRadius * 2,
+                glowRadius * 2
               );
               glowGradient.addColorStop(
                 0,
                 particle.color +
                   Math.floor(finalAlpha * 255)
                     .toString(16)
-                    .padStart(2, "0"),
+                    .padStart(2, "0")
               );
               glowGradient.addColorStop(1, "transparent");
               ctx.fillStyle = glowGradient;
@@ -323,10 +304,7 @@ export function MouseAttractionBackground() {
               ctx.lineWidth = 2;
               ctx.beginPath();
               ctx.moveTo(particle.x, particle.y);
-              ctx.lineTo(
-                particle.x - particle.speed * 5,
-                particle.y - particle.speed * 5,
-              );
+              ctx.lineTo(particle.x - particle.speed * 5, particle.y - particle.speed * 5);
               ctx.stroke();
               break;
 

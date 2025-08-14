@@ -4,16 +4,7 @@ import tailwindcssAnimate from "tailwindcss-animate";
 
 const config: Config = {
   darkMode: "class",
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "./src/components/**/*.{ts,tsx}",
-    "./src/components/**/*.tsx",
-    "./src/components/**/*.ts",
-    "./src/**/*.css",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx,html}"],
   prefix: "",
   theme: {
     container: {
@@ -28,7 +19,7 @@ const config: Config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: "hsl(var(--background, 0 0% 100%))",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -81,7 +72,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
 
 export default config;

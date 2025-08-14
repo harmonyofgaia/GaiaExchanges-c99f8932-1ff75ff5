@@ -30,19 +30,13 @@ export function ConnectionTracker() {
         const userIP = ipData.ip;
 
         // Get detailed location data
-        const locationResponse = await fetch(
-          `https://ipapi.co/${userIP}/json/`,
-        );
+        const locationResponse = await fetch(`https://ipapi.co/${userIP}/json/`);
         const locationData = await locationResponse.json();
 
         // Dragon threat assessment
         const dragonAssessment = `🐉 DRAGON SCAN: ${Math.random() < 0.1 ? "POTENTIAL THREAT DETECTED" : "CONNECTION VERIFIED SAFE"}`;
         const threatLevel =
-          Math.random() < 0.05
-            ? "CRITICAL"
-            : Math.random() < 0.2
-              ? "HIGH"
-              : "LOW";
+          Math.random() < 0.05 ? "CRITICAL" : Math.random() < 0.2 ? "HIGH" : "LOW";
 
         const connectionData = {
           ip_address: userIP,
@@ -65,22 +59,16 @@ export function ConnectionTracker() {
           event_details: {
             description: `Dragon tracked connection: ${dragonAssessment}`,
           },
-          severity:
-            threatLevel === "CRITICAL" ? 90 : threatLevel === "HIGH" ? 70 : 30,
+          severity: threatLevel === "CRITICAL" ? 90 : threatLevel === "HIGH" ? 70 : 30,
           ip_address: userIP,
           user_id: null,
         });
 
         if (error) {
-          console.log(
-            "🐉 Dragon database protection active - storing in secure cloud vault",
-          );
+          console.log("🐉 Dragon database protection active - storing in secure cloud vault");
 
           // Store in dragon-protected cloud as backup
-          localStorage.setItem(
-            `dragon_connection_${Date.now()}`,
-            JSON.stringify(connectionData),
-          );
+          localStorage.setItem(`dragon_connection_${Date.now()}`, JSON.stringify(connectionData));
         }
 
         console.log("🐉 CONNECTION SUCCESSFULLY TRACKED AND SECURED BY DRAGON");

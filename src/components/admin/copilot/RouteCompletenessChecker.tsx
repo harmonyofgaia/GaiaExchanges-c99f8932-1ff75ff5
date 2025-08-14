@@ -163,15 +163,9 @@ export function RouteCompletenessChecker() {
 
     // Generate analysis
     const totalRoutes = mockRoutes.length;
-    const completeRoutes = mockRoutes.filter(
-      (r) => r.status === "complete",
-    ).length;
-    const incompleteRoutes = mockRoutes.filter(
-      (r) => r.status === "incomplete",
-    ).length;
-    const missingRoutes = mockRoutes.filter(
-      (r) => r.status === "missing",
-    ).length;
+    const completeRoutes = mockRoutes.filter((r) => r.status === "complete").length;
+    const incompleteRoutes = mockRoutes.filter((r) => r.status === "incomplete").length;
+    const missingRoutes = mockRoutes.filter((r) => r.status === "missing").length;
     const errorRoutes = mockRoutes.filter((r) => r.status === "error").length;
 
     setAnalysis({
@@ -269,19 +263,10 @@ export function RouteCompletenessChecker() {
       prev.map((route) => ({
         ...route,
         lastChecked: new Date(),
-        accessibility: Math.max(
-          60,
-          Math.floor(Math.random() * 40) + route.accessibility - 10,
-        ),
-        performance: Math.max(
-          60,
-          Math.floor(Math.random() * 40) + route.performance - 10,
-        ),
-        seoScore: Math.max(
-          50,
-          Math.floor(Math.random() * 40) + route.seoScore - 10,
-        ),
-      })),
+        accessibility: Math.max(60, Math.floor(Math.random() * 40) + route.accessibility - 10),
+        performance: Math.max(60, Math.floor(Math.random() * 40) + route.performance - 10),
+        seoScore: Math.max(50, Math.floor(Math.random() * 40) + route.seoScore - 10),
+      }))
     );
 
     // Update analysis
@@ -409,7 +394,7 @@ export default ${route.component}
     (route) =>
       route.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       route.path.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      route.component.toLowerCase().includes(searchTerm.toLowerCase()),
+      route.component.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -421,12 +406,7 @@ export default ${route.component}
             🗺️ Page & Routing Completeness Checker
           </CardTitle>
           <div className="flex items-center gap-2">
-            <Button
-              size="sm"
-              variant="outline"
-              disabled={!analysis}
-              className="border-blue-500/30"
-            >
+            <Button size="sm" variant="outline" disabled={!analysis} className="border-blue-500/30">
               <Download className="h-4 w-4 mr-1" />
               Export Report
             </Button>
@@ -453,27 +433,19 @@ export default ${route.component}
         {analysis && (
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                {analysis.totalRoutes}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{analysis.totalRoutes}</div>
               <div className="text-xs text-gray-400">Total Routes</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">
-                {analysis.completeRoutes}
-              </div>
+              <div className="text-2xl font-bold text-green-400">{analysis.completeRoutes}</div>
               <div className="text-xs text-gray-400">Complete</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400">
-                {analysis.incompleteRoutes}
-              </div>
+              <div className="text-2xl font-bold text-yellow-400">{analysis.incompleteRoutes}</div>
               <div className="text-xs text-gray-400">Incomplete</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-400">
-                {analysis.missingRoutes}
-              </div>
+              <div className="text-2xl font-bold text-red-400">{analysis.missingRoutes}</div>
               <div className="text-xs text-gray-400">Missing</div>
             </div>
             <div className="text-center">
@@ -490,12 +462,8 @@ export default ${route.component}
           <Card className="border-green-500/30 mb-4">
             <CardContent className="p-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-green-400">
-                  Route Scan in Progress...
-                </span>
-                <span className="text-green-400">
-                  {scanProgress.toFixed(0)}%
-                </span>
+                <span className="text-green-400">Route Scan in Progress...</span>
+                <span className="text-green-400">{scanProgress.toFixed(0)}%</span>
               </div>
               <Progress value={scanProgress} className="h-2" />
             </CardContent>
@@ -504,12 +472,8 @@ export default ${route.component}
 
         <Tabs defaultValue="routes" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="routes">
-              🗂️ All Routes ({routes.length})
-            </TabsTrigger>
-            <TabsTrigger value="missing">
-              ➕ Missing Pages ({missingPages.length})
-            </TabsTrigger>
+            <TabsTrigger value="routes">🗂️ All Routes ({routes.length})</TabsTrigger>
+            <TabsTrigger value="missing">➕ Missing Pages ({missingPages.length})</TabsTrigger>
             <TabsTrigger value="issues">⚠️ Issues</TabsTrigger>
             <TabsTrigger value="metrics">📊 Metrics</TabsTrigger>
           </TabsList>
@@ -527,31 +491,20 @@ export default ${route.component}
 
             <div className="space-y-3">
               {filteredRoutes.map((route) => (
-                <Card
-                  key={route.id}
-                  className={`border ${getStatusColor(route.status)}`}
-                >
+                <Card key={route.id} className={`border ${getStatusColor(route.status)}`}>
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <Route className="h-4 w-4 text-blue-400" />
-                        <span className="font-medium text-white">
-                          {route.name}
-                        </span>
-                        <Badge
-                          variant="outline"
-                          className={getStatusColor(route.status)}
-                        >
+                        <span className="font-medium text-white">{route.name}</span>
+                        <Badge variant="outline" className={getStatusColor(route.status)}>
                           {route.status.toUpperCase()}
                         </Badge>
                         <Badge variant="secondary" className="text-xs">
                           {route.path}
                         </Badge>
                         {route.hasTests && (
-                          <Badge
-                            variant="outline"
-                            className="text-green-400 border-green-400"
-                          >
+                          <Badge variant="outline" className="text-green-400 border-green-400">
                             TESTED
                           </Badge>
                         )}
@@ -580,39 +533,28 @@ export default ${route.component}
                     </div>
 
                     <div className="text-sm text-gray-400 mb-2">
-                      <span className="font-medium">Component:</span>{" "}
-                      {route.component}
+                      <span className="font-medium">Component:</span> {route.component}
                     </div>
 
                     {route.preview && (
-                      <div className="text-sm text-gray-300 mb-3">
-                        {route.preview}
-                      </div>
+                      <div className="text-sm text-gray-300 mb-3">{route.preview}</div>
                     )}
 
                     <div className="grid grid-cols-3 gap-4 mb-3">
                       <div className="text-center">
-                        <div
-                          className={`text-lg font-bold ${getScoreColor(route.accessibility)}`}
-                        >
+                        <div className={`text-lg font-bold ${getScoreColor(route.accessibility)}`}>
                           {route.accessibility}%
                         </div>
-                        <div className="text-xs text-gray-400">
-                          Accessibility
-                        </div>
+                        <div className="text-xs text-gray-400">Accessibility</div>
                       </div>
                       <div className="text-center">
-                        <div
-                          className={`text-lg font-bold ${getScoreColor(route.performance)}`}
-                        >
+                        <div className={`text-lg font-bold ${getScoreColor(route.performance)}`}>
                           {route.performance}%
                         </div>
                         <div className="text-xs text-gray-400">Performance</div>
                       </div>
                       <div className="text-center">
-                        <div
-                          className={`text-lg font-bold ${getScoreColor(route.seoScore)}`}
-                        >
+                        <div className={`text-lg font-bold ${getScoreColor(route.seoScore)}`}>
                           {route.seoScore}%
                         </div>
                         <div className="text-xs text-gray-400">SEO Score</div>
@@ -622,10 +564,7 @@ export default ${route.component}
                     {route.issues.length > 0 && (
                       <div className="space-y-1">
                         {route.issues.map((issue, index) => (
-                          <div
-                            key={index}
-                            className="text-xs text-red-300 flex items-center gap-1"
-                          >
+                          <div key={index} className="text-xs text-red-300 flex items-center gap-1">
                             <AlertTriangle className="h-3 w-3" />
                             {issue}
                           </div>
@@ -644,21 +583,13 @@ export default ${route.component}
 
           <TabsContent value="missing" className="space-y-3">
             {missingPages.map((page) => (
-              <Card
-                key={page.id}
-                className={`border ${getImportanceColor(page.importance)}`}
-              >
+              <Card key={page.id} className={`border ${getImportanceColor(page.importance)}`}>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <Plus className="h-4 w-4 text-orange-400" />
-                      <span className="font-medium text-white">
-                        {page.suggestedName}
-                      </span>
-                      <Badge
-                        variant="outline"
-                        className={getImportanceColor(page.importance)}
-                      >
+                      <span className="font-medium text-white">{page.suggestedName}</span>
+                      <Badge variant="outline" className={getImportanceColor(page.importance)}>
                         {page.importance.toUpperCase()}
                       </Badge>
                       <Badge variant="secondary">{page.category}</Badge>
@@ -677,21 +608,16 @@ export default ${route.component}
                     </div>
                   </div>
                   <div className="text-sm text-gray-400 mb-2">
-                    <span className="font-medium">Suggested Path:</span>{" "}
-                    {page.suggestedPath}
+                    <span className="font-medium">Suggested Path:</span> {page.suggestedPath}
                   </div>
                   <div className="text-sm text-gray-300 mb-2">
                     <span className="font-medium">Reason:</span> {page.reason}
                   </div>
                   {page.template && (
-                    <div className="text-xs text-blue-300">
-                      💡 Template: {page.template}
-                    </div>
+                    <div className="text-xs text-blue-300">💡 Template: {page.template}</div>
                   )}
                   {!page.canAutoGenerate && (
-                    <div className="text-xs text-yellow-400 mt-2">
-                      ⚠️ Manual creation required
-                    </div>
+                    <div className="text-xs text-yellow-400 mt-2">⚠️ Manual creation required</div>
                   )}
                 </CardContent>
               </Card>
@@ -706,13 +632,8 @@ export default ${route.component}
                   <CardContent className="p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <AlertTriangle className="h-4 w-4 text-red-400" />
-                      <span className="font-medium text-white">
-                        {route.name}
-                      </span>
-                      <Badge
-                        variant="outline"
-                        className="text-red-400 border-red-400"
-                      >
+                      <span className="font-medium text-white">{route.name}</span>
+                      <Badge variant="outline" className="text-red-400 border-red-400">
                         {route.issues.length} ISSUE
                         {route.issues.length !== 1 ? "S" : ""}
                       </Badge>
@@ -722,10 +643,7 @@ export default ${route.component}
                     </div>
                     <ul className="space-y-1">
                       {route.issues.map((issue, index) => (
-                        <li
-                          key={index}
-                          className="text-sm text-red-300 flex items-start gap-2"
-                        >
+                        <li key={index} className="text-sm text-red-300 flex items-start gap-2">
                           <span className="text-red-500 mt-1">•</span>
                           {issue}
                         </li>
@@ -748,16 +666,9 @@ export default ${route.component}
                 <CardContent>
                   <div className="space-y-2">
                     {routes.slice(0, 5).map((route, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between"
-                      >
-                        <span className="text-xs text-gray-400 truncate mr-2">
-                          {route.name}
-                        </span>
-                        <span
-                          className={`text-xs ${getScoreColor(route.accessibility)}`}
-                        >
+                      <div key={index} className="flex items-center justify-between">
+                        <span className="text-xs text-gray-400 truncate mr-2">{route.name}</span>
+                        <span className={`text-xs ${getScoreColor(route.accessibility)}`}>
                           {route.accessibility}%
                         </span>
                       </div>
@@ -776,16 +687,9 @@ export default ${route.component}
                 <CardContent>
                   <div className="space-y-2">
                     {routes.slice(0, 5).map((route, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between"
-                      >
-                        <span className="text-xs text-gray-400 truncate mr-2">
-                          {route.name}
-                        </span>
-                        <span
-                          className={`text-xs ${getScoreColor(route.performance)}`}
-                        >
+                      <div key={index} className="flex items-center justify-between">
+                        <span className="text-xs text-gray-400 truncate mr-2">{route.name}</span>
+                        <span className={`text-xs ${getScoreColor(route.performance)}`}>
                           {route.performance}%
                         </span>
                       </div>
@@ -804,16 +708,9 @@ export default ${route.component}
                 <CardContent>
                   <div className="space-y-2">
                     {routes.slice(0, 5).map((route, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between"
-                      >
-                        <span className="text-xs text-gray-400 truncate mr-2">
-                          {route.name}
-                        </span>
-                        <span
-                          className={`text-xs ${getScoreColor(route.seoScore)}`}
-                        >
+                      <div key={index} className="flex items-center justify-between">
+                        <span className="text-xs text-gray-400 truncate mr-2">{route.name}</span>
+                        <span className={`text-xs ${getScoreColor(route.seoScore)}`}>
                           {route.seoScore}%
                         </span>
                       </div>

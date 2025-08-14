@@ -93,8 +93,7 @@ export function MasterUpgradePlan() {
         {
           id: "exchange-integration",
           name: "Integrate Instant Swap + Blockchain into Exchange",
-          description:
-            "Bundle instant swap page and blockchain page into main exchange page",
+          description: "Bundle instant swap page and blockchain page into main exchange page",
           status: "missing",
           priority: "high",
           complexity: 3,
@@ -142,8 +141,7 @@ export function MasterUpgradePlan() {
         {
           id: "gaia-points-to-tokens",
           name: "Gaia Points to Token Exchange",
-          description:
-            "Allow users to sell earned Gaia points for Gaia Tokens in fee destinations",
+          description: "Allow users to sell earned Gaia points for Gaia Tokens in fee destinations",
           status: "missing",
           priority: "medium",
           complexity: 3,
@@ -259,8 +257,7 @@ export function MasterUpgradePlan() {
         {
           id: "daily-engine-tasks",
           name: "Daily Engine Task Automation",
-          description:
-            "Restore all daily tasks that engines must perform or create automatically",
+          description: "Restore all daily tasks that engines must perform or create automatically",
           status: "missing",
           priority: "medium",
           complexity: 3,
@@ -289,8 +286,7 @@ export function MasterUpgradePlan() {
         {
           id: "ultimate-optimization",
           name: "System-Wide Optimization",
-          description:
-            "Final optimizations to make systems faster, stronger, and more efficient",
+          description: "Final optimizations to make systems faster, stronger, and more efficient",
           status: "missing",
           priority: "medium",
           complexity: 4,
@@ -356,17 +352,12 @@ export function MasterUpgradePlan() {
             🚀 MASTER UPGRADE PLAN - WORLD DOMINATION STRATEGY
           </CardTitle>
           <p className="text-muted-foreground">
-            Comprehensive 5-phase plan to make us better, faster, and stronger
-            than any system
+            Comprehensive 5-phase plan to make us better, faster, and stronger than any system
           </p>
         </CardHeader>
       </Card>
 
-      <Tabs
-        value={selectedPhase}
-        onValueChange={setSelectedPhase}
-        className="w-full"
-      >
+      <Tabs value={selectedPhase} onValueChange={setSelectedPhase} className="w-full">
         <TabsList className="grid w-full grid-cols-5">
           {phases.map((phase, index) => (
             <TabsTrigger key={phase.id} value={phase.id} className="text-xs">
@@ -385,12 +376,8 @@ export function MasterUpgradePlan() {
                 </CardTitle>
                 <p className="text-muted-foreground">{phase.description}</p>
                 <div className="flex gap-4 text-sm">
-                  <Badge className="bg-blue-600">
-                    ⏱️ {phase.estimatedTime}
-                  </Badge>
-                  <Badge className="bg-purple-600">
-                    📋 {phase.features.length} Features
-                  </Badge>
+                  <Badge className="bg-blue-600">⏱️ {phase.estimatedTime}</Badge>
+                  <Badge className="bg-purple-600">📋 {phase.features.length} Features</Badge>
                   {phase.dependencies.length > 0 && (
                     <Badge className="bg-orange-600">
                       🔗 Depends on: {phase.dependencies.join(", ")}
@@ -411,25 +398,19 @@ export function MasterUpgradePlan() {
                             <div className="flex items-center gap-2 mb-2">
                               {getStatusIcon(feature.status)}
                               {getCategoryIcon(feature.category)}
-                              <h3 className="font-semibold text-foreground">
-                                {feature.name}
-                              </h3>
+                              <h3 className="font-semibold text-foreground">{feature.name}</h3>
                             </div>
                             <p className="text-sm text-muted-foreground mb-3">
                               {feature.description}
                             </p>
                             <div className="flex gap-2 flex-wrap">
-                              <Badge
-                                className={getPriorityColor(feature.priority)}
-                              >
+                              <Badge className={getPriorityColor(feature.priority)}>
                                 {feature.priority.toUpperCase()}
                               </Badge>
                               <Badge className="bg-gray-600">
                                 Complexity: {feature.complexity}/5
                               </Badge>
-                              <Badge className="bg-indigo-600">
-                                {feature.category}
-                              </Badge>
+                              <Badge className="bg-indigo-600">{feature.category}</Badge>
                             </div>
                           </div>
                         </div>
@@ -455,50 +436,36 @@ export function MasterUpgradePlan() {
             <div className="text-center">
               <div className="text-2xl font-bold text-red-400">
                 {phases.reduce(
-                  (acc, phase) =>
-                    acc +
-                    phase.features.filter((f) => f.status === "missing").length,
-                  0,
+                  (acc, phase) => acc + phase.features.filter((f) => f.status === "missing").length,
+                  0
                 )}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Missing Features
-              </div>
+              <div className="text-sm text-muted-foreground">Missing Features</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-400">
                 {phases.reduce(
-                  (acc, phase) =>
-                    acc +
-                    phase.features.filter((f) => f.status === "partial").length,
-                  0,
+                  (acc, phase) => acc + phase.features.filter((f) => f.status === "partial").length,
+                  0
                 )}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Partial Features
-              </div>
+              <div className="text-sm text-muted-foreground">Partial Features</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-400">
                 {phases.reduce(
                   (acc, phase) =>
-                    acc +
-                    phase.features.filter((f) => f.status === "complete")
-                      .length,
-                  0,
+                    acc + phase.features.filter((f) => f.status === "complete").length,
+                  0
                 )}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Complete Features
-              </div>
+              <div className="text-sm text-muted-foreground">Complete Features</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-400">
                 {phases.reduce((acc, phase) => acc + phase.features.length, 0)}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Features
-              </div>
+              <div className="text-sm text-muted-foreground">Total Features</div>
             </div>
           </div>
         </CardContent>
@@ -515,15 +482,12 @@ export function MasterUpgradePlan() {
           <div className="space-y-4">
             <p className="text-foreground">
               Based on the analysis, I recommend starting with{" "}
-              <strong>Phase 1: Foundation Recovery & Integration</strong> as it
-              contains the most critical missing features that other phases
-              depend on.
+              <strong>Phase 1: Foundation Recovery & Integration</strong> as it contains the most
+              critical missing features that other phases depend on.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <h4 className="font-semibold text-red-400 mb-2">
-                  🚨 Critical Priority
-                </h4>
+                <h4 className="font-semibold text-red-400 mb-2">🚨 Critical Priority</h4>
                 <ul className="text-sm space-y-1 text-muted-foreground">
                   <li>• Bundle admin pages for better organization</li>
                   <li>• Update to new Gaia logo across all systems</li>
@@ -532,9 +496,7 @@ export function MasterUpgradePlan() {
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-orange-400 mb-2">
-                  ⚡ High Impact Features
-                </h4>
+                <h4 className="font-semibold text-orange-400 mb-2">⚡ High Impact Features</h4>
                 <ul className="text-sm space-y-1 text-muted-foreground">
                   <li>• Farmer system with event creation</li>
                   <li>• Animal grazing land recovery project</li>

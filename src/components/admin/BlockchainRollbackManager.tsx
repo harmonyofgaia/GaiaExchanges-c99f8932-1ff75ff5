@@ -35,11 +35,8 @@ interface RollbackOperation {
 }
 
 export function BlockchainRollbackManager() {
-  const [blockchainStates, setBlockchainStates] = useState<BlockchainState[]>(
-    [],
-  );
-  const [activeRollback, setActiveRollback] =
-    useState<RollbackOperation | null>(null);
+  const [blockchainStates, setBlockchainStates] = useState<BlockchainState[]>([]);
+  const [activeRollback, setActiveRollback] = useState<RollbackOperation | null>(null);
   const [currentBlock, setCurrentBlock] = useState(847291);
   const [rollbackInProgress, setRollbackInProgress] = useState(false);
 
@@ -120,10 +117,9 @@ export function BlockchainRollbackManager() {
             ? {
                 ...prev,
                 progress,
-                status:
-                  i === rollbackSteps.length - 1 ? "completed" : "processing",
+                status: i === rollbackSteps.length - 1 ? "completed" : "processing",
               }
-            : null,
+            : null
         );
 
         if (i === rollbackSteps.length - 1) {
@@ -135,9 +131,7 @@ export function BlockchainRollbackManager() {
             duration: 10000,
           });
 
-          console.log(
-            `✅ ROLLBACK COMPLETE: Blockchain restored to block ${targetBlock}`,
-          );
+          console.log(`✅ ROLLBACK COMPLETE: Blockchain restored to block ${targetBlock}`);
           console.log("🔒 DATA INTEGRITY: 100% maintained during rollback");
           console.log("⚡ QUANTUM VERIFICATION: All operations validated");
 
@@ -153,12 +147,8 @@ export function BlockchainRollbackManager() {
 
   const createBackupPoint = () => {
     console.log(`💾 CREATING BACKUP POINT AT BLOCK: ${currentBlock}`);
-    console.log(
-      "🔒 QUANTUM ENCRYPTION: Securing backup with maximum protection",
-    );
-    console.log(
-      "☁️ CLOUD STORAGE: Distributing backup across multiple secure locations",
-    );
+    console.log("🔒 QUANTUM ENCRYPTION: Securing backup with maximum protection");
+    console.log("☁️ CLOUD STORAGE: Distributing backup across multiple secure locations");
 
     toast.success("💾 Backup Point Created!", {
       description: `Emergency backup created at block ${currentBlock}`,
@@ -219,9 +209,7 @@ export function BlockchainRollbackManager() {
             🔄 BLOCKCHAIN ROLLBACK MANAGER - QUANTUM POWERED
           </CardTitle>
           <div className="flex gap-4">
-            <Badge className="bg-green-600">
-              Current Block: {currentBlock.toLocaleString()}
-            </Badge>
+            <Badge className="bg-green-600">Current Block: {currentBlock.toLocaleString()}</Badge>
             <Badge
               className={`${rollbackInProgress ? "bg-yellow-600 animate-pulse" : "bg-blue-600"}`}
             >
@@ -247,10 +235,7 @@ export function BlockchainRollbackManager() {
               <Shield className="h-5 w-5 mr-2" />
               🔍 VALIDATE BLOCKCHAIN
             </Button>
-            <Button
-              className="bg-blue-600 hover:bg-blue-700 py-6"
-              disabled={rollbackInProgress}
-            >
+            <Button className="bg-blue-600 hover:bg-blue-700 py-6" disabled={rollbackInProgress}>
               <Eye className="h-5 w-5 mr-2" />
               👁️ VIEW CHAIN STATE
             </Button>
@@ -277,10 +262,7 @@ export function BlockchainRollbackManager() {
                     {activeRollback.status.toUpperCase()}
                   </Badge>
                 </div>
-                <Progress
-                  value={activeRollback.progress}
-                  className="h-3 mb-2"
-                />
+                <Progress value={activeRollback.progress} className="h-3 mb-2" />
                 <div className="flex justify-between text-sm text-muted-foreground">
                   <span>Progress: {activeRollback.progress.toFixed(1)}%</span>
                   <span>
@@ -288,9 +270,7 @@ export function BlockchainRollbackManager() {
                     {Math.max(
                       0,
                       activeRollback.estimatedTime -
-                        (activeRollback.progress *
-                          activeRollback.estimatedTime) /
-                          100,
+                        (activeRollback.progress * activeRollback.estimatedTime) / 100
                     ).toFixed(0)}
                     s
                   </span>
@@ -300,22 +280,15 @@ export function BlockchainRollbackManager() {
           )}
 
           <div className="space-y-3">
-            <h4 className="text-lg font-bold text-blue-400">
-              📊 Recent Blockchain States
-            </h4>
+            <h4 className="text-lg font-bold text-blue-400">📊 Recent Blockchain States</h4>
             {blockchainStates.map((state) => (
-              <div
-                key={state.id}
-                className="p-4 bg-black/30 rounded-lg border border-gray-600"
-              >
+              <div key={state.id} className="p-4 bg-black/30 rounded-lg border border-gray-600">
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <div className="font-bold text-white">
                       Block {state.blockHeight.toLocaleString()}
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                      {state.description}
-                    </div>
+                    <div className="text-sm text-muted-foreground">{state.description}</div>
                   </div>
                   <div className="flex gap-2">
                     <Badge
@@ -327,9 +300,7 @@ export function BlockchainRollbackManager() {
                     <Button
                       size="sm"
                       onClick={() => initiateRollback(state.blockHeight)}
-                      disabled={
-                        rollbackInProgress || state.blockHeight >= currentBlock
-                      }
+                      disabled={rollbackInProgress || state.blockHeight >= currentBlock}
                       className="bg-orange-600 hover:bg-orange-700"
                     >
                       <RotateCcw className="h-3 w-3 mr-1" />
@@ -341,9 +312,7 @@ export function BlockchainRollbackManager() {
                   <div>📅 {state.timestamp.toLocaleString()}</div>
                   <div>📊 {state.transactionCount} transactions</div>
                 </div>
-                <div className="text-xs text-gray-500 mt-2 font-mono">
-                  🔒 {state.stateHash}
-                </div>
+                <div className="text-xs text-gray-500 mt-2 font-mono">🔒 {state.stateHash}</div>
               </div>
             ))}
           </div>

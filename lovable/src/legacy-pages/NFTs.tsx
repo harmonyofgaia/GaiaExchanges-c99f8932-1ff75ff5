@@ -25,12 +25,10 @@ export default function NFTs() {
         <CardContent className="space-y-6">
           <div className="text-center">
             <div className="text-6xl mb-4">🚧</div>
-            <h3 className="text-2xl font-bold text-green-400 mb-2">
-              Coming Soon
-            </h3>
+            <h3 className="text-2xl font-bold text-green-400 mb-2">Coming Soon</h3>
             <p className="text-muted-foreground">
-              Our NFT marketplace is under development. Stay tuned for exclusive
-              digital art and collectibles!
+              Our NFT marketplace is under development. Stay tuned for exclusive digital art and
+              collectibles!
             </p>
           </div>
         </CardContent>

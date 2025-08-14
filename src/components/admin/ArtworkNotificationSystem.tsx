@@ -29,11 +29,7 @@ export function ArtworkNotificationSystem() {
   const [lastSentTime, setLastSentTime] = useState<Date | null>(null);
 
   const sendArtworkNotification = async () => {
-    if (
-      !notificationData.recipient ||
-      !notificationData.subject ||
-      !notificationData.message
-    ) {
+    if (!notificationData.recipient || !notificationData.subject || !notificationData.message) {
       toast.error("Missing required fields", {
         description: "Please fill in recipient, subject, and message",
       });
@@ -41,20 +37,15 @@ export function ArtworkNotificationSystem() {
     }
 
     setIsSending(true);
-    console.log(
-      "📧 Sending artwork notification to:",
-      notificationData.recipient,
-    );
+    console.log("📧 Sending artwork notification to:", notificationData.recipient);
 
     try {
-      const { data, error } = await supabase.functions.invoke(
-        "send-contact-email",
-        {
-          body: {
-            name: "Culture of Harmony System",
-            email: notificationData.recipient,
-            subject: notificationData.subject,
-            message: `${notificationData.message}
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          name: "Culture of Harmony System",
+          email: notificationData.recipient,
+          subject: notificationData.subject,
+          message: `${notificationData.message}
 
 ${notificationData.artworkTitle ? `Artwork Title: ${notificationData.artworkTitle}` : ""}
 ${notificationData.artworkUrl ? `Artwork URL: ${notificationData.artworkUrl}` : ""}
@@ -64,10 +55,9 @@ Generated automatically by the Culture of Harmony artwork system.
 Best regards,
 Culture of Harmony Team
 🌍 Making the world a better place through sustainable creativity`,
-            contactType: "artwork_notification",
-          },
+          contactType: "artwork_notification",
         },
-      );
+      });
 
       if (error) {
         console.error("❌ Email sending error:", error);
@@ -85,10 +75,10 @@ Culture of Harmony Team
         description: `Successfully notified ${notificationData.recipient}`,
         duration: 5000,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("❌ Notification sending failed:", error);
       toast.error("Notification Failed", {
-        description: `Error: ${error.message}`,
+        description: `Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
         duration: 5000,
       });
     } finally {
@@ -101,19 +91,16 @@ Culture of Harmony Team
 
     setIsSending(true);
     try {
-      const { data, error } = await supabase.functions.invoke(
-        "send-contact-email",
-        {
-          body: {
-            name: "System Test",
-            email: "info@cultureofharmony.net",
-            subject: "Culture of Harmony - Email System Test",
-            message:
-              "This is a test email to verify the Resend API connection is working properly.\n\nIf you receive this message, the artwork notification system is ready!",
-            contactType: "system_test",
-          },
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          name: "System Test",
+          email: "info@cultureofharmony.net",
+          subject: "Culture of Harmony - Email System Test",
+          message:
+            "This is a test email to verify the Resend API connection is working properly.\n\nIf you receive this message, the artwork notification system is ready!",
+          contactType: "system_test",
         },
-      );
+      });
 
       if (error) {
         throw error;
@@ -123,9 +110,9 @@ Culture of Harmony Team
         description: "Resend API is properly configured",
         duration: 5000,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error("❌ Email Connection Test Failed", {
-        description: `Please check Resend API configuration: ${error.message}`,
+        description: `Please check Resend API configuration: ${error instanceof Error ? error.message : 'Unknown error'}`,
         duration: 8000,
       });
     } finally {
@@ -141,8 +128,7 @@ Culture of Harmony Team
           🎨 Artwork Notification System
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Automatic email notifications for new artwork generation to Culture of
-          Harmony team
+          Automatic email notifications for new artwork generation to Culture of Harmony team
         </p>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -275,9 +261,8 @@ Culture of Harmony Team
             <h4 className="font-medium text-blue-400">Integration Ready</h4>
           </div>
           <p className="text-sm text-muted-foreground">
-            This notification system will automatically send emails when new
-            artworks are generated. Perfect for keeping the Culture of Harmony
-            team informed about creative outputs.
+            This notification system will automatically send emails when new artworks are generated.
+            Perfect for keeping the Culture of Harmony team informed about creative outputs.
           </p>
         </div>
       </CardContent>

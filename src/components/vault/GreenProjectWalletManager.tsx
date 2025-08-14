@@ -79,10 +79,7 @@ export function GreenProjectWalletManager() {
   const [isProcessingFees, setIsProcessingFees] = useState(false);
 
   useEffect(() => {
-    const total = greenProjects.reduce(
-      (sum, project) => sum + project.total_received,
-      0,
-    );
+    const total = greenProjects.reduce((sum, project) => sum + project.total_received, 0);
     setTotalAllocated(total);
 
     // Simulate live fee processing
@@ -117,8 +114,7 @@ export function GreenProjectWalletManager() {
             🌍 Green Project Wallet Distribution System
           </CardTitle>
           <p className="text-green-300">
-            All community fees are automatically reinvested into global
-            environmental projects
+            All community fees are automatically reinvested into global environmental projects
           </p>
         </CardHeader>
         <CardContent>
@@ -127,23 +123,15 @@ export function GreenProjectWalletManager() {
               <div className="text-2xl font-bold text-green-400">
                 {totalAllocated.toLocaleString()} GAIA
               </div>
-              <div className="text-xs text-muted-foreground">
-                Total Allocated
-              </div>
+              <div className="text-xs text-muted-foreground">Total Allocated</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-blue-900/30">
-              <div className="text-2xl font-bold text-blue-400">
-                {greenProjects.length}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Active Projects
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{greenProjects.length}</div>
+              <div className="text-xs text-muted-foreground">Active Projects</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-purple-900/30">
               <div className="text-2xl font-bold text-purple-400">100%</div>
-              <div className="text-xs text-muted-foreground">
-                Fee Reinvestment
-              </div>
+              <div className="text-xs text-muted-foreground">Fee Reinvestment</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-orange-900/30">
               <div className="text-2xl font-bold text-orange-400">
@@ -180,51 +168,30 @@ export function GreenProjectWalletManager() {
             <CardContent className="p-6">
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h3 className="font-bold text-lg text-green-400">
-                    {project.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {project.description}
-                  </p>
+                  <h3 className="font-bold text-lg text-green-400">{project.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-2">{project.description}</p>
                 </div>
-                <Badge
-                  className={`${getStatusColor(project.project_status)} text-white`}
-                >
+                <Badge className={`${getStatusColor(project.project_status)} text-white`}>
                   {project.project_status.toUpperCase()}
                 </Badge>
               </div>
 
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">
-                    Allocation:
-                  </span>
-                  <span className="font-bold text-green-400">
-                    {project.allocation_percentage}%
-                  </span>
+                  <span className="text-sm text-muted-foreground">Allocation:</span>
+                  <span className="font-bold text-green-400">{project.allocation_percentage}%</span>
                 </div>
 
-                <Progress
-                  value={project.allocation_percentage}
-                  className="h-2"
-                />
+                <Progress value={project.allocation_percentage} className="h-2" />
 
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">
-                    Total Received:
-                  </span>
-                  <span className="font-bold">
-                    {project.total_received.toLocaleString()} GAIA
-                  </span>
+                  <span className="text-sm text-muted-foreground">Total Received:</span>
+                  <span className="font-bold">{project.total_received.toLocaleString()} GAIA</span>
                 </div>
 
                 <div className="bg-black/30 p-2 rounded text-xs">
-                  <div className="text-muted-foreground mb-1">
-                    Wallet Address:
-                  </div>
-                  <div className="font-mono text-green-400 break-all">
-                    {project.wallet_address}
-                  </div>
+                  <div className="text-muted-foreground mb-1">Wallet Address:</div>
+                  <div className="font-mono text-green-400 break-all">{project.wallet_address}</div>
                 </div>
               </div>
             </CardContent>
@@ -238,16 +205,13 @@ export function GreenProjectWalletManager() {
           <div className="text-center space-y-4">
             <div className="flex items-center justify-center gap-2">
               <Shield className="h-6 w-6 text-blue-400" />
-              <h3 className="text-xl font-bold text-blue-400">
-                Automatic Reinvestment System
-              </h3>
+              <h3 className="text-xl font-bold text-blue-400">Automatic Reinvestment System</h3>
               <Globe className="h-6 w-6 text-green-400" />
             </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              All transaction fees are automatically distributed to verified
-              green projects according to the allocation percentages shown
-              above. This creates a sustainable ecosystem where every trade
-              helps improve our planet.
+              All transaction fees are automatically distributed to verified green projects
+              according to the allocation percentages shown above. This creates a sustainable
+              ecosystem where every trade helps improve our planet.
             </p>
             <div className="flex justify-center gap-4 text-xs flex-wrap">
               <Badge className="bg-green-600 text-white">

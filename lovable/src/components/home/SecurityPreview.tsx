@@ -1,15 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Shield,
-  Lock,
-  Eye,
-  Zap,
-  Crown,
-  Globe,
-  AlertTriangle,
-} from "lucide-react";
+import { Shield, Lock, Eye, Zap, Crown, Globe, AlertTriangle } from "lucide-react";
 
 export const SecurityPreview = () => {
   return (
@@ -34,17 +26,15 @@ export const SecurityPreview = () => {
 
               <div className="text-lg font-semibold text-red-300 leading-relaxed mb-4">
                 🚫{" "}
-                <span className="text-red-400 font-bold">
-                  COMPLETE INVISIBILITY TO ALL THREATS
-                </span>{" "}
+                <span className="text-red-400 font-bold">COMPLETE INVISIBILITY TO ALL THREATS</span>{" "}
                 🚫
               </div>
 
               <div className="text-base text-red-200 leading-relaxed space-y-2">
                 <p>
                   <span className="text-red-400 font-bold">
-                    Every platform, system, electronic device, coding software,
-                    data tracking technology
+                    Every platform, system, electronic device, coding software, data tracking
+                    technology
                   </span>
                   and{" "}
                   <span className="text-red-400 font-bold">
@@ -60,8 +50,7 @@ export const SecurityPreview = () => {
                 </p>
 
                 <p className="text-lg font-bold text-green-400">
-                  ⚡ WE ARE ALWAYS 100X STRONGER THAN EVERY TECHNOLOGY THAT WILL
-                  BE CREATED ⚡
+                  ⚡ WE ARE ALWAYS 100X STRONGER THAN EVERY TECHNOLOGY THAT WILL BE CREATED ⚡
                 </p>
 
                 <p className="text-red-300">
@@ -70,10 +59,7 @@ export const SecurityPreview = () => {
                     Phishing, Data Theft, Identity Stealing
                   </span>
                   and all forms of{" "}
-                  <span className="text-red-400 font-bold">
-                    harmful information extraction
-                  </span>
-                  .
+                  <span className="text-red-400 font-bold">harmful information extraction</span>.
                 </p>
               </div>
             </div>
@@ -83,32 +69,20 @@ export const SecurityPreview = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30 rounded-lg p-4 text-center">
               <Lock className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="font-bold text-blue-400 mb-1">
-                Quantum Encryption
-              </div>
-              <div className="text-xs text-blue-300">
-                Unbreakable by any future technology
-              </div>
+              <div className="font-bold text-blue-400 mb-1">Quantum Encryption</div>
+              <div className="text-xs text-blue-300">Unbreakable by any future technology</div>
             </div>
 
             <div className="bg-gradient-to-br from-red-900/30 to-pink-900/30 border border-red-500/30 rounded-lg p-4 text-center">
               <Eye className="h-8 w-8 text-red-400 mx-auto mb-2" />
-              <div className="font-bold text-red-400 mb-1">
-                Invisible Tracking
-              </div>
-              <div className="text-xs text-red-300">
-                Complete stealth monitoring system
-              </div>
+              <div className="font-bold text-red-400 mb-1">Invisible Tracking</div>
+              <div className="text-xs text-red-300">Complete stealth monitoring system</div>
             </div>
 
             <div className="bg-gradient-to-br from-purple-900/30 to-violet-900/30 border border-purple-500/30 rounded-lg p-4 text-center">
               <Crown className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-              <div className="font-bold text-purple-400 mb-1">
-                Dragon Protection
-              </div>
-              <div className="text-xs text-purple-300">
-                Mythical-level security barriers
-              </div>
+              <div className="font-bold text-purple-400 mb-1">Dragon Protection</div>
+              <div className="text-xs text-purple-300">Mythical-level security barriers</div>
             </div>
           </div>
 
@@ -134,8 +108,7 @@ export const SecurityPreview = () => {
               🌍 CULTURE OF HARMONY - PROTECTING THE FUTURE OF HUMANITY
             </div>
             <p className="text-muted-foreground mb-4">
-              Join the most secure and advanced cryptocurrency ecosystem ever
-              created
+              Join the most secure and advanced cryptocurrency ecosystem ever created
             </p>
             <Button className="bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 hover:from-red-700 hover:via-purple-700 hover:to-blue-700 text-white text-lg px-8 py-3">
               <Shield className="h-5 w-5 mr-2" />

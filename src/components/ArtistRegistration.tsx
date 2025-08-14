@@ -71,26 +71,18 @@ export function ArtistRegistration() {
 
   const handlePercentageChange = (index: number, newPercentage: number) => {
     const updatedAllocations = [...fundAllocations];
-    updatedAllocations[index].percentage = Math.max(
-      0,
-      Math.min(100, newPercentage),
-    );
+    updatedAllocations[index].percentage = Math.max(0, Math.min(100, newPercentage));
 
     // Auto-adjust other percentages to maintain 100% total
-    const total = updatedAllocations.reduce(
-      (sum, alloc) => sum + alloc.percentage,
-      0,
-    );
+    const total = updatedAllocations.reduce((sum, alloc) => sum + alloc.percentage, 0);
     if (total !== 100) {
       const diff = 100 - total;
-      const otherIndices = updatedAllocations
-        .map((_, i) => i)
-        .filter((i) => i !== index);
+      const otherIndices = updatedAllocations.map((_, i) => i).filter((i) => i !== index);
       const adjustment = diff / otherIndices.length;
       otherIndices.forEach((i) => {
         updatedAllocations[i].percentage = Math.max(
           0,
-          updatedAllocations[i].percentage + adjustment,
+          updatedAllocations[i].percentage + adjustment
         );
       });
     }
@@ -125,13 +117,12 @@ export function ArtistRegistration() {
       // Burn tokens for fund allocation setup
       const burnSuccess = await gaiaTokenService.burnTokens(
         50,
-        `Fund allocation setup for ${artistData.name}`,
+        `Fund allocation setup for ${artistData.name}`
       );
 
       if (burnSuccess) {
         toast.success("💰 Fund Allocation Configured!", {
-          description:
-            "Your streaming earnings will be distributed according to your preferences.",
+          description: "Your streaming earnings will be distributed according to your preferences.",
           duration: 4000,
         });
 
@@ -142,10 +133,7 @@ export function ArtistRegistration() {
     }
   };
 
-  const totalPercentage = fundAllocations.reduce(
-    (sum, alloc) => sum + alloc.percentage,
-    0,
-  );
+  const totalPercentage = fundAllocations.reduce((sum, alloc) => sum + alloc.percentage, 0);
 
   return (
     <div className="space-y-6">
@@ -157,8 +145,7 @@ export function ArtistRegistration() {
             🎭 GAiA Artist Registration & Fund Management
           </CardTitle>
           <p className="text-muted-foreground">
-            Register as an artist and configure how your streaming earnings
-            support various causes
+            Register as an artist and configure how your streaming earnings support various causes
           </p>
         </CardHeader>
         <CardContent>
@@ -191,9 +178,7 @@ export function ArtistRegistration() {
                 <label className="text-sm font-medium">Artist Name *</label>
                 <Input
                   value={artistData.name}
-                  onChange={(e) =>
-                    setArtistData({ ...artistData, name: e.target.value })
-                  }
+                  onChange={(e) => setArtistData({ ...artistData, name: e.target.value })}
                   placeholder="Your artistic name"
                 />
               </div>
@@ -202,9 +187,7 @@ export function ArtistRegistration() {
                 <Input
                   type="email"
                   value={artistData.email}
-                  onChange={(e) =>
-                    setArtistData({ ...artistData, email: e.target.value })
-                  }
+                  onChange={(e) => setArtistData({ ...artistData, email: e.target.value })}
                   placeholder="your@email.com"
                 />
               </div>
@@ -214,9 +197,7 @@ export function ArtistRegistration() {
               <label className="text-sm font-medium">Artist Type</label>
               <select
                 value={artistData.artistType}
-                onChange={(e) =>
-                  setArtistData({ ...artistData, artistType: e.target.value })
-                }
+                onChange={(e) => setArtistData({ ...artistData, artistType: e.target.value })}
                 className="w-full px-3 py-2 bg-muted border border-border rounded-md"
               >
                 <option value="">Select your art form</option>
@@ -234,9 +215,7 @@ export function ArtistRegistration() {
               <label className="text-sm font-medium">Bio</label>
               <Textarea
                 value={artistData.bio}
-                onChange={(e) =>
-                  setArtistData({ ...artistData, bio: e.target.value })
-                }
+                onChange={(e) => setArtistData({ ...artistData, bio: e.target.value })}
                 placeholder="Tell us about your artistic journey..."
                 rows={3}
               />
@@ -260,9 +239,7 @@ export function ArtistRegistration() {
                 <label className="text-sm font-medium">Portfolio</label>
                 <Input
                   value={artistData.portfolio}
-                  onChange={(e) =>
-                    setArtistData({ ...artistData, portfolio: e.target.value })
-                  }
+                  onChange={(e) => setArtistData({ ...artistData, portfolio: e.target.value })}
                   placeholder="Portfolio website or gallery"
                 />
               </div>
@@ -289,8 +266,7 @@ export function ArtistRegistration() {
                   Welcome, {artistData.name}!
                 </h3>
                 <p className="text-muted-foreground">
-                  You're now registered as a GAiA artist and can start
-                  streaming.
+                  You're now registered as a GAiA artist and can start streaming.
                 </p>
                 <div className="flex justify-center gap-4 mt-4">
                   <Badge className="bg-purple-600 text-white">
@@ -318,8 +294,7 @@ export function ArtistRegistration() {
                 Fund Allocation Management
               </CardTitle>
               <p className="text-muted-foreground">
-                Configure how your streaming earnings are distributed to support
-                various causes
+                Configure how your streaming earnings are distributed to support various causes
               </p>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -343,17 +318,12 @@ export function ArtistRegistration() {
                   </div>
 
                   {fundAllocations.map((allocation, index) => (
-                    <div
-                      key={index}
-                      className="p-4 bg-muted/30 rounded-lg border border-border/50"
-                    >
+                    <div key={index} className="p-4 bg-muted/30 rounded-lg border border-border/50">
                       <div className="flex items-center gap-3 mb-2">
                         {allocation.icon}
                         <h4 className="font-semibold">{allocation.project}</h4>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        {allocation.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground mb-3">{allocation.description}</p>
                       <div className="flex items-center gap-2">
                         <Input
                           type="number"
@@ -361,18 +331,12 @@ export function ArtistRegistration() {
                           max="100"
                           value={allocation.percentage}
                           onChange={(e) =>
-                            handlePercentageChange(
-                              index,
-                              parseFloat(e.target.value) || 0,
-                            )
+                            handlePercentageChange(index, parseFloat(e.target.value) || 0)
                           }
                           className="w-20"
                         />
                         <span className="text-sm text-muted-foreground">%</span>
-                        <Progress
-                          value={allocation.percentage}
-                          className="flex-1 h-2"
-                        />
+                        <Progress value={allocation.percentage} className="flex-1 h-2" />
                       </div>
                     </div>
                   ))}
@@ -386,10 +350,7 @@ export function ArtistRegistration() {
                       <Target className="h-4 w-4 mr-2" />
                       Save Fund Allocation
                     </Button>
-                    <Button
-                      onClick={() => setShowFundSetup(false)}
-                      variant="outline"
-                    >
+                    <Button onClick={() => setShowFundSetup(false)} variant="outline">
                       Cancel
                     </Button>
                   </div>

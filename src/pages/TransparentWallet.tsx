@@ -36,8 +36,7 @@ export default function TransparentWallet() {
             💎 100% TRANSPARENT COMMUNITY WALLET
           </h1>
           <p className="text-2xl text-green-300 mb-6">
-            Every Fee • Every Burn • Every Transaction • Complete Transparency •
-            Community First
+            Every Fee • Every Burn • Every Transaction • Complete Transparency • Community First
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <Badge className="bg-green-600 text-white text-lg px-6 py-2 animate-pulse">
@@ -68,21 +67,19 @@ export default function TransparentWallet() {
           </CardHeader>
           <CardContent className="text-center space-y-4">
             <p className="text-xl text-green-300">
-              "We build a community of believers, not traders. Every fee
-              strengthens our environmental mission. No staking, no gambling -
-              just pure investment in a sustainable future."
+              "We build a community of believers, not traders. Every fee strengthens our
+              environmental mission. No staking, no gambling - just pure investment in a sustainable
+              future."
             </p>
             <p className="text-lg text-blue-300">
-              "GAiA is for those who want to change the world, not make quick
-              profits. We stay stable forever by focusing on long-term
-              environmental impact."
+              "GAiA is for those who want to change the world, not make quick profits. We stay
+              stable forever by focusing on long-term environmental impact."
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
               <div className="p-4 bg-green-900/30 rounded-lg">
                 <h4 className="font-bold text-green-400">✅ WE WELCOME</h4>
                 <p className="text-sm text-green-300">
-                  Long-term believers, Environmental advocates, Community
-                  builders
+                  Long-term believers, Environmental advocates, Community builders
                 </p>
               </div>
               <div className="p-4 bg-blue-900/30 rounded-lg">
@@ -93,9 +90,7 @@ export default function TransparentWallet() {
               </div>
               <div className="p-4 bg-red-900/30 rounded-lg">
                 <h4 className="font-bold text-red-400">❌ NOT FOR</h4>
-                <p className="text-sm text-red-300">
-                  Daily traders, Quick profits, Speculation
-                </p>
+                <p className="text-sm text-red-300">Daily traders, Quick profits, Speculation</p>
               </div>
             </div>
           </CardContent>
@@ -111,14 +106,9 @@ export default function TransparentWallet() {
           <CardContent className="space-y-6">
             <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-green-400 font-bold text-xl">
-                  Official Community Wallet:
-                </h3>
+                <h3 className="text-green-400 font-bold text-xl">Official Community Wallet:</h3>
                 <div className="flex gap-2">
-                  <Button
-                    onClick={copyWalletAddress}
-                    className="bg-green-600 hover:bg-green-700"
-                  >
+                  <Button onClick={copyWalletAddress} className="bg-green-600 hover:bg-green-700">
                     <Copy className="h-4 w-4 mr-2" />
                     Copy Address
                   </Button>
@@ -139,9 +129,7 @@ export default function TransparentWallet() {
 
             <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-purple-400 font-bold text-xl">
-                  Contract Address (Pump.fun):
-                </h3>
+                <h3 className="text-purple-400 font-bold text-xl">Contract Address (Pump.fun):</h3>
                 <Button
                   onClick={openPumpFun}
                   variant="outline"
@@ -164,33 +152,23 @@ export default function TransparentWallet() {
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/20">
-                    <h5 className="text-green-400 font-bold">
-                      🌱 Environmental Projects
-                    </h5>
+                    <h5 className="text-green-400 font-bold">🌱 Environmental Projects</h5>
                     <p className="text-green-300 text-sm">
                       Reforestation, Ocean cleanup, Solar energy, Carbon offset
                     </p>
                   </div>
                   <div className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/20">
-                    <h5 className="text-blue-400 font-bold">
-                      🔥 Token Burning
-                    </h5>
-                    <p className="text-blue-300 text-sm">
-                      Increase token value by reducing supply
-                    </p>
+                    <h5 className="text-blue-400 font-bold">🔥 Token Burning</h5>
+                    <p className="text-blue-300 text-sm">Increase token value by reducing supply</p>
                   </div>
                   <div className="p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
-                    <h5 className="text-purple-400 font-bold">
-                      🏦 Community Vault
-                    </h5>
+                    <h5 className="text-purple-400 font-bold">🏦 Community Vault</h5>
                     <p className="text-purple-300 text-sm">
                       Admin humanitarian surprises and community rewards
                     </p>
                   </div>
                   <div className="p-4 bg-orange-900/20 rounded-lg border border-orange-500/20">
-                    <h5 className="text-orange-400 font-bold">
-                      ❤️ Humanity Fund
-                    </h5>
+                    <h5 className="text-orange-400 font-bold">❤️ Humanity Fund</h5>
                     <p className="text-orange-300 text-sm">
                       Global humanitarian aid and disaster relief
                     </p>
@@ -216,16 +194,12 @@ export default function TransparentWallet() {
               🌍 TRANSPARENCY IS OUR FOUNDATION
             </h2>
             <p className="text-xl text-green-300 mb-6">
-              Every transaction visible • Every fee tracked • Every burn
-              recorded • Community trust through complete openness
+              Every transaction visible • Every fee tracked • Every burn recorded • Community trust
+              through complete openness
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
-              <Badge className="bg-green-600 text-white text-lg px-6 py-3">
-                ✅ No Hidden Fees
-              </Badge>
-              <Badge className="bg-blue-600 text-white text-lg px-6 py-3">
-                👁️ 100% Visible
-              </Badge>
+              <Badge className="bg-green-600 text-white text-lg px-6 py-3">✅ No Hidden Fees</Badge>
+              <Badge className="bg-blue-600 text-white text-lg px-6 py-3">👁️ 100% Visible</Badge>
               <Badge className="bg-purple-600 text-white text-lg px-6 py-3">
                 🛡️ Community Protected
               </Badge>

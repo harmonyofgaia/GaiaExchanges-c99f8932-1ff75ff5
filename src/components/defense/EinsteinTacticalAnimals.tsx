@@ -132,15 +132,12 @@ export function EinsteinTacticalAnimals() {
           ...animal,
           intelligenceLevel: animal.intelligenceLevel * 1.001,
           quantumPower: animal.quantumPower * 1.002,
-          threatsNeutralized:
-            animal.threatsNeutralized + Math.floor(Math.random() * 10000),
+          threatsNeutralized: animal.threatsNeutralized + Math.floor(Math.random() * 10000),
           evolutionStage: Math.min(animal.evolutionStage + 0.1, 100),
-        })),
+        }))
       );
 
-      setTotalQuantumPower(
-        animals.reduce((sum, animal) => sum + animal.quantumPower, 0),
-      );
+      setTotalQuantumPower(animals.reduce((sum, animal) => sum + animal.quantumPower, 0));
 
       if (Math.random() < 0.1) {
         const discoveries = [
@@ -152,8 +149,7 @@ export function EinsteinTacticalAnimals() {
           "🧬 DNA-level threat prevention activated",
         ];
 
-        const discovery =
-          discoveries[Math.floor(Math.random() * discoveries.length)];
+        const discovery = discoveries[Math.floor(Math.random() * discoveries.length)];
         toast.success("🧠 Einstein Discovery!", {
           description: discovery,
           duration: 4000,
@@ -172,7 +168,7 @@ export function EinsteinTacticalAnimals() {
         status: "omniscient" as const,
         intelligenceLevel: animal.intelligenceLevel * 2,
         quantumPower: animal.quantumPower * 3,
-      })),
+      }))
     );
 
     toast.success("🧠 MAXIMUM INTELLIGENCE ACTIVATED!", {
@@ -192,8 +188,7 @@ export function EinsteinTacticalAnimals() {
             TOTAL QUANTUM POWER: {totalQuantumPower.toLocaleString()}
           </Badge>
           <p className="text-muted-foreground">
-            Self-Evolving • Reality-Bending • Dimensional Defense • Omniscient
-            Awareness
+            Self-Evolving • Reality-Bending • Dimensional Defense • Omniscient Awareness
           </p>
         </div>
       </CardHeader>
@@ -205,9 +200,7 @@ export function EinsteinTacticalAnimals() {
               className="border-purple-400/30 bg-gradient-to-br from-purple-900/40 to-indigo-900/40"
             >
               <CardHeader>
-                <CardTitle className="text-purple-300 text-lg">
-                  {animal.name}
-                </CardTitle>
+                <CardTitle className="text-purple-300 text-lg">{animal.name}</CardTitle>
                 <div className="flex flex-wrap gap-2">
                   <Badge
                     className={`${
@@ -282,9 +275,7 @@ export function EinsteinTacticalAnimals() {
                     <div className="text-sm font-bold text-green-400">
                       {animal.threatsNeutralized.toLocaleString()}
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      Threats Neutralized
-                    </div>
+                    <div className="text-xs text-muted-foreground">Threats Neutralized</div>
                   </div>
                 </div>
               </CardContent>
@@ -299,16 +290,10 @@ export function EinsteinTacticalAnimals() {
           >
             🧠 ACTIVATE MAXIMUM INTELLIGENCE
           </Button>
-          <Button
-            variant="outline"
-            className="border-purple-500 text-purple-400"
-          >
+          <Button variant="outline" className="border-purple-500 text-purple-400">
             🌌 DIMENSIONAL SCAN
           </Button>
-          <Button
-            variant="outline"
-            className="border-indigo-500 text-indigo-400"
-          >
+          <Button variant="outline" className="border-indigo-500 text-indigo-400">
             ⚡ QUANTUM EVOLUTION
           </Button>
         </div>
@@ -320,12 +305,11 @@ export function EinsteinTacticalAnimals() {
               EINSTEIN-LEVEL INTELLIGENCE NETWORK
             </h3>
             <p className="text-purple-300">
-              Quantum Consciousness • Reality Manipulation • Dimensional Defense
-              • Omniscient Protection
+              Quantum Consciousness • Reality Manipulation • Dimensional Defense • Omniscient
+              Protection
             </p>
             <div className="text-sm text-muted-foreground">
-              🔥 Transcending human comprehension - Protecting through pure
-              intelligence
+              🔥 Transcending human comprehension - Protecting through pure intelligence
             </div>
           </div>
         </div>

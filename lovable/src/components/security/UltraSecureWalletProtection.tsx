@@ -2,15 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Shield,
-  Lock,
-  Eye,
-  Zap,
-  Globe,
-  AlertTriangle,
-  CheckCircle,
-} from "lucide-react";
+import { Shield, Lock, Eye, Zap, Globe, AlertTriangle, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import { GAIA_TOKEN } from "@/constants/gaia";
 
@@ -27,11 +19,7 @@ interface SecurityMetrics {
 
 interface GlobalThreat {
   id: string;
-  type:
-    | "COPY_ATTEMPT"
-    | "WALLET_ATTACK"
-    | "STRATEGY_THEFT"
-    | "PRIVATE_INFO_BREACH";
+  type: "COPY_ATTEMPT" | "WALLET_ATTACK" | "STRATEGY_THEFT" | "PRIVATE_INFO_BREACH";
   location: string;
   severity: "CRITICAL" | "HIGH" | "MEDIUM" | "LOW";
   blocked: boolean;
@@ -56,9 +44,7 @@ export function UltraSecureWalletProtection() {
 
   useEffect(() => {
     const performGlobalSecurityScan = async () => {
-      console.log(
-        "🛡️ GLOBAL SECURITY SCAN - EVERY 10 SECONDS - WORLDWIDE PROTECTION ACTIVE",
-      );
+      console.log("🛡️ GLOBAL SECURITY SCAN - EVERY 10 SECONDS - WORLDWIDE PROTECTION ACTIVE");
       console.log("🔒 BANK-LEVEL ENCRYPTION EXCEEDED - WE ARE ALWAYS STRONGER");
 
       try {
@@ -81,14 +67,10 @@ export function UltraSecureWalletProtection() {
             blockThreatInstantly(threat);
           });
 
-          toast.error(
-            `🚨 ${allThreats.length} GLOBAL THREATS DETECTED & BLOCKED`,
-            {
-              description:
-                "All threats neutralized instantly - Community protected",
-              duration: 5000,
-            },
-          );
+          toast.error(`🚨 ${allThreats.length} GLOBAL THREATS DETECTED & BLOCKED`, {
+            description: "All threats neutralized instantly - Community protected",
+            duration: 5000,
+          });
         }
 
         setMetrics({
@@ -122,13 +104,7 @@ export function UltraSecureWalletProtection() {
     const threats: GlobalThreat[] = [];
 
     if (Math.random() < 0.3) {
-      const locations = [
-        "Russia",
-        "China",
-        "North Korea",
-        "Unknown VPN",
-        "Dark Web",
-      ];
+      const locations = ["Russia", "China", "North Korea", "Unknown VPN", "Dark Web"];
 
       threats.push({
         id: `copy_${Date.now()}`,
@@ -195,9 +171,7 @@ export function UltraSecureWalletProtection() {
   };
 
   const blockThreatInstantly = (threat: GlobalThreat) => {
-    console.log(
-      `🚨 BLOCKING THREAT INSTANTLY: ${threat.type} from ${threat.location}`,
-    );
+    console.log(`🚨 BLOCKING THREAT INSTANTLY: ${threat.type} from ${threat.location}`);
 
     const blockingActions = [
       "IP_WORLDWIDE_BAN",
@@ -234,74 +208,44 @@ export function UltraSecureWalletProtection() {
           🛡️ ULTRA-SECURE WALLET PROTECTION - BEYOND BANK LEVEL
         </CardTitle>
         <p className="text-muted-foreground">
-          Global scanning every 10 seconds • Always stronger than banks •
-          Forbidden to copy
+          Global scanning every 10 seconds • Always stronger than banks • Forbidden to copy
         </p>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-green-400 font-bold">
-              🔒 GAiA Token Security:
-            </span>
-            <Badge className="bg-green-600 text-white">
-              MAXIMUM PROTECTION
-            </Badge>
+            <span className="text-green-400 font-bold">🔒 GAiA Token Security:</span>
+            <Badge className="bg-green-600 text-white">MAXIMUM PROTECTION</Badge>
           </div>
           <div className="text-sm space-y-1">
             <div>
-              Contract:{" "}
-              <code className="font-mono text-xs">
-                {GAIA_TOKEN.CONTRACT_ADDRESS}
-              </code>
+              Contract: <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
             </div>
             <div>
-              Wallet:{" "}
-              <code className="font-mono text-xs">
-                {GAIA_TOKEN.WALLET_ADDRESS}
-              </code>
+              Wallet: <code className="font-mono text-xs">{GAIA_TOKEN.WALLET_ADDRESS}</code>
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-green-400">
-              {metrics.encryptionLevel}%
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Encryption Level
-            </div>
+            <div className="text-2xl font-bold text-green-400">{metrics.encryptionLevel}%</div>
+            <div className="text-xs text-muted-foreground">Encryption Level</div>
             <Progress value={metrics.encryptionLevel} className="h-2 mt-1" />
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-blue-400">
-              {metrics.firewallStrength}%
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Firewall Strength
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{metrics.firewallStrength}%</div>
+            <div className="text-xs text-muted-foreground">Firewall Strength</div>
             <Progress value={metrics.firewallStrength} className="h-2 mt-1" />
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-purple-400">
-              {metrics.bankLevelSecurity}%
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Bank Level Security
-            </div>
-            <Progress
-              value={Math.min(100, metrics.bankLevelSecurity)}
-              className="h-2 mt-1"
-            />
+            <div className="text-2xl font-bold text-purple-400">{metrics.bankLevelSecurity}%</div>
+            <div className="text-xs text-muted-foreground">Bank Level Security</div>
+            <Progress value={Math.min(100, metrics.bankLevelSecurity)} className="h-2 mt-1" />
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-orange-400">
-              {metrics.quantumResistance}%
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Quantum Resistance
-            </div>
+            <div className="text-2xl font-bold text-orange-400">{metrics.quantumResistance}%</div>
+            <div className="text-xs text-muted-foreground">Quantum Resistance</div>
             <Progress value={metrics.quantumResistance} className="h-2 mt-1" />
           </div>
         </div>
@@ -309,16 +253,11 @@ export function UltraSecureWalletProtection() {
         <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
           <div className="flex items-center gap-2 mb-2">
             <Globe className="h-5 w-5 text-blue-400" />
-            <span className="text-blue-400 font-bold">
-              Global Security Scanning
-            </span>
-            {isScanning && (
-              <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse" />
-            )}
+            <span className="text-blue-400 font-bold">Global Security Scanning</span>
+            {isScanning && <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse" />}
           </div>
           <div className="text-sm text-muted-foreground">
-            Scanning worldwide every 10 seconds for threats, copy attempts, and
-            attacks
+            Scanning worldwide every 10 seconds for threats, copy attempts, and attacks
           </div>
         </div>
 
@@ -338,14 +277,10 @@ export function UltraSecureWalletProtection() {
                     <div className="font-semibold text-red-400">
                       {threat.type.replace("_", " ")}
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      {threat.location}
-                    </div>
+                    <div className="text-xs text-muted-foreground">{threat.location}</div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Badge className={getSeverityColor(threat.severity)}>
-                      {threat.severity}
-                    </Badge>
+                    <Badge className={getSeverityColor(threat.severity)}>{threat.severity}</Badge>
                     <CheckCircle className="h-4 w-4 text-green-400" />
                   </div>
                 </div>

@@ -95,8 +95,7 @@ export function QuantumPartnershipEngine() {
       id: 3,
       title: "Community Solar Farm Development",
       type: "green_project",
-      description:
-        "Community-driven solar farm project with GAiA token backing and green rewards",
+      description: "Community-driven solar farm project with GAiA token backing and green rewards",
       participants: 67,
       maxParticipants: 150,
       gaiaTokensRequired: 750,
@@ -107,9 +106,7 @@ export function QuantumPartnershipEngine() {
     },
   ]);
 
-  const [partnershipAdvice, setPartnershipAdvice] = useState<
-    PartnershipAdvice[]
-  >([
+  const [partnershipAdvice, setPartnershipAdvice] = useState<PartnershipAdvice[]>([
     {
       id: 1,
       category: "Green Technology",
@@ -147,8 +144,7 @@ export function QuantumPartnershipEngine() {
         "Revolutionary electric bicycle with integrated solar panels, regenerative braking, and quantum battery technology",
       eligibilityTokens: 5000,
       launchDate: "2024-Q2",
-      greenImpact:
-        "Zero-emission transportation with energy generation capability",
+      greenImpact: "Zero-emission transportation with energy generation capability",
       solarFeatures: [
         "Integrated flexible solar panels on frame",
         "Solar charging while riding or parked",
@@ -169,8 +165,7 @@ export function QuantumPartnershipEngine() {
         "Revolutionary smartphone with solar charging, biodegradable case, and GAiA token integration",
       eligibilityTokens: 10000,
       launchDate: "2024-Q3",
-      greenImpact:
-        "Reduces electronic waste by 90% with solar-powered operation",
+      greenImpact: "Reduces electronic waste by 90% with solar-powered operation",
       solarFeatures: [
         "Back-panel solar charging system",
         "Never needs wall charging",
@@ -202,8 +197,7 @@ export function QuantumPartnershipEngine() {
     {
       id: 4,
       item: "🏡 GAiA Solar Home Kit",
-      description:
-        "Complete home solar system with GAiA token rewards for energy production",
+      description: "Complete home solar system with GAiA token rewards for energy production",
       eligibilityTokens: 25000,
       launchDate: "2024-Q4",
       greenImpact: "Powers entire home with surplus energy for community",
@@ -222,17 +216,14 @@ export function QuantumPartnershipEngine() {
     },
   ]);
 
-  const [selectedMeeting, setSelectedMeeting] =
-    useState<BusinessMeeting | null>(null);
+  const [selectedMeeting, setSelectedMeeting] = useState<BusinessMeeting | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setAiProcessing((prev) => Math.min(99.9, prev + 0.02));
       setTokensBurned((prev) => prev + Math.floor(Math.random() * 100));
 
-      console.log(
-        "🤖 QUANTUM PARTNERSHIP ENGINE - AI ANALYZING GLOBAL OPPORTUNITIES",
-      );
+      console.log("🤖 QUANTUM PARTNERSHIP ENGINE - AI ANALYZING GLOBAL OPPORTUNITIES");
       console.log("🌍 MATCHING BUSINESS PARTNERS FOR GREEN INITIATIVES");
       console.log("🔥 BURNING GAIA TOKENS FOR ENVIRONMENTAL PROJECTS");
       console.log("🎁 PREPARING FUTURE GIVEAWAYS FOR COMMUNITY");
@@ -257,16 +248,12 @@ export function QuantumPartnershipEngine() {
     setGreenProjectsFunded((prev) => prev + 1);
 
     toast.success("🤖 New Partnership Advice Generated!", {
-      description:
-        "AI has identified a high-compatibility business opportunity",
+      description: "AI has identified a high-compatibility business opportunity",
       duration: 8000,
     });
   };
 
-  const joinMeeting = (
-    meeting: BusinessMeeting,
-    mode: "participate" | "listen_only",
-  ) => {
+  const joinMeeting = (meeting: BusinessMeeting, mode: "participate" | "listen_only") => {
     setSelectedMeeting(meeting);
 
     const burnTokens =
@@ -275,8 +262,7 @@ export function QuantumPartnershipEngine() {
         : Math.floor(meeting.gaiaTokensRequired * 0.3);
     setTokensBurned((prev) => prev + burnTokens);
 
-    const modeText =
-      mode === "participate" ? "Active Participation" : "Listen-Only Mode";
+    const modeText = mode === "participate" ? "Active Participation" : "Listen-Only Mode";
 
     toast.success(`🌍 Joined Global Meeting!`, {
       description: `${modeText} • ${burnTokens} GAiA tokens burned for green projects`,
@@ -285,9 +271,7 @@ export function QuantumPartnershipEngine() {
 
     console.log(`🌍 GLOBAL MEETING JOINED: ${meeting.title}`);
     console.log(`🔥 TOKENS BURNED: ${burnTokens} GAiA → Green Projects`);
-    console.log(
-      `🌱 GREEN IMPACT: ${meeting.greenImpact}% Environmental Benefit`,
-    );
+    console.log(`🌱 GREEN IMPACT: ${meeting.greenImpact}% Environmental Benefit`);
   };
 
   const getMeetingTypeColor = (type: string) => {
@@ -337,51 +321,33 @@ export function QuantumPartnershipEngine() {
             <Badge className="bg-purple-600 animate-pulse">
               🌱 GREEN PROJECTS: {greenProjectsFunded}
             </Badge>
-            <Badge className="bg-orange-600 animate-pulse">
-              ☀️ SOLAR GIVEAWAYS: 4
-            </Badge>
+            <Badge className="bg-orange-600 animate-pulse">☀️ SOLAR GIVEAWAYS: 4</Badge>
           </div>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-blue-400">
-                {aiProcessing.toFixed(1)}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                AI Analysis Power
-              </div>
+              <div className="text-3xl font-bold text-blue-400">{aiProcessing.toFixed(1)}%</div>
+              <div className="text-sm text-muted-foreground">AI Analysis Power</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
               <div className="text-3xl font-bold text-green-400">
                 {tokensBurned.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                GAiA Tokens Burned
-              </div>
+              <div className="text-sm text-muted-foreground">GAiA Tokens Burned</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-purple-400">
-                {greenProjectsFunded}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Green Projects Funded
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{greenProjectsFunded}</div>
+              <div className="text-sm text-muted-foreground">Green Projects Funded</div>
             </div>
             <div className="text-center p-4 bg-orange-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-orange-400">
-                {meetings.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Meetings
-              </div>
+              <div className="text-3xl font-bold text-orange-400">{meetings.length}</div>
+              <div className="text-sm text-muted-foreground">Active Meetings</div>
             </div>
             <div className="text-center p-4 bg-yellow-900/30 rounded-lg">
               <Sun className="h-8 w-8 text-yellow-400 mx-auto mb-1" />
               <div className="text-2xl font-bold text-yellow-400">SOLAR</div>
-              <div className="text-sm text-muted-foreground">
-                Powered Giveaways
-              </div>
+              <div className="text-sm text-muted-foreground">Powered Giveaways</div>
             </div>
           </div>
 
@@ -398,9 +364,7 @@ export function QuantumPartnershipEngine() {
       {/* Partnership Advice Section */}
       <Card className="border-purple-500/30 bg-purple-900/20">
         <CardHeader>
-          <CardTitle className="text-purple-400">
-            🧠 AI PARTNERSHIP ADVISORY
-          </CardTitle>
+          <CardTitle className="text-purple-400">🧠 AI PARTNERSHIP ADVISORY</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -416,9 +380,7 @@ export function QuantumPartnershipEngine() {
                       <div className="text-lg font-bold text-green-400">
                         {advice.compatibility}%
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        Compatibility
-                      </div>
+                      <div className="text-xs text-muted-foreground">Compatibility</div>
                     </div>
                   </div>
 
@@ -448,9 +410,7 @@ export function QuantumPartnershipEngine() {
       {/* Global Business Meetings */}
       <Card className="border-green-500/30 bg-green-900/20">
         <CardHeader>
-          <CardTitle className="text-green-400">
-            🌍 GLOBAL BUSINESS MEETINGS
-          </CardTitle>
+          <CardTitle className="text-green-400">🌍 GLOBAL BUSINESS MEETINGS</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -469,33 +429,22 @@ export function QuantumPartnershipEngine() {
                         {meeting.status.toUpperCase()}
                       </Badge>
                       {meeting.giveawayEligible && (
-                        <Badge className="bg-yellow-600">
-                          🎁 GIVEAWAY ELIGIBLE
-                        </Badge>
+                        <Badge className="bg-yellow-600">🎁 GIVEAWAY ELIGIBLE</Badge>
                       )}
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-bold text-green-400">
-                        {meeting.greenImpact}%
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        Green Impact
-                      </div>
+                      <div className="text-lg font-bold text-green-400">{meeting.greenImpact}%</div>
+                      <div className="text-xs text-muted-foreground">Green Impact</div>
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {meeting.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-3">
-                    {meeting.description}
-                  </p>
+                  <h3 className="text-xl font-bold text-white mb-2">{meeting.title}</h3>
+                  <p className="text-muted-foreground mb-3">{meeting.description}</p>
 
                   <div className="flex justify-between items-center mb-4">
                     <div className="text-sm">
                       <span className="text-green-400">
-                        Participants: {meeting.participants}/
-                        {meeting.maxParticipants}
+                        Participants: {meeting.participants}/{meeting.maxParticipants}
                       </span>
                     </div>
                     <div className="text-sm">
@@ -506,9 +455,7 @@ export function QuantumPartnershipEngine() {
                   </div>
 
                   <Progress
-                    value={
-                      (meeting.participants / meeting.maxParticipants) * 100
-                    }
+                    value={(meeting.participants / meeting.maxParticipants) * 100}
                     className="mb-4"
                   />
 
@@ -527,8 +474,7 @@ export function QuantumPartnershipEngine() {
                       disabled={meeting.status === "completed"}
                     >
                       <Headphones className="h-4 w-4 mr-2" />
-                      Listen Only (
-                      {Math.floor(meeting.gaiaTokensRequired * 0.3)} GAiA)
+                      Listen Only ({Math.floor(meeting.gaiaTokensRequired * 0.3)} GAiA)
                     </Button>
                   </div>
                 </CardContent>
@@ -557,18 +503,12 @@ export function QuantumPartnershipEngine() {
                   <div className="text-center mb-4">
                     <div className="flex items-center justify-center gap-2 mb-3">
                       <Gift className="h-8 w-8 text-yellow-400" />
-                      {giveaway.solarFeatures && (
-                        <Sun className="h-6 w-6 text-orange-400" />
-                      )}
+                      {giveaway.solarFeatures && <Sun className="h-6 w-6 text-orange-400" />}
                     </div>
-                    <h3 className="text-xl font-bold text-yellow-400">
-                      {giveaway.item}
-                    </h3>
+                    <h3 className="text-xl font-bold text-yellow-400">{giveaway.item}</h3>
                   </div>
 
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {giveaway.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">{giveaway.description}</p>
 
                   {/* Solar Features Section */}
                   {giveaway.solarFeatures && (
@@ -599,10 +539,7 @@ export function QuantumPartnershipEngine() {
                       </h4>
                       <ul className="space-y-1">
                         {giveaway.techSpecs.map((spec, index) => (
-                          <li
-                            key={index}
-                            className="text-xs text-blue-300 flex items-center gap-2"
-                          >
+                          <li key={index} className="text-xs text-blue-300 flex items-center gap-2">
                             <Zap className="h-3 w-3" />
                             {spec}
                           </li>
@@ -613,20 +550,14 @@ export function QuantumPartnershipEngine() {
 
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-xs text-muted-foreground">
-                        Eligibility:
-                      </span>
+                      <span className="text-xs text-muted-foreground">Eligibility:</span>
                       <span className="text-xs text-green-400">
                         {giveaway.eligibilityTokens.toLocaleString()} GAiA
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-xs text-muted-foreground">
-                        Launch:
-                      </span>
-                      <span className="text-xs text-blue-400">
-                        {giveaway.launchDate}
-                      </span>
+                      <span className="text-xs text-muted-foreground">Launch:</span>
+                      <span className="text-xs text-blue-400">{giveaway.launchDate}</span>
                     </div>
                     <div className="mt-3 p-3 bg-green-900/30 rounded">
                       <div className="text-xs text-green-300 flex items-center gap-2">
@@ -652,9 +583,7 @@ export function QuantumPartnershipEngine() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-lg font-bold text-white mb-3">
-                Enhanced Burning Statistics
-              </h4>
+              <h4 className="text-lg font-bold text-white mb-3">Enhanced Burning Statistics</h4>
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span>Total Tokens Burned:</span>
@@ -668,9 +597,7 @@ export function QuantumPartnershipEngine() {
                 </div>
                 <div className="flex justify-between">
                   <span>Green Projects Total:</span>
-                  <span className="text-green-400 font-bold">
-                    {greenProjectsFunded}
-                  </span>
+                  <span className="text-green-400 font-bold">{greenProjectsFunded}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Solar Energy Generated:</span>
@@ -684,9 +611,7 @@ export function QuantumPartnershipEngine() {
             </div>
 
             <div>
-              <h4 className="text-lg font-bold text-white mb-3">
-                Solar Reinvestment Areas
-              </h4>
+              <h4 className="text-lg font-bold text-white mb-3">Solar Reinvestment Areas</h4>
               <div className="space-y-2">
                 <Badge className="bg-yellow-600 w-full justify-center py-2">
                   <Sun className="h-3 w-3 mr-1" />
@@ -720,27 +645,19 @@ export function QuantumPartnershipEngine() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
               <div>
                 <div className="text-3xl font-bold text-yellow-400">500+</div>
-                <div className="text-sm text-muted-foreground">
-                  Solar Bicycles Pre-Ordered
-                </div>
+                <div className="text-sm text-muted-foreground">Solar Bicycles Pre-Ordered</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-orange-400">1000+</div>
-                <div className="text-sm text-muted-foreground">
-                  Solar Phones Reserved
-                </div>
+                <div className="text-sm text-muted-foreground">Solar Phones Reserved</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-green-400">50+</div>
-                <div className="text-sm text-muted-foreground">
-                  Solar Homes Powered
-                </div>
+                <div className="text-sm text-muted-foreground">Solar Homes Powered</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-blue-400">24/7</div>
-                <div className="text-sm text-muted-foreground">
-                  Solar Generation
-                </div>
+                <div className="text-sm text-muted-foreground">Solar Generation</div>
               </div>
             </div>
           </div>

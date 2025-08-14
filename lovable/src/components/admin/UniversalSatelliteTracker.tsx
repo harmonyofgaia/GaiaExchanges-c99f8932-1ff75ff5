@@ -4,16 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Satellite,
-  Search,
-  Shield,
-  Zap,
-  Globe,
-  Target,
-  Phone,
-  MapPin,
-} from "lucide-react";
+import { Satellite, Search, Shield, Zap, Globe, Target, Phone, MapPin } from "lucide-react";
 import { toast } from "sonner";
 
 interface PhoneTrace {
@@ -86,15 +77,10 @@ export function UniversalSatelliteTracker() {
 
   const activateDefenseMode = () => {
     setDefenseMode(!defenseMode);
-    toast.success(
-      defenseMode ? "🛡️ QUANTUM DEFENSE ACTIVATED" : "🔓 Defense Mode Disabled",
-      {
-        description: defenseMode
-          ? "Maximum protection engaged"
-          : "Defense systems on standby",
-        duration: 3000,
-      },
-    );
+    toast.success(defenseMode ? "🛡️ QUANTUM DEFENSE ACTIVATED" : "🔓 Defense Mode Disabled", {
+      description: defenseMode ? "Maximum protection engaged" : "Defense systems on standby",
+      duration: 3000,
+    });
   };
 
   return (
@@ -106,8 +92,7 @@ export function UniversalSatelliteTracker() {
             🛰️ UNIVERSAL SATELLITE TRACKER - ADMIN ONLY
           </CardTitle>
           <p className="text-blue-300">
-            Untraceable satellite network access • Quantum secured • Global
-            coverage
+            Untraceable satellite network access • Quantum secured • Global coverage
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -116,12 +101,8 @@ export function UniversalSatelliteTracker() {
             <Card className="border-green-500/20 bg-green-900/20">
               <CardContent className="p-4 text-center">
                 <Satellite className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-green-400">
-                  {connectedSatellites}
-                </div>
-                <div className="text-sm text-green-300">
-                  Connected Satellites
-                </div>
+                <div className="text-2xl font-bold text-green-400">{connectedSatellites}</div>
+                <div className="text-sm text-green-300">Connected Satellites</div>
                 <Progress value={connectedSatellites} className="mt-2" />
               </CardContent>
             </Card>
@@ -138,9 +119,7 @@ export function UniversalSatelliteTracker() {
             <Card className="border-purple-500/20 bg-purple-900/20">
               <CardContent className="p-4 text-center">
                 <Shield className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-purple-400">
-                  QUANTUM
-                </div>
+                <div className="text-2xl font-bold text-purple-400">QUANTUM</div>
                 <div className="text-sm text-purple-300">Security Level</div>
                 <Badge className="mt-2 bg-purple-600">ENCRYPTED</Badge>
               </CardContent>
@@ -159,9 +138,7 @@ export function UniversalSatelliteTracker() {
           {/* Phone Number Trace */}
           <Card className="border-red-500/30 bg-red-900/10">
             <CardHeader>
-              <CardTitle className="text-red-400">
-                📱 UNIVERSAL PHONE TRACE SYSTEM
-              </CardTitle>
+              <CardTitle className="text-red-400">📱 UNIVERSAL PHONE TRACE SYSTEM</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-2">
@@ -194,21 +171,16 @@ export function UniversalSatelliteTracker() {
               {traceResults && (
                 <Card className="border-green-500/30 bg-green-900/10">
                   <CardContent className="p-4">
-                    <h4 className="text-green-400 font-bold mb-3">
-                      🎯 TRACE RESULTS
-                    </h4>
+                    <h4 className="text-green-400 font-bold mb-3">🎯 TRACE RESULTS</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                       <div>
                         <div className="text-blue-400">📱 Number:</div>
-                        <div className="text-white font-mono">
-                          {traceResults.number}
-                        </div>
+                        <div className="text-white font-mono">{traceResults.number}</div>
                       </div>
                       <div>
                         <div className="text-blue-400">🌍 Location:</div>
                         <div className="text-white">
-                          {traceResults.location.country},{" "}
-                          {traceResults.location.city}
+                          {traceResults.location.country}, {traceResults.location.city}
                         </div>
                       </div>
                       <div>
@@ -219,9 +191,7 @@ export function UniversalSatelliteTracker() {
                       </div>
                       <div>
                         <div className="text-blue-400">🛰️ Satellite:</div>
-                        <div className="text-white">
-                          {traceResults.satellite}
-                        </div>
+                        <div className="text-white">{traceResults.satellite}</div>
                       </div>
                       <div>
                         <div className="text-blue-400">📡 Carrier:</div>
@@ -229,9 +199,7 @@ export function UniversalSatelliteTracker() {
                       </div>
                       <div>
                         <div className="text-blue-400">📊 Signal:</div>
-                        <Badge className="bg-green-600">
-                          {traceResults.signal}
-                        </Badge>
+                        <Badge className="bg-green-600">{traceResults.signal}</Badge>
                       </div>
                     </div>
                   </CardContent>
@@ -243,9 +211,7 @@ export function UniversalSatelliteTracker() {
           {/* Defense Controls */}
           <Card className="border-purple-500/30 bg-purple-900/10">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                🛡️ QUANTUM DEFENSE CONTROLS
-              </CardTitle>
+              <CardTitle className="text-purple-400">🛡️ QUANTUM DEFENSE CONTROLS</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex gap-4">
@@ -277,9 +243,8 @@ export function UniversalSatelliteTracker() {
             ⚠️ ADMIN ONLY - CLASSIFIED SYSTEM ⚠️
           </h4>
           <p className="text-sm text-muted-foreground">
-            This system provides untraceable satellite access for legitimate
-            security purposes only. All activities are quantum encrypted and
-            leave no digital traces.
+            This system provides untraceable satellite access for legitimate security purposes only.
+            All activities are quantum encrypted and leave no digital traces.
           </p>
         </CardContent>
       </Card>

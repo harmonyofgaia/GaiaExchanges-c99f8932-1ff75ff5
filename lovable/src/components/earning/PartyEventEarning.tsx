@@ -73,8 +73,7 @@ export function PartyEventEarning() {
     };
 
     const points =
-      (basePoints[eventType as keyof typeof basePoints] || 150) +
-      parseInt(attendees) * 5;
+      (basePoints[eventType as keyof typeof basePoints] || 150) + parseInt(attendees) * 5;
     const tokens = Math.floor(points * 0.3);
 
     const activity = {
@@ -99,7 +98,7 @@ export function PartyEventEarning() {
 
     addActivity(activity);
     toast.success(
-      `🎉 Party event recorded! +${Math.floor(points)} points earned for bringing community together!`,
+      `🎉 Party event recorded! +${Math.floor(points)} points earned for bringing community together!`
     );
     setEventType("");
     setAttendees("");
@@ -120,23 +119,17 @@ export function PartyEventEarning() {
       <CardContent className="space-y-6">
         {/* Active Events Dashboard */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-pink-400">
-            🎊 Your Events Impact
-          </h3>
+          <h3 className="text-lg font-semibold text-pink-400">🎊 Your Events Impact</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-pink-900/30 rounded-lg border border-pink-500/20">
-              <div className="text-2xl font-bold text-pink-400">
-                {activeEvents.length}
-              </div>
+              <div className="text-2xl font-bold text-pink-400">{activeEvents.length}</div>
               <div className="text-sm text-muted-foreground">Events Hosted</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
               <div className="text-2xl font-bold text-purple-400">
                 {activeEvents.reduce((sum, event) => sum + event.attendees, 0)}
               </div>
-              <div className="text-sm text-muted-foreground">
-                People Inspired
-              </div>
+              <div className="text-sm text-muted-foreground">People Inspired</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
               <div className="text-2xl font-bold text-blue-400">
@@ -165,16 +158,8 @@ export function PartyEventEarning() {
                 </div>
               </div>
               <div className="text-right">
-                <div className="font-bold text-yellow-400">
-                  +{event.earnings} GAiA
-                </div>
-                <Badge
-                  className={
-                    event.status === "completed"
-                      ? "bg-green-600"
-                      : "bg-blue-600"
-                  }
-                >
+                <div className="font-bold text-yellow-400">+{event.earnings} GAiA</div>
+                <Badge className={event.status === "completed" ? "bg-green-600" : "bg-blue-600"}>
                   {event.status}
                 </Badge>
               </div>
@@ -194,40 +179,26 @@ export function PartyEventEarning() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Event Type
-              </label>
+              <label className="block text-sm font-medium mb-2">Event Type</label>
               <Select value={eventType} onValueChange={setEventType}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select event type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="eco_party">
-                    🎉 Eco Dance Party (200 pts)
-                  </SelectItem>
-                  <SelectItem value="garden_party">
-                    🌱 Garden Party (150 pts)
-                  </SelectItem>
+                  <SelectItem value="eco_party">🎉 Eco Dance Party (200 pts)</SelectItem>
+                  <SelectItem value="garden_party">🌱 Garden Party (150 pts)</SelectItem>
                   <SelectItem value="workshop_event">
                     📚 Environmental Workshop (300 pts)
                   </SelectItem>
-                  <SelectItem value="cleanup_party">
-                    🧹 Cleanup Party (250 pts)
-                  </SelectItem>
-                  <SelectItem value="awareness_event">
-                    📢 Awareness Event (180 pts)
-                  </SelectItem>
-                  <SelectItem value="fundraiser">
-                    💰 Environmental Fundraiser (350 pts)
-                  </SelectItem>
+                  <SelectItem value="cleanup_party">🧹 Cleanup Party (250 pts)</SelectItem>
+                  <SelectItem value="awareness_event">📢 Awareness Event (180 pts)</SelectItem>
+                  <SelectItem value="fundraiser">💰 Environmental Fundraiser (350 pts)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Expected Attendees
-              </label>
+              <label className="block text-sm font-medium mb-2">Expected Attendees</label>
               <Input
                 type="number"
                 value={attendees}
@@ -238,9 +209,7 @@ export function PartyEventEarning() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Duration (hours)
-              </label>
+              <label className="block text-sm font-medium mb-2">Duration (hours)</label>
               <Input
                 type="number"
                 step="0.5"
@@ -252,39 +221,25 @@ export function PartyEventEarning() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Environmental Theme
-              </label>
+              <label className="block text-sm font-medium mb-2">Environmental Theme</label>
               <Select value={theme} onValueChange={setTheme}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select theme" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="zero_waste">🗑️ Zero Waste</SelectItem>
-                  <SelectItem value="renewable_energy">
-                    ⚡ Renewable Energy
-                  </SelectItem>
-                  <SelectItem value="plant_based">
-                    🌱 Plant-Based Living
-                  </SelectItem>
-                  <SelectItem value="ocean_conservation">
-                    🌊 Ocean Conservation
-                  </SelectItem>
-                  <SelectItem value="climate_action">
-                    🌍 Climate Action
-                  </SelectItem>
-                  <SelectItem value="biodiversity">
-                    🦋 Biodiversity Protection
-                  </SelectItem>
+                  <SelectItem value="renewable_energy">⚡ Renewable Energy</SelectItem>
+                  <SelectItem value="plant_based">🌱 Plant-Based Living</SelectItem>
+                  <SelectItem value="ocean_conservation">🌊 Ocean Conservation</SelectItem>
+                  <SelectItem value="climate_action">🌍 Climate Action</SelectItem>
+                  <SelectItem value="biodiversity">🦋 Biodiversity Protection</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Event Location
-            </label>
+            <label className="block text-sm font-medium mb-2">Event Location</label>
             <Input
               value={location}
               onChange={(e) => setLocation(e.target.value)}
@@ -292,23 +247,16 @@ export function PartyEventEarning() {
             />
           </div>
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-pink-600 hover:bg-pink-700"
-          >
-            {loading
-              ? "Creating Event..."
-              : "🎉 Host Environmental Event (+5 pts per attendee)"}
+          <Button type="submit" disabled={loading} className="w-full bg-pink-600 hover:bg-pink-700">
+            {loading ? "Creating Event..." : "🎉 Host Environmental Event (+5 pts per attendee)"}
           </Button>
         </form>
 
         <div className="p-4 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-lg border border-pink-500/20">
           <p className="text-sm text-pink-300">
-            💡 <strong>Party Power:</strong> Environmental parties and events
-            are the most fun way to spread awareness while earning massive GAiA
-            rewards! The more people you inspire, the bigger your impact and
-            earnings!
+            💡 <strong>Party Power:</strong> Environmental parties and events are the most fun way
+            to spread awareness while earning massive GAiA rewards! The more people you inspire, the
+            bigger your impact and earnings!
           </p>
         </div>
       </CardContent>

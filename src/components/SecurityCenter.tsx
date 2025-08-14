@@ -98,11 +98,7 @@ export function SecurityCenter({ notifications }: SecurityCenterProps) {
           "Firewall Rule Updated",
         ];
 
-        const severities: Array<"Low" | "Medium" | "High"> = [
-          "Low",
-          "Medium",
-          "High",
-        ];
+        const severities: Array<"Low" | "Medium" | "High"> = ["Low", "Medium", "High"];
         const statuses: Array<"Blocked" | "Monitored" | "Resolved"> = [
           "Blocked",
           "Monitored",
@@ -189,22 +185,15 @@ export function SecurityCenter({ notifications }: SecurityCenterProps) {
               <div className="text-3xl font-bold text-green-400">
                 {securityMetrics.overallScore}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Overall Security
-              </div>
+              <div className="text-sm text-muted-foreground">Overall Security</div>
               <Progress value={securityMetrics.overallScore} className="mt-2" />
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-400">
                 {securityMetrics.walletSecurity}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Wallet Security
-              </div>
-              <Progress
-                value={securityMetrics.walletSecurity}
-                className="mt-2"
-              />
+              <div className="text-sm text-muted-foreground">Wallet Security</div>
+              <Progress value={securityMetrics.walletSecurity} className="mt-2" />
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-400">
@@ -217,9 +206,7 @@ export function SecurityCenter({ notifications }: SecurityCenterProps) {
               <div className="text-3xl font-bold text-yellow-400">
                 {securityMetrics.threatsPrevented}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Prevented
-              </div>
+              <div className="text-sm text-muted-foreground">Threats Prevented</div>
               <div className="text-xs text-green-400 mt-1">Today</div>
             </div>
           </div>
@@ -238,21 +225,15 @@ export function SecurityCenter({ notifications }: SecurityCenterProps) {
           <CardContent className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-sm">Firewall</span>
-              <Badge className="bg-green-600 text-white">
-                {systemStatus.firewall}
-              </Badge>
+              <Badge className="bg-green-600 text-white">{systemStatus.firewall}</Badge>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm">DDoS Protection</span>
-              <Badge className="bg-green-600 text-white">
-                {systemStatus.ddosProtection}
-              </Badge>
+              <Badge className="bg-green-600 text-white">{systemStatus.ddosProtection}</Badge>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm">Intrusion Detection</span>
-              <Badge className="bg-green-600 text-white">
-                {systemStatus.intrusionDetection}
-              </Badge>
+              <Badge className="bg-green-600 text-white">{systemStatus.intrusionDetection}</Badge>
             </div>
           </CardContent>
         </Card>
@@ -267,15 +248,11 @@ export function SecurityCenter({ notifications }: SecurityCenterProps) {
           <CardContent className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-sm">Encryption</span>
-              <Badge className="bg-green-600 text-white">
-                {systemStatus.encryption}
-              </Badge>
+              <Badge className="bg-green-600 text-white">{systemStatus.encryption}</Badge>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm">Malware Scanner</span>
-              <Badge className="bg-green-600 text-white">
-                {systemStatus.malwareScanner}
-              </Badge>
+              <Badge className="bg-green-600 text-white">{systemStatus.malwareScanner}</Badge>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm">Data Integrity</span>
@@ -294,9 +271,7 @@ export function SecurityCenter({ notifications }: SecurityCenterProps) {
           <CardContent className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-sm">Wallet Monitor</span>
-              <Badge className="bg-green-600 text-white">
-                {systemStatus.walletMonitor}
-              </Badge>
+              <Badge className="bg-green-600 text-white">{systemStatus.walletMonitor}</Badge>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm">Transaction Scan</span>
@@ -320,10 +295,7 @@ export function SecurityCenter({ notifications }: SecurityCenterProps) {
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-4">
-            <Button
-              onClick={runSecurityScan}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
+            <Button onClick={runSecurityScan} className="bg-blue-600 hover:bg-blue-700">
               <FileCheck className="h-4 w-4 mr-2" />
               Run Full Security Scan
             </Button>
@@ -359,19 +331,13 @@ export function SecurityCenter({ notifications }: SecurityCenterProps) {
                 className="flex items-center justify-between p-3 rounded-lg bg-muted/20 border border-border/50"
               >
                 <div className="flex items-center gap-3">
-                  <div className="text-sm font-mono text-muted-foreground">
-                    {threat.time}
-                  </div>
+                  <div className="text-sm font-mono text-muted-foreground">{threat.time}</div>
                   <div className="text-sm">{threat.threat}</div>
-                  <Badge
-                    className={`text-white text-xs ${getSeverityColor(threat.severity)}`}
-                  >
+                  <Badge className={`text-white text-xs ${getSeverityColor(threat.severity)}`}>
                     {threat.severity}
                   </Badge>
                 </div>
-                <Badge
-                  className={`text-white text-xs ${getStatusColor(threat.status)}`}
-                >
+                <Badge className={`text-white text-xs ${getStatusColor(threat.status)}`}>
                   {threat.status}
                 </Badge>
               </div>

@@ -4,11 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Wallet, Shield, Zap, TrendingUp, Copy, Star } from "lucide-react";
-import {
-  GAIA_TOKEN,
-  formatGaiaPrice,
-  formatGaiaNumber,
-} from "@/constants/gaia";
+import { GAIA_TOKEN, formatGaiaPrice, formatGaiaNumber } from "@/constants/gaia";
 import { toast } from "sonner";
 
 export function WalletEnhancementEngine() {
@@ -55,9 +51,7 @@ export function WalletEnhancementEngine() {
         {/* Official GAiA Token Info */}
         <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-blue-400 font-bold">
-              Official GAiA Wallet:
-            </span>
+            <span className="text-blue-400 font-bold">Official GAiA Wallet:</span>
             <Button
               onClick={copyWalletAddress}
               variant="outline"
@@ -113,9 +107,7 @@ export function WalletEnhancementEngine() {
               <div className="flex items-center justify-between mb-2">
                 <div>
                   <p className="text-sm text-muted-foreground">Enhancement</p>
-                  <p className="text-xl font-bold text-blue-400">
-                    {enhancementLevel.toFixed(1)}%
-                  </p>
+                  <p className="text-xl font-bold text-blue-400">{enhancementLevel.toFixed(1)}%</p>
                 </div>
                 <Zap className="h-6 w-6 text-blue-400" />
               </div>
@@ -128,9 +120,7 @@ export function WalletEnhancementEngine() {
               <div className="flex items-center justify-between mb-2">
                 <div>
                   <p className="text-sm text-muted-foreground">Security</p>
-                  <p className="text-xl font-bold text-purple-400">
-                    {securityScore.toFixed(1)}%
-                  </p>
+                  <p className="text-xl font-bold text-purple-400">{securityScore.toFixed(1)}%</p>
                 </div>
                 <Shield className="h-6 w-6 text-purple-400" />
               </div>

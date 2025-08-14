@@ -163,7 +163,7 @@ export function ProLandscapeBuilder() {
           Math.random() * canvas.width,
           Math.random() * canvas.height,
           Math.random() * 20 + 5,
-          Math.random() * 20 + 5,
+          Math.random() * 20 + 5
         );
       }
 
@@ -256,16 +256,11 @@ export function ProLandscapeBuilder() {
             <Badge className="bg-green-600 animate-pulse">
               ☁️ Cloud: {cloudUsage.used} TB / {cloudUsage.total}
             </Badge>
-            <Badge className="bg-blue-600">
-              🎮 Projects: {savedProjects.length}
-            </Badge>
+            <Badge className="bg-blue-600">🎮 Projects: {savedProjects.length}</Badge>
             <Badge className="bg-purple-600">
-              🧠 AI Enhanced:{" "}
-              {savedProjects.filter((p) => p.aiGenerated).length}
+              🧠 AI Enhanced: {savedProjects.filter((p) => p.aiGenerated).length}
             </Badge>
-            <Badge className="bg-red-600">
-              🚀 Render Quality: {currentProject.renderQuality}%
-            </Badge>
+            <Badge className="bg-red-600">🚀 Render Quality: {currentProject.renderQuality}%</Badge>
             <Badge className="bg-yellow-600">
               ⚡ Physics: {currentProject.physicsEnabled ? "ON" : "OFF"}
             </Badge>
@@ -403,12 +398,8 @@ export function ProLandscapeBuilder() {
                     {currentProject.name || "Untitled Landscape"}
                   </div>
                   <div className="flex justify-center gap-2">
-                    <Badge className="bg-green-600">
-                      Size: {currentProject.size}km²
-                    </Badge>
-                    <Badge className="bg-blue-600">
-                      Quality: {currentProject.renderQuality}%
-                    </Badge>
+                    <Badge className="bg-green-600">Size: {currentProject.size}km²</Badge>
+                    <Badge className="bg-blue-600">Quality: {currentProject.renderQuality}%</Badge>
                     <Badge className="bg-purple-600">
                       AI: {currentProject.aiGenerated ? "Yes" : "No"}
                     </Badge>
@@ -424,9 +415,7 @@ export function ProLandscapeBuilder() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span>
-                      {isRendering
-                        ? "Saving to Quantum Cloud..."
-                        : "AI Generation in Progress..."}
+                      {isRendering ? "Saving to Quantum Cloud..." : "AI Generation in Progress..."}
                     </span>
                     <span>{renderProgress}%</span>
                   </div>
@@ -452,38 +441,28 @@ export function ProLandscapeBuilder() {
             <CardContent className="space-y-6">
               <div className="text-center">
                 <div className="text-6xl mb-4 animate-pulse">🧠</div>
-                <h3 className="text-2xl font-bold text-purple-400 mb-2">
-                  UNLIMITED AI CREATIVITY
-                </h3>
+                <h3 className="text-2xl font-bold text-purple-400 mb-2">UNLIMITED AI CREATIVITY</h3>
                 <p className="text-muted-foreground mb-6">
-                  Quantum AI generates infinite landscape possibilities using
-                  advanced neural networks
+                  Quantum AI generates infinite landscape possibilities using advanced neural
+                  networks
                 </p>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                   <div className="text-center p-4 bg-blue-900/20 rounded-lg">
                     <div className="text-2xl font-bold text-blue-400">∞</div>
-                    <div className="text-xs text-muted-foreground">
-                      Possibilities
-                    </div>
+                    <div className="text-xs text-muted-foreground">Possibilities</div>
                   </div>
                   <div className="text-center p-4 bg-green-900/20 rounded-lg">
-                    <div className="text-2xl font-bold text-green-400">
-                      100%
-                    </div>
+                    <div className="text-2xl font-bold text-green-400">100%</div>
                     <div className="text-xs text-muted-foreground">Unique</div>
                   </div>
                   <div className="text-center p-4 bg-purple-900/20 rounded-lg">
                     <div className="text-2xl font-bold text-purple-400">8K</div>
-                    <div className="text-xs text-muted-foreground">
-                      Ultra-HD
-                    </div>
+                    <div className="text-xs text-muted-foreground">Ultra-HD</div>
                   </div>
                   <div className="text-center p-4 bg-red-900/20 rounded-lg">
                     <div className="text-2xl font-bold text-red-400">0s</div>
-                    <div className="text-xs text-muted-foreground">
-                      Load Time
-                    </div>
+                    <div className="text-xs text-muted-foreground">Load Time</div>
                   </div>
                 </div>
 
@@ -493,9 +472,7 @@ export function ProLandscapeBuilder() {
                   className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold px-8 py-4"
                 >
                   <Rocket className="h-6 w-6 mr-2" />
-                  {isAIGenerating
-                    ? "🤖 AI CREATING..."
-                    : "🚀 GENERATE AI MASTERPIECE"}
+                  {isAIGenerating ? "🤖 AI CREATING..." : "🚀 GENERATE AI MASTERPIECE"}
                 </Button>
               </div>
             </CardContent>
@@ -507,21 +484,15 @@ export function ProLandscapeBuilder() {
             <Card className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-2 border-blue-500/50">
               <CardContent className="p-6 text-center">
                 <Cloud className="h-12 w-12 text-blue-400 mx-auto mb-4 animate-pulse" />
-                <div className="text-3xl font-bold text-blue-400 mb-2">
-                  ∞ TB
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Unlimited Storage
-                </div>
+                <div className="text-3xl font-bold text-blue-400 mb-2">∞ TB</div>
+                <div className="text-sm text-muted-foreground">Unlimited Storage</div>
               </CardContent>
             </Card>
 
             <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-500/50">
               <CardContent className="p-6 text-center">
                 <Zap className="h-12 w-12 text-green-400 mx-auto mb-4 animate-spin" />
-                <div className="text-3xl font-bold text-green-400 mb-2">
-                  0.001s
-                </div>
+                <div className="text-3xl font-bold text-green-400 mb-2">0.001s</div>
                 <div className="text-sm text-muted-foreground">Sync Speed</div>
               </CardContent>
             </Card>
@@ -529,12 +500,8 @@ export function ProLandscapeBuilder() {
             <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-2 border-purple-500/50">
               <CardContent className="p-6 text-center">
                 <Globe className="h-12 w-12 text-purple-400 mx-auto mb-4 animate-bounce" />
-                <div className="text-3xl font-bold text-purple-400 mb-2">
-                  24/7
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Global Access
-                </div>
+                <div className="text-3xl font-bold text-purple-400 mb-2">24/7</div>
+                <div className="text-sm text-muted-foreground">Global Access</div>
               </CardContent>
             </Card>
           </div>
@@ -543,9 +510,7 @@ export function ProLandscapeBuilder() {
         <TabsContent value="export" className="space-y-6">
           <Card className="bg-gradient-to-br from-red-900/30 to-orange-900/30 border-2 border-red-500/50">
             <CardHeader>
-              <CardTitle className="text-red-400 text-center">
-                📹 ULTRA-HD EXPORT CENTER
-              </CardTitle>
+              <CardTitle className="text-red-400 text-center">📹 ULTRA-HD EXPORT CENTER</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -592,15 +557,11 @@ export function ProLandscapeBuilder() {
                     </div>
                     <div className="flex justify-between text-xs">
                       <span>Storage</span>
-                      <span className="text-blue-400">
-                        {project.cloudStorage}
-                      </span>
+                      <span className="text-blue-400">{project.cloudStorage}</span>
                     </div>
                     <div className="flex justify-between text-xs">
                       <span>Quality</span>
-                      <span className="text-purple-400">
-                        {project.renderQuality}%
-                      </span>
+                      <span className="text-purple-400">{project.renderQuality}%</span>
                     </div>
                     {project.aiGenerated && (
                       <Badge className="bg-purple-600 text-xs w-full justify-center">

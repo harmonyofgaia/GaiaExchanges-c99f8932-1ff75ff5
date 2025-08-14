@@ -49,7 +49,7 @@ export function CoinGeckoTrading() {
           ...coin,
           price: coin.price * (1 + (Math.random() - 0.5) * 0.002),
           change24h: coin.change24h + (Math.random() - 0.5) * 0.1,
-        })),
+        }))
       );
     }, 5000);
 

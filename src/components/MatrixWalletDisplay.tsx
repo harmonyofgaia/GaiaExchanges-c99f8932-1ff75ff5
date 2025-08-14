@@ -19,10 +19,7 @@ interface MatrixWalletDisplayProps {
   label: string;
 }
 
-export function MatrixWalletDisplay({
-  walletAddress,
-  label,
-}: MatrixWalletDisplayProps) {
+export function MatrixWalletDisplay({ walletAddress, label }: MatrixWalletDisplayProps) {
   const [showFullAddress, setShowFullAddress] = useState(false);
   const [matrixChars, setMatrixChars] = useState<MatrixChar[]>([]);
   const [isAnimating, setIsAnimating] = useState(true);
@@ -54,7 +51,7 @@ export function MatrixWalletDisplay({
             Math.random() < 0.1
               ? matrixChars[Math.floor(Math.random() * matrixChars.length)]
               : char.char,
-        })),
+        }))
       );
     }, 100);
 
@@ -147,11 +144,7 @@ export function MatrixWalletDisplay({
                 size="sm"
                 className="border-green-500/30 text-green-400"
               >
-                {showFullAddress ? (
-                  <EyeOff className="h-3 w-3" />
-                ) : (
-                  <Eye className="h-3 w-3" />
-                )}
+                {showFullAddress ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
               </Button>
               <Button
                 onClick={copyWalletAddress}
@@ -172,9 +165,7 @@ export function MatrixWalletDisplay({
         <div className="p-4 bg-black/40 rounded-lg border border-blue-500/30">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <span className="text-blue-400 font-bold">
-                Official GAiA Contract:
-              </span>
+              <span className="text-blue-400 font-bold">Official GAiA Contract:</span>
               <Badge className="bg-blue-600 text-white">VERIFIED</Badge>
             </div>
             <div className="flex gap-2">
@@ -184,11 +175,7 @@ export function MatrixWalletDisplay({
                 size="sm"
                 className="border-blue-500/30 text-blue-400"
               >
-                {showFullAddress ? (
-                  <EyeOff className="h-3 w-3" />
-                ) : (
-                  <Eye className="h-3 w-3" />
-                )}
+                {showFullAddress ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
               </Button>
               <Button
                 onClick={copyContractAddress}
@@ -225,12 +212,10 @@ export function MatrixWalletDisplay({
 
         {/* Security Notice */}
         <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-          <h4 className="font-medium text-green-400 mb-2">
-            🔒 Security Notice
-          </h4>
+          <h4 className="font-medium text-green-400 mb-2">🔒 Security Notice</h4>
           <p className="text-sm text-green-300">
-            These are the official verified addresses for the Harmony of Gaia
-            (GAiA) token. Always verify addresses before making transactions.
+            These are the official verified addresses for the Harmony of Gaia (GAiA) token. Always
+            verify addresses before making transactions.
           </p>
         </div>
       </CardContent>

@@ -107,20 +107,14 @@ const ProjectFunding = () => {
       return;
     }
 
-    toast.success(
-      `Successfully funded project with ${fundingAmount} GAiA tokens!`,
-    );
+    toast.success(`Successfully funded project with ${fundingAmount} GAiA tokens!`);
     setFundingAmount("");
   };
 
   const handleCreateProject = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (
-      !newProject.title ||
-      !newProject.description ||
-      !newProject.goalAmount
-    ) {
+    if (!newProject.title || !newProject.description || !newProject.goalAmount) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -145,8 +139,7 @@ const ProjectFunding = () => {
               🌍 DECENTRALIZED PROJECT FUNDING
             </CardTitle>
             <p className="text-center text-xl text-green-300">
-              Fund environmental projects • Earn governance tokens • Create
-              positive impact
+              Fund environmental projects • Earn governance tokens • Create positive impact
             </p>
           </CardHeader>
         </Card>
@@ -157,9 +150,7 @@ const ProjectFunding = () => {
             <CardContent className="p-6 text-center">
               <TreePine className="h-8 w-8 mx-auto text-green-400 mb-2" />
               <div className="text-3xl font-bold text-green-400">47</div>
-              <div className="text-sm text-muted-foreground">
-                Active Projects
-              </div>
+              <div className="text-sm text-muted-foreground">Active Projects</div>
             </CardContent>
           </Card>
 
@@ -167,9 +158,7 @@ const ProjectFunding = () => {
             <CardContent className="p-6 text-center">
               <DollarSign className="h-8 w-8 mx-auto text-blue-400 mb-2" />
               <div className="text-3xl font-bold text-blue-400">2.8M</div>
-              <div className="text-sm text-muted-foreground">
-                GAiA Tokens Raised
-              </div>
+              <div className="text-sm text-muted-foreground">GAiA Tokens Raised</div>
             </CardContent>
           </Card>
 
@@ -206,9 +195,7 @@ const ProjectFunding = () => {
               ].map((category) => (
                 <Button
                   key={category}
-                  variant={
-                    selectedCategory === category ? "default" : "outline"
-                  }
+                  variant={selectedCategory === category ? "default" : "outline"}
                   onClick={() => setSelectedCategory(category)}
                   className="capitalize"
                 >
@@ -224,8 +211,7 @@ const ProjectFunding = () => {
           <div className="lg:col-span-2">
             <div className="space-y-6">
               {projects.map((project) => {
-                const progress =
-                  (project.currentAmount / project.goalAmount) * 100;
+                const progress = (project.currentAmount / project.goalAmount) * 100;
 
                 return (
                   <Card key={project.id} className="border-green-500/30">
@@ -235,9 +221,7 @@ const ProjectFunding = () => {
 
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
-                            <h3 className="text-xl font-bold text-green-400">
-                              {project.title}
-                            </h3>
+                            <h3 className="text-xl font-bold text-green-400">{project.title}</h3>
                             {project.verified && (
                               <Badge className="bg-blue-600 text-white">
                                 <Shield className="h-3 w-3 mr-1" />
@@ -249,15 +233,12 @@ const ProjectFunding = () => {
                             </Badge>
                           </div>
 
-                          <p className="text-muted-foreground mb-4">
-                            {project.description}
-                          </p>
+                          <p className="text-muted-foreground mb-4">{project.description}</p>
 
                           <div className="space-y-3">
                             <div className="flex justify-between text-sm">
                               <span>
-                                Progress:{" "}
-                                {project.currentAmount.toLocaleString()} /{" "}
+                                Progress: {project.currentAmount.toLocaleString()} /{" "}
                                 {project.goalAmount.toLocaleString()} GAiA
                               </span>
                               <span>{Math.round(progress)}% funded</span>
@@ -325,18 +306,14 @@ const ProjectFunding = () => {
             {/* Create Project */}
             <Card className="border-purple-500/30">
               <CardHeader>
-                <CardTitle className="text-purple-400">
-                  Propose New Project
-                </CardTitle>
+                <CardTitle className="text-purple-400">Propose New Project</CardTitle>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleCreateProject} className="space-y-4">
                   <Input
                     placeholder="Project title"
                     value={newProject.title}
-                    onChange={(e) =>
-                      setNewProject({ ...newProject, title: e.target.value })
-                    }
+                    onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
                   />
                   <Textarea
                     placeholder="Project description"
@@ -360,10 +337,7 @@ const ProjectFunding = () => {
                       })
                     }
                   />
-                  <Button
-                    type="submit"
-                    className="w-full bg-purple-600 hover:bg-purple-700"
-                  >
+                  <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
                     Submit Proposal
                   </Button>
                 </form>
@@ -373,9 +347,7 @@ const ProjectFunding = () => {
             {/* My Contributions */}
             <Card className="border-green-500/30">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  My Contributions
-                </CardTitle>
+                <CardTitle className="text-green-400">My Contributions</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 text-sm">

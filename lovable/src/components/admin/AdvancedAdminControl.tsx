@@ -48,10 +48,8 @@ export function AdvancedAdminControl() {
     setTimeout(() => {
       setCommands((prev) =>
         prev.map((cmd) =>
-          cmd.id === newCommand.id
-            ? { ...cmd, status: "executing" as const }
-            : cmd,
-        ),
+          cmd.id === newCommand.id ? { ...cmd, status: "executing" as const } : cmd
+        )
       );
 
       setTimeout(() => {
@@ -65,15 +63,14 @@ export function AdvancedAdminControl() {
           "User experience improvements applied across 12 components",
         ];
 
-        const randomResult =
-          results[Math.floor(Math.random() * results.length)];
+        const randomResult = results[Math.floor(Math.random() * results.length)];
 
         setCommands((prev) =>
           prev.map((cmd) =>
             cmd.id === newCommand.id
               ? { ...cmd, status: "completed" as const, result: randomResult }
-              : cmd,
-          ),
+              : cmd
+          )
         );
 
         setIsExecuting(false);
@@ -131,9 +128,7 @@ export function AdvancedAdminControl() {
         <CardTitle className="flex items-center gap-2 text-purple-400">
           <Command className="h-6 w-6" />
           🎯 ADVANCED ADMIN CONTROL - PHASE 2 & 3 ACTIVE
-          <Badge className="bg-purple-600 text-white animate-pulse">
-            BOUNDARY-FREE
-          </Badge>
+          <Badge className="bg-purple-600 text-white animate-pulse">BOUNDARY-FREE</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -147,9 +142,7 @@ export function AdvancedAdminControl() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) =>
-                  e.key === "Enter" &&
-                  !isExecuting &&
-                  executeAICommand(searchQuery)
+                  e.key === "Enter" && !isExecuting && executeAICommand(searchQuery)
                 }
                 className="pl-10"
                 disabled={isExecuting}
@@ -192,19 +185,13 @@ export function AdvancedAdminControl() {
               className="p-3 bg-black/40 rounded-lg border border-purple-500/30"
             >
               <div className="flex justify-between items-start mb-2">
-                <div className="text-sm font-semibold text-white">
-                  💬 {command.command}
-                </div>
-                <Badge
-                  className={`${getStatusColor(command.status)} text-white text-xs`}
-                >
+                <div className="text-sm font-semibold text-white">💬 {command.command}</div>
+                <Badge className={`${getStatusColor(command.status)} text-white text-xs`}>
                   {command.status.toUpperCase()}
                 </Badge>
               </div>
               {command.result && (
-                <div className="text-sm text-green-400 mb-2">
-                  ✅ {command.result}
-                </div>
+                <div className="text-sm text-green-400 mb-2">✅ {command.result}</div>
               )}
               <div className="text-xs text-muted-foreground">
                 {command.timestamp.toLocaleTimeString()}
@@ -217,9 +204,7 @@ export function AdvancedAdminControl() {
         <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="font-semibold text-green-400">
-                🔒 Admin IP Authorization
-              </h4>
+              <h4 className="font-semibold text-green-400">🔒 Admin IP Authorization</h4>
               <p className="text-sm text-muted-foreground">
                 Authorized IP: {adminIP} • Full System Access Granted
               </p>

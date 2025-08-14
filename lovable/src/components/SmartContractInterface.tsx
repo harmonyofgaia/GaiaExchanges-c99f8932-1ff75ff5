@@ -99,10 +99,7 @@ export function SmartContractInterface() {
       description: "🔍 Comprehensive security audit in progress...",
       duration: 3000,
     });
-    console.log(
-      "🛡️ Security audit started for contract:",
-      contractStatus.address,
-    );
+    console.log("🛡️ Security audit started for contract:", contractStatus.address);
   };
 
   return (
@@ -119,9 +116,7 @@ export function SmartContractInterface() {
           <div className="p-4 rounded-lg bg-muted/20 border border-border/50">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">
-                  Contract Address
-                </span>
+                <span className="text-sm text-muted-foreground">Contract Address</span>
                 <Badge className="bg-green-600 text-white">Verified</Badge>
               </div>
               <code className="text-xs break-all text-purple-400 font-mono">
@@ -133,25 +128,17 @@ export function SmartContractInterface() {
           <div className="p-4 rounded-lg bg-muted/20 border border-border/50">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">
-                  Security Score
-                </span>
-                <Badge className="bg-green-600 text-white">
-                  {contractStatus.securityScore}%
-                </Badge>
+                <span className="text-sm text-muted-foreground">Security Score</span>
+                <Badge className="bg-green-600 text-white">{contractStatus.securityScore}%</Badge>
               </div>
-              <div className="text-sm">
-                Last Audit: {contractStatus.lastAudit}
-              </div>
+              <div className="text-sm">Last Audit: {contractStatus.lastAudit}</div>
             </div>
           </div>
         </div>
 
         {/* Contract Features */}
         <div className="space-y-3">
-          <h4 className="font-semibold text-blue-400">
-            Advanced Security Features
-          </h4>
+          <h4 className="font-semibold text-blue-400">Advanced Security Features</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {contractFeatures.map((feature) => (
               <div
@@ -162,9 +149,7 @@ export function SmartContractInterface() {
                 <div className="flex-1">
                   <div className="text-sm font-medium">{feature.name}</div>
                 </div>
-                <Badge className="bg-green-600 text-white text-xs">
-                  {feature.status}
-                </Badge>
+                <Badge className="bg-green-600 text-white text-xs">{feature.status}</Badge>
               </div>
             ))}
           </div>
@@ -190,21 +175,13 @@ export function SmartContractInterface() {
             )}
           </Button>
 
-          <Button
-            onClick={handleSecurityAudit}
-            variant="outline"
-            className="border-blue-500/20"
-          >
+          <Button onClick={handleSecurityAudit} variant="outline" className="border-blue-500/20">
             <Shield className="h-4 w-4 mr-2" />
             Run Security Audit
           </Button>
 
           <Button variant="outline" className="border-green-500/20" asChild>
-            <a
-              href="https://etherscan.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://etherscan.io/" target="_blank" rel="noopener noreferrer">
               <Globe className="h-4 w-4 mr-2" />
               View on Explorer
             </a>
@@ -215,9 +192,7 @@ export function SmartContractInterface() {
         <div className="p-4 rounded-lg bg-gradient-to-r from-green-900/20 to-blue-900/20 border border-green-500/20">
           <div className="flex items-center gap-2 mb-3">
             <FileCheck className="h-5 w-5 text-green-400" />
-            <h4 className="font-semibold text-green-400">
-              Legal Compliance & Documentation
-            </h4>
+            <h4 className="font-semibold text-green-400">Legal Compliance & Documentation</h4>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
             <div className="flex items-center gap-2">
@@ -244,13 +219,11 @@ export function SmartContractInterface() {
           <div className="flex items-start gap-2">
             <AlertTriangle className="h-5 w-5 text-red-400 mt-0.5" />
             <div className="space-y-1">
-              <h4 className="font-semibold text-red-400">
-                Advanced Security Protocol
-              </h4>
+              <h4 className="font-semibold text-red-400">Advanced Security Protocol</h4>
               <p className="text-sm text-muted-foreground">
-                This contract includes military-grade security measures,
-                multi-signature requirements, and automated threat detection.
-                All transactions are monitored in real-time.
+                This contract includes military-grade security measures, multi-signature
+                requirements, and automated threat detection. All transactions are monitored in
+                real-time.
               </p>
             </div>
           </div>

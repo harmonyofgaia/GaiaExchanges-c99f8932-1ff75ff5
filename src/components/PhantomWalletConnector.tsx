@@ -17,12 +17,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { toast } from "sonner";
-import {
-  GAIA_TOKEN,
-  GAIA_METRICS,
-  formatGaiaPrice,
-  formatGaiaNumber,
-} from "@/constants/gaia";
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from "@/constants/gaia";
 
 export function PhantomWalletConnector() {
   const [isConnected, setIsConnected] = useState(false);
@@ -145,9 +140,7 @@ export function PhantomWalletConnector() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Symbol:</span>
-                  <span className="text-green-400 font-bold">
-                    {GAIA_TOKEN.SYMBOL}
-                  </span>
+                  <span className="text-green-400 font-bold">{GAIA_TOKEN.SYMBOL}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Initial Price:</span>
@@ -166,35 +159,26 @@ export function PhantomWalletConnector() {
 
             <div className="p-8 bg-gradient-to-br from-purple-900/40 to-pink-900/40 rounded-lg border border-purple-500/30">
               <Sparkles className="h-16 w-16 text-purple-400 mx-auto mb-4 animate-pulse" />
-              <h3 className="text-2xl font-bold text-purple-400 mb-4">
-                Connect to Official GAiA
-              </h3>
+              <h3 className="text-2xl font-bold text-purple-400 mb-4">Connect to Official GAiA</h3>
               <p className="text-muted-foreground mb-6">
-                Connect your Phantom wallet to the official GAiA token for
-                seamless trading
+                Connect your Phantom wallet to the official GAiA token for seamless trading
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="p-4 bg-green-900/30 rounded border border-green-500/20">
                   <Shield className="h-8 w-8 text-green-400 mx-auto mb-2" />
                   <h4 className="font-bold text-green-400 mb-2">Secure</h4>
-                  <p className="text-xs text-muted-foreground">
-                    Bank-level encryption
-                  </p>
+                  <p className="text-xs text-muted-foreground">Bank-level encryption</p>
                 </div>
                 <div className="p-4 bg-blue-900/30 rounded border border-blue-500/20">
                   <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
                   <h4 className="font-bold text-blue-400 mb-2">Fast</h4>
-                  <p className="text-xs text-muted-foreground">
-                    Instant transactions
-                  </p>
+                  <p className="text-xs text-muted-foreground">Instant transactions</p>
                 </div>
                 <div className="p-4 bg-yellow-900/30 rounded border border-yellow-500/20">
                   <Globe className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
                   <h4 className="font-bold text-yellow-400 mb-2">Global</h4>
-                  <p className="text-xs text-muted-foreground">
-                    Worldwide access
-                  </p>
+                  <p className="text-xs text-muted-foreground">Worldwide access</p>
                 </div>
               </div>
 
@@ -217,9 +201,7 @@ export function PhantomWalletConnector() {
                   <Wallet className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-green-400">
-                    Connected to Official GAiA
-                  </h3>
+                  <h3 className="font-bold text-green-400">Connected to Official GAiA</h3>
                   <Badge className="bg-green-600 text-white mt-1">ACTIVE</Badge>
                 </div>
               </div>
@@ -270,28 +252,18 @@ export function PhantomWalletConnector() {
                 <div className="grid grid-cols-3 gap-4">
                   <div className="p-3 bg-green-900/30 rounded border border-green-500/20">
                     <TrendingUp className="h-5 w-5 text-green-400 mx-auto mb-1" />
-                    <div className="text-sm font-bold text-green-400">
-                      +15.8%
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      24h Change
-                    </div>
+                    <div className="text-sm font-bold text-green-400">+15.8%</div>
+                    <div className="text-xs text-muted-foreground">24h Change</div>
                   </div>
                   <div className="p-3 bg-blue-900/30 rounded border border-blue-500/20">
                     <Star className="h-5 w-5 text-blue-400 mx-auto mb-1" />
                     <div className="text-sm font-bold text-blue-400">247</div>
-                    <div className="text-xs text-muted-foreground">
-                      NFTs Owned
-                    </div>
+                    <div className="text-xs text-muted-foreground">NFTs Owned</div>
                   </div>
                   <div className="p-3 bg-purple-900/30 rounded border border-purple-500/20">
                     <Sparkles className="h-5 w-5 text-purple-400 mx-auto mb-1" />
-                    <div className="text-sm font-bold text-purple-400">
-                      1,847
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      Animals Helped
-                    </div>
+                    <div className="text-sm font-bold text-purple-400">1,847</div>
+                    <div className="text-xs text-muted-foreground">Animals Helped</div>
                   </div>
                 </div>
               </div>
@@ -302,9 +274,7 @@ export function PhantomWalletConnector() {
               <div className="p-4 bg-gradient-to-r from-cyan-900/30 to-blue-900/30 rounded-lg border border-cyan-500/20">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="font-bold text-cyan-400 mb-2">
-                      Official GAiA Wallet
-                    </h4>
+                    <h4 className="font-bold text-cyan-400 mb-2">Official GAiA Wallet</h4>
                     <code className="text-sm text-muted-foreground font-mono bg-black/20 px-2 py-1 rounded block">
                       {GAIA_TOKEN.WALLET_ADDRESS}
                     </code>
@@ -333,9 +303,7 @@ export function PhantomWalletConnector() {
               <div className="p-4 bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg border border-purple-500/20">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="font-bold text-purple-400 mb-2">
-                      GAiA Contract Address
-                    </h4>
+                    <h4 className="font-bold text-purple-400 mb-2">GAiA Contract Address</h4>
                     <code className="text-sm text-muted-foreground font-mono bg-black/20 px-2 py-1 rounded block">
                       {GAIA_TOKEN.CONTRACT_ADDRESS}
                     </code>
@@ -376,13 +344,10 @@ export function PhantomWalletConnector() {
 
         {/* Matrix Integration Info */}
         <div className="text-center p-4 bg-gradient-to-r from-green-900/20 to-purple-900/20 rounded-lg border border-green-500/20">
-          <h4 className="font-bold text-green-400 mb-2">
-            🌐 OFFICIAL GAiA INTEGRATION
-          </h4>
+          <h4 className="font-bold text-green-400 mb-2">🌐 OFFICIAL GAiA INTEGRATION</h4>
           <p className="text-sm text-muted-foreground">
-            Connected to the official GAiA token on Pump.fun with real-time
-            matrix-style visualizations, seamless trading, and instant
-            environmental impact tracking.
+            Connected to the official GAiA token on Pump.fun with real-time matrix-style
+            visualizations, seamless trading, and instant environmental impact tracking.
           </p>
         </div>
       </CardContent>

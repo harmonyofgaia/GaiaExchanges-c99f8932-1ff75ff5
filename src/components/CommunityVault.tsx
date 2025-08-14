@@ -15,11 +15,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { toast } from "sonner";
-import {
-  GAIA_TOKEN,
-  formatGaiaPrice,
-  formatGaiaNumber,
-} from "@/constants/gaia";
+import { GAIA_TOKEN, formatGaiaPrice, formatGaiaNumber } from "@/constants/gaia";
 
 interface Transaction {
   id: string;
@@ -314,9 +310,7 @@ export function CommunityVault() {
           <CardTitle className="flex items-center gap-2 text-cyan-400">
             <Activity className="h-6 w-6 animate-pulse" />
             🔴 LIVE TRANSACTION MATRIX
-            <Badge className="bg-red-600 text-white animate-pulse ml-2">
-              LIVE
-            </Badge>
+            <Badge className="bg-red-600 text-white animate-pulse ml-2">LIVE</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -339,9 +333,7 @@ export function CommunityVault() {
                     <div className="text-xl">{getTransactionIcon(tx.type)}</div>
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span
-                          className={`font-bold ${getTransactionColor(tx.type)}`}
-                        >
+                        <span className={`font-bold ${getTransactionColor(tx.type)}`}>
                           {tx.type.toUpperCase()}
                         </span>
                         <Badge
@@ -356,18 +348,14 @@ export function CommunityVault() {
                           {tx.status}
                         </Badge>
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        {tx.purpose}
-                      </div>
+                      <div className="text-xs text-muted-foreground">{tx.purpose}</div>
                       <div className="text-xs font-mono text-gray-400">
                         {tx.hash} • {tx.timestamp.toLocaleTimeString()}
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div
-                      className={`font-bold ${getTransactionColor(tx.type)}`}
-                    >
+                    <div className={`font-bold ${getTransactionColor(tx.type)}`}>
                       {tx.type === "withdrawal" ? "-" : "+"}
                       {formatGaiaNumber(tx.amount)} GAiA
                     </div>
@@ -392,11 +380,7 @@ export function CommunityVault() {
               </a>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <a
-                href={GAIA_TOKEN.PUMP_FUN_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={GAIA_TOKEN.PUMP_FUN_URL} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Track on Pump.fun
               </a>
@@ -409,35 +393,26 @@ export function CommunityVault() {
       <Card className="border-blue-500/30 bg-gradient-to-r from-blue-900/20 to-purple-900/20">
         <CardContent className="p-6">
           <div className="text-center space-y-4">
-            <h3 className="text-xl font-bold text-blue-400">
-              🛡️ ABSOLUTE TRANSPARENCY GUARANTEE
-            </h3>
+            <h3 className="text-xl font-bold text-blue-400">🛡️ ABSOLUTE TRANSPARENCY GUARANTEE</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div className="bg-green-900/30 p-4 rounded-lg border border-green-500/30">
-                <div className="font-bold text-green-400 mb-2">
-                  🌱 Environmental Impact
-                </div>
+                <div className="font-bold text-green-400 mb-2">🌱 Environmental Impact</div>
                 <p className="text-green-300">
-                  All environmental fees directly fund verified tree planting,
-                  ocean cleanup, and renewable energy projects. Track every
-                  contribution in real-time.
+                  All environmental fees directly fund verified tree planting, ocean cleanup, and
+                  renewable energy projects. Track every contribution in real-time.
                 </p>
               </div>
               <div className="bg-blue-900/30 p-4 rounded-lg border border-blue-500/30">
-                <div className="font-bold text-blue-400 mb-2">
-                  👥 Community Development
-                </div>
+                <div className="font-bold text-blue-400 mb-2">👥 Community Development</div>
                 <p className="text-blue-300">
-                  Community fees support platform development, user rewards, and
-                  ecosystem growth. Every decision is transparent and
-                  community-driven.
+                  Community fees support platform development, user rewards, and ecosystem growth.
+                  Every decision is transparent and community-driven.
                 </p>
               </div>
             </div>
             <p className="text-muted-foreground">
               <strong>
-                🔒 Zero Hidden Fees • 🌍 Real Environmental Impact • 👥
-                Community Controlled
+                🔒 Zero Hidden Fees • 🌍 Real Environmental Impact • 👥 Community Controlled
               </strong>
             </p>
           </div>

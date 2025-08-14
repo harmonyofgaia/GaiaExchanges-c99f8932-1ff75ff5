@@ -3,8 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 serve(async (req) => {
@@ -15,7 +14,7 @@ serve(async (req) => {
   try {
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 
     // Get current time and determine what scans to run
@@ -52,7 +51,7 @@ serve(async (req) => {
         tasksExecuted: results.length,
         results: results,
       }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
     console.error("Security scheduler error:", error);
@@ -66,17 +65,14 @@ serve(async (req) => {
 async function runSecurityScan(supabaseClient: any, scanType: string) {
   try {
     // Call the security monitor function
-    const response = await fetch(
-      `${Deno.env.get("SUPABASE_URL")}/functions/v1/security-monitor`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ scanType }),
+    const response = await fetch(`${Deno.env.get("SUPABASE_URL")}/functions/v1/security-monitor`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({ scanType }),
+    });
 
     const result = await response.json();
     return { task: "security_scan", success: response.ok, result };
@@ -139,7 +135,7 @@ async function generateWeeklyReport(supabaseClient: any) {
           Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
           "Content-Type": "application/json",
         },
-      },
+      }
     );
 
     const result = await response.json();

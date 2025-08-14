@@ -9,9 +9,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(
-    Boolean,
-  ),
+  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -61,10 +59,7 @@ export default defineConfig(({ mode }) => ({
           ) {
             return "forest-shield";
           }
-          if (
-            id.includes("src/components/admin/") ||
-            id.includes("src/pages/Admin")
-          ) {
+          if (id.includes("src/components/admin/") || id.includes("src/pages/Admin")) {
             return "admin";
           }
           if (
@@ -77,7 +72,7 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
-  chunkSizeWarningLimit: 2500,
+    chunkSizeWarningLimit: 2500,
     target: "esnext",
     minify: "esbuild",
   },

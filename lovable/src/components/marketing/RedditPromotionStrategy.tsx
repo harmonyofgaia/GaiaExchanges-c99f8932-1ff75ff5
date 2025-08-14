@@ -3,14 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Copy,
-  MessageSquare,
-  TrendingUp,
-  Users,
-  Award,
-  CheckCircle,
-} from "lucide-react";
+import { Copy, MessageSquare, TrendingUp, Users, Award, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 
 export function RedditPromotionStrategy() {
@@ -212,8 +205,7 @@ DYOR but worth checking out if you're into gaming + sustainability.`,
   };
 
   const generateNewPost = () => {
-    const randomPost =
-      redditMessages[Math.floor(Math.random() * redditMessages.length)];
+    const randomPost = redditMessages[Math.floor(Math.random() * redditMessages.length)];
     setCurrentRedditPost(randomPost);
     toast.success("📝 New Reddit Strategy Generated!", {
       description: "Optimized for community trust and environmental focus",
@@ -228,33 +220,25 @@ DYOR but worth checking out if you're into gaming + sustainability.`,
           <CardTitle className="flex items-center gap-2 text-orange-400">
             <MessageSquare className="h-6 w-6" />
             🎯 REDDIT TRUST BUILDING STRATEGY
-            <Badge className="bg-green-600 animate-pulse">
-              COMMUNITY FOCUSED
-            </Badge>
+            <Badge className="bg-green-600 animate-pulse">COMMUNITY FOCUSED</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
               <Users className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {redditKarma.toLocaleString()}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{redditKarma.toLocaleString()}</div>
               <div className="text-xs text-muted-foreground">Reddit Karma</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
               <Award className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {trustScore.toFixed(1)}%
-              </div>
+              <div className="text-2xl font-bold text-green-400">{trustScore.toFixed(1)}%</div>
               <div className="text-xs text-muted-foreground">Trust Score</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
               <CheckCircle className="h-8 w-8 text-purple-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-purple-400">ACTIVE</div>
-              <div className="text-xs text-muted-foreground">
-                Campaign Status
-              </div>
+              <div className="text-xs text-muted-foreground">Campaign Status</div>
             </div>
           </div>
 
@@ -267,10 +251,7 @@ DYOR but worth checking out if you're into gaming + sustainability.`,
             />
 
             <div className="flex gap-4">
-              <Button
-                onClick={copyRedditPost}
-                className="flex-1 bg-green-600 hover:bg-green-700"
-              >
+              <Button onClick={copyRedditPost} className="flex-1 bg-green-600 hover:bg-green-700">
                 <Copy className="h-4 w-4 mr-2" />
                 📋 Copy for Reddit
               </Button>
@@ -291,25 +272,18 @@ DYOR but worth checking out if you're into gaming + sustainability.`,
         {redditTrustStrategies.map((strategy, index) => (
           <Card key={index} className="border-blue-500/30 bg-blue-900/20">
             <CardHeader>
-              <CardTitle className="text-blue-400 text-lg">
-                {strategy.title}
-              </CardTitle>
+              <CardTitle className="text-blue-400 text-lg">{strategy.title}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                {(
-                  strategy.communities ||
-                  strategy.tactics ||
-                  strategy.schedule
-                )?.map((item, itemIndex) => (
-                  <div
-                    key={itemIndex}
-                    className="text-sm text-blue-300 flex items-start gap-2"
-                  >
-                    <span className="text-green-400 mt-1">•</span>
-                    <span>{item}</span>
-                  </div>
-                ))}
+                {(strategy.communities || strategy.tactics || strategy.schedule)?.map(
+                  (item, itemIndex) => (
+                    <div key={itemIndex} className="text-sm text-blue-300 flex items-start gap-2">
+                      <span className="text-green-400 mt-1">•</span>
+                      <span>{item}</span>
+                    </div>
+                  )
+                )}
               </div>
             </CardContent>
           </Card>
@@ -319,16 +293,12 @@ DYOR but worth checking out if you're into gaming + sustainability.`,
       {/* Reddit Success Metrics */}
       <Card className="border-green-500/30 bg-green-900/20">
         <CardHeader>
-          <CardTitle className="text-green-400">
-            📊 Reddit Campaign Success Metrics
-          </CardTitle>
+          <CardTitle className="text-green-400">📊 Reddit Campaign Success Metrics</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h4 className="font-bold text-green-400 mb-3">
-                🎯 Primary Goals
-              </h4>
+              <h4 className="font-bold text-green-400 mb-3">🎯 Primary Goals</h4>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span>Build Community Trust:</span>
@@ -350,9 +320,7 @@ DYOR but worth checking out if you're into gaming + sustainability.`,
             </div>
 
             <div>
-              <h4 className="font-bold text-green-400 mb-3">
-                🚀 Key Performance Indicators
-              </h4>
+              <h4 className="font-bold text-green-400 mb-3">🚀 Key Performance Indicators</h4>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span>Average Upvotes per Post:</span>

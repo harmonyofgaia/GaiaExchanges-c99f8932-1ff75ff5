@@ -60,8 +60,7 @@ const Home = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Every transaction contributes to real-world environmental
-                  restoration projects.
+                  Every transaction contributes to real-world environmental restoration projects.
                 </p>
               </CardContent>
             </Card>
@@ -75,8 +74,7 @@ const Home = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Play games, earn tokens, and compete in tournaments while
-                  helping the planet.
+                  Play games, earn tokens, and compete in tournaments while helping the planet.
                 </p>
               </CardContent>
             </Card>
@@ -90,8 +88,7 @@ const Home = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Advanced security protocols protect your assets and
-                  transactions.
+                  Advanced security protocols protect your assets and transactions.
                 </p>
               </CardContent>
             </Card>
@@ -119,8 +116,7 @@ const Home = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Earn GAiA tokens instantly through various platform
-                  activities.
+                  Earn GAiA tokens instantly through various platform activities.
                 </p>
               </CardContent>
             </Card>

@@ -29,8 +29,7 @@ export function EternalDragonDisplay() {
           <div>
             <div className="text-4xl font-bold">ETERNAL DRAGON</div>
             <div className="text-lg font-normal">
-              Never Stops Growing • Level {dragon.dragonStats.level} • Age:{" "}
-              {dragon.formatAge()}
+              Never Stops Growing • Level {dragon.dragonStats.level} • Age: {dragon.formatAge()}
             </div>
           </div>
           <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white animate-bounce text-2xl px-8 py-4">
@@ -43,12 +42,8 @@ export function EternalDragonDisplay() {
           {/* Experience Progress */}
           <div>
             <div className="flex justify-between items-center mb-2">
-              <span className="text-lg font-bold text-orange-400">
-                Experience to Next Level
-              </span>
-              <span className="text-orange-400">
-                {Math.floor(getExperiencePercent())}%
-              </span>
+              <span className="text-lg font-bold text-orange-400">Experience to Next Level</span>
+              <span className="text-orange-400">{Math.floor(getExperiencePercent())}%</span>
             </div>
             <Progress value={getExperiencePercent()} className="h-4" />
             <div className="text-center text-sm text-muted-foreground mt-1">
@@ -79,9 +74,7 @@ export function EternalDragonDisplay() {
               <div className="text-2xl font-bold text-yellow-400">
                 {dragon.dragonStats.worldwideInfluence.toFixed(1)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Global Influence
-              </div>
+              <div className="text-sm text-muted-foreground">Global Influence</div>
             </div>
 
             <div className="p-4 rounded-lg bg-gradient-to-br from-green-500/20 to-blue-500/20 border border-green-500/40 text-center">
@@ -89,9 +82,7 @@ export function EternalDragonDisplay() {
               <div className="text-2xl font-bold text-green-400">
                 {dragon.dragonStats.threatsDestroyed}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Destroyed
-              </div>
+              <div className="text-sm text-muted-foreground">Threats Destroyed</div>
             </div>
 
             <div className="p-4 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-blue-500/40 text-center">
@@ -99,9 +90,7 @@ export function EternalDragonDisplay() {
               <div className="text-2xl font-bold text-blue-400">
                 {dragon.dragonStats.quantumEvolutions}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Quantum Evolutions
-              </div>
+              <div className="text-sm text-muted-foreground">Quantum Evolutions</div>
             </div>
 
             <div className="p-4 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/40 text-center">
@@ -109,9 +98,7 @@ export function EternalDragonDisplay() {
               <div className="text-2xl font-bold text-purple-400">
                 {dragon.dragonStats.networksProtected}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Networks Protected
-              </div>
+              <div className="text-sm text-muted-foreground">Networks Protected</div>
             </div>
           </div>
 
@@ -124,9 +111,7 @@ export function EternalDragonDisplay() {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span className="text-green-300">Dragon Level:</span>
-                  <span className="text-green-200 font-bold">
-                    {dragon.dragonStats.level}
-                  </span>
+                  <span className="text-green-200 font-bold">{dragon.dragonStats.level}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-green-300">Current Power:</span>
@@ -136,23 +121,17 @@ export function EternalDragonDisplay() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-green-300">Growth Rate:</span>
-                  <span className="text-green-200 font-bold">
-                    +{dragon.getGrowthRate()}/sec
-                  </span>
+                  <span className="text-green-200 font-bold">+{dragon.getGrowthRate()}/sec</span>
                 </div>
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span className="text-green-300">Dragon Age:</span>
-                  <span className="text-green-200 font-bold">
-                    {dragon.formatAge()}
-                  </span>
+                  <span className="text-green-200 font-bold">{dragon.formatAge()}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-green-300">Status:</span>
-                  <span className="text-green-200 font-bold">
-                    ETERNAL GROWTH
-                  </span>
+                  <span className="text-green-200 font-bold">ETERNAL GROWTH</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-green-300">Resets:</span>
@@ -162,8 +141,7 @@ export function EternalDragonDisplay() {
             </div>
             <div className="mt-4 text-center">
               <p className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-                🌟 Your Dragon grows stronger every second, even when you're
-                away! 🌟
+                🌟 Your Dragon grows stronger every second, even when you're away! 🌟
               </p>
             </div>
           </div>

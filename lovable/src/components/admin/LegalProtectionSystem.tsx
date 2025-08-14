@@ -27,35 +27,21 @@ export function LegalProtectionSystem() {
     <div className="space-y-6">
       <Card className="border-blue-500/50 bg-blue-900/20">
         <CardHeader>
-          <CardTitle className="text-blue-400">
-            ⚖️ LEGAL PROTECTION SYSTEM
-          </CardTitle>
+          <CardTitle className="text-blue-400">⚖️ LEGAL PROTECTION SYSTEM</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-blue-400">
-                {legalShield}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Legal Shield Strength
-              </div>
+              <div className="text-3xl font-bold text-blue-400">{legalShield}%</div>
+              <div className="text-sm text-muted-foreground">Legal Shield Strength</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-green-400">
-                {copyrightClaims}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Copyright Violations
-              </div>
+              <div className="text-3xl font-bold text-green-400">{copyrightClaims}</div>
+              <div className="text-sm text-muted-foreground">Copyright Violations</div>
             </div>
             <div className="text-center p-4 bg-red-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-red-400">
-                {legalThreats}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Legal Threats Blocked
-              </div>
+              <div className="text-3xl font-bold text-red-400">{legalThreats}</div>
+              <div className="text-sm text-muted-foreground">Legal Threats Blocked</div>
             </div>
           </div>
 

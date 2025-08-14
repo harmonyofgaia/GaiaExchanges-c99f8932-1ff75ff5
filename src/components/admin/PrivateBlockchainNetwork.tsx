@@ -23,7 +23,7 @@ export function PrivateBlockchainNetwork() {
         hashRate: prev.hashRate + Math.floor(Math.random() * 10000 - 5000),
         networkHealth: Math.max(
           95,
-          Math.min(100, prev.networkHealth + (Math.random() - 0.5) * 0.2),
+          Math.min(100, prev.networkHealth + (Math.random() - 0.5) * 0.2)
         ),
       }));
     }, 2000);
@@ -48,9 +48,7 @@ export function PrivateBlockchainNetwork() {
         <CardContent className="space-y-6">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-green-900/20 rounded border border-green-500/20">
-              <div className="text-2xl font-bold text-green-400">
-                {networkStats.nodes}
-              </div>
+              <div className="text-2xl font-bold text-green-400">{networkStats.nodes}</div>
               <div className="text-sm text-muted-foreground">Active Nodes</div>
             </div>
             <div className="text-center p-4 bg-blue-900/20 rounded border border-blue-500/20">
@@ -63,9 +61,7 @@ export function PrivateBlockchainNetwork() {
               <div className="text-2xl font-bold text-purple-400">
                 {networkStats.hashRate.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Hash Rate (H/s)
-              </div>
+              <div className="text-sm text-muted-foreground">Hash Rate (H/s)</div>
             </div>
           </div>
 
@@ -73,9 +69,7 @@ export function PrivateBlockchainNetwork() {
             <div>
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-green-400">Network Health</span>
-                <span className="text-green-400">
-                  {networkStats.networkHealth.toFixed(1)}%
-                </span>
+                <span className="text-green-400">{networkStats.networkHealth.toFixed(1)}%</span>
               </div>
               <Progress value={networkStats.networkHealth} className="h-2" />
             </div>
@@ -83,9 +77,7 @@ export function PrivateBlockchainNetwork() {
             <div>
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-blue-400">Security Level</span>
-                <span className="text-blue-400">
-                  {networkStats.securityLevel}%
-                </span>
+                <span className="text-blue-400">{networkStats.securityLevel}%</span>
               </div>
               <Progress value={networkStats.securityLevel} className="h-2" />
             </div>
@@ -93,9 +85,7 @@ export function PrivateBlockchainNetwork() {
             <div>
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-purple-400">Data Integrity</span>
-                <span className="text-purple-400">
-                  {networkStats.dataIntegrity}%
-                </span>
+                <span className="text-purple-400">{networkStats.dataIntegrity}%</span>
               </div>
               <Progress value={networkStats.dataIntegrity} className="h-2" />
             </div>
@@ -113,27 +103,19 @@ export function PrivateBlockchainNetwork() {
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">
-                Consensus Algorithm:
-              </span>
-              <span className="text-green-400 font-bold">
-                Quantum Proof of Stake
-              </span>
+              <span className="text-sm text-muted-foreground">Consensus Algorithm:</span>
+              <span className="text-green-400 font-bold">Quantum Proof of Stake</span>
             </div>
             <div className="flex justify-between">
               <span className="text-sm text-muted-foreground">Block Time:</span>
               <span className="text-blue-400 font-bold">0.5 seconds</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">
-                Transaction Speed:
-              </span>
+              <span className="text-sm text-muted-foreground">Transaction Speed:</span>
               <span className="text-purple-400 font-bold">50,000 TPS</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">
-                Network Type:
-              </span>
+              <span className="text-sm text-muted-foreground">Network Type:</span>
               <span className="text-cyan-400 font-bold">Private & Secure</span>
             </div>
           </CardContent>
@@ -149,26 +131,18 @@ export function PrivateBlockchainNetwork() {
           <CardContent className="space-y-3">
             <div className="flex justify-between">
               <span className="text-sm text-muted-foreground">Encryption:</span>
-              <span className="text-green-400 font-bold">
-                Quantum-Resistant
-              </span>
+              <span className="text-green-400 font-bold">Quantum-Resistant</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">
-                Authentication:
-              </span>
+              <span className="text-sm text-muted-foreground">Authentication:</span>
               <span className="text-blue-400 font-bold">Multi-Layer</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">
-                Data Privacy:
-              </span>
+              <span className="text-sm text-muted-foreground">Data Privacy:</span>
               <span className="text-purple-400 font-bold">Zero-Knowledge</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">
-                Immutability:
-              </span>
+              <span className="text-sm text-muted-foreground">Immutability:</span>
               <span className="text-cyan-400 font-bold">Absolute</span>
             </div>
           </CardContent>
@@ -191,9 +165,7 @@ export function PrivateBlockchainNetwork() {
               >
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-sm">
-                    Block #{(15847 + i).toLocaleString()} mined
-                  </span>
+                  <span className="text-sm">Block #{(15847 + i).toLocaleString()} mined</span>
                 </div>
                 <div className="text-sm text-purple-400">
                   {Math.floor(Math.random() * 100) + 50} transactions

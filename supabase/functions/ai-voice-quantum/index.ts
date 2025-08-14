@@ -4,8 +4,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.7.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 const elevenLabsApiKey = Deno.env.get("ELEVENLABS_API_KEY");
@@ -64,36 +63,31 @@ serve(async (req) => {
     const config = voiceConfigs[voice] || voiceConfigs["neural-assistant"];
 
     // Generate speech with ElevenLabs
-    const response = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${config.voice_id}`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "audio/mpeg",
-          "Content-Type": "application/json",
-          "xi-api-key": elevenLabsApiKey,
-        },
-        body: JSON.stringify({
-          text: text,
-          model_id: config.model_id,
-          voice_settings: config.voice_settings,
-        }),
+    const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${config.voice_id}`, {
+      method: "POST",
+      headers: {
+        Accept: "audio/mpeg",
+        "Content-Type": "application/json",
+        "xi-api-key": elevenLabsApiKey,
       },
-    );
+      body: JSON.stringify({
+        text: text,
+        model_id: config.model_id,
+        voice_settings: config.voice_settings,
+      }),
+    });
 
     if (!response.ok) {
       throw new Error(`ElevenLabs API error: ${response.statusText}`);
     }
 
     const audioArrayBuffer = await response.arrayBuffer();
-    const audioBase64 = btoa(
-      String.fromCharCode(...new Uint8Array(audioArrayBuffer)),
-    );
+    const audioBase64 = btoa(String.fromCharCode(...new Uint8Array(audioArrayBuffer)));
 
     // Log voice interaction
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
     await supabase.from("ai_voice_interactions").insert({
@@ -120,7 +114,7 @@ serve(async (req) => {
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-      },
+      }
     );
   } catch (error) {
     console.error("🔥 VOICE QUANTUM ERROR:", error);
@@ -133,7 +127,7 @@ serve(async (req) => {
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-      },
+      }
     );
   }
 });

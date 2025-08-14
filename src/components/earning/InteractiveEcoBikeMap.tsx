@@ -43,11 +43,7 @@ export function InteractiveEcoBikeMap() {
       name: "Riverside Green Path",
       distance: 8.5,
       difficulty: "easy",
-      ecoFeatures: [
-        "River cleanup stations",
-        "Bird watching points",
-        "Native plant gardens",
-      ],
+      ecoFeatures: ["River cleanup stations", "Bird watching points", "Native plant gardens"],
       multiplier: 2.2,
       estimated_time: 25,
     },
@@ -56,11 +52,7 @@ export function InteractiveEcoBikeMap() {
       name: "Urban Forest Loop",
       distance: 12.3,
       difficulty: "medium",
-      ecoFeatures: [
-        "Tree planting zones",
-        "Solar charging stations",
-        "Compost points",
-      ],
+      ecoFeatures: ["Tree planting zones", "Solar charging stations", "Compost points"],
       multiplier: 2.8,
       estimated_time: 40,
     },
@@ -69,12 +61,7 @@ export function InteractiveEcoBikeMap() {
       name: "Carbon Neutral Challenge",
       distance: 18.7,
       difficulty: "hard",
-      ecoFeatures: [
-        "Wind turbines",
-        "Bee hotels",
-        "Recycling centers",
-        "Community gardens",
-      ],
+      ecoFeatures: ["Wind turbines", "Bee hotels", "Recycling centers", "Community gardens"],
       multiplier: 3.5,
       estimated_time: 65,
     },
@@ -197,79 +184,54 @@ export function InteractiveEcoBikeMap() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center p-3 bg-green-900/30 rounded-lg">
-                <div className="text-xl font-bold text-green-400">
-                  {distance.toFixed(1)}km
-                </div>
+                <div className="text-xl font-bold text-green-400">{distance.toFixed(1)}km</div>
                 <div className="text-xs text-muted-foreground">Distance</div>
               </div>
               <div className="text-center p-3 bg-blue-900/30 rounded-lg">
-                <div className="text-xl font-bold text-blue-400">
-                  {formatTime(duration)}
-                </div>
+                <div className="text-xl font-bold text-blue-400">{formatTime(duration)}</div>
                 <div className="text-xs text-muted-foreground">Time</div>
               </div>
               <div className="text-center p-3 bg-yellow-900/30 rounded-lg">
-                <div className="text-xl font-bold text-yellow-400">
-                  {speed.toFixed(1)} km/h
-                </div>
+                <div className="text-xl font-bold text-yellow-400">{speed.toFixed(1)} km/h</div>
                 <div className="text-xs text-muted-foreground">Speed</div>
               </div>
               <div className="text-center p-3 bg-purple-900/30 rounded-lg">
-                <div className="text-xl font-bold text-purple-400">
-                  {tokensEarned.toFixed(1)}
-                </div>
+                <div className="text-xl font-bold text-purple-400">{tokensEarned.toFixed(1)}</div>
                 <div className="text-xs text-muted-foreground">GAiA Earned</div>
               </div>
             </div>
 
-            <Progress
-              value={(distance / activeRide.distance) * 100}
-              className="mt-4 h-3"
-            />
+            <Progress value={(distance / activeRide.distance) * 100} className="mt-4 h-3" />
             <div className="text-center text-sm text-muted-foreground mt-2">
-              {distance.toFixed(1)} / {activeRide.distance}km •{" "}
-              {activeRide.multiplier}x eco-multiplier active
+              {distance.toFixed(1)} / {activeRide.distance}km • {activeRide.multiplier}x
+              eco-multiplier active
             </div>
           </div>
         )}
 
         {/* Bike Stats Dashboard */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-green-400">
-            📊 Your Eco Bike Impact
-          </h3>
+          <h3 className="text-lg font-semibold text-green-400">📊 Your Eco Bike Impact</h3>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
             <div className="text-center p-4 bg-green-900/30 rounded-lg border border-green-500/20">
-              <div className="text-xl font-bold text-green-400">
-                {bikeStats.totalDistance}
-              </div>
+              <div className="text-xl font-bold text-green-400">{bikeStats.totalDistance}</div>
               <div className="text-xs text-muted-foreground">Total KM</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
-              <div className="text-xl font-bold text-blue-400">
-                {bikeStats.totalRides}
-              </div>
+              <div className="text-xl font-bold text-blue-400">{bikeStats.totalRides}</div>
               <div className="text-xs text-muted-foreground">Total Rides</div>
             </div>
             <div className="text-center p-4 bg-yellow-900/30 rounded-lg border border-yellow-500/20">
-              <div className="text-xl font-bold text-yellow-400">
-                {bikeStats.totalTokens}
-              </div>
+              <div className="text-xl font-bold text-yellow-400">{bikeStats.totalTokens}</div>
               <div className="text-xs text-muted-foreground">GAiA Earned</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
-              <div className="text-xl font-bold text-purple-400">
-                {bikeStats.weeklyDistance}
-              </div>
+              <div className="text-xl font-bold text-purple-400">{bikeStats.weeklyDistance}</div>
               <div className="text-xs text-muted-foreground">This Week</div>
             </div>
             <div className="text-center p-4 bg-red-900/30 rounded-lg border border-red-500/20">
-              <div className="text-xl font-bold text-red-400">
-                {bikeStats.co2Saved}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                CO2 Saved (kg)
-              </div>
+              <div className="text-xl font-bold text-red-400">{bikeStats.co2Saved}</div>
+              <div className="text-xs text-muted-foreground">CO2 Saved (kg)</div>
             </div>
             <div className="text-center p-4 bg-orange-900/30 rounded-lg border border-orange-500/20">
               <div className="text-xl font-bold text-orange-400">
@@ -337,11 +299,7 @@ export function InteractiveEcoBikeMap() {
                   </h5>
                   <div className="flex flex-wrap gap-2">
                     {route.ecoFeatures.map((feature, index) => (
-                      <Badge
-                        key={index}
-                        variant="outline"
-                        className="text-xs border-green-500/30"
-                      >
+                      <Badge key={index} variant="outline" className="text-xs border-green-500/30">
                         {feature}
                       </Badge>
                     ))}
@@ -356,21 +314,18 @@ export function InteractiveEcoBikeMap() {
         <div className="h-64 bg-gradient-to-br from-green-500/10 to-blue-500/10 rounded-lg border border-green-500/20 flex items-center justify-center">
           <div className="text-center">
             <Navigation className="h-12 w-12 text-green-400 mx-auto mb-3" />
-            <h4 className="font-semibold text-green-400 mb-2">
-              Interactive Eco Route Map
-            </h4>
+            <h4 className="font-semibold text-green-400 mb-2">Interactive Eco Route Map</h4>
             <p className="text-sm text-muted-foreground">
-              Real-time GPS tracking with eco-points and environmental impact
-              markers
+              Real-time GPS tracking with eco-points and environmental impact markers
             </p>
           </div>
         </div>
 
         <div className="p-4 bg-gradient-to-r from-green-500/10 to-cyan-500/10 rounded-lg border border-green-500/20">
           <p className="text-sm text-green-300">
-            💡 <strong>Eco Route Bonus:</strong> Special routes with
-            environmental features earn multiplied rewards! Visit eco-points for
-            extra tokens and help maintain local environmental projects!
+            💡 <strong>Eco Route Bonus:</strong> Special routes with environmental features earn
+            multiplied rewards! Visit eco-points for extra tokens and help maintain local
+            environmental projects!
           </p>
         </div>
       </CardContent>

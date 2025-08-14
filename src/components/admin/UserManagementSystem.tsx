@@ -139,9 +139,7 @@ export function UserManagementSystem() {
 
   const handleBanUser = (userId: string) => {
     setUsers((prev) =>
-      prev.map((user) =>
-        user.id === userId ? { ...user, status: "banned" as const } : user,
-      ),
+      prev.map((user) => (user.id === userId ? { ...user, status: "banned" as const } : user))
     );
 
     toast.success("🚫 User permanently banned!", {
@@ -162,8 +160,8 @@ export function UserManagementSystem() {
               status: "warned" as const,
               warningExpiry: expiryDate.toISOString().split("T")[0],
             }
-          : user,
-      ),
+          : user
+      )
     );
 
     toast.success(`⚠️ User warned for ${warningDuration} hours!`, {
@@ -181,8 +179,8 @@ export function UserManagementSystem() {
               status: "restricted" as const,
               restrictionLevel: restrictionLevel,
             }
-          : user,
-      ),
+          : user
+      )
     );
 
     toast.success(`🔒 User account restricted!`, {
@@ -191,22 +189,13 @@ export function UserManagementSystem() {
     });
   };
 
-  const handleIPAction = (
-    ip: string,
-    action: "approved" | "blocked" | "pending",
-  ) => {
+  const handleIPAction = (ip: string, action: "approved" | "blocked" | "pending") => {
     setIpAddresses((prev) =>
-      prev.map((ipAddr) =>
-        ipAddr.ip === ip ? { ...ipAddr, status: action } : ipAddr,
-      ),
+      prev.map((ipAddr) => (ipAddr.ip === ip ? { ...ipAddr, status: action } : ipAddr))
     );
 
     const actionText =
-      action === "approved"
-        ? "approved"
-        : action === "blocked"
-          ? "blocked"
-          : "marked as pending";
+      action === "approved" ? "approved" : action === "blocked" ? "blocked" : "marked as pending";
     toast.success(`🌐 IP Address ${actionText}!`, {
       description: `${ip} has been ${actionText} in the system.`,
       duration: 3000,
@@ -248,13 +237,12 @@ export function UserManagementSystem() {
     (user) =>
       user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.ipAddress.includes(searchTerm),
+      user.ipAddress.includes(searchTerm)
   );
 
   const filteredIPs = ipAddresses.filter(
     (ip) =>
-      ip.ip.includes(searchTerm) ||
-      ip.location.toLowerCase().includes(searchTerm.toLowerCase()),
+      ip.ip.includes(searchTerm) || ip.location.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -281,10 +269,7 @@ export function UserManagementSystem() {
                 <Search className="h-4 w-4" />
               </Button>
             </div>
-            <Button
-              onClick={generatePDFReport}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
+            <Button onClick={generatePDFReport} className="bg-blue-600 hover:bg-blue-700">
               <Download className="h-4 w-4 mr-2" />
               Export Security Report
             </Button>
@@ -309,30 +294,21 @@ export function UserManagementSystem() {
                       <div className="flex items-center gap-4">
                         <div>
                           <div className="font-semibold">{user.username}</div>
-                          <div className="text-sm text-muted-foreground">
-                            {user.email}
-                          </div>
+                          <div className="text-sm text-muted-foreground">{user.email}</div>
                           <div className="text-xs text-muted-foreground">
                             IP: {user.ipAddress} • Location: {user.location}
                           </div>
                           <div className="text-xs text-muted-foreground">
-                            Joined: {user.joinDate} • Last active:{" "}
-                            {user.lastActivity}
+                            Joined: {user.joinDate} • Last active: {user.lastActivity}
                           </div>
                         </div>
-                        <Badge
-                          className={`${getStatusColor(user.status)} text-white`}
-                        >
+                        <Badge className={`${getStatusColor(user.status)} text-white`}>
                           {user.status.toUpperCase()}
                         </Badge>
                       </div>
 
                       <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => setSelectedUser(user)}
-                        >
+                        <Button size="sm" variant="outline" onClick={() => setSelectedUser(user)}>
                           <Eye className="h-4 w-4" />
                         </Button>
                         <Button
@@ -366,12 +342,9 @@ export function UserManagementSystem() {
                       <div className="flex items-center gap-4">
                         <div>
                           <div className="font-semibold font-mono">{ip.ip}</div>
-                          <div className="text-sm text-muted-foreground">
-                            {ip.location}
-                          </div>
+                          <div className="text-sm text-muted-foreground">{ip.location}</div>
                           <div className="text-xs text-muted-foreground">
-                            First seen: {ip.firstSeen} • Last activity:{" "}
-                            {ip.lastActivity}
+                            First seen: {ip.firstSeen} • Last activity: {ip.lastActivity}
                           </div>
                           <div className="text-xs text-muted-foreground">
                             Users: {ip.userCount} • Risk Level:{" "}
@@ -380,9 +353,7 @@ export function UserManagementSystem() {
                             </span>
                           </div>
                         </div>
-                        <Badge
-                          className={`${getStatusColor(ip.status)} text-white`}
-                        >
+                        <Badge className={`${getStatusColor(ip.status)} text-white`}>
                           {ip.status.toUpperCase()}
                         </Badge>
                       </div>
@@ -428,24 +399,18 @@ export function UserManagementSystem() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div>
-                      <label className="text-sm font-medium">
-                        Duration (hours)
-                      </label>
+                      <label className="text-sm font-medium">Duration (hours)</label>
                       <Input
                         type="number"
                         value={warningDuration}
-                        onChange={(e) =>
-                          setWarningDuration(Number(e.target.value))
-                        }
+                        onChange={(e) => setWarningDuration(Number(e.target.value))}
                         min="1"
                         max="168"
                       />
                     </div>
                     <Button
                       className="w-full bg-yellow-600 hover:bg-yellow-700"
-                      onClick={() =>
-                        selectedUser && handleWarnUser(selectedUser.id)
-                      }
+                      onClick={() => selectedUser && handleWarnUser(selectedUser.id)}
                       disabled={!selectedUser}
                     >
                       <Clock className="h-4 w-4 mr-2" />
@@ -464,24 +429,18 @@ export function UserManagementSystem() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div>
-                      <label className="text-sm font-medium">
-                        Restriction Level (1-5)
-                      </label>
+                      <label className="text-sm font-medium">Restriction Level (1-5)</label>
                       <Input
                         type="number"
                         value={restrictionLevel}
-                        onChange={(e) =>
-                          setRestrictionLevel(Number(e.target.value))
-                        }
+                        onChange={(e) => setRestrictionLevel(Number(e.target.value))}
                         min="1"
                         max="5"
                       />
                     </div>
                     <Button
                       className="w-full bg-orange-600 hover:bg-orange-700"
-                      onClick={() =>
-                        selectedUser && handleRestrictUser(selectedUser.id)
-                      }
+                      onClick={() => selectedUser && handleRestrictUser(selectedUser.id)}
                       disabled={!selectedUser}
                     >
                       <UserMinus className="h-4 w-4 mr-2" />
@@ -504,9 +463,7 @@ export function UserManagementSystem() {
                     </div>
                     <Button
                       className="w-full bg-red-600 hover:bg-red-700"
-                      onClick={() =>
-                        selectedUser && handleBanUser(selectedUser.id)
-                      }
+                      onClick={() => selectedUser && handleBanUser(selectedUser.id)}
                       disabled={!selectedUser}
                     >
                       <Ban className="h-4 w-4 mr-2" />
@@ -540,15 +497,11 @@ export function UserManagementSystem() {
             <TabsContent value="chat-security" className="space-y-4">
               <Card className="bg-purple-900/30 border border-purple-500/30">
                 <CardHeader>
-                  <CardTitle className="text-purple-400">
-                    🔒 Secure Chat Settings
-                  </CardTitle>
+                  <CardTitle className="text-purple-400">🔒 Secure Chat Settings</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-                    <h4 className="font-medium text-green-400 mb-2">
-                      ✅ Chat Security Active
-                    </h4>
+                    <h4 className="font-medium text-green-400 mb-2">✅ Chat Security Active</h4>
                     <ul className="text-sm space-y-1 text-green-300">
                       <li>• All messages encrypted and untraceable</li>
                       <li>• Admin-only access to chat logs for moderation</li>
@@ -559,13 +512,10 @@ export function UserManagementSystem() {
                   </div>
 
                   <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
-                    <h4 className="font-medium text-red-400 mb-2">
-                      🛡️ Admin Privileges
-                    </h4>
+                    <h4 className="font-medium text-red-400 mb-2">🛡️ Admin Privileges</h4>
                     <p className="text-sm text-red-300">
-                      Only admin accounts can access chat logs for security
-                      purposes. All access is logged and audited for maximum
-                      transparency.
+                      Only admin accounts can access chat logs for security purposes. All access is
+                      logged and audited for maximum transparency.
                     </p>
                   </div>
                 </CardContent>

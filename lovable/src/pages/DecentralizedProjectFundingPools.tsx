@@ -67,8 +67,7 @@ export default function DecentralizedProjectFundingPools() {
     {
       id: "amazon-protection",
       title: "Amazon Rainforest Protection",
-      description:
-        "Large-scale conservation of 10,000 hectares in the Amazon basin",
+      description: "Large-scale conservation of 10,000 hectares in the Amazon basin",
       funding_goal: 2500000,
       current_funding: 1847500,
       project_type: "Forest Conservation",
@@ -92,8 +91,7 @@ export default function DecentralizedProjectFundingPools() {
     {
       id: "ocean-cleanup",
       title: "Pacific Ocean Plastic Removal",
-      description:
-        "Advanced filtration systems to remove microplastics from ocean currents",
+      description: "Advanced filtration systems to remove microplastics from ocean currents",
       funding_goal: 1800000,
       current_funding: 1260000,
       project_type: "Ocean Cleanup",
@@ -166,8 +164,7 @@ export default function DecentralizedProjectFundingPools() {
             🌍 Decentralized Project Funding Pools
           </h1>
           <p className="text-xl text-muted-foreground mt-2">
-            Community-driven environmental project funding with full
-            transparency
+            Community-driven environmental project funding with full transparency
           </p>
         </div>
 
@@ -183,9 +180,7 @@ export default function DecentralizedProjectFundingPools() {
                   {project.title}
                 </CardTitle>
                 <div className="flex gap-2">
-                  <Badge
-                    className={getStatusColor(project.verification_status)}
-                  >
+                  <Badge className={getStatusColor(project.verification_status)}>
                     {project.verification_status || "pending"}
                   </Badge>
                   {project.satellite_verified && (
@@ -194,24 +189,17 @@ export default function DecentralizedProjectFundingPools() {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  {project.description}
-                </p>
+                <p className="text-muted-foreground mb-4">{project.description}</p>
 
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Progress</span>
                     <span className="text-white font-bold">
-                      {Math.round(
-                        (project.current_funding / project.funding_goal) * 100,
-                      )}
-                      %
+                      {Math.round((project.current_funding / project.funding_goal) * 100)}%
                     </span>
                   </div>
                   <Progress
-                    value={
-                      (project.current_funding / project.funding_goal) * 100
-                    }
+                    value={(project.current_funding / project.funding_goal) * 100}
                     className="w-full h-2"
                   />
 
@@ -239,9 +227,7 @@ export default function DecentralizedProjectFundingPools() {
                   )}
 
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">
-                      Community Votes
-                    </span>
+                    <span className="text-muted-foreground">Community Votes</span>
                     <span className="text-purple-400 font-bold">
                       {project.community_votes.toLocaleString()}
                     </span>

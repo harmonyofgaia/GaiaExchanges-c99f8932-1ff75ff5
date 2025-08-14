@@ -54,22 +54,14 @@ export function SecurityOrchestrator() {
   useEffect(() => {
     const runSecurityOrchestrator = () => {
       console.log("🎯 SECURITY ORCHESTRATOR - COORDINATING ALL SYSTEMS");
-      console.log(
-        "👑 INVESTOR ATTRACTION ACTIVE - DEMONSTRATING PRICELESS VALUE",
-      );
+      console.log("👑 INVESTOR ATTRACTION ACTIVE - DEMONSTRATING PRICELESS VALUE");
 
       // Coordinate all security systems
       setUnbreakableDefense(true);
 
       // Generate investor leads
       if (Math.random() < 0.1) {
-        const platforms = [
-          "LinkedIn",
-          "AngelList",
-          "Crunchbase",
-          "Twitter",
-          "Discord",
-        ];
+        const platforms = ["LinkedIn", "AngelList", "Crunchbase", "Twitter", "Discord"];
         const profiles = [
           "Venture Capital Fund",
           "Angel Investor",
@@ -77,11 +69,7 @@ export function SecurityOrchestrator() {
           "Tech Investor",
           "Strategic Partner",
         ];
-        const priorities: ("high" | "medium" | "low")[] = [
-          "high",
-          "medium",
-          "low",
-        ];
+        const priorities: ("high" | "medium" | "low")[] = ["high", "medium", "low"];
 
         const newLead: InvestorLead = {
           id: `lead-${Date.now()}`,
@@ -107,7 +95,7 @@ export function SecurityOrchestrator() {
           ...layer,
           lastCheck: new Date(),
           threatLevel: Math.max(0, layer.threatLevel - 0.1),
-        })),
+        }))
       );
     };
 
@@ -115,8 +103,7 @@ export function SecurityOrchestrator() {
     runSecurityOrchestrator();
 
     return () => {
-      if (orchestratorInterval.current)
-        clearInterval(orchestratorInterval.current);
+      if (orchestratorInterval.current) clearInterval(orchestratorInterval.current);
     };
   }, []);
 

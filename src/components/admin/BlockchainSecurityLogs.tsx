@@ -15,7 +15,7 @@ interface SecurityLog {
 export function BlockchainSecurityLogs() {
   const [totalLogs, setTotalLogs] = useState(45892);
   const [blockchainHash, setBlockchainHash] = useState(
-    "0x7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+    "0x7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069"
   );
   const [recentLogs, setRecentLogs] = useState<SecurityLog[]>([]);
   const [verificationRate, setVerificationRate] = useState(100);
@@ -35,9 +35,7 @@ export function BlockchainSecurityLogs() {
       ][Math.floor(Math.random() * 8)],
       hash: `0x${Math.random().toString(16).substr(2, 32)}`,
       timestamp: new Date().toLocaleTimeString(),
-      severity: ["low", "medium", "high", "critical"][
-        Math.floor(Math.random() * 4)
-      ] as any,
+      severity: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as any,
       verified: true,
     });
 
@@ -83,16 +81,12 @@ export function BlockchainSecurityLogs() {
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-black/30 p-4 rounded-lg border border-cyan-500/20">
-            <div className="text-2xl font-bold text-cyan-400">
-              {totalLogs.toLocaleString()}
-            </div>
+            <div className="text-2xl font-bold text-cyan-400">{totalLogs.toLocaleString()}</div>
             <div className="text-sm text-cyan-300">Total Security Logs</div>
           </div>
 
           <div className="bg-black/30 p-4 rounded-lg border border-blue-500/20">
-            <div className="text-2xl font-bold text-blue-400">
-              {verificationRate}%
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{verificationRate}%</div>
             <div className="text-sm text-blue-300">Verification Rate</div>
           </div>
 
@@ -141,9 +135,7 @@ export function BlockchainSecurityLogs() {
                   </div>
                 </div>
                 <div className="text-xs mt-2 space-y-1">
-                  <div className="text-gray-400">
-                    Hash: {log.hash.substring(0, 20)}...
-                  </div>
+                  <div className="text-gray-400">Hash: {log.hash.substring(0, 20)}...</div>
                   <div className="text-gray-400">Time: {log.timestamp}</div>
                 </div>
               </div>
@@ -173,9 +165,7 @@ export function BlockchainSecurityLogs() {
         </div>
 
         <div className="text-center p-4 bg-gradient-to-r from-cyan-900/20 to-blue-900/20 rounded-lg border border-cyan-500/20">
-          <div className="text-cyan-400 font-bold">
-            ⛓️ BLOCKCHAIN SECURITY STATUS
-          </div>
+          <div className="text-cyan-400 font-bold">⛓️ BLOCKCHAIN SECURITY STATUS</div>
           <div className="text-green-400 text-sm mt-1">
             IMMUTABLE RECORDS • GAiA SECURED • CRYPTOGRAPHICALLY VERIFIED
           </div>

@@ -52,16 +52,10 @@ export function PersistentAudioControls() {
         }
       };
 
-      window.addEventListener(
-        "admin-audio-update",
-        handleMediaUpdate as EventListener,
-      );
+      window.addEventListener("admin-audio-update", handleMediaUpdate as EventListener);
 
       return () => {
-        window.removeEventListener(
-          "admin-audio-update",
-          handleMediaUpdate as EventListener,
-        );
+        window.removeEventListener("admin-audio-update", handleMediaUpdate as EventListener);
       };
     };
 
@@ -150,8 +144,7 @@ export function PersistentAudioControls() {
 
   const playPrevious = () => {
     if (playlist.length === 0) return;
-    const prevIndex =
-      currentIndex === 0 ? playlist.length - 1 : currentIndex - 1;
+    const prevIndex = currentIndex === 0 ? playlist.length - 1 : currentIndex - 1;
     setCurrentIndex(prevIndex);
     playTrack(playlist[prevIndex]);
   };
@@ -240,8 +233,7 @@ export function PersistentAudioControls() {
                   className="w-full"
                   onValueChange={(value) => {
                     if (audioRef.current && duration > 0) {
-                      audioRef.current.currentTime =
-                        (value[0] / 100) * duration;
+                      audioRef.current.currentTime = (value[0] / 100) * duration;
                     }
                   }}
                 />
@@ -271,11 +263,7 @@ export function PersistentAudioControls() {
               onClick={togglePlay}
               className="h-8 w-8 p-0 text-purple-400 hover:text-purple-300"
             >
-              {isPlaying ? (
-                <Pause className="h-4 w-4" />
-              ) : (
-                <Play className="h-4 w-4" />
-              )}
+              {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
             </Button>
 
             <Button

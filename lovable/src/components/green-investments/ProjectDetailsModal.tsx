@@ -1,23 +1,9 @@
 import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Heart,
-  Users,
-  Target,
-  DollarSign,
-  Clock,
-  Award,
-  MapPin,
-  ExternalLink,
-} from "lucide-react";
+import { Heart, Users, Target, DollarSign, Clock, Award, MapPin, ExternalLink } from "lucide-react";
 import { GAiAProject } from "@/constants/gaia-projects";
 
 interface ProjectDetailsModalProps {
@@ -26,11 +12,7 @@ interface ProjectDetailsModalProps {
   onClose: () => void;
 }
 
-export function ProjectDetailsModal({
-  project,
-  isOpen,
-  onClose,
-}: ProjectDetailsModalProps) {
+export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetailsModalProps) {
   if (!project) return null;
 
   const fundingPercentage =
@@ -104,9 +86,7 @@ export function ProjectDetailsModal({
           </div>
 
           {/* Description */}
-          <p className="text-green-300/80 text-lg leading-relaxed">
-            {project.description}
-          </p>
+          <p className="text-green-300/80 text-lg leading-relaxed">{project.description}</p>
 
           {/* Location */}
           {project.location && (
@@ -120,9 +100,7 @@ export function ProjectDetailsModal({
           <div className="space-y-3">
             <div className="flex justify-between text-sm">
               <span className="text-green-400">Funding Progress</span>
-              <span className="text-green-300">
-                {fundingPercentage.toFixed(1)}%
-              </span>
+              <span className="text-green-300">{fundingPercentage.toFixed(1)}%</span>
             </div>
             <Progress value={fundingPercentage} className="h-4" />
             {project.currentFunding && project.fundingGoal && (
@@ -130,9 +108,7 @@ export function ProjectDetailsModal({
                 <span className="text-green-400">
                   ${project.currentFunding.toLocaleString()} raised
                 </span>
-                <span className="text-blue-400">
-                  ${project.fundingGoal.toLocaleString()} goal
-                </span>
+                <span className="text-blue-400">${project.fundingGoal.toLocaleString()} goal</span>
               </div>
             )}
           </div>
@@ -149,17 +125,13 @@ export function ProjectDetailsModal({
 
             <div className="text-center p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
               <Award className="h-6 w-6 text-purple-400 mx-auto mb-2" />
-              <div className="text-xl font-bold text-purple-400">
-                {project.reward}
-              </div>
+              <div className="text-xl font-bold text-purple-400">{project.reward}</div>
               <div className="text-xs text-purple-300">GAiA Reward</div>
             </div>
 
             <div className="text-center p-4 bg-orange-900/20 rounded-lg border border-orange-500/20">
               <Target className="h-6 w-6 text-orange-400 mx-auto mb-2" />
-              <div
-                className={`text-xl font-bold ${getImpactColor(project.impact)}`}
-              >
+              <div className={`text-xl font-bold ${getImpactColor(project.impact)}`}>
                 {project.impact}
               </div>
               <div className="text-xs text-orange-300">Impact Level</div>
@@ -188,11 +160,7 @@ export function ProjectDetailsModal({
           {/* Tags */}
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag, index) => (
-              <Badge
-                key={index}
-                variant="outline"
-                className="border-green-400/30 text-green-400"
-              >
+              <Badge key={index} variant="outline" className="border-green-400/30 text-green-400">
                 #{tag}
               </Badge>
             ))}
@@ -208,9 +176,7 @@ export function ProjectDetailsModal({
               Support This Project
             </Button>
 
-            {["heart-of-gaia", "techno-soul-solutions"].includes(
-              project.id,
-            ) && (
+            {["heart-of-gaia", "techno-soul-solutions"].includes(project.id) && (
               <Button
                 onClick={handleVisitProject}
                 className="bg-blue-600 hover:bg-blue-700 text-white"

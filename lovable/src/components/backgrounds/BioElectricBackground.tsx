@@ -58,8 +58,7 @@ export function BioElectricBackground({
       ctx.lineWidth = 1;
       for (let x = 0; x < canvas.width; x += gridSize) {
         for (let y = 0; y < canvas.height; y += gridSize) {
-          const pulse =
-            Math.sin(Date.now() * 0.005 + (x + y) * 0.01) * 0.5 + 0.5;
+          const pulse = Math.sin(Date.now() * 0.005 + (x + y) * 0.01) * 0.5 + 0.5;
           ctx.globalAlpha = pulse * 0.3;
           ctx.strokeRect(x, y, gridSize, gridSize);
         }
@@ -95,11 +94,11 @@ export function BioElectricBackground({
             ctx.beginPath();
             ctx.moveTo(
               pulse.x + Math.cos(angle) * pulse.radius,
-              pulse.y + Math.sin(angle) * pulse.radius,
+              pulse.y + Math.sin(angle) * pulse.radius
             );
             ctx.lineTo(
               pulse.x + Math.cos(angle) * (pulse.radius + arcLength),
-              pulse.y + Math.sin(angle) * (pulse.radius + arcLength),
+              pulse.y + Math.sin(angle) * (pulse.radius + arcLength)
             );
             ctx.stroke();
           }

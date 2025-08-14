@@ -25,16 +25,10 @@ export function SecureVaultLogin() {
 
     try {
       // Admin credentials check
-      if (
-        credentials.username === "Synatic" &&
-        credentials.password === "Freedom!oul19922323"
-      ) {
+      if (credentials.username === "Synatic" && credentials.password === "Freedom!oul19922323") {
         // Set admin session
         localStorage.setItem("gaia-admin-session", `admin-${Date.now()}`);
-        localStorage.setItem(
-          "gaia-admin-expiry",
-          (Date.now() + 24 * 60 * 60 * 1000).toString(),
-        );
+        localStorage.setItem("gaia-admin-expiry", (Date.now() + 24 * 60 * 60 * 1000).toString());
         sessionStorage.setItem("admin-active", "true");
 
         setIsAuthenticated(true);
@@ -83,27 +77,17 @@ export function SecureVaultLogin() {
                 Ultimate Control Center • Secure Access • Global Management
               </p>
               <div className="flex gap-4 mt-4">
-                <Badge
-                  variant="outline"
-                  className="border-green-500/50 text-green-400"
-                >
+                <Badge variant="outline" className="border-green-500/50 text-green-400">
                   <Globe className="h-3 w-3 mr-1" />
                   Global Admin
                 </Badge>
-                <Badge
-                  variant="outline"
-                  className="border-blue-500/50 text-blue-400"
-                >
+                <Badge variant="outline" className="border-blue-500/50 text-blue-400">
                   <Shield className="h-3 w-3 mr-1" />
                   Vault Access
                 </Badge>
               </div>
             </div>
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              className="border-red-500/30"
-            >
+            <Button onClick={handleLogout} variant="outline" className="border-red-500/30">
               <Lock className="h-4 w-4 mr-2" />
               Logout
             </Button>
@@ -179,11 +163,7 @@ export function SecureVaultLogin() {
                   className="absolute right-1 top-1 h-8 w-8 p-0 text-green-400"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </Button>
               </div>
             </div>

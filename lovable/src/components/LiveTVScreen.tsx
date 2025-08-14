@@ -108,13 +108,10 @@ export function LiveTVScreen() {
       setUpcomingShows((prev) =>
         prev.map((show) => ({
           ...show,
-          viewers: show.isLive
-            ? show.viewers + Math.floor(Math.random() * 20) - 10
-            : show.viewers,
-          tokensCollected:
-            show.tokensCollected + Math.floor(Math.random() * 50),
+          viewers: show.isLive ? show.viewers + Math.floor(Math.random() * 20) - 10 : show.viewers,
+          tokensCollected: show.tokensCollected + Math.floor(Math.random() * 50),
           ecologyContribution: Math.floor(show.tokensCollected * 0.2),
-        })),
+        }))
       );
 
       setTotalTokensBurned((prev) => prev + Math.floor(Math.random() * 10));
@@ -145,8 +142,8 @@ export function LiveTVScreen() {
               ecologyContribution: s.ecologyContribution + ecologyAmount,
               viewers: s.viewers + 1,
             }
-          : s,
-      ),
+          : s
+      )
     );
 
     setTotalTokensBurned((prev) => prev + burnAmount);
@@ -180,17 +177,13 @@ export function LiveTVScreen() {
               <div className="text-xl font-bold text-orange-400">
                 {totalTokensBurned.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Total Tokens Burned
-              </div>
+              <div className="text-xs text-muted-foreground">Total Tokens Burned</div>
             </div>
             <div className="text-center p-3 bg-green-900/30 border border-green-500/20 rounded-lg">
               <div className="text-xl font-bold text-green-400">
                 {totalEcologyFunding.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Ecology Funding
-              </div>
+              <div className="text-xs text-muted-foreground">Ecology Funding</div>
             </div>
             <div className="text-center p-3 bg-blue-900/30 border border-blue-500/20 rounded-lg">
               <div className="text-xl font-bold text-blue-400">
@@ -200,9 +193,7 @@ export function LiveTVScreen() {
             </div>
             <div className="text-center p-3 bg-purple-900/30 border border-purple-500/20 rounded-lg">
               <div className="text-xl font-bold text-purple-400">
-                {upcomingShows
-                  .reduce((sum, show) => sum + show.viewers, 0)
-                  .toLocaleString()}
+                {upcomingShows.reduce((sum, show) => sum + show.viewers, 0).toLocaleString()}
               </div>
               <div className="text-xs text-muted-foreground">Total Viewers</div>
             </div>
@@ -279,23 +270,15 @@ export function LiveTVScreen() {
               <div className="space-y-3">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="text-2xl font-bold text-white">
-                      {currentShow.title}
-                    </h3>
-                    <p className="text-lg text-purple-400">
-                      {currentShow.artist}
-                    </p>
+                    <h3 className="text-2xl font-bold text-white">{currentShow.title}</h3>
+                    <p className="text-lg text-purple-400">{currentShow.artist}</p>
                   </div>
-                  <Badge
-                    className={`${getCategoryColor(currentShow.category)} text-white`}
-                  >
+                  <Badge className={`${getCategoryColor(currentShow.category)} text-white`}>
                     {currentShow.category}
                   </Badge>
                 </div>
 
-                <p className="text-muted-foreground">
-                  {currentShow.description}
-                </p>
+                <p className="text-muted-foreground">{currentShow.description}</p>
 
                 <div className="flex flex-wrap gap-4 text-sm">
                   <div className="flex items-center gap-1">
@@ -327,9 +310,7 @@ export function LiveTVScreen() {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium">
-                Payment Amount (GAiA)
-              </label>
+              <label className="text-sm font-medium">Payment Amount (GAiA)</label>
               <Input
                 type="number"
                 value={paymentAmount}
@@ -343,21 +324,15 @@ export function LiveTVScreen() {
               <div className="text-xs space-y-1">
                 <div className="flex justify-between">
                   <span>Artist (50%):</span>
-                  <span className="text-green-400">
-                    {Math.floor(paymentAmount * 0.5)} GAiA
-                  </span>
+                  <span className="text-green-400">{Math.floor(paymentAmount * 0.5)} GAiA</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Ecology Projects (30%):</span>
-                  <span className="text-blue-400">
-                    {Math.floor(paymentAmount * 0.3)} GAiA
-                  </span>
+                  <span className="text-blue-400">{Math.floor(paymentAmount * 0.3)} GAiA</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Burned for Impact (20%):</span>
-                  <span className="text-orange-400">
-                    {Math.floor(paymentAmount * 0.2)} GAiA
-                  </span>
+                  <span className="text-orange-400">{Math.floor(paymentAmount * 0.2)} GAiA</span>
                 </div>
               </div>
             </div>
@@ -366,9 +341,7 @@ export function LiveTVScreen() {
           <div className="text-center">
             <p className="text-sm text-muted-foreground mb-2">
               GAiA Contract:{" "}
-              <code className="font-mono text-xs">
-                {GAIA_TOKEN.CONTRACT_ADDRESS}
-              </code>
+              <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
             </p>
           </div>
         </CardContent>
@@ -406,20 +379,14 @@ export function LiveTVScreen() {
                 <div>
                   <h4 className="font-bold text-white">{show.title}</h4>
                   <p className="text-sm text-purple-400">{show.artist}</p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {show.description}
-                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">{show.description}</p>
                 </div>
 
                 <div className="flex items-center justify-between text-xs">
-                  <Badge
-                    className={`${getCategoryColor(show.category)} text-white`}
-                  >
+                  <Badge className={`${getCategoryColor(show.category)} text-white`}>
                     {show.category}
                   </Badge>
-                  {show.isLive && (
-                    <Badge className="bg-red-600 text-white">🔴 LIVE</Badge>
-                  )}
+                  {show.isLive && <Badge className="bg-red-600 text-white">🔴 LIVE</Badge>}
                 </div>
 
                 <div className="flex items-center justify-between text-xs text-muted-foreground">

@@ -37,8 +37,7 @@ export function UltimateAdminControls() {
         {
           id: "level2-defense",
           name: "Level 2 Enhanced Defense",
-          description:
-            "IP-specific invisibility activation only after Level 2 breach",
+          description: "IP-specific invisibility activation only after Level 2 breach",
           status: true,
           powerLevel: 100,
           category: "defense",
@@ -117,13 +116,10 @@ export function UltimateAdminControls() {
           console.log(`⚡ STATUS: ${newStatus ? "ACTIVATED" : "DEACTIVATED"}`);
           console.log("🌍 GLOBAL IMPACT: Immediate worldwide effect");
 
-          toast.success(
-            `👑 ${control.name} ${newStatus ? "ACTIVATED" : "DEACTIVATED"}!`,
-            {
-              description: `Godfather command executed - ${control.description}`,
-              duration: 5000,
-            },
-          );
+          toast.success(`👑 ${control.name} ${newStatus ? "ACTIVATED" : "DEACTIVATED"}!`, {
+            description: `Godfather command executed - ${control.description}`,
+            duration: 5000,
+          });
 
           return {
             ...control,
@@ -132,7 +128,7 @@ export function UltimateAdminControls() {
           };
         }
         return control;
-      }),
+      })
     );
   };
 
@@ -147,7 +143,7 @@ export function UltimateAdminControls() {
         ...control,
         status: true,
         powerLevel: 100,
-      })),
+      }))
     );
 
     setGodfatherMode(true);
@@ -198,14 +194,11 @@ export function UltimateAdminControls() {
           </CardTitle>
           <div className="flex justify-between items-center">
             <div className="flex gap-2">
-              <Badge
-                className={`${godfatherMode ? "bg-red-600 animate-pulse" : "bg-gray-600"}`}
-              >
+              <Badge className={`${godfatherMode ? "bg-red-600 animate-pulse" : "bg-gray-600"}`}>
                 👑 GODFATHER MODE: {godfatherMode ? "ACTIVE" : "STANDBY"}
               </Badge>
               <Badge className="bg-purple-600">
-                ⚡ Systems Active:{" "}
-                {systemControls.filter((c) => c.status).length}/
+                ⚡ Systems Active: {systemControls.filter((c) => c.status).length}/
                 {systemControls.length}
               </Badge>
             </div>
@@ -221,21 +214,14 @@ export function UltimateAdminControls() {
         <CardContent className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {systemControls.map((control) => (
-              <Card
-                key={control.id}
-                className={`${getCategoryColor(control.category)} border`}
-              >
+              <Card key={control.id} className={`${getCategoryColor(control.category)} border`}>
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-2">
                       {getCategoryIcon(control.category)}
                       <div>
-                        <h4 className="font-semibold text-white text-sm">
-                          {control.name}
-                        </h4>
-                        <p className="text-xs text-muted-foreground">
-                          {control.description}
-                        </p>
+                        <h4 className="font-semibold text-white text-sm">{control.name}</h4>
+                        <p className="text-xs text-muted-foreground">{control.description}</p>
                       </div>
                     </div>
                     <Switch
@@ -245,12 +231,8 @@ export function UltimateAdminControls() {
                   </div>
 
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-xs text-muted-foreground">
-                      Power Level
-                    </span>
-                    <Badge
-                      className={`text-xs ${control.status ? "bg-green-600" : "bg-gray-600"}`}
-                    >
+                    <span className="text-xs text-muted-foreground">Power Level</span>
+                    <Badge className={`text-xs ${control.status ? "bg-green-600" : "bg-gray-600"}`}>
                       {control.powerLevel}%
                     </Badge>
                   </div>
@@ -274,23 +256,18 @@ export function UltimateAdminControls() {
               👑 GODFATHER SUPREME AUTHORITY ACTIVE
             </h3>
             <p className="text-muted-foreground mb-4">
-              All quantum computers worldwide are synchronized and ready for
-              your commands. The global satellite network provides unlimited
-              reach and power. All systems respond instantly to your supreme
-              authority.
+              All quantum computers worldwide are synchronized and ready for your commands. The
+              global satellite network provides unlimited reach and power. All systems respond
+              instantly to your supreme authority.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
                 <div className="text-2xl font-bold text-green-400">100%</div>
-                <div className="text-xs text-muted-foreground">
-                  System Control
-                </div>
+                <div className="text-xs text-muted-foreground">System Control</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-red-400">∞</div>
-                <div className="text-xs text-muted-foreground">
-                  Attack Power
-                </div>
+                <div className="text-xs text-muted-foreground">Attack Power</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-400">20</div>
@@ -298,9 +275,7 @@ export function UltimateAdminControls() {
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-purple-400">🌍</div>
-                <div className="text-xs text-muted-foreground">
-                  Global Reach
-                </div>
+                <div className="text-xs text-muted-foreground">Global Reach</div>
               </div>
             </div>
           </div>

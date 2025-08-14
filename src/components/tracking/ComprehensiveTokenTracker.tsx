@@ -4,21 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  TrendingUp,
-  Activity,
-  BarChart3,
-  Eye,
-  Zap,
-  Globe,
-  ExternalLink,
-} from "lucide-react";
-import {
-  GAIA_TOKEN,
-  GAIA_METRICS,
-  formatGaiaPrice,
-  formatGaiaNumber,
-} from "@/constants/gaia";
+import { TrendingUp, Activity, BarChart3, Eye, Zap, Globe, ExternalLink } from "lucide-react";
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from "@/constants/gaia";
 import { useTypeValidation } from "@/hooks/useTypeValidation";
 
 interface TrackingData {
@@ -30,9 +17,7 @@ interface TrackingData {
 }
 
 export function ComprehensiveTokenTracker() {
-  const { isValidConfiguration } = useTypeValidation(
-    "ComprehensiveTokenTracker",
-  );
+  const { isValidConfiguration } = useTypeValidation("ComprehensiveTokenTracker");
   const [trackingData, setTrackingData] = useState<TrackingData>({
     price: GAIA_TOKEN.INITIAL_PRICE,
     volume: GAIA_METRICS.INITIAL_VOLUME,
@@ -83,9 +68,7 @@ export function ComprehensiveTokenTracker() {
               <ExternalLink className="h-3 w-3 mr-1" />
               View on PumpFun
             </Button>
-            <Badge
-              className={`${isLiveTracking ? "bg-green-600 animate-pulse" : "bg-gray-600"}`}
-            >
+            <Badge className={`${isLiveTracking ? "bg-green-600 animate-pulse" : "bg-gray-600"}`}>
               {isLiveTracking ? "LIVE TRACKING" : "PAUSED"}
             </Badge>
           </div>
@@ -105,9 +88,7 @@ export function ComprehensiveTokenTracker() {
                   <div className="text-2xl font-bold text-green-400">
                     {formatGaiaPrice(trackingData.price)}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    GAiA Price
-                  </div>
+                  <div className="text-sm text-muted-foreground">GAiA Price</div>
                   <div
                     className={`text-sm ${trackingData.change24h >= 0 ? "text-green-400" : "text-red-400"}`}
                   >
@@ -119,9 +100,7 @@ export function ComprehensiveTokenTracker() {
                   <div className="text-2xl font-bold text-blue-400">
                     {formatGaiaNumber(trackingData.volume)}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    24h Volume
-                  </div>
+                  <div className="text-sm text-muted-foreground">24h Volume</div>
                 </div>
                 <div className="text-center p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
                   <div className="text-2xl font-bold text-purple-400">
@@ -135,9 +114,7 @@ export function ComprehensiveTokenTracker() {
             <TabsContent value="metrics" className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 bg-black/20 rounded-lg border border-gray-500/20">
-                  <h4 className="text-lg font-semibold text-white mb-3">
-                    Market Metrics
-                  </h4>
+                  <h4 className="text-lg font-semibold text-white mb-3">Market Metrics</h4>
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span>Market Cap:</span>
@@ -148,51 +125,33 @@ export function ComprehensiveTokenTracker() {
                     <div className="flex justify-between">
                       <span>24h Change:</span>
                       <span
-                        className={
-                          trackingData.change24h >= 0
-                            ? "text-green-400"
-                            : "text-red-400"
-                        }
+                        className={trackingData.change24h >= 0 ? "text-green-400" : "text-red-400"}
                       >
                         {trackingData.change24h.toFixed(2)}%
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span>Network:</span>
-                      <span className="text-blue-400">
-                        {GAIA_TOKEN.NETWORK || "Solana"}
-                      </span>
+                      <span className="text-blue-400">{GAIA_TOKEN.NETWORK || "Solana"}</span>
                     </div>
                   </div>
                 </div>
                 <div className="p-4 bg-black/20 rounded-lg border border-gray-500/20">
-                  <h4 className="text-lg font-semibold text-white mb-3">
-                    System Health
-                  </h4>
+                  <h4 className="text-lg font-semibold text-white mb-3">System Health</h4>
                   <div className="space-y-3">
                     <div>
                       <div className="flex justify-between mb-1">
                         <span>Security Score:</span>
-                        <span className="text-green-400">
-                          {GAIA_METRICS.SECURITY_SCORE}%
-                        </span>
+                        <span className="text-green-400">{GAIA_METRICS.SECURITY_SCORE}%</span>
                       </div>
-                      <Progress
-                        value={GAIA_METRICS.SECURITY_SCORE}
-                        className="h-2"
-                      />
+                      <Progress value={GAIA_METRICS.SECURITY_SCORE} className="h-2" />
                     </div>
                     <div>
                       <div className="flex justify-between mb-1">
                         <span>Ecosystem Health:</span>
-                        <span className="text-blue-400">
-                          {GAIA_METRICS.ECOSYSTEM_HEALTH}%
-                        </span>
+                        <span className="text-blue-400">{GAIA_METRICS.ECOSYSTEM_HEALTH}%</span>
                       </div>
-                      <Progress
-                        value={GAIA_METRICS.ECOSYSTEM_HEALTH}
-                        className="h-2"
-                      />
+                      <Progress value={GAIA_METRICS.ECOSYSTEM_HEALTH} className="h-2" />
                     </div>
                   </div>
                 </div>
@@ -201,31 +160,19 @@ export function ComprehensiveTokenTracker() {
 
             <TabsContent value="analytics" className="space-y-4">
               <div className="p-4 bg-black/20 rounded-lg border border-gray-500/20">
-                <h4 className="text-lg font-semibold text-white mb-3">
-                  Real-Time Analytics
-                </h4>
+                <h4 className="text-lg font-semibold text-white mb-3">Real-Time Analytics</h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="text-center p-3 bg-cyan-900/20 rounded border border-cyan-500/20">
-                    <div className="text-xl font-bold text-cyan-400">
-                      {trackingSpeed}ms
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Update Speed
-                    </div>
+                    <div className="text-xl font-bold text-cyan-400">{trackingSpeed}ms</div>
+                    <div className="text-sm text-muted-foreground">Update Speed</div>
                   </div>
                   <div className="text-center p-3 bg-yellow-900/20 rounded border border-yellow-500/20">
-                    <div className="text-xl font-bold text-yellow-400">
-                      100%
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Accuracy
-                    </div>
+                    <div className="text-xl font-bold text-yellow-400">100%</div>
+                    <div className="text-sm text-muted-foreground">Accuracy</div>
                   </div>
                   <div className="text-center p-3 bg-green-900/20 rounded border border-green-500/20">
                     <div className="text-xl font-bold text-green-400">24/7</div>
-                    <div className="text-sm text-muted-foreground">
-                      Monitoring
-                    </div>
+                    <div className="text-sm text-muted-foreground">Monitoring</div>
                   </div>
                 </div>
               </div>
@@ -233,9 +180,7 @@ export function ComprehensiveTokenTracker() {
 
             <TabsContent value="network" className="space-y-4">
               <div className="p-4 bg-black/20 rounded-lg border border-gray-500/20">
-                <h4 className="text-lg font-semibold text-white mb-3">
-                  Network Information
-                </h4>
+                <h4 className="text-lg font-semibold text-white mb-3">Network Information</h4>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span>Contract Address:</span>
@@ -251,9 +196,7 @@ export function ComprehensiveTokenTracker() {
                   </div>
                   <div className="flex justify-between">
                     <span>Network Speed:</span>
-                    <span className="text-cyan-400">
-                      {GAIA_METRICS.NETWORK_SPEED} TPS
-                    </span>
+                    <span className="text-cyan-400">{GAIA_METRICS.NETWORK_SPEED} TPS</span>
                   </div>
                 </div>
               </div>
@@ -275,9 +218,7 @@ export function ComprehensiveTokenTracker() {
                 {isLiveTracking ? "Pause Tracking" : "Resume Tracking"}
               </Button>
               <Button
-                onClick={() =>
-                  setTrackingSpeed((prev) => (prev === 2500 ? 1000 : 2500))
-                }
+                onClick={() => setTrackingSpeed((prev) => (prev === 2500 ? 1000 : 2500))}
                 variant="outline"
                 className="border-purple-500/30 text-purple-400"
               >
@@ -287,9 +228,7 @@ export function ComprehensiveTokenTracker() {
             </div>
             <div className="flex items-center gap-2">
               <Globe className="h-4 w-4 text-green-400" />
-              <span className="text-sm text-green-400">
-                Connected to GAiA Network
-              </span>
+              <span className="text-sm text-green-400">Connected to GAiA Network</span>
             </div>
           </div>
         </CardContent>

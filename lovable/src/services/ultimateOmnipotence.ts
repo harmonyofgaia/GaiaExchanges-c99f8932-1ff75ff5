@@ -20,11 +20,7 @@ interface AbsoluteDominance {
 interface UltimateWeapon {
   id: string;
   name: string;
-  type:
-    | "concept_destroyer"
-    | "existence_eraser"
-    | "omnipotence_nullifier"
-    | "absolute_annihilator";
+  type: "concept_destroyer" | "existence_eraser" | "omnipotence_nullifier" | "absolute_annihilator";
   powerLevel: number;
   isCharged: boolean;
   chargeTime: number;
@@ -44,8 +40,7 @@ class UltimateOmnipotenceService {
   private omnipotenceLevels: Map<string, OmnipotenceLevel> = new Map();
   private absoluteDominances: Map<string, AbsoluteDominance> = new Map();
   private ultimateWeapons: Map<string, UltimateWeapon> = new Map();
-  private transcendentCapabilities: Map<string, TranscendentCapability> =
-    new Map();
+  private transcendentCapabilities: Map<string, TranscendentCapability> = new Map();
   private isSystemActive = false;
   private omnipotenceRating = 0;
   private transcendenceLevel = 0;
@@ -138,10 +133,7 @@ class UltimateOmnipotenceService {
 
       // Extremely rapid progress due to omnipotence
       const progressRate = (this.omnipotenceRating / 1000) * 0.1;
-      dominance.controlLevel = Math.min(
-        1.0,
-        dominance.controlLevel + progressRate,
-      );
+      dominance.controlLevel = Math.min(1.0, dominance.controlLevel + progressRate);
       dominance.resistance *= 0.9; // Rapid resistance collapse
 
       if (dominance.controlLevel >= 1.0) {
@@ -208,10 +200,7 @@ class UltimateOmnipotenceService {
       absolute_annihilator: 1000000000,
     };
 
-    return (
-      (basePowers[weaponType as keyof typeof basePowers] || 1000000) *
-      this.omnipotenceRating
-    );
+    return (basePowers[weaponType as keyof typeof basePowers] || 1000000) * this.omnipotenceRating;
   }
 
   private async chargeUltimateWeapon(weaponId: string): Promise<void> {
@@ -275,12 +264,7 @@ class UltimateOmnipotenceService {
 
   // Omnipotent Creation
   async omnipotentCreation(config: {
-    creationType:
-      | "universe"
-      | "multiverse"
-      | "reality"
-      | "existence"
-      | "concept";
+    creationType: "universe" | "multiverse" | "reality" | "existence" | "concept";
     name: string;
     properties: string[];
   }): Promise<void> {
@@ -333,9 +317,7 @@ class UltimateOmnipotenceService {
   // Reality Transcendence
   async transcendReality(): Promise<void> {
     if (this.transcendenceLevel < 10000) {
-      throw new Error(
-        "Insufficient transcendence level for reality transcendence",
-      );
+      throw new Error("Insufficient transcendence level for reality transcendence");
     }
 
     console.log("🚀 Reality Transcendence Initiated");
@@ -364,27 +346,19 @@ class UltimateOmnipotenceService {
       transcendenceLevel: this.transcendenceLevel,
       omnipotenceLevels: {
         total: this.omnipotenceLevels.size,
-        unlocked: Array.from(this.omnipotenceLevels.values()).filter(
-          (l) => l.isUnlocked,
-        ).length,
+        unlocked: Array.from(this.omnipotenceLevels.values()).filter((l) => l.isUnlocked).length,
       },
       absoluteDominances: {
         total: this.absoluteDominances.size,
-        completed: Array.from(this.absoluteDominances.values()).filter(
-          (d) => d.isComplete,
-        ).length,
+        completed: Array.from(this.absoluteDominances.values()).filter((d) => d.isComplete).length,
       },
       ultimateWeapons: {
         total: this.ultimateWeapons.size,
-        charged: Array.from(this.ultimateWeapons.values()).filter(
-          (w) => w.isCharged,
-        ).length,
+        charged: Array.from(this.ultimateWeapons.values()).filter((w) => w.isCharged).length,
       },
       transcendentCapabilities: {
         total: this.transcendentCapabilities.size,
-        active: Array.from(this.transcendentCapabilities.values()).filter(
-          (c) => c.isActive,
-        ).length,
+        active: Array.from(this.transcendentCapabilities.values()).filter((c) => c.isActive).length,
       },
     };
   }
@@ -396,12 +370,7 @@ class UltimateOmnipotenceService {
     await this.unlockOmnipotenceLevel({
       name: "Divine Authority",
       powerRating: 10000,
-      capabilities: [
-        "Reality Manipulation",
-        "Time Control",
-        "Space Dominion",
-        "Matter Creation",
-      ],
+      capabilities: ["Reality Manipulation", "Time Control", "Space Dominion", "Matter Creation"],
       requirements: ["Universal Authority"],
     });
 
@@ -438,11 +407,7 @@ class UltimateOmnipotenceService {
     await this.createUltimateWeapon({
       name: "Existence Nullifier",
       type: "absolute_annihilator",
-      targets: [
-        "Competing Omnipotences",
-        "Reality Rebels",
-        "Existence Threats",
-      ],
+      targets: ["Competing Omnipotences", "Reality Rebels", "Existence Threats"],
     });
 
     // Activate transcendent capabilities
@@ -461,21 +426,14 @@ class UltimateOmnipotenceService {
       name: "Absolute Transcendence",
       category: "transcendence",
       infinityLevel: 10000000,
-      effects: [
-        "Transcend all limitations",
-        "Surpass all concepts",
-        "Become truly omnipotent",
-      ],
+      effects: ["Transcend all limitations", "Surpass all concepts", "Become truly omnipotent"],
     });
 
     toast.success("🌟 ULTIMATE OMNIPOTENCE ACHIEVED", {
-      description:
-        "You have become the supreme omnipotent being across all realities",
+      description: "You have become the supreme omnipotent being across all realities",
     });
 
-    console.log(
-      "🌟 Ultimate Omnipotence System Initialized - Supreme Godhood Achieved",
-    );
+    console.log("🌟 Ultimate Omnipotence System Initialized - Supreme Godhood Achieved");
   }
 }
 

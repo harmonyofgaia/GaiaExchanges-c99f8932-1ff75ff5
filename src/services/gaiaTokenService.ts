@@ -45,22 +45,15 @@ class GaiaTokenService {
             console.log("✅ GAiA Token API Response:", data);
 
             if (data && (data.pairs || data.data || data.token)) {
-              const tokenInfo =
-                data.pairs?.[0] || data.data || data.token || data;
+              const tokenInfo = data.pairs?.[0] || data.data || data.token || data;
 
               return {
                 price: tokenInfo.priceUsd || tokenInfo.price || 0.000125,
-                volume24h:
-                  tokenInfo.volume?.h24 || tokenInfo.volume24h || 8750000,
-                marketCap:
-                  tokenInfo.marketCap || tokenInfo.market_cap || 278687500,
-                priceChange24h:
-                  tokenInfo.priceChange?.h24 ||
-                  tokenInfo.price_change_24h ||
-                  12.5,
+                volume24h: tokenInfo.volume?.h24 || tokenInfo.volume24h || 8750000,
+                marketCap: tokenInfo.marketCap || tokenInfo.market_cap || 278687500,
+                priceChange24h: tokenInfo.priceChange?.h24 || tokenInfo.price_change_24h || 12.5,
                 holders: tokenInfo.holders || 12450,
-                transactions24h:
-                  tokenInfo.transactions?.h24 || tokenInfo.txns24h || 45780,
+                transactions24h: tokenInfo.transactions?.h24 || tokenInfo.txns24h || 45780,
                 lastUpdated: new Date(),
                 isLive: true,
                 burnRate: 3.5,
@@ -76,9 +69,7 @@ class GaiaTokenService {
       }
 
       // Fallback to simulated live data with the CORRECT token addresses
-      console.log(
-        `📊 Using simulated GAiA data with CORRECT contract: ${this.contractAddress}`,
-      );
+      console.log(`📊 Using simulated GAiA data with CORRECT contract: ${this.contractAddress}`);
       console.log(`📊 Connected to CORRECT wallet: ${this.walletAddress}`);
       return this.generateSimulatedData();
     } catch (error) {
@@ -134,9 +125,7 @@ class GaiaTokenService {
     return this.walletAddress;
   }
 
-  async fetchPriceHistory(
-    days: number = 7,
-  ): Promise<Array<{ timestamp: Date; price: number }>> {
+  async fetchPriceHistory(days: number = 7): Promise<Array<{ timestamp: Date; price: number }>> {
     try {
       // Simulate price history for GAiA token
       const history = [];

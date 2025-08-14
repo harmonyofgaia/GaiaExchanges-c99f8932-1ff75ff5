@@ -58,9 +58,7 @@ export function PortfolioOverview() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Total Portfolio Value
-            </CardTitle>
+            <CardTitle className="text-sm font-medium">Total Portfolio Value</CardTitle>
             <Wallet className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -70,8 +68,7 @@ export function PortfolioOverview() {
             <div
               className={`text-xs flex items-center gap-1 ${getPriceChangeColor(portfolioData.totalChange)}`}
             >
-              <TrendingUp className="h-3 w-3" />+
-              {formatCurrency(portfolioData.totalChange)} (
+              <TrendingUp className="h-3 w-3" />+{formatCurrency(portfolioData.totalChange)} (
               {portfolioData.totalChangePercent}%)
             </div>
           </CardContent>
@@ -86,9 +83,7 @@ export function PortfolioOverview() {
             <div className="text-2xl font-bold text-green-400 mono-numbers">
               +{portfolioData.totalChangePercent}%
             </div>
-            <p className="text-xs text-muted-foreground">
-              Portfolio performance
-            </p>
+            <p className="text-xs text-muted-foreground">Portfolio performance</p>
           </CardContent>
         </Card>
 
@@ -98,12 +93,8 @@ export function PortfolioOverview() {
             <PieChart className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold mono-numbers">
-              {portfolioData.holdings.length}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Different cryptocurrencies
-            </p>
+            <div className="text-2xl font-bold mono-numbers">{portfolioData.holdings.length}</div>
+            <p className="text-xs text-muted-foreground">Different cryptocurrencies</p>
           </CardContent>
         </Card>
       </div>
@@ -119,10 +110,7 @@ export function PortfolioOverview() {
         <CardContent>
           <div className="space-y-4">
             {portfolioData.holdings.map((holding) => {
-              const percentage = (
-                (holding.value / portfolioData.totalValue) *
-                100
-              ).toFixed(1);
+              const percentage = ((holding.value / portfolioData.totalValue) * 100).toFixed(1);
 
               return (
                 <div
@@ -131,9 +119,7 @@ export function PortfolioOverview() {
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                      <span className="text-sm font-bold text-primary">
-                        {holding.symbol}
-                      </span>
+                      <span className="text-sm font-bold text-primary">{holding.symbol}</span>
                     </div>
                     <div>
                       <div className="font-medium">{holding.name}</div>
@@ -144,12 +130,8 @@ export function PortfolioOverview() {
                   </div>
 
                   <div className="text-right">
-                    <div className="font-medium mono-numbers">
-                      {formatCurrency(holding.value)}
-                    </div>
-                    <div
-                      className={`text-sm ${getPriceChangeColor(holding.change)}`}
-                    >
+                    <div className="font-medium mono-numbers">{formatCurrency(holding.value)}</div>
+                    <div className={`text-sm ${getPriceChangeColor(holding.change)}`}>
                       {holding.change > 0 ? "+" : ""}
                       {holding.change.toFixed(2)}%
                     </div>

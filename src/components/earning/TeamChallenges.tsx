@@ -5,15 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { toast } from "sonner";
-import {
-  Users,
-  Trophy,
-  Target,
-  Clock,
-  Leaf,
-  Droplets,
-  Zap,
-} from "lucide-react";
+import { Users, Trophy, Target, Clock, Leaf, Droplets, Zap } from "lucide-react";
 
 interface Team {
   id: string;
@@ -194,9 +186,7 @@ export function TeamChallenges() {
 
   const joinTeam = (challengeId: string, teamId: string) => {
     setUserTeam(teamId);
-    toast.success(
-      "Successfully joined the team! Start contributing to win the challenge!",
-    );
+    toast.success("Successfully joined the team! Start contributing to win the challenge!");
   };
 
   const contributeToChallenge = (challengeId: string, amount: number) => {
@@ -204,12 +194,10 @@ export function TeamChallenges() {
       challenges.map((challenge) =>
         challenge.id === challengeId
           ? { ...challenge, currentValue: challenge.currentValue + amount }
-          : challenge,
-      ),
+          : challenge
+      )
     );
-    toast.success(
-      `Contributed ${amount} points to your team! Keep up the great work!`,
-    );
+    toast.success(`Contributed ${amount} points to your team! Keep up the great work!`);
   };
 
   return (
@@ -226,24 +214,17 @@ export function TeamChallenges() {
       {challenges.map((challenge) => {
         const Icon = getCategoryIcon(challenge.category);
         const progress = (challenge.currentValue / challenge.targetValue) * 100;
-        const userInChallenge = challenge.teams.some(
-          (team) => team.id === userTeam,
-        );
+        const userInChallenge = challenge.teams.some((team) => team.id === userTeam);
 
         return (
-          <Card
-            key={challenge.id}
-            className={`border-2 ${getTypeColor(challenge.type)}`}
-          >
+          <Card key={challenge.id} className={`border-2 ${getTypeColor(challenge.type)}`}>
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Icon className="h-6 w-6 text-green-400" />
                   <div>
                     <CardTitle className="text-xl">{challenge.title}</CardTitle>
-                    <p className="text-sm text-muted-foreground">
-                      {challenge.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{challenge.description}</p>
                   </div>
                 </div>
                 <div className="text-right">
@@ -292,13 +273,7 @@ export function TeamChallenges() {
                     >
                       <div className="flex items-center gap-3">
                         <div className="text-lg">
-                          {index === 0
-                            ? "🥇"
-                            : index === 1
-                              ? "🥈"
-                              : index === 2
-                                ? "🥉"
-                                : "🏅"}
+                          {index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : "🏅"}
                         </div>
                         <Avatar className="h-8 w-8">
                           <AvatarFallback>{team.avatar}</AvatarFallback>
@@ -306,8 +281,7 @@ export function TeamChallenges() {
                         <div>
                           <div className="font-medium">{team.name}</div>
                           <div className="text-xs text-muted-foreground">
-                            {team.members}/{team.maxMembers} members • Led by{" "}
-                            {team.leader}
+                            {team.members}/{team.maxMembers} members • Led by {team.leader}
                           </div>
                         </div>
                       </div>

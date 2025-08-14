@@ -29,13 +29,7 @@ interface DefenseLayer {
   strength: number;
   threats_blocked: number;
   last_action: string;
-  type:
-    | "perimeter"
-    | "intrusion"
-    | "behavioral"
-    | "quantum"
-    | "ai"
-    | "physical";
+  type: "perimeter" | "intrusion" | "behavioral" | "quantum" | "ai" | "physical";
 }
 
 interface ThreatIntel {
@@ -253,27 +247,18 @@ export function QuantumDefenseWall() {
                 "Data Exfiltration",
                 "Privilege Escalation",
               ][Math.floor(Math.random() * 5)],
-              severity: ["critical", "high", "medium", "low"][
-                Math.floor(Math.random() * 4)
-              ] as any,
+              severity: ["critical", "high", "medium", "low"][Math.floor(Math.random() * 4)] as any,
               source_ip: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
-              location: [
-                "Unknown",
-                "China",
-                "Russia",
-                "North Korea",
-                "Iran",
-                "Anonymous Proxy",
-              ][Math.floor(Math.random() * 6)],
+              location: ["Unknown", "China", "Russia", "North Korea", "Iran", "Anonymous Proxy"][
+                Math.floor(Math.random() * 6)
+              ],
               status: "neutralized",
               timestamp: new Date(),
             };
 
             setThreatIntel((prev) => [newThreat, ...prev.slice(0, 19)]);
 
-            console.log(
-              `🛡️ ${layer.name}: ${threatsBlocked} threats neutralized`,
-            );
+            console.log(`🛡️ ${layer.name}: ${threatsBlocked} threats neutralized`);
 
             if (newThreat.severity === "critical") {
               toast.error(`🚨 CRITICAL THREAT BLOCKED`, {
@@ -293,12 +278,9 @@ export function QuantumDefenseWall() {
           // Normal fluctuation
           return {
             ...layer,
-            strength: Math.max(
-              85,
-              Math.min(100, layer.strength + (Math.random() - 0.5) * 1),
-            ),
+            strength: Math.max(85, Math.min(100, layer.strength + (Math.random() - 0.5) * 1)),
           };
-        }),
+        })
       );
 
       // Update system status
@@ -307,12 +289,9 @@ export function QuantumDefenseWall() {
         total_blocked: prev.total_blocked + Math.floor(Math.random() * 5),
         overall_health: Math.max(
           95,
-          Math.min(100, prev.overall_health + (Math.random() - 0.5) * 0.5),
+          Math.min(100, prev.overall_health + (Math.random() - 0.5) * 0.5)
         ),
-        ai_confidence: Math.max(
-          90,
-          Math.min(100, prev.ai_confidence + (Math.random() - 0.5) * 1),
-        ),
+        ai_confidence: Math.max(90, Math.min(100, prev.ai_confidence + (Math.random() - 0.5) * 1)),
       }));
     };
 
@@ -380,7 +359,7 @@ export function QuantumDefenseWall() {
         ...layer,
         status: "active",
         strength: 100,
-      })),
+      }))
     );
   };
 
@@ -399,8 +378,7 @@ export function QuantumDefenseWall() {
             <Shield className="h-6 w-6 text-red-400 animate-pulse" />
           </CardTitle>
           <p className="text-red-400">
-            18-Layer Defense Matrix • AI-Powered • Quantum-Secured •
-            Military-Grade
+            18-Layer Defense Matrix • AI-Powered • Quantum-Secured • Military-Grade
           </p>
         </CardHeader>
         <CardContent>
@@ -410,9 +388,7 @@ export function QuantumDefenseWall() {
                 <div className="text-2xl font-bold text-green-400">
                   {systemStatus.overall_health.toFixed(1)}%
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  System Health
-                </div>
+                <div className="text-xs text-muted-foreground">System Health</div>
               </CardContent>
             </Card>
             <Card className="bg-blue-900/30 border-blue-500/50">
@@ -420,9 +396,7 @@ export function QuantumDefenseWall() {
                 <div className="text-2xl font-bold text-blue-400">
                   {systemStatus.total_blocked.toLocaleString()}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Threats Blocked
-                </div>
+                <div className="text-xs text-muted-foreground">Threats Blocked</div>
               </CardContent>
             </Card>
             <Card className="bg-purple-900/30 border-purple-500/50">
@@ -430,9 +404,7 @@ export function QuantumDefenseWall() {
                 <div className="text-2xl font-bold text-purple-400">
                   {systemStatus.quantum_integrity.toFixed(1)}%
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Quantum Integrity
-                </div>
+                <div className="text-xs text-muted-foreground">Quantum Integrity</div>
               </CardContent>
             </Card>
             <Card className="bg-orange-900/30 border-orange-500/50">
@@ -440,19 +412,13 @@ export function QuantumDefenseWall() {
                 <div className="text-2xl font-bold text-orange-400">
                   {systemStatus.ai_confidence.toFixed(1)}%
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  AI Confidence
-                </div>
+                <div className="text-xs text-muted-foreground">AI Confidence</div>
               </CardContent>
             </Card>
             <Card className="bg-red-900/30 border-red-500/50">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-red-400">
-                  {systemStatus.active_threats}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Active Threats
-                </div>
+                <div className="text-2xl font-bold text-red-400">{systemStatus.active_threats}</div>
+                <div className="text-xs text-muted-foreground">Active Threats</div>
               </CardContent>
             </Card>
           </div>
@@ -480,13 +446,9 @@ export function QuantumDefenseWall() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   {getTypeIcon(layer.type)}
-                  <h4 className="font-semibold text-white text-sm">
-                    {layer.name}
-                  </h4>
+                  <h4 className="font-semibold text-white text-sm">{layer.name}</h4>
                 </div>
-                <Badge
-                  className={`${getStatusColor(layer.status)} text-white text-xs`}
-                >
+                <Badge className={`${getStatusColor(layer.status)} text-white text-xs`}>
                   {layer.status.toUpperCase()}
                 </Badge>
               </div>
@@ -495,9 +457,7 @@ export function QuantumDefenseWall() {
               <div className="space-y-2">
                 <div className="flex justify-between text-xs">
                   <span className="text-muted-foreground">Strength</span>
-                  <span className="text-green-400 font-bold">
-                    {layer.strength.toFixed(1)}%
-                  </span>
+                  <span className="text-green-400 font-bold">{layer.strength.toFixed(1)}%</span>
                 </div>
                 <Progress value={layer.strength} className="h-2" />
               </div>
@@ -509,9 +469,7 @@ export function QuantumDefenseWall() {
                     {layer.threats_blocked.toLocaleString()}
                   </span>
                 </div>
-                <div className="text-green-300 text-xs">
-                  Last: {layer.last_action}
-                </div>
+                <div className="text-green-300 text-xs">Last: {layer.last_action}</div>
               </div>
             </CardContent>
           </Card>
@@ -541,18 +499,14 @@ export function QuantumDefenseWall() {
                   <div className="flex items-center gap-3">
                     <Crosshair className="h-4 w-4 text-red-400" />
                     <div>
-                      <div className="font-semibold text-white text-sm">
-                        {threat.threat_type}
-                      </div>
+                      <div className="font-semibold text-white text-sm">{threat.threat_type}</div>
                       <div className="text-xs text-muted-foreground">
                         {threat.source_ip} • {threat.location}
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div
-                      className={`text-sm font-bold ${getSeverityColor(threat.severity)}`}
-                    >
+                    <div className={`text-sm font-bold ${getSeverityColor(threat.severity)}`}>
                       {threat.severity.toUpperCase()}
                     </div>
                     <div className="text-xs text-green-400">NEUTRALIZED</div>

@@ -91,9 +91,7 @@ export function NeuralMatrixBackground() {
       newNodes.forEach((node, i) => {
         const nearbyNodes = newNodes.filter((other, j) => {
           if (i === j) return false;
-          const distance = Math.sqrt(
-            (node.x - other.x) ** 2 + (node.y - other.y) ** 2,
-          );
+          const distance = Math.sqrt((node.x - other.x) ** 2 + (node.y - other.y) ** 2);
           return distance < 150;
         });
         node.connections = nearbyNodes.slice(0, 3).map((n) => n.id);
@@ -102,24 +100,19 @@ export function NeuralMatrixBackground() {
       setNodes(newNodes);
 
       // Create matrix code streams
-      const newMatrixCodes: MatrixCode[] = Array.from(
-        { length: 30 },
-        (_, i) => ({
-          id: i,
-          x: Math.random() * dimensions.width,
-          y: Math.random() * dimensions.height - 200,
-          characters: Array.from({ length: 10 }, () =>
-            Math.random() > 0.7
-              ? matrixChars[Math.floor(Math.random() * matrixChars.length)]
-              : binaryChars[Math.floor(Math.random() * binaryChars.length)],
-          ),
-          speed: Math.random() * 2 + 1,
-          opacity: Math.random() * 0.5 + 0.1,
-          color: ["#22c55e", "#3b82f6", "#8b5cf6"][
-            Math.floor(Math.random() * 3)
-          ],
-        }),
-      );
+      const newMatrixCodes: MatrixCode[] = Array.from({ length: 30 }, (_, i) => ({
+        id: i,
+        x: Math.random() * dimensions.width,
+        y: Math.random() * dimensions.height - 200,
+        characters: Array.from({ length: 10 }, () =>
+          Math.random() > 0.7
+            ? matrixChars[Math.floor(Math.random() * matrixChars.length)]
+            : binaryChars[Math.floor(Math.random() * binaryChars.length)]
+        ),
+        speed: Math.random() * 2 + 1,
+        opacity: Math.random() * 0.5 + 0.1,
+        color: ["#22c55e", "#3b82f6", "#8b5cf6"][Math.floor(Math.random() * 3)],
+      }));
 
       setMatrixCodes(newMatrixCodes);
     }
@@ -227,8 +220,7 @@ export function NeuralMatrixBackground() {
           node.connections.forEach((connectionId) => {
             const connectedNode = currentNodes[connectionId];
             if (connectedNode) {
-              const activityLevel =
-                (node.activity + connectedNode.activity) / 2;
+              const activityLevel = (node.activity + connectedNode.activity) / 2;
               ctx.strokeStyle = `${node.color}${Math.floor(activityLevel * 100)
                 .toString(16)
                 .padStart(2, "0")}`;
@@ -277,10 +269,7 @@ export function NeuralMatrixBackground() {
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(node.x, node.y);
-                ctx.lineTo(
-                  node.x + Math.cos(angle) * length,
-                  node.y + Math.sin(angle) * length,
-                );
+                ctx.lineTo(node.x + Math.cos(angle) * length, node.y + Math.sin(angle) * length);
                 ctx.stroke();
               }
               break;
@@ -300,11 +289,11 @@ export function NeuralMatrixBackground() {
                 const outerRadius = nodeSize * 1.5;
                 ctx.moveTo(
                   node.x + Math.cos(angle) * innerRadius,
-                  node.y + Math.sin(angle) * innerRadius,
+                  node.y + Math.sin(angle) * innerRadius
                 );
                 ctx.lineTo(
                   node.x + Math.cos(angle) * outerRadius,
-                  node.y + Math.sin(angle) * outerRadius,
+                  node.y + Math.sin(angle) * outerRadius
                 );
               }
               ctx.stroke();
@@ -324,16 +313,15 @@ export function NeuralMatrixBackground() {
                 ctx.beginPath();
                 for (let i = 0; i < segments; i++) {
                   const angle1 = (i * Math.PI * 2) / segments + time * ring;
-                  const angle2 =
-                    ((i + 1) * Math.PI * 2) / segments + time * ring;
+                  const angle2 = ((i + 1) * Math.PI * 2) / segments + time * ring;
                   if (i % 2 === 0) {
                     ctx.moveTo(
                       node.x + Math.cos(angle1) * radius,
-                      node.y + Math.sin(angle1) * radius,
+                      node.y + Math.sin(angle1) * radius
                     );
                     ctx.lineTo(
                       node.x + Math.cos(angle2) * radius,
-                      node.y + Math.sin(angle2) * radius,
+                      node.y + Math.sin(angle2) * radius
                     );
                   }
                 }
@@ -348,12 +336,7 @@ export function NeuralMatrixBackground() {
                 Math.floor(alpha * 255)
                   .toString(16)
                   .padStart(2, "0");
-              ctx.fillRect(
-                node.x - nodeSize,
-                node.y - nodeSize,
-                nodeSize * 2,
-                nodeSize * 2,
-              );
+              ctx.fillRect(node.x - nodeSize, node.y - nodeSize, nodeSize * 2, nodeSize * 2);
 
               // Digital glitch effect
               if (Math.random() > 0.95) {
@@ -362,7 +345,7 @@ export function NeuralMatrixBackground() {
                   node.x - nodeSize * 1.2,
                   node.y - nodeSize * 0.2,
                   nodeSize * 2.4,
-                  nodeSize * 0.4,
+                  nodeSize * 0.4
                 );
               }
               break;
@@ -387,7 +370,7 @@ export function NeuralMatrixBackground() {
           canvas.width * 0.6,
           y - curve,
           canvas.width * 0.8,
-          y,
+          y
         );
         ctx.stroke();
       }

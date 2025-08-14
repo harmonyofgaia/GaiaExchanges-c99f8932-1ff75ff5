@@ -2,16 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UniversalGaiaLogo } from "@/components/branding/UniversalGaiaLogo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Leaf,
-  Globe,
-  Heart,
-  Users,
-  Gamepad2,
-  Shield,
-  Zap,
-  Star,
-} from "lucide-react";
+import { Leaf, Globe, Heart, Users, Gamepad2, Shield, Zap, Star } from "lucide-react";
 
 export default function About() {
   return (
@@ -31,9 +22,9 @@ export default function About() {
             About Harmony of Gaia
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            We Are a Strong Creative Open Minded Circuit To Happiness - Building
-            the future of sustainable technology, gaming, and environmental
-            consciousness through quantum-powered innovation.
+            We Are a Strong Creative Open Minded Circuit To Happiness - Building the future of
+            sustainable technology, gaming, and environmental consciousness through quantum-powered
+            innovation.
           </p>
         </div>
 
@@ -47,9 +38,9 @@ export default function About() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                Our core mission is to create technology that not only serves
-                humanity but actively heals our planet. Every project connects
-                to environmental restoration and sustainability.
+                Our core mission is to create technology that not only serves humanity but actively
+                heals our planet. Every project connects to environmental restoration and
+                sustainability.
               </p>
               <Badge className="bg-green-600">🌍 Planet First</Badge>
             </CardContent>
@@ -64,9 +55,9 @@ export default function About() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                Revolutionary gaming experiences powered by quantum computing,
-                featuring 8K graphics, neural network AI, and immersive virtual
-                worlds that surpass all competitors.
+                Revolutionary gaming experiences powered by quantum computing, featuring 8K
+                graphics, neural network AI, and immersive virtual worlds that surpass all
+                competitors.
               </p>
               <Badge className="bg-blue-600">🎮 Next-Gen Gaming</Badge>
             </CardContent>
@@ -81,9 +72,8 @@ export default function About() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                Leveraging quantum computing power for unprecedented processing
-                capabilities, blockchain security, and AI-driven systems that
-                evolve and learn continuously.
+                Leveraging quantum computing power for unprecedented processing capabilities,
+                blockchain security, and AI-driven systems that evolve and learn continuously.
               </p>
               <Badge className="bg-purple-600">⚡ Quantum Powered</Badge>
             </CardContent>
@@ -102,36 +92,28 @@ export default function About() {
                 <Heart className="h-12 w-12 text-red-400 mx-auto mb-2" />
                 <h3 className="text-xl font-bold text-red-400">Happiness</h3>
                 <p className="text-sm text-muted-foreground">
-                  Bringing smiles to every soul through creative and positive
-                  experiences
+                  Bringing smiles to every soul through creative and positive experiences
                 </p>
               </div>
               <div className="text-center">
                 <Users className="h-12 w-12 text-blue-400 mx-auto mb-2" />
                 <h3 className="text-xl font-bold text-blue-400">Community</h3>
                 <p className="text-sm text-muted-foreground">
-                  Building strong, supportive communities that grow and thrive
-                  together
+                  Building strong, supportive communities that grow and thrive together
                 </p>
               </div>
               <div className="text-center">
                 <Star className="h-12 w-12 text-purple-400 mx-auto mb-2" />
-                <h3 className="text-xl font-bold text-purple-400">
-                  Innovation
-                </h3>
+                <h3 className="text-xl font-bold text-purple-400">Innovation</h3>
                 <p className="text-sm text-muted-foreground">
-                  Pushing boundaries with creative solutions that change the
-                  world
+                  Pushing boundaries with creative solutions that change the world
                 </p>
               </div>
               <div className="text-center">
                 <Globe className="h-12 w-12 text-green-400 mx-auto mb-2" />
-                <h3 className="text-xl font-bold text-green-400">
-                  Sustainability
-                </h3>
+                <h3 className="text-xl font-bold text-green-400">Sustainability</h3>
                 <p className="text-sm text-muted-foreground">
-                  Every action contributes to a healthier, more sustainable
-                  planet
+                  Every action contributes to a healthier, more sustainable planet
                 </p>
               </div>
             </div>
@@ -146,11 +128,10 @@ export default function About() {
           </CardHeader>
           <CardContent className="text-center space-y-6">
             <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
-              We envision a world where technology serves both humanity and
-              nature. Through our revolutionary gaming platforms, environmental
-              projects, and quantum-powered innovations, we're building the
-              foundation for a sustainable, joyful future where creativity
-              flourishes and every being can thrive.
+              We envision a world where technology serves both humanity and nature. Through our
+              revolutionary gaming platforms, environmental projects, and quantum-powered
+              innovations, we're building the foundation for a sustainable, joyful future where
+              creativity flourishes and every being can thrive.
             </p>
 
             <div className="bg-black/30 rounded-lg p-6">
@@ -158,10 +139,9 @@ export default function About() {
                 "Seeds Will Form Into Music"
               </h3>
               <p className="text-muted-foreground italic">
-                Every small action, every creative spark, every moment of
-                happiness contributes to the grand symphony of positive change.
-                We are planting seeds of innovation that will grow into
-                harmonious solutions for generations to come.
+                Every small action, every creative spark, every moment of happiness contributes to
+                the grand symphony of positive change. We are planting seeds of innovation that will
+                grow into harmonious solutions for generations to come.
               </p>
             </div>
 

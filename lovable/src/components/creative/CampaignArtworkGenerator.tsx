@@ -48,8 +48,7 @@ export function CampaignArtworkGenerator() {
       setTimeout(() => {
         setIsGenerating(false);
         toast.success("🎨 Campaign Artworks Generated!", {
-          description:
-            "Professional GAiA Token artworks ready for global distribution",
+          description: "Professional GAiA Token artworks ready for global distribution",
           duration: 5000,
         });
       }, 5000);
@@ -102,9 +101,7 @@ export function CampaignArtworkGenerator() {
 
         {generatedArtworks.length > 0 && (
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-purple-400">
-              Generated Campaign Artworks:
-            </h3>
+            <h3 className="text-lg font-bold text-purple-400">Generated Campaign Artworks:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {generatedArtworks.map((artwork, index) => (
                 <div key={index} className="p-4 bg-black/30 rounded-lg">
@@ -128,9 +125,7 @@ export function CampaignArtworkGenerator() {
         )}
 
         <div className="bg-gradient-to-r from-green-900/40 to-blue-900/40 p-4 rounded-lg border border-green-500/30">
-          <h4 className="font-bold text-green-400 mb-2">
-            🚀 Campaign Artwork Features:
-          </h4>
+          <h4 className="font-bold text-green-400 mb-2">🚀 Campaign Artwork Features:</h4>
           <ul className="text-sm text-green-300 space-y-1">
             <li>• Professional GAiA Token logo integration</li>
             <li>• Baby boom explosion graphics</li>

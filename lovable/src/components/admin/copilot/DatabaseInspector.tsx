@@ -27,12 +27,7 @@ import { toast } from "sonner";
 
 interface DatabaseIssue {
   id: string;
-  type:
-    | "orphaned"
-    | "missing_index"
-    | "broken_relation"
-    | "stale_data"
-    | "constraint_violation";
+  type: "orphaned" | "missing_index" | "broken_relation" | "stale_data" | "constraint_violation";
   severity: "critical" | "high" | "medium" | "low";
   table: string;
   description: string;
@@ -70,9 +65,7 @@ export function DatabaseInspector() {
   const [issues, setIssues] = useState<DatabaseIssue[]>([]);
   const [dataFlows, setDataFlows] = useState<DataFlow[]>([]);
   const [stats, setStats] = useState<DatabaseStats | null>(null);
-  const [selectedIssue, setSelectedIssue] = useState<DatabaseIssue | null>(
-    null,
-  );
+  const [selectedIssue, setSelectedIssue] = useState<DatabaseIssue | null>(null);
   const [auditLog, setAuditLog] = useState<
     Array<{
       id: string;
@@ -110,9 +103,7 @@ export function DatabaseInspector() {
       brokenRelations: Math.floor(seededRandom() * 3),
       queryPerformance: Math.floor(seededRandom() * 30) + 70,
       storageUsed: "2.4 GB",
-      lastOptimized: new Date(
-        Date.now() - seededRandom() * 7 * 24 * 60 * 60 * 1000,
-      ),
+      lastOptimized: new Date(Date.now() - seededRandom() * 7 * 24 * 60 * 60 * 1000),
       healthScore: Math.floor(seededRandom() * 20) + 75,
     };
     setStats(mockStats);
@@ -183,8 +174,7 @@ export function DatabaseInspector() {
         type: "orphaned",
         severity: "high",
         table: "media_files",
-        description:
-          "Found 127 media file records without corresponding project references",
+        description: "Found 127 media file records without corresponding project references",
         impact: "Storage waste and potential data inconsistency",
         records: 127,
         suggestion: "Clean up orphaned records or restore missing references",
@@ -394,9 +384,7 @@ export function DatabaseInspector() {
         {stats && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                {stats.totalTables}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{stats.totalTables}</div>
               <div className="text-xs text-gray-400">Tables</div>
             </div>
             <div className="text-center">
@@ -406,15 +394,11 @@ export function DatabaseInspector() {
               <div className="text-xs text-gray-400">Records</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400">
-                {stats.healthScore}%
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{stats.healthScore}%</div>
               <div className="text-xs text-gray-400">Health Score</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400">
-                {stats.queryPerformance}%
-              </div>
+              <div className="text-2xl font-bold text-yellow-400">{stats.queryPerformance}%</div>
               <div className="text-xs text-gray-400">Performance</div>
             </div>
           </div>
@@ -426,9 +410,7 @@ export function DatabaseInspector() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-blue-400">Deep Scan in Progress...</span>
-                <span className="text-blue-400">
-                  {scanProgress.toFixed(0)}%
-                </span>
+                <span className="text-blue-400">{scanProgress.toFixed(0)}%</span>
               </div>
               <Progress value={scanProgress} className="h-2" />
             </CardContent>
@@ -437,9 +419,7 @@ export function DatabaseInspector() {
 
         <Tabs defaultValue="issues" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="issues">
-              🚨 Issues ({issues.length})
-            </TabsTrigger>
+            <TabsTrigger value="issues">🚨 Issues ({issues.length})</TabsTrigger>
             <TabsTrigger value="flows">🔄 Data Flows</TabsTrigger>
             <TabsTrigger value="stats">📊 Statistics</TabsTrigger>
             <TabsTrigger value="audit">📜 Audit Log</TabsTrigger>
@@ -450,9 +430,7 @@ export function DatabaseInspector() {
               <Card className="border-green-500/30">
                 <CardContent className="p-6 text-center">
                   <CheckCircle className="h-12 w-12 text-green-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-green-400 mb-2">
-                    No Issues Detected
-                  </h3>
+                  <h3 className="text-lg font-semibold text-green-400 mb-2">No Issues Detected</h3>
                   <p className="text-gray-400">
                     {isScanning
                       ? "Scan in progress..."
@@ -462,27 +440,17 @@ export function DatabaseInspector() {
               </Card>
             ) : (
               issues.map((issue) => (
-                <Card
-                  key={issue.id}
-                  className={`border ${getSeverityColor(issue.severity)}`}
-                >
+                <Card key={issue.id} className={`border ${getSeverityColor(issue.severity)}`}>
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         {getTypeIcon(issue.type)}
-                        <span className="font-medium text-white">
-                          {issue.table}
-                        </span>
-                        <Badge
-                          variant="outline"
-                          className={getSeverityColor(issue.severity)}
-                        >
+                        <span className="font-medium text-white">{issue.table}</span>
+                        <Badge variant="outline" className={getSeverityColor(issue.severity)}>
                           {issue.severity.toUpperCase()}
                         </Badge>
                         {issue.records > 0 && (
-                          <Badge variant="secondary">
-                            {issue.records} records
-                          </Badge>
+                          <Badge variant="secondary">{issue.records} records</Badge>
                         )}
                       </div>
                       <div className="flex items-center gap-2">
@@ -507,15 +475,9 @@ export function DatabaseInspector() {
                         )}
                       </div>
                     </div>
-                    <p className="text-sm text-gray-300 mb-2">
-                      {issue.description}
-                    </p>
-                    <p className="text-xs text-gray-400 mb-2">
-                      Impact: {issue.impact}
-                    </p>
-                    <p className="text-xs text-blue-300">
-                      💡 {issue.suggestion}
-                    </p>
+                    <p className="text-sm text-gray-300 mb-2">{issue.description}</p>
+                    <p className="text-xs text-gray-400 mb-2">Impact: {issue.impact}</p>
+                    <p className="text-xs text-blue-300">💡 {issue.suggestion}</p>
                   </CardContent>
                 </Card>
               ))
@@ -524,36 +486,25 @@ export function DatabaseInspector() {
 
           <TabsContent value="flows" className="space-y-3">
             {dataFlows.map((flow) => (
-              <Card
-                key={flow.id}
-                className={`border ${getStatusColor(flow.status)}`}
-              >
+              <Card key={flow.id} className={`border ${getStatusColor(flow.status)}`}>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <Network className="h-4 w-4 text-blue-400" />
-                      <span className="font-medium text-white">
-                        {flow.name}
-                      </span>
-                      <Badge
-                        variant="outline"
-                        className={getStatusColor(flow.status)}
-                      >
+                      <span className="font-medium text-white">{flow.name}</span>
+                      <Badge variant="outline" className={getStatusColor(flow.status)}>
                         {flow.status.toUpperCase()}
                       </Badge>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Badge variant="secondary">
-                        {flow.performance}% performance
-                      </Badge>
+                      <Badge variant="secondary">{flow.performance}% performance</Badge>
                       <span className="text-xs text-gray-500">
                         {flow.lastUpdated.toLocaleTimeString()}
                       </span>
                     </div>
                   </div>
                   <div className="text-sm text-gray-400 mb-2">
-                    <span className="font-medium">Tables:</span>{" "}
-                    {flow.tables.join(", ")}
+                    <span className="font-medium">Tables:</span> {flow.tables.join(", ")}
                   </div>
                   <div className="text-sm text-gray-400 mb-2">
                     <span className="font-medium">Dependencies:</span>{" "}
@@ -593,28 +544,18 @@ export function DatabaseInspector() {
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-xs text-gray-400">
-                        Total Tables:
-                      </span>
-                      <span className="text-xs text-white">
-                        {stats.totalTables}
-                      </span>
+                      <span className="text-xs text-gray-400">Total Tables:</span>
+                      <span className="text-xs text-white">{stats.totalTables}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-xs text-gray-400">
-                        Total Records:
-                      </span>
+                      <span className="text-xs text-gray-400">Total Records:</span>
                       <span className="text-xs text-white">
                         {stats.totalRecords.toLocaleString()}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-xs text-gray-400">
-                        Storage Used:
-                      </span>
-                      <span className="text-xs text-white">
-                        {stats.storageUsed}
-                      </span>
+                      <span className="text-xs text-gray-400">Storage Used:</span>
+                      <span className="text-xs text-white">{stats.storageUsed}</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -628,28 +569,16 @@ export function DatabaseInspector() {
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-xs text-gray-400">
-                        Orphaned Records:
-                      </span>
-                      <span className="text-xs text-yellow-400">
-                        {stats.orphanedRecords}
-                      </span>
+                      <span className="text-xs text-gray-400">Orphaned Records:</span>
+                      <span className="text-xs text-yellow-400">{stats.orphanedRecords}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-xs text-gray-400">
-                        Missing Indexes:
-                      </span>
-                      <span className="text-xs text-yellow-400">
-                        {stats.missingIndexes}
-                      </span>
+                      <span className="text-xs text-gray-400">Missing Indexes:</span>
+                      <span className="text-xs text-yellow-400">{stats.missingIndexes}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-xs text-gray-400">
-                        Broken Relations:
-                      </span>
-                      <span className="text-xs text-yellow-400">
-                        {stats.brokenRelations}
-                      </span>
+                      <span className="text-xs text-gray-400">Broken Relations:</span>
+                      <span className="text-xs text-yellow-400">{stats.brokenRelations}</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -663,25 +592,15 @@ export function DatabaseInspector() {
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-xs text-gray-400">
-                        Health Score:
-                      </span>
-                      <span className="text-xs text-green-400">
-                        {stats.healthScore}%
-                      </span>
+                      <span className="text-xs text-gray-400">Health Score:</span>
+                      <span className="text-xs text-green-400">{stats.healthScore}%</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-xs text-gray-400">
-                        Query Performance:
-                      </span>
-                      <span className="text-xs text-green-400">
-                        {stats.queryPerformance}%
-                      </span>
+                      <span className="text-xs text-gray-400">Query Performance:</span>
+                      <span className="text-xs text-green-400">{stats.queryPerformance}%</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-xs text-gray-400">
-                        Last Optimized:
-                      </span>
+                      <span className="text-xs text-gray-400">Last Optimized:</span>
                       <span className="text-xs text-gray-300">
                         {stats.lastOptimized.toLocaleDateString()}
                       </span>
@@ -715,9 +634,7 @@ export function DatabaseInspector() {
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-400">by {entry.user}</span>
-                    <span className="text-gray-500">
-                      {entry.timestamp.toLocaleString()}
-                    </span>
+                    <span className="text-gray-500">{entry.timestamp.toLocaleString()}</span>
                   </div>
                 </CardContent>
               </Card>

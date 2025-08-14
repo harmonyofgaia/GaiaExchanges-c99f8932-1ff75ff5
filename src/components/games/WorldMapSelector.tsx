@@ -143,9 +143,7 @@ export function WorldMapSelector({
             <Badge className="bg-green-600">
               👥 {globalStats.totalPlayers.toLocaleString()} Total Players
             </Badge>
-            <Badge className="bg-blue-600">
-              💬 {globalStats.activeChatrooms} Active Chatrooms
-            </Badge>
+            <Badge className="bg-blue-600">💬 {globalStats.activeChatrooms} Active Chatrooms</Badge>
             <Badge className="bg-purple-600">
               🛡️ {globalStats.securedLocations} Secured Locations
             </Badge>
@@ -172,9 +170,7 @@ export function WorldMapSelector({
               <div className="text-center mb-3">
                 <div className="text-2xl mb-2">🌍</div>
                 <h3 className="font-bold text-lg">{location.city}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {location.country}
-                </p>
+                <p className="text-sm text-muted-foreground">{location.country}</p>
               </div>
 
               <div className="space-y-2 text-xs">
@@ -188,23 +184,15 @@ export function WorldMapSelector({
                 </div>
                 <div className="flex justify-between">
                   <span>🛡️ Security:</span>
-                  <span className="text-purple-400">
-                    {location.securityLevel}%
-                  </span>
+                  <span className="text-purple-400">{location.securityLevel}%</span>
                 </div>
               </div>
 
               <div className="mt-3 flex justify-center">
                 <Badge
-                  className={
-                    selectedLocation?.id === location.id
-                      ? "bg-green-600"
-                      : "bg-gray-600"
-                  }
+                  className={selectedLocation?.id === location.id ? "bg-green-600" : "bg-gray-600"}
                 >
-                  {selectedLocation?.id === location.id
-                    ? "✅ Selected"
-                    : "📍 Select"}
+                  {selectedLocation?.id === location.id ? "✅ Selected" : "📍 Select"}
                 </Badge>
               </div>
             </CardContent>
@@ -218,20 +206,15 @@ export function WorldMapSelector({
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-green-400">
               <MapPin className="h-6 w-6" />
-              📍 Selected Location: {selectedLocation.city},{" "}
-              {selectedLocation.country}
+              📍 Selected Location: {selectedLocation.city}, {selectedLocation.country}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center p-4 bg-green-900/30 rounded-lg">
                 <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-green-400">
-                  {selectedLocation.players}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Online Players
-                </div>
+                <div className="text-2xl font-bold text-green-400">{selectedLocation.players}</div>
+                <div className="text-sm text-muted-foreground">Online Players</div>
               </div>
 
               <div className="text-center p-4 bg-blue-900/30 rounded-lg">
@@ -239,9 +222,7 @@ export function WorldMapSelector({
                 <div className="text-2xl font-bold text-blue-400">
                   {selectedLocation.securityLevel}%
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Security Level
-                </div>
+                <div className="text-sm text-muted-foreground">Security Level</div>
               </div>
 
               <div className="text-center p-4 bg-purple-900/30 rounded-lg">
@@ -249,9 +230,7 @@ export function WorldMapSelector({
                 <div className="text-2xl font-bold text-purple-400">
                   {selectedLocation.chatrooms}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Private Chatrooms
-                </div>
+                <div className="text-sm text-muted-foreground">Private Chatrooms</div>
               </div>
             </div>
 
@@ -266,9 +245,7 @@ export function WorldMapSelector({
                 <div>✅ Parabolic universe protection</div>
                 <div>✅ Admin-only monitoring capabilities</div>
                 {isAdmin && (
-                  <div className="text-red-400">
-                    👑 Admin: Full surveillance access enabled
-                  </div>
+                  <div className="text-red-400">👑 Admin: Full surveillance access enabled</div>
                 )}
               </div>
             </div>

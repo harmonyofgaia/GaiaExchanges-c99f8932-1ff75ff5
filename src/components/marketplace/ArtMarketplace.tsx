@@ -57,9 +57,7 @@ export function ArtMarketplace() {
 
   const fetchMarketplaceItems = async () => {
     try {
-      console.log(
-        "🎨 MARKETPLACE: Fetching items with quantum security protection",
-      );
+      console.log("🎨 MARKETPLACE: Fetching items with quantum security protection");
 
       // Enhanced mock data with token burning mechanics
       const mockItems: MarketplaceItem[] = [
@@ -84,8 +82,7 @@ export function ArtMarketplace() {
         {
           id: "2",
           title: "Eco Vision #002",
-          description:
-            "An inspiring artwork showcasing the future of sustainable living",
+          description: "An inspiring artwork showcasing the future of sustainable living",
           price: 500,
           currency: "GAiA",
           image_url: "",
@@ -120,8 +117,7 @@ export function ArtMarketplace() {
         {
           id: "4",
           title: "Nature's Whisper",
-          description:
-            "Serene landscape with token-burning environmental message",
+          description: "Serene landscape with token-burning environmental message",
           price: 350,
           currency: "GAiA",
           image_url: "",
@@ -138,8 +134,7 @@ export function ArtMarketplace() {
         {
           id: "5",
           title: "Cosmic Energy Flow",
-          description:
-            "Abstract representation of energy and token burning processes",
+          description: "Abstract representation of energy and token burning processes",
           price: 750,
           currency: "GAiA",
           image_url: "",
@@ -156,9 +151,7 @@ export function ArtMarketplace() {
       ];
 
       setItems(mockItems);
-      setTotalBurned(
-        mockItems.reduce((sum, item) => sum + item.tokensForBurning, 0),
-      );
+      setTotalBurned(mockItems.reduce((sum, item) => sum + item.tokensForBurning, 0));
       console.log("🎨 MARKETPLACE: Loaded quantum-protected art collection");
     } catch (error) {
       console.error("Error in marketplace - quantum security engaged:", error);
@@ -193,7 +186,7 @@ export function ArtMarketplace() {
       // Burn tokens for the purchase
       const burnSuccess = await gaiaTokenService.burnTokens(
         item.tokensForBurning,
-        `Art purchase: ${item.title}`,
+        `Art purchase: ${item.title}`
       );
 
       if (burnSuccess) {
@@ -202,9 +195,7 @@ export function ArtMarketplace() {
           duration: 5000,
         });
 
-        console.log(
-          "🎨 MARKETPLACE: Art purchase completed with token burning",
-        );
+        console.log("🎨 MARKETPLACE: Art purchase completed with token burning");
         setTotalBurned((prev) => prev + item.tokensForBurning);
       }
     } catch (error) {
@@ -216,8 +207,7 @@ export function ArtMarketplace() {
     const matchesSearch =
       item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory =
-      selectedCategory === "All" || item.category === selectedCategory;
+    const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -240,19 +230,15 @@ export function ArtMarketplace() {
             🎨 GAiA Art Marketplace - Quantum Protected with Token Burning
           </CardTitle>
           <p className="text-muted-foreground">
-            Buy and sell exclusive art with GAiA tokens - Every purchase burns
-            tokens for environmental impact
+            Buy and sell exclusive art with GAiA tokens - Every purchase burns tokens for
+            environmental impact
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
             <div className="p-3 rounded-lg bg-green-900/30 border border-green-500/20">
-              <div className="text-xl font-bold text-green-400">
-                {items.length}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Active Listings
-              </div>
+              <div className="text-xl font-bold text-green-400">{items.length}</div>
+              <div className="text-xs text-muted-foreground">Active Listings</div>
             </div>
             <div className="p-3 rounded-lg bg-blue-900/30 border border-blue-500/20">
               <div className="text-xl font-bold text-blue-400">∞</div>
@@ -260,14 +246,10 @@ export function ArtMarketplace() {
             </div>
             <div className="p-3 rounded-lg bg-purple-900/30 border border-purple-500/20">
               <div className="text-xl font-bold text-purple-400">100%</div>
-              <div className="text-xs text-muted-foreground">
-                Quantum Security
-              </div>
+              <div className="text-xs text-muted-foreground">Quantum Security</div>
             </div>
             <div className="p-3 rounded-lg bg-orange-900/30 border border-orange-500/20">
-              <div className="text-xl font-bold text-orange-400">
-                {totalBurned}
-              </div>
+              <div className="text-xl font-bold text-orange-400">{totalBurned}</div>
               <div className="text-xs text-muted-foreground">Tokens Burned</div>
             </div>
             <div className="p-3 rounded-lg bg-red-900/30 border border-red-500/20">
@@ -322,9 +304,7 @@ export function ArtMarketplace() {
         ) : filteredItems.length === 0 ? (
           <div className="col-span-full text-center py-12">
             <Palette className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-muted-foreground">
-              No artwork available
-            </h3>
+            <h3 className="text-lg font-semibold text-muted-foreground">No artwork available</h3>
             <p className="text-sm text-muted-foreground">
               Be the first to list your art in the GAiA marketplace!
             </p>
@@ -346,9 +326,7 @@ export function ArtMarketplace() {
                   <Palette className="h-16 w-16 text-purple-400" />
                 )}
                 <div className="absolute top-2 left-2">
-                  <Badge
-                    className={`bg-gradient-to-r ${getRarityColor(item.rarity)} text-white`}
-                  >
+                  <Badge className={`bg-gradient-to-r ${getRarityColor(item.rarity)} text-white`}>
                     {item.rarity}
                   </Badge>
                 </div>
@@ -365,20 +343,14 @@ export function ArtMarketplace() {
                 <div>
                   <h3 className="font-semibold text-lg">{item.title}</h3>
                   {item.description && (
-                    <p className="text-sm text-muted-foreground line-clamp-2">
-                      {item.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground line-clamp-2">{item.description}</p>
                   )}
                 </div>
 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-green-400">
-                      {item.price}
-                    </span>
-                    <Badge className="bg-green-600 text-white">
-                      {item.currency}
-                    </Badge>
+                    <span className="text-2xl font-bold text-green-400">{item.price}</span>
+                    <Badge className="bg-green-600 text-white">{item.currency}</Badge>
                   </div>
 
                   <div className="flex justify-between text-xs">
@@ -432,9 +404,8 @@ export function ArtMarketplace() {
               </code>
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              Every art purchase burns GAiA tokens for environmental impact
-              while supporting artists. Join the creative revolution with
-              real-world conservation impact!
+              Every art purchase burns GAiA tokens for environmental impact while supporting
+              artists. Join the creative revolution with real-world conservation impact!
             </p>
             <div className="flex justify-center gap-4 text-xs mt-3">
               <Badge className="bg-green-600 text-white">

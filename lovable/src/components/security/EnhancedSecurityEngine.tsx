@@ -186,10 +186,7 @@ export function EnhancedSecurityEngine() {
     // Check for wallet tampering
     const walletElements = document.querySelectorAll('[data-testid*="wallet"]');
     walletElements.forEach((element) => {
-      if (
-        element.innerHTML.includes("private_key") ||
-        element.innerHTML.includes("seed_phrase")
-      ) {
+      if (element.innerHTML.includes("private_key") || element.innerHTML.includes("seed_phrase")) {
         threats.push({
           id: `wallet-${Date.now()}`,
           type: "critical",
@@ -210,7 +207,7 @@ export function EnhancedSecurityEngine() {
 
     // Validate all download links
     const downloadLinks = document.querySelectorAll(
-      'a[href*="download"], button[onclick*="download"]',
+      'a[href*="download"], button[onclick*="download"]'
     );
     downloadLinks.forEach((link) => {
       const href = link.getAttribute("href") || "";
@@ -237,10 +234,7 @@ export function EnhancedSecurityEngine() {
     const emailElements = document.querySelectorAll("*");
     emailElements.forEach((element) => {
       const text = element.textContent || "";
-      if (
-        text.includes("info@") &&
-        !text.includes("info@cultureofharmony.net")
-      ) {
+      if (text.includes("info@") && !text.includes("info@cultureofharmony.net")) {
         threats.push({
           id: `phishing-${Date.now()}`,
           type: "high",

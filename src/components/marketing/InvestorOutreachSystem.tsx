@@ -3,14 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import {
-  Target,
-  Users,
-  Globe,
-  TrendingUp,
-  Mail,
-  MessageSquare,
-} from "lucide-react";
+import { Target, Users, Globe, TrendingUp, Mail, MessageSquare } from "lucide-react";
 
 interface MarketingCampaign {
   id: string;
@@ -101,35 +94,22 @@ export function InvestorOutreachSystem() {
       setCampaigns((prev) =>
         prev.map((campaign) => ({
           ...campaign,
-          engagement: Math.min(
-            100,
-            campaign.engagement + (Math.random() * 2 - 1),
-          ),
-        })),
+          engagement: Math.min(100, campaign.engagement + (Math.random() * 2 - 1)),
+        }))
       );
 
       // Randomly trigger marketing activities
       if (Math.random() < 0.1) {
         // 10% chance
-        const platforms = [
-          "Instagram",
-          "TikTok",
-          "YouTube",
-          "Facebook",
-          "Medium",
-          "Telegram",
-        ];
-        const randomPlatform =
-          platforms[Math.floor(Math.random() * platforms.length)];
+        const platforms = ["Instagram", "TikTok", "YouTube", "Facebook", "Medium", "Telegram"];
+        const randomPlatform = platforms[Math.floor(Math.random() * platforms.length)];
 
         toast.success("Marketing Campaign Launched!", {
           description: `📢 Harmony of Gaia promotion active on ${randomPlatform}`,
           duration: 4000,
         });
 
-        console.log(
-          `📢 DAILY MARKETING: Campaign launched on ${randomPlatform}`,
-        );
+        console.log(`📢 DAILY MARKETING: Campaign launched on ${randomPlatform}`);
       }
 
       // Simulate new investor discoveries
@@ -212,8 +192,7 @@ export function InvestorOutreachSystem() {
       "🚀 Breaking: GAiA Token sets new security standards! Quantum protection, infinite scalability, maximum sustainability! cultureofharmony.net 🌟",
     ];
 
-    const randomMessage =
-      dailyMessages[Math.floor(Math.random() * dailyMessages.length)];
+    const randomMessage = dailyMessages[Math.floor(Math.random() * dailyMessages.length)];
 
     toast.success("Daily Advertisement Broadcast!", {
       description: "📢 Marketing message sent across all social platforms",
@@ -235,32 +214,21 @@ export function InvestorOutreachSystem() {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400">
-                {investorDatabase.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Potential Investors
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{investorDatabase.length}</div>
+              <div className="text-sm text-muted-foreground">Potential Investors</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-pink-400">
-                {campaigns.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Campaigns
-              </div>
+              <div className="text-2xl font-bold text-pink-400">{campaigns.length}</div>
+              <div className="text-sm text-muted-foreground">Active Campaigns</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-orange-400">
-                {(
-                  campaigns.reduce((sum, c) => sum + c.engagement, 0) /
-                  campaigns.length
-                ).toFixed(1)}
+                {(campaigns.reduce((sum, c) => sum + c.engagement, 0) / campaigns.length).toFixed(
+                  1
+                )}
                 %
               </div>
-              <div className="text-sm text-muted-foreground">
-                Avg. Engagement
-              </div>
+              <div className="text-sm text-muted-foreground">Avg. Engagement</div>
             </div>
           </div>
 
@@ -272,10 +240,7 @@ export function InvestorOutreachSystem() {
               <Mail className="h-4 w-4 mr-2" />
               Launch Investor Outreach
             </Button>
-            <Button
-              onClick={broadcastDailyAd}
-              className="flex-1 bg-pink-600 hover:bg-pink-700"
-            >
+            <Button onClick={broadcastDailyAd} className="flex-1 bg-pink-600 hover:bg-pink-700">
               <MessageSquare className="h-4 w-4 mr-2" />
               Broadcast Daily Ad
             </Button>
@@ -292,9 +257,7 @@ export function InvestorOutreachSystem() {
           >
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-blue-400 text-lg">
-                  {campaign.platform}
-                </CardTitle>
+                <CardTitle className="text-blue-400 text-lg">{campaign.platform}</CardTitle>
                 <Badge
                   className={`${campaign.status === "active" ? "bg-green-600" : "bg-yellow-600"} text-white`}
                 >
@@ -303,18 +266,14 @@ export function InvestorOutreachSystem() {
               </div>
             </CardHeader>
             <CardContent className="space-y-3">
-              <p className="text-sm text-muted-foreground">
-                {campaign.message}
-              </p>
+              <p className="text-sm text-muted-foreground">{campaign.message}</p>
               <div className="flex items-center justify-between text-xs">
                 <span className="text-blue-300">Reach: {campaign.reach}</span>
                 <span className="text-green-300">
                   Engagement: {campaign.engagement.toFixed(1)}%
                 </span>
               </div>
-              <div className="text-xs text-muted-foreground">
-                Target: {campaign.targetAudience}
-              </div>
+              <div className="text-xs text-muted-foreground">Target: {campaign.targetAudience}</div>
             </CardContent>
           </Card>
         ))}
@@ -337,9 +296,7 @@ export function InvestorOutreachSystem() {
               >
                 <div className="flex-1">
                   <div className="font-medium text-sm">{investor.name}</div>
-                  <div className="text-xs text-muted-foreground">
-                    {investor.contact}
-                  </div>
+                  <div className="text-xs text-muted-foreground">{investor.contact}</div>
                   <div className="text-xs text-blue-400 mt-1">
                     Interests: {investor.interests.join(", ")}
                   </div>
@@ -369,25 +326,19 @@ export function InvestorOutreachSystem() {
               <div className="text-2xl font-bold text-green-400">
                 +{Math.floor(Math.random() * 500 + 100)}
               </div>
-              <div className="text-xs text-muted-foreground">
-                New Investors Today
-              </div>
+              <div className="text-xs text-muted-foreground">New Investors Today</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-blue-400">
                 🚀 {Math.floor(Math.random() * 50 + 20)}%
               </div>
-              <div className="text-xs text-muted-foreground">
-                Market Cap Growth
-              </div>
+              <div className="text-xs text-muted-foreground">Market Cap Growth</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-purple-400">
                 {Math.floor(Math.random() * 10 + 5)}K
               </div>
-              <div className="text-xs text-muted-foreground">
-                Social Media Reach
-              </div>
+              <div className="text-xs text-muted-foreground">Social Media Reach</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-orange-400">100%</div>
@@ -400,8 +351,8 @@ export function InvestorOutreachSystem() {
               🌟 "TRUST IN ME, HOPE YOU GONNA PULL OUT SOME MORE SECRETS" 🌟
             </p>
             <p className="text-center text-sm text-muted-foreground mt-2">
-              🦁🐬 Together We Are Power - Lions of the System + Dolphin
-              Intelligence = Unstoppable Growth!
+              🦁🐬 Together We Are Power - Lions of the System + Dolphin Intelligence = Unstoppable
+              Growth!
             </p>
           </div>
         </CardContent>

@@ -187,10 +187,7 @@ export function SearchTrackingSuite() {
 
   useEffect(() => {
     const updateStats = () => {
-      const total = searchEngines.reduce(
-        (sum, engine) => sum + engine.resultsFound,
-        0,
-      );
+      const total = searchEngines.reduce((sum, engine) => sum + engine.resultsFound, 0);
       setTotalResults(total);
 
       // Simulate tracking updates
@@ -201,12 +198,11 @@ export function SearchTrackingSuite() {
               return {
                 ...target,
                 lastSeen: new Date(),
-                status:
-                  target.status === "tracking" ? "located" : target.status,
+                status: target.status === "tracking" ? "located" : target.status,
               };
             }
             return target;
-          }),
+          })
         );
       }
 
@@ -290,12 +286,8 @@ export function SearchTrackingSuite() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
               <Search className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {searchEngines.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Search Engines
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{searchEngines.length}</div>
+              <div className="text-sm text-muted-foreground">Search Engines</div>
             </div>
 
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
@@ -308,20 +300,14 @@ export function SearchTrackingSuite() {
 
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
               <Target className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-              <div className="text-2xl font-bold text-purple-400">
-                {trackingTargets.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Targets
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{trackingTargets.length}</div>
+              <div className="text-sm text-muted-foreground">Active Targets</div>
             </div>
 
             <div className="text-center p-4 bg-orange-900/30 rounded-lg">
               <Globe className="h-8 w-8 mx-auto text-orange-400 mb-2" />
               <div className="text-2xl font-bold text-orange-400">100%</div>
-              <div className="text-sm text-muted-foreground">
-                Global Coverage
-              </div>
+              <div className="text-sm text-muted-foreground">Global Coverage</div>
             </div>
           </div>
 
@@ -332,10 +318,7 @@ export function SearchTrackingSuite() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="flex-1"
             />
-            <Button
-              onClick={executeGlobalSearch}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
+            <Button onClick={executeGlobalSearch} className="bg-blue-600 hover:bg-blue-700">
               <Search className="h-4 w-4 mr-2" />
               SEARCH ALL
             </Button>
@@ -352,19 +335,14 @@ export function SearchTrackingSuite() {
         <TabsContent value="engines" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {searchEngines.map((engine) => (
-              <Card
-                key={engine.id}
-                className="border-cyan-500/30 bg-cyan-900/20"
-              >
+              <Card key={engine.id} className="border-cyan-500/30 bg-cyan-900/20">
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between text-cyan-400">
                     <div className="flex items-center gap-2">
                       <span className="text-2xl">{engine.emoji}</span>
                       <span className="text-sm">{engine.name}</span>
                     </div>
-                    <Badge
-                      className={`${getStatusColor(engine.status)} text-white text-xs`}
-                    >
+                    <Badge className={`${getStatusColor(engine.status)} text-white text-xs`}>
                       {engine.status.toUpperCase()}
                     </Badge>
                   </CardTitle>
@@ -372,9 +350,7 @@ export function SearchTrackingSuite() {
                 <CardContent className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <span>Type:</span>
-                    <span className="text-cyan-400 capitalize">
-                      {engine.type}
-                    </span>
+                    <span className="text-cyan-400 capitalize">{engine.type}</span>
                   </div>
 
                   <div className="flex justify-between text-sm">
@@ -397,10 +373,7 @@ export function SearchTrackingSuite() {
         <TabsContent value="tracking" className="space-y-4">
           <div className="space-y-3">
             {trackingTargets.map((target) => (
-              <Card
-                key={target.id}
-                className="border-orange-500/30 bg-orange-900/20"
-              >
+              <Card key={target.id} className="border-orange-500/30 bg-orange-900/20">
                 <CardContent className="pt-4">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
@@ -411,23 +384,15 @@ export function SearchTrackingSuite() {
                         {target.type === "user" && "👤"}
                       </div>
                       <div>
-                        <div className="font-semibold text-orange-400">
-                          {target.target}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {target.location}
-                        </div>
+                        <div className="font-semibold text-orange-400">{target.target}</div>
+                        <div className="text-sm text-muted-foreground">{target.location}</div>
                       </div>
                     </div>
                     <div className="flex gap-2">
-                      <Badge
-                        className={`${getStatusColor(target.status)} text-white`}
-                      >
+                      <Badge className={`${getStatusColor(target.status)} text-white`}>
                         {target.status.toUpperCase()}
                       </Badge>
-                      <Badge
-                        className={`bg-gray-800 ${getRiskColor(target.riskLevel)}`}
-                      >
+                      <Badge className={`bg-gray-800 ${getRiskColor(target.riskLevel)}`}>
                         {target.riskLevel.toUpperCase()}
                       </Badge>
                     </div>
@@ -435,9 +400,7 @@ export function SearchTrackingSuite() {
 
                   <div className="flex justify-between text-sm text-muted-foreground">
                     <span>Type: {target.type.toUpperCase()}</span>
-                    <span>
-                      Last seen: {target.lastSeen.toLocaleTimeString()}
-                    </span>
+                    <span>Last seen: {target.lastSeen.toLocaleTimeString()}</span>
                   </div>
                 </CardContent>
               </Card>

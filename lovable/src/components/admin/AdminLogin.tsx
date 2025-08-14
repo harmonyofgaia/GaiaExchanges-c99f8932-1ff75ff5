@@ -23,10 +23,7 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
     setIsLoading(true);
 
     try {
-      const success = onLoginSuccess(
-        credentials.username,
-        credentials.password,
-      );
+      const success = onLoginSuccess(credentials.username, credentials.password);
 
       if (!success) {
         toast.error("❌ Access Denied", {
@@ -105,11 +102,7 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
                 className="absolute right-1 top-1 h-8 w-8 p-0"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )}
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </Button>
             </div>
           </div>
@@ -126,8 +119,7 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
 
         <div className="mt-4 p-3 bg-green-900/20 border border-green-500/20 rounded-lg">
           <p className="text-xs text-green-300 text-center">
-            🛡️ Quantum Vault Protected • Advanced Security • All Access
-            Monitored
+            🛡️ Quantum Vault Protected • Advanced Security • All Access Monitored
           </p>
         </div>
       </CardContent>

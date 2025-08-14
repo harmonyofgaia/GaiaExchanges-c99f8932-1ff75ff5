@@ -2,16 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import {
-  Brain,
-  Cpu,
-  Zap,
-  Shield,
-  Eye,
-  Target,
-  TrendingUp,
-  Activity,
-} from "lucide-react";
+import { Brain, Cpu, Zap, Shield, Eye, Target, TrendingUp, Activity } from "lucide-react";
 
 interface AICapability {
   name: string;
@@ -36,8 +27,7 @@ export function AIBackgroundCapabilities() {
       name: "Error Prevention System",
       level: 91.8,
       status: "active",
-      description:
-        "Preventing recurring issues and maintaining system stability",
+      description: "Preventing recurring issues and maintaining system stability",
       improvements: 856,
       icon: <Shield className="h-4 w-4" />,
     },
@@ -93,22 +83,15 @@ export function AIBackgroundCapabilities() {
             ...capability,
             level: newLevel,
             improvements: capability.improvements + improvementCount,
-            status:
-              newLevel > 95
-                ? "optimizing"
-                : newLevel > 85
-                  ? "active"
-                  : "training",
+            status: newLevel > 95 ? "optimizing" : newLevel > 85 ? "active" : "training",
           };
-        }),
+        })
       );
 
       setTrainingCycles((prev) => prev + 1);
       setTotalImprovements((prev) => prev + Math.floor(Math.random() * 3));
 
-      const avgLevel =
-        capabilities.reduce((sum, cap) => sum + cap.level, 0) /
-        capabilities.length;
+      const avgLevel = capabilities.reduce((sum, cap) => sum + cap.level, 0) / capabilities.length;
       setOverallIntelligence(avgLevel);
 
       if (Math.random() < 0.1) {
@@ -160,18 +143,14 @@ export function AIBackgroundCapabilities() {
             <div className="text-3xl font-bold text-purple-400">
               {overallIntelligence.toFixed(1)}%
             </div>
-            <div className="text-sm text-muted-foreground">
-              Overall Intelligence
-            </div>
+            <div className="text-sm text-muted-foreground">Overall Intelligence</div>
             <Progress value={overallIntelligence} className="h-2 mt-2" />
           </div>
           <div className="text-center p-4 bg-blue-900/20 rounded-lg border border-blue-500/20">
             <div className="text-3xl font-bold text-blue-400">
               {totalImprovements.toLocaleString()}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Total Improvements
-            </div>
+            <div className="text-sm text-muted-foreground">Total Improvements</div>
             <div className="text-xs text-blue-300 mt-1">Live Counter</div>
           </div>
           <div className="text-center p-4 bg-green-900/20 rounded-lg border border-green-500/20">
@@ -185,28 +164,19 @@ export function AIBackgroundCapabilities() {
 
         {/* Individual Capabilities */}
         <div className="space-y-4">
-          <h4 className="text-lg font-bold text-purple-400">
-            🎯 Live Capability Analysis
-          </h4>
+          <h4 className="text-lg font-bold text-purple-400">🎯 Live Capability Analysis</h4>
           {capabilities.map((capability, index) => (
-            <div
-              key={index}
-              className="p-4 rounded-lg bg-black/20 border border-purple-500/20"
-            >
+            <div key={index} className="p-4 rounded-lg bg-black/20 border border-purple-500/20">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <div className="text-purple-400">{capability.icon}</div>
-                  <span className="font-medium text-purple-300">
-                    {capability.name}
-                  </span>
+                  <span className="font-medium text-purple-300">{capability.name}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-bold text-purple-400">
                     {capability.level.toFixed(1)}%
                   </span>
-                  <Badge
-                    className={`${getStatusColor(capability.status)} text-white`}
-                  >
+                  <Badge className={`${getStatusColor(capability.status)} text-white`}>
                     {capability.status.toUpperCase()}
                   </Badge>
                 </div>
@@ -216,9 +186,7 @@ export function AIBackgroundCapabilities() {
 
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>{capability.description}</span>
-                <span>
-                  Improvements: {capability.improvements.toLocaleString()}
-                </span>
+                <span>Improvements: {capability.improvements.toLocaleString()}</span>
               </div>
             </div>
           ))}
@@ -232,9 +200,7 @@ export function AIBackgroundCapabilities() {
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div>
-              <div className="text-purple-300 mb-1">
-                Communication Improvement:
-              </div>
+              <div className="text-purple-300 mb-1">Communication Improvement:</div>
               <div className="text-purple-400">
                 Learning admin preferences and reducing repetitive issues
               </div>
@@ -270,22 +236,17 @@ export function AIBackgroundCapabilities() {
             <div className="flex justify-between">
               <span className="text-blue-300">Reduce Admin Frustration:</span>
               <span className="text-blue-400 font-bold">
-                Target: 95% (Current:{" "}
-                {(100 - totalImprovements / 100).toFixed(1)}%)
+                Target: 95% (Current: {(100 - totalImprovements / 100).toFixed(1)}%)
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-purple-300">
-                Improve Response Accuracy:
-              </span>
+              <span className="text-purple-300">Improve Response Accuracy:</span>
               <span className="text-purple-400 font-bold">
                 Target: 98% (Current: {overallIntelligence.toFixed(1)}%)
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-green-300">
-                Eliminate Recurring Errors:
-              </span>
+              <span className="text-green-300">Eliminate Recurring Errors:</span>
               <span className="text-green-400 font-bold">
                 Target: 100% (Current: {capabilities[1]?.level.toFixed(1)}%)
               </span>

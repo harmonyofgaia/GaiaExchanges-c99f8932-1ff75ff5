@@ -1,9 +1,5 @@
 export interface WaterSavingAction {
-  type:
-    | "shower_reduction"
-    | "dishwasher_efficiency"
-    | "leak_fix"
-    | "rainwater_collection";
+  type: "shower_reduction" | "dishwasher_efficiency" | "leak_fix" | "rainwater_collection";
   amount: number;
   timestamp: Date;
 }

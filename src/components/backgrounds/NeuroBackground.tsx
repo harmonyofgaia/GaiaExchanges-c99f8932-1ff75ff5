@@ -39,7 +39,7 @@ export function NeuroBackground({
       const node = createPatternNode(
         Math.random() * canvas.width,
         Math.random() * canvas.height,
-        Math.random(),
+        Math.random()
       );
       nodes.push(node);
     }
@@ -75,8 +75,7 @@ export function NeuroBackground({
         nearbyNodes.forEach((nearbyNode) => {
           if (nearbyNode.id !== node.id) {
             const distance = Math.sqrt(
-              Math.pow(node.x - nearbyNode.x, 2) +
-                Math.pow(node.y - nearbyNode.y, 2),
+              Math.pow(node.x - nearbyNode.x, 2) + Math.pow(node.y - nearbyNode.y, 2)
             );
 
             if (distance < 150) {
@@ -100,10 +99,8 @@ export function NeuroBackground({
         node.y += (Math.random() - 0.5) * speed;
 
         // Bounce off edges
-        if (node.x < 0 || node.x > canvas.width)
-          node.x = Math.random() * canvas.width;
-        if (node.y < 0 || node.y > canvas.height)
-          node.y = Math.random() * canvas.height;
+        if (node.x < 0 || node.x > canvas.width) node.x = Math.random() * canvas.width;
+        if (node.y < 0 || node.y > canvas.height) node.y = Math.random() * canvas.height;
       });
 
       requestAnimationFrame(animate);

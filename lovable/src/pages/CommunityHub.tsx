@@ -4,16 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Users,
-  MessageCircle,
-  Calendar,
-  Star,
-  ThumbsUp,
-  Share2,
-  Plus,
-  Filter,
-} from "lucide-react";
+import { Users, MessageCircle, Calendar, Star, ThumbsUp, Share2, Plus, Filter } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { toast } from "sonner";
 
@@ -117,8 +108,7 @@ export default function CommunityHub() {
     {
       id: "2",
       title: "Urban Beekeeping Workshop",
-      description:
-        "Learn how to start and maintain bee colonies in urban environments",
+      description: "Learn how to start and maintain bee colonies in urban environments",
       date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
       location: "Green Community Center, Portland",
       attendees: 23,
@@ -210,44 +200,33 @@ export default function CommunityHub() {
                 <div className="flex gap-4 items-center">
                   <Filter className="h-5 w-5 text-muted-foreground" />
                   <div className="flex gap-2">
-                    {[
-                      "all",
-                      "Energy",
-                      "Gardening",
-                      "Technology",
-                      "Conservation",
-                    ].map((category) => (
-                      <Button
-                        key={category}
-                        onClick={() => setFilter(category)}
-                        variant={filter === category ? "default" : "outline"}
-                        size="sm"
-                      >
-                        {category}
-                      </Button>
-                    ))}
+                    {["all", "Energy", "Gardening", "Technology", "Conservation"].map(
+                      (category) => (
+                        <Button
+                          key={category}
+                          onClick={() => setFilter(category)}
+                          variant={filter === category ? "default" : "outline"}
+                          size="sm"
+                        >
+                          {category}
+                        </Button>
+                      )
+                    )}
                   </div>
                 </div>
 
                 {/* Posts */}
                 {posts.map((post) => (
-                  <Card
-                    key={post.id}
-                    className="bg-gray-900/50 border-gray-700/30"
-                  >
+                  <Card key={post.id} className="bg-gray-900/50 border-gray-700/30">
                     <CardHeader>
                       <div className="flex items-start justify-between">
                         <div className="flex items-center gap-3">
                           <div className="text-2xl">{post.avatar}</div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <h3 className="font-bold text-white">
-                                {post.author}
-                              </h3>
+                              <h3 className="font-bold text-white">{post.author}</h3>
                               {post.verified && (
-                                <Badge className="bg-blue-600 text-xs">
-                                  ✓ Verified
-                                </Badge>
+                                <Badge className="bg-blue-600 text-xs">✓ Verified</Badge>
                               )}
                             </div>
                             <p className="text-sm text-muted-foreground">
@@ -255,24 +234,16 @@ export default function CommunityHub() {
                             </p>
                           </div>
                         </div>
-                        <Badge className={getCategoryColor(post.category)}>
-                          {post.category}
-                        </Badge>
+                        <Badge className={getCategoryColor(post.category)}>{post.category}</Badge>
                       </div>
-                      <CardTitle className="text-lg text-green-400">
-                        {post.title}
-                      </CardTitle>
+                      <CardTitle className="text-lg text-green-400">{post.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-gray-300 mb-4">{post.content}</p>
 
                       <div className="flex gap-2 mb-4">
                         {post.tags.map((tag) => (
-                          <Badge
-                            key={tag}
-                            variant="outline"
-                            className="text-xs"
-                          >
+                          <Badge key={tag} variant="outline" className="text-xs">
                             #{tag}
                           </Badge>
                         ))}
@@ -313,23 +284,14 @@ export default function CommunityHub() {
             {activeTab === "events" && (
               <div className="space-y-6">
                 {events.map((event) => (
-                  <Card
-                    key={event.id}
-                    className="bg-blue-900/20 border-blue-500/30"
-                  >
+                  <Card key={event.id} className="bg-blue-900/20 border-blue-500/30">
                     <CardHeader>
                       <div className="flex justify-between items-start">
                         <div>
-                          <CardTitle className="text-blue-400">
-                            {event.title}
-                          </CardTitle>
-                          <p className="text-muted-foreground mt-1">
-                            by {event.organizer}
-                          </p>
+                          <CardTitle className="text-blue-400">{event.title}</CardTitle>
+                          <p className="text-muted-foreground mt-1">by {event.organizer}</p>
                         </div>
-                        <Badge className="bg-purple-600">
-                          {event.category}
-                        </Badge>
+                        <Badge className="bg-purple-600">{event.category}</Badge>
                       </div>
                     </CardHeader>
                     <CardContent>
@@ -338,23 +300,17 @@ export default function CommunityHub() {
                       <div className="grid grid-cols-2 gap-4 mb-4">
                         <div>
                           <p className="text-sm text-muted-foreground">Date</p>
-                          <p className="text-white">
-                            {event.date.toLocaleDateString()}
-                          </p>
+                          <p className="text-white">{event.date.toLocaleDateString()}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-muted-foreground">
-                            Location
-                          </p>
+                          <p className="text-sm text-muted-foreground">Location</p>
                           <p className="text-white">{event.location}</p>
                         </div>
                       </div>
 
                       <div className="flex justify-between items-center">
                         <div className="text-sm">
-                          <span className="text-green-400">
-                            {event.attendees}
-                          </span>
+                          <span className="text-green-400">{event.attendees}</span>
                           <span className="text-muted-foreground">
                             {" "}
                             / {event.maxAttendees} attendees
@@ -377,34 +333,24 @@ export default function CommunityHub() {
             {activeTab === "create" && (
               <Card className="bg-gray-900/50 border-gray-700/30">
                 <CardHeader>
-                  <CardTitle className="text-green-400">
-                    ✍️ Create New Post
-                  </CardTitle>
+                  <CardTitle className="text-green-400">✍️ Create New Post</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Post Title
-                    </label>
+                    <label className="block text-sm font-medium mb-2">Post Title</label>
                     <Input
                       value={newPost.title}
-                      onChange={(e) =>
-                        setNewPost({ ...newPost, title: e.target.value })
-                      }
+                      onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
                       placeholder="Share your eco-achievement or idea..."
                       className="bg-gray-800 border-gray-600"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Category
-                    </label>
+                    <label className="block text-sm font-medium mb-2">Category</label>
                     <select
                       value={newPost.category}
-                      onChange={(e) =>
-                        setNewPost({ ...newPost, category: e.target.value })
-                      }
+                      onChange={(e) => setNewPost({ ...newPost, category: e.target.value })}
                       className="w-full p-2 bg-gray-800 border border-gray-600 rounded-md text-white"
                     >
                       <option value="general">General Discussion</option>
@@ -416,14 +362,10 @@ export default function CommunityHub() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Content
-                    </label>
+                    <label className="block text-sm font-medium mb-2">Content</label>
                     <Textarea
                       value={newPost.content}
-                      onChange={(e) =>
-                        setNewPost({ ...newPost, content: e.target.value })
-                      }
+                      onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
                       placeholder="Tell your story, share tips, ask questions..."
                       className="bg-gray-800 border-gray-600 min-h-32"
                     />
@@ -446,9 +388,7 @@ export default function CommunityHub() {
             {/* Community Stats */}
             <Card className="bg-purple-900/20 border-purple-500/30">
               <CardHeader>
-                <CardTitle className="text-purple-400">
-                  📊 Community Stats
-                </CardTitle>
+                <CardTitle className="text-purple-400">📊 Community Stats</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
@@ -460,9 +400,7 @@ export default function CommunityHub() {
                   <span className="text-white font-bold">234</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    Events This Week
-                  </span>
+                  <span className="text-muted-foreground">Events This Week</span>
                   <span className="text-white font-bold">18</span>
                 </div>
                 <div className="flex justify-between">
@@ -475,9 +413,7 @@ export default function CommunityHub() {
             {/* Top Contributors */}
             <Card className="bg-green-900/20 border-green-500/30">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  🌟 Top Contributors
-                </CardTitle>
+                <CardTitle className="text-green-400">🌟 Top Contributors</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {[
@@ -486,15 +422,10 @@ export default function CommunityHub() {
                   { name: "NatureGuardian", points: 6891, avatar: "🛡️" },
                   { name: "SolarPioneer", points: 6234, avatar: "☀️" },
                 ].map((contributor, index) => (
-                  <div
-                    key={contributor.name}
-                    className="flex items-center gap-3"
-                  >
+                  <div key={contributor.name} className="flex items-center gap-3">
                     <div className="text-2xl">{contributor.avatar}</div>
                     <div className="flex-1">
-                      <div className="font-medium text-white">
-                        {contributor.name}
-                      </div>
+                      <div className="font-medium text-white">{contributor.name}</div>
                       <div className="text-sm text-green-400">
                         {contributor.points.toLocaleString()} points
                       </div>
@@ -508,9 +439,7 @@ export default function CommunityHub() {
             {/* Quick Actions */}
             <Card className="bg-orange-900/20 border-orange-500/30">
               <CardHeader>
-                <CardTitle className="text-orange-400">
-                  ⚡ Quick Actions
-                </CardTitle>
+                <CardTitle className="text-orange-400">⚡ Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
                 <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600">

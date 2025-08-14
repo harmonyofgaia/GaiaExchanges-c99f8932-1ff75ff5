@@ -104,25 +104,12 @@ export function AdvancedSecurityCenter() {
     const interval = setInterval(() => {
       setSystemStats((prev) => ({
         ...prev,
-        cpuUsage: Math.max(
-          15,
-          Math.min(85, prev.cpuUsage + (Math.random() - 0.5) * 10),
-        ),
-        memoryUsage: Math.max(
-          50,
-          Math.min(90, prev.memoryUsage + (Math.random() - 0.5) * 5),
-        ),
-        networkLoad: Math.max(
-          20,
-          Math.min(80, prev.networkLoad + (Math.random() - 0.5) * 15),
-        ),
-        activeConnections:
-          prev.activeConnections + Math.floor((Math.random() - 0.5) * 20),
+        cpuUsage: Math.max(15, Math.min(85, prev.cpuUsage + (Math.random() - 0.5) * 10)),
+        memoryUsage: Math.max(50, Math.min(90, prev.memoryUsage + (Math.random() - 0.5) * 5)),
+        networkLoad: Math.max(20, Math.min(80, prev.networkLoad + (Math.random() - 0.5) * 15)),
+        activeConnections: prev.activeConnections + Math.floor((Math.random() - 0.5) * 20),
         blockedThreats: prev.blockedThreats + Math.floor(Math.random() * 3),
-        dataTransfer: Math.max(
-          1,
-          Math.min(10, prev.dataTransfer + (Math.random() - 0.5) * 0.5),
-        ),
+        dataTransfer: Math.max(1, Math.min(10, prev.dataTransfer + (Math.random() - 0.5) * 0.5)),
       }));
 
       // Update security metrics occasionally
@@ -130,11 +117,8 @@ export function AdvancedSecurityCenter() {
         setSecurityMetrics((prev) =>
           prev.map((metric) => ({
             ...metric,
-            value: Math.max(
-              85,
-              Math.min(100, metric.value + (Math.random() - 0.5) * 2),
-            ),
-          })),
+            value: Math.max(85, Math.min(100, metric.value + (Math.random() - 0.5) * 2)),
+          }))
         );
       }
     }, 5000);
@@ -149,12 +133,11 @@ export function AdvancedSecurityCenter() {
         value: 100,
         status: "excellent" as const,
         trend: "up" as const,
-      })),
+      }))
     );
 
     toast.success("⚡ MAXIMUM SECURITY ACTIVATED!", {
-      description:
-        "All security protocols engaged - System locked down completely",
+      description: "All security protocols engaged - System locked down completely",
       duration: 8000,
     });
   };
@@ -218,19 +201,13 @@ export function AdvancedSecurityCenter() {
             <div className="text-center p-3 rounded-lg bg-green-900/30 border border-green-500/20">
               <Shield className="h-6 w-6 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">ACTIVE</div>
-              <div className="text-xs text-muted-foreground">
-                Quantum Shield
-              </div>
+              <div className="text-xs text-muted-foreground">Quantum Shield</div>
             </div>
 
             <div className="text-center p-3 rounded-lg bg-blue-900/30 border border-blue-500/20">
               <Eye className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {systemStats.blockedThreats}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Threats Blocked
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{systemStats.blockedThreats}</div>
+              <div className="text-xs text-muted-foreground">Threats Blocked</div>
             </div>
 
             <div className="text-center p-3 rounded-lg bg-purple-900/30 border border-purple-500/20">
@@ -238,9 +215,7 @@ export function AdvancedSecurityCenter() {
               <div className="text-2xl font-bold text-purple-400">
                 {systemStats.activeConnections}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Active Sessions
-              </div>
+              <div className="text-xs text-muted-foreground">Active Sessions</div>
             </div>
 
             <div className="text-center p-3 rounded-lg bg-orange-900/30 border border-orange-500/20">
@@ -253,17 +228,11 @@ export function AdvancedSecurityCenter() {
           </div>
 
           <div className="flex gap-4 justify-center">
-            <Button
-              onClick={activateMaxSecurity}
-              className="bg-red-600 hover:bg-red-700"
-            >
+            <Button onClick={activateMaxSecurity} className="bg-red-600 hover:bg-red-700">
               <Zap className="h-4 w-4 mr-2" />
               ACTIVATE MAX SECURITY
             </Button>
-            <Button
-              onClick={runSecurityScan}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
+            <Button onClick={runSecurityScan} className="bg-blue-600 hover:bg-blue-700">
               <Eye className="h-4 w-4 mr-2" />
               DEEP SECURITY SCAN
             </Button>
@@ -286,18 +255,14 @@ export function AdvancedSecurityCenter() {
                 <CardContent className="p-4">
                   <div className="flex justify-between items-center mb-2">
                     <h4 className="font-semibold text-sm">{metric.name}</h4>
-                    <Badge
-                      className={`${getStatusColor(metric.status)} bg-transparent border`}
-                    >
+                    <Badge className={`${getStatusColor(metric.status)} bg-transparent border`}>
                       {metric.status.toUpperCase()}
                     </Badge>
                   </div>
                   <div className="space-y-2">
                     <Progress value={metric.value} className="h-2" />
                     <div className="flex justify-between text-xs">
-                      <span className="text-muted-foreground">
-                        {metric.value.toFixed(1)}%
-                      </span>
+                      <span className="text-muted-foreground">{metric.value.toFixed(1)}%</span>
                       <span
                         className={`${
                           metric.trend === "up"
@@ -307,11 +272,7 @@ export function AdvancedSecurityCenter() {
                               : "text-gray-400"
                         }`}
                       >
-                        {metric.trend === "up"
-                          ? "↗"
-                          : metric.trend === "down"
-                            ? "↘"
-                            : "→"}
+                        {metric.trend === "up" ? "↗" : metric.trend === "down" ? "↘" : "→"}
                       </span>
                     </div>
                   </div>
@@ -324,9 +285,7 @@ export function AdvancedSecurityCenter() {
         <TabsContent value="threats" className="space-y-4">
           <Card className="border-red-500/20">
             <CardHeader>
-              <CardTitle className="text-red-400">
-                Live Threat Monitor
-              </CardTitle>
+              <CardTitle className="text-red-400">Live Threat Monitor</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               {threatAlerts.map((alert) => (
@@ -337,9 +296,7 @@ export function AdvancedSecurityCenter() {
                   <div className="flex items-center gap-3">
                     <AlertTriangle className="h-4 w-4 text-orange-400" />
                     <div>
-                      <div className="text-sm font-medium">
-                        {alert.description}
-                      </div>
+                      <div className="text-sm font-medium">{alert.description}</div>
                       <div className="text-xs text-muted-foreground">
                         {alert.source} • {alert.timestamp.toLocaleTimeString()}
                       </div>
@@ -426,9 +383,7 @@ export function AdvancedSecurityCenter() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm">Active Connections</span>
-                  <span className="text-sm text-cyan-400">
-                    {systemStats.activeConnections}
-                  </span>
+                  <span className="text-sm text-cyan-400">{systemStats.activeConnections}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm">Data Transfer</span>
@@ -446,45 +401,31 @@ export function AdvancedSecurityCenter() {
             <Card className="border-purple-500/20 bg-purple-900/20">
               <CardContent className="p-4 text-center">
                 <Database className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                <h4 className="font-bold text-purple-400 mb-2">
-                  Database Scanner
-                </h4>
+                <h4 className="font-bold text-purple-400 mb-2">Database Scanner</h4>
                 <p className="text-xs text-muted-foreground mb-3">
                   Deep database vulnerability scan
                 </p>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                  Scan Database
-                </Button>
+                <Button className="w-full bg-purple-600 hover:bg-purple-700">Scan Database</Button>
               </CardContent>
             </Card>
 
             <Card className="border-orange-500/20 bg-orange-900/20">
               <CardContent className="p-4 text-center">
                 <Globe className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-                <h4 className="font-bold text-orange-400 mb-2">
-                  Network Mapper
-                </h4>
-                <p className="text-xs text-muted-foreground mb-3">
-                  Map all network connections
-                </p>
-                <Button className="w-full bg-orange-600 hover:bg-orange-700">
-                  Map Network
-                </Button>
+                <h4 className="font-bold text-orange-400 mb-2">Network Mapper</h4>
+                <p className="text-xs text-muted-foreground mb-3">Map all network connections</p>
+                <Button className="w-full bg-orange-600 hover:bg-orange-700">Map Network</Button>
               </CardContent>
             </Card>
 
             <Card className="border-cyan-500/20 bg-cyan-900/20">
               <CardContent className="p-4 text-center">
                 <Lock className="h-8 w-8 text-cyan-400 mx-auto mb-2" />
-                <h4 className="font-bold text-cyan-400 mb-2">
-                  Encryption Audit
-                </h4>
+                <h4 className="font-bold text-cyan-400 mb-2">Encryption Audit</h4>
                 <p className="text-xs text-muted-foreground mb-3">
                   Verify all encryption protocols
                 </p>
-                <Button className="w-full bg-cyan-600 hover:bg-cyan-700">
-                  Audit Encryption
-                </Button>
+                <Button className="w-full bg-cyan-600 hover:bg-cyan-700">Audit Encryption</Button>
               </CardContent>
             </Card>
           </div>

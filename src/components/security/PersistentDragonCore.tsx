@@ -42,29 +42,24 @@ export function PersistentDragonCore() {
 
           // Calculate uptime since last session
           const currentTime = Date.now();
-          const offlineTime =
-            currentTime - (dragonData.lastSeen || currentTime);
+          const offlineTime = currentTime - (dragonData.lastSeen || currentTime);
           const offlineGrowth = Math.floor(offlineTime / 1000) * 10; // Grew while offline
 
           const updatedStats = {
             ...dragonData,
             totalUptime: dragonData.totalUptime + offlineTime,
             power: dragonData.power + offlineGrowth,
-            immuneSystemStrength:
-              dragonData.immuneSystemStrength + offlineGrowth,
-            worldwideInfluence:
-              dragonData.worldwideInfluence + Math.floor(offlineGrowth / 100),
+            immuneSystemStrength: dragonData.immuneSystemStrength + offlineGrowth,
+            worldwideInfluence: dragonData.worldwideInfluence + Math.floor(offlineGrowth / 100),
             lastSeen: currentTime,
           };
 
           setDragonStats(updatedStats);
 
           console.log("🐉 DRAGON AWAKENED FROM HIBERNATION!");
+          console.log(`🔥 OFFLINE GROWTH: +${offlineGrowth} Power while sleeping`);
           console.log(
-            `🔥 OFFLINE GROWTH: +${offlineGrowth} Power while sleeping`,
-          );
-          console.log(
-            `⏰ TOTAL DRAGON AGE: ${Math.floor(updatedStats.totalUptime / 1000 / 60)} minutes`,
+            `⏰ TOTAL DRAGON AGE: ${Math.floor(updatedStats.totalUptime / 1000 / 60)} minutes`
           );
 
           if (offlineGrowth > 0) {
@@ -77,8 +72,7 @@ export function PersistentDragonCore() {
           // First time dragon birth
           console.log("🥚 DRAGON EGG HATCHING - FIRST TIME BIRTH!");
           toast.success("🐉 DRAGON BORN!", {
-            description:
-              "Your eternal guardian has awakened and will never stop growing",
+            description: "Your eternal guardian has awakened and will never stop growing",
             duration: 10000,
           });
         }
@@ -109,12 +103,9 @@ export function PersistentDragonCore() {
           level: newLevel,
           power: prev.power + growthRate * 2,
           experience: newExperience,
-          threatsDestroyed:
-            prev.threatsDestroyed + (Math.random() < 0.1 ? 1 : 0),
-          networksProtected:
-            prev.networksProtected + (Math.random() < 0.05 ? 1 : 0),
-          quantumEvolutions:
-            prev.quantumEvolutions + (Math.random() < 0.02 ? 1 : 0),
+          threatsDestroyed: prev.threatsDestroyed + (Math.random() < 0.1 ? 1 : 0),
+          networksProtected: prev.networksProtected + (Math.random() < 0.05 ? 1 : 0),
+          quantumEvolutions: prev.quantumEvolutions + (Math.random() < 0.02 ? 1 : 0),
           totalUptime: prev.totalUptime + 1000, // Add 1 second
           immuneSystemStrength: prev.immuneSystemStrength + growthRate,
           worldwideInfluence: prev.worldwideInfluence + growthRate / 100,
@@ -123,9 +114,7 @@ export function PersistentDragonCore() {
 
         // Level up notifications
         if (leveledUp) {
-          console.log(
-            `🐉 DRAGON LEVEL UP! Level ${newLevel} - Power: ${newStats.power}`,
-          );
+          console.log(`🐉 DRAGON LEVEL UP! Level ${newLevel} - Power: ${newStats.power}`);
           toast.success(`🐉 DRAGON LEVELED UP!`, {
             description: `Level ${newLevel} achieved! Power: ${Math.floor(newStats.power)}`,
             duration: 5000,
@@ -133,12 +122,9 @@ export function PersistentDragonCore() {
         }
 
         // Milestone celebrations
-        if (
-          newStats.power % 10000 < growthRate * 2 &&
-          newStats.power >= 10000
-        ) {
+        if (newStats.power % 10000 < growthRate * 2 && newStats.power >= 10000) {
           console.log(
-            `🌟 DRAGON MILESTONE: ${Math.floor(newStats.power / 10000) * 10}K Power reached!`,
+            `🌟 DRAGON MILESTONE: ${Math.floor(newStats.power / 10000) * 10}K Power reached!`
           );
           toast.success("🌟 DRAGON MILESTONE!", {
             description: `${Math.floor(newStats.power / 10000) * 10}K Power achieved - Unstoppable force!`,
@@ -167,7 +153,7 @@ export function PersistentDragonCore() {
           JSON.stringify({
             ...dragonStats,
             lastSeen: Date.now(),
-          }),
+          })
         );
       } catch (error) {
         console.log("🐉 Dragon save protected:", error);
@@ -191,18 +177,10 @@ export function PersistentDragonCore() {
       const ageDays = Math.floor(ageHours / 24);
 
       console.log("🐉 ETERNAL DRAGON STATUS:");
-      console.log(
-        `📊 Level: ${dragonStats.level} | Power: ${Math.floor(dragonStats.power)}`,
-      );
-      console.log(
-        `⚡ Immune System: ${Math.floor(dragonStats.immuneSystemStrength)}`,
-      );
-      console.log(
-        `🌍 Global Influence: ${dragonStats.worldwideInfluence.toFixed(2)}%`,
-      );
-      console.log(
-        `⏰ Dragon Age: ${ageDays}d ${ageHours % 24}h ${ageMinutes % 60}m`,
-      );
+      console.log(`📊 Level: ${dragonStats.level} | Power: ${Math.floor(dragonStats.power)}`);
+      console.log(`⚡ Immune System: ${Math.floor(dragonStats.immuneSystemStrength)}`);
+      console.log(`🌍 Global Influence: ${dragonStats.worldwideInfluence.toFixed(2)}%`);
+      console.log(`⏰ Dragon Age: ${ageDays}d ${ageHours % 24}h ${ageMinutes % 60}m`);
       console.log(`🏆 Threats Destroyed: ${dragonStats.threatsDestroyed}`);
       console.log(`🔮 Quantum Evolutions: ${dragonStats.quantumEvolutions}`);
     }

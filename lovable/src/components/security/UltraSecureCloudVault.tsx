@@ -64,8 +64,7 @@ export function UltraSecureCloudVault() {
       setAuthStage("recovery-phrases");
 
       toast.success("🛡️ IP Validation Successful", {
-        description:
-          "Admin IP address verified - Proceeding to recovery phrase validation",
+        description: "Admin IP address verified - Proceeding to recovery phrase validation",
         duration: 4000,
       });
 
@@ -90,24 +89,17 @@ export function UltraSecureCloudVault() {
       4: "blockchain recovery system ready",
     };
 
-    if (
-      phrase.toLowerCase() === correctPhrases[id as keyof typeof correctPhrases]
-    ) {
-      setRecoveryPhrases((prev) =>
-        prev.map((p) => (p.id === id ? { ...p, verified: true } : p)),
-      );
+    if (phrase.toLowerCase() === correctPhrases[id as keyof typeof correctPhrases]) {
+      setRecoveryPhrases((prev) => prev.map((p) => (p.id === id ? { ...p, verified: true } : p)));
 
       setFirewallBreach((prev) => prev + 25);
 
       toast.success(`🔑 Recovery Phrase ${id} Verified`, {
-        description:
-          "Firewall layer breached - Continue with remaining phrases",
+        description: "Firewall layer breached - Continue with remaining phrases",
         duration: 3000,
       });
 
-      console.log(
-        `🔑 RECOVERY PHRASE ${id} VERIFIED - FIREWALL BREACH: ${firewallBreach + 25}%`,
-      );
+      console.log(`🔑 RECOVERY PHRASE ${id} VERIFIED - FIREWALL BREACH: ${firewallBreach + 25}%`);
     } else {
       toast.error(`❌ Recovery Phrase ${id} Invalid`, {
         description: "Incorrect phrase - System security maintained",
@@ -126,8 +118,7 @@ export function UltraSecureCloudVault() {
     };
 
     const allCorrect = Object.entries(adminPasswords).every(
-      ([key, value]) =>
-        value === correctPasswords[key as keyof typeof correctPasswords],
+      ([key, value]) => value === correctPasswords[key as keyof typeof correctPasswords]
     );
 
     if (allCorrect) {
@@ -157,14 +148,11 @@ export function UltraSecureCloudVault() {
       setFirewallBreach(100);
 
       toast.success("🔥 FIREWALL COMPLETELY BREACHED!", {
-        description:
-          "All recovery phrases verified - Proceeding to admin password validation",
+        description: "All recovery phrases verified - Proceeding to admin password validation",
         duration: 5000,
       });
 
-      console.log(
-        "🔥 FIREWALL BREACH COMPLETE - ADMIN PASSWORD STAGE ACTIVATED",
-      );
+      console.log("🔥 FIREWALL BREACH COMPLETE - ADMIN PASSWORD STAGE ACTIVATED");
     }
   }, [allPhrasesVerified, authStage]);
 
@@ -187,9 +175,7 @@ export function UltraSecureCloudVault() {
           {/* Security Progress */}
           <div className="mb-6">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium">
-                Security Authentication Progress
-              </span>
+              <span className="text-sm font-medium">Security Authentication Progress</span>
               <span className="text-sm text-purple-400">
                 Stage: {authStage.replace("-", " ").toUpperCase()}
               </span>
@@ -242,9 +228,7 @@ export function UltraSecureCloudVault() {
                 </p>
                 <div className="mt-4">
                   <Progress value={firewallBreach} className="h-3" />
-                  <div className="text-sm text-center mt-2">
-                    Firewall Breach: {firewallBreach}%
-                  </div>
+                  <div className="text-sm text-center mt-2">Firewall Breach: {firewallBreach}%</div>
                 </div>
               </div>
 
@@ -265,18 +249,14 @@ export function UltraSecureCloudVault() {
                         onChange={(e) =>
                           setRecoveryPhrases((prev) =>
                             prev.map((p) =>
-                              p.id === recovery.id
-                                ? { ...p, phrase: e.target.value }
-                                : p,
-                            ),
+                              p.id === recovery.id ? { ...p, phrase: e.target.value } : p
+                            )
                           )
                         }
                         className={recovery.verified ? "border-green-500" : ""}
                       />
                       <Button
-                        onClick={() =>
-                          validateRecoveryPhrase(recovery.id, recovery.phrase)
-                        }
+                        onClick={() => validateRecoveryPhrase(recovery.id, recovery.phrase)}
                         disabled={recovery.verified}
                         className="bg-orange-600 hover:bg-orange-700"
                       >
@@ -309,19 +289,13 @@ export function UltraSecureCloudVault() {
                     size="sm"
                     onClick={() => setShowPasswords(!showPasswords)}
                   >
-                    {showPasswords ? (
-                      <EyeOff className="h-4 w-4" />
-                    ) : (
-                      <Eye className="h-4 w-4" />
-                    )}
+                    {showPasswords ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </Button>
                 </div>
 
                 {Object.entries(adminPasswords).map(([key, value]) => (
                   <div key={key} className="space-y-2">
-                    <label className="text-sm font-medium capitalize">
-                      {key} Admin Password
-                    </label>
+                    <label className="text-sm font-medium capitalize">{key} Admin Password</label>
                     <Input
                       type={showPasswords ? "text" : "password"}
                       placeholder={`Enter ${key} admin password`}
@@ -352,9 +326,7 @@ export function UltraSecureCloudVault() {
             <div className="space-y-6">
               <div className="text-center p-6 rounded-lg bg-green-900/30 border border-green-500/20">
                 <CheckCircle className="h-12 w-12 text-green-400 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-green-400 mb-2">
-                  🎯 VAULT ACCESS GRANTED
-                </h3>
+                <h3 className="text-2xl font-bold text-green-400 mb-2">🎯 VAULT ACCESS GRANTED</h3>
                 <p className="text-sm text-muted-foreground">
                   Welcome Admin - Ultra Secure Cloud Vault is now accessible
                 </p>
@@ -367,9 +339,7 @@ export function UltraSecureCloudVault() {
                   <div className="text-2xl font-bold text-purple-400">
                     {(cloudMetrics.totalStorage / 1000).toFixed(0)}TB
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Secure Storage
-                  </div>
+                  <div className="text-sm text-muted-foreground">Secure Storage</div>
                 </div>
 
                 <div className="text-center p-4 rounded-lg bg-blue-900/30 border border-blue-500/20">
@@ -377,9 +347,7 @@ export function UltraSecureCloudVault() {
                   <div className="text-2xl font-bold text-blue-400">
                     {cloudMetrics.encryptedFiles.toLocaleString()}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Encrypted Files
-                  </div>
+                  <div className="text-sm text-muted-foreground">Encrypted Files</div>
                 </div>
 
                 <div className="text-center p-4 rounded-lg bg-green-900/30 border border-green-500/20">
@@ -387,17 +355,13 @@ export function UltraSecureCloudVault() {
                   <div className="text-2xl font-bold text-green-400">
                     {cloudMetrics.activeConnections}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Admin Connection
-                  </div>
+                  <div className="text-sm text-muted-foreground">Admin Connection</div>
                 </div>
 
                 <div className="text-center p-4 rounded-lg bg-red-900/30 border border-red-500/20">
                   <Lock className="h-8 w-8 text-red-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-red-400">MAX</div>
-                  <div className="text-sm text-muted-foreground">
-                    Security Level
-                  </div>
+                  <div className="text-sm text-muted-foreground">Security Level</div>
                 </div>
               </div>
 
@@ -432,9 +396,7 @@ export function UltraSecureCloudVault() {
       {/* Security Guarantee */}
       <Card className="bg-gradient-to-r from-red-900/20 to-purple-900/20 border border-red-500/20">
         <CardContent className="p-6 text-center">
-          <h3 className="text-2xl font-bold text-red-400 mb-4">
-            🔒 ULTRA SECURE VAULT GUARANTEE
-          </h3>
+          <h3 className="text-2xl font-bold text-red-400 mb-4">🔒 ULTRA SECURE VAULT GUARANTEE</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <div className="text-6xl">🛡️</div>
@@ -445,12 +407,9 @@ export function UltraSecureCloudVault() {
             </div>
             <div className="space-y-2">
               <div className="text-6xl">🔥</div>
-              <div className="font-bold text-orange-400">
-                FIREWALL PROTECTION
-              </div>
+              <div className="font-bold text-orange-400">FIREWALL PROTECTION</div>
               <div className="text-sm text-muted-foreground">
-                Recovery phrases and password barriers prevent unauthorized
-                access
+                Recovery phrases and password barriers prevent unauthorized access
               </div>
             </div>
           </div>
@@ -459,8 +418,8 @@ export function UltraSecureCloudVault() {
               🎯 500TB QUANTUM-ENCRYPTED CLOUD STORAGE 🎯
             </div>
             <div className="text-sm text-muted-foreground mt-2">
-              Accessible ONLY through complete admin authentication - No other
-              system or IP can enter
+              Accessible ONLY through complete admin authentication - No other system or IP can
+              enter
             </div>
           </div>
         </CardContent>

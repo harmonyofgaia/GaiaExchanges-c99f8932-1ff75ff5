@@ -39,8 +39,8 @@ const SecureAdmin = () => {
       </div>
       <div>
         <p>
-          Welcome to the Secure Admin dashboard. Use the buttons above to access
-          admin tools and documentation.
+          Welcome to the Secure Admin dashboard. Use the buttons above to access admin tools and
+          documentation.
         </p>
       </div>
     </div>

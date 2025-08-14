@@ -34,8 +34,7 @@ const masterVisionPhases: Phase[] = [
   {
     id: "phase1",
     title: "GAIA PRIVATE BLOCKCHAIN TRADING ENGINE",
-    description:
-      "Transform the Exchange page into the ultimate trading powerhouse",
+    description: "Transform the Exchange page into the ultimate trading powerhouse",
     priority: 1,
     status: "pending",
     timeline: "Next 30 Days",
@@ -146,9 +145,7 @@ export function MasterVisionControlPanel() {
 
   const updatePhaseStatus = (phaseId: string, newStatus: Phase["status"]) => {
     setPhases((prev) =>
-      prev.map((phase) =>
-        phase.id === phaseId ? { ...phase, status: newStatus } : phase,
-      ),
+      prev.map((phase) => (phase.id === phaseId ? { ...phase, status: newStatus } : phase))
     );
 
     const phaseName = phases.find((p) => p.id === phaseId)?.title;
@@ -200,8 +197,8 @@ export function MasterVisionControlPanel() {
             🎯 GAIA MASTER VISION CONTROL PANEL
           </CardTitle>
           <p className="text-center text-muted-foreground">
-            Strategic roadmap implementation control • AI directive management •
-            Phase approval system
+            Strategic roadmap implementation control • AI directive management • Phase approval
+            system
           </p>
         </CardHeader>
       </Card>
@@ -215,42 +212,35 @@ export function MasterVisionControlPanel() {
 
         <TabsContent value="overview" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {["pending", "approved", "in-progress", "completed"].map(
-              (status) => (
-                <Card key={status} className="border-gray-500/30">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-medium capitalize">
-                      {status} Phases
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold text-center">
-                      {phases.filter((p) => p.status === status).length}
-                    </div>
-                  </CardContent>
-                </Card>
-              ),
-            )}
+            {["pending", "approved", "in-progress", "completed"].map((status) => (
+              <Card key={status} className="border-gray-500/30">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium capitalize">{status} Phases</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-center">
+                    {phases.filter((p) => p.status === status).length}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
 
           <Card className="border-green-500/30 bg-green-900/20">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                🎯 Implementation Strategy
-              </CardTitle>
+              <CardTitle className="text-green-400">🎯 Implementation Strategy</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <p className="text-sm text-muted-foreground">
-                This control panel allows you to approve phases of the GAIA
-                Master Vision. When you approve a phase, Lovable AI will
-                understand it as a priority directive and implement those
-                features accordingly.
+                This control panel allows you to approve phases of the GAIA Master Vision. When you
+                approve a phase, Lovable AI will understand it as a priority directive and implement
+                those features accordingly.
               </p>
               <div className="bg-green-900/30 p-3 rounded-lg">
                 <p className="text-xs text-green-300">
-                  💡 <strong>How it works:</strong> Approve phases to signal to
-                  Lovable AI what to prioritize. The AI will refer to these
-                  approved phases when implementing new features.
+                  💡 <strong>How it works:</strong> Approve phases to signal to Lovable AI what to
+                  prioritize. The AI will refer to these approved phases when implementing new
+                  features.
                 </p>
               </div>
             </CardContent>
@@ -269,15 +259,11 @@ export function MasterVisionControlPanel() {
                     <phase.icon className="h-6 w-6 text-cyan-400" />
                     <div>
                       <CardTitle className="text-lg">{phase.title}</CardTitle>
-                      <p className="text-sm text-muted-foreground">
-                        {phase.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{phase.description}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Badge className={getStatusColor(phase.status)}>
-                      {phase.status}
-                    </Badge>
+                    <Badge className={getStatusColor(phase.status)}>{phase.status}</Badge>
                     <Badge variant="outline">Priority {phase.priority}</Badge>
                   </div>
                 </div>
@@ -289,10 +275,7 @@ export function MasterVisionControlPanel() {
                     <h4 className="font-semibold mb-2">Features:</h4>
                     <div className="grid grid-cols-1 gap-2">
                       {phase.features.map((feature, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-center gap-2 text-sm"
-                        >
+                        <div key={idx} className="flex items-center gap-2 text-sm">
                           <ArrowRight className="h-3 w-3 text-cyan-400" />
                           {feature}
                         </div>
@@ -317,9 +300,7 @@ export function MasterVisionControlPanel() {
                       )}
                       {phase.status === "approved" && (
                         <Button
-                          onClick={() =>
-                            updatePhaseStatus(phase.id, "in-progress")
-                          }
+                          onClick={() => updatePhaseStatus(phase.id, "in-progress")}
                           className="bg-blue-600 hover:bg-blue-700"
                           size="sm"
                         >
@@ -329,9 +310,7 @@ export function MasterVisionControlPanel() {
                       )}
                       {phase.status === "in-progress" && (
                         <Button
-                          onClick={() =>
-                            updatePhaseStatus(phase.id, "completed")
-                          }
+                          onClick={() => updatePhaseStatus(phase.id, "completed")}
                           className="bg-purple-600 hover:bg-purple-700"
                           size="sm"
                         >
@@ -350,9 +329,7 @@ export function MasterVisionControlPanel() {
         <TabsContent value="roadmap" className="space-y-4">
           <Card className="border-purple-500/30 bg-purple-900/20">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                🗺️ Implementation Roadmap
-              </CardTitle>
+              <CardTitle className="text-purple-400">🗺️ Implementation Roadmap</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
@@ -378,9 +355,7 @@ export function MasterVisionControlPanel() {
                     </div>
                     <div className="flex-1">
                       <h4 className="font-semibold">{phase.title}</h4>
-                      <p className="text-sm text-muted-foreground">
-                        {phase.timeline}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{phase.timeline}</p>
                       <Badge className={`mt-1 ${getStatusColor(phase.status)}`}>
                         {phase.status}
                       </Badge>

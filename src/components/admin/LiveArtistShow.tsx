@@ -95,9 +95,7 @@ export function LiveArtistShow() {
                 <Radio className="h-6 w-6" />
                 🎭 LIVE ARTIST SHOW - GAiA Sessions
               </div>
-              <Badge className="bg-red-600 text-white animate-pulse">
-                🔴 LIVE
-              </Badge>
+              <Badge className="bg-red-600 text-white animate-pulse">🔴 LIVE</Badge>
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -127,11 +125,7 @@ export function LiveArtistShow() {
                       size="sm"
                       className="text-white hover:bg-white/20"
                     >
-                      {isPlaying ? (
-                        <Pause className="h-5 w-5" />
-                      ) : (
-                        <Play className="h-5 w-5" />
-                      )}
+                      {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
                     </Button>
 
                     <div className="flex items-center gap-2">
@@ -152,9 +146,7 @@ export function LiveArtistShow() {
                         min="0"
                         max="100"
                         value={volume}
-                        onChange={(e) =>
-                          handleVolumeChange(Number(e.target.value))
-                        }
+                        onChange={(e) => handleVolumeChange(Number(e.target.value))}
                         className="w-20"
                       />
                     </div>
@@ -169,11 +161,7 @@ export function LiveArtistShow() {
                     >
                       <Maximize className="h-4 w-4" />
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-white hover:bg-white/20"
-                    >
+                    <Button variant="ghost" size="sm" className="text-white hover:bg-white/20">
                       <Settings className="h-4 w-4" />
                     </Button>
                   </div>
@@ -185,12 +173,8 @@ export function LiveArtistShow() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center p-3 bg-red-900/20 rounded border border-red-500/20">
                 <Users className="h-5 w-5 text-red-400 mx-auto mb-1" />
-                <div className="font-bold text-red-400">
-                  {viewerCount.toLocaleString()}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Live Viewers
-                </div>
+                <div className="font-bold text-red-400">{viewerCount.toLocaleString()}</div>
+                <div className="text-xs text-muted-foreground">Live Viewers</div>
               </div>
               <div className="text-center p-3 bg-green-900/20 rounded border border-green-500/20">
                 <Heart className="h-5 w-5 text-green-400 mx-auto mb-1" />
@@ -214,9 +198,7 @@ export function LiveArtistShow() {
         {/* Admin Controls */}
         <Card className="border-orange-500/30 bg-orange-900/20">
           <CardHeader>
-            <CardTitle className="text-orange-400">
-              🎛️ Admin Stream Controls
-            </CardTitle>
+            <CardTitle className="text-orange-400">🎛️ Admin Stream Controls</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -256,9 +238,7 @@ export function LiveArtistShow() {
               {chatMessages.map((msg, index) => (
                 <div key={index} className="text-sm">
                   <span className="text-cyan-400 font-bold">{msg.user}</span>
-                  <span className="text-xs text-muted-foreground ml-2">
-                    {msg.time}
-                  </span>
+                  <span className="text-xs text-muted-foreground ml-2">{msg.time}</span>
                   <div className="text-white ml-2">{msg.message}</div>
                 </div>
               ))}

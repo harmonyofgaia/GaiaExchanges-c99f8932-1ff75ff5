@@ -5,9 +5,9 @@ import { X, Bot, Heart, Sparkles } from "lucide-react";
 
 export function RobotAdvertisement() {
   const [isVisible, setIsVisible] = useState(false);
-  const [animationPhase, setAnimationPhase] = useState<
-    "approaching" | "delivering" | "leaving"
-  >("approaching");
+  const [animationPhase, setAnimationPhase] = useState<"approaching" | "delivering" | "leaving">(
+    "approaching"
+  );
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function RobotAdvertisement() {
           setAnimationPhase("leaving");
         }
       },
-      animationPhase === "approaching" ? 2000 : 16000,
+      animationPhase === "approaching" ? 2000 : 16000
     ); // 2s approach, 16s deliver message
 
     if (animationPhase === "leaving") {
@@ -136,9 +136,7 @@ export function RobotAdvertisement() {
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   <Bot className="h-5 w-5 text-cyan-400 animate-pulse" />
-                  <h3 className="font-bold text-cyan-300">
-                    Message from Harmony of Gaia!
-                  </h3>
+                  <h3 className="font-bold text-cyan-300">Message from Harmony of Gaia!</h3>
                 </div>
 
                 <div className="text-sm text-white space-y-2">
@@ -147,23 +145,16 @@ export function RobotAdvertisement() {
                   </p>
                   <p>
                     GAiA Token will{" "}
-                    <strong className="text-green-400">
-                      bark his way to barriers
-                    </strong>{" "}
-                    of many projects and
-                    <strong className="text-purple-300">
-                      {" "}
-                      rise and shine fully
-                    </strong>{" "}
-                    in this open minded space!
+                    <strong className="text-green-400">bark his way to barriers</strong> of many
+                    projects and
+                    <strong className="text-purple-300"> rise and shine fully</strong> in this open
+                    minded space!
                   </p>
                   <p className="text-cyan-200">
-                    🛡️ Protected by our <strong>Exotic Defense System</strong> -
-                    the most powerful AI-Human engagement ever created!
+                    🛡️ Protected by our <strong>Exotic Defense System</strong> - the most powerful
+                    AI-Human engagement ever created!
                   </p>
-                  <p className="text-orange-300 font-medium">
-                    "Seeds Will Form Into Music" 🎵
-                  </p>
+                  <p className="text-orange-300 font-medium">"Seeds Will Form Into Music" 🎵</p>
                 </div>
 
                 <div className="flex gap-2 pt-2">

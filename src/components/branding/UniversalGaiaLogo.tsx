@@ -79,9 +79,7 @@ export function UniversalGaiaLogo({
   };
 
   return (
-    <div
-      className={`flex items-center gap-3 ${positionClasses[position]} ${className}`}
-    >
+    <div className={`flex items-center gap-3 ${positionClasses[position]} ${className}`}>
       {/* Animated Background Effect */}
       {animated && (
         <div className="absolute inset-0 pointer-events-none">

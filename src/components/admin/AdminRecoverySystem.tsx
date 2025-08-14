@@ -24,10 +24,7 @@ interface AdminRecoverySystemProps {
   onBack: () => void;
 }
 
-export function AdminRecoverySystem({
-  onRecoveryComplete,
-  onBack,
-}: AdminRecoverySystemProps) {
+export function AdminRecoverySystem({ onRecoveryComplete, onBack }: AdminRecoverySystemProps) {
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3 | 4>(1);
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
 
@@ -56,15 +53,13 @@ export function AdminRecoverySystem({
     console.log("🔐 ADMIN RECOVERY COMPLETE:", notificationData);
 
     toast.success("🔐 4-Step Recovery Complete!", {
-      description:
-        "Admin notifications sent to +31687758236 and security emails",
+      description: "Admin notifications sent to +31687758236 and security emails",
       duration: 6000,
     });
   };
 
   const validateStep1 = (username: string, password: string) => {
-    const isValid =
-      username === "Synatic" && password === "harmonyquantumvaultaccess";
+    const isValid = username === "Synatic" && password === "harmonyquantumvaultaccess";
     if (isValid) {
       handleStepComplete(1);
     }
@@ -78,9 +73,7 @@ export function AdminRecoverySystem({
           <CardTitle className="flex items-center gap-2 text-blue-400">
             <Shield className="h-6 w-6" />
             🔑 4-STEP ADMIN RECOVERY SYSTEM
-            <Badge className="bg-blue-600 text-white">
-              STEP {currentStep}/4
-            </Badge>
+            <Badge className="bg-blue-600 text-white">STEP {currentStep}/4</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -106,18 +99,14 @@ export function AdminRecoverySystem({
           {/* Step Content */}
           {currentStep === 1 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-blue-400">
-                Step 1: Vault Credentials
-              </h3>
+              <h3 className="text-lg font-bold text-blue-400">Step 1: Vault Credentials</h3>
               <AdminLogin onLoginSuccess={validateStep1} />
             </div>
           )}
 
           {currentStep === 2 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-blue-400">
-                Step 2: SMS + Google Verification
-              </h3>
+              <h3 className="text-lg font-bold text-blue-400">Step 2: SMS + Google Verification</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <AdminMFA onMFASuccess={() => handleStepComplete(2)} />
                 <GoogleRecoveryStep onComplete={() => {}} />
@@ -127,16 +116,12 @@ export function AdminRecoverySystem({
 
           {currentStep === 3 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-blue-400">
-                Step 3: IP Network Validation
-              </h3>
+              <h3 className="text-lg font-bold text-blue-400">Step 3: IP Network Validation</h3>
               <Card className="bg-green-900/30 border border-green-500/30">
                 <CardContent className="p-4 text-center">
                   <CheckCircle className="h-8 w-8 text-green-400 mx-auto mb-2" />
                   <p className="text-green-400">IP Address Authorized</p>
-                  <p className="text-sm text-muted-foreground">
-                    Network access verified
-                  </p>
+                  <p className="text-sm text-muted-foreground">Network access verified</p>
                   <Button
                     onClick={() => handleStepComplete(3)}
                     className="mt-4 bg-green-600 hover:bg-green-700"
@@ -157,9 +142,7 @@ export function AdminRecoverySystem({
                 <CardContent className="p-4 text-center">
                   <Shield className="h-8 w-8 text-purple-400 mx-auto mb-2" />
                   <p className="text-purple-400">Security Scan Complete</p>
-                  <p className="text-sm text-muted-foreground">
-                    All verification steps passed
-                  </p>
+                  <p className="text-sm text-muted-foreground">All verification steps passed</p>
                   <Button
                     onClick={() => handleStepComplete(4)}
                     className="mt-4 bg-purple-600 hover:bg-purple-700"
@@ -172,11 +155,7 @@ export function AdminRecoverySystem({
           )}
 
           <div className="mt-6 text-center">
-            <Button
-              onClick={onBack}
-              variant="ghost"
-              className="text-xs text-muted-foreground"
-            >
+            <Button onClick={onBack} variant="ghost" className="text-xs text-muted-foreground">
               Back to Simple Login
             </Button>
           </div>

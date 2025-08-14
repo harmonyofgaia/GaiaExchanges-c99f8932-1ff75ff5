@@ -145,8 +145,7 @@ export function MultiExchangeIntegration() {
   ]);
 
   const [totalProgress, setTotalProgress] = useState(0);
-  const [isSubmittingApplications, setIsSubmittingApplications] =
-    useState(false);
+  const [isSubmittingApplications, setIsSubmittingApplications] = useState(false);
 
   useEffect(() => {
     // Auto-complete requirements simulation
@@ -156,19 +155,15 @@ export function MultiExchangeIntegration() {
           if (exchange.completedRequirements < exchange.totalRequirements) {
             const newCompleted = Math.min(
               exchange.completedRequirements + 1,
-              exchange.totalRequirements,
+              exchange.totalRequirements
             );
 
             // Update status based on completion
             let newStatus = exchange.status;
-            if (
-              newCompleted === exchange.totalRequirements &&
-              exchange.status === "preparing"
-            ) {
+            if (newCompleted === exchange.totalRequirements && exchange.status === "preparing") {
               newStatus = "submitted";
               toast.success(`📋 ${exchange.name} Application Submitted!`, {
-                description:
-                  "All requirements completed, application submitted for review",
+                description: "All requirements completed, application submitted for review",
                 duration: 4000,
               });
             }
@@ -180,7 +175,7 @@ export function MultiExchangeIntegration() {
             };
           }
           return exchange;
-        }),
+        })
       );
     }, 3000);
 
@@ -188,14 +183,8 @@ export function MultiExchangeIntegration() {
   }, []);
 
   useEffect(() => {
-    const totalCompleted = exchanges.reduce(
-      (sum, ex) => sum + ex.completedRequirements,
-      0,
-    );
-    const totalRequired = exchanges.reduce(
-      (sum, ex) => sum + ex.totalRequirements,
-      0,
-    );
+    const totalCompleted = exchanges.reduce((sum, ex) => sum + ex.completedRequirements, 0);
+    const totalRequired = exchanges.reduce((sum, ex) => sum + ex.totalRequirements, 0);
     setTotalProgress((totalCompleted / totalRequired) * 100);
   }, [exchanges]);
 
@@ -203,8 +192,7 @@ export function MultiExchangeIntegration() {
     setIsSubmittingApplications(true);
 
     toast.success("🚀 Multi-Exchange Campaign Launched!", {
-      description:
-        "Submitting GAiA token to all major exchanges simultaneously",
+      description: "Submitting GAiA token to all major exchanges simultaneously",
       duration: 6000,
     });
 
@@ -229,7 +217,7 @@ export function MultiExchangeIntegration() {
               return { ...exchange, status: "submitted" as const };
             }
             return exchange;
-          }),
+          })
         );
       }, i * 2000);
     }
@@ -237,8 +225,7 @@ export function MultiExchangeIntegration() {
     setTimeout(() => {
       setIsSubmittingApplications(false);
       toast.success("🌍 Global Exchange Integration Complete!", {
-        description:
-          "GAiA token submitted to all major exchanges. Awaiting approval.",
+        description: "GAiA token submitted to all major exchanges. Awaiting approval.",
         duration: 8000,
       });
     }, 12000);
@@ -291,31 +278,23 @@ export function MultiExchangeIntegration() {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">
-                {exchanges.length}
-              </div>
+              <div className="text-3xl font-bold text-green-400">{exchanges.length}</div>
               <p className="text-sm text-muted-foreground">Target Exchanges</p>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-400">
                 {exchanges.filter((e) => e.status === "submitted").length}
               </div>
-              <p className="text-sm text-muted-foreground">
-                Applications Submitted
-              </p>
+              <p className="text-sm text-muted-foreground">Applications Submitted</p>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-400">
                 {exchanges.filter((e) => e.status === "listed").length}
               </div>
-              <p className="text-sm text-muted-foreground">
-                Successfully Listed
-              </p>
+              <p className="text-sm text-muted-foreground">Successfully Listed</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">
-                {totalProgress.toFixed(0)}%
-              </div>
+              <div className="text-3xl font-bold text-yellow-400">{totalProgress.toFixed(0)}%</div>
               <p className="text-sm text-muted-foreground">Overall Progress</p>
             </div>
           </div>
@@ -359,19 +338,14 @@ export function MultiExchangeIntegration() {
                   <div>
                     <CardTitle className="text-lg">{exchange.name}</CardTitle>
                     <p className="text-sm text-muted-foreground">
-                      Estimated Time: {exchange.estimatedTime} | Fee:{" "}
-                      {exchange.listingFee}
+                      Estimated Time: {exchange.estimatedTime} | Fee: {exchange.listingFee}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge
-                    className={`${getStatusColor(exchange.status)} text-white`}
-                  >
+                  <Badge className={`${getStatusColor(exchange.status)} text-white`}>
                     {getStatusIcon(exchange.status)}
-                    <span className="ml-1 capitalize">
-                      {exchange.status.replace("_", " ")}
-                    </span>
+                    <span className="ml-1 capitalize">{exchange.status.replace("_", " ")}</span>
                   </Badge>
                   <Badge
                     variant="outline"
@@ -392,32 +366,22 @@ export function MultiExchangeIntegration() {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <h4 className="font-semibold text-sm mb-2">
-                    Requirements Progress
-                  </h4>
+                  <h4 className="font-semibold text-sm mb-2">Requirements Progress</h4>
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs">
                       <span>Completed</span>
                       <span>
-                        {exchange.completedRequirements}/
-                        {exchange.totalRequirements}
+                        {exchange.completedRequirements}/{exchange.totalRequirements}
                       </span>
                     </div>
                     <Progress
-                      value={
-                        (exchange.completedRequirements /
-                          exchange.totalRequirements) *
-                        100
-                      }
+                      value={(exchange.completedRequirements / exchange.totalRequirements) * 100}
                       className="h-1.5"
                     />
                   </div>
                   <div className="mt-2 space-y-1">
                     {exchange.requirements.map((req, reqIndex) => (
-                      <div
-                        key={reqIndex}
-                        className="flex items-center gap-2 text-xs"
-                      >
+                      <div key={reqIndex} className="flex items-center gap-2 text-xs">
                         {reqIndex < exchange.completedRequirements ? (
                           <CheckCircle className="h-3 w-3 text-green-400" />
                         ) : (
@@ -441,11 +405,7 @@ export function MultiExchangeIntegration() {
                   <h4 className="font-semibold text-sm mb-2">Trading Pairs</h4>
                   <div className="flex flex-wrap gap-1">
                     {exchange.tradingPairs.map((pair, pairIndex) => (
-                      <Badge
-                        key={pairIndex}
-                        variant="outline"
-                        className="text-xs"
-                      >
+                      <Badge key={pairIndex} variant="outline" className="text-xs">
                         {pair}
                       </Badge>
                     ))}
@@ -453,11 +413,7 @@ export function MultiExchangeIntegration() {
 
                   <div className="mt-3 flex gap-2">
                     <Button size="sm" variant="outline" asChild>
-                      <a
-                        href={exchange.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <a href={exchange.website} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="h-3 w-3 mr-1" />
                         Visit Exchange
                       </a>
@@ -494,10 +450,9 @@ export function MultiExchangeIntegration() {
                 Maximum Security Protocol Active
               </h4>
               <p className="text-sm text-muted-foreground mb-3">
-                Every exchange integration maintains military-grade security
-                standards. All smart contracts, legal documents, and technical
-                integrations undergo comprehensive security audits before
-                deployment.
+                Every exchange integration maintains military-grade security standards. All smart
+                contracts, legal documents, and technical integrations undergo comprehensive
+                security audits before deployment.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                 <div className="flex items-center gap-2">

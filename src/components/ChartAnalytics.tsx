@@ -26,13 +26,10 @@ export function ChartAnalytics() {
         ...prev,
         totalTrades: prev.totalTrades + Math.floor(Math.random() * 20) + 5,
         activeUsers: prev.activeUsers + Math.floor(Math.random() * 10),
-        systemHealth: Math.max(
-          90,
-          Math.min(100, prev.systemHealth + (Math.random() - 0.5) * 2),
-        ),
+        systemHealth: Math.max(90, Math.min(100, prev.systemHealth + (Math.random() - 0.5) * 2)),
         networkSpeed: Math.max(
           2000,
-          Math.min(3000, prev.networkSpeed + (Math.random() - 0.5) * 100),
+          Math.min(3000, prev.networkSpeed + (Math.random() - 0.5) * 100)
         ),
       }));
     }, 3000);
@@ -53,9 +50,7 @@ export function ChartAnalytics() {
           <div className="p-4 bg-black/30 rounded-lg border border-purple-500/30">
             <div className="flex items-center gap-2 mb-2">
               <TrendingUp className="h-4 w-4 text-green-400" />
-              <span className="text-green-400 font-semibold">
-                Trading Activity
-              </span>
+              <span className="text-green-400 font-semibold">Trading Activity</span>
             </div>
             <div className="text-2xl font-bold text-white mb-1">
               {analytics.totalTrades.toLocaleString()}
@@ -92,13 +87,8 @@ export function ChartAnalytics() {
             <div className="text-2xl font-bold text-cyan-400 mb-1">
               {analytics.networkSpeed.toFixed(0)} TPS
             </div>
-            <Progress
-              value={(analytics.networkSpeed / 3000) * 100}
-              className="h-2"
-            />
-            <Badge className="mt-2 bg-cyan-600 text-white">
-              High Performance
-            </Badge>
+            <Progress value={(analytics.networkSpeed / 3000) * 100} className="h-2" />
+            <Badge className="mt-2 bg-cyan-600 text-white">High Performance</Badge>
           </div>
         </div>
       </CardContent>

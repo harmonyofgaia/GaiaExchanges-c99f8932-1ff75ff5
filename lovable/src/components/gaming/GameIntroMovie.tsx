@@ -70,10 +70,7 @@ export function GameIntroMovie({ onComplete, onSkip }: GameIntroMovieProps) {
   if (!isPlaying && currentScene === 0) {
     return (
       <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-        <Button
-          onClick={togglePlayback}
-          className="bg-green-600 hover:bg-green-700"
-        >
+        <Button onClick={togglePlayback} className="bg-green-600 hover:bg-green-700">
           <Play className="h-6 w-6 mr-2" />
           Start Game Intro
         </Button>
@@ -156,10 +153,7 @@ export function GameIntroMovie({ onComplete, onSkip }: GameIntroMovieProps) {
         {/* "Provided by Harmony of Gaia" */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
           <p className="text-lg text-white/60">
-            Provided by{" "}
-            <span className="text-green-400 font-semibold">
-              Harmony of Gaia
-            </span>
+            Provided by <span className="text-green-400 font-semibold">Harmony of Gaia</span>
           </p>
         </div>
       </div>
@@ -172,11 +166,7 @@ export function GameIntroMovie({ onComplete, onSkip }: GameIntroMovieProps) {
           onClick={togglePlayback}
           className="bg-black/50 border-white/30 text-white hover:bg-black/70"
         >
-          {isPlaying ? (
-            <Pause className="h-5 w-5 mr-2" />
-          ) : (
-            <Play className="h-5 w-5 mr-2" />
-          )}
+          {isPlaying ? <Pause className="h-5 w-5 mr-2" /> : <Play className="h-5 w-5 mr-2" />}
           {isPlaying ? "Pause" : "Play"}
         </Button>
         <Button

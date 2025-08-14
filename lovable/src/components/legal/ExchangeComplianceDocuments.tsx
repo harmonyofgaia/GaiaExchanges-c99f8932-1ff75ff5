@@ -29,8 +29,7 @@ export function ExchangeComplianceDocuments() {
   const [documents] = useState<ComplianceDocument[]>([
     {
       title: "Token Registration Certificate",
-      description:
-        "Official GAiA Token registration with complete legal documentation",
+      description: "Official GAiA Token registration with complete legal documentation",
       status: "COMPLETED",
       required_for: ["Binance", "Revolut", "Coinbase", "Kraken"],
       content: `
@@ -116,8 +115,7 @@ This policy ensures full compliance with international AML standards required by
     },
     {
       title: "Security Audit & Penetration Test Report",
-      description:
-        "Professional security assessment meeting exchange standards",
+      description: "Professional security assessment meeting exchange standards",
       status: "COMPLETED",
       required_for: ["Binance", "Coinbase", "Kraken"],
       content: `
@@ -233,9 +231,7 @@ Date: ${new Date().toLocaleDateString()}
   };
 
   const overallProgress =
-    (documents.filter((d) => d.status === "COMPLETED").length /
-      documents.length) *
-    100;
+    (documents.filter((d) => d.status === "COMPLETED").length / documents.length) * 100;
 
   return (
     <Card className="border-green-500/20 bg-gradient-to-br from-green-900/30 to-blue-900/30">
@@ -246,12 +242,8 @@ Date: ${new Date().toLocaleDateString()}
         </CardTitle>
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">
-              Overall Compliance Progress
-            </span>
-            <span className="text-green-400 font-bold">
-              {overallProgress.toFixed(0)}%
-            </span>
+            <span className="text-sm text-muted-foreground">Overall Compliance Progress</span>
+            <span className="text-green-400 font-bold">{overallProgress.toFixed(0)}%</span>
           </div>
           <Progress value={overallProgress} className="h-2" />
         </div>
@@ -259,24 +251,17 @@ Date: ${new Date().toLocaleDateString()}
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 gap-4">
           {documents.map((doc, index) => (
-            <div
-              key={index}
-              className="p-4 rounded-lg bg-muted/20 border border-border/50"
-            >
+            <div key={index} className="p-4 rounded-lg bg-muted/20 border border-border/50">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <div>
                     <h3 className="font-semibold text-lg">{doc.title}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {doc.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{doc.description}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge className={`${getStatusColor(doc.status)} text-white`}>
-                    {doc.status === "COMPLETED" && (
-                      <CheckCircle className="h-3 w-3 mr-1" />
-                    )}
+                    {doc.status === "COMPLETED" && <CheckCircle className="h-3 w-3 mr-1" />}
                     {doc.status}
                   </Badge>
                   <Button
@@ -291,9 +276,7 @@ Date: ${new Date().toLocaleDateString()}
               </div>
 
               <div className="mb-3">
-                <div className="text-sm font-medium text-green-400 mb-1">
-                  Required for:
-                </div>
+                <div className="text-sm font-medium text-green-400 mb-1">Required for:</div>
                 <div className="flex gap-2 flex-wrap">
                   {doc.required_for.map((exchange, idx) => (
                     <Badge key={idx} variant="outline" className="text-xs">
@@ -310,12 +293,9 @@ Date: ${new Date().toLocaleDateString()}
           <div className="flex items-start gap-2 mb-4">
             <Shield className="h-5 w-5 text-green-400 mt-0.5" />
             <div>
-              <h4 className="font-semibold text-green-400">
-                Exchange Listing Status
-              </h4>
+              <h4 className="font-semibold text-green-400">Exchange Listing Status</h4>
               <p className="text-sm text-muted-foreground mt-1">
-                All legal documentation is complete and ready for major exchange
-                submissions
+                All legal documentation is complete and ready for major exchange submissions
               </p>
             </div>
           </div>
@@ -349,21 +329,13 @@ Date: ${new Date().toLocaleDateString()}
           </p>
           <div className="flex gap-4 justify-center">
             <Button variant="outline" className="border-green-500/20" asChild>
-              <a
-                href="mailto:listings@binance.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="mailto:listings@binance.com" target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Submit to Binance
               </a>
             </Button>
             <Button variant="outline" className="border-blue-500/20" asChild>
-              <a
-                href="mailto:support@revolut.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="mailto:support@revolut.com" target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Submit to Revolut
               </a>

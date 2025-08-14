@@ -128,12 +128,9 @@ export function SecurityDashboard() {
   const runSecurityScan = async () => {
     setScanning(true);
     try {
-      const { data, error } = await supabase.functions.invoke(
-        "security-monitor",
-        {
-          body: { action: "full_scan" },
-        },
-      );
+      const { data, error } = await supabase.functions.invoke("security-monitor", {
+        body: { action: "full_scan" },
+      });
 
       if (error) {
         console.error("Security scan error:", error);
@@ -200,19 +197,14 @@ export function SecurityDashboard() {
             <div className="text-center p-4 bg-green-900/50 rounded-lg border-2 border-green-500/50">
               <CheckCircle className="h-8 w-8 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-black text-green-400">
-                {scans.length > 0
-                  ? Math.round(scans[0]?.compliance_score || 0)
-                  : 0}
-                %
+                {scans.length > 0 ? Math.round(scans[0]?.compliance_score || 0) : 0}%
               </div>
               <div className="text-sm text-green-300">Compliance Score</div>
             </div>
 
             <div className="text-center p-4 bg-blue-900/50 rounded-lg border-2 border-blue-500/50">
               <Eye className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-black text-blue-400">
-                {threats.length}
-              </div>
+              <div className="text-2xl font-black text-blue-400">{threats.length}</div>
               <div className="text-sm text-blue-300">Active Threats</div>
             </div>
           </div>
@@ -251,9 +243,7 @@ export function SecurityDashboard() {
                     <div className="flex items-center justify-between mb-2">
                       <div className="font-semibold">{scan.scan_type}</div>
                       <div className="flex items-center gap-2">
-                        <Badge
-                          className={getComplianceColor(scan.compliance_score)}
-                        >
+                        <Badge className={getComplianceColor(scan.compliance_score)}>
                           {scan.compliance_score}% Compliant
                         </Badge>
                         <span className="text-sm text-muted-foreground">
@@ -263,32 +253,19 @@ export function SecurityDashboard() {
                     </div>
                     <div className="grid grid-cols-4 gap-4 text-sm">
                       <div>
-                        Critical:{" "}
-                        <span className="text-red-400">
-                          {scan.critical_issues}
-                        </span>
+                        Critical: <span className="text-red-400">{scan.critical_issues}</span>
                       </div>
                       <div>
-                        High:{" "}
-                        <span className="text-orange-400">
-                          {scan.high_issues}
-                        </span>
+                        High: <span className="text-orange-400">{scan.high_issues}</span>
                       </div>
                       <div>
-                        Medium:{" "}
-                        <span className="text-yellow-400">
-                          {scan.medium_issues}
-                        </span>
+                        Medium: <span className="text-yellow-400">{scan.medium_issues}</span>
                       </div>
                       <div>
-                        Low:{" "}
-                        <span className="text-blue-400">{scan.low_issues}</span>
+                        Low: <span className="text-blue-400">{scan.low_issues}</span>
                       </div>
                     </div>
-                    <Progress
-                      value={scan.compliance_score}
-                      className="mt-2 h-2"
-                    />
+                    <Progress value={scan.compliance_score} className="mt-2 h-2" />
                   </CardContent>
                 </Card>
               ))}
@@ -301,17 +278,11 @@ export function SecurityDashboard() {
                     <div className="flex items-center justify-between mb-2">
                       <div className="font-semibold">{threat.threat_type}</div>
                       <div className="flex items-center gap-2">
-                        <Badge
-                          className={getSeverityColor(threat.severity_level)}
-                        >
+                        <Badge className={getSeverityColor(threat.severity_level)}>
                           {threat.severity_level}
                         </Badge>
                         <Badge
-                          className={
-                            threat.status === "active"
-                              ? "bg-red-600"
-                              : "bg-green-600"
-                          }
+                          className={threat.status === "active" ? "bg-red-600" : "bg-green-600"}
                         >
                           {threat.status}
                         </Badge>

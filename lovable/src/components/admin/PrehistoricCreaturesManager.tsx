@@ -82,8 +82,7 @@ export function PrehistoricCreaturesManager() {
           "Threat Elimination",
           "Territory Defense",
         ],
-        description:
-          "Ultimate guardian against crypto scams and wallet thieves",
+        description: "Ultimate guardian against crypto scams and wallet thieves",
         defenseCapabilities: [
           "Phishing Protection",
           "Malware Detection",
@@ -110,14 +109,8 @@ export function PrehistoricCreaturesManager() {
           loyalty: 95,
           antiScam: 90,
         },
-        abilities: [
-          "Armor Plating",
-          "Data Encryption",
-          "Firewall Generation",
-          "Privacy Shield",
-        ],
-        description:
-          "Impenetrable defense against data breaches and privacy attacks",
+        abilities: ["Armor Plating", "Data Encryption", "Firewall Generation", "Privacy Shield"],
+        description: "Impenetrable defense against data breaches and privacy attacks",
         defenseCapabilities: [
           "Information Protection",
           "Identity Security",
@@ -144,14 +137,8 @@ export function PrehistoricCreaturesManager() {
           loyalty: 90,
           antiScam: 100,
         },
-        abilities: [
-          "Pack Hunting",
-          "Swift Strike",
-          "Scammer Tracking",
-          "Intelligence Gathering",
-        ],
-        description:
-          "Elite hunter that tracks down and eliminates crypto scammers",
+        abilities: ["Pack Hunting", "Swift Strike", "Scammer Tracking", "Intelligence Gathering"],
+        description: "Elite hunter that tracks down and eliminates crypto scammers",
         defenseCapabilities: [
           "Scammer Identification",
           "Fraud Prevention",
@@ -211,12 +198,7 @@ export function PrehistoricCreaturesManager() {
           loyalty: 100,
           antiScam: 85,
         },
-        abilities: [
-          "Immovable Defense",
-          "Threat Absorption",
-          "Counter Attack",
-          "Fortress Mode",
-        ],
+        abilities: ["Immovable Defense", "Threat Absorption", "Counter Attack", "Fortress Mode"],
         description: "Unbreakable defense against the strongest attacks",
         defenseCapabilities: [
           "DDoS Protection",
@@ -302,12 +284,7 @@ export function PrehistoricCreaturesManager() {
         loyalty: Math.floor(Math.random() * 100) + 50,
         antiScam: Math.floor(Math.random() * 100) + 50,
       },
-      abilities: [
-        "Security Protocol",
-        "Threat Detection",
-        "Defense Matrix",
-        "Anti-Scam Shield",
-      ],
+      abilities: ["Security Protocol", "Threat Detection", "Defense Matrix", "Anti-Scam Shield"],
       description: `AI-generated ${randomSpecies} specialized in crypto security and user protection`,
       defenseCapabilities: [
         "Wallet Security",
@@ -362,7 +339,7 @@ export function PrehistoricCreaturesManager() {
   };
 
   const filteredCreatures = creatures.filter(
-    (creature) => selectedType === "all" || creature.type === selectedType,
+    (creature) => selectedType === "all" || creature.type === selectedType
   );
 
   if (!isAdmin) {
@@ -370,9 +347,7 @@ export function PrehistoricCreaturesManager() {
       <Card className="border-2 border-red-500/50">
         <CardContent className="p-8 text-center">
           <Crown className="h-16 w-16 text-red-400 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-red-400">
-            Admin Access Required
-          </h3>
+          <h3 className="text-xl font-bold text-red-400">Admin Access Required</h3>
           <p className="text-muted-foreground">
             Prehistoric Creatures Manager requires admin privileges
           </p>
@@ -391,8 +366,8 @@ export function PrehistoricCreaturesManager() {
             🦖 PREHISTORIC DEFENSE ARMY MANAGEMENT
           </CardTitle>
           <p className="text-muted-foreground">
-            Create and manage prehistoric creatures to defend against scams,
-            malware, and crypto threats
+            Create and manage prehistoric creatures to defend against scams, malware, and crypto
+            threats
           </p>
         </CardHeader>
         <CardContent>
@@ -425,9 +400,7 @@ export function PrehistoricCreaturesManager() {
               <div className="text-xl font-bold text-orange-400">
                 {creatures.reduce((sum, c) => sum + c.stats.antiScam, 0)}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Total Anti-Scam
-              </div>
+              <div className="text-xs text-muted-foreground">Total Anti-Scam</div>
             </div>
           </div>
         </CardContent>
@@ -471,9 +444,7 @@ export function PrehistoricCreaturesManager() {
             <CardContent className="p-4 space-y-4">
               <div className="text-center">
                 <div className="text-6xl mb-2">{creature.sprite}</div>
-                <h3 className="font-bold text-white text-lg">
-                  {creature.name}
-                </h3>
+                <h3 className="font-bold text-white text-lg">{creature.name}</h3>
                 <div className="flex items-center justify-center gap-2 mt-2">
                   <Badge className={getTypeColor(creature.type)}>
                     {creature.type.toUpperCase()}
@@ -488,57 +459,39 @@ export function PrehistoricCreaturesManager() {
 
               <div className="text-center space-y-1">
                 <div className="text-sm text-cyan-400">{creature.species}</div>
-                <div className="text-xs text-muted-foreground">
-                  {creature.era} Era
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {creature.description}
-                </div>
+                <div className="text-xs text-muted-foreground">{creature.era} Era</div>
+                <div className="text-xs text-muted-foreground">{creature.description}</div>
               </div>
 
               <div className="grid grid-cols-3 gap-1 text-xs">
                 <div className="text-center">
-                  <div className="text-red-400 font-bold">
-                    {creature.stats.attack}
-                  </div>
+                  <div className="text-red-400 font-bold">{creature.stats.attack}</div>
                   <div className="text-muted-foreground">ATK</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-blue-400 font-bold">
-                    {creature.stats.defense}
-                  </div>
+                  <div className="text-blue-400 font-bold">{creature.stats.defense}</div>
                   <div className="text-muted-foreground">DEF</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-green-400 font-bold">
-                    {creature.stats.speed}
-                  </div>
+                  <div className="text-green-400 font-bold">{creature.stats.speed}</div>
                   <div className="text-muted-foreground">SPD</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-purple-400 font-bold">
-                    {creature.stats.intelligence}
-                  </div>
+                  <div className="text-purple-400 font-bold">{creature.stats.intelligence}</div>
                   <div className="text-muted-foreground">INT</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-yellow-400 font-bold">
-                    {creature.stats.loyalty}
-                  </div>
+                  <div className="text-yellow-400 font-bold">{creature.stats.loyalty}</div>
                   <div className="text-muted-foreground">LOY</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-orange-400 font-bold">
-                    {creature.stats.antiScam}
-                  </div>
+                  <div className="text-orange-400 font-bold">{creature.stats.antiScam}</div>
                   <div className="text-muted-foreground">A-S</div>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <div className="text-xs text-yellow-400 font-bold">
-                  Abilities:
-                </div>
+                <div className="text-xs text-yellow-400 font-bold">Abilities:</div>
                 <div className="flex flex-wrap gap-1">
                   {creature.abilities.slice(0, 2).map((ability) => (
                     <Badge key={ability} variant="outline" className="text-xs">
@@ -547,28 +500,18 @@ export function PrehistoricCreaturesManager() {
                   ))}
                 </div>
 
-                <div className="text-xs text-orange-400 font-bold">
-                  Defense Capabilities:
-                </div>
+                <div className="text-xs text-orange-400 font-bold">Defense Capabilities:</div>
                 <div className="flex flex-wrap gap-1">
-                  {creature.defenseCapabilities
-                    .slice(0, 2)
-                    .map((capability) => (
-                      <Badge
-                        key={capability}
-                        variant="outline"
-                        className="text-xs"
-                      >
-                        {capability}
-                      </Badge>
-                    ))}
+                  {creature.defenseCapabilities.slice(0, 2).map((capability) => (
+                    <Badge key={capability} variant="outline" className="text-xs">
+                      {capability}
+                    </Badge>
+                  ))}
                 </div>
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-green-400 font-bold">
-                  {creature.cost} GAIA
-                </span>
+                <span className="text-green-400 font-bold">{creature.cost} GAIA</span>
                 <div className="flex gap-2">
                   <Button size="sm" variant="outline" className="text-xs">
                     <Eye className="h-3 w-3 mr-1" />
@@ -588,12 +531,10 @@ export function PrehistoricCreaturesManager() {
       {/* Mission Statement */}
       <Card className="border-2 border-red-500/50 bg-gradient-to-r from-red-900/20 to-orange-900/20">
         <CardContent className="p-6 text-center">
-          <h3 className="text-2xl font-bold text-red-400 mb-4">
-            🛡️ DEFENSE ARMY MISSION
-          </h3>
+          <h3 className="text-2xl font-bold text-red-400 mb-4">🛡️ DEFENSE ARMY MISSION</h3>
           <p className="text-lg text-muted-foreground mb-4">
-            We are creating a formidable army of prehistoric guardians to
-            protect our community against:
+            We are creating a formidable army of prehistoric guardians to protect our community
+            against:
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
             <div className="p-3 bg-red-900/30 rounded border border-red-500/20">

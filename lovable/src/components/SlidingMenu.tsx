@@ -45,8 +45,7 @@ const SlidingMenu = () => {
       try {
         // Secure access check using environment variables
         const isAuthorized =
-          window.location.hostname === "localhost" ||
-          window.location.hostname.includes("lovable");
+          window.location.hostname === "localhost" || window.location.hostname.includes("lovable");
 
         setIsAuthorizedIP(isAuthorized);
       } catch (error) {
@@ -157,12 +156,8 @@ const SlidingMenu = () => {
             <div className="flex items-center gap-3">
               <div className="text-3xl">🌍</div>
               <div>
-                <h2 className="text-purple-400 font-bold text-xl">
-                  GAiA Universe
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  Harmony of Culture
-                </p>
+                <h2 className="text-purple-400 font-bold text-xl">GAiA Universe</h2>
+                <p className="text-sm text-muted-foreground">Harmony of Culture</p>
               </div>
             </div>
           </div>
@@ -197,12 +192,8 @@ const SlidingMenu = () => {
           {/* Footer */}
           <div className="p-4 border-t border-purple-500/30">
             <div className="text-center">
-              <p className="text-xs text-muted-foreground">
-                GAiA Platform v3.0
-              </p>
-              <p className="text-xs text-purple-400">
-                Harmony of Culture + AI Evolution
-              </p>
+              <p className="text-xs text-muted-foreground">GAiA Platform v3.0</p>
+              <p className="text-xs text-purple-400">Harmony of Culture + AI Evolution</p>
             </div>
           </div>
         </div>

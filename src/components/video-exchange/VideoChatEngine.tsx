@@ -29,33 +29,28 @@ interface ChatMessage {
 export function VideoChatEngine() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
-  const [replyingTo, setReplyingTo] = useState<ChatMessage | undefined>(
-    undefined,
-  );
+  const [replyingTo, setReplyingTo] = useState<ChatMessage | undefined>(undefined);
 
-  const handleSendMessage = useCallback(
-    (content: string, replyingTo?: ChatMessage) => {
-      const newMessage: ChatMessage = {
-        id: Date.now().toString(),
-        content,
-        user: "current-user",
-        timestamp: new Date().toISOString(),
-        type: "text",
-        reactions: [],
-        sender: "current-user",
-        replyingTo: replyingTo
-          ? {
-              id: replyingTo.id,
-              content: replyingTo.content,
-              user: replyingTo.user,
-            }
-          : undefined,
-      };
+  const handleSendMessage = useCallback((content: string, replyingTo?: ChatMessage) => {
+    const newMessage: ChatMessage = {
+      id: Date.now().toString(),
+      content,
+      user: "current-user",
+      timestamp: new Date().toISOString(),
+      type: "text",
+      reactions: [],
+      sender: "current-user",
+      replyingTo: replyingTo
+        ? {
+            id: replyingTo.id,
+            content: replyingTo.content,
+            user: replyingTo.user,
+          }
+        : undefined,
+    };
 
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
-    },
-    [],
-  );
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -94,8 +89,7 @@ export function VideoChatEngine() {
           >
             {message.replyingTo && (
               <div className="mb-1 p-2 bg-gray-100 rounded-md text-sm">
-                Replying to {message.replyingTo.user}:{" "}
-                {message.replyingTo.content}
+                Replying to {message.replyingTo.user}: {message.replyingTo.content}
               </div>
             )}
             <div
@@ -127,10 +121,7 @@ export function VideoChatEngine() {
         <CardContent>
           <form onSubmit={handleSubmit} className="flex items-center p-4">
             <Avatar className="mr-2 w-8 h-8">
-              <AvatarImage
-                src="https://github.com/shadcn.png"
-                alt="Your Avatar"
-              />
+              <AvatarImage src="https://github.com/shadcn.png" alt="Your Avatar" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <Input
@@ -142,10 +133,7 @@ export function VideoChatEngine() {
             />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="ml-2 p-2 rounded-full hover:bg-gray-200"
-                >
+                <Button variant="ghost" className="ml-2 p-2 rounded-full hover:bg-gray-200">
                   <Smile className="w-5 h-5" />
                 </Button>
               </DropdownMenuTrigger>

@@ -59,7 +59,7 @@ export function AnimalWelfareAnalytics() {
     { name: "Rhinos", protected: 1240, endangered: 27000, percentage: 4.59 },
     { name: "Tigers", protected: 890, endangered: 3900, percentage: 22.82 },
     { name: "Pandas", protected: 456, endangered: 1864, percentage: 24.46 },
-    { name: "Gorillas", protected: 234, endangered: 1000, percentage: 23.40 },
+    { name: "Gorillas", protected: 234, endangered: 1000, percentage: 23.4 },
     { name: "Sea Turtles", protected: 5678, endangered: 85000, percentage: 6.68 },
   ];
 
@@ -130,7 +130,7 @@ export function AnimalWelfareAnalytics() {
   // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
-      setRealTimeData(prev => ({
+      setRealTimeData((prev) => ({
         ...prev,
         totalAnimalsProtected: prev.totalAnimalsProtected + Math.floor(Math.random() * 3),
         fundsRaised: prev.fundsRaised + Math.floor(Math.random() * 100),
@@ -167,9 +167,7 @@ export function AnimalWelfareAnalytics() {
                   <div>
                     <p className="text-sm text-muted-foreground">{metric.title}</p>
                     <p className="text-2xl font-bold">{metric.value.toLocaleString()}</p>
-                    <p className={`text-sm ${metric.color}`}>
-                      {metric.change} from last month
-                    </p>
+                    <p className={`text-sm ${metric.color}`}>{metric.change} from last month</p>
                   </div>
                   <Icon className={`h-8 w-8 ${metric.color}`} />
                 </div>
@@ -202,18 +200,18 @@ export function AnimalWelfareAnalytics() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                     <XAxis dataKey="month" stroke="#9ca3af" />
                     <YAxis stroke="#9ca3af" />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: "#1f2937", 
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#1f2937",
                         border: "1px solid #10b981",
-                        borderRadius: "8px"
-                      }} 
+                        borderRadius: "8px",
+                      }}
                     />
-                    <Area 
-                      type="monotone" 
-                      dataKey="rescues" 
-                      stroke="#10b981" 
-                      fill="#10b981" 
+                    <Area
+                      type="monotone"
+                      dataKey="rescues"
+                      stroke="#10b981"
+                      fill="#10b981"
                       fillOpacity={0.3}
                     />
                   </AreaChart>
@@ -232,17 +230,17 @@ export function AnimalWelfareAnalytics() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                     <XAxis dataKey="month" stroke="#9ca3af" />
                     <YAxis stroke="#9ca3af" />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: "#1f2937", 
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#1f2937",
                         border: "1px solid #3b82f6",
-                        borderRadius: "8px"
-                      }} 
+                        borderRadius: "8px",
+                      }}
                     />
-                    <Line 
-                      type="monotone" 
-                      dataKey="funding" 
-                      stroke="#3b82f6" 
+                    <Line
+                      type="monotone"
+                      dataKey="funding"
+                      stroke="#3b82f6"
                       strokeWidth={3}
                       dot={{ fill: "#3b82f6", strokeWidth: 2, r: 6 }}
                     />
@@ -265,15 +263,21 @@ export function AnimalWelfareAnalytics() {
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-blue-800/30 rounded-lg">
                   <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse" />
-                  <span className="text-sm">💰 500 GAiA donated to marine conservation - 4 minutes ago</span>
+                  <span className="text-sm">
+                    💰 500 GAiA donated to marine conservation - 4 minutes ago
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-orange-800/30 rounded-lg">
                   <div className="w-3 h-3 bg-orange-400 rounded-full animate-pulse" />
-                  <span className="text-sm">🎨 New Tiger NFT sold for 150 GAiA - 7 minutes ago</span>
+                  <span className="text-sm">
+                    🎨 New Tiger NFT sold for 150 GAiA - 7 minutes ago
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-purple-800/30 rounded-lg">
                   <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse" />
-                  <span className="text-sm">📹 New live camera activated in Amazon - 12 minutes ago</span>
+                  <span className="text-sm">
+                    📹 New live camera activated in Amazon - 12 minutes ago
+                  </span>
                 </div>
               </div>
             </CardContent>
@@ -293,7 +297,9 @@ export function AnimalWelfareAnalytics() {
                     <div key={index} className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span>{region.name}</span>
-                        <span>{region.amount.toLocaleString()} GAiA ({region.percentage}%)</span>
+                        <span>
+                          {region.amount.toLocaleString()} GAiA ({region.percentage}%)
+                        </span>
                       </div>
                       <Progress value={region.percentage} className="h-2" />
                     </div>
@@ -335,7 +341,9 @@ export function AnimalWelfareAnalytics() {
         <TabsContent value="species" className="space-y-6">
           <Card className="border-orange-500/30 bg-orange-900/20">
             <CardHeader>
-              <CardTitle className="text-orange-400">Endangered Species Protection Progress</CardTitle>
+              <CardTitle className="text-orange-400">
+                Endangered Species Protection Progress
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
@@ -345,12 +353,11 @@ export function AnimalWelfareAnalytics() {
                       <div>
                         <h4 className="font-semibold">{species.name}</h4>
                         <p className="text-sm text-muted-foreground">
-                          {species.protected.toLocaleString()} protected of {species.endangered.toLocaleString()} endangered
+                          {species.protected.toLocaleString()} protected of{" "}
+                          {species.endangered.toLocaleString()} endangered
                         </p>
                       </div>
-                      <Badge className="bg-orange-600">
-                        {species.percentage.toFixed(2)}%
-                      </Badge>
+                      <Badge className="bg-orange-600">{species.percentage.toFixed(2)}%</Badge>
                     </div>
                     <Progress value={species.percentage} className="h-3" />
                   </div>
@@ -371,27 +378,27 @@ export function AnimalWelfareAnalytics() {
                   <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                   <XAxis dataKey="month" stroke="#9ca3af" />
                   <YAxis stroke="#9ca3af" />
-                  <Tooltip 
-                    contentStyle={{ 
-                      backgroundColor: "#1f2937", 
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#1f2937",
                       border: "1px solid #10b981",
-                      borderRadius: "8px"
-                    }} 
+                      borderRadius: "8px",
+                    }}
                   />
-                  <Area 
-                    type="monotone" 
-                    dataKey="carbonOffset" 
+                  <Area
+                    type="monotone"
+                    dataKey="carbonOffset"
                     stackId="1"
-                    stroke="#10b981" 
-                    fill="#10b981" 
+                    stroke="#10b981"
+                    fill="#10b981"
                     fillOpacity={0.6}
                   />
-                  <Area 
-                    type="monotone" 
-                    dataKey="treesPlanted" 
+                  <Area
+                    type="monotone"
+                    dataKey="treesPlanted"
                     stackId="2"
-                    stroke="#34d399" 
-                    fill="#34d399" 
+                    stroke="#34d399"
+                    fill="#34d399"
                     fillOpacity={0.6}
                   />
                 </AreaChart>
@@ -439,7 +446,9 @@ export function AnimalWelfareAnalytics() {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center p-3 bg-cyan-800/30 rounded-lg">
                     <span>Total NFTs Sold</span>
-                    <span className="font-bold text-cyan-400">{realTimeData.nftsSold.toLocaleString()}</span>
+                    <span className="font-bold text-cyan-400">
+                      {realTimeData.nftsSold.toLocaleString()}
+                    </span>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-cyan-800/30 rounded-lg">
                     <span>Average Sale Price</span>

@@ -80,9 +80,7 @@ export function MultiverseControlDashboard() {
               <Activity className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Timeline Controls</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.timelineControls.total}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.timelineControls.total}</div>
           </div>
         </div>
         <div className="space-y-2">
@@ -90,10 +88,7 @@ export function MultiverseControlDashboard() {
             <Activity className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium">Reality Stability Index</span>
           </div>
-          <Progress
-            value={status.realityStabilityIndex * 100}
-            className="mt-2"
-          />
+          <Progress value={status.realityStabilityIndex * 100} className="mt-2" />
           <div className="text-sm text-muted-foreground">
             {(status.realityStabilityIndex * 100).toFixed(1)}% Stable
           </div>
@@ -103,13 +98,10 @@ export function MultiverseControlDashboard() {
           Initialize Multiverse Control
         </Button>
         <div className="p-4 bg-muted/50 rounded-lg">
-          <h4 className="font-medium mb-2">
-            🌌 Multiverse Domination Guarantee
-          </h4>
+          <h4 className="font-medium mb-2">🌌 Multiverse Domination Guarantee</h4>
           <p className="text-sm text-muted-foreground">
-            Complete control over infinite realities through dimensional
-            manipulation, timeline control, and reality restructuring
-            capabilities.
+            Complete control over infinite realities through dimensional manipulation, timeline
+            control, and reality restructuring capabilities.
           </p>
         </div>
       </CardContent>

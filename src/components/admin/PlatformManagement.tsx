@@ -123,19 +123,15 @@ export function PlatformManagement() {
       setMetrics((prev) => ({
         ...prev,
         totalVolume: prev.totalVolume * (1 + (Math.random() - 0.5) * 0.001),
-        activePartnerships:
-          prev.activePartnerships + (Math.random() < 0.1 ? 1 : 0),
+        activePartnerships: prev.activePartnerships + (Math.random() < 0.1 ? 1 : 0),
       }));
 
       setExchanges((prev) =>
         prev.map((exchange) => ({
           ...exchange,
           volume24h: exchange.volume24h * (1 + (Math.random() - 0.5) * 0.02),
-          uptime: Math.max(
-            95,
-            Math.min(100, exchange.uptime + (Math.random() - 0.5) * 0.1),
-          ),
-        })),
+          uptime: Math.max(95, Math.min(100, exchange.uptime + (Math.random() - 0.5) * 0.1)),
+        }))
       );
     }, 5000);
 
@@ -203,8 +199,7 @@ export function PlatformManagement() {
             <Lock className="h-6 w-6 text-purple-400" />
           </CardTitle>
           <p className="text-purple-400">
-            Administrative control for global expansion and multi-exchange
-            integrations
+            Administrative control for global expansion and multi-exchange integrations
           </p>
         </CardHeader>
       </Card>
@@ -216,9 +211,7 @@ export function PlatformManagement() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Total Exchanges</p>
-                <p className="text-2xl font-bold text-green-400">
-                  {metrics.totalExchanges}
-                </p>
+                <p className="text-2xl font-bold text-green-400">{metrics.totalExchanges}</p>
               </div>
               <Building2 className="h-8 w-8 text-green-400" />
             </div>
@@ -229,12 +222,8 @@ export function PlatformManagement() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Active Partnerships
-                </p>
-                <p className="text-2xl font-bold text-blue-400">
-                  {metrics.activePartnerships}
-                </p>
+                <p className="text-sm text-muted-foreground">Active Partnerships</p>
+                <p className="text-2xl font-bold text-blue-400">{metrics.activePartnerships}</p>
               </div>
               <Users className="h-8 w-8 text-blue-400" />
             </div>
@@ -246,9 +235,7 @@ export function PlatformManagement() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Pending Deals</p>
-                <p className="text-2xl font-bold text-yellow-400">
-                  {metrics.pendingDeals}
-                </p>
+                <p className="text-2xl font-bold text-yellow-400">{metrics.pendingDeals}</p>
               </div>
               <BarChart3 className="h-8 w-8 text-yellow-400" />
             </div>
@@ -274,9 +261,7 @@ export function PlatformManagement() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Global Reach</p>
-                <p className="text-2xl font-bold text-cyan-400">
-                  {metrics.globalReach} Countries
-                </p>
+                <p className="text-2xl font-bold text-cyan-400">{metrics.globalReach} Countries</p>
               </div>
               <Globe className="h-8 w-8 text-cyan-400" />
             </div>
@@ -286,12 +271,8 @@ export function PlatformManagement() {
 
       <Tabs defaultValue="exchanges" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="exchanges">
-            Multi-Exchange Integration
-          </TabsTrigger>
-          <TabsTrigger value="expansion">
-            Global Expansion & Investment
-          </TabsTrigger>
+          <TabsTrigger value="exchanges">Multi-Exchange Integration</TabsTrigger>
+          <TabsTrigger value="expansion">Global Expansion & Investment</TabsTrigger>
         </TabsList>
 
         <TabsContent value="exchanges" className="space-y-6">
@@ -305,18 +286,11 @@ export function PlatformManagement() {
             <CardContent>
               <div className="space-y-4">
                 {exchanges.map((exchange, index) => (
-                  <div
-                    key={index}
-                    className="p-4 rounded-lg bg-black/30 border border-gray-500/30"
-                  >
+                  <div key={index} className="p-4 rounded-lg bg-black/30 border border-gray-500/30">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-3">
-                        <h4 className="font-semibold text-white">
-                          {exchange.name}
-                        </h4>
-                        <Badge
-                          className={`${getStatusColor(exchange.status)} text-white text-xs`}
-                        >
+                        <h4 className="font-semibold text-white">{exchange.name}</h4>
+                        <Badge className={`${getStatusColor(exchange.status)} text-white text-xs`}>
                           {exchange.status}
                         </Badge>
                       </div>
@@ -332,26 +306,18 @@ export function PlatformManagement() {
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                       <div>
-                        <span className="text-muted-foreground">
-                          24h Volume
-                        </span>
+                        <span className="text-muted-foreground">24h Volume</span>
                         <div className="font-bold text-green-400">
                           ${(exchange.volume24h / 1e9).toFixed(2)}B
                         </div>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">
-                          Trading Pairs
-                        </span>
-                        <div className="font-bold text-blue-400">
-                          {exchange.pairs}
-                        </div>
+                        <span className="text-muted-foreground">Trading Pairs</span>
+                        <div className="font-bold text-blue-400">{exchange.pairs}</div>
                       </div>
                       <div>
                         <span className="text-muted-foreground">Fees</span>
-                        <div className="font-bold text-yellow-400">
-                          {exchange.fees}%
-                        </div>
+                        <div className="font-bold text-yellow-400">{exchange.fees}%</div>
                       </div>
                       <div>
                         <span className="text-muted-foreground">Uptime</span>
@@ -401,15 +367,10 @@ export function PlatformManagement() {
             <CardContent>
               <div className="space-y-4">
                 {investments.map((investment, index) => (
-                  <div
-                    key={index}
-                    className="p-4 rounded-lg bg-black/30 border border-gray-500/30"
-                  >
+                  <div key={index} className="p-4 rounded-lg bg-black/30 border border-gray-500/30">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-3">
-                        <h4 className="font-semibold text-white">
-                          {investment.title}
-                        </h4>
+                        <h4 className="font-semibold text-white">{investment.title}</h4>
                         <Badge
                           className={`${getStatusColor(investment.status)} text-white text-xs`}
                         >
@@ -434,20 +395,12 @@ export function PlatformManagement() {
 
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                       <div>
-                        <span className="text-muted-foreground">
-                          Investment Amount
-                        </span>
-                        <div className="font-bold text-green-400">
-                          {investment.amount}
-                        </div>
+                        <span className="text-muted-foreground">Investment Amount</span>
+                        <div className="font-bold text-green-400">{investment.amount}</div>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">
-                          Expected ROI
-                        </span>
-                        <div className="font-bold text-blue-400">
-                          {investment.roi}
-                        </div>
+                        <span className="text-muted-foreground">Expected ROI</span>
+                        <div className="font-bold text-blue-400">{investment.roi}</div>
                       </div>
                       <div>
                         <span className="text-muted-foreground">Type</span>
@@ -461,9 +414,7 @@ export function PlatformManagement() {
               </div>
 
               <div className="mt-6 p-4 rounded-lg bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-500/30">
-                <h4 className="font-semibold text-blue-400 mb-3">
-                  🤝 Strategic Partnerships
-                </h4>
+                <h4 className="font-semibold text-blue-400 mb-3">🤝 Strategic Partnerships</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                   <ul className="space-y-1 text-muted-foreground">
                     <li>• Institutional investors ($5M+ portfolio)</li>

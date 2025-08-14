@@ -1,14 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  AlertTriangle,
-  Settings,
-  UserMinus,
-  UserX,
-  Clock,
-  Ban,
-} from "lucide-react";
+import { AlertTriangle, Settings, UserMinus, UserX, Clock, Ban } from "lucide-react";
 
 export function QuickActionsPanel() {
   return (
@@ -41,9 +34,7 @@ export function QuickActionsPanel() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <label className="text-sm font-medium">
-              Restriction Level (1-5)
-            </label>
+            <label className="text-sm font-medium">Restriction Level (1-5)</label>
             <Input type="number" defaultValue={1} min="1" max="5" />
           </div>
           <Button className="w-full bg-orange-600 hover:bg-orange-700">

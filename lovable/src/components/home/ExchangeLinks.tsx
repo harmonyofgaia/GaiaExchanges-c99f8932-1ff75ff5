@@ -53,8 +53,7 @@ export function ExchangeLinks() {
               💰 BUY GAiA TOKEN ON LEADING EXCHANGES
             </h2>
             <p className="text-xl text-muted-foreground">
-              Trade our verified GAiA Token on the world's most trusted
-              platforms
+              Trade our verified GAiA Token on the world's most trusted platforms
             </p>
           </div>
 
@@ -70,12 +69,8 @@ export function ExchangeLinks() {
                     />
                   </div>
 
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {exchange.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {exchange.description}
-                  </p>
+                  <h3 className="text-xl font-bold text-white mb-2">{exchange.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">{exchange.description}</p>
 
                   <div className="mb-4">
                     {exchange.status === "ACTIVE" ? (
@@ -98,15 +93,9 @@ export function ExchangeLinks() {
                     }`}
                     disabled={exchange.status !== "ACTIVE"}
                   >
-                    <a
-                      href={exchange.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={exchange.url} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4 mr-2" />
-                      {exchange.status === "ACTIVE"
-                        ? "TRADE NOW"
-                        : "COMING SOON"}
+                      {exchange.status === "ACTIVE" ? "TRADE NOW" : "COMING SOON"}
                     </a>
                   </Button>
                 </div>

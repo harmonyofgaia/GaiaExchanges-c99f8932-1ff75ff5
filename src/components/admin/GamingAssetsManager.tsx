@@ -27,14 +27,7 @@ import { toast } from "sonner";
 interface GameAsset {
   id: string;
   name: string;
-  category:
-    | "armor"
-    | "weapon"
-    | "tool"
-    | "landscape"
-    | "enhancement"
-    | "animation"
-    | "texture";
+  category: "armor" | "weapon" | "tool" | "landscape" | "enhancement" | "animation" | "texture";
   type: "gameplay" | "cosmetic" | "utility" | "environment";
   fileType: "image" | "model" | "animation" | "sound" | "script";
   filePath: string;
@@ -74,10 +67,8 @@ export function GamingAssetsManager() {
         type: "gameplay",
         fileType: "model",
         filePath: "/assets/armor/dragon-helmet.fbx",
-        previewImage:
-          "/lovable-uploads/93093efd-1912-4361-987d-424e6cf8e1df.png",
-        description:
-          "Legendary helmet with fire resistance and enhanced vision",
+        previewImage: "/lovable-uploads/93093efd-1912-4361-987d-424e6cf8e1df.png",
+        description: "Legendary helmet with fire resistance and enhanced vision",
         gameplayStats: { defense: 85, magic: 45 },
         compatibility: ["Unity", "Unreal Engine", "GAiA Engine"],
         createdDate: new Date("2024-01-15"),
@@ -94,10 +85,8 @@ export function GamingAssetsManager() {
         type: "gameplay",
         fileType: "model",
         filePath: "/assets/armor/quantum-suit.fbx",
-        previewImage:
-          "/lovable-uploads/2ab2dcf8-008f-4f94-9341-9b6fcb25cefb.png",
-        description:
-          "Full body armor with energy shields and quantum enhancement",
+        previewImage: "/lovable-uploads/2ab2dcf8-008f-4f94-9341-9b6fcb25cefb.png",
+        description: "Full body armor with energy shields and quantum enhancement",
         gameplayStats: { defense: 95, speed: 30, magic: 60 },
         compatibility: ["Unity", "Unreal Engine", "GAiA Engine", "VR Systems"],
         createdDate: new Date("2024-01-18"),
@@ -115,8 +104,7 @@ export function GamingAssetsManager() {
         type: "gameplay",
         fileType: "model",
         filePath: "/assets/weapons/neural-blade.fbx",
-        previewImage:
-          "/lovable-uploads/42ec85dc-42df-4958-96d8-7919a192f629.png",
+        previewImage: "/lovable-uploads/42ec85dc-42df-4958-96d8-7919a192f629.png",
         description: "AI-enhanced sword that adapts to combat situations",
         gameplayStats: { attack: 90, speed: 75, magic: 40 },
         compatibility: ["Unity", "Unreal Engine", "GAiA Engine"],
@@ -134,16 +122,10 @@ export function GamingAssetsManager() {
         type: "gameplay",
         fileType: "model",
         filePath: "/assets/weapons/harmony-staff.fbx",
-        previewImage:
-          "/lovable-uploads/1087f396-900a-4e0b-be62-7b049d0294ff.png",
+        previewImage: "/lovable-uploads/1087f396-900a-4e0b-be62-7b049d0294ff.png",
         description: "Magical staff that channels environmental energy",
         gameplayStats: { attack: 45, magic: 95, speed: 20 },
-        compatibility: [
-          "Unity",
-          "Unreal Engine",
-          "GAiA Engine",
-          "Magic Systems",
-        ],
+        compatibility: ["Unity", "Unreal Engine", "GAiA Engine", "Magic Systems"],
         createdDate: new Date("2024-01-10"),
         lastModified: new Date("2024-01-28"),
         fileSize: "15.2 MB",
@@ -159,8 +141,7 @@ export function GamingAssetsManager() {
         type: "utility",
         fileType: "script",
         filePath: "/assets/tools/landscape-modifier.cs",
-        previewImage:
-          "/lovable-uploads/1ed369eb-ecda-422a-af60-8f511aa9aa8e.png",
+        previewImage: "/lovable-uploads/1ed369eb-ecda-422a-af60-8f511aa9aa8e.png",
         description: "Advanced terrain manipulation tool for world building",
         gameplayStats: {},
         compatibility: ["Unity", "GAiA Engine", "Level Editors"],
@@ -179,8 +160,7 @@ export function GamingAssetsManager() {
         type: "environment",
         fileType: "model",
         filePath: "/assets/landscapes/mystical-forest.unitypackage",
-        previewImage:
-          "/lovable-uploads/3ce518f5-75b0-493f-897a-45119793a33d.png",
+        previewImage: "/lovable-uploads/3ce518f5-75b0-493f-897a-45119793a33d.png",
         description: "Complete forest environment with interactive elements",
         gameplayStats: {},
         compatibility: ["Unity", "Unreal Engine", "GAiA Engine"],
@@ -199,8 +179,7 @@ export function GamingAssetsManager() {
         type: "utility",
         fileType: "script",
         filePath: "/assets/enhancements/quantum-core.cs",
-        previewImage:
-          "/lovable-uploads/494a76f3-e002-482a-b606-e7af62367027.png",
+        previewImage: "/lovable-uploads/494a76f3-e002-482a-b606-e7af62367027.png",
         description: "Core system for quantum-enhanced gameplay mechanics",
         gameplayStats: {},
         compatibility: ["Unity", "GAiA Engine", "Quantum Systems"],
@@ -254,13 +233,10 @@ export function GamingAssetsManager() {
   };
 
   const filteredAssets = assets.filter((asset) => {
-    const matchesCategory =
-      selectedCategory === "all" || asset.category === selectedCategory;
+    const matchesCategory = selectedCategory === "all" || asset.category === selectedCategory;
     const matchesSearch =
       asset.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      asset.tags.some((tag) =>
-        tag.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
+      asset.tags.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
@@ -281,16 +257,14 @@ export function GamingAssetsManager() {
             🎮 GAMING ASSETS MANAGER - COMPLETE DEVELOPMENT ARSENAL
           </CardTitle>
           <p className="text-muted-foreground">
-            Comprehensive management of all gaming assets: armor, weapons,
-            tools, landscapes, and enhancements
+            Comprehensive management of all gaming assets: armor, weapons, tools, landscapes, and
+            enhancements
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-center">
             <div className="p-3 rounded-lg bg-blue-900/30 border border-blue-500/20">
-              <div className="text-xl font-bold text-blue-400">
-                {assets.length}
-              </div>
+              <div className="text-xl font-bold text-blue-400">{assets.length}</div>
               <div className="text-xs text-muted-foreground">Total Assets</div>
             </div>
             <div className="p-3 rounded-lg bg-green-900/30 border border-green-500/20">
@@ -369,25 +343,17 @@ export function GamingAssetsManager() {
               {/* Asset Info */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <h4 className="font-semibold text-white text-sm">
-                    {asset.name}
-                  </h4>
+                  <h4 className="font-semibold text-white text-sm">{asset.name}</h4>
                   {getCategoryIcon(asset.category)}
                 </div>
 
-                <p className="text-xs text-muted-foreground line-clamp-2">
-                  {asset.description}
-                </p>
+                <p className="text-xs text-muted-foreground line-clamp-2">{asset.description}</p>
 
                 <div className="flex items-center gap-2">
-                  <Badge
-                    className={`${getFileTypeColor(asset.fileType)} text-white text-xs`}
-                  >
+                  <Badge className={`${getFileTypeColor(asset.fileType)} text-white text-xs`}>
                     {asset.fileType.toUpperCase()}
                   </Badge>
-                  <span className="text-xs text-muted-foreground">
-                    {asset.fileSize}
-                  </span>
+                  <span className="text-xs text-muted-foreground">{asset.fileSize}</span>
                 </div>
 
                 {/* Gameplay Stats */}
@@ -396,9 +362,7 @@ export function GamingAssetsManager() {
                     {asset.gameplayStats.attack && (
                       <div className="flex justify-between">
                         <span className="text-red-400">Attack:</span>
-                        <span className="text-red-400 font-bold">
-                          {asset.gameplayStats.attack}
-                        </span>
+                        <span className="text-red-400 font-bold">{asset.gameplayStats.attack}</span>
                       </div>
                     )}
                     {asset.gameplayStats.defense && (

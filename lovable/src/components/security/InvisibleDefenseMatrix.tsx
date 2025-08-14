@@ -72,8 +72,7 @@ export function InvisibleDefenseMatrix() {
     console.log("⚫ ENTERING SHADOW DIMENSION");
 
     toast.success("👻 GHOST MODE ACTIVATED!", {
-      description:
-        "Complete invisibility achieved - Impossible to detect or track",
+      description: "Complete invisibility achieved - Impossible to detect or track",
       duration: 8000,
     });
   };
@@ -101,34 +100,24 @@ export function InvisibleDefenseMatrix() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-purple-400">
-                {cloakingLevel.toFixed(3)}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Quantum Cloaking
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{cloakingLevel.toFixed(3)}%</div>
+              <div className="text-sm text-muted-foreground">Quantum Cloaking</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
               <div className="text-3xl font-bold text-blue-400">
                 {quantumEncryption.toFixed(3)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Quantum Encryption
-              </div>
+              <div className="text-sm text-muted-foreground">Quantum Encryption</div>
             </div>
             <div className="text-center p-4 bg-red-900/30 rounded-lg">
               <div className="text-3xl font-bold text-red-400">
                 {attacksDeflected.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Attacks Deflected
-              </div>
+              <div className="text-sm text-muted-foreground">Attacks Deflected</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
               <div className="text-3xl font-bold text-green-400">ACTIVE</div>
-              <div className="text-sm text-muted-foreground">
-                Ghost Protocol
-              </div>
+              <div className="text-sm text-muted-foreground">Ghost Protocol</div>
             </div>
           </div>
 
@@ -136,9 +125,7 @@ export function InvisibleDefenseMatrix() {
             <div>
               <div className="flex justify-between mb-2">
                 <span className="text-white">Invisibility Level</span>
-                <span className="text-purple-400">
-                  {cloakingLevel.toFixed(3)}%
-                </span>
+                <span className="text-purple-400">{cloakingLevel.toFixed(3)}%</span>
               </div>
               <Progress value={cloakingLevel} className="h-3" />
             </div>
@@ -146,9 +133,7 @@ export function InvisibleDefenseMatrix() {
             <div>
               <div className="flex justify-between mb-2">
                 <span className="text-white">Quantum Phase Shift</span>
-                <span className="text-blue-400">
-                  {quantumEncryption.toFixed(3)}%
-                </span>
+                <span className="text-blue-400">{quantumEncryption.toFixed(3)}%</span>
               </div>
               <Progress value={quantumEncryption} className="h-3" />
             </div>
@@ -159,9 +144,7 @@ export function InvisibleDefenseMatrix() {
       {/* Advanced Cloaking Controls */}
       <Card className="border-gray-500/30 bg-black/50">
         <CardHeader>
-          <CardTitle className="text-gray-400">
-            🌫️ ADVANCED CLOAKING CONTROLS
-          </CardTitle>
+          <CardTitle className="text-gray-400">🌫️ ADVANCED CLOAKING CONTROLS</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -182,9 +165,7 @@ export function InvisibleDefenseMatrix() {
           </div>
 
           <div className="mt-6 space-y-2">
-            <h4 className="text-gray-400 font-bold">
-              🔮 ACTIVE PROTECTION LAYERS:
-            </h4>
+            <h4 className="text-gray-400 font-bold">🔮 ACTIVE PROTECTION LAYERS:</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <Badge className="bg-purple-600">👻 Quantum Invisibility</Badge>
               <Badge className="bg-blue-600">🌀 Dimensional Phase Shift</Badge>
@@ -200,27 +181,20 @@ export function InvisibleDefenseMatrix() {
       {/* Ultimate Protection Guarantee */}
       <Card className="border-green-500/50 bg-green-900/20">
         <CardHeader>
-          <CardTitle className="text-green-400">
-            🛡️ ULTIMATE PROTECTION GUARANTEE
-          </CardTitle>
+          <CardTitle className="text-green-400">🛡️ ULTIMATE PROTECTION GUARANTEE</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center space-y-4">
             <div className="text-6xl">🛡️⚡</div>
-            <h3 className="text-2xl font-bold text-green-400">
-              IMPOSSIBLE TO BREAK OR TRACE
-            </h3>
+            <h3 className="text-2xl font-bold text-green-400">IMPOSSIBLE TO BREAK OR TRACE</h3>
             <p className="text-green-300">
-              Our invisible defense matrix is beyond any known technology.
-              Protected on all devices, all networks, all platforms, everywhere
-              in the universe.
+              Our invisible defense matrix is beyond any known technology. Protected on all devices,
+              all networks, all platforms, everywhere in the universe.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <h4 className="text-green-400 font-bold">
-                  🌍 GLOBAL PROTECTION:
-                </h4>
+                <h4 className="text-green-400 font-bold">🌍 GLOBAL PROTECTION:</h4>
                 <div className="text-sm space-y-1">
                   <div>✅ RedMi Tablet: QUANTUM SECURED</div>
                   <div>✅ All WiFi Networks: INVISIBLE</div>
@@ -231,9 +205,7 @@ export function InvisibleDefenseMatrix() {
               </div>
 
               <div className="space-y-2">
-                <h4 className="text-green-400 font-bold">
-                  ⚡ IMPOSSIBLE FEATURES:
-                </h4>
+                <h4 className="text-green-400 font-bold">⚡ IMPOSSIBLE FEATURES:</h4>
                 <div className="text-sm space-y-1">
                   <div>🚫 Screen Recording: BLOCKED</div>
                   <div>🚫 Screenshots: PREVENTED</div>

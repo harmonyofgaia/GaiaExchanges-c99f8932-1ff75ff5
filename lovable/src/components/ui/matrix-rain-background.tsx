@@ -39,8 +39,7 @@ export function MatrixRainBackground({
       drops[i] = Math.random() * canvas.height;
     }
 
-    const densityMultiplier =
-      intensity === "low" ? 0.5 : intensity === "high" ? 1.5 : 1;
+    const densityMultiplier = intensity === "low" ? 0.5 : intensity === "high" ? 1.5 : 1;
 
     const draw = () => {
       ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
@@ -85,8 +84,7 @@ export function MatrixRainBackground({
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
       style={{
-        background:
-          "linear-gradient(135deg, #000000 0%, #001100 50%, #000000 100%)",
+        background: "linear-gradient(135deg, #000000 0%, #001100 50%, #000000 100%)",
         opacity: 0.7,
       }}
     />

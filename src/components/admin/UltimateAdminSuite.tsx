@@ -86,25 +86,14 @@ export function UltimateAdminSuite() {
           </CardTitle>
           <div className="text-center space-y-2">
             <div className="text-xl text-purple-400 font-bold">
-              🛡️ QUANTUM DEFENSE • 🐉 DRAGON AI • ⚡ INFINITE POWER • 🧠
-              EXCLUSIVE AI ENGINE
+              🛡️ QUANTUM DEFENSE • 🐉 DRAGON AI • ⚡ INFINITE POWER • 🧠 EXCLUSIVE AI ENGINE
             </div>
             <div className="flex justify-center gap-2 flex-wrap">
-              <Badge className="bg-red-600 animate-pulse">
-                MAXIMUM SECURITY
-              </Badge>
-              <Badge className="bg-blue-600 animate-pulse">
-                QUANTUM ACTIVE
-              </Badge>
-              <Badge className="bg-green-600 animate-pulse">
-                DRAGON PROTECTION
-              </Badge>
-              <Badge className="bg-purple-600 animate-pulse">
-                AI ENGINE SUPREME
-              </Badge>
-              <Badge className="bg-pink-600 animate-pulse">
-                ADMIN GODFATHER
-              </Badge>
+              <Badge className="bg-red-600 animate-pulse">MAXIMUM SECURITY</Badge>
+              <Badge className="bg-blue-600 animate-pulse">QUANTUM ACTIVE</Badge>
+              <Badge className="bg-green-600 animate-pulse">DRAGON PROTECTION</Badge>
+              <Badge className="bg-purple-600 animate-pulse">AI ENGINE SUPREME</Badge>
+              <Badge className="bg-pink-600 animate-pulse">ADMIN GODFATHER</Badge>
             </div>
           </div>
         </CardHeader>
@@ -113,9 +102,7 @@ export function UltimateAdminSuite() {
       {/* System Navigation */}
       <Card className="border-blue-500/30 bg-blue-900/20">
         <CardHeader>
-          <CardTitle className="text-blue-400">
-            🎛️ Admin System Navigation
-          </CardTitle>
+          <CardTitle className="text-blue-400">🎛️ Admin System Navigation</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
@@ -198,9 +185,7 @@ export function UltimateAdminSuite() {
             </div>
             <div className="p-3 bg-blue-900/30 rounded-lg">
               <div className="text-2xl font-bold text-blue-400">∞</div>
-              <div className="text-xs text-muted-foreground">
-                Processing Power
-              </div>
+              <div className="text-xs text-muted-foreground">Processing Power</div>
             </div>
             <div className="p-3 bg-purple-900/30 rounded-lg">
               <div className="text-2xl font-bold text-purple-400">SUPREME</div>
@@ -208,15 +193,11 @@ export function UltimateAdminSuite() {
             </div>
             <div className="p-3 bg-yellow-900/30 rounded-lg">
               <div className="text-2xl font-bold text-yellow-400">GALAXY</div>
-              <div className="text-xs text-muted-foreground">
-                Coverage Active
-              </div>
+              <div className="text-xs text-muted-foreground">Coverage Active</div>
             </div>
             <div className="p-3 bg-pink-900/30 rounded-lg">
               <div className="text-2xl font-bold text-pink-400">GODFATHER</div>
-              <div className="text-xs text-muted-foreground">
-                AI Engine Mode
-              </div>
+              <div className="text-xs text-muted-foreground">AI Engine Mode</div>
             </div>
           </div>
         </CardContent>

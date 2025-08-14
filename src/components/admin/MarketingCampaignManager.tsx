@@ -72,18 +72,12 @@ export function MarketingCampaignManager() {
   });
 
   const copyTokenAddress = (type: "wallet" | "contract") => {
-    const address =
-      type === "wallet"
-        ? GAIA_TOKEN.WALLET_ADDRESS
-        : GAIA_TOKEN.CONTRACT_ADDRESS;
+    const address = type === "wallet" ? GAIA_TOKEN.WALLET_ADDRESS : GAIA_TOKEN.CONTRACT_ADDRESS;
     navigator.clipboard.writeText(address);
-    toast.success(
-      `📋 ${type === "wallet" ? "Wallet" : "Contract"} Address Copied!`,
-      {
-        description: `GAiA Token ${type} address copied to clipboard`,
-        duration: 3000,
-      },
-    );
+    toast.success(`📋 ${type === "wallet" ? "Wallet" : "Contract"} Address Copied!`, {
+      description: `GAiA Token ${type} address copied to clipboard`,
+      duration: 3000,
+    });
   };
 
   const launchCampaign = () => {
@@ -104,9 +98,7 @@ export function MarketingCampaignManager() {
       engagement: 0,
       conversions: 0,
       startDate: new Date().toISOString().split("T")[0],
-      endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
-        .toISOString()
-        .split("T")[0],
+      endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
     };
 
     setCampaigns((prev) => [...prev, campaign]);
@@ -131,20 +123,16 @@ export function MarketingCampaignManager() {
         campaign.id === id
           ? {
               ...campaign,
-              status:
-                campaign.status === "active" ? "paused" : ("active" as const),
+              status: campaign.status === "active" ? "paused" : ("active" as const),
             }
-          : campaign,
-      ),
+          : campaign
+      )
     );
 
     const campaign = campaigns.find((c) => c.id === id);
-    toast.success(
-      `📊 Campaign ${campaign?.status === "active" ? "Paused" : "Resumed"}`,
-      {
-        description: `"${campaign?.title}" status updated`,
-      },
-    );
+    toast.success(`📊 Campaign ${campaign?.status === "active" ? "Paused" : "Resumed"}`, {
+      description: `"${campaign?.title}" status updated`,
+    });
   };
 
   const totalReach = campaigns.reduce((sum, c) => sum + c.reach, 0);
@@ -162,9 +150,7 @@ export function MarketingCampaignManager() {
           </CardTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <div className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/30">
-              <h4 className="text-blue-400 font-bold mb-2">
-                💰 Official GAiA Wallet
-              </h4>
+              <h4 className="text-blue-400 font-bold mb-2">💰 Official GAiA Wallet</h4>
               <code className="font-mono text-xs text-blue-300 break-all">
                 {GAIA_TOKEN.WALLET_ADDRESS}
               </code>
@@ -178,9 +164,7 @@ export function MarketingCampaignManager() {
               </Button>
             </div>
             <div className="p-4 bg-purple-900/20 rounded-lg border border-purple-500/30">
-              <h4 className="text-purple-400 font-bold mb-2">
-                📜 Contract Address
-              </h4>
+              <h4 className="text-purple-400 font-bold mb-2">📜 Contract Address</h4>
               <code className="font-mono text-xs text-purple-300 break-all">
                 {GAIA_TOKEN.CONTRACT_ADDRESS}
               </code>
@@ -202,20 +186,14 @@ export function MarketingCampaignManager() {
         <Card className="border-blue-500/30 bg-blue-900/20">
           <CardContent className="p-4 text-center">
             <Target className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-            <div className="text-2xl font-bold text-blue-400">
-              {activeCampaigns}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Active Campaigns
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{activeCampaigns}</div>
+            <div className="text-sm text-muted-foreground">Active Campaigns</div>
           </CardContent>
         </Card>
         <Card className="border-green-500/30 bg-green-900/20">
           <CardContent className="p-4 text-center">
             <Users className="h-8 w-8 mx-auto text-green-400 mb-2" />
-            <div className="text-2xl font-bold text-green-400">
-              {totalReach.toLocaleString()}
-            </div>
+            <div className="text-2xl font-bold text-green-400">{totalReach.toLocaleString()}</div>
             <div className="text-sm text-muted-foreground">Total Reach</div>
           </CardContent>
         </Card>
@@ -246,16 +224,11 @@ export function MarketingCampaignManager() {
 
         <TabsContent value="campaigns" className="space-y-4">
           {campaigns.map((campaign) => (
-            <Card
-              key={campaign.id}
-              className="border-orange-500/30 bg-orange-900/20"
-            >
+            <Card key={campaign.id} className="border-orange-500/30 bg-orange-900/20">
               <CardHeader>
                 <div className="flex justify-between items-start">
                   <div>
-                    <CardTitle className="text-orange-400">
-                      {campaign.title}
-                    </CardTitle>
+                    <CardTitle className="text-orange-400">{campaign.title}</CardTitle>
                     <div className="flex gap-2 mt-2">
                       <Badge
                         className={`${campaign.status === "active" ? "bg-green-600" : "bg-gray-600"}`}
@@ -269,11 +242,7 @@ export function MarketingCampaignManager() {
                   <Button
                     onClick={() => toggleCampaignStatus(campaign.id)}
                     size="sm"
-                    className={
-                      campaign.status === "active"
-                        ? "bg-orange-600"
-                        : "bg-green-600"
-                    }
+                    className={campaign.status === "active" ? "bg-orange-600" : "bg-green-600"}
                   >
                     {campaign.status === "active" ? (
                       <>
@@ -297,18 +266,14 @@ export function MarketingCampaignManager() {
                     <Progress value={65} className="mt-2" />
                   </div>
                   <div>
-                    <div className="text-sm text-muted-foreground">
-                      Engagement
-                    </div>
+                    <div className="text-sm text-muted-foreground">Engagement</div>
                     <div className="text-xl font-bold text-blue-400">
                       {campaign.engagement.toLocaleString()}
                     </div>
                     <Progress value={82} className="mt-2" />
                   </div>
                   <div>
-                    <div className="text-sm text-muted-foreground">
-                      Conversions
-                    </div>
+                    <div className="text-sm text-muted-foreground">Conversions</div>
                     <div className="text-xl font-bold text-purple-400">
                       {campaign.conversions.toLocaleString()}
                     </div>
@@ -327,9 +292,7 @@ export function MarketingCampaignManager() {
         <TabsContent value="create" className="space-y-6">
           <Card className="border-green-500/30 bg-green-900/20">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                🎯 Create New Marketing Campaign
-              </CardTitle>
+              <CardTitle className="text-green-400">🎯 Create New Marketing Campaign</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -388,9 +351,7 @@ export function MarketingCampaignManager() {
               </div>
 
               <div>
-                <label className="text-sm font-medium">
-                  Campaign Description
-                </label>
+                <label className="text-sm font-medium">Campaign Description</label>
                 <Textarea
                   placeholder="Describe your marketing campaign goals and strategy..."
                   value={newCampaign.description}
@@ -420,11 +381,7 @@ export function MarketingCampaignManager() {
               <Button
                 onClick={launchCampaign}
                 className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
-                disabled={
-                  !newCampaign.title ||
-                  !newCampaign.platform ||
-                  !newCampaign.budget
-                }
+                disabled={!newCampaign.title || !newCampaign.platform || !newCampaign.budget}
               >
                 <Globe className="h-5 w-5 mr-2" />
                 🚀 Launch Global Campaign
@@ -444,9 +401,7 @@ export function MarketingCampaignManager() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <h4 className="text-lg font-semibold text-purple-400">
-                    🎯 Performance Metrics
-                  </h4>
+                  <h4 className="text-lg font-semibold text-purple-400">🎯 Performance Metrics</h4>
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span>Conversion Rate:</span>
@@ -458,9 +413,7 @@ export function MarketingCampaignManager() {
                     </div>
                     <div className="flex justify-between">
                       <span>Cost per Conversion:</span>
-                      <span className="text-yellow-400 font-bold">
-                        0.3 GAIA
-                      </span>
+                      <span className="text-yellow-400 font-bold">0.3 GAIA</span>
                     </div>
                     <div className="flex justify-between">
                       <span>ROI:</span>
@@ -495,9 +448,7 @@ export function MarketingCampaignManager() {
               </div>
 
               <div className="mt-6 p-4 bg-green-900/20 border border-green-500/30 rounded-lg">
-                <h4 className="text-green-400 font-bold mb-2">
-                  🚀 Campaign Success Highlights
-                </h4>
+                <h4 className="text-green-400 font-bold mb-2">🚀 Campaign Success Highlights</h4>
                 <ul className="text-sm space-y-1 text-green-300">
                   <li>• 300% increase in GAiA token awareness</li>
                   <li>• 12,847 new wallet activations</li>

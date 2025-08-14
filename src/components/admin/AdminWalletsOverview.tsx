@@ -59,13 +59,7 @@ export const AdminWalletsOverview: React.FC = () => {
     autoTable(doc, {
       startY: 32,
       head: [["Wallet Address", "Network", "Contract"]],
-      body: [
-        [
-          mainWalletOverview.address,
-          mainWalletOverview.network,
-          mainWalletOverview.contract,
-        ],
-      ],
+      body: [[mainWalletOverview.address, mainWalletOverview.network, mainWalletOverview.contract]],
     });
 
     // Green Investments
@@ -115,16 +109,11 @@ export const AdminWalletsOverview: React.FC = () => {
   return (
     <Card className="border-blue-500/30 mt-8">
       <CardHeader>
-        <CardTitle className="text-blue-400">
-          Admin Wallets & Projects Overview
-        </CardTitle>
+        <CardTitle className="text-blue-400">Admin Wallets & Projects Overview</CardTitle>
       </CardHeader>
       <CardContent>
         {/* Render wallet/project tables here for admin view (reuse project arrays) */}
-        <Button
-          onClick={handleExportPDF}
-          className="bg-blue-600 hover:bg-blue-700 mt-4"
-        >
+        <Button onClick={handleExportPDF} className="bg-blue-600 hover:bg-blue-700 mt-4">
           Download PDF Overview
         </Button>
       </CardContent>

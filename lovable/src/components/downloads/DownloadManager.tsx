@@ -33,8 +33,7 @@ export function DownloadManager() {
   useEffect(() => {
     const updateCommunityStats = () => {
       setCommunityStats((prev) => ({
-        dailyDownloads:
-          prev.dailyDownloads + Math.floor(Math.random() * 50 + 10),
+        dailyDownloads: prev.dailyDownloads + Math.floor(Math.random() * 50 + 10),
         totalUsers: prev.totalUsers + Math.floor(Math.random() * 25 + 5),
         newInvestors: prev.newInvestors + Math.floor(Math.random() * 10 + 2),
         marketCapGrowth: prev.marketCapGrowth + (Math.random() * 5 + 1),
@@ -50,8 +49,7 @@ export function DownloadManager() {
           "🔥 Viral growth pattern detected!",
         ];
 
-        const randomMessage =
-          growthMessages[Math.floor(Math.random() * growthMessages.length)];
+        const randomMessage = growthMessages[Math.floor(Math.random() * growthMessages.length)];
         toast.success("Community Growth Update!", {
           description: randomMessage,
           duration: 4000,
@@ -66,9 +64,7 @@ export function DownloadManager() {
   // Auto-promote downloads across social media
   useEffect(() => {
     const autoPromote = () => {
-      console.log(
-        "🌍 AUTO-PROMOTION: Harmony of Gaia apps being promoted globally",
-      );
+      console.log("🌍 AUTO-PROMOTION: Harmony of Gaia apps being promoted globally");
 
       const promotionPlatforms = [
         "Twitter/X",
@@ -84,9 +80,7 @@ export function DownloadManager() {
       ];
 
       const randomPlatform =
-        promotionPlatforms[
-          Math.floor(Math.random() * promotionPlatforms.length)
-        ];
+        promotionPlatforms[Math.floor(Math.random() * promotionPlatforms.length)];
 
       if (Math.random() < 0.15) {
         toast.success(`Global Promotion Active!`, {
@@ -116,9 +110,7 @@ export function DownloadManager() {
               <div className="text-2xl font-bold text-green-400">
                 {communityStats.dailyDownloads.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Daily Downloads
-              </div>
+              <div className="text-xs text-muted-foreground">Daily Downloads</div>
             </div>
             <div className="p-4 rounded-lg bg-blue-900/30 border border-blue-500/20">
               <div className="text-2xl font-bold text-blue-400">
@@ -136,9 +128,7 @@ export function DownloadManager() {
               <div className="text-2xl font-bold text-orange-400">
                 +{communityStats.marketCapGrowth.toFixed(1)}%
               </div>
-              <div className="text-xs text-muted-foreground">
-                Market Cap Growth
-              </div>
+              <div className="text-xs text-muted-foreground">Market Cap Growth</div>
             </div>
           </div>
 
@@ -147,8 +137,7 @@ export function DownloadManager() {
               🌟 "SEEDS WILL FORM INTO MUSIC" - CULTURE OF HARMONY 🌟
             </p>
             <p className="text-center text-sm text-muted-foreground mt-2">
-              🦁🐬 Lions + Dolphins Power = Unstoppable Growth! Building Path of
-              Happiness Together!
+              🦁🐬 Lions + Dolphins Power = Unstoppable Growth! Building Path of Happiness Together!
             </p>
           </div>
         </CardContent>
@@ -242,35 +231,28 @@ export function DownloadManager() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
               <div>
                 <div className="text-xl font-bold text-green-400">Active</div>
-                <div className="text-xs text-muted-foreground">
-                  Social Media Promotion
-                </div>
+                <div className="text-xs text-muted-foreground">Social Media Promotion</div>
               </div>
               <div>
                 <div className="text-xl font-bold text-blue-400">Running</div>
-                <div className="text-xs text-muted-foreground">
-                  Investor Discovery
-                </div>
+                <div className="text-xs text-muted-foreground">Investor Discovery</div>
               </div>
               <div>
                 <div className="text-xl font-bold text-purple-400">Growing</div>
-                <div className="text-xs text-muted-foreground">
-                  Community Network
-                </div>
+                <div className="text-xs text-muted-foreground">Community Network</div>
               </div>
             </div>
 
             <div className="bg-gradient-to-r from-blue-900/40 to-purple-900/40 rounded-lg p-4 border border-blue-500/30">
               <p className="text-center font-semibold text-blue-400">
-                🌍 Harmony of Gaia apps are being automatically promoted across
-                all major platforms 24/7
+                🌍 Harmony of Gaia apps are being automatically promoted across all major platforms
+                24/7
               </p>
               <p className="text-center text-sm text-muted-foreground mt-2">
                 📱 Available on Web, Android, iOS, Windows, macOS, and Linux
               </p>
               <p className="text-center text-xs text-cyan-400 mt-2">
-                💪 Together We Are Power - Finding Right Souls & Investors
-                Globally!
+                💪 Together We Are Power - Finding Right Souls & Investors Globally!
               </p>
             </div>
           </div>

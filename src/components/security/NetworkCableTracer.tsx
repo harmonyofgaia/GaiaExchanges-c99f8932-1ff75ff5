@@ -43,34 +43,26 @@ export function NetworkCableTracer() {
             <div className="text-2xl font-bold text-blue-400">
               {networksBlocked.current.toLocaleString()}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Networks Blocked
-            </div>
+            <div className="text-sm text-muted-foreground">Networks Blocked</div>
           </div>
           <div className="text-center p-4 bg-green-900/30 rounded-lg">
             <Router className="h-8 w-8 mx-auto text-green-400 mb-2" />
             <div className="text-2xl font-bold text-green-400">
               {trojansDeployed.current.toLocaleString()}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Trojans Deployed
-            </div>
+            <div className="text-sm text-muted-foreground">Trojans Deployed</div>
           </div>
           <div className="text-center p-4 bg-red-900/30 rounded-lg">
             <Shield className="h-8 w-8 mx-auto text-red-400 mb-2" />
             <div className="text-2xl font-bold text-red-400">
               {systemsControlled.current.toLocaleString()}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Systems Controlled
-            </div>
+            <div className="text-sm text-muted-foreground">Systems Controlled</div>
           </div>
         </div>
 
         <div className="mt-6 space-y-3">
-          <h4 className="text-lg font-bold text-blue-400">
-            🌐 GLOBAL NETWORK CONTROL
-          </h4>
+          <h4 className="text-lg font-bold text-blue-400">🌐 GLOBAL NETWORK CONTROL</h4>
           <div className="text-sm text-muted-foreground space-y-1">
             <div>• Complete WiFi and cellular network blocking</div>
             <div>• Invisible trojan deployment on all systems</div>

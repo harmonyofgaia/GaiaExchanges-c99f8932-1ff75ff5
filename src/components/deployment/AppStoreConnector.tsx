@@ -37,8 +37,7 @@ export function AppStoreConnector() {
       platform: "Android",
       status: "connected",
       appId: "net.cultureofharmony.gaiaexchanges",
-      storeUrl:
-        "https://play.google.com/store/apps/details?id=net.cultureofharmony.gaiaexchanges",
+      storeUrl: "https://play.google.com/store/apps/details?id=net.cultureofharmony.gaiaexchanges",
       lastUpdate: new Date("2024-06-25"),
       version: "2.1.0",
       rating: 4.8,
@@ -111,9 +110,7 @@ export function AppStoreConnector() {
     },
   ]);
 
-  const [deploymentProgress, setDeploymentProgress] = useState<
-    Record<string, number>
-  >({});
+  const [deploymentProgress, setDeploymentProgress] = useState<Record<string, number>>({});
   const [isDeploying, setIsDeploying] = useState<Record<string, boolean>>({});
 
   // Auto-check store status every 30 seconds
@@ -142,7 +139,7 @@ export function AppStoreConnector() {
             }
           }
           return store;
-        }),
+        })
       );
     };
 
@@ -187,8 +184,8 @@ export function AppStoreConnector() {
                 ...s,
                 status: store.platform === "iOS" ? "reviewing" : "pending",
               }
-            : s,
-        ),
+            : s
+        )
       );
 
       toast.success(`${store.name} Deployment Complete!`, {
@@ -275,9 +272,7 @@ export function AppStoreConnector() {
                   </div>
                   <div className="flex items-center gap-2">
                     {getStatusIcon(store.status)}
-                    <Badge
-                      className={`${getStatusColor(store.status)} text-white text-xs`}
-                    >
+                    <Badge className={`${getStatusColor(store.status)} text-white text-xs`}>
                       {store.status.toUpperCase()}
                     </Badge>
                   </div>
@@ -298,9 +293,7 @@ export function AppStoreConnector() {
                   </div>
                   <div className="flex justify-between">
                     <span>Last Update:</span>
-                    <span className="font-semibold">
-                      {store.lastUpdate.toLocaleDateString()}
-                    </span>
+                    <span className="font-semibold">{store.lastUpdate.toLocaleDateString()}</span>
                   </div>
                 </div>
 
@@ -308,9 +301,7 @@ export function AppStoreConnector() {
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs">
                       <span>Deploying...</span>
-                      <span>
-                        {Math.round(deploymentProgress[store.id] || 0)}%
-                      </span>
+                      <span>{Math.round(deploymentProgress[store.id] || 0)}%</span>
                     </div>
                     <Progress value={deploymentProgress[store.id] || 0} />
                   </div>
@@ -345,9 +336,7 @@ export function AppStoreConnector() {
 
         <div className="mt-6 p-4 rounded-lg bg-green-900/20 border border-green-500/20">
           <div className="text-center space-y-3">
-            <h4 className="font-semibold text-green-400">
-              🌍 Global Distribution Status
-            </h4>
+            <h4 className="font-semibold text-green-400">🌍 Global Distribution Status</h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
               <div className="flex items-center gap-2">
                 <Shield className="h-4 w-4 text-green-400" />
@@ -367,8 +356,7 @@ export function AppStoreConnector() {
               </div>
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              🎵 "Seeds Will Form Into Music" - Culture of Harmony reaching
-              every device worldwide
+              🎵 "Seeds Will Form Into Music" - Culture of Harmony reaching every device worldwide
             </p>
           </div>
         </div>

@@ -154,9 +154,7 @@ export function UniversalStyleController() {
   // Load admin preferences
   useEffect(() => {
     if (isAdmin) {
-      const savedVisibility = localStorage.getItem(
-        "admin-style-controller-visible",
-      );
+      const savedVisibility = localStorage.getItem("admin-style-controller-visible");
       setIsVisible(savedVisibility === "true");
 
       const savedHistory = localStorage.getItem("admin-version-history");
@@ -232,10 +230,7 @@ export function UniversalStyleController() {
 
     const updatedHistory = [newVersion, ...versionHistory.slice(0, 19)];
     setVersionHistory(updatedHistory);
-    localStorage.setItem(
-      "admin-version-history",
-      JSON.stringify(updatedHistory),
-    );
+    localStorage.setItem("admin-version-history", JSON.stringify(updatedHistory));
 
     toast.success("🎨 Style Version Saved!", {
       description: `"${description}" added to version history`,
@@ -260,18 +255,9 @@ export function UniversalStyleController() {
     root.style.setProperty("--admin-title-font", style.typography.mainTitle);
     root.style.setProperty("--admin-body-font", style.typography.bodyFont);
     root.style.setProperty("--admin-font-size", `${style.typography.size}%`);
-    root.style.setProperty(
-      "--admin-font-weight",
-      style.typography.weight.toString(),
-    );
-    root.style.setProperty(
-      "--admin-letter-spacing",
-      `${style.typography.letterSpacing}px`,
-    );
-    root.style.setProperty(
-      "--admin-line-height",
-      style.typography.lineHeight.toString(),
-    );
+    root.style.setProperty("--admin-font-weight", style.typography.weight.toString());
+    root.style.setProperty("--admin-letter-spacing", `${style.typography.letterSpacing}px`);
+    root.style.setProperty("--admin-line-height", style.typography.lineHeight.toString());
 
     // Colors
     root.style.setProperty("--admin-primary", style.colors.primary);
@@ -283,22 +269,13 @@ export function UniversalStyleController() {
     // Effects
     root.style.setProperty("--admin-blur", `${style.effects.blur}px`);
     root.style.setProperty("--admin-contrast", `${style.effects.contrast}%`);
-    root.style.setProperty(
-      "--admin-brightness",
-      `${style.effects.brightness}%`,
-    );
-    root.style.setProperty(
-      "--admin-saturation",
-      `${style.effects.saturation}%`,
-    );
+    root.style.setProperty("--admin-brightness", `${style.effects.brightness}%`);
+    root.style.setProperty("--admin-saturation", `${style.effects.saturation}%`);
     root.style.setProperty("--admin-hue", `${style.effects.hue}deg`);
 
     // Layout
     root.style.setProperty("--admin-spacing", `${style.layout.spacing}px`);
-    root.style.setProperty(
-      "--admin-border-radius",
-      `${style.layout.borderRadius}px`,
-    );
+    root.style.setProperty("--admin-border-radius", `${style.layout.borderRadius}px`);
     root.style.setProperty("--admin-transition", style.layout.transition);
 
     // Matrix Effects
@@ -306,16 +283,10 @@ export function UniversalStyleController() {
     root.style.setProperty("--matrix-color", style.matrix.color);
     root.style.setProperty("--matrix-density", `${style.matrix.density}%`);
 
-    window.dispatchEvent(
-      new CustomEvent("admin-style-update", { detail: style }),
-    );
+    window.dispatchEvent(new CustomEvent("admin-style-update", { detail: style }));
   };
 
-  const handleStyleChange = (
-    category: keyof StyleState,
-    property: string,
-    value: any,
-  ) => {
+  const handleStyleChange = (category: keyof StyleState, property: string, value: any) => {
     const updatedStyle = {
       ...currentStyle,
       [category]: {
@@ -330,18 +301,12 @@ export function UniversalStyleController() {
   const toggleVisibility = () => {
     const newVisibility = !isVisible;
     setIsVisible(newVisibility);
-    localStorage.setItem(
-      "admin-style-controller-visible",
-      newVisibility.toString(),
-    );
+    localStorage.setItem("admin-style-controller-visible", newVisibility.toString());
 
-    toast.success(
-      `God Mode Controls ${newVisibility ? "Enabled" : "Disabled"}`,
-      {
-        description: `Ultimate style master is now ${newVisibility ? "active" : "hidden"}`,
-        duration: 3000,
-      },
-    );
+    toast.success(`God Mode Controls ${newVisibility ? "Enabled" : "Disabled"}`, {
+      description: `Ultimate style master is now ${newVisibility ? "active" : "hidden"}`,
+      duration: 3000,
+    });
   };
 
   const sections = {
@@ -376,11 +341,7 @@ export function UniversalStyleController() {
         className="fixed top-16 right-4 z-50 bg-purple-600 hover:bg-purple-700 opacity-70 hover:opacity-100 transition-all duration-300"
         size="sm"
       >
-        {isVisible ? (
-          <EyeOff className="h-4 w-4" />
-        ) : (
-          <Eye className="h-4 w-4" />
-        )}
+        {isVisible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
         <Crown className="h-3 w-3 ml-1" />
       </Button>
 
@@ -453,9 +414,7 @@ export function UniversalStyleController() {
 
                     <Select
                       value={currentStyle.typography.mainTitle}
-                      onValueChange={(value) =>
-                        handleStyleChange("typography", "mainTitle", value)
-                      }
+                      onValueChange={(value) => handleStyleChange("typography", "mainTitle", value)}
                     >
                       <SelectTrigger className="h-8 text-xs">
                         <SelectValue />
@@ -529,9 +488,7 @@ export function UniversalStyleController() {
                         </label>
                         <Slider
                           value={[currentStyle.matrix.speed]}
-                          onValueChange={([value]) =>
-                            handleStyleChange("matrix", "speed", value)
-                          }
+                          onValueChange={([value]) => handleStyleChange("matrix", "speed", value)}
                           min={10}
                           max={100}
                           step={5}
@@ -544,9 +501,7 @@ export function UniversalStyleController() {
                         </label>
                         <Slider
                           value={[currentStyle.matrix.density]}
-                          onValueChange={([value]) =>
-                            handleStyleChange("matrix", "density", value)
-                          }
+                          onValueChange={([value]) => handleStyleChange("matrix", "density", value)}
                           min={5}
                           max={50}
                           step={1}
@@ -558,9 +513,7 @@ export function UniversalStyleController() {
                     <Input
                       type="color"
                       value={currentStyle.matrix.color}
-                      onChange={(e) =>
-                        handleStyleChange("matrix", "color", e.target.value)
-                      }
+                      onChange={(e) => handleStyleChange("matrix", "color", e.target.value)}
                       className="h-8"
                     />
                   </div>
@@ -644,9 +597,7 @@ export function UniversalStyleController() {
                         className="flex items-center justify-between p-1 bg-gray-800/50 rounded text-xs"
                       >
                         <div>
-                          <div className="text-white">
-                            {version.description}
-                          </div>
+                          <div className="text-white">{version.description}</div>
                           <div className="text-gray-400 text-xs">
                             {new Date(version.timestamp).toLocaleTimeString()}
                           </div>

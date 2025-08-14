@@ -79,26 +79,18 @@ export function GitHubAdminIntegration() {
       console.log("🐙 QUANTUM GITHUB INTEGRATION - ADMIN FORCE WEAPONS ACTIVE");
       console.log("🔄 FLAWLESS ROLLBACK SYSTEM - EINSTEIN-LEVEL RELIABILITY");
       console.log("👑 ADMIN-ONLY CONTROLS - LOVABLE QUANTUM SECURED");
-      console.log(
-        "🧠 AI THREAT DETECTION - PREDICTING ATTACKS BEFORE THEY HAPPEN",
-      );
+      console.log("🧠 AI THREAT DETECTION - PREDICTING ATTACKS BEFORE THEY HAPPEN");
 
       // Enhanced security monitoring
       if (Math.random() < 0.15) {
-        console.log(
-          "🛡️ Quantum Security Scan Completed - All systems fortified",
-        );
+        console.log("🛡️ Quantum Security Scan Completed - All systems fortified");
 
         setGithubStatus((prev) => ({
           ...prev,
           securityScan: "QUANTUM_PASSED",
           lastCommit: new Date(),
-          activeProtections:
-            prev.activeProtections + (Math.random() > 0.4 ? 1 : 0),
-          quantumSecurityLevel: Math.min(
-            99.99,
-            prev.quantumSecurityLevel + 0.001,
-          ),
+          activeProtections: prev.activeProtections + (Math.random() > 0.4 ? 1 : 0),
+          quantumSecurityLevel: Math.min(99.99, prev.quantumSecurityLevel + 0.001),
         }));
       }
 
@@ -107,8 +99,7 @@ export function GitHubAdminIntegration() {
         console.log("🤖 AI THREAT PREDICTION - FUTURE ATTACKS NEUTRALIZED");
 
         toast.success("🤖 AI Threat Prevention", {
-          description:
-            "Future attack vectors analyzed and neutralized before execution",
+          description: "Future attack vectors analyzed and neutralized before execution",
           duration: 5000,
         });
       }
@@ -143,9 +134,7 @@ export function GitHubAdminIntegration() {
   };
 
   const activateQuantumProtection = () => {
-    console.log(
-      "🛡️ ACTIVATING QUANTUM GITHUB PROTECTION - MAXIMUM FORTRESS MODE",
-    );
+    console.log("🛡️ ACTIVATING QUANTUM GITHUB PROTECTION - MAXIMUM FORTRESS MODE");
 
     setGithubStatus((prev) => ({
       ...prev,
@@ -155,20 +144,16 @@ export function GitHubAdminIntegration() {
     }));
 
     toast.success("🛡️ Quantum Protection Activated!", {
-      description:
-        "GitHub repository now protected by quantum-level security barriers",
+      description: "GitHub repository now protected by quantum-level security barriers",
       duration: 6000,
     });
   };
 
   const runSystemOptimization = () => {
-    console.log(
-      "🚀 RUNNING QUANTUM SYSTEM OPTIMIZATION - 10X PERFORMANCE BOOST",
-    );
+    console.log("🚀 RUNNING QUANTUM SYSTEM OPTIMIZATION - 10X PERFORMANCE BOOST");
 
     toast.success("🚀 System Optimization Complete!", {
-      description:
-        "All GitHub operations now running at quantum efficiency levels",
+      description: "All GitHub operations now running at quantum efficiency levels",
       duration: 5000,
     });
 
@@ -196,9 +181,7 @@ export function GitHubAdminIntegration() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <Button
-              onClick={() =>
-                executeQuantumRollback("current", "Quantum test rollback")
-              }
+              onClick={() => executeQuantumRollback("current", "Quantum test rollback")}
               className="bg-green-600 hover:bg-green-700 text-white h-20 text-lg"
             >
               <RotateCcw className="h-6 w-6 mr-2" />
@@ -294,23 +277,17 @@ export function GitHubAdminIntegration() {
                     {commit.commit}
                   </div>
                   <div>
-                    <div className="font-medium text-blue-400">
-                      {commit.message}
-                    </div>
+                    <div className="font-medium text-blue-400">{commit.message}</div>
                     <div className="text-sm text-muted-foreground">
                       {commit.timestamp.toLocaleString()}
                     </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Badge className="bg-green-600 text-white">
-                    QUANTUM READY
-                  </Badge>
+                  <Badge className="bg-green-600 text-white">QUANTUM READY</Badge>
                   <Button
                     size="sm"
-                    onClick={() =>
-                      executeQuantumRollback(commit.commit, commit.message)
-                    }
+                    onClick={() => executeQuantumRollback(commit.commit, commit.message)}
                     className="bg-blue-600 hover:bg-blue-700"
                   >
                     <RotateCcw className="h-4 w-4 mr-1" />
@@ -336,12 +313,8 @@ export function GitHubAdminIntegration() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="text-sm font-medium">
-                    Quantum Encryption
-                  </label>
-                  <p className="text-xs text-muted-foreground">
-                    Military-grade quantum protection
-                  </p>
+                  <label className="text-sm font-medium">Quantum Encryption</label>
+                  <p className="text-xs text-muted-foreground">Military-grade quantum protection</p>
                 </div>
                 <Switch
                   checked={adminSettings.quantumEncryption}
@@ -356,9 +329,7 @@ export function GitHubAdminIntegration() {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="text-sm font-medium">
-                    AI Threat Detection
-                  </label>
+                  <label className="text-sm font-medium">AI Threat Detection</label>
                   <p className="text-xs text-muted-foreground">
                     Predict and prevent future attacks
                   </p>
@@ -376,9 +347,7 @@ export function GitHubAdminIntegration() {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="text-sm font-medium">
-                    Automatic Quantum Backups
-                  </label>
+                  <label className="text-sm font-medium">Automatic Quantum Backups</label>
                   <p className="text-xs text-muted-foreground">
                     Real-time quantum state preservation
                   </p>
@@ -398,9 +367,7 @@ export function GitHubAdminIntegration() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="text-sm font-medium">
-                    Require Admin Approval
-                  </label>
+                  <label className="text-sm font-medium">Require Admin Approval</label>
                   <p className="text-xs text-muted-foreground">
                     All changes must be approved by admin
                   </p>
@@ -418,9 +385,7 @@ export function GitHubAdminIntegration() {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="text-sm font-medium">
-                    Block Direct Push
-                  </label>
+                  <label className="text-sm font-medium">Block Direct Push</label>
                   <p className="text-xs text-muted-foreground">
                     Prevent direct pushes to protected branches
                   </p>
@@ -438,9 +403,7 @@ export function GitHubAdminIntegration() {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="text-sm font-medium">
-                    Admin-Only Merge
-                  </label>
+                  <label className="text-sm font-medium">Admin-Only Merge</label>
                   <p className="text-xs text-muted-foreground">
                     Only admin can merge pull requests
                   </p>
@@ -460,9 +423,7 @@ export function GitHubAdminIntegration() {
 
           {/* Enhanced Admin Privileges */}
           <div className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/30 rounded-lg p-6">
-            <h4 className="font-medium text-purple-400 mb-4">
-              👑 Quantum Admin Privileges
-            </h4>
+            <h4 className="font-medium text-purple-400 mb-4">👑 Quantum Admin Privileges</h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
               <div className="flex items-center gap-2">
                 <span className="text-green-400">✓</span>
@@ -496,33 +457,25 @@ export function GitHubAdminIntegration() {
       {/* Quantum System Guarantee */}
       <Card className="bg-gradient-to-r from-green-900/30 to-blue-900/30 border-2 border-green-500/30">
         <CardContent className="p-8 text-center">
-          <h3 className="text-3xl font-bold text-green-400 mb-6">
-            🐙 QUANTUM GITHUB GUARANTEE
-          </h3>
+          <h3 className="text-3xl font-bold text-green-400 mb-6">🐙 QUANTUM GITHUB GUARANTEE</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="space-y-3">
               <div className="text-7xl">🔄</div>
-              <div className="font-bold text-blue-400 text-xl">
-                PERFECT ROLLBACK
-              </div>
+              <div className="font-bold text-blue-400 text-xl">PERFECT ROLLBACK</div>
               <div className="text-sm text-muted-foreground">
                 Einstein-precision with quantum-level reliability
               </div>
             </div>
             <div className="space-y-3">
               <div className="text-7xl">👑</div>
-              <div className="font-bold text-purple-400 text-xl">
-                QUANTUM CONTROL
-              </div>
+              <div className="font-bold text-purple-400 text-xl">QUANTUM CONTROL</div>
               <div className="text-sm text-muted-foreground">
                 Ultimate admin power through Lovable integration
               </div>
             </div>
             <div className="space-y-3">
               <div className="text-7xl">🤖</div>
-              <div className="font-bold text-orange-400 text-xl">
-                AI PREDICTION
-              </div>
+              <div className="font-bold text-orange-400 text-xl">AI PREDICTION</div>
               <div className="text-sm text-muted-foreground">
                 Future threat detection and prevention
               </div>
@@ -533,8 +486,8 @@ export function GitHubAdminIntegration() {
               🛡️ GITHUB + LOVABLE + AI = UNBREAKABLE QUANTUM SYSTEM 🛡️
             </div>
             <div className="text-sm text-muted-foreground mt-3">
-              Perfect integration ensures flawless rollback and quantum-level
-              protection for all admin operations
+              Perfect integration ensures flawless rollback and quantum-level protection for all
+              admin operations
             </div>
           </div>
         </CardContent>

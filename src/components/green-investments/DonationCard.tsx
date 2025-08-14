@@ -32,9 +32,7 @@ export function DonationCard({ project, onDonate }: DonationCardProps) {
           <Heart className="h-5 w-5" />
           {project.name}
         </CardTitle>
-        <Badge className="bg-green-600 text-white w-fit">
-          {project.category}
-        </Badge>
+        <Badge className="bg-green-600 text-white w-fit">{project.category}</Badge>
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground">{project.description}</p>
@@ -45,9 +43,7 @@ export function DonationCard({ project, onDonate }: DonationCardProps) {
             <span className="text-green-400">Goal: ${project.goal}</span>
           </div>
           <Progress value={progress} className="h-2" />
-          <p className="text-xs text-muted-foreground">
-            {progress.toFixed(1)}% funded
-          </p>
+          <p className="text-xs text-muted-foreground">{progress.toFixed(1)}% funded</p>
         </div>
 
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -55,10 +51,7 @@ export function DonationCard({ project, onDonate }: DonationCardProps) {
           Deadline: {project.deadline}
         </div>
 
-        <Button
-          onClick={handleDonate}
-          className="w-full bg-green-600 hover:bg-green-700"
-        >
+        <Button onClick={handleDonate} className="w-full bg-green-600 hover:bg-green-700">
           <DollarSign className="h-4 w-4 mr-2" />
           Donate $25
         </Button>

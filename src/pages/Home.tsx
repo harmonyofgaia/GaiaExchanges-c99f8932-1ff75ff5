@@ -2,16 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  ArrowRight,
-  Zap,
-  Users,
-  Globe,
-  Leaf,
-  Star,
-  Trophy,
-  Shield,
-} from "lucide-react";
+import { ArrowRight, Zap, Users, Globe, Leaf, Star, Trophy, Shield } from "lucide-react";
 import { GaiaLogo } from "@/components/GaiaLogo";
 import { UniversalGaiaLogo } from "@/components/branding/UniversalGaiaLogo";
 import { EnhancedBackgroundManager } from "@/components/backgrounds/EnhancedBackgroundManager";
@@ -50,8 +41,7 @@ export default function Home() {
   const sampleMission = {
     id: "water-conservation",
     title: "Water Conservation Challenge",
-    description:
-      "Reduce water usage by 20% this month through smart conservation techniques.",
+    description: "Reduce water usage by 20% this month through smart conservation techniques.",
     reward: 150,
     progress: 67,
     maxProgress: 100,
@@ -95,17 +85,13 @@ export default function Home() {
               Together We Make The World A Better Place
             </p>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Join the revolutionary ecosystem that rewards environmental
-              action, sustainable living, and positive community impact through
-              our GAiA token.
+              Join the revolutionary ecosystem that rewards environmental action, sustainable
+              living, and positive community impact through our GAiA token.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-green-600 hover:bg-green-700 text-white"
-            >
+            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
               <Zap className="h-5 w-5 mr-2" />
               Start Earning GAIA
               <ArrowRight className="h-5 w-5 ml-2" />
@@ -198,9 +184,8 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-green-300/80">
-                  Get rewarded with GAIA tokens for every positive environmental
-                  action you take. From water conservation to renewable energy
-                  adoption.
+                  Get rewarded with GAIA tokens for every positive environmental action you take.
+                  From water conservation to renewable energy adoption.
                 </p>
               </CardContent>
             </Card>
@@ -214,9 +199,8 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-blue-300/80">
-                  Connect with thousands of eco-warriors worldwide. Share
-                  experiences, collaborate on projects, and amplify your
-                  environmental impact.
+                  Connect with thousands of eco-warriors worldwide. Share experiences, collaborate
+                  on projects, and amplify your environmental impact.
                 </p>
               </CardContent>
             </Card>
@@ -230,9 +214,8 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-purple-300/80">
-                  Built on blockchain technology with military-grade security.
-                  Every transaction is transparent and verified by our
-                  community.
+                  Built on blockchain technology with military-grade security. Every transaction is
+                  transparent and verified by our community.
                 </p>
               </CardContent>
             </Card>

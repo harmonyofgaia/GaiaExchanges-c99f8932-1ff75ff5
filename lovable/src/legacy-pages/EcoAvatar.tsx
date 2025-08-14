@@ -78,9 +78,7 @@ export default function EcoAvatar() {
                   <p className="text-xs text-muted-foreground">Level 3</p>
                 </div>
               </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                Start Meditation
-              </Button>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700">Start Meditation</Button>
             </CardContent>
           </Card>
 
@@ -95,36 +93,22 @@ export default function EcoAvatar() {
             <CardContent className="space-y-4">
               <div className="space-y-3">
                 <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
-                  <h4 className="font-medium text-purple-400 mb-1">
-                    Environmental Harmony
-                  </h4>
+                  <h4 className="font-medium text-purple-400 mb-1">Environmental Harmony</h4>
                   <Progress value={85} className="w-full mb-1" />
-                  <p className="text-xs text-muted-foreground">
-                    Deep connection with nature
-                  </p>
+                  <p className="text-xs text-muted-foreground">Deep connection with nature</p>
                 </div>
                 <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-3">
-                  <h4 className="font-medium text-cyan-400 mb-1">
-                    Inner Peace
-                  </h4>
+                  <h4 className="font-medium text-cyan-400 mb-1">Inner Peace</h4>
                   <Progress value={60} className="w-full mb-1" />
-                  <p className="text-xs text-muted-foreground">
-                    Meditation mastery progress
-                  </p>
+                  <p className="text-xs text-muted-foreground">Meditation mastery progress</p>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
-                  <h4 className="font-medium text-yellow-400 mb-1">
-                    Gaia Wisdom
-                  </h4>
+                  <h4 className="font-medium text-yellow-400 mb-1">Gaia Wisdom</h4>
                   <Progress value={40} className="w-full mb-1" />
-                  <p className="text-xs text-muted-foreground">
-                    Universal understanding
-                  </p>
+                  <p className="text-xs text-muted-foreground">Universal understanding</p>
                 </div>
               </div>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                Continue Journey
-              </Button>
+              <Button className="w-full bg-purple-600 hover:bg-purple-700">Continue Journey</Button>
             </CardContent>
           </Card>
         </div>
@@ -142,51 +126,32 @@ export default function EcoAvatar() {
                 <div className="text-center">
                   <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4 mb-3">
                     <div className="text-4xl mb-2">🌳</div>
-                    <h3 className="font-medium text-green-400 mb-1">
-                      Forest Communion
-                    </h3>
+                    <h3 className="font-medium text-green-400 mb-1">Forest Communion</h3>
                     <p className="text-sm text-muted-foreground">
                       Connect with ancient tree spirits
                     </p>
                   </div>
-                  <Button
-                    className="w-full bg-green-600 hover:bg-green-700"
-                    size="sm"
-                  >
+                  <Button className="w-full bg-green-600 hover:bg-green-700" size="sm">
                     Enter Forest
                   </Button>
                 </div>
                 <div className="text-center">
                   <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-3">
                     <div className="text-4xl mb-2">🌊</div>
-                    <h3 className="font-medium text-blue-400 mb-1">
-                      Ocean Meditation
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Flow with the rhythm of waves
-                    </p>
+                    <h3 className="font-medium text-blue-400 mb-1">Ocean Meditation</h3>
+                    <p className="text-sm text-muted-foreground">Flow with the rhythm of waves</p>
                   </div>
-                  <Button
-                    className="w-full bg-blue-600 hover:bg-blue-700"
-                    size="sm"
-                  >
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700" size="sm">
                     Dive Deep
                   </Button>
                 </div>
                 <div className="text-center">
                   <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-4 mb-3">
                     <div className="text-4xl mb-2">⛰️</div>
-                    <h3 className="font-medium text-purple-400 mb-1">
-                      Mountain Wisdom
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Seek guidance from stone elders
-                    </p>
+                    <h3 className="font-medium text-purple-400 mb-1">Mountain Wisdom</h3>
+                    <p className="text-sm text-muted-foreground">Seek guidance from stone elders</p>
                   </div>
-                  <Button
-                    className="w-full bg-purple-600 hover:bg-purple-700"
-                    size="sm"
-                  >
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700" size="sm">
                     Ascend Peak
                   </Button>
                 </div>

@@ -4,16 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import {
-  Bell,
-  BellOff,
-  Music,
-  Video,
-  Users,
-  Search,
-  Star,
-  TrendingUp,
-} from "lucide-react";
+import { Bell, BellOff, Music, Video, Users, Search, Star, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
 
 interface ChannelSubscription {
@@ -85,8 +76,7 @@ export function VideoChannelSubscriptions() {
       isLive: true,
       lastUpload: "30 minutes ago",
       verified: true,
-      description:
-        "Music, documentaries, and cultural content for a better world",
+      description: "Music, documentaries, and cultural content for a better world",
       speciality: "Cultural Movement",
     },
   ]);
@@ -100,12 +90,10 @@ export function VideoChannelSubscriptions() {
           ? {
               ...sub,
               isSubscribed: !sub.isSubscribed,
-              subscribers: sub.isSubscribed
-                ? sub.subscribers - 1
-                : sub.subscribers + 1,
+              subscribers: sub.isSubscribed ? sub.subscribers - 1 : sub.subscribers + 1,
             }
-          : sub,
-      ),
+          : sub
+      )
     );
 
     const channel = subscriptions.find((sub) => sub.id === channelId);
@@ -115,10 +103,8 @@ export function VideoChannelSubscriptions() {
           ? `Unsubscribed from ${channel.channelName}`
           : `Subscribed to ${channel.channelName}! 🔔`,
         {
-          description: channel.isSubscribed
-            ? ""
-            : "You'll be notified of new uploads",
-        },
+          description: channel.isSubscribed ? "" : "You'll be notified of new uploads",
+        }
       );
     }
   };
@@ -126,7 +112,7 @@ export function VideoChannelSubscriptions() {
   const filteredChannels = subscriptions.filter(
     (channel) =>
       channel.channelName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      channel.speciality.toLowerCase().includes(searchQuery.toLowerCase()),
+      channel.speciality.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const getContentIcon = (type: string) => {
@@ -173,9 +159,7 @@ export function VideoChannelSubscriptions() {
               <div className="text-2xl font-bold text-blue-400">
                 {subscriptions.filter((s) => s.isSubscribed).length}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Subscribed Channels
-              </div>
+              <div className="text-sm text-muted-foreground">Subscribed Channels</div>
             </div>
             <div className="p-4 bg-muted rounded-lg text-center">
               <div className="text-2xl font-bold text-green-400">
@@ -187,9 +171,7 @@ export function VideoChannelSubscriptions() {
               <div className="text-2xl font-bold text-purple-400">
                 {subscriptions.filter((s) => s.contentType === "music").length}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Music Channels
-              </div>
+              <div className="text-sm text-muted-foreground">Music Channels</div>
             </div>
           </div>
 
@@ -205,9 +187,7 @@ export function VideoChannelSubscriptions() {
                     <div className="relative">
                       <Avatar className="w-16 h-16">
                         <AvatarImage src={channel.avatar} />
-                        <AvatarFallback>
-                          {channel.channelName.slice(0, 2)}
-                        </AvatarFallback>
+                        <AvatarFallback>{channel.channelName.slice(0, 2)}</AvatarFallback>
                       </Avatar>
                       {channel.isLive && (
                         <div className="absolute -top-1 -right-1 bg-red-600 text-white text-xs px-2 py-1 rounded-full animate-pulse">
@@ -218,9 +198,7 @@ export function VideoChannelSubscriptions() {
 
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <h3 className="text-lg font-semibold text-white">
-                          {channel.channelName}
-                        </h3>
+                        <h3 className="text-lg font-semibold text-white">{channel.channelName}</h3>
                         {channel.verified && (
                           <Badge variant="secondary" className="text-xs">
                             <Star className="h-3 w-3 mr-1" />
@@ -229,15 +207,11 @@ export function VideoChannelSubscriptions() {
                         )}
                         <Badge variant="outline" className="text-xs">
                           {getContentIcon(channel.contentType)}
-                          <span className="ml-1 capitalize">
-                            {channel.contentType}
-                          </span>
+                          <span className="ml-1 capitalize">{channel.contentType}</span>
                         </Badge>
                       </div>
 
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {channel.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground mb-2">{channel.description}</p>
 
                       <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                         <div className="flex items-center gap-1">
@@ -263,9 +237,7 @@ export function VideoChannelSubscriptions() {
                         onClick={() => handleSubscribe(channel.id)}
                         variant={channel.isSubscribed ? "secondary" : "default"}
                         className={
-                          channel.isSubscribed
-                            ? "bg-gray-600"
-                            : "bg-red-600 hover:bg-red-700"
+                          channel.isSubscribed ? "bg-gray-600" : "bg-red-600 hover:bg-red-700"
                         }
                       >
                         {channel.isSubscribed ? (
@@ -282,11 +254,7 @@ export function VideoChannelSubscriptions() {
                       </Button>
 
                       {channel.isLive && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="border-red-500 text-red-400"
-                        >
+                        <Button size="sm" variant="outline" className="border-red-500 text-red-400">
                           Watch Live
                         </Button>
                       )}

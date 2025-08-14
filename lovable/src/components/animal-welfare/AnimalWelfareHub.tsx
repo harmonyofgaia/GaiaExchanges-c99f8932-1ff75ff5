@@ -116,8 +116,8 @@ export function AnimalWelfareHub() {
       prev.map((animal) =>
         animal.id === animalId
           ? { ...animal, currentFunding: animal.currentFunding + amount }
-          : animal,
-      ),
+          : animal
+      )
     );
     setUserContributions((prev) => prev + amount);
 
@@ -166,32 +166,22 @@ export function AnimalWelfareHub() {
             🐾 GAiA ANIMAL WELFARE - REAL LIVES, REAL IMPACT
           </CardTitle>
           <p className="text-center text-xl text-green-300">
-            Every Animal in Captivity Gets Its Own Wallet • Own NFT • Own Goal •
-            VR Rehabilitation • Global Relocation
+            Every Animal in Captivity Gets Its Own Wallet • Own NFT • Own Goal • VR Rehabilitation •
+            Global Relocation
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-green-900/30 rounded border border-green-500/20">
-              <div className="text-3xl font-bold text-green-400">
-                {totalAnimalsHelped}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Animals Helped
-              </div>
+              <div className="text-3xl font-bold text-green-400">{totalAnimalsHelped}</div>
+              <div className="text-sm text-muted-foreground">Animals Helped</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded border border-blue-500/20">
-              <div className="text-3xl font-bold text-blue-400">
-                {userContributions}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Your Contributions
-              </div>
+              <div className="text-3xl font-bold text-blue-400">{userContributions}</div>
+              <div className="text-sm text-muted-foreground">Your Contributions</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded border border-purple-500/20">
-              <div className="text-3xl font-bold text-purple-400">
-                {animals.length}
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{animals.length}</div>
               <div className="text-sm text-muted-foreground">Active Cases</div>
             </div>
             <div className="text-center p-4 bg-orange-900/30 rounded border border-orange-500/20">
@@ -218,24 +208,15 @@ export function AnimalWelfareHub() {
         <TabsContent value="rescue-animals" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {animals.map((animal) => (
-              <Card
-                key={animal.id}
-                className={`${getUrgencyColor(animal.urgencyLevel)} border-2`}
-              >
+              <Card key={animal.id} className={`${getUrgencyColor(animal.urgencyLevel)} border-2`}>
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
                       <div className="text-5xl">{animal.emoji}</div>
                       <div>
-                        <h3 className="text-xl font-bold text-white">
-                          {animal.name}
-                        </h3>
-                        <p className="text-muted-foreground">
-                          {animal.species}
-                        </p>
-                        <Badge
-                          className={`${getUrgencyBadgeColor(animal.urgencyLevel)} mt-1`}
-                        >
+                        <h3 className="text-xl font-bold text-white">{animal.name}</h3>
+                        <p className="text-muted-foreground">{animal.species}</p>
+                        <Badge className={`${getUrgencyBadgeColor(animal.urgencyLevel)} mt-1`}>
                           {animal.urgencyLevel.toUpperCase()} PRIORITY
                         </Badge>
                       </div>
@@ -271,9 +252,7 @@ export function AnimalWelfareHub() {
                         </span>
                       </div>
                       <Progress
-                        value={
-                          (animal.currentFunding / animal.fundingGoal) * 100
-                        }
+                        value={(animal.currentFunding / animal.fundingGoal) * 100}
                         className="h-3"
                       />
                     </div>
@@ -301,11 +280,7 @@ export function AnimalWelfareHub() {
                       </Button>
 
                       {animal.vrAvailable && (
-                        <Button
-                          variant="outline"
-                          className="border-purple-500/50"
-                          size="sm"
-                        >
+                        <Button variant="outline" className="border-purple-500/50" size="sm">
                           <Headphones className="h-4 w-4 mr-2" />
                           VR Visit
                         </Button>

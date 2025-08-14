@@ -80,9 +80,7 @@ export function SkillBasedEarning() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Project Title
-            </label>
+            <label className="block text-sm font-medium mb-2">Project Title</label>
             <Input
               value={projectTitle}
               onChange={(e) => setProjectTitle(e.target.value)}
@@ -91,9 +89,7 @@ export function SkillBasedEarning() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Hours Worked
-            </label>
+            <label className="block text-sm font-medium mb-2">Hours Worked</label>
             <Input
               type="number"
               step="0.5"
@@ -105,9 +101,7 @@ export function SkillBasedEarning() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Description (optional)
-            </label>
+            <label className="block text-sm font-medium mb-2">Description (optional)</label>
             <Textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -116,19 +110,14 @@ export function SkillBasedEarning() {
             />
           </div>
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-cyan-600 hover:bg-cyan-700"
-          >
+          <Button type="submit" disabled={loading} className="w-full bg-cyan-600 hover:bg-cyan-700">
             {loading ? "Recording..." : "⚡ Record Skill Work (10 Points/Hour)"}
           </Button>
         </form>
 
         <div className="mt-4 p-3 bg-cyan-900/20 rounded-lg border border-cyan-500/30">
           <p className="text-sm text-cyan-300">
-            💡 <strong>Earning:</strong> 10 points per hour + quality bonuses
-            for excellent work
+            💡 <strong>Earning:</strong> 10 points per hour + quality bonuses for excellent work
           </p>
         </div>
       </CardContent>

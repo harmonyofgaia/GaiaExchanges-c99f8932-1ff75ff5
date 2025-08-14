@@ -151,12 +151,9 @@ export default function PlanetCleaningRewardsSystem() {
       setGlobalMetrics((prev) => ({
         ...prev,
         totalCleaned: prev.totalCleaned + Math.floor(Math.random() * 100),
-        activeCommunities:
-          prev.activeCommunities + Math.floor(Math.random() * 5),
-        satelliteVerifications:
-          prev.satelliteVerifications + Math.floor(Math.random() * 3),
-        blockchainTransactions:
-          prev.blockchainTransactions + Math.floor(Math.random() * 10),
+        activeCommunities: prev.activeCommunities + Math.floor(Math.random() * 5),
+        satelliteVerifications: prev.satelliteVerifications + Math.floor(Math.random() * 3),
+        blockchainTransactions: prev.blockchainTransactions + Math.floor(Math.random() * 10),
       }));
     }, 12000);
 
@@ -240,7 +237,7 @@ export default function PlanetCleaningRewardsSystem() {
       if (error) throw error;
 
       toast.success(
-        `Activity submitted! You'll earn ${tokensEarned} GAiA tokens after verification.`,
+        `Activity submitted! You'll earn ${tokensEarned} GAiA tokens after verification.`
       );
 
       // Reset form
@@ -321,10 +318,7 @@ export default function PlanetCleaningRewardsSystem() {
     },
   ];
 
-  const totalTokensEarned = rewards.reduce(
-    (sum, reward) => sum + reward.tokens_earned,
-    0,
-  );
+  const totalTokensEarned = rewards.reduce((sum, reward) => sum + reward.tokens_earned, 0);
   const verifiedRewards = rewards.filter((r) => r.verified_at);
   const pendingRewards = rewards.filter((r) => !r.verified_at);
 
@@ -345,8 +339,7 @@ export default function PlanetCleaningRewardsSystem() {
           🌍 Planet Cleaning Rewards v7
         </h1>
         <p className="text-xl text-muted-foreground">
-          Advanced verification with satellite monitoring, IoT sensors, and
-          blockchain security
+          Advanced verification with satellite monitoring, IoT sensors, and blockchain security
         </p>
         <Badge className="mt-2 bg-purple-600 text-white">
           <Satellite className="h-3 w-3 mr-1" />
@@ -368,41 +361,31 @@ export default function PlanetCleaningRewardsSystem() {
               <div className="text-3xl font-bold text-green-400">
                 {globalMetrics.totalCleaned.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Kg Cleaned
-              </div>
+              <div className="text-sm text-muted-foreground">Total Kg Cleaned</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-400">
                 {globalMetrics.activeCommunities.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Active Communities
-              </div>
+              <div className="text-sm text-muted-foreground">Active Communities</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-400">
                 {globalMetrics.verificationAccuracy}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Verification Accuracy
-              </div>
+              <div className="text-sm text-muted-foreground">Verification Accuracy</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-cyan-400">
                 {globalMetrics.satelliteVerifications.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Satellite Verifications
-              </div>
+              <div className="text-sm text-muted-foreground">Satellite Verifications</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-yellow-400">
                 {globalMetrics.blockchainTransactions.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Blockchain Txns
-              </div>
+              <div className="text-sm text-muted-foreground">Blockchain Txns</div>
             </div>
           </div>
         </CardContent>
@@ -419,36 +402,22 @@ export default function PlanetCleaningRewardsSystem() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">
-                {totalTokensEarned}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Total Tokens Earned
-              </div>
+              <div className="text-3xl font-bold text-green-400">{totalTokensEarned}</div>
+              <div className="text-sm text-muted-foreground">Total Tokens Earned</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400">
-                {verifiedRewards.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Verified Activities
-              </div>
+              <div className="text-3xl font-bold text-blue-400">{verifiedRewards.length}</div>
+              <div className="text-sm text-muted-foreground">Verified Activities</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">
-                {pendingRewards.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Pending Review
-              </div>
+              <div className="text-3xl font-bold text-yellow-400">{pendingRewards.length}</div>
+              <div className="text-sm text-muted-foreground">Pending Review</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-400">
                 {rewards.filter((r) => r.satellite_verified).length}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Satellite Verified
-              </div>
+              <div className="text-sm text-muted-foreground">Satellite Verified</div>
             </div>
           </div>
         </CardContent>
@@ -465,20 +434,16 @@ export default function PlanetCleaningRewardsSystem() {
         <CardContent>
           <div className="space-y-4">
             <p className="text-muted-foreground text-sm">
-              Real-time satellite imagery verifies cleanup activities and
-              environmental changes with 96.7% accuracy.
+              Real-time satellite imagery verifies cleanup activities and environmental changes with
+              96.7% accuracy.
             </p>
             {satelliteData.map((data, index) => (
-              <div
-                key={index}
-                className="p-4 rounded-lg border border-cyan-500/20 bg-cyan-900/10"
-              >
+              <div key={index} className="p-4 rounded-lg border border-cyan-500/20 bg-cyan-900/10">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <Satellite className="h-4 w-4 text-cyan-400" />
                     <span className="text-sm font-medium text-cyan-400">
-                      Location: {data.coordinates[0].toFixed(4)},{" "}
-                      {data.coordinates[1].toFixed(4)}
+                      Location: {data.coordinates[0].toFixed(4)}, {data.coordinates[1].toFixed(4)}
                     </span>
                   </div>
                   <Badge className="bg-green-600">
@@ -487,17 +452,13 @@ export default function PlanetCleaningRewardsSystem() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <div className="text-sm text-muted-foreground mb-1">
-                      Before Image
-                    </div>
+                    <div className="text-sm text-muted-foreground mb-1">Before Image</div>
                     <div className="h-24 bg-gradient-to-br from-red-900/20 to-gray-900/20 rounded border border-red-500/30 flex items-center justify-center">
                       <Camera className="h-8 w-8 text-red-400" />
                     </div>
                   </div>
                   <div>
-                    <div className="text-sm text-muted-foreground mb-1">
-                      After Image
-                    </div>
+                    <div className="text-sm text-muted-foreground mb-1">After Image</div>
                     <div className="h-24 bg-gradient-to-br from-green-900/20 to-blue-900/20 rounded border border-green-500/30 flex items-center justify-center">
                       <Camera className="h-8 w-8 text-green-400" />
                     </div>
@@ -520,8 +481,8 @@ export default function PlanetCleaningRewardsSystem() {
         <CardContent>
           <div className="space-y-4">
             <p className="text-muted-foreground text-sm">
-              Distributed IoT sensors provide real-time environmental quality
-              measurements to verify cleanup impact.
+              Distributed IoT sensors provide real-time environmental quality measurements to verify
+              cleanup impact.
             </p>
             {iotReadings.map((reading, index) => (
               <div
@@ -532,8 +493,7 @@ export default function PlanetCleaningRewardsSystem() {
                   <div className="flex items-center gap-2">
                     <Network className="h-4 w-4 text-green-400" />
                     <span className="text-sm font-medium text-green-400">
-                      {reading.sensor_type.replace("_", " ").toUpperCase()}{" "}
-                      Sensor
+                      {reading.sensor_type.replace("_", " ").toUpperCase()} Sensor
                     </span>
                   </div>
                   <Badge variant="outline" className="text-blue-400">
@@ -543,15 +503,12 @@ export default function PlanetCleaningRewardsSystem() {
                 <div className="grid grid-cols-3 gap-4 text-sm">
                   <div>
                     <div className="text-muted-foreground">Reading Value</div>
-                    <div className="font-medium text-green-400">
-                      {reading.reading_value}%
-                    </div>
+                    <div className="font-medium text-green-400">{reading.reading_value}%</div>
                   </div>
                   <div>
                     <div className="text-muted-foreground">Location</div>
                     <div className="font-medium text-blue-400 font-mono text-xs">
-                      {reading.location[0].toFixed(4)},{" "}
-                      {reading.location[1].toFixed(4)}
+                      {reading.location[0].toFixed(4)}, {reading.location[1].toFixed(4)}
                     </div>
                   </div>
                   <div>
@@ -577,9 +534,7 @@ export default function PlanetCleaningRewardsSystem() {
           <div className="mb-4 p-3 rounded-lg bg-blue-900/20 border border-blue-500/20">
             <div className="flex items-center gap-2 mb-2">
               <Satellite className="h-4 w-4 text-blue-400" />
-              <span className="text-sm font-medium text-blue-400">
-                Multi-Layer Verification
-              </span>
+              <span className="text-sm font-medium text-blue-400">Multi-Layer Verification</span>
             </div>
             <div className="text-xs text-muted-foreground space-y-1">
               <div>✓ Satellite imagery verification</div>
@@ -591,9 +546,7 @@ export default function PlanetCleaningRewardsSystem() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Activity Type
-              </label>
+              <label className="block text-sm font-medium mb-2">Activity Type</label>
               <Select value={activityType} onValueChange={setActivityType}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select activity type" />
@@ -612,9 +565,7 @@ export default function PlanetCleaningRewardsSystem() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                GPS Location
-              </label>
+              <label className="block text-sm font-medium mb-2">GPS Location</label>
               <div className="flex gap-2">
                 <Input
                   placeholder="Auto-detected GPS coordinates"
@@ -630,9 +581,7 @@ export default function PlanetCleaningRewardsSystem() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Activity Description
-            </label>
+            <label className="block text-sm font-medium mb-2">Activity Description</label>
             <Input
               placeholder="Describe your environmental activity"
               value={description}
@@ -642,8 +591,7 @@ export default function PlanetCleaningRewardsSystem() {
 
           <div>
             <label className="block text-sm font-medium mb-2">
-              Impact Amount (
-              {activityType ? getImpactUnit(activityType) : "units"})
+              Impact Amount ({activityType ? getImpactUnit(activityType) : "units"})
             </label>
             <Input
               type="number"
@@ -656,13 +604,7 @@ export default function PlanetCleaningRewardsSystem() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Button
               onClick={submitCleaningActivity}
-              disabled={
-                submitting ||
-                !activityType ||
-                !location ||
-                !description ||
-                !impactAmount
-              }
+              disabled={submitting || !activityType || !location || !description || !impactAmount}
               className="bg-blue-600 hover:bg-blue-700"
             >
               {submitting ? "Submitting..." : "Submit for Verification"}
@@ -678,12 +620,8 @@ export default function PlanetCleaningRewardsSystem() {
           </div>
 
           <div className="text-xs text-muted-foreground bg-green-900/20 p-3 rounded-lg border border-green-500/20">
-            <div className="font-medium text-green-400 mb-1">
-              Enhanced Verification Process:
-            </div>
-            <div>
-              1. Satellite imagery confirms location and change detection
-            </div>
+            <div className="font-medium text-green-400 mb-1">Enhanced Verification Process:</div>
+            <div>1. Satellite imagery confirms location and change detection</div>
             <div>2. IoT sensors validate environmental improvement</div>
             <div>3. Community validators review submission</div>
             <div>4. Blockchain records immutable verification</div>
@@ -776,21 +714,15 @@ export default function PlanetCleaningRewardsSystem() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center">
               <div className="text-3xl font-bold text-green-400">2.8M</div>
-              <div className="text-sm text-muted-foreground">
-                Total Tokens Distributed
-              </div>
+              <div className="text-sm text-muted-foreground">Total Tokens Distributed</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-400">15.2K</div>
-              <div className="text-sm text-muted-foreground">
-                Active Cleaners
-              </div>
+              <div className="text-sm text-muted-foreground">Active Cleaners</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-400">847</div>
-              <div className="text-sm text-muted-foreground">
-                Cities Covered
-              </div>
+              <div className="text-sm text-muted-foreground">Cities Covered</div>
             </div>
           </div>
         </CardContent>

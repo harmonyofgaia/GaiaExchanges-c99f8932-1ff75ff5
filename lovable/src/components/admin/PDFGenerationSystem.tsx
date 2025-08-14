@@ -3,14 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  FileText,
-  Download,
-  RefreshCw,
-  CheckCircle,
-  Clock,
-  AlertTriangle,
-} from "lucide-react";
+import { FileText, Download, RefreshCw, CheckCircle, Clock, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 
 interface PDFDocument {
@@ -100,7 +93,7 @@ export function PDFGenerationSystem() {
             };
           }
           return doc;
-        }),
+        })
       );
     }, 10000); // Every 10 seconds
 
@@ -161,10 +154,8 @@ export function PDFGenerationSystem() {
     toast.success(`📄 Downloading ${document.name}...`);
     setDocuments((prev) =>
       prev.map((doc) =>
-        doc.id === document.id
-          ? { ...doc, downloadCount: doc.downloadCount + 1 }
-          : doc,
-      ),
+        doc.id === document.id ? { ...doc, downloadCount: doc.downloadCount + 1 } : doc
+      )
     );
 
     // Simulate download
@@ -176,9 +167,7 @@ export function PDFGenerationSystem() {
   const regenerateDocument = (document: PDFDocument) => {
     toast.success(`🔄 Regenerating ${document.name}...`);
     setDocuments((prev) =>
-      prev.map((doc) =>
-        doc.id === document.id ? { ...doc, status: "updating" as const } : doc,
-      ),
+      prev.map((doc) => (doc.id === document.id ? { ...doc, status: "updating" as const } : doc))
     );
 
     setTimeout(() => {
@@ -191,8 +180,8 @@ export function PDFGenerationSystem() {
                 lastUpdated: "Just now",
                 size: `${(Math.random() * 3 + 1).toFixed(1)} MB`,
               }
-            : doc,
-        ),
+            : doc
+        )
       );
       toast.success(`✅ ${document.name} regenerated successfully!`);
     }, 5000);
@@ -202,9 +191,7 @@ export function PDFGenerationSystem() {
     setIsGeneratingAll(true);
     toast.success("🚀 Generating all documents...");
 
-    setDocuments((prev) =>
-      prev.map((doc) => ({ ...doc, status: "updating" as const })),
-    );
+    setDocuments((prev) => prev.map((doc) => ({ ...doc, status: "updating" as const })));
 
     setTimeout(() => {
       setDocuments((prev) =>
@@ -213,7 +200,7 @@ export function PDFGenerationSystem() {
           status: "generated" as const,
           lastUpdated: "Just now",
           size: `${(Math.random() * 3 + 1).toFixed(1)} MB`,
-        })),
+        }))
       );
       setIsGeneratingAll(false);
       toast.success("✅ All documents generated successfully!");
@@ -221,13 +208,8 @@ export function PDFGenerationSystem() {
   };
 
   const totalDocuments = documents.length;
-  const generatedDocuments = documents.filter(
-    (doc) => doc.status === "generated",
-  ).length;
-  const totalDownloads = documents.reduce(
-    (sum, doc) => sum + doc.downloadCount,
-    0,
-  );
+  const generatedDocuments = documents.filter((doc) => doc.status === "generated").length;
+  const totalDownloads = documents.reduce((sum, doc) => sum + doc.downloadCount, 0);
 
   return (
     <div className="space-y-6">
@@ -245,17 +227,13 @@ export function PDFGenerationSystem() {
               <div className="text-2xl font-bold text-green-400">
                 {generatedDocuments}/{totalDocuments}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Documents Ready
-              </div>
+              <div className="text-sm text-muted-foreground">Documents Ready</div>
             </div>
             <div className="text-center p-4 bg-blue-900/20 rounded-lg">
               <div className="text-2xl font-bold text-blue-400">
                 {totalDownloads.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Downloads
-              </div>
+              <div className="text-sm text-muted-foreground">Total Downloads</div>
             </div>
             <div className="text-center p-4 bg-purple-900/20 rounded-lg">
               <div className="text-2xl font-bold text-purple-400">24/7</div>
@@ -309,9 +287,7 @@ export function PDFGenerationSystem() {
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex-1">
-                      <h4 className="font-bold text-white text-sm mb-1">
-                        {doc.name}
-                      </h4>
+                      <h4 className="font-bold text-white text-sm mb-1">{doc.name}</h4>
                       <Badge
                         className={`${getCategoryColor(doc.category)} text-white text-xs mb-2`}
                       >
@@ -324,9 +300,7 @@ export function PDFGenerationSystem() {
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs">
                       <span className="text-muted-foreground">Status</span>
-                      <Badge
-                        className={`${getStatusColor(doc.status)} text-white text-xs`}
-                      >
+                      <Badge className={`${getStatusColor(doc.status)} text-white text-xs`}>
                         {doc.status.toUpperCase()}
                       </Badge>
                     </div>
@@ -338,9 +312,7 @@ export function PDFGenerationSystem() {
 
                     <div className="flex justify-between text-xs">
                       <span className="text-muted-foreground">Downloads</span>
-                      <span className="text-green-400">
-                        {doc.downloadCount}
-                      </span>
+                      <span className="text-green-400">{doc.downloadCount}</span>
                     </div>
 
                     <div className="flex justify-between text-xs">
@@ -382,9 +354,7 @@ export function PDFGenerationSystem() {
       {/* Generation Statistics */}
       <Card className="border-green-500/30 bg-green-900/20">
         <CardHeader>
-          <CardTitle className="text-green-400">
-            📊 Generation Statistics
-          </CardTitle>
+          <CardTitle className="text-green-400">📊 Generation Statistics</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">

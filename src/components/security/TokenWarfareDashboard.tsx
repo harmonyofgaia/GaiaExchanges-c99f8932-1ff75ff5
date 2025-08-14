@@ -5,14 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { tokenWarfare } from "@/services/tokenWarfare";
-import {
-  Coins,
-  Shield,
-  Zap,
-  Target,
-  TrendingUp,
-  DollarSign,
-} from "lucide-react";
+import { Coins, Shield, Zap, Target, TrendingUp, DollarSign } from "lucide-react";
 
 export function TokenWarfareDashboard() {
   const [status, setStatus] = useState({
@@ -99,9 +92,7 @@ export function TokenWarfareDashboard() {
               <TrendingUp className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Active Proposals</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.activeProposals}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.activeProposals}</div>
           </div>
         </div>
 
@@ -129,20 +120,12 @@ export function TokenWarfareDashboard() {
             Initialize Token Warfare
           </Button>
 
-          <Button
-            onClick={handleCreateTokenMechanism}
-            variant="outline"
-            size="sm"
-          >
+          <Button onClick={handleCreateTokenMechanism} variant="outline" size="sm">
             <Coins className="h-4 w-4 mr-2" />
             Create Token Mechanism
           </Button>
 
-          <Button
-            onClick={handleCreateLiquidityPool}
-            variant="outline"
-            size="sm"
-          >
+          <Button onClick={handleCreateLiquidityPool} variant="outline" size="sm">
             <Shield className="h-4 w-4 mr-2" />
             Create Liquidity Pool
           </Button>
@@ -162,10 +145,9 @@ export function TokenWarfareDashboard() {
         <div className="p-4 bg-muted/50 rounded-lg">
           <h4 className="font-medium mb-2">🏦 Economic Domination Guarantee</h4>
           <p className="text-sm text-muted-foreground">
-            Our token warfare system provides unparalleled economic control
-            through advanced DeFi protocols, strategic token generation, and
-            market manipulation resistance. Complete financial sovereignty
-            achieved.
+            Our token warfare system provides unparalleled economic control through advanced DeFi
+            protocols, strategic token generation, and market manipulation resistance. Complete
+            financial sovereignty achieved.
           </p>
         </div>
       </CardContent>

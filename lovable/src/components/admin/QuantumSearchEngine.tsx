@@ -136,8 +136,7 @@ export function QuantumSearchEngine() {
           id: "1",
           title: `Hidden Database Entry: ${searchQuery}`,
           url: `https://classified-db.gov/records/${searchQuery}`,
-          description:
-            "Classified government database containing sensitive information",
+          description: "Classified government database containing sensitive information",
           type: "database",
           riskLevel: "critical",
           timestamp: new Date(),
@@ -260,22 +259,15 @@ export function QuantumSearchEngine() {
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
             {quantumEngines.map((engine, index) => (
-              <div
-                key={index}
-                className="p-3 bg-black/30 rounded-lg border border-purple-500/20"
-              >
+              <div key={index} className="p-3 bg-black/30 rounded-lg border border-purple-500/20">
                 <div className="text-center">
                   <div className="text-2xl mb-1">{engine.emoji}</div>
-                  <div className="text-xs font-bold text-purple-400">
-                    {engine.name}
-                  </div>
+                  <div className="text-xs font-bold text-purple-400">{engine.name}</div>
                   <div className="text-xs text-muted-foreground mb-2">
                     {engine.results.toLocaleString()} results
                   </div>
                   <Progress value={engine.power} className="h-2" />
-                  <div className="text-xs text-purple-300 mt-1">
-                    {engine.power}% Power
-                  </div>
+                  <div className="text-xs text-purple-300 mt-1">{engine.power}% Power</div>
                 </div>
               </div>
             ))}
@@ -286,9 +278,7 @@ export function QuantumSearchEngine() {
       {searchResults.length > 0 && (
         <Card className="border-red-500/30 bg-red-900/20">
           <CardHeader>
-            <CardTitle className="text-red-400">
-              🎯 QUANTUM SEARCH RESULTS - CLASSIFIED
-            </CardTitle>
+            <CardTitle className="text-red-400">🎯 QUANTUM SEARCH RESULTS - CLASSIFIED</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -301,23 +291,15 @@ export function QuantumSearchEngine() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <h4 className="font-bold text-white">{result.title}</h4>
-                        <Badge
-                          className={`${getTypeColor(result.type)} text-white text-xs`}
-                        >
+                        <Badge className={`${getTypeColor(result.type)} text-white text-xs`}>
                           {result.type.toUpperCase()}
                         </Badge>
-                        <Badge
-                          className={`bg-gray-800 ${getRiskColor(result.riskLevel)} text-xs`}
-                        >
+                        <Badge className={`bg-gray-800 ${getRiskColor(result.riskLevel)} text-xs`}>
                           {result.riskLevel.toUpperCase()}
                         </Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {result.description}
-                      </p>
-                      <div className="text-xs text-gray-400 font-mono">
-                        {result.url}
-                      </div>
+                      <p className="text-sm text-muted-foreground mb-2">{result.description}</p>
+                      <div className="text-xs text-gray-400 font-mono">{result.url}</div>
                     </div>
                     <div className="flex gap-2">
                       <Button

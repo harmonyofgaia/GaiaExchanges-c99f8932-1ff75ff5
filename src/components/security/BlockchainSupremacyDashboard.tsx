@@ -3,14 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Link,
-  Shield,
-  AlertTriangle,
-  GitBranch,
-  TrendingUp,
-  Zap,
-} from "lucide-react";
+import { Link, Shield, AlertTriangle, GitBranch, TrendingUp, Zap } from "lucide-react";
 import { blockchainSecurity } from "@/services/blockchainSecurity";
 import { toast } from "sonner";
 
@@ -62,11 +55,10 @@ export function BlockchainSupremacyDashboard() {
         { address: "0x9876543210987654321098765432109876543210", chainId: 137 },
       ];
 
-      const contract =
-        testContracts[Math.floor(Math.random() * testContracts.length)];
+      const contract = testContracts[Math.floor(Math.random() * testContracts.length)];
       const scanResult = await blockchainSecurity.scanSmartContract(
         contract.address,
-        contract.chainId,
+        contract.chainId
       );
 
       setContractScans((prev) => [scanResult, ...prev].slice(0, 10));
@@ -90,8 +82,7 @@ export function BlockchainSupremacyDashboard() {
         to: "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd",
       };
 
-      const result =
-        await blockchainSecurity.secureCrossChainTransaction(testTx);
+      const result = await blockchainSecurity.secureCrossChainTransaction(testTx);
       setCrossChainTxs((prev) => [result, ...prev].slice(0, 10));
 
       if (result.status === "blocked") {
@@ -165,9 +156,7 @@ export function BlockchainSupremacyDashboard() {
               <div className="text-3xl font-bold text-indigo-400">
                 {securityStatus.monitoredChains}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Monitored Chains
-              </div>
+              <div className="text-sm text-muted-foreground">Monitored Chains</div>
               <Badge className="mt-1 bg-indigo-600 text-white">
                 <Link className="h-3 w-3 mr-1" />
                 Multi-Chain
@@ -178,9 +167,7 @@ export function BlockchainSupremacyDashboard() {
               <div className="text-3xl font-bold text-blue-400">
                 {securityStatus.scannedContracts}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Scanned Contracts
-              </div>
+              <div className="text-sm text-muted-foreground">Scanned Contracts</div>
               <Badge className="mt-1 bg-blue-600 text-white">
                 <Shield className="h-3 w-3 mr-1" />
                 Analyzed
@@ -191,9 +178,7 @@ export function BlockchainSupremacyDashboard() {
               <div className="text-3xl font-bold text-green-400">
                 {securityStatus.crossChainTransactions}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Cross-Chain Txs
-              </div>
+              <div className="text-sm text-muted-foreground">Cross-Chain Txs</div>
               <Badge className="mt-1 bg-green-600 text-white">
                 <TrendingUp className="h-3 w-3 mr-1" />
                 Secured
@@ -204,9 +189,7 @@ export function BlockchainSupremacyDashboard() {
               <div className="text-3xl font-bold text-orange-400">
                 {securityStatus.detectedForks}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Detected Forks
-              </div>
+              <div className="text-sm text-muted-foreground">Detected Forks</div>
               <Badge className="mt-1 bg-orange-600 text-white">
                 <GitBranch className="h-3 w-3 mr-1" />
                 Monitored
@@ -224,9 +207,7 @@ export function BlockchainSupremacyDashboard() {
               </div>
               <Progress
                 value={
-                  (securityStatus.secureChains /
-                    Math.max(securityStatus.monitoredChains, 1)) *
-                  100
+                  (securityStatus.secureChains / Math.max(securityStatus.monitoredChains, 1)) * 100
                 }
                 className="h-2"
               />
@@ -255,9 +236,7 @@ export function BlockchainSupremacyDashboard() {
               disabled={isInitializing || securityStatus.isActive}
               className="bg-indigo-600 hover:bg-indigo-700"
             >
-              {isInitializing
-                ? "Initializing..."
-                : "Initialize Blockchain Security"}
+              {isInitializing ? "Initializing..." : "Initialize Blockchain Security"}
             </Button>
 
             <Button
@@ -300,12 +279,11 @@ export function BlockchainSupremacyDashboard() {
                   <div className="flex items-start justify-between mb-3">
                     <div>
                       <div className="font-medium text-red-400">
-                        {contract.address.slice(0, 20)}... (
-                        {getChainName(contract.chainId)})
+                        {contract.address.slice(0, 20)}... ({getChainName(contract.chainId)})
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        Risk Score: {(contract.riskScore * 100).toFixed(1)}% |
-                        Verified: {contract.isVerified ? "Yes" : "No"}
+                        Risk Score: {(contract.riskScore * 100).toFixed(1)}% | Verified:{" "}
+                        {contract.isVerified ? "Yes" : "No"}
                       </div>
                     </div>
 
@@ -331,12 +309,8 @@ export function BlockchainSupremacyDashboard() {
                           className="flex items-center justify-between p-2 bg-red-900/20 rounded border border-red-500/30"
                         >
                           <div>
-                            <div className="text-sm font-medium text-red-400">
-                              {vuln.type}
-                            </div>
-                            <div className="text-xs text-muted-foreground">
-                              {vuln.description}
-                            </div>
+                            <div className="text-sm font-medium text-red-400">{vuln.type}</div>
+                            <div className="text-xs text-muted-foreground">{vuln.description}</div>
                           </div>
                           <Badge
                             className={`${getSeverityColor(vuln.severity)} text-white text-xs`}
@@ -353,9 +327,7 @@ export function BlockchainSupremacyDashboard() {
               <div className="text-center text-muted-foreground py-8">
                 <AlertTriangle className="h-12 w-12 mx-auto mb-4 text-red-400/50" />
                 <p>No contract scans available</p>
-                <p className="text-sm">
-                  Scan smart contracts to detect vulnerabilities
-                </p>
+                <p className="text-sm">Scan smart contracts to detect vulnerabilities</p>
               </div>
             )}
           </div>
@@ -381,8 +353,7 @@ export function BlockchainSupremacyDashboard() {
                   <div className="flex items-start justify-between mb-3">
                     <div>
                       <div className="font-medium text-green-400">
-                        {getChainName(tx.sourceChain)} →{" "}
-                        {getChainName(tx.targetChain)}
+                        {getChainName(tx.sourceChain)} → {getChainName(tx.targetChain)}
                       </div>
                       <div className="text-sm text-muted-foreground">
                         Amount: {tx.amount} {tx.token} | Risk Level:{" "}
@@ -390,9 +361,7 @@ export function BlockchainSupremacyDashboard() {
                       </div>
                     </div>
 
-                    <Badge
-                      className={`${getStatusColor(tx.status)} text-white`}
-                    >
+                    <Badge className={`${getStatusColor(tx.status)} text-white`}>
                       {tx.status.toUpperCase()}
                     </Badge>
                   </div>
@@ -417,9 +386,7 @@ export function BlockchainSupremacyDashboard() {
               <div className="text-center text-muted-foreground py-8">
                 <TrendingUp className="h-12 w-12 mx-auto mb-4 text-green-400/50" />
                 <p>No cross-chain transactions monitored</p>
-                <p className="text-sm">
-                  Test cross-chain security to see results
-                </p>
+                <p className="text-sm">Test cross-chain security to see results</p>
               </div>
             )}
           </div>
@@ -469,9 +436,7 @@ export function BlockchainSupremacyDashboard() {
               </div>
 
               <div className="flex items-center justify-between p-3 bg-yellow-900/10 rounded border border-yellow-500/20">
-                <span className="text-sm">
-                  Cross-Chain Transaction Monitoring
-                </span>
+                <span className="text-sm">Cross-Chain Transaction Monitoring</span>
                 <Badge className="bg-yellow-600 text-white">Live</Badge>
               </div>
             </div>

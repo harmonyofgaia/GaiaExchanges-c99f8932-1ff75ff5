@@ -9,33 +9,23 @@ export const useTypeValidation = (componentName: string) => {
     // Validate token configuration
     const tokenErrors = TypeValidator.validateTokenConfig(GAIA_TOKEN);
     if (tokenErrors.length > 0) {
-      TypeValidator.logValidationErrors(
-        `${componentName} - GAIA_TOKEN`,
-        tokenErrors,
-      );
+      TypeValidator.logValidationErrors(`${componentName} - GAIA_TOKEN`, tokenErrors);
     }
 
     // Validate metrics
     const metricsErrors = TypeValidator.validateMetrics(GAIA_METRICS);
     if (metricsErrors.length > 0) {
-      TypeValidator.logValidationErrors(
-        `${componentName} - GAIA_METRICS`,
-        metricsErrors,
-      );
+      TypeValidator.logValidationErrors(`${componentName} - GAIA_METRICS`, metricsErrors);
     }
 
     if (tokenErrors.length === 0 && metricsErrors.length === 0) {
-      console.log(
-        `✅ ${componentName}: All type validations passed successfully`,
-      );
+      console.log(`✅ ${componentName}: All type validations passed successfully`);
     }
   }, [componentName]);
 
   return {
-    validateTokenConfig: (config: unknown) =>
-      TypeValidator.validateTokenConfig(config),
-    validateMetrics: (metrics: unknown) =>
-      TypeValidator.validateMetrics(metrics),
+    validateTokenConfig: (config: unknown) => TypeValidator.validateTokenConfig(config),
+    validateMetrics: (metrics: unknown) => TypeValidator.validateMetrics(metrics),
     isValidConfiguration: () => {
       const tokenErrors = TypeValidator.validateTokenConfig(GAIA_TOKEN);
       const metricsErrors = TypeValidator.validateMetrics(GAIA_METRICS);

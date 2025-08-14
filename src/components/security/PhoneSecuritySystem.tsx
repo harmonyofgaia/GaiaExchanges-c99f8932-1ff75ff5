@@ -97,9 +97,7 @@ export function PhoneSecuritySystem() {
     console.log("🌐 Protecting Network: All connected devices and services");
 
     const performSecurityScan = () => {
-      console.log(
-        "🛡️ Phone Security Scan - Checking all communication channels",
-      );
+      console.log("🛡️ Phone Security Scan - Checking all communication channels");
 
       const potentialThreats = [
         {
@@ -140,17 +138,14 @@ export function PhoneSecuritySystem() {
 
       if (Math.random() < 0.15) {
         // 15% chance of detecting a threat
-        const threatData =
-          potentialThreats[Math.floor(Math.random() * potentialThreats.length)];
-        const threatLevel =
-          Math.random() > 0.9 ? "high" : Math.random() > 0.6 ? "medium" : "low";
+        const threatData = potentialThreats[Math.floor(Math.random() * potentialThreats.length)];
+        const threatLevel = Math.random() > 0.9 ? "high" : Math.random() > 0.6 ? "medium" : "low";
 
         const newThreat: SecurityThreat = {
           id: `threat-${Date.now()}`,
           type: threatLevel as "high" | "medium" | "low",
           title: threatData.title,
-          description:
-            "Automatically neutralized by advanced phone security system",
+          description: "Automatically neutralized by advanced phone security system",
           timestamp: new Date(),
           resolved: true,
           channel: threatData.channel,
@@ -259,9 +254,7 @@ export function PhoneSecuritySystem() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-400">100%</div>
-              <div className="text-sm text-muted-foreground">
-                Security Score
-              </div>
+              <div className="text-sm text-muted-foreground">Security Score</div>
               <Badge className="mt-1 bg-blue-600 text-white">
                 <CheckCircle className="h-3 w-3 mr-1" />
                 Maximum
@@ -272,9 +265,7 @@ export function PhoneSecuritySystem() {
               <div className="text-3xl font-bold text-green-400">
                 {securityStatus.threatsBlocked}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Blocked
-              </div>
+              <div className="text-sm text-muted-foreground">Threats Blocked</div>
               <Badge className="mt-1 bg-green-600 text-white">
                 <Shield className="h-3 w-3 mr-1" />
                 Protected
@@ -285,9 +276,7 @@ export function PhoneSecuritySystem() {
               <div className="text-3xl font-bold text-purple-400">
                 {securityStatus.activeProtections}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Active Shields
-              </div>
+              <div className="text-sm text-muted-foreground">Active Shields</div>
               <Badge className="mt-1 bg-purple-600 text-white">
                 <Activity className="h-3 w-3 mr-1" />
                 Running
@@ -309,44 +298,30 @@ export function PhoneSecuritySystem() {
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <Smartphone className="h-4 w-4 text-blue-400" />
-                  <span className="text-blue-400 font-medium">
-                    Protected Phone:
-                  </span>
+                  <span className="text-blue-400 font-medium">Protected Phone:</span>
                 </div>
-                <code className="text-green-400">
-                  {securityStatus.phoneNumber}
-                </code>
+                <code className="text-green-400">{securityStatus.phoneNumber}</code>
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <Mail className="h-4 w-4 text-blue-400" />
-                  <span className="text-blue-400 font-medium">
-                    Protected Email:
-                  </span>
+                  <span className="text-blue-400 font-medium">Protected Email:</span>
                 </div>
                 <code className="text-green-400">{securityStatus.email}</code>
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <Globe className="h-4 w-4 text-blue-400" />
-                  <span className="text-blue-400 font-medium">
-                    Protected IP:
-                  </span>
+                  <span className="text-blue-400 font-medium">Protected IP:</span>
                 </div>
-                <code className="text-green-400">
-                  {securityStatus.ipAddress}
-                </code>
+                <code className="text-green-400">{securityStatus.ipAddress}</code>
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <Globe className="h-4 w-4 text-blue-400" />
-                  <span className="text-blue-400 font-medium">
-                    Secured Network:
-                  </span>
+                  <span className="text-blue-400 font-medium">Secured Network:</span>
                 </div>
-                <code className="text-green-400">
-                  {securityStatus.wifiNetwork}
-                </code>
+                <code className="text-green-400">{securityStatus.wifiNetwork}</code>
               </div>
             </div>
           </div>
@@ -372,14 +347,10 @@ export function PhoneSecuritySystem() {
                   <CheckCircle className="h-4 w-4 text-green-400" />
                   <div>
                     <div className="font-medium text-sm">{feature.name}</div>
-                    <div className="text-xs text-muted-foreground">
-                      {feature.level}
-                    </div>
+                    <div className="text-xs text-muted-foreground">{feature.level}</div>
                   </div>
                 </div>
-                <Badge className="bg-green-600 text-white text-xs">
-                  Active
-                </Badge>
+                <Badge className="bg-green-600 text-white text-xs">Active</Badge>
               </div>
             ))}
           </div>
@@ -427,21 +398,16 @@ export function PhoneSecuritySystem() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium">
-                        {threat.title}
-                      </span>
+                      <span className="text-sm font-medium">{threat.title}</span>
                       <Badge className="text-xs" variant="outline">
                         {threat.channel.toUpperCase()}
                       </Badge>
                     </div>
                     <div className="text-xs text-muted-foreground">
-                      {threat.timestamp.toLocaleTimeString()} •{" "}
-                      {threat.description}
+                      {threat.timestamp.toLocaleTimeString()} • {threat.description}
                     </div>
                   </div>
-                  <Badge className="bg-green-600 text-white text-xs">
-                    Blocked
-                  </Badge>
+                  <Badge className="bg-green-600 text-white text-xs">Blocked</Badge>
                 </div>
               ))}
             </div>
@@ -460,12 +426,10 @@ export function PhoneSecuritySystem() {
               </h3>
             </div>
             <p className="text-sm text-muted-foreground max-w-3xl mx-auto">
-              Your phone number (+31687758236), email
-              (info@cultureofharmony.net), and all connected services are
-              protected by military-grade security. We monitor SMS, email,
-              calls, WiFi, and IP traffic 24/7 to prevent phishing, malware, and
-              social engineering attacks across all platforms including Gmail,
-              Outlook, WhatsApp, Telegram, and more.
+              Your phone number (+31687758236), email (info@cultureofharmony.net), and all connected
+              services are protected by military-grade security. We monitor SMS, email, calls, WiFi,
+              and IP traffic 24/7 to prevent phishing, malware, and social engineering attacks
+              across all platforms including Gmail, Outlook, WhatsApp, Telegram, and more.
             </p>
             <div className="flex items-center justify-center gap-4 pt-2 flex-wrap">
               <Badge className="bg-blue-600 text-white">

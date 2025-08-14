@@ -29,8 +29,7 @@ export function CompletionTaskManager() {
     {
       id: "2",
       title: "Legal Documentation",
-      description:
-        "Create official partnership agreements with brand distinction clauses",
+      description: "Create official partnership agreements with brand distinction clauses",
       category: "legal",
       completed: false,
       priority: "high",
@@ -38,8 +37,7 @@ export function CompletionTaskManager() {
     {
       id: "3",
       title: "Google Search Optimization",
-      description:
-        "Submit to Google to clarify our distinct identity and prevent confusion",
+      description: "Submit to Google to clarify our distinct identity and prevent confusion",
       category: "marketing",
       completed: false,
       priority: "high",
@@ -47,8 +45,7 @@ export function CompletionTaskManager() {
     {
       id: "4",
       title: "Exclusive Brand Identity",
-      description:
-        "Develop unique visual and textual elements that distinguish us completely",
+      description: "Develop unique visual and textual elements that distinguish us completely",
       category: "branding",
       completed: false,
       priority: "high",
@@ -72,8 +69,7 @@ export function CompletionTaskManager() {
     {
       id: "7",
       title: "Immutable AI Core Protection",
-      description:
-        "Lock AI modifications to admin-only with biometric verification",
+      description: "Lock AI modifications to admin-only with biometric verification",
       category: "security",
       completed: false,
       priority: "high",
@@ -81,8 +77,7 @@ export function CompletionTaskManager() {
     {
       id: "8",
       title: "Enhanced Tools & Weapons Making System",
-      description:
-        "Advanced 3D designer for creating superior gaming tools and weapons",
+      description: "Advanced 3D designer for creating superior gaming tools and weapons",
       category: "development",
       completed: false,
       priority: "medium",
@@ -91,9 +86,7 @@ export function CompletionTaskManager() {
 
   const toggleTask = (taskId: string) => {
     setTasks((prev) =>
-      prev.map((task) =>
-        task.id === taskId ? { ...task, completed: !task.completed } : task,
-      ),
+      prev.map((task) => (task.id === taskId ? { ...task, completed: !task.completed } : task))
     );
 
     const task = tasks.find((t) => t.id === taskId);
@@ -153,9 +146,7 @@ export function CompletionTaskManager() {
             <div className="text-4xl font-bold text-purple-400 mb-2">
               {completedTasks}/{totalTasks}
             </div>
-            <div className="text-sm text-muted-foreground mb-4">
-              Tasks Completed
-            </div>
+            <div className="text-sm text-muted-foreground mb-4">Tasks Completed</div>
             <Progress value={completionPercentage} className="h-4" />
             <div className="text-sm text-muted-foreground mt-2">
               {completionPercentage.toFixed(1)}% Complete
@@ -209,9 +200,7 @@ export function CompletionTaskManager() {
                         {task.priority.toUpperCase()}
                       </Badge>
                     </div>
-                    <p
-                      className={`text-sm ${task.completed ? "text-gray-500" : "text-gray-300"}`}
-                    >
+                    <p className={`text-sm ${task.completed ? "text-gray-500" : "text-gray-300"}`}>
                       {task.description}
                     </p>
                   </div>
@@ -227,9 +216,8 @@ export function CompletionTaskManager() {
                 🎉 WATERSOLID PLAN COMPLETE! 🎉
               </h3>
               <p className="text-green-300">
-                All tasks completed! GAiA Token community is now fully
-                established as an exclusive, independent project powered by
-                Culture of Harmony!
+                All tasks completed! GAiA Token community is now fully established as an exclusive,
+                independent project powered by Culture of Harmony!
               </p>
             </div>
           )}

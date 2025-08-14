@@ -178,12 +178,7 @@ export interface BeeHotelAction {
 
 export interface EnvironmentalEducationAction {
   id: string;
-  type:
-    | "course_completion"
-    | "teaching"
-    | "content_creation"
-    | "workshop_attendance"
-    | "research";
+  type: "course_completion" | "teaching" | "content_creation" | "workshop_attendance" | "research";
   topic: string;
   duration: number; // hours
   participants: number;
@@ -257,11 +252,7 @@ export interface LocationMission {
 
 export interface CarbonCreditAction {
   id: string;
-  actionType:
-    | "tree_planting"
-    | "renewable_energy"
-    | "carbon_sequestration"
-    | "emissions_reduction";
+  actionType: "tree_planting" | "renewable_energy" | "carbon_sequestration" | "emissions_reduction";
   carbonOffset: number; // kg CO2
   verified: boolean;
   certificationBody: string;
@@ -285,18 +276,8 @@ export interface NFTMarketplaceActivity {
 
 export interface EmergencyResponse {
   id: string;
-  emergencyType:
-    | "wildfire"
-    | "flood"
-    | "earthquake"
-    | "climate_event"
-    | "pollution_incident";
-  responseType:
-    | "volunteer"
-    | "donation"
-    | "resource_sharing"
-    | "coordination"
-    | "reporting";
+  emergencyType: "wildfire" | "flood" | "earthquake" | "climate_event" | "pollution_incident";
+  responseType: "volunteer" | "donation" | "resource_sharing" | "coordination" | "reporting";
   urgencyLevel: 1 | 2 | 3 | 4 | 5;
   impactArea: string;
   hoursContributed: number;
@@ -307,11 +288,7 @@ export interface EmergencyResponse {
 
 export interface LongTermCommitment {
   id: string;
-  commitmentType:
-    | "daily_action"
-    | "weekly_challenge"
-    | "monthly_goal"
-    | "yearly_pledge";
+  commitmentType: "daily_action" | "weekly_challenge" | "monthly_goal" | "yearly_pledge";
   duration: number; // days
   consistency: number; // percentage
   milestones: number;
@@ -323,12 +300,7 @@ export interface LongTermCommitment {
 
 export interface InnovationBonus {
   id: string;
-  innovationType:
-    | "new_solution"
-    | "improvement"
-    | "research"
-    | "patent"
-    | "open_source";
+  innovationType: "new_solution" | "improvement" | "research" | "patent" | "open_source";
   title: string;
   description: string;
   adoptionRate: number;
@@ -341,12 +313,7 @@ export interface InnovationBonus {
 
 export interface AccessibilityReward {
   id: string;
-  type:
-    | "inclusive_design"
-    | "accessibility_testing"
-    | "barrier_removal"
-    | "education"
-    | "advocacy";
+  type: "inclusive_design" | "accessibility_testing" | "barrier_removal" | "education" | "advocacy";
   beneficiaries: number;
   impactVerified: boolean;
   sustainabilityFocus: boolean;
@@ -437,10 +404,7 @@ export interface EcoActionHistory {
 
 export const formatGaiaNumber = (number: number): string => {
   if (typeof number !== "number" || isNaN(number)) {
-    console.warn(
-      "⚠️ Invalid number value provided to formatGaiaNumber:",
-      number,
-    );
+    console.warn("⚠️ Invalid number value provided to formatGaiaNumber:", number);
     return "0";
   }
   return number.toLocaleString();

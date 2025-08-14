@@ -21,12 +21,7 @@ interface DeepWebMonitor {
 
 interface GovernmentIntegration {
   agency: string;
-  classification:
-    | "UNCLASSIFIED"
-    | "CONFIDENTIAL"
-    | "SECRET"
-    | "TOP_SECRET"
-    | "COSMIC";
+  classification: "UNCLASSIFIED" | "CONFIDENTIAL" | "SECRET" | "TOP_SECRET" | "COSMIC";
   feeds: string[];
   realTimeAccess: boolean;
   lastSync: number;
@@ -45,8 +40,7 @@ interface InternationalThreat {
 class GlobalSurveillanceService {
   private satelliteNetwork: Map<string, SatelliteNode> = new Map();
   private deepWebMonitors: Map<string, DeepWebMonitor> = new Map();
-  private governmentIntegrations: Map<string, GovernmentIntegration> =
-    new Map();
+  private governmentIntegrations: Map<string, GovernmentIntegration> = new Map();
   private internationalThreats: Map<string, InternationalThreat> = new Map();
   private isSurveillanceActive = false;
 
@@ -84,11 +78,7 @@ class GlobalSurveillanceService {
         id: "gaia-sat-quantum",
         satelliteName: "GAIA Quantum Eye",
         orbit: "Quantum",
-        coverage: [
-          "Dimensional Monitoring",
-          "Quantum Threats",
-          "Time-Space Anomalies",
-        ],
+        coverage: ["Dimensional Monitoring", "Quantum Threats", "Time-Space Anomalies"],
         isActive: true,
         threats_detected: 0,
         lastUpdate: Date.now(),
@@ -100,11 +90,7 @@ class GlobalSurveillanceService {
       this.initializeSatelliteMonitoring(satellite);
     });
 
-    console.log(
-      "🛰️ Satellite Network Deployed:",
-      satellites.length,
-      "satellites",
-    );
+    console.log("🛰️ Satellite Network Deployed:", satellites.length, "satellites");
 
     toast.success("🛰️ Satellite Network Online", {
       description: `${satellites.length} surveillance satellites deployed globally`,
@@ -127,12 +113,9 @@ class GlobalSurveillanceService {
           "Dimensional breach alert",
         ];
 
-        const detectedThreat =
-          threatTypes[Math.floor(Math.random() * threatTypes.length)];
+        const detectedThreat = threatTypes[Math.floor(Math.random() * threatTypes.length)];
 
-        console.log(
-          `🛰️ ${satellite.satelliteName} detected: ${detectedThreat}`,
-        );
+        console.log(`🛰️ ${satellite.satelliteName} detected: ${detectedThreat}`);
 
         // Alert other systems
         this.coordinateGlobalResponse({
@@ -147,12 +130,10 @@ class GlobalSurveillanceService {
 
   async getSatelliteIntelligence(): Promise<any> {
     const intelligence = {
-      activeSatellites: Array.from(this.satelliteNetwork.values()).filter(
-        (s) => s.isActive,
-      ).length,
+      activeSatellites: Array.from(this.satelliteNetwork.values()).filter((s) => s.isActive).length,
       totalThreats: Array.from(this.satelliteNetwork.values()).reduce(
         (sum, s) => sum + s.threats_detected,
-        0,
+        0
       ),
       globalCoverage: "99.7%",
       quantumMonitoring: this.satelliteNetwork.has("gaia-sat-quantum"),
@@ -181,11 +162,7 @@ class GlobalSurveillanceService {
       {
         id: "deep-monitor",
         layer: "deep",
-        marketplaces: [
-          "Academic Databases",
-          "Private Forums",
-          "Corporate Networks",
-        ],
+        marketplaces: ["Academic Databases", "Private Forums", "Corporate Networks"],
         threatsFound: 0,
         intelligence: [],
         isActive: true,
@@ -229,11 +206,7 @@ class GlobalSurveillanceService {
       this.startDeepWebCrawling(monitor);
     });
 
-    console.log(
-      "🌐 Deep Web Monitoring Initialized:",
-      monitors.length,
-      "layers",
-    );
+    console.log("🌐 Deep Web Monitoring Initialized:", monitors.length, "layers");
 
     toast.success("🌐 Deep Web Surveillance Active", {
       description: `Monitoring ${monitors.length} layers of the internet`,
@@ -248,46 +221,24 @@ class GlobalSurveillanceService {
         monitor.threatsFound++;
 
         const threats = {
-          surface: [
-            "Phishing campaigns",
-            "Social engineering",
-            "Malware distribution",
-          ],
-          deep: [
-            "Corporate espionage",
-            "Advanced malware",
-            "State-sponsored activities",
-          ],
+          surface: ["Phishing campaigns", "Social engineering", "Malware distribution"],
+          deep: ["Corporate espionage", "Advanced malware", "State-sponsored activities"],
           dark: ["Exploit kits", "Stolen credentials", "Criminal services"],
-          marianas: [
-            "Zero-day exploits",
-            "Nation-state tools",
-            "Quantum malware",
-          ],
-          quantum_void: [
-            "Reality manipulation tools",
-            "Temporal exploits",
-            "Dimensional breaches",
-          ],
+          marianas: ["Zero-day exploits", "Nation-state tools", "Quantum malware"],
+          quantum_void: ["Reality manipulation tools", "Temporal exploits", "Dimensional breaches"],
         };
 
         const layerThreats = threats[monitor.layer];
-        const foundThreat =
-          layerThreats[Math.floor(Math.random() * layerThreats.length)];
+        const foundThreat = layerThreats[Math.floor(Math.random() * layerThreats.length)];
 
         monitor.intelligence.push({
           timestamp: Date.now(),
           threat: foundThreat,
-          source:
-            monitor.marketplaces[
-              Math.floor(Math.random() * monitor.marketplaces.length)
-            ],
+          source: monitor.marketplaces[Math.floor(Math.random() * monitor.marketplaces.length)],
           layer: monitor.layer,
         });
 
-        console.log(
-          `🌐 Deep Web Monitor (${monitor.layer}) found: ${foundThreat}`,
-        );
+        console.log(`🌐 Deep Web Monitor (${monitor.layer}) found: ${foundThreat}`);
       }
     }, 60000); // Scan every minute
   }
@@ -319,22 +270,14 @@ class GlobalSurveillanceService {
       {
         agency: "CISA",
         classification: "UNCLASSIFIED",
-        feeds: [
-          "Infrastructure Threats",
-          "Vulnerability Alerts",
-          "Incident Reports",
-        ],
+        feeds: ["Infrastructure Threats", "Vulnerability Alerts", "Incident Reports"],
         realTimeAccess: true,
         lastSync: Date.now(),
       },
       {
         agency: "COSMIC_COMMAND",
         classification: "COSMIC",
-        feeds: [
-          "Quantum Threats",
-          "Dimensional Incursions",
-          "Reality Breaches",
-        ],
+        feeds: ["Quantum Threats", "Dimensional Incursions", "Reality Breaches"],
         realTimeAccess: true,
         lastSync: Date.now(),
       },
@@ -345,11 +288,7 @@ class GlobalSurveillanceService {
       this.synchronizeGovernmentFeed(integration);
     });
 
-    console.log(
-      "🏛️ Government Integration Complete:",
-      integrations.length,
-      "agencies",
-    );
+    console.log("🏛️ Government Integration Complete:", integrations.length, "agencies");
 
     toast.success("🏛️ Government Feeds Integrated", {
       description: `Real-time access to ${integrations.length} intelligence agencies`,
@@ -363,19 +302,14 @@ class GlobalSurveillanceService {
 
       if (Math.random() > 0.9) {
         // 10% chance of new intelligence
-        console.log(
-          `🏛️ ${integration.agency} feed updated:`,
-          integration.feeds,
-        );
+        console.log(`🏛️ ${integration.agency} feed updated:`, integration.feeds);
 
         // Process high-priority intelligence
         if (
           integration.classification === "TOP_SECRET" ||
           integration.classification === "COSMIC"
         ) {
-          console.log(
-            `🚨 HIGH PRIORITY INTELLIGENCE from ${integration.agency}`,
-          );
+          console.log(`🚨 HIGH PRIORITY INTELLIGENCE from ${integration.agency}`);
         }
       }
     }, 120000); // Sync every 2 minutes
@@ -400,8 +334,7 @@ class GlobalSurveillanceService {
 
     // Determine international partners based on threat severity and affected regions
     if (threat.severity > 0.7) {
-      internationalThreat.partners =
-        await this.activateInternationalPartners(threat);
+      internationalThreat.partners = await this.activateInternationalPartners(threat);
       internationalThreat.coordinatedResponse = true;
     }
 
@@ -441,7 +374,7 @@ class GlobalSurveillanceService {
       // Select relevant partners based on regions
       if (
         threat.affectedRegions.some((r: string) =>
-          ["North America", "Europe", "Australia"].includes(r),
+          ["North America", "Europe", "Australia"].includes(r)
         )
       ) {
         activatedPartners.push("Five Eyes Alliance", "NATO Cyber Command");
@@ -466,10 +399,7 @@ class GlobalSurveillanceService {
     console.log("🌐 Coordinating Global Response:", alert);
 
     // Automatically escalate to international coordination if severe
-    if (
-      alert.threat.includes("Quantum") ||
-      alert.threat.includes("Dimensional")
-    ) {
+    if (alert.threat.includes("Quantum") || alert.threat.includes("Dimensional")) {
       await this.coordinateInternationalResponse({
         origin: alert.satellite || "Unknown",
         threatType: alert.threat,
@@ -494,10 +424,7 @@ class GlobalSurveillanceService {
           "quantum-trap.space",
         ];
 
-        const domain =
-          suspiciousDomains[
-            Math.floor(Math.random() * suspiciousDomains.length)
-          ];
+        const domain = suspiciousDomains[Math.floor(Math.random() * suspiciousDomains.length)];
 
         console.log("🚨 DNS Poisoning Detected:", domain);
         toast.warning("🚨 DNS Poisoning Detected", {
@@ -513,36 +440,34 @@ class GlobalSurveillanceService {
       isActive: this.isSurveillanceActive,
       satelliteNetwork: {
         total: this.satelliteNetwork.size,
-        active: Array.from(this.satelliteNetwork.values()).filter(
-          (s) => s.isActive,
-        ).length,
+        active: Array.from(this.satelliteNetwork.values()).filter((s) => s.isActive).length,
         threats: Array.from(this.satelliteNetwork.values()).reduce(
           (sum, s) => sum + s.threats_detected,
-          0,
+          0
         ),
       },
       deepWebMonitoring: {
         layers: this.deepWebMonitors.size,
         threats: Array.from(this.deepWebMonitors.values()).reduce(
           (sum, m) => sum + m.threatsFound,
-          0,
+          0
         ),
         intelligence: Array.from(this.deepWebMonitors.values()).reduce(
           (sum, m) => sum + m.intelligence.length,
-          0,
+          0
         ),
       },
       governmentIntegration: {
         agencies: this.governmentIntegrations.size,
         realTimeFeeds: Array.from(this.governmentIntegrations.values()).filter(
-          (g) => g.realTimeAccess,
+          (g) => g.realTimeAccess
         ).length,
       },
       internationalCoordination: {
         activeThreats: this.internationalThreats.size,
-        coordinatedResponses: Array.from(
-          this.internationalThreats.values(),
-        ).filter((t) => t.coordinatedResponse).length,
+        coordinatedResponses: Array.from(this.internationalThreats.values()).filter(
+          (t) => t.coordinatedResponse
+        ).length,
       },
     };
   }

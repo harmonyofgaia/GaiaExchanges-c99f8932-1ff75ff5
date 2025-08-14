@@ -4,15 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  MessageSquare,
-  Shield,
-  Lock,
-  Users,
-  Crown,
-  Eye,
-  Zap,
-} from "lucide-react";
+import { MessageSquare, Shield, Lock, Users, Crown, Eye, Zap } from "lucide-react";
 import { toast } from "sonner";
 
 interface Message {
@@ -39,11 +31,7 @@ interface ChatroomProps {
   isAdmin: boolean;
 }
 
-export function PrivateChatrooms({
-  selectedLocation,
-  playerData,
-  isAdmin,
-}: ChatroomProps) {
+export function PrivateChatrooms({ selectedLocation, playerData, isAdmin }: ChatroomProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -109,7 +97,7 @@ export function PrivateChatrooms({
     // Simulate live connection monitoring
     const interval = setInterval(() => {
       setParabolicConnection((prev) =>
-        Math.max(95, Math.min(100, prev + (Math.random() - 0.5) * 2)),
+        Math.max(95, Math.min(100, prev + (Math.random() - 0.5) * 2))
       );
       setEncryptionLevel(100); // Always maximum for security
     }, 3000);
@@ -196,12 +184,9 @@ export function PrivateChatrooms({
       <Card className="bg-gradient-to-r from-red-900/30 to-orange-900/30 border-red-500/30">
         <CardContent className="p-8 text-center">
           <MessageSquare className="h-16 w-16 text-red-400 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-red-400 mb-2">
-            🌍 Select Location First
-          </h3>
+          <h3 className="text-xl font-bold text-red-400 mb-2">🌍 Select Location First</h3>
           <p className="text-muted-foreground">
-            Please select a location on the world map to access secure chatrooms
-            in that area.
+            Please select a location on the world map to access secure chatrooms in that area.
           </p>
         </CardContent>
       </Card>
@@ -221,16 +206,10 @@ export function PrivateChatrooms({
             <Badge className="bg-green-600 animate-pulse">
               🌌 Parabolic Connection: {parabolicConnection.toFixed(1)}%
             </Badge>
-            <Badge className="bg-blue-600">
-              🔐 Encryption Level: {encryptionLevel}%
-            </Badge>
-            <Badge className="bg-purple-600">
-              📍 Location: {selectedLocation.city}
-            </Badge>
+            <Badge className="bg-blue-600">🔐 Encryption Level: {encryptionLevel}%</Badge>
+            <Badge className="bg-purple-600">📍 Location: {selectedLocation.city}</Badge>
             {isAdmin && (
-              <Badge className="bg-red-600 animate-pulse">
-                👑 ADMIN SURVEILLANCE ACTIVE
-              </Badge>
+              <Badge className="bg-red-600 animate-pulse">👑 ADMIN SURVEILLANCE ACTIVE</Badge>
             )}
           </div>
         </CardHeader>
@@ -240,9 +219,7 @@ export function PrivateChatrooms({
         {/* Chatroom List */}
         <Card className="bg-black/30 border-purple-500/30">
           <CardHeader>
-            <CardTitle className="text-purple-400">
-              💬 Available Chatrooms
-            </CardTitle>
+            <CardTitle className="text-purple-400">💬 Available Chatrooms</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             {availableChatrooms.map((chatroom) => (
@@ -258,21 +235,15 @@ export function PrivateChatrooms({
                 <CardContent className="p-3">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-bold text-sm">{chatroom.name}</h4>
-                    {chatroom.private && (
-                      <Lock className="h-4 w-4 text-yellow-400" />
-                    )}
-                    {chatroom.admin && (
-                      <Crown className="h-4 w-4 text-red-400" />
-                    )}
+                    {chatroom.private && <Lock className="h-4 w-4 text-yellow-400" />}
+                    {chatroom.admin && <Crown className="h-4 w-4 text-red-400" />}
                   </div>
                   <div className="text-xs text-muted-foreground">
                     <div>👥 {chatroom.participants} participants</div>
                     <div>📍 {chatroom.location}</div>
                   </div>
                   {chatroom.admin && !isAdmin && (
-                    <div className="text-xs text-red-400 mt-1">
-                      🚫 Admin Only
-                    </div>
+                    <div className="text-xs text-red-400 mt-1">🚫 Admin Only</div>
                   )}
                 </CardContent>
               </Card>
@@ -285,19 +256,13 @@ export function PrivateChatrooms({
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-blue-400">
               <MessageSquare className="h-6 w-6" />
-              {activeChatroom
-                ? `💬 ${activeChatroom.name}`
-                : "💬 Select a Chatroom"}
+              {activeChatroom ? `💬 ${activeChatroom.name}` : "💬 Select a Chatroom"}
             </CardTitle>
             {activeChatroom && (
               <div className="flex gap-2 text-sm">
-                <Badge className="bg-green-600">
-                  👥 {activeChatroom.participants} Online
-                </Badge>
+                <Badge className="bg-green-600">👥 {activeChatroom.participants} Online</Badge>
                 <Badge className="bg-blue-600">🔒 Quantum Encrypted</Badge>
-                {activeChatroom.admin && (
-                  <Badge className="bg-red-600">👑 Admin Channel</Badge>
-                )}
+                {activeChatroom.admin && <Badge className="bg-red-600">👑 Admin Channel</Badge>}
               </div>
             )}
           </CardHeader>
@@ -322,17 +287,11 @@ export function PrivateChatrooms({
                           <span className="font-bold text-sm">
                             {message.user === "System" && "🤖"}
                             {message.user === "Parabolic AI" && "🌌"}
-                            {message.user !== "System" &&
-                              message.user !== "Parabolic AI" &&
-                              "👤"}
+                            {message.user !== "System" && message.user !== "Parabolic AI" && "👤"}
                             {message.user}
                           </span>
-                          {message.encrypted && (
-                            <Lock className="h-3 w-3 text-green-400" />
-                          )}
-                          {message.adminOnly && (
-                            <Crown className="h-3 w-3 text-red-400" />
-                          )}
+                          {message.encrypted && <Lock className="h-3 w-3 text-green-400" />}
+                          {message.adminOnly && <Crown className="h-3 w-3 text-red-400" />}
                           <span className="text-xs text-muted-foreground">
                             {message.timestamp.toLocaleTimeString()}
                           </span>
@@ -353,10 +312,7 @@ export function PrivateChatrooms({
                     placeholder="Type your encrypted message..."
                     className="flex-1"
                   />
-                  <Button
-                    onClick={sendMessage}
-                    className="bg-blue-600 hover:bg-blue-700"
-                  >
+                  <Button onClick={sendMessage} className="bg-blue-600 hover:bg-blue-700">
                     📤 Send
                   </Button>
                 </div>
@@ -378,9 +334,7 @@ export function PrivateChatrooms({
             ) : (
               <div className="text-center p-8">
                 <MessageSquare className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-bold text-gray-400 mb-2">
-                  Select a Chatroom
-                </h3>
+                <h3 className="text-lg font-bold text-gray-400 mb-2">Select a Chatroom</h3>
                 <p className="text-muted-foreground">
                   Choose a chatroom from the list to start secure communication.
                 </p>

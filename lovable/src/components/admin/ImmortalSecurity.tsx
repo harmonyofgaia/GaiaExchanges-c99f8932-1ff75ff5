@@ -21,8 +21,7 @@ export function ImmortalSecurity() {
               ⚡ IMMORTAL SECURITY SYSTEM
             </CardTitle>
             <p className="text-center text-xl text-muted-foreground">
-              Eternal Protection • Self-Healing • Admin-Only Control • Never
-              Dies Defense Matrix
+              Eternal Protection • Self-Healing • Admin-Only Control • Never Dies Defense Matrix
             </p>
           </CardHeader>
         </Card>

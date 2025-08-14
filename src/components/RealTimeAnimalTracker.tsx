@@ -81,41 +81,28 @@ export function RealTimeAnimalTracker() {
       setTrackedAnimals((prev) =>
         prev.map((animal) => ({
           ...animal,
-          heartRate: Math.max(
-            20,
-            animal.heartRate + Math.floor(Math.random() * 20 - 10),
-          ),
+          heartRate: Math.max(20, animal.heartRate + Math.floor(Math.random() * 20 - 10)),
           speed: Math.max(0, animal.speed + Math.floor(Math.random() * 10 - 5)),
           batteryLevel: Math.max(
             60,
-            Math.min(
-              100,
-              animal.batteryLevel + Math.floor(Math.random() * 4 - 2),
-            ),
+            Math.min(100, animal.batteryLevel + Math.floor(Math.random() * 4 - 2))
           ),
           signalStrength: Math.max(
             70,
-            Math.min(
-              100,
-              animal.signalStrength + Math.floor(Math.random() * 6 - 3),
-            ),
+            Math.min(100, animal.signalStrength + Math.floor(Math.random() * 6 - 3))
           ),
           location: {
             ...animal.location,
             lat: animal.location.lat + (Math.random() * 0.01 - 0.005),
             lng: animal.location.lng + (Math.random() * 0.01 - 0.005),
           },
-        })),
+        }))
       );
 
       setGlobalTracking((prev) => ({
         ...prev,
-        dataPointsPerSecond:
-          prev.dataPointsPerSecond + Math.floor(Math.random() * 100 - 50),
-        globalCoverage: Math.max(
-          90,
-          Math.min(100, prev.globalCoverage + Math.random() * 2 - 1),
-        ),
+        dataPointsPerSecond: prev.dataPointsPerSecond + Math.floor(Math.random() * 100 - 50),
+        globalCoverage: Math.max(90, Math.min(100, prev.globalCoverage + Math.random() * 2 - 1)),
       }));
     };
 
@@ -143,12 +130,8 @@ export function RealTimeAnimalTracker() {
           </div>
           <div className="p-4 bg-blue-900/30 rounded border border-blue-500/20 text-center">
             <Satellite className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-            <div className="text-lg font-bold text-blue-400">
-              {globalTracking.activeSatellites}
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Active Satellites
-            </div>
+            <div className="text-lg font-bold text-blue-400">{globalTracking.activeSatellites}</div>
+            <div className="text-xs text-muted-foreground">Active Satellites</div>
           </div>
           <div className="p-4 bg-purple-900/30 rounded border border-purple-500/20 text-center">
             <Activity className="h-6 w-6 text-purple-400 mx-auto mb-2" />
@@ -166,18 +149,14 @@ export function RealTimeAnimalTracker() {
           </div>
           <div className="p-4 bg-yellow-900/30 rounded border border-yellow-500/20 text-center">
             <Monitor className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
-            <div className="text-lg font-bold text-yellow-400">
-              {globalTracking.uptime}%
-            </div>
+            <div className="text-lg font-bold text-yellow-400">{globalTracking.uptime}%</div>
             <div className="text-xs text-muted-foreground">Network Uptime</div>
           </div>
         </div>
 
         {/* Live Animal Tracking */}
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-cyan-400 text-center">
-            📡 LIVE ANIMAL MONITORING
-          </h3>
+          <h3 className="text-xl font-bold text-cyan-400 text-center">📡 LIVE ANIMAL MONITORING</h3>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {trackedAnimals.map((animal) => (
@@ -188,18 +167,12 @@ export function RealTimeAnimalTracker() {
                 {/* Animal Header */}
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="text-lg font-bold text-cyan-400">
-                      {animal.name}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {animal.species}
-                    </p>
+                    <h4 className="text-lg font-bold text-cyan-400">{animal.name}</h4>
+                    <p className="text-sm text-muted-foreground">{animal.species}</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                    <Badge className="bg-green-600 text-white text-xs">
-                      LIVE
-                    </Badge>
+                    <Badge className="bg-green-600 text-white text-xs">LIVE</Badge>
                   </div>
                 </div>
 
@@ -207,16 +180,11 @@ export function RealTimeAnimalTracker() {
                 <div className="p-3 bg-green-900/30 rounded border border-green-500/20">
                   <div className="flex items-center gap-2 mb-2">
                     <MapPin className="h-4 w-4 text-green-400" />
-                    <span className="font-bold text-green-400">
-                      Current Location
-                    </span>
+                    <span className="font-bold text-green-400">Current Location</span>
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    {animal.location.name}
-                  </div>
+                  <div className="text-sm text-muted-foreground">{animal.location.name}</div>
                   <div className="text-xs text-muted-foreground mt-1">
-                    Lat: {animal.location.lat.toFixed(4)}, Lng:{" "}
-                    {animal.location.lng.toFixed(4)}
+                    Lat: {animal.location.lat.toFixed(4)}, Lng: {animal.location.lng.toFixed(4)}
                   </div>
                 </div>
 
@@ -227,9 +195,7 @@ export function RealTimeAnimalTracker() {
                       <Heart className="h-4 w-4 text-red-400" />
                       <span className="text-sm">Heart Rate</span>
                     </div>
-                    <span className="text-red-400 font-bold">
-                      {animal.heartRate} BPM
-                    </span>
+                    <span className="text-red-400 font-bold">{animal.heartRate} BPM</span>
                   </div>
 
                   <div className="flex items-center justify-between">
@@ -238,8 +204,7 @@ export function RealTimeAnimalTracker() {
                       <span className="text-sm">Speed</span>
                     </div>
                     <span className="text-blue-400 font-bold">
-                      {animal.speed}{" "}
-                      {animal.species === "Sea Turtle" ? "knots" : "mph"}
+                      {animal.speed} {animal.species === "Sea Turtle" ? "knots" : "mph"}
                     </span>
                   </div>
 
@@ -249,9 +214,7 @@ export function RealTimeAnimalTracker() {
                         <Target className="h-4 w-4 text-purple-400" />
                         <span className="text-sm">Altitude</span>
                       </div>
-                      <span className="text-purple-400 font-bold">
-                        {animal.altitude} ft
-                      </span>
+                      <span className="text-purple-400 font-bold">{animal.altitude} ft</span>
                     </div>
                   )}
 
@@ -261,9 +224,7 @@ export function RealTimeAnimalTracker() {
                         <Target className="h-4 w-4 text-cyan-400" />
                         <span className="text-sm">Depth</span>
                       </div>
-                      <span className="text-cyan-400 font-bold">
-                        {animal.depth} ft
-                      </span>
+                      <span className="text-cyan-400 font-bold">{animal.depth} ft</span>
                     </div>
                   )}
 
@@ -273,9 +234,7 @@ export function RealTimeAnimalTracker() {
                         <Zap className="h-4 w-4 text-yellow-400" />
                         <span className="text-sm">Temperature</span>
                       </div>
-                      <span className="text-yellow-400 font-bold">
-                        {animal.temperature}°C
-                      </span>
+                      <span className="text-yellow-400 font-bold">{animal.temperature}°C</span>
                     </div>
                   )}
                 </div>
@@ -284,17 +243,13 @@ export function RealTimeAnimalTracker() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs">
                     <span>Battery Level:</span>
-                    <span className="text-green-400">
-                      {animal.batteryLevel}%
-                    </span>
+                    <span className="text-green-400">{animal.batteryLevel}%</span>
                   </div>
                   <Progress value={animal.batteryLevel} className="h-2" />
 
                   <div className="flex justify-between text-xs">
                     <span>Signal Strength:</span>
-                    <span className="text-blue-400">
-                      {animal.signalStrength}%
-                    </span>
+                    <span className="text-blue-400">{animal.signalStrength}%</span>
                   </div>
                   <Progress value={animal.signalStrength} className="h-2" />
                 </div>
@@ -303,9 +258,7 @@ export function RealTimeAnimalTracker() {
                 <div className="flex items-center justify-between pt-2">
                   <div className="flex items-center gap-2">
                     <Activity className="h-4 w-4 text-green-400" />
-                    <span className="text-sm text-green-400">
-                      {animal.status}
-                    </span>
+                    <span className="text-sm text-green-400">{animal.status}</span>
                   </div>
                   <div className="flex gap-2">
                     <Button
@@ -353,9 +306,7 @@ export function RealTimeAnimalTracker() {
                   <Satellite className="h-5 w-5 text-blue-400" />
                   <Signal className="h-3 w-3 text-green-400 ml-1" />
                 </div>
-                <div className="text-sm font-bold text-blue-400">
-                  SAT-{i + 1}
-                </div>
+                <div className="text-sm font-bold text-blue-400">SAT-{i + 1}</div>
                 <div className="text-xs text-muted-foreground">Online</div>
                 <div className="text-xs text-green-400">
                   {(85 + Math.random() * 15).toFixed(1)}% Signal
@@ -380,9 +331,7 @@ export function RealTimeAnimalTracker() {
             </div>
             <div className="p-4 bg-purple-900/30 rounded border border-purple-500/20">
               <Activity className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-              <h4 className="font-bold text-purple-400 mb-2">
-                Real-Time Health
-              </h4>
+              <h4 className="font-bold text-purple-400 mb-2">Real-Time Health</h4>
               <p className="text-xs text-muted-foreground">
                 Heart rate, movement, and behavioral pattern analysis
               </p>

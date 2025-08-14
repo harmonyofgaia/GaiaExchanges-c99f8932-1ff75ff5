@@ -2,18 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Move,
-  Edit,
-  Palette,
-  Settings,
-  Save,
-  Undo,
-  Eye,
-  EyeOff,
-  Grid,
-  Layers,
-} from "lucide-react";
+import { Move, Edit, Palette, Settings, Save, Undo, Eye, EyeOff, Grid, Layers } from "lucide-react";
 import { toast } from "sonner";
 
 export function AdminLayoutEditor() {
@@ -25,7 +14,7 @@ export function AdminLayoutEditor() {
     if (isEditMode) {
       // Add visual indicators for editable elements
       const elements = document.querySelectorAll(
-        "div, section, article, main, aside, header, footer",
+        "div, section, article, main, aside, header, footer"
       );
       elements.forEach((el, index) => {
         if (el instanceof HTMLElement) {

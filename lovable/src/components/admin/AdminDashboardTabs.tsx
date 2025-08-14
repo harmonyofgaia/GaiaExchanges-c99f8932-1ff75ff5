@@ -54,22 +54,16 @@ import { AdminDashboardTabsErrorBoundary } from "./AdminDashboardTabsErrorBounda
 import { AdminTabLoading, AdminTabInlineLoading } from "./AdminTabLoading";
 
 // Lazy load all tab components for better performance
-const AdminControlSystem = React.lazy(
-  () => import("@/components/AdminControlSystem"),
-);
+const AdminControlSystem = React.lazy(() => import("@/components/AdminControlSystem"));
 const RefactoredAdminTools = React.lazy(() => import("./RefactoredAdminTools"));
 const UltimateSecurity = React.lazy(() => import("./UltimateSecurity"));
-const AdminRecoveryPortal = React.lazy(
-  () => import("../security/AdminRecoveryPortal"),
-);
+const AdminRecoveryPortal = React.lazy(() => import("../security/AdminRecoveryPortal"));
 const PlanRecoverySystem = React.lazy(() => import("./PlanRecoverySystem"));
 const HolisticAnalysis = React.lazy(() => import("./HolisticAnalysis"));
-const AnimalWelfareControlPanel = React.lazy(
-  () => import("./AnimalWelfareControlPanel"),
-);
+const AnimalWelfareControlPanel = React.lazy(() => import("./AnimalWelfareControlPanel"));
 const AdminVisualControls = React.lazy(() => import("./AdminVisualControls"));
 const SecureAdminQuantumIAEnginePanel = React.lazy(
-  () => import("../SecureAdminQuantumIAEnginePanel"),
+  () => import("../SecureAdminQuantumIAEnginePanel")
 );
 
 /**
@@ -177,7 +171,7 @@ export function AdminDashboardTabs() {
         badge: { text: "👑", variant: "default" },
       },
     ],
-    [],
+    []
   );
 
   /**
@@ -217,10 +211,7 @@ export function AdminDashboardTabs() {
           <Icon className="h-4 w-4 flex-shrink-0" />
           <span className="hidden sm:inline truncate">{tab.label}</span>
           {tab.badge && (
-            <Badge
-              variant={tab.badge.variant}
-              className="text-xs px-1 py-0 h-auto ml-1"
-            >
+            <Badge variant={tab.badge.variant} className="text-xs px-1 py-0 h-auto ml-1">
               {tab.badge.text}
             </Badge>
           )}
@@ -260,23 +251,15 @@ export function AdminDashboardTabs() {
               Admin Dashboard - Enhanced & Stable
             </CardTitle>
             <div className="flex items-center gap-2">
-              <Badge className="bg-green-600 text-green-100">
-                All Systems Operational
-              </Badge>
-              <Badge className="bg-blue-600 text-blue-100">
-                Error-Protected Mode
-              </Badge>
+              <Badge className="bg-green-600 text-green-100">All Systems Operational</Badge>
+              <Badge className="bg-blue-600 text-blue-100">Error-Protected Mode</Badge>
             </div>
           </div>
         </CardHeader>
       </Card>
 
       {/* Main Tabs Container */}
-      <Tabs
-        value={currentTab}
-        onValueChange={handleTabChange}
-        className="w-full"
-      >
+      <Tabs value={currentTab} onValueChange={handleTabChange} className="w-full">
         {/* Responsive Tabs List */}
         <div className="relative">
           <TabsList
@@ -291,9 +274,7 @@ export function AdminDashboardTabs() {
 
           {/* Mobile navigation hint */}
           <div className="md:hidden text-center mt-2">
-            <p className="text-xs text-muted-foreground">
-              Swipe tabs to see more options
-            </p>
+            <p className="text-xs text-muted-foreground">Swipe tabs to see more options</p>
           </div>
         </div>
 

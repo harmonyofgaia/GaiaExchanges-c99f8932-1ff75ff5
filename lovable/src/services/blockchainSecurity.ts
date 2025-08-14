@@ -159,16 +159,13 @@ class BlockchainSecurityService {
 
   private async performCrossChainSecurityChecks(
     tx: CrossChainTransaction,
-    details: any,
+    details: any
   ): Promise<{ checksPassed: string[]; riskLevel: number }> {
     const checks = [];
     let riskLevel = 0;
 
     // Chain validation
-    if (
-      this.monitoredChains.has(tx.sourceChain) &&
-      this.monitoredChains.has(tx.targetChain)
-    ) {
+    if (this.monitoredChains.has(tx.sourceChain) && this.monitoredChains.has(tx.targetChain)) {
       checks.push("chain_validation");
     } else {
       riskLevel += 0.3;
@@ -202,7 +199,7 @@ class BlockchainSecurityService {
   private async monitorCrossChainTransactions(): Promise<void> {
     // Monitor pending transactions for completion or issues
     const pendingTxs = Array.from(this.crossChainTxs.values()).filter(
-      (tx) => tx.status === "pending",
+      (tx) => tx.status === "pending"
     );
 
     for (const tx of pendingTxs) {
@@ -217,13 +214,8 @@ class BlockchainSecurityService {
   }
 
   // Smart Contract Vulnerability Scanner
-  async scanSmartContract(
-    contractAddress: string,
-    chainId: number,
-  ): Promise<SmartContract> {
-    console.log(
-      `🔍 Scanning Smart Contract: ${contractAddress} on chain ${chainId}`,
-    );
+  async scanSmartContract(contractAddress: string, chainId: number): Promise<SmartContract> {
+    console.log(`🔍 Scanning Smart Contract: ${contractAddress} on chain ${chainId}`);
 
     // Simulate contract bytecode fetching
     const bytecode = await this.fetchContractBytecode(contractAddress, chainId);
@@ -251,23 +243,16 @@ class BlockchainSecurityService {
     return contract;
   }
 
-  private async fetchContractBytecode(
-    address: string,
-    chainId: number,
-  ): Promise<string> {
+  private async fetchContractBytecode(address: string, chainId: number): Promise<string> {
     // Simulate bytecode fetching from blockchain
     const mockBytecode =
       "0x608060405234801561001057600080fd5b50..." +
-      Array.from({ length: 100 }, () =>
-        Math.floor(Math.random() * 16).toString(16),
-      ).join("");
+      Array.from({ length: 100 }, () => Math.floor(Math.random() * 16).toString(16)).join("");
 
     return mockBytecode;
   }
 
-  private async analyzeContractVulnerabilities(
-    bytecode: string,
-  ): Promise<ContractVulnerability[]> {
+  private async analyzeContractVulnerabilities(bytecode: string): Promise<ContractVulnerability[]> {
     const vulnerabilities: ContractVulnerability[] = [];
 
     // Simulate vulnerability detection patterns
@@ -316,14 +301,10 @@ class BlockchainSecurityService {
 
   private getVulnerabilityRecommendation(vulnType: string): string {
     const recommendations = {
-      "Delegatecall Injection":
-        "Use low-level call instead of delegatecall when possible",
-      "Destructible Contract":
-        "Consider removing selfdestruct or adding proper access controls",
-      Reentrancy:
-        "Implement checks-effects-interactions pattern and use reentrancy guards",
-      "tx.origin Usage":
-        "Use msg.sender instead of tx.origin for authorization",
+      "Delegatecall Injection": "Use low-level call instead of delegatecall when possible",
+      "Destructible Contract": "Consider removing selfdestruct or adding proper access controls",
+      Reentrancy: "Implement checks-effects-interactions pattern and use reentrancy guards",
+      "tx.origin Usage": "Use msg.sender instead of tx.origin for authorization",
     };
 
     return (
@@ -332,9 +313,7 @@ class BlockchainSecurityService {
     );
   }
 
-  private calculateContractRiskScore(
-    vulnerabilities: ContractVulnerability[],
-  ): number {
+  private calculateContractRiskScore(vulnerabilities: ContractVulnerability[]): number {
     let score = 0;
 
     vulnerabilities.forEach((vuln) => {
@@ -373,10 +352,7 @@ class BlockchainSecurityService {
     };
 
     if (Object.values(suspiciousActivity).some(Boolean)) {
-      console.warn(
-        `⚠️ Consensus Attack Detected on Chain ${node.chainId}:`,
-        suspiciousActivity,
-      );
+      console.warn(`⚠️ Consensus Attack Detected on Chain ${node.chainId}:`, suspiciousActivity);
 
       toast.warning("🛡️ Consensus Attack Detected", {
         description: `Suspicious activity on ${node.consensusType} chain ${node.chainId}`,
@@ -387,9 +363,7 @@ class BlockchainSecurityService {
     }
   }
 
-  private async activateConsensusProtection(
-    node: BlockchainNode,
-  ): Promise<void> {
+  private async activateConsensusProtection(node: BlockchainNode): Promise<void> {
     console.log(`🛡️ Activating consensus protection for chain ${node.chainId}`);
 
     // Mark node as under attack
@@ -414,9 +388,7 @@ class BlockchainSecurityService {
     }
   }
 
-  private async checkForFork(
-    node: BlockchainNode,
-  ): Promise<BlockchainFork | null> {
+  private async checkForFork(node: BlockchainNode): Promise<BlockchainFork | null> {
     // Simulate fork detection
     if (Math.random() > 0.995) {
       // 0.5% chance of fork detection
@@ -425,14 +397,10 @@ class BlockchainSecurityService {
         forkHeight: node.lastBlock - Math.floor(Math.random() * 10),
         forkHash:
           "0x" +
-          Array.from({ length: 64 }, () =>
-            Math.floor(Math.random() * 16).toString(16),
-          ).join(""),
+          Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join(""),
         alternativeHash:
           "0x" +
-          Array.from({ length: 64 }, () =>
-            Math.floor(Math.random() * 16).toString(16),
-          ).join(""),
+          Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join(""),
         detectedAt: Date.now(),
         isResolved: false,
         consensusReached: false,
@@ -481,7 +449,7 @@ class BlockchainSecurityService {
 
     if (majorMinerShare > 0.51) {
       console.warn(
-        `⚠️ 51% Attack Risk on Chain ${node.chainId}: Major miner has ${(majorMinerShare * 100).toFixed(1)}% hash rate`,
+        `⚠️ 51% Attack Risk on Chain ${node.chainId}: Major miner has ${(majorMinerShare * 100).toFixed(1)}% hash rate`
       );
 
       toast.error("🚨 51% Attack Risk Detected", {
@@ -492,15 +460,13 @@ class BlockchainSecurityService {
     }
   }
 
-  private async checkValidatorDistribution(
-    node: BlockchainNode,
-  ): Promise<void> {
+  private async checkValidatorDistribution(node: BlockchainNode): Promise<void> {
     const totalValidators = node.validators || 100;
     const majorValidatorStake = Math.random() * 0.6 + 0.2; // 20-80% stake
 
     if (majorValidatorStake > 0.51) {
       console.warn(
-        `⚠️ Validator Concentration Risk on Chain ${node.chainId}: Major validator has ${(majorValidatorStake * 100).toFixed(1)}% stake`,
+        `⚠️ Validator Concentration Risk on Chain ${node.chainId}: Major validator has ${(majorValidatorStake * 100).toFixed(1)}% stake`
       );
 
       toast.warning("⚠️ Validator Concentration Detected", {
@@ -509,12 +475,8 @@ class BlockchainSecurityService {
     }
   }
 
-  private async implement51PercentProtection(
-    node: BlockchainNode,
-  ): Promise<void> {
-    console.log(
-      `🛡️ Implementing 51% attack protection for chain ${node.chainId}`,
-    );
+  private async implement51PercentProtection(node: BlockchainNode): Promise<void> {
+    console.log(`🛡️ Implementing 51% attack protection for chain ${node.chainId}`);
 
     // Simulate protection measures
     const protections = [
@@ -537,9 +499,7 @@ class BlockchainSecurityService {
       scannedContracts: this.smartContracts.size,
       detectedForks: this.detectedForks.length,
       crossChainTransactions: this.crossChainTxs.size,
-      secureChains: Array.from(this.monitoredChains.values()).filter(
-        (n) => n.isSecure,
-      ).length,
+      secureChains: Array.from(this.monitoredChains.values()).filter((n) => n.isSecure).length,
     };
   }
 

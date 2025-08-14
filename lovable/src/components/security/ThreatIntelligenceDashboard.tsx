@@ -84,10 +84,8 @@ export function ThreatIntelligenceDashboard() {
 
   const handleScanZeroDayExploits = async () => {
     try {
-      const testContent =
-        "CVE-2024-1234 exploit payload shellcode buffer overflow";
-      const isZeroDay =
-        await threatIntelligence.scanForZeroDayExploits(testContent);
+      const testContent = "CVE-2024-1234 exploit payload shellcode buffer overflow";
+      const isZeroDay = await threatIntelligence.scanForZeroDayExploits(testContent);
 
       if (isZeroDay) {
         toast.error("🚨 Zero-Day Exploit Detected", {
@@ -134,9 +132,7 @@ export function ThreatIntelligenceDashboard() {
               <div className="text-3xl font-bold text-blue-400">
                 {systemStatus.threatSignatures}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Threat Signatures
-              </div>
+              <div className="text-sm text-muted-foreground">Threat Signatures</div>
               <Badge className="mt-1 bg-blue-600 text-white">
                 <Shield className="h-3 w-3 mr-1" />
                 Database
@@ -144,12 +140,8 @@ export function ThreatIntelligenceDashboard() {
             </div>
 
             <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">
-                {systemStatus.predictions}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                AI Predictions
-              </div>
+              <div className="text-3xl font-bold text-green-400">{systemStatus.predictions}</div>
+              <div className="text-sm text-muted-foreground">AI Predictions</div>
               <Badge className="mt-1 bg-green-600 text-white">
                 <Target className="h-3 w-3 mr-1" />
                 Active
@@ -157,12 +149,8 @@ export function ThreatIntelligenceDashboard() {
             </div>
 
             <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400">
-                {systemStatus.globalSources}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Global Sources
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{systemStatus.globalSources}</div>
+              <div className="text-sm text-muted-foreground">Global Sources</div>
               <Badge className="mt-1 bg-purple-600 text-white">
                 <Eye className="h-3 w-3 mr-1" />
                 Connected
@@ -170,9 +158,7 @@ export function ThreatIntelligenceDashboard() {
             </div>
 
             <div className="text-center">
-              <div className="text-3xl font-bold text-red-400">
-                {systemStatus.blockedIPs}
-              </div>
+              <div className="text-3xl font-bold text-red-400">{systemStatus.blockedIPs}</div>
               <div className="text-sm text-muted-foreground">Blocked IPs</div>
               <Badge className="mt-1 bg-red-600 text-white">
                 <AlertTriangle className="h-3 w-3 mr-1" />
@@ -187,10 +173,7 @@ export function ThreatIntelligenceDashboard() {
                 <span>Predictive Accuracy</span>
                 <span>{monitoringStats.predictiveAccuracy}%</span>
               </div>
-              <Progress
-                value={monitoringStats.predictiveAccuracy}
-                className="h-2"
-              />
+              <Progress value={monitoringStats.predictiveAccuracy} className="h-2" />
             </div>
 
             <div>
@@ -198,10 +181,7 @@ export function ThreatIntelligenceDashboard() {
                 <span>Response Time</span>
                 <span>{monitoringStats.responseTime}s</span>
               </div>
-              <Progress
-                value={100 - monitoringStats.responseTime * 10}
-                className="h-2"
-              />
+              <Progress value={100 - monitoringStats.responseTime * 10} className="h-2" />
             </div>
 
             <div>
@@ -219,9 +199,7 @@ export function ThreatIntelligenceDashboard() {
               disabled={isInitializing || systemStatus.isActive}
               className="bg-blue-600 hover:bg-blue-700"
             >
-              {isInitializing
-                ? "Initializing..."
-                : "Initialize Threat Intelligence"}
+              {isInitializing ? "Initializing..." : "Initialize Threat Intelligence"}
             </Button>
 
             <Button
@@ -267,8 +245,8 @@ export function ThreatIntelligenceDashboard() {
                         {prediction.predictedThreat}
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        Probability: {(prediction.probability * 100).toFixed(1)}
-                        % | Timeframe: {prediction.timeframe}
+                        Probability: {(prediction.probability * 100).toFixed(1)}% | Timeframe:{" "}
+                        {prediction.timeframe}
                       </div>
                     </div>
 
@@ -289,17 +267,11 @@ export function ThreatIntelligenceDashboard() {
                         Indicators:
                       </div>
                       <div className="flex flex-wrap gap-1">
-                        {prediction.indicators.map(
-                          (indicator: string, i: number) => (
-                            <Badge
-                              key={i}
-                              variant="outline"
-                              className="text-xs"
-                            >
-                              {indicator}
-                            </Badge>
-                          ),
-                        )}
+                        {prediction.indicators.map((indicator: string, i: number) => (
+                          <Badge key={i} variant="outline" className="text-xs">
+                            {indicator}
+                          </Badge>
+                        ))}
                       </div>
                     </div>
 
@@ -308,13 +280,11 @@ export function ThreatIntelligenceDashboard() {
                         Recommended Actions:
                       </div>
                       <div className="space-y-1">
-                        {prediction.recommendedActions.map(
-                          (action: string, i: number) => (
-                            <div key={i} className="text-xs text-green-400">
-                              • {action}
-                            </div>
-                          ),
-                        )}
+                        {prediction.recommendedActions.map((action: string, i: number) => (
+                          <div key={i} className="text-xs text-green-400">
+                            • {action}
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -324,9 +294,7 @@ export function ThreatIntelligenceDashboard() {
               <div className="text-center text-muted-foreground py-8">
                 <Brain className="h-12 w-12 mx-auto mb-4 text-purple-400/50" />
                 <p>No threat predictions available</p>
-                <p className="text-sm">
-                  Run AI analysis to generate predictions
-                </p>
+                <p className="text-sm">Run AI analysis to generate predictions</p>
               </div>
             )}
           </div>
@@ -363,9 +331,7 @@ export function ThreatIntelligenceDashboard() {
             </div>
 
             <div className="space-y-3">
-              <h4 className="font-medium text-yellow-400">
-                Intelligence Sources
-              </h4>
+              <h4 className="font-medium text-yellow-400">Intelligence Sources</h4>
 
               <div className="flex items-center justify-between p-3 bg-yellow-900/10 rounded border border-yellow-500/20">
                 <span className="text-sm">MITRE ATT&CK Framework</span>

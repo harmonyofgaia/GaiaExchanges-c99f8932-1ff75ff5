@@ -10,17 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  TreePine,
-  Mountain,
-  Waves,
-  Sun,
-  Home,
-  Palette,
-  Save,
-  Download,
-  Eye,
-} from "lucide-react";
+import { TreePine, Mountain, Waves, Sun, Home, Palette, Save, Download, Eye } from "lucide-react";
 import { toast } from "sonner";
 import { GAIA_TOKEN } from "@/constants/gaia";
 
@@ -53,8 +43,7 @@ export function LandscapeBuilderRestored() {
     timestamp: new Date(),
   });
 
-  const [selectedTool, setSelectedTool] =
-    useState<LandscapeElement["type"]>("tree");
+  const [selectedTool, setSelectedTool] = useState<LandscapeElement["type"]>("tree");
   const [brushSize, setBrushSize] = useState([50]);
   const [selectedColor, setSelectedColor] = useState("#228B22");
   const [isBuilding, setIsBuilding] = useState(false);
@@ -104,12 +93,7 @@ export function LandscapeBuilderRestored() {
       switch (element.type) {
         case "tree":
           // Draw simple tree
-          ctx.fillRect(
-            -element.size / 8,
-            -element.size / 4,
-            element.size / 4,
-            element.size / 2,
-          );
+          ctx.fillRect(-element.size / 8, -element.size / 4, element.size / 4, element.size / 2);
           ctx.beginPath();
           ctx.arc(0, -element.size / 2, element.size / 3, 0, Math.PI * 2);
           ctx.fill();
@@ -139,12 +123,7 @@ export function LandscapeBuilderRestored() {
           break;
         case "building":
           // Draw simple building
-          ctx.fillRect(
-            -element.size / 2,
-            -element.size / 2,
-            element.size,
-            element.size,
-          );
+          ctx.fillRect(-element.size / 2, -element.size / 2, element.size, element.size);
           ctx.fillStyle = "#FF0000";
           ctx.beginPath();
           ctx.moveTo(-element.size / 2, -element.size / 2);
@@ -252,9 +231,7 @@ export function LandscapeBuilderRestored() {
           <Badge className="bg-green-600 text-white">
             Elements: {currentProject.elements.length}
           </Badge>
-          <Badge className="bg-blue-600 text-white">
-            Projects: {savedProjects.length}
-          </Badge>
+          <Badge className="bg-blue-600 text-white">Projects: {savedProjects.length}</Badge>
         </div>
       </CardHeader>
 
@@ -273,12 +250,8 @@ export function LandscapeBuilderRestored() {
                 </code>
               </div>
               <div>
-                <div className="text-muted-foreground">
-                  Virtual Reality Ready:
-                </div>
-                <div className="text-lg font-bold text-green-400">
-                  ✅ VR Compatible
-                </div>
+                <div className="text-muted-foreground">Virtual Reality Ready:</div>
+                <div className="text-lg font-bold text-green-400">✅ VR Compatible</div>
               </div>
             </div>
           </div>
@@ -308,9 +281,7 @@ export function LandscapeBuilderRestored() {
         {/* Tool Settings */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-green-400">
-              Brush Size
-            </label>
+            <label className="text-sm font-medium text-green-400">Brush Size</label>
             <Slider
               value={brushSize}
               onValueChange={setBrushSize}
@@ -319,9 +290,7 @@ export function LandscapeBuilderRestored() {
               step={5}
               className="w-full"
             />
-            <div className="text-xs text-muted-foreground">
-              Size: {brushSize[0]}px
-            </div>
+            <div className="text-xs text-muted-foreground">Size: {brushSize[0]}px</div>
           </div>
 
           <div className="space-y-2">
@@ -335,9 +304,7 @@ export function LandscapeBuilderRestored() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-green-400">
-              Background
-            </label>
+            <label className="text-sm font-medium text-green-400">Background</label>
             <Select
               value={currentProject.backgroundType}
               onValueChange={(value) => {
@@ -395,17 +362,11 @@ export function LandscapeBuilderRestored() {
 
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-2 justify-center">
-          <Button
-            onClick={saveProject}
-            className="bg-blue-600 hover:bg-blue-700"
-          >
+          <Button onClick={saveProject} className="bg-blue-600 hover:bg-blue-700">
             <Save className="h-4 w-4 mr-2" />
             Save Landscape
           </Button>
-          <Button
-            onClick={exportLandscape}
-            className="bg-purple-600 hover:bg-purple-700"
-          >
+          <Button onClick={exportLandscape} className="bg-purple-600 hover:bg-purple-700">
             <Download className="h-4 w-4 mr-2" />
             Export PNG
           </Button>
@@ -418,21 +379,16 @@ export function LandscapeBuilderRestored() {
         {/* Saved Projects */}
         {savedProjects.length > 0 && (
           <div className="space-y-2">
-            <h4 className="text-lg font-bold text-green-400">
-              🎨 Your Creations
-            </h4>
+            <h4 className="text-lg font-bold text-green-400">🎨 Your Creations</h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
               {savedProjects.map((project) => (
                 <div
                   key={project.id}
                   className="bg-black/20 border border-gray-500/30 rounded-lg p-3"
                 >
-                  <div className="text-sm font-medium text-white">
-                    {project.name}
-                  </div>
+                  <div className="text-sm font-medium text-white">{project.name}</div>
                   <div className="text-xs text-muted-foreground">
-                    {project.elements.length} elements •{" "}
-                    {project.timestamp.toLocaleDateString()}
+                    {project.elements.length} elements • {project.timestamp.toLocaleDateString()}
                   </div>
                 </div>
               ))}
@@ -447,15 +403,12 @@ export function LandscapeBuilderRestored() {
               🌟 Little Big Planet Integration
             </h4>
             <p className="text-sm text-muted-foreground mb-4">
-              Your landscapes are VR-ready and can be shared with the Gaia
-              community
+              Your landscapes are VR-ready and can be shared with the Gaia community
             </p>
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
                 <div className="text-lg font-bold text-purple-400">VR</div>
-                <div className="text-xs text-muted-foreground">
-                  Virtual Reality
-                </div>
+                <div className="text-xs text-muted-foreground">Virtual Reality</div>
               </div>
               <div>
                 <div className="text-lg font-bold text-pink-400">3D</div>

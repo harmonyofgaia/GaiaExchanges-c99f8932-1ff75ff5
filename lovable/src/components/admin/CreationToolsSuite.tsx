@@ -2,14 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Palette,
-  Hammer,
-  Coins,
-  Globe,
-  Gamepad2,
-  Sparkles,
-} from "lucide-react";
+import { Palette, Hammer, Coins, Globe, Gamepad2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
 export function CreationToolsSuite() {
@@ -34,9 +27,7 @@ export function CreationToolsSuite() {
       artGenerator: "AI Art Generator",
     };
 
-    toast.success(
-      `${toolNames[tool]} ${activeTools[tool] ? "Disabled" : "Activated"}!`,
-    );
+    toast.success(`${toolNames[tool]} ${activeTools[tool] ? "Disabled" : "Activated"}!`);
   };
 
   const tools = [
@@ -44,8 +35,7 @@ export function CreationToolsSuite() {
       key: "landscapeBuilder",
       name: "Landscape Builder Master",
       icon: Globe,
-      description:
-        "Ultimate world creation with age groups (0-12, 13-16, 17-22, 23+)",
+      description: "Ultimate world creation with age groups (0-12, 13-16, 17-22, 23+)",
       color: "green",
       features: [
         "Age-based environments",
@@ -73,12 +63,7 @@ export function CreationToolsSuite() {
       icon: Sparkles,
       description: "Create movie-like NFTs with emotions and personalities",
       color: "purple",
-      features: [
-        "Emotional AI",
-        "Walkable characters",
-        "Living animations",
-        "Personality traits",
-      ],
+      features: ["Emotional AI", "Walkable characters", "Living animations", "Personality traits"],
     },
     {
       key: "weaponsDesigner",
@@ -86,12 +71,7 @@ export function CreationToolsSuite() {
       icon: Hammer,
       description: "Enhanced tools & weapons making system for gaming",
       color: "red",
-      features: [
-        "3D modeling",
-        "Physics simulation",
-        "Game integration",
-        "Combat testing",
-      ],
+      features: ["3D modeling", "Physics simulation", "Game integration", "Combat testing"],
     },
     {
       key: "worldBuilder",
@@ -99,12 +79,7 @@ export function CreationToolsSuite() {
       icon: Gamepad2,
       description: "Create immersive virtual worlds and experiences",
       color: "blue",
-      features: [
-        "Physics engine",
-        "Lighting system",
-        "Terrain tools",
-        "Asset library",
-      ],
+      features: ["Physics engine", "Lighting system", "Terrain tools", "Asset library"],
     },
     {
       key: "artGenerator",
@@ -112,12 +87,7 @@ export function CreationToolsSuite() {
       icon: Palette,
       description: "Generate impressive visual designs for NFT projects",
       color: "pink",
-      features: [
-        "AI-powered",
-        "Style transfer",
-        "Batch generation",
-        "NFT optimization",
-      ],
+      features: ["AI-powered", "Style transfer", "Batch generation", "NFT optimization"],
     },
   ];
 
@@ -137,12 +107,8 @@ export function CreationToolsSuite() {
               {Object.values(activeTools).filter(Boolean).length} /{" "}
               {Object.keys(activeTools).length}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Active Creation Tools
-            </div>
-            <Badge className="bg-purple-600 text-white">
-              MASTER CREATOR MODE
-            </Badge>
+            <div className="text-sm text-muted-foreground">Active Creation Tools</div>
+            <Badge className="bg-purple-600 text-white">MASTER CREATOR MODE</Badge>
           </div>
         </CardContent>
       </Card>
@@ -159,31 +125,19 @@ export function CreationToolsSuite() {
               className={`border-${tool.color}-500/30 bg-gradient-to-br from-${tool.color}-900/20 to-black/50 transition-all duration-300 ${isActive ? "scale-105 shadow-lg" : ""}`}
             >
               <CardHeader>
-                <CardTitle
-                  className={`flex items-center gap-2 text-${tool.color}-400`}
-                >
+                <CardTitle className={`flex items-center gap-2 text-${tool.color}-400`}>
                   <Icon className="h-6 w-6" />
                   {tool.name}
-                  <Badge
-                    className={
-                      isActive ? `bg-${tool.color}-600` : "bg-gray-600"
-                    }
-                  >
+                  <Badge className={isActive ? `bg-${tool.color}-600` : "bg-gray-600"}>
                     {isActive ? "ACTIVE" : "INACTIVE"}
                   </Badge>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm text-muted-foreground">
-                  {tool.description}
-                </p>
+                <p className="text-sm text-muted-foreground">{tool.description}</p>
 
                 <div className="space-y-2">
-                  <h4
-                    className={`font-semibold text-${tool.color}-400 text-sm`}
-                  >
-                    Key Features:
-                  </h4>
+                  <h4 className={`font-semibold text-${tool.color}-400 text-sm`}>Key Features:</h4>
                   <ul className="space-y-1">
                     {tool.features.map((feature, index) => (
                       <li
@@ -198,9 +152,7 @@ export function CreationToolsSuite() {
                 </div>
 
                 <Button
-                  onClick={() =>
-                    toggleTool(tool.key as keyof typeof activeTools)
-                  }
+                  onClick={() => toggleTool(tool.key as keyof typeof activeTools)}
                   className={`w-full ${isActive ? "bg-red-600 hover:bg-red-700" : `bg-${tool.color}-600 hover:bg-${tool.color}-700`}`}
                 >
                   {isActive ? "Disable Tool" : "Activate Tool"}

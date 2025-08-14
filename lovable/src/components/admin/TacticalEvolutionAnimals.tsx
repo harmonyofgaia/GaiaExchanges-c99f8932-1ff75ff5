@@ -4,16 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import {
-  Zap,
-  Brain,
-  Cpu,
-  Dna,
-  Target,
-  Shield,
-  Flame,
-  Star,
-} from "lucide-react";
+import { Zap, Brain, Cpu, Dna, Target, Shield, Flame, Star } from "lucide-react";
 import { toast } from "sonner";
 
 interface TacticalAnimal {
@@ -52,13 +43,7 @@ interface TacticalAnimal {
   missionCount: number;
   successRate: number;
   lastMission: string;
-  status:
-    | "training"
-    | "active"
-    | "evolving"
-    | "mission"
-    | "dormant"
-    | "ascending";
+  status: "training" | "active" | "evolving" | "mission" | "dormant" | "ascending";
   location: string;
 }
 
@@ -324,9 +309,7 @@ export function TacticalEvolutionAnimals() {
     },
   ]);
 
-  const [evolutionProtocols, setEvolutionProtocols] = useState<
-    EvolutionProtocol[]
-  >([
+  const [evolutionProtocols, setEvolutionProtocols] = useState<EvolutionProtocol[]>([
     {
       id: "omega-ascension",
       name: "Omega Ascension Protocol",
@@ -365,10 +348,7 @@ export function TacticalEvolutionAnimals() {
         prev.map((animal) => {
           // Power growth
           const powerGrowth = Math.floor(Math.random() * 50000) + 25000;
-          const newPower = Math.min(
-            animal.maxPower,
-            animal.currentPower + powerGrowth,
-          );
+          const newPower = Math.min(animal.maxPower, animal.currentPower + powerGrowth);
 
           // Training module progress
           const updatedModules = animal.selfTrainingModules.map((module) => ({
@@ -392,9 +372,7 @@ export function TacticalEvolutionAnimals() {
 
           // Mission count increase
           const newMissions = Math.floor(Math.random() * 3) + 1;
-          const successfulMissions = Math.floor(
-            newMissions * (animal.successRate / 100),
-          );
+          const successfulMissions = Math.floor(newMissions * (animal.successRate / 100));
 
           return {
             ...animal,
@@ -403,12 +381,9 @@ export function TacticalEvolutionAnimals() {
             selfTrainingModules: updatedModules,
             missionCount: animal.missionCount + newMissions,
             lastMission: `Auto-training evolution: +${powerGrowth.toLocaleString()} power`,
-            successRate: Math.min(
-              100,
-              animal.successRate + Math.random() * 0.01,
-            ),
+            successRate: Math.min(100, animal.successRate + Math.random() * 0.01),
           };
-        }),
+        })
       );
 
       // Random status changes for realism
@@ -423,8 +398,7 @@ export function TacticalEvolutionAnimals() {
             "mission",
             "ascending",
           ];
-          const newStatus =
-            statuses[Math.floor(Math.random() * statuses.length)];
+          const newStatus = statuses[Math.floor(Math.random() * statuses.length)];
 
           newAnimals[animalIndex] = {
             ...newAnimals[animalIndex],
@@ -447,7 +421,7 @@ export function TacticalEvolutionAnimals() {
     if (!protocol) return;
 
     const eligibleAnimals = tacticalAnimals.filter((animal) =>
-      protocol.targetAnimals.includes(animal.id),
+      protocol.targetAnimals.includes(animal.id)
     );
 
     if (eligibleAnimals.length > 0) {
@@ -456,20 +430,15 @@ export function TacticalEvolutionAnimals() {
           if (eligibleAnimals.some((a) => a.id === animal.id)) {
             return {
               ...animal,
-              currentPower: Math.floor(
-                animal.currentPower * protocol.powerMultiplier,
-              ),
+              currentPower: Math.floor(animal.currentPower * protocol.powerMultiplier),
               maxPower: Math.floor(animal.maxPower * protocol.powerMultiplier),
-              evolutionStage: Math.min(
-                animal.maxEvolutionStage,
-                animal.evolutionStage + 3,
-              ),
+              evolutionStage: Math.min(animal.maxEvolutionStage, animal.evolutionStage + 3),
               status: "ascending",
               lastMission: `${protocol.name} executed - Power multiplied by ${protocol.powerMultiplier}x`,
             };
           }
           return animal;
-        }),
+        })
       );
 
       toast.success(`🚀 ${protocol.name} Activated!`, {
@@ -478,25 +447,17 @@ export function TacticalEvolutionAnimals() {
       });
 
       console.log(`🌟 EVOLUTION PROTOCOL: ${protocol.name}`);
-      console.log(
-        `🔥 Animals evolved: ${eligibleAnimals.map((a) => a.name).join(", ")}`,
-      );
+      console.log(`🔥 Animals evolved: ${eligibleAnimals.map((a) => a.name).join(", ")}`);
     }
   };
 
-  const totalPower = tacticalAnimals.reduce(
-    (sum, animal) => sum + animal.currentPower,
-    0,
-  );
+  const totalPower = tacticalAnimals.reduce((sum, animal) => sum + animal.currentPower, 0);
   const averageEvolution =
     tacticalAnimals.reduce(
       (sum, animal) => sum + animal.evolutionStage / animal.maxEvolutionStage,
-      0,
+      0
     ) / tacticalAnimals.length;
-  const totalMissions = tacticalAnimals.reduce(
-    (sum, animal) => sum + animal.missionCount,
-    0,
-  );
+  const totalMissions = tacticalAnimals.reduce((sum, animal) => sum + animal.missionCount, 0);
 
   return (
     <div className="space-y-6">
@@ -514,9 +475,7 @@ export function TacticalEvolutionAnimals() {
         <Card className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 border-purple-500/50">
           <CardContent className="p-4 text-center">
             <div className="text-3xl mb-2">⚡</div>
-            <div className="text-2xl font-bold text-purple-400">
-              {totalPower.toLocaleString()}
-            </div>
+            <div className="text-2xl font-bold text-purple-400">{totalPower.toLocaleString()}</div>
             <div className="text-sm text-purple-300">Total Power Level</div>
           </CardContent>
         </Card>
@@ -534,9 +493,7 @@ export function TacticalEvolutionAnimals() {
         <Card className="bg-gradient-to-br from-red-900/40 to-orange-900/40 border-red-500/50">
           <CardContent className="p-4 text-center">
             <div className="text-3xl mb-2">🎯</div>
-            <div className="text-2xl font-bold text-red-400">
-              {totalMissions.toLocaleString()}
-            </div>
+            <div className="text-2xl font-bold text-red-400">{totalMissions.toLocaleString()}</div>
             <div className="text-sm text-red-300">Total Missions</div>
           </CardContent>
         </Card>
@@ -547,9 +504,7 @@ export function TacticalEvolutionAnimals() {
             <div className="text-2xl font-bold text-orange-400">
               {
                 tacticalAnimals.filter(
-                  (a) =>
-                    a.powerClass === "INFINITE" ||
-                    a.powerClass === "MULTIVERSE",
+                  (a) => a.powerClass === "INFINITE" || a.powerClass === "MULTIVERSE"
                 ).length
               }
             </div>
@@ -577,9 +532,7 @@ export function TacticalEvolutionAnimals() {
                     <div className="flex items-center gap-3">
                       <div className="text-3xl">{animal.emoji}</div>
                       <div>
-                        <CardTitle className="text-lg text-white">
-                          {animal.name}
-                        </CardTitle>
+                        <CardTitle className="text-lg text-white">{animal.name}</CardTitle>
                         <div className="flex items-center gap-2 mt-1">
                           <Badge
                             className={`text-xs ${
@@ -632,18 +585,13 @@ export function TacticalEvolutionAnimals() {
                         {animal.evolutionStage}/{animal.maxEvolutionStage}
                       </div>
                       <Progress
-                        value={
-                          (animal.evolutionStage / animal.maxEvolutionStage) *
-                          100
-                        }
+                        value={(animal.evolutionStage / animal.maxEvolutionStage) * 100}
                         className="mt-1"
                       />
                     </div>
                     <div>
                       <div className="text-muted-foreground">Missions</div>
-                      <div className="text-green-400 font-bold">
-                        {animal.missionCount}
-                      </div>
+                      <div className="text-green-400 font-bold">{animal.missionCount}</div>
                     </div>
                     <div>
                       <div className="text-muted-foreground">Success Rate</div>
@@ -654,56 +602,34 @@ export function TacticalEvolutionAnimals() {
                   </div>
 
                   <div>
-                    <div className="text-muted-foreground text-sm mb-2">
-                      Tactical Abilities
-                    </div>
+                    <div className="text-muted-foreground text-sm mb-2">Tactical Abilities</div>
                     <div className="grid grid-cols-1 gap-1">
-                      {animal.tacticalAbilities
-                        .slice(0, 2)
-                        .map((ability, idx) => (
-                          <div
-                            key={idx}
-                            className="flex justify-between text-xs"
-                          >
-                            <span className="text-cyan-400">
-                              {ability.name}
-                            </span>
-                            <span className="text-orange-400">
-                              {ability.power.toLocaleString()}
-                            </span>
-                          </div>
-                        ))}
+                      {animal.tacticalAbilities.slice(0, 2).map((ability, idx) => (
+                        <div key={idx} className="flex justify-between text-xs">
+                          <span className="text-cyan-400">{ability.name}</span>
+                          <span className="text-orange-400">{ability.power.toLocaleString()}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
                   <div>
-                    <div className="text-muted-foreground text-sm mb-2">
-                      Self-Training Modules
-                    </div>
+                    <div className="text-muted-foreground text-sm mb-2">Self-Training Modules</div>
                     <div className="space-y-1">
-                      {animal.selfTrainingModules
-                        .slice(0, 2)
-                        .map((module, idx) => (
-                          <div
-                            key={idx}
-                            className="flex justify-between items-center text-xs"
-                          >
-                            <span className="text-gray-300">
-                              {module.module}
-                            </span>
-                            <div className="flex items-center gap-2">
-                              <span className="text-green-400">
-                                {module.progress.toFixed(1)}%
-                              </span>
-                              <div className="w-12 h-1 bg-gray-700 rounded">
-                                <div
-                                  className="h-full bg-green-400 rounded transition-all duration-300"
-                                  style={{ width: `${module.progress}%` }}
-                                />
-                              </div>
+                      {animal.selfTrainingModules.slice(0, 2).map((module, idx) => (
+                        <div key={idx} className="flex justify-between items-center text-xs">
+                          <span className="text-gray-300">{module.module}</span>
+                          <div className="flex items-center gap-2">
+                            <span className="text-green-400">{module.progress.toFixed(1)}%</span>
+                            <div className="w-12 h-1 bg-gray-700 rounded">
+                              <div
+                                className="h-full bg-green-400 rounded transition-all duration-300"
+                                style={{ width: `${module.progress}%` }}
+                              />
                             </div>
                           </div>
-                        ))}
+                        </div>
+                      ))}
                     </div>
                   </div>
 
@@ -727,34 +653,23 @@ export function TacticalEvolutionAnimals() {
                 className="bg-gradient-to-br from-indigo-900/40 to-purple-900/40 border-indigo-500/50"
               >
                 <CardHeader>
-                  <CardTitle className="text-lg text-indigo-300">
-                    {protocol.name}
-                  </CardTitle>
+                  <CardTitle className="text-lg text-indigo-300">{protocol.name}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm text-gray-300">
-                    {protocol.description}
-                  </p>
+                  <p className="text-sm text-gray-300">{protocol.description}</p>
 
                   <div>
-                    <div className="text-sm text-muted-foreground mb-2">
-                      Power Multiplier
-                    </div>
+                    <div className="text-sm text-muted-foreground mb-2">Power Multiplier</div>
                     <div className="text-2xl font-bold text-yellow-400">
                       {protocol.powerMultiplier}x
                     </div>
                   </div>
 
                   <div>
-                    <div className="text-sm text-muted-foreground mb-2">
-                      Requirements
-                    </div>
+                    <div className="text-sm text-muted-foreground mb-2">Requirements</div>
                     <div className="space-y-1">
                       {protocol.requirements.map((req, idx) => (
-                        <div
-                          key={idx}
-                          className="text-xs text-green-400 flex items-center gap-1"
-                        >
+                        <div key={idx} className="text-xs text-green-400 flex items-center gap-1">
                           <Star className="h-3 w-3" />
                           {req}
                         </div>
@@ -794,9 +709,7 @@ export function TacticalEvolutionAnimals() {
                       <div className="text-2xl font-bold text-cyan-400">
                         {animal.evolutionStage}
                       </div>
-                      <div className="text-sm text-cyan-300">
-                        Evolution Stage
-                      </div>
+                      <div className="text-sm text-cyan-300">Evolution Stage</div>
                     </div>
                     <div className="text-center">
                       <div className="text-2xl font-bold text-blue-400">
@@ -807,19 +720,13 @@ export function TacticalEvolutionAnimals() {
                   </div>
 
                   <div>
-                    <div className="text-sm text-muted-foreground mb-3">
-                      Self-Training Modules
-                    </div>
+                    <div className="text-sm text-muted-foreground mb-3">Self-Training Modules</div>
                     <div className="space-y-3">
                       {animal.selfTrainingModules.map((module, idx) => (
                         <div key={idx} className="space-y-1">
                           <div className="flex justify-between text-sm">
-                            <span className="text-gray-300">
-                              {module.module}
-                            </span>
-                            <span className="text-cyan-400">
-                              {module.progress.toFixed(1)}%
-                            </span>
+                            <span className="text-gray-300">{module.module}</span>
+                            <span className="text-cyan-400">{module.progress.toFixed(1)}%</span>
                           </div>
                           <Progress value={module.progress} className="h-2" />
                           <div className="flex justify-between text-xs">
@@ -833,9 +740,7 @@ export function TacticalEvolutionAnimals() {
                   </div>
 
                   <div>
-                    <div className="text-sm text-muted-foreground mb-2">
-                      Specializations
-                    </div>
+                    <div className="text-sm text-muted-foreground mb-2">Specializations</div>
                     <div className="flex flex-wrap gap-1">
                       {animal.specializations.map((spec, idx) => (
                         <Badge key={idx} variant="outline" className="text-xs">

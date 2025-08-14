@@ -28,9 +28,7 @@ export function GitHubRollbackManager() {
   const [rollbackPoints, setRollbackPoints] = useState<RollbackPoint[]>([]);
   const [selectedVersion, setSelectedVersion] = useState("");
   const [isRollingBack, setIsRollingBack] = useState(false);
-  const [currentVersion, setCurrentVersion] = useState(
-    "v2.4.7-dragon-protected",
-  );
+  const [currentVersion, setCurrentVersion] = useState("v2.4.7-dragon-protected");
 
   useEffect(() => {
     // Load rollback points
@@ -39,23 +37,15 @@ export function GitHubRollbackManager() {
         id: "rp_001",
         timestamp: new Date().toISOString(),
         version: "v2.4.7-dragon-protected",
-        description:
-          "🐉 Dragon Security + Binance Integration + Multi-Network Support",
-        networks: [
-          "Binance Smart Chain",
-          "Ethereum",
-          "Polygon",
-          "Solana",
-          "Arbitrum",
-        ],
+        description: "🐉 Dragon Security + Binance Integration + Multi-Network Support",
+        networks: ["Binance Smart Chain", "Ethereum", "Polygon", "Solana", "Arbitrum"],
         status: "active",
       },
       {
         id: "rp_002",
         timestamp: new Date(Date.now() - 86400000).toISOString(),
         version: "v2.4.6-quantum-enhanced",
-        description:
-          "⚡ Quantum Security + DEX Integration + Cross-chain Swaps",
+        description: "⚡ Quantum Security + DEX Integration + Cross-chain Swaps",
         networks: ["Binance Smart Chain", "Ethereum", "Polygon"],
         status: "rollback_ready",
       },
@@ -63,8 +53,7 @@ export function GitHubRollbackManager() {
         id: "rp_003",
         timestamp: new Date(Date.now() - 172800000).toISOString(),
         version: "v2.4.5-multi-exchange",
-        description:
-          "🔄 Multi-Exchange Support + Advanced Trading + Security Layer",
+        description: "🔄 Multi-Exchange Support + Advanced Trading + Security Layer",
         networks: ["Binance Smart Chain", "Ethereum"],
         status: "rollback_ready",
       },
@@ -78,10 +67,7 @@ export function GitHubRollbackManager() {
 
     try {
       console.log("🔄 INITIATING GITHUB ROLLBACK TO:", rollbackPoint.version);
-      console.log(
-        "📦 Rolling back networks:",
-        rollbackPoint.networks.join(", "),
-      );
+      console.log("📦 Rolling back networks:", rollbackPoint.networks.join(", "));
 
       // Simulate GitHub rollback process
       await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -94,7 +80,7 @@ export function GitHubRollbackManager() {
         prev.map((point) => ({
           ...point,
           status: point.id === rollbackPoint.id ? "active" : "rollback_ready",
-        })),
+        }))
       );
 
       toast.success("🎉 GitHub Rollback Successful!", {
@@ -118,16 +104,8 @@ export function GitHubRollbackManager() {
       id: `rp_${Date.now()}`,
       timestamp: new Date().toISOString(),
       version: `v${Math.floor(Math.random() * 10)}.${Math.floor(Math.random() * 10)}.${Math.floor(Math.random() * 10)}-dragon-enhanced`,
-      description:
-        "🐉 Current Dragon State + All Network Integrations + Latest Features",
-      networks: [
-        "Binance Smart Chain",
-        "Ethereum",
-        "Polygon",
-        "Solana",
-        "Arbitrum",
-        "Avalanche",
-      ],
+      description: "🐉 Current Dragon State + All Network Integrations + Latest Features",
+      networks: ["Binance Smart Chain", "Ethereum", "Polygon", "Solana", "Arbitrum", "Avalanche"],
       status: "rollback_ready",
     };
 
@@ -157,30 +135,20 @@ export function GitHubRollbackManager() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center p-4 rounded-lg bg-green-900/30 border border-green-500/20">
               <GitBranch className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="text-xl font-bold text-green-400">
-                {currentVersion}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Current Version
-              </div>
+              <div className="text-xl font-bold text-green-400">{currentVersion}</div>
+              <div className="text-sm text-muted-foreground">Current Version</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-blue-900/30 border border-blue-500/20">
               <Database className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-xl font-bold text-blue-400">
-                {rollbackPoints.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Rollback Points
-              </div>
+              <div className="text-xl font-bold text-blue-400">{rollbackPoints.length}</div>
+              <div className="text-sm text-muted-foreground">Rollback Points</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-purple-900/30 border border-purple-500/20">
               <Zap className="h-8 w-8 text-purple-400 mx-auto mb-2" />
               <div className="text-xl font-bold text-purple-400">6</div>
-              <div className="text-sm text-muted-foreground">
-                Networks Ready
-              </div>
+              <div className="text-sm text-muted-foreground">Networks Ready</div>
             </div>
           </div>
         </CardContent>
@@ -190,13 +158,8 @@ export function GitHubRollbackManager() {
       <Card className="border-green-500/30">
         <CardHeader>
           <div className="flex justify-between items-center">
-            <CardTitle className="text-green-400">
-              📦 Available Rollback Points
-            </CardTitle>
-            <Button
-              onClick={createNewRollbackPoint}
-              className="bg-green-600 hover:bg-green-700"
-            >
+            <CardTitle className="text-green-400">📦 Available Rollback Points</CardTitle>
+            <Button onClick={createNewRollbackPoint} className="bg-green-600 hover:bg-green-700">
               <Upload className="h-4 w-4 mr-2" />
               Create Rollback Point
             </Button>
@@ -234,17 +197,11 @@ export function GitHubRollbackManager() {
                         )}
                       </div>
 
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {point.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground mb-2">{point.description}</p>
 
                       <div className="flex flex-wrap gap-1 mb-2">
                         {point.networks.map((network) => (
-                          <Badge
-                            key={network}
-                            variant="outline"
-                            className="text-xs"
-                          >
+                          <Badge key={network} variant="outline" className="text-xs">
                             {network}
                           </Badge>
                         ))}
@@ -278,30 +235,21 @@ export function GitHubRollbackManager() {
       {/* Network Integration Status */}
       <Card className="border-purple-500/30 bg-purple-900/20">
         <CardHeader>
-          <CardTitle className="text-purple-400">
-            🌐 Network Integration Status
-          </CardTitle>
+          <CardTitle className="text-purple-400">🌐 Network Integration Status</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[
-              "Binance Smart Chain",
-              "Ethereum",
-              "Polygon",
-              "Solana",
-              "Arbitrum",
-              "Avalanche",
-            ].map((network) => (
-              <div
-                key={network}
-                className="flex items-center justify-between p-3 bg-green-900/20 rounded-lg border border-green-500/20"
-              >
-                <span className="text-sm text-green-300">{network}</span>
-                <Badge className="bg-green-600 text-white text-xs">
-                  ✅ READY
-                </Badge>
-              </div>
-            ))}
+            {["Binance Smart Chain", "Ethereum", "Polygon", "Solana", "Arbitrum", "Avalanche"].map(
+              (network) => (
+                <div
+                  key={network}
+                  className="flex items-center justify-between p-3 bg-green-900/20 rounded-lg border border-green-500/20"
+                >
+                  <span className="text-sm text-green-300">{network}</span>
+                  <Badge className="bg-green-600 text-white text-xs">✅ READY</Badge>
+                </div>
+              )
+            )}
           </div>
         </CardContent>
       </Card>
@@ -309,9 +257,7 @@ export function GitHubRollbackManager() {
       {/* Rollback Actions */}
       <Card className="border-red-500/30 bg-red-900/20">
         <CardHeader>
-          <CardTitle className="text-red-400">
-            ⚡ Emergency Rollback Actions
-          </CardTitle>
+          <CardTitle className="text-red-400">⚡ Emergency Rollback Actions</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -4,12 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  TrendingUp,
-  TrendingDown,
-  ArrowUpDown,
-  ExternalLink,
-} from "lucide-react";
+import { TrendingUp, TrendingDown, ArrowUpDown, ExternalLink } from "lucide-react";
 import { GAIA_TOKEN, formatGaiaPrice } from "@/constants/gaia";
 import { toast } from "sonner";
 
@@ -80,14 +75,10 @@ export function TradingInterface() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Buy Section */}
               <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/30">
-                <h3 className="text-lg font-semibold text-green-400 mb-3">
-                  Buy GAiA
-                </h3>
+                <h3 className="text-lg font-semibold text-green-400 mb-3">Buy GAiA</h3>
                 <div className="space-y-3">
                   <div>
-                    <label className="text-sm text-green-300">
-                      Amount (USDT)
-                    </label>
+                    <label className="text-sm text-green-300">Amount (USDT)</label>
                     <Input
                       type="number"
                       value={buyAmount}
@@ -97,16 +88,9 @@ export function TradingInterface() {
                     />
                   </div>
                   <div className="text-sm text-green-300">
-                    ≈{" "}
-                    {buyAmount
-                      ? (parseFloat(buyAmount) / 0.000125).toLocaleString()
-                      : "0"}{" "}
-                    GAiA
+                    ≈ {buyAmount ? (parseFloat(buyAmount) / 0.000125).toLocaleString() : "0"} GAiA
                   </div>
-                  <Button
-                    onClick={handleBuy}
-                    className="w-full bg-green-600 hover:bg-green-700"
-                  >
+                  <Button onClick={handleBuy} className="w-full bg-green-600 hover:bg-green-700">
                     <TrendingUp className="h-4 w-4 mr-2" />
                     Buy GAiA
                   </Button>
@@ -115,14 +99,10 @@ export function TradingInterface() {
 
               {/* Sell Section */}
               <div className="p-4 bg-red-900/20 rounded-lg border border-red-500/30">
-                <h3 className="text-lg font-semibold text-red-400 mb-3">
-                  Sell GAiA
-                </h3>
+                <h3 className="text-lg font-semibold text-red-400 mb-3">Sell GAiA</h3>
                 <div className="space-y-3">
                   <div>
-                    <label className="text-sm text-red-300">
-                      Amount (GAiA)
-                    </label>
+                    <label className="text-sm text-red-300">Amount (GAiA)</label>
                     <Input
                       type="number"
                       value={sellAmount}
@@ -132,15 +112,9 @@ export function TradingInterface() {
                     />
                   </div>
                   <div className="text-sm text-red-300">
-                    ≈ $
-                    {sellAmount
-                      ? (parseFloat(sellAmount) * 0.000125).toFixed(6)
-                      : "0.000000"}
+                    ≈ ${sellAmount ? (parseFloat(sellAmount) * 0.000125).toFixed(6) : "0.000000"}
                   </div>
-                  <Button
-                    onClick={handleSell}
-                    className="w-full bg-red-600 hover:bg-red-700"
-                  >
+                  <Button onClick={handleSell} className="w-full bg-red-600 hover:bg-red-700">
                     <TrendingDown className="h-4 w-4 mr-2" />
                     Sell GAiA
                   </Button>
@@ -160,9 +134,7 @@ export function TradingInterface() {
                     <div className="text-2xl">🪙</div>
                     <div>
                       <div className="font-bold text-white">{pair.symbol}</div>
-                      <div className="text-sm text-gray-400">
-                        {formatGaiaPrice(pair.price)}
-                      </div>
+                      <div className="text-sm text-gray-400">{formatGaiaPrice(pair.price)}</div>
                     </div>
                   </div>
                   <div className="text-right">

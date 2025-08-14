@@ -72,7 +72,7 @@ export function MarketData() {
           ...coin,
           price: coin.price * (1 + (Math.random() - 0.5) * 0.002), // ±0.1% random change
           change24h: coin.change24h + (Math.random() - 0.5) * 0.1,
-        })),
+        }))
       );
     }, 3000);
 
@@ -117,22 +117,16 @@ export function MarketData() {
             >
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                  <span className="text-xs font-bold text-primary">
-                    {coin.symbol.slice(0, 2)}
-                  </span>
+                  <span className="text-xs font-bold text-primary">{coin.symbol.slice(0, 2)}</span>
                 </div>
                 <div>
                   <div className="font-medium">{coin.name}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {coin.symbol}
-                  </div>
+                  <div className="text-sm text-muted-foreground">{coin.symbol}</div>
                 </div>
               </div>
 
               <div className="text-right">
-                <div className="mono-numbers font-medium">
-                  {formatPrice(coin.price)}
-                </div>
+                <div className="mono-numbers font-medium">{formatPrice(coin.price)}</div>
                 <div
                   className={`text-sm flex items-center gap-1 ${getPriceChangeColor(coin.change24h)}`}
                 >

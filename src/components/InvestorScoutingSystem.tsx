@@ -84,8 +84,7 @@ export function InvestorScoutingSystem() {
           "QuantumSecurity_Investor",
         ];
 
-        const randomInvestor =
-          newInvestors[Math.floor(Math.random() * newInvestors.length)];
+        const randomInvestor = newInvestors[Math.floor(Math.random() * newInvestors.length)];
 
         toast.success(`🎯 New Investor Discovered!`, {
           description: `Found ${randomInvestor} - High potential for GAiA investment`,
@@ -159,8 +158,8 @@ Culture of Harmony Investment Team
                   contactStatus: "contacted",
                   lastContact: new Date().toISOString().split("T")[0],
                 }
-              : inv,
-          ),
+              : inv
+          )
         );
 
         toast.success(`📧 Outreach Sent to ${investor.name}`, {
@@ -176,24 +175,19 @@ Culture of Harmony Investment Team
 
   const broadcastToAllInvestors = async () => {
     toast.success("🌍 Global Investor Campaign Launched!", {
-      description:
-        "Broadcasting GAiA investment opportunity to all discovered investors",
+      description: "Broadcasting GAiA investment opportunity to all discovered investors",
       duration: 6000,
     });
 
     // Send to all pending investors
-    const pendingInvestors = investors.filter(
-      (inv) => inv.contactStatus === "pending",
-    );
+    const pendingInvestors = investors.filter((inv) => inv.contactStatus === "pending");
 
     for (const investor of pendingInvestors) {
       setTimeout(() => sendOutreachMessage(investor), Math.random() * 2000);
     }
 
     setTotalContacted((prev) => prev + pendingInvestors.length);
-    setTotalInterested(
-      (prev) => prev + Math.floor(pendingInvestors.length * 0.15),
-    );
+    setTotalInterested((prev) => prev + Math.floor(pendingInvestors.length * 0.15));
   };
 
   return (
@@ -204,12 +198,8 @@ Culture of Harmony Investment Team
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Investors Contacted
-                </p>
-                <p className="text-2xl font-bold text-green-400">
-                  {totalContacted}
-                </p>
+                <p className="text-sm text-muted-foreground">Investors Contacted</p>
+                <p className="text-2xl font-bold text-green-400">{totalContacted}</p>
               </div>
               <Mail className="h-8 w-8 text-green-400" />
             </div>
@@ -220,12 +210,8 @@ Culture of Harmony Investment Team
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Showing Interest
-                </p>
-                <p className="text-2xl font-bold text-blue-400">
-                  {totalInterested}
-                </p>
+                <p className="text-sm text-muted-foreground">Showing Interest</p>
+                <p className="text-2xl font-bold text-blue-400">{totalInterested}</p>
               </div>
               <TrendingUp className="h-8 w-8 text-blue-400" />
             </div>
@@ -255,9 +241,7 @@ Culture of Harmony Investment Team
                   {isScanning ? "LIVE" : "READY"}
                 </p>
               </div>
-              <Zap
-                className={`h-8 w-8 text-yellow-400 ${isScanning ? "animate-pulse" : ""}`}
-              />
+              <Zap className={`h-8 w-8 text-yellow-400 ${isScanning ? "animate-pulse" : ""}`} />
             </div>
           </CardContent>
         </Card>
@@ -274,9 +258,7 @@ Culture of Harmony Investment Team
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
-              <h4 className="font-semibold text-blue-400">
-                🎯 Active Targeting:
-              </h4>
+              <h4 className="font-semibold text-blue-400">🎯 Active Targeting:</h4>
               <ul className="text-sm space-y-1">
                 <li>✅ Large-cap crypto holders (BTC, ETH, SOL)</li>
                 <li>✅ Environmental/sustainable token investors</li>
@@ -286,9 +268,7 @@ Culture of Harmony Investment Team
               </ul>
             </div>
             <div className="space-y-4">
-              <h4 className="font-semibold text-purple-400">
-                💎 Value Proposition:
-              </h4>
+              <h4 className="font-semibold text-purple-400">💎 Value Proposition:</h4>
               <ul className="text-sm space-y-1">
                 <li>🚀 Pre-exponential market cap entry</li>
                 <li>🛡️ World's most secure trading platform</li>
@@ -300,10 +280,7 @@ Culture of Harmony Investment Team
           </div>
 
           <div className="flex gap-4 flex-wrap">
-            <Button
-              onClick={broadcastToAllInvestors}
-              className="bg-green-600 hover:bg-green-700"
-            >
+            <Button onClick={broadcastToAllInvestors} className="bg-green-600 hover:bg-green-700">
               <Globe className="h-4 w-4 mr-2" />
               Launch Global Campaign
             </Button>
@@ -340,15 +317,11 @@ Culture of Harmony Investment Team
                 <div className="flex items-center gap-4">
                   <div>
                     <div className="font-medium">{investor.name}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {investor.email}
-                    </div>
+                    <div className="text-sm text-muted-foreground">{investor.email}</div>
                     <div className="text-xs text-blue-400">
                       Holdings: {investor.tokenHoldings.join(", ")}
                     </div>
-                    <div className="text-xs text-green-400">
-                      Range: {investor.investmentRange}
-                    </div>
+                    <div className="text-xs text-green-400">Range: {investor.investmentRange}</div>
                   </div>
                 </div>
 
@@ -371,9 +344,7 @@ Culture of Harmony Investment Team
                     className="bg-green-600 hover:bg-green-700"
                   >
                     <Mail className="h-3 w-3 mr-1" />
-                    {investor.contactStatus === "contacted"
-                      ? "Sent"
-                      : "Contact"}
+                    {investor.contactStatus === "contacted" ? "Sent" : "Contact"}
                   </Button>
                 </div>
               </div>
@@ -402,9 +373,7 @@ Culture of Harmony Investment Team
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <h4 className="font-semibold text-green-400">
-                📱 Mobile Testing:
-              </h4>
+              <h4 className="font-semibold text-green-400">📱 Mobile Testing:</h4>
               <ul className="text-sm space-y-1">
                 <li>✅ iPhone/Android responsive design</li>
                 <li>✅ Touch-optimized trading interface</li>
@@ -413,9 +382,7 @@ Culture of Harmony Investment Team
               </ul>
             </div>
             <div className="space-y-2">
-              <h4 className="font-semibold text-blue-400">
-                💻 Desktop Testing:
-              </h4>
+              <h4 className="font-semibold text-blue-400">💻 Desktop Testing:</h4>
               <ul className="text-sm space-y-1">
                 <li>✅ Full trading dashboard</li>
                 <li>✅ Advanced charting tools</li>

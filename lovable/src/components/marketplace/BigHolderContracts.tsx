@@ -69,10 +69,7 @@ export function BigHolderContracts() {
       setContracts(mockContracts);
       console.log("💎 BIG HOLDER: Contracts loaded with quantum security");
     } catch (error) {
-      console.error(
-        "Error fetching contracts - quantum protection engaged:",
-        error,
-      );
+      console.error("Error fetching contracts - quantum protection engaged:", error);
     }
   };
 
@@ -132,17 +129,15 @@ export function BigHolderContracts() {
             💎 Big Holder Contracts - Quantum Secured
           </CardTitle>
           <p className="text-muted-foreground">
-            Exclusive contracts for major GAIA token holders with marketplace
-            investment requirements
+            Exclusive contracts for major GAIA token holders with marketplace investment
+            requirements
           </p>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium">
-                  Investment Amount (GAIA)
-                </label>
+                <label className="text-sm font-medium">Investment Amount (GAIA)</label>
                 <Input
                   type="number"
                   placeholder="Minimum 10,000 GAIA"
@@ -191,8 +186,7 @@ export function BigHolderContracts() {
               />
             </div>
             <p className="text-sm text-muted-foreground">
-              Scan this QR code with your Google Authenticator to complete
-              verification
+              Scan this QR code with your Google Authenticator to complete verification
             </p>
             <Button onClick={() => setShowQrCode(false)} variant="outline">
               I've scanned the QR code
@@ -232,9 +226,7 @@ export function BigHolderContracts() {
                               : "bg-yellow-600"
                         }
                       >
-                        {contract.contract_status
-                          .replace("_", " ")
-                          .toUpperCase()}
+                        {contract.contract_status.replace("_", " ").toUpperCase()}
                       </Badge>
                     </div>
                     <div className="flex items-center gap-4 text-sm">
@@ -275,8 +267,8 @@ export function BigHolderContracts() {
         <CardContent className="pt-6">
           <div className="text-center space-y-2">
             <p className="text-lg font-bold text-red-400 animate-pulse">
-              🐉 "Protected by the eternal flame of the quantum dragon's tail -
-              No force in existence can breach our heavenly community" 🐉
+              🐉 "Protected by the eternal flame of the quantum dragon's tail - No force in
+              existence can breach our heavenly community" 🐉
             </p>
             <p className="text-xs text-muted-foreground">
               This message will disappear in 20 seconds for maximum security

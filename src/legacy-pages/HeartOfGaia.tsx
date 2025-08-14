@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Heart,
-  TreePine,
-  Bird,
-  Crown,
-  Shield,
-  Flame,
-  Target,
-  Zap,
-} from "lucide-react";
+import { Heart, TreePine, Bird, Crown, Shield, Flame, Target, Zap } from "lucide-react";
 import { toast } from "sonner";
 
 const HeartOfGaia = () => {
@@ -120,9 +111,7 @@ const HeartOfGaia = () => {
           <Card className="bg-gradient-to-br from-red-900/30 to-pink-900/30 border-2 border-red-500/50">
             <CardContent className="pt-4 text-center">
               <Crown className="h-6 w-6 text-red-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-red-400">
-                {battleStats.dragonsDefeated}
-              </div>
+              <div className="text-2xl font-bold text-red-400">{battleStats.dragonsDefeated}</div>
               <div className="text-xs text-red-300">Dragons Defeated</div>
             </CardContent>
           </Card>
@@ -140,9 +129,7 @@ const HeartOfGaia = () => {
           <Card className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-2 border-blue-500/50">
             <CardContent className="pt-4 text-center">
               <Shield className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {battleStats.activeGuardians}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{battleStats.activeGuardians}</div>
               <div className="text-xs text-blue-300">Active Guardians</div>
             </CardContent>
           </Card>
@@ -150,9 +137,7 @@ const HeartOfGaia = () => {
           <Card className="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/50">
             <CardContent className="pt-4 text-center">
               <Heart className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-yellow-400">
-                {battleStats.gaiaEssence}%
-              </div>
+              <div className="text-2xl font-bold text-yellow-400">{battleStats.gaiaEssence}%</div>
               <div className="text-xs text-yellow-300">Gaia Essence</div>
             </CardContent>
           </Card>
@@ -170,12 +155,10 @@ const HeartOfGaia = () => {
             {/* Dragon Illustration */}
             <div className="relative bg-gradient-to-br from-red-800/30 to-black/30 border border-red-500/30 rounded-lg p-8 text-center">
               <div className="text-8xl mb-4 animate-pulse">🐉</div>
-              <h3 className="text-3xl font-bold text-red-400 mb-2">
-                ANCIENT FOREST DRAGON
-              </h3>
+              <h3 className="text-3xl font-bold text-red-400 mb-2">ANCIENT FOREST DRAGON</h3>
               <p className="text-lg text-muted-foreground mb-4">
-                Guardian of the forest's darkest secrets, this legendary beast
-                has protected Gaia's heart for millennia
+                Guardian of the forest's darkest secrets, this legendary beast has protected Gaia's
+                heart for millennia
               </p>
 
               {/* Dragon Stats */}
@@ -216,27 +199,17 @@ const HeartOfGaia = () => {
                 <div className="text-center p-4 bg-yellow-900/20 rounded">
                   <div className="text-2xl mb-2">💰</div>
                   <div className="font-bold text-yellow-400">500-1000 GAIA</div>
-                  <div className="text-xs text-muted-foreground">
-                    Victory Tokens
-                  </div>
+                  <div className="text-xs text-muted-foreground">Victory Tokens</div>
                 </div>
                 <div className="text-center p-4 bg-green-900/20 rounded">
                   <div className="text-2xl mb-2">🌳</div>
-                  <div className="font-bold text-green-400">
-                    Forest Guardian
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    Legendary Title
-                  </div>
+                  <div className="font-bold text-green-400">Forest Guardian</div>
+                  <div className="text-xs text-muted-foreground">Legendary Title</div>
                 </div>
                 <div className="text-center p-4 bg-red-900/20 rounded">
                   <div className="text-2xl mb-2">🔥</div>
-                  <div className="font-bold text-red-400">
-                    Dragon's Blessing
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    Permanent Power
-                  </div>
+                  <div className="font-bold text-red-400">Dragon's Blessing</div>
+                  <div className="text-xs text-muted-foreground">Permanent Power</div>
                 </div>
               </div>
             </div>
@@ -248,30 +221,23 @@ const HeartOfGaia = () => {
           <CardContent className="pt-6">
             <div className="text-center">
               <TreePine className="h-12 w-12 text-green-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-green-400 mb-4">
-                🌍 PROTECTING GAIA'S HEART
-              </h3>
+              <h3 className="text-2xl font-bold text-green-400 mb-4">🌍 PROTECTING GAIA'S HEART</h3>
               <p className="text-lg text-muted-foreground mb-6">
-                Every battle fought in this arena directly contributes to forest
-                conservation and wildlife protection worldwide. The Ancient
-                Forest Dragon's defeat channels its power into real
-                environmental restoration projects.
+                Every battle fought in this arena directly contributes to forest conservation and
+                wildlife protection worldwide. The Ancient Forest Dragon's defeat channels its power
+                into real environmental restoration projects.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="p-6 bg-green-900/20 rounded-lg border border-green-500/20">
                   <Heart className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                  <h4 className="font-bold text-green-400">
-                    Forest Restoration
-                  </h4>
+                  <h4 className="font-bold text-green-400">Forest Restoration</h4>
                   <p className="text-sm text-muted-foreground">
                     Each victory plants 100 real trees
                   </p>
                 </div>
                 <div className="p-6 bg-blue-900/20 rounded-lg border border-blue-500/20">
                   <Bird className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                  <h4 className="font-bold text-blue-400">
-                    Wildlife Protection
-                  </h4>
+                  <h4 className="font-bold text-blue-400">Wildlife Protection</h4>
                   <p className="text-sm text-muted-foreground">
                     Protects endangered forest species
                   </p>

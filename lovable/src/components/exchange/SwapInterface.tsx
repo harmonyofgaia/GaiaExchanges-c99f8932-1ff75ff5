@@ -23,8 +23,7 @@ export function SwapInterface({
   const [isSwapping, setIsSwapping] = useState<boolean>(false);
 
   const { tokenData, hasRealData } = useGaiaTokenData();
-  const exchangeRate =
-    hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE;
+  const exchangeRate = hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE;
 
   useEffect(() => {
     if (fromAmount && !isNaN(Number(fromAmount))) {
@@ -49,12 +48,9 @@ export function SwapInterface({
         ? `Long-term investment: ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency}`
         : `Investment transaction: ${fromAmount} ${fromCurrency} for ${toAmount} ${toCurrency} (using estimated rates)`;
 
-      toast.success(
-        "🌱 Investment Confirmed - Fees Sent to Community Wallet!",
-        {
-          description: `${message} • All fees transparently sent to: ${GAIA_TOKEN.WALLET_ADDRESS}`,
-        },
-      );
+      toast.success("🌱 Investment Confirmed - Fees Sent to Community Wallet!", {
+        description: `${message} • All fees transparently sent to: ${GAIA_TOKEN.WALLET_ADDRESS}`,
+      });
       setFromAmount("");
       setToAmount("");
       setIsSwapping(false);
@@ -159,12 +155,8 @@ export function SwapInterface({
             Rate: 1 {GAIA_TOKEN.SYMBOL} = ${exchangeRate.toFixed(6)} USDC{" "}
             {!hasRealData && "(estimated)"}
           </div>
-          <div>
-            Investment Fee: 0.1% (transparently sent to community wallet)
-          </div>
-          <div>
-            📍 Community Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...
-          </div>
+          <div>Investment Fee: 0.1% (transparently sent to community wallet)</div>
+          <div>📍 Community Wallet: {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 20)}...</div>
           <div>🌱 100% of fees reinvested in environmental projects</div>
           <div>🛡️ No staking = No gambling = Stable forever</div>
         </div>

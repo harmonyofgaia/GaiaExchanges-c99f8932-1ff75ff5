@@ -93,20 +93,15 @@ export function EnvironmentalGamesHub() {
           <TabsContent value="challenges" className="mt-0">
             <Card className="border-purple-500/30">
               <CardHeader>
-                <CardTitle className="text-purple-400">
-                  🏆 Environmental Challenges
-                </CardTitle>
+                <CardTitle className="text-purple-400">🏆 Environmental Challenges</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center py-12">
                   <Trophy className="h-16 w-16 mx-auto text-purple-400 mb-4" />
-                  <h3 className="text-xl font-bold text-purple-400 mb-2">
-                    Coming Soon!
-                  </h3>
+                  <h3 className="text-xl font-bold text-purple-400 mb-2">Coming Soon!</h3>
                   <p className="text-muted-foreground">
-                    Weekly environmental challenges with massive GAiA token
-                    rewards. Compete with players worldwide to make the biggest
-                    environmental impact!
+                    Weekly environmental challenges with massive GAiA token rewards. Compete with
+                    players worldwide to make the biggest environmental impact!
                   </p>
                 </div>
               </CardContent>
@@ -116,9 +111,7 @@ export function EnvironmentalGamesHub() {
           <TabsContent value="leaderboard" className="mt-0">
             <Card className="border-orange-500/30">
               <CardHeader>
-                <CardTitle className="text-orange-400">
-                  ⚡ Global Leaderboard
-                </CardTitle>
+                <CardTitle className="text-orange-400">⚡ Global Leaderboard</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center py-12">
@@ -127,9 +120,8 @@ export function EnvironmentalGamesHub() {
                     Global Rankings Coming Soon!
                   </h3>
                   <p className="text-muted-foreground">
-                    See how your environmental impact compares with players
-                    worldwide. Climb the ranks and earn exclusive badges and
-                    rewards!
+                    See how your environmental impact compares with players worldwide. Climb the
+                    ranks and earn exclusive badges and rewards!
                   </p>
                 </div>
               </CardContent>

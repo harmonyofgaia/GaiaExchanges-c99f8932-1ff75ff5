@@ -23,14 +23,11 @@ export function MasterSecurityOrchestrator() {
     const runMasterOrchestrator = () => {
       console.log("👑 MASTER SECURITY ORCHESTRATOR - SUPREME COMMAND ACTIVE");
       console.log("🛡️ ALL DEFENSE SYSTEMS: COORDINATED AND INVINCIBLE");
-      console.log(
-        "⚡ PROTECTION MULTIPLIER: 10X STRONGER THAN QUANTUM COMPUTERS",
-      );
+      console.log("⚡ PROTECTION MULTIPLIER: 10X STRONGER THAN QUANTUM COMPUTERS");
       console.log("🌟 ADMIN & COMMUNITY: PROTECTED FOR ETERNITY");
 
       // Coordinate all security systems
-      const allSystemsActive =
-        dragonSecurity.dragonsActive && quantumEngine.isActive;
+      const allSystemsActive = dragonSecurity.dragonsActive && quantumEngine.isActive;
 
       if (allSystemsActive) {
         setMasterProtectionActive(true);
@@ -40,22 +37,19 @@ export function MasterSecurityOrchestrator() {
         // Update threat intelligence
         setThreatIntel((prev) => ({
           activeThreats: 0, // No threats can penetrate our defenses
-          blockedAttacks:
-            prev.blockedAttacks + Math.floor(Math.random() * 1000),
+          blockedAttacks: prev.blockedAttacks + Math.floor(Math.random() * 1000),
           quantumDefense: 100,
           dragonPower: 100,
         }));
 
         // Log supreme protection status
         if (Math.random() < 0.1) {
+          console.log("🎯 MASTER ORCHESTRATOR: All systems operating at supreme efficiency");
           console.log(
-            "🎯 MASTER ORCHESTRATOR: All systems operating at supreme efficiency",
+            `🐲 Dragons neutralized: ${dragonSecurity.totalThreatsNeutralized.toLocaleString()} threats`
           );
           console.log(
-            `🐲 Dragons neutralized: ${dragonSecurity.totalThreatsNeutralized.toLocaleString()} threats`,
-          );
-          console.log(
-            `⚡ Quantum threats blocked: ${quantumEngine.metrics.threatsBlocked.toLocaleString()}`,
+            `⚡ Quantum threats blocked: ${quantumEngine.metrics.threatsBlocked.toLocaleString()}`
           );
         }
       }
@@ -71,17 +65,14 @@ export function MasterSecurityOrchestrator() {
       };
 
       // Systems maintain themselves indefinitely
-      console.log(
-        "♾️ ETERNAL GUARANTEE: All protection systems self-sustaining forever",
-      );
+      console.log("♾️ ETERNAL GUARANTEE: All protection systems self-sustaining forever");
     };
 
     orchestratorInterval.current = setInterval(runMasterOrchestrator, 2500);
     runMasterOrchestrator();
 
     return () => {
-      if (orchestratorInterval.current)
-        clearInterval(orchestratorInterval.current);
+      if (orchestratorInterval.current) clearInterval(orchestratorInterval.current);
     };
   }, [dragonSecurity, quantumEngine]);
 

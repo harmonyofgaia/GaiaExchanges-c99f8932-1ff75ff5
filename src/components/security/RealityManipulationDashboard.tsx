@@ -55,8 +55,7 @@ export function RealityManipulationDashboard() {
               <span className="text-sm font-medium">Reality Distortions</span>
             </div>
             <div className="text-2xl font-bold text-primary">
-              {status.probabilityMatrices.active}/
-              {status.probabilityMatrices.total}
+              {status.probabilityMatrices.active}/{status.probabilityMatrices.total}
             </div>
           </div>
           <div className="space-y-2">
@@ -64,9 +63,7 @@ export function RealityManipulationDashboard() {
               <Globe className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Dimensional Anchors</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.realityAnchors.deployed}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.realityAnchors.deployed}</div>
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
@@ -82,9 +79,7 @@ export function RealityManipulationDashboard() {
               <Target className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Causality Violations</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.causalLoops.active}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.causalLoops.active}</div>
           </div>
         </div>
         <div className="space-y-2">
@@ -104,8 +99,8 @@ export function RealityManipulationDashboard() {
         <div className="p-4 bg-muted/50 rounded-lg">
           <h4 className="font-medium mb-2">🌌 Reality Control Guarantee</h4>
           <p className="text-sm text-muted-foreground">
-            Complete control over physical laws, probability manipulation, and
-            dimensional reality restructuring capabilities.
+            Complete control over physical laws, probability manipulation, and dimensional reality
+            restructuring capabilities.
           </p>
         </div>
       </CardContent>

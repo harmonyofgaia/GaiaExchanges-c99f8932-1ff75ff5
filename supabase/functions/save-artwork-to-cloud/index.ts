@@ -3,8 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.7.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 serve(async (req) => {
@@ -17,14 +16,12 @@ serve(async (req) => {
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
     // Convert base64 to blob
     const base64Data = imageData.replace(/^data:image\/\w+;base64,/, "");
-    const imageBuffer = Uint8Array.from(atob(base64Data), (c) =>
-      c.charCodeAt(0),
-    );
+    const imageBuffer = Uint8Array.from(atob(base64Data), (c) => c.charCodeAt(0));
 
     // Generate unique filename
     const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
@@ -46,9 +43,7 @@ serve(async (req) => {
     }
 
     // Get public URL
-    const { data: urlData } = supabase.storage
-      .from("artwork-files")
-      .getPublicUrl(filePath);
+    const { data: urlData } = supabase.storage.from("artwork-files").getPublicUrl(filePath);
 
     // Update database record with cloud storage info
     const { error: updateError } = await supabase
@@ -74,18 +69,16 @@ serve(async (req) => {
 
     // Send success email notification
     try {
-      await fetch(
-        `${Deno.env.get("SUPABASE_URL")}/functions/v1/send-contact-email`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
-          },
-          body: JSON.stringify({
-            to: "info@cultureofharmony.net",
-            subject: "🎨 New Artwork Saved to Cloud Storage",
-            html: `
+      await fetch(`${Deno.env.get("SUPABASE_URL")}/functions/v1/send-contact-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
+        },
+        body: JSON.stringify({
+          to: "info@cultureofharmony.net",
+          subject: "🎨 New Artwork Saved to Cloud Storage",
+          html: `
             <h2>🎨 New Artwork Successfully Saved</h2>
             <p><strong>Artwork ID:</strong> ${artworkId}</p>
             <p><strong>Type:</strong> ${artworkType}</p>
@@ -96,9 +89,8 @@ serve(async (req) => {
             <hr>
             <p>Access your artwork collection in the Admin Dashboard.</p>
           `,
-          }),
-        },
-      );
+        }),
+      });
     } catch (emailError) {
       console.log("Email notification failed:", emailError);
     }
@@ -111,7 +103,7 @@ serve(async (req) => {
         file_path: filePath,
         file_size: imageBuffer.length,
       }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
     console.error("Cloud save error:", error);
@@ -124,7 +116,7 @@ serve(async (req) => {
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,
-      },
+      }
     );
   }
 });

@@ -122,10 +122,7 @@ export function WebsiteTemplateSystem() {
 
   const [activeTab, setActiveTab] = useState("templates");
 
-  const handleColorChange = (
-    colorType: keyof TemplateConfig["colors"],
-    value: string,
-  ) => {
+  const handleColorChange = (colorType: keyof TemplateConfig["colors"], value: string) => {
     setCustomTemplate((prev) => ({
       ...prev,
       colors: {
@@ -135,10 +132,7 @@ export function WebsiteTemplateSystem() {
     }));
   };
 
-  const handleTypographyChange = (
-    typoType: keyof TemplateConfig["typography"],
-    value: string,
-  ) => {
+  const handleTypographyChange = (typoType: keyof TemplateConfig["typography"], value: string) => {
     setCustomTemplate((prev) => ({
       ...prev,
       typography: {
@@ -150,7 +144,7 @@ export function WebsiteTemplateSystem() {
 
   const handleLayoutChange = (
     layoutType: keyof TemplateConfig["layout"],
-    value: boolean | number,
+    value: boolean | number
   ) => {
     setCustomTemplate((prev) => ({
       ...prev,
@@ -168,8 +162,7 @@ export function WebsiteTemplateSystem() {
 
   const exportTemplate = () => {
     const dataStr = JSON.stringify(customTemplate, null, 2);
-    const dataUri =
-      "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+    const dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
 
     const exportFileDefaultName = `${customTemplate.name.replace(/\s+/g, "-").toLowerCase()}-template.json`;
 
@@ -202,8 +195,7 @@ export function WebsiteTemplateSystem() {
           🎨 Website Template System
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Create, customize, and deploy beautiful website templates for the GAiA
-          ecosystem
+          Create, customize, and deploy beautiful website templates for the GAiA ecosystem
         </p>
       </div>
 
@@ -232,9 +224,7 @@ export function WebsiteTemplateSystem() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {template.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">{template.description}</p>
 
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
@@ -252,11 +242,7 @@ export function WebsiteTemplateSystem() {
 
                     <div className="flex flex-wrap gap-1">
                       {template.components.map((component) => (
-                        <Badge
-                          key={component}
-                          variant="secondary"
-                          className="text-xs"
-                        >
+                        <Badge key={component} variant="secondary" className="text-xs">
                           {component}
                         </Badge>
                       ))}
@@ -300,10 +286,7 @@ export function WebsiteTemplateSystem() {
                         type="color"
                         value={value}
                         onChange={(e) =>
-                          handleColorChange(
-                            key as keyof TemplateConfig["colors"],
-                            e.target.value,
-                          )
+                          handleColorChange(key as keyof TemplateConfig["colors"], e.target.value)
                         }
                         className="w-12 h-8 p-0 border-0"
                       />
@@ -311,10 +294,7 @@ export function WebsiteTemplateSystem() {
                         type="text"
                         value={value}
                         onChange={(e) =>
-                          handleColorChange(
-                            key as keyof TemplateConfig["colors"],
-                            e.target.value,
-                          )
+                          handleColorChange(key as keyof TemplateConfig["colors"], e.target.value)
                         }
                         className="w-20 text-xs"
                       />
@@ -337,9 +317,7 @@ export function WebsiteTemplateSystem() {
                   <label className="text-sm font-medium">Font Family</label>
                   <Input
                     value={customTemplate.typography.fontFamily}
-                    onChange={(e) =>
-                      handleTypographyChange("fontFamily", e.target.value)
-                    }
+                    onChange={(e) => handleTypographyChange("fontFamily", e.target.value)}
                     placeholder="Inter, Roboto, Arial"
                   />
                 </div>
@@ -348,9 +326,7 @@ export function WebsiteTemplateSystem() {
                   <label className="text-sm font-medium">Font Size</label>
                   <Input
                     value={customTemplate.typography.fontSize}
-                    onChange={(e) =>
-                      handleTypographyChange("fontSize", e.target.value)
-                    }
+                    onChange={(e) => handleTypographyChange("fontSize", e.target.value)}
                     placeholder="16px, 1rem, 14px"
                   />
                 </div>
@@ -359,9 +335,7 @@ export function WebsiteTemplateSystem() {
                   <label className="text-sm font-medium">Line Height</label>
                   <Input
                     value={customTemplate.typography.lineHeight}
-                    onChange={(e) =>
-                      handleTypographyChange("lineHeight", e.target.value)
-                    }
+                    onChange={(e) => handleTypographyChange("lineHeight", e.target.value)}
                     placeholder="1.5, 1.6, 24px"
                   />
                 </div>
@@ -382,9 +356,7 @@ export function WebsiteTemplateSystem() {
                   <input
                     type="checkbox"
                     checked={customTemplate.layout.header}
-                    onChange={(e) =>
-                      handleLayoutChange("header", e.target.checked)
-                    }
+                    onChange={(e) => handleLayoutChange("header", e.target.checked)}
                     className="w-4 h-4"
                   />
                 </div>
@@ -394,9 +366,7 @@ export function WebsiteTemplateSystem() {
                   <input
                     type="checkbox"
                     checked={customTemplate.layout.sidebar}
-                    onChange={(e) =>
-                      handleLayoutChange("sidebar", e.target.checked)
-                    }
+                    onChange={(e) => handleLayoutChange("sidebar", e.target.checked)}
                     className="w-4 h-4"
                   />
                 </div>
@@ -406,9 +376,7 @@ export function WebsiteTemplateSystem() {
                   <input
                     type="checkbox"
                     checked={customTemplate.layout.footer}
-                    onChange={(e) =>
-                      handleLayoutChange("footer", e.target.checked)
-                    }
+                    onChange={(e) => handleLayoutChange("footer", e.target.checked)}
                     className="w-4 h-4"
                   />
                 </div>
@@ -420,9 +388,7 @@ export function WebsiteTemplateSystem() {
                     min="1"
                     max="4"
                     value={customTemplate.layout.columns}
-                    onChange={(e) =>
-                      handleLayoutChange("columns", parseInt(e.target.value))
-                    }
+                    onChange={(e) => handleLayoutChange("columns", parseInt(e.target.value))}
                   />
                 </div>
               </CardContent>
@@ -531,8 +497,8 @@ export function WebsiteTemplateSystem() {
                   >
                     <h2 className="text-xl font-semibold mb-2">Main Content</h2>
                     <p>
-                      This is a preview of your custom template with the
-                      selected colors and typography.
+                      This is a preview of your custom template with the selected colors and
+                      typography.
                     </p>
                   </div>
 
@@ -555,10 +521,7 @@ export function WebsiteTemplateSystem() {
                     className="p-4 mt-4 rounded"
                     style={{ backgroundColor: customTemplate.colors.text }}
                   >
-                    <p
-                      className="text-sm"
-                      style={{ color: customTemplate.colors.background }}
-                    >
+                    <p className="text-sm" style={{ color: customTemplate.colors.background }}>
                       Footer content - {customTemplate.description}
                     </p>
                   </div>
@@ -579,8 +542,8 @@ export function WebsiteTemplateSystem() {
             <CardContent className="space-y-4">
               <div className="text-center">
                 <p className="text-muted-foreground mb-6">
-                  Ready to deploy your custom template? This will generate the
-                  necessary files and configuration.
+                  Ready to deploy your custom template? This will generate the necessary files and
+                  configuration.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">

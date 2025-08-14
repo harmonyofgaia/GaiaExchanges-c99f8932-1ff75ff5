@@ -108,8 +108,7 @@ export default function VaultSystem() {
         totalLocked: prev.totalLocked + Math.floor(Math.random() * 1000),
         totalBurned: prev.totalBurned + Math.floor(Math.random() * 50),
         vaultBalance: prev.vaultBalance + Math.floor(Math.random() * 500),
-        userContributions:
-          prev.userContributions + (Math.random() > 0.8 ? 1 : 0),
+        userContributions: prev.userContributions + (Math.random() > 0.8 ? 1 : 0),
       }));
     }, 5000);
 
@@ -125,9 +124,7 @@ export default function VaultSystem() {
     const amount = parseFloat(burnAmount);
 
     if (selectedProjects.length === 0 && !payForFree) {
-      toast.error(
-        "Please select at least one project or choose free transaction",
-      );
+      toast.error("Please select at least one project or choose free transaction");
       return;
     }
 
@@ -171,9 +168,7 @@ export default function VaultSystem() {
 
   const toggleProject = (projectId: string) => {
     setSelectedProjects((prev) =>
-      prev.includes(projectId)
-        ? prev.filter((id) => id !== projectId)
-        : [...prev, projectId],
+      prev.includes(projectId) ? prev.filter((id) => id !== projectId) : [...prev, projectId]
     );
   };
 
@@ -185,8 +180,7 @@ export default function VaultSystem() {
             🏛️ GAiA VAULT SYSTEM & BURNING PROTOCOL
           </h1>
           <p className="text-xl text-muted-foreground">
-            Secure Token Vault • Customizable Burning • Real Money Transfer •
-            Community Projects
+            Secure Token Vault • Customizable Burning • Real Money Transfer • Community Projects
           </p>
         </div>
 
@@ -225,9 +219,7 @@ export default function VaultSystem() {
           <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border-purple-500/50">
             <CardContent className="p-6 text-center">
               <Users className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-              <div className="text-2xl font-bold text-purple-400">
-                {metrics.userContributions}
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{metrics.userContributions}</div>
               <div className="text-sm text-muted-foreground">Contributors</div>
             </CardContent>
           </Card>
@@ -291,9 +283,7 @@ export default function VaultSystem() {
                           <div className="flex items-center gap-3">
                             <Icon className={`h-5 w-5 ${option.color}`} />
                             <div>
-                              <div className="font-semibold text-white">
-                                {option.name}
-                              </div>
+                              <div className="font-semibold text-white">{option.name}</div>
                               <div className="text-sm text-muted-foreground">
                                 {option.description}
                               </div>
@@ -301,13 +291,9 @@ export default function VaultSystem() {
                           </div>
                           <div className="flex items-center gap-2">
                             {option.percentage > 0 && (
-                              <Badge className="bg-blue-600">
-                                {option.percentage}%
-                              </Badge>
+                              <Badge className="bg-blue-600">{option.percentage}%</Badge>
                             )}
-                            {isSelected && (
-                              <Zap className="h-4 w-4 text-green-400" />
-                            )}
+                            {isSelected && <Zap className="h-4 w-4 text-green-400" />}
                           </div>
                         </div>
                       </div>
@@ -319,9 +305,7 @@ export default function VaultSystem() {
               <Button
                 onClick={handleBurnTokens}
                 className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold py-6"
-                disabled={
-                  !burnAmount || (selectedProjects.length === 0 && !payForFree)
-                }
+                disabled={!burnAmount || (selectedProjects.length === 0 && !payForFree)}
               >
                 <Flame className="h-5 w-5 mr-2" />
                 🔥 BURN TOKENS & TRANSFER TO VAULT
@@ -340,9 +324,7 @@ export default function VaultSystem() {
             <CardContent className="space-y-6">
               <div className="text-center p-6 bg-green-900/20 rounded-lg border border-green-500/30">
                 <DollarSign className="h-12 w-12 mx-auto text-green-400 mb-4" />
-                <div className="text-2xl font-bold text-green-400 mb-2">
-                  $247,850.67
-                </div>
+                <div className="text-2xl font-bold text-green-400 mb-2">$247,850.67</div>
                 <div className="text-sm text-muted-foreground mb-4">
                   Current Vault Real Money Value
                 </div>
@@ -355,9 +337,7 @@ export default function VaultSystem() {
               <div className="space-y-4">
                 <div className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/30">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-blue-400 font-medium">
-                      Harmony Projects
-                    </span>
+                    <span className="text-blue-400 font-medium">Harmony Projects</span>
                     <span className="text-white">$62,450.20</span>
                   </div>
                   <Progress value={85} className="h-2" />
@@ -365,9 +345,7 @@ export default function VaultSystem() {
 
                 <div className="p-4 bg-red-900/20 rounded-lg border border-red-500/30">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-red-400 font-medium">
-                      Animal Protection
-                    </span>
+                    <span className="text-red-400 font-medium">Animal Protection</span>
                     <span className="text-white">$45,230.15</span>
                   </div>
                   <Progress value={70} className="h-2" />
@@ -375,9 +353,7 @@ export default function VaultSystem() {
 
                 <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/30">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-green-400 font-medium">
-                      Environmental
-                    </span>
+                    <span className="text-green-400 font-medium">Environmental</span>
                     <span className="text-white">$38,750.30</span>
                   </div>
                   <Progress value={65} className="h-2" />
@@ -389,8 +365,7 @@ export default function VaultSystem() {
                   🌍 REAL IMPACT • REAL CHANGE
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Every burned token creates real-world value and positive
-                  impact
+                  Every burned token creates real-world value and positive impact
                 </p>
               </div>
             </CardContent>
@@ -407,41 +382,31 @@ export default function VaultSystem() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="text-center p-4 bg-blue-900/20 rounded-lg">
-                <div className="text-blue-400 font-bold mb-2">
-                  Main Community Wallet
-                </div>
+                <div className="text-blue-400 font-bold mb-2">Main Community Wallet</div>
                 <div className="text-white font-mono text-sm break-all">
                   {GAIA_TOKEN.WALLET_ADDRESS}
                 </div>
               </div>
               <div className="text-center p-4 bg-green-900/20 rounded-lg">
-                <div className="text-green-400 font-bold mb-2">
-                  Green Investments Wallet
-                </div>
+                <div className="text-green-400 font-bold mb-2">Green Investments Wallet</div>
                 <div className="text-white font-mono text-sm break-all">
                   {GAIA_TOKEN.GREEN_INVESTMENTS_WALLET}
                 </div>
               </div>
               <div className="text-center p-4 bg-purple-900/20 rounded-lg">
-                <div className="text-purple-400 font-bold mb-2">
-                  Community Vault Wallet
-                </div>
+                <div className="text-purple-400 font-bold mb-2">Community Vault Wallet</div>
                 <div className="text-white font-mono text-sm break-all">
                   {GAIA_TOKEN.COMMUNITY_VAULT_WALLET}
                 </div>
               </div>
               <div className="text-center p-4 bg-orange-900/20 rounded-lg">
-                <div className="text-orange-400 font-bold mb-2">
-                  Animal Welfare Wallet
-                </div>
+                <div className="text-orange-400 font-bold mb-2">Animal Welfare Wallet</div>
                 <div className="text-white font-mono text-sm break-all">
                   {GAIA_TOKEN.ANIMAL_WELFARE_WALLET}
                 </div>
               </div>
               <div className="text-center p-4 bg-blue-900/20 rounded-lg">
-                <div className="text-blue-400 font-bold mb-2">
-                  Contract Address
-                </div>
+                <div className="text-blue-400 font-bold mb-2">Contract Address</div>
                 <div className="text-white font-mono text-sm break-all">
                   {GAIA_TOKEN.CONTRACT_ADDRESS}
                 </div>

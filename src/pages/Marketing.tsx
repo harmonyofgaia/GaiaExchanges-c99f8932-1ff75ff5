@@ -8,9 +8,7 @@ const Marketing = () => {
     <div className="min-h-screen bg-gradient-to-br from-orange-900/20 via-red-900/20 to-purple-900/20">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-orange-400 mb-4">
-            🎯 MARKETING HUB
-          </h1>
+          <h1 className="text-4xl font-bold text-orange-400 mb-4">🎯 MARKETING HUB</h1>
           <p className="text-muted-foreground">
             Grow the GAIA ecosystem with dragon-powered marketing tools
           </p>
@@ -25,12 +23,8 @@ const Marketing = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Create and manage marketing campaigns
-              </p>
-              <Button className="w-full bg-orange-600 hover:bg-orange-700">
-                Launch Campaign
-              </Button>
+              <p className="text-muted-foreground mb-4">Create and manage marketing campaigns</p>
+              <Button className="w-full bg-orange-600 hover:bg-orange-700">Launch Campaign</Button>
             </CardContent>
           </Card>
 
@@ -42,12 +36,8 @@ const Marketing = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Track performance and growth metrics
-              </p>
-              <Button className="w-full bg-green-600 hover:bg-green-700">
-                View Analytics
-              </Button>
+              <p className="text-muted-foreground mb-4">Track performance and growth metrics</p>
+              <Button className="w-full bg-green-600 hover:bg-green-700">View Analytics</Button>
             </CardContent>
           </Card>
 
@@ -59,12 +49,8 @@ const Marketing = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Manage social media presence
-              </p>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                Social Hub
-              </Button>
+              <p className="text-muted-foreground mb-4">Manage social media presence</p>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700">Social Hub</Button>
             </CardContent>
           </Card>
         </div>

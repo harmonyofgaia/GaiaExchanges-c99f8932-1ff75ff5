@@ -18,12 +18,7 @@ import {
   ExternalLink,
   BarChart3,
 } from "lucide-react";
-import {
-  GAIA_TOKEN,
-  GAIA_METRICS,
-  formatGaiaPrice,
-  formatGaiaNumber,
-} from "@/constants/gaia";
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from "@/constants/gaia";
 import { toast } from "sonner";
 export function GaiaCoinCrafter() {
   const [monthlyProgress, setMonthlyProgress] = useState(67);
@@ -36,7 +31,7 @@ export function GaiaCoinCrafter() {
   useEffect(() => {
     console.log(
       "🏭 GAiA Coin Crafter: Connected to official token address:",
-      GAIA_TOKEN.WALLET_ADDRESS,
+      GAIA_TOKEN.WALLET_ADDRESS
     );
   }, []);
 
@@ -55,9 +50,7 @@ export function GaiaCoinCrafter() {
             {/* Official Wallet Address */}
             <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-blue-400 font-bold">
-                  Official GAiA Wallet:
-                </span>
+                <span className="text-blue-400 font-bold">Official GAiA Wallet:</span>
                 <div className="flex gap-2">
                   {/* <Button onClick={copyOfficialWalletAddress} variant="outline" size="sm" className="border-blue-500/30 text-blue-400">
                     <Copy className="h-3 w-3 mr-1" />
@@ -76,9 +69,7 @@ export function GaiaCoinCrafter() {
             {/* Official Contract Address */}
             <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-purple-400 font-bold">
-                  Official GAiA Contract:
-                </span>
+                <span className="text-purple-400 font-bold">Official GAiA Contract:</span>
                 {/* <Button onClick={copyOfficialContractAddress} variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
                   <Copy className="h-3 w-3 mr-1" />
                   Copy

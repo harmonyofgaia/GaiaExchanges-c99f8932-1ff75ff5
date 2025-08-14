@@ -12,9 +12,7 @@ export function AutoResolutionFeatures() {
 
   return (
     <div className="space-y-2">
-      <h4 className="font-medium text-green-400">
-        🛡️ Advanced Security Features
-      </h4>
+      <h4 className="font-medium text-green-400">🛡️ Advanced Security Features</h4>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
         {features.map((feature) => {
           const IconComponent = feature.icon;
@@ -28,8 +26,7 @@ export function AutoResolutionFeatures() {
       </div>
       <div className="mt-3 p-2 bg-blue-500/10 border border-blue-500/20 rounded text-xs">
         <p className="text-blue-300">
-          🔐 <strong>Silent Monitoring:</strong> No pop-ups, only critical
-          security notifications
+          🔐 <strong>Silent Monitoring:</strong> No pop-ups, only critical security notifications
         </p>
       </div>
     </div>

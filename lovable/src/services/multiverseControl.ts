@@ -14,11 +14,7 @@ interface MultiverseConnection {
   id: string;
   universeA: string;
   universeB: string;
-  connectionType:
-    | "quantum_tunnel"
-    | "dimensional_bridge"
-    | "reality_fold"
-    | "multiverse_portal";
+  connectionType: "quantum_tunnel" | "dimensional_bridge" | "reality_fold" | "multiverse_portal";
   stability: number;
   isEstablished: boolean;
 }
@@ -39,11 +35,7 @@ interface RealityManipulation {
 interface TimelineControl {
   id: string;
   timelineId: string;
-  controlType:
-    | "temporal_lock"
-    | "causality_manipulation"
-    | "timeline_merge"
-    | "parallel_access";
+  controlType: "temporal_lock" | "causality_manipulation" | "timeline_merge" | "parallel_access";
   strength: number;
   affectedEvents: string[];
   isActive: boolean;
@@ -111,11 +103,7 @@ class MultiverseControlService {
   async establishMultiverseConnection(config: {
     universeA: string;
     universeB: string;
-    connectionType:
-      | "quantum_tunnel"
-      | "dimensional_bridge"
-      | "reality_fold"
-      | "multiverse_portal";
+    connectionType: "quantum_tunnel" | "dimensional_bridge" | "reality_fold" | "multiverse_portal";
   }): Promise<MultiverseConnection> {
     const connection: MultiverseConnection = {
       id: `connection-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -202,11 +190,7 @@ class MultiverseControlService {
   // Timeline Control
   async controlTimeline(config: {
     timelineId: string;
-    controlType:
-      | "temporal_lock"
-      | "causality_manipulation"
-      | "timeline_merge"
-      | "parallel_access";
+    controlType: "temporal_lock" | "causality_manipulation" | "timeline_merge" | "parallel_access";
     strength: number;
     affectedEvents: string[];
   }): Promise<TimelineControl> {
@@ -288,10 +272,7 @@ class MultiverseControlService {
     // Simulate stabilization process
     await new Promise((resolve) => setTimeout(resolve, 5000));
 
-    this.realityStabilityIndex = Math.min(
-      1.0,
-      this.realityStabilityIndex + 0.1,
-    );
+    this.realityStabilityIndex = Math.min(1.0, this.realityStabilityIndex + 0.1);
 
     // Deactivate unstable manipulations
     this.realityManipulations.forEach((manipulation) => {
@@ -316,27 +297,20 @@ class MultiverseControlService {
       realityStabilityIndex: this.realityStabilityIndex,
       dimensionalGateways: {
         total: this.dimensionalGateways.size,
-        active: Array.from(this.dimensionalGateways.values()).filter(
-          (g) => g.isActive,
-        ).length,
+        active: Array.from(this.dimensionalGateways.values()).filter((g) => g.isActive).length,
       },
       multiverseConnections: {
         total: this.multiverseConnections.size,
-        established: Array.from(this.multiverseConnections.values()).filter(
-          (c) => c.isEstablished,
-        ).length,
+        established: Array.from(this.multiverseConnections.values()).filter((c) => c.isEstablished)
+          .length,
       },
       realityManipulations: {
         total: this.realityManipulations.size,
-        active: Array.from(this.realityManipulations.values()).filter(
-          (r) => r.isActive,
-        ).length,
+        active: Array.from(this.realityManipulations.values()).filter((r) => r.isActive).length,
       },
       timelineControls: {
         total: this.timelineControls.size,
-        active: Array.from(this.timelineControls.values()).filter(
-          (t) => t.isActive,
-        ).length,
+        active: Array.from(this.timelineControls.values()).filter((t) => t.isActive).length,
       },
     };
   }

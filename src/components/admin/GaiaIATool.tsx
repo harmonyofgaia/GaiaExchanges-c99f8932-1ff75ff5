@@ -65,11 +65,7 @@ export function GaiaIATool() {
             onChange={(e) => setQuery(e.target.value)}
             className="flex-grow"
           />
-          <Button
-            type="submit"
-            disabled={loading}
-            className="bg-green-600 hover:bg-green-700"
-          >
+          <Button type="submit" disabled={loading} className="bg-green-600 hover:bg-green-700">
             {loading ? "Searching..." : "Search"}
           </Button>
         </form>
@@ -80,17 +76,13 @@ export function GaiaIATool() {
             <Card key={result.id} className="border-blue-500/20">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-semibold text-blue-400">
-                    {result.title}
-                  </h4>
+                  <h4 className="font-semibold text-blue-400">{result.title}</h4>
                   <Badge variant="secondary">
                     {result.confidence !== undefined &&
                       `${(result.confidence * 100).toFixed(0)}% confidence`}
                   </Badge>
                 </div>
-                <p className="text-sm text-muted-foreground mb-2">
-                  {result.data}
-                </p>
+                <p className="text-sm text-muted-foreground mb-2">{result.data}</p>
                 <div className="flex items-center gap-2 text-xs text-gray-400">
                   <span>Source: {result.source}</span>
                   <span>•</span>

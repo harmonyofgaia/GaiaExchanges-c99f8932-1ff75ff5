@@ -25,8 +25,7 @@ export function CoinCrafterIllustration() {
           🔥 OFFICIAL GAiA COIN CRAFTER ILLUSTRATION
         </CardTitle>
         <p className="text-center text-lg text-yellow-300">
-          Real-Time Coin Generation • 100 Coins Monthly • Connected to GAiA
-          Ecosystem
+          Real-Time Coin Generation • 100 Coins Monthly • Connected to GAiA Ecosystem
         </p>
       </CardHeader>
       <CardContent>
@@ -38,36 +37,26 @@ export function CoinCrafterIllustration() {
               🪙
             </div>
             <div className="absolute -top-2 -right-2">
-              <Badge className="bg-yellow-600 text-white px-3 py-1 text-lg">
-                +{coinCount}
-              </Badge>
+              <Badge className="bg-yellow-600 text-white px-3 py-1 text-lg">+{coinCount}</Badge>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-yellow-900/30 p-4 rounded-lg border border-yellow-500/30">
               <Coins className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-yellow-400">
-                100 Coins/Month
-              </div>
-              <div className="text-sm text-yellow-300">
-                Automatic Generation
-              </div>
+              <div className="text-lg font-bold text-yellow-400">100 Coins/Month</div>
+              <div className="text-sm text-yellow-300">Automatic Generation</div>
             </div>
 
             <div className="bg-orange-900/30 p-4 rounded-lg border border-orange-500/30">
               <Zap className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-orange-400">
-                Real-Time Mining
-              </div>
+              <div className="text-lg font-bold text-orange-400">Real-Time Mining</div>
               <div className="text-sm text-orange-300">Quantum Powered</div>
             </div>
 
             <div className="bg-red-900/30 p-4 rounded-lg border border-red-500/30">
               <Crown className="h-8 w-8 text-red-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-red-400">
-                Premium Access
-              </div>
+              <div className="text-lg font-bold text-red-400">Premium Access</div>
               <div className="text-sm text-red-300">Admin Controlled</div>
             </div>
           </div>
@@ -78,9 +67,7 @@ export function CoinCrafterIllustration() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
-                <div className="text-green-300 font-medium">
-                  Official GAiA Wallet:
-                </div>
+                <div className="text-green-300 font-medium">Official GAiA Wallet:</div>
                 <div className="text-green-400 font-mono text-xs break-all">
                   5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
                 </div>
