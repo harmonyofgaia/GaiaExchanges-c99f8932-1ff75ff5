@@ -41,16 +41,16 @@ export function useSecureAdmin() {
     }
 
     try {
-      // Check if user has admin account in database  
+      // Check if user has admin account in database
       const { data: adminAccount, error } = await supabase
-        .from('admin_users')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('is_active', true)
+        .from("admin_users")
+        .select("*")
+        .eq("user_id", user.id)
+        .eq("is_active", true)
         .maybeSingle();
 
-      if (error && error.code !== 'PGRST116') {
-        console.error('Error checking admin status:', error);
+      if (error && error.code !== "PGRST116") {
+        console.error("Error checking admin status:", error);
         setIsAdmin(false);
         setAdminSession(null);
       } else if (adminAccount) {
@@ -58,14 +58,14 @@ export function useSecureAdmin() {
         setAdminSession({
           id: adminAccount.user_id,
           timestamp: Date.now(),
-          level: 'admin',
+          level: "admin",
         });
       } else {
         setIsAdmin(false);
         setAdminSession(null);
       }
     } catch (error) {
-      console.error('Error validating admin session:', error);
+      console.error("Error validating admin session:", error);
       setIsAdmin(false);
       setAdminSession(null);
     } finally {
@@ -79,27 +79,25 @@ export function useSecureAdmin() {
     try {
       // Create a secure session token
       const sessionToken = `session-${Date.now()}-${Math.random().toString(36).substr(2, 16)}`;
-      
+
       // Create admin session record
-      const { error } = await supabase
-        .from('admin_sessions')
-        .insert([
-          {
-            session_token: sessionToken,
-            ip_address: '127.0.0.1', // Would be real IP in production
-            user_agent: navigator.userAgent,
-          }
-        ]);
+      const { error } = await supabase.from("admin_sessions").insert([
+        {
+          session_token: sessionToken,
+          ip_address: "127.0.0.1", // Would be real IP in production
+          user_agent: navigator.userAgent,
+        },
+      ]);
 
       if (error) {
-        console.error('Error creating admin session:', error);
+        console.error("Error creating admin session:", error);
         return false;
       }
 
       await validateAdminSession();
       return true;
     } catch (error) {
-      console.error('Error granting admin access:', error);
+      console.error("Error granting admin access:", error);
       return false;
     }
   };
@@ -111,7 +109,7 @@ export function useSecureAdmin() {
       // Clear admin session data - no need to update database in this simplified version
       console.log("Admin session revoked");
     } catch (error) {
-      console.error('Error revoking admin access:', error);
+      console.error("Error revoking admin access:", error);
     }
 
     setIsAdmin(false);
@@ -125,7 +123,7 @@ export function useSecureAdmin() {
       // Session extended - log for now in simplified version
       console.log("Admin session extended");
     } catch (error) {
-      console.error('Error extending session:', error);
+      console.error("Error extending session:", error);
     }
   };
 
