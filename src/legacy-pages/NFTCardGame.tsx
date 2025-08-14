@@ -47,7 +47,13 @@ interface NFTCard {
   real_world_impact?: number;
   evolution_stage?: number;
   max_evolution?: number;
-  trading_history?: any[];
+  trading_history?: Array<{
+    date: string;
+    price: number;
+    buyer: string;
+    seller: string;
+    transaction_id: string;
+  }>;
   market_value?: number;
 }
 
@@ -70,8 +76,20 @@ interface ConservationPartnership {
 interface MarketplaceData {
   totalVolume: number;
   activeTraders: number;
-  topCollections: any[];
-  recentSales: any[];
+  topCollections: Array<{
+    name: string;
+    volume: number;
+    floor_price: number;
+    change_24h: number;
+    items: number;
+  }>;
+  recentSales: Array<{
+    card_name: string;
+    price: number;
+    buyer: string;
+    timestamp: number;
+    image_url: string;
+  }>;
   conservationFunding: number;
 }
 

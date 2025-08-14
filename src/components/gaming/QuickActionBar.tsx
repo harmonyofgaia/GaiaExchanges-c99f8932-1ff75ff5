@@ -22,7 +22,7 @@ import { toast } from "sonner";
 interface QuickAction {
   id: string;
   label: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   action: () => void;
   color: string;
   badge?: string;

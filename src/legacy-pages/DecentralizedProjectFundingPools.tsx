@@ -61,8 +61,19 @@ interface GovernanceProposal {
 
 interface VerificationData {
   satellite_images: string[];
-  iot_readings: any[];
-  third_party_audits: any[];
+  iot_readings: Array<{
+    sensor_id: string;
+    timestamp: number;
+    readings: Record<string, number>;
+    location: { lat: number; lng: number };
+  }>;
+  third_party_audits: Array<{
+    auditor: string;
+    date: string;
+    score: number;
+    report_url: string;
+    verified: boolean;
+  }>;
   community_reports: number;
 }
 
