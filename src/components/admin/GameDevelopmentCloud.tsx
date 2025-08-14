@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -88,6 +88,26 @@ export function GameDevelopmentCloud() {
   const [assetsGenerated, setAssetsGenerated] = useState(0);
 
   const trainingRef = useRef<NodeJS.Timeout>(undefined);
+
+  const startAdvancedTraining = useCallback(() => {
+    setIsTraining(true);
+
+    trainingRef.current = setInterval(() => {
+      setTrainingProgress((prev) => {
+        const newProgress = (prev + 2) % 100; // Faster training
+
+        if (newProgress < 10) {
+          // Training cycle complete - generate revolutionary assets
+          generateRevolutionaryAsset();
+          updateCompetitorAnalysis();
+          setCloudStorageUsed((prev) => prev + Math.random() * 200);
+          setAssetsGenerated((prev) => prev + 1);
+        }
+
+        return newProgress;
+      });
+    }, 50); // Ultra-fast training cycle
+  }, []);
 
   // Initialize with World of Warcraft + Rage 1 + Final Fantasy inspired assets
   useEffect(() => {
@@ -260,27 +280,7 @@ export function GameDevelopmentCloud() {
 
     // Start continuous AI training
     startAdvancedTraining();
-  }, []);
-
-  const startAdvancedTraining = () => {
-    setIsTraining(true);
-
-    trainingRef.current = setInterval(() => {
-      setTrainingProgress((prev) => {
-        const newProgress = (prev + 2) % 100; // Faster training
-
-        if (newProgress < 10) {
-          // Training cycle complete - generate revolutionary assets
-          generateRevolutionaryAsset();
-          updateCompetitorAnalysis();
-          setCloudStorageUsed((prev) => prev + Math.random() * 200);
-          setAssetsGenerated((prev) => prev + 1);
-        }
-
-        return newProgress;
-      });
-    }, 50); // Ultra-fast training cycle
-  };
+  }, [startAdvancedTraining]);
 
   const generateRevolutionaryAsset = async () => {
     const revolutionaryTypes = ["world", "weapon", "environment", "creature", "artifact"] as const;
@@ -345,7 +345,7 @@ export function GameDevelopmentCloud() {
     const newAsset: GameAsset = {
       id: `custom-world-${Date.now()}`,
       name: customPrompt,
-      type: selectedAssetType as any,
+      type: selectedAssetType as GameAsset["type"],
       quality: "mythic",
       description: `Custom ${selectedAssetType} designed for First Gaia World with WoW exploration, Rage combat, and Final Fantasy aesthetics`,
       cloudUrl: `/custom-worlds/${Date.now()}.png`,

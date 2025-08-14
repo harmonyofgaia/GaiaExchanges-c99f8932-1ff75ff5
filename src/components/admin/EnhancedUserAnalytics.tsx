@@ -31,10 +31,18 @@ interface UserAnalytics {
   dataUsage: string;
 }
 
+interface CalculationResults {
+  totalDataPoints: number;
+  securityScore: number;
+  networkConnections: number;
+  riskFactors: string[];
+  recommendations: string[];
+}
+
 export function EnhancedUserAnalytics() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedUser, setSelectedUser] = useState<UserAnalytics | null>(null);
-  const [calculationResults, setCalculationResults] = useState<any>(null);
+  const [calculationResults, setCalculationResults] = useState<CalculationResults | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
   const mockUsers: UserAnalytics[] = [

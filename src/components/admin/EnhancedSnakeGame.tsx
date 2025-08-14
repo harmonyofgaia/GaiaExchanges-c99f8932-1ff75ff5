@@ -173,7 +173,7 @@ export function EnhancedSnakeGame() {
           break;
       }
     },
-    [gameState.gameRunning, gameState.gameOver, gameState.direction]
+    [gameState]
   );
 
   // Game loop
