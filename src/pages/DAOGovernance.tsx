@@ -306,7 +306,7 @@ export default function DAOGovernance() {
                   onChange={(e) =>
                     setNewProposal((prev) => ({
                       ...prev,
-                      type: e.target.value as any,
+                      type: e.target.value as "funding" | "governance" | "technical" | "community",
                     }))
                   }
                 >

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -48,15 +48,8 @@ const FeeVault = () => {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(() => {
-    fetchVaultData();
 
-    // Auto-refresh every 5 seconds for live updates
-    const interval = setInterval(fetchVaultData, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const fetchVaultData = async () => {
+  const fetchVaultData = useCallback(async () => {
     try {
       console.log("🏦 VAULT: Fetching live vault data with quantum security");
 
@@ -104,7 +97,15 @@ const FeeVault = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    fetchVaultData();
+
+    // Auto-refresh every 5 seconds for live updates
+    const interval = setInterval(fetchVaultData, 5000);
+    return () => clearInterval(interval);
+  }, [fetchVaultData]);
 
   const getCategoryIcon = (category: string) => {
     switch (category) {

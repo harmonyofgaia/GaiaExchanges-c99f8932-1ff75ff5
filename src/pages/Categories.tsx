@@ -49,7 +49,7 @@ interface ActivityComponent {
   id: string;
   title: string;
   description: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   points: string;
   difficulty: "Easy" | "Medium" | "Hard" | "Advanced";
   category: string;
