@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +21,15 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+
+interface MediaFile {
+  id: string;
+  original_name: string;
+  storage_path: string;
+  mime_type: string;
+  file_size: number;
+  created_at: string;
+}
 import { useQuery } from "@tanstack/react-query";
 
 export function AdminMediaLibrary() {
@@ -31,7 +40,7 @@ export function AdminMediaLibrary() {
   const [isBackgroundMusic, setIsBackgroundMusic] = useState(false);
 
   // Music player state
-  const [currentTrack, setCurrentTrack] = useState<any>(null);
+  const [currentTrack, setCurrentTrack] = useState<MediaFile | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
   const [currentTime, setCurrentTime] = useState(0);
@@ -80,7 +89,7 @@ export function AdminMediaLibrary() {
       audio.removeEventListener("timeupdate", updateTime);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, [currentTrack, mediaFiles]);
+  }, [currentTrack, mediaFiles, playTrack]);
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -182,7 +191,7 @@ export function AdminMediaLibrary() {
     }
   };
 
-  const deleteFile = async (file: any) => {
+  const deleteFile = async (file: MediaFile) => {
     if (!confirm(`Are you sure you want to delete "${file.original_name}"?`)) {
       return;
     }
@@ -220,7 +229,7 @@ export function AdminMediaLibrary() {
     }
   };
 
-  const playTrack = async (file: any) => {
+  const playTrack = useCallback(async (file: MediaFile) => {
     if (!file.mime_type.startsWith("audio/")) return;
 
     const audioUrl = supabase.storage.from("admin-media").getPublicUrl(file.storage_path)
@@ -249,7 +258,7 @@ export function AdminMediaLibrary() {
         toast.error("Failed to play audio file");
       }
     }
-  };
+  }, [musicFiles]);
 
   const togglePlayPause = async () => {
     if (audioRef.current) {
@@ -287,8 +296,12 @@ export function AdminMediaLibrary() {
     }
   };
 
-  const musicFiles = mediaFiles?.filter((file) => file.is_background_music) || [];
-  const otherFiles = mediaFiles?.filter((file) => !file.is_background_music) || [];
+  const musicFiles = useMemo(() => 
+    mediaFiles?.filter((file) => file.is_background_music) || [], [mediaFiles]
+  );
+  const otherFiles = useMemo(() => 
+    mediaFiles?.filter((file) => !file.is_background_music) || [], [mediaFiles]
+  );
 
   return (
     <div className="space-y-6">
