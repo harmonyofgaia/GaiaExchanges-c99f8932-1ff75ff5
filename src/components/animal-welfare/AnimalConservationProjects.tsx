@@ -50,7 +50,8 @@ export function AnimalConservationProjects() {
     {
       id: "1",
       title: "Amazon Rainforest Protection Initiative",
-      description: "Large-scale reforestation and wildlife corridor creation to protect endangered species in the Amazon basin.",
+      description:
+        "Large-scale reforestation and wildlife corridor creation to protect endangered species in the Amazon basin.",
       location: "Amazon Basin",
       country: "Brazil",
       category: "forest",
@@ -62,21 +63,38 @@ export function AnimalConservationProjects() {
       impact: {
         metric: "Trees Planted",
         value: 125000,
-        unit: "trees"
+        unit: "trees",
       },
       status: "active",
       images: ["forest1.jpg", "forest2.jpg"],
       milestones: [
-        { title: "Land Acquisition", completed: true, description: "Secured 10,000 hectares" },
-        { title: "Species Survey", completed: true, description: "Catalogued 847 species" },
-        { title: "Reforestation Phase 1", completed: false, description: "Plant 50,000 trees" },
-        { title: "Wildlife Corridors", completed: false, description: "Create 5 corridors" },
-      ]
+        {
+          title: "Land Acquisition",
+          completed: true,
+          description: "Secured 10,000 hectares",
+        },
+        {
+          title: "Species Survey",
+          completed: true,
+          description: "Catalogued 847 species",
+        },
+        {
+          title: "Reforestation Phase 1",
+          completed: false,
+          description: "Plant 50,000 trees",
+        },
+        {
+          title: "Wildlife Corridors",
+          completed: false,
+          description: "Create 5 corridors",
+        },
+      ],
     },
     {
       id: "2",
       title: "Great Barrier Reef Restoration",
-      description: "Coral restoration and marine protected area expansion to save the world's largest coral reef ecosystem.",
+      description:
+        "Coral restoration and marine protected area expansion to save the world's largest coral reef ecosystem.",
       location: "Great Barrier Reef",
       country: "Australia",
       category: "marine",
@@ -88,21 +106,38 @@ export function AnimalConservationProjects() {
       impact: {
         metric: "Coral Colonies Restored",
         value: 15600,
-        unit: "colonies"
+        unit: "colonies",
       },
       status: "active",
       images: ["reef1.jpg", "reef2.jpg"],
       milestones: [
-        { title: "Research Phase", completed: true, description: "Marine biodiversity assessment" },
-        { title: "Coral Nurseries", completed: true, description: "Established 20 nurseries" },
-        { title: "Restoration Phase 1", completed: false, description: "Restore 100 hectares" },
-        { title: "Protected Area Expansion", completed: false, description: "Add 500 sq km" },
-      ]
+        {
+          title: "Research Phase",
+          completed: true,
+          description: "Marine biodiversity assessment",
+        },
+        {
+          title: "Coral Nurseries",
+          completed: true,
+          description: "Established 20 nurseries",
+        },
+        {
+          title: "Restoration Phase 1",
+          completed: false,
+          description: "Restore 100 hectares",
+        },
+        {
+          title: "Protected Area Expansion",
+          completed: false,
+          description: "Add 500 sq km",
+        },
+      ],
     },
     {
       id: "3",
       title: "African Elephant Migration Route Protection",
-      description: "Securing ancient elephant migration routes and reducing human-wildlife conflict through community engagement.",
+      description:
+        "Securing ancient elephant migration routes and reducing human-wildlife conflict through community engagement.",
       location: "Kenya-Tanzania Border",
       country: "Kenya/Tanzania",
       category: "wildlife",
@@ -114,21 +149,38 @@ export function AnimalConservationProjects() {
       impact: {
         metric: "Migration Route Protected",
         value: 450,
-        unit: "kilometers"
+        unit: "kilometers",
       },
       status: "urgent",
       images: ["elephant1.jpg", "elephant2.jpg"],
       milestones: [
-        { title: "Community Outreach", completed: true, description: "Engaged 50 villages" },
-        { title: "Route Mapping", completed: false, description: "GPS tracking of herds" },
-        { title: "Corridor Creation", completed: false, description: "Build 12 wildlife corridors" },
-        { title: "Monitoring System", completed: false, description: "24/7 tracking network" },
-      ]
+        {
+          title: "Community Outreach",
+          completed: true,
+          description: "Engaged 50 villages",
+        },
+        {
+          title: "Route Mapping",
+          completed: false,
+          description: "GPS tracking of herds",
+        },
+        {
+          title: "Corridor Creation",
+          completed: false,
+          description: "Build 12 wildlife corridors",
+        },
+        {
+          title: "Monitoring System",
+          completed: false,
+          description: "24/7 tracking network",
+        },
+      ],
     },
     {
       id: "4",
       title: "Arctic Ice Habitat Preservation",
-      description: "Climate change mitigation and habitat preservation for Arctic wildlife threatened by ice loss.",
+      description:
+        "Climate change mitigation and habitat preservation for Arctic wildlife threatened by ice loss.",
       location: "Arctic Circle",
       country: "Multiple",
       category: "habitat",
@@ -140,30 +192,46 @@ export function AnimalConservationProjects() {
       impact: {
         metric: "Ice Habitat Protected",
         value: 2500,
-        unit: "sq km"
+        unit: "sq km",
       },
       status: "active",
       images: ["arctic1.jpg", "arctic2.jpg"],
       milestones: [
-        { title: "Research Stations", completed: true, description: "5 monitoring stations" },
-        { title: "Ice Preservation Tech", completed: false, description: "Deploy preservation systems" },
-        { title: "Wildlife Tracking", completed: false, description: "Tag 500 animals" },
-        { title: "Climate Action Plan", completed: false, description: "International cooperation" },
-      ]
+        {
+          title: "Research Stations",
+          completed: true,
+          description: "5 monitoring stations",
+        },
+        {
+          title: "Ice Preservation Tech",
+          completed: false,
+          description: "Deploy preservation systems",
+        },
+        {
+          title: "Wildlife Tracking",
+          completed: false,
+          description: "Tag 500 animals",
+        },
+        {
+          title: "Climate Action Plan",
+          completed: false,
+          description: "International cooperation",
+        },
+      ],
     },
   ]);
 
   const fundProject = (projectId: string, amount: number) => {
-    setProjects(prev => 
-      prev.map(project => 
-        project.id === projectId 
-          ? { 
-              ...project, 
+    setProjects((prev) =>
+      prev.map((project) =>
+        project.id === projectId
+          ? {
+              ...project,
               fundingRaised: project.fundingRaised + amount,
-              participants: project.participants + 1
+              participants: project.participants + 1,
             }
-          : project
-      )
+          : project,
+      ),
     );
     toast.success("🌿 Conservation funding sent!", {
       description: `${amount} GAiA contributed to conservation project`,
@@ -173,21 +241,31 @@ export function AnimalConservationProjects() {
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case "forest": return <TreePine className="h-5 w-5" />;
-      case "marine": return <Waves className="h-5 w-5" />;
-      case "wildlife": return <Heart className="h-5 w-5" />;
-      case "habitat": return <Mountain className="h-5 w-5" />;
-      default: return <Leaf className="h-5 w-5" />;
+      case "forest":
+        return <TreePine className="h-5 w-5" />;
+      case "marine":
+        return <Waves className="h-5 w-5" />;
+      case "wildlife":
+        return <Heart className="h-5 w-5" />;
+      case "habitat":
+        return <Mountain className="h-5 w-5" />;
+      default:
+        return <Leaf className="h-5 w-5" />;
     }
   };
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case "forest": return "bg-green-600";
-      case "marine": return "bg-blue-600";
-      case "wildlife": return "bg-orange-600";
-      case "habitat": return "bg-purple-600";
-      default: return "bg-gray-600";
+      case "forest":
+        return "bg-green-600";
+      case "marine":
+        return "bg-blue-600";
+      case "wildlife":
+        return "bg-orange-600";
+      case "habitat":
+        return "bg-purple-600";
+      default:
+        return "bg-gray-600";
     }
   };
 
@@ -200,7 +278,8 @@ export function AnimalConservationProjects() {
             🌿 GLOBAL CONSERVATION PROJECTS
           </CardTitle>
           <p className="text-center text-lg text-muted-foreground">
-            Long-term conservation initiatives protecting habitats and species worldwide
+            Long-term conservation initiatives protecting habitats and species
+            worldwide
           </p>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
             <Badge className="bg-green-600 p-3 text-center">
@@ -214,7 +293,15 @@ export function AnimalConservationProjects() {
               <div className="flex flex-col items-center">
                 <Target className="h-6 w-6 mb-1" />
                 <span className="text-lg font-bold">
-                  {Math.round(projects.reduce((sum, p) => sum + (p.fundingRaised / p.fundingGoal), 0) / projects.length * 100)}%
+                  {Math.round(
+                    (projects.reduce(
+                      (sum, p) => sum + p.fundingRaised / p.fundingGoal,
+                      0,
+                    ) /
+                      projects.length) *
+                      100,
+                  )}
+                  %
                 </span>
                 <span className="text-sm">Avg Funded</span>
               </div>
@@ -223,7 +310,9 @@ export function AnimalConservationProjects() {
               <div className="flex flex-col items-center">
                 <Users className="h-6 w-6 mb-1" />
                 <span className="text-lg font-bold">
-                  {projects.reduce((sum, p) => sum + p.participants, 0).toLocaleString()}
+                  {projects
+                    .reduce((sum, p) => sum + p.participants, 0)
+                    .toLocaleString()}
                 </span>
                 <span className="text-sm">Participants</span>
               </div>
@@ -251,17 +340,25 @@ export function AnimalConservationProjects() {
 
         <TabsContent value="all" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {projects.map(project => (
-              <Card key={project.id} className={`border-2 ${
-                project.status === "urgent" ? "border-red-500/50 bg-red-900/20" : 
-                "border-green-500/30 bg-green-900/20"
-              }`}>
+            {projects.map((project) => (
+              <Card
+                key={project.id}
+                className={`border-2 ${
+                  project.status === "urgent"
+                    ? "border-red-500/50 bg-red-900/20"
+                    : "border-green-500/30 bg-green-900/20"
+                }`}
+              >
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <CardTitle className={`flex items-center gap-2 ${
-                        project.status === "urgent" ? "text-red-400" : "text-green-400"
-                      }`}>
+                      <CardTitle
+                        className={`flex items-center gap-2 ${
+                          project.status === "urgent"
+                            ? "text-red-400"
+                            : "text-green-400"
+                        }`}
+                      >
                         {getCategoryIcon(project.category)}
                         {project.title}
                       </CardTitle>
@@ -282,40 +379,70 @@ export function AnimalConservationProjects() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm mb-4">{project.description}</p>
-                  
+
                   <div className="space-y-3 mb-4">
                     <div className="flex justify-between text-sm">
                       <span>Funding Progress</span>
-                      <span>{((project.fundingRaised / project.fundingGoal) * 100).toFixed(1)}%</span>
+                      <span>
+                        {(
+                          (project.fundingRaised / project.fundingGoal) *
+                          100
+                        ).toFixed(1)}
+                        %
+                      </span>
                     </div>
-                    <Progress 
-                      value={(project.fundingRaised / project.fundingGoal) * 100}
+                    <Progress
+                      value={
+                        (project.fundingRaised / project.fundingGoal) * 100
+                      }
                       className="h-3"
                     />
                     <div className="flex justify-between text-sm text-muted-foreground">
-                      <span>{project.fundingRaised.toLocaleString()} GAiA raised</span>
-                      <span>{project.fundingGoal.toLocaleString()} GAiA goal</span>
+                      <span>
+                        {project.fundingRaised.toLocaleString()} GAiA raised
+                      </span>
+                      <span>
+                        {project.fundingGoal.toLocaleString()} GAiA goal
+                      </span>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div className="bg-blue-900/30 p-3 rounded-lg">
-                      <p className="text-sm font-semibold text-blue-400">Impact Goal</p>
-                      <p className="text-lg font-bold">{project.impact.value.toLocaleString()}</p>
-                      <p className="text-sm text-muted-foreground">{project.impact.metric}</p>
+                      <p className="text-sm font-semibold text-blue-400">
+                        Impact Goal
+                      </p>
+                      <p className="text-lg font-bold">
+                        {project.impact.value.toLocaleString()}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {project.impact.metric}
+                      </p>
                     </div>
                     <div className="bg-purple-900/30 p-3 rounded-lg">
-                      <p className="text-sm font-semibold text-purple-400">Community</p>
-                      <p className="text-lg font-bold">{project.participants.toLocaleString()}</p>
-                      <p className="text-sm text-muted-foreground">Participants</p>
+                      <p className="text-sm font-semibold text-purple-400">
+                        Community
+                      </p>
+                      <p className="text-lg font-bold">
+                        {project.participants.toLocaleString()}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Participants
+                      </p>
                     </div>
                   </div>
 
                   <div className="mb-4">
-                    <p className="text-sm font-semibold mb-2">Species Protected:</p>
+                    <p className="text-sm font-semibold mb-2">
+                      Species Protected:
+                    </p>
                     <div className="flex flex-wrap gap-1">
-                      {project.species.map(species => (
-                        <Badge key={species} variant="outline" className="text-xs">
+                      {project.species.map((species) => (
+                        <Badge
+                          key={species}
+                          variant="outline"
+                          className="text-xs"
+                        >
                           {species}
                         </Badge>
                       ))}
@@ -323,14 +450,29 @@ export function AnimalConservationProjects() {
                   </div>
 
                   <div className="mb-4">
-                    <p className="text-sm font-semibold mb-2">Project Milestones:</p>
+                    <p className="text-sm font-semibold mb-2">
+                      Project Milestones:
+                    </p>
                     <div className="space-y-1">
                       {project.milestones.map((milestone, index) => (
-                        <div key={index} className="flex items-center gap-2 text-sm">
-                          <div className={`w-3 h-3 rounded-full ${
-                            milestone.completed ? "bg-green-500" : "bg-gray-500"
-                          }`} />
-                          <span className={milestone.completed ? "text-green-400" : "text-muted-foreground"}>
+                        <div
+                          key={index}
+                          className="flex items-center gap-2 text-sm"
+                        >
+                          <div
+                            className={`w-3 h-3 rounded-full ${
+                              milestone.completed
+                                ? "bg-green-500"
+                                : "bg-gray-500"
+                            }`}
+                          />
+                          <span
+                            className={
+                              milestone.completed
+                                ? "text-green-400"
+                                : "text-muted-foreground"
+                            }
+                          >
                             {milestone.title}
                           </span>
                         </div>
@@ -339,19 +481,19 @@ export function AnimalConservationProjects() {
                   </div>
 
                   <div className="flex gap-2">
-                    <Button 
+                    <Button
                       onClick={() => fundProject(project.id, 100)}
                       className="bg-green-600 hover:bg-green-700"
                     >
                       🌱 100 GAiA
                     </Button>
-                    <Button 
+                    <Button
                       onClick={() => fundProject(project.id, 500)}
                       className="bg-blue-600 hover:bg-blue-700"
                     >
                       🌿 500 GAiA
                     </Button>
-                    <Button 
+                    <Button
                       onClick={() => fundProject(project.id, 1000)}
                       className="bg-purple-600 hover:bg-purple-700"
                     >
@@ -375,54 +517,65 @@ export function AnimalConservationProjects() {
           </div>
         </TabsContent>
 
-        {["forest", "marine", "wildlife", "habitat"].map(category => (
+        {["forest", "marine", "wildlife", "habitat"].map((category) => (
           <TabsContent key={category} value={category} className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {projects.filter(p => p.category === category).map(project => (
-                <Card key={project.id} className="border-green-500/30 bg-green-900/20">
-                  <CardHeader>
-                    <CardTitle className="text-green-400 flex items-center gap-2">
-                      {getCategoryIcon(project.category)}
-                      {project.title}
-                    </CardTitle>
-                    <p className="text-sm text-muted-foreground flex items-center gap-1">
-                      <MapPin className="h-4 w-4" />
-                      {project.location}, {project.country}
-                    </p>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm mb-4">{project.description}</p>
-                    
-                    <div className="space-y-3 mb-4">
-                      <Progress 
-                        value={(project.fundingRaised / project.fundingGoal) * 100}
-                        className="h-3"
-                      />
-                      <div className="flex justify-between text-sm text-muted-foreground">
-                        <span>{project.fundingRaised.toLocaleString()} GAiA</span>
-                        <span>{project.fundingGoal.toLocaleString()} GAiA</span>
-                      </div>
-                    </div>
+              {projects
+                .filter((p) => p.category === category)
+                .map((project) => (
+                  <Card
+                    key={project.id}
+                    className="border-green-500/30 bg-green-900/20"
+                  >
+                    <CardHeader>
+                      <CardTitle className="text-green-400 flex items-center gap-2">
+                        {getCategoryIcon(project.category)}
+                        {project.title}
+                      </CardTitle>
+                      <p className="text-sm text-muted-foreground flex items-center gap-1">
+                        <MapPin className="h-4 w-4" />
+                        {project.location}, {project.country}
+                      </p>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm mb-4">{project.description}</p>
 
-                    <div className="flex gap-2">
-                      <Button 
-                        onClick={() => fundProject(project.id, 100)}
-                        className="bg-green-600 hover:bg-green-700"
-                        size="sm"
-                      >
-                        Support 100 GAiA
-                      </Button>
-                      <Button 
-                        onClick={() => fundProject(project.id, 500)}
-                        className="bg-blue-600 hover:bg-blue-700"
-                        size="sm"
-                      >
-                        Donate 500 GAiA
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                      <div className="space-y-3 mb-4">
+                        <Progress
+                          value={
+                            (project.fundingRaised / project.fundingGoal) * 100
+                          }
+                          className="h-3"
+                        />
+                        <div className="flex justify-between text-sm text-muted-foreground">
+                          <span>
+                            {project.fundingRaised.toLocaleString()} GAiA
+                          </span>
+                          <span>
+                            {project.fundingGoal.toLocaleString()} GAiA
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-2">
+                        <Button
+                          onClick={() => fundProject(project.id, 100)}
+                          className="bg-green-600 hover:bg-green-700"
+                          size="sm"
+                        >
+                          Support 100 GAiA
+                        </Button>
+                        <Button
+                          onClick={() => fundProject(project.id, 500)}
+                          className="bg-blue-600 hover:bg-blue-700"
+                          size="sm"
+                        >
+                          Donate 500 GAiA
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
             </div>
           </TabsContent>
         ))}
