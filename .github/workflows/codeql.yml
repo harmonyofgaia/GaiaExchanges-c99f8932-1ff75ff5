@@ -1,21 +1,26 @@
-name: "CodeQL"
+name: CodeQL
 
 on:
   push:
-    branches: [main, deploy]
+    branches: [main]
   pull_request:
-    branches: [main, deploy]
+    branches: [main]
   schedule:
     - cron: "0 0 * * 0"
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   analyze:
     name: Analyze
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
@@ -23,12 +28,45 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - id: nodefile
+        run: |
+          if [ -f .nvmrc ]; then
+            echo "file=.nvmrc" >> $GITHUB_OUTPUT
+          fi
+      - name: Setup Node from .nvmrc
+        if: steps.nodefile.outputs.file
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - name: Setup Node 20 (fallback)
+        if: "!steps.nodefile.outputs.file"
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies (best-effort)
+        run: |
+          if [ -f pnpm-lock.yaml ]; then
+            corepack enable || true
+            pnpm install --frozen-lockfile || true
+          elif [ -f yarn.lock ]; then
+            corepack enable || true
+            yarn install --frozen-lockfile || true
+          elif [ -f package-lock.json ]; then
+            npm ci || true
+          fi
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
+
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
+
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
