@@ -6,7 +6,7 @@
   "scripts": {
     "pre-deploy": "echo \"No pre-deploy steps required\"",
     "dev": "vite",
-    "build": "npm run tailwind:build && vite build",
+    "build": "vite build",
     "build:dev": "vite build --mode development",
     "build:vercel": "npx tsc && vite build",
     "preview": "vite preview",
