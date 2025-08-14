@@ -200,6 +200,106 @@ All changes must go through a reviewed pull request with passing CI checks. See 
 
 These are isolated to their respective components and do not impact the admin dashboard system.
 
+## Code Formatting and Automation
+
+### Prettier CI Workflow
+
+This repository uses an automated Prettier workflow to ensure consistent code formatting across all files. Here's how it works:
+
+**Automatic Code Formatting:**
+
+- The Prettier GitHub Actions workflow runs on every push and pull request to `main` and `deploy` branches
+- If unformatted code is detected, Prettier automatically formats it and commits the changes back to your branch
+- The workflow then fails to notify you that formatting was required, but the code is already fixed
+- You'll need to pull the latest changes to sync the auto-formatted code to your local branch
+
+**Why This Approach:**
+
+- Prevents deployment failures due to formatting issues
+- Ensures all code follows consistent style guidelines
+- Reduces friction for contributors while maintaining code quality
+
+### Local Development Setup
+
+**Install Dependencies:**
+
+```sh
+npm install
+```
+
+**Pre-commit Hooks (Recommended):**
+This repository includes Husky and lint-staged for automatic formatting before commits:
+
+```sh
+# Husky is automatically installed with npm install
+# Pre-commit hooks will run Prettier and ESLint on staged files
+```
+
+**Manual Formatting:**
+
+```sh
+# Format all files
+npm run lint:fix
+
+# Check formatting without fixing
+npx prettier --check .
+
+# Format specific files
+npx prettier --write path/to/file.ts
+```
+
+**ESLint Integration:**
+
+```sh
+# Run ESLint
+npm run lint
+
+# Fix ESLint issues automatically
+npm run lint:fix
+```
+
+### Troubleshooting Formatting Issues
+
+**PR Formatting Failure:**
+
+1. **Check the Actions tab** in your PR to see which files needed formatting
+2. **Pull the latest changes** - the workflow automatically fixed and committed the formatting
+   ```sh
+   git pull origin your-branch-name
+   ```
+3. **Continue development** - your branch now has properly formatted code
+
+**Local Formatting Setup:**
+
+1. **Enable pre-commit hooks** - they're automatically installed with `npm install`
+2. **Verify hooks are working:**
+   ```sh
+   # Make a small change and commit - formatting should run automatically
+   git add .
+   git commit -m "test commit"
+   ```
+
+**Common Issues:**
+
+- **"Prettier check failed"**: Pull the latest changes as the CI auto-fixed the formatting
+- **Pre-commit hooks not running**: Ensure Husky is installed with `npm install`
+- **Conflicting formatting**: Run `npm run lint:fix` to standardize formatting locally
+
+**Manual Override (Not Recommended):**
+If you need to bypass formatting temporarily:
+
+```sh
+# Skip pre-commit hooks (not recommended)
+git commit --no-verify -m "emergency commit"
+```
+
+### Configuration Files
+
+- **`.prettierignore`**: Defines files/folders excluded from formatting
+- **`lint-staged.config.json`**: Configures pre-commit formatting and linting
+- **`.husky/pre-commit`**: Pre-commit hook configuration
+- **`.github/workflows/prettier.yml`**: CI workflow for automatic formatting
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!

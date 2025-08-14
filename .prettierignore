@@ -7,4 +7,6 @@ build/
 *.lock
 *.html
 *.xml
-*.json
+package-lock.json
+.git/
+.husky/_/
