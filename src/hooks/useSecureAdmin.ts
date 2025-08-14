@@ -1,15 +1,32 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
-// Safe useAuth that handles missing AuthProvider
+// Safe useAuth hook that doesn't violate hooks rules
 function useSafeAuth() {
-  try {
-    const { useAuth } = require("@/components/auth/AuthProvider");
-    return useAuth();
-  } catch (error) {
-    // Return null user if AuthProvider is not available
-    return { user: null };
-  }
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Try to get user from Supabase auth directly
+    const getUser = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        setUser(user);
+      } catch (error) {
+        setUser(null);
+      }
+    };
+
+    getUser();
+
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  return { user };
 }
 
 interface AdminSession {
