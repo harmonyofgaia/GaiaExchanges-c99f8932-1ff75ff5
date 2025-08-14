@@ -1,35 +1,102 @@
-name: "CodeQL"
+name: CodeQL
 
 on:
   push:
-    branches: [main, deploy]
+    branches: [ main, 'release/*' ]
   pull_request:
-    branches: [main, deploy]
+    branches: [ main, 'release/*' ]
   schedule:
-    - cron: "0 0 * * 0"
+    - cron: '35 3 * * 4'
+  merge_group:
+    types: [checks_requested]
+
+permissions:
+  contents: read
+  actions: read
+  packages: read
+  security-events: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   analyze:
-    name: Analyze
+    name: Analyze (${{ matrix.language }})
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false
     runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
-        language: ["javascript", "typescript"]
+        language:
+          - javascript-typescript
+          - python
+          - go
+          - java
+          - ruby
+          - cpp
+          - csharp
+
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
+          queries: +security-extended,security-and-quality
+
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
-      - name: Perform CodeQL Analysis
+
+      - name: Analyze and upload
         uses: github/codeql-action/analyze@v3
         with:
-          category: "/language:${{ matrix.language }}"
+          category: /language:${{ matrix.language }}
+
+  analyze-fork-pr:
+    name: Analyze fork PR (${{ matrix.language }}) [no upload]
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      actions: read
+      packages: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - javascript-typescript
+          - python
+          - go
+          - java
+          - ruby
+          - cpp
+          - csharp
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: +security-extended,security-and-quality
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Analyze (no upload on fork PR)
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: /language:${{ matrix.language }}
+          upload: false
