@@ -26,13 +26,7 @@ import { toast } from "sonner";
 interface TechInnovation {
   id: string;
   technology: string;
-  category:
-    | "framework"
-    | "security"
-    | "ai"
-    | "blockchain"
-    | "database"
-    | "deployment";
+  category: "framework" | "security" | "ai" | "blockchain" | "database" | "deployment";
   priority: "critical" | "high" | "medium" | "low";
   description: string;
   implementationPlan: string;
@@ -81,9 +75,7 @@ export function GlobalTechIntelligence() {
       if (!isScanning) return;
 
       console.log("🚀 ADVANCED TECH INTELLIGENCE SCAN - 5-MINUTE CYCLE");
-      console.log(
-        "🧠 Analyzing global coding patterns, frameworks, and innovations",
-      );
+      console.log("🧠 Analyzing global coding patterns, frameworks, and innovations");
 
       const newInnovations: TechInnovation[] = [];
       const newPatterns: CodingPattern[] = [];
@@ -119,19 +111,11 @@ export function GlobalTechIntelligence() {
       for (let i = 0; i < Math.floor(Math.random() * 4) + 2; i++) {
         const innovation: TechInnovation = {
           id: `tech-${Date.now()}-${i}`,
-          technology:
-            emergingTechnologies[
-              Math.floor(Math.random() * emergingTechnologies.length)
-            ],
-          category:
-            techCategories[Math.floor(Math.random() * techCategories.length)],
-          priority: ["critical", "high", "medium", "low"][
-            Math.floor(Math.random() * 4)
-          ] as any,
-          description:
-            "Cutting-edge technology detected - Implementation analysis complete",
-          implementationPlan:
-            "Strategic integration with our existing quantum systems",
+          technology: emergingTechnologies[Math.floor(Math.random() * emergingTechnologies.length)],
+          category: techCategories[Math.floor(Math.random() * techCategories.length)],
+          priority: ["critical", "high", "medium", "low"][Math.floor(Math.random() * 4)] as any,
+          description: "Cutting-edge technology detected - Implementation analysis complete",
+          implementationPlan: "Strategic integration with our existing quantum systems",
           competitorUsage: Math.floor(Math.random() * 30), // 0-30% competitor usage
           ourAdvantage: `${(Math.random() * 5 + 5).toFixed(1)}x performance improvement`,
           timestamp: new Date(),
@@ -160,25 +144,17 @@ export function GlobalTechIntelligence() {
       for (let i = 0; i < 3; i++) {
         const pattern: CodingPattern = {
           pattern: patterns[Math.floor(Math.random() * patterns.length)],
-          language:
-            programmingLanguages[
-              Math.floor(Math.random() * programmingLanguages.length)
-            ],
+          language: programmingLanguages[Math.floor(Math.random() * programmingLanguages.length)],
           performance: Math.floor(Math.random() * 30) + 70, // 70-100%
           security: Math.floor(Math.random() * 25) + 75, // 75-100%
           adoption: `${Math.floor(Math.random() * 20)}% industry adoption`,
-          recommendation:
-            "Immediate implementation recommended for competitive advantage",
+          recommendation: "Immediate implementation recommended for competitive advantage",
         };
         newPatterns.push(pattern);
       }
 
       // Generate strategic plans
-      const strategicCategories = [
-        "immediate",
-        "short_term",
-        "long_term",
-      ] as const;
+      const strategicCategories = ["immediate", "short_term", "long_term"] as const;
       const planTitles = [
         "Quantum Security Integration",
         "AI-Powered Development Pipeline",
@@ -192,14 +168,8 @@ export function GlobalTechIntelligence() {
         const plan: StrategicPlan = {
           id: `plan-${Date.now()}-${i}`,
           title: planTitles[Math.floor(Math.random() * planTitles.length)],
-          category:
-            strategicCategories[
-              Math.floor(Math.random() * strategicCategories.length)
-            ],
-          technologies: emergingTechnologies.slice(
-            0,
-            Math.floor(Math.random() * 3) + 2,
-          ),
+          category: strategicCategories[Math.floor(Math.random() * strategicCategories.length)],
+          technologies: emergingTechnologies.slice(0, Math.floor(Math.random() * 3) + 2),
           advantages: [
             "Maintain 10x performance lead",
             "Unbreakable security framework",
@@ -223,14 +193,11 @@ export function GlobalTechIntelligence() {
         technologiesTracked: prev.technologiesTracked + newInnovations.length,
         patternsAnalyzed: prev.patternsAnalyzed + newPatterns.length,
         advantageMargin: Math.min(15.0, prev.advantageMargin + 0.1),
-        innovationsImplemented:
-          prev.innovationsImplemented + Math.floor(Math.random() * 2),
+        innovationsImplemented: prev.innovationsImplemented + Math.floor(Math.random() * 2),
       }));
 
       // Critical innovation alerts
-      const criticalInnovations = newInnovations.filter(
-        (i) => i.priority === "critical",
-      );
+      const criticalInnovations = newInnovations.filter((i) => i.priority === "critical");
       if (criticalInnovations.length > 0) {
         toast.success("🚀 CRITICAL TECH BREAKTHROUGH DETECTED", {
           description: `${criticalInnovations.length} game-changing technologies identified - Implementation initiated`,
@@ -304,21 +271,17 @@ export function GlobalTechIntelligence() {
     URL.revokeObjectURL(url);
 
     toast.success("🚀 ADVANCED TECH SUPERIORITY MANUAL GENERATED", {
-      description:
-        "Complete technology intelligence with working links - Admin access only",
+      description: "Complete technology intelligence with working links - Admin access only",
       duration: 5000,
     });
   };
 
   const toggleAdvancedScanning = () => {
     setIsScanning(!isScanning);
-    toast.success(
-      `🧠 Advanced Tech Scanning ${!isScanning ? "ACTIVATED" : "PAUSED"}`,
-      {
-        description: `Global technology intelligence ${!isScanning ? "monitoring resumed" : "temporarily paused"}`,
-        duration: 3000,
-      },
-    );
+    toast.success(`🧠 Advanced Tech Scanning ${!isScanning ? "ACTIVATED" : "PAUSED"}`, {
+      description: `Global technology intelligence ${!isScanning ? "monitoring resumed" : "temporarily paused"}`,
+      duration: 3000,
+    });
   };
 
   return (
@@ -338,8 +301,7 @@ export function GlobalTechIntelligence() {
                 🧠 ADVANCED TECH INTELLIGENCE CENTER
               </div>
               <div className="text-sm font-normal text-cyan-400">
-                Global Code Analysis • Innovation Tracking • Strategic Planning
-                • Always 10x Ahead
+                Global Code Analysis • Innovation Tracking • Strategic Planning • Always 10x Ahead
               </div>
             </div>
           </CardTitle>
@@ -349,32 +311,20 @@ export function GlobalTechIntelligence() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-3 bg-cyan-900/20 rounded-lg border border-cyan-500/30">
               <Code className="h-6 w-6 mx-auto text-cyan-400 mb-2" />
-              <div className="text-xl font-bold text-cyan-400">
-                {techStats.technologiesTracked}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Tech Innovations
-              </div>
+              <div className="text-xl font-bold text-cyan-400">{techStats.technologiesTracked}</div>
+              <div className="text-xs text-muted-foreground">Tech Innovations</div>
             </div>
 
             <div className="text-center p-3 bg-purple-900/20 rounded-lg border border-purple-500/30">
               <Brain className="h-6 w-6 mx-auto text-purple-400 mb-2" />
-              <div className="text-xl font-bold text-purple-400">
-                {techStats.patternsAnalyzed}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Patterns Analyzed
-              </div>
+              <div className="text-xl font-bold text-purple-400">{techStats.patternsAnalyzed}</div>
+              <div className="text-xs text-muted-foreground">Patterns Analyzed</div>
             </div>
 
             <div className="text-center p-3 bg-green-900/20 rounded-lg border border-green-500/30">
               <Rocket className="h-6 w-6 mx-auto text-green-400 mb-2" />
-              <div className="text-xl font-bold text-green-400">
-                {techStats.advantageMargin}x
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Advantage Margin
-              </div>
+              <div className="text-xl font-bold text-green-400">{techStats.advantageMargin}x</div>
+              <div className="text-xs text-muted-foreground">Advantage Margin</div>
             </div>
 
             <div className="text-center p-3 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
@@ -382,9 +332,7 @@ export function GlobalTechIntelligence() {
               <div className="text-xl font-bold text-yellow-400">
                 {techStats.innovationsImplemented}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Innovations Live
-              </div>
+              <div className="text-xs text-muted-foreground">Innovations Live</div>
             </div>
           </div>
 
@@ -393,9 +341,7 @@ export function GlobalTechIntelligence() {
             <Button
               onClick={toggleAdvancedScanning}
               className={`flex-1 ${
-                isScanning
-                  ? "bg-orange-600 hover:bg-orange-700"
-                  : "bg-green-600 hover:bg-green-700"
+                isScanning ? "bg-orange-600 hover:bg-orange-700" : "bg-green-600 hover:bg-green-700"
               }`}
             >
               {isScanning ? (
@@ -435,9 +381,7 @@ export function GlobalTechIntelligence() {
                     isScanning ? "bg-green-400 animate-pulse" : "bg-gray-400"
                   }`}
                 ></div>
-                <span
-                  className={isScanning ? "text-green-400" : "text-gray-400"}
-                >
+                <span className={isScanning ? "text-green-400" : "text-gray-400"}>
                   {isScanning
                     ? "Advanced Intelligence Active - 5-Minute Global Scans"
                     : "Advanced Intelligence Paused"}
@@ -464,12 +408,8 @@ export function GlobalTechIntelligence() {
             {techInnovations.length === 0 ? (
               <div className="text-center text-muted-foreground py-8">
                 <Brain className="h-12 w-12 mx-auto mb-3 text-cyan-400" />
-                <p className="text-lg font-medium">
-                  🧠 Analyzing Global Tech Landscape
-                </p>
-                <p className="text-sm">
-                  Scanning for the latest innovations worldwide
-                </p>
+                <p className="text-lg font-medium">🧠 Analyzing Global Tech Landscape</p>
+                <p className="text-sm">Scanning for the latest innovations worldwide</p>
               </div>
             ) : (
               techInnovations.map((innovation) => (
@@ -498,15 +438,9 @@ export function GlobalTechIntelligence() {
                           {innovation.competitorUsage}% adoption
                         </Badge>
                       </div>
-                      <p className="text-sm font-medium">
-                        {innovation.technology}
-                      </p>
-                      <p className="text-xs text-muted-foreground mb-1">
-                        {innovation.description}
-                      </p>
-                      <p className="text-xs text-green-400">
-                        Advantage: {innovation.ourAdvantage}
-                      </p>
+                      <p className="text-sm font-medium">{innovation.technology}</p>
+                      <p className="text-xs text-muted-foreground mb-1">{innovation.description}</p>
+                      <p className="text-xs text-green-400">Advantage: {innovation.ourAdvantage}</p>
                     </div>
                     <CheckCircle className="h-5 w-5 text-green-400" />
                   </div>
@@ -528,10 +462,7 @@ export function GlobalTechIntelligence() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {strategicPlans.slice(0, 6).map((plan) => (
-              <div
-                key={plan.id}
-                className="p-4 rounded-lg bg-card/50 border border-border/50"
-              >
+              <div key={plan.id} className="p-4 rounded-lg bg-card/50 border border-border/50">
                 <div className="flex items-center justify-between mb-2">
                   <Badge
                     className={`${
@@ -547,9 +478,7 @@ export function GlobalTechIntelligence() {
                   <Badge variant="outline">#{plan.priority}</Badge>
                 </div>
                 <h4 className="font-medium text-sm mb-2">{plan.title}</h4>
-                <p className="text-xs text-muted-foreground mb-2">
-                  {plan.timeline}
-                </p>
+                <p className="text-xs text-muted-foreground mb-2">{plan.timeline}</p>
                 <div className="text-xs text-green-400">
                   {plan.technologies.slice(0, 2).join(", ")}
                   {plan.technologies.length > 2 && "..."}

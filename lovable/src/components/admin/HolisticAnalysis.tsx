@@ -22,13 +22,7 @@ interface MissingFeature {
   id: string;
   title: string;
   description: string;
-  category:
-    | "UI/UX"
-    | "Backend"
-    | "Integration"
-    | "Security"
-    | "Performance"
-    | "Analytics";
+  category: "UI/UX" | "Backend" | "Integration" | "Security" | "Performance" | "Analytics";
   priority: "high" | "medium" | "low";
   estimatedEffort: string;
   suggestedImplementation: string;
@@ -58,9 +52,7 @@ interface ConversationInsight {
 function HolisticAnalysis() {
   const [missingFeatures, setMissingFeatures] = useState<MissingFeature[]>([]);
   const [improvements, setImprovements] = useState<ImprovementSuggestion[]>([]);
-  const [conversationInsights, setConversationInsights] = useState<
-    ConversationInsight[]
-  >([]);
+  const [conversationInsights, setConversationInsights] = useState<ConversationInsight[]>([]);
   const [analysisProgress, setAnalysisProgress] = useState(0);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [lastAnalysis, setLastAnalysis] = useState<Date | null>(null);
@@ -99,11 +91,7 @@ function HolisticAnalysis() {
           estimatedEffort: "2-3 weeks",
           suggestedImplementation:
             "Smart contract integration with Supabase for tracking and reward distribution",
-          relatedConversations: [
-            "conversation_1",
-            "conversation_15",
-            "conversation_23",
-          ],
+          relatedConversations: ["conversation_1", "conversation_15", "conversation_23"],
           status: "identified",
         },
         {
@@ -114,21 +102,18 @@ function HolisticAnalysis() {
           category: "UI/UX",
           priority: "high",
           estimatedEffort: "1-2 weeks",
-          suggestedImplementation:
-            "React component with Leaflet.js and satellite API integration",
+          suggestedImplementation: "React component with Leaflet.js and satellite API integration",
           relatedConversations: ["conversation_8", "conversation_12"],
           status: "identified",
         },
         {
           id: "3",
           title: "NFT Trading Marketplace",
-          description:
-            "Peer-to-peer NFT trading with escrow services and reputation system.",
+          description: "Peer-to-peer NFT trading with escrow services and reputation system.",
           category: "Integration",
           priority: "medium",
           estimatedEffort: "3-4 weeks",
-          suggestedImplementation:
-            "Blockchain integration with automated escrow smart contracts",
+          suggestedImplementation: "Blockchain integration with automated escrow smart contracts",
           relatedConversations: ["conversation_5", "conversation_19"],
           status: "identified",
         },
@@ -140,8 +125,7 @@ function HolisticAnalysis() {
           category: "Analytics",
           priority: "medium",
           estimatedEffort: "2-3 weeks",
-          suggestedImplementation:
-            "Machine learning integration with historical data analysis",
+          suggestedImplementation: "Machine learning integration with historical data analysis",
           relatedConversations: ["conversation_3", "conversation_11"],
           status: "identified",
         },
@@ -154,11 +138,7 @@ function HolisticAnalysis() {
           current: "Basic Supabase auth with limited customization",
           suggested:
             "Multi-factor authentication with biometric support and social login integration",
-          benefits: [
-            "Enhanced security",
-            "Better user experience",
-            "Reduced friction",
-          ],
+          benefits: ["Enhanced security", "Better user experience", "Reduced friction"],
           priority: "high",
           complexity: "medium",
         },
@@ -166,13 +146,8 @@ function HolisticAnalysis() {
           id: "2",
           area: "Database Query Optimization",
           current: "Standard Supabase queries without advanced optimization",
-          suggested:
-            "Implement query caching, indexing strategies, and connection pooling",
-          benefits: [
-            "Improved performance",
-            "Reduced server load",
-            "Better scalability",
-          ],
+          suggested: "Implement query caching, indexing strategies, and connection pooling",
+          benefits: ["Improved performance", "Reduced server load", "Better scalability"],
           priority: "high",
           complexity: "low",
         },
@@ -233,7 +208,7 @@ function HolisticAnalysis() {
   };
 
   const filteredFeatures = missingFeatures.filter(
-    (feature) => activeFilter === "all" || feature.category === activeFilter,
+    (feature) => activeFilter === "all" || feature.category === activeFilter
   );
 
   return (
@@ -249,22 +224,14 @@ function HolisticAnalysis() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <Card className="bg-blue-900/20 border-blue-500/30">
               <CardContent className="p-4">
-                <div className="text-2xl font-bold text-blue-400">
-                  {missingFeatures.length}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Missing Features
-                </div>
+                <div className="text-2xl font-bold text-blue-400">{missingFeatures.length}</div>
+                <div className="text-sm text-muted-foreground">Missing Features</div>
               </CardContent>
             </Card>
             <Card className="bg-green-900/20 border-green-500/30">
               <CardContent className="p-4">
-                <div className="text-2xl font-bold text-green-400">
-                  {improvements.length}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Improvements
-                </div>
+                <div className="text-2xl font-bold text-green-400">{improvements.length}</div>
+                <div className="text-sm text-muted-foreground">Improvements</div>
               </CardContent>
             </Card>
             <Card className="bg-amber-900/20 border-amber-500/30">
@@ -290,11 +257,7 @@ function HolisticAnalysis() {
               )}
               {isAnalyzing ? "Analyzing..." : "Run Deep Analysis"}
             </Button>
-            <Button
-              onClick={exportToPDF}
-              variant="outline"
-              className="border-purple-500/50"
-            >
+            <Button onClick={exportToPDF} variant="outline" className="border-purple-500/50">
               <Download className="h-4 w-4 mr-2" />
               Export PDF Report
             </Button>
@@ -343,9 +306,7 @@ function HolisticAnalysis() {
                     variant="outline"
                     size="sm"
                     onClick={() => setActiveFilter("Backend")}
-                    className={
-                      activeFilter === "Backend" ? "bg-purple-600" : ""
-                    }
+                    className={activeFilter === "Backend" ? "bg-purple-600" : ""}
                   >
                     Backend
                   </Button>
@@ -364,35 +325,24 @@ function HolisticAnalysis() {
               <ScrollArea className="h-96">
                 <div className="space-y-4">
                   {filteredFeatures.map((feature) => (
-                    <Card
-                      key={feature.id}
-                      className="border-l-4 border-l-blue-500"
-                    >
+                    <Card key={feature.id} className="border-l-4 border-l-blue-500">
                       <CardContent className="p-4">
                         <div className="flex justify-between items-start mb-2">
-                          <h3 className="font-semibold text-white">
-                            {feature.title}
-                          </h3>
+                          <h3 className="font-semibold text-white">{feature.title}</h3>
                           <div className="flex gap-2">
-                            <Badge
-                              className={getPriorityColor(feature.priority)}
-                            >
+                            <Badge className={getPriorityColor(feature.priority)}>
                               {feature.priority}
                             </Badge>
                             <Badge variant="outline">{feature.category}</Badge>
                           </div>
                         </div>
-                        <p className="text-muted-foreground mb-3">
-                          {feature.description}
-                        </p>
+                        <p className="text-muted-foreground mb-3">{feature.description}</p>
                         <div className="space-y-2 text-sm">
                           <div>
-                            <strong>Estimated Effort:</strong>{" "}
-                            {feature.estimatedEffort}
+                            <strong>Estimated Effort:</strong> {feature.estimatedEffort}
                           </div>
                           <div>
-                            <strong>Implementation:</strong>{" "}
-                            {feature.suggestedImplementation}
+                            <strong>Implementation:</strong> {feature.suggestedImplementation}
                           </div>
                           <div>
                             <strong>Related Conversations:</strong>{" "}
@@ -417,24 +367,15 @@ function HolisticAnalysis() {
               <ScrollArea className="h-96">
                 <div className="space-y-4">
                   {improvements.map((improvement) => (
-                    <Card
-                      key={improvement.id}
-                      className="border-l-4 border-l-green-500"
-                    >
+                    <Card key={improvement.id} className="border-l-4 border-l-green-500">
                       <CardContent className="p-4">
                         <div className="flex justify-between items-start mb-2">
-                          <h3 className="font-semibold text-white">
-                            {improvement.area}
-                          </h3>
+                          <h3 className="font-semibold text-white">{improvement.area}</h3>
                           <div className="flex gap-2">
-                            <Badge
-                              className={getPriorityColor(improvement.priority)}
-                            >
+                            <Badge className={getPriorityColor(improvement.priority)}>
                               {improvement.priority}
                             </Badge>
-                            <Badge variant="outline">
-                              {improvement.complexity} complexity
-                            </Badge>
+                            <Badge variant="outline">{improvement.complexity} complexity</Badge>
                           </div>
                         </div>
                         <div className="space-y-2 text-sm">
@@ -445,8 +386,7 @@ function HolisticAnalysis() {
                             <strong>Suggested:</strong> {improvement.suggested}
                           </div>
                           <div>
-                            <strong>Benefits:</strong>{" "}
-                            {improvement.benefits.join(", ")}
+                            <strong>Benefits:</strong> {improvement.benefits.join(", ")}
                           </div>
                         </div>
                       </CardContent>
@@ -467,22 +407,13 @@ function HolisticAnalysis() {
               <ScrollArea className="h-96">
                 <div className="space-y-4">
                   {conversationInsights.map((insight) => (
-                    <Card
-                      key={insight.id}
-                      className="border-l-4 border-l-amber-500"
-                    >
+                    <Card key={insight.id} className="border-l-4 border-l-amber-500">
                       <CardContent className="p-4">
                         <div className="flex justify-between items-start mb-2">
-                          <h3 className="font-semibold text-white">
-                            {insight.topic}
-                          </h3>
-                          <Badge variant="outline">
-                            {insight.timestamp.toLocaleDateString()}
-                          </Badge>
+                          <h3 className="font-semibold text-white">{insight.topic}</h3>
+                          <Badge variant="outline">{insight.timestamp.toLocaleDateString()}</Badge>
                         </div>
-                        <p className="text-muted-foreground mb-2">
-                          {insight.context}
-                        </p>
+                        <p className="text-muted-foreground mb-2">{insight.context}</p>
                         <div className="space-y-2">
                           <div>
                             <strong>Key Points:</strong>

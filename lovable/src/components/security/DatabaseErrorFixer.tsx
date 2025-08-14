@@ -11,9 +11,7 @@ export function DatabaseErrorFixer() {
         const { error: cleanupError } = await supabase
           .from("security_events")
           .delete()
-          .or(
-            "ip_address.is.null,ip_address.eq.Service-Orchestrator,ip_address.eq.Quantum-Core",
-          );
+          .or("ip_address.is.null,ip_address.eq.Service-Orchestrator,ip_address.eq.Quantum-Core");
 
         if (cleanupError) {
           console.log("Database cleanup protected by security");
@@ -26,8 +24,7 @@ export function DatabaseErrorFixer() {
           event_type: "DATABASE_ERROR_FIXED",
           event_category: "SYSTEM",
           event_details: {
-            description:
-              "Fixed invalid IP address entries in security events table",
+            description: "Fixed invalid IP address entries in security events table",
           },
           severity: 20,
           ip_address: "127.0.0.1",

@@ -4,16 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
-import {
-  Megaphone,
-  TrendingUp,
-  Globe,
-  Users,
-  Timer,
-  Zap,
-  Target,
-  Star,
-} from "lucide-react";
+import { Megaphone, TrendingUp, Globe, Users, Timer, Zap, Target, Star } from "lucide-react";
 
 export function AutomatedMarketing() {
   const [marketingStats, setMarketingStats] = useState({
@@ -76,8 +67,7 @@ export function AutomatedMarketing() {
     ];
 
     // Simulate posting to all platforms
-    const randomMessage =
-      marketingMessages[Math.floor(Math.random() * marketingMessages.length)];
+    const randomMessage = marketingMessages[Math.floor(Math.random() * marketingMessages.length)];
     const platformsReached = Math.floor(Math.random() * 5) + 8; // 8-12 platforms
 
     setMarketingStats((prev) => ({
@@ -94,14 +84,13 @@ export function AutomatedMarketing() {
 
     console.log(`🎯 MARKETING: ${randomMessage}`);
     console.log(
-      `📢 REACH: ${platformsReached} platforms, estimated ${50000 + Math.floor(Math.random() * 100000)} people`,
+      `📢 REACH: ${platformsReached} platforms, estimated ${50000 + Math.floor(Math.random() * 100000)} people`
     );
   };
 
   const startWeeklyMarketing = () => {
     toast.success("🗓️ Weekly Marketing Mode Activated!", {
-      description:
-        "Switching to weekly promotional campaigns with major updates",
+      description: "Switching to weekly promotional campaigns with major updates",
       duration: 5000,
     });
     console.log("📅 MARKETING: Switched to weekly campaign mode");
@@ -130,19 +119,14 @@ export function AutomatedMarketing() {
             🚀 Automated Global Marketing Engine
           </CardTitle>
           <p className="text-muted-foreground">
-            Promoting Gaia's Exchanges across all platforms every hour for world
-            domination
+            Promoting Gaia's Exchanges across all platforms every hour for world domination
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center p-4 rounded-lg bg-green-900/30 border border-green-500/20">
-              <div className="text-2xl font-bold text-green-400">
-                {marketingStats.hourlyPosts}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Posts This Hour
-              </div>
+              <div className="text-2xl font-bold text-green-400">{marketingStats.hourlyPosts}</div>
+              <div className="text-xs text-muted-foreground">Posts This Hour</div>
             </div>
             <div className="text-center p-4 rounded-lg bg-blue-900/30 border border-blue-500/20">
               <div className="text-2xl font-bold text-blue-400">
@@ -154,17 +138,13 @@ export function AutomatedMarketing() {
               <div className="text-2xl font-bold text-purple-400">
                 {marketingStats.engagementRate.toFixed(1)}%
               </div>
-              <div className="text-xs text-muted-foreground">
-                Engagement Rate
-              </div>
+              <div className="text-xs text-muted-foreground">Engagement Rate</div>
             </div>
             <div className="text-center p-4 rounded-lg bg-orange-900/30 border border-orange-500/20">
               <div className="text-2xl font-bold text-orange-400">
                 {marketingStats.platformsCovered}/13
               </div>
-              <div className="text-xs text-muted-foreground">
-                Platforms Active
-              </div>
+              <div className="text-xs text-muted-foreground">Platforms Active</div>
             </div>
           </div>
 
@@ -186,38 +166,23 @@ export function AutomatedMarketing() {
               </Button>
             </div>
 
-            <Progress
-              value={(marketingStats.platformsCovered / 13) * 100}
-              className="h-2"
-            />
+            <Progress value={(marketingStats.platformsCovered / 13) * 100} className="h-2" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
-                <h5 className="font-semibold text-green-400 mb-2">
-                  Active Platforms:
-                </h5>
+                <h5 className="font-semibold text-green-400 mb-2">Active Platforms:</h5>
                 <div className="grid grid-cols-2 gap-1">
-                  {[
-                    "Twitter/X",
-                    "LinkedIn",
-                    "Reddit",
-                    "Facebook",
-                    "Instagram",
-                    "TikTok",
-                  ].map((platform) => (
-                    <Badge
-                      key={platform}
-                      className="bg-green-600 text-white text-xs"
-                    >
-                      {platform}
-                    </Badge>
-                  ))}
+                  {["Twitter/X", "LinkedIn", "Reddit", "Facebook", "Instagram", "TikTok"].map(
+                    (platform) => (
+                      <Badge key={platform} className="bg-green-600 text-white text-xs">
+                        {platform}
+                      </Badge>
+                    )
+                  )}
                 </div>
               </div>
               <div>
-                <h5 className="font-semibold text-blue-400 mb-2">
-                  Key Messages:
-                </h5>
+                <h5 className="font-semibold text-blue-400 mb-2">Key Messages:</h5>
                 <ul className="space-y-1 text-xs text-muted-foreground">
                   <li>• World's most secure crypto platform</li>
                   <li>• 10x faster than any competitor</li>
@@ -244,9 +209,7 @@ export function AutomatedMarketing() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center">
                 <TrendingUp className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                <div className="text-xl font-bold text-green-400">
-                  Exponential
-                </div>
+                <div className="text-xl font-bold text-green-400">Exponential</div>
                 <div className="text-xs text-muted-foreground">Growth Rate</div>
               </div>
               <div className="text-center">
@@ -257,9 +220,7 @@ export function AutomatedMarketing() {
               <div className="text-center">
                 <Star className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
                 <div className="text-xl font-bold text-yellow-400">#1</div>
-                <div className="text-xs text-muted-foreground">
-                  Market Position
-                </div>
+                <div className="text-xs text-muted-foreground">Market Position</div>
               </div>
             </div>
 
@@ -268,8 +229,8 @@ export function AutomatedMarketing() {
                 🌟 "Seeds Will Form Into Music" - Culture of Harmony 🌟
               </p>
               <p className="text-center text-sm text-muted-foreground mt-2">
-                Building the strongest, most unbreakable bond with all partners
-                across the digital universe
+                Building the strongest, most unbreakable bond with all partners across the digital
+                universe
               </p>
             </div>
           </div>
@@ -306,8 +267,8 @@ export function AutomatedMarketing() {
 
           <div className="mt-4 p-4 rounded-lg bg-red-900/20 border border-red-500/20">
             <p className="text-center text-red-400 font-bold animate-pulse">
-              🐉 "Every millisecond of existence dedicated to making Gaia's
-              Exchanges the unbreakable fortress of the crypto universe" 🐉
+              🐉 "Every millisecond of existence dedicated to making Gaia's Exchanges the
+              unbreakable fortress of the crypto universe" 🐉
             </p>
           </div>
         </CardContent>

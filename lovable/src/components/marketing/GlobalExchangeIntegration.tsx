@@ -72,25 +72,16 @@ export function GlobalExchangeIntegration() {
 
   useEffect(() => {
     const globalIntegrationEngine = () => {
-      console.log(
-        `🌍 GLOBAL EXCHANGE INTEGRATION - ${GAIA_TOKEN.SYMBOL} WORLDWIDE DOMINATION`,
-      );
-      console.log(
-        `💰 ${GAIA_TOKEN.SYMBOL} TOKEN TAKING OVER ALL MAJOR EXCHANGES`,
-      );
+      console.log(`🌍 GLOBAL EXCHANGE INTEGRATION - ${GAIA_TOKEN.SYMBOL} WORLDWIDE DOMINATION`);
+      console.log(`💰 ${GAIA_TOKEN.SYMBOL} TOKEN TAKING OVER ALL MAJOR EXCHANGES`);
       console.log("🚀 UNSTOPPABLE MARKET PENETRATION - EVERYWHERE AT ONCE");
 
       // Update exchange statuses
       setExchanges((prev) =>
         prev.map((exchange) => {
           if (Math.random() < 0.1) {
-            const statuses: Exchange["status"][] = [
-              "listing",
-              "active",
-              "negotiating",
-            ];
-            const newStatus =
-              statuses[Math.floor(Math.random() * statuses.length)];
+            const statuses: Exchange["status"][] = ["listing", "active", "negotiating"];
+            const newStatus = statuses[Math.floor(Math.random() * statuses.length)];
 
             if (newStatus !== exchange.status) {
               toast.success("🚀 Exchange Update!", {
@@ -102,7 +93,7 @@ export function GlobalExchangeIntegration() {
             return { ...exchange, status: newStatus };
           }
           return exchange;
-        }),
+        })
       );
 
       // Update global stats
@@ -113,14 +104,10 @@ export function GlobalExchangeIntegration() {
         activeExchanges: exchanges.filter((e) => e.status === "active").length,
         totalUsers: prev.totalUsers + Math.floor(Math.random() * 10000),
         marketCap:
-          hasRealData && tokenData
-            ? tokenData.marketCap
-            : prev.marketCap + Math.random() * 500000,
+          hasRealData && tokenData ? tokenData.marketCap : prev.marketCap + Math.random() * 500000,
       }));
 
-      console.log(
-        `💎 ${GAIA_TOKEN.SYMBOL} TOKEN: BECOMING THE #1 CRYPTOCURRENCY WORLDWIDE`,
-      );
+      console.log(`💎 ${GAIA_TOKEN.SYMBOL} TOKEN: BECOMING THE #1 CRYPTOCURRENCY WORLDWIDE`);
     };
 
     const integrationInterval = setInterval(globalIntegrationEngine, 5000);
@@ -139,12 +126,10 @@ export function GlobalExchangeIntegration() {
       prev.map((exchange) => ({
         ...exchange,
         status: "active",
-      })),
+      }))
     );
 
-    console.log(
-      `⚡ ${GAIA_TOKEN.SYMBOL} EXCHANGE ACCELERATION: ALL BARRIERS REMOVED`,
-    );
+    console.log(`⚡ ${GAIA_TOKEN.SYMBOL} EXCHANGE ACCELERATION: ALL BARRIERS REMOVED`);
   };
 
   const getStatusColor = (status: Exchange["status"]) => {
@@ -168,8 +153,7 @@ export function GlobalExchangeIntegration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Globe className="h-6 w-6" />
-            🌍 GLOBAL EXCHANGE INTEGRATION - {GAIA_TOKEN.SYMBOL} WORLDWIDE
-            DOMINATION
+            🌍 GLOBAL EXCHANGE INTEGRATION - {GAIA_TOKEN.SYMBOL} WORLDWIDE DOMINATION
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -184,12 +168,8 @@ export function GlobalExchangeIntegration() {
 
             <div className="text-center p-3 bg-blue-900/30 rounded-lg">
               <Globe className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-              <div className="text-xl font-bold text-blue-400">
-                {globalStats.activeExchanges}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Active Exchanges
-              </div>
+              <div className="text-xl font-bold text-blue-400">{globalStats.activeExchanges}</div>
+              <div className="text-xs text-muted-foreground">Active Exchanges</div>
             </div>
 
             <div className="text-center p-3 bg-purple-900/30 rounded-lg">
@@ -214,42 +194,30 @@ export function GlobalExchangeIntegration() {
             className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-3 mb-6"
           >
             <Zap className="h-5 w-5 mr-2" />
-            🚀 ACCELERATE ALL {GAIA_TOKEN.SYMBOL} EXCHANGE LISTINGS - GLOBAL
-            DOMINATION
+            🚀 ACCELERATE ALL {GAIA_TOKEN.SYMBOL} EXCHANGE LISTINGS - GLOBAL DOMINATION
           </Button>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {exchanges.map((exchange, index) => (
-              <div
-                key={index}
-                className="p-4 bg-black/30 rounded-lg border border-border/30"
-              >
+              <div key={index} className="p-4 bg-black/30 rounded-lg border border-border/30">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="font-bold text-white">{exchange.name}</h4>
-                  <Badge
-                    className={`${getStatusColor(exchange.status)} text-white`}
-                  >
+                  <Badge className={`${getStatusColor(exchange.status)} text-white`}>
                     {exchange.status.toUpperCase()}
                   </Badge>
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-xs">
                   <div>
                     <div className="text-muted-foreground">Volume</div>
-                    <div className="text-green-400 font-bold">
-                      {exchange.volume}
-                    </div>
+                    <div className="text-green-400 font-bold">{exchange.volume}</div>
                   </div>
                   <div>
                     <div className="text-muted-foreground">Users</div>
-                    <div className="text-blue-400 font-bold">
-                      {exchange.users}
-                    </div>
+                    <div className="text-blue-400 font-bold">{exchange.users}</div>
                   </div>
                   <div>
                     <div className="text-muted-foreground">Region</div>
-                    <div className="text-purple-400 font-bold">
-                      {exchange.region}
-                    </div>
+                    <div className="text-purple-400 font-bold">{exchange.region}</div>
                   </div>
                 </div>
                 <div className="mt-2 text-xs text-muted-foreground">

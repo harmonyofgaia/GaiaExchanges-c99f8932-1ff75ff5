@@ -46,9 +46,7 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
       setIpAllowed(true);
     });
     // Check for existing admin session (both new and old formats)
-    const newSession =
-      localStorage.getItem("gaia-admin") ||
-      sessionStorage.getItem("gaia-admin");
+    const newSession = localStorage.getItem("gaia-admin") || sessionStorage.getItem("gaia-admin");
     const oldSession = localStorage.getItem("gaia-admin-session");
     const adminActive = sessionStorage.getItem("admin-active");
     let sessionValid = false;
@@ -120,9 +118,7 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
       console.log("🛡️ ADMIN ACCESS GRANTED - QUANTUM SECURITY ACTIVE");
     } else {
       setAttempts((prev) => prev + 1);
-      alert(
-        `🚫 Invalid admin credentials. Attempts: ${attempts + 1}/${maxAttempts}`,
-      );
+      alert(`🚫 Invalid admin credentials. Attempts: ${attempts + 1}/${maxAttempts}`);
       setAdminCredentials({ username: "", password: "" });
     }
   };
@@ -150,12 +146,7 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
             <span className="text-red-400 font-bold">🛡️ ADMIN MODE ACTIVE</span>
             <Badge className="bg-red-600 animate-pulse">QUANTUM SECURED</Badge>
           </div>
-          <Button
-            onClick={handleLogout}
-            variant="outline"
-            size="sm"
-            className="border-red-500/30"
-          >
+          <Button onClick={handleLogout} variant="outline" size="sm" className="border-red-500/30">
             <Lock className="h-4 w-4 mr-2" />
             Logout Admin
           </Button>
@@ -183,9 +174,7 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
               Your IP: <code>{clientIP}</code>
             </div>
             {!ipAllowed && (
-              <div className="text-red-500 font-bold mt-2">
-                ⛔ IP Address Not Whitelisted
-              </div>
+              <div className="text-red-500 font-bold mt-2">⛔ IP Address Not Whitelisted</div>
             )}
           </div>
         </CardHeader>
@@ -194,9 +183,7 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
             <div className="text-center p-6 space-y-4">
               <AlertTriangle className="h-16 w-16 text-red-400 mx-auto" />
               <div className="text-red-400 font-bold">ACCESS BLOCKED</div>
-              <p className="text-red-300 text-sm">
-                Maximum login attempts exceeded
-              </p>
+              <p className="text-red-300 text-sm">Maximum login attempts exceeded</p>
               <Button
                 className="mt-4 bg-red-700 text-white"
                 onClick={() => {
@@ -212,8 +199,7 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
               <AlertTriangle className="h-16 w-16 text-red-400 mx-auto" />
               <div className="text-red-400 font-bold">ACCESS DENIED</div>
               <p className="text-red-300 text-sm">
-                Your IP ({clientIP || "unknown"}) is not allowed to access the
-                admin portal.
+                Your IP ({clientIP || "unknown"}) is not allowed to access the admin portal.
               </p>
             </div>
           ) : (
@@ -277,12 +263,10 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
               {/* DEBUG: Show entered credentials for troubleshooting */}
               <div className="mt-4 p-2 bg-black/30 border border-red-500/20 rounded text-xs text-red-300">
                 <div>
-                  <b>DEBUG:</b> Entered Username:{" "}
-                  <code>{adminCredentials.username}</code>
+                  <b>DEBUG:</b> Entered Username: <code>{adminCredentials.username}</code>
                 </div>
                 <div>
-                  <b>DEBUG:</b> Entered Password:{" "}
-                  <code>{adminCredentials.password}</code>
+                  <b>DEBUG:</b> Entered Password: <code>{adminCredentials.password}</code>
                 </div>
               </div>
             </form>

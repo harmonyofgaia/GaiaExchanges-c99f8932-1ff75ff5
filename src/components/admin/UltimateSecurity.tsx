@@ -36,9 +36,7 @@ export default function UltimateSecurity() {
               <Crown className="h-4 w-4" />
               <span className="font-medium">Security Level</span>
             </div>
-            <div className="text-2xl font-bold text-green-300">
-              {securityLevel}%
-            </div>
+            <div className="text-2xl font-bold text-green-300">{securityLevel}%</div>
           </div>
 
           <div className="bg-blue-900/20 border border-blue-500/20 rounded-lg p-3">
@@ -46,9 +44,7 @@ export default function UltimateSecurity() {
               <Eye className="h-4 w-4" />
               <span className="font-medium">Threats Blocked</span>
             </div>
-            <div className="text-2xl font-bold text-blue-300">
-              {threatsBlocked}
-            </div>
+            <div className="text-2xl font-bold text-blue-300">{threatsBlocked}</div>
           </div>
         </div>
 

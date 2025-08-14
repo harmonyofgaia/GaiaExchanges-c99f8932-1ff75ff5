@@ -2,14 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Sparkles,
-  Rocket,
-  Brain,
-  Gamepad2,
-  Atom,
-  Infinity as InfinityIcon,
-} from "lucide-react";
+import { Sparkles, Rocket, Brain, Gamepad2, Atom, Infinity as InfinityIcon } from "lucide-react";
 import { toast } from "sonner";
 
 export function IntergalacticIdeasVault() {
@@ -23,8 +16,7 @@ export function IntergalacticIdeasVault() {
   const intergalacticIdeas = [
     {
       title: "Quantum Gaming Multiverse",
-      description:
-        "AI-powered procedural worlds that adapt to player consciousness",
+      description: "AI-powered procedural worlds that adapt to player consciousness",
       category: "Gaming",
       impact: "Revolutionary",
       progress: 85,
@@ -38,8 +30,7 @@ export function IntergalacticIdeasVault() {
     },
     {
       title: "Dimensional Investment Portal",
-      description:
-        "Cross-dimensional investment opportunities in parallel universes",
+      description: "Cross-dimensional investment opportunities in parallel universes",
       category: "Finance",
       impact: "Universe-changing",
       progress: 72,
@@ -81,8 +72,7 @@ export function IntergalacticIdeasVault() {
     },
     {
       title: "Universal Justice Network",
-      description:
-        "Instant karma enforcement across all dimensions and realities",
+      description: "Instant karma enforcement across all dimensions and realities",
       category: "Justice",
       impact: "Reality-correcting",
       progress: 94,
@@ -113,32 +103,27 @@ export function IntergalacticIdeasVault() {
   const gameAIFeatures = [
     {
       name: "Consciousness-Responsive Landscapes",
-      description:
-        "Game worlds that reshape based on player's emotional state and thoughts",
+      description: "Game worlds that reshape based on player's emotional state and thoughts",
       status: "Developing",
     },
     {
       name: "Quantum NPCs with True Personalities",
-      description:
-        "AI characters that develop real relationships and memories with players",
+      description: "AI characters that develop real relationships and memories with players",
       status: "Testing",
     },
     {
       name: "Reality-Blending Graphics Engine",
-      description:
-        "Graphics so realistic they merge with actual reality perception",
+      description: "Graphics so realistic they merge with actual reality perception",
       status: "Prototyping",
     },
     {
       name: "Dimensional Weapon Crafting",
-      description:
-        "Tools and weapons that affect multiple dimensions simultaneously",
+      description: "Tools and weapons that affect multiple dimensions simultaneously",
       status: "Conceptual",
     },
     {
       name: "Universal Landscape Editor",
-      description:
-        "Players can reshape entire universes with thought-controlled tools",
+      description: "Players can reshape entire universes with thought-controlled tools",
       status: "Active Development",
     },
   ];
@@ -152,8 +137,7 @@ export function IntergalacticIdeasVault() {
             🌌 INTERGALACTIC IDEAS VAULT - UNIVERSE-LEVEL CONCEPTS
           </CardTitle>
           <p className="text-purple-300">
-            Advanced concepts beyond human understanding • For beings of higher
-            consciousness only
+            Advanced concepts beyond human understanding • For beings of higher consciousness only
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -165,9 +149,7 @@ export function IntergalacticIdeasVault() {
               >
                 <CardHeader>
                   <div className="flex justify-between items-start">
-                    <CardTitle className="text-cyan-400 text-lg">
-                      {idea.title}
-                    </CardTitle>
+                    <CardTitle className="text-cyan-400 text-lg">{idea.title}</CardTitle>
                     <Badge
                       className={`${
                         idea.impact === "Revolutionary"
@@ -186,25 +168,19 @@ export function IntergalacticIdeasVault() {
                       {idea.impact}
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    {idea.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{idea.description}</p>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Development Progress:</span>
-                      <span className="text-cyan-400 font-bold">
-                        {idea.progress}%
-                      </span>
+                      <span className="text-cyan-400 font-bold">{idea.progress}%</span>
                     </div>
                     <Progress value={idea.progress} className="h-2" />
                   </div>
 
                   <div className="space-y-2">
-                    <div className="text-sm font-medium text-green-400">
-                      Key Features:
-                    </div>
+                    <div className="text-sm font-medium text-green-400">Key Features:</div>
                     <ul className="text-xs space-y-1">
                       {idea.features.map((feature, i) => (
                         <li key={i} className="text-muted-foreground">
@@ -236,8 +212,8 @@ export function IntergalacticIdeasVault() {
             🎮 GAMING AI MASTERPLAN - GRAPHICS & GAMEPLAY REVOLUTION
           </CardTitle>
           <p className="text-green-300">
-            Next-generation gaming with AI tools, graphic designs, and
-            consciousness-responsive gameplay
+            Next-generation gaming with AI tools, graphic designs, and consciousness-responsive
+            gameplay
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -245,12 +221,8 @@ export function IntergalacticIdeasVault() {
             {gameAIFeatures.map((feature, index) => (
               <Card key={index} className="border-blue-500/20 bg-blue-900/10">
                 <CardContent className="p-4">
-                  <h4 className="font-bold text-blue-400 mb-2">
-                    {feature.name}
-                  </h4>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {feature.description}
-                  </p>
+                  <h4 className="font-bold text-blue-400 mb-2">{feature.name}</h4>
+                  <p className="text-sm text-muted-foreground mb-3">{feature.description}</p>
                   <Badge
                     className={`${
                       feature.status === "Active Development"
@@ -280,13 +252,11 @@ export function IntergalacticIdeasVault() {
             <CardContent>
               <div className="text-center space-y-4">
                 <Brain className="h-16 w-16 text-purple-400 mx-auto" />
-                <h3 className="text-xl font-bold text-purple-400">
-                  Self-Evolving AI Intelligence
-                </h3>
+                <h3 className="text-xl font-bold text-purple-400">Self-Evolving AI Intelligence</h3>
                 <p className="text-muted-foreground">
-                  Creating AI that learns from every website interaction, gaming
-                  session, and user behavior to continuously improve and develop
-                  new tools, weapons, and landscape features autonomously.
+                  Creating AI that learns from every website interaction, gaming session, and user
+                  behavior to continuously improve and develop new tools, weapons, and landscape
+                  features autonomously.
                 </p>
                 <div className="flex justify-center gap-4">
                   <Button className="bg-purple-600">
@@ -312,10 +282,9 @@ export function IntergalacticIdeasVault() {
             "AS A DOLPHIN WHO HELPS A LION TO SHINE A BEAM THROUGH GALAXY"
           </h4>
           <p className="text-lg text-muted-foreground mb-4">
-            Together we illuminate the universe with our combined power, wisdom,
-            and infinite potential. The dolphin's intelligence guides the lion's
-            strength to create a beam that pierces through galaxies, showing our
-            true power to the cosmos.
+            Together we illuminate the universe with our combined power, wisdom, and infinite
+            potential. The dolphin's intelligence guides the lion's strength to create a beam that
+            pierces through galaxies, showing our true power to the cosmos.
           </p>
           <Button className="bg-gradient-to-r from-gold-600 via-blue-600 to-purple-600 hover:opacity-90 text-white font-bold px-8 py-4 text-lg">
             <InfinityIcon className="h-6 w-6 mr-2" />

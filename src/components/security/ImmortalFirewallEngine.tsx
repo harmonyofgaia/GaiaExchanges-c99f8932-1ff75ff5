@@ -55,16 +55,12 @@ export function ImmortalFirewallEngine() {
             <div className="text-2xl font-bold text-purple-400">
               {systemsDestroyed.current.toLocaleString()}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Systems Destroyed
-            </div>
+            <div className="text-sm text-muted-foreground">Systems Destroyed</div>
           </div>
         </div>
 
         <div className="mt-6 p-4 bg-orange-900/20 rounded-lg border border-orange-500/30">
-          <h4 className="text-lg font-bold text-orange-400 mb-2">
-            🔥 IMMORTAL CAPABILITIES
-          </h4>
+          <h4 className="text-lg font-bold text-orange-400 mb-2">🔥 IMMORTAL CAPABILITIES</h4>
           <div className="text-sm text-muted-foreground space-y-1">
             <div>• Cannot be destroyed or bypassed</div>
             <div>• Self-evolving defense mechanisms</div>

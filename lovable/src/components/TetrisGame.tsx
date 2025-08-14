@@ -15,58 +15,57 @@ interface Tetromino {
   color: string;
 }
 
-const TETROMINOS: Record<TetrominoType, { shape: number[][]; color: string }> =
-  {
-    I: { shape: [[1, 1, 1, 1]], color: "bg-cyan-500" },
-    O: {
-      shape: [
-        [1, 1],
-        [1, 1],
-      ],
-      color: "bg-yellow-500",
-    },
-    T: {
-      shape: [
-        [0, 1, 0],
-        [1, 1, 1],
-      ],
-      color: "bg-purple-500",
-    },
-    S: {
-      shape: [
-        [0, 1, 1],
-        [1, 1, 0],
-      ],
-      color: "bg-green-500",
-    },
-    Z: {
-      shape: [
-        [1, 1, 0],
-        [0, 1, 1],
-      ],
-      color: "bg-red-500",
-    },
-    J: {
-      shape: [
-        [1, 0, 0],
-        [1, 1, 1],
-      ],
-      color: "bg-blue-500",
-    },
-    L: {
-      shape: [
-        [0, 0, 1],
-        [1, 1, 1],
-      ],
-      color: "bg-orange-500",
-    },
-  };
+const TETROMINOS: Record<TetrominoType, { shape: number[][]; color: string }> = {
+  I: { shape: [[1, 1, 1, 1]], color: "bg-cyan-500" },
+  O: {
+    shape: [
+      [1, 1],
+      [1, 1],
+    ],
+    color: "bg-yellow-500",
+  },
+  T: {
+    shape: [
+      [0, 1, 0],
+      [1, 1, 1],
+    ],
+    color: "bg-purple-500",
+  },
+  S: {
+    shape: [
+      [0, 1, 1],
+      [1, 1, 0],
+    ],
+    color: "bg-green-500",
+  },
+  Z: {
+    shape: [
+      [1, 1, 0],
+      [0, 1, 1],
+    ],
+    color: "bg-red-500",
+  },
+  J: {
+    shape: [
+      [1, 0, 0],
+      [1, 1, 1],
+    ],
+    color: "bg-blue-500",
+  },
+  L: {
+    shape: [
+      [0, 0, 1],
+      [1, 1, 1],
+    ],
+    color: "bg-orange-500",
+  },
+};
 
 export function TetrisGame() {
   const [board, setBoard] = useState<string[][]>(() =>
     Array(20)
       .fill(null)
-      .map(() => Array(10).fill("")),
+      .map(() => Array(10).fill(""))
   );
   const [currentPiece, setCurrentPiece] = useState<Tetromino | null>(null);
   const [score, setScore] = useState(0);
@@ -92,7 +91,7 @@ export function TetrisGame() {
 
   const rotatePiece = (piece: Tetromino): Tetromino => {
     const rotated = piece.shape[0].map((_, index) =>
-      piece.shape.map((row) => row[index]).reverse(),
+      piece.shape.map((row) => row[index]).reverse()
     );
     return { ...piece, shape: rotated };
   };
@@ -101,7 +100,7 @@ export function TetrisGame() {
     piece: Tetromino,
     newX: number,
     newY: number,
-    newShape?: number[][],
+    newShape?: number[][]
   ): boolean => {
     const shape = newShape || piece.shape;
 
@@ -185,16 +184,7 @@ export function TetrisGame() {
         }
       }
     },
-    [
-      currentPiece,
-      isPlaying,
-      gameOver,
-      board,
-      score,
-      gaiaTokensEarned,
-      level,
-      lines,
-    ],
+    [currentPiece, isPlaying, gameOver, board, score, gaiaTokensEarned, level, lines]
   );
 
   const rotatePieceHandler = () => {
@@ -223,7 +213,7 @@ export function TetrisGame() {
       () => {
         movePiece(0, 1);
       },
-      Math.max(50, 1000 - level * 50),
+      Math.max(50, 1000 - level * 50)
     );
 
     return () => clearInterval(interval);
@@ -261,7 +251,7 @@ export function TetrisGame() {
     setBoard(
       Array(20)
         .fill(null)
-        .map(() => Array(10).fill("")),
+        .map(() => Array(10).fill(""))
     );
     setCurrentPiece(createNewPiece());
     setScore(0);
@@ -301,10 +291,7 @@ export function TetrisGame() {
     return displayBoard.map((row, y) => (
       <div key={y} className="flex">
         {row.map((cell, x) => (
-          <div
-            key={x}
-            className={`w-6 h-6 border border-gray-600 ${cell || "bg-gray-900"}`}
-          />
+          <div key={x} className={`w-6 h-6 border border-gray-600 ${cell || "bg-gray-900"}`} />
         ))}
       </div>
     ));
@@ -321,9 +308,7 @@ export function TetrisGame() {
           <Badge className="bg-blue-600 text-white">Score: {score}</Badge>
           <Badge className="bg-purple-600 text-white">Level: {level}</Badge>
           <Badge className="bg-green-600 text-white">Lines: {lines}</Badge>
-          <Badge className="bg-orange-600 text-white">
-            GAiA: {gaiaTokensEarned.toFixed(1)}
-          </Badge>
+          <Badge className="bg-orange-600 text-white">GAiA: {gaiaTokensEarned.toFixed(1)}</Badge>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -332,19 +317,11 @@ export function TetrisGame() {
             <Play className="h-4 w-4 mr-2" />
             Start
           </Button>
-          <Button
-            onClick={pauseGame}
-            disabled={!currentPiece}
-            variant="outline"
-          >
+          <Button onClick={pauseGame} disabled={!currentPiece} variant="outline">
             <Pause className="h-4 w-4 mr-2" />
             Pause
           </Button>
-          <Button
-            onClick={dropPiece}
-            disabled={!isPlaying || gameOver}
-            variant="outline"
-          >
+          <Button onClick={dropPiece} disabled={!isPlaying || gameOver} variant="outline">
             <Zap className="h-4 w-4 mr-2" />
             Drop
           </Button>
@@ -367,9 +344,7 @@ export function TetrisGame() {
           <div className="text-center p-4 bg-red-900/20 border border-red-500/30 rounded">
             <h3 className="text-red-400 font-bold">Game Over!</h3>
             <p className="text-muted-foreground">Final Score: {score}</p>
-            <p className="text-green-400">
-              GAiA Tokens Earned: {gaiaTokensEarned.toFixed(1)}
-            </p>
+            <p className="text-green-400">GAiA Tokens Earned: {gaiaTokensEarned.toFixed(1)}</p>
           </div>
         )}
       </CardContent>

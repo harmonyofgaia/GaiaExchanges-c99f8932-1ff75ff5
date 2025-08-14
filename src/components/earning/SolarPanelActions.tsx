@@ -27,8 +27,7 @@ export function SolarPanelActions() {
       return;
     }
 
-    const points =
-      parseFloat(capacity) * 20 + parseFloat(monthlyGeneration) * 0.5;
+    const points = parseFloat(capacity) * 20 + parseFloat(monthlyGeneration) * 0.5;
     const tokens = Math.floor(points * 0.2);
 
     const activity = {
@@ -50,9 +49,7 @@ export function SolarPanelActions() {
     };
 
     addActivity(activity);
-    toast.success(
-      `Solar installation recorded! +${Math.floor(points)} points earned`,
-    );
+    toast.success(`Solar installation recorded! +${Math.floor(points)} points earned`);
     setPanelType("");
     setCapacity("");
     setMonthlyGeneration("");
@@ -85,9 +82,7 @@ export function SolarPanelActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              System Capacity (kW)
-            </label>
+            <label className="block text-sm font-medium mb-2">System Capacity (kW)</label>
             <Input
               type="number"
               step="0.1"
@@ -99,9 +94,7 @@ export function SolarPanelActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Monthly Generation (kWh)
-            </label>
+            <label className="block text-sm font-medium mb-2">Monthly Generation (kWh)</label>
             <Input
               type="number"
               value={monthlyGeneration}
@@ -122,8 +115,8 @@ export function SolarPanelActions() {
 
         <div className="mt-4 p-3 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
           <p className="text-sm text-yellow-300">
-            💡 <strong>Bonus:</strong> Solar installations qualify for premium
-            GAiA multipliers and renewable energy badges!
+            💡 <strong>Bonus:</strong> Solar installations qualify for premium GAiA multipliers and
+            renewable energy badges!
           </p>
         </div>
       </CardContent>

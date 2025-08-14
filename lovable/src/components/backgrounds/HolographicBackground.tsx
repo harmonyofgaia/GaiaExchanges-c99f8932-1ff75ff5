@@ -39,8 +39,7 @@ export function HolographicBackground({
       // Draw holographic layers
       for (let layer = 0; layer < layerCount; layer++) {
         const offset = layer * 20;
-        const alpha =
-          (Math.sin(time + layer) * 0.3 + 0.7) * (0.8 - layer * 0.1);
+        const alpha = (Math.sin(time + layer) * 0.3 + 0.7) * (0.8 - layer * 0.1);
 
         ctx.globalAlpha = alpha;
         ctx.strokeStyle = color;
@@ -58,8 +57,7 @@ export function HolographicBackground({
         // Vertical interference patterns
         ctx.globalAlpha = alpha * 0.3;
         for (let x = 0; x < canvas.width; x += 40) {
-          const interference =
-            Math.sin(time * 3 + x * 0.01) * canvas.height * 0.1;
+          const interference = Math.sin(time * 3 + x * 0.01) * canvas.height * 0.1;
           ctx.beginPath();
           ctx.moveTo(x, canvas.height * 0.5 - interference);
           ctx.lineTo(x, canvas.height * 0.5 + interference);

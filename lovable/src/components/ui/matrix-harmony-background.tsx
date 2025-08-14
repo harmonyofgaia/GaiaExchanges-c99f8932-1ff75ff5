@@ -30,18 +30,7 @@ export function MatrixHarmonyBackground() {
     window.addEventListener("resize", resizeCanvas);
 
     // Initialize matrix elements with Gaia symbols and neural patterns
-    const gaiaSymbols = [
-      "🌍",
-      "🌿",
-      "⚡",
-      "💎",
-      "🐉",
-      "🌱",
-      "✨",
-      "🔮",
-      "🌊",
-      "🍃",
-    ];
+    const gaiaSymbols = ["🌍", "🌿", "⚡", "💎", "🐉", "🌱", "✨", "🔮", "🌊", "🍃"];
     const neuralChars = ["◦", "●", "○", "◉", "◎", "⚬", "⚫", "⚪", "◆", "◇"];
 
     for (let i = 0; i < 50; i++) {

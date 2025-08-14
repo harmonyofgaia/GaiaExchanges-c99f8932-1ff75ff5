@@ -1,15 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Download,
-  Smartphone,
-  Monitor,
-  Tablet,
-  Shield,
-  Star,
-  ExternalLink,
-} from "lucide-react";
+import { Download, Smartphone, Monitor, Tablet, Shield, Star, ExternalLink } from "lucide-react";
 import { GAIA_TOKEN } from "@/constants/gaia";
 import { toast } from "sonner";
 
@@ -42,10 +34,7 @@ const Downloads = () => {
                 Get GAiA on all your devices - Official Harmony of Gaia Token
               </p>
               <div className="text-center mt-4">
-                <Button
-                  onClick={openGaiaToken}
-                  className="bg-green-600 hover:bg-green-700"
-                >
+                <Button onClick={openGaiaToken} className="bg-green-600 hover:bg-green-700">
                   <ExternalLink className="h-4 w-4 mr-2" />
                   Official GAiA Token: {GAIA_TOKEN.CONTRACT_ADDRESS.slice(0, 8)}
                   ...
@@ -64,8 +53,7 @@ const Downloads = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">
-                  Full-featured mobile experience for iOS and Android with GAiA
-                  token integration.
+                  Full-featured mobile experience for iOS and Android with GAiA token integration.
                 </p>
                 <div className="space-y-2">
                   <Button
@@ -132,8 +120,7 @@ const Downloads = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">
-                  Optimized tablet experience with touch-friendly GAiA
-                  interface.
+                  Optimized tablet experience with touch-friendly GAiA interface.
                 </p>
                 <div className="space-y-2">
                   <Button
@@ -161,14 +148,11 @@ const Downloads = () => {
                   <Smartphone className="h-6 w-6" />
                   BlackBerry
                 </CardTitle>
-                <Badge className="bg-orange-600 text-white">
-                  Legacy Support
-                </Badge>
+                <Badge className="bg-orange-600 text-white">Legacy Support</Badge>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">
-                  Special GAiA app version optimized for BlackBerry OS 10.3+
-                  devices.
+                  Special GAiA app version optimized for BlackBerry OS 10.3+ devices.
                 </p>
                 <div className="space-y-2">
                   <Button
@@ -205,9 +189,7 @@ const Downloads = () => {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <h4 className="font-semibold text-green-400 mb-2">
-                    Token Details
-                  </h4>
+                  <h4 className="font-semibold text-green-400 mb-2">Token Details</h4>
                   <div className="space-y-1 text-sm">
                     <p>
                       <strong>Name:</strong> {GAIA_TOKEN.NAME}
@@ -227,9 +209,7 @@ const Downloads = () => {
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-green-400 mb-2">
-                    App Features
-                  </h4>
+                  <h4 className="font-semibold text-green-400 mb-2">App Features</h4>
                   <div className="space-y-1 text-sm">
                     <p>• Real-time GAiA token tracking</p>
                     <p>• Secure wallet integration</p>
@@ -296,16 +276,13 @@ const Downloads = () => {
             </CardHeader>
             <CardContent>
               <p className="text-red-300 mb-3">
-                ⚠️ Always verify you're downloading the official Harmony of Gaia
-                applications. Our official GAiA token contract is:{" "}
-                <code className="text-blue-400">
-                  {GAIA_TOKEN.CONTRACT_ADDRESS}
-                </code>
+                ⚠️ Always verify you're downloading the official Harmony of Gaia applications. Our
+                official GAiA token contract is:{" "}
+                <code className="text-blue-400">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
               </p>
               <p className="text-red-300">
-                🚫 This is NOT GAIA Everworld or any other GAIA token. We are
-                the official Harmony of Gaia community token. Never share your
-                private keys or wallet information.
+                🚫 This is NOT GAIA Everworld or any other GAIA token. We are the official Harmony
+                of Gaia community token. Never share your private keys or wallet information.
               </p>
             </CardContent>
           </Card>

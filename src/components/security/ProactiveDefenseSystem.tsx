@@ -147,40 +147,30 @@ export function ProactiveDefenseSystem() {
                 "Deploying network countermeasures",
               ];
 
-              const statuses: (
-                | "active"
-                | "hunting"
-                | "attacking"
-                | "defending"
-              )[] = ["active", "hunting", "attacking", "defending"];
+              const statuses: ("active" | "hunting" | "attacking" | "defending")[] = [
+                "active",
+                "hunting",
+                "attacking",
+                "defending",
+              ];
 
               // Randomly update bot status and actions
               if (Math.random() < 0.4) {
-                const newAction =
-                  actions[Math.floor(Math.random() * actions.length)];
-                const newStatus =
-                  statuses[Math.floor(Math.random() * statuses.length)];
+                const newAction = actions[Math.floor(Math.random() * actions.length)];
+                const newStatus = statuses[Math.floor(Math.random() * statuses.length)];
 
                 return {
                   ...bot,
                   status: newStatus,
                   lastAction: newAction,
                   targetsNeutralized:
-                    newStatus === "attacking"
-                      ? bot.targetsNeutralized + 1
-                      : bot.targetsNeutralized,
-                  attacksBlocked:
-                    Math.random() < 0.3
-                      ? bot.attacksBlocked + 1
-                      : bot.attacksBlocked,
-                  powerLevel: Math.min(
-                    100,
-                    bot.powerLevel + (Math.random() < 0.5 ? 1 : -1),
-                  ),
+                    newStatus === "attacking" ? bot.targetsNeutralized + 1 : bot.targetsNeutralized,
+                  attacksBlocked: Math.random() < 0.3 ? bot.attacksBlocked + 1 : bot.attacksBlocked,
+                  powerLevel: Math.min(100, bot.powerLevel + (Math.random() < 0.5 ? 1 : -1)),
                 };
               }
               return bot;
-            }),
+            })
           );
         };
 
@@ -200,12 +190,8 @@ export function ProactiveDefenseSystem() {
           // Simulate threat detection
           if (Math.random() < 0.25) {
             const detectedThreat =
-              threatIndicators[
-                Math.floor(Math.random() * threatIndicators.length)
-              ];
-            console.log(
-              `🚨 AI DETECTION: ${detectedThreat} - DEPLOYING COUNTER-MEASURES`,
-            );
+              threatIndicators[Math.floor(Math.random() * threatIndicators.length)];
+            console.log(`🚨 AI DETECTION: ${detectedThreat} - DEPLOYING COUNTER-MEASURES`);
 
             toast.warning("🤖 AI Threat Detection", {
               description: `Proactive threat detected: ${detectedThreat.replace(/_/g, " ")}`,
@@ -229,10 +215,7 @@ export function ProactiveDefenseSystem() {
           ];
 
           if (Math.random() < 0.2) {
-            const action =
-              hardeningActions[
-                Math.floor(Math.random() * hardeningActions.length)
-              ];
+            const action = hardeningActions[Math.floor(Math.random() * hardeningActions.length)];
             console.log(`🔧 AUTO-HARDENING: ${action}`);
 
             setDefenseMetrics((prev) => ({
@@ -256,10 +239,9 @@ export function ProactiveDefenseSystem() {
           ];
 
           if (Math.random() < 0.15) {
-            const predictedAttack =
-              attackVectors[Math.floor(Math.random() * attackVectors.length)];
+            const predictedAttack = attackVectors[Math.floor(Math.random() * attackVectors.length)];
             console.log(
-              `🔮 AI PREDICTION: Potential ${predictedAttack} - PRE-EMPTIVE DEFENSE ACTIVATED`,
+              `🔮 AI PREDICTION: Potential ${predictedAttack} - PRE-EMPTIVE DEFENSE ACTIVATED`
             );
 
             toast.info("🧠 AI Prediction System", {
@@ -280,8 +262,7 @@ export function ProactiveDefenseSystem() {
           setDefenseMetrics((prev) => ({
             ...prev,
             threatsNeutralized: prev.threatsNeutralized + 1,
-            attacksRepelled:
-              prev.attacksRepelled + Math.floor(Math.random() * 3) + 1,
+            attacksRepelled: prev.attacksRepelled + Math.floor(Math.random() * 3) + 1,
           }));
         }
       } catch (error) {
@@ -376,9 +357,7 @@ export function ProactiveDefenseSystem() {
               <div className="text-3xl font-bold text-blue-300 animate-pulse">
                 {defenseMetrics.botsActive}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Active Defense Bots
-              </div>
+              <div className="text-sm text-muted-foreground">Active Defense Bots</div>
               <Badge className="mt-2 bg-blue-600 text-white animate-pulse">
                 <Bot className="h-3 w-3 mr-1" />
                 DEPLOYED
@@ -389,9 +368,7 @@ export function ProactiveDefenseSystem() {
               <div className="text-3xl font-bold text-red-300">
                 {defenseMetrics.threatsNeutralized}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Neutralized
-              </div>
+              <div className="text-sm text-muted-foreground">Threats Neutralized</div>
               <Badge className="mt-2 bg-red-600 text-white">
                 <Target className="h-3 w-3 mr-1" />
                 ELIMINATED
@@ -402,9 +379,7 @@ export function ProactiveDefenseSystem() {
               <div className="text-3xl font-bold text-green-300">
                 {defenseMetrics.attacksRepelled}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Attacks Repelled
-              </div>
+              <div className="text-sm text-muted-foreground">Attacks Repelled</div>
               <Badge className="mt-2 bg-green-600 text-white">
                 <Shield className="h-3 w-3 mr-1" />
                 BLOCKED
@@ -415,9 +390,7 @@ export function ProactiveDefenseSystem() {
               <div className="text-3xl font-bold text-purple-300">
                 {defenseMetrics.networkShieldsActive}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Network Shields
-              </div>
+              <div className="text-sm text-muted-foreground">Network Shields</div>
               <Badge className="mt-2 bg-purple-600 text-white">
                 <Lock className="h-3 w-3 mr-1" />
                 ACTIVE
@@ -429,10 +402,7 @@ export function ProactiveDefenseSystem() {
                 {defenseMetrics.aiConfidenceLevel.toFixed(1)}%
               </div>
               <div className="text-sm text-muted-foreground">AI Confidence</div>
-              <Progress
-                value={defenseMetrics.aiConfidenceLevel}
-                className="mt-2 h-2"
-              />
+              <Progress value={defenseMetrics.aiConfidenceLevel} className="mt-2 h-2" />
             </div>
           </div>
 
@@ -474,29 +444,21 @@ export function ProactiveDefenseSystem() {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex items-center justify-between">
-                <Badge
-                  className={`text-white text-xs ${getBotStatusColor(bot.status)}`}
-                >
+                <Badge className={`text-white text-xs ${getBotStatusColor(bot.status)}`}>
                   {getBotStatusIcon(bot.status)}
                   <span className="ml-1">{bot.status.toUpperCase()}</span>
                 </Badge>
-                <div className="text-xs text-muted-foreground">
-                  Power: {bot.powerLevel}%
-                </div>
+                <div className="text-xs text-muted-foreground">Power: {bot.powerLevel}%</div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between text-xs">
                   <span>Neutralized:</span>
-                  <span className="text-red-400 font-semibold">
-                    {bot.targetsNeutralized}
-                  </span>
+                  <span className="text-red-400 font-semibold">{bot.targetsNeutralized}</span>
                 </div>
                 <div className="flex justify-between text-xs">
                   <span>Blocked:</span>
-                  <span className="text-green-400 font-semibold">
-                    {bot.attacksBlocked}
-                  </span>
+                  <span className="text-green-400 font-semibold">{bot.attacksBlocked}</span>
                 </div>
               </div>
 
@@ -518,9 +480,7 @@ export function ProactiveDefenseSystem() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
             <div className="space-y-3">
-              <h4 className="font-semibold text-blue-400">
-                🧠 Intelligent Threat Detection
-              </h4>
+              <h4 className="font-semibold text-blue-400">🧠 Intelligent Threat Detection</h4>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <Activity className="h-3 w-3 text-green-400" />
@@ -542,9 +502,7 @@ export function ProactiveDefenseSystem() {
             </div>
 
             <div className="space-y-3">
-              <h4 className="font-semibold text-red-400">
-                ⚡ Automated Counter-Attacks
-              </h4>
+              <h4 className="font-semibold text-red-400">⚡ Automated Counter-Attacks</h4>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <Zap className="h-3 w-3 text-green-400" />
@@ -566,9 +524,7 @@ export function ProactiveDefenseSystem() {
             </div>
 
             <div className="space-y-3">
-              <h4 className="font-semibold text-purple-400">
-                🛡️ Proactive Defense
-              </h4>
+              <h4 className="font-semibold text-purple-400">🛡️ Proactive Defense</h4>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <Shield className="h-3 w-3 text-green-400" />
@@ -593,13 +549,11 @@ export function ProactiveDefenseSystem() {
           <div className="mt-8 p-4 rounded-lg bg-gradient-to-r from-blue-900/40 to-purple-900/40 border border-blue-500/30">
             <div className="text-center space-y-2">
               <AlertTriangle className="h-8 w-8 mx-auto text-yellow-400" />
-              <h4 className="font-bold text-blue-300 text-lg">
-                🤖 AI DEFENSE COMMITMENT
-              </h4>
+              <h4 className="font-bold text-blue-300 text-lg">🤖 AI DEFENSE COMMITMENT</h4>
               <p className="text-sm text-blue-200">
-                Our AI Defense Robot Army operates 24/7 to protect Culture of
-                Harmony community. Every bot is equipped with advanced machine
-                learning algorithms and real-time threat intelligence.
+                Our AI Defense Robot Army operates 24/7 to protect Culture of Harmony community.
+                Every bot is equipped with advanced machine learning algorithms and real-time threat
+                intelligence.
               </p>
               <div className="flex items-center justify-center gap-6 pt-2 text-xs flex-wrap">
                 <span className="text-blue-300">🧠 Machine Learning</span>

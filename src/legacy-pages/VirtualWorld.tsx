@@ -2,16 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Globe,
-  Users,
-  Gamepad2,
-  Zap,
-  Crown,
-  Star,
-  Rocket,
-  Cpu,
-} from "lucide-react";
+import { Globe, Users, Gamepad2, Zap, Crown, Star, Rocket, Cpu } from "lucide-react";
 import { toast } from "sonner";
 import { UniversalGaiaLogo } from "@/components/branding/UniversalGaiaLogo";
 
@@ -25,31 +16,27 @@ export default function VirtualWorld() {
     gameEngine: "Harmony Quantum Engine v3.0",
   });
 
-  const [selectedLandscape, setSelectedLandscape] =
-    useState("underground-winter");
+  const [selectedLandscape, setSelectedLandscape] = useState("underground-winter");
 
   const premadeLandscapes = [
     {
       id: "underground-winter",
       name: "Underground Winter Fortress",
-      description:
-        "Massive underground kingdom with frozen waterfalls and crystal caves",
+      description: "Massive underground kingdom with frozen waterfalls and crystal caves",
       graphics: "8K Ultra HDR",
       style: "Fantasy Epic",
     },
     {
       id: "halo-station",
       name: "Halo Space Station",
-      description:
-        "Futuristic space station with gravity rings and plasma weapons",
+      description: "Futuristic space station with gravity rings and plasma weapons",
       graphics: "8K Ray-Traced",
       style: "Sci-Fi Action",
     },
     {
       id: "god-of-war-realm",
       name: "God of War Nordic Realm",
-      description:
-        "Norse mythology world with ancient temples and mythical creatures",
+      description: "Norse mythology world with ancient temples and mythical creatures",
       graphics: "8K Photorealistic",
       style: "Mythological",
     },
@@ -143,9 +130,7 @@ export default function VirtualWorld() {
 
               <div className="text-center p-4 bg-blue-900/50 rounded-lg border-2 border-blue-500/50">
                 <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2 animate-spin" />
-                <div className="text-2xl font-black text-blue-400">
-                  {worldState.worldsCreated}
-                </div>
+                <div className="text-2xl font-black text-blue-400">{worldState.worldsCreated}</div>
                 <div className="text-sm text-blue-300">Worlds Created</div>
               </div>
 
@@ -181,19 +166,11 @@ export default function VirtualWorld() {
                   >
                     <CardContent className="p-6">
                       <div className="text-center space-y-3">
-                        <div className="text-2xl font-bold text-yellow-400">
-                          {landscape.name}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {landscape.description}
-                        </div>
+                        <div className="text-2xl font-bold text-yellow-400">{landscape.name}</div>
+                        <div className="text-sm text-muted-foreground">{landscape.description}</div>
                         <div className="space-y-2">
-                          <Badge className="bg-blue-600 text-white">
-                            {landscape.graphics}
-                          </Badge>
-                          <Badge className="bg-purple-600 text-white">
-                            {landscape.style}
-                          </Badge>
+                          <Badge className="bg-blue-600 text-white">{landscape.graphics}</Badge>
+                          <Badge className="bg-purple-600 text-white">{landscape.style}</Badge>
                         </div>
                         <Button
                           onClick={() => setSelectedLandscape(landscape.id)}
@@ -220,32 +197,20 @@ export default function VirtualWorld() {
                     </div>
                     <div className="text-xl text-cyan-300">
                       Current World:{" "}
-                      {
-                        premadeLandscapes.find(
-                          (l) => l.id === selectedLandscape,
-                        )?.name
-                      }
+                      {premadeLandscapes.find((l) => l.id === selectedLandscape)?.name}
                     </div>
-                    <div className="text-lg text-blue-300">
-                      Engine: {worldState.gameEngine}
-                    </div>
+                    <div className="text-lg text-blue-300">Engine: {worldState.gameEngine}</div>
                     <div className="grid grid-cols-3 gap-4 text-sm">
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-green-400">
-                          8K
-                        </div>
+                        <div className="text-2xl font-bold text-green-400">8K</div>
                         <div>Ultra Graphics</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-purple-400">
-                          ∞
-                        </div>
+                        <div className="text-2xl font-bold text-purple-400">∞</div>
                         <div>Cloud Power</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-yellow-400">
-                          VR
-                        </div>
+                        <div className="text-2xl font-bold text-yellow-400">VR</div>
                         <div>Ready</div>
                       </div>
                     </div>

@@ -67,22 +67,13 @@ export function PageSpecificBackground() {
   };
 
   return (
-    <div
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ zIndex: -1 }}
-    >
+    <div className="fixed inset-0 pointer-events-none z-0" style={{ zIndex: -1 }}>
       {config.useQuantum ? (
         <QuantumAnimatedBackground />
       ) : config.useNeural ? (
-        <NeuralElectricBackground
-          style={config.style}
-          intensity={config.intensity}
-        />
+        <NeuralElectricBackground style={config.style} intensity={config.intensity} />
       ) : (
-        <NeuralElectricBackground
-          style={config.style}
-          intensity={config.intensity}
-        />
+        <NeuralElectricBackground style={config.style} intensity={config.intensity} />
       )}
 
       {/* Reduced opacity background layers with proper z-index */}

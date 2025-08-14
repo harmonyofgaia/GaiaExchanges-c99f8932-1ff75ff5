@@ -2,16 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Gamepad2,
-  Trophy,
-  Users,
-  Star,
-  Play,
-  Settings,
-  Zap,
-  Rocket,
-} from "lucide-react";
+import { Gamepad2, Trophy, Users, Star, Play, Settings, Zap, Rocket } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArtilleryCreatorEngine } from "./ArtilleryCreatorEngine";
@@ -125,30 +116,19 @@ export function GaiaGameHub() {
             🎮 GAiA GAME HUB - ALL SYSTEMS OPERATIONAL
           </CardTitle>
           <div className="flex items-center gap-4">
-            <Badge className="bg-green-600 animate-pulse">
-              ✅ ALL GAMES WORKING
-            </Badge>
-            <Badge className="bg-blue-600">
-              🎯 {games.length} Games Available
-            </Badge>
+            <Badge className="bg-green-600 animate-pulse">✅ ALL GAMES WORKING</Badge>
+            <Badge className="bg-blue-600">🎯 {games.length} Games Available</Badge>
             <Badge className="bg-purple-600">
-              👥{" "}
-              {games
-                .reduce((sum, game) => sum + game.players, 0)
-                .toLocaleString()}{" "}
-              Active Players
+              👥 {games.reduce((sum, game) => sum + game.players, 0).toLocaleString()} Active
+              Players
             </Badge>
           </div>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
             <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/20">
-              <div className="text-2xl font-bold text-green-400">
-                {games.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Games Available
-              </div>
+              <div className="text-2xl font-bold text-green-400">{games.length}</div>
+              <div className="text-sm text-muted-foreground">Games Available</div>
             </div>
             <div className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/20">
               <div className="text-2xl font-bold text-blue-400">100%</div>
@@ -185,24 +165,18 @@ export function GaiaGameHub() {
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     <Badge className="bg-green-600">ACTIVE</Badge>
-                    <Badge
-                      className={`${getDifficultyColor(game.difficulty)} text-white`}
-                    >
+                    <Badge className={`${getDifficultyColor(game.difficulty)} text-white`}>
                       {game.difficulty}
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-muted-foreground text-sm">
-                    {game.description}
-                  </p>
+                  <p className="text-muted-foreground text-sm">{game.description}</p>
 
                   <div className="flex items-center justify-between text-sm">
                     <div className="flex items-center gap-1">
                       <Users className="h-4 w-4 text-blue-400" />
-                      <span className="text-blue-400">
-                        {game.players.toLocaleString()} players
-                      </span>
+                      <span className="text-blue-400">{game.players.toLocaleString()} players</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Star className="h-4 w-4 text-yellow-400" />
@@ -235,31 +209,19 @@ export function GaiaGameHub() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Button
-                  variant="outline"
-                  className="border-green-500/30 text-green-400"
-                >
+                <Button variant="outline" className="border-green-500/30 text-green-400">
                   <Trophy className="h-4 w-4 mr-2" />
                   Leaderboards
                 </Button>
-                <Button
-                  variant="outline"
-                  className="border-blue-500/30 text-blue-400"
-                >
+                <Button variant="outline" className="border-blue-500/30 text-blue-400">
                   <Users className="h-4 w-4 mr-2" />
                   Find Players
                 </Button>
-                <Button
-                  variant="outline"
-                  className="border-purple-500/30 text-purple-400"
-                >
+                <Button variant="outline" className="border-purple-500/30 text-purple-400">
                   <Settings className="h-4 w-4 mr-2" />
                   Game Settings
                 </Button>
-                <Button
-                  variant="outline"
-                  className="border-yellow-500/30 text-yellow-400"
-                >
+                <Button variant="outline" className="border-yellow-500/30 text-yellow-400">
                   <Zap className="h-4 w-4 mr-2" />
                   Power-Ups
                 </Button>
@@ -271,9 +233,7 @@ export function GaiaGameHub() {
 
       {/* System Status */}
       <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-        <h4 className="font-medium text-green-400 mb-2">
-          🎮 Game Hub System Status
-        </h4>
+        <h4 className="font-medium text-green-400 mb-2">🎮 Game Hub System Status</h4>
         <div className="text-sm text-green-300">
           ✅ All games are fully operational and connected to the GAiA ecosystem
           <br />

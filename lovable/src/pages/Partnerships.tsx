@@ -111,8 +111,7 @@ const Partnerships = () => {
       name: "Climate Action Network",
       type: "NGO",
       logo: "🌡️",
-      description:
-        "Global network of organizations working together on climate change solutions.",
+      description: "Global network of organizations working together on climate change solutions.",
       website: "climatenetwork.org",
       projects: 9,
       impact: "50 communities reached",
@@ -124,18 +123,12 @@ const Partnerships = () => {
   const handlePartnershipApplication = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (
-      !partnershipForm.organization ||
-      !partnershipForm.type ||
-      !partnershipForm.description
-    ) {
+    if (!partnershipForm.organization || !partnershipForm.type || !partnershipForm.description) {
       toast.error("Please fill in all required fields");
       return;
     }
 
-    toast.success(
-      "Partnership application submitted! We will review and contact you soon.",
-    );
+    toast.success("Partnership application submitted! We will review and contact you soon.");
     setPartnershipForm({
       organization: "",
       type: "",
@@ -145,9 +138,7 @@ const Partnerships = () => {
   };
 
   const filteredPartners =
-    selectedType === "all"
-      ? partners
-      : partners.filter((partner) => partner.type === selectedType);
+    selectedType === "all" ? partners : partners.filter((partner) => partner.type === selectedType);
 
   const getStatusColor = (status: Partner["status"]) => {
     switch (status) {
@@ -185,8 +176,8 @@ const Partnerships = () => {
               🤝 GLOBAL PARTNERSHIP NETWORK
             </CardTitle>
             <p className="text-center text-xl text-blue-300">
-              Collaborate with leading organizations • Amplify environmental
-              impact • Build stronger communities
+              Collaborate with leading organizations • Amplify environmental impact • Build stronger
+              communities
             </p>
           </CardHeader>
         </Card>
@@ -197,9 +188,7 @@ const Partnerships = () => {
             <CardContent className="p-4 text-center">
               <Handshake className="h-6 w-6 mx-auto text-green-400 mb-2" />
               <div className="text-2xl font-bold text-green-400">47</div>
-              <div className="text-xs text-muted-foreground">
-                Active Partners
-              </div>
+              <div className="text-xs text-muted-foreground">Active Partners</div>
             </CardContent>
           </Card>
 
@@ -215,9 +204,7 @@ const Partnerships = () => {
             <CardContent className="p-4 text-center">
               <Target className="h-6 w-6 mx-auto text-purple-400 mb-2" />
               <div className="text-2xl font-bold text-purple-400">156</div>
-              <div className="text-xs text-muted-foreground">
-                Joint Projects
-              </div>
+              <div className="text-xs text-muted-foreground">Joint Projects</div>
             </CardContent>
           </Card>
 
@@ -225,9 +212,7 @@ const Partnerships = () => {
             <CardContent className="p-4 text-center">
               <TrendingUp className="h-6 w-6 mx-auto text-yellow-400 mb-2" />
               <div className="text-2xl font-bold text-yellow-400">$12M</div>
-              <div className="text-xs text-muted-foreground">
-                Combined Impact
-              </div>
+              <div className="text-xs text-muted-foreground">Combined Impact</div>
             </CardContent>
           </Card>
 
@@ -247,14 +232,7 @@ const Partnerships = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
-              {[
-                "all",
-                "NGO",
-                "Government",
-                "Technology",
-                "Research",
-                "Corporate",
-              ].map((type) => (
+              {["all", "NGO", "Government", "Technology", "Research", "Corporate"].map((type) => (
                 <Button
                   key={type}
                   variant={selectedType === type ? "default" : "outline"}
@@ -282,27 +260,19 @@ const Partnerships = () => {
                       <div className="text-4xl">{partner.logo}</div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <h3 className="font-bold text-blue-400">
-                            {partner.name}
-                          </h3>
-                          <Badge
-                            className={`${getStatusColor(partner.status)} text-white`}
-                          >
+                          <h3 className="font-bold text-blue-400">{partner.name}</h3>
+                          <Badge className={`${getStatusColor(partner.status)} text-white`}>
                             {partner.status}
                           </Badge>
                         </div>
                         <div className="flex items-center gap-1 mb-2">
                           {getTypeIcon(partner.type)}
-                          <span className="text-sm text-muted-foreground">
-                            {partner.type}
-                          </span>
+                          <span className="text-sm text-muted-foreground">{partner.type}</span>
                         </div>
                       </div>
                     </div>
 
-                    <p className="text-sm text-muted-foreground mb-4">
-                      {partner.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground mb-4">{partner.description}</p>
 
                     <div className="space-y-2 text-xs">
                       <div className="flex justify-between">
@@ -311,9 +281,7 @@ const Partnerships = () => {
                       </div>
                       <div className="flex justify-between">
                         <span>Impact:</span>
-                        <span className="font-bold text-green-400">
-                          {partner.impact}
-                        </span>
+                        <span className="font-bold text-green-400">{partner.impact}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Partnership Since:</span>
@@ -326,10 +294,7 @@ const Partnerships = () => {
                         <ExternalLink className="h-3 w-3 mr-1" />
                         Visit
                       </Button>
-                      <Button
-                        size="sm"
-                        className="flex-1 bg-blue-600 hover:bg-blue-700"
-                      >
+                      <Button size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700">
                         <Mail className="h-3 w-3 mr-1" />
                         Contact
                       </Button>
@@ -344,15 +309,10 @@ const Partnerships = () => {
           <div className="space-y-6">
             <Card className="border-purple-500/30">
               <CardHeader>
-                <CardTitle className="text-purple-400">
-                  Join Our Network
-                </CardTitle>
+                <CardTitle className="text-purple-400">Join Our Network</CardTitle>
               </CardHeader>
               <CardContent>
-                <form
-                  onSubmit={handlePartnershipApplication}
-                  className="space-y-4"
-                >
+                <form onSubmit={handlePartnershipApplication} className="space-y-4">
                   <Input
                     placeholder="Organization name"
                     value={partnershipForm.organization}
@@ -402,10 +362,7 @@ const Partnerships = () => {
                       })
                     }
                   />
-                  <Button
-                    type="submit"
-                    className="w-full bg-purple-600 hover:bg-purple-700"
-                  >
+                  <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
                     Apply for Partnership
                   </Button>
                 </form>
@@ -415,9 +372,7 @@ const Partnerships = () => {
             {/* Partnership Benefits */}
             <Card className="border-green-500/30">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  Partnership Benefits
-                </CardTitle>
+                <CardTitle className="text-green-400">Partnership Benefits</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 text-sm">
@@ -448,25 +403,18 @@ const Partnerships = () => {
             {/* Success Stories */}
             <Card className="border-yellow-500/30">
               <CardHeader>
-                <CardTitle className="text-yellow-400">
-                  Success Stories
-                </CardTitle>
+                <CardTitle className="text-yellow-400">Success Stories</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4 text-sm">
                   <div className="p-3 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
-                    <div className="font-bold text-yellow-400 mb-1">
-                      Amazon Restoration
-                    </div>
+                    <div className="font-bold text-yellow-400 mb-1">Amazon Restoration</div>
                     <div className="text-muted-foreground">
-                      WWF + CleanTech partnership planted 500K trees using IoT
-                      monitoring
+                      WWF + CleanTech partnership planted 500K trees using IoT monitoring
                     </div>
                   </div>
                   <div className="p-3 bg-blue-900/20 rounded-lg border border-blue-500/30">
-                    <div className="font-bold text-blue-400 mb-1">
-                      Ocean Cleanup
-                    </div>
+                    <div className="font-bold text-blue-400 mb-1">Ocean Cleanup</div>
                     <div className="text-muted-foreground">
                       Research Institute + EPA removed 50 tons of plastic waste
                     </div>

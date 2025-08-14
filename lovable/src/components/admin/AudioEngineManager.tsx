@@ -74,7 +74,7 @@ export function AudioEngineManager() {
       prev.map((f) => ({
         ...f,
         isPlaying: f.id === fileId,
-      })),
+      }))
     );
   };
 
@@ -86,7 +86,7 @@ export function AudioEngineManager() {
       prev.map((f) => ({
         ...f,
         isPlaying: false,
-      })),
+      }))
     );
     setCurrentFile(null);
   };
@@ -130,9 +130,7 @@ export function AudioEngineManager() {
               <CardContent className="pt-4">
                 <div className="flex items-center gap-2 mb-3">
                   <Volume2 className="h-5 w-5 text-blue-400" />
-                  <span className="text-blue-400 font-semibold">
-                    Volume Control
-                  </span>
+                  <span className="text-blue-400 font-semibold">Volume Control</span>
                 </div>
                 <Slider
                   value={volume}
@@ -151,9 +149,7 @@ export function AudioEngineManager() {
               <CardContent className="pt-4">
                 <div className="flex items-center gap-2 mb-3">
                   <Mic className="h-5 w-5 text-green-400" />
-                  <span className="text-green-400 font-semibold">
-                    Recording
-                  </span>
+                  <span className="text-green-400 font-semibold">Recording</span>
                 </div>
                 <Button
                   onClick={isRecording ? stopRecording : startRecording}
@@ -168,9 +164,7 @@ export function AudioEngineManager() {
               <CardContent className="pt-4">
                 <div className="flex items-center gap-2 mb-3">
                   <Upload className="h-5 w-5 text-orange-400" />
-                  <span className="text-orange-400 font-semibold">
-                    Upload Audio
-                  </span>
+                  <span className="text-orange-400 font-semibold">Upload Audio</span>
                 </div>
                 <Button
                   onClick={() => fileInputRef.current?.click()}
@@ -195,9 +189,7 @@ export function AudioEngineManager() {
             <CardContent className="pt-4">
               <div className="flex items-center gap-2 mb-4">
                 <Waves className="h-5 w-5 text-cyan-400" />
-                <span className="text-cyan-400 font-semibold">
-                  Audio Visualizer
-                </span>
+                <span className="text-cyan-400 font-semibold">Audio Visualizer</span>
               </div>
               <div className="bg-black/40 p-4 rounded-lg">
                 <div className="flex items-end justify-center gap-1 h-20">
@@ -221,9 +213,7 @@ export function AudioEngineManager() {
             <CardContent className="pt-4">
               <div className="flex items-center gap-2 mb-4">
                 <Headphones className="h-5 w-5 text-gray-400" />
-                <span className="text-gray-400 font-semibold">
-                  Audio Library
-                </span>
+                <span className="text-gray-400 font-semibold">Audio Library</span>
               </div>
 
               {audioFiles.length === 0 ? (
@@ -242,9 +232,7 @@ export function AudioEngineManager() {
                           size="sm"
                           variant="outline"
                           onClick={() =>
-                            file.isPlaying
-                              ? pauseAudio(file.id)
-                              : playAudio(file.id)
+                            file.isPlaying ? pauseAudio(file.id) : playAudio(file.id)
                           }
                         >
                           {file.isPlaying ? (
@@ -254,9 +242,7 @@ export function AudioEngineManager() {
                           )}
                         </Button>
                         <div>
-                          <div className="font-semibold text-white">
-                            {file.name}
-                          </div>
+                          <div className="font-semibold text-white">{file.name}</div>
                           <div className="text-xs text-muted-foreground">
                             Duration: {Math.floor(file.duration / 60)}:
                             {Math.floor(file.duration % 60)
@@ -267,9 +253,7 @@ export function AudioEngineManager() {
                       </div>
                       <div className="flex items-center gap-2">
                         {file.isPlaying && (
-                          <Badge className="bg-green-600 text-white animate-pulse">
-                            Playing
-                          </Badge>
+                          <Badge className="bg-green-600 text-white animate-pulse">Playing</Badge>
                         )}
                         <Badge variant="outline">Audio</Badge>
                       </div>
@@ -285,34 +269,23 @@ export function AudioEngineManager() {
             <CardContent className="pt-4">
               <div className="flex items-center gap-2 mb-4">
                 <BarChart3 className="h-5 w-5 text-indigo-400" />
-                <span className="text-indigo-400 font-semibold">
-                  Advanced Equalizer
-                </span>
+                <span className="text-indigo-400 font-semibold">Advanced Equalizer</span>
               </div>
               <div className="grid grid-cols-8 gap-2">
-                {[
-                  "60Hz",
-                  "170Hz",
-                  "310Hz",
-                  "600Hz",
-                  "1kHz",
-                  "3kHz",
-                  "6kHz",
-                  "12kHz",
-                ].map((freq, i) => (
-                  <div key={freq} className="text-center">
-                    <div className="text-xs text-muted-foreground mb-2">
-                      {freq}
+                {["60Hz", "170Hz", "310Hz", "600Hz", "1kHz", "3kHz", "6kHz", "12kHz"].map(
+                  (freq, i) => (
+                    <div key={freq} className="text-center">
+                      <div className="text-xs text-muted-foreground mb-2">{freq}</div>
+                      <Slider
+                        orientation="vertical"
+                        defaultValue={[50]}
+                        max={100}
+                        step={1}
+                        className="h-20"
+                      />
                     </div>
-                    <Slider
-                      orientation="vertical"
-                      defaultValue={[50]}
-                      max={100}
-                      step={1}
-                      className="h-20"
-                    />
-                  </div>
-                ))}
+                  )
+                )}
               </div>
             </CardContent>
           </Card>

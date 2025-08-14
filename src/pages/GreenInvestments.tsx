@@ -170,8 +170,8 @@ const GreenInvestments = () => {
             🌱 Green Investments
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Invest in environmental projects • Support sustainable initiatives •
-            Make a positive impact
+            Invest in environmental projects • Support sustainable initiatives • Make a positive
+            impact
           </p>
           <div className="text-sm text-green-400 mt-2">
             ✨ Powered by GAiA Token • Community Driven • Transparent Impact
@@ -190,18 +190,12 @@ const GreenInvestments = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div className="text-center p-4 bg-green-800/20 rounded-lg">
                 <Leaf className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-green-400">
-                  Environmental
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Impact Projects
-                </div>
+                <div className="text-2xl font-bold text-green-400">Environmental</div>
+                <div className="text-sm text-muted-foreground">Impact Projects</div>
               </div>
               <div className="text-center p-4 bg-blue-800/20 rounded-lg">
                 <TrendingUp className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-blue-400">
-                  Sustainable
-                </div>
+                <div className="text-2xl font-bold text-blue-400">Sustainable</div>
                 <div className="text-sm text-muted-foreground">Returns</div>
               </div>
               <div className="text-center p-4 bg-purple-800/20 rounded-lg">
@@ -211,12 +205,8 @@ const GreenInvestments = () => {
               </div>
               <div className="text-center p-4 bg-orange-800/20 rounded-lg">
                 <Shield className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-orange-400">
-                  Protection
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  & Prevention
-                </div>
+                <div className="text-2xl font-bold text-orange-400">Protection</div>
+                <div className="text-sm text-muted-foreground">& Prevention</div>
               </div>
             </div>
           </CardContent>
@@ -235,8 +225,7 @@ const GreenInvestments = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {originalProjects.map((project) => {
-              const fundingPercentage =
-                (project.currentFunding / project.fundingGoal) * 100;
+              const fundingPercentage = (project.currentFunding / project.fundingGoal) * 100;
 
               return (
                 <Card
@@ -245,9 +234,7 @@ const GreenInvestments = () => {
                 >
                   <CardHeader>
                     <div className="flex items-center justify-between">
-                      <Badge
-                        className={`bg-gradient-to-r ${project.color} text-white`}
-                      >
+                      <Badge className={`bg-gradient-to-r ${project.color} text-white`}>
                         {project.category}
                       </Badge>
                       <div className="text-2xl">{project.icon}</div>
@@ -275,9 +262,7 @@ const GreenInvestments = () => {
                         <span className="text-green-300/60">
                           {fundingPercentage.toFixed(1)}% funded
                         </span>
-                        <span className="text-blue-400">
-                          {project.backers} backers
-                        </span>
+                        <span className="text-blue-400">{project.backers} backers</span>
                       </div>
                     </div>
 
@@ -310,12 +295,9 @@ const GreenInvestments = () => {
               <Flame className="h-4 w-4 mr-1" />
               FEATURED INVESTMENT PROJECT
             </Badge>
-            <h2 className="text-3xl font-bold text-orange-400">
-              SandProtect Initiative
-            </h2>
+            <h2 className="text-3xl font-bold text-orange-400">SandProtect Initiative</h2>
             <p className="text-muted-foreground mt-2">
-              Revolutionary sand barrier technology with multiple investment
-              tiers and proven ROI
+              Revolutionary sand barrier technology with multiple investment tiers and proven ROI
             </p>
           </div>
           <SandProtectInvestmentProject />
@@ -332,8 +314,7 @@ const GreenInvestments = () => {
               Advanced Wildfire Sand Barrier Technology
             </h2>
             <p className="text-muted-foreground mt-2">
-              Deep dive into the technical implementation and real-time
-              monitoring systems
+              Deep dive into the technical implementation and real-time monitoring systems
             </p>
           </div>
           <WildfireSandProtection />
@@ -346,8 +327,7 @@ const GreenInvestments = () => {
               🚀 Enhanced GAIA Research Projects
             </h2>
             <p className="text-muted-foreground">
-              Revolutionary environmental research initiatives with cutting-edge
-              technology
+              Revolutionary environmental research initiatives with cutting-edge technology
             </p>
           </div>
 
@@ -356,9 +336,7 @@ const GreenInvestments = () => {
             <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-green-500/30">
               <CardHeader>
                 <div className="flex items-center justify-between mb-4">
-                  <Badge className="bg-green-600 text-white">
-                    Land Restoration
-                  </Badge>
+                  <Badge className="bg-green-600 text-white">Land Restoration</Badge>
                   <TreePine className="h-8 w-8 text-green-400" />
                 </div>
                 <CardTitle className="text-green-400 text-xl">
@@ -367,10 +345,9 @@ const GreenInvestments = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-green-300/80 text-sm leading-relaxed">
-                  Revolutionary 7-phase land restoration combining regenerative
-                  agriculture with advanced soil recovery techniques.
-                  Transforming degraded land into productive, sustainable
-                  farming ecosystems.
+                  Revolutionary 7-phase land restoration combining regenerative agriculture with
+                  advanced soil recovery techniques. Transforming degraded land into productive,
+                  sustainable farming ecosystems.
                 </p>
 
                 <div className="space-y-2">
@@ -379,52 +356,29 @@ const GreenInvestments = () => {
                     <span className="text-green-300">$125,000 / $500,000</span>
                   </div>
                   <Progress value={25} className="h-2" />
-                  <div className="text-xs text-green-300/60">
-                    25% funded • 89 participants
-                  </div>
+                  <div className="text-xs text-green-300/60">25% funded • 89 participants</div>
                 </div>
 
                 <div className="space-y-2">
-                  <h4 className="text-green-400 font-medium text-sm">
-                    7 Recovery Phases:
-                  </h4>
+                  <h4 className="text-green-400 font-medium text-sm">7 Recovery Phases:</h4>
                   <div className="grid grid-cols-1 gap-1 text-xs">
                     <div className="text-green-300/70">
                       • Soil Analysis & Contamination Assessment
                     </div>
-                    <div className="text-green-300/70">
-                      • Mycorrhizal Network Restoration
-                    </div>
-                    <div className="text-green-300/70">
-                      • Carbon Sequestration Implementation
-                    </div>
-                    <div className="text-green-300/70">
-                      • Biodiversity Corridor Creation
-                    </div>
-                    <div className="text-green-300/70">
-                      • Sustainable Water Management
-                    </div>
-                    <div className="text-green-300/70">
-                      • Community Training & Integration
-                    </div>
-                    <div className="text-green-300/70">
-                      • Long-term Monitoring & Optimization
-                    </div>
+                    <div className="text-green-300/70">• Mycorrhizal Network Restoration</div>
+                    <div className="text-green-300/70">• Carbon Sequestration Implementation</div>
+                    <div className="text-green-300/70">• Biodiversity Corridor Creation</div>
+                    <div className="text-green-300/70">• Sustainable Water Management</div>
+                    <div className="text-green-300/70">• Community Training & Integration</div>
+                    <div className="text-green-300/70">• Long-term Monitoring & Optimization</div>
                   </div>
                 </div>
 
                 <div className="flex gap-2">
-                  <Button
-                    className="flex-1 bg-green-600 hover:bg-green-700"
-                    size="sm"
-                  >
+                  <Button className="flex-1 bg-green-600 hover:bg-green-700" size="sm">
                     💚 Support Research
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="border-green-400 text-green-400"
-                    size="sm"
-                  >
+                  <Button variant="outline" className="border-green-400 text-green-400" size="sm">
                     📊 View Progress
                   </Button>
                 </div>
@@ -435,9 +389,7 @@ const GreenInvestments = () => {
             <Card className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-blue-500/30">
               <CardHeader>
                 <div className="flex items-center justify-between mb-4">
-                  <Badge className="bg-blue-600 text-white">
-                    Water Purification
-                  </Badge>
+                  <Badge className="bg-blue-600 text-white">Water Purification</Badge>
                   <Globe className="h-8 w-8 text-blue-400" />
                 </div>
                 <CardTitle className="text-blue-400 text-xl">
@@ -446,10 +398,9 @@ const GreenInvestments = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-blue-300/80 text-sm leading-relaxed">
-                  Advanced research project to eliminate PFAS (Poly- and
-                  perfluoroalkyl substances) contamination from water systems
-                  using bio-engineered filtration and molecular breakdown
-                  technologies.
+                  Advanced research project to eliminate PFAS (Poly- and perfluoroalkyl substances)
+                  contamination from water systems using bio-engineered filtration and molecular
+                  breakdown technologies.
                 </p>
 
                 <div className="space-y-2">
@@ -458,49 +409,26 @@ const GreenInvestments = () => {
                     <span className="text-blue-300">$87,500 / $350,000</span>
                   </div>
                   <Progress value={25} className="h-2" />
-                  <div className="text-xs text-blue-300/60">
-                    25% funded • 156 participants
-                  </div>
+                  <div className="text-xs text-blue-300/60">25% funded • 156 participants</div>
                 </div>
 
                 <div className="space-y-2">
-                  <h4 className="text-blue-400 font-medium text-sm">
-                    Research Focus Areas:
-                  </h4>
+                  <h4 className="text-blue-400 font-medium text-sm">Research Focus Areas:</h4>
                   <div className="grid grid-cols-1 gap-1 text-xs">
-                    <div className="text-blue-300/70">
-                      • PFAS Contamination Mapping & Analysis
-                    </div>
-                    <div className="text-blue-300/70">
-                      • Bio-engineered Filtration Systems
-                    </div>
-                    <div className="text-blue-300/70">
-                      • Molecular Breakdown Technologies
-                    </div>
-                    <div className="text-blue-300/70">
-                      • Advanced Membrane Development
-                    </div>
-                    <div className="text-blue-300/70">
-                      • Community Water Testing Programs
-                    </div>
-                    <div className="text-blue-300/70">
-                      • Global Implementation Strategy
-                    </div>
+                    <div className="text-blue-300/70">• PFAS Contamination Mapping & Analysis</div>
+                    <div className="text-blue-300/70">• Bio-engineered Filtration Systems</div>
+                    <div className="text-blue-300/70">• Molecular Breakdown Technologies</div>
+                    <div className="text-blue-300/70">• Advanced Membrane Development</div>
+                    <div className="text-blue-300/70">• Community Water Testing Programs</div>
+                    <div className="text-blue-300/70">• Global Implementation Strategy</div>
                   </div>
                 </div>
 
                 <div className="flex gap-2">
-                  <Button
-                    className="flex-1 bg-blue-600 hover:bg-blue-700"
-                    size="sm"
-                  >
+                  <Button className="flex-1 bg-blue-600 hover:bg-blue-700" size="sm">
                     💙 Fund Research
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="border-blue-400 text-blue-400"
-                    size="sm"
-                  >
+                  <Button variant="outline" className="border-blue-400 text-blue-400" size="sm">
                     🔬 Research Data
                   </Button>
                 </div>
@@ -528,8 +456,7 @@ const GreenInvestments = () => {
                 🌱 Green Impact & Environmental Progress
               </CardTitle>
               <p className="text-emerald-300">
-                Track your environmental impact across all GAiA projects and
-                investments
+                Track your environmental impact across all GAiA projects and investments
               </p>
             </CardHeader>
             <CardContent>
@@ -542,27 +469,19 @@ const GreenInvestments = () => {
                     <TreePine className="h-4 w-4 text-green-400" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-white">
-                      12.4K tons
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      +15% from last month
-                    </p>
+                    <div className="text-2xl font-bold text-white">12.4K tons</div>
+                    <p className="text-xs text-muted-foreground">+15% from last month</p>
                   </CardContent>
                 </Card>
 
                 <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium text-blue-400">
-                      Water Saved
-                    </CardTitle>
+                    <CardTitle className="text-sm font-medium text-blue-400">Water Saved</CardTitle>
                     <Globe className="h-4 w-4 text-blue-400" />
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold text-white">2.1M L</div>
-                    <p className="text-xs text-muted-foreground">
-                      +22% from last month
-                    </p>
+                    <p className="text-xs text-muted-foreground">+22% from last month</p>
                   </CardContent>
                 </Card>
 
@@ -575,9 +494,7 @@ const GreenInvestments = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold text-white">847 MWh</div>
-                    <p className="text-xs text-muted-foreground">
-                      +18% from last month
-                    </p>
+                    <p className="text-xs text-muted-foreground">+18% from last month</p>
                   </CardContent>
                 </Card>
 
@@ -590,9 +507,7 @@ const GreenInvestments = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold text-white">8.7/10</div>
-                    <p className="text-xs text-muted-foreground">
-                      +0.3 from last month
-                    </p>
+                    <p className="text-xs text-muted-foreground">+0.3 from last month</p>
                   </CardContent>
                 </Card>
               </div>
@@ -600,9 +515,7 @@ const GreenInvestments = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
                   <CardHeader>
-                    <CardTitle className="text-green-400">
-                      Global Impact Progress
-                    </CardTitle>
+                    <CardTitle className="text-green-400">Global Impact Progress</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-6">
@@ -633,9 +546,7 @@ const GreenInvestments = () => {
 
                 <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
                   <CardHeader>
-                    <CardTitle className="text-blue-400">
-                      AI Environmental Predictions
-                    </CardTitle>
+                    <CardTitle className="text-blue-400">AI Environmental Predictions</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
@@ -648,9 +559,7 @@ const GreenInvestments = () => {
                         </div>
                       </div>
                       <div className="p-3 bg-blue-900/20 rounded-lg border border-blue-500/20">
-                        <div className="text-sm font-medium text-blue-400 mb-1">
-                          Water Quality
-                        </div>
+                        <div className="text-sm font-medium text-blue-400 mb-1">Water Quality</div>
                         <div className="text-xs text-muted-foreground">
                           Marine ecosystems showing 15% recovery
                         </div>

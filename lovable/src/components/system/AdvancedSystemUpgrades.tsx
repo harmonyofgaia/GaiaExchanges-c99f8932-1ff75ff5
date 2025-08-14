@@ -35,8 +35,7 @@ export function AdvancedSystemUpgrades() {
     {
       id: "quantum-cache",
       name: "Quantum Cache Engine",
-      description:
-        "Instantaneous data retrieval using quantum entanglement principles",
+      description: "Instantaneous data retrieval using quantum entanglement principles",
       category: "performance",
       status: "available",
       progress: 0,
@@ -46,8 +45,7 @@ export function AdvancedSystemUpgrades() {
     {
       id: "neural-ui",
       name: "Neural UI Adaptation",
-      description:
-        "Interface that learns and adapts to each user's behavior patterns",
+      description: "Interface that learns and adapts to each user's behavior patterns",
       category: "frontend",
       status: "available",
       progress: 0,
@@ -127,10 +125,8 @@ export function AdvancedSystemUpgrades() {
   const installUpgrade = async (upgradeId: string) => {
     setUpgrades((prev) =>
       prev.map((upgrade) =>
-        upgrade.id === upgradeId
-          ? { ...upgrade, status: "installing", progress: 0 }
-          : upgrade,
-      ),
+        upgrade.id === upgradeId ? { ...upgrade, status: "installing", progress: 0 } : upgrade
+      )
     );
 
     const upgrade = upgrades.find((u) => u.id === upgradeId);
@@ -160,7 +156,7 @@ export function AdvancedSystemUpgrades() {
             return { ...u, progress: newProgress };
           }
           return u;
-        }),
+        })
       );
     }, 500);
 
@@ -172,8 +168,7 @@ export function AdvancedSystemUpgrades() {
         systemPower: prev.systemPower + upgrade.exclusivity * 100,
         exclusivityScore: prev.exclusivityScore + upgrade.exclusivity,
         revolutionaryFeatures:
-          prev.revolutionaryFeatures +
-          (upgrade.impact === "revolutionary" ? 1 : 0),
+          prev.revolutionaryFeatures + (upgrade.impact === "revolutionary" ? 1 : 0),
       }));
     }, 3000);
   };
@@ -221,9 +216,7 @@ export function AdvancedSystemUpgrades() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
               <Rocket className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-              <div className="text-2xl font-bold text-purple-400">
-                {systemStats.systemPower}
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{systemStats.systemPower}</div>
               <div className="text-sm text-muted-foreground">System Power</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
@@ -231,27 +224,21 @@ export function AdvancedSystemUpgrades() {
               <div className="text-2xl font-bold text-blue-400">
                 {systemStats.exclusivityScore}/80
               </div>
-              <div className="text-sm text-muted-foreground">
-                Exclusivity Score
-              </div>
+              <div className="text-sm text-muted-foreground">Exclusivity Score</div>
             </div>
             <div className="text-center p-4 bg-cyan-900/30 rounded-lg">
               <Eye className="h-8 w-8 mx-auto text-cyan-400 mb-2" />
               <div className="text-2xl font-bold text-cyan-400">
                 {systemStats.revolutionaryFeatures}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Revolutionary Features
-              </div>
+              <div className="text-sm text-muted-foreground">Revolutionary Features</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
               <Gamepad2 className="h-8 w-8 mx-auto text-green-400 mb-2" />
               <div className="text-2xl font-bold text-green-400">
                 {systemStats.activeUpgrades}/{systemStats.totalUpgrades}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Active Upgrades
-              </div>
+              <div className="text-sm text-muted-foreground">Active Upgrades</div>
             </div>
           </div>
         </CardContent>
@@ -263,10 +250,7 @@ export function AdvancedSystemUpgrades() {
           const Icon = getCategoryIcon(upgrade.category);
 
           return (
-            <Card
-              key={upgrade.id}
-              className={`border-2 ${getImpactColor(upgrade.impact)}`}
-            >
+            <Card key={upgrade.id} className={`border-2 ${getImpactColor(upgrade.impact)}`}>
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -279,24 +263,18 @@ export function AdvancedSystemUpgrades() {
                     >
                       {upgrade.impact.toUpperCase()}
                     </Badge>
-                    <Badge className="bg-purple-600">
-                      ⭐ {upgrade.exclusivity}/10
-                    </Badge>
+                    <Badge className="bg-purple-600">⭐ {upgrade.exclusivity}/10</Badge>
                   </div>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {upgrade.description}
-                </p>
+                <p className="text-sm text-muted-foreground mb-4">{upgrade.description}</p>
 
                 {upgrade.status === "installing" && (
                   <div className="mb-4">
                     <div className="flex justify-between mb-2">
                       <span className="text-sm">Installing...</span>
-                      <span className="text-sm">
-                        {Math.floor(upgrade.progress)}%
-                      </span>
+                      <span className="text-sm">{Math.floor(upgrade.progress)}%</span>
                     </div>
                     <Progress value={upgrade.progress} className="h-2" />
                   </div>
@@ -317,8 +295,7 @@ export function AdvancedSystemUpgrades() {
                 >
                   {upgrade.status === "active" && "✅ Active"}
                   {upgrade.status === "installing" && "⚡ Installing..."}
-                  {upgrade.status === "available" &&
-                    `🚀 Install ${upgrade.name}`}
+                  {upgrade.status === "available" && `🚀 Install ${upgrade.name}`}
                 </Button>
               </CardContent>
             </Card>

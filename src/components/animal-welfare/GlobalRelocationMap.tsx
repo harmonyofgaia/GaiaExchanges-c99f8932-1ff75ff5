@@ -57,9 +57,7 @@ export function GlobalRelocationMap() {
     lng: number;
   } | null>(null);
   const [vrActive, setVrActive] = useState(false);
-  const [uploadMode, setUploadMode] = useState<
-    "photo" | "video" | "stream" | null
-  >(null);
+  const [uploadMode, setUploadMode] = useState<"photo" | "video" | "stream" | null>(null);
 
   const [animals] = useState<Animal[]>([
     {
@@ -141,10 +139,8 @@ export function GlobalRelocationMap() {
           });
         },
         (error) => {
-          toast.error(
-            "❌ Could not get your location. Please enable location services.",
-          );
-        },
+          toast.error("❌ Could not get your location. Please enable location services.");
+        }
       );
     }
   };
@@ -157,7 +153,7 @@ export function GlobalRelocationMap() {
 
     console.log(`🌍 STARTING GLOBAL VR EXPERIENCE FOR: ${animal.name}`);
     console.log(
-      `👑 Top Investor: ${animal.topInvestor.name} (${animal.topInvestor.nftCount} NFTs)`,
+      `👑 Top Investor: ${animal.topInvestor.name} (${animal.topInvestor.nftCount} NFTs)`
     );
     console.log(`🎯 Searching for relocation sites globally...`);
 
@@ -179,7 +175,7 @@ export function GlobalRelocationMap() {
       {
         description: "Share the relocation journey with the community",
         duration: 4000,
-      },
+      }
     );
 
     console.log(`📱 UPLOADING ${type.toUpperCase()} CONTENT`);
@@ -189,12 +185,9 @@ export function GlobalRelocationMap() {
   const endVRExperience = () => {
     setVrActive(false);
     setSelectedAnimal(null);
-    toast.info(
-      "✨ VR experience completed! Thank you for helping find a new home.",
-      {
-        duration: 4000,
-      },
-    );
+    toast.info("✨ VR experience completed! Thank you for helping find a new home.", {
+      duration: 4000,
+    });
   };
 
   return (
@@ -206,8 +199,8 @@ export function GlobalRelocationMap() {
             🌍 Global Animal Relocation Map
           </CardTitle>
           <p className="text-muted-foreground">
-            Explore the world to find perfect new habitats for rescued animals.
-            Top NFT investors lead the relocation process.
+            Explore the world to find perfect new habitats for rescued animals. Top NFT investors
+            lead the relocation process.
           </p>
         </CardHeader>
       </Card>
@@ -222,11 +215,7 @@ export function GlobalRelocationMap() {
           <Globe className="h-4 w-4" />
           Earth View
         </Button>
-        <Button
-          variant="outline"
-          onClick={getUserLocation}
-          className="flex items-center gap-2"
-        >
+        <Button variant="outline" onClick={getUserLocation} className="flex items-center gap-2">
           <MapPin className="h-4 w-4" />
           Pin My Location
         </Button>
@@ -248,12 +237,9 @@ export function GlobalRelocationMap() {
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <div className="text-6xl">{selectedAnimal.emoji}</div>
-              <h3 className="text-2xl font-bold text-green-400">
-                🥽 VR Global Exploration Active
-              </h3>
+              <h3 className="text-2xl font-bold text-green-400">🥽 VR Global Exploration Active</h3>
               <p className="text-lg">
-                Searching worldwide for the perfect habitat for{" "}
-                {selectedAnimal.name}
+                Searching worldwide for the perfect habitat for {selectedAnimal.name}
               </p>
               <div className="flex gap-2 justify-center">
                 <Button
@@ -277,11 +263,7 @@ export function GlobalRelocationMap() {
                   <Upload className="h-4 w-4 mr-2" />
                   Live Stream
                 </Button>
-                <Button
-                  onClick={endVRExperience}
-                  variant="outline"
-                  className="border-green-500/50"
-                >
+                <Button onClick={endVRExperience} variant="outline" className="border-green-500/50">
                   End Experience
                 </Button>
               </div>
@@ -301,9 +283,7 @@ export function GlobalRelocationMap() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center space-y-4">
                   <div className="text-8xl animate-spin-slow">🌍</div>
-                  <h3 className="text-2xl font-bold text-blue-400">
-                    Earth Overview
-                  </h3>
+                  <h3 className="text-2xl font-bold text-blue-400">Earth Overview</h3>
                   <p className="text-muted-foreground">
                     Pin your location to explore local relocation sites
                   </p>
@@ -332,9 +312,7 @@ export function GlobalRelocationMap() {
                             <div className="text-sm font-semibold text-purple-400">
                               👑 Top Investor
                             </div>
-                            <div className="text-xs">
-                              {animal.topInvestor.name}
-                            </div>
+                            <div className="text-xs">{animal.topInvestor.name}</div>
                             <div className="text-xs text-yellow-400">
                               {animal.topInvestor.nftCount} NFTs •{" "}
                               {animal.topInvestor.totalInvested} GAiA
@@ -363,17 +341,13 @@ export function GlobalRelocationMap() {
                     📍 Local Area Exploration
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    Your location: {userLocation.lat.toFixed(4)},{" "}
-                    {userLocation.lng.toFixed(4)}
+                    Your location: {userLocation.lat.toFixed(4)}, {userLocation.lng.toFixed(4)}
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {relocationSites.map((site) => (
-                    <Card
-                      key={site.id}
-                      className="bg-black/40 border-blue-500/20"
-                    >
+                    <Card key={site.id} className="bg-black/40 border-blue-500/20">
                       <CardContent className="p-4">
                         <div className="space-y-3">
                           <div className="flex items-center justify-between">
@@ -397,23 +371,16 @@ export function GlobalRelocationMap() {
                           <div>
                             <div className="flex justify-between text-sm mb-1">
                               <span>Habitat Suitability</span>
-                              <span className="font-bold text-green-400">
-                                {site.suitability}%
-                              </span>
+                              <span className="font-bold text-green-400">{site.suitability}%</span>
                             </div>
-                            <Progress
-                              value={site.suitability}
-                              className="h-2"
-                            />
+                            <Progress value={site.suitability} className="h-2" />
                           </div>
 
                           <Button
                             size="sm"
                             className="w-full bg-blue-600 hover:bg-blue-700"
                             onClick={() =>
-                              toast.success(
-                                `🎯 Selected ${site.name} for VR exploration!`,
-                              )
+                              toast.success(`🎯 Selected ${site.name} for VR exploration!`)
                             }
                           >
                             <Zap className="h-3 w-3 mr-2" />

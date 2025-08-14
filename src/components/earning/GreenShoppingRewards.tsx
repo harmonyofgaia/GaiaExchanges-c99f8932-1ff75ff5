@@ -114,29 +114,21 @@ export function GreenShoppingRewards() {
 
     const basePoints = parseFloat(amount) * 2;
     const categoryBonus =
-      basePoints *
-      (categoryMultipliers[itemCategory as keyof typeof categoryMultipliers] ||
-        1);
+      basePoints * (categoryMultipliers[itemCategory as keyof typeof categoryMultipliers] || 1);
     const shopBonus =
-      categoryBonus *
-      (shopMultipliers[shopType as keyof typeof shopMultipliers] || 1);
+      categoryBonus * (shopMultipliers[shopType as keyof typeof shopMultipliers] || 1);
 
     let certificationBonus = 0;
     certifications.forEach((cert) => {
       certificationBonus +=
-        shopBonus *
-        (certificationBonuses[cert as keyof typeof certificationBonuses] || 0);
+        shopBonus * (certificationBonuses[cert as keyof typeof certificationBonuses] || 0);
     });
 
     const packagingBonus = packaging
-      ? shopBonus *
-        ((packagingBonuses[packaging as keyof typeof packagingBonuses] || 1) -
-          1)
+      ? shopBonus * ((packagingBonuses[packaging as keyof typeof packagingBonuses] || 1) - 1)
       : 0;
 
-    const totalPoints = Math.floor(
-      shopBonus + certificationBonus + packagingBonus,
-    );
+    const totalPoints = Math.floor(shopBonus + certificationBonus + packagingBonus);
     const tokens = Math.floor(totalPoints * 0.3);
 
     const activity = {
@@ -161,7 +153,7 @@ export function GreenShoppingRewards() {
 
     addActivity(activity);
     toast.success(
-      `🛍️ Green shopping recorded! +${totalPoints} points earned for sustainable choices!`,
+      `🛍️ Green shopping recorded! +${totalPoints} points earned for sustainable choices!`
     );
     setShopType("");
     setItemCategory("");
@@ -172,7 +164,7 @@ export function GreenShoppingRewards() {
 
   const toggleCertification = (cert: string) => {
     setCertifications((prev) =>
-      prev.includes(cert) ? prev.filter((c) => c !== cert) : [...prev, cert],
+      prev.includes(cert) ? prev.filter((c) => c !== cert) : [...prev, cert]
     );
   };
 
@@ -221,17 +213,13 @@ export function GreenShoppingRewards() {
               <div className="text-xl font-bold text-green-400">
                 {shoppingStats.localBusinessesSupported}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Local Businesses
-              </div>
+              <div className="text-xs text-muted-foreground">Local Businesses</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
               <div className="text-xl font-bold text-blue-400">
                 {shoppingStats.plasticAvoided}kg
               </div>
-              <div className="text-xs text-muted-foreground">
-                Plastic Avoided
-              </div>
+              <div className="text-xs text-muted-foreground">Plastic Avoided</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
               <div className="text-xl font-bold text-purple-400">
@@ -240,9 +228,7 @@ export function GreenShoppingRewards() {
               <div className="text-xs text-muted-foreground">CO2 Reduced</div>
             </div>
             <div className="text-center p-4 bg-yellow-900/30 rounded-lg border border-yellow-500/20">
-              <div className="text-xl font-bold text-yellow-400">
-                {shoppingStats.tokensEarned}
-              </div>
+              <div className="text-xl font-bold text-yellow-400">{shoppingStats.tokensEarned}</div>
               <div className="text-xs text-muted-foreground">GAiA Earned</div>
             </div>
           </div>
@@ -263,12 +249,8 @@ export function GreenShoppingRewards() {
                 <div className="flex items-start gap-3">
                   <Package className="h-6 w-6 text-emerald-400 mt-1" />
                   <div>
-                    <h5 className="font-semibold text-emerald-300">
-                      {purchase.store}
-                    </h5>
-                    <p className="text-sm text-muted-foreground">
-                      {purchase.items}
-                    </p>
+                    <h5 className="font-semibold text-emerald-300">{purchase.store}</h5>
+                    <p className="text-sm text-muted-foreground">{purchase.items}</p>
                     <div className="flex items-center gap-2 mt-2">
                       {purchase.certifications.map((cert, index) => (
                         <Badge
@@ -283,15 +265,9 @@ export function GreenShoppingRewards() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-bold text-yellow-400">
-                    +{purchase.tokens} GAiA
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    ${purchase.amount}
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    {purchase.date}
-                  </div>
+                  <div className="font-bold text-yellow-400">+{purchase.tokens} GAiA</div>
+                  <div className="text-sm text-muted-foreground">${purchase.amount}</div>
+                  <div className="text-xs text-muted-foreground">{purchase.date}</div>
                 </div>
               </div>
             </div>
@@ -310,81 +286,45 @@ export function GreenShoppingRewards() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Shop Type
-              </label>
+              <label className="block text-sm font-medium mb-2">Shop Type</label>
               <Select value={shopType} onValueChange={setShopType}>
                 <SelectTrigger>
                   <SelectValue placeholder="Where did you shop?" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="local_organic">
-                    🏪 Local Organic Store (2x)
-                  </SelectItem>
-                  <SelectItem value="farmers_market">
-                    🌾 Farmers Market (2.2x)
-                  </SelectItem>
-                  <SelectItem value="zero_waste_store">
-                    ♻️ Zero Waste Store (2.5x)
-                  </SelectItem>
-                  <SelectItem value="thrift_store">
-                    👕 Thrift Store (1.8x)
-                  </SelectItem>
+                  <SelectItem value="local_organic">🏪 Local Organic Store (2x)</SelectItem>
+                  <SelectItem value="farmers_market">🌾 Farmers Market (2.2x)</SelectItem>
+                  <SelectItem value="zero_waste_store">♻️ Zero Waste Store (2.5x)</SelectItem>
+                  <SelectItem value="thrift_store">👕 Thrift Store (1.8x)</SelectItem>
                   <SelectItem value="co_op">🤝 Co-op (1.9x)</SelectItem>
-                  <SelectItem value="fair_trade_shop">
-                    ⚖️ Fair Trade Shop (2.1x)
-                  </SelectItem>
-                  <SelectItem value="sustainable_brand">
-                    🌱 Sustainable Brand (1.7x)
-                  </SelectItem>
-                  <SelectItem value="bulk_store">
-                    📦 Bulk Store (1.6x)
-                  </SelectItem>
+                  <SelectItem value="fair_trade_shop">⚖️ Fair Trade Shop (2.1x)</SelectItem>
+                  <SelectItem value="sustainable_brand">🌱 Sustainable Brand (1.7x)</SelectItem>
+                  <SelectItem value="bulk_store">📦 Bulk Store (1.6x)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Item Category
-              </label>
+              <label className="block text-sm font-medium mb-2">Item Category</label>
               <Select value={itemCategory} onValueChange={setItemCategory}>
                 <SelectTrigger>
                   <SelectValue placeholder="What category?" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="food">
-                    🥕 Food & Beverages (1.5x)
-                  </SelectItem>
-                  <SelectItem value="household">
-                    🏠 Household Items (1.3x)
-                  </SelectItem>
-                  <SelectItem value="clothing">
-                    👕 Clothing & Textiles (1.8x)
-                  </SelectItem>
-                  <SelectItem value="beauty">
-                    💄 Beauty & Personal Care (1.4x)
-                  </SelectItem>
-                  <SelectItem value="electronics">
-                    📱 Electronics (2x)
-                  </SelectItem>
-                  <SelectItem value="furniture">
-                    🪑 Furniture & Home (2.2x)
-                  </SelectItem>
-                  <SelectItem value="transportation">
-                    🚲 Transportation (1.9x)
-                  </SelectItem>
-                  <SelectItem value="energy">
-                    ⚡ Energy & Utilities (2.5x)
-                  </SelectItem>
+                  <SelectItem value="food">🥕 Food & Beverages (1.5x)</SelectItem>
+                  <SelectItem value="household">🏠 Household Items (1.3x)</SelectItem>
+                  <SelectItem value="clothing">👕 Clothing & Textiles (1.8x)</SelectItem>
+                  <SelectItem value="beauty">💄 Beauty & Personal Care (1.4x)</SelectItem>
+                  <SelectItem value="electronics">📱 Electronics (2x)</SelectItem>
+                  <SelectItem value="furniture">🪑 Furniture & Home (2.2x)</SelectItem>
+                  <SelectItem value="transportation">🚲 Transportation (1.9x)</SelectItem>
+                  <SelectItem value="energy">⚡ Energy & Utilities (2.5x)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Purchase Amount ($)
-              </label>
+              <label className="block text-sm font-medium mb-2">Purchase Amount ($)</label>
               <Input
                 type="number"
                 step="0.01"
@@ -396,29 +336,17 @@ export function GreenShoppingRewards() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Packaging Type
-              </label>
+              <label className="block text-sm font-medium mb-2">Packaging Type</label>
               <Select value={packaging} onValueChange={setPackaging}>
                 <SelectTrigger>
                   <SelectValue placeholder="Packaging type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="no_packaging">
-                    🚫 No Packaging (1.5x)
-                  </SelectItem>
-                  <SelectItem value="reusable_container">
-                    ♻️ Reusable Container (1.3x)
-                  </SelectItem>
-                  <SelectItem value="compostable">
-                    🍃 Compostable (1.2x)
-                  </SelectItem>
-                  <SelectItem value="recyclable">
-                    ♻️ Recyclable (1.1x)
-                  </SelectItem>
-                  <SelectItem value="minimal">
-                    📦 Minimal Packaging (1.1x)
-                  </SelectItem>
+                  <SelectItem value="no_packaging">🚫 No Packaging (1.5x)</SelectItem>
+                  <SelectItem value="reusable_container">♻️ Reusable Container (1.3x)</SelectItem>
+                  <SelectItem value="compostable">🍃 Compostable (1.2x)</SelectItem>
+                  <SelectItem value="recyclable">♻️ Recyclable (1.1x)</SelectItem>
+                  <SelectItem value="minimal">📦 Minimal Packaging (1.1x)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -455,9 +383,7 @@ export function GreenShoppingRewards() {
                 <Button
                   key={cert.value}
                   type="button"
-                  variant={
-                    certifications.includes(cert.value) ? "default" : "outline"
-                  }
+                  variant={certifications.includes(cert.value) ? "default" : "outline"}
                   size="sm"
                   onClick={() => toggleCertification(cert.value)}
                   className={`justify-start text-xs ${
@@ -478,17 +404,15 @@ export function GreenShoppingRewards() {
             disabled={loading}
             className="w-full bg-emerald-600 hover:bg-emerald-700"
           >
-            {loading
-              ? "Recording Purchase..."
-              : "🛍️ Record Green Shopping (+2 pts per $)"}
+            {loading ? "Recording Purchase..." : "🛍️ Record Green Shopping (+2 pts per $)"}
           </Button>
         </form>
 
         <div className="p-4 bg-gradient-to-r from-emerald-500/10 to-green-500/10 rounded-lg border border-emerald-500/20">
           <p className="text-sm text-emerald-300">
-            💡 <strong>Conscious Consumer Bonus:</strong> Certifications and
-            packaging choices multiply your rewards! Support local businesses
-            and choose plastic-free options for maximum GAiA earnings!
+            💡 <strong>Conscious Consumer Bonus:</strong> Certifications and packaging choices
+            multiply your rewards! Support local businesses and choose plastic-free options for
+            maximum GAiA earnings!
           </p>
         </div>
       </CardContent>

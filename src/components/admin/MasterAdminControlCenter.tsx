@@ -23,8 +23,7 @@ export function MasterAdminControlCenter() {
     {
       id: 1,
       name: "Green Energy Token Mining",
-      description:
-        "Users earn GAIA tokens by contributing to renewable energy projects",
+      description: "Users earn GAIA tokens by contributing to renewable energy projects",
       tokensEarned: 15000,
       worldImpact: "Reduced CO2 by 50 tons",
       status: "ACTIVE",
@@ -32,8 +31,7 @@ export function MasterAdminControlCenter() {
     {
       id: 2,
       name: "Ocean Cleanup Initiative",
-      description:
-        "Token rewards for participating in ocean cleanup activities",
+      description: "Token rewards for participating in ocean cleanup activities",
       tokensEarned: 12000,
       worldImpact: "Cleaned 2.5 tons of ocean plastic",
       status: "ACTIVE",
@@ -105,12 +103,8 @@ export function MasterAdminControlCenter() {
           </CardTitle>
           <div className="text-center">
             <Badge className="bg-gold-600 animate-pulse">UNLIMITED POWER</Badge>
-            <Badge className="bg-red-600 animate-pulse ml-2">
-              ADMIN SUPREME
-            </Badge>
-            <Badge className="bg-purple-600 animate-pulse ml-2">
-              INVISIBLE CONTROL
-            </Badge>
+            <Badge className="bg-red-600 animate-pulse ml-2">ADMIN SUPREME</Badge>
+            <Badge className="bg-purple-600 animate-pulse ml-2">INVISIBLE CONTROL</Badge>
           </div>
         </CardHeader>
       </Card>
@@ -134,9 +128,7 @@ export function MasterAdminControlCenter() {
         <TabsContent value="admin-pages" className="space-y-6">
           <Card className="border-blue-500/30 bg-blue-900/20">
             <CardHeader>
-              <CardTitle className="text-blue-400">
-                📋 CONSOLIDATED ADMIN PAGES
-              </CardTitle>
+              <CardTitle className="text-blue-400">📋 CONSOLIDATED ADMIN PAGES</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -160,46 +152,31 @@ export function MasterAdminControlCenter() {
         <TabsContent value="community" className="space-y-6">
           <Card className="border-green-500/30 bg-green-900/20">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                🌍 COMMUNITY INNOVATION PROJECTS
-              </CardTitle>
+              <CardTitle className="text-green-400">🌍 COMMUNITY INNOVATION PROJECTS</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {communityProjects.map((project) => (
-                  <div
-                    key={project.id}
-                    className="p-4 bg-green-900/30 rounded-lg"
-                  >
+                  <div key={project.id} className="p-4 bg-green-900/30 rounded-lg">
                     <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-bold text-green-400">
-                        {project.name}
-                      </h4>
+                      <h4 className="font-bold text-green-400">{project.name}</h4>
                       <Badge
                         className={`${project.status === "ACTIVE" ? "bg-green-600" : "bg-yellow-600"}`}
                       >
                         {project.status}
                       </Badge>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      {project.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground mb-2">{project.description}</p>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <span className="text-xs text-muted-foreground">
-                          Tokens Earned
-                        </span>
+                        <span className="text-xs text-muted-foreground">Tokens Earned</span>
                         <div className="text-lg font-bold text-green-400">
                           {project.tokensEarned}
                         </div>
                       </div>
                       <div>
-                        <span className="text-xs text-muted-foreground">
-                          World Impact
-                        </span>
-                        <div className="text-sm text-green-300">
-                          {project.worldImpact}
-                        </div>
+                        <span className="text-xs text-muted-foreground">World Impact</span>
+                        <div className="text-sm text-green-300">{project.worldImpact}</div>
                       </div>
                     </div>
                   </div>
@@ -212,9 +189,7 @@ export function MasterAdminControlCenter() {
         <TabsContent value="defense" className="space-y-6">
           <Card className="border-red-500/30 bg-red-900/20">
             <CardHeader>
-              <CardTitle className="text-red-400">
-                🛡️ ADVANCED DEFENSE STATUS
-              </CardTitle>
+              <CardTitle className="text-red-400">🛡️ ADVANCED DEFENSE STATUS</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -224,36 +199,20 @@ export function MasterAdminControlCenter() {
                   </h4>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <span className="text-sm text-muted-foreground">
-                        Ghost Trackers
-                      </span>
-                      <div className="text-lg font-bold text-purple-400">
-                        DEPLOYED
-                      </div>
+                      <span className="text-sm text-muted-foreground">Ghost Trackers</span>
+                      <div className="text-lg font-bold text-purple-400">DEPLOYED</div>
                     </div>
                     <div>
-                      <span className="text-sm text-muted-foreground">
-                        Matrix Traps
-                      </span>
-                      <div className="text-lg font-bold text-cyan-400">
-                        ACTIVE
-                      </div>
+                      <span className="text-sm text-muted-foreground">Matrix Traps</span>
+                      <div className="text-lg font-bold text-cyan-400">ACTIVE</div>
                     </div>
                     <div>
-                      <span className="text-sm text-muted-foreground">
-                        Defense Animals
-                      </span>
-                      <div className="text-lg font-bold text-green-400">
-                        PATROLLING
-                      </div>
+                      <span className="text-sm text-muted-foreground">Defense Animals</span>
+                      <div className="text-lg font-bold text-green-400">PATROLLING</div>
                     </div>
                     <div>
-                      <span className="text-sm text-muted-foreground">
-                        Invisible Trojans
-                      </span>
-                      <div className="text-lg font-bold text-yellow-400">
-                        READY
-                      </div>
+                      <span className="text-sm text-muted-foreground">Invisible Trojans</span>
+                      <div className="text-lg font-bold text-yellow-400">READY</div>
                     </div>
                   </div>
                 </div>
@@ -265,17 +224,12 @@ export function MasterAdminControlCenter() {
         <TabsContent value="tasks" className="space-y-6">
           <Card className="border-purple-500/30 bg-purple-900/20">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                ✅ MASTER EINSTEIN TASK LIST
-              </CardTitle>
+              <CardTitle className="text-purple-400">✅ MASTER EINSTEIN TASK LIST</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
                 {masterTaskList.map((task, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-3 p-2 bg-purple-900/30 rounded"
-                  >
+                  <div key={index} className="flex items-center gap-3 p-2 bg-purple-900/30 rounded">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                     <span className="text-sm text-purple-300">{task}</span>
                   </div>
@@ -288,37 +242,25 @@ export function MasterAdminControlCenter() {
         <TabsContent value="monitoring" className="space-y-6">
           <Card className="border-cyan-500/30 bg-cyan-900/20">
             <CardHeader>
-              <CardTitle className="text-cyan-400">
-                👁️ GLOBAL MONITORING DASHBOARD
-              </CardTitle>
+              <CardTitle className="text-cyan-400">👁️ GLOBAL MONITORING DASHBOARD</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="p-4 bg-cyan-900/30 rounded-lg text-center">
                   <div className="text-2xl font-bold text-cyan-400">100%</div>
-                  <div className="text-sm text-muted-foreground">
-                    System Coverage
-                  </div>
+                  <div className="text-sm text-muted-foreground">System Coverage</div>
                 </div>
                 <div className="p-4 bg-green-900/30 rounded-lg text-center">
                   <div className="text-2xl font-bold text-green-400">∞</div>
-                  <div className="text-sm text-muted-foreground">
-                    Data Processing
-                  </div>
+                  <div className="text-sm text-muted-foreground">Data Processing</div>
                 </div>
                 <div className="p-4 bg-purple-900/30 rounded-lg text-center">
                   <div className="text-2xl font-bold text-purple-400">24/7</div>
-                  <div className="text-sm text-muted-foreground">
-                    Active Monitoring
-                  </div>
+                  <div className="text-sm text-muted-foreground">Active Monitoring</div>
                 </div>
                 <div className="p-4 bg-red-900/30 rounded-lg text-center">
-                  <div className="text-2xl font-bold text-red-400">
-                    INVISIBLE
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Stealth Mode
-                  </div>
+                  <div className="text-2xl font-bold text-red-400">INVISIBLE</div>
+                  <div className="text-sm text-muted-foreground">Stealth Mode</div>
                 </div>
               </div>
             </CardContent>
@@ -328,9 +270,7 @@ export function MasterAdminControlCenter() {
         <TabsContent value="projects" className="space-y-6">
           <Card className="border-yellow-500/30 bg-yellow-900/20">
             <CardHeader>
-              <CardTitle className="text-yellow-400">
-                🚀 FUTURE INNOVATION PROJECTS
-              </CardTitle>
+              <CardTitle className="text-yellow-400">🚀 FUTURE INNOVATION PROJECTS</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -339,8 +279,8 @@ export function MasterAdminControlCenter() {
                     🌱 Sustainable Living Token System
                   </h4>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Reward users for adopting sustainable lifestyle practices
-                    with automatic token earning
+                    Reward users for adopting sustainable lifestyle practices with automatic token
+                    earning
                   </p>
                   <Badge className="bg-green-600">WORLD IMPACT: HIGH</Badge>
                 </div>
@@ -349,8 +289,7 @@ export function MasterAdminControlCenter() {
                     🏥 Health Data Contribution Network
                   </h4>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Anonymous health data sharing for medical research with
-                    token rewards
+                    Anonymous health data sharing for medical research with token rewards
                   </p>
                   <Badge className="bg-blue-600">WORLD IMPACT: MAXIMUM</Badge>
                 </div>
@@ -359,8 +298,7 @@ export function MasterAdminControlCenter() {
                     🌍 Global Climate Action Network
                   </h4>
                   <p className="text-sm text-muted-foreground mb-2">
-                    Coordinated climate action with token incentives and impact
-                    tracking
+                    Coordinated climate action with token incentives and impact tracking
                   </p>
                   <Badge className="bg-green-600">WORLD IMPACT: CRITICAL</Badge>
                 </div>
@@ -372,9 +310,7 @@ export function MasterAdminControlCenter() {
         <TabsContent value="control" className="space-y-6">
           <Card className="border-red-500/30 bg-red-900/20">
             <CardHeader>
-              <CardTitle className="text-red-400">
-                ⚡ ULTIMATE ADMIN CONTROL PANEL
-              </CardTitle>
+              <CardTitle className="text-red-400">⚡ ULTIMATE ADMIN CONTROL PANEL</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">

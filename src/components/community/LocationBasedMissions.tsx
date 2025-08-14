@@ -4,15 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
-import {
-  MapPin,
-  Target,
-  Clock,
-  Users,
-  TreePine,
-  Droplets,
-  Recycle,
-} from "lucide-react";
+import { MapPin, Target, Clock, Users, TreePine, Droplets, Recycle } from "lucide-react";
 
 interface Mission {
   id: string;
@@ -132,12 +124,10 @@ export function LocationBasedMissions() {
               participants: mission.participants + 1,
               status: "in-progress" as const,
             }
-          : mission,
-      ),
+          : mission
+      )
     );
-    toast.success(
-      "Successfully joined the mission! Check your map for directions.",
-    );
+    toast.success("Successfully joined the mission! Check your map for directions.");
   };
 
   return (
@@ -155,16 +145,13 @@ export function LocationBasedMissions() {
         {missions.map((mission) => {
           const Icon = getTypeIcon(mission.type);
           const isAvailable =
-            mission.status === "available" &&
-            mission.participants < mission.maxParticipants;
+            mission.status === "available" && mission.participants < mission.maxParticipants;
 
           return (
             <Card
               key={mission.id}
               className={`border-2 transition-colors ${
-                isAvailable
-                  ? "border-green-500/30 hover:border-green-500/50"
-                  : "border-gray-500/30"
+                isAvailable ? "border-green-500/30 hover:border-green-500/50" : "border-gray-500/30"
               }`}
             >
               <CardHeader>
@@ -177,16 +164,12 @@ export function LocationBasedMissions() {
                 <CardTitle className="text-lg">{mission.title}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm text-muted-foreground">
-                  {mission.description}
-                </p>
+                <p className="text-sm text-muted-foreground">{mission.description}</p>
 
                 <div className="flex items-center gap-2 text-sm">
                   <MapPin className="h-4 w-4 text-blue-400" />
                   <span>{mission.location}</span>
-                  <span className="text-muted-foreground">
-                    ({mission.distance}km away)
-                  </span>
+                  <span className="text-muted-foreground">({mission.distance}km away)</span>
                 </div>
 
                 <div className="space-y-2">
@@ -197,9 +180,7 @@ export function LocationBasedMissions() {
                     </span>
                   </div>
                   <Progress
-                    value={
-                      (mission.participants / mission.maxParticipants) * 100
-                    }
+                    value={(mission.participants / mission.maxParticipants) * 100}
                     className="h-2"
                   />
                 </div>

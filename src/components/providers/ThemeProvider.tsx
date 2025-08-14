@@ -71,11 +71,7 @@ function LockProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("gaia-ui-lock", JSON.stringify(newLockState));
   };
 
-  return (
-    <LockContext.Provider value={{ isLocked, toggleLock }}>
-      {children}
-    </LockContext.Provider>
-  );
+  return <LockContext.Provider value={{ isLocked, toggleLock }}>{children}</LockContext.Provider>;
 }
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {

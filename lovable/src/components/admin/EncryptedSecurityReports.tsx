@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Shield,
-  Download,
-  FileText,
-  Lock,
-  Zap,
-  Brain,
-  Crown,
-  Target,
-} from "lucide-react";
+import { Shield, Download, FileText, Lock, Zap, Brain, Crown, Target } from "lucide-react";
 import { toast } from "sonner";
 
 interface SecurityReport {
@@ -27,19 +18,14 @@ interface SecurityReport {
 
 export function EncryptedSecurityReports() {
   const [reports, setReports] = useState<SecurityReport[]>([]);
-  const [currentReport, setCurrentReport] = useState<SecurityReport | null>(
-    null,
-  );
+  const [currentReport, setCurrentReport] = useState<SecurityReport | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
   useEffect(() => {
     generateDailyReport();
 
     // Generate new report every 24 hours
-    const reportInterval = setInterval(
-      generateDailyReport,
-      24 * 60 * 60 * 1000,
-    );
+    const reportInterval = setInterval(generateDailyReport, 24 * 60 * 60 * 1000);
 
     return () => clearInterval(reportInterval);
   }, []);
@@ -140,8 +126,7 @@ This report will self-destruct if unauthorized access is detected.
       URL.revokeObjectURL(url);
 
       toast.success("🔐 Encrypted Security Report Downloaded", {
-        description:
-          "Admin-only security report has been generated and encrypted",
+        description: "Admin-only security report has been generated and encrypted",
         duration: 5000,
       });
     } catch (error) {
@@ -169,20 +154,14 @@ This report will self-destruct if unauthorized access is detected.
               CLASSIFIED - QUANTUM ENCRYPTED DATABASE
             </h3>
             <p className="text-red-300 text-sm mb-3">
-              🔐 Database Protection: WATERCLOSED - Will self-destruct if
-              unauthorized access detected
+              🔐 Database Protection: WATERCLOSED - Will self-destruct if unauthorized access
+              detected
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
-              <Badge className="bg-red-600 text-white">
-                🛡️ Quantum Encrypted
-              </Badge>
-              <Badge className="bg-orange-600 text-white">
-                🔥 Self-Destructing
-              </Badge>
+              <Badge className="bg-red-600 text-white">🛡️ Quantum Encrypted</Badge>
+              <Badge className="bg-orange-600 text-white">🔥 Self-Destructing</Badge>
               <Badge className="bg-purple-600 text-white">👑 Admin Only</Badge>
-              <Badge className="bg-green-600 text-white">
-                💾 Zero Leakages
-              </Badge>
+              <Badge className="bg-green-600 text-white">💾 Zero Leakages</Badge>
             </div>
           </div>
 
@@ -199,29 +178,18 @@ This report will self-destruct if unauthorized access is detected.
                     <div className="text-2xl font-bold text-green-400">
                       {currentReport.systemHealth}%
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      System Health
-                    </p>
-                    <Progress
-                      value={currentReport.systemHealth}
-                      className="mt-2"
-                    />
+                    <p className="text-sm text-muted-foreground">System Health</p>
+                    <Progress value={currentReport.systemHealth} className="mt-2" />
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-red-400">
-                      {currentReport.threats}
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      Threats Neutralized
-                    </p>
+                    <div className="text-2xl font-bold text-red-400">{currentReport.threats}</div>
+                    <p className="text-sm text-muted-foreground">Threats Neutralized</p>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-purple-400">
                       {currentReport.encryptionLevel.split("_").length}
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      Security Layers
-                    </p>
+                    <p className="text-sm text-muted-foreground">Security Layers</p>
                   </div>
                 </div>
 
@@ -232,10 +200,7 @@ This report will self-destruct if unauthorized access is detected.
                   </h4>
                   <div className="space-y-1 text-sm">
                     {currentReport.improvements.map((improvement, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-2 text-cyan-200"
-                      >
+                      <div key={index} className="flex items-center gap-2 text-cyan-200">
                         <Target className="h-3 w-3 text-green-400" />
                         {improvement}
                       </div>
@@ -302,12 +267,9 @@ This report will self-destruct if unauthorized access is detected.
                     className="flex items-center justify-between p-3 rounded-lg bg-muted/20"
                   >
                     <div>
-                      <div className="font-medium text-white">
-                        {report.date}
-                      </div>
+                      <div className="font-medium text-white">{report.date}</div>
                       <div className="text-sm text-muted-foreground">
-                        {report.threats} threats neutralized •{" "}
-                        {report.systemHealth}% health
+                        {report.threats} threats neutralized • {report.systemHealth}% health
                       </div>
                     </div>
                     <Badge className="bg-purple-600 text-white">Archived</Badge>

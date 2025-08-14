@@ -101,24 +101,18 @@ export function TokenWarfareSystem() {
 
       // Simulate battle outcome
       setTimeout(() => {
-        const winner =
-          token.power > mockOpponent.power ? "You" : "Shadow Fighter";
+        const winner = token.power > mockOpponent.power ? "You" : "Shadow Fighter";
         const updatedBattle = {
           ...newBattle,
           status: "completed" as const,
           winner,
         };
 
-        setActiveBattles((prev) =>
-          prev.map((b) => (b.id === newBattle.id ? updatedBattle : b)),
-        );
+        setActiveBattles((prev) => prev.map((b) => (b.id === newBattle.id ? updatedBattle : b)));
 
         if (winner === "You") {
           toast.success(`🏆 Victory! You won ${mockOpponent.name} token!`);
-          setUserTokens((prev) => [
-            ...prev,
-            { ...mockOpponent, owner: "Player1" },
-          ]);
+          setUserTokens((prev) => [...prev, { ...mockOpponent, owner: "Player1" }]);
         } else {
           toast.error(`💀 Defeat! You lost ${token.name} token!`);
           setUserTokens((prev) => prev.filter((t) => t.id !== token.id));
@@ -134,8 +128,7 @@ export function TokenWarfareSystem() {
           ⚔️ Token Warfare Arena
         </h2>
         <p className="text-muted-foreground">
-          Battle with your custom tokens in Tekken-style combat. Winner takes
-          all!
+          Battle with your custom tokens in Tekken-style combat. Winner takes all!
         </p>
       </div>
 
@@ -158,9 +151,7 @@ export function TokenWarfareSystem() {
                   <div className="text-center mb-3">
                     <div className="text-4xl mb-2">{token.image}</div>
                     <h3 className="font-bold text-purple-300">{token.name}</h3>
-                    <Badge className={getRarityColor(token.rarity)}>
-                      {token.rarity}
-                    </Badge>
+                    <Badge className={getRarityColor(token.rarity)}>{token.rarity}</Badge>
                   </div>
 
                   <div className="space-y-2">
@@ -219,12 +210,8 @@ export function TokenWarfareSystem() {
                     <div className="grid grid-cols-3 gap-4 items-center">
                       {/* Player 1 */}
                       <div className="text-center">
-                        <div className="text-2xl mb-1">
-                          {battle.player1Token.image}
-                        </div>
-                        <h4 className="font-bold text-red-300">
-                          {battle.player1Token.name}
-                        </h4>
+                        <div className="text-2xl mb-1">{battle.player1Token.image}</div>
+                        <h4 className="font-bold text-red-300">{battle.player1Token.name}</h4>
                         <div className="text-sm text-red-400">
                           Power: {battle.player1Token.power}
                         </div>
@@ -235,9 +222,7 @@ export function TokenWarfareSystem() {
 
                       {/* VS */}
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-yellow-400 animate-pulse">
-                          ⚔️
-                        </div>
+                        <div className="text-2xl font-bold text-yellow-400 animate-pulse">⚔️</div>
                         <div className="text-sm text-yellow-300">
                           {battle.status === "active"
                             ? "FIGHTING!"
@@ -246,20 +231,14 @@ export function TokenWarfareSystem() {
                               : "PENDING"}
                         </div>
                         {battle.winner && (
-                          <Badge className="mt-1 bg-yellow-600">
-                            Winner: {battle.winner}
-                          </Badge>
+                          <Badge className="mt-1 bg-yellow-600">Winner: {battle.winner}</Badge>
                         )}
                       </div>
 
                       {/* Player 2 */}
                       <div className="text-center">
-                        <div className="text-2xl mb-1">
-                          {battle.player2Token.image}
-                        </div>
-                        <h4 className="font-bold text-red-300">
-                          {battle.player2Token.name}
-                        </h4>
+                        <div className="text-2xl mb-1">{battle.player2Token.image}</div>
+                        <h4 className="font-bold text-red-300">{battle.player2Token.name}</h4>
                         <div className="text-sm text-red-400">
                           Power: {battle.player2Token.power}
                         </div>
@@ -289,17 +268,13 @@ export function TokenWarfareSystem() {
             <div className="text-center p-4 bg-green-800/20 rounded-lg">
               <Target className="h-8 w-8 mx-auto mb-2 text-green-400" />
               <h4 className="font-bold text-green-300">Gaia Fantasy Access</h4>
-              <p className="text-sm text-green-400/80">
-                Win battles to unlock special features
-              </p>
+              <p className="text-sm text-green-400/80">Win battles to unlock special features</p>
             </div>
 
             <div className="text-center p-4 bg-green-800/20 rounded-lg">
               <Users className="h-8 w-8 mx-auto mb-2 text-green-400" />
               <h4 className="font-bold text-green-300">Opponent Tokens</h4>
-              <p className="text-sm text-green-400/80">
-                Collect defeated tokens for your arsenal
-              </p>
+              <p className="text-sm text-green-400/80">Collect defeated tokens for your arsenal</p>
             </div>
 
             <div className="text-center p-4 bg-green-800/20 rounded-lg">

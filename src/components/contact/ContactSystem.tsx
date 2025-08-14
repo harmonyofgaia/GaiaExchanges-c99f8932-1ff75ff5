@@ -38,16 +38,14 @@ export function ContactSystem() {
       }
 
       // Store contact in database for tracking
-      const { error: dbError } = await supabase
-        .from("contact_submissions")
-        .insert({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          contact_type: formData.contactType,
-          status: "sent",
-        });
+      const { error: dbError } = await supabase.from("contact_submissions").insert({
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        contact_type: formData.contactType,
+        status: "sent",
+      });
 
       if (dbError) {
         console.error("Database error:", dbError);
@@ -69,8 +67,7 @@ export function ContactSystem() {
     } catch (error) {
       console.error("Contact form error:", error);
       toast.error("Failed to send message", {
-        description:
-          "Please try again or contact us directly at info@cultureofharmony.net",
+        description: "Please try again or contact us directly at info@cultureofharmony.net",
       });
     } finally {
       setIsSubmitting(false);
@@ -95,8 +92,7 @@ export function ContactSystem() {
             Contact Culture of Harmony
           </CardTitle>
           <p className="text-muted-foreground">
-            Get in touch with us at info@cultureofharmony.net - We respond
-            within 24 hours
+            Get in touch with us at info@cultureofharmony.net - We respond within 24 hours
           </p>
         </CardHeader>
         <CardContent>
@@ -108,9 +104,7 @@ export function ContactSystem() {
                   id="name"
                   type="text"
                   value={formData.name}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, name: e.target.value }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                   required
                   placeholder="Your full name"
                 />
@@ -121,9 +115,7 @@ export function ContactSystem() {
                   id="email"
                   type="email"
                   value={formData.email}
-                  onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, email: e.target.value }))
-                  }
+                  onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
                   required
                   placeholder="your@email.com"
                 />
@@ -157,9 +149,7 @@ export function ContactSystem() {
                 id="subject"
                 type="text"
                 value={formData.subject}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, subject: e.target.value }))
-                }
+                onChange={(e) => setFormData((prev) => ({ ...prev, subject: e.target.value }))}
                 required
                 placeholder="What is this about?"
               />
@@ -170,9 +160,7 @@ export function ContactSystem() {
               <Textarea
                 id="message"
                 value={formData.message}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, message: e.target.value }))
-                }
+                onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
                 required
                 placeholder="Please provide details about your inquiry..."
                 className="min-h-[120px]"
@@ -227,15 +215,11 @@ export function ContactSystem() {
           </div>
 
           <div className="bg-gradient-to-r from-green-900/20 to-blue-900/20 rounded-lg p-4">
-            <h4 className="font-medium text-purple-400 mb-2">
-              About Culture of Harmony
-            </h4>
+            <h4 className="font-medium text-purple-400 mb-2">About Culture of Harmony</h4>
             <p className="text-sm text-muted-foreground">
-              We are building the future of sustainable cryptocurrency and
-              environmental blockchain technology. Our mission is to create
-              tools that not only advance financial technology but also
-              contribute to healing our planet. Together we make the world a
-              better place.
+              We are building the future of sustainable cryptocurrency and environmental blockchain
+              technology. Our mission is to create tools that not only advance financial technology
+              but also contribute to healing our planet. Together we make the world a better place.
             </p>
           </div>
         </CardContent>

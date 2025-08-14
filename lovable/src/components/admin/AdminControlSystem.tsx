@@ -31,9 +31,7 @@ export function AdminControlSystem() {
       console.log("🌟 ADMIN SECURITY: GROWING STRONGER EVERY MILLISECOND");
 
       setActiveConnections((prev) => prev + Math.floor(Math.random() * 10) - 5);
-      setSecurityLevel((prev) =>
-        Math.max(90, Math.min(100, prev + (Math.random() - 0.5) * 2)),
-      );
+      setSecurityLevel((prev) => Math.max(90, Math.min(100, prev + (Math.random() - 0.5) * 2)));
     }, 1000);
 
     return () => clearInterval(interval);
@@ -48,15 +46,9 @@ export function AdminControlSystem() {
             ⚙️ ADMIN CONTROL SYSTEM - GODFATHER MODE ACTIVE
           </CardTitle>
           <div className="flex gap-4 text-sm">
-            <Badge className="bg-green-600 animate-pulse">
-              🚀 SYSTEM: {systemStatus}
-            </Badge>
-            <Badge className="bg-blue-600">
-              🔒 SECURITY: {securityLevel.toFixed(1)}%
-            </Badge>
-            <Badge className="bg-purple-600">
-              👥 CONNECTIONS: {activeConnections}
-            </Badge>
+            <Badge className="bg-green-600 animate-pulse">🚀 SYSTEM: {systemStatus}</Badge>
+            <Badge className="bg-blue-600">🔒 SECURITY: {securityLevel.toFixed(1)}%</Badge>
+            <Badge className="bg-purple-600">👥 CONNECTIONS: {activeConnections}</Badge>
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -86,9 +78,7 @@ export function AdminControlSystem() {
             <div>
               <div className="flex justify-between mb-2">
                 <span className="text-white">Security Level</span>
-                <span className="text-blue-400">
-                  {securityLevel.toFixed(1)}%
-                </span>
+                <span className="text-blue-400">{securityLevel.toFixed(1)}%</span>
               </div>
               <Progress value={securityLevel} className="h-2" />
             </div>

@@ -346,7 +346,7 @@ export default function CommunityMissionVoting() {
           return updatedMission;
         }
         return mission;
-      }),
+      })
     );
 
     const mission = missions.find((m) => m.id === missionId);
@@ -409,8 +409,7 @@ export default function CommunityMissionVoting() {
 
   const getRankChangeIcon = (change: number) => {
     if (change > 0) return <TrendingUp className="h-3 w-3 text-green-400" />;
-    if (change < 0)
-      return <TrendingUp className="h-3 w-3 text-red-400 rotate-180" />;
+    if (change < 0) return <TrendingUp className="h-3 w-3 text-red-400 rotate-180" />;
     return <span className="w-3 h-3 text-gray-400">-</span>;
   };
 
@@ -424,8 +423,7 @@ export default function CommunityMissionVoting() {
             🗳️ Community Mission Voting & Leaderboard
           </h1>
           <p className="text-xl text-muted-foreground">
-            Vote on Environmental Missions • Compete for Impact • Build a Better
-            World Together
+            Vote on Environmental Missions • Compete for Impact • Build a Better World Together
           </p>
         </div>
 
@@ -443,9 +441,7 @@ export default function CommunityMissionVoting() {
                 <div className="text-2xl font-bold text-green-400">
                   {communityStats.total_missions}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Total Missions
-                </div>
+                <div className="text-sm text-muted-foreground">Total Missions</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-400">
@@ -463,9 +459,7 @@ export default function CommunityMissionVoting() {
                 <div className="text-2xl font-bold text-yellow-400">
                   ${(communityStats.total_funding / 1000000).toFixed(1)}M
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Total Funding
-                </div>
+                <div className="text-sm text-muted-foreground">Total Funding</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-cyan-400">
@@ -481,11 +475,7 @@ export default function CommunityMissionVoting() {
               </div>
               <div className="text-center">
                 <div className="text-lg font-bold text-red-400">
-                  {(
-                    communityStats.environmental_impact.total_carbon_saved /
-                    1000
-                  ).toFixed(0)}
-                  T
+                  {(communityStats.environmental_impact.total_carbon_saved / 1000).toFixed(0)}T
                 </div>
                 <div className="text-sm text-muted-foreground">CO₂ Saved</div>
               </div>
@@ -503,36 +493,23 @@ export default function CommunityMissionVoting() {
           <TabsContent value="missions" className="space-y-4">
             <div className="space-y-6">
               {missions.map((mission) => (
-                <Card
-                  key={mission.id}
-                  className="border-gray-500/20 bg-black/20"
-                >
+                <Card key={mission.id} className="border-gray-500/20 bg-black/20">
                   <CardContent className="pt-6">
                     <div className="space-y-4">
                       {/* Mission Header */}
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <h3 className="text-xl font-bold text-white">
-                              {mission.title}
-                            </h3>
-                            <Badge
-                              variant="outline"
-                              className={getCategoryColor(mission.category)}
-                            >
+                            <h3 className="text-xl font-bold text-white">{mission.title}</h3>
+                            <Badge variant="outline" className={getCategoryColor(mission.category)}>
                               {getCategoryIcon(mission.category)}
                               {mission.category.replace("_", " ")}
                             </Badge>
-                            <Badge
-                              variant="outline"
-                              className={getStatusColor(mission.status)}
-                            >
+                            <Badge variant="outline" className={getStatusColor(mission.status)}>
                               {mission.status}
                             </Badge>
                           </div>
-                          <p className="text-muted-foreground mb-3">
-                            {mission.description}
-                          </p>
+                          <p className="text-muted-foreground mb-3">{mission.description}</p>
                           <div className="flex items-center gap-4 text-sm text-muted-foreground">
                             <div className="flex items-center gap-1">
                               <MapPin className="h-3 w-3" />
@@ -560,10 +537,7 @@ export default function CommunityMissionVoting() {
                           </span>
                         </div>
                         <Progress
-                          value={
-                            (mission.current_funding / mission.target_amount) *
-                            100
-                          }
+                          value={(mission.current_funding / mission.target_amount) * 100}
                           className="h-2"
                         />
                       </div>
@@ -571,9 +545,7 @@ export default function CommunityMissionVoting() {
                       {/* Voting Section */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-3">
-                          <h4 className="font-semibold text-white">
-                            Community Voting
-                          </h4>
+                          <h4 className="font-semibold text-white">Community Voting</h4>
                           <div className="space-y-2">
                             <div className="flex justify-between items-center">
                               <div className="flex items-center gap-2">
@@ -581,17 +553,11 @@ export default function CommunityMissionVoting() {
                                 <span>Support ({mission.votes_for})</span>
                               </div>
                               <div className="text-green-400 font-bold">
-                                {Math.round(
-                                  (mission.votes_for / mission.total_voters) *
-                                    100,
-                                )}
-                                %
+                                {Math.round((mission.votes_for / mission.total_voters) * 100)}%
                               </div>
                             </div>
                             <Progress
-                              value={
-                                (mission.votes_for / mission.total_voters) * 100
-                              }
+                              value={(mission.votes_for / mission.total_voters) * 100}
                               className="h-1"
                             />
 
@@ -601,19 +567,11 @@ export default function CommunityMissionVoting() {
                                 <span>Against ({mission.votes_against})</span>
                               </div>
                               <div className="text-red-400 font-bold">
-                                {Math.round(
-                                  (mission.votes_against /
-                                    mission.total_voters) *
-                                    100,
-                                )}
-                                %
+                                {Math.round((mission.votes_against / mission.total_voters) * 100)}%
                               </div>
                             </div>
                             <Progress
-                              value={
-                                (mission.votes_against / mission.total_voters) *
-                                100
-                              }
+                              value={(mission.votes_against / mission.total_voters) * 100}
                               className="h-1"
                             />
                           </div>
@@ -625,30 +583,22 @@ export default function CommunityMissionVoting() {
                                 className={`flex-1 ${mission.user_vote === "for" ? "bg-green-600" : "bg-green-600/70"} hover:bg-green-700`}
                               >
                                 <ThumbsUp className="h-4 w-4 mr-2" />
-                                {mission.user_vote === "for"
-                                  ? "Voted Support"
-                                  : "Vote Support"}
+                                {mission.user_vote === "for" ? "Voted Support" : "Vote Support"}
                               </Button>
                               <Button
-                                onClick={() =>
-                                  voteOnMission(mission.id, "against")
-                                }
+                                onClick={() => voteOnMission(mission.id, "against")}
                                 variant="outline"
                                 className={`flex-1 ${mission.user_vote === "against" ? "border-red-500 text-red-400" : "border-gray-500"}`}
                               >
                                 <ThumbsDown className="h-4 w-4 mr-2" />
-                                {mission.user_vote === "against"
-                                  ? "Voted Against"
-                                  : "Vote Against"}
+                                {mission.user_vote === "against" ? "Voted Against" : "Vote Against"}
                               </Button>
                             </div>
                           )}
                         </div>
 
                         <div className="space-y-3">
-                          <h4 className="font-semibold text-white">
-                            Expected Impact
-                          </h4>
+                          <h4 className="font-semibold text-white">Expected Impact</h4>
                           <div className="space-y-2">
                             <div className="flex justify-between">
                               <span className="flex items-center gap-2">
@@ -656,8 +606,7 @@ export default function CommunityMissionVoting() {
                                 CO₂ Reduction
                               </span>
                               <span className="font-bold text-blue-400">
-                                {mission.impact_metrics.carbon_reduction.toLocaleString()}{" "}
-                                kg
+                                {mission.impact_metrics.carbon_reduction.toLocaleString()} kg
                               </span>
                             </div>
                             {mission.impact_metrics.trees_planted > 0 && (
@@ -710,10 +659,7 @@ export default function CommunityMissionVoting() {
               <CardContent>
                 <div className="space-y-4">
                   {leaderboard.map((user) => (
-                    <Card
-                      key={user.id}
-                      className="border-gray-500/20 bg-black/10"
-                    >
+                    <Card key={user.id} className="border-gray-500/20 bg-black/10">
                       <CardContent className="pt-4">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-4">
@@ -732,18 +678,14 @@ export default function CommunityMissionVoting() {
                                 {user.rank <= 3 ? "👑" : user.avatar}
                               </div>
                               <div className="flex items-center gap-1 mt-1">
-                                <span className="text-lg font-bold">
-                                  #{user.rank}
-                                </span>
+                                <span className="text-lg font-bold">#{user.rank}</span>
                                 {getRankChangeIcon(user.rank_change)}
                               </div>
                             </div>
 
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-1">
-                                <h3 className="font-bold text-white text-lg">
-                                  {user.username}
-                                </h3>
+                                <h3 className="font-bold text-white text-lg">{user.username}</h3>
                                 <Badge
                                   variant="outline"
                                   className="border-purple-500/50 text-purple-400"
@@ -754,36 +696,26 @@ export default function CommunityMissionVoting() {
 
                               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-2">
                                 <div>
-                                  <div className="text-sm text-muted-foreground">
-                                    Eco Score
-                                  </div>
+                                  <div className="text-sm text-muted-foreground">Eco Score</div>
                                   <div className="font-bold text-green-400">
                                     {user.eco_score.toLocaleString()}
                                   </div>
                                 </div>
                                 <div>
-                                  <div className="text-sm text-muted-foreground">
-                                    Missions
-                                  </div>
+                                  <div className="text-sm text-muted-foreground">Missions</div>
                                   <div className="font-bold text-blue-400">
                                     {user.missions_completed}
                                   </div>
                                 </div>
                                 <div>
-                                  <div className="text-sm text-muted-foreground">
-                                    Tokens
-                                  </div>
+                                  <div className="text-sm text-muted-foreground">Tokens</div>
                                   <div className="font-bold text-yellow-400">
                                     {user.tokens_earned.toLocaleString()}
                                   </div>
                                 </div>
                                 <div>
-                                  <div className="text-sm text-muted-foreground">
-                                    Votes Cast
-                                  </div>
-                                  <div className="font-bold text-purple-400">
-                                    {user.votes_cast}
-                                  </div>
+                                  <div className="text-sm text-muted-foreground">Votes Cast</div>
+                                  <div className="font-bold text-purple-400">{user.votes_cast}</div>
                                 </div>
                               </div>
 
@@ -803,9 +735,7 @@ export default function CommunityMissionVoting() {
                           </div>
 
                           <div className="text-right">
-                            <div className="text-sm text-muted-foreground">
-                              Joined
-                            </div>
+                            <div className="text-sm text-muted-foreground">Joined</div>
                             <div className="text-sm text-white">
                               {user.join_date.toLocaleDateString()}
                             </div>
@@ -823,9 +753,7 @@ export default function CommunityMissionVoting() {
             <div className="grid gap-4 md:grid-cols-2">
               <Card className="border-green-500/20">
                 <CardHeader>
-                  <CardTitle className="text-green-400">
-                    Mission Success Rates
-                  </CardTitle>
+                  <CardTitle className="text-green-400">Mission Success Rates</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -852,23 +780,16 @@ export default function CommunityMissionVoting() {
 
               <Card className="border-blue-500/20">
                 <CardHeader>
-                  <CardTitle className="text-blue-400">
-                    Global Environmental Impact
-                  </CardTitle>
+                  <CardTitle className="text-blue-400">Global Environmental Impact</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="text-center">
                       <div className="text-3xl font-bold text-green-400 mb-2">
-                        {(
-                          communityStats.environmental_impact
-                            .total_carbon_saved / 1000
-                        ).toFixed(1)}
+                        {(communityStats.environmental_impact.total_carbon_saved / 1000).toFixed(1)}
                         T
                       </div>
-                      <div className="text-sm text-muted-foreground">
-                        Total CO₂ Saved
-                      </div>
+                      <div className="text-sm text-muted-foreground">Total CO₂ Saved</div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4 text-center">
@@ -876,28 +797,21 @@ export default function CommunityMissionVoting() {
                         <div className="text-xl font-bold text-blue-400">
                           {communityStats.environmental_impact.total_trees_planted.toLocaleString()}
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          Trees Planted
-                        </div>
+                        <div className="text-xs text-muted-foreground">Trees Planted</div>
                       </div>
                       <div>
                         <div className="text-xl font-bold text-purple-400">
                           {(
-                            communityStats.environmental_impact
-                              .total_people_impacted / 1000
+                            communityStats.environmental_impact.total_people_impacted / 1000
                           ).toFixed(0)}
                           K
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          People Impacted
-                        </div>
+                        <div className="text-xs text-muted-foreground">People Impacted</div>
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <div className="text-sm font-medium">
-                        This Month's Progress:
-                      </div>
+                      <div className="text-sm font-medium">This Month's Progress:</div>
                       <div className="space-y-1">
                         <div className="flex justify-between text-sm">
                           <span>New Missions</span>

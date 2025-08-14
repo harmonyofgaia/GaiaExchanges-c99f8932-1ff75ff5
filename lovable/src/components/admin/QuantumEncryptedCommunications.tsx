@@ -34,24 +34,18 @@ export function QuantumEncryptedCommunications() {
       <CardContent className="space-y-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="bg-black/30 p-4 rounded-lg border border-blue-500/20">
-            <div className="text-2xl font-bold text-blue-400">
-              {encryptionLevel}%
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{encryptionLevel}%</div>
             <div className="text-sm text-blue-300">Quantum Encryption</div>
             <Progress value={encryptionLevel} className="h-2 mt-2" />
           </div>
 
           <div className="bg-black/30 p-4 rounded-lg border border-purple-500/20">
-            <div className="text-2xl font-bold text-purple-400">
-              {activeChannels}
-            </div>
+            <div className="text-2xl font-bold text-purple-400">{activeChannels}</div>
             <div className="text-sm text-purple-300">Active Channels</div>
           </div>
 
           <div className="bg-black/30 p-4 rounded-lg border border-green-500/20">
-            <div className="text-2xl font-bold text-green-400">
-              {quantumKeys.toLocaleString()}
-            </div>
+            <div className="text-2xl font-bold text-green-400">{quantumKeys.toLocaleString()}</div>
             <div className="text-sm text-green-300">Quantum Keys</div>
           </div>
 
@@ -75,9 +69,7 @@ export function QuantumEncryptedCommunications() {
           <div className="flex items-center justify-between p-3 bg-purple-900/20 rounded-lg border border-purple-500/30">
             <div className="flex items-center gap-3">
               <Lock className="h-4 w-4 text-purple-400" />
-              <span className="text-purple-300">
-                Emergency Protocol Channel
-              </span>
+              <span className="text-purple-300">Emergency Protocol Channel</span>
             </div>
             <div className="text-green-400 text-sm">QUANTUM SECURED</div>
           </div>
@@ -85,9 +77,7 @@ export function QuantumEncryptedCommunications() {
           <div className="flex items-center justify-between p-3 bg-green-900/20 rounded-lg border border-green-500/30">
             <div className="flex items-center gap-3">
               <Zap className="h-4 w-4 text-green-400" />
-              <span className="text-green-300">
-                Global Coordination Channel
-              </span>
+              <span className="text-green-300">Global Coordination Channel</span>
             </div>
             <div className="text-green-400 text-sm">QUANTUM SECURED</div>
           </div>
@@ -115,9 +105,7 @@ export function QuantumEncryptedCommunications() {
         </div>
 
         <div className="text-center p-4 bg-gradient-to-r from-blue-900/20 to-purple-900/20 rounded-lg border border-blue-500/20">
-          <div className="text-blue-400 font-bold">
-            🔐 QUANTUM COMMUNICATIONS STATUS
-          </div>
+          <div className="text-blue-400 font-bold">🔐 QUANTUM COMMUNICATIONS STATUS</div>
           <div className="text-green-400 text-sm mt-1">
             ALL CHANNELS SECURE • QUANTUM PROTECTED • UNBREAKABLE
           </div>

@@ -65,8 +65,7 @@ export function OmniscientGPSEngine() {
       { lat: 41.9028, lng: 12.4964, name: "Rome, Italy" },
     ];
 
-    const randomCity =
-      majorCities[Math.floor(Math.random() * majorCities.length)];
+    const randomCity = majorCities[Math.floor(Math.random() * majorCities.length)];
 
     return {
       latitude: randomCity.lat + (Math.random() - 0.5) * 0.1,
@@ -81,9 +80,7 @@ export function OmniscientGPSEngine() {
     };
   };
 
-  const generatePredictedPath = (
-    currentLocation: LocationData,
-  ): LocationData[] => {
+  const generatePredictedPath = (currentLocation: LocationData): LocationData[] => {
     const path: LocationData[] = [];
     let lat = currentLocation.latitude;
     let lng = currentLocation.longitude;
@@ -114,10 +111,7 @@ export function OmniscientGPSEngine() {
         updated[existingIndex] = {
           ...updated[existingIndex],
           currentLocation: location,
-          locationHistory: [
-            ...updated[existingIndex].locationHistory,
-            location,
-          ].slice(-50),
+          locationHistory: [...updated[existingIndex].locationHistory, location].slice(-50),
           lastUpdate: Date.now(),
         };
         return updated;
@@ -186,7 +180,7 @@ export function OmniscientGPSEngine() {
             duration: 5000,
           });
         },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
     } else {
       const simulatedLocation = generateRealisticLocation();
@@ -234,12 +228,8 @@ export function OmniscientGPSEngine() {
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
               <Eye className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-xl font-bold text-blue-400">
-                {targets.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Targets
-              </div>
+              <div className="text-xl font-bold text-blue-400">{targets.length}</div>
+              <div className="text-sm text-muted-foreground">Active Targets</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
               <Target className="h-8 w-8 mx-auto text-purple-400 mb-2" />
@@ -261,26 +251,17 @@ export function OmniscientGPSEngine() {
                 placeholder="Enter target identifier (IP, phone, email, device ID, etc.)"
                 className="flex-1"
               />
-              <Button
-                type="submit"
-                disabled={isTracking}
-                className="bg-blue-600 hover:bg-blue-700"
-              >
+              <Button type="submit" disabled={isTracking} className="bg-blue-600 hover:bg-blue-700">
                 {isTracking ? "Tracking..." : "Track"}
               </Button>
             </div>
           </form>
 
           {targets.map((target) => (
-            <Card
-              key={target.id}
-              className="border-green-500/30 bg-green-900/20"
-            >
+            <Card key={target.id} className="border-green-500/30 bg-green-900/20">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <div className="font-bold text-green-400">
-                    {target.identifier}
-                  </div>
+                  <div className="font-bold text-green-400">{target.identifier}</div>
                   <Badge className="bg-green-600 animate-pulse">TRACKED</Badge>
                 </div>
                 <div className="grid grid-cols-2 gap-4 text-sm">
@@ -337,10 +318,7 @@ export function OmniscientGPSEngine() {
           🛰️ UNKNOWABLY POWERFUL Tracking Capabilities
         </h4>
         <div className="text-sm text-blue-300 space-y-1">
-          <div>
-            ✅ Multi-satellite constellation tracking (GPS, GLONASS, Galileo,
-            BeiDou)
-          </div>
+          <div>✅ Multi-satellite constellation tracking (GPS, GLONASS, Galileo, BeiDou)</div>
           <div>✅ Cellular tower triangulation with sub-meter accuracy</div>
           <div>✅ WiFi fingerprinting and Bluetooth beacon analysis</div>
           <div>✅ Advanced IP geolocation with ISP database correlation</div>

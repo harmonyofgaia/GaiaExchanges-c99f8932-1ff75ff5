@@ -58,8 +58,7 @@ export function PersistentEvolutionEngine() {
       if (offlineHours > 0.1) {
         // More than 6 minutes offline
         const offlineGrowth =
-          Math.pow(metrics.evolutionRate, offlineHours * 60) *
-          metrics.offlineGrowthMultiplier;
+          Math.pow(metrics.evolutionRate, offlineHours * 60) * metrics.offlineGrowthMultiplier;
 
         setMetrics((prev) => ({
           ...prev,
@@ -78,7 +77,7 @@ export function PersistentEvolutionEngine() {
         }));
 
         console.log(
-          `🌟 OFFLINE GROWTH: ${offlineHours.toFixed(1)} hours = ${(offlineGrowth * 100 - 100).toFixed(1)}% power increase`,
+          `🌟 OFFLINE GROWTH: ${offlineHours.toFixed(1)} hours = ${(offlineGrowth * 100 - 100).toFixed(1)}% power increase`
         );
         toast.success("🚀 System Evolved While Offline!", {
           description: `${offlineHours.toFixed(1)} hours of growth applied - All systems stronger!`,
@@ -103,23 +102,17 @@ export function PersistentEvolutionEngine() {
             blockchain: prev.powerLevels.blockchain * prev.evolutionRate,
             animalRescue: prev.powerLevels.animalRescue * prev.evolutionRate,
             gpsTracking: prev.powerLevels.gpsTracking * prev.evolutionRate,
-            landscapeBuilder:
-              prev.powerLevels.landscapeBuilder * prev.evolutionRate,
+            landscapeBuilder: prev.powerLevels.landscapeBuilder * prev.evolutionRate,
             adminControl: prev.powerLevels.adminControl * prev.evolutionRate,
-            securityEngine:
-              prev.powerLevels.securityEngine * prev.evolutionRate,
+            securityEngine: prev.powerLevels.securityEngine * prev.evolutionRate,
             quantumCore: prev.powerLevels.quantumCore * prev.evolutionRate,
-            aiIntelligence:
-              prev.powerLevels.aiIntelligence * prev.evolutionRate,
+            aiIntelligence: prev.powerLevels.aiIntelligence * prev.evolutionRate,
           },
           lastActiveTimestamp: Date.now(),
         };
 
         // Save to localStorage every evolution
-        localStorage.setItem(
-          "gaia_evolution_metrics",
-          JSON.stringify(newMetrics),
-        );
+        localStorage.setItem("gaia_evolution_metrics", JSON.stringify(newMetrics));
 
         return newMetrics;
       });
@@ -162,16 +155,14 @@ export function PersistentEvolutionEngine() {
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
-    return () =>
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
   }, [metrics.lastActiveTimestamp]);
 
   // Milestone notifications
   useEffect(() => {
     const powerMilestones = [1000, 5000, 10000, 50000, 100000, 500000, 1000000];
     const currentMilestone = powerMilestones.find(
-      (m) =>
-        metrics.totalSystemPower >= m && metrics.totalSystemPower < m * 1.1,
+      (m) => metrics.totalSystemPower >= m && metrics.totalSystemPower < m * 1.1
     );
 
     if (currentMilestone && metrics.totalSystemPower % 1000 < 10) {
@@ -186,26 +177,22 @@ export function PersistentEvolutionEngine() {
   useEffect(() => {
     if (Math.floor(metrics.totalSystemPower) % 100 < 2) {
       console.log("📊 EVOLUTION STATUS:");
+      console.log(`🔥 Total Power: ${Math.floor(metrics.totalSystemPower).toLocaleString()}`);
       console.log(
-        `🔥 Total Power: ${Math.floor(metrics.totalSystemPower).toLocaleString()}`,
+        `⚡ Evolution Rate: ${((metrics.evolutionRate - 1) * 100).toFixed(4)}% per second`
       );
       console.log(
-        `⚡ Evolution Rate: ${((metrics.evolutionRate - 1) * 100).toFixed(4)}% per second`,
+        `🌍 GPS Tracking: ${Math.floor(metrics.powerLevels.gpsTracking).toLocaleString()}`
       );
       console.log(
-        `🌍 GPS Tracking: ${Math.floor(metrics.powerLevels.gpsTracking).toLocaleString()}`,
+        `🦎 Animal Rescue: ${Math.floor(metrics.powerLevels.animalRescue).toLocaleString()}`
+      );
+      console.log(`⛓️ Blockchain: ${Math.floor(metrics.powerLevels.blockchain).toLocaleString()}`);
+      console.log(
+        `🏔️ Landscape Builder: ${Math.floor(metrics.powerLevels.landscapeBuilder).toLocaleString()}`
       );
       console.log(
-        `🦎 Animal Rescue: ${Math.floor(metrics.powerLevels.animalRescue).toLocaleString()}`,
-      );
-      console.log(
-        `⛓️ Blockchain: ${Math.floor(metrics.powerLevels.blockchain).toLocaleString()}`,
-      );
-      console.log(
-        `🏔️ Landscape Builder: ${Math.floor(metrics.powerLevels.landscapeBuilder).toLocaleString()}`,
-      );
-      console.log(
-        `👑 Admin Control: ${Math.floor(metrics.powerLevels.adminControl).toLocaleString()}`,
+        `👑 Admin Control: ${Math.floor(metrics.powerLevels.adminControl).toLocaleString()}`
       );
     }
   }, [metrics]);
@@ -215,8 +202,7 @@ export function PersistentEvolutionEngine() {
     isEvolving: true,
     neverStops: true,
     growsOffline: true,
-    getGrowthRate: () =>
-      ((metrics.evolutionRate - 1) * 100).toFixed(4) + "% per second",
+    getGrowthRate: () => ((metrics.evolutionRate - 1) * 100).toFixed(4) + "% per second",
     getTotalPower: () => Math.floor(metrics.totalSystemPower).toLocaleString(),
     getUptime: () => Math.floor((Date.now() - startTime.current) / 1000),
   };

@@ -56,9 +56,7 @@ export function QuantumFortressDashboard() {
 
   const handleGenerateQuantumKey = async () => {
     try {
-      const newKey = await quantumSecurity.generateQuantumKey(
-        `fortress-${Date.now()}`,
-      );
+      const newKey = await quantumSecurity.generateQuantumKey(`fortress-${Date.now()}`);
       setQuantumKeys((prev) => [...prev, newKey].slice(-10)); // Keep last 10 keys
 
       toast.success("🔑 New Quantum Key Generated", {
@@ -103,9 +101,7 @@ export function QuantumFortressDashboard() {
               <div className="text-3xl font-bold text-purple-400">
                 {quantumStatus.quantumReadiness}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Quantum Readiness
-              </div>
+              <div className="text-sm text-muted-foreground">Quantum Readiness</div>
               <Badge
                 className={`mt-1 ${quantumStatus.isActive ? "bg-green-600" : "bg-red-600"} text-white`}
               >
@@ -115,9 +111,7 @@ export function QuantumFortressDashboard() {
             </div>
 
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400">
-                {quantumStatus.activeKeys}
-              </div>
+              <div className="text-3xl font-bold text-blue-400">{quantumStatus.activeKeys}</div>
               <div className="text-sm text-muted-foreground">Quantum Keys</div>
               <Badge className="mt-1 bg-blue-600 text-white">
                 <Key className="h-3 w-3 mr-1" />
@@ -126,9 +120,7 @@ export function QuantumFortressDashboard() {
             </div>
 
             <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">
-                {quantumStatus.entanglements}
-              </div>
+              <div className="text-3xl font-bold text-green-400">{quantumStatus.entanglements}</div>
               <div className="text-sm text-muted-foreground">Entanglements</div>
               <Badge className="mt-1 bg-green-600 text-white">
                 <Zap className="h-3 w-3 mr-1" />
@@ -180,9 +172,7 @@ export function QuantumFortressDashboard() {
               disabled={isInitializing || quantumStatus.isActive}
               className="bg-purple-600 hover:bg-purple-700"
             >
-              {isInitializing
-                ? "Initializing..."
-                : "Initialize Quantum Fortress"}
+              {isInitializing ? "Initializing..." : "Initialize Quantum Fortress"}
             </Button>
 
             <Button
@@ -214,9 +204,7 @@ export function QuantumFortressDashboard() {
                   className="flex items-center justify-between p-4 bg-blue-900/10 rounded-lg border border-blue-500/20"
                 >
                   <div>
-                    <div className="font-medium text-blue-400">
-                      Key ID: {key.id}
-                    </div>
+                    <div className="font-medium text-blue-400">Key ID: {key.id}</div>
                     <div className="text-sm text-muted-foreground">
                       Entanglement: {key.entanglementId}
                     </div>
@@ -247,9 +235,7 @@ export function QuantumFortressDashboard() {
               <div className="text-center text-muted-foreground py-8">
                 <Lock className="h-12 w-12 mx-auto mb-4 text-blue-400/50" />
                 <p>No quantum keys generated yet</p>
-                <p className="text-sm">
-                  Initialize the Quantum Fortress to begin
-                </p>
+                <p className="text-sm">Initialize the Quantum Fortress to begin</p>
               </div>
             )}
           </div>
@@ -267,9 +253,7 @@ export function QuantumFortressDashboard() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-3">
-              <h4 className="font-medium text-green-400">
-                Active Technologies
-              </h4>
+              <h4 className="font-medium text-green-400">Active Technologies</h4>
 
               <div className="flex items-center justify-between p-3 bg-green-900/10 rounded border border-green-500/20">
                 <span className="text-sm">Quantum Key Distribution (QKD)</span>

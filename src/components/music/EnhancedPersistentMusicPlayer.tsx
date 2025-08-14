@@ -85,16 +85,14 @@ export function EnhancedPersistentMusicPlayer() {
         setPlaylists(parsedPlaylists);
 
         if (activePlaylistId) {
-          const activePlaylist = parsedPlaylists.find(
-            (p: Playlist) => p.id === activePlaylistId,
-          );
+          const activePlaylist = parsedPlaylists.find((p: Playlist) => p.id === activePlaylistId);
           if (activePlaylist) {
             setCurrentPlaylist(activePlaylist);
             setIsVisible(true);
 
             if (currentTrackId) {
               const trackIndex = activePlaylist.files.findIndex(
-                (f: MediaFile) => f.id === currentTrackId,
+                (f: MediaFile) => f.id === currentTrackId
               );
               if (trackIndex !== -1) {
                 setCurrentIndex(trackIndex);
@@ -110,8 +108,7 @@ export function EnhancedPersistentMusicPlayer() {
   }, []);
 
   useEffect(() => {
-    const mediaElement =
-      currentTrack?.type === "video" ? videoRef.current : audioRef.current;
+    const mediaElement = currentTrack?.type === "video" ? videoRef.current : audioRef.current;
     if (!mediaElement) return;
 
     const updateTime = () => {
@@ -149,8 +146,7 @@ export function EnhancedPersistentMusicPlayer() {
   };
 
   const togglePlay = () => {
-    const mediaElement =
-      currentTrack?.type === "video" ? videoRef.current : audioRef.current;
+    const mediaElement = currentTrack?.type === "video" ? videoRef.current : audioRef.current;
     if (!mediaElement || !currentTrack) return;
 
     if (isPlaying) {
@@ -173,8 +169,7 @@ export function EnhancedPersistentMusicPlayer() {
   };
 
   const toggleMute = () => {
-    const mediaElement =
-      currentTrack?.type === "video" ? videoRef.current : audioRef.current;
+    const mediaElement = currentTrack?.type === "video" ? videoRef.current : audioRef.current;
     if (!mediaElement) return;
 
     mediaElement.muted = !isMuted;
@@ -182,8 +177,7 @@ export function EnhancedPersistentMusicPlayer() {
   };
 
   const handleVolumeChange = (value: number[]) => {
-    const mediaElement =
-      currentTrack?.type === "video" ? videoRef.current : audioRef.current;
+    const mediaElement = currentTrack?.type === "video" ? videoRef.current : audioRef.current;
     if (!mediaElement) return;
 
     const newVolume = value[0];
@@ -192,8 +186,7 @@ export function EnhancedPersistentMusicPlayer() {
   };
 
   const handleSeek = (value: number[]) => {
-    const mediaElement =
-      currentTrack?.type === "video" ? videoRef.current : audioRef.current;
+    const mediaElement = currentTrack?.type === "video" ? videoRef.current : audioRef.current;
     if (!mediaElement) return;
 
     mediaElement.currentTime = value[0];
@@ -207,8 +200,7 @@ export function EnhancedPersistentMusicPlayer() {
 
     if (repeatMode === "one") {
       // Repeat current track
-      const mediaElement =
-        currentTrack?.type === "video" ? videoRef.current : audioRef.current;
+      const mediaElement = currentTrack?.type === "video" ? videoRef.current : audioRef.current;
       if (mediaElement) {
         mediaElement.currentTime = 0;
         if (isPlaying) mediaElement.play();
@@ -240,10 +232,7 @@ export function EnhancedPersistentMusicPlayer() {
     if (isShuffled) {
       prevIndex = Math.floor(Math.random() * currentPlaylist.files.length);
     } else {
-      prevIndex =
-        currentIndex === 0
-          ? currentPlaylist.files.length - 1
-          : currentIndex - 1;
+      prevIndex = currentIndex === 0 ? currentPlaylist.files.length - 1 : currentIndex - 1;
     }
 
     setCurrentIndex(prevIndex);
@@ -281,7 +270,7 @@ export function EnhancedPersistentMusicPlayer() {
         setCurrentPlaylist(updatedPlaylist);
 
         const updatedPlaylists = playlists.map((p) =>
-          p.id === currentPlaylist.id ? updatedPlaylist : p,
+          p.id === currentPlaylist.id ? updatedPlaylist : p
         );
         setPlaylists(updatedPlaylists);
       } else {
@@ -455,9 +444,7 @@ export function EnhancedPersistentMusicPlayer() {
                     variant="ghost"
                     onClick={playPrevious}
                     className="h-8 w-8 p-0 text-purple-400 hover:text-purple-300"
-                    disabled={
-                      !currentPlaylist || currentPlaylist.files.length === 0
-                    }
+                    disabled={!currentPlaylist || currentPlaylist.files.length === 0}
                   >
                     <SkipBack className="h-4 w-4" />
                   </Button>
@@ -468,20 +455,14 @@ export function EnhancedPersistentMusicPlayer() {
                     className="h-10 w-10 p-0 text-white bg-purple-600 hover:bg-purple-700 rounded-full"
                     disabled={!currentTrack}
                   >
-                    {isPlaying ? (
-                      <Pause className="h-5 w-5" />
-                    ) : (
-                      <Play className="h-5 w-5" />
-                    )}
+                    {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
                   </Button>
                   <Button
                     size="sm"
                     variant="ghost"
                     onClick={playNext}
                     className="h-8 w-8 p-0 text-purple-400 hover:text-purple-300"
-                    disabled={
-                      !currentPlaylist || currentPlaylist.files.length === 0
-                    }
+                    disabled={!currentPlaylist || currentPlaylist.files.length === 0}
                   >
                     <SkipForward className="h-4 w-4" />
                   </Button>
@@ -490,19 +471,13 @@ export function EnhancedPersistentMusicPlayer() {
                     variant="ghost"
                     onClick={() =>
                       setRepeatMode(
-                        repeatMode === "none"
-                          ? "all"
-                          : repeatMode === "all"
-                            ? "one"
-                            : "none",
+                        repeatMode === "none" ? "all" : repeatMode === "all" ? "one" : "none"
                       )
                     }
                     className={`h-8 w-8 p-0 ${repeatMode !== "none" ? "text-purple-400" : "text-gray-400"} hover:text-purple-300`}
                   >
                     <Repeat className="h-4 w-4" />
-                    {repeatMode === "one" && (
-                      <span className="text-xs absolute">1</span>
-                    )}
+                    {repeatMode === "one" && <span className="text-xs absolute">1</span>}
                   </Button>
                 </div>
 
@@ -515,11 +490,7 @@ export function EnhancedPersistentMusicPlayer() {
                       onClick={toggleMute}
                       className="h-6 w-6 p-0 text-purple-400 hover:text-purple-300"
                     >
-                      {isMuted ? (
-                        <VolumeX className="h-3 w-3" />
-                      ) : (
-                        <Volume2 className="h-3 w-3" />
-                      )}
+                      {isMuted ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
                     </Button>
                     <div className="w-16">
                       <Slider
@@ -559,16 +530,11 @@ export function EnhancedPersistentMusicPlayer() {
                   <div className="border-t border-purple-500/30 pt-3">
                     <Tabs defaultValue="current" className="w-full">
                       <TabsList className="grid w-full grid-cols-2">
-                        <TabsTrigger value="current">
-                          Current Playlist
-                        </TabsTrigger>
+                        <TabsTrigger value="current">Current Playlist</TabsTrigger>
                         <TabsTrigger value="library">Library</TabsTrigger>
                       </TabsList>
 
-                      <TabsContent
-                        value="current"
-                        className="space-y-2 max-h-32 overflow-y-auto"
-                      >
+                      <TabsContent value="current" className="space-y-2 max-h-32 overflow-y-auto">
                         {currentPlaylist?.files.map((file, index) => (
                           <div
                             key={file.id}
@@ -581,9 +547,7 @@ export function EnhancedPersistentMusicPlayer() {
                             }}
                           >
                             <div className="flex-1 min-w-0">
-                              <div className="text-xs font-medium truncate">
-                                {file.name}
-                              </div>
+                              <div className="text-xs font-medium truncate">{file.name}</div>
                               <div className="text-xs text-muted-foreground">
                                 {formatFileSize(file.size)}
                               </div>
@@ -595,18 +559,14 @@ export function EnhancedPersistentMusicPlayer() {
                             )}
                           </div>
                         ))}
-                        {(!currentPlaylist ||
-                          currentPlaylist.files.length === 0) && (
+                        {(!currentPlaylist || currentPlaylist.files.length === 0) && (
                           <div className="text-center text-muted-foreground text-xs py-4">
                             No files in playlist
                           </div>
                         )}
                       </TabsContent>
 
-                      <TabsContent
-                        value="library"
-                        className="space-y-2 max-h-32 overflow-y-auto"
-                      >
+                      <TabsContent value="library" className="space-y-2 max-h-32 overflow-y-auto">
                         {playlists.map((playlist) => (
                           <div
                             key={playlist.id}
@@ -614,9 +574,7 @@ export function EnhancedPersistentMusicPlayer() {
                             onClick={() => activatePlaylist(playlist)}
                           >
                             <div>
-                              <div className="text-xs font-medium">
-                                {playlist.name}
-                              </div>
+                              <div className="text-xs font-medium">{playlist.name}</div>
                               <div className="text-xs text-muted-foreground">
                                 {playlist.files.length} files
                               </div>

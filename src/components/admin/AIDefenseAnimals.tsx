@@ -100,8 +100,7 @@ export function AIDefenseAnimals() {
     {
       id: 5,
       name: "Alpha Dragon",
-      description:
-        "Ultimate alpha dragon with quantum fire breath capabilities",
+      description: "Ultimate alpha dragon with quantum fire breath capabilities",
       effectiveness: 99,
       status: "Active",
       location: "Global Command Center",
@@ -221,9 +220,7 @@ export function AIDefenseAnimals() {
   ]);
 
   const [selectedAnimals, setSelectedAnimals] = useState<number[]>([]);
-  const [editingAnimal, setEditingAnimal] = useState<AnimalDefense | null>(
-    null,
-  );
+  const [editingAnimal, setEditingAnimal] = useState<AnimalDefense | null>(null);
   const [isCreatingNew, setIsCreatingNew] = useState(false);
 
   // New animal form state
@@ -241,13 +238,9 @@ export function AIDefenseAnimals() {
       setAnimalDefenses((prev) =>
         prev.map((animal) => ({
           ...animal,
-          threatsRepelled:
-            animal.threatsRepelled + Math.floor(Math.random() * 3),
-          activityLevel: Math.min(
-            100,
-            animal.activityLevel + (Math.random() - 0.5) * 2,
-          ),
-        })),
+          threatsRepelled: animal.threatsRepelled + Math.floor(Math.random() * 3),
+          activityLevel: Math.min(100, animal.activityLevel + (Math.random() - 0.5) * 2),
+        }))
       );
     }, 5000);
 
@@ -262,17 +255,15 @@ export function AIDefenseAnimals() {
               ...animal,
               status: animal.status === "Active" ? "Inactive" : "Active",
             }
-          : animal,
-      ),
+          : animal
+      )
     );
     toast.success("Animal status updated successfully!");
   };
 
-  const updateAnimalAttribute = (id: number, attribute: string, value: any) => {
+  const updateAnimalAttribute = (id: number, attribute: string, value: unknown) => {
     setAnimalDefenses((prev) =>
-      prev.map((animal) =>
-        animal.id === id ? { ...animal, [attribute]: value } : animal,
-      ),
+      prev.map((animal) => (animal.id === id ? { ...animal, [attribute]: value } : animal))
     );
     toast.success(`Animal ${attribute} updated!`);
   };
@@ -283,16 +274,12 @@ export function AIDefenseAnimals() {
   };
 
   const batchActivateAnimals = () => {
-    setAnimalDefenses((prev) =>
-      prev.map((animal) => ({ ...animal, status: "Active" })),
-    );
+    setAnimalDefenses((prev) => prev.map((animal) => ({ ...animal, status: "Active" })));
     toast.success("All animals activated!");
   };
 
   const batchDeactivateAnimals = () => {
-    setAnimalDefenses((prev) =>
-      prev.map((animal) => ({ ...animal, status: "Inactive" })),
-    );
+    setAnimalDefenses((prev) => prev.map((animal) => ({ ...animal, status: "Inactive" })));
     toast.success("All animals deactivated!");
   };
 
@@ -306,13 +293,13 @@ export function AIDefenseAnimals() {
               activityLevel: 50,
               effectiveness: 50,
             }
-          : animal,
-      ),
+          : animal
+      )
     );
     toast.success("Animal stats reset!");
   };
 
-  const addNewAnimal = (animalData: any) => {
+  const addNewAnimal = (animalData: Partial<AnimalDefense>) => {
     const newAnimal = {
       ...animalData,
       id: Math.max(...animalDefenses.map((a) => a.id)) + 1,
@@ -367,56 +354,34 @@ export function AIDefenseAnimals() {
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <span className="text-2xl">{animal.emoji}</span>
-                      <div className="font-semibold text-lg text-green-400">
-                        {animal.name}
-                      </div>
+                      <div className="font-semibold text-lg text-green-400">{animal.name}</div>
                     </div>
                     <div className="flex items-center gap-2">
                       <Switch
                         checked={animal.status === "Active"}
                         onCheckedChange={() => toggleAnimalStatus(animal.id)}
                       />
-                      <Badge
-                        className={
-                          animal.status === "Active"
-                            ? "bg-green-600"
-                            : "bg-red-600"
-                        }
-                      >
+                      <Badge className={animal.status === "Active" ? "bg-green-600" : "bg-red-600"}>
                         {animal.status}
                       </Badge>
                     </div>
                   </div>
 
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {animal.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">{animal.description}</p>
 
                   <div className="space-y-3">
                     <div>
-                      <Label className="text-xs text-muted-foreground">
-                        Effectiveness
-                      </Label>
+                      <Label className="text-xs text-muted-foreground">Effectiveness</Label>
                       <div className="flex items-center gap-2">
-                        <Progress
-                          value={animal.effectiveness}
-                          className="h-2 flex-1"
-                        />
-                        <span className="text-xs text-green-400">
-                          {animal.effectiveness}%
-                        </span>
+                        <Progress value={animal.effectiveness} className="h-2 flex-1" />
+                        <span className="text-xs text-green-400">{animal.effectiveness}%</span>
                       </div>
                     </div>
 
                     <div>
-                      <Label className="text-xs text-muted-foreground">
-                        Activity Level
-                      </Label>
+                      <Label className="text-xs text-muted-foreground">Activity Level</Label>
                       <div className="flex items-center gap-2">
-                        <Progress
-                          value={animal.activityLevel}
-                          className="h-2 flex-1"
-                        />
+                        <Progress value={animal.activityLevel} className="h-2 flex-1" />
                         <span className="text-xs text-purple-400">
                           {Math.round(animal.activityLevel)}%
                         </span>
@@ -426,9 +391,7 @@ export function AIDefenseAnimals() {
                     <div className="grid grid-cols-2 gap-2 text-sm">
                       <div className="flex items-center gap-1">
                         <MapPin className="h-4 w-4 text-blue-400" />
-                        <span className="text-xs truncate">
-                          {animal.location}
-                        </span>
+                        <span className="text-xs truncate">{animal.location}</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Users className="h-4 w-4 text-orange-400" />
@@ -436,9 +399,7 @@ export function AIDefenseAnimals() {
                       </div>
                       <div className="flex items-center gap-1">
                         <Target className="h-4 w-4 text-red-400" />
-                        <span className="text-xs">
-                          {animal.threatsRepelled}
-                        </span>
+                        <span className="text-xs">{animal.threatsRepelled}</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Activity className="h-4 w-4 text-purple-400" />
@@ -484,29 +445,21 @@ export function AIDefenseAnimals() {
             <div className="text-center p-4 bg-green-900/50 rounded-lg border-2 border-green-500/50">
               <CheckCircle className="h-8 w-8 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">
-                {
-                  animalDefenses.filter((animal) => animal.status === "Active")
-                    .length
-                }
+                {animalDefenses.filter((animal) => animal.status === "Active").length}
               </div>
               <div className="text-sm text-green-300">Active Defenses</div>
             </div>
 
             <div className="text-center p-4 bg-blue-900/50 rounded-lg border-2 border-blue-500/50">
               <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {animalDefenses.length}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{animalDefenses.length}</div>
               <div className="text-sm text-blue-300">Total Guardians</div>
             </div>
 
             <div className="text-center p-4 bg-red-900/50 rounded-lg border-2 border-red-500/50">
               <Target className="h-8 w-8 text-red-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-red-400">
-                {animalDefenses.reduce(
-                  (sum, animal) => sum + animal.threatsRepelled,
-                  0,
-                )}
+                {animalDefenses.reduce((sum, animal) => sum + animal.threatsRepelled, 0)}
               </div>
               <div className="text-sm text-red-300">Threats Repelled</div>
             </div>
@@ -515,10 +468,8 @@ export function AIDefenseAnimals() {
               <Zap className="h-8 w-8 text-purple-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-purple-400">
                 {Math.round(
-                  animalDefenses.reduce(
-                    (sum, animal) => sum + animal.effectiveness,
-                    0,
-                  ) / animalDefenses.length,
+                  animalDefenses.reduce((sum, animal) => sum + animal.effectiveness, 0) /
+                    animalDefenses.length
                 )}
                 %
               </div>
@@ -532,9 +483,7 @@ export function AIDefenseAnimals() {
       {editingAnimal && (
         <Card className="border-yellow-500/50 bg-gradient-to-br from-yellow-900/30 to-orange-900/30">
           <CardHeader>
-            <CardTitle className="text-yellow-400">
-              Edit {editingAnimal.name}
-            </CardTitle>
+            <CardTitle className="text-yellow-400">Edit {editingAnimal.name}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
@@ -614,9 +563,7 @@ export function AIDefenseAnimals() {
               <Button
                 onClick={() => {
                   setAnimalDefenses((prev) =>
-                    prev.map((animal) =>
-                      animal.id === editingAnimal.id ? editingAnimal : animal,
-                    ),
+                    prev.map((animal) => (animal.id === editingAnimal.id ? editingAnimal : animal))
                   );
                   setEditingAnimal(null);
                   toast.success("Animal updated successfully!");
@@ -637,9 +584,7 @@ export function AIDefenseAnimals() {
       {isCreatingNew && (
         <Card className="border-blue-500/50 bg-gradient-to-br from-blue-900/30 to-cyan-900/30">
           <CardHeader>
-            <CardTitle className="text-blue-400">
-              Add New Defense Animal
-            </CardTitle>
+            <CardTitle className="text-blue-400">Add New Defense Animal</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -672,9 +617,7 @@ export function AIDefenseAnimals() {
                   <Label>Contributors</Label>
                   <Input
                     value={contributors}
-                    onChange={(e) =>
-                      setContributors(parseInt(e.target.value) || 0)
-                    }
+                    onChange={(e) => setContributors(parseInt(e.target.value) || 0)}
                     type="number"
                     placeholder="1000"
                   />
@@ -683,9 +626,7 @@ export function AIDefenseAnimals() {
                   <Label>Effectiveness (%)</Label>
                   <Input
                     value={effectiveness}
-                    onChange={(e) =>
-                      setEffectiveness(parseInt(e.target.value) || 0)
-                    }
+                    onChange={(e) => setEffectiveness(parseInt(e.target.value) || 0)}
                     type="number"
                     min="0"
                     max="100"
@@ -731,10 +672,7 @@ export function AIDefenseAnimals() {
                 >
                   Add Animal
                 </Button>
-                <Button
-                  onClick={() => setIsCreatingNew(false)}
-                  variant="outline"
-                >
+                <Button onClick={() => setIsCreatingNew(false)} variant="outline">
                   Cancel
                 </Button>
               </div>

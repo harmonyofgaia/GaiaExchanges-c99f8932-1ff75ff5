@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import {
-  Building2,
-  Users,
-  Coins,
-  TrendingUp,
-  Star,
-  Crown,
-  Rocket,
-  Zap,
-} from "lucide-react";
+import { Building2, Users, Coins, TrendingUp, Star, Crown, Rocket, Zap } from "lucide-react";
 import { toast } from "sonner";
 
 export function EnhancedHabboTycoon() {
@@ -90,8 +81,7 @@ export function EnhancedHabboTycoon() {
             "💰 Investment Opportunity - Triple Revenue!",
             "🌟 Award Ceremony - World's Best Tycoon!",
           ];
-          const event =
-            strategicEvents[Math.floor(Math.random() * strategicEvents.length)];
+          const event = strategicEvents[Math.floor(Math.random() * strategicEvents.length)];
           toast.success("🏆 STRATEGIC EVENT!", {
             description: event,
             duration: 5000,
@@ -106,8 +96,7 @@ export function EnhancedHabboTycoon() {
   const startTycoonEmpire = () => {
     setTycoonState((prev) => ({ ...prev, isActive: true }));
     toast.success("🏨 HABBO TYCOON EMPIRE ACTIVATED!", {
-      description:
-        "Strategic Business Simulation - Build Your Hotel & Theme Park Empire!",
+      description: "Strategic Business Simulation - Build Your Hotel & Theme Park Empire!",
       duration: 5000,
     });
   };
@@ -119,8 +108,7 @@ export function EnhancedHabboTycoon() {
         ...prev,
         totalRevenue: prev.totalRevenue - building.cost,
         totalRooms: prev.totalRooms + (type === "hotel" ? 10 : 5),
-        rollercoasters:
-          prev.rollercoasters + (type === "rollercoaster" ? 1 : 0),
+        rollercoasters: prev.rollercoasters + (type === "rollercoaster" ? 1 : 0),
         attractions: prev.attractions + 1,
       }));
 
@@ -143,8 +131,7 @@ export function EnhancedHabboTycoon() {
           🏨 HABBO TYCOON - STRATEGIC EMPIRE BUILDER
         </CardTitle>
         <div className="text-center text-xl text-pink-300 font-bold">
-          RollerCoaster Tycoon × Habbo Hotel × Little Big Planet = Ultimate
-          Strategy
+          RollerCoaster Tycoon × Habbo Hotel × Little Big Planet = Ultimate Strategy
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -152,9 +139,7 @@ export function EnhancedHabboTycoon() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           <div className="text-center p-4 bg-pink-900/50 rounded-lg border-2 border-pink-500/50">
             <Building2 className="h-8 w-8 text-pink-400 mx-auto mb-2 animate-pulse" />
-            <div className="text-2xl font-black text-pink-400">
-              {tycoonState.hotelEmpire}
-            </div>
+            <div className="text-2xl font-black text-pink-400">{tycoonState.hotelEmpire}</div>
             <div className="text-sm text-pink-300">Hotel Empires</div>
           </div>
 
@@ -176,26 +161,20 @@ export function EnhancedHabboTycoon() {
 
           <div className="text-center p-4 bg-purple-900/50 rounded-lg border-2 border-purple-500/50">
             <Rocket className="h-8 w-8 text-purple-400 mx-auto mb-2 animate-pulse" />
-            <div className="text-2xl font-black text-purple-400">
-              {tycoonState.rollercoasters}
-            </div>
+            <div className="text-2xl font-black text-purple-400">{tycoonState.rollercoasters}</div>
             <div className="text-sm text-purple-300">Rollercoasters</div>
           </div>
 
           <div className="text-center p-4 bg-orange-900/50 rounded-lg border-2 border-orange-500/50">
             <Crown className="h-8 w-8 text-orange-400 mx-auto mb-2 animate-bounce" />
-            <div className="text-2xl font-black text-orange-400">
-              {tycoonState.reputation}%
-            </div>
+            <div className="text-2xl font-black text-orange-400">{tycoonState.reputation}%</div>
             <div className="text-sm text-orange-300">Reputation</div>
           </div>
         </div>
 
         {/* Strategic Building Interface */}
         <div className="space-y-4">
-          <h3 className="text-2xl font-bold text-center text-white">
-            🏗️ STRATEGIC CONSTRUCTION
-          </h3>
+          <h3 className="text-2xl font-bold text-center text-white">🏗️ STRATEGIC CONSTRUCTION</h3>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             {buildingTypes.map((building) => {
               const Icon = building.icon;
@@ -207,15 +186,9 @@ export function EnhancedHabboTycoon() {
                   className="p-4 h-auto flex flex-col items-center gap-2 bg-gradient-to-br from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:opacity-50"
                 >
                   <Icon className="h-6 w-6" />
-                  <span className="text-sm font-bold text-center">
-                    {building.name}
-                  </span>
-                  <span className="text-xs">
-                    ${building.cost.toLocaleString()}
-                  </span>
-                  <Badge className="bg-green-600">
-                    +${building.income.toLocaleString()}/day
-                  </Badge>
+                  <span className="text-sm font-bold text-center">{building.name}</span>
+                  <span className="text-xs">${building.cost.toLocaleString()}</span>
+                  <Badge className="bg-green-600">+${building.income.toLocaleString()}/day</Badge>
                 </Button>
               );
             })}
@@ -236,9 +209,7 @@ export function EnhancedHabboTycoon() {
                 </div>
                 <div className="grid grid-cols-3 gap-4 text-sm">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-400">
-                      {tycoonState.totalRooms}
-                    </div>
+                    <div className="text-2xl font-bold text-blue-400">{tycoonState.totalRooms}</div>
                     <div>Total Rooms</div>
                   </div>
                   <div className="text-center">
@@ -248,9 +219,7 @@ export function EnhancedHabboTycoon() {
                     <div>Attractions</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-400">
-                      {tycoonState.staff}
-                    </div>
+                    <div className="text-2xl font-bold text-purple-400">{tycoonState.staff}</div>
                     <div>Staff Members</div>
                   </div>
                 </div>
@@ -277,27 +246,19 @@ export function EnhancedHabboTycoon() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-3 bg-gradient-to-br from-pink-900/30 to-purple-900/30 rounded border border-pink-500/30">
               <div className="text-sm text-pink-300">Multi-Planet</div>
-              <div className="text-xs text-pink-400 font-bold">
-                Expansion Ready
-              </div>
+              <div className="text-xs text-pink-400 font-bold">Expansion Ready</div>
             </div>
             <div className="text-center p-3 bg-gradient-to-br from-blue-900/30 to-cyan-900/30 rounded border border-blue-500/30">
               <div className="text-sm text-blue-300">Online Multiplayer</div>
-              <div className="text-xs text-blue-400 font-bold">
-                10,000+ Players
-              </div>
+              <div className="text-xs text-blue-400 font-bold">10,000+ Players</div>
             </div>
             <div className="text-center p-3 bg-gradient-to-br from-green-900/30 to-emerald-900/30 rounded border border-green-500/30">
               <div className="text-sm text-green-300">Daily Events</div>
-              <div className="text-xs text-green-400 font-bold">
-                Growing Features
-              </div>
+              <div className="text-xs text-green-400 font-bold">Growing Features</div>
             </div>
             <div className="text-center p-3 bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded border border-purple-500/30">
               <div className="text-sm text-purple-300">AI Crafting</div>
-              <div className="text-xs text-purple-400 font-bold">
-                New Tools Daily
-              </div>
+              <div className="text-xs text-purple-400 font-bold">New Tools Daily</div>
             </div>
           </div>
         </div>

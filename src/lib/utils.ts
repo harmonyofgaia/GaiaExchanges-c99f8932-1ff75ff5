@@ -19,7 +19,7 @@ export const toastConfig = {
 
 // Helper function to determine if notification should show
 export const shouldShowNotification = (
-  priority: "low" | "medium" | "high" | "critical" = "medium",
+  priority: "low" | "medium" | "high" | "critical" = "medium"
 ): boolean => {
   if (toastConfig.criticalOnly) {
     return priority === "critical" || priority === "high";

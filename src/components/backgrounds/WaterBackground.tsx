@@ -33,8 +33,7 @@ export function WaterBackground({
 
     // Water ripple parameters
     const ripples = [];
-    const rippleCount =
-      intensity === "low" ? 5 : intensity === "medium" ? 10 : 15;
+    const rippleCount = intensity === "low" ? 5 : intensity === "medium" ? 10 : 15;
 
     for (let i = 0; i < rippleCount; i++) {
       ripples.push({
@@ -79,15 +78,13 @@ export function WaterBackground({
       ctx.moveTo(0, canvas.height);
 
       wavePoints.forEach((point, index) => {
-        const y =
-          point.baseY + Math.sin(time * speed + point.phase) * point.amplitude;
+        const y = point.baseY + Math.sin(time * speed + point.phase) * point.amplitude;
         if (index === 0) {
           ctx.moveTo(point.x, y);
         } else {
           const prevPoint = wavePoints[index - 1];
           const prevY =
-            prevPoint.baseY +
-            Math.sin(time * speed + prevPoint.phase) * prevPoint.amplitude;
+            prevPoint.baseY + Math.sin(time * speed + prevPoint.phase) * prevPoint.amplitude;
           const cpx = (prevPoint.x + point.x) / 2;
           const cpy = (prevY + y) / 2;
           ctx.quadraticCurveTo(cpx, cpy, point.x, y);
@@ -98,12 +95,7 @@ export function WaterBackground({
       ctx.closePath();
 
       // Water surface gradient
-      const waterGradient = ctx.createLinearGradient(
-        0,
-        canvas.height * 0.5,
-        0,
-        canvas.height,
-      );
+      const waterGradient = ctx.createLinearGradient(0, canvas.height * 0.5, 0, canvas.height);
       waterGradient.addColorStop(0, `${color}40`);
       waterGradient.addColorStop(0.5, `${color}60`);
       waterGradient.addColorStop(1, `${color}80`);

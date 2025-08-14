@@ -65,9 +65,7 @@ export function HomeGrownFoodActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Quantity (kg)
-            </label>
+            <label className="block text-sm font-medium mb-2">Quantity (kg)</label>
             <Input
               type="number"
               step="0.1"
@@ -89,8 +87,7 @@ export function HomeGrownFoodActions() {
 
         <div className="mt-4 p-3 bg-orange-900/20 rounded-lg border border-orange-500/30">
           <p className="text-sm text-orange-300">
-            💡 <strong>Bonus:</strong> Organic certification and seed sharing
-            earn extra tokens!
+            💡 <strong>Bonus:</strong> Organic certification and seed sharing earn extra tokens!
           </p>
         </div>
       </CardContent>

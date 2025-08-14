@@ -1,13 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  ArrowUpDown,
-  TrendingUp,
-  BarChart3,
-  Wallet,
-  Shield,
-  Settings,
-} from "lucide-react";
+import { ArrowUpDown, TrendingUp, BarChart3, Wallet, Shield, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function ExchangeActions() {
@@ -78,12 +71,8 @@ export function ExchangeActions() {
                       >
                         <Icon className="h-8 w-8 text-white" />
                       </div>
-                      <h3 className="text-lg font-bold text-white mb-2">
-                        {action.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {action.description}
-                      </p>
+                      <h3 className="text-lg font-bold text-white mb-2">{action.title}</h3>
+                      <p className="text-sm text-muted-foreground">{action.description}</p>
                     </CardContent>
                   </Card>
                 </Link>

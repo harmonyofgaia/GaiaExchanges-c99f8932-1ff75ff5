@@ -1,11 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -124,7 +118,7 @@ const ForestTokenSystem = () => {
         rewards: 0,
       },
     ],
-    [],
+    []
   );
 
   const stakingPools: StakingPool[] = [
@@ -137,8 +131,7 @@ const ForestTokenSystem = () => {
       userStaked: 1200,
       lockPeriod: 30,
       rewards: 45.6,
-      description:
-        "Validate environmental impact measurements and earn rewards",
+      description: "Validate environmental impact measurements and earn rewards",
     },
     {
       id: "governance-90",
@@ -273,7 +266,7 @@ const ForestTokenSystem = () => {
   const totalStaked = useMemo(() => {
     return tokenBalances.reduce(
       (sum, token) => sum + token.staked * (token.value / token.balance),
-      0,
+      0
     );
   }, [tokenBalances]);
 
@@ -296,9 +289,7 @@ const ForestTokenSystem = () => {
             <div className="flex items-center">
               <Coins className="h-10 w-10 text-green-600 mr-3" />
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">
-                  Forest Shield Token System
-                </h1>
+                <h1 className="text-3xl font-bold text-gray-900">Forest Shield Token System</h1>
                 <p className="text-lg text-gray-600">
                   Multi-tier blockchain rewards for wildfire defense
                 </p>
@@ -306,9 +297,7 @@ const ForestTokenSystem = () => {
             </div>
             <div className="flex items-center space-x-4">
               <div className="text-right">
-                <div className="text-sm text-gray-600">
-                  Total Portfolio Value
-                </div>
+                <div className="text-sm text-gray-600">Total Portfolio Value</div>
                 <div className="text-2xl font-bold text-green-600">
                   ${totalPortfolioValue.toLocaleString()}
                 </div>
@@ -361,9 +350,7 @@ const ForestTokenSystem = () => {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">
-                {totalRewards.toFixed(1)}
-              </div>
+              <div className="text-2xl font-bold text-gray-900">{totalRewards.toFixed(1)}</div>
               <div className="text-sm text-gray-600">Pending Rewards</div>
             </CardContent>
           </Card>
@@ -376,20 +363,14 @@ const ForestTokenSystem = () => {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900">
-                {votingPower.toLocaleString()}
-              </div>
+              <div className="text-2xl font-bold text-gray-900">{votingPower.toLocaleString()}</div>
               <div className="text-sm text-gray-600">Voting Power</div>
             </CardContent>
           </Card>
         </div>
 
         {/* Main Tabs */}
-        <Tabs
-          value={activeTab}
-          onValueChange={setActiveTab}
-          className="space-y-6"
-        >
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="portfolio">Portfolio</TabsTrigger>
             <TabsTrigger value="staking">Staking</TabsTrigger>
@@ -405,9 +386,7 @@ const ForestTokenSystem = () => {
                 <Card>
                   <CardHeader>
                     <CardTitle>Token Holdings</CardTitle>
-                    <CardDescription>
-                      Your multi-tier Forest Shield token balances
-                    </CardDescription>
+                    <CardDescription>Your multi-tier Forest Shield token balances</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
@@ -425,13 +404,9 @@ const ForestTokenSystem = () => {
                           >
                             <div className="flex items-center justify-between mb-3">
                               <div className="flex items-center space-x-3">
-                                <IconComponent
-                                  className={`h-8 w-8 ${getTokenColor(token.type)}`}
-                                />
+                                <IconComponent className={`h-8 w-8 ${getTokenColor(token.type)}`} />
                                 <div>
-                                  <div className="font-semibold">
-                                    {token.symbol}
-                                  </div>
+                                  <div className="font-semibold">{token.symbol}</div>
                                   <div className="text-sm text-gray-600 capitalize">
                                     {token.type} Token
                                   </div>
@@ -459,15 +434,11 @@ const ForestTokenSystem = () => {
                               </div>
                               <div>
                                 <div className="text-gray-600">Staked</div>
-                                <div className="font-semibold">
-                                  {token.staked.toLocaleString()}
-                                </div>
+                                <div className="font-semibold">{token.staked.toLocaleString()}</div>
                               </div>
                               <div>
                                 <div className="text-gray-600">Rewards</div>
-                                <div className="font-semibold text-green-600">
-                                  {token.rewards}
-                                </div>
+                                <div className="font-semibold text-green-600">{token.rewards}</div>
                               </div>
                             </div>
                           </div>
@@ -484,9 +455,7 @@ const ForestTokenSystem = () => {
                     <CardHeader>
                       <CardTitle className="flex items-center">
                         {(() => {
-                          const IconComponent = getTokenIcon(
-                            selectedToken.type,
-                          );
+                          const IconComponent = getTokenIcon(selectedToken.type);
                           return (
                             <IconComponent
                               className={`h-5 w-5 mr-2 ${getTokenColor(selectedToken.type)}`}
@@ -515,9 +484,7 @@ const ForestTokenSystem = () => {
                           <h4 className="font-semibold">Token Utility</h4>
                           {selectedToken.type === "impact" && (
                             <ul className="text-sm text-gray-600 space-y-1">
-                              <li>
-                                • Reward environmental impact verification
-                              </li>
+                              <li>• Reward environmental impact verification</li>
                               <li>• Access premium impact tracking tools</li>
                               <li>• Participate in conservation projects</li>
                             </ul>
@@ -560,10 +527,7 @@ const ForestTokenSystem = () => {
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-lg">{pool.name}</CardTitle>
-                      <Badge
-                        variant="outline"
-                        className="bg-green-100 text-green-800"
-                      >
+                      <Badge variant="outline" className="bg-green-100 text-green-800">
                         {pool.apy}% APY
                       </Badge>
                     </div>
@@ -580,22 +544,17 @@ const ForestTokenSystem = () => {
                         </div>
                         <div>
                           <div className="text-gray-600">Lock Period</div>
-                          <div className="font-semibold">
-                            {pool.lockPeriod} days
-                          </div>
+                          <div className="font-semibold">{pool.lockPeriod} days</div>
                         </div>
                         <div>
                           <div className="text-gray-600">Total Staked</div>
                           <div className="font-semibold">
-                            {(pool.totalStaked / 1000000).toFixed(1)}M{" "}
-                            {pool.tokenType}
+                            {(pool.totalStaked / 1000000).toFixed(1)}M {pool.tokenType}
                           </div>
                         </div>
                         <div>
                           <div className="text-gray-600">Your Rewards</div>
-                          <div className="font-semibold text-green-600">
-                            {pool.rewards}
-                          </div>
+                          <div className="font-semibold text-green-600">{pool.rewards}</div>
                         </div>
                       </div>
 
@@ -665,17 +624,13 @@ const ForestTokenSystem = () => {
                               <div className="flex items-start space-x-3">
                                 <IconComponent className="h-6 w-6 text-blue-600 mt-1" />
                                 <div>
-                                  <h3 className="font-semibold">
-                                    {proposal.title}
-                                  </h3>
+                                  <h3 className="font-semibold">{proposal.title}</h3>
                                   <p className="text-sm text-gray-600 mt-1">
                                     {proposal.description}
                                   </p>
                                 </div>
                               </div>
-                              <Badge
-                                variant={isActive ? "default" : "secondary"}
-                              >
+                              <Badge variant={isActive ? "default" : "secondary"}>
                                 {proposal.status.toUpperCase()}
                               </Badge>
                             </div>
@@ -687,14 +642,10 @@ const ForestTokenSystem = () => {
                                     Votes: {votePercentage.toFixed(1)}% For
                                   </span>
                                   <span className="text-sm text-gray-600">
-                                    {proposal.totalVotes.toLocaleString()} total
-                                    votes
+                                    {proposal.totalVotes.toLocaleString()} total votes
                                   </span>
                                 </div>
-                                <Progress
-                                  value={votePercentage}
-                                  className="h-2"
-                                />
+                                <Progress value={votePercentage} className="h-2" />
                               </div>
 
                               <div className="grid grid-cols-2 gap-4 text-sm">
@@ -705,9 +656,7 @@ const ForestTokenSystem = () => {
                                   </div>
                                 </div>
                                 <div>
-                                  <div className="text-gray-600">
-                                    Votes Against
-                                  </div>
+                                  <div className="text-gray-600">Votes Against</div>
                                   <div className="font-semibold text-red-600">
                                     {proposal.votesAgainst.toLocaleString()}
                                   </div>
@@ -720,11 +669,7 @@ const ForestTokenSystem = () => {
                                     <Vote className="h-4 w-4 mr-2" />
                                     Vote For
                                   </Button>
-                                  <Button
-                                    size="sm"
-                                    variant="outline"
-                                    className="flex-1"
-                                  >
+                                  <Button size="sm" variant="outline" className="flex-1">
                                     <Vote className="h-4 w-4 mr-2" />
                                     Vote Against
                                   </Button>
@@ -735,8 +680,7 @@ const ForestTokenSystem = () => {
                                 {isActive
                                   ? `Voting ends: ${new Date(proposal.endDate).toLocaleDateString()}`
                                   : `Proposal ${proposal.status}`}
-                                • Required tokens: {proposal.requiredTokens}{" "}
-                                GOVERN
+                                • Required tokens: {proposal.requiredTokens} GOVERN
                               </div>
                             </div>
                           </div>
@@ -758,9 +702,7 @@ const ForestTokenSystem = () => {
                         <div className="text-3xl font-bold text-blue-600">
                           {votingPower.toLocaleString()}
                         </div>
-                        <div className="text-sm text-gray-600">
-                          GOVERN Tokens
-                        </div>
+                        <div className="text-sm text-gray-600">GOVERN Tokens</div>
                       </div>
 
                       <div className="space-y-2">
@@ -794,9 +736,7 @@ const ForestTokenSystem = () => {
                       </Button>
 
                       <div className="pt-4 border-t">
-                        <h4 className="font-semibold mb-2">
-                          Governance History
-                        </h4>
+                        <h4 className="font-semibold mb-2">Governance History</h4>
                         <div className="text-sm text-gray-600 space-y-1">
                           <div>Proposals Voted: 12</div>
                           <div>Success Rate: 83%</div>
@@ -882,8 +822,7 @@ const ForestTokenSystem = () => {
               <CardHeader>
                 <CardTitle>Reward Activities</CardTitle>
                 <CardDescription>
-                  Track your contributions and earned rewards across all token
-                  types
+                  Track your contributions and earned rewards across all token types
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -892,18 +831,12 @@ const ForestTokenSystem = () => {
                     <div className="flex items-center space-x-3">
                       <TreePine className="h-6 w-6 text-green-600" />
                       <div>
-                        <div className="font-semibold">
-                          Forest Impact Verification
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          Verified 12 hectares protected
-                        </div>
+                        <div className="font-semibold">Forest Impact Verification</div>
+                        <div className="text-sm text-gray-600">Verified 12 hectares protected</div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="font-semibold text-green-600">
-                        +15.2 IMPACT
-                      </div>
+                      <div className="font-semibold text-green-600">+15.2 IMPACT</div>
                       <div className="text-xs text-gray-500">2 hours ago</div>
                     </div>
                   </div>
@@ -912,18 +845,12 @@ const ForestTokenSystem = () => {
                     <div className="flex items-center space-x-3">
                       <Vote className="h-6 w-6 text-blue-600" />
                       <div>
-                        <div className="font-semibold">
-                          Governance Participation
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          Voted on deployment proposal
-                        </div>
+                        <div className="font-semibold">Governance Participation</div>
+                        <div className="text-sm text-gray-600">Voted on deployment proposal</div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="font-semibold text-blue-600">
-                        +5.8 GOVERN
-                      </div>
+                      <div className="font-semibold text-blue-600">+5.8 GOVERN</div>
                       <div className="text-xs text-gray-500">1 day ago</div>
                     </div>
                   </div>
@@ -933,15 +860,11 @@ const ForestTokenSystem = () => {
                       <Shield className="h-6 w-6 text-purple-600" />
                       <div>
                         <div className="font-semibold">Emergency Response</div>
-                        <div className="text-sm text-gray-600">
-                          Participated in wildfire alert
-                        </div>
+                        <div className="text-sm text-gray-600">Participated in wildfire alert</div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="font-semibold text-purple-600">
-                        +25.0 COMM
-                      </div>
+                      <div className="font-semibold text-purple-600">+25.0 COMM</div>
                       <div className="text-xs text-gray-500">3 days ago</div>
                     </div>
                   </div>
@@ -1006,12 +929,10 @@ const ForestTokenSystem = () => {
                 <CardContent>
                   <div className="space-y-4">
                     <div className="p-4 border rounded-lg">
-                      <div className="font-semibold mb-2">
-                        Gaia Forest Guardian NFT
-                      </div>
+                      <div className="font-semibold mb-2">Gaia Forest Guardian NFT</div>
                       <div className="text-sm text-gray-600 mb-3">
-                        Exclusive NFT collection for token holders with verified
-                        environmental impact
+                        Exclusive NFT collection for token holders with verified environmental
+                        impact
                       </div>
                       <div className="flex justify-between items-center">
                         <Badge variant="outline">500 IMPACT Required</Badge>
@@ -1022,12 +943,9 @@ const ForestTokenSystem = () => {
                     </div>
 
                     <div className="p-4 border rounded-lg">
-                      <div className="font-semibold mb-2">
-                        Gaia Smart Garden Kit
-                      </div>
+                      <div className="font-semibold mb-2">Gaia Smart Garden Kit</div>
                       <div className="text-sm text-gray-600 mb-3">
-                        IoT-enabled garden monitoring system for personal
-                        sustainability
+                        IoT-enabled garden monitoring system for personal sustainability
                       </div>
                       <div className="flex justify-between items-center">
                         <Badge variant="outline">1000 COMM Required</Badge>
@@ -1038,12 +956,9 @@ const ForestTokenSystem = () => {
                     </div>
 
                     <div className="p-4 border rounded-lg">
-                      <div className="font-semibold mb-2">
-                        Gaia Carbon Credit Package
-                      </div>
+                      <div className="font-semibold mb-2">Gaia Carbon Credit Package</div>
                       <div className="text-sm text-gray-600 mb-3">
-                        Verified carbon credits from Forest Shield protected
-                        areas
+                        Verified carbon credits from Forest Shield protected areas
                       </div>
                       <div className="flex justify-between items-center">
                         <Badge variant="outline">100 INVEST Required</Badge>

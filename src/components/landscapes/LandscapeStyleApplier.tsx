@@ -32,8 +32,7 @@ export function LandscapeStyleApplier({ onStyleApplied }: StyleApplierProps) {
     {
       id: "underwater-dream",
       name: "🌊 Underwater Dream",
-      description:
-        "Deep ocean blues with flowing currents and bioluminescent accents",
+      description: "Deep ocean blues with flowing currents and bioluminescent accents",
       color: "from-blue-900 to-cyan-600",
       cssVars: {
         "--primary": "220 100% 50%",
@@ -103,8 +102,7 @@ export function LandscapeStyleApplier({ onStyleApplied }: StyleApplierProps) {
     {
       id: "quantum-realm",
       name: "⚡ Quantum Realm",
-      description:
-        "Reality-bending colors that shift and phase through dimensions",
+      description: "Reality-bending colors that shift and phase through dimensions",
       color: "from-purple-600 to-cyan-400",
       cssVars: {
         "--primary": "280 100% 60%",
@@ -137,7 +135,7 @@ export function LandscapeStyleApplier({ onStyleApplied }: StyleApplierProps) {
             applyToTools,
             applyToDesigns,
           },
-        }),
+        })
       );
     }
 
@@ -164,55 +162,33 @@ export function LandscapeStyleApplier({ onStyleApplied }: StyleApplierProps) {
             🎨 Landscape Style Applier
           </CardTitle>
           <p className="text-purple-300">
-            Apply generated landscape styles to your entire interface, tools,
-            and designs
+            Apply generated landscape styles to your entire interface, tools, and designs
           </p>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="flex items-center justify-between p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
               <div>
-                <Label className="text-blue-400 font-medium">
-                  Interface Theme
-                </Label>
-                <p className="text-xs text-muted-foreground">
-                  Colors, backgrounds, UI elements
-                </p>
+                <Label className="text-blue-400 font-medium">Interface Theme</Label>
+                <p className="text-xs text-muted-foreground">Colors, backgrounds, UI elements</p>
               </div>
-              <Switch
-                checked={applyToInterface}
-                onCheckedChange={setApplyToInterface}
-              />
+              <Switch checked={applyToInterface} onCheckedChange={setApplyToInterface} />
             </div>
 
             <div className="flex items-center justify-between p-3 rounded-lg bg-green-500/10 border border-green-500/20">
               <div>
-                <Label className="text-green-400 font-medium">
-                  Building Tools
-                </Label>
-                <p className="text-xs text-muted-foreground">
-                  Brushes, effects, physics
-                </p>
+                <Label className="text-green-400 font-medium">Building Tools</Label>
+                <p className="text-xs text-muted-foreground">Brushes, effects, physics</p>
               </div>
-              <Switch
-                checked={applyToTools}
-                onCheckedChange={setApplyToTools}
-              />
+              <Switch checked={applyToTools} onCheckedChange={setApplyToTools} />
             </div>
 
             <div className="flex items-center justify-between p-3 rounded-lg bg-orange-500/10 border border-orange-500/20">
               <div>
-                <Label className="text-orange-400 font-medium">
-                  Created Designs
-                </Label>
-                <p className="text-xs text-muted-foreground">
-                  All environments, projects
-                </p>
+                <Label className="text-orange-400 font-medium">Created Designs</Label>
+                <p className="text-xs text-muted-foreground">All environments, projects</p>
               </div>
-              <Switch
-                checked={applyToDesigns}
-                onCheckedChange={setApplyToDesigns}
-              />
+              <Switch checked={applyToDesigns} onCheckedChange={setApplyToDesigns} />
             </div>
           </div>
         </CardContent>
@@ -249,14 +225,10 @@ export function LandscapeStyleApplier({ onStyleApplied }: StyleApplierProps) {
               </Badge>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground mb-3 text-sm">
-                {style.description}
-              </p>
+              <p className="text-muted-foreground mb-3 text-sm">{style.description}</p>
 
               <div className="mb-4">
-                <h4 className="text-xs font-bold text-white mb-2">
-                  Visual Effects:
-                </h4>
+                <h4 className="text-xs font-bold text-white mb-2">Visual Effects:</h4>
                 <div className="flex flex-wrap gap-1">
                   {style.effects.map((effect, index) => (
                     <Badge key={index} variant="outline" className="text-xs">

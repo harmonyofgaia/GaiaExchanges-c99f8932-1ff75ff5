@@ -148,10 +148,7 @@ export function ArtStudio() {
     link.click();
     document.body.removeChild(link);
 
-    setArtHistory((prev) => [
-      "📤 Artwork exported as PNG",
-      ...prev.slice(0, 4),
-    ]);
+    setArtHistory((prev) => ["📤 Artwork exported as PNG", ...prev.slice(0, 4)]);
     toast.success("Canvas exported as PNG");
   };
 
@@ -165,19 +162,14 @@ export function ArtStudio() {
       if (!event.target || typeof event.target.result !== "string") return;
 
       import("fabric").then((fabricModule) => {
-        fabricModule.FabricImage.fromURL(event.target!.result as string).then(
-          (img) => {
-            img.scaleToWidth(fabricCanvas.width!);
-            img.scaleToHeight(fabricCanvas.height!);
-            fabricCanvas.add(img);
-            fabricCanvas.renderAll();
-            setArtHistory((prev) => [
-              "🖼️ Image imported onto canvas",
-              ...prev.slice(0, 4),
-            ]);
-            toast.success("Image imported successfully!");
-          },
-        );
+        fabricModule.FabricImage.fromURL(event.target!.result as string).then((img) => {
+          img.scaleToWidth(fabricCanvas.width!);
+          img.scaleToHeight(fabricCanvas.height!);
+          fabricCanvas.add(img);
+          fabricCanvas.renderAll();
+          setArtHistory((prev) => ["🖼️ Image imported onto canvas", ...prev.slice(0, 4)]);
+          toast.success("Image imported successfully!");
+        });
       });
     };
 
@@ -296,9 +288,7 @@ export function ArtStudio() {
                   onChange={(e) => setSelectedColor(e.target.value)}
                   className="w-16 h-10"
                 />
-                <div className="text-sm text-muted-foreground">
-                  {selectedColor}
-                </div>
+                <div className="text-sm text-muted-foreground">{selectedColor}</div>
               </div>
             </div>
 
@@ -339,10 +329,7 @@ export function ArtStudio() {
           {/* Action Buttons */}
           <div className="flex justify-between items-center">
             <div className="flex gap-2">
-              <Button
-                onClick={saveArtwork}
-                className="bg-green-600 hover:bg-green-700"
-              >
+              <Button onClick={saveArtwork} className="bg-green-600 hover:bg-green-700">
                 <Save className="h-4 w-4 mr-2" />
                 Save Artwork
               </Button>
@@ -384,10 +371,7 @@ export function ArtStudio() {
             </CardHeader>
             <CardContent className="space-y-2">
               {layers.map((layer, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 p-2 bg-background/50 rounded"
-                >
+                <div key={index} className="flex items-center gap-2 p-2 bg-background/50 rounded">
                   <div className="flex-1">{layer.name}</div>
                   <Badge variant={layer.visible ? "default" : "secondary"}>
                     {layer.visible ? "Visible" : "Hidden"}

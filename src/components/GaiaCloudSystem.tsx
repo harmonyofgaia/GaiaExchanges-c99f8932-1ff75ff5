@@ -48,30 +48,12 @@ export function GaiaCloudSystem() {
     const interval = setInterval(() => {
       setCloudData((prev) => ({
         ...prev,
-        visibility: Math.max(
-          10,
-          Math.min(100, prev.visibility + (Math.random() - 0.5) * 5),
-        ),
-        coverage: Math.max(
-          0,
-          Math.min(100, prev.coverage + (Math.random() - 0.5) * 3),
-        ),
-        humidity: Math.max(
-          20,
-          Math.min(100, prev.humidity + (Math.random() - 0.5) * 2),
-        ),
-        temperature: Math.max(
-          -10,
-          Math.min(45, prev.temperature + (Math.random() - 0.5) * 1),
-        ),
-        windSpeed: Math.max(
-          0,
-          Math.min(50, prev.windSpeed + (Math.random() - 0.5) * 3),
-        ),
-        gaiaEnergy: Math.max(
-          100,
-          Math.min(2000, prev.gaiaEnergy + (Math.random() - 0.5) * 50),
-        ),
+        visibility: Math.max(10, Math.min(100, prev.visibility + (Math.random() - 0.5) * 5)),
+        coverage: Math.max(0, Math.min(100, prev.coverage + (Math.random() - 0.5) * 3)),
+        humidity: Math.max(20, Math.min(100, prev.humidity + (Math.random() - 0.5) * 2)),
+        temperature: Math.max(-10, Math.min(45, prev.temperature + (Math.random() - 0.5) * 1)),
+        windSpeed: Math.max(0, Math.min(50, prev.windSpeed + (Math.random() - 0.5) * 3)),
+        gaiaEnergy: Math.max(100, Math.min(2000, prev.gaiaEnergy + (Math.random() - 0.5) * 50)),
       }));
     }, 2000);
 
@@ -79,10 +61,8 @@ export function GaiaCloudSystem() {
   }, []);
 
   const getCloudIcon = () => {
-    if (cloudData.coverage > 80)
-      return <CloudRain className="h-8 w-8 text-blue-400" />;
-    if (cloudData.coverage > 50)
-      return <Cloud className="h-8 w-8 text-gray-400" />;
+    if (cloudData.coverage > 80) return <CloudRain className="h-8 w-8 text-blue-400" />;
+    if (cloudData.coverage > 50) return <Cloud className="h-8 w-8 text-gray-400" />;
     return <Sun className="h-8 w-8 text-yellow-400" />;
   };
 
@@ -109,18 +89,14 @@ export function GaiaCloudSystem() {
           ☁️ GAiA Cloud Visibility System
         </CardTitle>
         <div className="flex gap-2 flex-wrap">
-          <Badge
-            className={`${isCloudVisible ? "bg-green-600" : "bg-red-600"} text-white`}
-          >
+          <Badge className={`${isCloudVisible ? "bg-green-600" : "bg-red-600"} text-white`}>
             <Eye className="h-3 w-3 mr-1" />
             {isCloudVisible ? "Visible" : "Hidden"}
           </Badge>
           <Badge className="bg-blue-600 text-white">
             Coverage: {cloudData.coverage.toFixed(1)}%
           </Badge>
-          <Badge className="bg-purple-600 text-white">
-            Energy: {cloudData.gaiaEnergy}
-          </Badge>
+          <Badge className="bg-purple-600 text-white">Energy: {cloudData.gaiaEnergy}</Badge>
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -133,10 +109,7 @@ export function GaiaCloudSystem() {
             <Eye className="h-4 w-4 mr-2" />
             {isCloudVisible ? "Hide Clouds" : "Show Clouds"}
           </Button>
-          <Button
-            variant="outline"
-            onClick={() => setAnimationSpeed(animationSpeed === 1 ? 3 : 1)}
-          >
+          <Button variant="outline" onClick={() => setAnimationSpeed(animationSpeed === 1 ? 3 : 1)}>
             <Zap className="h-4 w-4 mr-2" />
             Speed: {animationSpeed}x
           </Button>
@@ -203,9 +176,7 @@ export function GaiaCloudSystem() {
 
           <div className="text-center">
             <Cloud className="h-6 w-6 mx-auto mb-2 text-blue-400" />
-            <div className="text-2xl font-bold text-blue-400">
-              {cloudData.coverage.toFixed(1)}%
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{cloudData.coverage.toFixed(1)}%</div>
             <div className="text-sm text-muted-foreground">Coverage</div>
             <Progress value={cloudData.coverage} className="h-2 mt-1" />
           </div>
@@ -231,17 +202,13 @@ export function GaiaCloudSystem() {
         <div className="grid grid-cols-2 gap-4">
           <div className="text-center p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
             <Droplets className="h-6 w-6 mx-auto mb-2 text-blue-400" />
-            <div className="text-lg font-bold text-blue-400">
-              {cloudData.humidity}%
-            </div>
+            <div className="text-lg font-bold text-blue-400">{cloudData.humidity}%</div>
             <div className="text-sm text-muted-foreground">Humidity</div>
           </div>
 
           <div className="text-center p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg">
             <Activity className="h-6 w-6 mx-auto mb-2 text-purple-400" />
-            <div className="text-lg font-bold text-purple-400">
-              {cloudData.gaiaEnergy}
-            </div>
+            <div className="text-lg font-bold text-purple-400">{cloudData.gaiaEnergy}</div>
             <div className="text-sm text-muted-foreground">GAiA Energy</div>
           </div>
         </div>
@@ -249,15 +216,9 @@ export function GaiaCloudSystem() {
         {/* Weather Status */}
         <div className="text-center p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 rounded-lg">
           <Globe className="h-8 w-8 mx-auto mb-2 text-cyan-400" />
-          <h3 className="text-lg font-bold text-cyan-400">
-            {getWeatherDescription()}
-          </h3>
-          <p className="text-sm text-muted-foreground">
-            Cloud Type: {cloudData.type}
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Altitude: {cloudData.height}m
-          </p>
+          <h3 className="text-lg font-bold text-cyan-400">{getWeatherDescription()}</h3>
+          <p className="text-sm text-muted-foreground">Cloud Type: {cloudData.type}</p>
+          <p className="text-sm text-muted-foreground">Altitude: {cloudData.height}m</p>
         </div>
       </CardContent>
     </Card>

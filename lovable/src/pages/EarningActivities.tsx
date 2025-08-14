@@ -426,8 +426,8 @@ export default function EarningActivities() {
       category.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       category.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       category.components.some((comp) =>
-        comp.title.toLowerCase().includes(searchQuery.toLowerCase()),
-      ),
+        comp.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
   );
 
   return (
@@ -445,9 +445,8 @@ export default function EarningActivities() {
               <Sparkles className="h-12 w-12 text-yellow-400 animate-pulse" />
             </div>
             <p className="text-2xl text-muted-foreground max-w-4xl mx-auto">
-              The world's most comprehensive environmental action and reward
-              ecosystem. Earn GAiA tokens while making a real impact on our
-              planet! 🌍
+              The world's most comprehensive environmental action and reward ecosystem. Earn GAiA
+              tokens while making a real impact on our planet! 🌍
             </p>
 
             {/* Quick Stats */}
@@ -459,55 +458,35 @@ export default function EarningActivities() {
                 <div className="text-xs text-muted-foreground">Total GAiA</div>
               </div>
               <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
-                <div className="text-2xl font-bold text-blue-400">
-                  {userStats.weeklyEarnings}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Weekly Earnings
-                </div>
+                <div className="text-2xl font-bold text-blue-400">{userStats.weeklyEarnings}</div>
+                <div className="text-xs text-muted-foreground">Weekly Earnings</div>
               </div>
               <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
                 <div className="text-2xl font-bold text-purple-400">
                   {userStats.completedActivities}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Activities Done
-                </div>
+                <div className="text-xs text-muted-foreground">Activities Done</div>
               </div>
               <div className="text-center p-4 bg-yellow-900/30 rounded-lg border border-yellow-500/20">
                 <div className="text-2xl font-bold text-yellow-400">
                   Level {userStats.currentLevel}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Current Level
-                </div>
+                <div className="text-xs text-muted-foreground">Current Level</div>
               </div>
               <div className="text-center p-4 bg-orange-900/30 rounded-lg border border-orange-500/20">
-                <div className="text-2xl font-bold text-orange-400">
-                  {userStats.badgesEarned}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Badges Earned
-                </div>
+                <div className="text-2xl font-bold text-orange-400">{userStats.badgesEarned}</div>
+                <div className="text-xs text-muted-foreground">Badges Earned</div>
               </div>
               <div className="text-center p-4 bg-teal-900/30 rounded-lg border border-teal-500/20">
-                <div className="text-2xl font-bold text-teal-400">
-                  {userStats.co2Offset}kg
-                </div>
+                <div className="text-2xl font-bold text-teal-400">{userStats.co2Offset}kg</div>
                 <div className="text-xs text-muted-foreground">CO2 Offset</div>
               </div>
               <div className="text-center p-4 bg-pink-900/30 rounded-lg border border-pink-500/20">
-                <div className="text-2xl font-bold text-pink-400">
-                  #{userStats.communityRank}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Community Rank
-                </div>
+                <div className="text-2xl font-bold text-pink-400">#{userStats.communityRank}</div>
+                <div className="text-xs text-muted-foreground">Community Rank</div>
               </div>
               <div className="text-center p-4 bg-red-900/30 rounded-lg border border-red-500/20">
-                <div className="text-2xl font-bold text-red-400">
-                  {userStats.streakDays}
-                </div>
+                <div className="text-2xl font-bold text-red-400">{userStats.streakDays}</div>
                 <div className="text-xs text-muted-foreground">Day Streak</div>
               </div>
             </div>
@@ -535,25 +514,16 @@ export default function EarningActivities() {
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8 h-16 bg-black/20">
-            <TabsTrigger
-              value="overview"
-              className="text-base font-medium h-12"
-            >
+            <TabsTrigger value="overview" className="text-base font-medium h-12">
               🌟 Overview
             </TabsTrigger>
-            <TabsTrigger
-              value="categories"
-              className="text-base font-medium h-12"
-            >
+            <TabsTrigger value="categories" className="text-base font-medium h-12">
               📂 Categories
             </TabsTrigger>
             <TabsTrigger value="live" className="text-base font-medium h-12">
               🔴 Live Activities
             </TabsTrigger>
-            <TabsTrigger
-              value="achievements"
-              className="text-base font-medium h-12"
-            >
+            <TabsTrigger value="achievements" className="text-base font-medium h-12">
               🏆 Achievements
             </TabsTrigger>
           </TabsList>
@@ -569,22 +539,16 @@ export default function EarningActivities() {
                 >
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-xl font-bold text-primary">
-                        {category.title}
-                      </h3>
+                      <h3 className="text-xl font-bold text-primary">{category.title}</h3>
                       <Badge className="bg-primary/20 text-primary">
                         {category.completedCount}/{category.totalCount}
                       </Badge>
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      {category.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{category.description}</p>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <Progress
-                      value={
-                        (category.completedCount / category.totalCount) * 100
-                      }
+                      value={(category.completedCount / category.totalCount) * 100}
                       className="h-3"
                     />
 
@@ -599,14 +563,10 @@ export default function EarningActivities() {
                             <span className="truncate">{comp.title}</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Badge
-                              className={getDifficultyColor(comp.difficulty)}
-                            >
+                            <Badge className={getDifficultyColor(comp.difficulty)}>
                               {comp.difficulty}
                             </Badge>
-                            <span className="text-xs text-yellow-400">
-                              {comp.points}
-                            </span>
+                            <span className="text-xs text-yellow-400">{comp.points}</span>
                           </div>
                         </div>
                       ))}
@@ -628,21 +588,15 @@ export default function EarningActivities() {
               <div key={category.id} className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-3xl font-bold text-primary mb-2">
-                      {category.title}
-                    </h2>
-                    <p className="text-lg text-muted-foreground">
-                      {category.description}
-                    </p>
+                    <h2 className="text-3xl font-bold text-primary mb-2">{category.title}</h2>
+                    <p className="text-lg text-muted-foreground">{category.description}</p>
                   </div>
                   <div className="text-right">
                     <div className="text-2xl font-bold text-primary">
                       {category.completedCount}/{category.totalCount}
                     </div>
                     <Progress
-                      value={
-                        (category.completedCount / category.totalCount) * 100
-                      }
+                      value={(category.completedCount / category.totalCount) * 100}
                       className="w-32 h-3"
                     />
                   </div>
@@ -679,9 +633,7 @@ export default function EarningActivities() {
           {/* Achievements Tab */}
           <TabsContent value="achievements" className="space-y-8">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-yellow-400 mb-3">
-                🏆 Achievements & Rewards
-              </h2>
+              <h2 className="text-3xl font-bold text-yellow-400 mb-3">🏆 Achievements & Rewards</h2>
               <p className="text-lg text-muted-foreground">
                 Your progress, badges, and reward systems
               </p>
@@ -703,9 +655,8 @@ export default function EarningActivities() {
               🌟 Ready to Change the World?
             </h3>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Join millions of eco-warriors earning GAiA tokens while protecting
-              our planet. Every action counts, every token matters, every person
-              makes a difference! 🌍
+              Join millions of eco-warriors earning GAiA tokens while protecting our planet. Every
+              action counts, every token matters, every person makes a difference! 🌍
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
               <Button

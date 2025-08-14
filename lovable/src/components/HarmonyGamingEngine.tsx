@@ -155,14 +155,8 @@ export function HarmonyGamingEngine() {
         ...prev,
         fps: Math.max(120, 165 + Math.floor(Math.random() * 20 - 10)),
         ping: Math.max(1, prev.ping + Math.floor(Math.random() * 4 - 2)),
-        cpuUsage: Math.max(
-          15,
-          Math.min(35, prev.cpuUsage + Math.floor(Math.random() * 6 - 3)),
-        ),
-        gpuUsage: Math.max(
-          50,
-          Math.min(85, prev.gpuUsage + Math.floor(Math.random() * 10 - 5)),
-        ),
+        cpuUsage: Math.max(15, Math.min(35, prev.cpuUsage + Math.floor(Math.random() * 6 - 3))),
+        gpuUsage: Math.max(50, Math.min(85, prev.gpuUsage + Math.floor(Math.random() * 10 - 5))),
         activeNPCs: prev.activeNPCs + Math.floor(Math.random() * 100 - 50),
       }));
 
@@ -201,8 +195,7 @@ export function HarmonyGamingEngine() {
           "🌸 Sanctuary Bloom - Flowers grow wherever animals walk!",
           "💫 Stellar Alignment - All animals gain temporary flight!",
         ];
-        const randomEvent =
-          epicEvents[Math.floor(Math.random() * epicEvents.length)];
+        const randomEvent = epicEvents[Math.floor(Math.random() * epicEvents.length)];
         toast.success("🎮 EPIC QUANTUM EVENT!", {
           description: randomEvent,
           duration: 6000,
@@ -216,8 +209,7 @@ export function HarmonyGamingEngine() {
   const startQuantumGame = () => {
     setGameState((prev) => ({ ...prev, isPlaying: true }));
     toast.success("🚀 QUANTUM HARMONY ENGINE ACTIVATED!", {
-      description:
-        "Ultra-realistic animal liberation warfare begins! Graphics beyond imagination!",
+      description: "Ultra-realistic animal liberation warfare begins! Graphics beyond imagination!",
       duration: 5000,
     });
   };
@@ -259,12 +251,8 @@ export function HarmonyGamingEngine() {
           <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
             <div className="text-center p-4 rounded-lg bg-blue-900/40 border border-blue-500/30">
               <Crown className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                Level {gameState.playerLevel}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Quantum Liberator
-              </div>
+              <div className="text-2xl font-bold text-blue-400">Level {gameState.playerLevel}</div>
+              <div className="text-xs text-muted-foreground">Quantum Liberator</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-yellow-900/40 border border-yellow-500/30">
@@ -277,32 +265,20 @@ export function HarmonyGamingEngine() {
 
             <div className="text-center p-4 rounded-lg bg-green-900/40 border border-green-500/30">
               <Heart className="h-6 w-6 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {gameState.animalsSaved}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Souls Liberated
-              </div>
+              <div className="text-2xl font-bold text-green-400">{gameState.animalsSaved}</div>
+              <div className="text-xs text-muted-foreground">Souls Liberated</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-red-900/40 border border-red-500/30">
               <Trophy className="h-6 w-6 text-red-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-red-400">
-                {gameState.killCount}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Cage Systems Destroyed
-              </div>
+              <div className="text-2xl font-bold text-red-400">{gameState.killCount}</div>
+              <div className="text-xs text-muted-foreground">Cage Systems Destroyed</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-cyan-900/40 border border-cyan-500/30">
               <Atom className="h-6 w-6 text-cyan-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-cyan-400">
-                {gameState.quantumEnergy}%
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Quantum Energy
-              </div>
+              <div className="text-2xl font-bold text-cyan-400">{gameState.quantumEnergy}%</div>
+              <div className="text-xs text-muted-foreground">Quantum Energy</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-pink-900/40 border border-pink-500/30">
@@ -359,9 +335,7 @@ export function HarmonyGamingEngine() {
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <div className="text-center space-y-4">
                 <Sparkles className="h-20 w-20 text-green-400 mx-auto animate-pulse" />
-                <h3 className="text-3xl font-bold text-green-400">
-                  QUANTUM HARMONY ENGINE
-                </h3>
+                <h3 className="text-3xl font-bold text-green-400">QUANTUM HARMONY ENGINE</h3>
                 <p className="text-muted-foreground text-lg">
                   Beyond Reality • Cross-Dimensional • Neural-Synchronized
                 </p>
@@ -369,36 +343,24 @@ export function HarmonyGamingEngine() {
                 {/* Real-time Game Metrics */}
                 <div className="grid grid-cols-4 gap-4 mt-8">
                   <div className="p-4 bg-green-900/40 rounded border border-green-500/30">
-                    <div className="text-lg font-bold text-green-400">
-                      {gameMetrics.fps} FPS
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {gameMetrics.resolution}
-                    </div>
+                    <div className="text-lg font-bold text-green-400">{gameMetrics.fps} FPS</div>
+                    <div className="text-xs text-muted-foreground">{gameMetrics.resolution}</div>
                   </div>
                   <div className="p-4 bg-blue-900/40 rounded border border-blue-500/30">
-                    <div className="text-lg font-bold text-blue-400">
-                      {gameMetrics.ping}ms
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      Quantum Ping
-                    </div>
+                    <div className="text-lg font-bold text-blue-400">{gameMetrics.ping}ms</div>
+                    <div className="text-xs text-muted-foreground">Quantum Ping</div>
                   </div>
                   <div className="p-4 bg-purple-900/40 rounded border border-purple-500/30">
                     <div className="text-lg font-bold text-purple-400">
                       {gameMetrics.activeNPCs.toLocaleString()}
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      Living NPCs
-                    </div>
+                    <div className="text-xs text-muted-foreground">Living NPCs</div>
                   </div>
                   <div className="p-4 bg-yellow-900/40 rounded border border-yellow-500/30">
                     <div className="text-lg font-bold text-yellow-400">
                       {gameMetrics.renderDistance}
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      Render Distance
-                    </div>
+                    <div className="text-xs text-muted-foreground">Render Distance</div>
                   </div>
                 </div>
 
@@ -411,8 +373,8 @@ export function HarmonyGamingEngine() {
                     Weather: {gameWorld.weather} | Time: {gameWorld.timeOfDay}
                   </div>
                   <div className="text-sm text-green-400 mt-2">
-                    Animals in this realm: {gameWorld.animalCount} |
-                    Sanctuaries: {gameWorld.sanctuariesBuilt}
+                    Animals in this realm: {gameWorld.animalCount} | Sanctuaries:{" "}
+                    {gameWorld.sanctuariesBuilt}
                   </div>
                 </div>
               </div>
@@ -422,15 +384,11 @@ export function HarmonyGamingEngine() {
             {gameState.isPlaying && (
               <div className="absolute top-4 left-4 space-y-2 z-10">
                 <div className="bg-black/80 p-3 rounded border border-green-500/30">
-                  <div className="text-green-400 font-bold">
-                    Wave: {gameState.currentWave}
-                  </div>
+                  <div className="text-green-400 font-bold">Wave: {gameState.currentWave}</div>
                   <div className="text-yellow-400 text-sm">
                     GAIA: {gameState.gaiaEarned.toFixed(2)}
                   </div>
-                  <div className="text-cyan-400 text-sm">
-                    Quantum: {gameState.quantumEnergy}%
-                  </div>
+                  <div className="text-cyan-400 text-sm">Quantum: {gameState.quantumEnergy}%</div>
                 </div>
               </div>
             )}
@@ -469,9 +427,7 @@ export function HarmonyGamingEngine() {
                     {feature.status}
                   </Badge>
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  {feature.impact}
-                </div>
+                <div className="text-xs text-muted-foreground">{feature.impact}</div>
               </div>
             ))}
           </div>
@@ -503,22 +459,15 @@ export function HarmonyGamingEngine() {
 
               <div className="flex justify-between text-sm">
                 <span>Memory Usage:</span>
-                <span className="text-blue-400">
-                  {gameMetrics.memoryUsage}%
-                </span>
+                <span className="text-blue-400">{gameMetrics.memoryUsage}%</span>
               </div>
               <Progress value={gameMetrics.memoryUsage} className="h-2" />
 
               <div className="flex justify-between text-sm">
                 <span>Quantum Cores Active:</span>
-                <span className="text-purple-400">
-                  {gameMetrics.quantumCores}/16
-                </span>
+                <span className="text-purple-400">{gameMetrics.quantumCores}/16</span>
               </div>
-              <Progress
-                value={(gameMetrics.quantumCores / 16) * 100}
-                className="h-2"
-              />
+              <Progress value={(gameMetrics.quantumCores / 16) * 100} className="h-2" />
             </div>
           </CardContent>
         </Card>
@@ -575,12 +524,8 @@ export function HarmonyGamingEngine() {
                     <span className="text-sm">{platform.platform}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Badge className="bg-green-600 text-white text-xs">
-                      {platform.status}
-                    </Badge>
-                    <span className="text-xs text-green-400">
-                      {platform.performance}%
-                    </span>
+                    <Badge className="bg-green-600 text-white text-xs">{platform.status}</Badge>
+                    <span className="text-xs text-green-400">{platform.performance}%</span>
                   </div>
                 </div>
               ))}
@@ -596,53 +541,36 @@ export function HarmonyGamingEngine() {
             🎮 REVOLUTIONARY GAMING TECHNOLOGY
           </h3>
           <p className="text-muted-foreground mb-6 text-lg">
-            The most advanced gaming engine ever created. Quantum-powered
-            graphics, neural AI companions, infinite procedural worlds, and
-            reality-bending physics that make animals feel truly alive.
+            The most advanced gaming engine ever created. Quantum-powered graphics, neural AI
+            companions, infinite procedural worlds, and reality-bending physics that make animals
+            feel truly alive.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
             <div className="p-4 bg-green-900/30 rounded border border-green-500/20">
               <Sparkles className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="text-sm font-bold text-green-400">
-                🌟 Quantum Graphics
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Beyond 8K Ultra Reality
-              </div>
+              <div className="text-sm font-bold text-green-400">🌟 Quantum Graphics</div>
+              <div className="text-xs text-muted-foreground">Beyond 8K Ultra Reality</div>
             </div>
             <div className="p-4 bg-blue-900/30 rounded border border-blue-500/20">
               <Brain className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-sm font-bold text-blue-400">
-                🧠 Neural AI
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Living Intelligent Animals
-              </div>
+              <div className="text-sm font-bold text-blue-400">🧠 Neural AI</div>
+              <div className="text-xs text-muted-foreground">Living Intelligent Animals</div>
             </div>
             <div className="p-4 bg-purple-900/30 rounded border border-purple-500/20">
               <Globe className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-              <div className="text-sm font-bold text-purple-400">
-                🌍 Infinite Worlds
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Procedural Paradise
-              </div>
+              <div className="text-sm font-bold text-purple-400">🌍 Infinite Worlds</div>
+              <div className="text-xs text-muted-foreground">Procedural Paradise</div>
             </div>
             <div className="p-4 bg-yellow-900/30 rounded border border-yellow-500/20">
               <Heart className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
-              <div className="text-sm font-bold text-yellow-400">
-                💖 Emotional Reality
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Feel Every Heartbeat
-              </div>
+              <div className="text-sm font-bold text-yellow-400">💖 Emotional Reality</div>
+              <div className="text-xs text-muted-foreground">Feel Every Heartbeat</div>
             </div>
           </div>
 
           <p className="text-sm text-green-400 font-bold mt-6">
-            🎵 "Seeds Will Form Into Music" - Every frame creates harmony and
-            liberation! 🎵
+            🎵 "Seeds Will Form Into Music" - Every frame creates harmony and liberation! 🎵
           </p>
         </div>
       </div>

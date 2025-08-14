@@ -45,10 +45,7 @@ export function EnhancedUserAnalytics() {
       ipAddresses: ["192.168.1.100", "10.0.0.5"],
       locations: ["Amsterdam, Netherlands", "Rotterdam, Netherlands"],
       devices: ["iPhone 14 Pro", "MacBook Pro M2", "Windows Desktop"],
-      socialConnections: [
-        "Twitter: @user_example",
-        "LinkedIn: /in/user-example",
-      ],
+      socialConnections: ["Twitter: @user_example", "LinkedIn: /in/user-example"],
       phoneNumber: "+31612345678",
       lastActivity: "2 minutes ago",
       securityRisk: "low",
@@ -143,23 +140,15 @@ export function EnhancedUserAnalytics() {
                       </div>
                       <div>
                         <span className="text-muted-foreground">Phone:</span>
-                        <div className="font-mono">
-                          {selectedUser.phoneNumber || "N/A"}
-                        </div>
+                        <div className="font-mono">{selectedUser.phoneNumber || "N/A"}</div>
                       </div>
                       <div>
                         <span className="text-muted-foreground">Sessions:</span>
-                        <div className="font-bold text-green-400">
-                          {selectedUser.totalSessions}
-                        </div>
+                        <div className="font-bold text-green-400">{selectedUser.totalSessions}</div>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">
-                          Data Usage:
-                        </span>
-                        <div className="font-bold text-blue-400">
-                          {selectedUser.dataUsage}
-                        </div>
+                        <span className="text-muted-foreground">Data Usage:</span>
+                        <div className="font-bold text-blue-400">{selectedUser.dataUsage}</div>
                       </div>
                     </div>
 
@@ -194,10 +183,7 @@ export function EnhancedUserAnalytics() {
                         Locations:
                       </span>
                       {selectedUser.locations.map((location, i) => (
-                        <div
-                          key={i}
-                          className="text-sm bg-black/30 p-2 rounded"
-                        >
+                        <div key={i} className="text-sm bg-black/30 p-2 rounded">
                           {location}
                         </div>
                       ))}
@@ -209,10 +195,7 @@ export function EnhancedUserAnalytics() {
                         Devices:
                       </span>
                       {selectedUser.devices.map((device, i) => (
-                        <div
-                          key={i}
-                          className="text-sm bg-black/30 p-2 rounded"
-                        >
+                        <div key={i} className="text-sm bg-black/30 p-2 rounded">
                           {device}
                         </div>
                       ))}
@@ -224,10 +207,7 @@ export function EnhancedUserAnalytics() {
                         IP Addresses:
                       </span>
                       {selectedUser.ipAddresses.map((ip, i) => (
-                        <div
-                          key={i}
-                          className="text-sm bg-black/30 p-2 rounded font-mono"
-                        >
+                        <div key={i} className="text-sm bg-black/30 p-2 rounded font-mono">
                           {ip}
                         </div>
                       ))}
@@ -246,9 +226,7 @@ export function EnhancedUserAnalytics() {
                   className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 text-lg"
                 >
                   <Calculator className="h-5 w-5 mr-2" />
-                  {isCalculating
-                    ? "Calculating Global Data..."
-                    : "Perform Global Calculation"}
+                  {isCalculating ? "Calculating Global Data..." : "Perform Global Calculation"}
                 </Button>
               </div>
             )}
@@ -268,55 +246,41 @@ export function EnhancedUserAnalytics() {
                       <div className="text-3xl font-bold text-yellow-400">
                         {calculationResults.totalDataPoints}
                       </div>
-                      <div className="text-sm text-muted-foreground">
-                        Total Data Points
-                      </div>
+                      <div className="text-sm text-muted-foreground">Total Data Points</div>
                     </div>
                     <div className="text-center">
                       <div className="text-3xl font-bold text-green-400">
                         {calculationResults.securityScore}%
                       </div>
-                      <div className="text-sm text-muted-foreground">
-                        Security Score
-                      </div>
+                      <div className="text-sm text-muted-foreground">Security Score</div>
                     </div>
                     <div className="text-center">
                       <div className="text-3xl font-bold text-blue-400">
                         {calculationResults.networkConnections}
                       </div>
-                      <div className="text-sm text-muted-foreground">
-                        Network Connections
-                      </div>
+                      <div className="text-sm text-muted-foreground">Network Connections</div>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <h4 className="font-bold text-red-400 mb-2">
-                        Risk Factors:
-                      </h4>
+                      <h4 className="font-bold text-red-400 mb-2">Risk Factors:</h4>
                       <ul className="space-y-1 text-sm">
-                        {calculationResults.riskFactors.map(
-                          (factor: string, i: number) => (
-                            <li key={i} className="text-red-300">
-                              • {factor}
-                            </li>
-                          ),
-                        )}
+                        {calculationResults.riskFactors.map((factor: string, i: number) => (
+                          <li key={i} className="text-red-300">
+                            • {factor}
+                          </li>
+                        ))}
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-bold text-green-400 mb-2">
-                        Recommendations:
-                      </h4>
+                      <h4 className="font-bold text-green-400 mb-2">Recommendations:</h4>
                       <ul className="space-y-1 text-sm">
-                        {calculationResults.recommendations.map(
-                          (rec: string, i: number) => (
-                            <li key={i} className="text-green-300">
-                              • {rec}
-                            </li>
-                          ),
-                        )}
+                        {calculationResults.recommendations.map((rec: string, i: number) => (
+                          <li key={i} className="text-green-300">
+                            • {rec}
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </div>

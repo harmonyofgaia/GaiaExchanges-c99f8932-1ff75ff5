@@ -3,14 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Zap,
-  Settings,
-  Globe,
-  TrendingUp,
-  Users,
-  Activity,
-} from "lucide-react";
+import { Zap, Settings, Globe, TrendingUp, Users, Activity } from "lucide-react";
 import { toast } from "sonner";
 
 export function AutomationMaster() {
@@ -40,10 +33,7 @@ export function AutomationMaster() {
       setSystemMetrics((prev) => ({
         ...prev,
         tasksCompleted: prev.tasksCompleted + Math.floor(Math.random() * 5),
-        efficiency: Math.min(
-          100,
-          prev.efficiency + (Math.random() - 0.5) * 0.1,
-        ),
+        efficiency: Math.min(100, prev.efficiency + (Math.random() - 0.5) * 0.1),
         uptime: Math.max(99.9, prev.uptime + (Math.random() - 0.5) * 0.001),
       }));
     }, 3000);
@@ -67,7 +57,7 @@ export function AutomationMaster() {
     };
 
     toast.success(
-      `${systemNames[system]} ${automationSystems[system] ? "Disabled" : "Activated"}!`,
+      `${systemNames[system]} ${automationSystems[system] ? "Disabled" : "Activated"}!`
     );
   };
 
@@ -102,17 +92,11 @@ export function AutomationMaster() {
               <div className="text-2xl font-bold text-green-400">
                 {systemMetrics.totalAutomations}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Active Systems
-              </div>
+              <div className="text-sm text-muted-foreground">Active Systems</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                {systemMetrics.tasksCompleted}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Tasks Completed
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{systemMetrics.tasksCompleted}</div>
+              <div className="text-sm text-muted-foreground">Tasks Completed</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-400">
@@ -176,26 +160,16 @@ export function AutomationMaster() {
               <CardContent className="p-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <Icon
-                      className={`h-5 w-5 text-${systemConfig.color}-400`}
-                    />
-                    <span className="font-semibold text-sm">
-                      {systemConfig.name}
-                    </span>
+                    <Icon className={`h-5 w-5 text-${systemConfig.color}-400`} />
+                    <span className="font-semibold text-sm">{systemConfig.name}</span>
                   </div>
-                  <Badge
-                    className={
-                      active ? `bg-${systemConfig.color}-600` : "bg-gray-600"
-                    }
-                  >
+                  <Badge className={active ? `bg-${systemConfig.color}-600` : "bg-gray-600"}>
                     {active ? "ACTIVE" : "INACTIVE"}
                   </Badge>
                 </div>
                 <Progress value={active ? 100 : 0} className="mb-3" />
                 <Button
-                  onClick={() =>
-                    toggleAutomation(key as keyof typeof automationSystems)
-                  }
+                  onClick={() => toggleAutomation(key as keyof typeof automationSystems)}
                   className={`w-full ${active ? "bg-red-600 hover:bg-red-700" : `bg-${systemConfig.color}-600 hover:bg-${systemConfig.color}-700`}`}
                   size="sm"
                 >

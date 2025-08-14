@@ -48,9 +48,7 @@ export default function TaskReverser() {
 
       if (error) throw error;
 
-      toast.success(
-        `Feature ${!currentStatus ? "enabled" : "disabled"} successfully`,
-      );
+      toast.success(`Feature ${!currentStatus ? "enabled" : "disabled"} successfully`);
       refetch();
     } catch (error) {
       console.error("Toggle error:", error);
@@ -95,10 +93,7 @@ export default function TaskReverser() {
     }
 
     try {
-      const { error } = await supabase
-        .from("feature_toggles")
-        .delete()
-        .eq("id", featureId);
+      const { error } = await supabase.from("feature_toggles").delete().eq("id", featureId);
 
       if (error) throw error;
 
@@ -142,7 +137,7 @@ export default function TaskReverser() {
         acc[feature.category].push(feature);
         return acc;
       },
-      {} as Record<string, typeof features>,
+      {} as Record<string, typeof features>
     ) || {};
 
   if (!user) {
@@ -178,74 +173,59 @@ export default function TaskReverser() {
         </TabsList>
 
         <TabsContent value="features" className="space-y-6">
-          {Object.entries(groupedFeatures).map(
-            ([category, categoryFeatures]) => (
-              <Card
-                key={category}
-                className="border-orange-500/30 bg-orange-900/20"
-              >
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-orange-400 capitalize">
-                    {getCategoryIcon(category)}
-                    {category} Features
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-4">
-                    {categoryFeatures.map((feature) => (
-                      <div
-                        key={feature.id}
-                        className="flex items-center justify-between p-4 bg-black/40 rounded-lg"
-                      >
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <h3 className="font-medium capitalize">
-                              {feature.feature_name.replace(/_/g, " ")}
-                            </h3>
-                            <Badge
-                              className={getCategoryColor(feature.category)}
-                            >
-                              {feature.category}
-                            </Badge>
-                            {feature.admin_only && (
-                              <Badge variant="destructive">Admin Only</Badge>
-                            )}
-                          </div>
-                          {feature.feature_description && (
-                            <p className="text-sm text-muted-foreground">
-                              {feature.feature_description}
-                            </p>
-                          )}
+          {Object.entries(groupedFeatures).map(([category, categoryFeatures]) => (
+            <Card key={category} className="border-orange-500/30 bg-orange-900/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-orange-400 capitalize">
+                  {getCategoryIcon(category)}
+                  {category} Features
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-4">
+                  {categoryFeatures.map((feature) => (
+                    <div
+                      key={feature.id}
+                      className="flex items-center justify-between p-4 bg-black/40 rounded-lg"
+                    >
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="font-medium capitalize">
+                            {feature.feature_name.replace(/_/g, " ")}
+                          </h3>
+                          <Badge className={getCategoryColor(feature.category)}>
+                            {feature.category}
+                          </Badge>
+                          {feature.admin_only && <Badge variant="destructive">Admin Only</Badge>}
                         </div>
-                        <div className="flex items-center gap-3">
-                          <div className="flex items-center space-x-2">
-                            <Switch
-                              checked={feature.is_enabled}
-                              onCheckedChange={() =>
-                                toggleFeature(feature.id, feature.is_enabled)
-                              }
-                            />
-                            <Label className="text-sm">
-                              {feature.is_enabled ? "ON" : "OFF"}
-                            </Label>
-                          </div>
-                          <Button
-                            variant="destructive"
-                            size="sm"
-                            onClick={() =>
-                              deleteFeature(feature.id, feature.feature_name)
-                            }
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
+                        {feature.feature_description && (
+                          <p className="text-sm text-muted-foreground">
+                            {feature.feature_description}
+                          </p>
+                        )}
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ),
-          )}
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center space-x-2">
+                          <Switch
+                            checked={feature.is_enabled}
+                            onCheckedChange={() => toggleFeature(feature.id, feature.is_enabled)}
+                          />
+                          <Label className="text-sm">{feature.is_enabled ? "ON" : "OFF"}</Label>
+                        </div>
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          onClick={() => deleteFeature(feature.id, feature.feature_name)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </TabsContent>
 
         <TabsContent value="create">
@@ -262,9 +242,7 @@ export default function TaskReverser() {
                 <Input
                   id="feature-name"
                   value={newFeature.name}
-                  onChange={(e) =>
-                    setNewFeature((prev) => ({ ...prev, name: e.target.value }))
-                  }
+                  onChange={(e) => setNewFeature((prev) => ({ ...prev, name: e.target.value }))}
                   placeholder="e.g., Advanced Analytics, Premium Features..."
                   className="bg-black/40 border-green-500/30"
                 />
@@ -352,17 +330,13 @@ export default function TaskReverser() {
               <div className="text-2xl font-bold text-green-400">
                 {features?.filter((f) => f.is_enabled).length || 0}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Active Features
-              </div>
+              <div className="text-sm text-muted-foreground">Active Features</div>
             </div>
             <div className="text-center p-4 bg-black/40 rounded-lg">
               <div className="text-2xl font-bold text-red-400">
                 {features?.filter((f) => !f.is_enabled).length || 0}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Disabled Features
-              </div>
+              <div className="text-sm text-muted-foreground">Disabled Features</div>
             </div>
             <div className="text-center p-4 bg-black/40 rounded-lg">
               <div className="text-2xl font-bold text-purple-400">
@@ -371,12 +345,8 @@ export default function TaskReverser() {
               <div className="text-sm text-muted-foreground">Admin Only</div>
             </div>
             <div className="text-center p-4 bg-black/40 rounded-lg">
-              <div className="text-2xl font-bold text-blue-400">
-                {features?.length || 0}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Total Features
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{features?.length || 0}</div>
+              <div className="text-sm text-muted-foreground">Total Features</div>
             </div>
           </div>
         </CardContent>

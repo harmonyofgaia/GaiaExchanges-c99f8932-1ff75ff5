@@ -91,33 +91,21 @@ export function GhostAnimalArmy() {
             return {
               ...ghost,
               helpCount: ghost.helpCount + Math.floor(Math.random() * 5),
-              energy: Math.max(
-                20,
-                ghost.energy - Math.floor(Math.random() * 3),
-              ),
+              energy: Math.max(20, ghost.energy - Math.floor(Math.random() * 3)),
               position: {
-                x: Math.max(
-                  5,
-                  Math.min(95, ghost.position.x + (Math.random() - 0.5) * 10),
-                ),
-                y: Math.max(
-                  5,
-                  Math.min(95, ghost.position.y + (Math.random() - 0.5) * 10),
-                ),
+                x: Math.max(5, Math.min(95, ghost.position.x + (Math.random() - 0.5) * 10)),
+                y: Math.max(5, Math.min(95, ghost.position.y + (Math.random() - 0.5) * 10)),
               },
             };
           }
           return ghost;
-        }),
+        })
       );
 
       setArmyStats((prev) => ({
         ...prev,
         totalHelps: prev.totalHelps + Math.floor(Math.random() * 15),
-        energyLevel: Math.max(
-          70,
-          Math.min(100, prev.energyLevel + (Math.random() - 0.5) * 5),
-        ),
+        energyLevel: Math.max(70, Math.min(100, prev.energyLevel + (Math.random() - 0.5) * 5)),
       }));
     }, 2000);
 
@@ -147,16 +135,14 @@ export function GhostAnimalArmy() {
       prev.map((ghost) =>
         ghost.id === ghostId
           ? { ...ghost, level: ghost.level + 1, status: "upgrading" as const }
-          : ghost,
-      ),
+          : ghost
+      )
     );
     setTimeout(() => {
       setGhosts((prev) =>
         prev.map((ghost) =>
-          ghost.id === ghostId
-            ? { ...ghost, status: "active" as const, energy: 100 }
-            : ghost,
-        ),
+          ghost.id === ghostId ? { ...ghost, status: "active" as const, energy: 100 } : ghost
+        )
       );
     }, 3000);
   };
@@ -188,9 +174,7 @@ export function GhostAnimalArmy() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
               <Users className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-              <div className="text-2xl font-bold text-purple-400">
-                {armyStats.activeGhosts}
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{armyStats.activeGhosts}</div>
               <div className="text-sm text-muted-foreground">Active Ghosts</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
@@ -202,25 +186,18 @@ export function GhostAnimalArmy() {
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
               <Brain className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {armyStats.upgradesCompleted}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{armyStats.upgradesCompleted}</div>
               <div className="text-sm text-muted-foreground">Upgrades Done</div>
             </div>
             <div className="text-center p-4 bg-yellow-900/30 rounded-lg">
               <Zap className="h-8 w-8 mx-auto text-yellow-400 mb-2" />
-              <div className="text-2xl font-bold text-yellow-400">
-                {armyStats.energyLevel}%
-              </div>
+              <div className="text-2xl font-bold text-yellow-400">{armyStats.energyLevel}%</div>
               <div className="text-sm text-muted-foreground">Army Energy</div>
             </div>
           </div>
 
           <div className="flex gap-4 mb-6">
-            <Button
-              onClick={deployGhost}
-              className="bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={deployGhost} className="bg-purple-600 hover:bg-purple-700">
               <Ghost className="h-4 w-4 mr-2" />
               Deploy New Ghost
             </Button>
@@ -235,9 +212,7 @@ export function GhostAnimalArmy() {
 
           {/* Ghost Activity Map */}
           <div className="relative bg-black/50 rounded-lg p-4 h-64 overflow-hidden border border-purple-500/30">
-            <h4 className="text-purple-400 font-bold mb-2">
-              👻 Real-Time Ghost Positions
-            </h4>
+            <h4 className="text-purple-400 font-bold mb-2">👻 Real-Time Ghost Positions</h4>
             {ghosts.map((ghost) => (
               <div
                 key={ghost.id}
@@ -264,9 +239,7 @@ export function GhostAnimalArmy() {
       {/* Ghost Directory */}
       <Card className="bg-gradient-to-r from-indigo-900/50 to-purple-900/50 border-indigo-500/50">
         <CardHeader>
-          <CardTitle className="text-indigo-400">
-            🔮 Ghost Avatar Directory
-          </CardTitle>
+          <CardTitle className="text-indigo-400">🔮 Ghost Avatar Directory</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -278,21 +251,15 @@ export function GhostAnimalArmy() {
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <Ghost className="h-5 w-5 text-purple-400" />
-                    <span className="font-bold text-purple-400">
-                      {ghost.name}
-                    </span>
+                    <span className="font-bold text-purple-400">{ghost.name}</span>
                   </div>
-                  <Badge className={getStatusColor(ghost.status)}>
-                    {ghost.status}
-                  </Badge>
+                  <Badge className={getStatusColor(ghost.status)}>{ghost.status}</Badge>
                 </div>
 
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Level:</span>
-                    <span className="text-purple-400 font-bold">
-                      {ghost.level}
-                    </span>
+                    <span className="text-purple-400 font-bold">{ghost.level}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Energy:</span>
@@ -303,15 +270,11 @@ export function GhostAnimalArmy() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Assigned:</span>
-                    <span className="text-green-400">
-                      {ghost.assignedAnimal}
-                    </span>
+                    <span className="text-green-400">{ghost.assignedAnimal}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Helps:</span>
-                    <span className="text-yellow-400">
-                      {ghost.helpCount.toLocaleString()}
-                    </span>
+                    <span className="text-yellow-400">{ghost.helpCount.toLocaleString()}</span>
                   </div>
                 </div>
 
@@ -321,9 +284,7 @@ export function GhostAnimalArmy() {
                   className="w-full mt-3 bg-purple-600 hover:bg-purple-700 disabled:opacity-50"
                   size="sm"
                 >
-                  {ghost.status === "upgrading"
-                    ? "Upgrading..."
-                    : "Upgrade Ghost"}
+                  {ghost.status === "upgrading" ? "Upgrading..." : "Upgrade Ghost"}
                 </Button>
               </div>
             ))}
@@ -334,16 +295,12 @@ export function GhostAnimalArmy() {
       {/* Ghost Capabilities */}
       <Card className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 border-blue-500/50">
         <CardHeader>
-          <CardTitle className="text-blue-400">
-            ⚡ Ghost Army Capabilities
-          </CardTitle>
+          <CardTitle className="text-blue-400">⚡ Ghost Army Capabilities</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <h4 className="text-purple-400 font-bold">
-                🔮 Spiritual Powers:
-              </h4>
+              <h4 className="text-purple-400 font-bold">🔮 Spiritual Powers:</h4>
               <div className="text-sm text-muted-foreground space-y-1">
                 <div>• Ethereal animal healing and energy restoration</div>
                 <div>• Invisible threat detection and early warning</div>

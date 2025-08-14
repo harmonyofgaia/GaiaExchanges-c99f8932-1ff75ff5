@@ -60,8 +60,7 @@ export function EnhancedDownloadLinks() {
           📱 Download Gaia's Exchanges - Multi-Platform
         </CardTitle>
         <p className="text-center text-muted-foreground">
-          Access GAIA token trading on all your devices with our native
-          applications
+          Access GAIA token trading on all your devices with our native applications
         </p>
       </CardHeader>
       <CardContent>
@@ -73,9 +72,7 @@ export function EnhancedDownloadLinks() {
             >
               <CardContent className="p-4">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className={`p-2 rounded-lg ${option.color}`}>
-                    {option.icon}
-                  </div>
+                  <div className={`p-2 rounded-lg ${option.color}`}>{option.icon}</div>
                   <div>
                     <h4 className="font-bold text-white">{option.platform}</h4>
                     <Badge variant="outline" className="text-xs">
@@ -84,14 +81,10 @@ export function EnhancedDownloadLinks() {
                   </div>
                 </div>
 
-                <p className="text-sm text-muted-foreground mb-3">
-                  {option.description}
-                </p>
+                <p className="text-sm text-muted-foreground mb-3">{option.description}</p>
 
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs text-blue-400">
-                    Size: {option.size}
-                  </span>
+                  <span className="text-xs text-blue-400">Size: {option.size}</span>
                   <Shield className="h-4 w-4 text-green-400" />
                 </div>
 
@@ -99,11 +92,7 @@ export function EnhancedDownloadLinks() {
                   className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
                   onClick={() => {
                     if (option.platform === "Web App") {
-                      window.open(
-                        option.downloadUrl,
-                        "_blank",
-                        "noopener,noreferrer",
-                      );
+                      window.open(option.downloadUrl, "_blank", "noopener,noreferrer");
                     } else {
                       // Simulate download for native apps
                       console.log(`Downloading ${option.platform} app...`);
@@ -121,14 +110,11 @@ export function EnhancedDownloadLinks() {
         <div className="mt-6 p-4 bg-green-900/20 border border-green-500/30 rounded-lg">
           <div className="flex items-center gap-2 mb-2">
             <Shield className="h-5 w-5 text-green-400" />
-            <h4 className="font-bold text-green-400">
-              🔒 Secure & Verified Downloads
-            </h4>
+            <h4 className="font-bold text-green-400">🔒 Secure & Verified Downloads</h4>
           </div>
           <p className="text-green-300 text-sm">
-            All downloads are digitally signed and verified. Our applications
-            use end-to-end encryption and never store your private keys on our
-            servers.
+            All downloads are digitally signed and verified. Our applications use end-to-end
+            encryption and never store your private keys on our servers.
           </p>
         </div>
       </CardContent>

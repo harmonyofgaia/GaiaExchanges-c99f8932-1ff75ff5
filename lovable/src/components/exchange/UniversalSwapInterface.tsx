@@ -120,10 +120,7 @@ const FEE_OPTIONS = [
 
 export function UniversalSwapInterface() {
   console.log("🔄 UniversalSwapInterface rendering - NEW UNIFIED VERSION");
-  console.log(
-    "🖼️ Logo should be:",
-    "/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png",
-  );
+  console.log("🖼️ Logo should be:", "/lovable-uploads/1569bfa1-1c8d-4cb2-9588-d846081e8cfb.png");
 
   const [fromAmount, setFromAmount] = useState<string>("");
   const [toAmount, setToAmount] = useState<string>("");
@@ -136,12 +133,11 @@ export function UniversalSwapInterface() {
 
   const getExchangeRate = (
     from: (typeof SUPPORTED_TOKENS)[0],
-    to: (typeof SUPPORTED_TOKENS)[0],
+    to: (typeof SUPPORTED_TOKENS)[0]
   ) => {
     // Mock exchange rates - in production, this would fetch real rates
     const rates: Record<string, number> = {
-      [GAIA_TOKEN.SYMBOL]:
-        hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE,
+      [GAIA_TOKEN.SYMBOL]: hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE,
       USDC: 1,
       SOL: 95.5,
       BTC: 67000,
@@ -167,9 +163,7 @@ export function UniversalSwapInterface() {
       return;
     }
 
-    const selectedOption = FEE_OPTIONS.find(
-      (opt) => opt.id === selectedFeeOption,
-    );
+    const selectedOption = FEE_OPTIONS.find((opt) => opt.id === selectedFeeOption);
     setIsSwapping(true);
 
     setTimeout(() => {
@@ -199,9 +193,7 @@ export function UniversalSwapInterface() {
     label: string;
   }) => (
     <div className="space-y-2">
-      <label className="text-sm font-medium text-muted-foreground">
-        {label}
-      </label>
+      <label className="text-sm font-medium text-muted-foreground">{label}</label>
       <Select
         value={selectedToken.symbol}
         onValueChange={(value) => {
@@ -222,9 +214,7 @@ export function UniversalSwapInterface() {
                 <span className="text-lg">{selectedToken.logo}</span>
               )}
               <span>{selectedToken.symbol}</span>
-              <span className="text-xs text-muted-foreground">
-                - {selectedToken.name}
-              </span>
+              <span className="text-xs text-muted-foreground">- {selectedToken.name}</span>
             </div>
           </SelectValue>
         </SelectTrigger>
@@ -242,9 +232,7 @@ export function UniversalSwapInterface() {
                   <span className="text-lg">{token.logo}</span>
                 )}
                 <span>{token.symbol}</span>
-                <span className="text-xs text-muted-foreground">
-                  - {token.name}
-                </span>
+                <span className="text-xs text-muted-foreground">- {token.name}</span>
               </div>
             </SelectItem>
           ))}
@@ -257,9 +245,7 @@ export function UniversalSwapInterface() {
             alt="Harmony of Gaia"
             className="w-6 h-6 object-contain"
           />
-          <span className="text-xs text-green-400 font-medium">
-            Harmony of Gaia Official Token
-          </span>
+          <span className="text-xs text-green-400 font-medium">Harmony of Gaia Official Token</span>
         </div>
       )}
     </div>
@@ -279,12 +265,10 @@ export function UniversalSwapInterface() {
         </CardTitle>
         <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
           <p className="text-sm text-green-300 mb-2">
-            <strong>Universal Token Exchange</strong> - Powered by Gaia's
-            Private Blockchain
+            <strong>Universal Token Exchange</strong> - Powered by Gaia's Private Blockchain
           </p>
           <p className="text-xs text-green-400">
-            Zero fees • Instant swaps • 100% transparency • Community vault
-            rewards
+            Zero fees • Instant swaps • 100% transparency • Community vault rewards
           </p>
         </div>
       </CardHeader>
@@ -293,11 +277,7 @@ export function UniversalSwapInterface() {
         {/* Token Swap Interface */}
         <div className="space-y-4">
           <div className="space-y-3">
-            <TokenSelector
-              selectedToken={fromToken}
-              onSelect={setFromToken}
-              label="From"
-            />
+            <TokenSelector selectedToken={fromToken} onSelect={setFromToken} label="From" />
             <Input
               type="number"
               placeholder="0.00"
@@ -319,11 +299,7 @@ export function UniversalSwapInterface() {
           </div>
 
           <div className="space-y-3">
-            <TokenSelector
-              selectedToken={toToken}
-              onSelect={setToToken}
-              label="To"
-            />
+            <TokenSelector selectedToken={toToken} onSelect={setToToken} label="To" />
             <Input
               type="number"
               placeholder="0.00"
@@ -355,18 +331,12 @@ export function UniversalSwapInterface() {
                   {option.icon}
                   <div className="flex-1">
                     <h4 className="font-semibold text-sm">{option.name}</h4>
-                    <p className="text-xs text-muted-foreground mb-2">
-                      {option.description}
-                    </p>
+                    <p className="text-xs text-muted-foreground mb-2">{option.description}</p>
                     <Badge
-                      variant={
-                        selectedFeeOption === option.id ? "default" : "outline"
-                      }
+                      variant={selectedFeeOption === option.id ? "default" : "outline"}
                       className="text-xs"
                     >
-                      {option.percentage === 0
-                        ? "FREE"
-                        : `${option.percentage}% fee`}
+                      {option.percentage === 0 ? "FREE" : `${option.percentage}% fee`}
                     </Badge>
                   </div>
                 </div>
@@ -380,8 +350,8 @@ export function UniversalSwapInterface() {
           <div className="flex justify-between text-sm">
             <span className="text-muted-foreground">Exchange Rate:</span>
             <span className="text-green-400 font-mono">
-              1 {fromToken.symbol} ={" "}
-              {getExchangeRate(fromToken, toToken).toFixed(8)} {toToken.symbol}
+              1 {fromToken.symbol} = {getExchangeRate(fromToken, toToken).toFixed(8)}{" "}
+              {toToken.symbol}
             </span>
           </div>
           <div className="flex justify-between text-sm">
@@ -421,9 +391,7 @@ export function UniversalSwapInterface() {
         {/* Network Stats */}
         <div className="grid grid-cols-3 gap-4 text-center">
           <div className="p-3 bg-green-500/10 rounded-lg border border-green-500/20">
-            <div className="text-lg font-bold text-green-400">
-              {SUPPORTED_TOKENS.length}
-            </div>
+            <div className="text-lg font-bold text-green-400">{SUPPORTED_TOKENS.length}</div>
             <div className="text-xs text-green-300">Verified Tokens</div>
           </div>
           <div className="p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">

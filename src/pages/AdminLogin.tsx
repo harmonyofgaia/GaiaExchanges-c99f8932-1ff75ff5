@@ -4,15 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import {
-  Shield,
-  Lock,
-  Eye,
-  EyeOff,
-  Globe,
-  AlertTriangle,
-  Skull,
-} from "lucide-react";
+import { Shield, Lock, Eye, EyeOff, Globe, AlertTriangle, Skull } from "lucide-react";
 import { toast } from "sonner";
 
 export default function AdminLogin() {
@@ -44,9 +36,7 @@ export default function AdminLogin() {
       console.log("📊 Attacker Data:", attackerData);
 
       // Store attacker data
-      const existingLogs = JSON.parse(
-        localStorage.getItem("honeypot-logs") || "[]",
-      );
+      const existingLogs = JSON.parse(localStorage.getItem("honeypot-logs") || "[]");
       existingLogs.push(attackerData);
       localStorage.setItem("honeypot-logs", JSON.stringify(existingLogs));
 
@@ -78,16 +68,12 @@ export default function AdminLogin() {
       ip: attackerIP,
     };
 
-    const existingAttempts = JSON.parse(
-      localStorage.getItem("honeypot-attempts") || "[]",
-    );
+    const existingAttempts = JSON.parse(localStorage.getItem("honeypot-attempts") || "[]");
     existingAttempts.push(attemptData);
     localStorage.setItem("honeypot-attempts", JSON.stringify(existingAttempts));
 
     // Always show fake loading and then rejection
-    await new Promise((resolve) =>
-      setTimeout(resolve, 2000 + Math.random() * 3000),
-    );
+    await new Promise((resolve) => setTimeout(resolve, 2000 + Math.random() * 3000));
 
     // Various fake error messages to confuse attackers
     const fakeErrors = [
@@ -102,8 +88,7 @@ export default function AdminLogin() {
       "💀 Nice Try, Hacker",
     ];
 
-    const randomError =
-      fakeErrors[Math.floor(Math.random() * fakeErrors.length)];
+    const randomError = fakeErrors[Math.floor(Math.random() * fakeErrors.length)];
 
     toast.error(randomError, {
       description: `Login attempt #${attemptCount + 1} failed. IP: ${attackerIP}`,
@@ -116,8 +101,7 @@ export default function AdminLogin() {
     // Fake progressive security measures
     if (attemptCount >= 2) {
       toast.error("🚨 Multiple Failed Attempts Detected", {
-        description:
-          "Security team has been notified. Account monitoring active.",
+        description: "Security team has been notified. Account monitoring active.",
         duration: 8000,
       });
     }
@@ -136,9 +120,7 @@ export default function AdminLogin() {
         <CardHeader>
           <div className="text-center">
             <Shield className="h-12 w-12 text-red-400 mx-auto mb-4" />
-            <CardTitle className="text-2xl font-bold text-red-400">
-              🛡️ GAIA Admin Portal
-            </CardTitle>
+            <CardTitle className="text-2xl font-bold text-red-400">🛡️ GAIA Admin Portal</CardTitle>
             <p className="text-red-300 text-sm mt-2">
               Secure Administrative Access • High Security Zone
             </p>
@@ -152,9 +134,7 @@ export default function AdminLogin() {
               {attemptCount > 0 && (
                 <div className="flex items-center justify-center gap-2 text-xs">
                   <AlertTriangle className="h-3 w-3 text-yellow-400" />
-                  <span className="text-yellow-300">
-                    Failed Attempts: {attemptCount}
-                  </span>
+                  <span className="text-yellow-300">Failed Attempts: {attemptCount}</span>
                 </div>
               )}
               {attemptCount > 3 && (
@@ -216,11 +196,7 @@ export default function AdminLogin() {
                   className="absolute right-1 top-1 h-8 w-8 p-0 text-red-400"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </Button>
               </div>
             </div>
@@ -244,31 +220,20 @@ export default function AdminLogin() {
               <div>• All admin activities are monitored</div>
               <div>• Multi-factor authentication required</div>
               {attemptCount > 2 && (
-                <div className="text-red-400">
-                  • ⚠️ Suspicious activity detected
-                </div>
+                <div className="text-red-400">• ⚠️ Suspicious activity detected</div>
               )}
             </div>
           </div>
 
           {/* Fake security badges */}
           <div className="mt-4 flex justify-center gap-2">
-            <Badge
-              variant="outline"
-              className="border-red-500/30 text-red-400 text-xs"
-            >
+            <Badge variant="outline" className="border-red-500/30 text-red-400 text-xs">
               SSL Secured
             </Badge>
-            <Badge
-              variant="outline"
-              className="border-orange-500/30 text-orange-400 text-xs"
-            >
+            <Badge variant="outline" className="border-orange-500/30 text-orange-400 text-xs">
               Bank Level
             </Badge>
-            <Badge
-              variant="outline"
-              className="border-yellow-500/30 text-yellow-400 text-xs"
-            >
+            <Badge variant="outline" className="border-yellow-500/30 text-yellow-400 text-xs">
               ISO 27001
             </Badge>
           </div>

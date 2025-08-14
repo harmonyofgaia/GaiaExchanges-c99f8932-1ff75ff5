@@ -3,8 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 serve(async (req) => {
@@ -15,7 +14,7 @@ serve(async (req) => {
   try {
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 
     // Generate weekly security report
@@ -26,7 +25,7 @@ serve(async (req) => {
         success: true,
         report: report,
       }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
     console.error("Weekly report error:", error);
@@ -66,15 +65,12 @@ async function generateWeeklySecurityReport(supabaseClient: any) {
   const metrics = {
     totalScans: scans?.length || 0,
     averageComplianceScore:
-      scans?.reduce((sum, scan) => sum + scan.compliance_score, 0) /
-      (scans?.length || 1),
+      scans?.reduce((sum, scan) => sum + scan.compliance_score, 0) / (scans?.length || 1),
     totalThreats: threats?.length || 0,
     threatsResolved: threats?.filter((t) => t.resolved_at).length || 0,
-    criticalIssues:
-      scans?.reduce((sum, scan) => sum + scan.critical_issues, 0) || 0,
+    criticalIssues: scans?.reduce((sum, scan) => sum + scan.critical_issues, 0) || 0,
     highIssues: scans?.reduce((sum, scan) => sum + scan.high_issues, 0) || 0,
-    mediumIssues:
-      scans?.reduce((sum, scan) => sum + scan.medium_issues, 0) || 0,
+    mediumIssues: scans?.reduce((sum, scan) => sum + scan.medium_issues, 0) || 0,
     lowIssues: scans?.reduce((sum, scan) => sum + scan.low_issues, 0) || 0,
     successfulRemediations: remediations?.filter((r) => r.success).length || 0,
     failedRemediations: remediations?.filter((r) => !r.success).length || 0,
@@ -84,20 +80,10 @@ async function generateWeeklySecurityReport(supabaseClient: any) {
   const insights = generateSecurityInsights(metrics, scans, threats);
 
   // Generate recommendations
-  const recommendations = generateSecurityRecommendations(
-    metrics,
-    scans,
-    threats,
-  );
+  const recommendations = generateSecurityRecommendations(metrics, scans, threats);
 
   // Create HTML report
-  const htmlReport = generateHTMLReport(
-    metrics,
-    insights,
-    recommendations,
-    startDate,
-    endDate,
-  );
+  const htmlReport = generateHTMLReport(metrics, insights, recommendations, startDate, endDate);
 
   return {
     reportId: `weekly-${Date.now()}`,
@@ -139,8 +125,7 @@ function generateSecurityInsights(metrics: any, scans: any[], threats: any[]) {
       description: "No security threats were detected this week.",
     });
   } else {
-    const resolutionRate =
-      (metrics.threatsResolved / metrics.totalThreats) * 100;
+    const resolutionRate = (metrics.threatsResolved / metrics.totalThreats) * 100;
     insights.push({
       type: resolutionRate >= 90 ? "positive" : "warning",
       title: "Threat Resolution",
@@ -160,11 +145,7 @@ function generateSecurityInsights(metrics: any, scans: any[], threats: any[]) {
   return insights;
 }
 
-function generateSecurityRecommendations(
-  metrics: any,
-  scans: any[],
-  threats: any[],
-) {
+function generateSecurityRecommendations(metrics: any, scans: any[], threats: any[]) {
   const recommendations = [];
 
   // Compliance recommendations
@@ -202,8 +183,7 @@ function generateSecurityRecommendations(
     recommendations.push({
       priority: "low",
       title: "Optimize Security Scans",
-      description:
-        "Regular security scans are running well. Consider optimizing scan frequency.",
+      description: "Regular security scans are running well. Consider optimizing scan frequency.",
       actionItems: [
         "Review scan scheduling",
         "Optimize scan performance",
@@ -220,7 +200,7 @@ function generateHTMLReport(
   insights: any[],
   recommendations: any[],
   startDate: Date,
-  endDate: Date,
+  endDate: Date
 ) {
   return `
     <!DOCTYPE html>
@@ -273,7 +253,7 @@ function generateHTMLReport(
           <h3>${insight.title}</h3>
           <p>${insight.description}</p>
         </div>
-      `,
+      `
         )
         .join("")}
       
@@ -288,7 +268,7 @@ function generateHTMLReport(
             ${rec.actionItems.map((item) => `<li>${item}</li>`).join("")}
           </ul>
         </div>
-      `,
+      `
         )
         .join("")}
       

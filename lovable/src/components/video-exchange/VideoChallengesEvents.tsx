@@ -68,9 +68,7 @@ export function VideoChallengesEvents() {
                 <div key={event.id} className="p-4 bg-muted rounded-lg">
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <h3 className="font-semibold text-purple-400">
-                        {event.title}
-                      </h3>
+                      <h3 className="font-semibold text-purple-400">{event.title}</h3>
                       <div className="flex items-center gap-4 mt-1 text-sm text-muted-foreground">
                         <div className="flex items-center gap-1">
                           <Clock className="h-3 w-3" />
@@ -82,11 +80,7 @@ export function VideoChallengesEvents() {
                         </div>
                       </div>
                     </div>
-                    <Badge
-                      variant={
-                        event.status === "Open" ? "default" : "secondary"
-                      }
-                    >
+                    <Badge variant={event.status === "Open" ? "default" : "secondary"}>
                       {event.status}
                     </Badge>
                   </div>
@@ -94,14 +88,10 @@ export function VideoChallengesEvents() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Trophy className="h-4 w-4 text-yellow-400" />
-                      <span className="text-sm font-medium">
-                        Prize: {event.prize}
-                      </span>
+                      <span className="text-sm font-medium">Prize: {event.prize}</span>
                     </div>
                     <Button size="sm" variant="outline">
-                      {event.status === "Open"
-                        ? "Join Challenge"
-                        : "Learn More"}
+                      {event.status === "Open" ? "Join Challenge" : "Learn More"}
                     </Button>
                   </div>
                 </div>

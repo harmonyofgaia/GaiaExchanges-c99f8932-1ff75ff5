@@ -92,9 +92,7 @@ export function ServerResilienceEngine() {
   ]);
 
   const [overallSecurity, setOverallSecurity] = useState(96);
-  const [threatLevel, setThreatLevel] = useState<"low" | "medium" | "high">(
-    "low",
-  );
+  const [threatLevel, setThreatLevel] = useState<"low" | "medium" | "high">("low");
 
   useEffect(() => {
     const securityMonitoring = setInterval(() => {
@@ -102,18 +100,14 @@ export function ServerResilienceEngine() {
       setSecurityLayers((prev) =>
         prev.map((layer) => ({
           ...layer,
-          strength: Math.max(
-            85,
-            Math.min(100, layer.strength + (Math.random() - 0.5) * 2),
-          ),
+          strength: Math.max(85, Math.min(100, layer.strength + (Math.random() - 0.5) * 2)),
           lastCheck: new Date(),
-        })),
+        }))
       );
 
       // Update overall security
       const avgStrength =
-        securityLayers.reduce((sum, layer) => sum + layer.strength, 0) /
-        securityLayers.length;
+        securityLayers.reduce((sum, layer) => sum + layer.strength, 0) / securityLayers.length;
       setOverallSecurity(Math.round(avgStrength));
 
       // Determine threat level
@@ -127,13 +121,9 @@ export function ServerResilienceEngine() {
       setServerNodes((prev) =>
         prev.map((node) => ({
           ...node,
-          load: Math.max(
-            10,
-            Math.min(90, node.load + (Math.random() - 0.5) * 10),
-          ),
-          connections:
-            node.connections + Math.floor((Math.random() - 0.5) * 100),
-        })),
+          load: Math.max(10, Math.min(90, node.load + (Math.random() - 0.5) * 10)),
+          connections: node.connections + Math.floor((Math.random() - 0.5) * 100),
+        }))
       );
     }, 3000);
 
@@ -155,7 +145,7 @@ export function ServerResilienceEngine() {
         status: "secure",
         strength: Math.min(100, layer.strength + 5),
         lastCheck: new Date(),
-      })),
+      }))
     );
   };
 
@@ -185,12 +175,8 @@ export function ServerResilienceEngine() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
             <div>
-              <div className="text-3xl font-bold text-green-400">
-                {overallSecurity}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Overall Security
-              </div>
+              <div className="text-3xl font-bold text-green-400">{overallSecurity}%</div>
+              <div className="text-sm text-muted-foreground">Overall Security</div>
               <Progress value={overallSecurity} className="mt-2" />
             </div>
             <div>
@@ -201,12 +187,9 @@ export function ServerResilienceEngine() {
             </div>
             <div>
               <div className="text-3xl font-bold text-blue-400">
-                {serverNodes.filter((node) => node.status === "online").length}/
-                {serverNodes.length}
+                {serverNodes.filter((node) => node.status === "online").length}/{serverNodes.length}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Servers Online
-              </div>
+              <div className="text-sm text-muted-foreground">Servers Online</div>
             </div>
           </div>
         </CardContent>
@@ -244,18 +227,10 @@ export function ServerResilienceEngine() {
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="text-right">
-                    <div className="text-sm font-medium text-green-400">
-                      {layer.strength}%
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      Strength
-                    </div>
+                    <div className="text-sm font-medium text-green-400">{layer.strength}%</div>
+                    <div className="text-xs text-muted-foreground">Strength</div>
                   </div>
-                  <Badge
-                    className={
-                      layer.status === "secure" ? "bg-green-600" : "bg-red-600"
-                    }
-                  >
+                  <Badge className={layer.status === "secure" ? "bg-green-600" : "bg-red-600"}>
                     {layer.status}
                   </Badge>
                 </div>
@@ -292,9 +267,7 @@ export function ServerResilienceEngine() {
                 <div className="flex items-center gap-4">
                   <div className="text-right text-sm">
                     <div>Load: {node.load}%</div>
-                    <div className="text-muted-foreground">
-                      Uptime: {node.uptime}%
-                    </div>
+                    <div className="text-muted-foreground">Uptime: {node.uptime}%</div>
                   </div>
                   <Badge
                     className={
@@ -316,10 +289,7 @@ export function ServerResilienceEngine() {
 
       {/* Action Buttons */}
       <div className="flex gap-4">
-        <Button
-          onClick={runSecurityScan}
-          className="bg-green-600 hover:bg-green-700"
-        >
+        <Button onClick={runSecurityScan} className="bg-green-600 hover:bg-green-700">
           <Shield className="h-4 w-4 mr-2" />
           Run Security Scan
         </Button>

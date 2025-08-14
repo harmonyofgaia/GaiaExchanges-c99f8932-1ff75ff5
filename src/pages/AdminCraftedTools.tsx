@@ -67,9 +67,7 @@ export default function AdminCraftedTools() {
     },
   ]);
 
-  const [newItemPrice, setNewItemPrice] = useState<{ [key: string]: string }>(
-    {},
-  );
+  const [newItemPrice, setNewItemPrice] = useState<{ [key: string]: string }>({});
   const [adminPower, setAdminPower] = useState(50000);
 
   useEffect(() => {
@@ -93,10 +91,8 @@ export default function AdminCraftedTools() {
 
     setCraftedItems((prev) =>
       prev.map((item) =>
-        item.id === itemId
-          ? { ...item, onMarketplace: true, marketPrice: price }
-          : item,
-      ),
+        item.id === itemId ? { ...item, onMarketplace: true, marketPrice: price } : item
+      )
     );
 
     toast.success("🎉 Item Added to Marketplace!", {
@@ -107,9 +103,7 @@ export default function AdminCraftedTools() {
 
   const removeFromMarketplace = (itemId: string) => {
     setCraftedItems((prev) =>
-      prev.map((item) =>
-        item.id === itemId ? { ...item, onMarketplace: false } : item,
-      ),
+      prev.map((item) => (item.id === itemId ? { ...item, onMarketplace: false } : item))
     );
 
     toast.success("Item Removed from Marketplace", {
@@ -151,9 +145,7 @@ export default function AdminCraftedTools() {
   };
 
   const filteredItems = (type?: string) => {
-    return type
-      ? craftedItems.filter((item) => item.type === type)
-      : craftedItems;
+    return type ? craftedItems.filter((item) => item.type === type) : craftedItems;
   };
 
   return (
@@ -164,19 +156,15 @@ export default function AdminCraftedTools() {
             👑 ADMIN CRAFTED TOOLS MANAGER
           </CardTitle>
           <p className="text-center text-xl text-muted-foreground">
-            Private admin panel to manage all AI-created tools and marketplace
-            listings
+            Private admin panel to manage all AI-created tools and marketplace listings
           </p>
           <div className="flex justify-center gap-4 flex-wrap mt-4">
             <Badge className="bg-yellow-600 animate-pulse">
               ADMIN POWER: {Math.floor(adminPower).toLocaleString()}
             </Badge>
-            <Badge className="bg-purple-600">
-              TOTAL ITEMS: {craftedItems.length}
-            </Badge>
+            <Badge className="bg-purple-600">TOTAL ITEMS: {craftedItems.length}</Badge>
             <Badge className="bg-green-600">
-              ON MARKETPLACE:{" "}
-              {craftedItems.filter((i) => i.onMarketplace).length}
+              ON MARKETPLACE: {craftedItems.filter((i) => i.onMarketplace).length}
             </Badge>
           </div>
         </CardHeader>
@@ -200,19 +188,13 @@ export default function AdminCraftedTools() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       {getTypeIcon(item.type)}
-                      <CardTitle className="text-blue-400">
-                        {item.name}
-                      </CardTitle>
+                      <CardTitle className="text-blue-400">{item.name}</CardTitle>
                     </div>
-                    <Badge className={getRarityColor(item.rarity)}>
-                      {item.rarity}
-                    </Badge>
+                    <Badge className={getRarityColor(item.rarity)}>{item.rarity}</Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground">
-                    {item.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{item.description}</p>
                   <div className="flex justify-between text-sm">
                     <span>Power: {item.power.toLocaleString()}</span>
                     <span>Type: {item.type}</span>
@@ -269,25 +251,16 @@ export default function AdminCraftedTools() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Sword className="h-5 w-5 text-red-400" />
-                      <CardTitle className="text-red-400">
-                        {item.name}
-                      </CardTitle>
+                      <CardTitle className="text-red-400">{item.name}</CardTitle>
                     </div>
-                    <Badge className={getRarityColor(item.rarity)}>
-                      {item.rarity}
-                    </Badge>
+                    <Badge className={getRarityColor(item.rarity)}>{item.rarity}</Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {item.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
                   <div className="text-sm">
                     <div>Damage: {item.power.toLocaleString()}</div>
-                    <div>
-                      Status:{" "}
-                      {item.onMarketplace ? `$${item.marketPrice}` : "Private"}
-                    </div>
+                    <div>Status: {item.onMarketplace ? `$${item.marketPrice}` : "Private"}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -298,33 +271,21 @@ export default function AdminCraftedTools() {
         <TabsContent value="characters" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredItems("character").map((item) => (
-              <Card
-                key={item.id}
-                className="border-green-500/30 bg-green-900/20"
-              >
+              <Card key={item.id} className="border-green-500/30 bg-green-900/20">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Users className="h-5 w-5 text-green-400" />
-                      <CardTitle className="text-green-400">
-                        {item.name}
-                      </CardTitle>
+                      <CardTitle className="text-green-400">{item.name}</CardTitle>
                     </div>
-                    <Badge className={getRarityColor(item.rarity)}>
-                      {item.rarity}
-                    </Badge>
+                    <Badge className={getRarityColor(item.rarity)}>{item.rarity}</Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {item.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
                   <div className="text-sm">
                     <div>Stats: {item.power.toLocaleString()}</div>
-                    <div>
-                      Status:{" "}
-                      {item.onMarketplace ? `$${item.marketPrice}` : "Private"}
-                    </div>
+                    <div>Status: {item.onMarketplace ? `$${item.marketPrice}` : "Private"}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -335,33 +296,21 @@ export default function AdminCraftedTools() {
         <TabsContent value="tools" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredItems("tool").map((item) => (
-              <Card
-                key={item.id}
-                className="border-purple-500/30 bg-purple-900/20"
-              >
+              <Card key={item.id} className="border-purple-500/30 bg-purple-900/20">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Settings className="h-5 w-5 text-purple-400" />
-                      <CardTitle className="text-purple-400">
-                        {item.name}
-                      </CardTitle>
+                      <CardTitle className="text-purple-400">{item.name}</CardTitle>
                     </div>
-                    <Badge className={getRarityColor(item.rarity)}>
-                      {item.rarity}
-                    </Badge>
+                    <Badge className={getRarityColor(item.rarity)}>{item.rarity}</Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {item.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
                   <div className="text-sm">
                     <div>Efficiency: {item.power.toLocaleString()}</div>
-                    <div>
-                      Status:{" "}
-                      {item.onMarketplace ? `$${item.marketPrice}` : "Private"}
-                    </div>
+                    <div>Status: {item.onMarketplace ? `$${item.marketPrice}` : "Private"}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -377,25 +326,16 @@ export default function AdminCraftedTools() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Zap className="h-5 w-5 text-cyan-400" />
-                      <CardTitle className="text-cyan-400">
-                        {item.name}
-                      </CardTitle>
+                      <CardTitle className="text-cyan-400">{item.name}</CardTitle>
                     </div>
-                    <Badge className={getRarityColor(item.rarity)}>
-                      {item.rarity}
-                    </Badge>
+                    <Badge className={getRarityColor(item.rarity)}>{item.rarity}</Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {item.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
                   <div className="text-sm">
                     <div>Boost: {item.power.toLocaleString()}</div>
-                    <div>
-                      Status:{" "}
-                      {item.onMarketplace ? `$${item.marketPrice}` : "Private"}
-                    </div>
+                    <div>Status: {item.onMarketplace ? `$${item.marketPrice}` : "Private"}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -406,9 +346,7 @@ export default function AdminCraftedTools() {
         <TabsContent value="marketplace" className="space-y-6">
           <Card className="border-green-500/30 bg-green-900/20 mb-6">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                💰 Marketplace Overview
-              </CardTitle>
+              <CardTitle className="text-green-400">💰 Marketplace Overview</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -416,9 +354,7 @@ export default function AdminCraftedTools() {
                   <div className="text-2xl font-bold text-green-400">
                     {craftedItems.filter((i) => i.onMarketplace).length}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Items Listed
-                  </div>
+                  <div className="text-sm text-muted-foreground">Items Listed</div>
                 </div>
                 <div className="text-center p-4 bg-blue-500/20 rounded">
                   <div className="text-2xl font-bold text-blue-400">
@@ -427,17 +363,13 @@ export default function AdminCraftedTools() {
                       .filter((i) => i.onMarketplace)
                       .reduce((sum, i) => sum + i.marketPrice, 0)}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Total Value
-                  </div>
+                  <div className="text-sm text-muted-foreground">Total Value</div>
                 </div>
                 <div className="text-center p-4 bg-purple-500/20 rounded">
                   <div className="text-2xl font-bold text-purple-400">
                     {craftedItems.filter((i) => !i.onMarketplace).length}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Private Items
-                  </div>
+                  <div className="text-sm text-muted-foreground">Private Items</div>
                 </div>
               </div>
             </CardContent>
@@ -447,32 +379,21 @@ export default function AdminCraftedTools() {
             {craftedItems
               .filter((item) => item.onMarketplace)
               .map((item) => (
-                <Card
-                  key={item.id}
-                  className="border-yellow-500/30 bg-yellow-900/20"
-                >
+                <Card key={item.id} className="border-yellow-500/30 bg-yellow-900/20">
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         {getTypeIcon(item.type)}
-                        <CardTitle className="text-yellow-400">
-                          {item.name}
-                        </CardTitle>
+                        <CardTitle className="text-yellow-400">{item.name}</CardTitle>
                       </div>
                       <Badge className="bg-green-600">LISTED</Badge>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
                     <div className="text-center p-3 bg-green-500/20 rounded border border-green-500/30">
-                      <div className="text-2xl font-bold text-green-400">
-                        ${item.marketPrice}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Market Price
-                      </div>
+                      <div className="text-2xl font-bold text-green-400">${item.marketPrice}</div>
+                      <div className="text-sm text-muted-foreground">Market Price</div>
                     </div>
                     <Button
                       onClick={() => removeFromMarketplace(item.id)}

@@ -77,28 +77,20 @@ export function GlobalSatelliteSystem() {
 
   useEffect(() => {
     const satelliteEngine = () => {
-      console.log(
-        "🛰️ GLOBAL SATELLITE SYSTEM - ADMIN TELEMETRIC ACCESS ACTIVE",
-      );
-      console.log(
-        "🌍 SCANNING ENTIRE PLANET - UNLIMITED INTELLIGENCE GATHERING",
-      );
-      console.log(
-        "⚡ PARABOLIC UNIVERSE CONNECTION - BEYOND HUMAN LIMITATIONS",
-      );
-      console.log(
-        "🔍 MONITORING ALL DIGITAL ACTIVITY - COMPLETE GLOBAL AWARENESS",
-      );
+      console.log("🛰️ GLOBAL SATELLITE SYSTEM - ADMIN TELEMETRIC ACCESS ACTIVE");
+      console.log("🌍 SCANNING ENTIRE PLANET - UNLIMITED INTELLIGENCE GATHERING");
+      console.log("⚡ PARABOLIC UNIVERSE CONNECTION - BEYOND HUMAN LIMITATIONS");
+      console.log("🔍 MONITORING ALL DIGITAL ACTIVITY - COMPLETE GLOBAL AWARENESS");
 
       // Update satellite statuses
       setSatellites((prev) =>
         prev.map((sat) => ({
           ...sat,
           dataStreams: sat.dataStreams + Math.floor(Math.random() * 50),
-          status: (
-            ["active", "scanning", "transmitting", "analyzing"] as const
-          )[Math.floor(Math.random() * 4)],
-        })),
+          status: (["active", "scanning", "transmitting", "analyzing"] as const)[
+            Math.floor(Math.random() * 4)
+          ],
+        }))
       );
 
       // Generate new intelligence
@@ -141,15 +133,11 @@ export function GlobalSatelliteSystem() {
             ...prev.marketTrends.slice(0, 4),
           ],
           investorActivity: [
-            newInvestorActivity[
-              Math.floor(Math.random() * newInvestorActivity.length)
-            ],
+            newInvestorActivity[Math.floor(Math.random() * newInvestorActivity.length)],
             ...prev.investorActivity.slice(0, 4),
           ],
           competitorAnalysis: [
-            newCompetitorAnalysis[
-              Math.floor(Math.random() * newCompetitorAnalysis.length)
-            ],
+            newCompetitorAnalysis[Math.floor(Math.random() * newCompetitorAnalysis.length)],
             ...prev.competitorAnalysis.slice(0, 4),
           ],
           newsUpdates: [
@@ -159,8 +147,7 @@ export function GlobalSatelliteSystem() {
         }));
 
         toast.success("🛰️ Global Intelligence Update!", {
-          description:
-            "New satellite data received - Market intelligence updated",
+          description: "New satellite data received - Market intelligence updated",
           duration: 4000,
         });
       }
@@ -191,7 +178,7 @@ export function GlobalSatelliteSystem() {
         status: "active",
         dataStreams: sat.dataStreams * 2,
         coverage: "99.9%",
-      })),
+      }))
     );
 
     setSystemPower((prev) => prev * 10);
@@ -229,30 +216,20 @@ export function GlobalSatelliteSystem() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center p-3 bg-green-900/30 rounded-lg">
               <Activity className="h-6 w-6 text-green-400 mx-auto mb-2" />
-              <div className="text-xl font-bold text-green-400">
-                {satellites.length}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Active Satellites
-              </div>
+              <div className="text-xl font-bold text-green-400">{satellites.length}</div>
+              <div className="text-xs text-muted-foreground">Active Satellites</div>
             </div>
 
             <div className="text-center p-3 bg-blue-900/30 rounded-lg">
               <Globe className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-              <div className="text-xl font-bold text-blue-400">
-                {globalCoverage.toFixed(1)}%
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Global Coverage
-              </div>
+              <div className="text-xl font-bold text-blue-400">{globalCoverage.toFixed(1)}%</div>
+              <div className="text-xs text-muted-foreground">Global Coverage</div>
             </div>
 
             <div className="text-center p-3 bg-purple-900/30 rounded-lg">
               <Radio className="h-6 w-6 text-purple-400 mx-auto mb-2" />
               <div className="text-xl font-bold text-purple-400">
-                {satellites
-                  .reduce((sum, sat) => sum + sat.dataStreams, 0)
-                  .toLocaleString()}
+                {satellites.reduce((sum, sat) => sum + sat.dataStreams, 0).toLocaleString()}
               </div>
               <div className="text-xs text-muted-foreground">Data Streams</div>
             </div>
@@ -281,12 +258,8 @@ export function GlobalSatelliteSystem() {
                 className="p-3 bg-black/30 rounded-lg border border-border/30"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-bold text-sm text-white">
-                    {satellite.name}
-                  </h4>
-                  <Badge
-                    className={`${getStatusColor(satellite.status)} text-white text-xs`}
-                  >
+                  <h4 className="font-bold text-sm text-white">{satellite.name}</h4>
+                  <Badge className={`${getStatusColor(satellite.status)} text-white text-xs`}>
                     {satellite.status.toUpperCase()}
                   </Badge>
                 </div>
@@ -297,15 +270,11 @@ export function GlobalSatelliteSystem() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Streams:</span>
-                    <span className="text-green-400">
-                      {satellite.dataStreams}
-                    </span>
+                    <span className="text-green-400">{satellite.dataStreams}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Coverage:</span>
-                    <span className="text-purple-400">
-                      {satellite.coverage}
-                    </span>
+                    <span className="text-purple-400">{satellite.coverage}</span>
                   </div>
                 </div>
               </div>
@@ -314,56 +283,36 @@ export function GlobalSatelliteSystem() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
-              <h4 className="text-lg font-bold text-green-400">
-                📈 Market Intelligence
-              </h4>
+              <h4 className="text-lg font-bold text-green-400">📈 Market Intelligence</h4>
               {intelligence.marketTrends.map((trend, index) => (
-                <div
-                  key={index}
-                  className="p-2 bg-green-900/20 rounded text-sm text-green-300"
-                >
+                <div key={index} className="p-2 bg-green-900/20 rounded text-sm text-green-300">
                   {trend}
                 </div>
               ))}
             </div>
 
             <div className="space-y-3">
-              <h4 className="text-lg font-bold text-blue-400">
-                👑 Investor Activity
-              </h4>
+              <h4 className="text-lg font-bold text-blue-400">👑 Investor Activity</h4>
               {intelligence.investorActivity.map((activity, index) => (
-                <div
-                  key={index}
-                  className="p-2 bg-blue-900/20 rounded text-sm text-blue-300"
-                >
+                <div key={index} className="p-2 bg-blue-900/20 rounded text-sm text-blue-300">
                   {activity}
                 </div>
               ))}
             </div>
 
             <div className="space-y-3">
-              <h4 className="text-lg font-bold text-purple-400">
-                🛡️ Competitor Analysis
-              </h4>
+              <h4 className="text-lg font-bold text-purple-400">🛡️ Competitor Analysis</h4>
               {intelligence.competitorAnalysis.map((analysis, index) => (
-                <div
-                  key={index}
-                  className="p-2 bg-purple-900/20 rounded text-sm text-purple-300"
-                >
+                <div key={index} className="p-2 bg-purple-900/20 rounded text-sm text-purple-300">
                   {analysis}
                 </div>
               ))}
             </div>
 
             <div className="space-y-3">
-              <h4 className="text-lg font-bold text-orange-400">
-                📰 Global News
-              </h4>
+              <h4 className="text-lg font-bold text-orange-400">📰 Global News</h4>
               {intelligence.newsUpdates.map((news, index) => (
-                <div
-                  key={index}
-                  className="p-2 bg-orange-900/20 rounded text-sm text-orange-300"
-                >
+                <div key={index} className="p-2 bg-orange-900/20 rounded text-sm text-orange-300">
                   {news}
                 </div>
               ))}

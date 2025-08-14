@@ -10,15 +10,11 @@ interface Enhanced2FAAdminLoginProps {
   onLoginSuccess: () => void;
 }
 
-export function Enhanced2FAAdminLogin({
-  onLoginSuccess,
-}: Enhanced2FAAdminLoginProps) {
-  const [loginStep, setLoginStep] = useState<
-    "credentials" | "sms-mfa" | "google-2fa" | "success"
-  >("credentials");
-  const [selectedMFAMethod, setSelectedMFAMethod] = useState<"sms" | "google">(
-    "sms",
+export function Enhanced2FAAdminLogin({ onLoginSuccess }: Enhanced2FAAdminLoginProps) {
+  const [loginStep, setLoginStep] = useState<"credentials" | "sms-mfa" | "google-2fa" | "success">(
+    "credentials"
   );
+  const [selectedMFAMethod, setSelectedMFAMethod] = useState<"sms" | "google">("sms");
 
   const handleCredentialsSuccess = (username: string, password: string) => {
     // Generate vault access key with quantum protection
@@ -33,10 +29,7 @@ export function Enhanced2FAAdminLogin({
       vault: vaultKey,
     };
 
-    if (
-      username === validCredentials.user &&
-      password === validCredentials.pass
-    ) {
+    if (username === validCredentials.user && password === validCredentials.pass) {
       // Immediate secure cleanup
       username = "";
       password = "";
@@ -72,12 +65,8 @@ export function Enhanced2FAAdminLogin({
       <Card className="border-green-500/30 bg-gradient-to-br from-green-900/20 to-blue-900/20 p-6">
         <div className="text-center space-y-2">
           <Shield className="h-12 w-12 text-green-400 mx-auto" />
-          <h1 className="text-2xl font-bold text-green-400">
-            GAIA Admin Security Center
-          </h1>
-          <p className="text-sm text-green-300">
-            Multi-Factor Authentication Required
-          </p>
+          <h1 className="text-2xl font-bold text-green-400">GAIA Admin Security Center</h1>
+          <p className="text-sm text-green-300">Multi-Factor Authentication Required</p>
         </div>
       </Card>
 
@@ -85,9 +74,7 @@ export function Enhanced2FAAdminLogin({
         <div className="space-y-4">
           {/* MFA Method Selection */}
           <Card className="border-blue-500/30 p-4">
-            <h3 className="text-blue-400 font-medium mb-3">
-              Choose 2FA Method:
-            </h3>
+            <h3 className="text-blue-400 font-medium mb-3">Choose 2FA Method:</h3>
             <Tabs
               value={selectedMFAMethod}
               onValueChange={(v) => setSelectedMFAMethod(v as "sms" | "google")}
@@ -124,12 +111,9 @@ export function Enhanced2FAAdminLogin({
         <Card className="border-green-500/30 bg-gradient-to-br from-green-900/20 to-emerald-900/20 p-6">
           <div className="text-center space-y-4">
             <div className="text-6xl">🎉</div>
-            <h2 className="text-2xl font-bold text-green-400">
-              Security Verification Complete!
-            </h2>
+            <h2 className="text-2xl font-bold text-green-400">Security Verification Complete!</h2>
             <p className="text-green-300">
-              Welcome to GAIA Admin Dashboard - Maximum security active across
-              all platforms
+              Welcome to GAIA Admin Dashboard - Maximum security active across all platforms
             </p>
           </div>
         </Card>

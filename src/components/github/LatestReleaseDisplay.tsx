@@ -6,9 +6,7 @@ interface LatestReleaseDisplayProps {
   githubStatus: GitHubStatus;
 }
 
-export function LatestReleaseDisplay({
-  githubStatus,
-}: LatestReleaseDisplayProps) {
+export function LatestReleaseDisplay({ githubStatus }: LatestReleaseDisplayProps) {
   if (!githubStatus.hasReleases) {
     return null;
   }
@@ -18,9 +16,7 @@ export function LatestReleaseDisplay({
       <div className="flex items-center gap-3">
         <Download className="h-5 w-5 text-green-400" />
         <div>
-          <div className="font-semibold text-green-400">
-            Latest Secure Release
-          </div>
+          <div className="font-semibold text-green-400">Latest Secure Release</div>
           <div className="text-sm text-muted-foreground">
             Version {githubStatus.lastRelease} - Fully audited and signed
           </div>

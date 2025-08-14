@@ -38,14 +38,11 @@ export function NotificationSettings() {
 
   const updatePreference = <K extends keyof NotificationPreferences>(
     key: K,
-    value: NotificationPreferences[K],
+    value: NotificationPreferences[K]
   ) => {
     const newPreferences = { ...preferences, [key]: value };
     setPreferences(newPreferences);
-    localStorage.setItem(
-      "notification_preferences",
-      JSON.stringify(newPreferences),
-    );
+    localStorage.setItem("notification_preferences", JSON.stringify(newPreferences));
 
     // Update global notification manager
     if ((window as any).smartNotifications) {
@@ -60,8 +57,7 @@ export function NotificationSettings() {
 
   const testNotification = () => {
     toast.success("🧪 Test Notification", {
-      description:
-        "This is how your notifications will appear with current settings",
+      description: "This is how your notifications will appear with current settings",
       duration: 4000,
     });
   };
@@ -98,14 +94,10 @@ export function NotificationSettings() {
             {(["off", "major", "milestones", "all"] as const).map((option) => (
               <Button
                 key={option}
-                variant={
-                  preferences.dragonLevels === option ? "default" : "outline"
-                }
+                variant={preferences.dragonLevels === option ? "default" : "outline"}
                 size="sm"
                 onClick={() => updatePreference("dragonLevels", option)}
-                className={
-                  preferences.dragonLevels === option ? "bg-orange-600" : ""
-                }
+                className={preferences.dragonLevels === option ? "bg-orange-600" : ""}
               >
                 {option.charAt(0).toUpperCase() + option.slice(1)}
               </Button>
@@ -113,20 +105,15 @@ export function NotificationSettings() {
           </div>
           <div className="text-sm text-muted-foreground">
             {preferences.dragonLevels === "off" && "No dragon notifications"}
-            {preferences.dragonLevels === "major" &&
-              "Only every 1000 levels (5min cooldown)"}
-            {preferences.dragonLevels === "milestones" &&
-              "Every 100 levels (1min cooldown)"}
-            {preferences.dragonLevels === "all" &&
-              "All level ups (30sec cooldown)"}
+            {preferences.dragonLevels === "major" && "Only every 1000 levels (5min cooldown)"}
+            {preferences.dragonLevels === "milestones" && "Every 100 levels (1min cooldown)"}
+            {preferences.dragonLevels === "all" && "All level ups (30sec cooldown)"}
           </div>
         </div>
 
         {/* System Notifications */}
         <div className="space-y-4">
-          <Label className="text-lg font-semibold text-green-400">
-            📱 System Notifications
-          </Label>
+          <Label className="text-lg font-semibold text-green-400">📱 System Notifications</Label>
           <div className="space-y-3">
             {[
               { key: "systemUpdates", label: "System Updates", icon: "⚙️" },
@@ -142,23 +129,15 @@ export function NotificationSettings() {
                 key={key}
                 className="flex items-center justify-between p-3 rounded bg-blue-500/10 border border-blue-500/20"
               >
-                <Label
-                  htmlFor={key}
-                  className="flex items-center gap-2 cursor-pointer"
-                >
+                <Label htmlFor={key} className="flex items-center gap-2 cursor-pointer">
                   <span>{icon}</span>
                   {label}
                 </Label>
                 <Switch
                   id={key}
-                  checked={
-                    preferences[key as keyof NotificationPreferences] as boolean
-                  }
+                  checked={preferences[key as keyof NotificationPreferences] as boolean}
                   onCheckedChange={(checked) =>
-                    updatePreference(
-                      key as keyof NotificationPreferences,
-                      checked,
-                    )
+                    updatePreference(key as keyof NotificationPreferences, checked)
                   }
                 />
               </div>
@@ -168,15 +147,10 @@ export function NotificationSettings() {
 
         {/* Audio & Desktop Settings */}
         <div className="space-y-4">
-          <Label className="text-lg font-semibold text-purple-400">
-            🔊 Audio & Desktop
-          </Label>
+          <Label className="text-lg font-semibold text-purple-400">🔊 Audio & Desktop</Label>
           <div className="space-y-3">
             <div className="flex items-center justify-between p-3 rounded bg-purple-500/10 border border-purple-500/20">
-              <Label
-                htmlFor="soundEnabled"
-                className="flex items-center gap-2 cursor-pointer"
-              >
+              <Label htmlFor="soundEnabled" className="flex items-center gap-2 cursor-pointer">
                 {preferences.soundEnabled ? (
                   <Volume2 className="h-4 w-4" />
                 ) : (
@@ -187,9 +161,7 @@ export function NotificationSettings() {
               <Switch
                 id="soundEnabled"
                 checked={preferences.soundEnabled}
-                onCheckedChange={(checked) =>
-                  updatePreference("soundEnabled", checked)
-                }
+                onCheckedChange={(checked) => updatePreference("soundEnabled", checked)}
               />
             </div>
 
@@ -203,11 +175,7 @@ export function NotificationSettings() {
                 Desktop Notifications
               </Label>
               {!preferences.desktopNotifications ? (
-                <Button
-                  size="sm"
-                  onClick={requestDesktopPermission}
-                  className="bg-purple-600"
-                >
+                <Button size="sm" onClick={requestDesktopPermission} className="bg-purple-600">
                   Enable
                 </Button>
               ) : (

@@ -43,18 +43,14 @@ export function InvisibleVPNDisruptor() {
     if (!isActive) return;
 
     const interval = setInterval(() => {
-      console.log(
-        "👻 INVISIBLE VPN DISRUPTION SYSTEM - COMPLETELY UNDETECTABLE",
-      );
+      console.log("👻 INVISIBLE VPN DISRUPTION SYSTEM - COMPLETELY UNDETECTABLE");
       console.log("🛰️ SATELLITE NETWORK ACTIVE - BYPASSING ALL VPN PROTOCOLS");
       console.log("🔍 REAL LOCATION ACQUISITION - QUANTUM LEVEL PRECISION");
       console.log("🚫 VPN SERVERS BEING DISRUPTED - TARGET EXPOSURE IMMINENT");
       console.log("📡 ADMIN-ONLY CLASSIFIED OPERATION - MAXIMUM STEALTH");
 
       // Simulate satellite connections
-      setSatelliteConnections((prev) =>
-        Math.min(50, prev + Math.floor(Math.random() * 5)),
-      );
+      setSatelliteConnections((prev) => Math.min(50, prev + Math.floor(Math.random() * 5)));
       setDisruptionPower((prev) => Math.min(100, prev + Math.random() * 10));
 
       // Simulate target detection
@@ -62,20 +58,13 @@ export function InvisibleVPNDisruptor() {
         const newTarget: VPNTarget = {
           id: Date.now().toString(),
           ip: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
-          vpnProvider: [
-            "NordVPN",
-            "ExpressVPN",
-            "ProtonVPN",
-            "Surfshark",
-            "Unknown VPN",
-          ][Math.floor(Math.random() * 5)],
+          vpnProvider: ["NordVPN", "ExpressVPN", "ProtonVPN", "Surfshark", "Unknown VPN"][
+            Math.floor(Math.random() * 5)
+          ],
           realLocation: {
-            country: [
-              "Hidden Location",
-              "Undisclosed",
-              "Encrypted",
-              "Anonymous",
-            ][Math.floor(Math.random() * 4)],
+            country: ["Hidden Location", "Undisclosed", "Encrypted", "Anonymous"][
+              Math.floor(Math.random() * 4)
+            ],
             city: "Acquiring...",
             coordinates: {
               lat: (Math.random() - 0.5) * 180,
@@ -99,17 +88,14 @@ export function InvisibleVPNDisruptor() {
   const activateInvisibleDisruption = () => {
     setIsActive(true);
     console.log("🚨 INVISIBLE VPN DISRUPTION SYSTEM ACTIVATED");
-    console.log(
-      "👻 STEALTH MODE: COMPLETE INVISIBILITY TO ALL SECURITY SYSTEMS",
-    );
+    console.log("👻 STEALTH MODE: COMPLETE INVISIBILITY TO ALL SECURITY SYSTEMS");
     console.log("🛰️ SATELLITE ARRAY: CONNECTING TO GLOBAL NETWORK");
     console.log("🔒 ADMIN AUTHORIZATION: MICHEL ZUIDWIJK VERIFIED");
     console.log("📧 REAL-TIME ALERTS: SENDING TO michelzuidwijk@gmail.com");
     console.log("📱 SMS NOTIFICATIONS: SENDING TO +31687758236");
 
     toast.success("👻 INVISIBLE DISRUPTION ACTIVATED!", {
-      description:
-        "VPN disruption system is now completely invisible and active",
+      description: "VPN disruption system is now completely invisible and active",
       duration: 8000,
     });
   };
@@ -172,8 +158,8 @@ export function InvisibleVPNDisruptor() {
             <div>
               <div className="text-3xl">👻 INVISIBLE VPN DISRUPTION SYSTEM</div>
               <div className="text-lg font-normal">
-                Satellite Network • VPN Bypass • Real Location Acquisition •
-                Admin Only • Completely Invisible
+                Satellite Network • VPN Bypass • Real Location Acquisition • Admin Only • Completely
+                Invisible
               </div>
             </div>
             <Badge
@@ -187,20 +173,13 @@ export function InvisibleVPNDisruptor() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center p-4 bg-red-900/40 rounded-lg border border-red-500/30">
               <Satellite className="h-8 w-8 mx-auto text-red-400 animate-pulse mb-2" />
-              <div className="text-2xl font-bold text-red-400">
-                {satelliteConnections}
-              </div>
+              <div className="text-2xl font-bold text-red-400">{satelliteConnections}</div>
               <div className="text-sm text-muted-foreground">Satellites</div>
-              <Progress
-                value={(satelliteConnections / 50) * 100}
-                className="mt-2"
-              />
+              <Progress value={(satelliteConnections / 50) * 100} className="mt-2" />
             </div>
             <div className="text-center p-4 bg-purple-900/40 rounded-lg border border-purple-500/30">
               <Eye className="h-8 w-8 mx-auto text-purple-400 animate-pulse mb-2" />
-              <div className="text-2xl font-bold text-purple-400">
-                INVISIBLE
-              </div>
+              <div className="text-2xl font-bold text-purple-400">INVISIBLE</div>
               <div className="text-sm text-muted-foreground">Stealth Level</div>
             </div>
             <div className="text-center p-4 bg-orange-900/40 rounded-lg border border-orange-500/30">
@@ -208,19 +187,13 @@ export function InvisibleVPNDisruptor() {
               <div className="text-2xl font-bold text-orange-400">
                 {disruptionPower.toFixed(0)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Disruption Power
-              </div>
+              <div className="text-sm text-muted-foreground">Disruption Power</div>
               <Progress value={disruptionPower} className="mt-2" />
             </div>
             <div className="text-center p-4 bg-green-900/40 rounded-lg border border-green-500/30">
               <Target className="h-8 w-8 mx-auto text-green-400 animate-pulse mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {targets.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Targets
-              </div>
+              <div className="text-2xl font-bold text-green-400">{targets.length}</div>
+              <div className="text-sm text-muted-foreground">Active Targets</div>
             </div>
           </div>
 
@@ -243,33 +216,23 @@ export function InvisibleVPNDisruptor() {
               onChange={(e) => setTargetIP(e.target.value)}
               className="bg-black/30 border-red-500/30 text-red-400"
             />
-            <Button
-              onClick={trackSpecificIP}
-              className="bg-red-600 hover:bg-red-700"
-            >
+            <Button onClick={trackSpecificIP} className="bg-red-600 hover:bg-red-700">
               <Target className="h-4 w-4 mr-2" />
               TRACK
             </Button>
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-lg font-bold text-red-400">
-              🎯 VPN TARGETS - INVISIBLE TRACKING
-            </h4>
+            <h4 className="text-lg font-bold text-red-400">🎯 VPN TARGETS - INVISIBLE TRACKING</h4>
             {targets.map((target) => (
-              <div
-                key={target.id}
-                className="p-4 bg-black/40 rounded-lg border border-red-500/30"
-              >
+              <div key={target.id} className="p-4 bg-black/40 rounded-lg border border-red-500/30">
                 <div className="flex justify-between items-start mb-3">
                   <div>
                     <div className="flex items-center gap-2 font-semibold text-white">
                       <Wifi className="h-4 w-4" />
                       {target.ip}
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                      VPN: {target.vpnProvider}
-                    </div>
+                    <div className="text-sm text-muted-foreground">VPN: {target.vpnProvider}</div>
                     <div className="text-sm text-yellow-400">
                       <MapPin className="h-3 w-3 inline mr-1" />
                       {target.realLocation.country}, {target.realLocation.city}
@@ -304,10 +267,7 @@ export function InvisibleVPNDisruptor() {
             <AlertTriangle className="h-8 w-8 text-yellow-400" />
           </div>
           <div className="space-y-2 text-sm text-muted-foreground">
-            <p>
-              🛡️ This system operates completely invisibly to protect our
-              community
-            </p>
+            <p>🛡️ This system operates completely invisibly to protect our community</p>
             <p>🛰️ Satellite network provides untraceable global coverage</p>
             <p>👻 VPN disruption occurs without target detection</p>
             <p>📧 Real-time alerts sent to: michelzuidwijk@gmail.com</p>

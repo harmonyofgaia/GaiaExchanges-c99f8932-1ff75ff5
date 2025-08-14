@@ -21,12 +21,7 @@ import {
 
 interface SearchResult {
   id: string;
-  type:
-    | "document"
-    | "encrypted_file"
-    | "database"
-    | "network_trace"
-    | "hacker_trace";
+  type: "document" | "encrypted_file" | "database" | "network_trace" | "hacker_trace";
   title: string;
   content: string;
   location: string;
@@ -64,9 +59,7 @@ export function QuantumGlobalSearchEngine() {
   useEffect(() => {
     // Background quantum processing
     const quantumProcessing = setInterval(() => {
-      console.log(
-        "⚡ QUANTUM GLOBAL SEARCH ENGINE - 20 QUANTUM COMPUTERS ACTIVE",
-      );
+      console.log("⚡ QUANTUM GLOBAL SEARCH ENGINE - 20 QUANTUM COMPUTERS ACTIVE");
       console.log("🌐 SCANNING: Entire global internet infrastructure");
       console.log("🔓 DECRYPTING: All encrypted files and databases");
       console.log("🕵️ TRACKING: Hackers and cyber attackers worldwide");
@@ -76,16 +69,10 @@ export function QuantumGlobalSearchEngine() {
       setMetrics((prev) => ({
         ...prev,
         totalDocuments: prev.totalDocuments + Math.floor(Math.random() * 10000),
-        encryptedFilesAccessed:
-          prev.encryptedFilesAccessed + Math.floor(Math.random() * 100),
-        databasesScanned:
-          prev.databasesScanned + Math.floor(Math.random() * 50),
-        hackerTracesFound:
-          prev.hackerTracesFound + Math.floor(Math.random() * 5),
-        globalReachPercentage: Math.min(
-          99.9,
-          prev.globalReachPercentage + Math.random() * 0.1,
-        ),
+        encryptedFilesAccessed: prev.encryptedFilesAccessed + Math.floor(Math.random() * 100),
+        databasesScanned: prev.databasesScanned + Math.floor(Math.random() * 50),
+        hackerTracesFound: prev.hackerTracesFound + Math.floor(Math.random() * 5),
+        globalReachPercentage: Math.min(99.9, prev.globalReachPercentage + Math.random() * 0.1),
       }));
     }, 5000);
 
@@ -104,9 +91,7 @@ export function QuantumGlobalSearchEngine() {
 
     console.log(`🔍 QUANTUM SEARCH INITIATED: "${searchQuery}"`);
     console.log("⚡ DEPLOYING 20 QUANTUM COMPUTERS FOR GLOBAL SEARCH");
-    console.log(
-      "🌐 ACCESSING: All global databases, documents, and encrypted files",
-    );
+    console.log("🌐 ACCESSING: All global databases, documents, and encrypted files");
     console.log("👻 INVISIBLE MODE: Completely undetectable search operation");
 
     // Simulate quantum search process
@@ -182,9 +167,7 @@ export function QuantumGlobalSearchEngine() {
             duration: 8000,
           });
 
-          console.log(
-            `✅ QUANTUM SEARCH COMPLETE: ${mockResults.length} results found`,
-          );
+          console.log(`✅ QUANTUM SEARCH COMPLETE: ${mockResults.length} results found`);
           console.log("🔒 ALL SEARCH OPERATIONS REMAIN COMPLETELY INVISIBLE");
         }
       }, i * 1500);
@@ -253,13 +236,9 @@ export function QuantumGlobalSearchEngine() {
       <Card className="bg-gradient-to-r from-black to-purple-900/40 border-purple-500/50">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-purple-400">
-            <Brain className="h-6 w-6 animate-pulse" />⚡ QUANTUM GLOBAL SEARCH
-            ENGINE - 20 QUANTUM COMPUTERS
-            {quantumActive && (
-              <Badge className="bg-green-600 animate-pulse">
-                QUANTUM ACTIVE
-              </Badge>
-            )}
+            <Brain className="h-6 w-6 animate-pulse" />⚡ QUANTUM GLOBAL SEARCH ENGINE - 20 QUANTUM
+            COMPUTERS
+            {quantumActive && <Badge className="bg-green-600 animate-pulse">QUANTUM ACTIVE</Badge>}
           </CardTitle>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-sm">
             <div className="text-center">
@@ -272,9 +251,7 @@ export function QuantumGlobalSearchEngine() {
               <div className="text-lg font-bold text-blue-400">
                 {metrics.encryptedFilesAccessed.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Encrypted Files
-              </div>
+              <div className="text-xs text-muted-foreground">Encrypted Files</div>
             </div>
             <div className="text-center">
               <div className="text-lg font-bold text-purple-400">
@@ -329,18 +306,14 @@ export function QuantumGlobalSearchEngine() {
               <div className="text-center">
                 <Globe className="h-8 w-8 mx-auto text-green-400 mb-2" />
                 <div className="font-bold text-green-400">GLOBAL ACCESS</div>
-                <div className="text-sm text-muted-foreground">
-                  All networks worldwide
-                </div>
+                <div className="text-sm text-muted-foreground">All networks worldwide</div>
               </div>
             </div>
             <div className="p-4 bg-purple-900/20 rounded-lg border border-purple-500/30">
               <div className="text-center">
                 <Eye className="h-8 w-8 mx-auto text-purple-400 mb-2" />
                 <div className="font-bold text-purple-400">INVISIBLE MODE</div>
-                <div className="text-sm text-muted-foreground">
-                  Completely undetectable
-                </div>
+                <div className="text-sm text-muted-foreground">Completely undetectable</div>
               </div>
             </div>
           </div>
@@ -350,17 +323,12 @@ export function QuantumGlobalSearchEngine() {
       {searchResults.length > 0 && (
         <Card className="bg-gradient-to-r from-gray-900/50 to-black border-gray-700">
           <CardHeader>
-            <CardTitle className="text-green-400">
-              🔍 QUANTUM SEARCH RESULTS
-            </CardTitle>
+            <CardTitle className="text-green-400">🔍 QUANTUM SEARCH RESULTS</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {searchResults.map((result) => (
-                <div
-                  key={result.id}
-                  className="p-4 bg-black/40 rounded-lg border border-gray-600"
-                >
+                <div key={result.id} className="p-4 bg-black/40 rounded-lg border border-gray-600">
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex items-center gap-2">
                       {getResultIcon(result.type)}
@@ -370,15 +338,11 @@ export function QuantumGlobalSearchEngine() {
                       <Badge className={getRiskColor(result.risk_level)}>
                         {result.risk_level.toUpperCase()}
                       </Badge>
-                      <Badge className="bg-blue-600">
-                        🔒 {result.encryption_level}-bit
-                      </Badge>
+                      <Badge className="bg-blue-600">🔒 {result.encryption_level}-bit</Badge>
                     </div>
                   </div>
 
-                  <p className="text-muted-foreground text-sm mb-3">
-                    {result.content}
-                  </p>
+                  <p className="text-muted-foreground text-sm mb-3">{result.content}</p>
 
                   <div className="flex justify-between items-center text-xs text-gray-400 mb-3">
                     <span>📍 {result.location}</span>
@@ -406,11 +370,7 @@ export function QuantumGlobalSearchEngine() {
                         Trace
                       </Button>
                     )}
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="border-gray-600"
-                    >
+                    <Button size="sm" variant="outline" className="border-gray-600">
                       <Eye className="h-3 w-3 mr-1" />
                       Analyze
                     </Button>

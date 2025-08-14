@@ -26,14 +26,10 @@ export function Invisible4StepVerification() {
 
         // Advanced IP verification
         const verifyAdminAccess = () => {
-          const isFirefoxBrowser = navigator.userAgent
-            .toLowerCase()
-            .includes("firefox");
-          const hasAdminSession =
-            sessionStorage.getItem("admin-session-active") === "true";
+          const isFirefoxBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+          const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
           const isAuthorizedIP =
-            adminIPs.current.includes(currentIP) ||
-            currentIP === "10.13.125.207";
+            adminIPs.current.includes(currentIP) || currentIP === "10.13.125.207";
 
           if (isFirefoxBrowser && hasAdminSession && isAuthorizedIP) {
             console.log("👑 ADMIN ACCESS VERIFIED - FULL SYSTEM CONTROL");

@@ -49,12 +49,7 @@ interface Automation {
   id: string;
   name: string;
   description: string;
-  category:
-    | "security"
-    | "token_management"
-    | "user_engagement"
-    | "environmental"
-    | "analytics";
+  category: "security" | "token_management" | "user_engagement" | "environmental" | "analytics";
   status: "active" | "inactive" | "error" | "testing";
   trigger_count: number;
   success_rate: number;
@@ -88,8 +83,7 @@ interface AutomationMetrics {
 export function CustomAutomationBuilder() {
   const [automations, setAutomations] = useState<Automation[]>([]);
   const [templates, setTemplates] = useState<AutomationTemplate[]>([]);
-  const [selectedAutomation, setSelectedAutomation] =
-    useState<Automation | null>(null);
+  const [selectedAutomation, setSelectedAutomation] = useState<Automation | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [metrics, setMetrics] = useState<AutomationMetrics>({
     total_automations: 0,
@@ -119,13 +113,7 @@ export function CustomAutomationBuilder() {
       name: "Conditional Check",
       icon: <Target className="h-4 w-4" />,
       description: "Check conditions before proceeding",
-      options: [
-        "User Level",
-        "Token Price",
-        "Eco Score",
-        "Time Range",
-        "Geographic Location",
-      ],
+      options: ["User Level", "Token Price", "Eco Score", "Time Range", "Geographic Location"],
     },
     {
       type: "action",
@@ -146,12 +134,7 @@ export function CustomAutomationBuilder() {
       name: "Wait/Delay",
       icon: <Clock className="h-4 w-4" />,
       description: "Add delays between steps",
-      options: [
-        "Fixed Delay",
-        "Wait for Event",
-        "Schedule Time",
-        "Random Delay",
-      ],
+      options: ["Fixed Delay", "Wait for Event", "Schedule Time", "Random Delay"],
     },
   ];
 
@@ -173,8 +156,7 @@ export function CustomAutomationBuilder() {
       {
         id: "auto-1",
         name: "AI Defense Auto-Deploy",
-        description:
-          "Automatically deploy AI defense animals when threats are detected",
+        description: "Automatically deploy AI defense animals when threats are detected",
         category: "security",
         status: "active",
         trigger_count: 156,
@@ -229,8 +211,7 @@ export function CustomAutomationBuilder() {
       {
         id: "auto-2",
         name: "Token Auto-Approval",
-        description:
-          "Automatically approve eco-friendly tokens with high scores",
+        description: "Automatically approve eco-friendly tokens with high scores",
         category: "token_management",
         status: "active",
         trigger_count: 89,
@@ -442,8 +423,7 @@ export function CustomAutomationBuilder() {
   const updateMetrics = () => {
     setMetrics((prev) => ({
       ...prev,
-      total_executions_today:
-        prev.total_executions_today + Math.floor(Math.random() * 5),
+      total_executions_today: prev.total_executions_today + Math.floor(Math.random() * 5),
       issues_resolved: prev.issues_resolved + (Math.random() > 0.9 ? 1 : 0),
       time_saved_hours: prev.time_saved_hours + Math.random() * 0.1,
     }));
@@ -475,8 +455,7 @@ export function CustomAutomationBuilder() {
     setAutomations((prev) =>
       prev.map((automation) => {
         if (automation.id === automationId) {
-          const newStatus =
-            automation.status === "active" ? "inactive" : "active";
+          const newStatus = automation.status === "active" ? "inactive" : "active";
           toast.success(`Automation ${newStatus}!`, {
             description: `${automation.name} is now ${newStatus}`,
             duration: 3000,
@@ -484,7 +463,7 @@ export function CustomAutomationBuilder() {
           return { ...automation, status: newStatus as any };
         }
         return automation;
-      }),
+      })
     );
   };
 
@@ -593,26 +572,18 @@ export function CustomAutomationBuilder() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">
-                {metrics.total_automations}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Total Automations
-              </div>
+              <div className="text-2xl font-bold text-green-400">{metrics.total_automations}</div>
+              <div className="text-sm text-muted-foreground">Total Automations</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                {metrics.active_automations}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{metrics.active_automations}</div>
               <div className="text-sm text-muted-foreground">Active Now</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-400">
                 {metrics.total_executions_today}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Executions Today
-              </div>
+              <div className="text-sm text-muted-foreground">Executions Today</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-400">
@@ -627,12 +598,8 @@ export function CustomAutomationBuilder() {
               <div className="text-sm text-muted-foreground">Time Saved</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-orange-400">
-                {metrics.issues_resolved}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Issues Resolved
-              </div>
+              <div className="text-2xl font-bold text-orange-400">{metrics.issues_resolved}</div>
+              <div className="text-sm text-muted-foreground">Issues Resolved</div>
             </div>
           </div>
         </CardContent>
@@ -648,13 +615,8 @@ export function CustomAutomationBuilder() {
 
         <TabsContent value="automations" className="space-y-4">
           <div className="flex justify-between items-center">
-            <h3 className="text-lg font-semibold text-white">
-              Active Automations
-            </h3>
-            <Button
-              onClick={createNewAutomation}
-              className="bg-green-600 hover:bg-green-700"
-            >
+            <h3 className="text-lg font-semibold text-white">Active Automations</h3>
+            <Button onClick={createNewAutomation} className="bg-green-600 hover:bg-green-700">
               <Plus className="h-4 w-4 mr-2" />
               New Automation
             </Button>
@@ -662,66 +624,41 @@ export function CustomAutomationBuilder() {
 
           <div className="space-y-4">
             {automations.map((automation) => (
-              <Card
-                key={automation.id}
-                className="border-gray-500/20 bg-black/20"
-              >
+              <Card key={automation.id} className="border-gray-500/20 bg-black/20">
                 <CardContent className="pt-4">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold text-white text-lg">
-                          {automation.name}
-                        </h3>
-                        <Badge
-                          variant="outline"
-                          className={getStatusColor(automation.status)}
-                        >
+                        <h3 className="font-semibold text-white text-lg">{automation.name}</h3>
+                        <Badge variant="outline" className={getStatusColor(automation.status)}>
                           {getStatusIcon(automation.status)}
                           {automation.status}
                         </Badge>
-                        <Badge
-                          variant="outline"
-                          className={getCategoryColor(automation.category)}
-                        >
+                        <Badge variant="outline" className={getCategoryColor(automation.category)}>
                           {getCategoryIcon(automation.category)}
                           {automation.category.replace("_", " ")}
                         </Badge>
                       </div>
 
-                      <p className="text-muted-foreground mb-3">
-                        {automation.description}
-                      </p>
+                      <p className="text-muted-foreground mb-3">{automation.description}</p>
 
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3">
                         <div>
-                          <div className="text-sm text-muted-foreground">
-                            Executions
-                          </div>
-                          <div className="font-bold text-blue-400">
-                            {automation.trigger_count}
-                          </div>
+                          <div className="text-sm text-muted-foreground">Executions</div>
+                          <div className="font-bold text-blue-400">{automation.trigger_count}</div>
                         </div>
                         <div>
-                          <div className="text-sm text-muted-foreground">
-                            Success Rate
-                          </div>
+                          <div className="text-sm text-muted-foreground">Success Rate</div>
                           <div className="font-bold text-green-400">
                             {automation.success_rate.toFixed(1)}%
                           </div>
                         </div>
                         <div>
-                          <div className="text-sm text-muted-foreground">
-                            Steps
-                          </div>
-                          <div className="font-bold text-purple-400">
-                            {automation.steps.length}
-                          </div>
+                          <div className="text-sm text-muted-foreground">Steps</div>
+                          <div className="font-bold text-purple-400">{automation.steps.length}</div>
                         </div>
                         <div>
-                          <div className="text-sm text-muted-foreground">
-                            Last Run
-                          </div>
+                          <div className="text-sm text-muted-foreground">Last Run</div>
                           <div className="font-bold text-yellow-400">
                             {automation.last_run.toLocaleTimeString()}
                           </div>
@@ -799,30 +736,24 @@ export function CustomAutomationBuilder() {
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-4">
                     <div>
-                      <label className="text-sm font-medium text-white">
-                        Automation Name
-                      </label>
+                      <label className="text-sm font-medium text-white">Automation Name</label>
                       <Input
                         value={selectedAutomation.name}
                         onChange={(e) =>
                           setSelectedAutomation((prev) =>
-                            prev ? { ...prev, name: e.target.value } : null,
+                            prev ? { ...prev, name: e.target.value } : null
                           )
                         }
                         className="bg-black/20 border-blue-500/30"
                       />
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-white">
-                        Description
-                      </label>
+                      <label className="text-sm font-medium text-white">Description</label>
                       <Textarea
                         value={selectedAutomation.description}
                         onChange={(e) =>
                           setSelectedAutomation((prev) =>
-                            prev
-                              ? { ...prev, description: e.target.value }
-                              : null,
+                            prev ? { ...prev, description: e.target.value } : null
                           )
                         }
                         className="bg-black/20 border-blue-500/30"
@@ -831,9 +762,7 @@ export function CustomAutomationBuilder() {
                   </div>
 
                   <div className="space-y-4">
-                    <h4 className="font-semibold text-white">
-                      Available Step Types
-                    </h4>
+                    <h4 className="font-semibold text-white">Available Step Types</h4>
                     <div className="grid grid-cols-2 gap-2">
                       {availableStepTypes.map((stepType) => (
                         <Button
@@ -842,8 +771,7 @@ export function CustomAutomationBuilder() {
                           className="h-auto p-3 flex flex-col items-start"
                           onClick={() => {
                             toast.info(`Adding ${stepType.name}...`, {
-                              description:
-                                "Drag and drop to position in workflow",
+                              description: "Drag and drop to position in workflow",
                               duration: 2000,
                             });
                           }}
@@ -876,12 +804,8 @@ export function CustomAutomationBuilder() {
                             {index + 1}
                           </div>
                           <div className="flex-1">
-                            <div className="font-medium text-white">
-                              {step.name}
-                            </div>
-                            <div className="text-sm text-muted-foreground">
-                              {step.description}
-                            </div>
+                            <div className="font-medium text-white">{step.name}</div>
+                            <div className="text-sm text-muted-foreground">{step.description}</div>
                             <Badge variant="outline" className="text-xs mt-1">
                               {step.type}
                             </Badge>
@@ -904,10 +828,7 @@ export function CustomAutomationBuilder() {
                   ) : (
                     <div className="text-center py-8 text-muted-foreground">
                       <Workflow className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                      <p>
-                        No steps added yet. Drag step types from above to build
-                        your workflow.
-                      </p>
+                      <p>No steps added yet. Drag step types from above to build your workflow.</p>
                     </div>
                   )}
                 </div>
@@ -936,17 +857,12 @@ export function CustomAutomationBuilder() {
             <Card className="border-gray-500/20">
               <CardContent className="pt-6 text-center">
                 <Brain className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  No Automation Selected
-                </h3>
+                <h3 className="text-lg font-semibold text-white mb-2">No Automation Selected</h3>
                 <p className="text-muted-foreground mb-4">
-                  Select an automation from the list or create a new one to
-                  start building your workflow.
+                  Select an automation from the list or create a new one to start building your
+                  workflow.
                 </p>
-                <Button
-                  onClick={createNewAutomation}
-                  className="bg-blue-600 hover:bg-blue-700"
-                >
+                <Button onClick={createNewAutomation} className="bg-blue-600 hover:bg-blue-700">
                   <Plus className="h-4 w-4 mr-2" />
                   Create New Automation
                 </Button>
@@ -960,44 +876,30 @@ export function CustomAutomationBuilder() {
             {templates.map((template) => (
               <Card key={template.id} className="border-purple-500/20">
                 <CardHeader>
-                  <CardTitle className="text-purple-400">
-                    {template.name}
-                  </CardTitle>
+                  <CardTitle className="text-purple-400">{template.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground mb-4">
-                    {template.description}
-                  </p>
+                  <p className="text-muted-foreground mb-4">{template.description}</p>
 
                   <div className="space-y-2 mb-4">
                     <div className="flex justify-between text-sm">
                       <span>Category:</span>
-                      <Badge
-                        variant="outline"
-                        className={getCategoryColor(template.category)}
-                      >
+                      <Badge variant="outline" className={getCategoryColor(template.category)}>
                         {template.category.replace("_", " ")}
                       </Badge>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span>Steps:</span>
-                      <span className="font-bold text-blue-400">
-                        {template.steps.length}
-                      </span>
+                      <span className="font-bold text-blue-400">{template.steps.length}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span>Used:</span>
-                      <span className="font-bold text-green-400">
-                        {template.use_count} times
-                      </span>
+                      <span className="font-bold text-green-400">{template.use_count} times</span>
                     </div>
                   </div>
 
                   <div className="flex gap-2">
-                    <Button
-                      size="sm"
-                      className="flex-1 bg-purple-600 hover:bg-purple-700"
-                    >
+                    <Button size="sm" className="flex-1 bg-purple-600 hover:bg-purple-700">
                       <Copy className="h-3 w-3 mr-1" />
                       Use Template
                     </Button>
@@ -1016,9 +918,7 @@ export function CustomAutomationBuilder() {
           <div className="grid gap-4 md:grid-cols-2">
             <Card className="border-green-500/20">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  Performance Analytics
-                </CardTitle>
+                <CardTitle className="text-green-400">Performance Analytics</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -1082,12 +982,8 @@ export function CustomAutomationBuilder() {
                       className="flex items-center justify-between p-2 border border-gray-500/20 rounded"
                     >
                       <div>
-                        <div className="text-sm text-white">
-                          {activity.event}
-                        </div>
-                        <div className="text-xs text-muted-foreground">
-                          {activity.time}
-                        </div>
+                        <div className="text-sm text-white">{activity.event}</div>
+                        <div className="text-xs text-muted-foreground">{activity.time}</div>
                       </div>
                       <Badge
                         variant="outline"

@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Shield,
-  Lock,
-  Eye,
-  Zap,
-  Globe,
-  Wifi,
-  Router,
-  AlertTriangle,
-} from "lucide-react";
+import { Shield, Lock, Eye, Zap, Globe, Wifi, Router, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -60,19 +51,14 @@ export function AdvancedIPProtection() {
             const url = args[0]?.toString() || "";
 
             // Block any attempt to reveal real IP
-            if (
-              url.includes("ipify") ||
-              url.includes("whatismyip") ||
-              url.includes("ip-api")
-            ) {
+            if (url.includes("ipify") || url.includes("whatismyip") || url.includes("ip-api")) {
               console.log("🚫 IP EXPOSURE ATTEMPT BLOCKED:", url);
 
               newThreats.push({
                 id: `ip-protection-${Date.now()}`,
                 type: "CRITICAL",
                 source: "IP Shield System",
-                description:
-                  "IP exposure attempt blocked - Quantum protection active",
+                description: "IP exposure attempt blocked - Quantum protection active",
                 blocked: true,
                 timestamp: new Date(),
               });
@@ -81,13 +67,12 @@ export function AdvancedIPProtection() {
               return new Response(
                 JSON.stringify({
                   ip: "GAIA-QUANTUM-PROTECTED",
-                  message:
-                    "IP ADDRESS QUANTUM ENCRYPTED - MAXIMUM SECURITY ACTIVE",
+                  message: "IP ADDRESS QUANTUM ENCRYPTED - MAXIMUM SECURITY ACTIVE",
                 }),
                 {
                   status: 200,
                   headers: { "Content-Type": "application/json" },
-                },
+                }
               );
             }
 
@@ -132,8 +117,7 @@ export function AdvancedIPProtection() {
           // Simulate advanced threat detection
           if (Math.random() < 0.08) {
             // 8% chance of detecting threat
-            const threatType =
-              threatPatterns[Math.floor(Math.random() * threatPatterns.length)];
+            const threatType = threatPatterns[Math.floor(Math.random() * threatPatterns.length)];
 
             newThreats.push({
               id: `network-threat-${Date.now()}`,
@@ -159,9 +143,7 @@ export function AdvancedIPProtection() {
           ];
 
           const currentEncryption =
-            encryptionLevels[
-              Math.floor(Math.random() * encryptionLevels.length)
-            ];
+            encryptionLevels[Math.floor(Math.random() * encryptionLevels.length)];
 
           setMetrics((prev) => ({
             ...prev,
@@ -172,9 +154,7 @@ export function AdvancedIPProtection() {
 
         // 5. LIFELONG PROTECTION GUARANTEE
         const activateLifelongProtection = () => {
-          console.log(
-            "♾️ LIFELONG PROTECTION ACTIVATED - ETERNAL SECURITY GUARANTEE",
-          );
+          console.log("♾️ LIFELONG PROTECTION ACTIVATED - ETERNAL SECURITY GUARANTEE");
 
           // Permanent protection mechanisms
           const protectionFeatures = [
@@ -204,8 +184,7 @@ export function AdvancedIPProtection() {
           // Update metrics
           setMetrics((prev) => ({
             ...prev,
-            threatsBlocked:
-              prev.threatsBlocked + newThreats.filter((t) => t.blocked).length,
+            threatsBlocked: prev.threatsBlocked + newThreats.filter((t) => t.blocked).length,
             lastSecurityScan: new Date(),
           }));
 
@@ -290,43 +269,29 @@ export function AdvancedIPProtection() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="text-center p-4 rounded-lg bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-500/30">
             <Shield className="h-8 w-8 mx-auto text-green-400 mb-2" />
-            <div className="text-2xl font-bold text-green-400">
-              {metrics.protectionLevel}%
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Protection Level
-            </div>
+            <div className="text-2xl font-bold text-green-400">{metrics.protectionLevel}%</div>
+            <div className="text-sm text-muted-foreground">Protection Level</div>
             <Badge className="mt-2 bg-green-600 text-white">MAXIMUM</Badge>
           </div>
 
           <div className="text-center p-4 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30">
             <Lock className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-            <div className="text-xl font-bold text-blue-400">
-              {metrics.encryptionStrength}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Encryption Level
-            </div>
+            <div className="text-xl font-bold text-blue-400">{metrics.encryptionStrength}</div>
+            <div className="text-sm text-muted-foreground">Encryption Level</div>
             <Badge className="mt-2 bg-blue-600 text-white">QUANTUM</Badge>
           </div>
 
           <div className="text-center p-4 rounded-lg bg-gradient-to-br from-red-500/20 to-pink-500/20 border border-red-500/30">
             <Eye className="h-8 w-8 mx-auto text-red-400 mb-2" />
-            <div className="text-2xl font-bold text-red-400">
-              {metrics.threatsBlocked}
-            </div>
+            <div className="text-2xl font-bold text-red-400">{metrics.threatsBlocked}</div>
             <div className="text-sm text-muted-foreground">Threats Blocked</div>
             <Badge className="mt-2 bg-red-600 text-white">ACTIVE</Badge>
           </div>
 
           <div className="text-center p-4 rounded-lg bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-purple-500/30">
             <Wifi className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-            <div className="text-2xl font-bold text-purple-400">
-              {metrics.connectionStability}%
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Connection Quality
-            </div>
+            <div className="text-2xl font-bold text-purple-400">{metrics.connectionStability}%</div>
+            <div className="text-sm text-muted-foreground">Connection Quality</div>
             <Badge className="mt-2 bg-purple-600 text-white">STABLE</Badge>
           </div>
         </div>
@@ -334,17 +299,12 @@ export function AdvancedIPProtection() {
         {/* Protection Status */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h4 className="text-xl font-bold text-green-400">
-              🛡️ IP Protection Status
-            </h4>
-            <span className="text-2xl font-bold text-green-400">
-              LIFELONG ACTIVE
-            </span>
+            <h4 className="text-xl font-bold text-green-400">🛡️ IP Protection Status</h4>
+            <span className="text-2xl font-bold text-green-400">LIFELONG ACTIVE</span>
           </div>
           <Progress value={metrics.protectionLevel} className="h-6" />
           <p className="text-center text-sm">
-            🔮 Quantum Encrypted • ♾️ Lifelong Protected • 🚫 IP Cloaked • 🛡️
-            Maximum Defense
+            🔮 Quantum Encrypted • ♾️ Lifelong Protected • 🚫 IP Cloaked • 🛡️ Maximum Defense
           </p>
         </div>
 
@@ -360,9 +320,7 @@ export function AdvancedIPProtection() {
         {/* Recent IP Threats */}
         {ipThreats.length > 0 && (
           <div className="space-y-4">
-            <h4 className="text-lg font-bold text-red-400">
-              🚨 Recent IP Protection Events:
-            </h4>
+            <h4 className="text-lg font-bold text-red-400">🚨 Recent IP Protection Events:</h4>
             <div className="max-h-64 overflow-y-auto space-y-2">
               {ipThreats.slice(0, 8).map((threat) => (
                 <div
@@ -372,18 +330,12 @@ export function AdvancedIPProtection() {
                   <div className="flex items-center gap-3">
                     <Shield className="h-4 w-4 text-green-400" />
                     <div>
-                      <div className="font-medium text-green-400">
-                        {threat.source}
-                      </div>
-                      <div className="text-sm text-green-300">
-                        {threat.description}
-                      </div>
+                      <div className="font-medium text-green-400">{threat.source}</div>
+                      <div className="text-sm text-green-300">{threat.description}</div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <Badge className="mb-1 bg-green-600 text-white">
-                      NEUTRALIZED
-                    </Badge>
+                    <Badge className="mb-1 bg-green-600 text-white">NEUTRALIZED</Badge>
                     <div className="text-xs text-muted-foreground">
                       {threat.timestamp.toLocaleTimeString()}
                     </div>
@@ -397,9 +349,7 @@ export function AdvancedIPProtection() {
         {/* Protection Features */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-3">
-            <h5 className="font-bold text-green-400">
-              🛡️ IP PROTECTION FEATURES:
-            </h5>
+            <h5 className="font-bold text-green-400">🛡️ IP PROTECTION FEATURES:</h5>
             <ul className="text-sm space-y-1 text-green-200">
               <li className="flex items-center gap-2">
                 <Lock className="h-4 w-4" /> Quantum IP Encryption
@@ -437,14 +387,11 @@ export function AdvancedIPProtection() {
 
         {/* Security Guarantee */}
         <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 rounded-lg p-4 border border-green-500/20">
-          <h4 className="font-bold text-green-400 mb-2">
-            ♾️ LIFELONG SECURITY GUARANTEE
-          </h4>
+          <h4 className="font-bold text-green-400 mb-2">♾️ LIFELONG SECURITY GUARANTEE</h4>
           <p className="text-sm text-green-200">
-            Your IP address is now protected with our most advanced quantum
-            encryption technology. This protection is PERMANENT and LIFELONG -
-            it will never expire or weaken. Our AI continuously evolves the
-            security measures to stay ahead of all future threats. Your
+            Your IP address is now protected with our most advanced quantum encryption technology.
+            This protection is PERMANENT and LIFELONG - it will never expire or weaken. Our AI
+            continuously evolves the security measures to stay ahead of all future threats. Your
             connection is now invisible and unbreakable.
           </p>
         </div>

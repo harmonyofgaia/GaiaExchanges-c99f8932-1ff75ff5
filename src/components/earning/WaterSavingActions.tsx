@@ -54,33 +54,23 @@ export function WaterSavingActions() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Conservation Method
-            </label>
+            <label className="block text-sm font-medium mb-2">Conservation Method</label>
             <Select value={actionType} onValueChange={setActionType}>
               <SelectTrigger>
                 <SelectValue placeholder="Select conservation method" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="rain_collection">
-                  Rain Water Collection
-                </SelectItem>
+                <SelectItem value="rain_collection">Rain Water Collection</SelectItem>
                 <SelectItem value="greywater_reuse">Greywater Reuse</SelectItem>
-                <SelectItem value="low_flow_fixtures">
-                  Low-Flow Fixtures
-                </SelectItem>
+                <SelectItem value="low_flow_fixtures">Low-Flow Fixtures</SelectItem>
                 <SelectItem value="leak_repair">Leak Repair</SelectItem>
-                <SelectItem value="drought_resistant_plants">
-                  Drought-Resistant Plants
-                </SelectItem>
+                <SelectItem value="drought_resistant_plants">Drought-Resistant Plants</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Water Saved (Liters)
-            </label>
+            <label className="block text-sm font-medium mb-2">Water Saved (Liters)</label>
             <Input
               type="number"
               value={waterAmount}
@@ -90,19 +80,15 @@ export function WaterSavingActions() {
             />
           </div>
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700"
-          >
+          <Button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700">
             {loading ? "Recording..." : "💧 Record Water Saving"}
           </Button>
         </form>
 
         <div className="mt-4 p-3 bg-blue-900/20 rounded-lg border border-blue-500/30">
           <p className="text-sm text-blue-300">
-            💡 <strong>Earning:</strong> 0.1 points per liter saved + bonus
-            tokens for verified actions
+            💡 <strong>Earning:</strong> 0.1 points per liter saved + bonus tokens for verified
+            actions
           </p>
         </div>
       </CardContent>

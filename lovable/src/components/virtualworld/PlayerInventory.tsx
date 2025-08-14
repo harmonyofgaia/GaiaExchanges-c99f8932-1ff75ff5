@@ -134,31 +134,20 @@ export function PlayerInventory() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-blue-900/30 rounded border border-blue-500/20">
-              <div className="text-3xl font-bold text-blue-400">
-                Level {playerLevel}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Eco-Warrior Rank
-              </div>
-              <Progress
-                value={(playerXP / nextLevelXP) * 100}
-                className="mt-2"
-              />
+              <div className="text-3xl font-bold text-blue-400">Level {playerLevel}</div>
+              <div className="text-sm text-muted-foreground">Eco-Warrior Rank</div>
+              <Progress value={(playerXP / nextLevelXP) * 100} className="mt-2" />
               <div className="text-xs text-muted-foreground mt-1">
                 {playerXP.toLocaleString()} / {nextLevelXP.toLocaleString()} XP
               </div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded border border-green-500/20">
               <div className="text-3xl font-bold text-green-400">4,250</div>
-              <div className="text-sm text-muted-foreground">
-                Total Tokens Burned
-              </div>
+              <div className="text-sm text-muted-foreground">Total Tokens Burned</div>
             </div>
             <div className="text-center p-4 bg-orange-900/30 rounded border border-orange-500/20">
               <div className="text-3xl font-bold text-orange-400">1,847</div>
-              <div className="text-sm text-muted-foreground">
-                Animals Helped
-              </div>
+              <div className="text-sm text-muted-foreground">Animals Helped</div>
             </div>
           </div>
         </CardContent>
@@ -167,31 +156,19 @@ export function PlayerInventory() {
       {/* Inventory Tabs */}
       <Tabs defaultValue="equipment" className="w-full">
         <TabsList className="grid w-full grid-cols-4 bg-black/50 backdrop-blur-md">
-          <TabsTrigger
-            value="equipment"
-            className="data-[state=active]:bg-purple-500/20"
-          >
+          <TabsTrigger value="equipment" className="data-[state=active]:bg-purple-500/20">
             <Sword className="h-4 w-4 mr-2" />
             ⚔️ Equipment
           </TabsTrigger>
-          <TabsTrigger
-            value="landscapes"
-            className="data-[state=active]:bg-green-500/20"
-          >
+          <TabsTrigger value="landscapes" className="data-[state=active]:bg-green-500/20">
             <TreePine className="h-4 w-4 mr-2" />
             🌍 Landscapes
           </TabsTrigger>
-          <TabsTrigger
-            value="resources"
-            className="data-[state=active]:bg-blue-500/20"
-          >
+          <TabsTrigger value="resources" className="data-[state=active]:bg-blue-500/20">
             <Gem className="h-4 w-4 mr-2" />
             💎 Resources
           </TabsTrigger>
-          <TabsTrigger
-            value="achievements"
-            className="data-[state=active]:bg-yellow-500/20"
-          >
+          <TabsTrigger value="achievements" className="data-[state=active]:bg-yellow-500/20">
             <Award className="h-4 w-4 mr-2" />
             🏆 Achievements
           </TabsTrigger>
@@ -203,42 +180,30 @@ export function PlayerInventory() {
               <Card
                 key={index}
                 className={`border transition-all ${
-                  item.equipped
-                    ? "border-green-500/50 bg-green-900/20"
-                    : "border-muted/50"
+                  item.equipped ? "border-green-500/50 bg-green-900/20" : "border-muted/50"
                 }`}
               >
                 <CardContent className="pt-4">
                   <div className="flex items-start justify-between mb-3">
                     <div>
                       <h4 className="font-bold">{item.name}</h4>
-                      <Badge
-                        className={`${getRarityColor(item.rarity)} text-white text-xs mt-1`}
-                      >
+                      <Badge className={`${getRarityColor(item.rarity)} text-white text-xs mt-1`}>
                         {item.rarity.toUpperCase()}
                       </Badge>
                     </div>
-                    {item.equipped && (
-                      <Badge className="bg-green-600 text-white">
-                        EQUIPPED
-                      </Badge>
-                    )}
+                    {item.equipped && <Badge className="bg-green-600 text-white">EQUIPPED</Badge>}
                   </div>
                   <div className="space-y-2">
                     {item.power && (
                       <div className="flex justify-between">
                         <span className="text-sm">Power:</span>
-                        <span className="text-red-400 font-bold">
-                          {item.power}
-                        </span>
+                        <span className="text-red-400 font-bold">{item.power}</span>
                       </div>
                     )}
                     {item.defense && (
                       <div className="flex justify-between">
                         <span className="text-sm">Defense:</span>
-                        <span className="text-blue-400 font-bold">
-                          {item.defense}
-                        </span>
+                        <span className="text-blue-400 font-bold">{item.defense}</span>
                       </div>
                     )}
                   </div>
@@ -269,11 +234,7 @@ export function PlayerInventory() {
                 <CardContent className="pt-4">
                   <div className="flex items-start justify-between mb-3">
                     <h4 className="font-bold">{landscape.name}</h4>
-                    <Badge
-                      className={
-                        landscape.owned ? "bg-green-600" : "bg-gray-600"
-                      }
-                    >
+                    <Badge className={landscape.owned ? "bg-green-600" : "bg-gray-600"}>
                       {landscape.owned ? "OWNED" : "LOCKED"}
                     </Badge>
                   </div>
@@ -311,9 +272,7 @@ export function PlayerInventory() {
                         <Icon className={`h-8 w-8 ${resource.color}`} />
                         <div>
                           <h4 className="font-bold">{resource.name}</h4>
-                          <p className="text-2xl font-bold">
-                            {resource.amount.toLocaleString()}
-                          </p>
+                          <p className="text-2xl font-bold">{resource.amount.toLocaleString()}</p>
                         </div>
                       </div>
                     </div>
@@ -339,15 +298,9 @@ export function PlayerInventory() {
                   <div className="flex items-start justify-between mb-3">
                     <div>
                       <h4 className="font-bold">{achievement.name}</h4>
-                      <p className="text-sm text-muted-foreground">
-                        {achievement.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{achievement.description}</p>
                     </div>
-                    <Badge
-                      className={
-                        achievement.unlocked ? "bg-yellow-600" : "bg-gray-600"
-                      }
-                    >
+                    <Badge className={achievement.unlocked ? "bg-yellow-600" : "bg-gray-600"}>
                       {achievement.unlocked ? "UNLOCKED" : "LOCKED"}
                     </Badge>
                   </div>

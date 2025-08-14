@@ -123,20 +123,14 @@ export function GaiaFighterGameRestored() {
           return {
             ...prev,
             gameActive: false,
-            gameLog: [
-              ...prev.gameLog,
-              `🏆 Victory! Earned ${reward} GAiA tokens!`,
-            ],
+            gameLog: [...prev.gameLog, `🏆 Victory! Earned ${reward} GAiA tokens!`],
           };
         }
 
         // Opponent attacks
         const opponentDamage = Math.floor(Math.random() * 20) + 8;
         const newState = { ...prev };
-        newState.player.health = Math.max(
-          0,
-          newState.player.health - opponentDamage,
-        );
+        newState.player.health = Math.max(0, newState.player.health - opponentDamage);
         newState.gameLog = [
           ...newState.gameLog.slice(-4),
           `💥 Eco Destroyer attacks for ${opponentDamage} damage!`,
@@ -181,12 +175,8 @@ export function GaiaFighterGameRestored() {
           🎮 GAIA FIGHTER GAME - Environmental Battle Arena
         </CardTitle>
         <div className="flex items-center gap-4">
-          <Badge className="bg-green-600 text-white">
-            GAiA Rewards: {gaiaRewards}
-          </Badge>
-          <Badge className="bg-blue-600 text-white">
-            Round: {gameState.round}
-          </Badge>
+          <Badge className="bg-green-600 text-white">GAiA Rewards: {gaiaRewards}</Badge>
+          <Badge className="bg-blue-600 text-white">Round: {gameState.round}</Badge>
         </div>
       </CardHeader>
 
@@ -206,9 +196,7 @@ export function GaiaFighterGameRestored() {
               </div>
               <div>
                 <div className="text-muted-foreground">Rewards Earned:</div>
-                <div className="text-xl font-bold text-green-400">
-                  {gaiaRewards} GAiA
-                </div>
+                <div className="text-xl font-bold text-green-400">{gaiaRewards} GAiA</div>
               </div>
             </div>
           </div>
@@ -231,9 +219,7 @@ export function GaiaFighterGameRestored() {
                   </span>
                 </div>
                 <Progress
-                  value={
-                    (gameState.player.health / gameState.player.maxHealth) * 100
-                  }
+                  value={(gameState.player.health / gameState.player.maxHealth) * 100}
                   className="h-2"
                 />
               </div>
@@ -261,10 +247,7 @@ export function GaiaFighterGameRestored() {
                   </span>
                 </div>
                 <Progress
-                  value={
-                    (gameState.opponent.health / gameState.opponent.maxHealth) *
-                    100
-                  }
+                  value={(gameState.opponent.health / gameState.opponent.maxHealth) * 100}
                   className="h-2"
                 />
               </div>
@@ -282,11 +265,7 @@ export function GaiaFighterGameRestored() {
         <div className="space-y-4">
           {!gameState.gameActive ? (
             <div className="text-center space-y-4">
-              <Button
-                onClick={startGame}
-                size="lg"
-                className="bg-green-600 hover:bg-green-700"
-              >
+              <Button onClick={startGame} size="lg" className="bg-green-600 hover:bg-green-700">
                 <Gamepad2 className="h-5 w-5 mr-2" />
                 Start Eco Battle
               </Button>
@@ -343,12 +322,10 @@ export function GaiaFighterGameRestored() {
         {/* Environmental Impact */}
         <div className="bg-gradient-to-r from-green-900/20 via-blue-900/20 to-purple-900/20 border border-green-500/30 rounded-lg p-4">
           <div className="text-center">
-            <h4 className="text-lg font-bold text-green-400 mb-2">
-              🌱 Environmental Impact
-            </h4>
+            <h4 className="text-lg font-bold text-green-400 mb-2">🌱 Environmental Impact</h4>
             <p className="text-sm text-muted-foreground">
-              Every victory in Gaia Fighter helps fund real environmental
-              projects through GAiA token rewards
+              Every victory in Gaia Fighter helps fund real environmental projects through GAiA
+              token rewards
             </p>
           </div>
         </div>

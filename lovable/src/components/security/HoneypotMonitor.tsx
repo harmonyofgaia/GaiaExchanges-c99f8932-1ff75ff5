@@ -27,12 +27,8 @@ export function HoneypotMonitor() {
 
   useEffect(() => {
     const loadHoneypotData = () => {
-      const storedLogs = JSON.parse(
-        localStorage.getItem("honeypot-logs") || "[]",
-      );
-      const storedAttempts = JSON.parse(
-        localStorage.getItem("honeypot-attempts") || "[]",
-      );
+      const storedLogs = JSON.parse(localStorage.getItem("honeypot-logs") || "[]");
+      const storedAttempts = JSON.parse(localStorage.getItem("honeypot-attempts") || "[]");
       setLogs(storedLogs);
       setAttempts(storedAttempts);
     };
@@ -67,15 +63,11 @@ export function HoneypotMonitor() {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-400">
-                {logs.length}
-              </div>
+              <div className="text-2xl font-bold text-red-400">{logs.length}</div>
               <div className="text-sm text-red-300">Honeypot Visits</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-orange-400">
-                {attempts.length}
-              </div>
+              <div className="text-2xl font-bold text-orange-400">{attempts.length}</div>
               <div className="text-sm text-orange-300">Login Attempts</div>
             </div>
             <div className="text-center">
@@ -113,15 +105,10 @@ export function HoneypotMonitor() {
                     className="p-3 bg-black/30 rounded-lg border border-yellow-500/20"
                   >
                     <div className="flex justify-between items-start mb-2">
-                      <Badge
-                        variant="outline"
-                        className="border-yellow-500/30 text-yellow-400"
-                      >
+                      <Badge variant="outline" className="border-yellow-500/30 text-yellow-400">
                         {log.ip}
                       </Badge>
-                      <span className="text-xs text-gray-400">
-                        {formatTime(log.timestamp)}
-                      </span>
+                      <span className="text-xs text-gray-400">{formatTime(log.timestamp)}</span>
                     </div>
                     <div className="text-xs text-gray-300 space-y-1">
                       <div>Platform: {log.platform}</div>
@@ -150,35 +137,22 @@ export function HoneypotMonitor() {
                 .slice(-10)
                 .reverse()
                 .map((attempt, index) => (
-                  <div
-                    key={index}
-                    className="p-3 bg-black/30 rounded-lg border border-red-500/20"
-                  >
+                  <div key={index} className="p-3 bg-black/30 rounded-lg border border-red-500/20">
                     <div className="flex justify-between items-start mb-2">
-                      <Badge
-                        variant="outline"
-                        className="border-red-500/30 text-red-400"
-                      >
+                      <Badge variant="outline" className="border-red-500/30 text-red-400">
                         Attempt #{attempt.attempt}
                       </Badge>
-                      <span className="text-xs text-gray-400">
-                        {formatTime(attempt.timestamp)}
-                      </span>
+                      <span className="text-xs text-gray-400">{formatTime(attempt.timestamp)}</span>
                     </div>
                     <div className="text-xs text-gray-300 space-y-1">
                       <div>IP: {attempt.ip}</div>
                       <div>
-                        Username:{" "}
-                        <span className="text-red-400">
-                          {attempt.username || "N/A"}
-                        </span>
+                        Username: <span className="text-red-400">{attempt.username || "N/A"}</span>
                       </div>
                       <div>
                         Password:{" "}
                         <span className="text-red-400">
-                          {attempt.password
-                            ? "•".repeat(attempt.password.length)
-                            : "N/A"}
+                          {attempt.password ? "•".repeat(attempt.password.length) : "N/A"}
                         </span>
                       </div>
                     </div>

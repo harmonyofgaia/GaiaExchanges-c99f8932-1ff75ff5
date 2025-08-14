@@ -99,7 +99,7 @@ class GitHubScannerService {
     while (true) {
       try {
         const response = await fetch(
-          `${this.API_BASE}/repos/${this.REPO_OWNER}/${this.REPO_NAME}/issues?state=all&page=${page}&per_page=${per_page}&sort=updated&direction=desc`,
+          `${this.API_BASE}/repos/${this.REPO_OWNER}/${this.REPO_NAME}/issues?state=all&page=${page}&per_page=${per_page}&sort=updated&direction=desc`
         );
 
         if (!response.ok) {
@@ -112,9 +112,7 @@ class GitHubScannerService {
         if (pageIssues.length === 0) break;
 
         // Filter out pull requests (GitHub includes PRs in issues endpoint)
-        const actualIssues = pageIssues.filter(
-          (issue) => !("pull_request" in issue),
-        );
+        const actualIssues = pageIssues.filter((issue) => !("pull_request" in issue));
         issues.push(...actualIssues);
 
         page++;
@@ -138,7 +136,7 @@ class GitHubScannerService {
     while (true) {
       try {
         const response = await fetch(
-          `${this.API_BASE}/repos/${this.REPO_OWNER}/${this.REPO_NAME}/pulls?state=all&page=${page}&per_page=${per_page}&sort=updated&direction=desc`,
+          `${this.API_BASE}/repos/${this.REPO_OWNER}/${this.REPO_NAME}/pulls?state=all&page=${page}&per_page=${per_page}&sort=updated&direction=desc`
         );
 
         if (!response.ok) {
@@ -164,10 +162,7 @@ class GitHubScannerService {
     return pullRequests;
   }
 
-  private analyzeLostFeatures(
-    issues: GitHubIssue[],
-    pullRequests: GitHubPR[],
-  ): LostFeature[] {
+  private analyzeLostFeatures(issues: GitHubIssue[], pullRequests: GitHubPR[]): LostFeature[] {
     const lostFeatures: LostFeature[] = [];
 
     // Analyze issues for missing features
@@ -175,16 +170,13 @@ class GitHubScannerService {
       (issue) =>
         issue.title.toLowerCase().includes("feature") ||
         issue.title.toLowerCase().includes("missing") ||
-        issue.labels.some((label) =>
-          label.name.toLowerCase().includes("feature"),
-        ),
+        issue.labels.some((label) => label.name.toLowerCase().includes("feature"))
     );
 
     // Look for GAIA Bike references
     const bikeIssues = [...issues, ...pullRequests].filter(
       (item) =>
-        item.title.toLowerCase().includes("bike") ||
-        item.body?.toLowerCase().includes("gaia bike"),
+        item.title.toLowerCase().includes("bike") || item.body?.toLowerCase().includes("gaia bike")
     );
 
     if (bikeIssues.length > 0) {
@@ -193,8 +185,7 @@ class GitHubScannerService {
         description: "Eco-friendly transportation and rewards system",
         lastSeen: bikeIssues[0].updated_at,
         priority: "high",
-        restoreInstructions:
-          "Integrate bike tracking, rewards, and eco-missions",
+        restoreInstructions: "Integrate bike tracking, rewards, and eco-missions",
       });
     }
 
@@ -202,8 +193,7 @@ class GitHubScannerService {
     const adminIssues = [...issues, ...pullRequests].filter(
       (item) =>
         item.title.toLowerCase().includes("admin") &&
-        (item.title.toLowerCase().includes("login") ||
-          item.title.toLowerCase().includes("auth")),
+        (item.title.toLowerCase().includes("login") || item.title.toLowerCase().includes("auth"))
     );
 
     if (adminIssues.length > 0) {
@@ -212,26 +202,21 @@ class GitHubScannerService {
         description: "Secure administrative access system",
         lastSeen: adminIssues[0].updated_at,
         priority: "high",
-        restoreInstructions:
-          "Enhance existing admin authentication with Gaia-specific features",
+        restoreInstructions: "Enhance existing admin authentication with Gaia-specific features",
       });
     }
 
     return lostFeatures;
   }
 
-  private calculateHealthScore(
-    issues: GitHubIssue[],
-    pullRequests: GitHubPR[],
-  ): number {
+  private calculateHealthScore(issues: GitHubIssue[], pullRequests: GitHubPR[]): number {
     const openIssues = issues.filter((i) => i.state === "open").length;
     const totalIssues = issues.length;
     const mergedPRs = pullRequests.filter((pr) => pr.merged).length;
     const totalPRs = pullRequests.length;
 
     // Calculate based on issue resolution rate and PR merge rate
-    const issueScore =
-      totalIssues > 0 ? ((totalIssues - openIssues) / totalIssues) * 50 : 50;
+    const issueScore = totalIssues > 0 ? ((totalIssues - openIssues) / totalIssues) * 50 : 50;
     const prScore = totalPRs > 0 ? (mergedPRs / totalPRs) * 50 : 50;
 
     return Math.round(issueScore + prScore);
@@ -263,16 +248,14 @@ class GitHubScannerService {
           description: "Eco-friendly transportation and rewards system",
           lastSeen: new Date().toISOString(),
           priority: "high",
-          restoreInstructions:
-            "Integrate bike tracking, rewards, and eco-missions",
+          restoreInstructions: "Integrate bike tracking, rewards, and eco-missions",
         },
         {
           name: "Admin Gaia Login",
           description: "Secure administrative access system",
           lastSeen: new Date().toISOString(),
           priority: "high",
-          restoreInstructions:
-            "Enhance existing admin authentication with Gaia-specific features",
+          restoreInstructions: "Enhance existing admin authentication with Gaia-specific features",
         },
       ],
       totalScanned: 1,
@@ -291,9 +274,7 @@ class GitHubScannerService {
       .forEach((issue) => {
         systemIssues.push({
           id: `github-issue-${issue.id}`,
-          type: issue.labels.some((l) => l.name.includes("bug"))
-            ? "error"
-            : "warning",
+          type: issue.labels.some((l) => l.name.includes("bug")) ? "error" : "warning",
           message: issue.title,
           component: "GitHub Repository",
           resolved: false,

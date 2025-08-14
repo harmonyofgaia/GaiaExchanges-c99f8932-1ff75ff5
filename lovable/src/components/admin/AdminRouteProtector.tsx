@@ -9,9 +9,7 @@ export function AdminRouteProtector() {
     // Ultra-secure admin route protection
     const protectAdminRoutes = () => {
       const adminRoutes = ["/admin", "/secure-admin", "/secure-vault"];
-      const isAdminRoute = adminRoutes.some((route) =>
-        location.pathname.includes(route),
-      );
+      const isAdminRoute = adminRoutes.some((route) => location.pathname.includes(route));
 
       if (isAdminRoute) {
         // Check for valid admin session
@@ -42,11 +40,7 @@ export function AdminRouteProtector() {
         // Anti-detection measures
         if (window.location.pathname.includes("admin")) {
           // Cloak the URL from external scanners
-          history.replaceState(
-            null,
-            "GAIA Platform",
-            window.location.origin + "/",
-          );
+          history.replaceState(null, "GAIA Platform", window.location.origin + "/");
         }
       }
     };

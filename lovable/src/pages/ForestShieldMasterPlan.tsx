@@ -26,16 +26,8 @@ const roadmapPhases: RoadmapPhase[] = [
     description: "Establishing the fundamental systems for forest protection",
     status: "completed",
     progress: 100,
-    milestones: [
-      "Satellite monitoring network",
-      "AI threat detection",
-      "Community alerts",
-    ],
-    technologies: [
-      "Quantum encryption",
-      "AI pattern recognition",
-      "Blockchain verification",
-    ],
+    milestones: ["Satellite monitoring network", "AI threat detection", "Community alerts"],
+    technologies: ["Quantum encryption", "AI pattern recognition", "Blockchain verification"],
   },
   {
     id: "phase-2",
@@ -44,16 +36,8 @@ const roadmapPhases: RoadmapPhase[] = [
     description: "Implementation of proactive forest shield technologies",
     status: "in-progress",
     progress: 65,
-    milestones: [
-      "Drone patrol networks",
-      "Automated fire suppression",
-      "Wildlife corridors",
-    ],
-    technologies: [
-      "Autonomous drones",
-      "Smart sensors",
-      "Predictive analytics",
-    ],
+    milestones: ["Drone patrol networks", "Automated fire suppression", "Wildlife corridors"],
+    technologies: ["Autonomous drones", "Smart sensors", "Predictive analytics"],
   },
   {
     id: "phase-3",
@@ -62,16 +46,8 @@ const roadmapPhases: RoadmapPhase[] = [
     description: "Connecting forest protection systems worldwide",
     status: "upcoming",
     progress: 25,
-    milestones: [
-      "International partnerships",
-      "Data sharing protocols",
-      "Unified command center",
-    ],
-    technologies: [
-      "Global mesh network",
-      "Cross-border coordination",
-      "Universal threat database",
-    ],
+    milestones: ["International partnerships", "Data sharing protocols", "Unified command center"],
+    technologies: ["Global mesh network", "Cross-border coordination", "Universal threat database"],
   },
 ];
 
@@ -116,8 +92,7 @@ export default function ForestShieldMasterPlan() {
             🛡️ Forest Shield Master Plan
           </h1>
           <p className="text-xl text-muted-foreground mt-2">
-            Advanced ecosystem protection through quantum-powered defense
-            systems
+            Advanced ecosystem protection through quantum-powered defense systems
           </p>
         </div>
 
@@ -133,31 +108,21 @@ export default function ForestShieldMasterPlan() {
             <div className="space-y-4">
               <div className="flex justify-between text-sm">
                 <span>Master Plan Implementation</span>
-                <span className="text-green-400 font-bold">
-                  {totalProgress}%
-                </span>
+                <span className="text-green-400 font-bold">{totalProgress}%</span>
               </div>
               <Progress value={totalProgress} className="w-full h-3" />
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
                   <div className="text-2xl font-bold text-green-400">47M</div>
-                  <div className="text-sm text-muted-foreground">
-                    Hectares Protected
-                  </div>
+                  <div className="text-sm text-muted-foreground">Hectares Protected</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-blue-400">12.5K</div>
-                  <div className="text-sm text-muted-foreground">
-                    AI Sensors Active
-                  </div>
+                  <div className="text-sm text-muted-foreground">AI Sensors Active</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-purple-400">
-                    98.7%
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Threat Detection Rate
-                  </div>
+                  <div className="text-2xl font-bold text-purple-400">98.7%</div>
+                  <div className="text-sm text-muted-foreground">Threat Detection Rate</div>
                 </div>
               </div>
             </div>
@@ -193,26 +158,17 @@ export default function ForestShieldMasterPlan() {
                 </Badge>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  {selectedPhaseData.description}
-                </p>
+                <p className="text-muted-foreground mb-4">{selectedPhaseData.description}</p>
                 <div className="space-y-4">
                   <div>
                     <div className="flex justify-between text-sm mb-2">
                       <span>Phase Progress</span>
-                      <span className="text-blue-400 font-bold">
-                        {selectedPhaseData.progress}%
-                      </span>
+                      <span className="text-blue-400 font-bold">{selectedPhaseData.progress}%</span>
                     </div>
-                    <Progress
-                      value={selectedPhaseData.progress}
-                      className="h-2"
-                    />
+                    <Progress value={selectedPhaseData.progress} className="h-2" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-white mb-2">
-                      Key Milestones
-                    </h4>
+                    <h4 className="font-medium text-white mb-2">Key Milestones</h4>
                     <ul className="space-y-1">
                       {selectedPhaseData.milestones.map((milestone, index) => (
                         <li
@@ -262,21 +218,15 @@ export default function ForestShieldMasterPlan() {
                   {getPhaseIcon(phase.phase)}
                   Phase {phase.phase}
                 </CardTitle>
-                <Badge className={getStatusColor(phase.status)}>
-                  {phase.status}
-                </Badge>
+                <Badge className={getStatusColor(phase.status)}>{phase.status}</Badge>
               </CardHeader>
               <CardContent>
                 <h4 className="font-medium text-white mb-2">{phase.title}</h4>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {phase.description}
-                </p>
+                <p className="text-sm text-muted-foreground mb-4">{phase.description}</p>
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span>Progress</span>
-                    <span className="text-blue-400 font-bold">
-                      {phase.progress}%
-                    </span>
+                    <span className="text-blue-400 font-bold">{phase.progress}%</span>
                   </div>
                   <Progress value={phase.progress} className="h-1" />
                 </div>

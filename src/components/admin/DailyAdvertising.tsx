@@ -75,9 +75,7 @@ export function DailyAdvertising() {
               <Card className="border-green-500/20 bg-green-500/10">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-green-400">
-                      Global Reach Campaign
-                    </h4>
+                    <h4 className="font-medium text-green-400">Global Reach Campaign</h4>
                     <Badge className={isLive ? "bg-green-600" : "bg-gray-600"}>
                       {isLive ? "ACTIVE" : "PAUSED"}
                     </Badge>
@@ -87,20 +85,12 @@ export function DailyAdvertising() {
                   </p>
                   <div className="flex gap-2">
                     {!isLive ? (
-                      <Button
-                        size="sm"
-                        onClick={handleLaunchCampaign}
-                        className="bg-green-600"
-                      >
+                      <Button size="sm" onClick={handleLaunchCampaign} className="bg-green-600">
                         <Play className="h-4 w-4 mr-1" />
                         Launch
                       </Button>
                     ) : (
-                      <Button
-                        size="sm"
-                        onClick={handlePauseCampaign}
-                        className="bg-orange-600"
-                      >
+                      <Button size="sm" onClick={handlePauseCampaign} className="bg-orange-600">
                         <Pause className="h-4 w-4 mr-1" />
                         Pause
                       </Button>
@@ -112,9 +102,7 @@ export function DailyAdvertising() {
               <Card className="border-blue-500/20 bg-blue-500/10">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-blue-400">
-                      Investor Outreach
-                    </h4>
+                    <h4 className="font-medium text-blue-400">Investor Outreach</h4>
                     <Badge className="bg-blue-600">SCHEDULED</Badge>
                   </div>
                   <p className="text-sm text-muted-foreground mb-3">
@@ -130,9 +118,7 @@ export function DailyAdvertising() {
               <Card className="border-purple-500/20 bg-purple-500/10">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-purple-400">
-                      Community Growth
-                    </h4>
+                    <h4 className="font-medium text-purple-400">Community Growth</h4>
                     <Badge className="bg-purple-600">ACTIVE</Badge>
                   </div>
                   <p className="text-sm text-muted-foreground mb-3">
@@ -150,9 +136,7 @@ export function DailyAdvertising() {
           <TabsContent value="create" className="space-y-6">
             <div className="max-w-2xl mx-auto space-y-6">
               <div className="text-center">
-                <h3 className="text-xl font-bold text-orange-400">
-                  Create New Marketing Campaign
-                </h3>
+                <h3 className="text-xl font-bold text-orange-400">Create New Marketing Campaign</h3>
                 <p className="text-sm text-muted-foreground">
                   Launch global advertising initiatives
                 </p>
@@ -190,9 +174,7 @@ export function DailyAdvertising() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium">
-                  Campaign Description
-                </label>
+                <label className="text-sm font-medium">Campaign Description</label>
                 <Textarea
                   placeholder="Describe your marketing campaign..."
                   value={campaign.description}
@@ -222,9 +204,7 @@ export function DailyAdvertising() {
               <div className="text-center p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
                 <Globe className="h-8 w-8 text-green-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-green-400">847M</div>
-                <p className="text-sm text-muted-foreground">
-                  Global Impressions
-                </p>
+                <p className="text-sm text-muted-foreground">Global Impressions</p>
               </div>
 
               <div className="text-center p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
@@ -251,9 +231,7 @@ export function DailyAdvertising() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card className="border-cyan-500/20">
                 <CardHeader>
-                  <CardTitle className="text-cyan-400">
-                    Geographic Targeting
-                  </CardTitle>
+                  <CardTitle className="text-cyan-400">Geographic Targeting</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -279,9 +257,7 @@ export function DailyAdvertising() {
 
               <Card className="border-pink-500/20">
                 <CardHeader>
-                  <CardTitle className="text-pink-400">
-                    Audience Segments
-                  </CardTitle>
+                  <CardTitle className="text-pink-400">Audience Segments</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">

@@ -77,33 +77,20 @@ const CoinCrafter = () => {
               <CardContent className="space-y-4">
                 <div className="text-center">
                   <div className="text-6xl mb-4">⚡</div>
-                  <h3 className="text-xl font-bold text-red-400 mb-2">
-                    Advanced Features
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Configure advanced token properties
-                  </p>
+                  <h3 className="text-xl font-bold text-red-400 mb-2">Advanced Features</h3>
+                  <p className="text-muted-foreground">Configure advanced token properties</p>
                 </div>
 
                 <div className="space-y-3">
-                  <Button
-                    variant="outline"
-                    className="w-full border-red-500/30"
-                  >
+                  <Button variant="outline" className="w-full border-red-500/30">
                     <Settings className="h-4 w-4 mr-2" />
                     Token Economics
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full border-red-500/30"
-                  >
+                  <Button variant="outline" className="w-full border-red-500/30">
                     <Coins className="h-4 w-4 mr-2" />
                     Supply Management
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full border-red-500/30"
-                  >
+                  <Button variant="outline" className="w-full border-red-500/30">
                     <Zap className="h-4 w-4 mr-2" />
                     Advanced Settings
                   </Button>

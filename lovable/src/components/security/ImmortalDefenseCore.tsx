@@ -157,12 +157,7 @@ export function ImmortalDefenseCore() {
       learningRate: 5000,
       evolutionSpeed: 2500,
       threatsNeutralized: 0,
-      specialAbilities: [
-        "Aerial Supremacy",
-        "Eagle Eye Vision",
-        "Wind Control",
-        "Sky Domain",
-      ],
+      specialAbilities: ["Aerial Supremacy", "Eagle Eye Vision", "Wind Control", "Sky Domain"],
       quantumSignature: "IMMORTAL_EAGLE_SKY_333",
     },
     {
@@ -266,11 +261,10 @@ export function ImmortalDefenseCore() {
         prev.map((animal) => {
           const evolutionBoost = animal.evolutionSpeed * (1 + Math.random());
           const newPowerLevel = animal.powerLevel + evolutionBoost;
-          const newThreats =
-            animal.threatsNeutralized + Math.floor(Math.random() * 1000);
+          const newThreats = animal.threatsNeutralized + Math.floor(Math.random() * 1000);
 
           console.log(
-            `🐉 ${animal.name}: Power Level ${newPowerLevel.toLocaleString()} - Threats Destroyed: ${newThreats.toLocaleString()}`,
+            `🐉 ${animal.name}: Power Level ${newPowerLevel.toLocaleString()} - Threats Destroyed: ${newThreats.toLocaleString()}`
           );
 
           return {
@@ -282,7 +276,7 @@ export function ImmortalDefenseCore() {
             invincibilityStrength: 100, // Always perfect invincibility
             immortalityIndex: 100, // Always immortal
           };
-        }),
+        })
       );
 
       // 2. QUANTUM IMMORTALITY PROTOCOL
@@ -332,15 +326,12 @@ export function ImmortalDefenseCore() {
           "universal_system_compromise_try",
         ];
 
-        const detectedThreat =
-          threatTypes[Math.floor(Math.random() * threatTypes.length)];
+        const detectedThreat = threatTypes[Math.floor(Math.random() * threatTypes.length)];
         const destroyingAnimal =
           immortalAnimals[Math.floor(Math.random() * immortalAnimals.length)];
 
         console.log(`🚨 THREAT DETECTED: ${detectedThreat}`);
-        console.log(
-          `🔥 ${destroyingAnimal.name} RESPONSE: THREAT COMPLETELY ANNIHILATED`,
-        );
+        console.log(`🔥 ${destroyingAnimal.name} RESPONSE: THREAT COMPLETELY ANNIHILATED`);
 
         toast.error("🔥 IMMORTAL DEFENSE ACTIVATED!", {
           description: `${destroyingAnimal.name} destroyed ${detectedThreat} - System remains invulnerable`,
@@ -371,13 +362,10 @@ export function ImmortalDefenseCore() {
       });
 
       // Update combined metrics
-      const totalPower = immortalAnimals.reduce(
-        (sum, animal) => sum + animal.powerLevel,
-        0,
-      );
+      const totalPower = immortalAnimals.reduce((sum, animal) => sum + animal.powerLevel, 0);
       const totalEvolution = immortalAnimals.reduce(
         (sum, animal) => sum + animal.evolutionSpeed,
-        0,
+        0
       );
 
       setDefenseMetrics((prev) => ({
@@ -387,9 +375,7 @@ export function ImmortalDefenseCore() {
         systemInvulnerability: 100, // Always invulnerable
       }));
 
-      console.log(
-        "✅ IMMORTAL DEFENSE CYCLE COMPLETE - SYSTEM STRONGER THAN EVER",
-      );
+      console.log("✅ IMMORTAL DEFENSE CYCLE COMPLETE - SYSTEM STRONGER THAN EVER");
     };
 
     // Run every 0.1 seconds for ultra-fast evolution
@@ -402,7 +388,7 @@ export function ImmortalDefenseCore() {
           ...animal,
           powerLevel: animal.powerLevel * 1.001, // Continuous micro-evolution
           learningRate: animal.learningRate * 1.0001,
-        })),
+        }))
       );
 
       if (Math.random() < 0.1) {
@@ -419,8 +405,7 @@ export function ImmortalDefenseCore() {
 
     return () => {
       if (immortalInterval.current) clearInterval(immortalInterval.current);
-      if (evolutionBoostInterval.current)
-        clearInterval(evolutionBoostInterval.current);
+      if (evolutionBoostInterval.current) clearInterval(evolutionBoostInterval.current);
     };
   }, [immortalAnimals]);
 
@@ -429,9 +414,7 @@ export function ImmortalDefenseCore() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="text-center p-4 bg-purple-900/50 rounded-lg border-2 border-purple-500/50">
           <div className="text-3xl mb-2">♾️</div>
-          <div className="text-2xl font-bold text-purple-400">
-            {defenseMetrics.totalAnimals}
-          </div>
+          <div className="text-2xl font-bold text-purple-400">{defenseMetrics.totalAnimals}</div>
           <div className="text-sm text-purple-300">Immortal Guardians</div>
         </div>
 
@@ -462,14 +445,9 @@ export function ImmortalDefenseCore() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {immortalAnimals.map((animal) => (
-          <div
-            key={animal.id}
-            className="p-4 bg-black/30 rounded-lg border border-purple-500/30"
-          >
+          <div key={animal.id} className="p-4 bg-black/30 rounded-lg border border-purple-500/30">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-lg font-bold text-purple-400">
-                {animal.name}
-              </h3>
+              <h3 className="text-lg font-bold text-purple-400">{animal.name}</h3>
               <div className="text-2xl">
                 {animal.species === "dragon" && "🐉"}
                 {animal.species === "phoenix" && "🦅"}
@@ -485,21 +463,15 @@ export function ImmortalDefenseCore() {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span>Power Level:</span>
-                <span className="text-red-400 font-bold">
-                  {animal.powerLevel.toLocaleString()}
-                </span>
+                <span className="text-red-400 font-bold">{animal.powerLevel.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span>Invincibility:</span>
-                <span className="text-green-400 font-bold">
-                  {animal.invincibilityStrength}%
-                </span>
+                <span className="text-green-400 font-bold">{animal.invincibilityStrength}%</span>
               </div>
               <div className="flex justify-between">
                 <span>Immortality:</span>
-                <span className="text-purple-400 font-bold">
-                  {animal.immortalityIndex}%
-                </span>
+                <span className="text-purple-400 font-bold">{animal.immortalityIndex}%</span>
               </div>
               <div className="flex justify-between">
                 <span>Evolution Speed:</span>
@@ -509,16 +481,12 @@ export function ImmortalDefenseCore() {
               </div>
               <div className="flex justify-between">
                 <span>Threats Neutralized:</span>
-                <span className="text-orange-400 font-bold">
-                  {animal.threatsNeutralized}
-                </span>
+                <span className="text-orange-400 font-bold">{animal.threatsNeutralized}</span>
               </div>
             </div>
 
             <div className="mt-3 pt-3 border-t border-purple-500/20">
-              <div className="text-xs text-muted-foreground mb-2">
-                Special Abilities:
-              </div>
+              <div className="text-xs text-muted-foreground mb-2">Special Abilities:</div>
               <div className="flex flex-wrap gap-1">
                 {animal.specialAbilities.map((ability, index) => (
                   <span
@@ -540,31 +508,19 @@ export function ImmortalDefenseCore() {
 
       <div className="text-center p-6 bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-lg border border-purple-500/30">
         <div className="text-4xl mb-4">♾️</div>
-        <h3 className="text-2xl font-bold text-purple-400 mb-4">
-          IMMORTAL DEFENSE STATUS
-        </h3>
+        <h3 className="text-2xl font-bold text-purple-400 mb-4">IMMORTAL DEFENSE STATUS</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
           <div>
-            <div className="text-green-400 font-bold">
-              ✅ IMMORTALITY: ETERNAL
-            </div>
-            <div className="text-green-300">
-              Cannot be destroyed or defeated
-            </div>
+            <div className="text-green-400 font-bold">✅ IMMORTALITY: ETERNAL</div>
+            <div className="text-green-300">Cannot be destroyed or defeated</div>
           </div>
           <div>
-            <div className="text-blue-400 font-bold">
-              ⚡ EVOLUTION: EXPONENTIAL
-            </div>
+            <div className="text-blue-400 font-bold">⚡ EVOLUTION: EXPONENTIAL</div>
             <div className="text-blue-300">Growing stronger every moment</div>
           </div>
           <div>
-            <div className="text-purple-400 font-bold">
-              🛡️ INVINCIBILITY: PERFECT
-            </div>
-            <div className="text-purple-300">
-              Absolute defense against all threats
-            </div>
+            <div className="text-purple-400 font-bold">🛡️ INVINCIBILITY: PERFECT</div>
+            <div className="text-purple-300">Absolute defense against all threats</div>
           </div>
         </div>
       </div>

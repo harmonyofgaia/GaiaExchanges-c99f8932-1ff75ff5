@@ -109,19 +109,15 @@ export function MarketDominationSuite() {
           change_24h: market.change_24h + (Math.random() - 0.5) * 2,
           market_cap: market.market_cap + Math.floor(Math.random() * 50000),
           dominance: Math.min(100, market.dominance + Math.random() * 0.5),
-        })),
+        }))
       );
 
       setDominationStats((prev) => ({
         ...prev,
-        totalMarketCap:
-          prev.totalMarketCap + Math.floor(Math.random() * 100000),
+        totalMarketCap: prev.totalMarketCap + Math.floor(Math.random() * 100000),
         dailyVolume: prev.dailyVolume + Math.floor(Math.random() * 50000),
         holderCount: prev.holderCount + Math.floor(Math.random() * 1000),
-        marketDominance: Math.min(
-          100,
-          prev.marketDominance + Math.random() * 0.1,
-        ),
+        marketDominance: Math.min(100, prev.marketDominance + Math.random() * 0.1),
         burnedTokens: prev.burnedTokens + Math.floor(Math.random() * 10000),
         stakingRewards: prev.stakingRewards + Math.floor(Math.random() * 5000),
       }));
@@ -184,9 +180,7 @@ export function MarketDominationSuite() {
                     <div className="text-2xl font-bold text-green-400">
                       {formatCurrency(dominationStats.totalMarketCap)}
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      Market Cap
-                    </div>
+                    <div className="text-xs text-muted-foreground">Market Cap</div>
                   </CardContent>
                 </Card>
 
@@ -196,9 +190,7 @@ export function MarketDominationSuite() {
                     <div className="text-2xl font-bold text-blue-400">
                       {formatCurrency(dominationStats.dailyVolume)}
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      24h Volume
-                    </div>
+                    <div className="text-xs text-muted-foreground">24h Volume</div>
                   </CardContent>
                 </Card>
 
@@ -218,9 +210,7 @@ export function MarketDominationSuite() {
                     <div className="text-2xl font-bold text-yellow-400">
                       {dominationStats.exchangesListed}
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      Exchanges
-                    </div>
+                    <div className="text-xs text-muted-foreground">Exchanges</div>
                   </CardContent>
                 </Card>
               </div>
@@ -235,38 +225,26 @@ export function MarketDominationSuite() {
                   <div className="space-y-4">
                     <div>
                       <div className="flex justify-between mb-2">
-                        <span className="text-orange-300">
-                          Overall Market Control
-                        </span>
+                        <span className="text-orange-300">Overall Market Control</span>
                         <span className="text-orange-400">
                           {dominationStats.marketDominance.toFixed(1)}%
                         </span>
                       </div>
-                      <Progress
-                        value={dominationStats.marketDominance}
-                        className="h-3"
-                      />
+                      <Progress value={dominationStats.marketDominance} className="h-3" />
                     </div>
                     <div>
                       <div className="flex justify-between mb-2">
-                        <span className="text-orange-300">
-                          Price Target Achievement
-                        </span>
+                        <span className="text-orange-300">Price Target Achievement</span>
                         <span className="text-orange-400">
                           {(
-                            ((marketData[0]?.price || 0) /
-                              dominationStats.priceTarget) *
+                            ((marketData[0]?.price || 0) / dominationStats.priceTarget) *
                             100
                           ).toFixed(1)}
                           %
                         </span>
                       </div>
                       <Progress
-                        value={
-                          ((marketData[0]?.price || 0) /
-                            dominationStats.priceTarget) *
-                          100
-                        }
+                        value={((marketData[0]?.price || 0) / dominationStats.priceTarget) * 100}
                         className="h-3"
                       />
                     </div>
@@ -282,9 +260,7 @@ export function MarketDominationSuite() {
                     <CardContent className="pt-4">
                       <div className="flex items-start justify-between mb-3">
                         <div>
-                          <h4 className="font-bold text-white">
-                            {market.exchange}
-                          </h4>
+                          <h4 className="font-bold text-white">{market.exchange}</h4>
                           <Badge
                             className={`${getStatusColor(market.status)} text-white text-xs mt-1`}
                           >
@@ -307,9 +283,7 @@ export function MarketDominationSuite() {
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm">
                           <span className="text-gray-400">Volume (24h)</span>
-                          <span className="text-blue-400">
-                            {formatCurrency(market.volume)}
-                          </span>
+                          <span className="text-blue-400">{formatCurrency(market.volume)}</span>
                         </div>
                         <div className="flex justify-between text-sm">
                           <span className="text-gray-400">Market Cap</span>
@@ -319,9 +293,7 @@ export function MarketDominationSuite() {
                         </div>
                         <div className="flex justify-between text-sm">
                           <span className="text-gray-400">Dominance</span>
-                          <span className="text-yellow-400">
-                            {market.dominance.toFixed(1)}%
-                          </span>
+                          <span className="text-yellow-400">{market.dominance.toFixed(1)}%</span>
                         </div>
                         <div className="pt-2">
                           <Progress value={market.dominance} className="h-2" />
@@ -358,9 +330,7 @@ export function MarketDominationSuite() {
                     <Button className="bg-yellow-600 hover:bg-yellow-700 h-20 flex-col">
                       <Globe className="h-6 w-6 mb-2" />
                       <span className="text-xs">Global Hype</span>
-                      <span className="text-xs text-purple-400">
-                        Viral Mode
-                      </span>
+                      <span className="text-xs text-purple-400">Viral Mode</span>
                     </Button>
                     <Button className="bg-green-600 hover:bg-green-700 h-20 flex-col">
                       <Rocket className="h-6 w-6 mb-2" />
@@ -373,41 +343,27 @@ export function MarketDominationSuite() {
 
               <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border-purple-500/30">
                 <CardContent className="pt-4">
-                  <h3 className="text-purple-400 font-bold mb-4">
-                    Manipulation Statistics
-                  </h3>
+                  <h3 className="text-purple-400 font-bold mb-4">Manipulation Statistics</h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                     <div>
                       <div className="text-2xl font-bold text-green-400">
                         {formatNumber(dominationStats.burnedTokens)}
                       </div>
-                      <div className="text-sm text-muted-foreground">
-                        Tokens Burned
-                      </div>
+                      <div className="text-sm text-muted-foreground">Tokens Burned</div>
                     </div>
                     <div>
                       <div className="text-2xl font-bold text-blue-400">
                         {formatNumber(dominationStats.stakingRewards)}
                       </div>
-                      <div className="text-sm text-muted-foreground">
-                        Staking Rewards
-                      </div>
+                      <div className="text-sm text-muted-foreground">Staking Rewards</div>
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-purple-400">
-                        ∞
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Liquidity Injected
-                      </div>
+                      <div className="text-2xl font-bold text-purple-400">∞</div>
+                      <div className="text-sm text-muted-foreground">Liquidity Injected</div>
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-yellow-400">
-                        100%
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Market Control
-                      </div>
+                      <div className="text-2xl font-bold text-yellow-400">100%</div>
+                      <div className="text-sm text-muted-foreground">Market Control</div>
                     </div>
                   </div>
                 </CardContent>
@@ -420,27 +376,20 @@ export function MarketDominationSuite() {
                   <div className="text-center mb-6">
                     <Target className="h-16 w-16 text-yellow-400 mx-auto mb-4 animate-pulse" />
                     <h3 className="text-3xl font-bold text-yellow-400 mb-2">
-                      MARKET DOMINATION:{" "}
-                      {dominationStats.marketDominance.toFixed(1)}%
+                      MARKET DOMINATION: {dominationStats.marketDominance.toFixed(1)}%
                     </h3>
-                    <p className="text-orange-400">
-                      📈 COMPLETE CRYPTO MARKET CONTROL IN PROGRESS
-                    </p>
+                    <p className="text-orange-400">📈 COMPLETE CRYPTO MARKET CONTROL IN PROGRESS</p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-3">
-                      <h4 className="text-yellow-400 font-bold">
-                        Controlled Exchanges:
-                      </h4>
+                      <h4 className="text-yellow-400 font-bold">Controlled Exchanges:</h4>
                       <ul className="space-y-2 text-sm">
                         {marketData
                           .filter((m) => m.status === "dominating")
                           .map((market, index) => (
                             <li key={index} className="flex justify-between">
-                              <span className="text-white">
-                                {market.exchange}
-                              </span>
+                              <span className="text-white">{market.exchange}</span>
                               <span className="text-green-400">
                                 {market.dominance.toFixed(1)}% controlled
                               </span>
@@ -449,20 +398,14 @@ export function MarketDominationSuite() {
                       </ul>
                     </div>
                     <div className="space-y-3">
-                      <h4 className="text-orange-400 font-bold">
-                        Next Targets:
-                      </h4>
+                      <h4 className="text-orange-400 font-bold">Next Targets:</h4>
                       <ul className="space-y-2 text-sm">
                         {marketData
                           .filter((m) => m.status === "pending")
                           .map((market, index) => (
                             <li key={index} className="flex justify-between">
-                              <span className="text-white">
-                                {market.exchange}
-                              </span>
-                              <span className="text-yellow-400">
-                                Infiltrating...
-                              </span>
+                              <span className="text-white">{market.exchange}</span>
+                              <span className="text-yellow-400">Infiltrating...</span>
                             </li>
                           ))}
                       </ul>

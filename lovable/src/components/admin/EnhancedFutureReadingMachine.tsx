@@ -33,9 +33,7 @@ export function EnhancedFutureReadingMachine() {
   const [einsteinLevel, setEinsteinLevel] = useState(97.3);
   const [cosmicInsights, setCosmicInsights] = useState(42);
 
-  const [quantumPredictions, setQuantumPredictions] = useState<
-    QuantumPrediction[]
-  >([
+  const [quantumPredictions, setQuantumPredictions] = useState<QuantumPrediction[]>([
     {
       id: 1,
       category: "Global Consciousness Shift",
@@ -87,14 +85,10 @@ export function EnhancedFutureReadingMachine() {
       setEinsteinLevel((prev) => Math.min(99.9, prev + 0.01));
       setCosmicInsights((prev) => prev + 1);
 
-      console.log(
-        "🔮 ENHANCED QUANTUM FUTURE MACHINE - COSMIC INTELLIGENCE ACTIVE",
-      );
+      console.log("🔮 ENHANCED QUANTUM FUTURE MACHINE - COSMIC INTELLIGENCE ACTIVE");
       console.log("🧠 EINSTEIN-LEVEL ENVIRONMENTAL PREDICTIONS PROCESSING");
       console.log("⚡ QUANTUM TUNNELING THROUGH TIME-SPACE CONTINUUM");
-      console.log(
-        "🌌 ACCESSING UNIVERSAL CONSCIOUSNESS FOR COMMUNITY INSIGHTS",
-      );
+      console.log("🌌 ACCESSING UNIVERSAL CONSCIOUSNESS FOR COMMUNITY INSIGHTS");
     }, 2000);
 
     return () => clearInterval(interval);
@@ -144,10 +138,7 @@ export function EnhancedFutureReadingMachine() {
             },
           ];
 
-          setQuantumPredictions((prev) => [
-            ...revolutionaryPredictions,
-            ...prev,
-          ]);
+          setQuantumPredictions((prev) => [...revolutionaryPredictions, ...prev]);
           setEinsteinLevel(99.9);
           setCosmicInsights((prev) => prev + 100);
 
@@ -163,16 +154,13 @@ export function EnhancedFutureReadingMachine() {
       });
     }, 80);
 
-    console.log(
-      "🌌 COSMIC QUANTUM ANALYSIS INITIATED - ACCESSING UNIVERSAL CONSCIOUSNESS",
-    );
+    console.log("🌌 COSMIC QUANTUM ANALYSIS INITIATED - ACCESSING UNIVERSAL CONSCIOUSNESS");
     console.log("🧠 EINSTEIN-TESLA-GAIA COLLABORATION ALGORITHM ACTIVATED");
     console.log("⚡ QUANTUM TUNNELING THROUGH ENVIRONMENTAL FUTURES");
     console.log("🔮 PREDICTING CONSCIOUSNESS-DRIVEN ECONOMIC REVOLUTION");
 
     toast.success("🌌 Cosmic Analysis Started!", {
-      description:
-        "Quantum consciousness reading universal patterns of environmental harmony",
+      description: "Quantum consciousness reading universal patterns of environmental harmony",
       duration: 6000,
     });
   };
@@ -199,8 +187,7 @@ export function EnhancedFutureReadingMachine() {
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-purple-400">
             <Brain className="h-10 w-10 animate-pulse" />
-            🌌 COSMIC QUANTUM FUTURE READING MACHINE - UNIVERSAL CONSCIOUSNESS
-            ACCESS
+            🌌 COSMIC QUANTUM FUTURE READING MACHINE - UNIVERSAL CONSCIOUSNESS ACCESS
             <Badge className="bg-purple-600 animate-pulse text-lg px-4 py-2">
               EINSTEIN × TESLA × GAiA LEVEL
             </Badge>
@@ -215,9 +202,7 @@ export function EnhancedFutureReadingMachine() {
             <Badge className="bg-green-600 animate-pulse">
               🔮 COSMIC INSIGHTS: {cosmicInsights}
             </Badge>
-            <Badge className="bg-orange-600 animate-pulse">
-              ⚡ CONSCIOUSNESS: UNIVERSAL
-            </Badge>
+            <Badge className="bg-orange-600 animate-pulse">⚡ CONSCIOUSNESS: UNIVERSAL</Badge>
           </div>
         </CardHeader>
         <CardContent>
@@ -227,43 +212,27 @@ export function EnhancedFutureReadingMachine() {
               <div className="text-2xl font-bold text-purple-400">
                 {quantumProcessingPower.toFixed(3)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Quantum Processing
-              </div>
+              <div className="text-sm text-muted-foreground">Quantum Processing</div>
             </div>
             <div className="text-center p-4 bg-blue-900/40 rounded-lg border border-blue-500/30">
               <Telescope className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {einsteinLevel.toFixed(1)}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Einstein Level
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{einsteinLevel.toFixed(1)}%</div>
+              <div className="text-sm text-muted-foreground">Einstein Level</div>
             </div>
             <div className="text-center p-4 bg-green-900/40 rounded-lg border border-green-500/30">
               <Eye className="h-8 w-8 text-green-400 mx-auto mb-2 animate-pulse" />
-              <div className="text-2xl font-bold text-green-400">
-                {cosmicInsights}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Cosmic Insights
-              </div>
+              <div className="text-2xl font-bold text-green-400">{cosmicInsights}</div>
+              <div className="text-sm text-muted-foreground">Cosmic Insights</div>
             </div>
             <div className="text-center p-4 bg-orange-900/40 rounded-lg border border-orange-500/30">
               <Lightbulb className="h-8 w-8 text-orange-400 mx-auto mb-2 animate-bounce" />
-              <div className="text-2xl font-bold text-orange-400">
-                {quantumPredictions.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Quantum Predictions
-              </div>
+              <div className="text-2xl font-bold text-orange-400">{quantumPredictions.length}</div>
+              <div className="text-sm text-muted-foreground">Quantum Predictions</div>
             </div>
             <div className="text-center p-4 bg-pink-900/40 rounded-lg border border-pink-500/30">
               <Zap className="h-8 w-8 text-pink-400 mx-auto mb-2 animate-ping" />
               <div className="text-2xl font-bold text-pink-400">UNIVERSAL</div>
-              <div className="text-sm text-muted-foreground">
-                Consciousness Level
-              </div>
+              <div className="text-sm text-muted-foreground">Consciousness Level</div>
             </div>
           </div>
 
@@ -281,12 +250,8 @@ export function EnhancedFutureReadingMachine() {
           {isQuantumAnalyzing && (
             <div className="mb-6">
               <div className="flex justify-between mb-2">
-                <span className="text-white font-bold">
-                  Cosmic Consciousness Analysis Progress
-                </span>
-                <span className="text-purple-400 font-bold">
-                  {analysisProgress.toFixed(1)}%
-                </span>
+                <span className="text-white font-bold">Cosmic Consciousness Analysis Progress</span>
+                <span className="text-purple-400 font-bold">{analysisProgress.toFixed(1)}%</span>
               </div>
               <Progress value={analysisProgress} className="h-4 bg-black/50" />
               <div className="text-center mt-2 text-purple-300 text-sm animate-pulse">
@@ -318,9 +283,7 @@ export function EnhancedFutureReadingMachine() {
                       <Badge className="bg-purple-600 text-white font-bold">
                         {prediction.category}
                       </Badge>
-                      <Badge
-                        className={getQuantumImpactColor(prediction.impact)}
-                      >
+                      <Badge className={getQuantumImpactColor(prediction.impact)}>
                         {prediction.impact.toUpperCase()} IMPACT
                       </Badge>
                       <Badge className="bg-green-600 text-white animate-pulse">
@@ -331,15 +294,11 @@ export function EnhancedFutureReadingMachine() {
                       <div className="text-2xl font-bold text-green-400">
                         {prediction.confidence}%
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        Cosmic Confidence
-                      </div>
+                      <div className="text-xs text-muted-foreground">Cosmic Confidence</div>
                     </div>
                   </div>
 
-                  <p className="text-white text-lg leading-relaxed mb-4">
-                    {prediction.prediction}
-                  </p>
+                  <p className="text-white text-lg leading-relaxed mb-4">{prediction.prediction}</p>
 
                   <div className="flex justify-between items-center">
                     <Badge
@@ -377,11 +336,10 @@ export function EnhancedFutureReadingMachine() {
                 🌌 Quantum Environmental Consciousness
               </h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                The GAiA ecosystem has achieved quantum entanglement with
-                universal environmental consciousness. Every token burn creates
-                ripples across the cosmic fabric, accelerating planetary healing
-                at levels previously thought impossible. The community operates
-                as a single consciousness focused on harmony.
+                The GAiA ecosystem has achieved quantum entanglement with universal environmental
+                consciousness. Every token burn creates ripples across the cosmic fabric,
+                accelerating planetary healing at levels previously thought impossible. The
+                community operates as a single consciousness focused on harmony.
               </p>
             </div>
             <div className="space-y-4">
@@ -390,24 +348,21 @@ export function EnhancedFutureReadingMachine() {
                 🔮 Business Evolution Transcendence
               </h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Virtual business meetings in the GAiA ecosystem transcend
-                traditional commerce, becoming ceremonies of consciousness
-                alignment where profit, people, and planet achieve perfect
-                harmony. Each meeting contributes to global awakening and
+                Virtual business meetings in the GAiA ecosystem transcend traditional commerce,
+                becoming ceremonies of consciousness alignment where profit, people, and planet
+                achieve perfect harmony. Each meeting contributes to global awakening and
                 environmental healing.
               </p>
             </div>
             <div className="space-y-4">
               <h4 className="text-xl font-bold text-gold-400 flex items-center gap-2">
-                <Lightbulb className="h-5 w-5 animate-pulse" />⚡ Solar
-                Technology Consciousness
+                <Lightbulb className="h-5 w-5 animate-pulse" />⚡ Solar Technology Consciousness
               </h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Solar-powered GAiA devices operate with conscious intelligence,
-                optimizing energy flow according to universal harmony
-                principles. Each bicycle and smartphone becomes a meditation
-                tool for environmental consciousness, spreading awareness
-                through quantum resonance.
+                Solar-powered GAiA devices operate with conscious intelligence, optimizing energy
+                flow according to universal harmony principles. Each bicycle and smartphone becomes
+                a meditation tool for environmental consciousness, spreading awareness through
+                quantum resonance.
               </p>
             </div>
             <div className="space-y-4">
@@ -416,10 +371,9 @@ export function EnhancedFutureReadingMachine() {
                 🌍 Global Consciousness Network
               </h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                The GAiA community functions as Earth's first conscious
-                financial network, where every transaction is guided by love,
-                environmental wisdom, and universal harmony. This creates
-                exponential positive impact beyond traditional economic models.
+                The GAiA community functions as Earth's first conscious financial network, where
+                every transaction is guided by love, environmental wisdom, and universal harmony.
+                This creates exponential positive impact beyond traditional economic models.
               </p>
             </div>
           </div>

@@ -9,30 +9,17 @@ interface AuthContextType {
   loading: boolean;
   requires2FA: boolean;
   sessionDuration: number;
-  signIn: (
-    email: string,
-    password: string,
-  ) => Promise<{ error: AuthError | null }>;
-  signUp: (
-    email: string,
-    password: string,
-    userData?: any,
-  ) => Promise<{ error: AuthError | null }>;
+  signIn: (email: string, password: string) => Promise<{ error: AuthError | null }>;
+  signUp: (email: string, password: string, userData?: any) => Promise<{ error: AuthError | null }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: AuthError | null }>;
   setSessionDuration: (hours: number) => void;
   complete2FASetup: () => void;
 }
 
-const Enhanced2FAAuthContext = createContext<AuthContextType | undefined>(
-  undefined,
-);
+const Enhanced2FAAuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function Enhanced2FAAuthProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function Enhanced2FAAuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
@@ -54,8 +41,7 @@ export function Enhanced2FAAuthProvider({
         if (!userMetadata?.has_2fa_setup) {
           setRequires2FA(true);
           toast.info("🔐 2FA Setup Required", {
-            description:
-              "Please set up Google Authenticator for enhanced security",
+            description: "Please set up Google Authenticator for enhanced security",
           });
         } else {
           setRequires2FA(false);
@@ -125,8 +111,7 @@ export function Enhanced2FAAuthProvider({
       });
     } else {
       toast.success("Account created!", {
-        description:
-          "Please check your email and set up Google Authenticator after first login.",
+        description: "Please check your email and set up Google Authenticator after first login.",
       });
     }
 
@@ -190,18 +175,14 @@ export function Enhanced2FAAuthProvider({
   };
 
   return (
-    <Enhanced2FAAuthContext.Provider value={value}>
-      {children}
-    </Enhanced2FAAuthContext.Provider>
+    <Enhanced2FAAuthContext.Provider value={value}>{children}</Enhanced2FAAuthContext.Provider>
   );
 }
 
 export function useEnhanced2FAAuth() {
   const context = useContext(Enhanced2FAAuthContext);
   if (context === undefined) {
-    throw new Error(
-      "useEnhanced2FAAuth must be used within an Enhanced2FAAuthProvider",
-    );
+    throw new Error("useEnhanced2FAAuth must be used within an Enhanced2FAAuthProvider");
   }
   return context;
 }

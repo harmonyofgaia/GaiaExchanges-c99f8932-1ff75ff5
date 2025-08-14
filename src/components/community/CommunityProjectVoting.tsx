@@ -54,8 +54,7 @@ export function CommunityProjectVoting() {
     {
       id: "3",
       title: "Eco Education Center",
-      description:
-        "Build a community center focused on environmental education and workshops",
+      description: "Build a community center focused on environmental education and workshops",
       category: "education",
       fundingGoal: 75000,
       currentFunding: 31500,
@@ -108,16 +107,12 @@ export function CommunityProjectVoting() {
 
     setProjects(
       projects.map((project) =>
-        project.id === projectId
-          ? { ...project, votes: project.votes + 1 }
-          : project,
-      ),
+        project.id === projectId ? { ...project, votes: project.votes + 1 } : project
+      )
     );
 
     setUserVotes((prev) => new Set(prev).add(projectId));
-    toast.success(
-      "Vote cast successfully! +10 GAiA tokens earned for community participation",
-    );
+    toast.success("Vote cast successfully! +10 GAiA tokens earned for community participation");
   };
 
   const fundProject = (projectId: string, amount: number) => {
@@ -125,20 +120,16 @@ export function CommunityProjectVoting() {
       projects.map((project) =>
         project.id === projectId
           ? { ...project, currentFunding: project.currentFunding + amount }
-          : project,
-      ),
+          : project
+      )
     );
-    toast.success(
-      `Funded ${amount} GAiA tokens! Thank you for supporting community projects`,
-    );
+    toast.success(`Funded ${amount} GAiA tokens! Thank you for supporting community projects`);
   };
 
   const submitProposal = () => {
     if (!newProposal.trim()) return;
 
-    toast.success(
-      "Project proposal submitted! It will be reviewed by the community.",
-    );
+    toast.success("Project proposal submitted! It will be reviewed by the community.");
     setNewProposal("");
   };
 
@@ -148,17 +139,14 @@ export function CommunityProjectVoting() {
         <h2 className="text-3xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
           🗳️ Community Project Voting
         </h2>
-        <p className="text-muted-foreground">
-          Vote on and fund community environmental projects
-        </p>
+        <p className="text-muted-foreground">Vote on and fund community environmental projects</p>
       </div>
 
       {/* Current Projects */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {projects.map((project) => {
           const Icon = getCategoryIcon(project.category);
-          const fundingProgress =
-            (project.currentFunding / project.fundingGoal) * 100;
+          const fundingProgress = (project.currentFunding / project.fundingGoal) * 100;
           const hasVoted = userVotes.has(project.id);
 
           return (
@@ -179,9 +167,7 @@ export function CommunityProjectVoting() {
                 <CardTitle className="text-xl">{project.title}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm text-muted-foreground">
-                  {project.description}
-                </p>
+                <p className="text-sm text-muted-foreground">{project.description}</p>
 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
@@ -197,9 +183,7 @@ export function CommunityProjectVoting() {
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <span className="text-muted-foreground">Votes: </span>
-                    <span className="font-bold text-green-400">
-                      {project.votes}
-                    </span>
+                    <span className="font-bold text-green-400">{project.votes}</span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Impact: </span>

@@ -41,21 +41,15 @@ export function RealTimeCounterAttack() {
         "Evidence Collected",
         "Attacker Traced",
       ][Math.floor(Math.random() * 8)],
-      status: ["executing", "completed", "failed"][
-        Math.floor(Math.random() * 3)
-      ] as any,
+      status: ["executing", "completed", "failed"][Math.floor(Math.random() * 3)] as any,
       timestamp: new Date().toLocaleTimeString(),
       effectiveness: Math.floor(Math.random() * 40) + 60,
     });
 
     const interval = setInterval(() => {
       setThreatsStopped((prev) => prev + Math.floor(Math.random() * 8));
-      setResponseTime((prev) =>
-        Math.max(0.1, Math.min(2.0, prev + (Math.random() - 0.5) * 0.2)),
-      );
-      setActiveCounters((prev) =>
-        Math.max(8, Math.min(20, prev + (Math.random() - 0.5) * 3)),
-      );
+      setResponseTime((prev) => Math.max(0.1, Math.min(2.0, prev + (Math.random() - 0.5) * 0.2)));
+      setActiveCounters((prev) => Math.max(8, Math.min(20, prev + (Math.random() - 0.5) * 3)));
 
       if (Math.random() > 0.5) {
         setRecentCounters((prev) => [generateCounter(), ...prev.slice(0, 5)]);
@@ -92,9 +86,7 @@ export function RealTimeCounterAttack() {
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="bg-black/30 p-4 rounded-lg border border-red-500/20">
-            <div className="text-2xl font-bold text-red-400">
-              {activeCounters}
-            </div>
+            <div className="text-2xl font-bold text-red-400">{activeCounters}</div>
             <div className="text-sm text-red-300">Active Counters</div>
           </div>
 
@@ -106,9 +98,7 @@ export function RealTimeCounterAttack() {
           </div>
 
           <div className="bg-black/30 p-4 rounded-lg border border-yellow-500/20">
-            <div className="text-2xl font-bold text-yellow-400">
-              {responseTime.toFixed(1)}s
-            </div>
+            <div className="text-2xl font-bold text-yellow-400">{responseTime.toFixed(1)}s</div>
             <div className="text-sm text-yellow-300">Response Time</div>
           </div>
 
@@ -151,15 +141,10 @@ export function RealTimeCounterAttack() {
             </h3>
             <div className="space-y-2 max-h-40 overflow-y-auto">
               {recentCounters.length === 0 ? (
-                <div className="text-center text-gray-400 py-4">
-                  🎯 Standing ready...
-                </div>
+                <div className="text-center text-gray-400 py-4">🎯 Standing ready...</div>
               ) : (
                 recentCounters.map((counter) => (
-                  <div
-                    key={counter.id}
-                    className="text-xs border border-gray-600 rounded p-2"
-                  >
+                  <div key={counter.id} className="text-xs border border-gray-600 rounded p-2">
                     <div className="flex items-center justify-between">
                       <span className="text-red-400">{counter.threat}</span>
                       <span
@@ -168,9 +153,7 @@ export function RealTimeCounterAttack() {
                         {counter.status.toUpperCase()}
                       </span>
                     </div>
-                    <div className="text-orange-300 mt-1">
-                      {counter.response}
-                    </div>
+                    <div className="text-orange-300 mt-1">{counter.response}</div>
                     <div className="flex justify-between mt-1 text-gray-400">
                       <span>{counter.timestamp}</span>
                       <span>{counter.effectiveness}% effective</span>

@@ -95,9 +95,7 @@ export function ThemeDesigner() {
               {backgroundTypes.map((type) => (
                 <Button
                   key={type.id}
-                  variant={
-                    currentTheme.type === type.id ? "default" : "outline"
-                  }
+                  variant={currentTheme.type === type.id ? "default" : "outline"}
                   onClick={() => updateTheme({ type: type.id })}
                   className={`text-xs p-2 h-auto ${
                     currentTheme.type === type.id
@@ -123,9 +121,7 @@ export function ThemeDesigner() {
                   key={color}
                   onClick={() => updateTheme({ color })}
                   className={`h-8 w-8 rounded-full border-2 ${
-                    currentTheme.color === color
-                      ? "border-white"
-                      : "border-gray-600"
+                    currentTheme.color === color ? "border-white" : "border-gray-600"
                   }`}
                   style={{ backgroundColor: color }}
                 />
@@ -140,9 +136,7 @@ export function ThemeDesigner() {
               {(["low", "medium", "high"] as const).map((intensity) => (
                 <Button
                   key={intensity}
-                  variant={
-                    currentTheme.intensity === intensity ? "default" : "outline"
-                  }
+                  variant={currentTheme.intensity === intensity ? "default" : "outline"}
                   onClick={() => updateTheme({ intensity })}
                   className={`flex-1 ${
                     currentTheme.intensity === intensity
@@ -180,9 +174,7 @@ export function ThemeDesigner() {
             <span className="text-purple-400">Auto-generate themes</span>
             <Button
               variant={currentTheme.autoGenerate ? "default" : "outline"}
-              onClick={() =>
-                updateTheme({ autoGenerate: !currentTheme.autoGenerate })
-              }
+              onClick={() => updateTheme({ autoGenerate: !currentTheme.autoGenerate })}
               className={
                 currentTheme.autoGenerate
                   ? "bg-purple-600 hover:bg-purple-700"
@@ -204,9 +196,7 @@ export function ThemeDesigner() {
           <div className="relative h-32 rounded-lg overflow-hidden">
             <EnhancedBackgroundManager settings={currentTheme} />
             <div className="absolute inset-0 flex items-center justify-center">
-              <Badge className="bg-purple-600/80 text-white">
-                Theme Preview
-              </Badge>
+              <Badge className="bg-purple-600/80 text-white">Theme Preview</Badge>
             </div>
           </div>
         </CardContent>

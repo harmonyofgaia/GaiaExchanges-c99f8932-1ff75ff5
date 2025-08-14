@@ -60,32 +60,22 @@ export function CarbonCreditActions() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Action Type
-            </label>
+            <label className="block text-sm font-medium mb-2">Action Type</label>
             <Select value={actionType} onValueChange={setActionType}>
               <SelectTrigger>
                 <SelectValue placeholder="Select action type" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="tree_planting">Tree Planting</SelectItem>
-                <SelectItem value="renewable_energy">
-                  Renewable Energy
-                </SelectItem>
-                <SelectItem value="carbon_sequestration">
-                  Carbon Sequestration
-                </SelectItem>
-                <SelectItem value="emissions_reduction">
-                  Emissions Reduction
-                </SelectItem>
+                <SelectItem value="renewable_energy">Renewable Energy</SelectItem>
+                <SelectItem value="carbon_sequestration">Carbon Sequestration</SelectItem>
+                <SelectItem value="emissions_reduction">Emissions Reduction</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Carbon Offset (kg CO2)
-            </label>
+            <label className="block text-sm font-medium mb-2">Carbon Offset (kg CO2)</label>
             <Input
               type="number"
               step="0.1"
@@ -107,8 +97,7 @@ export function CarbonCreditActions() {
 
         <div className="mt-4 p-3 bg-green-900/20 rounded-lg border border-green-500/30">
           <p className="text-sm text-green-300">
-            💡 <strong>Earning:</strong> 10 points per kg CO2 offset + verified
-            carbon credits
+            💡 <strong>Earning:</strong> 10 points per kg CO2 offset + verified carbon credits
           </p>
         </div>
       </CardContent>

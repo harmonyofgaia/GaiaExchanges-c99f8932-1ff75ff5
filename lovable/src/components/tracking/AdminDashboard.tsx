@@ -63,21 +63,14 @@ export function AdminDashboard() {
         database: Math.min(100, prev.database + (Math.random() - 0.5) * 0.05),
         network: Math.min(100, prev.network + (Math.random() - 0.5) * 0.2),
         security: 100, // Always perfect security
-        performance: Math.min(
-          100,
-          prev.performance + (Math.random() - 0.5) * 0.3,
-        ),
+        performance: Math.min(100, prev.performance + (Math.random() - 0.5) * 0.3),
       }));
 
       setAdminMetrics((prev) => ({
         ...prev,
         activeUsers: prev.activeUsers + Math.floor(Math.random() * 50 - 25),
-        totalTransactions:
-          prev.totalTransactions + Math.floor(Math.random() * 100),
-        systemLoad: Math.max(
-          0,
-          Math.min(100, prev.systemLoad + (Math.random() - 0.5) * 2),
-        ),
+        totalTransactions: prev.totalTransactions + Math.floor(Math.random() * 100),
+        systemLoad: Math.max(0, Math.min(100, prev.systemLoad + (Math.random() - 0.5) * 2)),
       }));
 
       // Randomly add alerts
@@ -125,9 +118,7 @@ export function AdminDashboard() {
             <div className="flex items-center gap-4">
               <Shield className="h-8 w-8 text-red-400" />
               <div>
-                <h2 className="text-2xl font-bold text-red-400">
-                  🔒 ADMIN CONTROL CENTER
-                </h2>
+                <h2 className="text-2xl font-bold text-red-400">🔒 ADMIN CONTROL CENTER</h2>
                 <p className="text-sm text-muted-foreground">
                   Ultimate system control & monitoring dashboard
                 </p>
@@ -163,9 +154,7 @@ export function AdminDashboard() {
                 <div className="text-center space-y-2">
                   <Server className="h-6 w-6 text-green-400 mx-auto" />
                   <p className="text-sm text-muted-foreground">Server Health</p>
-                  <p
-                    className={`text-xl font-bold ${getHealthColor(systemHealth.server)}`}
-                  >
+                  <p className={`text-xl font-bold ${getHealthColor(systemHealth.server)}`}>
                     {systemHealth.server.toFixed(1)}%
                   </p>
                   <Progress value={systemHealth.server} className="h-2" />
@@ -178,9 +167,7 @@ export function AdminDashboard() {
                 <div className="text-center space-y-2">
                   <Database className="h-6 w-6 text-blue-400 mx-auto" />
                   <p className="text-sm text-muted-foreground">Database</p>
-                  <p
-                    className={`text-xl font-bold ${getHealthColor(systemHealth.database)}`}
-                  >
+                  <p className={`text-xl font-bold ${getHealthColor(systemHealth.database)}`}>
                     {systemHealth.database.toFixed(1)}%
                   </p>
                   <Progress value={systemHealth.database} className="h-2" />
@@ -193,9 +180,7 @@ export function AdminDashboard() {
                 <div className="text-center space-y-2">
                   <Activity className="h-6 w-6 text-purple-400 mx-auto" />
                   <p className="text-sm text-muted-foreground">Network</p>
-                  <p
-                    className={`text-xl font-bold ${getHealthColor(systemHealth.network)}`}
-                  >
+                  <p className={`text-xl font-bold ${getHealthColor(systemHealth.network)}`}>
                     {systemHealth.network.toFixed(1)}%
                   </p>
                   <Progress value={systemHealth.network} className="h-2" />
@@ -208,9 +193,7 @@ export function AdminDashboard() {
                 <div className="text-center space-y-2">
                   <Shield className="h-6 w-6 text-red-400 mx-auto" />
                   <p className="text-sm text-muted-foreground">Security</p>
-                  <p
-                    className={`text-xl font-bold ${getHealthColor(systemHealth.security)}`}
-                  >
+                  <p className={`text-xl font-bold ${getHealthColor(systemHealth.security)}`}>
                     {systemHealth.security.toFixed(1)}%
                   </p>
                   <Progress value={systemHealth.security} className="h-2" />
@@ -223,9 +206,7 @@ export function AdminDashboard() {
                 <div className="text-center space-y-2">
                   <Settings className="h-6 w-6 text-yellow-400 mx-auto" />
                   <p className="text-sm text-muted-foreground">Performance</p>
-                  <p
-                    className={`text-xl font-bold ${getHealthColor(systemHealth.performance)}`}
-                  >
+                  <p className={`text-xl font-bold ${getHealthColor(systemHealth.performance)}`}>
                     {systemHealth.performance.toFixed(1)}%
                   </p>
                   <Progress value={systemHealth.performance} className="h-2" />
@@ -275,15 +256,11 @@ export function AdminDashboard() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center">
                   <p className="text-2xl font-bold text-green-400">0</p>
-                  <p className="text-sm text-muted-foreground">
-                    Active Threats
-                  </p>
+                  <p className="text-sm text-muted-foreground">Active Threats</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-green-400">100%</p>
-                  <p className="text-sm text-muted-foreground">
-                    Protection Level
-                  </p>
+                  <p className="text-sm text-muted-foreground">Protection Level</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-blue-400">24/7</p>
@@ -291,9 +268,7 @@ export function AdminDashboard() {
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-purple-400">∞</p>
-                  <p className="text-sm text-muted-foreground">
-                    Security Layers
-                  </p>
+                  <p className="text-sm text-muted-foreground">Security Layers</p>
                 </div>
               </div>
             </CardContent>
@@ -303,17 +278,13 @@ export function AdminDashboard() {
         <TabsContent value="performance" className="space-y-6">
           <Card className="border-green-500/30">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                ⚡ Performance Metrics
-              </CardTitle>
+              <CardTitle className="text-green-400">⚡ Performance Metrics</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center">
                   <p className="text-2xl font-bold text-green-400">10x</p>
-                  <p className="text-sm text-muted-foreground">
-                    Speed Multiplier
-                  </p>
+                  <p className="text-sm text-muted-foreground">Speed Multiplier</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-blue-400">
@@ -322,9 +293,7 @@ export function AdminDashboard() {
                   <p className="text-sm text-muted-foreground">System Load</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-purple-400">
-                    {adminMetrics.serverUptime}%
-                  </p>
+                  <p className="text-2xl font-bold text-purple-400">{adminMetrics.serverUptime}%</p>
                   <p className="text-sm text-muted-foreground">Uptime</p>
                 </div>
                 <div className="text-center">
@@ -362,15 +331,11 @@ export function AdminDashboard() {
                   <p className="text-2xl font-bold text-purple-400">
                     {adminMetrics.totalTransactions.toLocaleString()}
                   </p>
-                  <p className="text-sm text-muted-foreground">
-                    Total Transactions
-                  </p>
+                  <p className="text-sm text-muted-foreground">Total Transactions</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-yellow-400">98.5%</p>
-                  <p className="text-sm text-muted-foreground">
-                    Satisfaction Rate
-                  </p>
+                  <p className="text-sm text-muted-foreground">Satisfaction Rate</p>
                 </div>
               </div>
             </CardContent>
@@ -381,9 +346,7 @@ export function AdminDashboard() {
       {/* Admin Quick Actions */}
       <Card className="border-purple-500/30">
         <CardHeader>
-          <CardTitle className="text-purple-400">
-            🚀 Quick Admin Actions
-          </CardTitle>
+          <CardTitle className="text-purple-400">🚀 Quick Admin Actions</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

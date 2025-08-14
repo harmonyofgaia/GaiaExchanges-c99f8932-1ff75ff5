@@ -1,15 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Volume2,
-  VolumeX,
-  Play,
-  Pause,
-  SkipForward,
-  SkipBack,
-  X,
-} from "lucide-react";
+import { Volume2, VolumeX, Play, Pause, SkipForward, SkipBack, X } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 
 export function PersistentMusicPlayer() {
@@ -137,8 +129,7 @@ export function PersistentMusicPlayer() {
 
   const playPrevious = () => {
     if (playlist.length > 1) {
-      const prevIndex =
-        currentIndex === 0 ? playlist.length - 1 : currentIndex - 1;
+      const prevIndex = currentIndex === 0 ? playlist.length - 1 : currentIndex - 1;
       setCurrentIndex(prevIndex);
       setCurrentTrack(playlist[prevIndex]);
     }
@@ -175,9 +166,7 @@ export function PersistentMusicPlayer() {
                 <h4 className="text-sm font-medium text-purple-400 truncate">
                   {currentTrack.name}
                 </h4>
-                <p className="text-xs text-muted-foreground">
-                  Now Playing • Background Music
-                </p>
+                <p className="text-xs text-muted-foreground">Now Playing • Background Music</p>
               </div>
               <Button
                 size="sm"
@@ -222,11 +211,7 @@ export function PersistentMusicPlayer() {
                 onClick={togglePlay}
                 className="h-8 w-8 p-0 text-purple-400 hover:text-purple-300"
               >
-                {isPlaying ? (
-                  <Pause className="h-4 w-4" />
-                ) : (
-                  <Play className="h-4 w-4" />
-                )}
+                {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
               </Button>
               <Button
                 size="sm"
@@ -245,11 +230,7 @@ export function PersistentMusicPlayer() {
                 onClick={toggleMute}
                 className="h-6 w-6 p-0 text-purple-400 hover:text-purple-300"
               >
-                {isMuted ? (
-                  <VolumeX className="h-3 w-3" />
-                ) : (
-                  <Volume2 className="h-3 w-3" />
-                )}
+                {isMuted ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
               </Button>
               <div className="w-16">
                 <Slider

@@ -135,9 +135,7 @@ export function SupremeSearchTracking() {
             accessLevel: ["surface", "deep", "core", "quantum"][
               Math.floor(Math.random() * 4)
             ] as any,
-            status: ["scanning", "breached", "controlled"][
-              Math.floor(Math.random() * 3)
-            ] as any,
+            status: ["scanning", "breached", "controlled"][Math.floor(Math.random() * 3)] as any,
             dataExtracted: Math.floor(Math.random() * 1000),
           };
 
@@ -162,9 +160,7 @@ export function SupremeSearchTracking() {
   const startHunt = () => {
     setIsHunting(true);
     setHuntProgress(0);
-    console.log(
-      "🎯 SUPREME SEARCH & TRACKING INITIATED - HUNTING ALL HACKERS & ANONYMOUS",
-    );
+    console.log("🎯 SUPREME SEARCH & TRACKING INITIATED - HUNTING ALL HACKERS & ANONYMOUS");
   };
 
   const stopHunt = () => {
@@ -225,9 +221,7 @@ export function SupremeSearchTracking() {
               <Button
                 onClick={isHunting ? stopHunt : startHunt}
                 className={`px-8 py-3 text-lg font-bold ${
-                  isHunting
-                    ? "bg-red-600 hover:bg-red-700"
-                    : "bg-green-600 hover:bg-green-700"
+                  isHunting ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"
                 }`}
               >
                 {isHunting ? "🛑 Stop Hunting" : "🎯 Start Hunting Hackers"}
@@ -235,9 +229,7 @@ export function SupremeSearchTracking() {
 
               {isHunting && (
                 <div className="space-y-2">
-                  <div className="text-sm text-red-400">
-                    Scanning all networks for threats...
-                  </div>
+                  <div className="text-sm text-red-400">Scanning all networks for threats...</div>
                   <Progress value={huntProgress} className="w-full" />
                   <div className="text-xs text-muted-foreground">
                     {huntProgress.toFixed(1)}% Complete
@@ -263,9 +255,7 @@ export function SupremeSearchTracking() {
                     <div className="flex items-center gap-3">
                       <Globe className="h-5 w-5 text-cyan-400" />
                       <div>
-                        <div className="font-semibold text-white">
-                          {engine.name}
-                        </div>
+                        <div className="font-semibold text-white">{engine.name}</div>
                         <div className="text-xs text-muted-foreground">
                           Coverage: {engine.coverage}% | Deep Web:{" "}
                           {engine.deepWebAccess ? "Yes" : "No"}
@@ -274,9 +264,7 @@ export function SupremeSearchTracking() {
                     </div>
                     <div className="flex items-center gap-2">
                       {engine.quantumPowered && (
-                        <Badge className="bg-purple-600 text-white">
-                          QUANTUM
-                        </Badge>
+                        <Badge className="bg-purple-600 text-white">QUANTUM</Badge>
                       )}
                       <Badge
                         className={`${
@@ -304,57 +292,39 @@ export function SupremeSearchTracking() {
                 <div className="text-2xl font-bold text-green-400">
                   {metrics.hackersNeutralized}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Hackers Neutralized
-                </div>
+                <div className="text-xs text-muted-foreground">Hackers Neutralized</div>
               </CardContent>
             </Card>
 
             <Card className="bg-blue-900/20 border-blue-500/30">
               <CardContent className="pt-4 text-center">
                 <Eye className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-blue-400">
-                  {metrics.anonymousUnmasked}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Anonymous Unmasked
-                </div>
+                <div className="text-2xl font-bold text-blue-400">{metrics.anonymousUnmasked}</div>
+                <div className="text-xs text-muted-foreground">Anonymous Unmasked</div>
               </CardContent>
             </Card>
 
             <Card className="bg-purple-900/20 border-purple-500/30">
               <CardContent className="pt-4 text-center">
                 <Lock className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-purple-400">
-                  {metrics.systemsSecured}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Systems Secured
-                </div>
+                <div className="text-2xl font-bold text-purple-400">{metrics.systemsSecured}</div>
+                <div className="text-xs text-muted-foreground">Systems Secured</div>
               </CardContent>
             </Card>
 
             <Card className="bg-orange-900/20 border-orange-500/30">
               <CardContent className="pt-4 text-center">
                 <Database className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-orange-400">
-                  {metrics.dataRecovered}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  MB Data Recovered
-                </div>
+                <div className="text-2xl font-bold text-orange-400">{metrics.dataRecovered}</div>
+                <div className="text-xs text-muted-foreground">MB Data Recovered</div>
               </CardContent>
             </Card>
 
             <Card className="bg-red-900/20 border-red-500/30">
               <CardContent className="pt-4 text-center">
                 <Zap className="h-8 w-8 text-red-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-red-400">
-                  {metrics.threatsEliminated}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Threats Eliminated
-                </div>
+                <div className="text-2xl font-bold text-red-400">{metrics.threatsEliminated}</div>
+                <div className="text-xs text-muted-foreground">Threats Eliminated</div>
               </CardContent>
             </Card>
           </div>
@@ -380,12 +350,9 @@ export function SupremeSearchTracking() {
                       <div className="flex items-center gap-3">
                         <MapPin className="h-4 w-4 text-yellow-400" />
                         <div>
-                          <div className="font-semibold text-white">
-                            {target.ip}
-                          </div>
+                          <div className="font-semibold text-white">{target.ip}</div>
                           <div className="text-xs text-muted-foreground">
-                            {target.location} | {target.system} |{" "}
-                            {target.vulnerability}
+                            {target.location} | {target.system} | {target.vulnerability}
                           </div>
                         </div>
                       </div>
@@ -418,9 +385,7 @@ export function SupremeSearchTracking() {
           {/* Capabilities */}
           <Card className="bg-gradient-to-r from-indigo-900/20 to-purple-900/20 border-indigo-500/30">
             <CardContent className="pt-4">
-              <h3 className="text-indigo-400 font-bold mb-4">
-                🔍 Supreme Capabilities
-              </h3>
+              <h3 className="text-indigo-400 font-bold mb-4">🔍 Supreme Capabilities</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-cyan-300">
@@ -467,12 +432,10 @@ export function SupremeSearchTracking() {
             <CardContent className="pt-4">
               <div className="text-center text-red-300">
                 <AlertTriangle className="h-8 w-8 mx-auto mb-2" />
-                <div className="font-bold">
-                  MAXIMUM SECURITY CLEARANCE REQUIRED
-                </div>
+                <div className="font-bold">MAXIMUM SECURITY CLEARANCE REQUIRED</div>
                 <div className="text-sm mt-2">
-                  This system operates beyond conventional ethical boundaries
-                  for humanity's protection.
+                  This system operates beyond conventional ethical boundaries for humanity's
+                  protection.
                 </div>
               </div>
             </CardContent>

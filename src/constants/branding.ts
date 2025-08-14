@@ -1,8 +1,7 @@
 export const GAIA_BRANDING = {
   NAME: "Gaia's Exchanges",
   TAGLINE: "The Ultimate Modular Web3 Exchange",
-  DESCRIPTION:
-    "Best reinvestment in green projects and sustainable blockchain technology",
+  DESCRIPTION: "Best reinvestment in green projects and sustainable blockchain technology",
   LOGO_URL: "/gaia-logo.svg",
   TOKEN_SYMBOL: "GAiA",
   TOKEN_NAME: "GAiA Token",

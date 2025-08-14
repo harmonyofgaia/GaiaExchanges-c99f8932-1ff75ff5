@@ -33,9 +33,7 @@ export default function LandscapeBuilder() {
   const [virtualWorlds, setVirtualWorlds] = useState(8);
 
   useEffect(() => {
-    console.log(
-      "🏔️ LANDSCAPE BUILDER PRO - ULTIMATE ECOSYSTEM CREATION ACTIVE",
-    );
+    console.log("🏔️ LANDSCAPE BUILDER PRO - ULTIMATE ECOSYSTEM CREATION ACTIVE");
     console.log("🌍 ENVIRONMENTAL RESTORATION: UNLIMITED POWER");
     console.log("⚡ ALL ENGINES ACTIVATED: Reality Bending Mode");
 
@@ -73,8 +71,7 @@ export default function LandscapeBuilder() {
 
   const createMegaLandscape = () => {
     toast.success("🌍 MEGA LANDSCAPE CREATED!", {
-      description:
-        "Universe-scale ecosystem generated with all engines active!",
+      description: "Universe-scale ecosystem generated with all engines active!",
       duration: 5000,
     });
   };
@@ -107,9 +104,7 @@ export default function LandscapeBuilder() {
             <Badge className="bg-purple-600 animate-bounce text-lg px-4 py-2">
               ENGINES: {activeEngines}/50 🔧
             </Badge>
-            <Badge className="bg-cyan-600 text-lg px-4 py-2">
-              WORLDS: {virtualWorlds}🌌
-            </Badge>
+            <Badge className="bg-cyan-600 text-lg px-4 py-2">WORLDS: {virtualWorlds}🌌</Badge>
           </div>
         </CardHeader>
       </Card>
@@ -201,12 +196,8 @@ export default function LandscapeBuilder() {
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-3">
-                        <div className="text-3xl font-bold text-green-400">
-                          2.8M
-                        </div>
-                        <div className="text-sm text-green-300">
-                          Trees Planted
-                        </div>
+                        <div className="text-3xl font-bold text-green-400">2.8M</div>
+                        <div className="text-sm text-green-300">Trees Planted</div>
                         <Button className="w-full bg-green-600 hover:bg-green-700">
                           <Trees className="h-4 w-4 mr-2" />
                           Plant Forest
@@ -224,12 +215,8 @@ export default function LandscapeBuilder() {
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-3">
-                        <div className="text-3xl font-bold text-blue-400">
-                          18K
-                        </div>
-                        <div className="text-sm text-blue-300">
-                          Reefs Restored
-                        </div>
+                        <div className="text-3xl font-bold text-blue-400">18K</div>
+                        <div className="text-sm text-blue-300">Reefs Restored</div>
                         <Button className="w-full bg-blue-600 hover:bg-blue-700">
                           <Waves className="h-4 w-4 mr-2" />
                           Clean Ocean
@@ -247,12 +234,8 @@ export default function LandscapeBuilder() {
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-3">
-                        <div className="text-3xl font-bold text-orange-400">
-                          500
-                        </div>
-                        <div className="text-sm text-orange-300">
-                          Peaks Restored
-                        </div>
+                        <div className="text-3xl font-bold text-orange-400">500</div>
+                        <div className="text-sm text-orange-300">Peaks Restored</div>
                         <Button className="w-full bg-orange-600 hover:bg-orange-700">
                           <Mountain className="h-4 w-4 mr-2" />
                           Restore Mountains
@@ -272,29 +255,17 @@ export default function LandscapeBuilder() {
                         <div className="text-green-400">
                           🌲 Amazon Rainforest Recovery: 95% Complete
                         </div>
-                        <div className="text-blue-400">
-                          🐋 Whale Migration Routes: Restored
-                        </div>
+                        <div className="text-blue-400">🐋 Whale Migration Routes: Restored</div>
                         <div className="text-purple-400">
                           🦋 Butterfly Sanctuaries: 1,200 Created
                         </div>
-                        <div className="text-orange-400">
-                          🏔️ Alpine Ecosystem Renewal: Active
-                        </div>
+                        <div className="text-orange-400">🏔️ Alpine Ecosystem Renewal: Active</div>
                       </div>
                       <div className="space-y-2">
-                        <div className="text-cyan-400">
-                          🌊 Coral Reef Regeneration: 2.5M m²
-                        </div>
-                        <div className="text-yellow-400">
-                          🌅 Wetland Restoration: 800 Sites
-                        </div>
-                        <div className="text-pink-400">
-                          🌸 Pollinator Gardens: 15,000 Planted
-                        </div>
-                        <div className="text-green-300">
-                          🌱 Soil Remediation: 50,000 Acres
-                        </div>
+                        <div className="text-cyan-400">🌊 Coral Reef Regeneration: 2.5M m²</div>
+                        <div className="text-yellow-400">🌅 Wetland Restoration: 800 Sites</div>
+                        <div className="text-pink-400">🌸 Pollinator Gardens: 15,000 Planted</div>
+                        <div className="text-green-300">🌱 Soil Remediation: 50,000 Acres</div>
                       </div>
                     </div>
                   </CardContent>
@@ -329,9 +300,7 @@ export default function LandscapeBuilder() {
                 <Sparkles className="h-6 w-6 mr-2 animate-pulse" />
                 <div className="text-left">
                   <div className="font-bold">🌟 Aura Scrapyard</div>
-                  <div className="text-xs">
-                    Transform scrap to landscape materials
-                  </div>
+                  <div className="text-xs">Transform scrap to landscape materials</div>
                 </div>
               </Button>
             </Link>

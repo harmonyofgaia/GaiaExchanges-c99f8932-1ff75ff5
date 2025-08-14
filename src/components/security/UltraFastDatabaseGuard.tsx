@@ -3,18 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Database,
-  Zap,
-  Shield,
-  Target,
-  Flame,
-  Eye,
-  Lock,
-  Brain,
-  Globe,
-  Skull,
-} from "lucide-react";
+import { Database, Zap, Shield, Target, Flame, Eye, Lock, Brain, Globe, Skull } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -54,17 +43,13 @@ export function UltraFastDatabaseGuard() {
   // ULTRA-FAST DATABASE ATTACK DETECTION AND WATERSOLID RESPONSE
   useEffect(() => {
     const nanosecondDatabaseProtection = async () => {
-      console.log(
-        "⚡ NANOSECOND DATABASE GUARD - 0.00000000000001 SECONDS RESPONSE",
-      );
+      console.log("⚡ NANOSECOND DATABASE GUARD - 0.00000000000001 SECONDS RESPONSE");
       console.log("💧 WATERSOLID PLAN READY - INSTANT ATTACKER ELIMINATION");
 
       try {
         // DETECT DATABASE ATTACKERS INSTANTLY
         const instantAttackerDetection = async () => {
-          console.log(
-            "🔍 INSTANT ATTACKER DETECTION - SCANNING WORLDWIDE DATABASE ACCESS",
-          );
+          console.log("🔍 INSTANT ATTACKER DETECTION - SCANNING WORLDWIDE DATABASE ACCESS");
 
           // Advanced database attack patterns
           const attackPatterns = [
@@ -82,8 +67,7 @@ export function UltraFastDatabaseGuard() {
 
           // Simulate ultra-fast detection
           if (Math.random() < 0.4) {
-            const attackType =
-              attackPatterns[Math.floor(Math.random() * attackPatterns.length)];
+            const attackType = attackPatterns[Math.floor(Math.random() * attackPatterns.length)];
             const attackerIP = `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
             const detectionTimeNanoseconds = 0.00000000000001;
 
@@ -101,9 +85,7 @@ export function UltraFastDatabaseGuard() {
 
             console.log(`🚨 DATABASE ATTACKER DETECTED: ${attackerIP}`);
             console.log(`⚡ ATTACK TYPE: ${attackType}`);
-            console.log(
-              `🕒 DETECTION TIME: ${detectionTimeNanoseconds} SECONDS`,
-            );
+            console.log(`🕒 DETECTION TIME: ${detectionTimeNanoseconds} SECONDS`);
 
             // INSTANT WATERSOLID COUNTER-ATTACK
             await deployWatersolidPlan(newAttacker);
@@ -116,9 +98,7 @@ export function UltraFastDatabaseGuard() {
         // WATERSOLID PLAN DEPLOYMENT - NANOSECOND EXECUTION
         const deployWatersolidPlan = async (attacker: DatabaseAttacker) => {
           console.log(`💧 DEPLOYING WATERSOLID PLAN AGAINST ${attacker.ip}`);
-          console.log(
-            "⚡ EXECUTION SPEED: 0.00000000000001 SECONDS - MILLION TIMES FASTER",
-          );
+          console.log("⚡ EXECUTION SPEED: 0.00000000000001 SECONDS - MILLION TIMES FASTER");
 
           const watersolidActions = [
             "INSTANT_WORLDWIDE_IP_BAN",
@@ -136,9 +116,7 @@ export function UltraFastDatabaseGuard() {
           // Execute all watersolid actions in nanoseconds
           for (let i = 0; i < watersolidActions.length; i++) {
             setTimeout(() => {
-              console.log(
-                `💧 WATERSOLID ACTION ${i + 1}: ${watersolidActions[i]}`,
-              );
+              console.log(`💧 WATERSOLID ACTION ${i + 1}: ${watersolidActions[i]}`);
 
               setAttackers((prev) =>
                 prev.map((a) =>
@@ -147,12 +125,10 @@ export function UltraFastDatabaseGuard() {
                         ...a,
                         watersolidActionsExecuted: i + 1,
                         status:
-                          i === watersolidActions.length - 1
-                            ? "BANNED_WORLDWIDE"
-                            : "ATTACKING",
+                          i === watersolidActions.length - 1 ? "BANNED_WORLDWIDE" : "ATTACKING",
                       }
-                    : a,
-                ),
+                    : a
+                )
               );
             }, i * 0.0001); // Nanosecond timing
           }
@@ -190,9 +166,7 @@ export function UltraFastDatabaseGuard() {
         const maintainSpeedSupremacy = () => {
           console.log("🌌 TRILLION CENTURY SPEED SUPREMACY ACTIVE");
           console.log("⚡ ALWAYS MILLION TIMES FASTER THAN ANY SYSTEM");
-          console.log(
-            "🔮 FUTURE-PROOF SPEED GUARANTEE FOR NEXT TRILLION CENTURIES",
-          );
+          console.log("🔮 FUTURE-PROOF SPEED GUARANTEE FOR NEXT TRILLION CENTURIES");
 
           // Ensure we're always the fastest
           setMetrics((prev) => ({
@@ -227,8 +201,7 @@ export function UltraFastDatabaseGuard() {
     setIsUltraFastModeActive(true);
 
     toast.success("💧 MAXIMUM WATERSOLID MODE ACTIVATED!", {
-      description:
-        "0.00000000000001 second response time - Million times faster than any system",
+      description: "0.00000000000001 second response time - Million times faster than any system",
       duration: 10000,
     });
 
@@ -255,8 +228,7 @@ export function UltraFastDatabaseGuard() {
                 ULTRA-FAST DATABASE GUARD
               </div>
               <div className="text-sm font-normal text-cyan-400">
-                Nanosecond Response • Watersolid Plans • Trillion Century Speed
-                Guarantee
+                Nanosecond Response • Watersolid Plans • Trillion Century Speed Guarantee
               </div>
             </div>
             <Badge className="bg-cyan-600 text-white animate-bounce text-lg px-4 py-2">
@@ -271,9 +243,7 @@ export function UltraFastDatabaseGuard() {
               <div className="text-3xl font-bold text-cyan-400 animate-pulse">
                 {metrics.databaseAttacksBlocked.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Database Attacks Blocked
-              </div>
+              <div className="text-xs text-muted-foreground">Database Attacks Blocked</div>
               <Badge className="bg-cyan-600 text-white">
                 <Shield className="h-3 w-3 mr-1" />
                 BLOCKED
@@ -284,9 +254,7 @@ export function UltraFastDatabaseGuard() {
               <div className="text-3xl font-bold text-blue-400">
                 {metrics.attackersWorldwideBanned.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Worldwide Bans
-              </div>
+              <div className="text-xs text-muted-foreground">Worldwide Bans</div>
               <Badge className="bg-blue-600 text-white">
                 <Globe className="h-3 w-3 mr-1" />
                 BANNED
@@ -297,9 +265,7 @@ export function UltraFastDatabaseGuard() {
               <div className="text-3xl font-bold text-green-400">
                 {metrics.nanosecondResponsesExecuted.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Nanosecond Responses
-              </div>
+              <div className="text-xs text-muted-foreground">Nanosecond Responses</div>
               <Badge className="bg-green-600 text-white">
                 <Zap className="h-3 w-3 mr-1" />
                 INSTANT
@@ -310,9 +276,7 @@ export function UltraFastDatabaseGuard() {
               <div className="text-3xl font-bold text-purple-400">
                 {metrics.watersolidPlansDeployed.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Watersolid Plans
-              </div>
+              <div className="text-xs text-muted-foreground">Watersolid Plans</div>
               <Badge className="bg-purple-600 text-white">
                 <Target className="h-3 w-3 mr-1" />
                 DEPLOYED
@@ -323,9 +287,7 @@ export function UltraFastDatabaseGuard() {
               <div className="text-2xl font-bold text-yellow-400">
                 {metrics.speedAdvantageOverOthers}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Speed Advantage
-              </div>
+              <div className="text-xs text-muted-foreground">Speed Advantage</div>
               <Badge className="bg-yellow-600 text-white">
                 <Flame className="h-3 w-3 mr-1" />
                 SUPREME
@@ -334,9 +296,7 @@ export function UltraFastDatabaseGuard() {
 
             <div className="text-center space-y-2">
               <div className="text-2xl font-bold text-red-400">TRILLION</div>
-              <div className="text-xs text-muted-foreground">
-                Century Guarantee
-              </div>
+              <div className="text-xs text-muted-foreground">Century Guarantee</div>
               <Badge className="bg-red-600 text-white animate-pulse">
                 <Brain className="h-3 w-3 mr-1" />
                 FUTURE
@@ -387,8 +347,7 @@ export function UltraFastDatabaseGuard() {
                           {attacker.attackType} from {attacker.ip}
                         </div>
                         <div className="text-sm text-muted-foreground">
-                          Detected in {attacker.detectionTime} seconds •
-                          Watersolid actions:{" "}
+                          Detected in {attacker.detectionTime} seconds • Watersolid actions:{" "}
                           {attacker.watersolidActionsExecuted}/10
                         </div>
                       </div>
@@ -406,9 +365,7 @@ export function UltraFastDatabaseGuard() {
                         {attacker.status}
                       </Badge>
                       {attacker.nanosecondResponse && (
-                        <Badge className="bg-cyan-600 text-white">
-                          NANOSECOND
-                        </Badge>
+                        <Badge className="bg-cyan-600 text-white">NANOSECOND</Badge>
                       )}
                     </div>
                   </div>

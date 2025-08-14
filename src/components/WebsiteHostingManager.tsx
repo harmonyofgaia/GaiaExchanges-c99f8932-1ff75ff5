@@ -133,8 +133,7 @@ export function WebsiteHostingManager() {
       }));
 
       toast.success("✅ Cross-Browser Compatibility Verified!", {
-        description:
-          "Website works perfectly on all browsers and mobile devices",
+        description: "Website works perfectly on all browsers and mobile devices",
         duration: 4000,
       });
     }, 3000);
@@ -261,18 +260,12 @@ export function WebsiteHostingManager() {
           🌐 GAIA WEBSITE HOSTING - Global Access Ready
         </CardTitle>
         <div className="flex flex-wrap gap-2">
-          <Badge
-            className={`${getStatusColor(hostingStatus.status)} text-white`}
-          >
+          <Badge className={`${getStatusColor(hostingStatus.status)} text-white`}>
             {getStatusIcon(hostingStatus.status)}
             <span className="ml-1">{hostingStatus.status.toUpperCase()}</span>
           </Badge>
-          <Badge className="bg-green-600 text-white">
-            SSL: {hostingStatus.ssl ? "✅" : "❌"}
-          </Badge>
-          <Badge className="bg-purple-600 text-white">
-            CDN: {hostingStatus.cdn ? "✅" : "❌"}
-          </Badge>
+          <Badge className="bg-green-600 text-white">SSL: {hostingStatus.ssl ? "✅" : "❌"}</Badge>
+          <Badge className="bg-purple-600 text-white">CDN: {hostingStatus.cdn ? "✅" : "❌"}</Badge>
 
           {isFirefoxAdmin && (
             <Badge className="bg-orange-600 text-white">
@@ -291,12 +284,10 @@ export function WebsiteHostingManager() {
         {/* Admin Firefox Control Info */}
         {isAdmin && currentBrowser !== "firefox" && (
           <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-4">
-            <h4 className="text-orange-400 font-bold mb-2">
-              ⚠️ Admin Access Info
-            </h4>
+            <h4 className="text-orange-400 font-bold mb-2">⚠️ Admin Access Info</h4>
             <p className="text-sm text-orange-300">
-              Full admin controls are optimized for Firefox browser. Current
-              browser: <span className="font-mono">{currentBrowser}</span>
+              Full admin controls are optimized for Firefox browser. Current browser:{" "}
+              <span className="font-mono">{currentBrowser}</span>
             </p>
           </div>
         )}
@@ -309,9 +300,7 @@ export function WebsiteHostingManager() {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
             <div className="text-center">
               <div className="text-green-400">✅ Chrome</div>
-              <div className="text-xs text-muted-foreground">
-                Fully Compatible
-              </div>
+              <div className="text-xs text-muted-foreground">Fully Compatible</div>
             </div>
             <div className="text-center">
               <div className="text-green-400">✅ Firefox</div>
@@ -319,9 +308,7 @@ export function WebsiteHostingManager() {
             </div>
             <div className="text-center">
               <div className="text-green-400">✅ Safari</div>
-              <div className="text-xs text-muted-foreground">
-                iOS/macOS Ready
-              </div>
+              <div className="text-xs text-muted-foreground">iOS/macOS Ready</div>
             </div>
             <div className="text-center">
               <div className="text-green-400">✅ Edge</div>
@@ -343,9 +330,7 @@ export function WebsiteHostingManager() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
                 <div className="text-muted-foreground">Domain:</div>
-                <div className="font-mono text-blue-400">
-                  {hostingStatus.domain}
-                </div>
+                <div className="font-mono text-blue-400">{hostingStatus.domain}</div>
               </div>
               <div>
                 <div className="text-muted-foreground">Status:</div>
@@ -371,9 +356,7 @@ export function WebsiteHostingManager() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 text-center">
-            <div className="text-2xl font-bold text-green-400">
-              {hostingStatus.uptime}%
-            </div>
+            <div className="text-2xl font-bold text-green-400">{hostingStatus.uptime}%</div>
             <div className="text-xs text-muted-foreground">Uptime</div>
             <Progress value={hostingStatus.uptime} className="h-2 mt-2" />
           </div>
@@ -393,22 +376,15 @@ export function WebsiteHostingManager() {
           </div>
 
           <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-4 text-center">
-            <div className="text-2xl font-bold text-orange-400">
-              {hostingStatus.securityLevel}%
-            </div>
+            <div className="text-2xl font-bold text-orange-400">{hostingStatus.securityLevel}%</div>
             <div className="text-xs text-muted-foreground">Security</div>
-            <Progress
-              value={hostingStatus.securityLevel}
-              className="h-2 mt-2"
-            />
+            <Progress value={hostingStatus.securityLevel} className="h-2 mt-2" />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-blue-400">
-              🚀 Deployment & Compatibility
-            </h3>
+            <h3 className="text-lg font-bold text-blue-400">🚀 Deployment & Compatibility</h3>
             <div className="space-y-2">
               <Button
                 onClick={testBrowserCompatibility}
@@ -436,11 +412,7 @@ export function WebsiteHostingManager() {
                 )}
               </Button>
 
-              <Button
-                onClick={visitWebsite}
-                variant="outline"
-                className="w-full"
-              >
+              <Button onClick={visitWebsite} variant="outline" className="w-full">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Visit www.gaiaexchanges.com
               </Button>
@@ -450,9 +422,7 @@ export function WebsiteHostingManager() {
           <div className="space-y-4">
             <h3 className="text-lg font-bold text-green-400">
               🛡️ Security & Auto-Operation
-              {isFirefoxAdmin && (
-                <Monitor className="inline h-4 w-4 ml-2 text-orange-400" />
-              )}
+              {isFirefoxAdmin && <Monitor className="inline h-4 w-4 ml-2 text-orange-400" />}
             </h3>
             <div className="space-y-2">
               <Button
@@ -463,19 +433,12 @@ export function WebsiteHostingManager() {
                 Enable 24/7 Auto-Operation
               </Button>
 
-              <Button
-                onClick={testSecurity}
-                className="w-full bg-green-600 hover:bg-green-700"
-              >
+              <Button onClick={testSecurity} className="w-full bg-green-600 hover:bg-green-700">
                 <Shield className="h-4 w-4 mr-2" />
                 Test Security
               </Button>
 
-              <Button
-                onClick={optimizePerformance}
-                variant="outline"
-                className="w-full"
-              >
+              <Button onClick={optimizePerformance} variant="outline" className="w-full">
                 <Zap className="h-4 w-4 mr-2" />
                 Optimize Performance
               </Button>
@@ -485,9 +448,7 @@ export function WebsiteHostingManager() {
 
         {/* Custom Domain Setup */}
         <div className="bg-gray-900/20 border border-gray-500/30 rounded-lg p-4">
-          <h3 className="text-lg font-bold text-gray-400 mb-4">
-            🌐 Custom Domain Setup
-          </h3>
+          <h3 className="text-lg font-bold text-gray-400 mb-4">🌐 Custom Domain Setup</h3>
           <div className="flex gap-2">
             <Input
               placeholder="Enter custom domain (e.g., mycustomdomain.com)"
@@ -504,14 +465,10 @@ export function WebsiteHostingManager() {
 
         {/* Deployment History */}
         <div className="bg-black/20 border border-gray-500/30 rounded-lg p-4">
-          <h3 className="text-lg font-bold text-gray-400 mb-4">
-            📊 Deployment Statistics
-          </h3>
+          <h3 className="text-lg font-bold text-gray-400 mb-4">📊 Deployment Statistics</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div>
-              <div className="text-xl font-bold text-blue-400">
-                {deploymentStats.totalSites}
-              </div>
+              <div className="text-xl font-bold text-blue-400">{deploymentStats.totalSites}</div>
               <div className="text-xs text-muted-foreground">Total Sites</div>
             </div>
             <div>
@@ -530,9 +487,7 @@ export function WebsiteHostingManager() {
               <div className="text-xl font-bold text-orange-400">
                 {deploymentStats.securityEvents}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Security Events
-              </div>
+              <div className="text-xs text-muted-foreground">Security Events</div>
             </div>
           </div>
         </div>
@@ -541,8 +496,7 @@ export function WebsiteHostingManager() {
         <div className="text-center text-sm text-muted-foreground">
           Last deployment: {hostingStatus.lastDeployment.toLocaleString()}
           <br />
-          🛡️ Protected by Quantum Security • ⚡ Optimized for Speed • 🌍 Global
-          CDN Active
+          🛡️ Protected by Quantum Security • ⚡ Optimized for Speed • 🌍 Global CDN Active
           <br />
           <span className="text-green-400">
             ✅ Domain: www.gaiaexchanges.com is LIVE and globally accessible

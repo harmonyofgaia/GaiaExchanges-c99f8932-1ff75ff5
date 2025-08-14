@@ -32,18 +32,12 @@ export function PowerAnalyticsHub() {
         totalUsers: prev.totalUsers + Math.floor(Math.random() * 10),
         activeUsers: Math.floor(Math.random() * 3000),
         totalRevenue: prev.totalRevenue + Math.random() * 100,
-        growthRate: Math.max(
-          0,
-          Math.min(100, prev.growthRate + (Math.random() - 0.5) * 2),
-        ),
+        growthRate: Math.max(0, Math.min(100, prev.growthRate + (Math.random() - 0.5) * 2)),
         networkActivity: Math.max(
           0,
-          Math.min(100, prev.networkActivity + (Math.random() - 0.5) * 5),
+          Math.min(100, prev.networkActivity + (Math.random() - 0.5) * 5)
         ),
-        securityScore: Math.max(
-          0,
-          Math.min(100, prev.securityScore + (Math.random() - 0.5) * 1),
-        ),
+        securityScore: Math.max(0, Math.min(100, prev.securityScore + (Math.random() - 0.5) * 1)),
       }));
     }, 3000);
 
@@ -118,9 +112,7 @@ export function PowerAnalyticsHub() {
             <div className="text-2xl font-bold text-cyan-400">
               {analytics.networkActivity.toFixed(1)}%
             </div>
-            <div className="text-sm text-muted-foreground">
-              Network Activity
-            </div>
+            <div className="text-sm text-muted-foreground">Network Activity</div>
           </CardContent>
         </Card>
 
@@ -149,9 +141,7 @@ export function PowerAnalyticsHub() {
               <div>
                 <div className="flex justify-between mb-2">
                   <span>User Growth</span>
-                  <span className="text-green-400">
-                    {analytics.growthRate.toFixed(1)}%
-                  </span>
+                  <span className="text-green-400">{analytics.growthRate.toFixed(1)}%</span>
                 </div>
                 <Progress value={analytics.growthRate} className="h-2" />
               </div>
@@ -203,9 +193,7 @@ export function PowerAnalyticsHub() {
               <div>
                 <div className="flex justify-between mb-2">
                   <span>Network Stability</span>
-                  <span className="text-blue-400">
-                    {analytics.networkActivity.toFixed(1)}%
-                  </span>
+                  <span className="text-blue-400">{analytics.networkActivity.toFixed(1)}%</span>
                 </div>
                 <Progress value={analytics.networkActivity} className="h-2" />
               </div>
@@ -227,9 +215,7 @@ export function PowerAnalyticsHub() {
             <div className="text-center p-4 bg-black/30 rounded-lg">
               <Target className="h-12 w-12 mx-auto text-purple-400 mb-2" />
               <div className="text-2xl font-bold text-purple-400">2,847</div>
-              <div className="text-sm text-muted-foreground">
-                Active Sessions
-              </div>
+              <div className="text-sm text-muted-foreground">Active Sessions</div>
             </div>
 
             <div className="text-center p-4 bg-black/30 rounded-lg">

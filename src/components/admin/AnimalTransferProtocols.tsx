@@ -4,15 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import {
-  Heart,
-  Shield,
-  Truck,
-  MapPin,
-  Clock,
-  AlertTriangle,
-  CheckCircle,
-} from "lucide-react";
+import { Heart, Shield, Truck, MapPin, Clock, AlertTriangle, CheckCircle } from "lucide-react";
 
 interface TransferProtocol {
   id: string;
@@ -209,9 +201,7 @@ export function AnimalTransferProtocols() {
     }
   };
 
-  const getStressLevelBadge = (
-    stressLevel: TransferProtocol["stressLevel"],
-  ) => {
+  const getStressLevelBadge = (stressLevel: TransferProtocol["stressLevel"]) => {
     switch (stressLevel) {
       case "minimal":
         return "bg-green-600";
@@ -233,8 +223,8 @@ export function AnimalTransferProtocols() {
             🚛 STRESS-FREE ANIMAL TRANSFER PROTOCOLS
           </CardTitle>
           <p className="text-muted-foreground">
-            Revolutionary animal welfare system ensuring zero-stress
-            transportation to restoration sites
+            Revolutionary animal welfare system ensuring zero-stress transportation to restoration
+            sites
           </p>
         </CardHeader>
       </Card>
@@ -260,14 +250,10 @@ export function AnimalTransferProtocols() {
                       {protocol.animalType}
                     </CardTitle>
                     <div className="flex gap-2">
-                      <Badge
-                        className={getStressLevelBadge(protocol.stressLevel)}
-                      >
+                      <Badge className={getStressLevelBadge(protocol.stressLevel)}>
                         {protocol.stressLevel} stress
                       </Badge>
-                      <Badge className="bg-green-600">
-                        {protocol.successRate}% success
-                      </Badge>
+                      <Badge className="bg-green-600">{protocol.successRate}% success</Badge>
                     </div>
                   </div>
                 </CardHeader>
@@ -297,17 +283,15 @@ export function AnimalTransferProtocols() {
                         Monitoring Requirements
                       </h4>
                       <ul className="space-y-2">
-                        {protocol.monitoringRequirements.map(
-                          (requirement, index) => (
-                            <li
-                              key={index}
-                              className="text-sm text-muted-foreground flex items-start gap-2"
-                            >
-                              <CheckCircle className="h-4 w-4 text-yellow-400 mt-0.5 flex-shrink-0" />
-                              {requirement}
-                            </li>
-                          ),
-                        )}
+                        {protocol.monitoringRequirements.map((requirement, index) => (
+                          <li
+                            key={index}
+                            className="text-sm text-muted-foreground flex items-start gap-2"
+                          >
+                            <CheckCircle className="h-4 w-4 text-yellow-400 mt-0.5 flex-shrink-0" />
+                            {requirement}
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </div>
@@ -315,32 +299,20 @@ export function AnimalTransferProtocols() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 pt-4 border-t border-gray-700">
                     <div className="text-center">
                       <Clock className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-                      <div className="font-semibold text-purple-400">
-                        Max Transport Time
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        {protocol.transportTime}
-                      </div>
+                      <div className="font-semibold text-purple-400">Max Transport Time</div>
+                      <div className="text-sm text-muted-foreground">{protocol.transportTime}</div>
                     </div>
 
                     <div className="text-center">
                       <Heart className="h-8 w-8 mx-auto text-green-400 mb-2" />
-                      <div className="font-semibold text-green-400">
-                        Recovery Time
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        {protocol.recoveryTime}
-                      </div>
+                      <div className="font-semibold text-green-400">Recovery Time</div>
+                      <div className="text-sm text-muted-foreground">{protocol.recoveryTime}</div>
                     </div>
 
                     <div className="text-center">
                       <Shield className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-                      <div className="font-semibold text-blue-400">
-                        Success Rate
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        {protocol.successRate}%
-                      </div>
+                      <div className="font-semibold text-blue-400">Success Rate</div>
+                      <div className="text-sm text-muted-foreground">{protocol.successRate}%</div>
                     </div>
                   </div>
                 </CardContent>
@@ -370,35 +342,25 @@ export function AnimalTransferProtocols() {
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="font-semibold text-cyan-400 mb-3">
-                        🚛 Transfer Details
-                      </h4>
+                      <h4 className="font-semibold text-cyan-400 mb-3">🚛 Transfer Details</h4>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
                           <span>Animal Type:</span>
-                          <span className="font-semibold">
-                            {transfer.animalType}
-                          </span>
+                          <span className="font-semibold">{transfer.animalType}</span>
                         </div>
                         <div className="flex justify-between">
                           <span>Quantity:</span>
-                          <span className="font-semibold">
-                            {transfer.quantity} animals
-                          </span>
+                          <span className="font-semibold">{transfer.quantity} animals</span>
                         </div>
                         <div className="flex justify-between">
                           <span>Protocol:</span>
-                          <span className="font-semibold">
-                            {transfer.protocol}
-                          </span>
+                          <span className="font-semibold">{transfer.protocol}</span>
                         </div>
                       </div>
                     </div>
 
                     <div>
-                      <h4 className="font-semibold text-green-400 mb-3">
-                        📍 Route Information
-                      </h4>
+                      <h4 className="font-semibold text-green-400 mb-3">📍 Route Information</h4>
                       <div className="space-y-2 text-sm">
                         <div>
                           <span className="text-muted-foreground">From:</span>
@@ -406,9 +368,7 @@ export function AnimalTransferProtocols() {
                         </div>
                         <div>
                           <span className="text-muted-foreground">To:</span>
-                          <div className="font-semibold">
-                            {transfer.destination}
-                          </div>
+                          <div className="font-semibold">{transfer.destination}</div>
                         </div>
                       </div>
                     </div>
@@ -416,30 +376,18 @@ export function AnimalTransferProtocols() {
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 pt-4 border-t border-gray-700">
                     <div>
-                      <div className="text-sm text-muted-foreground mb-1">
-                        Departure
-                      </div>
-                      <div className="font-semibold">
-                        {transfer.departureTime}
-                      </div>
+                      <div className="text-sm text-muted-foreground mb-1">Departure</div>
+                      <div className="font-semibold">{transfer.departureTime}</div>
                     </div>
 
                     <div>
-                      <div className="text-sm text-muted-foreground mb-1">
-                        Expected Arrival
-                      </div>
-                      <div className="font-semibold">
-                        {transfer.estimatedArrival}
-                      </div>
+                      <div className="text-sm text-muted-foreground mb-1">Expected Arrival</div>
+                      <div className="font-semibold">{transfer.estimatedArrival}</div>
                     </div>
 
                     <div>
-                      <div className="text-sm text-muted-foreground mb-1">
-                        Stress Level
-                      </div>
-                      <div
-                        className={`font-semibold ${getStressLevelColor(transfer.stressLevel)}`}
-                      >
+                      <div className="text-sm text-muted-foreground mb-1">Stress Level</div>
+                      <div className={`font-semibold ${getStressLevelColor(transfer.stressLevel)}`}>
                         {transfer.stressLevel}%
                       </div>
                     </div>
@@ -448,9 +396,7 @@ export function AnimalTransferProtocols() {
                   <div className="mt-4">
                     <div className="flex justify-between text-sm mb-2">
                       <span>Animal Stress Level</span>
-                      <span
-                        className={getStressLevelColor(transfer.stressLevel)}
-                      >
+                      <span className={getStressLevelColor(transfer.stressLevel)}>
                         {transfer.stressLevel}%
                       </span>
                     </div>
@@ -466,9 +412,7 @@ export function AnimalTransferProtocols() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border border-green-500/30">
               <CardHeader>
-                <CardTitle className="text-lg text-green-400">
-                  🩺 Live Health Monitoring
-                </CardTitle>
+                <CardTitle className="text-lg text-green-400">🩺 Live Health Monitoring</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -501,9 +445,7 @@ export function AnimalTransferProtocols() {
 
             <Card className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border border-blue-500/30">
               <CardHeader>
-                <CardTitle className="text-lg text-blue-400">
-                  🚛 Transport Conditions
-                </CardTitle>
+                <CardTitle className="text-lg text-blue-400">🚛 Transport Conditions</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -542,9 +484,7 @@ export function AnimalTransferProtocols() {
               <CardContent className="p-6 text-center">
                 <Heart className="h-12 w-12 mx-auto text-purple-400 mb-4" />
                 <div className="text-3xl font-bold text-purple-400">96.8%</div>
-                <div className="text-sm text-muted-foreground">
-                  Average Success Rate
-                </div>
+                <div className="text-sm text-muted-foreground">Average Success Rate</div>
               </CardContent>
             </Card>
 
@@ -552,9 +492,7 @@ export function AnimalTransferProtocols() {
               <CardContent className="p-6 text-center">
                 <Shield className="h-12 w-12 mx-auto text-orange-400 mb-4" />
                 <div className="text-3xl font-bold text-orange-400">18%</div>
-                <div className="text-sm text-muted-foreground">
-                  Average Stress Level
-                </div>
+                <div className="text-sm text-muted-foreground">Average Stress Level</div>
               </CardContent>
             </Card>
 
@@ -562,9 +500,7 @@ export function AnimalTransferProtocols() {
               <CardContent className="p-6 text-center">
                 <Clock className="h-12 w-12 mx-auto text-cyan-400 mb-4" />
                 <div className="text-3xl font-bold text-cyan-400">32h</div>
-                <div className="text-sm text-muted-foreground">
-                  Average Recovery Time
-                </div>
+                <div className="text-sm text-muted-foreground">Average Recovery Time</div>
               </CardContent>
             </Card>
           </div>

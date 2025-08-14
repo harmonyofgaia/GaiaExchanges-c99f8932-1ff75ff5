@@ -81,8 +81,7 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
     {
       id: 4,
       user: "DragonMaster99",
-      message:
-        "*waves* Hey everyone! My dragon just evolved to Ancient level! 🐉",
+      message: "*waves* Hey everyone! My dragon just evolved to Ancient level! 🐉",
       timestamp: new Date(Date.now() - 120000),
       type: "emote",
       userLevel: 85,
@@ -181,26 +180,13 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
     "Moonlit Gardens",
   ];
 
-  const quickEmotes = [
-    "👋",
-    "😊",
-    "🌱",
-    "🌊",
-    "🔥",
-    "⚡",
-    "🐉",
-    "❤️",
-    "✨",
-    "🎉",
-  ];
+  const quickEmotes = ["👋", "😊", "🌱", "🌊", "🔥", "⚡", "🐉", "❤️", "✨", "🎉"];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const randomUser =
-        onlineUsers[Math.floor(Math.random() * onlineUsers.length)];
+      const randomUser = onlineUsers[Math.floor(Math.random() * onlineUsers.length)];
       const messageTypes = ["action", "message", "emote", "trade"];
-      const randomType =
-        messageTypes[Math.floor(Math.random() * messageTypes.length)];
+      const randomType = messageTypes[Math.floor(Math.random() * messageTypes.length)];
 
       let randomMessage = "";
       switch (randomType) {
@@ -261,10 +247,7 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
           message: randomMessage,
           timestamp: new Date(),
           type: randomType as any,
-          tokensBurned:
-            randomType === "action"
-              ? Math.floor(Math.random() * 100) + 10
-              : undefined,
+          tokensBurned: randomType === "action" ? Math.floor(Math.random() * 100) + 10 : undefined,
           userLevel: randomUser.level,
           userBadge: randomUser.badge,
           avatar: randomUser.avatar,
@@ -339,14 +322,10 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
   };
 
   const getUserBadgeIcon = (badge: string) => {
-    if (badge.includes("Dragon"))
-      return <Crown className="h-3 w-3 text-purple-400" />;
-    if (badge.includes("Ocean"))
-      return <Waves className="h-3 w-3 text-blue-400" />;
-    if (badge.includes("Guardian"))
-      return <Shield className="h-3 w-3 text-green-400" />;
-    if (badge.includes("Master"))
-      return <Star className="h-3 w-3 text-yellow-400" />;
+    if (badge.includes("Dragon")) return <Crown className="h-3 w-3 text-purple-400" />;
+    if (badge.includes("Ocean")) return <Waves className="h-3 w-3 text-blue-400" />;
+    if (badge.includes("Guardian")) return <Shield className="h-3 w-3 text-green-400" />;
+    if (badge.includes("Master")) return <Star className="h-3 w-3 text-yellow-400" />;
     return <Heart className="h-3 w-3 text-pink-400" />;
   };
 
@@ -381,9 +360,7 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
           <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
             <div className="text-sm text-green-400">
               <strong>Powered by GAIA:</strong>{" "}
-              <code className="font-mono text-xs">
-                {GAIA_TOKEN.CONTRACT_ADDRESS}
-              </code>
+              <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
             </div>
           </div>
         </CardContent>
@@ -439,14 +416,10 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-1">
-                            <span className="text-xs font-medium truncate">
-                              {user.name}
-                            </span>
+                            <span className="text-xs font-medium truncate">{user.name}</span>
                             {getUserBadgeIcon(user.badge)}
                           </div>
-                          <div className="text-xs text-muted-foreground">
-                            Lv.{user.level}
-                          </div>
+                          <div className="text-xs text-muted-foreground">Lv.{user.level}</div>
                         </div>
                       </div>
                     </div>
@@ -462,9 +435,7 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
           {/* Chat Messages */}
           <Card className="border-green-500/30">
             <CardHeader>
-              <CardTitle className="text-green-400 text-sm">
-                Chat Room: {selectedRoom}
-              </CardTitle>
+              <CardTitle className="text-green-400 text-sm">Chat Room: {selectedRoom}</CardTitle>
             </CardHeader>
             <CardContent>
               <ScrollArea className="h-80 w-full">
@@ -476,15 +447,11 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
                     >
                       <div className="flex items-start gap-2">
                         <div className="flex-shrink-0">
-                          {msg.avatar && (
-                            <span className="text-lg">{msg.avatar}</span>
-                          )}
+                          {msg.avatar && <span className="text-lg">{msg.avatar}</span>}
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="font-bold text-sm">
-                              {msg.user}
-                            </span>
+                            <span className="font-bold text-sm">{msg.user}</span>
                             {msg.userLevel && (
                               <Badge className="bg-gray-600 text-white text-xs">
                                 Lv.{msg.userLevel}
@@ -503,9 +470,7 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
                               </Badge>
                             )}
                             {msg.type === "trade" && (
-                              <Badge className="bg-yellow-600 text-white text-xs">
-                                💰 TRADE
-                              </Badge>
+                              <Badge className="bg-yellow-600 text-white text-xs">💰 TRADE</Badge>
                             )}
                             {msg.tokensBurned && (
                               <Badge className="bg-green-600 text-white text-xs">
@@ -530,9 +495,7 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
           <Card className="border-yellow-500/30">
             <CardContent className="pt-4">
               <div className="flex flex-wrap gap-2 mb-3">
-                <span className="text-sm text-muted-foreground">
-                  Quick Emotes:
-                </span>
+                <span className="text-sm text-muted-foreground">Quick Emotes:</span>
                 {quickEmotes.map((emote, index) => (
                   <Button
                     key={index}
@@ -559,16 +522,13 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
                   onKeyPress={(e) => e.key === "Enter" && sendMessage()}
                   className="flex-1"
                 />
-                <Button
-                  onClick={sendMessage}
-                  className="bg-blue-600 hover:bg-blue-700"
-                >
+                <Button onClick={sendMessage} className="bg-blue-600 hover:bg-blue-700">
                   <Send className="h-4 w-4" />
                 </Button>
               </div>
               <div className="mt-2 text-xs text-muted-foreground">
-                💡 Tips: Use *action* for emotes • WTS = Want to Sell • WTB =
-                Want to Buy • WTT = Want to Trade
+                💡 Tips: Use *action* for emotes • WTS = Want to Sell • WTB = Want to Buy • WTT =
+                Want to Trade
               </div>
             </CardContent>
           </Card>

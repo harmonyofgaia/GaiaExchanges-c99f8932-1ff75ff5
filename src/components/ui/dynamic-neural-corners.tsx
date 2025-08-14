@@ -11,12 +11,7 @@ export function DynamicNeuralCorners() {
   const [effects, setEffects] = useState<CornerEffect[]>([]);
 
   useEffect(() => {
-    const corners = [
-      "top-left",
-      "top-right",
-      "bottom-left",
-      "bottom-right",
-    ] as const;
+    const corners = ["top-left", "top-right", "bottom-left", "bottom-right"] as const;
     const colors = ["#00ffff", "#ff00ff", "#00ff00", "#ffff00"];
 
     const newEffects = corners.map((corner, index) => ({
@@ -33,7 +28,7 @@ export function DynamicNeuralCorners() {
         prev.map((effect) => ({
           ...effect,
           intensity: Math.random() * 0.7 + 0.2,
-        })),
+        }))
       );
     }, 2000);
 
@@ -57,9 +52,9 @@ export function DynamicNeuralCorners() {
           style={{
             background: `radial-gradient(circle at ${
               effect.corner.includes("left") ? "0%" : "100%"
-            } ${
-              effect.corner.includes("top") ? "0%" : "100%"
-            }, ${effect.color}${Math.floor(effect.intensity * 255)
+            } ${effect.corner.includes("top") ? "0%" : "100%"}, ${effect.color}${Math.floor(
+              effect.intensity * 255
+            )
               .toString(16)
               .padStart(2, "0")} 0%, transparent 70%)`,
             filter: "blur(2px)",
@@ -79,11 +74,7 @@ export function DynamicNeuralCorners() {
             height="50"
             patternUnits="userSpaceOnUse"
           >
-            <path
-              d="M25,5 L25,45 M5,25 L45,25"
-              stroke="rgba(0,255,255,0.3)"
-              strokeWidth="1"
-            />
+            <path d="M25,5 L25,45 M5,25 L45,25" stroke="rgba(0,255,255,0.3)" strokeWidth="1" />
             <circle cx="25" cy="25" r="3" fill="rgba(0,255,255,0.5)" />
             <circle cx="25" cy="5" r="2" fill="rgba(255,0,255,0.4)" />
             <circle cx="25" cy="45" r="2" fill="rgba(255,0,255,0.4)" />
@@ -93,14 +84,7 @@ export function DynamicNeuralCorners() {
         </defs>
 
         {/* Top corners */}
-        <rect
-          x="0"
-          y="0"
-          width="100"
-          height="100"
-          fill="url(#neural-circuit)"
-          opacity="0.3"
-        />
+        <rect x="0" y="0" width="100" height="100" fill="url(#neural-circuit)" opacity="0.3" />
         <rect
           x="calc(100% - 100px)"
           y="0"

@@ -39,8 +39,7 @@ export function QuantumSecurityEngine() {
         adminProtectionLevel: 100, // Admin always fully protected
         systemIntegrity: 100, // System always perfect
         communitySecurityScore: 100, // Community always safe
-        walletsProtected:
-          prev.walletsProtected + Math.floor(Math.random() * 100),
+        walletsProtected: prev.walletsProtected + Math.floor(Math.random() * 100),
         quantumSecurityScore: 100, // Maximum quantum security
       }));
 
@@ -64,15 +63,11 @@ export function QuantumSecurityEngine() {
       setIsActive(true);
     };
 
-    securityEngineInterval.current = setInterval(
-      runQuantumSecurityEngine,
-      4000,
-    );
+    securityEngineInterval.current = setInterval(runQuantumSecurityEngine, 4000);
     runQuantumSecurityEngine();
 
     return () => {
-      if (securityEngineInterval.current)
-        clearInterval(securityEngineInterval.current);
+      if (securityEngineInterval.current) clearInterval(securityEngineInterval.current);
     };
   }, []);
 

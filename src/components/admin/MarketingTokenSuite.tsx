@@ -5,15 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  TrendingUp,
-  Coins,
-  Users,
-  Send,
-  Bot,
-  Flame,
-  Calculator,
-} from "lucide-react";
+import { TrendingUp, Coins, Users, Send, Bot, Flame, Calculator } from "lucide-react";
 import { toast } from "sonner";
 
 export function MarketingTokenSuite() {
@@ -56,8 +48,7 @@ export function MarketingTokenSuite() {
 
       setSocialMetrics((prev) => ({
         ...prev,
-        twitter_followers:
-          prev.twitter_followers + Math.floor(Math.random() * 3),
+        twitter_followers: prev.twitter_followers + Math.floor(Math.random() * 3),
         reddit_members: prev.reddit_members + Math.floor(Math.random() * 2),
         discord_members: prev.discord_members + Math.floor(Math.random() * 5),
         telegram_members: prev.telegram_members + Math.floor(Math.random() * 2),
@@ -75,8 +66,7 @@ export function MarketingTokenSuite() {
 
   const launchSocialCampaign = (platform: string) => {
     toast.success(`📱 ${platform} campaign launched!`, {
-      description:
-        "Auto-engagement bot activated - Viral marketing in progress",
+      description: "Auto-engagement bot activated - Viral marketing in progress",
     });
   };
 
@@ -93,9 +83,7 @@ export function MarketingTokenSuite() {
       burned: prev.burned + burnAmount,
       circulating: prev.circulating - burnAmount,
     }));
-    toast.success(
-      `🔥 Token Burn Executed: ${burnAmount.toLocaleString()} GAiA tokens burned!`,
-    );
+    toast.success(`🔥 Token Burn Executed: ${burnAmount.toLocaleString()} GAiA tokens burned!`);
   };
 
   return (
@@ -172,9 +160,7 @@ export function MarketingTokenSuite() {
               <div className="mt-4 p-3 bg-green-600/20 rounded-lg">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-green-400 font-medium">
-                    LIVE API CONNECTION ACTIVE
-                  </span>
+                  <span className="text-green-400 font-medium">LIVE API CONNECTION ACTIVE</span>
                 </div>
                 <p className="text-sm text-green-300 mt-1">
                   Real-time data streaming from Pump.fun
@@ -256,12 +242,8 @@ export function MarketingTokenSuite() {
                 <Button className="bg-yellow-600 hover:bg-yellow-700">
                   👥 Find Crypto Influencers
                 </Button>
-                <Button className="bg-pink-600 hover:bg-pink-700">
-                  💰 Auto Negotiate Deals
-                </Button>
-                <Button className="bg-indigo-600 hover:bg-indigo-700">
-                  📊 Track Performance
-                </Button>
+                <Button className="bg-pink-600 hover:bg-pink-700">💰 Auto Negotiate Deals</Button>
+                <Button className="bg-indigo-600 hover:bg-indigo-700">📊 Track Performance</Button>
               </div>
             </div>
           </TabsContent>
@@ -317,18 +299,14 @@ export function MarketingTokenSuite() {
                 📰 Press Release Distribution
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Button className="bg-red-600 hover:bg-red-700">
-                  📰 CoinDesk Release
-                </Button>
+                <Button className="bg-red-600 hover:bg-red-700">📰 CoinDesk Release</Button>
                 <Button className="bg-orange-600 hover:bg-orange-700">
                   📺 CoinTelegraph Feature
                 </Button>
                 <Button className="bg-purple-600 hover:bg-purple-700">
                   🗞️ CryptoNews Distribution
                 </Button>
-                <Button className="bg-blue-600 hover:bg-blue-700">
-                  📡 Global Media Blast
-                </Button>
+                <Button className="bg-blue-600 hover:bg-blue-700">📡 Global Media Blast</Button>
               </div>
             </div>
           </TabsContent>
@@ -363,23 +341,16 @@ export function MarketingTokenSuite() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-3 bg-red-600/20 rounded-lg">
                   <div>
-                    <h4 className="font-medium text-red-400">
-                      🔥 Auto Token Burn
-                    </h4>
+                    <h4 className="font-medium text-red-400">🔥 Auto Token Burn</h4>
                     <p className="text-sm text-gray-400">
                       Automatic burning based on trading activity
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Badge
-                      className={autoBurnActive ? "bg-green-600" : "bg-red-600"}
-                    >
+                    <Badge className={autoBurnActive ? "bg-green-600" : "bg-red-600"}>
                       {autoBurnActive ? "ACTIVE" : "INACTIVE"}
                     </Badge>
-                    <Button
-                      onClick={executeTokenBurn}
-                      className="bg-red-600 hover:bg-red-700"
-                    >
+                    <Button onClick={executeTokenBurn} className="bg-red-600 hover:bg-red-700">
                       <Flame className="h-4 w-4 mr-2" />
                       Manual Burn
                     </Button>
@@ -388,12 +359,8 @@ export function MarketingTokenSuite() {
 
                 <div className="flex items-center justify-between p-3 bg-purple-600/20 rounded-lg">
                   <div>
-                    <h4 className="font-medium text-purple-400">
-                      💎 Staking System
-                    </h4>
-                    <p className="text-sm text-gray-400">
-                      Current APY: {stakingAPY}%
-                    </p>
+                    <h4 className="font-medium text-purple-400">💎 Staking System</h4>
+                    <p className="text-sm text-gray-400">Current APY: {stakingAPY}%</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="text-right">
@@ -410,15 +377,11 @@ export function MarketingTokenSuite() {
                 </div>
 
                 <div className="p-3 bg-green-600/20 rounded-lg">
-                  <h4 className="font-medium text-green-400 mb-2">
-                    💰 Market Cap Tracker
-                  </h4>
+                  <h4 className="font-medium text-green-400 mb-2">💰 Market Cap Tracker</h4>
                   <div className="text-3xl font-bold text-green-400">
                     ${tokenMetrics.marketCap.toLocaleString()}
                   </div>
-                  <div className="text-sm text-gray-400">
-                    Current Market Cap
-                  </div>
+                  <div className="text-sm text-gray-400">Current Market Cap</div>
                 </div>
               </div>
             </div>

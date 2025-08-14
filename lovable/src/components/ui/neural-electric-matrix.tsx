@@ -67,8 +67,7 @@ export function NeuralElectricMatrix() {
       newNodes.forEach((node, index) => {
         newNodes.slice(index + 1).forEach((otherNode) => {
           const distance = Math.sqrt(
-            Math.pow(node.x - otherNode.x, 2) +
-              Math.pow(node.y - otherNode.y, 2),
+            Math.pow(node.x - otherNode.x, 2) + Math.pow(node.y - otherNode.y, 2)
           );
 
           if (distance < 200 && Math.random() < 0.3) {
@@ -139,14 +138,7 @@ export function NeuralElectricMatrix() {
         const radius = node.radius * pulse;
 
         // Outer glow
-        const gradient = ctx.createRadialGradient(
-          node.x,
-          node.y,
-          0,
-          node.x,
-          node.y,
-          radius * 3,
-        );
+        const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, radius * 3);
         gradient.addColorStop(
           0,
           `rgba(${
@@ -159,7 +151,7 @@ export function NeuralElectricMatrix() {
                   : node.color === "#00ff00"
                     ? "0,255,0"
                     : "255,0,128"
-          }, ${node.pulseIntensity * 0.3})`,
+          }, ${node.pulseIntensity * 0.3})`
         );
         gradient.addColorStop(1, "rgba(0,0,0,0)");
 
@@ -187,19 +179,12 @@ export function NeuralElectricMatrix() {
       const mouseDistance = 150;
       nodes.forEach((node) => {
         const distance = Math.sqrt(
-          Math.pow(node.x - mousePos.x, 2) + Math.pow(node.y - mousePos.y, 2),
+          Math.pow(node.x - mousePos.x, 2) + Math.pow(node.y - mousePos.y, 2)
         );
 
         if (distance < mouseDistance) {
           const influence = 1 - distance / mouseDistance;
-          const gradient = ctx.createRadialGradient(
-            node.x,
-            node.y,
-            0,
-            node.x,
-            node.y,
-            30,
-          );
+          const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, 30);
           gradient.addColorStop(0, `rgba(255,255,255,${influence * 0.5})`);
           gradient.addColorStop(1, "rgba(255,255,255,0)");
 
@@ -231,10 +216,6 @@ export function NeuralElectricMatrix() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: -1 }}
-    />
+    <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none" style={{ zIndex: -1 }} />
   );
 }

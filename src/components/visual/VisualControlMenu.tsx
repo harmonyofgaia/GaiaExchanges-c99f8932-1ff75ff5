@@ -5,16 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Settings,
-  Palette,
-  Brush,
-  LayoutDashboard,
-  Code,
-  Wand2,
-  Lock,
-  Unlock,
-} from "lucide-react";
+import { Settings, Palette, Brush, LayoutDashboard, Code, Wand2, Lock, Unlock } from "lucide-react";
 
 import { TemplateSelector } from "./TemplateSelector";
 import { LockToggle } from "./LockToggle";
@@ -39,11 +30,7 @@ export function VisualControlMenu() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="site-title">Site Title</Label>
-            <Input
-              id="site-title"
-              defaultValue="GAiA - Harmony of Life"
-              disabled={isLocked}
-            />
+            <Input id="site-title" defaultValue="GAiA - Harmony of Life" disabled={isLocked} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="site-description">Site Description</Label>
@@ -67,32 +54,17 @@ export function VisualControlMenu() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="primary-color">Primary Color</Label>
-              <Input
-                id="primary-color"
-                type="color"
-                defaultValue="#0070f3"
-                disabled={isLocked}
-              />
+              <Input id="primary-color" type="color" defaultValue="#0070f3" disabled={isLocked} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="secondary-color">Secondary Color</Label>
-              <Input
-                id="secondary-color"
-                type="color"
-                defaultValue="#6c757d"
-                disabled={isLocked}
-              />
+              <Input id="secondary-color" type="color" defaultValue="#6c757d" disabled={isLocked} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="accent-color">Accent Color</Label>
-              <Input
-                id="accent-color"
-                type="color"
-                defaultValue="#ff4581"
-                disabled={isLocked}
-              />
+              <Input id="accent-color" type="color" defaultValue="#ff4581" disabled={isLocked} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="background-color">Background Color</Label>
@@ -117,21 +89,12 @@ export function VisualControlMenu() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="font-family">Font Family</Label>
-            <Input
-              id="font-family"
-              defaultValue="Inter, sans-serif"
-              disabled={isLocked}
-            />
+            <Input id="font-family" defaultValue="Inter, sans-serif" disabled={isLocked} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="font-size">Font Size</Label>
-              <Input
-                id="font-size"
-                type="number"
-                defaultValue="16"
-                disabled={isLocked}
-              />
+              <Input id="font-size" type="number" defaultValue="16" disabled={isLocked} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="line-height">Line Height</Label>
@@ -157,31 +120,16 @@ export function VisualControlMenu() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="container-width">Container Width</Label>
-            <Input
-              id="container-width"
-              type="number"
-              defaultValue="1200"
-              disabled={isLocked}
-            />
+            <Input id="container-width" type="number" defaultValue="1200" disabled={isLocked} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="padding">Padding</Label>
-              <Input
-                id="padding"
-                type="number"
-                defaultValue="16"
-                disabled={isLocked}
-              />
+              <Input id="padding" type="number" defaultValue="16" disabled={isLocked} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="margin">Margin</Label>
-              <Input
-                id="margin"
-                type="number"
-                defaultValue="24"
-                disabled={isLocked}
-              />
+              <Input id="margin" type="number" defaultValue="24" disabled={isLocked} />
             </div>
           </div>
         </CardContent>
@@ -206,10 +154,7 @@ export function VisualControlMenu() {
         </CardContent>
       </Card>
 
-      <TemplateSelector
-        onTemplateApplied={handleTemplateApplied}
-        isLocked={isLocked}
-      />
+      <TemplateSelector onTemplateApplied={handleTemplateApplied} isLocked={isLocked} />
 
       <div className="flex justify-end">
         <LockToggle isLocked={isLocked} onLockToggle={toggleLock} />

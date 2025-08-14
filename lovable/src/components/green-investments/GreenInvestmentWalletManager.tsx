@@ -13,16 +13,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Leaf,
-  DollarSign,
-  Percent,
-  Zap,
-  Shield,
-  TrendingUp,
-  Globe,
-  TreePine,
-} from "lucide-react";
+import { Leaf, DollarSign, Percent, Zap, Shield, TrendingUp, Globe, TreePine } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -124,10 +115,7 @@ export function GreenInvestmentWalletManager() {
 
     fetchUserConfig();
 
-    const total = greenProjects.reduce(
-      (sum, project) => sum + project.total_received,
-      0,
-    );
+    const total = greenProjects.reduce((sum, project) => sum + project.total_received, 0);
     setTotalAllocated(total);
 
     // Simulate live fee processing
@@ -191,8 +179,7 @@ export function GreenInvestmentWalletManager() {
       }
 
       toast.success("🌱 Green Investment Configuration Saved!", {
-        description:
-          "Your fees will now support environmental projects automatically.",
+        description: "Your fees will now support environmental projects automatically.",
         duration: 4000,
       });
     } catch (error) {
@@ -236,12 +223,10 @@ export function GreenInvestmentWalletManager() {
             🌱 Green Investment Fee Configuration
           </CardTitle>
           <p className="text-green-300">
-            Configure how your transaction fees automatically support global
-            environmental initiatives
+            Configure how your transaction fees automatically support global environmental
+            initiatives
             {!user && (
-              <span className="text-yellow-400 ml-2">
-                (Login required for custom settings)
-              </span>
+              <span className="text-yellow-400 ml-2">(Login required for custom settings)</span>
             )}
           </p>
         </CardHeader>
@@ -253,8 +238,7 @@ export function GreenInvestmentWalletManager() {
                 🌱 Green Project Support (Recommended)
               </Label>
               <p className="text-sm text-muted-foreground">
-                All fees automatically go to verified environmental and
-                sustainability projects
+                All fees automatically go to verified environmental and sustainability projects
               </p>
             </div>
             <Switch
@@ -262,9 +246,7 @@ export function GreenInvestmentWalletManager() {
               onCheckedChange={(checked) =>
                 setConfig({
                   ...config,
-                  preferred_fee_destination: checked
-                    ? "green_projects"
-                    : "vault",
+                  preferred_fee_destination: checked ? "green_projects" : "vault",
                   zero_fee_enabled: false,
                 })
               }
@@ -274,19 +256,14 @@ export function GreenInvestmentWalletManager() {
           {/* Zero Fee Option */}
           <div className="flex items-center justify-between p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
             <div>
-              <Label className="text-base font-medium text-blue-400">
-                Zero Fee Mode
-              </Label>
+              <Label className="text-base font-medium text-blue-400">Zero Fee Mode</Label>
               <p className="text-sm text-muted-foreground">
-                Enable completely free transactions (no environmental
-                contribution)
+                Enable completely free transactions (no environmental contribution)
               </p>
             </div>
             <Switch
               checked={config.zero_fee_enabled}
-              onCheckedChange={(checked) =>
-                setConfig({ ...config, zero_fee_enabled: checked })
-              }
+              onCheckedChange={(checked) => setConfig({ ...config, zero_fee_enabled: checked })}
             />
           </div>
 
@@ -316,8 +293,7 @@ export function GreenInvestmentWalletManager() {
                   </Badge>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Recommended: 0.1% (0.001) - Small fees that make big
-                  environmental impact
+                  Recommended: 0.1% (0.001) - Small fees that make big environmental impact
                 </p>
               </div>
 
@@ -337,15 +313,9 @@ export function GreenInvestmentWalletManager() {
                     <SelectItem value="green_projects">
                       🌱 Green Projects (Recommended - Save Earth)
                     </SelectItem>
-                    <SelectItem value="animal_welfare">
-                      🐾 Animal Welfare (Save Animals)
-                    </SelectItem>
-                    <SelectItem value="vault">
-                      🏦 Community Vault (Admin Surprises)
-                    </SelectItem>
-                    <SelectItem value="humanity">
-                      ❤️ Humanity Fund (Global Aid)
-                    </SelectItem>
+                    <SelectItem value="animal_welfare">🐾 Animal Welfare (Save Animals)</SelectItem>
+                    <SelectItem value="vault">🏦 Community Vault (Admin Surprises)</SelectItem>
+                    <SelectItem value="humanity">❤️ Humanity Fund (Global Aid)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -393,8 +363,8 @@ export function GreenInvestmentWalletManager() {
             🌍 Green Investment Project Distribution System
           </CardTitle>
           <p className="text-emerald-300">
-            All community fees are automatically reinvested into global
-            environmental and sustainability projects
+            All community fees are automatically reinvested into global environmental and
+            sustainability projects
           </p>
           <div className="bg-black/30 p-3 rounded-lg">
             <div className="text-sm text-muted-foreground mb-1">
@@ -411,27 +381,17 @@ export function GreenInvestmentWalletManager() {
               <div className="text-2xl font-bold text-green-400">
                 {totalAllocated.toLocaleString()} GAIA
               </div>
-              <div className="text-xs text-muted-foreground">
-                Total Allocated
-              </div>
+              <div className="text-xs text-muted-foreground">Total Allocated</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-blue-900/30">
-              <div className="text-2xl font-bold text-blue-400">
-                {greenProjects.length}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Active Projects
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{greenProjects.length}</div>
+              <div className="text-xs text-muted-foreground">Active Projects</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-emerald-900/30">
               <div className="text-2xl font-bold text-emerald-400">
-                {greenProjects
-                  .reduce((sum, p) => sum + p.carbon_offset, 0)
-                  .toLocaleString()}
+                {greenProjects.reduce((sum, p) => sum + p.carbon_offset, 0).toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                CO2 Offset (tons)
-              </div>
+              <div className="text-xs text-muted-foreground">CO2 Offset (tons)</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-orange-900/30">
               <div className="text-2xl font-bold text-orange-400">
@@ -466,43 +426,30 @@ export function GreenInvestmentWalletManager() {
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h3 className="font-bold text-lg text-green-400">
-                        {project.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {project.description}
-                      </p>
+                      <h3 className="font-bold text-lg text-green-400">{project.name}</h3>
+                      <p className="text-sm text-muted-foreground mb-2">{project.description}</p>
                       <Badge className="bg-emerald-600 text-white">
                         <TreePine className="h-3 w-3 mr-1" />
                         {project.carbon_offset.toLocaleString()} tons CO2
                       </Badge>
                     </div>
-                    <Badge
-                      className={`${getStatusColor(project.project_status)} text-white`}
-                    >
+                    <Badge className={`${getStatusColor(project.project_status)} text-white`}>
                       {project.project_status.toUpperCase()}
                     </Badge>
                   </div>
 
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">
-                        Allocation:
-                      </span>
+                      <span className="text-sm text-muted-foreground">Allocation:</span>
                       <span className="font-bold text-green-400">
                         {project.allocation_percentage}%
                       </span>
                     </div>
 
-                    <Progress
-                      value={project.allocation_percentage}
-                      className="h-2"
-                    />
+                    <Progress value={project.allocation_percentage} className="h-2" />
 
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">
-                        Total Received:
-                      </span>
+                      <span className="text-sm text-muted-foreground">Total Received:</span>
                       <span className="font-bold">
                         {project.total_received.toLocaleString()} GAIA
                       </span>
@@ -521,16 +468,13 @@ export function GreenInvestmentWalletManager() {
           <div className="text-center space-y-4">
             <div className="flex items-center justify-center gap-2">
               <Shield className="h-6 w-6 text-blue-400" />
-              <h3 className="text-xl font-bold text-blue-400">
-                Automatic Green Investment System
-              </h3>
+              <h3 className="text-xl font-bold text-blue-400">Automatic Green Investment System</h3>
               <Globe className="h-6 w-6 text-green-400" />
             </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              All transaction fees are automatically distributed to verified
-              environmental projects according to the allocation percentages
-              shown above. This creates a sustainable ecosystem where every
-              trade helps protect our planet and combat climate change.
+              All transaction fees are automatically distributed to verified environmental projects
+              according to the allocation percentages shown above. This creates a sustainable
+              ecosystem where every trade helps protect our planet and combat climate change.
             </p>
             <div className="flex justify-center gap-4 text-xs flex-wrap">
               <Badge className="bg-green-600 text-white">

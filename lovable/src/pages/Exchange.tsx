@@ -45,12 +45,7 @@ import { SecurityCenter } from "@/components/SecurityCenter";
 import { GaiaLogo } from "@/components/GaiaLogo";
 import { CommunityVault } from "@/components/CommunityVault";
 import { toast } from "sonner";
-import {
-  GAIA_TOKEN,
-  GAIA_METRICS,
-  formatGaiaPrice,
-  formatGaiaNumber,
-} from "@/constants/gaia";
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from "@/constants/gaia";
 
 // Token configuration for comprehensive trading
 const supportedTokens = [
@@ -177,7 +172,7 @@ export default function Exchange() {
           price: coin.price * (1 + (Math.random() - 0.5) * 0.002),
           change24h: coin.change24h + (Math.random() - 0.5) * 0.1,
           volume: coin.volume * (1 + (Math.random() - 0.5) * 0.05),
-        })),
+        }))
       );
 
       setSwapRate((prev) => {
@@ -217,7 +212,7 @@ export default function Exchange() {
 
     setTimeout(() => {
       toast.success(
-        `Successfully swapped ${fromAmount} ${fromToken.symbol} for ${toAmount} ${toToken.symbol}`,
+        `Successfully swapped ${fromAmount} ${fromToken.symbol} for ${toAmount} ${toToken.symbol}`
       );
       setIsSwapping(false);
       setFromAmount("");
@@ -227,13 +222,10 @@ export default function Exchange() {
 
   const handleDownloadApp = (platform: string) => {
     const downloadLinks = {
-      windows:
-        "https://releases.harmonyofgaia.net/gaia-exchanges-windows-x64.exe",
-      macos:
-        "https://releases.harmonyofgaia.net/gaia-exchanges-macos-universal.dmg",
+      windows: "https://releases.harmonyofgaia.net/gaia-exchanges-windows-x64.exe",
+      macos: "https://releases.harmonyofgaia.net/gaia-exchanges-macos-universal.dmg",
       android: "https://releases.harmonyofgaia.net/gaia-exchanges-android.apk",
-      linux:
-        "https://releases.harmonyofgaia.net/gaia-exchanges-linux-amd64.deb",
+      linux: "https://releases.harmonyofgaia.net/gaia-exchanges-linux-amd64.deb",
       ios: "https://apps.apple.com/search?term=gaia+exchanges",
       web: "https://app.gaiaexchanges.com",
     };
@@ -295,9 +287,7 @@ export default function Exchange() {
                 <div className="text-2xl font-bold text-green-400">
                   {metrics.health.toFixed(1)}%
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Network Health
-                </div>
+                <div className="text-xs text-muted-foreground">Network Health</div>
               </CardContent>
             </Card>
             <Card className="bg-blue-900/30 border-blue-500/50">
@@ -305,36 +295,24 @@ export default function Exchange() {
                 <div className="text-2xl font-bold text-blue-400">
                   {metrics.transactions.toLocaleString()}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Transactions
-                </div>
+                <div className="text-xs text-muted-foreground">Transactions</div>
               </CardContent>
             </Card>
             <Card className="bg-purple-900/30 border-purple-500/50">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-purple-400">
-                  {metrics.nodes}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Network Nodes
-                </div>
+                <div className="text-2xl font-bold text-purple-400">{metrics.nodes}</div>
+                <div className="text-xs text-muted-foreground">Network Nodes</div>
               </CardContent>
             </Card>
             <Card className="bg-red-900/30 border-red-500/50">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-red-400">
-                  {metrics.security}%
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  Security Score
-                </div>
+                <div className="text-2xl font-bold text-red-400">{metrics.security}%</div>
+                <div className="text-xs text-muted-foreground">Security Score</div>
               </CardContent>
             </Card>
             <Card className="bg-yellow-900/30 border-yellow-500/50">
               <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-yellow-400">
-                  {metrics.uptime}%
-                </div>
+                <div className="text-2xl font-bold text-yellow-400">{metrics.uptime}%</div>
                 <div className="text-xs text-muted-foreground">Uptime</div>
               </CardContent>
             </Card>
@@ -351,9 +329,7 @@ export default function Exchange() {
                 <div className="text-2xl font-bold text-orange-400">
                   {metrics.users.toLocaleString()}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Active Users
-                </div>
+                <div className="text-xs text-muted-foreground">Active Users</div>
               </CardContent>
             </Card>
             <Card className="bg-pink-900/30 border-pink-500/50">
@@ -361,9 +337,7 @@ export default function Exchange() {
                 <div className="text-2xl font-bold text-pink-400">
                   {metrics.trades.toLocaleString()}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Total Trades
-                </div>
+                <div className="text-xs text-muted-foreground">Total Trades</div>
               </CardContent>
             </Card>
           </div>
@@ -387,17 +361,12 @@ export default function Exchange() {
                 <CardContent>
                   <div className="space-y-3">
                     {marketData.map((coin) => (
-                      <div
-                        key={coin.symbol}
-                        className="flex items-center justify-between"
-                      >
+                      <div key={coin.symbol} className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <div className="font-mono text-sm">{coin.symbol}</div>
                         </div>
                         <div className="text-right">
-                          <div className="font-bold">
-                            {formatGaiaPrice(coin.price)}
-                          </div>
+                          <div className="font-bold">{formatGaiaPrice(coin.price)}</div>
                           <div
                             className={`text-sm flex items-center gap-1 ${coin.change24h >= 0 ? "text-green-400" : "text-red-400"}`}
                           >
@@ -438,9 +407,7 @@ export default function Exchange() {
                       <Badge className="bg-green-600">Active</Badge>
                     </div>
                     <div className="space-y-2">
-                      <div className="text-sm text-muted-foreground">
-                        Recent Alerts:
-                      </div>
+                      <div className="text-sm text-muted-foreground">Recent Alerts:</div>
                       {notifications.slice(0, 2).map((notification, idx) => (
                         <div
                           key={idx}
@@ -470,9 +437,7 @@ export default function Exchange() {
                 <div className="text-center">
                   <div className="text-sm text-blue-400 mt-2">
                     <strong>Contract:</strong>{" "}
-                    <code className="font-mono text-xs">
-                      {GAIA_TOKEN.CONTRACT_ADDRESS}
-                    </code>
+                    <code className="font-mono text-xs">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
                   </div>
                   <div className="text-sm text-green-400 mt-1">
                     <strong>Official Website:</strong> www.gaiaexchanges.com
@@ -527,21 +492,13 @@ export default function Exchange() {
 
                 <div className="mt-6 flex justify-center gap-4 flex-wrap">
                   <Button variant="outline" size="sm" asChild>
-                    <a
-                      href={GAIA_TOKEN.PUMP_FUN_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={GAIA_TOKEN.PUMP_FUN_URL} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4 mr-2" />
                       Trade on Pump.fun
                     </a>
                   </Button>
                   <Button variant="outline" size="sm" asChild>
-                    <a
-                      href={GAIA_TOKEN.OFFICIAL_WEBSITE}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={GAIA_TOKEN.OFFICIAL_WEBSITE} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4 mr-2" />
                       Official Website
                     </a>
@@ -563,8 +520,7 @@ export default function Exchange() {
                   <div className="text-4xl">🚀</div>
                 </CardTitle>
                 <p className="text-emerald-400 text-lg">
-                  Ultimate Trading Ecosystem • All-in-One Interface • Zero Fees
-                  Forever
+                  Ultimate Trading Ecosystem • All-in-One Interface • Zero Fees Forever
                 </p>
               </CardHeader>
               <CardContent>
@@ -596,11 +552,7 @@ export default function Exchange() {
                         <Button
                           key={interface_item.id}
                           onClick={() => setActiveInterface(interface_item.id)}
-                          variant={
-                            activeInterface === interface_item.id
-                              ? "default"
-                              : "outline"
-                          }
+                          variant={activeInterface === interface_item.id ? "default" : "outline"}
                           className={`h-auto py-3 px-4 flex-col gap-1 text-xs ${
                             activeInterface === interface_item.id
                               ? `bg-${interface_item.color}-600 text-white border-${interface_item.color}-500`
@@ -664,26 +616,17 @@ export default function Exchange() {
                             <div className="text-3xl">🚀</div>
                           </CardTitle>
                           <p className="text-blue-400">
-                            Professional Trading • Advanced Analytics •
-                            Multi-Platform Integration
+                            Professional Trading • Advanced Analytics • Multi-Platform Integration
                           </p>
                         </CardHeader>
                         <CardContent>
                           <Tabs defaultValue="pro-swap" className="w-full">
                             <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
-                              <TabsTrigger value="pro-swap">
-                                💱 Pro Swap
-                              </TabsTrigger>
-                              <TabsTrigger value="spot-trading">
-                                📊 Spot Trading
-                              </TabsTrigger>
+                              <TabsTrigger value="pro-swap">💱 Pro Swap</TabsTrigger>
+                              <TabsTrigger value="spot-trading">📊 Spot Trading</TabsTrigger>
 
-                              <TabsTrigger value="advanced-charts">
-                                📈 Analytics
-                              </TabsTrigger>
-                              <TabsTrigger value="gaia-exchange">
-                                🌿 GAIA Exchange
-                              </TabsTrigger>
+                              <TabsTrigger value="advanced-charts">📈 Analytics</TabsTrigger>
+                              <TabsTrigger value="gaia-exchange">🌿 GAIA Exchange</TabsTrigger>
                             </TabsList>
 
                             <TabsContent value="pro-swap" className="space-y-6">
@@ -704,17 +647,13 @@ export default function Exchange() {
                                         onChange={(e) =>
                                           setFromToken(
                                             supportedTokens.find(
-                                              (t) =>
-                                                t.symbol === e.target.value,
-                                            ) || supportedTokens[0],
+                                              (t) => t.symbol === e.target.value
+                                            ) || supportedTokens[0]
                                           )
                                         }
                                       >
                                         {supportedTokens.map((token) => (
-                                          <option
-                                            key={token.symbol}
-                                            value={token.symbol}
-                                          >
+                                          <option key={token.symbol} value={token.symbol}>
                                             {token.icon} {token.symbol}
                                           </option>
                                         ))}
@@ -722,9 +661,7 @@ export default function Exchange() {
                                       <Input
                                         placeholder="0.0"
                                         value={fromAmount}
-                                        onChange={(e) =>
-                                          setFromAmount(e.target.value)
-                                        }
+                                        onChange={(e) => setFromAmount(e.target.value)}
                                         className="flex-1"
                                       />
                                     </div>
@@ -745,17 +682,13 @@ export default function Exchange() {
                                         onChange={(e) =>
                                           setToToken(
                                             supportedTokens.find(
-                                              (t) =>
-                                                t.symbol === e.target.value,
-                                            ) || supportedTokens[0],
+                                              (t) => t.symbol === e.target.value
+                                            ) || supportedTokens[0]
                                           )
                                         }
                                       >
                                         {supportedTokens.map((token) => (
-                                          <option
-                                            key={token.symbol}
-                                            value={token.symbol}
-                                          >
+                                          <option key={token.symbol} value={token.symbol}>
                                             {token.icon} {token.symbol}
                                           </option>
                                         ))}
@@ -769,8 +702,8 @@ export default function Exchange() {
                                     </div>
                                   </div>
                                   <div className="text-center text-sm text-muted-foreground">
-                                    Professional Rate: 1 {fromToken.symbol} ={" "}
-                                    {swapRate.toFixed(6)} {toToken.symbol}
+                                    Professional Rate: 1 {fromToken.symbol} = {swapRate.toFixed(6)}{" "}
+                                    {toToken.symbol}
                                   </div>
                                   <Button
                                     onClick={executeSwap}
@@ -783,19 +716,13 @@ export default function Exchange() {
                                   </Button>
                                   <div className="grid grid-cols-3 gap-2 text-center text-xs">
                                     <div className="bg-green-900/30 p-2 rounded">
-                                      <div className="text-green-400 font-bold">
-                                        Zero Fees
-                                      </div>
+                                      <div className="text-green-400 font-bold">Zero Fees</div>
                                     </div>
                                     <div className="bg-blue-900/30 p-2 rounded">
-                                      <div className="text-blue-400 font-bold">
-                                        Instant
-                                      </div>
+                                      <div className="text-blue-400 font-bold">Instant</div>
                                     </div>
                                     <div className="bg-purple-900/30 p-2 rounded">
-                                      <div className="text-purple-400 font-bold">
-                                        Secure
-                                      </div>
+                                      <div className="text-purple-400 font-bold">Secure</div>
                                     </div>
                                   </div>
                                 </CardContent>
@@ -803,24 +730,15 @@ export default function Exchange() {
                               <FullyFunctionalExchange />
                             </TabsContent>
 
-                            <TabsContent
-                              value="spot-trading"
-                              className="space-y-6"
-                            >
+                            <TabsContent value="spot-trading" className="space-y-6">
                               <TradingInterface />
                             </TabsContent>
 
-                            <TabsContent
-                              value="advanced-charts"
-                              className="space-y-6"
-                            >
+                            <TabsContent value="advanced-charts" className="space-y-6">
                               <ChartAnalytics />
                             </TabsContent>
 
-                            <TabsContent
-                              value="gaia-exchange"
-                              className="space-y-6"
-                            >
+                            <TabsContent value="gaia-exchange" className="space-y-6">
                               <GaiasExchange />
                             </TabsContent>
                           </Tabs>
@@ -864,21 +782,15 @@ export default function Exchange() {
                               <div className="grid grid-cols-3 gap-4">
                                 <div className="text-center p-4 bg-green-900/30 rounded-lg">
                                   <Shield className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                                  <div className="font-bold text-green-400">
-                                    Quantum Secure
-                                  </div>
+                                  <div className="font-bold text-green-400">Quantum Secure</div>
                                 </div>
                                 <div className="text-center p-4 bg-blue-900/30 rounded-lg">
                                   <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                                  <div className="font-bold text-blue-400">
-                                    100k TPS
-                                  </div>
+                                  <div className="font-bold text-blue-400">100k TPS</div>
                                 </div>
                                 <div className="text-center p-4 bg-purple-900/30 rounded-lg">
                                   <Heart className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                                  <div className="font-bold text-purple-400">
-                                    Eco-Friendly
-                                  </div>
+                                  <div className="font-bold text-purple-400">Eco-Friendly</div>
                                 </div>
                               </div>
                             </div>
@@ -900,28 +812,20 @@ export default function Exchange() {
                                 Private Hosting Infrastructure
                               </div>
                               <Progress value={85} className="h-4 mb-2" />
-                              <div className="text-sm text-muted-foreground">
-                                85% Complete
-                              </div>
+                              <div className="text-sm text-muted-foreground">85% Complete</div>
                             </div>
                             <div className="grid grid-cols-3 gap-4">
                               <div className="text-center p-4 bg-green-900/30 rounded-lg">
                                 <Rocket className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                                <div className="font-bold text-green-400">
-                                  99.99% Uptime
-                                </div>
+                                <div className="font-bold text-green-400">99.99% Uptime</div>
                               </div>
                               <div className="text-center p-4 bg-blue-900/30 rounded-lg">
                                 <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                                <div className="font-bold text-blue-400">
-                                  Global CDN
-                                </div>
+                                <div className="font-bold text-blue-400">Global CDN</div>
                               </div>
                               <div className="text-center p-4 bg-purple-900/30 rounded-lg">
                                 <Shield className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                                <div className="font-bold text-purple-400">
-                                  Military Security
-                                </div>
+                                <div className="font-bold text-purple-400">Military Security</div>
                               </div>
                             </div>
                           </CardContent>

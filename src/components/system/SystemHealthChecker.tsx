@@ -2,13 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  CheckCircle,
-  AlertCircle,
-  XCircle,
-  RefreshCw,
-  Shield,
-} from "lucide-react";
+import { CheckCircle, AlertCircle, XCircle, RefreshCw, Shield } from "lucide-react";
 import { toast } from "sonner";
 
 interface SystemCheck {
@@ -21,9 +15,7 @@ interface SystemCheck {
 export function SystemHealthChecker() {
   const [checks, setChecks] = useState<SystemCheck[]>([]);
   const [isRunning, setIsRunning] = useState(false);
-  const [overallHealth, setOverallHealth] = useState<
-    "healthy" | "warning" | "error"
-  >("healthy");
+  const [overallHealth, setOverallHealth] = useState<"healthy" | "warning" | "error">("healthy");
 
   const runSystemCheck = async () => {
     setIsRunning(true);
@@ -88,9 +80,7 @@ export function SystemHealthChecker() {
 
     // Determine overall health
     const hasErrors = systemChecks.some((check) => check.status === "error");
-    const hasWarnings = systemChecks.some(
-      (check) => check.status === "warning",
-    );
+    const hasWarnings = systemChecks.some((check) => check.status === "warning");
 
     if (hasErrors) setOverallHealth("error");
     else if (hasWarnings) setOverallHealth("warning");
@@ -147,15 +137,8 @@ export function SystemHealthChecker() {
             {getStatusIcon(overallHealth)}
             <span className="ml-1">{overallHealth.toUpperCase()}</span>
           </Badge>
-          <Button
-            onClick={runSystemCheck}
-            disabled={isRunning}
-            variant="outline"
-            size="sm"
-          >
-            <RefreshCw
-              className={`h-4 w-4 mr-2 ${isRunning ? "animate-spin" : ""}`}
-            />
+          <Button onClick={runSystemCheck} disabled={isRunning} variant="outline" size="sm">
+            <RefreshCw className={`h-4 w-4 mr-2 ${isRunning ? "animate-spin" : ""}`} />
             {isRunning ? "Checking..." : "Run Check"}
           </Button>
         </div>
@@ -171,9 +154,7 @@ export function SystemHealthChecker() {
                 {getStatusIcon(check.status)}
                 <div>
                   <div className="font-medium text-white">{check.name}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {check.description}
-                  </div>
+                  <div className="text-sm text-muted-foreground">{check.description}</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -182,9 +163,7 @@ export function SystemHealthChecker() {
                     CRITICAL
                   </Badge>
                 )}
-                <Badge
-                  className={`${getStatusColor(check.status)} text-white text-xs`}
-                >
+                <Badge className={`${getStatusColor(check.status)} text-white text-xs`}>
                   {check.status.toUpperCase()}
                 </Badge>
               </div>
@@ -203,9 +182,7 @@ export function SystemHealthChecker() {
           <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 rounded border border-green-500/30">
             <div className="text-center">
               <CheckCircle className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-green-400">
-                🛡️ ALL SYSTEMS OPERATIONAL
-              </div>
+              <div className="text-lg font-bold text-green-400">🛡️ ALL SYSTEMS OPERATIONAL</div>
               <div className="text-sm text-muted-foreground">
                 Harmony of Gaia platform running at optimal performance
               </div>

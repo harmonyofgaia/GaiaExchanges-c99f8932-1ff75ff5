@@ -34,31 +34,19 @@ export const ArtisticTitle = () => {
         </div>
 
         <div className="absolute -top-8 left-0 transform -translate-x-full flex gap-4 text-3xl opacity-70">
-          <span
-            className="text-green-400 animate-bounce"
-            style={{ animationDelay: "0s" }}
-          >
+          <span className="text-green-400 animate-bounce" style={{ animationDelay: "0s" }}>
             🍃
           </span>
-          <span
-            className="text-emerald-400 animate-bounce"
-            style={{ animationDelay: "0.5s" }}
-          >
+          <span className="text-emerald-400 animate-bounce" style={{ animationDelay: "0.5s" }}>
             🌱
           </span>
         </div>
 
         <div className="absolute -top-8 right-0 transform translate-x-full flex gap-4 text-3xl opacity-70">
-          <span
-            className="text-green-400 animate-bounce"
-            style={{ animationDelay: "0.3s" }}
-          >
+          <span className="text-green-400 animate-bounce" style={{ animationDelay: "0.3s" }}>
             🌱
           </span>
-          <span
-            className="text-emerald-400 animate-bounce"
-            style={{ animationDelay: "0.8s" }}
-          >
+          <span className="text-emerald-400 animate-bounce" style={{ animationDelay: "0.8s" }}>
             🍃
           </span>
         </div>
@@ -176,22 +164,13 @@ export const ArtisticTitle = () => {
 
         {/* Bottom decoration */}
         <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex gap-16 text-4xl opacity-80">
-          <span
-            className="text-amber-600 animate-pulse"
-            style={{ animationDelay: "0s" }}
-          >
+          <span className="text-amber-600 animate-pulse" style={{ animationDelay: "0s" }}>
             🌰
           </span>
-          <span
-            className="text-green-600 animate-pulse"
-            style={{ animationDelay: "0.7s" }}
-          >
+          <span className="text-green-600 animate-pulse" style={{ animationDelay: "0.7s" }}>
             🌿
           </span>
-          <span
-            className="text-emerald-600 animate-pulse"
-            style={{ animationDelay: "1.4s" }}
-          >
+          <span className="text-emerald-600 animate-pulse" style={{ animationDelay: "1.4s" }}>
             🌰
           </span>
         </div>

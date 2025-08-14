@@ -66,11 +66,10 @@ export function UnifiedDragonSecurity() {
       setDragonDefenses((prev) =>
         prev.map((dragon) => ({
           ...dragon,
-          threatsNeutralized:
-            dragon.threatsNeutralized + Math.floor(Math.random() * 500),
+          threatsNeutralized: dragon.threatsNeutralized + Math.floor(Math.random() * 500),
           powerLevel: 100, // Dragons always at full power
           isActive: true,
-        })),
+        }))
       );
 
       // Maintain ultimate protection
@@ -84,12 +83,10 @@ export function UnifiedDragonSecurity() {
           "Cyber Fortress",
           "Mystical Ward",
         ];
-        const randomDragon =
-          dragonNames[Math.floor(Math.random() * dragonNames.length)];
+        const randomDragon = dragonNames[Math.floor(Math.random() * dragonNames.length)];
 
         toast.success(`🐲 ${randomDragon} Dragon Active!`, {
-          description:
-            "Threats neutralized - Community protected by dragon power",
+          description: "Threats neutralized - Community protected by dragon power",
           duration: 3000,
         });
       }
@@ -106,10 +103,7 @@ export function UnifiedDragonSecurity() {
   // This runs in background - dragons protecting silently
   return {
     dragonsActive: dragonDefenses.every((d) => d.isActive),
-    totalThreatsNeutralized: dragonDefenses.reduce(
-      (sum, d) => sum + d.threatsNeutralized,
-      0,
-    ),
+    totalThreatsNeutralized: dragonDefenses.reduce((sum, d) => sum + d.threatsNeutralized, 0),
     ultimateProtection,
     dragonPowerLevel: 100,
   };

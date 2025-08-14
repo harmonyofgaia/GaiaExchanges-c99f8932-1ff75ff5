@@ -7,9 +7,7 @@ const TechnoSoulSolutions = () => {
     <div className="min-h-screen bg-gradient-to-br from-cyan-900/20 via-blue-900/20 to-purple-900/20">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-cyan-400 mb-4">
-            🔧 TECHNO SOUL SOLUTIONS
-          </h1>
+          <h1 className="text-4xl font-bold text-cyan-400 mb-4">🔧 TECHNO SOUL SOLUTIONS</h1>
           <p className="text-muted-foreground">
             Advanced technical support with dragon-powered solutions
           </p>
@@ -27,9 +25,7 @@ const TechnoSoulSolutions = () => {
               <p className="text-muted-foreground mb-4">
                 Get expert technical assistance from our dragon-trained team
               </p>
-              <Button className="w-full bg-cyan-600 hover:bg-cyan-700">
-                Get Support
-              </Button>
+              <Button className="w-full bg-cyan-600 hover:bg-cyan-700">Get Support</Button>
             </CardContent>
           </Card>
 
@@ -44,9 +40,7 @@ const TechnoSoulSolutions = () => {
               <p className="text-muted-foreground mb-4">
                 Optimize your systems with quantum-enhanced performance
               </p>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                Optimize Now
-              </Button>
+              <Button className="w-full bg-purple-600 hover:bg-purple-700">Optimize Now</Button>
             </CardContent>
           </Card>
         </div>

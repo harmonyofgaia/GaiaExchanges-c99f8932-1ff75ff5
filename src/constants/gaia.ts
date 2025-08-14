@@ -6,8 +6,7 @@ export const GAIA_TOKEN = {
   NAME: "GAiA Token - Harmony of Gaia",
   DECIMALS: 9,
   NETWORK: "Solana",
-  PUMP_FUN_URL:
-    "https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump",
+  PUMP_FUN_URL: "https://pump.fun/coin/t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump",
   OFFICIAL_WEBSITE: "https://www.gaiaexchanges.com",
 
   // Additional Wallets
@@ -95,13 +94,9 @@ export const PHASE_STATUS = {
 };
 
 // Verification functions
-export const verifyOfficialToken = (
-  contractAddress: string,
-  walletAddress: string,
-): boolean => {
+export const verifyOfficialToken = (contractAddress: string, walletAddress: string): boolean => {
   return (
-    contractAddress === GAIA_TOKEN.CONTRACT_ADDRESS &&
-    walletAddress === GAIA_TOKEN.WALLET_ADDRESS
+    contractAddress === GAIA_TOKEN.CONTRACT_ADDRESS && walletAddress === GAIA_TOKEN.WALLET_ADDRESS
   );
 };
 

@@ -59,14 +59,7 @@ interface GameAsset {
 interface GameplayFeature {
   id: string;
   name: string;
-  category:
-    | "combat"
-    | "exploration"
-    | "building"
-    | "social"
-    | "economy"
-    | "evolution"
-    | "reality";
+  category: "combat" | "exploration" | "building" | "social" | "economy" | "evolution" | "reality";
   description: string;
   implemented: boolean;
   powerRating: number;
@@ -83,9 +76,7 @@ interface CompetitorGame {
 
 export function GameDevelopmentCloud() {
   const [gameAssets, setGameAssets] = useState<GameAsset[]>([]);
-  const [gameplayFeatures, setGameplayFeatures] = useState<GameplayFeature[]>(
-    [],
-  );
+  const [gameplayFeatures, setGameplayFeatures] = useState<GameplayFeature[]>([]);
   const [competitorGames, setCompetitorGames] = useState<CompetitorGame[]>([]);
   const [isTraining, setIsTraining] = useState(true);
   const [trainingProgress, setTrainingProgress] = useState(0);
@@ -174,8 +165,7 @@ export function GameDevelopmentCloud() {
         id: "rage-combat-evolution",
         name: "Rage Combat Evolution",
         category: "combat",
-        description:
-          "Rage 1 gunplay mechanics evolved with magic systems and neural enhancement",
+        description: "Rage 1 gunplay mechanics evolved with magic systems and neural enhancement",
         implemented: true,
         powerRating: 96,
         betterThan: ["Rage 1", "Rage 2", "Borderlands", "Destiny 2"],
@@ -184,8 +174,7 @@ export function GameDevelopmentCloud() {
         id: "final-fantasy-underwater",
         name: "Final Fantasy Underwater Transformation",
         category: "reality",
-        description:
-          "Seamlessly transform between above and underwater Final Fantasy realms",
+        description: "Seamlessly transform between above and underwater Final Fantasy realms",
         implemented: true,
         powerRating: 99,
         betterThan: ["Final Fantasy XIV", "Final Fantasy XVI", "Subnautica"],
@@ -204,8 +193,7 @@ export function GameDevelopmentCloud() {
         id: "vr-integration-ultimate",
         name: "Ultimate VR Integration",
         category: "reality",
-        description:
-          "Full VR compatibility with haptic feedback and neural interface support",
+        description: "Full VR compatibility with haptic feedback and neural interface support",
         implemented: true,
         powerRating: 95,
         betterThan: ["Half-Life Alyx", "VRChat", "Horizon Worlds"],
@@ -214,8 +202,7 @@ export function GameDevelopmentCloud() {
         id: "green-economy-system",
         name: "Green Economy & Animal Rescue",
         category: "economy",
-        description:
-          "Every transaction supports environmental projects and animal welfare",
+        description: "Every transaction supports environmental projects and animal welfare",
         implemented: true,
         powerRating: 100,
         betterThan: ["All other games - first to integrate real-world impact"],
@@ -263,21 +250,13 @@ export function GameDevelopmentCloud() {
     setGameAssets(legendaryAssets);
     setGameplayFeatures(ultimateFeatures);
     setCompetitorGames(majorCompetitors);
-    setTotalPowerLevel(
-      legendaryAssets.reduce((sum, asset) => sum + asset.powerLevel, 0),
-    );
+    setTotalPowerLevel(legendaryAssets.reduce((sum, asset) => sum + asset.powerLevel, 0));
 
     // Calculate how far ahead we are
     const avgCompetitorPower =
-      majorCompetitors.reduce((sum, comp) => sum + comp.powerLevel, 0) /
-      majorCompetitors.length;
-    const ourPower = legendaryAssets.reduce(
-      (sum, asset) => sum + asset.powerLevel,
-      0,
-    );
-    setAheadPercentage(
-      Math.floor(((ourPower - avgCompetitorPower) / avgCompetitorPower) * 100),
-    );
+      majorCompetitors.reduce((sum, comp) => sum + comp.powerLevel, 0) / majorCompetitors.length;
+    const ourPower = legendaryAssets.reduce((sum, asset) => sum + asset.powerLevel, 0);
+    setAheadPercentage(Math.floor(((ourPower - avgCompetitorPower) / avgCompetitorPower) * 100));
 
     // Start continuous AI training
     startAdvancedTraining();
@@ -304,13 +283,7 @@ export function GameDevelopmentCloud() {
   };
 
   const generateRevolutionaryAsset = async () => {
-    const revolutionaryTypes = [
-      "world",
-      "weapon",
-      "environment",
-      "creature",
-      "artifact",
-    ] as const;
+    const revolutionaryTypes = ["world", "weapon", "environment", "creature", "artifact"] as const;
     const mythicQualities = ["mythic", "legendary", "epic"] as const;
 
     const revolutionaryConcepts = [
@@ -325,13 +298,9 @@ export function GameDevelopmentCloud() {
     ];
 
     const randomConcept =
-      revolutionaryConcepts[
-        Math.floor(Math.random() * revolutionaryConcepts.length)
-      ];
-    const randomType =
-      revolutionaryTypes[Math.floor(Math.random() * revolutionaryTypes.length)];
-    const randomQuality =
-      mythicQualities[Math.floor(Math.random() * mythicQualities.length)];
+      revolutionaryConcepts[Math.floor(Math.random() * revolutionaryConcepts.length)];
+    const randomType = revolutionaryTypes[Math.floor(Math.random() * revolutionaryTypes.length)];
+    const randomQuality = mythicQualities[Math.floor(Math.random() * mythicQualities.length)];
 
     const newAsset: GameAsset = {
       id: `revolutionary-${Date.now()}`,
@@ -362,15 +331,12 @@ export function GameDevelopmentCloud() {
       prev.map((comp) => ({
         ...comp,
         ourAdvantage:
-          comp.ourAdvantage +
-          ` • Always ${Math.floor(Math.random() * 50) + 100}% ahead`,
-      })),
+          comp.ourAdvantage + ` • Always ${Math.floor(Math.random() * 50) + 100}% ahead`,
+      }))
     );
 
     // Update how far ahead we are
-    setAheadPercentage((prev) =>
-      Math.min(prev + Math.floor(Math.random() * 10) + 5, 500),
-    ); // Cap at 500% ahead
+    setAheadPercentage((prev) => Math.min(prev + Math.floor(Math.random() * 10) + 5, 500)); // Cap at 500% ahead
   };
 
   const createCustomWorldAsset = async () => {
@@ -387,11 +353,7 @@ export function GameDevelopmentCloud() {
       aiGenerated: false,
       powerLevel: Math.floor(Math.random() * 800) + 1200,
       gameplayValue: Math.floor(Math.random() * 1000) + 1500,
-      compatibility: [
-        "All Environments",
-        "VR Ready",
-        "Green Economy Integrated",
-      ],
+      compatibility: ["All Environments", "VR Ready", "Green Economy Integrated"],
     };
 
     setGameAssets((prev) => [newAsset, ...prev]);
@@ -431,8 +393,7 @@ export function GameDevelopmentCloud() {
                 🌍 FIRST GAIA WORLD - ULTIMATE GAME ENGINE
               </div>
               <div className="text-sm font-normal text-yellow-300">
-                WoW + Rage 1 + Final Fantasy • Always Ahead • Self-Evolving • VR
-                Ready
+                WoW + Rage 1 + Final Fantasy • Always Ahead • Self-Evolving • VR Ready
               </div>
             </div>
             <Trophy className="h-6 w-6 text-gold-400 animate-bounce" />
@@ -445,39 +406,25 @@ export function GameDevelopmentCloud() {
               <div className="text-3xl font-bold text-yellow-400">
                 {totalPowerLevel.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Power Level
-              </div>
+              <div className="text-sm text-muted-foreground">Total Power Level</div>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-orange-400">
-                {gameAssets.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Revolutionary Assets
-              </div>
+              <div className="text-3xl font-bold text-orange-400">{gameAssets.length}</div>
+              <div className="text-sm text-muted-foreground">Revolutionary Assets</div>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-red-400">
-                {aheadPercentage}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Ahead of All Games
-              </div>
+              <div className="text-3xl font-bold text-red-400">{aheadPercentage}%</div>
+              <div className="text-sm text-muted-foreground">Ahead of All Games</div>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-green-400">
-                {assetsGenerated}
-              </div>
+              <div className="text-3xl font-bold text-green-400">{assetsGenerated}</div>
               <div className="text-sm text-muted-foreground">AI Generated</div>
             </div>
             <div className="text-center space-y-2">
               <div className="text-3xl font-bold text-purple-400">
                 {Math.floor(cloudStorageUsed)}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Cloud Storage GB
-              </div>
+              <div className="text-sm text-muted-foreground">Cloud Storage GB</div>
             </div>
           </div>
 
@@ -488,16 +435,13 @@ export function GameDevelopmentCloud() {
                 <Brain className="h-5 w-5 animate-pulse" />
                 Revolutionary AI Training System
               </h3>
-              <Badge
-                className={`${isTraining ? "bg-green-600" : "bg-red-600"} text-white`}
-              >
+              <Badge className={`${isTraining ? "bg-green-600" : "bg-red-600"} text-white`}>
                 {isTraining ? "ALWAYS ACTIVE" : "PAUSED"}
               </Badge>
             </div>
             <Progress value={trainingProgress} className="h-3 mb-2" />
             <div className="text-xs text-purple-300">
-              🧠 Training to stay ahead of WoW, Final Fantasy, GTA VI, and ALL
-              future games
+              🧠 Training to stay ahead of WoW, Final Fantasy, GTA VI, and ALL future games
             </div>
           </div>
         </CardContent>
@@ -536,19 +480,13 @@ export function GameDevelopmentCloud() {
 
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <h4 className="font-semibold text-white text-sm truncate">
-                        {asset.name}
-                      </h4>
+                      <h4 className="font-semibold text-white text-sm truncate">{asset.name}</h4>
                       {asset.aiGenerated && (
-                        <Badge className="bg-cyan-600 text-white text-xs">
-                          AI
-                        </Badge>
+                        <Badge className="bg-cyan-600 text-white text-xs">AI</Badge>
                       )}
                     </div>
 
-                    <Badge
-                      className={`${getQualityColor(asset.quality)} text-xs`}
-                    >
+                    <Badge className={`${getQualityColor(asset.quality)} text-xs`}>
                       {asset.quality.toUpperCase()}
                     </Badge>
 
@@ -558,17 +496,10 @@ export function GameDevelopmentCloud() {
 
                     <div className="flex items-center justify-between text-xs">
                       <div className="space-y-1">
-                        <div className="text-yellow-400">
-                          Power: {asset.powerLevel}
-                        </div>
-                        <div className="text-green-400">
-                          Value: {asset.gameplayValue}
-                        </div>
+                        <div className="text-yellow-400">Power: {asset.powerLevel}</div>
+                        <div className="text-green-400">Value: {asset.gameplayValue}</div>
                       </div>
-                      <Button
-                        size="sm"
-                        className="bg-gradient-to-r from-purple-600 to-pink-600"
-                      >
+                      <Button size="sm" className="bg-gradient-to-r from-purple-600 to-pink-600">
                         <Download className="h-3 w-3 mr-1" />
                         Deploy
                       </Button>
@@ -593,20 +524,11 @@ export function GameDevelopmentCloud() {
                       {feature.implemented ? "ACTIVE" : "DEVELOPMENT"}
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {feature.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-3">{feature.description}</p>
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="text-xs text-yellow-400">
-                      Power Rating:
-                    </span>
-                    <Progress
-                      value={feature.powerRating}
-                      className="flex-1 h-2"
-                    />
-                    <span className="text-xs text-yellow-400">
-                      {feature.powerRating}%
-                    </span>
+                    <span className="text-xs text-yellow-400">Power Rating:</span>
+                    <Progress value={feature.powerRating} className="flex-1 h-2" />
+                    <span className="text-xs text-yellow-400">{feature.powerRating}%</span>
                   </div>
                   <div className="text-xs text-green-400">
                     Better than: {feature.betterThan.join(", ")}
@@ -628,12 +550,8 @@ export function GameDevelopmentCloud() {
             <CardContent>
               <div className="space-y-6">
                 <div className="text-center">
-                  <div className="text-6xl font-bold text-green-400 mb-2">
-                    {aheadPercentage}%
-                  </div>
-                  <div className="text-lg text-green-300">
-                    AHEAD OF ALL COMPETITION
-                  </div>
+                  <div className="text-6xl font-bold text-green-400 mb-2">{aheadPercentage}%</div>
+                  <div className="text-lg text-green-300">AHEAD OF ALL COMPETITION</div>
                 </div>
 
                 <div className="space-y-4">
@@ -643,18 +561,12 @@ export function GameDevelopmentCloud() {
                       className="bg-black/20 border border-gray-500/30 rounded-lg p-4"
                     >
                       <div className="flex justify-between items-center mb-2">
-                        <h4 className="text-lg font-bold text-white">
-                          {game.name}
-                        </h4>
-                        <Badge className="bg-red-600 text-white">
-                          BEHIND US
-                        </Badge>
+                        <h4 className="text-lg font-bold text-white">{game.name}</h4>
+                        <Badge className="bg-red-600 text-white">BEHIND US</Badge>
                       </div>
                       <div className="grid grid-cols-3 gap-4 text-sm mb-2">
                         <div>
-                          <div className="text-muted-foreground">
-                            Power Level:
-                          </div>
+                          <div className="text-muted-foreground">Power Level:</div>
                           <div className="text-red-400">{game.powerLevel}</div>
                         </div>
                         <div>
@@ -663,9 +575,7 @@ export function GameDevelopmentCloud() {
                         </div>
                         <div>
                           <div className="text-muted-foreground">Players:</div>
-                          <div className="text-red-400">
-                            {game.playerBase.toLocaleString()}
-                          </div>
+                          <div className="text-red-400">{game.playerBase.toLocaleString()}</div>
                         </div>
                       </div>
                       <div className="text-xs text-green-400">
@@ -682,20 +592,13 @@ export function GameDevelopmentCloud() {
         <TabsContent value="create" className="space-y-4">
           <Card className="border-2 border-purple-500/50">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                ✨ Create Revolutionary Game Assets
-              </CardTitle>
+              <CardTitle className="text-purple-400">✨ Create Revolutionary Game Assets</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-purple-400">
-                    Asset Type
-                  </label>
-                  <Select
-                    value={selectedAssetType}
-                    onValueChange={setSelectedAssetType}
-                  >
+                  <label className="text-sm font-medium text-purple-400">Asset Type</label>
+                  <Select value={selectedAssetType} onValueChange={setSelectedAssetType}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
@@ -739,16 +642,12 @@ export function GameDevelopmentCloud() {
         <TabsContent value="cloud" className="space-y-4">
           <Card className="border-2 border-blue-500/50 bg-gradient-to-br from-blue-900/30 to-cyan-900/30">
             <CardHeader>
-              <CardTitle className="text-blue-400">
-                ☁️ Unlimited Secure Cloud Storage
-              </CardTitle>
+              <CardTitle className="text-blue-400">☁️ Unlimited Secure Cloud Storage</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-blue-400 mb-2">
-                    ∞ Infinite Space
-                  </div>
+                  <div className="text-4xl font-bold text-blue-400 mb-2">∞ Infinite Space</div>
                   <div className="text-lg text-blue-300">
                     Your game worlds will never be limited
                   </div>
@@ -756,36 +655,20 @@ export function GameDevelopmentCloud() {
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 text-center">
-                    <div className="text-xl font-bold text-blue-400">
-                      Auto-Backup
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Every asset saved
-                    </div>
+                    <div className="text-xl font-bold text-blue-400">Auto-Backup</div>
+                    <div className="text-sm text-muted-foreground">Every asset saved</div>
                   </div>
                   <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 text-center">
-                    <div className="text-xl font-bold text-blue-400">
-                      Ultra-Secure
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Admin-only access
-                    </div>
+                    <div className="text-xl font-bold text-blue-400">Ultra-Secure</div>
+                    <div className="text-sm text-muted-foreground">Admin-only access</div>
                   </div>
                   <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 text-center">
-                    <div className="text-xl font-bold text-blue-400">
-                      Global Sync
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Worldwide access
-                    </div>
+                    <div className="text-xl font-bold text-blue-400">Global Sync</div>
+                    <div className="text-sm text-muted-foreground">Worldwide access</div>
                   </div>
                   <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 text-center">
-                    <div className="text-xl font-bold text-blue-400">
-                      AI Enhanced
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Smart optimization
-                    </div>
+                    <div className="text-xl font-bold text-blue-400">AI Enhanced</div>
+                    <div className="text-sm text-muted-foreground">Smart optimization</div>
                   </div>
                 </div>
 
@@ -805,16 +688,12 @@ export function GameDevelopmentCloud() {
         <TabsContent value="impact" className="space-y-4">
           <Card className="border-2 border-green-500/50 bg-gradient-to-br from-green-900/30 to-emerald-900/30">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                🌱 Real World Impact Integration
-              </CardTitle>
+              <CardTitle className="text-green-400">🌱 Real World Impact Integration</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-green-400 mb-2">
-                    5% Burning Rate
-                  </div>
+                  <div className="text-4xl font-bold text-green-400 mb-2">5% Burning Rate</div>
                   <div className="text-lg text-green-300">
                     Every transaction helps the planet and animals
                   </div>
@@ -835,9 +714,7 @@ export function GameDevelopmentCloud() {
                   </div>
 
                   <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
-                    <h4 className="text-lg font-bold text-green-400 mb-2">
-                      🐾 Animal Welfare
-                    </h4>
+                    <h4 className="text-lg font-bold text-green-400 mb-2">🐾 Animal Welfare</h4>
                     <ul className="text-sm text-green-300 space-y-1">
                       <li>• Rescue Caged Animals</li>
                       <li>• Wildlife Sanctuaries</li>
@@ -853,9 +730,8 @@ export function GameDevelopmentCloud() {
                     First Game to Directly Impact the Real World
                   </h4>
                   <p className="text-sm text-green-300">
-                    Every asset you create, every world you build, every battle
-                    you fight contributes to making Earth a better place for all
-                    living beings.
+                    Every asset you create, every world you build, every battle you fight
+                    contributes to making Earth a better place for all living beings.
                   </p>
                 </div>
               </div>

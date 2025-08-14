@@ -10,17 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Palette,
-  Sparkles,
-  Zap,
-  Crown,
-  Globe,
-  Heart,
-  Cloud,
-  Save,
-  Download,
-} from "lucide-react";
+import { Palette, Sparkles, Zap, Crown, Globe, Heart, Cloud, Save, Download } from "lucide-react";
 import { AdminProtectedRoute } from "@/components/auth/AdminProtectedRoute";
 import { toast } from "sonner";
 
@@ -40,9 +30,7 @@ function BackgroundManagerContent() {
   const [currentBackground, setCurrentBackground] = useState("neural-electric");
   const [reverseButtonVisible, setReverseButtonVisible] = useState(true);
   const [dailyInspiration, setDailyInspiration] = useState("");
-  const [backgroundStyles, setBackgroundStyles] = useState<BackgroundStyle[]>(
-    [],
-  );
+  const [backgroundStyles, setBackgroundStyles] = useState<BackgroundStyle[]>([]);
   const [selectedStyleType, setSelectedStyleType] = useState<string>("all");
 
   const predefinedStyles: BackgroundStyle[] = [
@@ -50,26 +38,22 @@ function BackgroundManagerContent() {
       id: "style-1",
       name: "Neural Harmony Supreme",
       type: "neural",
-      description:
-        "Advanced neural pathways with harmony-inspired flow patterns",
+      description: "Advanced neural pathways with harmony-inspired flow patterns",
       colors: ["#10b981", "#34d399", "#6ee7b7", "#a7f3d0"],
       cloudUrl: "/lovable-uploads/2ab2dcf8-008f-4f94-9341-9b6fcb25cefb.png",
       isActive: true,
-      artisticValue:
-        "High-energy organic neural flow with environmental consciousness",
+      artisticValue: "High-energy organic neural flow with environmental consciousness",
       createdAt: new Date("2024-01-15"),
     },
     {
       id: "style-2",
       name: "Gothic Quantum Elegance",
       type: "gothic",
-      description:
-        "Medieval-inspired quantum patterns with decorative flourishes",
+      description: "Medieval-inspired quantum patterns with decorative flourishes",
       colors: ["#8b5cf6", "#a855f7", "#c084fc", "#ddd6fe"],
       cloudUrl: "/lovable-uploads/494a76f3-e002-482a-b606-e7af62367027.png",
       isActive: false,
-      artisticValue:
-        "Combines ancient aesthetics with quantum technology harmony",
+      artisticValue: "Combines ancient aesthetics with quantum technology harmony",
       createdAt: new Date("2024-01-16"),
     },
     {
@@ -80,8 +64,7 @@ function BackgroundManagerContent() {
       colors: ["#f59e0b", "#f97316", "#ef4444", "#dc2626"],
       cloudUrl: "/lovable-uploads/42ec85dc-42df-4958-96d8-7919a192f629.png",
       isActive: false,
-      artisticValue:
-        "Infinite cosmic energy channeled through dragon consciousness",
+      artisticValue: "Infinite cosmic energy channeled through dragon consciousness",
       createdAt: new Date("2024-01-17"),
     },
     {
@@ -92,8 +75,7 @@ function BackgroundManagerContent() {
       colors: ["#06b6d4", "#0891b2", "#0e7490", "#155e75"],
       cloudUrl: "/lovable-uploads/3ce518f5-75b0-493f-897a-45119793a33d.png",
       isActive: false,
-      artisticValue:
-        "Biological electricity merged with symphonic visual harmony",
+      artisticValue: "Biological electricity merged with symphonic visual harmony",
       createdAt: new Date("2024-01-18"),
     },
     {
@@ -104,8 +86,7 @@ function BackgroundManagerContent() {
       colors: ["#22c55e", "#16a34a", "#15803d", "#166534"],
       cloudUrl: "/lovable-uploads/1087f396-900a-4e0b-be62-7b049d0294ff.png",
       isActive: false,
-      artisticValue:
-        "Sacred geometry expressed through logo multiplication and arrangement",
+      artisticValue: "Sacred geometry expressed through logo multiplication and arrangement",
       createdAt: new Date("2024-01-19"),
     },
     {
@@ -116,21 +97,18 @@ function BackgroundManagerContent() {
       colors: ["#059669", "#047857", "#065f46", "#064e3b"],
       cloudUrl: "/lovable-uploads/1ed369eb-ecda-422a-af60-8f511aa9aa8e.png",
       isActive: false,
-      artisticValue:
-        "Environmental healing energy captured in quantum visual language",
+      artisticValue: "Environmental healing energy captured in quantum visual language",
       createdAt: new Date("2024-01-20"),
     },
     {
       id: "style-7",
       name: "Dragon Neural Mastery",
       type: "neural",
-      description:
-        "Ultimate fusion of dragon power and neural network supremacy",
+      description: "Ultimate fusion of dragon power and neural network supremacy",
       colors: ["#dc2626", "#ef4444", "#f97316", "#f59e0b"],
       cloudUrl: "/lovable-uploads/93093efd-1912-4361-987d-424e6cf8e1df.png",
       isActive: false,
-      artisticValue:
-        "Dragon consciousness channeled through advanced neural architectures",
+      artisticValue: "Dragon consciousness channeled through advanced neural architectures",
       createdAt: new Date("2024-01-21"),
     },
   ];
@@ -152,15 +130,12 @@ function BackgroundManagerContent() {
     ];
 
     if (storedDate !== today) {
-      const newInspiration =
-        inspirations[Math.floor(Math.random() * inspirations.length)];
+      const newInspiration = inspirations[Math.floor(Math.random() * inspirations.length)];
       setDailyInspiration(newInspiration);
       localStorage.setItem("dailyInspiration", newInspiration);
       localStorage.setItem("dailyInspirationDate", today);
     } else {
-      setDailyInspiration(
-        localStorage.getItem("dailyInspiration") || inspirations[0],
-      );
+      setDailyInspiration(localStorage.getItem("dailyInspiration") || inspirations[0]);
     }
   }, []);
 
@@ -174,7 +149,7 @@ function BackgroundManagerContent() {
       prev.map((style) => ({
         ...style,
         isActive: style.id === styleId,
-      })),
+      }))
     );
 
     const selectedStyle = backgroundStyles.find((s) => s.id === styleId);
@@ -237,12 +212,8 @@ function BackgroundManagerContent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-center justify-between p-3 rounded bg-zinc-800/50">
                 <div>
-                  <span className="text-white font-medium">
-                    Admin Reverse Button
-                  </span>
-                  <p className="text-sm text-gray-400">
-                    Show/hide reverse button on all pages
-                  </p>
+                  <span className="text-white font-medium">Admin Reverse Button</span>
+                  <p className="text-sm text-gray-400">Show/hide reverse button on all pages</p>
                 </div>
                 <Switch
                   checked={reverseButtonVisible}
@@ -252,17 +223,10 @@ function BackgroundManagerContent() {
 
               <div className="flex items-center justify-between p-3 rounded bg-zinc-800/50">
                 <div>
-                  <span className="text-white font-medium">
-                    Background Filter
-                  </span>
-                  <p className="text-sm text-gray-400">
-                    Filter backgrounds by artistic type
-                  </p>
+                  <span className="text-white font-medium">Background Filter</span>
+                  <p className="text-sm text-gray-400">Filter backgrounds by artistic type</p>
                 </div>
-                <Select
-                  value={selectedStyleType}
-                  onValueChange={setSelectedStyleType}
-                >
+                <Select value={selectedStyleType} onValueChange={setSelectedStyleType}>
                   <SelectTrigger className="w-32">
                     <SelectValue />
                   </SelectTrigger>
@@ -295,9 +259,7 @@ function BackgroundManagerContent() {
                   <CardContent className="p-4">
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <h4 className="font-medium text-white text-sm">
-                          {style.name}
-                        </h4>
+                        <h4 className="font-medium text-white text-sm">{style.name}</h4>
                         <Badge
                           className={`${style.isActive ? "bg-green-600" : "bg-gray-600"} text-white text-xs`}
                         >
@@ -309,9 +271,7 @@ function BackgroundManagerContent() {
                         <div className="text-2xl">🎨</div>
                       </div>
 
-                      <p className="text-xs text-gray-300">
-                        {style.description}
-                      </p>
+                      <p className="text-xs text-gray-300">{style.description}</p>
 
                       <div className="flex flex-wrap gap-1">
                         {style.colors.map((color, i) => (
@@ -326,15 +286,13 @@ function BackgroundManagerContent() {
                       <div className="space-y-1">
                         <p className="text-xs text-purple-300">
                           <strong>Type:</strong>{" "}
-                          {style.type.charAt(0).toUpperCase() +
-                            style.type.slice(1)}
+                          {style.type.charAt(0).toUpperCase() + style.type.slice(1)}
                         </p>
                         <p className="text-xs text-blue-300">
                           <strong>Artistic Value:</strong> {style.artisticValue}
                         </p>
                         <p className="text-xs text-green-300">
-                          <strong>Created:</strong>{" "}
-                          {style.createdAt.toLocaleDateString()}
+                          <strong>Created:</strong> {style.createdAt.toLocaleDateString()}
                         </p>
                       </div>
 
@@ -381,29 +339,17 @@ function BackgroundManagerContent() {
             </h4>
             <div className="text-sm text-green-200 space-y-1">
               <p>
-                • Typography enhancement: Revolutionary multi-layered Gothic
-                styling with quantum effects ✅
+                • Typography enhancement: Revolutionary multi-layered Gothic styling with quantum
+                effects ✅
               </p>
               <p>
-                • Background collection: {backgroundStyles.length} unique
-                artistic styles cloud-ready ✅
+                • Background collection: {backgroundStyles.length} unique artistic styles
+                cloud-ready ✅
               </p>
-              <p>
-                • Visual harmony: Advanced color gradients and animation systems
-                ✅
-              </p>
-              <p>
-                • Admin control: Full background management with cloud storage
-                integration ✅
-              </p>
-              <p>
-                • Creative energy: 100% powered by Harmony of Gaia artistic
-                vision ✅
-              </p>
-              <p>
-                • Heavenly fortress: Building our digital realm with artistic
-                excellence ✅
-              </p>
+              <p>• Visual harmony: Advanced color gradients and animation systems ✅</p>
+              <p>• Admin control: Full background management with cloud storage integration ✅</p>
+              <p>• Creative energy: 100% powered by Harmony of Gaia artistic vision ✅</p>
+              <p>• Heavenly fortress: Building our digital realm with artistic excellence ✅</p>
             </div>
           </div>
         </CardContent>

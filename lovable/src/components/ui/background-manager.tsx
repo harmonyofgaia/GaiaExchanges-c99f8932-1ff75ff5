@@ -153,7 +153,7 @@ function renderParticles(
   ctx: CanvasRenderingContext2D,
   particles: any[],
   effect: BackgroundEffect,
-  time: number,
+  time: number
 ) {
   particles.forEach((particle, i) => {
     const pulse = Math.sin(time + i * 0.1) * 0.3 + 0.7;
@@ -168,11 +168,7 @@ function renderParticles(
   });
 }
 
-function renderWaves(
-  ctx: CanvasRenderingContext2D,
-  effect: BackgroundEffect,
-  time: number,
-) {
+function renderWaves(ctx: CanvasRenderingContext2D, effect: BackgroundEffect, time: number) {
   ctx.strokeStyle = effect.color + "40";
   ctx.lineWidth = 2;
 
@@ -188,11 +184,7 @@ function renderWaves(
   }
 }
 
-function renderMatrix(
-  ctx: CanvasRenderingContext2D,
-  effect: BackgroundEffect,
-  time: number,
-) {
+function renderMatrix(ctx: CanvasRenderingContext2D, effect: BackgroundEffect, time: number) {
   ctx.fillStyle = effect.color + "60";
   ctx.font = "12px monospace";
 
@@ -209,7 +201,7 @@ function renderNeural(
   ctx: CanvasRenderingContext2D,
   particles: any[],
   effect: BackgroundEffect,
-  time: number,
+  time: number
 ) {
   // Draw connections between nearby particles
   ctx.strokeStyle = effect.color + "30";
@@ -230,11 +222,7 @@ function renderNeural(
   renderParticles(ctx, particles, effect, time);
 }
 
-function renderQuantum(
-  ctx: CanvasRenderingContext2D,
-  effect: BackgroundEffect,
-  time: number,
-) {
+function renderQuantum(ctx: CanvasRenderingContext2D, effect: BackgroundEffect, time: number) {
   // Quantum field visualization
   const centerX = ctx.canvas.width / 2;
   const centerY = ctx.canvas.height / 2;

@@ -15,9 +15,7 @@ export function LogoProtectionSystem() {
     if (!protectionActive) return;
 
     const protectLogo = () => {
-      console.log(
-        "🎨 GAIA LOGO PROTECTION - Copyright & Trademark Security Active",
-      );
+      console.log("🎨 GAIA LOGO PROTECTION - Copyright & Trademark Security Active");
 
       // Simulate copyright protection scanning
       setCopyrightScans((prev) => prev + 1);
@@ -85,39 +83,29 @@ export function LogoProtectionSystem() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center p-4 rounded-lg bg-gradient-to-br from-pink-500/20 to-rose-500/20 border border-pink-500/30">
             <Copyright className="h-8 w-8 mx-auto text-pink-400 mb-2" />
-            <div className="text-2xl font-bold text-pink-400">
-              {copyrightScans}
-            </div>
+            <div className="text-2xl font-bold text-pink-400">{copyrightScans}</div>
             <div className="text-sm text-muted-foreground">Copyright Scans</div>
             <Badge className="mt-2 bg-pink-600 text-white">ACTIVE</Badge>
           </div>
 
           <div className="text-center p-4 rounded-lg bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-purple-500/30">
             <Eye className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-            <div className="text-2xl font-bold text-purple-400">
-              {unauthorizedUse}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Blocked Attempts
-            </div>
+            <div className="text-2xl font-bold text-purple-400">{unauthorizedUse}</div>
+            <div className="text-sm text-muted-foreground">Blocked Attempts</div>
             <Badge className="mt-2 bg-purple-600 text-white">SECURED</Badge>
           </div>
 
           <div className="text-center p-4 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30">
             <Lock className="h-8 w-8 mx-auto text-blue-400 mb-2" />
             <div className="text-2xl font-bold text-blue-400">100%</div>
-            <div className="text-sm text-muted-foreground">
-              Protection Level
-            </div>
+            <div className="text-sm text-muted-foreground">Protection Level</div>
             <Badge className="mt-2 bg-blue-600 text-white">MAXIMUM</Badge>
           </div>
         </div>
 
         {/* Logo Showcase */}
         <div className="text-center space-y-4">
-          <h4 className="text-xl font-bold text-pink-400">
-            🎨 Official Gaia of Harmony Logo
-          </h4>
+          <h4 className="text-xl font-bold text-pink-400">🎨 Official Gaia of Harmony Logo</h4>
           <div className="flex justify-center items-center gap-8">
             <GaiaLogo size="sm" />
             <GaiaLogo size="md" />
@@ -141,9 +129,7 @@ export function LogoProtectionSystem() {
         {/* Protection Features */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-3">
-            <h5 className="font-bold text-pink-400">
-              ©️ COPYRIGHT PROTECTION:
-            </h5>
+            <h5 className="font-bold text-pink-400">©️ COPYRIGHT PROTECTION:</h5>
             <ul className="text-sm space-y-1 text-pink-200">
               <li className="flex items-center gap-2">
                 <Shield className="h-4 w-4" /> Digital Watermark Protection
@@ -161,9 +147,7 @@ export function LogoProtectionSystem() {
           </div>
 
           <div className="space-y-3">
-            <h5 className="font-bold text-purple-400">
-              ™️ TRADEMARK SECURITY:
-            </h5>
+            <h5 className="font-bold text-purple-400">™️ TRADEMARK SECURITY:</h5>
             <ul className="text-sm space-y-1 text-purple-200">
               <li className="flex items-center gap-2">
                 <Shield className="h-4 w-4" /> Trademark Registration Protected
@@ -183,15 +167,12 @@ export function LogoProtectionSystem() {
 
         {/* Legal Notice */}
         <div className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 rounded-lg p-4 border border-blue-500/20">
-          <h4 className="font-bold text-blue-400 mb-2">
-            ⚖️ LEGAL PROTECTION NOTICE
-          </h4>
+          <h4 className="font-bold text-blue-400 mb-2">⚖️ LEGAL PROTECTION NOTICE</h4>
           <p className="text-sm text-blue-200">
-            The "Gaia of Harmony" logo and brand are fully protected by
-            copyright and trademark laws. Any unauthorized use, reproduction, or
-            distribution is strictly prohibited and will result in immediate
-            legal action. Our advanced monitoring system tracks all usage across
-            the internet and reports violations to the appropriate authorities.
+            The "Gaia of Harmony" logo and brand are fully protected by copyright and trademark
+            laws. Any unauthorized use, reproduction, or distribution is strictly prohibited and
+            will result in immediate legal action. Our advanced monitoring system tracks all usage
+            across the internet and reports violations to the appropriate authorities.
           </p>
         </div>
       </CardContent>

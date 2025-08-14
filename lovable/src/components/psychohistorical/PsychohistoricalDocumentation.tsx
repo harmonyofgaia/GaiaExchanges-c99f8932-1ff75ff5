@@ -53,12 +53,7 @@ interface DocumentationEntry {
 
 interface CommunityAlert {
   id: string;
-  type:
-    | "threat_warning"
-    | "opportunity"
-    | "milestone"
-    | "insight"
-    | "implementation_ready";
+  type: "threat_warning" | "opportunity" | "milestone" | "insight" | "implementation_ready";
   severity: "info" | "low" | "medium" | "high" | "critical";
   title: string;
   message: string;
@@ -96,13 +91,9 @@ interface GlobalInsight {
 }
 
 export function PsychohistoricalDocumentation() {
-  const [documentationEntries, setDocumentationEntries] = useState<
-    DocumentationEntry[]
-  >([]);
+  const [documentationEntries, setDocumentationEntries] = useState<DocumentationEntry[]>([]);
   const [communityAlerts, setCommunityAlerts] = useState<CommunityAlert[]>([]);
-  const [knowledgePatterns, setKnowledgePatterns] = useState<
-    KnowledgePattern[]
-  >([]);
+  const [knowledgePatterns, setKnowledgePatterns] = useState<KnowledgePattern[]>([]);
   const [globalInsights, setGlobalInsights] = useState<GlobalInsight[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
@@ -188,22 +179,14 @@ export function PsychohistoricalDocumentation() {
         type: "threat_warning",
         severity: "high",
         title: "Coral Bleaching Event Predicted",
-        message:
-          "AI models predict severe coral bleaching in Great Barrier Reef within 45 days",
+        message: "AI models predict severe coral bleaching in Great Barrier Reef within 45 days",
         details:
           "Temperature anomaly patterns indicate 87% probability of widespread bleaching. Immediate intervention recommended.",
         timestamp: new Date(Date.now() - 15 * 60 * 1000),
         read: false,
         actionRequired: true,
-        affectedCommunities: [
-          "Australia",
-          "Pacific Islands",
-          "Marine Conservation Groups",
-        ],
-        relatedSolutions: [
-          "coral-protection-protocols",
-          "temperature-mitigation-systems",
-        ],
+        affectedCommunities: ["Australia", "Pacific Islands", "Marine Conservation Groups"],
+        relatedSolutions: ["coral-protection-protocols", "temperature-mitigation-systems"],
       },
       {
         id: "alert-2",
@@ -218,10 +201,7 @@ export function PsychohistoricalDocumentation() {
         read: false,
         actionRequired: false,
         affectedCommunities: ["North America", "Europe", "Southeast Asia"],
-        relatedSolutions: [
-          "distributed-renewable-networks",
-          "community-energy-cooperatives",
-        ],
+        relatedSolutions: ["distributed-renewable-networks", "community-energy-cooperatives"],
       },
       {
         id: "alert-3",
@@ -235,28 +215,20 @@ export function PsychohistoricalDocumentation() {
         read: true,
         actionRequired: false,
         affectedCommunities: ["Global"],
-        relatedSolutions: [
-          "automated-cleanup-systems",
-          "plastic-processing-facilities",
-        ],
+        relatedSolutions: ["automated-cleanup-systems", "plastic-processing-facilities"],
       },
       {
         id: "alert-4",
         type: "implementation_ready",
         severity: "medium",
         title: "Biodegradable Electronics Ready for Deployment",
-        message:
-          "AI-generated electronics solution has passed all validation tests",
+        message: "AI-generated electronics solution has passed all validation tests",
         details:
           "Community validation complete. 94% feasibility rating. Ready for pilot implementation in 6 locations.",
         timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000),
         read: false,
         actionRequired: true,
-        affectedCommunities: [
-          "Tech Communities",
-          "Environmental Groups",
-          "Manufacturing Sectors",
-        ],
+        affectedCommunities: ["Tech Communities", "Environmental Groups", "Manufacturing Sectors"],
         relatedSolutions: ["biodegradable-electronics", "e-waste-reduction"],
       },
     ];
@@ -297,8 +269,7 @@ export function PsychohistoricalDocumentation() {
         frequency: 67,
         successRate: 95.8,
         applicableSolutions: 134,
-        environmentalImpact:
-          "45% multiplicative improvement in environmental outcomes",
+        environmentalImpact: "45% multiplicative improvement in environmental outcomes",
         discoveredAt: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000),
         confidence: 88.9,
       },
@@ -318,12 +289,7 @@ export function PsychohistoricalDocumentation() {
         impact: "high",
         category: "Climate Recovery",
         generatedAt: new Date(Date.now() - 4 * 60 * 60 * 1000),
-        affectedRegions: [
-          "Arctic Ocean",
-          "Northern Canada",
-          "Greenland",
-          "Northern Alaska",
-        ],
+        affectedRegions: ["Arctic Ocean", "Northern Canada", "Greenland", "Northern Alaska"],
         recommendedActions: [
           "Scale marine protection programs",
           "Increase cold water circulation projects",
@@ -340,11 +306,7 @@ export function PsychohistoricalDocumentation() {
         impact: "high",
         category: "Urban Environment",
         generatedAt: new Date(Date.now() - 8 * 60 * 60 * 1000),
-        affectedRegions: [
-          "Global Urban Centers",
-          "Major Cities",
-          "Metropolitan Areas",
-        ],
+        affectedRegions: ["Global Urban Centers", "Major Cities", "Metropolitan Areas"],
         recommendedActions: [
           "Promote integrated urban planning",
           "Expand vertical farming initiatives",
@@ -383,17 +345,13 @@ export function PsychohistoricalDocumentation() {
 
   const markAlertAsRead = (alertId: string) => {
     setCommunityAlerts((prev) =>
-      prev.map((alert) =>
-        alert.id === alertId ? { ...alert, read: true } : alert,
-      ),
+      prev.map((alert) => (alert.id === alertId ? { ...alert, read: true } : alert))
     );
   };
 
   const voteHelpful = (docId: string) => {
     setDocumentationEntries((prev) =>
-      prev.map((doc) =>
-        doc.id === docId ? { ...doc, helpfulVotes: doc.helpfulVotes + 1 } : doc,
-      ),
+      prev.map((doc) => (doc.id === docId ? { ...doc, helpfulVotes: doc.helpfulVotes + 1 } : doc))
     );
     toast.success("Thank you for your feedback!");
   };
@@ -468,15 +426,8 @@ export function PsychohistoricalDocumentation() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              "threat_warning",
-              "opportunity",
-              "milestone",
-              "implementation_ready",
-            ].map((type) => {
-              const count = communityAlerts.filter(
-                (a) => a.type === type,
-              ).length;
+            {["threat_warning", "opportunity", "milestone", "implementation_ready"].map((type) => {
+              const count = communityAlerts.filter((a) => a.type === type).length;
               return (
                 <div
                   key={type}
@@ -484,13 +435,9 @@ export function PsychohistoricalDocumentation() {
                 >
                   <div className="flex items-center justify-center mb-2">
                     {getAlertIcon(type)}
-                    <span className="ml-2 text-sm capitalize">
-                      {type.replace("_", " ")}
-                    </span>
+                    <span className="ml-2 text-sm capitalize">{type.replace("_", " ")}</span>
                   </div>
-                  <div className="text-2xl font-bold text-yellow-400">
-                    {count}
-                  </div>
+                  <div className="text-2xl font-bold text-yellow-400">{count}</div>
                 </div>
               );
             })}
@@ -533,14 +480,9 @@ export function PsychohistoricalDocumentation() {
                           {getAlertIcon(alert.type)}
                         </div>
                         <div>
-                          <h4 className="font-medium text-white">
-                            {alert.title}
-                          </h4>
+                          <h4 className="font-medium text-white">{alert.title}</h4>
                           <div className="flex items-center gap-2 mt-1">
-                            <Badge
-                              variant="outline"
-                              className={getSeverityColor(alert.severity)}
-                            >
+                            <Badge variant="outline" className={getSeverityColor(alert.severity)}>
                               {alert.severity}
                             </Badge>
                             <Badge
@@ -550,12 +492,8 @@ export function PsychohistoricalDocumentation() {
                               {alert.type.replace("_", " ")}
                             </Badge>
                             <span className="text-xs text-muted-foreground">
-                              {Math.floor(
-                                (Date.now() - alert.timestamp.getTime()) /
-                                  1000 /
-                                  60,
-                              )}
-                              m ago
+                              {Math.floor((Date.now() - alert.timestamp.getTime()) / 1000 / 60)}m
+                              ago
                             </span>
                           </div>
                         </div>
@@ -573,9 +511,7 @@ export function PsychohistoricalDocumentation() {
                     </div>
 
                     <p className="text-white mb-2">{alert.message}</p>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      {alert.details}
-                    </p>
+                    <p className="text-sm text-muted-foreground mb-3">{alert.details}</p>
 
                     <div className="space-y-2">
                       <div>
@@ -598,9 +534,7 @@ export function PsychohistoricalDocumentation() {
 
                       {alert.relatedSolutions.length > 0 && (
                         <div>
-                          <span className="text-sm text-muted-foreground">
-                            Related Solutions:{" "}
-                          </span>
+                          <span className="text-sm text-muted-foreground">Related Solutions: </span>
                           <div className="flex flex-wrap gap-1 mt-1">
                             {alert.relatedSolutions.map((solution, index) => (
                               <Badge
@@ -619,10 +553,7 @@ export function PsychohistoricalDocumentation() {
 
                     {alert.actionRequired && (
                       <div className="mt-3 pt-3 border-t border-gray-500/20">
-                        <Badge
-                          variant="outline"
-                          className="border-orange-500/50 text-orange-400"
-                        >
+                        <Badge variant="outline" className="border-orange-500/50 text-orange-400">
                           <AlertTriangle className="h-3 w-3 mr-1" />
                           Action Required
                         </Badge>
@@ -669,20 +600,13 @@ export function PsychohistoricalDocumentation() {
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <h4 className="font-medium text-white">
-                            {doc.title}
-                          </h4>
-                          <Badge
-                            variant="outline"
-                            className={getDocTypeColor(doc.type)}
-                          >
+                          <h4 className="font-medium text-white">{doc.title}</h4>
+                          <Badge variant="outline" className={getDocTypeColor(doc.type)}>
                             <FileText className="h-3 w-3 mr-1" />
                             {doc.type.replace("_", " ")}
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground mb-3">
-                          {doc.content}
-                        </p>
+                        <p className="text-sm text-muted-foreground mb-3">{doc.content}</p>
 
                         <div className="flex flex-wrap gap-1 mb-3">
                           {doc.tags.map((tag, index) => (
@@ -698,37 +622,22 @@ export function PsychohistoricalDocumentation() {
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                           <div>
-                            <span className="text-muted-foreground">
-                              Author:{" "}
-                            </span>
+                            <span className="text-muted-foreground">Author: </span>
                             <span className="text-white">{doc.author}</span>
                           </div>
                           <div>
-                            <span className="text-muted-foreground">
-                              Views:{" "}
-                            </span>
-                            <span className="text-blue-400">
-                              {doc.views.toLocaleString()}
-                            </span>
+                            <span className="text-muted-foreground">Views: </span>
+                            <span className="text-blue-400">{doc.views.toLocaleString()}</span>
                           </div>
                           <div>
-                            <span className="text-muted-foreground">
-                              Helpful:{" "}
-                            </span>
-                            <span className="text-green-400">
-                              {doc.helpfulVotes}
-                            </span>
+                            <span className="text-muted-foreground">Helpful: </span>
+                            <span className="text-green-400">{doc.helpfulVotes}</span>
                           </div>
                           <div>
-                            <span className="text-muted-foreground">
-                              Updated:{" "}
-                            </span>
+                            <span className="text-muted-foreground">Updated: </span>
                             <span className="text-purple-400">
                               {Math.floor(
-                                (Date.now() - doc.lastUpdated.getTime()) /
-                                  1000 /
-                                  60 /
-                                  60,
+                                (Date.now() - doc.lastUpdated.getTime()) / 1000 / 60 / 60
                               )}
                               h ago
                             </span>
@@ -788,53 +697,33 @@ export function PsychohistoricalDocumentation() {
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
-                        <h4 className="font-medium text-white mb-2">
-                          {pattern.pattern}
-                        </h4>
-                        <p className="text-sm text-muted-foreground mb-3">
-                          {pattern.description}
-                        </p>
+                        <h4 className="font-medium text-white mb-2">{pattern.pattern}</h4>
+                        <p className="text-sm text-muted-foreground mb-3">{pattern.description}</p>
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                           <div>
-                            <div className="text-sm text-muted-foreground">
-                              Success Rate
-                            </div>
-                            <div className="font-bold text-green-400">
-                              {pattern.successRate}%
-                            </div>
+                            <div className="text-sm text-muted-foreground">Success Rate</div>
+                            <div className="font-bold text-green-400">{pattern.successRate}%</div>
                           </div>
                           <div>
-                            <div className="text-sm text-muted-foreground">
-                              Frequency
-                            </div>
-                            <div className="font-bold text-blue-400">
-                              {pattern.frequency}
-                            </div>
+                            <div className="text-sm text-muted-foreground">Frequency</div>
+                            <div className="font-bold text-blue-400">{pattern.frequency}</div>
                           </div>
                           <div>
-                            <div className="text-sm text-muted-foreground">
-                              Solutions
-                            </div>
+                            <div className="text-sm text-muted-foreground">Solutions</div>
                             <div className="font-bold text-purple-400">
                               {pattern.applicableSolutions}
                             </div>
                           </div>
                           <div>
-                            <div className="text-sm text-muted-foreground">
-                              Confidence
-                            </div>
-                            <div className="font-bold text-yellow-400">
-                              {pattern.confidence}%
-                            </div>
+                            <div className="text-sm text-muted-foreground">Confidence</div>
+                            <div className="font-bold text-yellow-400">{pattern.confidence}%</div>
                           </div>
                         </div>
 
                         <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 p-3 rounded-lg">
                           <div className="text-sm">
-                            <span className="text-muted-foreground">
-                              Environmental Impact:{" "}
-                            </span>
+                            <span className="text-muted-foreground">Environmental Impact: </span>
                             <span className="font-bold text-green-400">
                               {pattern.environmentalImpact}
                             </span>
@@ -846,11 +735,7 @@ export function PsychohistoricalDocumentation() {
                     <div className="text-xs text-muted-foreground">
                       Discovered{" "}
                       {Math.floor(
-                        (Date.now() - pattern.discoveredAt.getTime()) /
-                          1000 /
-                          60 /
-                          60 /
-                          24,
+                        (Date.now() - pattern.discoveredAt.getTime()) / 1000 / 60 / 60 / 24
                       )}{" "}
                       days ago
                     </div>
@@ -879,9 +764,7 @@ export function PsychohistoricalDocumentation() {
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <h4 className="font-medium text-white">
-                            {insight.title}
-                          </h4>
+                          <h4 className="font-medium text-white">{insight.title}</h4>
                           <Badge
                             variant="outline"
                             className={
@@ -896,37 +779,24 @@ export function PsychohistoricalDocumentation() {
                           </Badge>
                         </div>
 
-                        <p className="text-sm text-muted-foreground mb-3">
-                          {insight.summary}
-                        </p>
+                        <p className="text-sm text-muted-foreground mb-3">{insight.summary}</p>
 
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-3">
                           <div>
-                            <div className="text-sm text-muted-foreground">
-                              Data Points
-                            </div>
+                            <div className="text-sm text-muted-foreground">Data Points</div>
                             <div className="font-bold text-blue-400">
                               {(insight.dataPoints / 1000000).toFixed(1)}M
                             </div>
                           </div>
                           <div>
-                            <div className="text-sm text-muted-foreground">
-                              Confidence
-                            </div>
-                            <div className="font-bold text-green-400">
-                              {insight.confidence}%
-                            </div>
+                            <div className="text-sm text-muted-foreground">Confidence</div>
+                            <div className="font-bold text-green-400">{insight.confidence}%</div>
                           </div>
                           <div>
-                            <div className="text-sm text-muted-foreground">
-                              Generated
-                            </div>
+                            <div className="text-sm text-muted-foreground">Generated</div>
                             <div className="font-bold text-purple-400">
                               {Math.floor(
-                                (Date.now() - insight.generatedAt.getTime()) /
-                                  1000 /
-                                  60 /
-                                  60,
+                                (Date.now() - insight.generatedAt.getTime()) / 1000 / 60 / 60
                               )}
                               h ago
                             </div>
@@ -957,18 +827,16 @@ export function PsychohistoricalDocumentation() {
                               Recommended Actions:{" "}
                             </span>
                             <div className="flex flex-wrap gap-1 mt-1">
-                              {insight.recommendedActions.map(
-                                (action, index) => (
-                                  <Badge
-                                    key={index}
-                                    variant="outline"
-                                    className="text-xs border-blue-500/50 text-blue-400"
-                                  >
-                                    <CheckCircle className="h-3 w-3 mr-1" />
-                                    {action}
-                                  </Badge>
-                                ),
-                              )}
+                              {insight.recommendedActions.map((action, index) => (
+                                <Badge
+                                  key={index}
+                                  variant="outline"
+                                  className="text-xs border-blue-500/50 text-blue-400"
+                                >
+                                  <CheckCircle className="h-3 w-3 mr-1" />
+                                  {action}
+                                </Badge>
+                              ))}
                             </div>
                           </div>
                         </div>

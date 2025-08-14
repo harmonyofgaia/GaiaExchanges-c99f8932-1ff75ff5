@@ -61,8 +61,7 @@ export function AutoTacticsGenerator() {
       },
       {
         name: "Phoenix Resurrection Protocol",
-        description:
-          "Automatically rebuilds systems stronger after any breach attempt",
+        description: "Automatically rebuilds systems stronger after any breach attempt",
         base_effectiveness: 96,
       },
       {
@@ -83,8 +82,7 @@ export function AutoTacticsGenerator() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       const template = tacticTemplates[i];
-      const effectiveness =
-        template.base_effectiveness + Math.floor(Math.random() * 10) - 5;
+      const effectiveness = template.base_effectiveness + Math.floor(Math.random() * 10) - 5;
 
       newTactics.push({
         id: `tactic_${Date.now()}_${i}`,
@@ -92,8 +90,7 @@ export function AutoTacticsGenerator() {
         description: template.description,
         effectiveness: Math.max(effectiveness, 70),
         auto_generated: true,
-        priority:
-          effectiveness > 90 ? "high" : effectiveness > 80 ? "medium" : "low",
+        priority: effectiveness > 90 ? "high" : effectiveness > 80 ? "medium" : "low",
         last_updated: new Date().toISOString(),
       });
 
@@ -102,9 +99,7 @@ export function AutoTacticsGenerator() {
 
     setTactics(newTactics);
     setIsGenerating(false);
-    toast.success(
-      "🧠 Daily tactical analysis complete! New defense strategies generated!",
-    );
+    toast.success("🧠 Daily tactical analysis complete! New defense strategies generated!");
   };
 
   const getPriorityColor = (priority: string) => {
@@ -126,14 +121,12 @@ export function AutoTacticsGenerator() {
               ...tactic,
               effectiveness: Math.min(tactic.effectiveness + 5, 100),
             }
-          : tactic,
-      ),
+          : tactic
+      )
     );
 
     const tactic = tactics.find((t) => t.id === tacticId);
-    toast.success(
-      `⚡ ${tactic?.name} activated! Defense effectiveness increased!`,
-    );
+    toast.success(`⚡ ${tactic?.name} activated! Defense effectiveness increased!`);
   };
 
   return (
@@ -154,27 +147,20 @@ export function AutoTacticsGenerator() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center p-3 rounded-lg bg-green-900/30">
               <Target className="h-6 w-6 text-green-400 mx-auto mb-2" />
-              <div className="text-lg font-bold text-green-400">
-                {tactics.length}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Active Tactics
-              </div>
+              <div className="text-lg font-bold text-green-400">{tactics.length}</div>
+              <div className="text-xs text-muted-foreground">Active Tactics</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-blue-900/30">
               <Activity className="h-6 w-6 text-blue-400 mx-auto mb-2" />
               <div className="text-lg font-bold text-blue-400">
                 {tactics.length > 0
                   ? Math.round(
-                      tactics.reduce((sum, t) => sum + t.effectiveness, 0) /
-                        tactics.length,
+                      tactics.reduce((sum, t) => sum + t.effectiveness, 0) / tactics.length
                     )
                   : 0}
                 %
               </div>
-              <div className="text-xs text-muted-foreground">
-                Avg Effectiveness
-              </div>
+              <div className="text-xs text-muted-foreground">Avg Effectiveness</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-purple-900/30">
               <TrendingUp className="h-6 w-6 text-purple-400 mx-auto mb-2" />
@@ -191,9 +177,7 @@ export function AutoTacticsGenerator() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="font-semibold text-blue-400">
-                  Daily Tactics Generation
-                </h4>
+                <h4 className="font-semibold text-blue-400">Daily Tactics Generation</h4>
                 <p className="text-sm text-muted-foreground">
                   {isGenerating
                     ? "Generating new defense tactics..."
@@ -210,9 +194,7 @@ export function AutoTacticsGenerator() {
               </Button>
             </div>
 
-            {isGenerating && (
-              <Progress value={generationProgress} className="h-3" />
-            )}
+            {isGenerating && <Progress value={generationProgress} className="h-3" />}
           </div>
         </CardContent>
       </Card>
@@ -226,18 +208,14 @@ export function AutoTacticsGenerator() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <h4 className="font-semibold text-lg">{tactic.name}</h4>
-                    <Badge
-                      className={`text-white ${getPriorityColor(tactic.priority)}`}
-                    >
+                    <Badge className={`text-white ${getPriorityColor(tactic.priority)}`}>
                       {tactic.priority.toUpperCase()}
                     </Badge>
                     <Badge className="bg-cyan-600 text-white">
                       {tactic.effectiveness}% Effective
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {tactic.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-3">{tactic.description}</p>
                   <div className="space-y-1">
                     <div className="flex justify-between text-xs">
                       <span>Effectiveness Rating</span>
@@ -246,8 +224,7 @@ export function AutoTacticsGenerator() {
                     <Progress value={tactic.effectiveness} className="h-2" />
                   </div>
                   <div className="text-xs text-muted-foreground mt-2">
-                    Last Updated:{" "}
-                    {new Date(tactic.last_updated).toLocaleString()}
+                    Last Updated: {new Date(tactic.last_updated).toLocaleString()}
                   </div>
                 </div>
 
@@ -274,16 +251,11 @@ export function AutoTacticsGenerator() {
         <Card className="border-gray-500/30">
           <CardContent className="pt-6 text-center">
             <Calculator className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-400 mb-2">
-              No Tactics Generated Yet
-            </h3>
+            <h3 className="text-lg font-semibold text-gray-400 mb-2">No Tactics Generated Yet</h3>
             <p className="text-sm text-muted-foreground mb-4">
               Click the generate button to create new AI-powered defense tactics
             </p>
-            <Button
-              onClick={generateDailyTactics}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
+            <Button onClick={generateDailyTactics} className="bg-blue-600 hover:bg-blue-700">
               <Brain className="h-4 w-4 mr-2" />
               Generate First Tactics
             </Button>

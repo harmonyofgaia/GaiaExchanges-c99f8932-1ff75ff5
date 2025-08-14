@@ -115,18 +115,15 @@ export function AnimalNFTMarketplace() {
             🏪 NFT Marketplace - Animal Guardians
           </CardTitle>
           <p className="text-muted-foreground">
-            Purchase NFTs to become an official guardian. 100% of proceeds go to
-            the animal's dedicated wallet.
+            Purchase NFTs to become an official guardian. 100% of proceeds go to the animal's
+            dedicated wallet.
           </p>
         </CardHeader>
       </Card>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {nfts.map((nft) => (
-          <Card
-            key={nft.id}
-            className={`${getRarityColor(nft.rarity)} border-2`}
-          >
+          <Card key={nft.id} className={`${getRarityColor(nft.rarity)} border-2`}>
             <CardContent className="p-6">
               <div className="space-y-4">
                 <div className="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg flex items-center justify-center text-6xl border border-white/10">
@@ -136,9 +133,7 @@ export function AnimalNFTMarketplace() {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="font-bold text-lg">{nft.name}</h3>
-                    <Badge className={getRarityBadge(nft.rarity)}>
-                      {nft.rarity.toUpperCase()}
-                    </Badge>
+                    <Badge className={getRarityBadge(nft.rarity)}>{nft.rarity.toUpperCase()}</Badge>
                   </div>
                   <p className="text-muted-foreground text-sm">{nft.species}</p>
                 </div>
@@ -150,10 +145,7 @@ export function AnimalNFTMarketplace() {
                   </h4>
                   <ul className="space-y-1">
                     {nft.benefits.map((benefit, index) => (
-                      <li
-                        key={index}
-                        className="text-sm flex items-center gap-2"
-                      >
+                      <li key={index} className="text-sm flex items-center gap-2">
                         <span className="text-green-400">✓</span>
                         {benefit}
                       </li>
@@ -163,12 +155,8 @@ export function AnimalNFTMarketplace() {
 
                 <div className="border-t pt-4">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm text-muted-foreground">
-                      Price:
-                    </span>
-                    <span className="font-bold text-xl text-yellow-400">
-                      {nft.price} GAiA
-                    </span>
+                    <span className="text-sm text-muted-foreground">Price:</span>
+                    <span className="font-bold text-xl text-yellow-400">{nft.price} GAiA</span>
                   </div>
 
                   <Button
@@ -181,12 +169,10 @@ export function AnimalNFTMarketplace() {
                 </div>
 
                 <div className="bg-black/40 p-3 rounded border border-green-500/20">
-                  <div className="text-xs text-green-400 font-semibold">
-                    100% Direct Funding
-                  </div>
+                  <div className="text-xs text-green-400 font-semibold">100% Direct Funding</div>
                   <div className="text-xs text-muted-foreground">
-                    Your purchase goes directly to this animal's wallet for
-                    care, food, and rehabilitation.
+                    Your purchase goes directly to this animal's wallet for care, food, and
+                    rehabilitation.
                   </div>
                 </div>
               </div>

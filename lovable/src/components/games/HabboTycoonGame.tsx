@@ -46,9 +46,7 @@ interface Building {
 }
 
 export function HabboTycoonGame() {
-  const [gameState, setGameState] = useState<
-    "menu" | "building" | "chatroom" | "world"
-  >("menu");
+  const [gameState, setGameState] = useState<"menu" | "building" | "chatroom" | "world">("menu");
   const [playerData, setPlayerData] = useState<Player>({
     id: "player1",
     name: "TycoonMaster",
@@ -136,10 +134,7 @@ export function HabboTycoonGame() {
 
     // Game loop for passive income and updates
     gameLoopRef.current = setInterval(() => {
-      const income = buildings.reduce(
-        (total, building) => total + building.income,
-        0,
-      );
+      const income = buildings.reduce((total, building) => total + building.income, 0);
 
       setPlayerData((prev) => ({
         ...prev,
@@ -211,10 +206,7 @@ export function HabboTycoonGame() {
   const upgradeBuilding = (buildingId: string) => {
     setBuildings((prev) =>
       prev.map((building) => {
-        if (
-          building.id === buildingId &&
-          playerData.coins >= building.cost / 2
-        ) {
+        if (building.id === buildingId && playerData.coins >= building.cost / 2) {
           setPlayerData((p) => ({ ...p, coins: p.coins - building.cost / 2 }));
 
           toast.success("⬆️ Building Upgraded!", {
@@ -229,7 +221,7 @@ export function HabboTycoonGame() {
           };
         }
         return building;
-      }),
+      })
     );
   };
 
@@ -264,21 +256,11 @@ export function HabboTycoonGame() {
             <Badge className="bg-green-600">
               👤 {playerData.name} - Level {playerData.level}
             </Badge>
-            <Badge className="bg-yellow-600">
-              💰 {playerData.coins.toLocaleString()} Coins
-            </Badge>
-            <Badge className="bg-blue-600">
-              🏢 {playerData.buildings} Buildings
-            </Badge>
-            <Badge className="bg-purple-600">
-              🌟 {playerData.reputation}% Reputation
-            </Badge>
-            <Badge className="bg-red-600">
-              👥 {onlinePlayers.toLocaleString()} Online
-            </Badge>
-            <Badge className="bg-green-600">
-              🛡️ Security: {securityLevel}%
-            </Badge>
+            <Badge className="bg-yellow-600">💰 {playerData.coins.toLocaleString()} Coins</Badge>
+            <Badge className="bg-blue-600">🏢 {playerData.buildings} Buildings</Badge>
+            <Badge className="bg-purple-600">🌟 {playerData.reputation}% Reputation</Badge>
+            <Badge className="bg-red-600">👥 {onlinePlayers.toLocaleString()} Online</Badge>
+            <Badge className="bg-green-600">🛡️ Security: {securityLevel}%</Badge>
           </div>
         </CardHeader>
       </Card>
@@ -301,24 +283,18 @@ export function HabboTycoonGame() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="bg-black/30 border-blue-500/30">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  📊 Empire Overview
-                </CardTitle>
+                <CardTitle className="text-blue-400">📊 Empire Overview</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex justify-between">
                     <span>Total Buildings:</span>
-                    <span className="text-blue-400 font-bold">
-                      {buildings.length}
-                    </span>
+                    <span className="text-blue-400 font-bold">{buildings.length}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Hourly Income:</span>
                     <span className="text-green-400 font-bold">
-                      {(
-                        buildings.reduce((sum, b) => sum + b.income, 0) * 20
-                      ).toLocaleString()}
+                      {(buildings.reduce((sum, b) => sum + b.income, 0) * 20).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between">
@@ -337,9 +313,7 @@ export function HabboTycoonGame() {
 
             <Card className="bg-black/30 border-purple-500/30">
               <CardHeader>
-                <CardTitle className="text-purple-400">
-                  🚀 Quick Actions
-                </CardTitle>
+                <CardTitle className="text-purple-400">🚀 Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button
@@ -349,10 +323,7 @@ export function HabboTycoonGame() {
                   <Coins className="h-4 w-4 mr-2" />
                   Collect All Income
                 </Button>
-                <Button
-                  onClick={enterChatroom}
-                  className="w-full bg-blue-600 hover:bg-blue-700"
-                >
+                <Button onClick={enterChatroom} className="w-full bg-blue-600 hover:bg-blue-700">
                   <Users className="h-4 w-4 mr-2" />
                   Enter Global Chat
                 </Button>
@@ -363,10 +334,7 @@ export function HabboTycoonGame() {
                   <Globe className="h-4 w-4 mr-2" />
                   Explore World Map
                 </Button>
-                <Button
-                  variant="outline"
-                  className="w-full border-yellow-500/30 text-yellow-400"
-                >
+                <Button variant="outline" className="w-full border-yellow-500/30 text-yellow-400">
                   <Gift className="h-4 w-4 mr-2" />
                   Daily Rewards
                 </Button>
@@ -380,9 +348,7 @@ export function HabboTycoonGame() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="md:col-span-2 bg-black/30 border-purple-500/30">
               <CardHeader>
-                <CardTitle className="text-purple-400">
-                  🏗️ Your Tycoon Empire
-                </CardTitle>
+                <CardTitle className="text-purple-400">🏗️ Your Tycoon Empire</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="relative w-full h-80 bg-gradient-to-b from-green-900/20 to-brown-900/20 rounded-lg border border-green-500/30 overflow-hidden">
@@ -395,10 +361,7 @@ export function HabboTycoonGame() {
                       title={`${building.name} - Level ${building.level} - Income: ${building.income}/3s - Click to upgrade`}
                     >
                       <div className="text-3xl group-hover:animate-bounce">
-                        {
-                          buildingTypes.find((b) => b.id === building.type)
-                            ?.icon
-                        }
+                        {buildingTypes.find((b) => b.id === building.type)?.icon}
                       </div>
                       <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                         Lv.{building.level} | +{building.income}
@@ -416,9 +379,7 @@ export function HabboTycoonGame() {
 
             <Card className="bg-black/30 border-blue-500/30">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  🏗️ Construction Menu
-                </CardTitle>
+                <CardTitle className="text-blue-400">🏗️ Construction Menu</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {buildingTypes.map((building) => (
@@ -432,15 +393,11 @@ export function HabboTycoonGame() {
                       <span className="text-lg">{building.icon}</span>
                       <div className="text-left">
                         <div className="text-sm font-bold">{building.name}</div>
-                        <div className="text-xs opacity-75">
-                          +{building.income}/3s
-                        </div>
+                        <div className="text-xs opacity-75">+{building.income}/3s</div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-sm font-bold">
-                        {building.cost} 💰
-                      </div>
+                      <div className="text-sm font-bold">{building.cost} 💰</div>
                     </div>
                   </Button>
                 ))}
@@ -453,21 +410,17 @@ export function HabboTycoonGame() {
           {/* World Map */}
           <Card className="bg-black/30 border-green-500/30">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                🌍 Global Tycoon Network
-              </CardTitle>
+              <CardTitle className="text-green-400">🌍 Global Tycoon Network</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="aspect-video bg-gradient-to-br from-blue-900/30 to-green-900/30 rounded-lg border border-green-500/30 relative overflow-hidden">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center space-y-4">
                     <div className="text-6xl animate-pulse">🌍</div>
-                    <div className="text-2xl font-bold text-green-400">
-                      GLOBAL TYCOON NETWORK
-                    </div>
+                    <div className="text-2xl font-bold text-green-400">GLOBAL TYCOON NETWORK</div>
                     <div className="text-lg text-green-300">
-                      Connect with tycoons worldwide •{" "}
-                      {onlinePlayers.toLocaleString()} players online
+                      Connect with tycoons worldwide • {onlinePlayers.toLocaleString()} players
+                      online
                     </div>
                     <div className="grid grid-cols-3 gap-4 text-sm">
                       <div className="text-center p-2 bg-blue-900/30 rounded">
@@ -494,14 +447,10 @@ export function HabboTycoonGame() {
           {/* Global Chatroom */}
           <Card className="bg-black/30 border-blue-500/30">
             <CardHeader>
-              <CardTitle className="text-blue-400">
-                💬 Global Tycoon Chatroom
-              </CardTitle>
+              <CardTitle className="text-blue-400">💬 Global Tycoon Chatroom</CardTitle>
               <div className="flex items-center gap-2">
                 <Badge className="bg-green-600">🔒 Quantum Encrypted</Badge>
-                <Badge className="bg-blue-600">
-                  👥 {onlinePlayers.toLocaleString()} Online
-                </Badge>
+                <Badge className="bg-blue-600">👥 {onlinePlayers.toLocaleString()} Online</Badge>
               </div>
             </CardHeader>
             <CardContent>
@@ -534,9 +483,7 @@ export function HabboTycoonGame() {
                     placeholder="Type your message to the global tycoon community..."
                     className="flex-1 bg-black/50 border-blue-500/30"
                   />
-                  <Button className="bg-blue-600 hover:bg-blue-700">
-                    Send 💬
-                  </Button>
+                  <Button className="bg-blue-600 hover:bg-blue-700">Send 💬</Button>
                 </div>
               </div>
             </CardContent>
@@ -557,36 +504,28 @@ export function HabboTycoonGame() {
 
         <Card className="bg-blue-900/30 border-blue-500/30">
           <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-blue-400">
-              {onlinePlayers.toLocaleString()}
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{onlinePlayers.toLocaleString()}</div>
             <div className="text-sm text-muted-foreground">Players Online</div>
           </CardContent>
         </Card>
 
         <Card className="bg-purple-900/30 border-purple-500/30">
           <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-purple-400">
-              {playerData.level}
-            </div>
+            <div className="text-2xl font-bold text-purple-400">{playerData.level}</div>
             <div className="text-sm text-muted-foreground">Player Level</div>
           </CardContent>
         </Card>
 
         <Card className="bg-orange-900/30 border-orange-500/30">
           <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-orange-400">
-              {buildings.length}
-            </div>
+            <div className="text-2xl font-bold text-orange-400">{buildings.length}</div>
             <div className="text-sm text-muted-foreground">Buildings Built</div>
           </CardContent>
         </Card>
 
         <Card className="bg-red-900/30 border-red-500/30">
           <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-red-400">
-              {securityLevel}%
-            </div>
+            <div className="text-2xl font-bold text-red-400">{securityLevel}%</div>
             <div className="text-sm text-muted-foreference">Security Level</div>
           </CardContent>
         </Card>

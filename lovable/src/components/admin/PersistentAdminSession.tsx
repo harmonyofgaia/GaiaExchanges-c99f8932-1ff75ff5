@@ -83,10 +83,7 @@ export function PersistentAdminSession() {
             // Try to maintain localStorage, fallback to sessionStorage
             try {
               if (hasLocalSession) {
-                localStorage.setItem(
-                  "gaia-admin",
-                  JSON.stringify(essentialData),
-                );
+                localStorage.setItem("gaia-admin", JSON.stringify(essentialData));
               }
             } catch (e) {
               // If localStorage fails, clear it and use sessionStorage

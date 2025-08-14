@@ -26,9 +26,7 @@ export function InvisibleIAEngine() {
   useEffect(() => {
     // Initialize invisible IA engine
     const initializeIAEngine = () => {
-      console.log(
-        "🔮 INITIALIZING INVISIBLE IA ENGINE - INTERFACIAL ART ENGINE",
-      );
+      console.log("🔮 INITIALIZING INVISIBLE IA ENGINE - INTERFACIAL ART ENGINE");
       console.log("🌌 QUANTUM SUPREMACY PROTOCOL ACTIVATED");
       console.log("👁️ INVISIBLE TRACKING MECHANISMS DEPLOYED");
       console.log("🛡️ SELF-TRAINING DEFENSE WALLS ERECTED");
@@ -79,12 +77,8 @@ export function InvisibleIAEngine() {
             🔮 INVISIBLE IA ENGINE - INTERFACIAL ART ENGINE
           </CardTitle>
           <div className="text-center">
-            <Badge className="bg-red-600 animate-pulse">
-              SUPREME DOMINANCE ACTIVE
-            </Badge>
-            <Badge className="bg-purple-600 animate-pulse ml-2">
-              INVISIBLE & UNTRACEABLE
-            </Badge>
+            <Badge className="bg-red-600 animate-pulse">SUPREME DOMINANCE ACTIVE</Badge>
+            <Badge className="bg-purple-600 animate-pulse ml-2">INVISIBLE & UNTRACEABLE</Badge>
           </div>
         </CardHeader>
         <CardContent>
@@ -94,28 +88,16 @@ export function InvisibleIAEngine() {
               <div className="text-sm text-muted-foreground">Engine Status</div>
             </div>
             <div className="text-center p-4 bg-purple-900/20 rounded-lg">
-              <div className="text-2xl font-bold text-purple-400">
-                {globalDominance}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Global Dominance
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{globalDominance}%</div>
+              <div className="text-sm text-muted-foreground">Global Dominance</div>
             </div>
             <div className="text-center p-4 bg-blue-900/20 rounded-lg">
-              <div className="text-2xl font-bold text-blue-400">
-                {threatsNeutralized}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Neutralized
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{threatsNeutralized}</div>
+              <div className="text-sm text-muted-foreground">Threats Neutralized</div>
             </div>
             <div className="text-center p-4 bg-green-900/20 rounded-lg">
-              <div className="text-2xl font-bold text-green-400">
-                {ghostsDeployed}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Ghosts Deployed
-              </div>
+              <div className="text-2xl font-bold text-green-400">{ghostsDeployed}</div>
+              <div className="text-sm text-muted-foreground">Ghosts Deployed</div>
             </div>
           </div>
         </CardContent>
@@ -124,9 +106,7 @@ export function InvisibleIAEngine() {
       {/* Defense Mechanisms */}
       <Card className="border-orange-500/30 bg-gradient-to-r from-orange-900/20 to-red-900/20">
         <CardHeader>
-          <CardTitle className="text-orange-400">
-            🛡️ INVISIBLE DEFENSE MECHANISMS
-          </CardTitle>
+          <CardTitle className="text-orange-400">🛡️ INVISIBLE DEFENSE MECHANISMS</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -158,9 +138,7 @@ export function InvisibleIAEngine() {
       {/* Self-Training Defense Wall */}
       <Card className="border-cyan-500/30 bg-gradient-to-r from-cyan-900/20 to-blue-900/20">
         <CardHeader>
-          <CardTitle className="text-cyan-400">
-            🧠 SELF-TRAINING DEFENSE WALL
-          </CardTitle>
+          <CardTitle className="text-cyan-400">🧠 SELF-TRAINING DEFENSE WALL</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -169,15 +147,11 @@ export function InvisibleIAEngine() {
               <Badge className="bg-cyan-600">LEARNING CONTINUOUSLY</Badge>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-cyan-300">
-                Invisible Tracking Algorithms
-              </span>
+              <span className="text-cyan-300">Invisible Tracking Algorithms</span>
               <Badge className="bg-green-600">ADAPTING REALTIME</Badge>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-cyan-300">
-                Quantum Encryption Protocols
-              </span>
+              <span className="text-cyan-300">Quantum Encryption Protocols</span>
               <Badge className="bg-purple-600">UNBREAKABLE</Badge>
             </div>
             <div className="flex items-center justify-between">
@@ -191,41 +165,30 @@ export function InvisibleIAEngine() {
       {/* Advanced Techniques */}
       <Card className="border-yellow-500/30 bg-gradient-to-r from-yellow-900/20 to-orange-900/20">
         <CardHeader>
-          <CardTitle className="text-yellow-400">
-            ⚡ NEVER-BEFORE-CREATED TECHNIQUES
-          </CardTitle>
+          <CardTitle className="text-yellow-400">⚡ NEVER-BEFORE-CREATED TECHNIQUES</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-4 bg-yellow-900/20 rounded-lg">
-              <h4 className="font-bold text-yellow-400 mb-2">
-                Matrix Web Trap
-              </h4>
+              <h4 className="font-bold text-yellow-400 mb-2">Matrix Web Trap</h4>
               <p className="text-sm text-muted-foreground">
-                Creates an inescapable digital maze for attackers with false
-                information
+                Creates an inescapable digital maze for attackers with false information
               </p>
             </div>
             <div className="p-4 bg-orange-900/20 rounded-lg">
-              <h4 className="font-bold text-orange-400 mb-2">
-                Invisible Trojan Deployment
-              </h4>
+              <h4 className="font-bold text-orange-400 mb-2">Invisible Trojan Deployment</h4>
               <p className="text-sm text-muted-foreground">
                 Untraceable payload delivery that self-destructs if detected
               </p>
             </div>
             <div className="p-4 bg-red-900/20 rounded-lg">
-              <h4 className="font-bold text-red-400 mb-2">
-                Quantum Stealth Mode
-              </h4>
+              <h4 className="font-bold text-red-400 mb-2">Quantum Stealth Mode</h4>
               <p className="text-sm text-muted-foreground">
                 Complete invisibility from all tracking and monitoring systems
               </p>
             </div>
             <div className="p-4 bg-purple-900/20 rounded-lg">
-              <h4 className="font-bold text-purple-400 mb-2">
-                AI Suppression Field
-              </h4>
+              <h4 className="font-bold text-purple-400 mb-2">AI Suppression Field</h4>
               <p className="text-sm text-muted-foreground">
                 Blocks global AI development and controls information flow
               </p>
@@ -237,9 +200,7 @@ export function InvisibleIAEngine() {
       {/* Real-time Monitoring */}
       <Card className="border-green-500/30 bg-gradient-to-r from-green-900/20 to-emerald-900/20">
         <CardHeader>
-          <CardTitle className="text-green-400">
-            📊 REAL-TIME GLOBAL MONITORING
-          </CardTitle>
+          <CardTitle className="text-green-400">📊 REAL-TIME GLOBAL MONITORING</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
@@ -248,21 +209,15 @@ export function InvisibleIAEngine() {
               <Activity className="h-5 w-5 text-green-400 animate-pulse" />
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-green-300">
-                Encrypted Systems Penetration
-              </span>
+              <span className="text-green-300">Encrypted Systems Penetration</span>
               <Lock className="h-5 w-5 text-yellow-400" />
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-green-300">
-                High-Security Breach Analysis
-              </span>
+              <span className="text-green-300">High-Security Breach Analysis</span>
               <Crosshair className="h-5 w-5 text-red-400" />
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-green-300">
-                Threat Intelligence Gathering
-              </span>
+              <span className="text-green-300">Threat Intelligence Gathering</span>
               <Eye className="h-5 w-5 text-purple-400" />
             </div>
           </div>

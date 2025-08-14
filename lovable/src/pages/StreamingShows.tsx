@@ -181,8 +181,7 @@ export default function StreamingShows() {
   }, []);
 
   const filteredShows = shows.filter((show) => {
-    const matchesCategory =
-      selectedCategory === "all" || show.category === selectedCategory;
+    const matchesCategory = selectedCategory === "all" || show.category === selectedCategory;
     const matchesSearch =
       show.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       show.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -206,14 +205,10 @@ export default function StreamingShows() {
             <div className="flex items-center gap-2 mb-2">
               <h3 className="font-bold text-white text-lg">{show.title}</h3>
               {show.isLive && (
-                <Badge className="bg-red-600 animate-pulse text-white">
-                  🔴 LIVE
-                </Badge>
+                <Badge className="bg-red-600 animate-pulse text-white">🔴 LIVE</Badge>
               )}
             </div>
-            <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-              {show.description}
-            </p>
+            <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{show.description}</p>
 
             <div className="flex items-center gap-4 mb-3">
               <Badge variant="outline" className="text-xs">
@@ -273,8 +268,7 @@ export default function StreamingShows() {
               </CardTitle>
               <div className="text-center space-y-2">
                 <p className="text-xl text-muted-foreground">
-                  Discover Life's True Beauty - From Golden 70s/80s to Hidden
-                  Wonders
+                  Discover Life's True Beauty - From Golden 70s/80s to Hidden Wonders
                 </p>
                 <div className="flex justify-center gap-2 flex-wrap">
                   <Badge className="bg-orange-600">📅 Retro Life</Badge>
@@ -293,13 +287,10 @@ export default function StreamingShows() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-green-400 font-medium">
-                    Daily Web Scanning Active
-                  </span>
+                  <span className="text-green-400 font-medium">Daily Web Scanning Active</span>
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  Last scan: 2 hours ago • 847 sources monitored • 3 new docs
-                  found
+                  Last scan: 2 hours ago • 847 sources monitored • 3 new docs found
                 </div>
               </div>
             </CardContent>
@@ -318,9 +309,7 @@ export default function StreamingShows() {
                     className="pl-10"
                   />
                 </div>
-                <Button className="bg-purple-600 hover:bg-purple-700">
-                  Search
-                </Button>
+                <Button className="bg-purple-600 hover:bg-purple-700">Search</Button>
               </div>
             </CardContent>
           </Card>
@@ -333,9 +322,7 @@ export default function StreamingShows() {
                 <Button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  variant={
-                    selectedCategory === category.id ? "default" : "outline"
-                  }
+                  variant={selectedCategory === category.id ? "default" : "outline"}
                   className={`${selectedCategory === category.id ? category.color : ""} transition-all`}
                 >
                   <Icon className="h-4 w-4 mr-2" />
@@ -349,9 +336,7 @@ export default function StreamingShows() {
           {isLoading ? (
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-              <p className="text-muted-foreground">
-                Loading amazing content...
-              </p>
+              <p className="text-muted-foreground">Loading amazing content...</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -375,18 +360,14 @@ export default function StreamingShows() {
               <CardContent className="p-4 text-center">
                 <Calendar className="h-6 w-6 text-orange-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-orange-400">127</div>
-                <div className="text-xs text-muted-foreground">
-                  70s/80s Documentaries
-                </div>
+                <div className="text-xs text-muted-foreground">70s/80s Documentaries</div>
               </CardContent>
             </Card>
             <Card className="bg-green-900/30 border-green-500/30">
               <CardContent className="p-4 text-center">
                 <TreePine className="h-6 w-6 text-green-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-green-400">89</div>
-                <div className="text-xs text-muted-foreground">
-                  Nature & Wildlife
-                </div>
+                <div className="text-xs text-muted-foreground">Nature & Wildlife</div>
               </CardContent>
             </Card>
             <Card className="bg-blue-900/30 border-blue-500/30">

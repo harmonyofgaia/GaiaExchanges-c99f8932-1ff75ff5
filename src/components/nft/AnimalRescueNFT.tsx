@@ -98,8 +98,8 @@ export function AnimalRescueNFT() {
             🆘 Emergency Animal Rescue Center
           </CardTitle>
           <p className="text-muted-foreground">
-            Real animals in crisis need immediate help. Your contributions go
-            directly to rescue operations.
+            Real animals in crisis need immediate help. Your contributions go directly to rescue
+            operations.
           </p>
         </CardHeader>
       </Card>
@@ -116,14 +116,10 @@ export function AnimalRescueNFT() {
                   <div className="text-3xl">{animal.emoji}</div>
                   <div>
                     <h3 className="font-bold text-white">{animal.name}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {animal.species}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{animal.species}</p>
                   </div>
                 </div>
-                <Badge className={getUrgencyBadge(animal.urgency)}>
-                  {animal.urgency}
-                </Badge>
+                <Badge className={getUrgencyBadge(animal.urgency)}>{animal.urgency}</Badge>
               </div>
 
               <div className="space-y-2">
@@ -131,9 +127,7 @@ export function AnimalRescueNFT() {
                   <MapPin className="h-4 w-4 text-blue-400" />
                   <span className="text-blue-400">{animal.location}</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  {animal.situation}
-                </p>
+                <p className="text-sm text-muted-foreground">{animal.situation}</p>
               </div>
 
               <div className="space-y-2">
@@ -143,10 +137,7 @@ export function AnimalRescueNFT() {
                     {animal.raised} / {animal.needed} GAiA
                   </span>
                 </div>
-                <Progress
-                  value={(animal.raised / animal.needed) * 100}
-                  className="h-2"
-                />
+                <Progress value={(animal.raised / animal.needed) * 100} className="h-2" />
               </div>
 
               <div className="flex gap-2">
@@ -164,10 +155,7 @@ export function AnimalRescueNFT() {
                   <Zap className="h-4 w-4 mr-1" />
                   100 GAiA
                 </Button>
-                <Button
-                  variant="outline"
-                  className="border-cyan-500/30 text-cyan-400"
-                >
+                <Button variant="outline" className="border-cyan-500/30 text-cyan-400">
                   <Camera className="h-4 w-4" />
                 </Button>
               </div>

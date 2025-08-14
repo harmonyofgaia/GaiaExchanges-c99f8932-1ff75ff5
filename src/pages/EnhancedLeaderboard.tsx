@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Trophy,
-  Medal,
-  Star,
-  Users,
-  TrendingUp,
-  Crown,
-  Zap,
-  Globe,
-} from "lucide-react";
+import { Trophy, Medal, Star, Users, TrendingUp, Crown, Zap, Globe } from "lucide-react";
 
 interface LeaderboardEntry {
   rank: number;
@@ -60,9 +51,7 @@ export default function EnhancedLeaderboard() {
     // Add more entries...
   ]);
 
-  const [timeFrame, setTimeFrame] = useState<"weekly" | "monthly" | "allTime">(
-    "weekly",
-  );
+  const [timeFrame, setTimeFrame] = useState<"weekly" | "monthly" | "allTime">("weekly");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -71,7 +60,7 @@ export default function EnhancedLeaderboard() {
           ...entry,
           points: entry.points + Math.floor(Math.random() * 50),
           tokens: entry.tokens + Math.floor(Math.random() * 10),
-        })),
+        }))
       );
     }, 10000);
 
@@ -87,11 +76,7 @@ export default function EnhancedLeaderboard() {
       case 3:
         return <Medal className="h-6 w-6 text-orange-400" />;
       default:
-        return (
-          <span className="text-lg font-bold text-muted-foreground">
-            #{rank}
-          </span>
-        );
+        return <span className="text-lg font-bold text-muted-foreground">#{rank}</span>;
     }
   };
 
@@ -144,14 +129,10 @@ export default function EnhancedLeaderboard() {
                   }`}
                 >
                   <CardHeader>
-                    <div className="flex justify-center mb-2">
-                      {getRankIcon(entry.rank)}
-                    </div>
+                    <div className="flex justify-center mb-2">{getRankIcon(entry.rank)}</div>
                     <CardTitle className="text-xl">{entry.username}</CardTitle>
                     <div className="flex justify-center gap-2">
-                      <Badge className="bg-purple-600">
-                        Level {entry.level}
-                      </Badge>
+                      <Badge className="bg-purple-600">Level {entry.level}</Badge>
                       <Badge className="bg-blue-600">{entry.country}</Badge>
                     </div>
                   </CardHeader>
@@ -190,15 +171,11 @@ export default function EnhancedLeaderboard() {
                       }`}
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-8 flex justify-center">
-                          {getRankIcon(entry.rank)}
-                        </div>
+                        <div className="w-8 flex justify-center">{getRankIcon(entry.rank)}</div>
                         <div className="flex items-center gap-2">
                           <span className="text-2xl">{entry.badge}</span>
                           <div>
-                            <div className="font-semibold">
-                              {entry.username}
-                            </div>
+                            <div className="font-semibold">{entry.username}</div>
                             <div className="text-sm text-muted-foreground">
                               Level {entry.level} • {entry.country}
                             </div>
@@ -215,9 +192,7 @@ export default function EnhancedLeaderboard() {
                             {entry.tokens.toLocaleString()} GAIA
                           </div>
                         </div>
-                        <div className="w-6 flex justify-center">
-                          {getChangeIcon(entry.change)}
-                        </div>
+                        <div className="w-6 flex justify-center">{getChangeIcon(entry.change)}</div>
                       </div>
                     </div>
                   ))}
@@ -230,12 +205,8 @@ export default function EnhancedLeaderboard() {
               <Card className="bg-green-900/30 border-green-500/30">
                 <CardContent className="p-4 text-center">
                   <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-green-400">
-                    12,589
-                  </div>
-                  <div className="text-sm text-green-300/80">
-                    Total Participants
-                  </div>
+                  <div className="text-2xl font-bold text-green-400">12,589</div>
+                  <div className="text-sm text-green-300/80">Total Participants</div>
                 </CardContent>
               </Card>
 
@@ -243,9 +214,7 @@ export default function EnhancedLeaderboard() {
                 <CardContent className="p-4 text-center">
                   <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-blue-400">2.4M</div>
-                  <div className="text-sm text-blue-300/80">
-                    Total GAIA Earned
-                  </div>
+                  <div className="text-sm text-blue-300/80">Total GAIA Earned</div>
                 </CardContent>
               </Card>
 
@@ -261,9 +230,7 @@ export default function EnhancedLeaderboard() {
                 <CardContent className="p-4 text-center">
                   <Globe className="h-8 w-8 text-orange-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-orange-400">45K</div>
-                  <div className="text-sm text-orange-300/80">
-                    Projects Completed
-                  </div>
+                  <div className="text-sm text-orange-300/80">Projects Completed</div>
                 </CardContent>
               </Card>
             </div>

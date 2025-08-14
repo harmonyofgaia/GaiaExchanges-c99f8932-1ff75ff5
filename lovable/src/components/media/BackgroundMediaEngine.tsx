@@ -100,20 +100,16 @@ export function BackgroundMediaEngine() {
             <CardContent className="p-6 text-center">
               <div className="mb-4">
                 <div className="text-4xl mb-2">🎵</div>
-                <h3 className="text-xl font-bold text-green-400 mb-2">
-                  Experience Gaia's Harmony
-                </h3>
+                <h3 className="text-xl font-bold text-green-400 mb-2">Experience Gaia's Harmony</h3>
                 <p className="text-muted-foreground text-sm">
-                  We've prepared a special {currentMedia.type} experience to
-                  enhance your journey. Would you like to enable background
-                  media?
+                  We've prepared a special {currentMedia.type} experience to enhance your journey.
+                  Would you like to enable background media?
                 </p>
               </div>
 
               <div className="bg-black/20 rounded-lg p-3 mb-4">
                 <div className="text-sm text-green-300">
-                  Now Playing:{" "}
-                  <span className="font-semibold">{currentMedia.name}</span>
+                  Now Playing: <span className="font-semibold">{currentMedia.name}</span>
                 </div>
               </div>
 
@@ -125,11 +121,7 @@ export function BackgroundMediaEngine() {
                   <Play className="h-4 w-4 mr-2" />
                   Yes, Immerse Me
                 </Button>
-                <Button
-                  onClick={declineMediaExperience}
-                  variant="outline"
-                  className="flex-1"
-                >
+                <Button onClick={declineMediaExperience} variant="outline" className="flex-1">
                   No Thanks
                 </Button>
               </div>
@@ -158,11 +150,7 @@ export function BackgroundMediaEngine() {
                     onClick={isPlaying ? pauseMedia : playMedia}
                     className="h-8 w-8 p-0 text-green-400 hover:text-green-300"
                   >
-                    {isPlaying ? (
-                      <Pause className="h-3 w-3" />
-                    ) : (
-                      <Play className="h-3 w-3" />
-                    )}
+                    {isPlaying ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
                   </Button>
                   <Button
                     size="sm"
@@ -170,18 +158,12 @@ export function BackgroundMediaEngine() {
                     onClick={toggleMute}
                     className="h-8 w-8 p-0 text-green-400 hover:text-green-300"
                   >
-                    {isMuted ? (
-                      <VolumeX className="h-3 w-3" />
-                    ) : (
-                      <Volume2 className="h-3 w-3" />
-                    )}
+                    {isMuted ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
                   </Button>
                   <Button
                     size="sm"
                     variant="ghost"
-                    onClick={() =>
-                      setPreferences({ ...preferences, enabled: false })
-                    }
+                    onClick={() => setPreferences({ ...preferences, enabled: false })}
                     className="h-8 w-8 p-0 text-red-400 hover:text-red-300"
                   >
                     <X className="h-3 w-3" />

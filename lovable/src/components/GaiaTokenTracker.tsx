@@ -3,15 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Leaf,
-  Flame,
-  TrendingUp,
-  Users,
-  Globe,
-  ExternalLink,
-  Shield,
-} from "lucide-react";
+import { Leaf, Flame, TrendingUp, Users, Globe, ExternalLink, Shield } from "lucide-react";
 
 interface GaiaTokenData {
   totalSupply: number;
@@ -92,9 +84,7 @@ export function GaiaTokenTracker() {
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-green-400">
-                  Live Updates Every 5 Seconds
-                </span>
+                <span className="text-green-400">Live Updates Every 5 Seconds</span>
               </div>
               <div className="text-muted-foreground">
                 Last Updated: {lastUpdate.toLocaleTimeString()}
@@ -120,9 +110,7 @@ export function GaiaTokenTracker() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card className="border-green-500/20">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              GAiA Price
-            </CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">GAiA Price</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-green-400 mono-numbers">
@@ -142,25 +130,19 @@ export function GaiaTokenTracker() {
 
         <Card className="border-blue-500/20">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Market Cap
-            </CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Market Cap</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-blue-400 mono-numbers">
               {formatCurrency(gaiaData.marketCap)}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Rank: #1 Harmony Token
-            </div>
+            <div className="text-sm text-muted-foreground">Rank: #1 Harmony Token</div>
           </CardContent>
         </Card>
 
         <Card className="border-purple-500/20">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              24h Volume
-            </CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">24h Volume</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-purple-400 mono-numbers">
@@ -172,17 +154,13 @@ export function GaiaTokenTracker() {
 
         <Card className="border-orange-500/20">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Holders
-            </CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Holders</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-orange-400 mono-numbers">
               {formatNumber(gaiaData.holders)}
             </div>
-            <div className="text-sm text-muted-foreground">
-              Growing community
-            </div>
+            <div className="text-sm text-muted-foreground">Growing community</div>
           </CardContent>
         </Card>
       </div>
@@ -199,27 +177,21 @@ export function GaiaTokenTracker() {
           <CardContent className="space-y-4">
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">
-                  Total Supply
-                </span>
+                <span className="text-sm text-muted-foreground">Total Supply</span>
                 <span className="font-mono font-semibold">
                   {formatNumber(gaiaData.totalSupply)} GAiA
                 </span>
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">
-                  Circulating Supply
-                </span>
+                <span className="text-sm text-muted-foreground">Circulating Supply</span>
                 <span className="font-mono font-semibold text-green-400">
                   {formatNumber(gaiaData.circulatingSupply)} GAiA
                 </span>
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">
-                  Burned Tokens
-                </span>
+                <span className="text-sm text-muted-foreground">Burned Tokens</span>
                 <span className="font-mono font-semibold text-orange-400">
                   {formatNumber(gaiaData.burnedTokens)} GAiA
                 </span>
@@ -246,33 +218,23 @@ export function GaiaTokenTracker() {
           <CardContent className="space-y-4">
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">
-                  Projects Funded
-                </span>
+                <span className="text-sm text-muted-foreground">Projects Funded</span>
                 <span className="font-mono font-semibold text-green-400">
                   {gaiaData.environmentalProjects}
                 </span>
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">
-                  Staking Rewards
-                </span>
+                <span className="text-sm text-muted-foreground">Staking Rewards</span>
                 <span className="font-mono font-semibold text-blue-400">
                   {formatNumber(gaiaData.stakingRewards)} GAiA
                 </span>
               </div>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
-                <div className="text-sm text-green-400 font-medium">
-                  Environmental Savings
-                </div>
-                <div className="text-lg font-bold text-green-400 mono-numbers">
-                  $5.2M
-                </div>
-                <div className="text-xs text-green-400/80">
-                  CO2 reduction achieved
-                </div>
+                <div className="text-sm text-green-400 font-medium">Environmental Savings</div>
+                <div className="text-lg font-bold text-green-400 mono-numbers">$5.2M</div>
+                <div className="text-xs text-green-400/80">CO2 reduction achieved</div>
               </div>
             </div>
           </CardContent>
@@ -293,17 +255,12 @@ export function GaiaTokenTracker() {
               variant="outline"
               className="justify-between h-auto p-4"
               onClick={() =>
-                window.open(
-                  `https://pump.fun/coin/${GAIA_CONTRACT_ADDRESS}`,
-                  "_blank",
-                )
+                window.open(`https://pump.fun/coin/${GAIA_CONTRACT_ADDRESS}`, "_blank")
               }
             >
               <div className="text-left">
                 <div className="font-semibold">Pump.fun Chart</div>
-                <div className="text-sm text-muted-foreground">
-                  Live GAiA trading data
-                </div>
+                <div className="text-sm text-muted-foreground">Live GAiA trading data</div>
               </div>
               <ExternalLink className="h-4 w-4" />
             </Button>
@@ -312,17 +269,12 @@ export function GaiaTokenTracker() {
               variant="outline"
               className="justify-between h-auto p-4"
               onClick={() =>
-                window.open(
-                  `https://dexscreener.com/solana/${GAIA_CONTRACT_ADDRESS}`,
-                  "_blank",
-                )
+                window.open(`https://dexscreener.com/solana/${GAIA_CONTRACT_ADDRESS}`, "_blank")
               }
             >
               <div className="text-left">
                 <div className="font-semibold">DEXScreener</div>
-                <div className="text-sm text-muted-foreground">
-                  Advanced GAiA analytics
-                </div>
+                <div className="text-sm text-muted-foreground">Advanced GAiA analytics</div>
               </div>
               <ExternalLink className="h-4 w-4" />
             </Button>
@@ -331,17 +283,12 @@ export function GaiaTokenTracker() {
               variant="outline"
               className="justify-between h-auto p-4"
               onClick={() =>
-                window.open(
-                  `https://solscan.io/token/${GAIA_CONTRACT_ADDRESS}`,
-                  "_blank",
-                )
+                window.open(`https://solscan.io/token/${GAIA_CONTRACT_ADDRESS}`, "_blank")
               }
             >
               <div className="text-left">
                 <div className="font-semibold">Blockchain Explorer</div>
-                <div className="text-sm text-muted-foreground">
-                  GAiA transaction history
-                </div>
+                <div className="text-sm text-muted-foreground">GAiA transaction history</div>
               </div>
               <ExternalLink className="h-4 w-4" />
             </Button>

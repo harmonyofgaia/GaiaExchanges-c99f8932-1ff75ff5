@@ -13,9 +13,7 @@ export function EnhancedLevel2Defense() {
       console.log("🛡️ ENHANCED LEVEL 2 DEFENSE SYSTEM ACTIVATED");
       console.log("⚡ QUANTUM COMPUTERS: 20 systems synchronized for defense");
       console.log("🎯 IP-SPECIFIC TARGETING: Only attacking IPs affected");
-      console.log(
-        "👻 ENHANCED INVISIBILITY: Activated only after Level 2 breach",
-      );
+      console.log("👻 ENHANCED INVISIBILITY: Activated only after Level 2 breach");
 
       defenseActive.current = true;
 
@@ -45,12 +43,8 @@ export function EnhancedLevel2Defense() {
                 if (!level1BreachedIPs.current.has(userIP)) {
                   level1BreachedIPs.current.add(userIP);
 
-                  console.log(
-                    `🚨 LEVEL 1 BREACH DETECTED FROM SPECIFIC IP: ${userIP}`,
-                  );
-                  console.log(
-                    "⚡ QUANTUM DEFENSE: Monitoring increased for this IP only",
-                  );
+                  console.log(`🚨 LEVEL 1 BREACH DETECTED FROM SPECIFIC IP: ${userIP}`);
+                  console.log("⚡ QUANTUM DEFENSE: Monitoring increased for this IP only");
 
                   toast.warning(`⚠️ Level 1 Defense Alert - IP: ${userIP}`, {
                     description:
@@ -89,26 +83,16 @@ export function EnhancedLevel2Defense() {
             const currentUrl = window.location.href.toLowerCase();
 
             advancedAttackPatterns.forEach((pattern) => {
-              if (
-                pageContent.includes(pattern) ||
-                currentUrl.includes(pattern)
-              ) {
+              if (pageContent.includes(pattern) || currentUrl.includes(pattern)) {
                 if (!level2BreachedIPs.current.has(userIP)) {
                   level2BreachedIPs.current.add(userIP);
 
-                  console.log(
-                    `🔥 CRITICAL: LEVEL 2 DEFENSE BREACH FROM IP: ${userIP}`,
-                  );
-                  console.log(
-                    "⚡ ALL 20 QUANTUM COMPUTERS: Coordinating defense response",
-                  );
-                  console.log(
-                    "🎯 IP-SPECIFIC TARGETING: Only this IP will be affected",
-                  );
+                  console.log(`🔥 CRITICAL: LEVEL 2 DEFENSE BREACH FROM IP: ${userIP}`);
+                  console.log("⚡ ALL 20 QUANTUM COMPUTERS: Coordinating defense response");
+                  console.log("🎯 IP-SPECIFIC TARGETING: Only this IP will be affected");
 
                   toast.error(`🚨 LEVEL 2 DEFENSE BREACH - IP: ${userIP}`, {
-                    description:
-                      "Advanced defense wall breached! Quantum response initiated...",
+                    description: "Advanced defense wall breached! Quantum response initiated...",
                     duration: 15000,
                   });
 
@@ -117,26 +101,15 @@ export function EnhancedLevel2Defense() {
                     if (!enhancedInvisibilityIPs.current.has(userIP)) {
                       enhancedInvisibilityIPs.current.add(userIP);
 
-                      console.log(
-                        `👻 ENHANCED INVISIBILITY ACTIVATED FOR IP: ${userIP}`,
-                      );
-                      console.log(
-                        "🌐 IP-SPECIFIC QUANTUM INVISIBILITY: Only this IP affected",
-                      );
-                      console.log(
-                        "⚡ 20 QUANTUM COMPUTERS: Synchronized invisibility protocol",
-                      );
-                      console.log(
-                        "🚫 NETWORK ISOLATION: Complete invisibility for attacking IP",
-                      );
+                      console.log(`👻 ENHANCED INVISIBILITY ACTIVATED FOR IP: ${userIP}`);
+                      console.log("🌐 IP-SPECIFIC QUANTUM INVISIBILITY: Only this IP affected");
+                      console.log("⚡ 20 QUANTUM COMPUTERS: Synchronized invisibility protocol");
+                      console.log("🚫 NETWORK ISOLATION: Complete invisibility for attacking IP");
 
                       // Make content invisible only for this specific IP
                       const elements = document.querySelectorAll("*");
                       elements.forEach((el) => {
-                        if (
-                          el instanceof HTMLElement &&
-                          !el.classList.contains("defense-shield")
-                        ) {
+                        if (el instanceof HTMLElement && !el.classList.contains("defense-shield")) {
                           el.style.visibility = "hidden";
                           el.style.opacity = "0";
                           el.style.pointerEvents = "none";
@@ -171,29 +144,22 @@ export function EnhancedLevel2Defense() {
                       `;
                       document.body.appendChild(quantumShield);
 
-                      toast.error(
-                        `👻 ENHANCED INVISIBILITY ACTIVE - IP: ${userIP}`,
-                        {
-                          description:
-                            "Level 2 breach triggered quantum invisibility. This IP is now isolated.",
-                          duration: 20000,
-                        },
-                      );
+                      toast.error(`👻 ENHANCED INVISIBILITY ACTIVE - IP: ${userIP}`, {
+                        description:
+                          "Level 2 breach triggered quantum invisibility. This IP is now isolated.",
+                        duration: 20000,
+                      });
 
                       // Launch counter-attack after enhanced invisibility
                       setTimeout(() => {
                         if (!counterAttackLaunched.current.has(userIP)) {
                           counterAttackLaunched.current.add(userIP);
 
+                          console.log(`💀 COUNTER-ATTACK LAUNCHED AGAINST IP: ${userIP}`);
                           console.log(
-                            `💀 COUNTER-ATTACK LAUNCHED AGAINST IP: ${userIP}`,
+                            "⚡ HIGH-SPEED DEMOLITION: Target system destruction initiated"
                           );
-                          console.log(
-                            "⚡ HIGH-SPEED DEMOLITION: Target system destruction initiated",
-                          );
-                          console.log(
-                            "🔥 QUANTUM RETALIATION: Maximum force authorized",
-                          );
+                          console.log("🔥 QUANTUM RETALIATION: Maximum force authorized");
 
                           toast.error(`💀 COUNTER-ATTACK LAUNCHED: ${userIP}`, {
                             description:
@@ -217,10 +183,7 @@ export function EnhancedLevel2Defense() {
       };
 
       // Monitor defense every 2 seconds
-      const defenseInterval = setInterval(
-        performEnhancedDefenseMonitoring,
-        2000,
-      );
+      const defenseInterval = setInterval(performEnhancedDefenseMonitoring, 2000);
       performEnhancedDefenseMonitoring();
 
       return () => clearInterval(defenseInterval);

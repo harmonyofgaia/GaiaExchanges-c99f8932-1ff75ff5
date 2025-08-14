@@ -32,25 +32,19 @@ export function VideoSecurityCompliance() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="p-3 bg-muted rounded-lg text-center">
                   <UserCheck className="h-6 w-6 mx-auto mb-2 text-green-400" />
-                  <div className="text-sm text-muted-foreground">
-                    Verified Users
-                  </div>
+                  <div className="text-sm text-muted-foreground">Verified Users</div>
                   <div className="text-lg font-bold text-green-400">
                     {verifiedUsers.toLocaleString()}
                   </div>
                 </div>
                 <div className="p-3 bg-muted rounded-lg text-center">
                   <Shield className="h-6 w-6 mx-auto mb-2 text-blue-400" />
-                  <div className="text-sm text-muted-foreground">
-                    Security Score
-                  </div>
+                  <div className="text-sm text-muted-foreground">Security Score</div>
                   <div className="text-lg font-bold text-blue-400">A+</div>
                 </div>
                 <div className="p-3 bg-muted rounded-lg text-center">
                   <Lock className="h-6 w-6 mx-auto mb-2 text-purple-400" />
-                  <div className="text-sm text-muted-foreground">
-                    Encrypted Videos
-                  </div>
+                  <div className="text-sm text-muted-foreground">Encrypted Videos</div>
                   <div className="text-lg font-bold text-purple-400">100%</div>
                 </div>
               </div>
@@ -100,12 +94,8 @@ export function VideoSecurityCompliance() {
                     </p>
                   </div>
                   <div className="ml-auto text-right">
-                    <div className="text-2xl font-bold text-green-400">
-                      {complianceScore}%
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      Excellent
-                    </div>
+                    <div className="text-2xl font-bold text-green-400">{complianceScore}%</div>
+                    <div className="text-xs text-muted-foreground">Excellent</div>
                   </div>
                 </div>
 
@@ -139,8 +129,8 @@ export function VideoSecurityCompliance() {
               </div>
               <div className="p-4 bg-muted rounded-lg">
                 <p className="text-muted-foreground">
-                  Comprehensive audit logging system tracks all platform
-                  activities for security and compliance purposes.
+                  Comprehensive audit logging system tracks all platform activities for security and
+                  compliance purposes.
                 </p>
               </div>
             </TabsContent>

@@ -22,8 +22,7 @@ const ComprehensiveStatus = () => {
               👑 COMPREHENSIVE GALAXY STATUS
             </CardTitle>
             <p className="text-center text-xl text-muted-foreground">
-              Universal Monitoring • Quantum Analytics • Dragon Intelligence •
-              Admin Control
+              Universal Monitoring • Quantum Analytics • Dragon Intelligence • Admin Control
             </p>
           </CardHeader>
         </Card>
@@ -43,12 +42,8 @@ const ComprehensiveStatus = () => {
               <Card className="border-green-500/30 bg-green-900/20">
                 <CardContent className="p-6 text-center">
                   <Globe className="h-12 w-12 mx-auto text-green-400 animate-pulse mb-4" />
-                  <div className="text-2xl font-bold text-green-400">
-                    OPERATIONAL
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    System Status
-                  </div>
+                  <div className="text-2xl font-bold text-green-400">OPERATIONAL</div>
+                  <div className="text-sm text-muted-foreground">System Status</div>
                 </CardContent>
               </Card>
 
@@ -56,30 +51,22 @@ const ComprehensiveStatus = () => {
                 <CardContent className="p-6 text-center">
                   <Activity className="h-12 w-12 mx-auto text-blue-400 animate-pulse mb-4" />
                   <div className="text-2xl font-bold text-blue-400">999M+</div>
-                  <div className="text-sm text-muted-foreground">
-                    Active Users
-                  </div>
+                  <div className="text-sm text-muted-foreground">Active Users</div>
                 </CardContent>
               </Card>
 
               <Card className="border-purple-500/30 bg-purple-900/20">
                 <CardContent className="p-6 text-center">
                   <Shield className="h-12 w-12 mx-auto text-purple-400 animate-pulse mb-4" />
-                  <div className="text-2xl font-bold text-purple-400">
-                    SUPREME
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Defense Level
-                  </div>
+                  <div className="text-2xl font-bold text-purple-400">SUPREME</div>
+                  <div className="text-sm text-muted-foreground">Defense Level</div>
                 </CardContent>
               </Card>
 
               <Card className="border-yellow-500/30 bg-yellow-900/20">
                 <CardContent className="p-6 text-center">
                   <Crown className="h-12 w-12 mx-auto text-yellow-400 animate-pulse mb-4" />
-                  <div className="text-2xl font-bold text-yellow-400">
-                    GALAXY
-                  </div>
+                  <div className="text-2xl font-bold text-yellow-400">GALAXY</div>
                   <div className="text-sm text-muted-foreground">Coverage</div>
                 </CardContent>
               </Card>
@@ -89,16 +76,12 @@ const ComprehensiveStatus = () => {
           <TabsContent value="security" className="space-y-6">
             <Card className="border-red-500/30 bg-red-900/20">
               <CardHeader>
-                <CardTitle className="text-red-400">
-                  🛡️ QUANTUM SECURITY STATUS
-                </CardTitle>
+                <CardTitle className="text-red-400">🛡️ QUANTUM SECURITY STATUS</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center space-y-4">
                   <div className="text-6xl animate-pulse">🛡️</div>
-                  <div className="text-2xl font-bold text-red-400">
-                    UNBREAKABLE DEFENSE ACTIVE
-                  </div>
+                  <div className="text-2xl font-bold text-red-400">UNBREAKABLE DEFENSE ACTIVE</div>
                   <div className="text-lg text-muted-foreground">
                     Quantum Encryption • Dragon Protection • Immortal Firewall
                   </div>
@@ -110,41 +93,25 @@ const ComprehensiveStatus = () => {
           <TabsContent value="performance" className="space-y-6">
             <Card className="border-cyan-500/30 bg-cyan-900/20">
               <CardHeader>
-                <CardTitle className="text-cyan-400">
-                  ⚡ PERFORMANCE METRICS
-                </CardTitle>
+                <CardTitle className="text-cyan-400">⚡ PERFORMANCE METRICS</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-cyan-400">
-                      99.99%
-                    </div>
+                    <div className="text-2xl font-bold text-cyan-400">99.99%</div>
                     <div className="text-sm text-muted-foreground">Uptime</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-400">
-                      0.001ms
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Response Time
-                    </div>
+                    <div className="text-2xl font-bold text-green-400">0.001ms</div>
+                    <div className="text-sm text-muted-foreground">Response Time</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-400">
-                      INFINITE
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Scalability
-                    </div>
+                    <div className="text-2xl font-bold text-blue-400">INFINITE</div>
+                    <div className="text-sm text-muted-foreground">Scalability</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-400">
-                      SUPREME
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      Efficiency
-                    </div>
+                    <div className="text-2xl font-bold text-purple-400">SUPREME</div>
+                    <div className="text-sm text-muted-foreground">Efficiency</div>
                   </div>
                 </div>
               </CardContent>
@@ -154,9 +121,7 @@ const ComprehensiveStatus = () => {
           <TabsContent value="dragons" className="space-y-6">
             <Card className="border-orange-500/30 bg-orange-900/20">
               <CardHeader>
-                <CardTitle className="text-orange-400">
-                  🐲 DRAGON CORE STATUS
-                </CardTitle>
+                <CardTitle className="text-orange-400">🐲 DRAGON CORE STATUS</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center space-y-4">
@@ -175,9 +140,7 @@ const ComprehensiveStatus = () => {
           <TabsContent value="admin" className="space-y-6">
             <Card className="border-gold-500/30 bg-yellow-900/20">
               <CardHeader>
-                <CardTitle className="text-yellow-400">
-                  👑 ADMIN GOD POWERS
-                </CardTitle>
+                <CardTitle className="text-yellow-400">👑 ADMIN GOD POWERS</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center space-y-4">
@@ -196,16 +159,12 @@ const ComprehensiveStatus = () => {
           <TabsContent value="quantum" className="space-y-6">
             <Card className="border-pink-500/30 bg-pink-900/20">
               <CardHeader>
-                <CardTitle className="text-pink-400">
-                  ⚡ QUANTUM CORE STATUS
-                </CardTitle>
+                <CardTitle className="text-pink-400">⚡ QUANTUM CORE STATUS</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center space-y-4">
                   <div className="text-6xl animate-pulse">⚡</div>
-                  <div className="text-2xl font-bold text-pink-400">
-                    QUANTUM SUPREMACY ACHIEVED
-                  </div>
+                  <div className="text-2xl font-bold text-pink-400">QUANTUM SUPREMACY ACHIEVED</div>
                   <div className="text-lg text-muted-foreground">
                     Infinite Processing • Parallel Universes • Time Manipulation
                   </div>

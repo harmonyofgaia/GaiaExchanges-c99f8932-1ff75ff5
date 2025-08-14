@@ -19,9 +19,7 @@ export function GlobalMarketingEngine() {
       setGlobalReach((prev) => prev + Math.floor(Math.random() * 1000));
       setConversionRate((prev) => Math.min(15, prev + 0.01));
 
-      console.log(
-        "🚀 GLOBAL MARKETING ENGINE - SPREADING ENVIRONMENTAL AWARENESS",
-      );
+      console.log("🚀 GLOBAL MARKETING ENGINE - SPREADING ENVIRONMENTAL AWARENESS");
       console.log("🌍 REACHING MILLIONS WITH SUSTAINABLE CRYPTO MESSAGE");
       console.log("💚 CONVERTING USERS TO ENVIRONMENTAL ADVOCATES");
     }, 5000);
@@ -33,8 +31,7 @@ export function GlobalMarketingEngine() {
     console.log("🚀 LAUNCHING GLOBAL ENVIRONMENTAL AWARENESS CAMPAIGN");
 
     toast.success("🌍 Global Campaign Launched!", {
-      description:
-        "Environmental crypto awareness spreading across all continents",
+      description: "Environmental crypto awareness spreading across all continents",
       duration: 8000,
     });
 
@@ -50,9 +47,7 @@ export function GlobalMarketingEngine() {
           <CardTitle className="flex items-center gap-2 text-green-400">
             <Globe className="h-8 w-8 animate-spin-slow" />
             🌍 GLOBAL MARKETING COMMAND CENTER
-            <Badge className="bg-green-600 animate-pulse">
-              ENVIRONMENTAL FOCUS
-            </Badge>
+            <Badge className="bg-green-600 animate-pulse">ENVIRONMENTAL FOCUS</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -64,26 +59,16 @@ export function GlobalMarketingEngine() {
               <div className="text-sm text-muted-foreground">Global Reach</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-blue-400">
-                {conversionRate.toFixed(1)}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Conversion Rate
-              </div>
+              <div className="text-3xl font-bold text-blue-400">{conversionRate.toFixed(1)}%</div>
+              <div className="text-sm text-muted-foreground">Conversion Rate</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
-              <div className="text-3xl font-bold text-purple-400">
-                {activeChannels}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Channels
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{activeChannels}</div>
+              <div className="text-sm text-muted-foreground">Active Channels</div>
             </div>
             <div className="text-center p-4 bg-orange-900/30 rounded-lg">
               <div className="text-3xl font-bold text-orange-400">24/7</div>
-              <div className="text-sm text-muted-foreground">
-                Campaign Status
-              </div>
+              <div className="text-sm text-muted-foreground">Campaign Status</div>
             </div>
           </div>
 

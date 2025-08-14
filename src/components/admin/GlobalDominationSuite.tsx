@@ -30,9 +30,7 @@ interface DominationMetric {
 }
 
 export function GlobalDominationSuite() {
-  const [dominationMetrics, setDominationMetrics] = useState<
-    DominationMetric[]
-  >([
+  const [dominationMetrics, setDominationMetrics] = useState<DominationMetric[]>([
     {
       sector: "Financial Markets",
       control_percentage: 87,
@@ -114,41 +112,20 @@ export function GlobalDominationSuite() {
       setDominationMetrics((prev) =>
         prev.map((metric) => ({
           ...metric,
-          control_percentage: Math.min(
-            100,
-            metric.control_percentage + Math.random() * 0.5,
-          ),
-          influence_score: Math.min(
-            100,
-            metric.influence_score + Math.random() * 0.3,
-          ),
-          assets_controlled:
-            metric.assets_controlled + Math.floor(Math.random() * 10),
-          revenue_generated:
-            metric.revenue_generated + Math.floor(Math.random() * 1000000),
-        })),
+          control_percentage: Math.min(100, metric.control_percentage + Math.random() * 0.5),
+          influence_score: Math.min(100, metric.influence_score + Math.random() * 0.3),
+          assets_controlled: metric.assets_controlled + Math.floor(Math.random() * 10),
+          revenue_generated: metric.revenue_generated + Math.floor(Math.random() * 1000000),
+        }))
       );
 
       setGlobalStats((prev) => ({
         ...prev,
-        totalDomination: Math.min(
-          100,
-          prev.totalDomination + Math.random() * 0.1,
-        ),
-        worldInfluence: Math.min(
-          100,
-          prev.worldInfluence + Math.random() * 0.05,
-        ),
-        economicControl: Math.min(
-          100,
-          prev.economicControl + Math.random() * 0.15,
-        ),
-        informationControl: Math.min(
-          100,
-          prev.informationControl + Math.random() * 0.02,
-        ),
-        populationReach:
-          prev.populationReach + Math.floor(Math.random() * 10000),
+        totalDomination: Math.min(100, prev.totalDomination + Math.random() * 0.1),
+        worldInfluence: Math.min(100, prev.worldInfluence + Math.random() * 0.05),
+        economicControl: Math.min(100, prev.economicControl + Math.random() * 0.15),
+        informationControl: Math.min(100, prev.informationControl + Math.random() * 0.02),
+        populationReach: prev.populationReach + Math.floor(Math.random() * 10000),
         activeOperations: prev.activeOperations + Math.floor(Math.random() * 5),
       }));
     }, 5000);
@@ -202,54 +179,42 @@ export function GlobalDominationSuite() {
                   <div className="text-2xl font-bold text-red-400">
                     {globalStats.totalDomination.toFixed(1)}%
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Total World Domination
-                  </div>
+                  <div className="text-sm text-muted-foreground">Total World Domination</div>
                 </div>
                 <div className="text-center">
                   <Brain className="h-8 w-8 text-orange-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-orange-400">
                     {globalStats.worldInfluence.toFixed(1)}%
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Global Influence
-                  </div>
+                  <div className="text-sm text-muted-foreground">Global Influence</div>
                 </div>
                 <div className="text-center">
                   <DollarSign className="h-8 w-8 text-green-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-green-400">
                     {globalStats.economicControl.toFixed(1)}%
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Economic Control
-                  </div>
+                  <div className="text-sm text-muted-foreground">Economic Control</div>
                 </div>
                 <div className="text-center">
                   <Eye className="h-8 w-8 text-blue-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-blue-400">
                     {globalStats.informationControl.toFixed(1)}%
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Information Control
-                  </div>
+                  <div className="text-sm text-muted-foreground">Information Control</div>
                 </div>
                 <div className="text-center">
                   <Users className="h-8 w-8 text-purple-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-purple-400">
                     {formatNumber(globalStats.populationReach)}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Population Reach
-                  </div>
+                  <div className="text-sm text-muted-foreground">Population Reach</div>
                 </div>
                 <div className="text-center">
                   <Target className="h-8 w-8 text-pink-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-pink-400">
                     {globalStats.activeOperations}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Active Operations
-                  </div>
+                  <div className="text-sm text-muted-foreground">Active Operations</div>
                 </div>
               </div>
             </CardContent>
@@ -266,9 +231,7 @@ export function GlobalDominationSuite() {
                   <div className="flex items-start justify-between mb-3">
                     <div>
                       <h4 className="font-bold text-white">{metric.sector}</h4>
-                      <Badge
-                        className={`${getStatusColor(metric.status)} text-white text-xs mt-1`}
-                      >
+                      <Badge className={`${getStatusColor(metric.status)} text-white text-xs mt-1`}>
                         {metric.status.toUpperCase()}
                       </Badge>
                     </div>
@@ -276,9 +239,7 @@ export function GlobalDominationSuite() {
                       <div className="text-2xl font-bold text-yellow-400">
                         {metric.control_percentage.toFixed(1)}%
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        Control
-                      </div>
+                      <div className="text-xs text-muted-foreground">Control</div>
                     </div>
                   </div>
 
@@ -290,23 +251,15 @@ export function GlobalDominationSuite() {
                           {metric.control_percentage.toFixed(1)}%
                         </span>
                       </div>
-                      <Progress
-                        value={metric.control_percentage}
-                        className="h-2"
-                      />
+                      <Progress value={metric.control_percentage} className="h-2" />
                     </div>
 
                     <div>
                       <div className="flex justify-between text-sm mb-1">
                         <span className="text-gray-400">Influence Score</span>
-                        <span className="text-blue-400">
-                          {metric.influence_score.toFixed(1)}%
-                        </span>
+                        <span className="text-blue-400">{metric.influence_score.toFixed(1)}%</span>
                       </div>
-                      <Progress
-                        value={metric.influence_score}
-                        className="h-2"
-                      />
+                      <Progress value={metric.influence_score} className="h-2" />
                     </div>
 
                     <div className="grid grid-cols-2 gap-4 text-sm">
@@ -339,45 +292,30 @@ export function GlobalDominationSuite() {
               <div className="space-y-4">
                 <div>
                   <div className="flex justify-between mb-2">
-                    <span className="text-purple-300">
-                      World Economic Takeover
-                    </span>
+                    <span className="text-purple-300">World Economic Takeover</span>
                     <span className="text-purple-400">
                       {globalStats.economicControl.toFixed(1)}%
                     </span>
                   </div>
-                  <Progress
-                    value={globalStats.economicControl}
-                    className="h-3"
-                  />
+                  <Progress value={globalStats.economicControl} className="h-3" />
                 </div>
                 <div>
                   <div className="flex justify-between mb-2">
-                    <span className="text-purple-300">
-                      Global Information Control
-                    </span>
+                    <span className="text-purple-300">Global Information Control</span>
                     <span className="text-purple-400">
                       {globalStats.informationControl.toFixed(1)}%
                     </span>
                   </div>
-                  <Progress
-                    value={globalStats.informationControl}
-                    className="h-3"
-                  />
+                  <Progress value={globalStats.informationControl} className="h-3" />
                 </div>
                 <div>
                   <div className="flex justify-between mb-2">
-                    <span className="text-purple-300">
-                      Population Influence
-                    </span>
+                    <span className="text-purple-300">Population Influence</span>
                     <span className="text-purple-400">
                       {((globalStats.populationReach / 8e9) * 100).toFixed(1)}%
                     </span>
                   </div>
-                  <Progress
-                    value={(globalStats.populationReach / 8e9) * 100}
-                    className="h-3"
-                  />
+                  <Progress value={(globalStats.populationReach / 8e9) * 100} className="h-3" />
                 </div>
               </div>
             </CardContent>
@@ -409,12 +347,10 @@ export function GlobalDominationSuite() {
               <div className="text-center">
                 <Crown className="h-16 w-16 text-yellow-400 mx-auto mb-4 animate-pulse" />
                 <h3 className="text-2xl font-bold text-yellow-400 mb-2">
-                  GLOBAL DOMINATION STATUS:{" "}
-                  {globalStats.totalDomination.toFixed(1)}% COMPLETE
+                  GLOBAL DOMINATION STATUS: {globalStats.totalDomination.toFixed(1)}% COMPLETE
                 </h3>
                 <p className="text-green-400">
-                  👑 WORLD EMPIRE ESTABLISHMENT IN PROGRESS • TOTAL CONTROL
-                  IMMINENT
+                  👑 WORLD EMPIRE ESTABLISHMENT IN PROGRESS • TOTAL CONTROL IMMINENT
                 </p>
               </div>
             </CardContent>

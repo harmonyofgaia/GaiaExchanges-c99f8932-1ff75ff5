@@ -197,20 +197,13 @@ export function EntertainmentRewardsHub() {
       setCommunityVault((prev) => ({
         ...prev,
         totalBalance: prev.totalBalance + Math.floor(Math.random() * 1000),
-        participantsCount:
-          prev.participantsCount + Math.floor(Math.random() * 10),
+        participantsCount: prev.participantsCount + Math.floor(Math.random() * 10),
       }));
 
       console.log("🎬 ENTERTAINMENT & REWARDS HUB - MAXIMUM ENGAGEMENT ACTIVE");
-      console.log(
-        `🎵 ${artistShows.filter((s) => s.status === "live").length} Live Shows Running`,
-      );
-      console.log(
-        `🎁 ${rewards.reduce((sum, r) => sum + r.stock, 0)} Rewards Available`,
-      );
-      console.log(
-        `💰 Vault Balance: ${communityVault.totalBalance.toLocaleString()} GAIA`,
-      );
+      console.log(`🎵 ${artistShows.filter((s) => s.status === "live").length} Live Shows Running`);
+      console.log(`🎁 ${rewards.reduce((sum, r) => sum + r.stock, 0)} Rewards Available`);
+      console.log(`💰 Vault Balance: ${communityVault.totalBalance.toLocaleString()} GAIA`);
       console.log("🏆 Community Engagement: 100% - Everyone Happy!");
     };
 
@@ -300,9 +293,7 @@ export function EntertainmentRewardsHub() {
               <div className="text-2xl font-bold text-blue-400">
                 {rewards.reduce((sum, r) => sum + r.stock, 0)}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Rewards Available
-              </div>
+              <div className="text-sm text-muted-foreground">Rewards Available</div>
             </div>
 
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
@@ -349,8 +340,7 @@ export function EntertainmentRewardsHub() {
                         {artistShows.find((s) => s.id === currentShow)?.title}
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        by{" "}
-                        {artistShows.find((s) => s.id === currentShow)?.artist}
+                        by {artistShows.find((s) => s.id === currentShow)?.artist}
                       </div>
                     </div>
                     <div className="flex gap-2">
@@ -378,14 +368,10 @@ export function EntertainmentRewardsHub() {
                       <span className="text-2xl">{show.thumbnail}</span>
                       <div>
                         <div className="text-sm">{show.title}</div>
-                        <div className="text-xs text-muted-foreground">
-                          {show.artist}
-                        </div>
+                        <div className="text-xs text-muted-foreground">{show.artist}</div>
                       </div>
                     </div>
-                    <Badge
-                      className={`${getShowStatusColor(show.status)} text-white`}
-                    >
+                    <Badge className={`${getShowStatusColor(show.status)} text-white`}>
                       {show.status.toUpperCase()}
                     </Badge>
                   </CardTitle>
@@ -421,10 +407,7 @@ export function EntertainmentRewardsHub() {
         <TabsContent value="rewards" className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {rewards.map((reward) => (
-              <Card
-                key={reward.id}
-                className="border-yellow-500/30 bg-yellow-900/20"
-              >
+              <Card key={reward.id} className="border-yellow-500/30 bg-yellow-900/20">
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between text-yellow-400">
                     <div className="flex items-center gap-2">
@@ -449,9 +432,7 @@ export function EntertainmentRewardsHub() {
                     </div>
                     <div className="flex justify-between">
                       <span>Available:</span>
-                      <span className="text-blue-400">
-                        {reward.stock - reward.claimed}
-                      </span>
+                      <span className="text-blue-400">{reward.stock - reward.claimed}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Claimed:</span>
@@ -459,10 +440,7 @@ export function EntertainmentRewardsHub() {
                     </div>
                   </div>
 
-                  <Progress
-                    value={(reward.claimed / reward.stock) * 100}
-                    className="h-2"
-                  />
+                  <Progress value={(reward.claimed / reward.stock) * 100} className="h-2" />
 
                   <Button
                     onClick={() => claimReward(reward.id)}
@@ -470,9 +448,7 @@ export function EntertainmentRewardsHub() {
                     className="w-full bg-yellow-600 hover:bg-yellow-700"
                   >
                     <Gift className="h-4 w-4 mr-2" />
-                    {reward.stock <= reward.claimed
-                      ? "OUT OF STOCK"
-                      : "CLAIM REWARD"}
+                    {reward.stock <= reward.claimed ? "OUT OF STOCK" : "CLAIM REWARD"}
                   </Button>
                 </CardContent>
               </Card>
@@ -495,9 +471,7 @@ export function EntertainmentRewardsHub() {
                   <div className="text-2xl font-bold text-green-400">
                     {communityVault.totalBalance.toLocaleString()}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Total Balance
-                  </div>
+                  <div className="text-sm text-muted-foreground">Total Balance</div>
                 </div>
 
                 <div className="text-center p-4 bg-blue-900/30 rounded-lg">
@@ -505,9 +479,7 @@ export function EntertainmentRewardsHub() {
                   <div className="text-2xl font-bold text-blue-400">
                     {communityVault.weeklyGiveaway.toLocaleString()}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Weekly Giveaway
-                  </div>
+                  <div className="text-sm text-muted-foreground">Weekly Giveaway</div>
                 </div>
 
                 <div className="text-center p-4 bg-purple-900/30 rounded-lg">
@@ -515,22 +487,17 @@ export function EntertainmentRewardsHub() {
                   <div className="text-2xl font-bold text-purple-400">
                     {communityVault.participantsCount.toLocaleString()}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Participants
-                  </div>
+                  <div className="text-sm text-muted-foreground">Participants</div>
                 </div>
               </div>
 
               <div className="text-center p-6 bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg">
-                <h3 className="text-xl font-bold text-blue-400 mb-2">
-                  Next Draw
-                </h3>
+                <h3 className="text-xl font-bold text-blue-400 mb-2">Next Draw</h3>
                 <div className="text-3xl font-bold text-purple-400 mb-2">
                   {communityVault.nextDrawDate.toLocaleDateString()}
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  Prize Pool: {communityVault.weeklyGiveaway.toLocaleString()}{" "}
-                  GAIA
+                  Prize Pool: {communityVault.weeklyGiveaway.toLocaleString()} GAIA
                 </div>
               </div>
 

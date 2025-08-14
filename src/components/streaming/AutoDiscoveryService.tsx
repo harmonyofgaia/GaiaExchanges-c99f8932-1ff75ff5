@@ -19,7 +19,7 @@ export const AutoDiscoveryService = () => {
       () => {
         performDailyScan();
       },
-      24 * 60 * 60 * 1000,
+      24 * 60 * 60 * 1000
     ); // 24 hours
 
     // Initial scan
@@ -76,7 +76,7 @@ export const AutoDiscoveryService = () => {
     // Show discovery notification
     if (mockDiscoveries.length > 0) {
       toast.success(
-        `🔍 Daily Scan Complete! Discovered ${mockDiscoveries.length} new documentaries about happiness, nature, and forgotten wisdom.`,
+        `🔍 Daily Scan Complete! Discovered ${mockDiscoveries.length} new documentaries about happiness, nature, and forgotten wisdom.`
       );
     }
 

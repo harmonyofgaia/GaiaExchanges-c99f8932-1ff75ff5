@@ -44,13 +44,9 @@ export function MultiDimensionalFirewall() {
       setFirewallLayers((prev) =>
         prev.map((layer) => ({
           ...layer,
-          threats_blocked:
-            layer.threats_blocked + Math.floor(Math.random() * 10),
-          strength: Math.max(
-            95,
-            Math.min(100, layer.strength + (Math.random() - 0.5) * 2),
-          ),
-        })),
+          threats_blocked: layer.threats_blocked + Math.floor(Math.random() * 10),
+          strength: Math.max(95, Math.min(100, layer.strength + (Math.random() - 0.5) * 2)),
+        }))
       );
 
       setTotalThreatsBlocked((prev) => prev + Math.floor(Math.random() * 25));
@@ -100,9 +96,7 @@ export function MultiDimensionalFirewall() {
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-black/30 p-4 rounded-lg border border-slate-500/20">
-            <div className="text-2xl font-bold text-slate-400">
-              {overallStrength}%
-            </div>
+            <div className="text-2xl font-bold text-slate-400">{overallStrength}%</div>
             <div className="text-sm text-slate-300">Overall Strength</div>
             <Progress value={overallStrength} className="h-2 mt-2" />
           </div>
@@ -144,9 +138,7 @@ export function MultiDimensionalFirewall() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <div className="text-xs text-gray-400">Strength</div>
-                  <div className="text-lg font-bold text-white">
-                    {layer.strength.toFixed(1)}%
-                  </div>
+                  <div className="text-lg font-bold text-white">{layer.strength.toFixed(1)}%</div>
                   <Progress value={layer.strength} className="h-1 mt-1" />
                 </div>
                 <div>
@@ -234,9 +226,7 @@ export function MultiDimensionalFirewall() {
         </div>
 
         <div className="text-center p-4 bg-gradient-to-r from-slate-900/20 to-gray-900/20 rounded-lg border border-slate-500/20">
-          <div className="text-slate-400 font-bold">
-            🛡️ MULTI-DIMENSIONAL FIREWALL STATUS
-          </div>
+          <div className="text-slate-400 font-bold">🛡️ MULTI-DIMENSIONAL FIREWALL STATUS</div>
           <div className="text-green-400 text-sm mt-1">
             ALL REALMS PROTECTED • TRIPLE LAYER DEFENSE • UNBREACHABLE
           </div>

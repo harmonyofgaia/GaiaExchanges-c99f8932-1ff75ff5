@@ -4,20 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  GitBranch,
-  GitCommit,
-  GitPullRequest,
-  Github,
-  Settings,
-  Webhook,
-} from "lucide-react";
+import { GitBranch, GitCommit, GitPullRequest, Github, Settings, Webhook } from "lucide-react";
 
 export function GitHubIntegrationSuite() {
   const [isConnected, setIsConnected] = useState(true);
-  const [repoUrl, setRepoUrl] = useState(
-    "https://github.com/harmonyofgaia/GaiaExchanges",
-  );
+  const [repoUrl, setRepoUrl] = useState("https://github.com/harmonyofgaia/GaiaExchanges");
 
   const pullRequests = [
     {
@@ -102,9 +93,7 @@ export function GitHubIntegrationSuite() {
 
             <TabsContent value="pull-requests" className="space-y-4">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-blue-400">
-                  Pull Requests Status
-                </h3>
+                <h3 className="text-lg font-semibold text-blue-400">Pull Requests Status</h3>
                 <Button className="bg-blue-600 hover:bg-blue-700">
                   <GitPullRequest className="h-4 w-4 mr-2" />
                   Sync PRs
@@ -119,17 +108,9 @@ export function GitHubIntegrationSuite() {
                         <div className="font-semibold">
                           #{pr.id} {pr.title}
                         </div>
-                        <div className="text-sm text-muted-foreground">
-                          by {pr.author}
-                        </div>
+                        <div className="text-sm text-muted-foreground">by {pr.author}</div>
                       </div>
-                      <Badge
-                        className={
-                          pr.status === "merged"
-                            ? "bg-purple-600"
-                            : "bg-green-600"
-                        }
-                      >
+                      <Badge className={pr.status === "merged" ? "bg-purple-600" : "bg-green-600"}>
                         {pr.status.toUpperCase()}
                       </Badge>
                     </div>
@@ -140,9 +121,7 @@ export function GitHubIntegrationSuite() {
 
             <TabsContent value="commits" className="space-y-4">
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-blue-400">
-                  Recent Commits
-                </h3>
+                <h3 className="text-lg font-semibold text-blue-400">Recent Commits</h3>
                 <Button className="bg-blue-600 hover:bg-blue-700">
                   <GitCommit className="h-4 w-4 mr-2" />
                   Sync Commits
@@ -167,15 +146,11 @@ export function GitHubIntegrationSuite() {
             </TabsContent>
 
             <TabsContent value="settings" className="space-y-4">
-              <h3 className="text-lg font-semibold text-blue-400">
-                Repository Settings
-              </h3>
+              <h3 className="text-lg font-semibold text-blue-400">Repository Settings</h3>
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Repository URL
-                  </label>
+                  <label className="block text-sm font-medium mb-2">Repository URL</label>
                   <Input
                     value={repoUrl}
                     onChange={(e) => setRepoUrl(e.target.value)}
@@ -197,9 +172,7 @@ export function GitHubIntegrationSuite() {
             </TabsContent>
 
             <TabsContent value="webhooks" className="space-y-4">
-              <h3 className="text-lg font-semibold text-blue-400">
-                Webhook Configuration
-              </h3>
+              <h3 className="text-lg font-semibold text-blue-400">Webhook Configuration</h3>
 
               <div className="space-y-4">
                 <Card className="bg-black/30">

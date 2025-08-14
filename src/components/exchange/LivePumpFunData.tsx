@@ -24,9 +24,7 @@ export function LivePumpFunData() {
     return (
       <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-blue-900/30">
         <CardContent className="pt-6">
-          <div className="text-center text-green-400">
-            Loading GAiA token data...
-          </div>
+          <div className="text-center text-green-400">Loading GAiA token data...</div>
         </CardContent>
       </Card>
     );
@@ -41,9 +39,7 @@ export function LivePumpFunData() {
             🚀 LIVE GAiA Token Data - {GAIA_TOKEN.SYMBOL}
           </div>
           <div className="flex items-center gap-2">
-            <Badge
-              className={`${isConnected ? "bg-green-600" : "bg-red-600"} text-white`}
-            >
+            <Badge className={`${isConnected ? "bg-green-600" : "bg-red-600"} text-white`}>
               {isConnected ? "🟢 LIVE" : "🔴 OFFLINE"}
             </Badge>
             <Button onClick={openPumpFun} variant="outline" size="sm">
@@ -56,18 +52,14 @@ export function LivePumpFunData() {
       <CardContent>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <div className="text-center p-4 bg-green-900/30 rounded-lg">
-            <div className="text-2xl font-bold text-green-400">
-              ${tokenData.price.toFixed(8)}
-            </div>
+            <div className="text-2xl font-bold text-green-400">${tokenData.price.toFixed(8)}</div>
             <div className="text-sm text-muted-foreground">Current Price</div>
           </div>
 
           <div className="text-center p-4 bg-blue-900/30 rounded-lg">
             <div
               className={`text-2xl font-bold flex items-center justify-center gap-1 ${
-                tokenData.priceChange24h >= 0
-                  ? "text-green-400"
-                  : "text-red-400"
+                tokenData.priceChange24h >= 0 ? "text-green-400" : "text-red-400"
               }`}
             >
               {tokenData.priceChange24h >= 0 ? (
@@ -108,20 +100,14 @@ export function LivePumpFunData() {
             <div className="text-lg font-bold text-yellow-400">
               {tokenData.transactions24h.toLocaleString()}
             </div>
-            <div className="text-xs text-muted-foreground">
-              24h Transactions
-            </div>
+            <div className="text-xs text-muted-foreground">24h Transactions</div>
           </div>
 
           <div className="text-center p-3 bg-pink-900/20 rounded-lg">
             <div className="text-lg font-bold text-pink-400">
-              {tokenData.circulatingSupply
-                ? tokenData.circulatingSupply.toLocaleString()
-                : "N/A"}
+              {tokenData.circulatingSupply ? tokenData.circulatingSupply.toLocaleString() : "N/A"}
             </div>
-            <div className="text-xs text-muted-foreground">
-              Circulating Supply
-            </div>
+            <div className="text-xs text-muted-foreground">Circulating Supply</div>
           </div>
         </div>
 

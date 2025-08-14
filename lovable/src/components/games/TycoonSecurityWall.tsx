@@ -6,9 +6,7 @@ export function TycoonSecurityWall() {
 
   useEffect(() => {
     const activateUnbreakableDefense = () => {
-      console.log(
-        "🛡️ HABBO TYCOON SECURITY WALL - UNBREAKABLE DEFENSE ACTIVATED",
-      );
+      console.log("🛡️ HABBO TYCOON SECURITY WALL - UNBREAKABLE DEFENSE ACTIVATED");
       console.log("🌌 PARABOLIC UNIVERSE PROTECTION - QUANTUM SECURED");
       console.log("🚫 NO TECHNOLOGY CAN BREACH OUR DEFENSES");
       console.log("👑 ADMIN-ONLY ACCESS TO QUANTUM GAMING TECHNOLOGY");
@@ -19,11 +17,8 @@ export function TycoonSecurityWall() {
 
       // Block unauthorized access to game features
       const blockUnauthorizedAccess = () => {
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
-        const hasAdminSession =
-          sessionStorage.getItem("admin-session-active") === "true";
+        const isAdminBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+        const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
 
         if (!isAdminBrowser || !hasAdminSession) {
           console.log("🚨 NON-ADMIN DETECTED IN GAMING SYSTEM");
@@ -31,9 +26,7 @@ export function TycoonSecurityWall() {
           console.log("🔒 ADVANCED FEATURES INVISIBLE TO NON-ADMINS");
 
           // Hide advanced gaming features for non-admins
-          const elements = document.querySelectorAll(
-            '[data-admin-only="true"]',
-          );
+          const elements = document.querySelectorAll('[data-admin-only="true"]');
           elements.forEach((el) => {
             if (el instanceof HTMLElement) {
               el.style.display = "none";
@@ -49,19 +42,12 @@ export function TycoonSecurityWall() {
       const protectGameCode = () => {
         const originalFetch = window.fetch;
         window.fetch = async (...args) => {
-          const isAdminBrowser = navigator.userAgent
-            .toLowerCase()
-            .includes("firefox");
-          const hasAdminSession =
-            sessionStorage.getItem("admin-session-active") === "true";
+          const isAdminBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+          const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
 
           if (!isAdminBrowser || !hasAdminSession) {
             const url = args[0]?.toString() || "";
-            if (
-              url.includes("game") ||
-              url.includes("tycoon") ||
-              url.includes("admin")
-            ) {
+            if (url.includes("game") || url.includes("tycoon") || url.includes("admin")) {
               console.log("🚨 UNAUTHORIZED GAME API ACCESS BLOCKED");
               console.log("🛡️ PROTECTING HABBO TYCOON TECHNOLOGY");
               throw new Error("Game access denied - Admin privileges required");
@@ -83,10 +69,7 @@ export function TycoonSecurityWall() {
         };
 
         // Store in invisible session data
-        sessionStorage.setItem(
-          "parabolic-protection",
-          JSON.stringify(parabolicData),
-        );
+        sessionStorage.setItem("parabolic-protection", JSON.stringify(parabolicData));
 
         console.log("🌌 PARABOLIC UNIVERSE DEFENSE WALL ESTABLISHED");
         console.log("🎮 HABBO TYCOON TECHNOLOGY FULLY PROTECTED");
@@ -98,11 +81,8 @@ export function TycoonSecurityWall() {
 
       // Continuous monitoring
       const monitoringInterval = setInterval(() => {
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
-        const hasAdminSession =
-          sessionStorage.getItem("admin-session-active") === "true";
+        const isAdminBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+        const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
 
         if (isAdminBrowser && hasAdminSession) {
           console.log("👑 ADMIN GAMING SESSION VERIFIED");

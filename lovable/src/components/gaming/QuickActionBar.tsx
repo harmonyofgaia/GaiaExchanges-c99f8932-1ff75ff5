@@ -146,9 +146,7 @@ export function QuickActionBar() {
   useState(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.ctrlKey || e.altKey) {
-        const action = quickActions.find(
-          (a) => a.hotkey?.toLowerCase() === e.key.toLowerCase(),
-        );
+        const action = quickActions.find((a) => a.hotkey?.toLowerCase() === e.key.toLowerCase());
         if (action) {
           e.preventDefault();
           action.action();
@@ -211,9 +209,7 @@ export function QuickActionBar() {
                   <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black/90 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                     {action.label}
                     {action.hotkey && (
-                      <span className="ml-1 text-gray-400">
-                        (Ctrl+{action.hotkey})
-                      </span>
+                      <span className="ml-1 text-gray-400">(Ctrl+{action.hotkey})</span>
                     )}
                   </div>
                 </div>
@@ -246,9 +242,7 @@ export function QuickActionBar() {
                   `}
                 >
                   <action.icon className="h-5 w-5" />
-                  <span className="text-xs font-medium">
-                    {action.label.split(" ")[0]}
-                  </span>
+                  <span className="text-xs font-medium">{action.label.split(" ")[0]}</span>
                 </Button>
 
                 {action.badge && (

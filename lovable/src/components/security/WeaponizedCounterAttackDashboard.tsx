@@ -78,9 +78,7 @@ export function WeaponizedCounterAttackDashboard() {
               <Target className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Active Attacks</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.activeCounterAttacks}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.activeCounterAttacks}</div>
           </div>
 
           <div className="space-y-2">
@@ -88,9 +86,7 @@ export function WeaponizedCounterAttackDashboard() {
               <Crosshair className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Completed</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.completedAttacks}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.completedAttacks}</div>
           </div>
 
           <div className="space-y-2">
@@ -98,9 +94,7 @@ export function WeaponizedCounterAttackDashboard() {
               <Bomb className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Weaponized IPs</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.weaponizedIPs}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.weaponizedIPs}</div>
           </div>
 
           <div className="space-y-2">
@@ -108,9 +102,7 @@ export function WeaponizedCounterAttackDashboard() {
               <Shield className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Honeypots</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.weaponizedHoneypots}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.weaponizedHoneypots}</div>
           </div>
         </div>
 
@@ -128,20 +120,14 @@ export function WeaponizedCounterAttackDashboard() {
               <Target className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Attackers Trapped</span>
             </div>
-            <div className="text-xl font-bold">
-              {status.totalAttackersTrapped}
-            </div>
+            <div className="text-xl font-bold">{status.totalAttackersTrapped}</div>
           </div>
         </div>
 
         <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
           <Zap className="h-4 w-4 text-primary" />
           <span className="text-sm font-medium">Auto-Retaliation:</span>
-          <Badge
-            variant={
-              status.autoRetaliationEnabled ? "destructive" : "secondary"
-            }
-          >
+          <Badge variant={status.autoRetaliationEnabled ? "destructive" : "secondary"}>
             {status.autoRetaliationEnabled ? "ENABLED" : "DISABLED"}
           </Badge>
         </div>
@@ -152,11 +138,7 @@ export function WeaponizedCounterAttackDashboard() {
             Initialize Counter-Attack
           </Button>
 
-          <Button
-            onClick={handleLaunchCounterAttack}
-            variant="destructive"
-            size="sm"
-          >
+          <Button onClick={handleLaunchCounterAttack} variant="destructive" size="sm">
             <Target className="h-4 w-4 mr-2" />
             Launch Counter-Attack
           </Button>
@@ -179,13 +161,11 @@ export function WeaponizedCounterAttackDashboard() {
         </div>
 
         <div className="p-4 bg-muted/50 rounded-lg">
-          <h4 className="font-medium mb-2">
-            ⚔️ Automated Retaliation Guarantee
-          </h4>
+          <h4 className="font-medium mb-2">⚔️ Automated Retaliation Guarantee</h4>
           <p className="text-sm text-muted-foreground">
-            Our weaponized counter-attack system provides automated retaliation
-            against all threats with quantum-level precision, social engineering
-            reversals, and overwhelming defensive firepower.
+            Our weaponized counter-attack system provides automated retaliation against all threats
+            with quantum-level precision, social engineering reversals, and overwhelming defensive
+            firepower.
           </p>
         </div>
       </CardContent>

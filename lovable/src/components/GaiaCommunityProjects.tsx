@@ -34,8 +34,7 @@ export function GaiaCommunityProjects() {
     {
       id: "2",
       title: "Ocean Cleanup Drones",
-      description:
-        "Deploying autonomous drones to collect plastic waste from ocean surfaces.",
+      description: "Deploying autonomous drones to collect plastic waste from ocean surfaces.",
       category: "Ocean Conservation",
       fundingGoal: 75000,
       currentFunding: 42300,
@@ -66,10 +65,10 @@ export function GaiaCommunityProjects() {
           ...project,
           currentFunding: Math.min(
             project.fundingGoal,
-            project.currentFunding + Math.floor(Math.random() * 500),
+            project.currentFunding + Math.floor(Math.random() * 500)
           ),
           backers: project.backers + Math.floor(Math.random() * 3),
-        })),
+        }))
       );
     }, 5000);
 
@@ -79,19 +78,15 @@ export function GaiaCommunityProjects() {
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-green-400 mb-4">
-          🌱 Community Impact Projects
-        </h2>
+        <h2 className="text-3xl font-bold text-green-400 mb-4">🌱 Community Impact Projects</h2>
         <p className="text-muted-foreground">
-          Support real-world environmental projects that make a measurable
-          difference
+          Support real-world environmental projects that make a measurable difference
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {animatedProjects.map((project) => {
-          const fundingPercentage =
-            (project.currentFunding / project.fundingGoal) * 100;
+          const fundingPercentage = (project.currentFunding / project.fundingGoal) * 100;
           const isNearingGoal = fundingPercentage > 80;
 
           return (
@@ -109,15 +104,11 @@ export function GaiaCommunityProjects() {
                     <span className="text-sm">{project.daysLeft} days</span>
                   </div>
                 </div>
-                <CardTitle className="text-green-400">
-                  {project.title}
-                </CardTitle>
+                <CardTitle className="text-green-400">{project.title}</CardTitle>
               </CardHeader>
 
               <CardContent className="space-y-4">
-                <p className="text-sm text-green-300/80">
-                  {project.description}
-                </p>
+                <p className="text-sm text-green-300/80">{project.description}</p>
 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
@@ -149,16 +140,11 @@ export function GaiaCommunityProjects() {
                     <Award className="h-4 w-4" />
                     <span className="font-medium">Expected Impact</span>
                   </div>
-                  <p className="text-sm text-emerald-300/80">
-                    {project.impact}
-                  </p>
+                  <p className="text-sm text-emerald-300/80">{project.impact}</p>
                 </div>
 
                 <div className="flex gap-2">
-                  <Button
-                    className="flex-1 bg-green-600 hover:bg-green-700"
-                    size="sm"
-                  >
+                  <Button className="flex-1 bg-green-600 hover:bg-green-700" size="sm">
                     <DollarSign className="h-4 w-4 mr-1" />
                     Back Project
                   </Button>

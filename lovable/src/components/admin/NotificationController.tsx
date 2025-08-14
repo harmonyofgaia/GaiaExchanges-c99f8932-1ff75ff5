@@ -13,9 +13,7 @@ export function NotificationController() {
 
   const toggleNotifications = () => {
     setNotificationsEnabled(!notificationsEnabled);
-    toast.success(
-      notificationsEnabled ? "Notifications disabled" : "Notifications enabled",
-    );
+    toast.success(notificationsEnabled ? "Notifications disabled" : "Notifications enabled");
   };
 
   const testNotification = () => {
@@ -42,15 +40,11 @@ export function NotificationController() {
             </div>
             <div className="p-4 bg-blue-900/20 rounded-lg text-center">
               <div className="text-2xl font-bold text-blue-400">47</div>
-              <div className="text-sm text-muted-foreground">
-                Today's Alerts
-              </div>
+              <div className="text-sm text-muted-foreground">Today's Alerts</div>
             </div>
             <div className="p-4 bg-purple-900/20 rounded-lg text-center">
               <div className="text-2xl font-bold text-purple-400">3</div>
-              <div className="text-sm text-muted-foreground">
-                Critical Pending
-              </div>
+              <div className="text-sm text-muted-foreground">Critical Pending</div>
             </div>
           </div>
 
@@ -65,21 +59,12 @@ export function NotificationController() {
                 )}
                 <div>
                   <h3 className="font-semibold">Master Notifications</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Control all system notifications
-                  </p>
+                  <p className="text-sm text-muted-foreground">Control all system notifications</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Switch
-                  checked={notificationsEnabled}
-                  onCheckedChange={toggleNotifications}
-                />
-                <Badge
-                  className={
-                    notificationsEnabled ? "bg-green-600" : "bg-red-600"
-                  }
-                >
+                <Switch checked={notificationsEnabled} onCheckedChange={toggleNotifications} />
+                <Badge className={notificationsEnabled ? "bg-green-600" : "bg-red-600"}>
                   {notificationsEnabled ? "ON" : "OFF"}
                 </Badge>
               </div>
@@ -94,15 +79,10 @@ export function NotificationController() {
                 )}
                 <div>
                   <h3 className="font-semibold">Sound Alerts</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Play audio for notifications
-                  </p>
+                  <p className="text-sm text-muted-foreground">Play audio for notifications</p>
                 </div>
               </div>
-              <Switch
-                checked={soundEnabled}
-                onCheckedChange={setSoundEnabled}
-              />
+              <Switch checked={soundEnabled} onCheckedChange={setSoundEnabled} />
             </div>
 
             <div className="flex items-center justify-between p-4 bg-gray-900/30 rounded-lg">
@@ -115,26 +95,17 @@ export function NotificationController() {
                   </p>
                 </div>
               </div>
-              <Switch
-                checked={criticalAlertsOnly}
-                onCheckedChange={setCriticalAlertsOnly}
-              />
+              <Switch checked={criticalAlertsOnly} onCheckedChange={setCriticalAlertsOnly} />
             </div>
           </div>
 
           {/* Action Buttons */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Button
-              onClick={testNotification}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
+            <Button onClick={testNotification} className="bg-blue-600 hover:bg-blue-700">
               <Bell className="h-4 w-4 mr-2" />
               Test Notification
             </Button>
-            <Button
-              onClick={() => toast.info("All notifications cleared")}
-              variant="outline"
-            >
+            <Button onClick={() => toast.info("All notifications cleared")} variant="outline">
               Clear All Alerts
             </Button>
           </div>

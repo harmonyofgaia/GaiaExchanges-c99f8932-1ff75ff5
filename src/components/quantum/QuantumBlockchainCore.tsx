@@ -3,17 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Hexagon,
-  Zap,
-  Shield,
-  Database,
-  Network,
-  Lock,
-  Eye,
-  Cpu,
-  Activity,
-} from "lucide-react";
+import { Hexagon, Zap, Shield, Database, Network, Lock, Eye, Cpu, Activity } from "lucide-react";
 import { toast } from "sonner";
 
 interface BlockchainBlock {
@@ -126,12 +116,9 @@ export function QuantumBlockchainCore() {
           <CardTitle className="flex items-center gap-3 text-green-400">
             <Hexagon className="h-10 w-10" />
             <div>
-              <h1 className="text-4xl font-bold">
-                ⚡ ARCHITEK NETWORK BLOCKCHAIN ⚡
-              </h1>
+              <h1 className="text-4xl font-bold">⚡ ARCHITEK NETWORK BLOCKCHAIN ⚡</h1>
               <p className="text-xl text-green-300">
-                Private Quantum Blockchain • Unbreakable • Future-Proof • Admin
-                Supreme
+                Private Quantum Blockchain • Unbreakable • Future-Proof • Admin Supreme
               </p>
             </div>
           </CardTitle>
@@ -221,9 +208,7 @@ export function QuantumBlockchainCore() {
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <Badge className="bg-green-600 text-white">
-                          Block #{block.id}
-                        </Badge>
+                        <Badge className="bg-green-600 text-white">Block #{block.id}</Badge>
                         <span className="text-sm text-muted-foreground">
                           {new Date(block.timestamp).toLocaleString()}
                         </span>
@@ -245,33 +230,21 @@ export function QuantumBlockchainCore() {
                         </div>
                       </div>
                       <div>
-                        <div className="text-muted-foreground">
-                          Previous Hash:
-                        </div>
+                        <div className="text-muted-foreground">Previous Hash:</div>
                         <div className="font-mono text-xs break-all text-blue-400">
                           {block.previousHash}
                         </div>
                       </div>
                       <div>
-                        <div className="text-muted-foreground">
-                          Transactions:
-                        </div>
-                        <div className="font-bold text-purple-400">
-                          {block.transactions}
-                        </div>
+                        <div className="text-muted-foreground">Transactions:</div>
+                        <div className="font-bold text-purple-400">{block.transactions}</div>
                       </div>
                       <div>
-                        <div className="text-muted-foreground">
-                          Quantum Validator:
-                        </div>
-                        <div className="font-mono text-xs text-yellow-400">
-                          {block.validator}
-                        </div>
+                        <div className="text-muted-foreground">Quantum Validator:</div>
+                        <div className="font-mono text-xs text-yellow-400">{block.validator}</div>
                       </div>
                       <div className="md:col-span-2">
-                        <div className="text-muted-foreground">
-                          Quantum Signature:
-                        </div>
+                        <div className="text-muted-foreground">Quantum Signature:</div>
                         <div className="font-mono text-xs break-all text-red-400">
                           {block.quantumSignature}
                         </div>
@@ -310,36 +283,26 @@ export function QuantumBlockchainCore() {
                     </div>
                     <div className="flex justify-between">
                       <span>[ENTANGLEMENT]</span>
-                      <span className="text-green-400">
-                        {quantumDefense.quantumEntanglement}
-                      </span>
+                      <span className="text-green-400">{quantumDefense.quantumEntanglement}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>[SECURITY_LEVEL]</span>
-                      <span className="text-green-400">
-                        {quantumDefense.securityLevel}
-                      </span>
+                      <span className="text-green-400">{quantumDefense.securityLevel}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>[ENCRYPTION_LAYERS]</span>
-                      <span className="text-green-400">
-                        {quantumDefense.encryptionLayers}
-                      </span>
+                      <span className="text-green-400">{quantumDefense.encryptionLayers}</span>
                     </div>
                   </div>
 
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span>[COPY_PROTECTION]</span>
-                      <span className="text-green-400">
-                        {quantumDefense.copyProtection}
-                      </span>
+                      <span className="text-green-400">{quantumDefense.copyProtection}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>[IP_MONITORING]</span>
-                      <span className="text-green-400">
-                        {quantumDefense.ipMonitoring}
-                      </span>
+                      <span className="text-green-400">{quantumDefense.ipMonitoring}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>[THREATS_BLOCKED]</span>
@@ -357,8 +320,7 @@ export function QuantumBlockchainCore() {
                 <div className="text-center mt-6">
                   <div className="text-purple-400 animate-pulse text-lg">
                     ► ARCHITEK NETWORK: THE ULTIMATE BLOCKCHAIN TECHNOLOGY ◄
-                    <br />► QUANTUM SUPREME • FOREVER UNBEATABLE • HUMANITY
-                    PROTECTED ◄
+                    <br />► QUANTUM SUPREME • FOREVER UNBEATABLE • HUMANITY PROTECTED ◄
                   </div>
                 </div>
               </div>
@@ -387,9 +349,7 @@ export function QuantumBlockchainCore() {
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
                   <span>Network Speed:</span>
-                  <span className="text-blue-400 font-bold">
-                    {networkStats.networkSpeed}
-                  </span>
+                  <span className="text-blue-400 font-bold">{networkStats.networkSpeed}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Hash Rate:</span>
@@ -399,9 +359,7 @@ export function QuantumBlockchainCore() {
                 </div>
                 <div className="flex justify-between">
                   <span>Validator Nodes:</span>
-                  <span className="text-blue-400 font-bold">
-                    {networkStats.validatorNodes}
-                  </span>
+                  <span className="text-blue-400 font-bold">{networkStats.validatorNodes}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Network Uptime:</span>
@@ -449,15 +407,11 @@ export function QuantumBlockchainCore() {
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
                   <span>Quantum Security:</span>
-                  <span className="text-purple-400 font-bold">
-                    {networkStats.quantumSecurity}%
-                  </span>
+                  <span className="text-purple-400 font-bold">{networkStats.quantumSecurity}%</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Encryption Strength:</span>
-                  <span className="text-purple-400 font-bold">
-                    Quantum Supreme
-                  </span>
+                  <span className="text-purple-400 font-bold">Quantum Supreme</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Key Distribution:</span>
@@ -487,42 +441,35 @@ export function QuantumBlockchainCore() {
                 </h3>
                 <div className="space-y-3 text-red-300">
                   <p className="text-center">
-                    <strong>
-                      THIS SYSTEM IS THE ULTIMATE TECHNOLOGICAL ACHIEVEMENT
-                    </strong>
+                    <strong>THIS SYSTEM IS THE ULTIMATE TECHNOLOGICAL ACHIEVEMENT</strong>
                   </p>
                   <p>
-                    • It is NEVER ALLOWED to copy, reproduce, or attempt to
-                    create superior technology
+                    • It is NEVER ALLOWED to copy, reproduce, or attempt to create superior
+                    technology
+                  </p>
+                  <p>• ALL global internet traffic is monitored for threats against our system</p>
+                  <p>
+                    • ANY attempt to breach, copy, or surpass this system will result in immediate
+                    IP blocking
                   </p>
                   <p>
-                    • ALL global internet traffic is monitored for threats
-                    against our system
+                    • This protection extends to ALL entities: corporations, governments, and
+                    individuals
                   </p>
                   <p>
-                    • ANY attempt to breach, copy, or surpass this system will
-                    result in immediate IP blocking
+                    • Our quantum defense system predicts and prevents future threats before they
+                    exist
                   </p>
                   <p>
-                    • This protection extends to ALL entities: corporations,
-                    governments, and individuals
-                  </p>
-                  <p>
-                    • Our quantum defense system predicts and prevents future
-                    threats before they exist
-                  </p>
-                  <p>
-                    • This system will FOREVER remain the most powerful and
-                    secure technology on Earth
+                    • This system will FOREVER remain the most powerful and secure technology on
+                    Earth
                   </p>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <h4 className="font-bold text-red-400">
-                    🛡️ Active Protection Protocols
-                  </h4>
+                  <h4 className="font-bold text-red-400">🛡️ Active Protection Protocols</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center justify-between p-2 bg-red-500/5 rounded">
                       <span>Global IP Monitoring</span>
@@ -544,33 +491,23 @@ export function QuantumBlockchainCore() {
                 </div>
 
                 <div className="space-y-4">
-                  <h4 className="font-bold text-red-400">
-                    ⚡ Supreme Capabilities
-                  </h4>
+                  <h4 className="font-bold text-red-400">⚡ Supreme Capabilities</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center justify-between p-2 bg-red-500/5 rounded">
                       <span>Processing Power</span>
-                      <Badge className="bg-purple-600 text-white">
-                        ∞ QUANTUM
-                      </Badge>
+                      <Badge className="bg-purple-600 text-white">∞ QUANTUM</Badge>
                     </div>
                     <div className="flex items-center justify-between p-2 bg-red-500/5 rounded">
                       <span>Network Defense</span>
-                      <Badge className="bg-purple-600 text-white">
-                        UNBREAKABLE
-                      </Badge>
+                      <Badge className="bg-purple-600 text-white">UNBREAKABLE</Badge>
                     </div>
                     <div className="flex items-center justify-between p-2 bg-red-500/5 rounded">
                       <span>Encryption Level</span>
-                      <Badge className="bg-purple-600 text-white">
-                        QUANTUM SUPREME
-                      </Badge>
+                      <Badge className="bg-purple-600 text-white">QUANTUM SUPREME</Badge>
                     </div>
                     <div className="flex items-center justify-between p-2 bg-red-500/5 rounded">
                       <span>Supremacy Status</span>
-                      <Badge className="bg-purple-600 text-white">
-                        ETERNAL
-                      </Badge>
+                      <Badge className="bg-purple-600 text-white">ETERNAL</Badge>
                     </div>
                   </div>
                 </div>

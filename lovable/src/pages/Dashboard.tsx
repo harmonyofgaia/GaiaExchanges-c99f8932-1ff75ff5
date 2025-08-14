@@ -68,9 +68,7 @@ export default function Dashboard() {
   });
 
   const [liveProjects, setLiveProjects] = useState<LiveProject[]>([]);
-  const [recentActivities, setRecentActivities] = useState<RecentActivity[]>(
-    [],
-  );
+  const [recentActivities, setRecentActivities] = useState<RecentActivity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [globalStats, setGlobalStats] = useState({
     totalAnimalsRescued: 2847,
@@ -228,12 +226,9 @@ export default function Dashboard() {
     // Simulate real-time updates
     setGlobalStats((prev) => ({
       ...prev,
-      totalAnimalsRescued:
-        prev.totalAnimalsRescued + Math.floor(Math.random() * 3),
-      totalCarbonOffset:
-        prev.totalCarbonOffset + Math.floor(Math.random() * 1000),
-      totalUsersImpacting:
-        prev.totalUsersImpacting + Math.floor(Math.random() * 5),
+      totalAnimalsRescued: prev.totalAnimalsRescued + Math.floor(Math.random() * 3),
+      totalCarbonOffset: prev.totalCarbonOffset + Math.floor(Math.random() * 1000),
+      totalUsersImpacting: prev.totalUsersImpacting + Math.floor(Math.random() * 5),
     }));
   };
 
@@ -272,12 +267,8 @@ export default function Dashboard() {
           <CardContent className="p-8">
             <div className="text-center">
               <Zap className="h-12 w-12 text-blue-400 mx-auto mb-4 animate-pulse" />
-              <h3 className="text-xl font-bold text-blue-400">
-                Loading Your GAiA Impact...
-              </h3>
-              <p className="text-muted-foreground">
-                Calculating your real-world contributions
-              </p>
+              <h3 className="text-xl font-bold text-blue-400">Loading Your GAiA Impact...</h3>
+              <p className="text-muted-foreground">Calculating your real-world contributions</p>
             </div>
           </CardContent>
         </Card>
@@ -295,8 +286,7 @@ export default function Dashboard() {
               🌍 Your GAiA Impact Dashboard
             </CardTitle>
             <p className="text-center text-xl text-muted-foreground">
-              Real Impact • Real Animals Saved • Real Environmental Change •
-              Powered by Your Actions
+              Real Impact • Real Animals Saved • Real Environmental Change • Powered by Your Actions
             </p>
           </CardHeader>
         </Card>
@@ -309,9 +299,7 @@ export default function Dashboard() {
               <div className="text-2xl font-bold text-pink-400">
                 {globalStats.totalAnimalsRescued.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Animals Rescued Globally
-              </div>
+              <div className="text-xs text-muted-foreground">Animals Rescued Globally</div>
             </CardContent>
           </Card>
 
@@ -321,9 +309,7 @@ export default function Dashboard() {
               <div className="text-2xl font-bold text-green-400">
                 {(globalStats.totalCarbonOffset / 1000).toFixed(1)}K
               </div>
-              <div className="text-xs text-muted-foreground">
-                Tons CO2 Offset
-              </div>
+              <div className="text-xs text-muted-foreground">Tons CO2 Offset</div>
             </CardContent>
           </Card>
 
@@ -333,9 +319,7 @@ export default function Dashboard() {
               <div className="text-2xl font-bold text-blue-400">
                 {globalStats.totalUsersImpacting.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Active Contributors
-              </div>
+              <div className="text-xs text-muted-foreground">Active Contributors</div>
             </CardContent>
           </Card>
 
@@ -345,9 +329,7 @@ export default function Dashboard() {
               <div className="text-2xl font-bold text-yellow-400">
                 {(globalStats.totalGaiaCirculating / 1000000).toFixed(1)}M
               </div>
-              <div className="text-xs text-muted-foreground">
-                GAiA Circulating
-              </div>
+              <div className="text-xs text-muted-foreground">GAiA Circulating</div>
             </CardContent>
           </Card>
         </div>
@@ -367,12 +349,8 @@ export default function Dashboard() {
               <Card className="border-pink-500/30 bg-gradient-to-br from-pink-900/20 to-red-900/20">
                 <CardContent className="p-6 text-center">
                   <Heart className="h-10 w-10 text-pink-400 mx-auto mb-3" />
-                  <div className="text-3xl font-bold text-pink-400">
-                    {userImpact.animalsHelped}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Animals You've Helped
-                  </div>
+                  <div className="text-3xl font-bold text-pink-400">{userImpact.animalsHelped}</div>
+                  <div className="text-sm text-muted-foreground">Animals You've Helped</div>
                   <div className="text-xs text-pink-300 mt-1">
                     Direct impact through your contributions
                   </div>
@@ -382,12 +360,8 @@ export default function Dashboard() {
               <Card className="border-green-500/30 bg-gradient-to-br from-green-900/20 to-emerald-900/20">
                 <CardContent className="p-6 text-center">
                   <TreePine className="h-10 w-10 text-green-400 mx-auto mb-3" />
-                  <div className="text-3xl font-bold text-green-400">
-                    {userImpact.treesPlanted}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Trees You've Planted
-                  </div>
+                  <div className="text-3xl font-bold text-green-400">{userImpact.treesPlanted}</div>
+                  <div className="text-sm text-muted-foreground">Trees You've Planted</div>
                   <div className="text-xs text-green-300 mt-1">
                     {userImpact.carbonOffset.toFixed(1)} tons CO2 offset
                   </div>
@@ -397,15 +371,9 @@ export default function Dashboard() {
               <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-indigo-900/20">
                 <CardContent className="p-6 text-center">
                   <Gamepad2 className="h-10 w-10 text-purple-400 mx-auto mb-3" />
-                  <div className="text-3xl font-bold text-purple-400">
-                    {userImpact.gamesPlayed}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Games Contributing
-                  </div>
-                  <div className="text-xs text-purple-300 mt-1">
-                    Earning while making impact
-                  </div>
+                  <div className="text-3xl font-bold text-purple-400">{userImpact.gamesPlayed}</div>
+                  <div className="text-sm text-muted-foreground">Games Contributing</div>
+                  <div className="text-xs text-purple-300 mt-1">Earning while making impact</div>
                 </CardContent>
               </Card>
 
@@ -415,12 +383,8 @@ export default function Dashboard() {
                   <div className="text-3xl font-bold text-yellow-400">
                     {userImpact.totalContribution.toFixed(0)}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    GAiA Contributed
-                  </div>
-                  <div className="text-xs text-yellow-300 mt-1">
-                    Auto-distributed to causes
-                  </div>
+                  <div className="text-sm text-muted-foreground">GAiA Contributed</div>
+                  <div className="text-xs text-yellow-300 mt-1">Auto-distributed to causes</div>
                 </CardContent>
               </Card>
             </div>
@@ -487,9 +451,7 @@ export default function Dashboard() {
                   </div>
                   <div>
                     <div className="flex justify-between mb-2">
-                      <span className="text-purple-400">
-                        Gaming Contribution
-                      </span>
+                      <span className="text-purple-400">Gaming Contribution</span>
                       <span className="text-purple-400">
                         {(
                           (userImpact.gamesPlayed /
@@ -520,10 +482,7 @@ export default function Dashboard() {
           <TabsContent value="projects" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {liveProjects.map((project) => (
-                <Card
-                  key={project.id}
-                  className={`${getUrgencyColor(project.urgency)} border-2`}
-                >
+                <Card key={project.id} className={`${getUrgencyColor(project.urgency)} border-2`}>
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-lg">{project.name}</CardTitle>
@@ -543,37 +502,26 @@ export default function Dashboard() {
                   <CardContent className="space-y-4">
                     <div>
                       <div className="flex justify-between mb-2">
-                        <span className="text-sm text-muted-foreground">
-                          Funding Progress
-                        </span>
+                        <span className="text-sm text-muted-foreground">Funding Progress</span>
                         <span className="text-sm font-bold">
                           {project.currentFunding.toLocaleString()} /{" "}
                           {project.goalFunding.toLocaleString()} GAiA
                         </span>
                       </div>
                       <Progress
-                        value={
-                          (project.currentFunding / project.goalFunding) * 100
-                        }
+                        value={(project.currentFunding / project.goalFunding) * 100}
                         className="h-3"
                       />
                     </div>
                     <div className="bg-black/30 p-3 rounded">
-                      <div className="text-sm font-bold text-green-400 mb-1">
-                        Real Impact:
-                      </div>
-                      <div className="text-sm text-green-300">
-                        {project.impactMetric}
-                      </div>
+                      <div className="text-sm font-bold text-green-400 mb-1">Real Impact:</div>
+                      <div className="text-sm text-green-300">{project.impactMetric}</div>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-xs text-muted-foreground">
                         Updated: {project.lastUpdate}
                       </span>
-                      <Button
-                        size="sm"
-                        className="bg-blue-600 hover:bg-blue-700"
-                      >
+                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
                         Contribute Now
                       </Button>
                     </div>
@@ -598,16 +546,10 @@ export default function Dashboard() {
                       key={activity.id}
                       className="flex items-start gap-4 p-4 rounded-lg bg-black/30 border border-white/10"
                     >
-                      <div className="mt-1">
-                        {getActivityIcon(activity.type)}
-                      </div>
+                      <div className="mt-1">{getActivityIcon(activity.type)}</div>
                       <div className="flex-1">
-                        <div className="font-semibold">
-                          {activity.description}
-                        </div>
-                        <div className="text-sm text-green-400 mt-1">
-                          {activity.impact}
-                        </div>
+                        <div className="font-semibold">{activity.description}</div>
+                        <div className="text-sm text-green-400 mt-1">{activity.impact}</div>
                         <div className="text-xs text-muted-foreground mt-2">
                           {activity.timestamp}
                         </div>
@@ -616,9 +558,7 @@ export default function Dashboard() {
                         <div className="font-bold text-yellow-400">
                           {activity.tokens.toFixed(2)} GAiA
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          contributed
-                        </div>
+                        <div className="text-xs text-muted-foreground">contributed</div>
                       </div>
                     </div>
                   ))}
@@ -632,9 +572,7 @@ export default function Dashboard() {
               <Card className="border-yellow-500/30 bg-gradient-to-br from-yellow-900/20 to-orange-900/20">
                 <CardContent className="p-6 text-center">
                   <Award className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold text-yellow-400 mb-2">
-                    Animal Guardian
-                  </h3>
+                  <h3 className="text-xl font-bold text-yellow-400 mb-2">Animal Guardian</h3>
                   <p className="text-sm text-muted-foreground">
                     Helped save {userImpact.animalsHelped} animals
                   </p>
@@ -645,9 +583,7 @@ export default function Dashboard() {
               <Card className="border-green-500/30 bg-gradient-to-br from-green-900/20 to-emerald-900/20">
                 <CardContent className="p-6 text-center">
                   <TreePine className="h-12 w-12 text-green-400 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold text-green-400 mb-2">
-                    Eco Warrior
-                  </h3>
+                  <h3 className="text-xl font-bold text-green-400 mb-2">Eco Warrior</h3>
                   <p className="text-sm text-muted-foreground">
                     Planted {userImpact.treesPlanted} trees
                   </p>
@@ -658,9 +594,7 @@ export default function Dashboard() {
               <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-indigo-900/20">
                 <CardContent className="p-6 text-center">
                   <Gamepad2 className="h-12 w-12 text-purple-400 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold text-purple-400 mb-2">
-                    Gaming Hero
-                  </h3>
+                  <h3 className="text-xl font-bold text-purple-400 mb-2">Gaming Hero</h3>
                   <p className="text-sm text-muted-foreground">
                     Contributing through {userImpact.gamesPlayed} games
                   </p>
@@ -674,9 +608,7 @@ export default function Dashboard() {
         {/* Quick Actions */}
         <Card className="border-blue-500/30 bg-blue-900/20">
           <CardHeader>
-            <CardTitle className="text-blue-400">
-              Quick Impact Actions
-            </CardTitle>
+            <CardTitle className="text-blue-400">Quick Impact Actions</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

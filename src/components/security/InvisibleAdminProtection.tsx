@@ -16,11 +16,8 @@ export function InvisibleAdminProtection() {
       // Block all keyboard input for non-admin users
       const blockKeyboardInput = (event: KeyboardEvent) => {
         // Allow admin access (invisible detection)
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
-        const hasAdminSession =
-          sessionStorage.getItem("admin-session-active") === "true";
+        const isAdminBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+        const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
 
         if (!isAdminBrowser || !hasAdminSession) {
           console.log("🚨 UNAUTHORIZED KEYBOARD ACCESS BLOCKED");
@@ -34,11 +31,8 @@ export function InvisibleAdminProtection() {
 
       // Block mouse interactions for non-admin users
       const blockMouseInput = (event: MouseEvent) => {
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
-        const hasAdminSession =
-          sessionStorage.getItem("admin-session-active") === "true";
+        const isAdminBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+        const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
 
         if (!isAdminBrowser || !hasAdminSession) {
           console.log("🚨 UNAUTHORIZED MOUSE ACCESS BLOCKED");
@@ -52,11 +46,8 @@ export function InvisibleAdminProtection() {
 
       // Block form submissions for non-admin users
       const blockFormSubmission = (event: Event) => {
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
-        const hasAdminSession =
-          sessionStorage.getItem("admin-session-active") === "true";
+        const isAdminBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+        const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
 
         if (!isAdminBrowser || !hasAdminSession) {
           console.log("🚨 UNAUTHORIZED FORM SUBMISSION BLOCKED");
@@ -72,11 +63,8 @@ export function InvisibleAdminProtection() {
       const blockNetworkRequests = () => {
         const originalFetch = window.fetch;
         window.fetch = async (...args) => {
-          const isAdminBrowser = navigator.userAgent
-            .toLowerCase()
-            .includes("firefox");
-          const hasAdminSession =
-            sessionStorage.getItem("admin-session-active") === "true";
+          const isAdminBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+          const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
 
           if (!isAdminBrowser || !hasAdminSession) {
             console.log("🚨 UNAUTHORIZED NETWORK REQUEST BLOCKED");
@@ -104,11 +92,8 @@ export function InvisibleAdminProtection() {
 
       // Invisible admin session monitoring
       const monitorAdminSession = setInterval(() => {
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
-        const hasAdminSession =
-          sessionStorage.getItem("admin-session-active") === "true";
+        const isAdminBrowser = navigator.userAgent.toLowerCase().includes("firefox");
+        const hasAdminSession = sessionStorage.getItem("admin-session-active") === "true";
 
         if (isAdminBrowser && hasAdminSession) {
           console.log("👑 ADMIN SESSION VERIFIED - FULL ACCESS GRANTED");

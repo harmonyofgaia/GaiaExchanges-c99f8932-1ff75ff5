@@ -158,9 +158,7 @@ export default function Marketplace() {
   };
 
   const filteredItems = marketplaceItems.filter((item) => {
-    const matchesSearch = item.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType = selectedType === "all" || item.type === selectedType;
     return matchesSearch && matchesType;
   });
@@ -173,22 +171,18 @@ export default function Marketplace() {
             🛒 GAIA MARKETPLACE - COMPREHENSIVE TRADING PLATFORM
           </CardTitle>
           <p className="text-center text-xl text-muted-foreground">
-            Trade NFTs, invest in animal rescue, buy land for restoration, and
-            discover exclusive tools
+            Trade NFTs, invest in animal rescue, buy land for restoration, and discover exclusive
+            tools
           </p>
           <div className="flex justify-center gap-4 flex-wrap mt-4">
-            <Badge className="bg-blue-600">
-              ITEMS: {marketStats.totalItems}
-            </Badge>
+            <Badge className="bg-blue-600">ITEMS: {marketStats.totalItems}</Badge>
             <Badge className="bg-green-600">
               VALUE: ${marketStats.totalValue.toLocaleString()}
             </Badge>
             <Badge className="bg-purple-600 animate-pulse">
               ANIMALS SAVED: {marketStats.animalsSaved}
             </Badge>
-            <Badge className="bg-cyan-600">
-              LAND RESTORED: {marketStats.landRestored} acres
-            </Badge>
+            <Badge className="bg-cyan-600">LAND RESTORED: {marketStats.landRestored} acres</Badge>
           </div>
         </CardHeader>
       </Card>
@@ -236,27 +230,18 @@ export default function Marketplace() {
             {filteredItems
               .filter((item) => item.featured)
               .map((item) => (
-                <Card
-                  key={item.id}
-                  className="border-yellow-500/30 bg-yellow-900/20"
-                >
+                <Card key={item.id} className="border-yellow-500/30 bg-yellow-900/20">
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         {getTypeIcon(item.type)}
-                        <CardTitle className="text-yellow-400">
-                          {item.name}
-                        </CardTitle>
+                        <CardTitle className="text-yellow-400">{item.name}</CardTitle>
                       </div>
-                      <Badge className={getRarityColor(item.rarity)}>
-                        {item.rarity}
-                      </Badge>
+                      <Badge className={getRarityColor(item.rarity)}>{item.rarity}</Badge>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
 
                     {item.type === "animal" && item.investmentGoal && (
                       <div className="space-y-2">
@@ -288,9 +273,7 @@ export default function Marketplace() {
                       <div className="text-lg font-bold text-green-400">
                         {item.price.toLocaleString()} {item.currency}
                       </div>
-                      <div className="text-sm text-muted-foreground">
-                        by {item.seller}
-                      </div>
+                      <div className="text-sm text-muted-foreground">by {item.seller}</div>
                     </div>
 
                     <div className="flex gap-2">
@@ -302,11 +285,7 @@ export default function Marketplace() {
                         {item.type === "animal" ? "Invest" : "Buy"}
                       </Button>
                       {item.liveTracking && (
-                        <Button
-                          onClick={() => trackAnimal(item)}
-                          variant="outline"
-                          size="sm"
-                        >
+                        <Button onClick={() => trackAnimal(item)} variant="outline" size="sm">
                           <Eye className="h-4 w-4" />
                         </Button>
                       )}
@@ -327,25 +306,13 @@ export default function Marketplace() {
             </CardHeader>
             <CardContent>
               <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-                <h4 className="font-bold text-green-400 mb-2">
-                  🌟 How Animal Investment Works:
-                </h4>
+                <h4 className="font-bold text-green-400 mb-2">🌟 How Animal Investment Works:</h4>
                 <div className="text-sm text-green-300 space-y-1">
-                  <div>
-                    • Invest in zoo animals to fund their relocation to natural
-                    sanctuaries
-                  </div>
-                  <div>
-                    • Each animal has a unique NFT with live GPS tracking
-                  </div>
-                  <div>
-                    • Watch real-time progress as funding goals are reached
-                  </div>
+                  <div>• Invest in zoo animals to fund their relocation to natural sanctuaries</div>
+                  <div>• Each animal has a unique NFT with live GPS tracking</div>
+                  <div>• Watch real-time progress as funding goals are reached</div>
                   <div>• Animals are automatically moved when 100% funded</div>
-                  <div>
-                    • Receive exclusive NFT and tracking rights after successful
-                    rescue
-                  </div>
+                  <div>• Receive exclusive NFT and tracking rights after successful rescue</div>
                 </div>
               </div>
             </CardContent>
@@ -355,29 +322,20 @@ export default function Marketplace() {
             {filteredItems
               .filter((item) => item.type === "animal")
               .map((item) => (
-                <Card
-                  key={item.id}
-                  className="border-green-500/30 bg-green-900/20"
-                >
+                <Card key={item.id} className="border-green-500/30 bg-green-900/20">
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Heart className="h-5 w-5 text-green-400" />
-                        <CardTitle className="text-green-400">
-                          {item.name}
-                        </CardTitle>
+                        <CardTitle className="text-green-400">{item.name}</CardTitle>
                       </div>
                       {item.liveTracking && (
-                        <Badge className="bg-blue-600 animate-pulse">
-                          LIVE
-                        </Badge>
+                        <Badge className="bg-blue-600 animate-pulse">LIVE</Badge>
                       )}
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
 
                     {item.animalLocation && (
                       <div className="flex items-center gap-2 text-sm">
@@ -404,12 +362,8 @@ export default function Marketplace() {
                           ></div>
                         </div>
                         <div className="text-center text-sm text-green-400">
-                          {Math.round(
-                            ((item.currentInvestment || 0) /
-                              item.investmentGoal) *
-                              100,
-                          )}
-                          % funded
+                          {Math.round(((item.currentInvestment || 0) / item.investmentGoal) * 100)}%
+                          funded
                         </div>
                       </div>
                     )}
@@ -422,18 +376,13 @@ export default function Marketplace() {
                         <Heart className="h-4 w-4 mr-2" />
                         Invest in Rescue
                       </Button>
-                      <Button
-                        onClick={() => trackAnimal(item)}
-                        variant="outline"
-                        size="sm"
-                      >
+                      <Button onClick={() => trackAnimal(item)} variant="outline" size="sm">
                         <Eye className="h-4 w-4" />
                       </Button>
                     </div>
 
                     <div className="text-xs text-muted-foreground text-center">
-                      Min. investment: ${item.price.toLocaleString()}{" "}
-                      {item.currency}
+                      Min. investment: ${item.price.toLocaleString()} {item.currency}
                     </div>
                   </CardContent>
                 </Card>
@@ -446,29 +395,20 @@ export default function Marketplace() {
             {filteredItems
               .filter((item) => item.type === "nft")
               .map((item) => (
-                <Card
-                  key={item.id}
-                  className="border-purple-500/30 bg-purple-900/20"
-                >
+                <Card key={item.id} className="border-purple-500/30 bg-purple-900/20">
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Gem className="h-5 w-5 text-purple-400" />
-                        <CardTitle className="text-purple-400 text-sm">
-                          {item.name}
-                        </CardTitle>
+                        <CardTitle className="text-purple-400 text-sm">{item.name}</CardTitle>
                       </div>
-                      <Badge
-                        className={getRarityColor(item.rarity) + " text-xs"}
-                      >
+                      <Badge className={getRarityColor(item.rarity) + " text-xs"}>
                         {item.rarity}
                       </Badge>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    <p className="text-xs text-muted-foreground">
-                      {item.description}
-                    </p>
+                    <p className="text-xs text-muted-foreground">{item.description}</p>
                     <div className="text-center">
                       <div className="text-lg font-bold text-purple-400">
                         {item.price.toLocaleString()} {item.currency}
@@ -498,19 +438,13 @@ export default function Marketplace() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Star className="h-5 w-5 text-red-400" />
-                        <CardTitle className="text-red-400">
-                          {item.name}
-                        </CardTitle>
+                        <CardTitle className="text-red-400">{item.name}</CardTitle>
                       </div>
-                      <Badge className={getRarityColor(item.rarity)}>
-                        {item.rarity}
-                      </Badge>
+                      <Badge className={getRarityColor(item.rarity)}>{item.rarity}</Badge>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
                     <div className="text-lg font-bold text-red-400">
                       {item.price.toLocaleString()} {item.currency}
                     </div>
@@ -532,27 +466,18 @@ export default function Marketplace() {
             {filteredItems
               .filter((item) => item.type === "land")
               .map((item) => (
-                <Card
-                  key={item.id}
-                  className="border-cyan-500/30 bg-cyan-900/20"
-                >
+                <Card key={item.id} className="border-cyan-500/30 bg-cyan-900/20">
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <MapPin className="h-5 w-5 text-cyan-400" />
-                        <CardTitle className="text-cyan-400">
-                          {item.name}
-                        </CardTitle>
+                        <CardTitle className="text-cyan-400">{item.name}</CardTitle>
                       </div>
-                      <Badge className={getRarityColor(item.rarity)}>
-                        {item.rarity}
-                      </Badge>
+                      <Badge className={getRarityColor(item.rarity)}>{item.rarity}</Badge>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
                     {item.animalLocation && (
                       <div className="flex items-center gap-2 text-sm">
                         <MapPin className="h-4 w-4 text-cyan-400" />

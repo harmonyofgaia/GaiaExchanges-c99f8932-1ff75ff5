@@ -2,13 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  CheckCircle,
-  AlertCircle,
-  ExternalLink,
-  Download,
-  Cloud,
-} from "lucide-react";
+import { CheckCircle, AlertCircle, ExternalLink, Download, Cloud } from "lucide-react";
 import { toast } from "sonner";
 
 interface FeatureStatus {
@@ -107,7 +101,7 @@ export function FeatureStatusChecker() {
   ]);
 
   const [cloudArtworkUrl] = useState(
-    "https://supabase.com/dashboard/project/slheudxfcqqppyphyobq/storage/buckets",
+    "https://supabase.com/dashboard/project/slheudxfcqqppyphyobq/storage/buckets"
   );
 
   const openCloudStorage = () => {
@@ -119,9 +113,7 @@ export function FeatureStatusChecker() {
   };
 
   const generateFeatureReport = () => {
-    const completeFeatures = features.filter(
-      (f) => f.status === "complete",
-    ).length;
+    const completeFeatures = features.filter((f) => f.status === "complete").length;
     const totalFeatures = features.length;
     const completionRate = Math.round((completeFeatures / totalFeatures) * 100);
 
@@ -180,28 +172,18 @@ export function FeatureStatusChecker() {
         <CardContent>
           <div className="text-center space-y-4">
             <div className="text-4xl font-bold text-green-400">100%</div>
-            <div className="text-xl text-muted-foreground">
-              All Features Operational
-            </div>
+            <div className="text-xl text-muted-foreground">All Features Operational</div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-              <Button
-                onClick={generateFeatureReport}
-                className="bg-blue-600 hover:bg-blue-700"
-              >
+              <Button onClick={generateFeatureReport} className="bg-blue-600 hover:bg-blue-700">
                 <Download className="h-4 w-4 mr-2" />
                 Generate Report
               </Button>
-              <Button
-                onClick={openCloudStorage}
-                className="bg-purple-600 hover:bg-purple-700"
-              >
+              <Button onClick={openCloudStorage} className="bg-purple-600 hover:bg-purple-700">
                 <Cloud className="h-4 w-4 mr-2" />
                 Cloud Artwork (Admin)
               </Button>
               <Button
-                onClick={() =>
-                  window.open("https://www.gaiaexchange.net", "_blank")
-                }
+                onClick={() => window.open("https://www.gaiaexchange.net", "_blank")}
                 className="bg-green-600 hover:bg-green-700"
               >
                 <ExternalLink className="h-4 w-4 mr-2" />
@@ -221,26 +203,20 @@ export function FeatureStatusChecker() {
           >
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-3">
-                <h4 className="font-semibold text-white text-sm">
-                  {feature.name}
-                </h4>
+                <h4 className="font-semibold text-white text-sm">{feature.name}</h4>
                 {getStatusBadge(feature.status)}
               </div>
-              <p className="text-xs text-muted-foreground mb-3">
-                {feature.description}
-              </p>
-              {feature.page &&
-                feature.page !== "admin-only" &&
-                feature.page !== "all pages" && (
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="w-full text-xs"
-                    onClick={() => (window.location.href = feature.page)}
-                  >
-                    View Feature
-                  </Button>
-                )}
+              <p className="text-xs text-muted-foreground mb-3">{feature.description}</p>
+              {feature.page && feature.page !== "admin-only" && feature.page !== "all pages" && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="w-full text-xs"
+                  onClick={() => (window.location.href = feature.page)}
+                >
+                  View Feature
+                </Button>
+              )}
             </CardContent>
           </Card>
         ))}
@@ -256,11 +232,9 @@ export function FeatureStatusChecker() {
             🌍 Together We Make The World A Better Place 🌍
           </div>
           <div className="text-sm text-muted-foreground">
-            Every feature harmonized • Every system optimized • Every goal
-            achieved
+            Every feature harmonized • Every system optimized • Every goal achieved
             <br />
-            🦁🐬 Lions & Dolphins Standard - Always Perfect, Always Improving
-            🐬🦁
+            🦁🐬 Lions & Dolphins Standard - Always Perfect, Always Improving 🐬🦁
           </div>
         </CardContent>
       </Card>

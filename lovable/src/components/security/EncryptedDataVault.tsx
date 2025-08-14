@@ -30,12 +30,7 @@ interface EncryptedFile {
 
 export function EncryptedDataVault() {
   const [recoveryStage, setRecoveryStage] = useState<
-    | "locked"
-    | "recovery-1"
-    | "recovery-2"
-    | "recovery-3"
-    | "recovery-4"
-    | "unlocked"
+    "locked" | "recovery-1" | "recovery-2" | "recovery-3" | "recovery-4" | "unlocked"
   >("locked");
   const [recoveryPhrases, setRecoveryPhrases] = useState({
     phrase1: "",
@@ -101,20 +96,14 @@ export function EncryptedDataVault() {
       4: "quantum recovery system ready",
     };
 
-    if (
-      phrase.toLowerCase() ===
-      correctPhrases[stage as keyof typeof correctPhrases]
-    ) {
-      console.log(
-        `🔑 RECOVERY PHRASE ${stage} VERIFIED - PROCEEDING TO NEXT BARRIER`,
-      );
+    if (phrase.toLowerCase() === correctPhrases[stage as keyof typeof correctPhrases]) {
+      console.log(`🔑 RECOVERY PHRASE ${stage} VERIFIED - PROCEEDING TO NEXT BARRIER`);
 
       const nextStage = `recovery-${stage + 1}` as any;
       if (stage === 4) {
         setRecoveryStage("unlocked");
         toast.success("🎯 ALL RECOVERY PHRASES VERIFIED!", {
-          description:
-            "Ultra Secure Data Vault unlocked - Admin access granted",
+          description: "Ultra Secure Data Vault unlocked - Admin access granted",
           duration: 6000,
         });
         console.log("👑 ADMIN VAULT ACCESS GRANTED - ALL BARRIERS BREACHED");
@@ -153,7 +142,7 @@ export function EncryptedDataVault() {
           prev.map((file) => ({
             ...file,
             lastBackup: new Date(),
-          })),
+          }))
         );
       }
     }, 1000); // Every second for demo (would be milliseconds in production)
@@ -180,8 +169,7 @@ export function EncryptedDataVault() {
     console.log("🔄 INITIATING COMPLETE SYSTEM RESTORATION");
 
     toast.success("🚀 SYSTEM RESTORATION INITIATED!", {
-      description:
-        "All wallets, data, and configurations being restored to new system",
+      description: "All wallets, data, and configurations being restored to new system",
       duration: 8000,
     });
 
@@ -217,9 +205,7 @@ export function EncryptedDataVault() {
               <div className="text-2xl font-bold text-purple-400">
                 {encryptionStatus.encryptedFiles}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Files Encrypted
-              </div>
+              <div className="text-sm text-muted-foreground">Files Encrypted</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-blue-900/30 border border-blue-500/20">
@@ -231,9 +217,7 @@ export function EncryptedDataVault() {
             <div className="text-center p-4 rounded-lg bg-green-900/30 border border-green-500/20">
               <Zap className="h-8 w-8 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">24/7</div>
-              <div className="text-sm text-muted-foreground">
-                Auto Encryption
-              </div>
+              <div className="text-sm text-muted-foreground">Auto Encryption</div>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-orange-900/30 border border-orange-500/20">
@@ -246,9 +230,7 @@ export function EncryptedDataVault() {
           {/* Recovery Stage Progress */}
           <div className="mb-6">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium">
-                Admin Recovery Progress
-              </span>
+              <span className="text-sm font-medium">Admin Recovery Progress</span>
               <span className="text-sm text-purple-400">
                 {recoveryStage === "locked"
                   ? "SEALED"
@@ -283,8 +265,7 @@ export function EncryptedDataVault() {
                 🔒 VAULT SEALED - ADMIN RECOVERY REQUIRED
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
-                Enter your 4-step admin recovery process to access encrypted
-                data
+                Enter your 4-step admin recovery process to access encrypted data
               </p>
               <Button
                 onClick={() => setRecoveryStage("recovery-1")}
@@ -297,73 +278,60 @@ export function EncryptedDataVault() {
           )}
 
           {/* Recovery Phrase Stages */}
-          {recoveryStage.startsWith("recovery-") &&
-            recoveryStage !== "unlocked" && (
-              <div className="space-y-4">
-                {[1, 2, 3, 4].map((stage) => {
-                  const currentStage = parseInt(
-                    recoveryStage.split("-")[1] || "0",
-                  );
-                  const isActive = stage === currentStage;
-                  const isCompleted = stage < currentStage;
+          {recoveryStage.startsWith("recovery-") && recoveryStage !== "unlocked" && (
+            <div className="space-y-4">
+              {[1, 2, 3, 4].map((stage) => {
+                const currentStage = parseInt(recoveryStage.split("-")[1] || "0");
+                const isActive = stage === currentStage;
+                const isCompleted = stage < currentStage;
 
-                  if (!isActive && !isCompleted) return null;
+                if (!isActive && !isCompleted) return null;
 
-                  return (
-                    <div
-                      key={stage}
-                      className={`p-4 rounded-lg border ${
-                        isCompleted
-                          ? "bg-green-900/20 border-green-500/20"
-                          : "bg-orange-900/30 border-orange-500/20"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="font-bold text-orange-400">
-                          Recovery Barrier {stage}
-                        </span>
-                        {isCompleted && (
-                          <CheckCircle className="h-5 w-5 text-green-400" />
-                        )}
-                      </div>
-
-                      {isActive && (
-                        <div className="flex gap-2">
-                          <Input
-                            type="password"
-                            placeholder={`Enter recovery phrase ${stage}`}
-                            value={
-                              recoveryPhrases[
-                                `phrase${stage}` as keyof typeof recoveryPhrases
-                              ]
-                            }
-                            onChange={(e) =>
-                              setRecoveryPhrases((prev) => ({
-                                ...prev,
-                                [`phrase${stage}`]: e.target.value,
-                              }))
-                            }
-                          />
-                          <Button
-                            onClick={() =>
-                              validateRecoveryPhrase(
-                                stage,
-                                recoveryPhrases[
-                                  `phrase${stage}` as keyof typeof recoveryPhrases
-                                ],
-                              )
-                            }
-                            className="bg-orange-600 hover:bg-orange-700"
-                          >
-                            <Key className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      )}
+                return (
+                  <div
+                    key={stage}
+                    className={`p-4 rounded-lg border ${
+                      isCompleted
+                        ? "bg-green-900/20 border-green-500/20"
+                        : "bg-orange-900/30 border-orange-500/20"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-bold text-orange-400">Recovery Barrier {stage}</span>
+                      {isCompleted && <CheckCircle className="h-5 w-5 text-green-400" />}
                     </div>
-                  );
-                })}
-              </div>
-            )}
+
+                    {isActive && (
+                      <div className="flex gap-2">
+                        <Input
+                          type="password"
+                          placeholder={`Enter recovery phrase ${stage}`}
+                          value={recoveryPhrases[`phrase${stage}` as keyof typeof recoveryPhrases]}
+                          onChange={(e) =>
+                            setRecoveryPhrases((prev) => ({
+                              ...prev,
+                              [`phrase${stage}`]: e.target.value,
+                            }))
+                          }
+                        />
+                        <Button
+                          onClick={() =>
+                            validateRecoveryPhrase(
+                              stage,
+                              recoveryPhrases[`phrase${stage}` as keyof typeof recoveryPhrases]
+                            )
+                          }
+                          className="bg-orange-600 hover:bg-orange-700"
+                        >
+                          <Key className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           {/* Unlocked Vault Interface */}
           {recoveryStage === "unlocked" && (
@@ -377,34 +345,24 @@ export function EncryptedDataVault() {
 
               {/* Encrypted Files List */}
               <div className="space-y-3">
-                <h4 className="font-bold text-purple-400">
-                  Encrypted Data Files
-                </h4>
+                <h4 className="font-bold text-purple-400">Encrypted Data Files</h4>
                 {encryptedFiles.map((file) => (
                   <div
                     key={file.id}
                     className="flex items-center justify-between p-3 rounded-lg bg-muted/20 border"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-2xl">
-                        {getFileTypeIcon(file.type)}
-                      </span>
+                      <span className="text-2xl">{getFileTypeIcon(file.type)}</span>
                       <div>
                         <div className="font-medium">{file.name}</div>
                         <div className="text-sm text-muted-foreground">
-                          {file.size}KB • Last backup:{" "}
-                          {file.lastBackup.toLocaleTimeString()}
+                          {file.size}KB • Last backup: {file.lastBackup.toLocaleTimeString()}
                         </div>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Badge className="bg-green-600 text-white">
-                        ENCRYPTED
-                      </Badge>
-                      <Button
-                        size="sm"
-                        className="bg-blue-600 hover:bg-blue-700"
-                      >
+                      <Badge className="bg-green-600 text-white">ENCRYPTED</Badge>
+                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
                         <Eye className="h-4 w-4 mr-1" />
                         Access
                       </Button>
@@ -421,9 +379,7 @@ export function EncryptedDataVault() {
                 <Database className="h-6 w-6 mr-2" />
                 🚀 INITIATE COMPLETE SYSTEM RESTORATION
                 <br />
-                <span className="text-sm">
-                  Restore all wallets, data & system configurations
-                </span>
+                <span className="text-sm">Restore all wallets, data & system configurations</span>
               </Button>
             </div>
           )}
@@ -433,24 +389,18 @@ export function EncryptedDataVault() {
       {/* Security Guarantee */}
       <Card className="bg-gradient-to-r from-red-900/20 to-purple-900/20 border border-red-500/20">
         <CardContent className="p-6 text-center">
-          <h3 className="text-2xl font-bold text-red-400 mb-4">
-            🛡️ ABSOLUTE ENCRYPTION GUARANTEE
-          </h3>
+          <h3 className="text-2xl font-bold text-red-400 mb-4">🛡️ ABSOLUTE ENCRYPTION GUARANTEE</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
               <div className="text-6xl">🔒</div>
-              <div className="font-bold text-purple-400">
-                CONTINUOUS ENCRYPTION
-              </div>
+              <div className="font-bold text-purple-400">CONTINUOUS ENCRYPTION</div>
               <div className="text-sm text-muted-foreground">
                 Every millisecond - No data ever unencrypted
               </div>
             </div>
             <div className="space-y-2">
               <div className="text-6xl">🔑</div>
-              <div className="font-bold text-orange-400">
-                4-BARRIER RECOVERY
-              </div>
+              <div className="font-bold text-orange-400">4-BARRIER RECOVERY</div>
               <div className="text-sm text-muted-foreground">
                 Only admin with exact recovery phrases can access
               </div>

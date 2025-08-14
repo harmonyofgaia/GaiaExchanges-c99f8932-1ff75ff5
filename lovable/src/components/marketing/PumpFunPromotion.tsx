@@ -75,8 +75,7 @@ Contract: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const randomMessage =
-        pumpFunMessages[Math.floor(Math.random() * pumpFunMessages.length)];
+      const randomMessage = pumpFunMessages[Math.floor(Math.random() * pumpFunMessages.length)];
       setCurrentMessage(randomMessage);
       setViralCount((prev) => prev + Math.floor(Math.random() * 100));
     }, 10000);
@@ -96,8 +95,7 @@ Contract: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
   };
 
   const generateNewMessage = () => {
-    const randomMessage =
-      pumpFunMessages[Math.floor(Math.random() * pumpFunMessages.length)];
+    const randomMessage = pumpFunMessages[Math.floor(Math.random() * pumpFunMessages.length)];
     setCurrentMessage(randomMessage);
     toast.success("🎯 New Viral Message Generated!", {
       description: "Optimized for maximum pump.fun engagement",
@@ -117,12 +115,8 @@ Contract: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center p-4 bg-green-900/30 rounded-lg">
             <TrendingUp className="h-8 w-8 text-green-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-green-400">
-              {viralCount.toLocaleString()}
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Viral Impressions
-            </div>
+            <div className="text-2xl font-bold text-green-400">{viralCount.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground">Viral Impressions</div>
           </div>
           <div className="text-center p-4 bg-purple-900/30 rounded-lg">
             <Zap className="h-8 w-8 text-purple-400 mx-auto mb-2" />
@@ -145,10 +139,7 @@ Contract: 5GrTjU1zsrBDjzukfHKX7ug63cVcJWFLXGjM2xstAFbh
           />
 
           <div className="flex gap-4">
-            <Button
-              onClick={copyMessage}
-              className="flex-1 bg-green-600 hover:bg-green-700"
-            >
+            <Button onClick={copyMessage} className="flex-1 bg-green-600 hover:bg-green-700">
               <Copy className="h-4 w-4 mr-2" />
               📋 Copy for Pump.Fun
             </Button>

@@ -84,8 +84,7 @@ export function AdvancedCommunityFeatures() {
     {
       id: "2",
       title: "Zero Waste Lifestyle Workshop",
-      description:
-        "Learn practical techniques for reducing waste and living sustainably",
+      description: "Learn practical techniques for reducing waste and living sustainably",
       date: "2024-02-12",
       location: "Community Center",
       organizer: "Green Guru Mike",
@@ -98,8 +97,7 @@ export function AdvancedCommunityFeatures() {
     {
       id: "3",
       title: "Ocean Cleanup Expedition",
-      description:
-        "Help remove plastic waste from our local beaches and waterways",
+      description: "Help remove plastic waste from our local beaches and waterways",
       date: "2024-02-20",
       location: "Sunset Beach",
       organizer: "Ocean Defender Lisa",
@@ -171,8 +169,7 @@ export function AdvancedCommunityFeatures() {
     {
       id: "2",
       title: "Community Seed Bank Initiative",
-      description:
-        "Local seed sharing network to preserve biodiversity and support food security",
+      description: "Local seed sharing network to preserve biodiversity and support food security",
       author: "Seed Keeper John",
       votes: 89,
       category: "community",
@@ -206,8 +203,7 @@ export function AdvancedCommunityFeatures() {
     const community = communities.find((c) => c.id === communityId);
     if (community) {
       toast.success(`🌟 Joined ${community.name}!`, {
-        description:
-          "You can now participate in community challenges and earn bonus rewards.",
+        description: "You can now participate in community challenges and earn bonus rewards.",
         duration: 4000,
       });
     }
@@ -258,11 +254,7 @@ export function AdvancedCommunityFeatures() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <Tabs
-          value={selectedTab}
-          onValueChange={setSelectedTab}
-          className="w-full"
-        >
+        <Tabs value={selectedTab} onValueChange={setSelectedTab} className="w-full">
           <TabsList className="grid w-full grid-cols-4 mb-6">
             <TabsTrigger value="events" className="text-sm">
               📅 Events
@@ -281,9 +273,7 @@ export function AdvancedCommunityFeatures() {
           {/* Community Events */}
           <TabsContent value="events" className="space-y-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-xl font-bold text-blue-400">
-                🎯 Upcoming Community Events
-              </h3>
+              <h3 className="text-xl font-bold text-blue-400">🎯 Upcoming Community Events</h3>
               <Button className="bg-blue-600 hover:bg-blue-700">
                 <Calendar className="h-4 w-4 mr-2" />
                 Create Event
@@ -292,23 +282,14 @@ export function AdvancedCommunityFeatures() {
 
             <div className="space-y-4">
               {communityEvents.map((event) => (
-                <Card
-                  key={event.id}
-                  className="border-blue-500/30 bg-blue-900/10"
-                >
+                <Card key={event.id} className="border-blue-500/30 bg-blue-900/10">
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex items-start gap-3">
-                        <span className="text-3xl">
-                          {getCategoryIcon(event.category)}
-                        </span>
+                        <span className="text-3xl">{getCategoryIcon(event.category)}</span>
                         <div>
-                          <h4 className="text-lg font-semibold text-blue-300">
-                            {event.title}
-                          </h4>
-                          <p className="text-sm text-muted-foreground">
-                            {event.description}
-                          </p>
+                          <h4 className="text-lg font-semibold text-blue-300">{event.title}</h4>
+                          <p className="text-sm text-muted-foreground">{event.description}</p>
                           <div className="flex items-center gap-4 mt-2 text-sm">
                             <span className="flex items-center gap-1">
                               <Calendar className="h-3 w-3" />
@@ -337,8 +318,7 @@ export function AdvancedCommunityFeatures() {
 
                     <div className="flex justify-between items-center">
                       <div className="text-sm text-muted-foreground">
-                        Organized by{" "}
-                        <span className="text-blue-400">{event.organizer}</span>
+                        Organized by <span className="text-blue-400">{event.organizer}</span>
                       </div>
                       <div className="flex gap-2">
                         <Button
@@ -372,9 +352,7 @@ export function AdvancedCommunityFeatures() {
           {/* Communities */}
           <TabsContent value="communities" className="space-y-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-xl font-bold text-purple-400">
-                🏘️ Active Communities
-              </h3>
+              <h3 className="text-xl font-bold text-purple-400">🏘️ Active Communities</h3>
               <Button className="bg-purple-600 hover:bg-purple-700">
                 <Users className="h-4 w-4 mr-2" />
                 Create Community
@@ -383,10 +361,7 @@ export function AdvancedCommunityFeatures() {
 
             <div className="space-y-4">
               {communities.map((community) => (
-                <Card
-                  key={community.id}
-                  className="border-purple-500/30 bg-purple-900/10"
-                >
+                <Card key={community.id} className="border-purple-500/30 bg-purple-900/10">
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div>
@@ -394,9 +369,7 @@ export function AdvancedCommunityFeatures() {
                           <h4 className="text-lg font-semibold text-purple-300">
                             {community.name}
                           </h4>
-                          <Badge className="bg-purple-600">
-                            Level {community.level}
-                          </Badge>
+                          <Badge className="bg-purple-600">Level {community.level}</Badge>
                         </div>
                         <p className="text-sm text-muted-foreground mb-3">
                           {community.description}
@@ -421,9 +394,7 @@ export function AdvancedCommunityFeatures() {
                     <div className="bg-purple-900/20 rounded-lg p-3 mb-3">
                       <div className="flex items-center gap-2 mb-2">
                         <Target className="h-4 w-4 text-purple-400" />
-                        <span className="font-medium text-purple-400">
-                          Weekly Challenge
-                        </span>
+                        <span className="font-medium text-purple-400">Weekly Challenge</span>
                       </div>
                       <p className="text-sm">{community.weeklyChallenge}</p>
                     </div>
@@ -433,25 +404,19 @@ export function AdvancedCommunityFeatures() {
                         <div className="text-lg font-bold text-green-400">
                           {community.impact.treesPlanted}
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          Trees Planted
-                        </div>
+                        <div className="text-xs text-muted-foreground">Trees Planted</div>
                       </div>
                       <div className="text-center p-2 bg-blue-900/20 rounded-lg">
                         <div className="text-lg font-bold text-blue-400">
                           {community.impact.co2Reduced}
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          CO2 Reduced (kg)
-                        </div>
+                        <div className="text-xs text-muted-foreground">CO2 Reduced (kg)</div>
                       </div>
                       <div className="text-center p-2 bg-orange-900/20 rounded-lg">
                         <div className="text-lg font-bold text-orange-400">
                           {community.impact.wasteCollected}
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          Waste Collected (kg)
-                        </div>
+                        <div className="text-xs text-muted-foreground">Waste Collected (kg)</div>
                       </div>
                     </div>
                   </CardContent>
@@ -463,9 +428,7 @@ export function AdvancedCommunityFeatures() {
           {/* Idea Exchange */}
           <TabsContent value="ideas" className="space-y-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-xl font-bold text-cyan-400">
-                💡 Community Idea Exchange
-              </h3>
+              <h3 className="text-xl font-bold text-cyan-400">💡 Community Idea Exchange</h3>
               <Button className="bg-cyan-600 hover:bg-cyan-700">
                 <Lightbulb className="h-4 w-4 mr-2" />
                 Submit Idea
@@ -474,17 +437,12 @@ export function AdvancedCommunityFeatures() {
 
             <div className="space-y-4">
               {ideaExchange.map((idea) => (
-                <Card
-                  key={idea.id}
-                  className="border-cyan-500/30 bg-cyan-900/10"
-                >
+                <Card key={idea.id} className="border-cyan-500/30 bg-cyan-900/10">
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <h4 className="text-lg font-semibold text-cyan-300">
-                            {idea.title}
-                          </h4>
+                          <h4 className="text-lg font-semibold text-cyan-300">{idea.title}</h4>
                           <Badge
                             className={`${
                               idea.implementation === "completed"
@@ -497,13 +455,9 @@ export function AdvancedCommunityFeatures() {
                             {idea.implementation.toUpperCase()}
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground mb-3">
-                          {idea.description}
-                        </p>
+                        <p className="text-sm text-muted-foreground mb-3">{idea.description}</p>
                         <div className="flex items-center gap-4 text-sm">
-                          <span className="text-cyan-400">
-                            By {idea.author}
-                          </span>
+                          <span className="text-cyan-400">By {idea.author}</span>
                           <Badge variant="outline">{idea.category}</Badge>
                           <span className="flex items-center gap-1">
                             <Award className="h-3 w-3" />
@@ -521,10 +475,7 @@ export function AdvancedCommunityFeatures() {
                           <Heart className="h-3 w-3 mr-1" />
                           {idea.votes}
                         </Button>
-                        <Button
-                          size="sm"
-                          className="bg-cyan-600 hover:bg-cyan-700"
-                        >
+                        <Button size="sm" className="bg-cyan-600 hover:bg-cyan-700">
                           View Details
                         </Button>
                       </div>
@@ -539,38 +490,28 @@ export function AdvancedCommunityFeatures() {
 
           {/* Impact Dashboard */}
           <TabsContent value="impact" className="space-y-6">
-            <h3 className="text-xl font-bold text-green-400">
-              🌟 Community Impact Dashboard
-            </h3>
+            <h3 className="text-xl font-bold text-green-400">🌟 Community Impact Dashboard</h3>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center p-4 bg-green-900/30 rounded-lg border border-green-500/20">
                 <Globe className="h-8 w-8 text-green-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-green-400">45,892</div>
-                <div className="text-sm text-muted-foreground">
-                  Total Members
-                </div>
+                <div className="text-sm text-muted-foreground">Total Members</div>
               </div>
               <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
                 <Zap className="h-8 w-8 text-blue-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-blue-400">127</div>
-                <div className="text-sm text-muted-foreground">
-                  Active Projects
-                </div>
+                <div className="text-sm text-muted-foreground">Active Projects</div>
               </div>
               <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
                 <Award className="h-8 w-8 text-purple-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-purple-400">892</div>
-                <div className="text-sm text-muted-foreground">
-                  Ideas Implemented
-                </div>
+                <div className="text-sm text-muted-foreground">Ideas Implemented</div>
               </div>
               <div className="text-center p-4 bg-yellow-900/30 rounded-lg border border-yellow-500/20">
                 <Heart className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-yellow-400">2.4M</div>
-                <div className="text-sm text-muted-foreground">
-                  Lives Impacted
-                </div>
+                <div className="text-sm text-muted-foreground">Lives Impacted</div>
               </div>
             </div>
 
@@ -594,10 +535,7 @@ export function AdvancedCommunityFeatures() {
                   </div>
                   <div className="flex items-center gap-3">
                     <Badge className="bg-yellow-600">Award</Badge>
-                    <span>
-                      Wildlife Protection League won Environmental Excellence
-                      Award
-                    </span>
+                    <span>Wildlife Protection League won Environmental Excellence Award</span>
                   </div>
                 </div>
               </CardContent>

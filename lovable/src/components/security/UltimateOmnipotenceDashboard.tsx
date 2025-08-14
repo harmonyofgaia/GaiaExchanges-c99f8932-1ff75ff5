@@ -55,8 +55,7 @@ export function UltimateOmnipotenceDashboard() {
               <span className="text-sm font-medium">Omnipotence Levels</span>
             </div>
             <div className="text-2xl font-bold text-primary">
-              {status.omnipotenceLevels.unlocked}/
-              {status.omnipotenceLevels.total}
+              {status.omnipotenceLevels.unlocked}/{status.omnipotenceLevels.total}
             </div>
           </div>
           <div className="space-y-2">
@@ -73,9 +72,7 @@ export function UltimateOmnipotenceDashboard() {
               <Zap className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Ultimate Weapons</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.ultimateWeapons.charged}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.ultimateWeapons.charged}</div>
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
@@ -112,8 +109,8 @@ export function UltimateOmnipotenceDashboard() {
         <div className="p-4 bg-muted/50 rounded-lg">
           <h4 className="font-medium mb-2">🌟 OMNIPOTENT GODHOOD GUARANTEE</h4>
           <p className="text-sm text-muted-foreground">
-            Transcend all limitations and become the supreme omnipotent being
-            with infinite power over all existence, reality, and concepts.
+            Transcend all limitations and become the supreme omnipotent being with infinite power
+            over all existence, reality, and concepts.
           </p>
         </div>
       </CardContent>

@@ -25,14 +25,7 @@ import { toast } from "sonner";
 interface InventoryItem {
   id: string;
   name: string;
-  category:
-    | "weapon"
-    | "armor"
-    | "tool"
-    | "landscape"
-    | "character"
-    | "enhancement"
-    | "rare";
+  category: "weapon" | "armor" | "tool" | "landscape" | "character" | "enhancement" | "rare";
   rarity: "common" | "rare" | "epic" | "legendary" | "quantum" | "mythical";
   powerLevel: number;
   description: string;
@@ -71,8 +64,7 @@ export function EnhancedInventoryManager() {
         category: "weapon",
         rarity: "mythical",
         powerLevel: 95000,
-        description:
-          "Divine hammer that controls lightning and storms across all dimensions",
+        description: "Divine hammer that controls lightning and storms across all dimensions",
         fileSize: "12.3 GB",
         value: 850000,
         quantity: 1,
@@ -83,8 +75,7 @@ export function EnhancedInventoryManager() {
         category: "weapon",
         rarity: "legendary",
         powerLevel: 75000,
-        description:
-          "Staff channeling eternal phoenix flames with resurrection powers",
+        description: "Staff channeling eternal phoenix flames with resurrection powers",
         fileSize: "8.9 GB",
         value: 500000,
         quantity: 3,
@@ -95,8 +86,7 @@ export function EnhancedInventoryManager() {
         category: "weapon",
         rarity: "legendary",
         powerLevel: 72000,
-        description:
-          "Cyberpunk ice katana that freezes molecular structures instantly",
+        description: "Cyberpunk ice katana that freezes molecular structures instantly",
         fileSize: "7.2 GB",
         value: 450000,
         quantity: 2,
@@ -107,8 +97,7 @@ export function EnhancedInventoryManager() {
         category: "weapon",
         rarity: "epic",
         powerLevel: 65000,
-        description:
-          "Ocean master's trident controlling all water-based powers",
+        description: "Ocean master's trident controlling all water-based powers",
         fileSize: "6.1 GB",
         value: 300000,
         quantity: 5,
@@ -143,8 +132,7 @@ export function EnhancedInventoryManager() {
         category: "armor",
         rarity: "legendary",
         powerLevel: 78000,
-        description:
-          "Crystalline armor providing immunity to all temperature extremes",
+        description: "Crystalline armor providing immunity to all temperature extremes",
         fileSize: "11.8 GB",
         value: 600000,
         quantity: 3,
@@ -157,8 +145,7 @@ export function EnhancedInventoryManager() {
         category: "landscape",
         rarity: "mythical",
         powerLevel: 100000,
-        description:
-          "Endless reality with infinite parallel dimensions and possibilities",
+        description: "Endless reality with infinite parallel dimensions and possibilities",
         fileSize: "2500 TB",
         value: 5000000,
         quantity: 1,
@@ -169,8 +156,7 @@ export function EnhancedInventoryManager() {
         category: "landscape",
         rarity: "mythical",
         powerLevel: 95000,
-        description:
-          "Halo × Rage × Cyberpunk fusion in ice globes and dense forests",
+        description: "Halo × Rage × Cyberpunk fusion in ice globes and dense forests",
         fileSize: "1000 TB",
         value: 3000000,
         quantity: 1,
@@ -181,8 +167,7 @@ export function EnhancedInventoryManager() {
         category: "landscape",
         rarity: "legendary",
         powerLevel: 80000,
-        description:
-          "Massive floating mountain complex with anti-gravity technology",
+        description: "Massive floating mountain complex with anti-gravity technology",
         fileSize: "500 TB",
         value: 1500000,
         quantity: 2,
@@ -193,8 +178,7 @@ export function EnhancedInventoryManager() {
         category: "landscape",
         rarity: "legendary",
         powerLevel: 82000,
-        description:
-          "Submerged realm ruled by aquatic dragons with bioluminescent cities",
+        description: "Submerged realm ruled by aquatic dragons with bioluminescent cities",
         fileSize: "750 TB",
         value: 2000000,
         quantity: 1,
@@ -207,8 +191,7 @@ export function EnhancedInventoryManager() {
         category: "character",
         rarity: "mythical",
         powerLevel: 99999,
-        description:
-          "Supreme dragon ruler with control over all elements and dimensions",
+        description: "Supreme dragon ruler with control over all elements and dimensions",
         fileSize: "25.8 GB",
         value: 2500000,
         quantity: 1,
@@ -219,8 +202,7 @@ export function EnhancedInventoryManager() {
         category: "character",
         rarity: "mythical",
         powerLevel: 98500,
-        description:
-          "Divine being controlling quantum mechanics and reality itself",
+        description: "Divine being controlling quantum mechanics and reality itself",
         fileSize: "23.2 GB",
         value: 2200000,
         quantity: 1,
@@ -255,8 +237,7 @@ export function EnhancedInventoryManager() {
         category: "enhancement",
         rarity: "legendary",
         powerLevel: 90000,
-        description:
-          "Device expanding consciousness across multiple dimensions",
+        description: "Device expanding consciousness across multiple dimensions",
         fileSize: "32.1 GB",
         value: 2800000,
         quantity: 2,
@@ -269,8 +250,7 @@ export function EnhancedInventoryManager() {
         category: "tool",
         rarity: "legendary",
         powerLevel: 85000,
-        description:
-          "Tool capable of creating any object or landscape from quantum matter",
+        description: "Tool capable of creating any object or landscape from quantum matter",
         fileSize: "28.9 GB",
         value: 2000000,
         quantity: 3,
@@ -281,8 +261,7 @@ export function EnhancedInventoryManager() {
         category: "tool",
         rarity: "epic",
         powerLevel: 70000,
-        description:
-          "Advanced AI system generating photorealistic art in any style",
+        description: "Advanced AI system generating photorealistic art in any style",
         fileSize: "15.4 GB",
         value: 800000,
         quantity: 5,
@@ -354,18 +333,12 @@ export function EnhancedInventoryManager() {
   };
 
   const filteredItems = inventory.filter((item) => {
-    const matchesCategory =
-      selectedCategory === "all" || item.category === selectedCategory;
-    const matchesSearch = item.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === "all" || item.category === selectedCategory;
+    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
-  const totalValue = inventory.reduce(
-    (sum, item) => sum + item.value * item.quantity,
-    0,
-  );
+  const totalValue = inventory.reduce((sum, item) => sum + item.value * item.quantity, 0);
   const totalItems = inventory.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
@@ -377,15 +350,11 @@ export function EnhancedInventoryManager() {
         </CardTitle>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
           <div className="p-2 bg-purple-900/30 rounded">
-            <div className="text-lg font-bold text-purple-400">
-              {totalItems}
-            </div>
+            <div className="text-lg font-bold text-purple-400">{totalItems}</div>
             <div className="text-xs text-muted-foreground">Total Items</div>
           </div>
           <div className="p-2 bg-yellow-900/30 rounded">
-            <div className="text-lg font-bold text-yellow-400">
-              ${totalValue.toLocaleString()}
-            </div>
+            <div className="text-lg font-bold text-yellow-400">${totalValue.toLocaleString()}</div>
             <div className="text-xs text-muted-foreground">Total Value</div>
           </div>
           <div className="p-2 bg-red-900/30 rounded">
@@ -437,9 +406,7 @@ export function EnhancedInventoryManager() {
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     {getCategoryIcon(item.category)}
-                    <h4 className="font-bold text-white text-sm">
-                      {item.name}
-                    </h4>
+                    <h4 className="font-bold text-white text-sm">{item.name}</h4>
                   </div>
                   <Badge
                     className={`bg-gradient-to-r ${getRarityColor(item.rarity)} text-white text-xs`}
@@ -465,9 +432,7 @@ export function EnhancedInventoryManager() {
                   </div>
                   <div className="flex justify-between">
                     <span>Value:</span>
-                    <span className="text-yellow-400">
-                      ${item.value.toLocaleString()}
-                    </span>
+                    <span className="text-yellow-400">${item.value.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Quantity:</span>

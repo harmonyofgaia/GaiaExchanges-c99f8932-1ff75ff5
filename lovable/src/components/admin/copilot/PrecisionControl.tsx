@@ -17,11 +17,7 @@ import {
 } from "@/components/ui/table";
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon } from "lucide-react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 
@@ -48,10 +44,7 @@ interface PrecisionControlProps {
   actionId?: string;
 }
 
-export function PrecisionControl({
-  actionName,
-  actionId,
-}: PrecisionControlProps) {
+export function PrecisionControl({ actionName, actionId }: PrecisionControlProps) {
   const [inputField, setInputField] = useState("");
   const [sliderValue, setSliderValue] = useState([50]);
   const [enableFeature, setEnableFeature] = useState(false);
@@ -87,8 +80,8 @@ export function PrecisionControl({
                   status: "success" as const,
                   result: "Action completed",
                 }
-              : action,
-          ),
+              : action
+          )
         );
       } catch (error) {
         setActionHistory((prev) =>
@@ -97,15 +90,14 @@ export function PrecisionControl({
               ? {
                   ...action,
                   status: "error" as const,
-                  error:
-                    error instanceof Error ? error.message : "Unknown error",
+                  error: error instanceof Error ? error.message : "Unknown error",
                 }
-              : action,
-          ),
+              : action
+          )
         );
       }
     },
-    [actionName, actionId],
+    [actionName, actionId]
   );
 
   const handleSubmit = () => {
@@ -133,21 +125,13 @@ export function PrecisionControl({
       <CardHeader>
         <CardTitle>
           Precision Control Panel
-          {actionName && (
-            <span className="text-sm text-muted-foreground ml-2">
-              ({actionName})
-            </span>
-          )}
+          {actionName && <span className="text-sm text-muted-foreground ml-2">({actionName})</span>}
         </CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
         <div className="grid gap-2">
           <Label htmlFor="input">Input Field</Label>
-          <Input
-            id="input"
-            value={inputField}
-            onChange={(e) => setInputField(e.target.value)}
-          />
+          <Input id="input" value={inputField} onChange={(e) => setInputField(e.target.value)} />
         </div>
         <div className="grid gap-2">
           <Label htmlFor="slider">Slider Value</Label>
@@ -161,27 +145,15 @@ export function PrecisionControl({
           <p>Value: {sliderValue[0]}</p>
         </div>
         <div className="flex items-center space-x-2">
-          <Switch
-            id="enable"
-            checked={enableFeature}
-            onCheckedChange={setEnableFeature}
-          />
+          <Switch id="enable" checked={enableFeature} onCheckedChange={setEnableFeature} />
           <Label htmlFor="enable">Enable Feature</Label>
         </div>
         <div className="flex items-center space-x-2">
-          <Checkbox
-            id="optionA"
-            checked={optionA}
-            onCheckedChange={handleOptionAChange}
-          />
+          <Checkbox id="optionA" checked={optionA} onCheckedChange={handleOptionAChange} />
           <Label htmlFor="optionA">Option A</Label>
         </div>
         <div className="flex items-center space-x-2">
-          <Checkbox
-            id="optionB"
-            checked={optionB}
-            onCheckedChange={handleOptionBChange}
-          />
+          <Checkbox id="optionB" checked={optionB} onCheckedChange={handleOptionBChange} />
           <Label htmlFor="optionB">Option B</Label>
         </div>
         <div className="grid gap-2">
@@ -192,15 +164,11 @@ export function PrecisionControl({
                 variant={"outline"}
                 className={cn(
                   "w-[240px] justify-start text-left font-normal",
-                  !selectedDate && "text-muted-foreground",
+                  !selectedDate && "text-muted-foreground"
                 )}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {selectedDate ? (
-                  format(selectedDate, "PPP")
-                ) : (
-                  <span>Pick a date</span>
-                )}
+                {selectedDate ? format(selectedDate, "PPP") : <span>Pick a date</span>}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
@@ -208,9 +176,7 @@ export function PrecisionControl({
                 mode="single"
                 selected={selectedDate}
                 onSelect={setSelectedDate}
-                disabled={(date) =>
-                  date > new Date() || date < new Date("1900-01-01")
-                }
+                disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
                 initialFocus
               />
             </PopoverContent>
@@ -238,20 +204,10 @@ export function PrecisionControl({
                     <ul className="list-disc pl-5">
                       <li>Input: {action.parameters.inputField}</li>
                       <li>Slider: {action.parameters.sliderValue}</li>
-                      <li>
-                        Enable: {action.parameters.enableFeature ? "Yes" : "No"}
-                      </li>
-                      <li>
-                        Option A: {action.parameters.optionA ? "Yes" : "No"}
-                      </li>
-                      <li>
-                        Option B: {action.parameters.optionB ? "Yes" : "No"}
-                      </li>
-                      <li>
-                        Date:{" "}
-                        {action.parameters.selectedDate?.toLocaleDateString() ||
-                          "N/A"}
-                      </li>
+                      <li>Enable: {action.parameters.enableFeature ? "Yes" : "No"}</li>
+                      <li>Option A: {action.parameters.optionA ? "Yes" : "No"}</li>
+                      <li>Option B: {action.parameters.optionB ? "Yes" : "No"}</li>
+                      <li>Date: {action.parameters.selectedDate?.toLocaleDateString() || "N/A"}</li>
                     </ul>
                   </TableCell>
                   <TableCell>{action.status}</TableCell>

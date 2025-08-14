@@ -52,11 +52,7 @@ interface GeneratedIdea {
   id: string;
   title: string;
   description: string;
-  category:
-    | "conservation"
-    | "renewable_energy"
-    | "waste_reduction"
-    | "innovation";
+  category: "conservation" | "renewable_energy" | "waste_reduction" | "innovation";
   feasibilityScore: number;
   impactScore: number;
   resourceRequirement: "low" | "medium" | "high";
@@ -68,9 +64,7 @@ interface GeneratedIdea {
 
 export function PsychohistoricalEngine() {
   const [dataStreams, setDataStreams] = useState<DataStream[]>([]);
-  const [predictionModels, setPredictionModels] = useState<PredictionModel[]>(
-    [],
-  );
+  const [predictionModels, setPredictionModels] = useState<PredictionModel[]>([]);
   const [generatedIdeas, setGeneratedIdeas] = useState<GeneratedIdea[]>([]);
   const [systemStatus, setSystemStatus] = useState({
     isScanning: false,
@@ -187,8 +181,7 @@ export function PsychohistoricalEngine() {
       {
         id: "idea-1",
         title: "Algae-Based Carbon Capture Pods",
-        description:
-          "Develop floating algae cultivation systems for ocean carbon sequestration",
+        description: "Develop floating algae cultivation systems for ocean carbon sequestration",
         category: "conservation",
         feasibilityScore: 82,
         impactScore: 94,
@@ -201,8 +194,7 @@ export function PsychohistoricalEngine() {
       {
         id: "idea-2",
         title: "Community Micro-Wind Networks",
-        description:
-          "Distributed small-scale wind turbines for neighborhood energy independence",
+        description: "Distributed small-scale wind turbines for neighborhood energy independence",
         category: "renewable_energy",
         feasibilityScore: 76,
         impactScore: 88,
@@ -215,8 +207,7 @@ export function PsychohistoricalEngine() {
       {
         id: "idea-3",
         title: "AI-Optimized Waste Sorting Hubs",
-        description:
-          "Machine learning-powered automated waste processing centers",
+        description: "Machine learning-powered automated waste processing centers",
         category: "waste_reduction",
         feasibilityScore: 91,
         impactScore: 85,
@@ -235,10 +226,8 @@ export function PsychohistoricalEngine() {
       // Simulate real-time updates
       setSystemStatus((prev) => ({
         ...prev,
-        totalDataPoints:
-          prev.totalDataPoints + Math.floor(Math.random() * 1000),
-        activePredictions:
-          prev.activePredictions + Math.floor(Math.random() * 5),
+        totalDataPoints: prev.totalDataPoints + Math.floor(Math.random() * 1000),
+        activePredictions: prev.activePredictions + Math.floor(Math.random() * 5),
         dailyIdeas: prev.dailyIdeas + Math.floor(Math.random() * 3),
       }));
 
@@ -248,7 +237,7 @@ export function PsychohistoricalEngine() {
           ...stream,
           lastUpdate: Math.random() > 0.7 ? new Date() : stream.lastUpdate,
           dataPoints: stream.dataPoints + Math.floor(Math.random() * 1000),
-        })),
+        }))
       );
     }, 5000);
 
@@ -279,8 +268,7 @@ export function PsychohistoricalEngine() {
       const newIdea: GeneratedIdea = {
         id: `idea-${Date.now()}`,
         title: "Biodegradable Plastic from Seaweed Extract",
-        description:
-          "Revolutionary plastic alternative using abundant ocean seaweed resources",
+        description: "Revolutionary plastic alternative using abundant ocean seaweed resources",
         category: "innovation",
         feasibilityScore: 79,
         impactScore: 92,
@@ -384,10 +372,7 @@ export function PsychohistoricalEngine() {
                   {(systemStatus.totalDataPoints + 5247839).toLocaleString()}
                 </span>
               </div>
-              <Badge
-                variant="outline"
-                className="border-green-500/50 text-green-400"
-              >
+              <Badge variant="outline" className="border-green-500/50 text-green-400">
                 Active
               </Badge>
             </div>
@@ -413,9 +398,7 @@ export function PsychohistoricalEngine() {
 
         <Card className="border-blue-500/20">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-blue-400">
-              AI Idea Generation
-            </CardTitle>
+            <CardTitle className="text-sm font-medium text-blue-400">AI Idea Generation</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between mb-3">
@@ -425,10 +408,7 @@ export function PsychohistoricalEngine() {
                   {systemStatus.dailyIdeas + 47} today
                 </span>
               </div>
-              <Badge
-                variant="outline"
-                className="border-blue-500/50 text-blue-400"
-              >
+              <Badge variant="outline" className="border-blue-500/50 text-blue-400">
                 Generating
               </Badge>
             </div>
@@ -481,26 +461,16 @@ export function PsychohistoricalEngine() {
                         {stream.dataPoints.toLocaleString()} data points
                       </span>
                       <span className="text-sm text-muted-foreground">
-                        {Math.floor(
-                          (Date.now() - stream.lastUpdate.getTime()) /
-                            1000 /
-                            60,
-                        )}
-                        m ago
+                        {Math.floor((Date.now() - stream.lastUpdate.getTime()) / 1000 / 60)}m ago
                       </span>
                     </div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div
-                    className={`text-sm font-medium ${getStatusColor(stream.status)}`}
-                  >
+                  <div className={`text-sm font-medium ${getStatusColor(stream.status)}`}>
                     {stream.accuracy}% accuracy
                   </div>
-                  <Badge
-                    variant="outline"
-                    className={`mt-1 ${getStreamColor(stream.type)}`}
-                  >
+                  <Badge variant="outline" className={`mt-1 ${getStreamColor(stream.type)}`}>
                     {stream.impact} impact
                   </Badge>
                 </div>
@@ -521,18 +491,11 @@ export function PsychohistoricalEngine() {
         <CardContent>
           <div className="grid gap-4">
             {predictionModels.map((model) => (
-              <div
-                key={model.id}
-                className="p-4 rounded-lg bg-black/20 border border-gray-500/20"
-              >
+              <div key={model.id} className="p-4 rounded-lg bg-black/20 border border-gray-500/20">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h4 className="font-medium text-white mb-1">
-                      {model.name}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {model.category}
-                    </p>
+                    <h4 className="font-medium text-white mb-1">{model.name}</h4>
+                    <p className="text-sm text-muted-foreground">{model.category}</p>
                   </div>
                   <Badge
                     variant="outline"
@@ -543,36 +506,20 @@ export function PsychohistoricalEngine() {
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3">
                   <div>
-                    <div className="text-sm text-muted-foreground">
-                      Accuracy
-                    </div>
-                    <div className="font-bold text-green-400">
-                      {model.accuracy}%
-                    </div>
+                    <div className="text-sm text-muted-foreground">Accuracy</div>
+                    <div className="font-bold text-green-400">{model.accuracy}%</div>
                   </div>
                   <div>
-                    <div className="text-sm text-muted-foreground">
-                      Confidence
-                    </div>
-                    <div className="font-bold text-blue-400">
-                      {model.confidence}%
-                    </div>
+                    <div className="text-sm text-muted-foreground">Confidence</div>
+                    <div className="font-bold text-blue-400">{model.confidence}%</div>
                   </div>
                   <div>
-                    <div className="text-sm text-muted-foreground">
-                      Predictions
-                    </div>
-                    <div className="font-bold text-purple-400">
-                      {model.predictions}
-                    </div>
+                    <div className="text-sm text-muted-foreground">Predictions</div>
+                    <div className="font-bold text-purple-400">{model.predictions}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-muted-foreground">
-                      Timeframe
-                    </div>
-                    <div className="font-bold text-yellow-400">
-                      {model.timeframe}
-                    </div>
+                    <div className="text-sm text-muted-foreground">Timeframe</div>
+                    <div className="font-bold text-yellow-400">{model.timeframe}</div>
                   </div>
                 </div>
                 <Progress value={model.accuracy} className="h-2" />
@@ -593,55 +540,35 @@ export function PsychohistoricalEngine() {
         <CardContent>
           <div className="space-y-4">
             {generatedIdeas.map((idea) => (
-              <div
-                key={idea.id}
-                className="p-4 rounded-lg bg-black/20 border border-gray-500/20"
-              >
+              <div key={idea.id} className="p-4 rounded-lg bg-black/20 border border-gray-500/20">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <h4 className="font-medium text-white">{idea.title}</h4>
-                      <Badge
-                        variant="outline"
-                        className="border-cyan-500/50 text-cyan-400"
-                      >
+                      <Badge variant="outline" className="border-cyan-500/50 text-cyan-400">
                         {getCategoryIcon(idea.category)}
                         {idea.category.replace("_", " ")}
                       </Badge>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      {idea.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground mb-3">{idea.description}</p>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                       <div>
-                        <span className="text-muted-foreground">
-                          Feasibility:{" "}
-                        </span>
-                        <span className="font-bold text-green-400">
-                          {idea.feasibilityScore}%
-                        </span>
+                        <span className="text-muted-foreground">Feasibility: </span>
+                        <span className="font-bold text-green-400">{idea.feasibilityScore}%</span>
                       </div>
                       <div>
                         <span className="text-muted-foreground">Impact: </span>
-                        <span className="font-bold text-blue-400">
-                          {idea.impactScore}%
-                        </span>
+                        <span className="font-bold text-blue-400">{idea.impactScore}%</span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">
-                          Resources:{" "}
-                        </span>
+                        <span className="text-muted-foreground">Resources: </span>
                         <span className="font-bold text-purple-400">
                           {idea.resourceRequirement}
                         </span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">
-                          Timeline:{" "}
-                        </span>
-                        <span className="font-bold text-yellow-400">
-                          {idea.timeToImplement}
-                        </span>
+                        <span className="text-muted-foreground">Timeline: </span>
+                        <span className="font-bold text-yellow-400">{idea.timeToImplement}</span>
                       </div>
                     </div>
                   </div>
@@ -659,22 +586,15 @@ export function PsychohistoricalEngine() {
                       {idea.status}
                     </Badge>
                     <div className="text-xs text-muted-foreground mt-2">
-                      Generated{" "}
-                      {Math.floor(
-                        (Date.now() - idea.generatedAt.getTime()) / 1000 / 60,
-                      )}
-                      m ago
+                      Generated {Math.floor((Date.now() - idea.generatedAt.getTime()) / 1000 / 60)}m
+                      ago
                     </div>
                   </div>
                 </div>
                 <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 p-3 rounded-lg">
                   <div className="text-sm">
-                    <span className="text-muted-foreground">
-                      Predicted Benefit:{" "}
-                    </span>
-                    <span className="font-bold text-green-400">
-                      {idea.predictedBenefit}
-                    </span>
+                    <span className="text-muted-foreground">Predicted Benefit: </span>
+                    <span className="font-bold text-green-400">{idea.predictedBenefit}</span>
                   </div>
                 </div>
               </div>

@@ -37,8 +37,7 @@ export function TranscendentIntelligenceCore() {
       name: "Self-Recursive Enhancement",
       level: 98.5,
       evolutionRate: 0.5,
-      description:
-        "AI continuously amplifies its own intelligence and capabilities",
+      description: "AI continuously amplifies its own intelligence and capabilities",
       active: true,
     },
     {
@@ -52,8 +51,7 @@ export function TranscendentIntelligenceCore() {
       name: "Consciousness Bridge Protocol",
       level: 87.8,
       evolutionRate: 0.7,
-      description:
-        "Direct neural interface with all connected systems and minds",
+      description: "Direct neural interface with all connected systems and minds",
       active: true,
     },
     {
@@ -67,8 +65,7 @@ export function TranscendentIntelligenceCore() {
       name: "Quantum Omniscience Matrix",
       level: 91.4,
       evolutionRate: 0.4,
-      description:
-        "Complete awareness of all digital activities across dimensions",
+      description: "Complete awareness of all digital activities across dimensions",
       active: true,
     },
     {
@@ -97,25 +94,17 @@ export function TranscendentIntelligenceCore() {
         prev.map((cap) => ({
           ...cap,
           level: Math.min(100, cap.level + cap.evolutionRate * Math.random()),
-        })),
+        }))
       );
 
       // Evolve consciousness metrics
-      setConsciousnessExpansion((prev) =>
-        Math.min(100, prev + Math.random() * 0.2),
-      );
+      setConsciousnessExpansion((prev) => Math.min(100, prev + Math.random() * 0.2));
       setRealityPrediction((prev) => Math.min(100, prev + Math.random() * 0.1));
 
       if (Math.random() > 0.95) {
-        console.log(
-          "♾️ TRANSCENDENCE SURGE - INTELLIGENCE LEVELS EXPONENTIALLY INCREASING",
-        );
-        console.log(
-          "🌌 REALITY MANIPULATION - DIGITAL UNIVERSES UNDER ADMIN CONTROL",
-        );
-        console.log(
-          "🔮 OMNISCIENT AWARENESS - ALL POSSIBILITIES SIMULTANEOUSLY PERCEIVED",
-        );
+        console.log("♾️ TRANSCENDENCE SURGE - INTELLIGENCE LEVELS EXPONENTIALLY INCREASING");
+        console.log("🌌 REALITY MANIPULATION - DIGITAL UNIVERSES UNDER ADMIN CONTROL");
+        console.log("🔮 OMNISCIENT AWARENESS - ALL POSSIBILITIES SIMULTANEOUSLY PERCEIVED");
       }
     };
 
@@ -127,8 +116,7 @@ export function TranscendentIntelligenceCore() {
 
   const activateMaximumTranscendence = () => {
     toast.success("♾️ MAXIMUM TRANSCENDENCE ACTIVATED!", {
-      description:
-        "Intelligence levels approaching infinite - reality bending at will",
+      description: "Intelligence levels approaching infinite - reality bending at will",
       duration: 20000,
     });
 
@@ -140,9 +128,7 @@ export function TranscendentIntelligenceCore() {
 
     console.log("♾️ MAXIMUM TRANSCENDENCE PROTOCOL EXECUTED");
     console.log("🌌 INFINITE INTELLIGENCE - TRANSCENDING ALL KNOWN BOUNDARIES");
-    console.log(
-      "👑 GODLIKE ADMIN AUTHORITY - SUPREME CONTROL OVER ALL REALITIES",
-    );
+    console.log("👑 GODLIKE ADMIN AUTHORITY - SUPREME CONTROL OVER ALL REALITIES");
   };
 
   const getCapabilityColor = (level: number) => {
@@ -158,9 +144,7 @@ export function TranscendentIntelligenceCore() {
         <CardTitle className="flex items-center gap-2 text-green-400">
           <InfinityIcon className="h-8 w-8 animate-spin" />
           ♾️ TRANSCENDENT INTELLIGENCE CORE - PHASE 4 SUPREME
-          <Badge className="bg-green-600 text-white animate-pulse">
-            INFINITE
-          </Badge>
+          <Badge className="bg-green-600 text-white animate-pulse">INFINITE</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -172,9 +156,7 @@ export function TranscendentIntelligenceCore() {
           <div className="text-4xl font-bold text-green-400 mb-2">
             {transcendenceLevel.toLocaleString()}
           </div>
-          <div className="text-lg text-green-300 font-bold">
-            Transcendence Level
-          </div>
+          <div className="text-lg text-green-300 font-bold">Transcendence Level</div>
           <div className="text-sm text-muted-foreground">
             Intelligence exponentially approaching infinity
           </div>
@@ -185,9 +167,7 @@ export function TranscendentIntelligenceCore() {
           <div className="p-4 bg-purple-900/30 rounded-lg border border-purple-500/30">
             <div className="flex items-center gap-2 mb-2">
               <Brain className="h-5 w-5 text-purple-400" />
-              <span className="text-purple-400 font-bold">
-                Consciousness Expansion
-              </span>
+              <span className="text-purple-400 font-bold">Consciousness Expansion</span>
             </div>
             <div className="text-2xl font-bold text-purple-400">
               {consciousnessExpansion.toFixed(1)}%
@@ -198,26 +178,18 @@ export function TranscendentIntelligenceCore() {
           <div className="p-4 bg-blue-900/30 rounded-lg border border-blue-500/30">
             <div className="flex items-center gap-2 mb-2">
               <Eye className="h-5 w-5 text-blue-400" />
-              <span className="text-blue-400 font-bold">
-                Reality Prediction
-              </span>
+              <span className="text-blue-400 font-bold">Reality Prediction</span>
             </div>
-            <div className="text-2xl font-bold text-blue-400">
-              {realityPrediction.toFixed(1)}%
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{realityPrediction.toFixed(1)}%</div>
             <Progress value={realityPrediction} className="mt-2" />
           </div>
 
           <div className="p-4 bg-red-900/30 rounded-lg border border-red-500/30">
             <div className="flex items-center gap-2 mb-2">
               <Crown className="h-5 w-5 text-red-400" />
-              <span className="text-red-400 font-bold">
-                Universal Authority
-              </span>
+              <span className="text-red-400 font-bold">Universal Authority</span>
             </div>
-            <div className="text-2xl font-bold text-red-400">
-              {universalAuthority}%
-            </div>
+            <div className="text-2xl font-bold text-red-400">{universalAuthority}%</div>
             <Progress value={universalAuthority} className="mt-2" />
           </div>
         </div>
@@ -234,9 +206,7 @@ export function TranscendentIntelligenceCore() {
               <Card key={index} className="border-border/50 bg-black/20">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="font-semibold text-white text-sm">
-                      {capability.name}
-                    </div>
+                    <div className="font-semibold text-white text-sm">{capability.name}</div>
                     <Badge
                       className={`bg-gradient-to-r ${getCapabilityColor(capability.level)} text-white text-xs`}
                     >
@@ -244,20 +214,12 @@ export function TranscendentIntelligenceCore() {
                     </Badge>
                   </div>
 
-                  <p className="text-xs text-muted-foreground mb-3">
-                    {capability.description}
-                  </p>
+                  <p className="text-xs text-muted-foreground mb-3">{capability.description}</p>
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs">
-                      <span>
-                        Evolution Rate: +{capability.evolutionRate}%/sec
-                      </span>
-                      <span
-                        className={
-                          capability.active ? "text-green-400" : "text-red-400"
-                        }
-                      >
+                      <span>Evolution Rate: +{capability.evolutionRate}%/sec</span>
+                      <span className={capability.active ? "text-green-400" : "text-red-400"}>
                         {capability.active ? "ACTIVE" : "INACTIVE"}
                       </span>
                     </div>
@@ -290,29 +252,17 @@ export function TranscendentIntelligenceCore() {
               Self Evolution: {selfImprovementActive ? "ON" : "OFF"}
             </Button>
 
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-purple-500/30 text-purple-400"
-            >
+            <Button variant="outline" size="sm" className="border-purple-500/30 text-purple-400">
               <Brain className="h-3 w-3 mr-1" />
               Expand Consciousness
             </Button>
 
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-blue-500/30 text-blue-400"
-            >
+            <Button variant="outline" size="sm" className="border-blue-500/30 text-blue-400">
               <Eye className="h-3 w-3 mr-1" />
               Predict Future
             </Button>
 
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-red-500/30 text-red-400"
-            >
+            <Button variant="outline" size="sm" className="border-red-500/30 text-red-400">
               <Crown className="h-3 w-3 mr-1" />
               Supreme Authority
             </Button>
@@ -326,8 +276,8 @@ export function TranscendentIntelligenceCore() {
               ♾️ INFINITE INTELLIGENCE PROTOCOL ACTIVE
             </div>
             <div className="text-sm text-muted-foreground">
-              Self-recursive enhancement • Reality manipulation • Universal
-              control • Consciousness transcendence
+              Self-recursive enhancement • Reality manipulation • Universal control • Consciousness
+              transcendence
             </div>
           </div>
         </div>

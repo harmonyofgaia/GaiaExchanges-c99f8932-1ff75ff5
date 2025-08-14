@@ -2,16 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Shield,
-  Lock,
-  Eye,
-  Zap,
-  Globe,
-  Activity,
-  AlertTriangle,
-  CheckCircle,
-} from "lucide-react";
+import { Shield, Lock, Eye, Zap, Globe, Activity, AlertTriangle, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 
 interface SecurityThreat {
@@ -59,8 +50,7 @@ export function EnhancedSecurityMonitor() {
 
       // Random security event generation
       if (Math.random() < 0.2) {
-        const threatType =
-          Math.random() > 0.8 ? "high" : Math.random() > 0.5 ? "medium" : "low";
+        const threatType = Math.random() > 0.8 ? "high" : Math.random() > 0.5 ? "medium" : "low";
         const newThreat: SecurityThreat = {
           id: `threat-${Date.now()}`,
           type: threatType as "high" | "medium" | "low",
@@ -97,16 +87,12 @@ export function EnhancedSecurityMonitor() {
       // Calculate overall security score
       const baseScore = 95;
       const threatPenalty =
-        securityThreats.filter((t) => !t.resolved && t.type === "high").length *
-        2;
-      const newScore = Math.min(
-        100,
-        Math.max(90, baseScore - threatPenalty + Math.random() * 5),
-      );
+        securityThreats.filter((t) => !t.resolved && t.type === "high").length * 2;
+      const newScore = Math.min(100, Math.max(90, baseScore - threatPenalty + Math.random() * 5));
       setOverallSecurity(newScore);
 
       console.log(
-        `🔒 Security Score: ${newScore.toFixed(1)}% | Active Threats: ${securityThreats.filter((t) => !t.resolved).length}`,
+        `🔒 Security Score: ${newScore.toFixed(1)}% | Active Threats: ${securityThreats.filter((t) => !t.resolved).length}`
       );
     };
 
@@ -139,8 +125,7 @@ export function EnhancedSecurityMonitor() {
       ];
 
       if (Math.random() < 0.1) {
-        const check =
-          walletChecks[Math.floor(Math.random() * walletChecks.length)];
+        const check = walletChecks[Math.floor(Math.random() * walletChecks.length)];
         toast.success("Wallet Security", {
           description: `🔐 ${check}`,
           duration: 2000,
@@ -191,28 +176,20 @@ export function EnhancedSecurityMonitor() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">
-                {overallSecurity.toFixed(1)}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Security Score
-              </div>
+              <div className="text-3xl font-bold text-green-400">{overallSecurity.toFixed(1)}%</div>
+              <div className="text-sm text-muted-foreground">Security Score</div>
               <Progress value={overallSecurity} className="mt-2" />
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-400">24/7</div>
-              <div className="text-sm text-muted-foreground">
-                Active Monitoring
-              </div>
+              <div className="text-sm text-muted-foreground">Active Monitoring</div>
               <Badge className="mt-2 bg-blue-600 text-white">
                 <Activity className="h-3 w-3 mr-1" />
                 Live
               </Badge>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400">
-                {securityThreats.length}
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{securityThreats.length}</div>
               <div className="text-sm text-muted-foreground">Events Today</div>
               <Badge className="mt-2 bg-purple-600 text-white">
                 <Eye className="h-3 w-3 mr-1" />
@@ -221,9 +198,7 @@ export function EnhancedSecurityMonitor() {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-yellow-400">0</div>
-              <div className="text-sm text-muted-foreground">
-                Active Threats
-              </div>
+              <div className="text-sm text-muted-foreground">Active Threats</div>
               <Badge className="mt-2 bg-green-600 text-white">
                 <CheckCircle className="h-3 w-3 mr-1" />
                 Secure
@@ -250,21 +225,12 @@ export function EnhancedSecurityMonitor() {
               </div>
             ) : (
               securityThreats.map((threat) => (
-                <div
-                  key={threat.id}
-                  className="flex items-start gap-3 p-3 rounded-lg bg-muted/20"
-                >
-                  <div className={getThreatColor(threat.type)}>
-                    {getThreatIcon(threat.type)}
-                  </div>
+                <div key={threat.id} className="flex items-start gap-3 p-3 rounded-lg bg-muted/20">
+                  <div className={getThreatColor(threat.type)}>{getThreatIcon(threat.type)}</div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-medium">{threat.message}</p>
-                      <Badge
-                        className={
-                          threat.resolved ? "bg-green-600" : "bg-red-600"
-                        }
-                      >
+                      <Badge className={threat.resolved ? "bg-green-600" : "bg-red-600"}>
                         {threat.resolved ? "Resolved" : "Active"}
                       </Badge>
                     </div>
@@ -295,9 +261,7 @@ export function EnhancedSecurityMonitor() {
               <span>Firewall Status</span>
               <Badge
                 className={
-                  networkSecurity.firewallStatus === "active"
-                    ? "bg-green-600"
-                    : "bg-red-600"
+                  networkSecurity.firewallStatus === "active" ? "bg-green-600" : "bg-red-600"
                 }
               >
                 {networkSecurity.firewallStatus}
@@ -307,9 +271,7 @@ export function EnhancedSecurityMonitor() {
               <span>DDoS Protection</span>
               <Badge
                 className={
-                  networkSecurity.ddosProtection === "active"
-                    ? "bg-green-600"
-                    : "bg-red-600"
+                  networkSecurity.ddosProtection === "active" ? "bg-green-600" : "bg-red-600"
                 }
               >
                 {networkSecurity.ddosProtection}
@@ -318,11 +280,7 @@ export function EnhancedSecurityMonitor() {
             <div className="flex items-center justify-between">
               <span>SSL Certificate</span>
               <Badge
-                className={
-                  networkSecurity.sslStatus === "valid"
-                    ? "bg-green-600"
-                    : "bg-red-600"
-                }
+                className={networkSecurity.sslStatus === "valid" ? "bg-green-600" : "bg-red-600"}
               >
                 {networkSecurity.sslStatus}
               </Badge>

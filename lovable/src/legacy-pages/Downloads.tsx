@@ -1,14 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Download,
-  Smartphone,
-  Monitor,
-  Tablet,
-  Shield,
-  Star,
-} from "lucide-react";
+import { Download, Smartphone, Monitor, Tablet, Shield, Star } from "lucide-react";
 
 const Downloads = () => {
   return (
@@ -151,9 +144,8 @@ const Downloads = () => {
             </CardHeader>
             <CardContent>
               <p className="text-red-300">
-                Always download GAiA applications from official sources only.
-                Verify the authenticity of downloads and never share your
-                private keys or wallet information.
+                Always download GAiA applications from official sources only. Verify the
+                authenticity of downloads and never share your private keys or wallet information.
               </p>
             </CardContent>
           </Card>

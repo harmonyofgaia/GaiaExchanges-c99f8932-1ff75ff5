@@ -54,16 +54,14 @@ export function RealTimeCoinGeneration() {
     lastUpdate: new Date(),
   });
 
-  const [generationMetrics, setGenerationMetrics] = useState<GenerationMetrics>(
-    {
-      totalGenerated: 0,
-      generationRate: 150,
-      burnRate: 75,
-      netSupplyChange: 75,
-      stabilityScore: 85.7,
-      marketHealth: 92.3,
-    },
-  );
+  const [generationMetrics, setGenerationMetrics] = useState<GenerationMetrics>({
+    totalGenerated: 0,
+    generationRate: 150,
+    burnRate: 75,
+    netSupplyChange: 75,
+    stabilityScore: 85.7,
+    marketHealth: 92.3,
+  });
 
   const [recentTransactions, setRecentTransactions] = useState<
     Array<{
@@ -83,8 +81,7 @@ export function RealTimeCoinGeneration() {
       // Generate realistic market fluctuations
       const priceFluctuation = (Math.random() - 0.5) * 0.0001; // Small price movements
       const volumeFluctuation = (Math.random() - 0.5) * 0.05; // Volume changes
-      const holdersGrowth =
-        Math.random() < 0.7 ? Math.floor(Math.random() * 5) : 0;
+      const holdersGrowth = Math.random() < 0.7 ? Math.floor(Math.random() * 5) : 0;
       const transactionBoost = Math.floor(Math.random() * 10) + 1;
 
       const newPrice = Math.max(0.000001, prev.price + priceFluctuation);
@@ -94,8 +91,7 @@ export function RealTimeCoinGeneration() {
 
       // Calculate price change percentage
       const priceChangePct = ((newPrice - prev.price) / prev.price) * 100;
-      const volumeChangePct =
-        ((newVolume - prev.volume24h) / prev.volume24h) * 100;
+      const volumeChangePct = ((newVolume - prev.volume24h) / prev.volume24h) * 100;
 
       return {
         ...prev,
@@ -121,8 +117,7 @@ export function RealTimeCoinGeneration() {
       const adaptiveGenerationRate = Math.max(50, 200 - marketVolatility * 2);
       const adaptiveBurnRate = Math.min(150, 50 + marketVolatility * 1.5);
 
-      const newGenerated =
-        Math.floor(Math.random() * adaptiveGenerationRate) + 25;
+      const newGenerated = Math.floor(Math.random() * adaptiveGenerationRate) + 25;
       const newBurned = Math.floor(Math.random() * adaptiveBurnRate) + 10;
       const netChange = newGenerated - newBurned;
 
@@ -138,26 +133,15 @@ export function RealTimeCoinGeneration() {
         generationRate: adaptiveGenerationRate,
         burnRate: adaptiveBurnRate,
         netSupplyChange: netChange,
-        stabilityScore: Math.max(
-          0,
-          Math.min(100, prev.stabilityScore + (Math.random() - 0.5) * 2),
-        ),
-        marketHealth: Math.max(
-          0,
-          Math.min(100, prev.marketHealth + (Math.random() - 0.5) * 1.5),
-        ),
+        stabilityScore: Math.max(0, Math.min(100, prev.stabilityScore + (Math.random() - 0.5) * 2)),
+        marketHealth: Math.max(0, Math.min(100, prev.marketHealth + (Math.random() - 0.5) * 1.5)),
       };
     });
 
     // Add transaction to recent activity
     if (Math.random() < 0.6) {
-      const transactionTypes: Array<"mint" | "burn" | "trade"> = [
-        "mint",
-        "burn",
-        "trade",
-      ];
-      const type =
-        transactionTypes[Math.floor(Math.random() * transactionTypes.length)];
+      const transactionTypes: Array<"mint" | "burn" | "trade"> = ["mint", "burn", "trade"];
+      const type = transactionTypes[Math.floor(Math.random() * transactionTypes.length)];
       const amount = Math.floor(Math.random() * 10000) + 100;
 
       setRecentTransactions((prev) => [
@@ -189,14 +173,12 @@ export function RealTimeCoinGeneration() {
   const toggleSystem = () => {
     setIsActive(!isActive);
     toast.success(
-      isActive
-        ? "⏸️ Real-time coin generation paused"
-        : "▶️ Real-time coin generation activated",
+      isActive ? "⏸️ Real-time coin generation paused" : "▶️ Real-time coin generation activated",
       {
         description: isActive
           ? "Market fluctuations and supply management suspended"
           : "Dynamic market and supply management is now running",
-      },
+      }
     );
   };
 
@@ -245,8 +227,7 @@ export function RealTimeCoinGeneration() {
                 />
               </CardTitle>
               <p className="text-emerald-400 mt-2">
-                Dynamic Market Fluctuation • Supply Management • Real-Time
-                Analytics
+                Dynamic Market Fluctuation • Supply Management • Real-Time Analytics
               </p>
             </div>
             <div className="flex gap-2">
@@ -254,9 +235,7 @@ export function RealTimeCoinGeneration() {
                 onClick={toggleSystem}
                 variant={isActive ? "destructive" : "default"}
                 className={
-                  isActive
-                    ? "bg-red-600 hover:bg-red-700"
-                    : "bg-green-600 hover:bg-green-700"
+                  isActive ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"
                 }
               >
                 {isActive ? (
@@ -266,31 +245,19 @@ export function RealTimeCoinGeneration() {
                 )}
                 {isActive ? "Pause System" : "Start System"}
               </Button>
-              <Button
-                onClick={resetSystem}
-                variant="outline"
-                className="border-emerald-500/30"
-              >
+              <Button onClick={resetSystem} variant="outline" className="border-emerald-500/30">
                 <RefreshCw className="h-4 w-4 mr-2" />
                 Reset
               </Button>
             </div>
           </div>
           <div className="flex gap-2 mt-4">
-            <Badge
-              className={`${isActive ? "bg-green-600" : "bg-gray-600"} text-white`}
-            >
+            <Badge className={`${isActive ? "bg-green-600" : "bg-gray-600"} text-white`}>
               {isActive ? "🟢 ACTIVE" : "🔴 PAUSED"}
             </Badge>
-            <Badge className="bg-blue-600 text-white">
-              ⚡ Live Market Data
-            </Badge>
-            <Badge className="bg-purple-600 text-white">
-              🔄 Auto Supply Management
-            </Badge>
-            <Badge className="bg-orange-600 text-white">
-              📊 Real-Time Analytics
-            </Badge>
+            <Badge className="bg-blue-600 text-white">⚡ Live Market Data</Badge>
+            <Badge className="bg-purple-600 text-white">🔄 Auto Supply Management</Badge>
+            <Badge className="bg-orange-600 text-white">📊 Real-Time Analytics</Badge>
           </div>
         </CardHeader>
       </Card>
@@ -305,9 +272,7 @@ export function RealTimeCoinGeneration() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-white">
-              {formatGaiaPrice(marketData.price)}
-            </div>
+            <div className="text-2xl font-bold text-white">{formatGaiaPrice(marketData.price)}</div>
             <div
               className={`text-sm flex items-center gap-1 ${marketData.priceChange24h >= 0 ? "text-green-400" : "text-red-400"}`}
             >
@@ -435,9 +400,7 @@ export function RealTimeCoinGeneration() {
             </div>
 
             <div className="pt-2 space-y-2">
-              <div className="text-sm text-muted-foreground">
-                Total Generated Today
-              </div>
+              <div className="text-sm text-muted-foreground">Total Generated Today</div>
               <div className="text-xl font-bold text-emerald-400">
                 {formatGaiaNumber(generationMetrics.totalGenerated)} GAiA
               </div>
@@ -455,32 +418,22 @@ export function RealTimeCoinGeneration() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">
-                  Market Stability Score
-                </span>
+                <span className="text-muted-foreground">Market Stability Score</span>
                 <span className="text-blue-400 font-bold">
                   {generationMetrics.stabilityScore.toFixed(1)}%
                 </span>
               </div>
-              <Progress
-                value={generationMetrics.stabilityScore}
-                className="h-2 bg-blue-900/30"
-              />
+              <Progress value={generationMetrics.stabilityScore} className="h-2 bg-blue-900/30" />
             </div>
 
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">
-                  Market Health Index
-                </span>
+                <span className="text-muted-foreground">Market Health Index</span>
                 <span className="text-green-400 font-bold">
                   {generationMetrics.marketHealth.toFixed(1)}%
                 </span>
               </div>
-              <Progress
-                value={generationMetrics.marketHealth}
-                className="h-2 bg-green-900/30"
-              />
+              <Progress value={generationMetrics.marketHealth} className="h-2 bg-green-900/30" />
             </div>
 
             <div className="pt-2 space-y-2">
@@ -493,14 +446,10 @@ export function RealTimeCoinGeneration() {
             <div className="space-y-2">
               <div className="text-sm text-muted-foreground">System Status</div>
               <div className="flex gap-2">
-                <Badge
-                  className={`${isActive ? "bg-green-600" : "bg-red-600"} text-white text-xs`}
-                >
+                <Badge className={`${isActive ? "bg-green-600" : "bg-red-600"} text-white text-xs`}>
                   {isActive ? "OPERATIONAL" : "SUSPENDED"}
                 </Badge>
-                <Badge className="bg-blue-600 text-white text-xs">
-                  AUTO-SCALING
-                </Badge>
+                <Badge className="bg-blue-600 text-white text-xs">AUTO-SCALING</Badge>
               </div>
             </div>
           </CardContent>

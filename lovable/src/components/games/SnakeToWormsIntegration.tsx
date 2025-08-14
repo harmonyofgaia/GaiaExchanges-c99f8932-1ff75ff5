@@ -32,9 +32,7 @@ export function SnakeToWormsIntegration() {
   const [snake, setSnake] = useState<Position[]>([{ x: 10, y: 10 }]);
   const [food, setFood] = useState<Position>({ x: 15, y: 15 });
   const [direction, setDirection] = useState<Position>({ x: 1, y: 0 });
-  const [gameState, setGameState] = useState<
-    "menu" | "playing" | "paused" | "gameover"
-  >("menu");
+  const [gameState, setGameState] = useState<"menu" | "playing" | "paused" | "gameover">("menu");
   const [score, setScore] = useState(0);
   const [snakeSpeed, setSnakeSpeed] = useState(200);
 
@@ -78,9 +76,7 @@ export function SnakeToWormsIntegration() {
       }
 
       // Check self collision
-      if (
-        newSnake.some((segment) => segment.x === head.x && segment.y === head.y)
-      ) {
+      if (newSnake.some((segment) => segment.x === head.x && segment.y === head.y)) {
         setGameState("gameover");
         toast.error("🐍 Snake ate itself!", { description: "Game Over" });
         return currentSnake;
@@ -159,11 +155,7 @@ export function SnakeToWormsIntegration() {
     snake.forEach((segment, index) => {
       const worm: Worm = {
         id: `worm-${index}`,
-        segments: [
-          segment,
-          { x: segment.x, y: segment.y + 1 },
-          { x: segment.x, y: segment.y + 2 },
-        ],
+        segments: [segment, { x: segment.x, y: segment.y + 1 }, { x: segment.x, y: segment.y + 2 }],
         health: 100,
         color: index === 0 ? "#00ff00" : "#66ff66", // Snake head becomes main worm
       };
@@ -189,17 +181,14 @@ export function SnakeToWormsIntegration() {
 
     // Remove explosion after animation
     setTimeout(() => {
-      setExplosions((prev) =>
-        prev.filter((exp) => exp.x !== explosion.x || exp.y !== explosion.y),
-      );
+      setExplosions((prev) => prev.filter((exp) => exp.x !== explosion.x || exp.y !== explosion.y));
     }, 1000);
 
     // Damage nearby worms
     setWorms((prev) =>
       prev.map((worm) => {
         const distance = Math.sqrt(
-          Math.pow(worm.segments[0].x - targetX, 2) +
-            Math.pow(worm.segments[0].y - targetY, 2),
+          Math.pow(worm.segments[0].x - targetX, 2) + Math.pow(worm.segments[0].y - targetY, 2)
         );
 
         if (distance <= 2 && worm.id !== selectedWorm) {
@@ -215,7 +204,7 @@ export function SnakeToWormsIntegration() {
           return { ...worm, health: newHealth };
         }
         return worm;
-      }),
+      })
     );
 
     toast.info("💥 Weapon fired!", { description: "Explosion damage dealt" });
@@ -302,9 +291,7 @@ export function SnakeToWormsIntegration() {
           <div className="flex gap-4 text-sm flex-wrap">
             <Badge className="bg-green-600">Score: {score}</Badge>
             <Badge className="bg-blue-600">Snake Length: {snake.length}</Badge>
-            <Badge className="bg-purple-600">
-              Mode: {gameMode.toUpperCase()}
-            </Badge>
+            <Badge className="bg-purple-600">Mode: {gameMode.toUpperCase()}</Badge>
             <Badge className="bg-yellow-600">
               Worms: {worms.filter((w) => w.health > 0).length}
             </Badge>
@@ -317,12 +304,8 @@ export function SnakeToWormsIntegration() {
         <Card className="bg-black/30 border-green-500/30">
           <CardContent className="pt-6">
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">
-                {gameStats.snakeWins}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Snake Victories
-              </div>
+              <div className="text-2xl font-bold text-green-400">{gameStats.snakeWins}</div>
+              <div className="text-sm text-muted-foreground">Snake Victories</div>
             </div>
           </CardContent>
         </Card>
@@ -330,12 +313,8 @@ export function SnakeToWormsIntegration() {
         <Card className="bg-black/30 border-purple-500/30">
           <CardContent className="pt-6">
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400">
-                {gameStats.wormsDefeated}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Worms Defeated
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{gameStats.wormsDefeated}</div>
+              <div className="text-sm text-muted-foreground">Worms Defeated</div>
             </div>
           </CardContent>
         </Card>
@@ -343,9 +322,7 @@ export function SnakeToWormsIntegration() {
         <Card className="bg-black/30 border-blue-500/30">
           <CardContent className="pt-6">
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                {gameStats.totalScore}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{gameStats.totalScore}</div>
               <div className="text-sm text-muted-foreground">Total Score</div>
             </div>
           </CardContent>
@@ -399,21 +376,15 @@ export function SnakeToWormsIntegration() {
               const x = i % 30;
               const y = Math.floor(i / 30);
 
-              const isSnake = snake.some(
-                (segment) => segment.x === x && segment.y === y,
-              );
+              const isSnake = snake.some((segment) => segment.x === x && segment.y === y);
               const isSnakeHead = snake[0]?.x === x && snake[0]?.y === y;
               const isFood = food.x === x && food.y === y;
               const isWorm = worms.some(
                 (worm) =>
                   worm.health > 0 &&
-                  worm.segments.some(
-                    (segment) => segment.x === x && segment.y === y,
-                  ),
+                  worm.segments.some((segment) => segment.x === x && segment.y === y)
               );
-              const isExplosion = explosions.some(
-                (exp) => exp.x === x && exp.y === y,
-              );
+              const isExplosion = explosions.some((exp) => exp.x === x && exp.y === y);
 
               return (
                 <div
@@ -441,10 +412,7 @@ export function SnakeToWormsIntegration() {
           {/* Game Controls */}
           <div className="flex gap-4 justify-center">
             {gameState === "menu" && (
-              <Button
-                onClick={startSnakeGame}
-                className="bg-green-600 hover:bg-green-700"
-              >
+              <Button onClick={startSnakeGame} className="bg-green-600 hover:bg-green-700">
                 <Target className="h-4 w-4 mr-2" />
                 Start Snake Game
               </Button>
@@ -468,11 +436,7 @@ export function SnakeToWormsIntegration() {
               </Button>
             )}
 
-            <Button
-              onClick={resetGame}
-              variant="outline"
-              className="border-red-500/30"
-            >
+            <Button onClick={resetGame} variant="outline" className="border-red-500/30">
               Reset Game
             </Button>
           </div>
@@ -482,10 +446,7 @@ export function SnakeToWormsIntegration() {
             {gameMode === "snake" && (
               <>
                 <p>🎮 Use arrow keys to control the snake</p>
-                <p>
-                  🎯 Eat food to grow • Reach 15 segments to blast into Worms
-                  mode!
-                </p>
+                <p>🎯 Eat food to grow • Reach 15 segments to blast into Worms mode!</p>
               </>
             )}
             {gameMode === "worms" && (
@@ -502,9 +463,7 @@ export function SnakeToWormsIntegration() {
       {gameMode === "worms" && wormsGameActive && (
         <Card className="bg-black/30 border-purple-500/30">
           <CardHeader>
-            <CardTitle className="text-purple-400">
-              🪱 Worms Command Center
-            </CardTitle>
+            <CardTitle className="text-purple-400">🪱 Worms Command Center</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -527,9 +486,7 @@ export function SnakeToWormsIntegration() {
                       </span>
                     </div>
                     <Progress value={worm.health} className="h-2" />
-                    <div className="text-xs text-muted-foreground mt-1">
-                      Health: {worm.health}%
-                    </div>
+                    <div className="text-xs text-muted-foreground mt-1">Health: {worm.health}%</div>
                   </div>
                 ))}
             </div>

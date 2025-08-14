@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -58,9 +52,7 @@ export function Enhanced2FAAuthPage() {
     if (error) {
       setError(error.message || "Failed to sign up");
     } else {
-      setSuccess(
-        "Account created successfully! Please set up 2FA for maximum security.",
-      );
+      setSuccess("Account created successfully! Please set up 2FA for maximum security.");
       setShow2FASetup(true);
     }
 
@@ -70,7 +62,7 @@ export function Enhanced2FAAuthPage() {
   const handle2FASetupComplete = () => {
     setShow2FASetup(false);
     setSuccess(
-      "🔐 Account created with maximum security! Please check your email to verify your account.",
+      "🔐 Account created with maximum security! Please check your email to verify your account."
     );
   };
 
@@ -126,9 +118,7 @@ export function Enhanced2FAAuthPage() {
         {/* Auth Card */}
         <Card className="border-green-500/20">
           <CardHeader>
-            <CardTitle className="text-center">
-              Welcome to Gaia's Gaming World
-            </CardTitle>
+            <CardTitle className="text-center">Welcome to Gaia's Gaming World</CardTitle>
             <CardDescription className="text-center">
               Sign in to your account or create a new one with maximum security
             </CardDescription>
@@ -219,9 +209,7 @@ export function Enhanced2FAAuthPage() {
                     className="w-full bg-green-600 hover:bg-green-700"
                     disabled={isLoading}
                   >
-                    {isLoading
-                      ? "Creating Account..."
-                      : "Create Secure Account"}
+                    {isLoading ? "Creating Account..." : "Create Secure Account"}
                   </Button>
                 </form>
               </TabsContent>
@@ -230,18 +218,14 @@ export function Enhanced2FAAuthPage() {
             {error && (
               <Alert className="mt-4 border-red-500/20 bg-red-500/10">
                 <AlertCircle className="h-4 w-4 text-red-400" />
-                <AlertDescription className="text-red-400">
-                  {error}
-                </AlertDescription>
+                <AlertDescription className="text-red-400">{error}</AlertDescription>
               </Alert>
             )}
 
             {success && (
               <Alert className="mt-4 border-green-500/20 bg-green-500/10">
                 <Shield className="h-4 w-4 text-green-400" />
-                <AlertDescription className="text-green-400">
-                  {success}
-                </AlertDescription>
+                <AlertDescription className="text-green-400">{success}</AlertDescription>
               </Alert>
             )}
           </CardContent>
@@ -251,9 +235,7 @@ export function Enhanced2FAAuthPage() {
         <div className="space-y-3 text-center text-sm text-muted-foreground">
           <div className="flex items-center justify-center gap-2">
             <Shield className="h-4 w-4 text-green-400" />
-            <span>
-              Military-grade security with environmental impact tracking
-            </span>
+            <span>Military-grade security with environmental impact tracking</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <Globe className="h-4 w-4 text-blue-400" />

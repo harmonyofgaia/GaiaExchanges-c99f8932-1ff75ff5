@@ -68,9 +68,7 @@ export function CreativeGameEngine() {
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <h4 className="text-lg font-bold text-purple-400">
-              🚀 ENGINE CAPABILITIES
-            </h4>
+            <h4 className="text-lg font-bold text-purple-400">🚀 ENGINE CAPABILITIES</h4>
             <div className="text-sm text-muted-foreground space-y-1">
               <div>• Infinite building possibilities</div>
               <div>• Real-time landscape generation</div>
@@ -82,9 +80,7 @@ export function CreativeGameEngine() {
           </div>
 
           <div className="space-y-2">
-            <h4 className="text-lg font-bold text-blue-400">
-              🛡️ SECURITY FEATURES
-            </h4>
+            <h4 className="text-lg font-bold text-blue-400">🛡️ SECURITY FEATURES</h4>
             <div className="text-sm text-muted-foreground space-y-1">
               <div>• Anti-cheat quantum protection</div>
               <div>• Invisible admin monitoring</div>
@@ -97,9 +93,7 @@ export function CreativeGameEngine() {
         </div>
 
         <div className="mt-4 p-3 bg-purple-900/20 rounded-lg border border-purple-500/30">
-          <h4 className="text-lg font-bold text-purple-400 mb-2">
-            🌟 LIVE ENGINE STATUS
-          </h4>
+          <h4 className="text-lg font-bold text-purple-400 mb-2">🌟 LIVE ENGINE STATUS</h4>
           <div className="text-sm text-green-400">
             ✅ All systems operational at maximum efficiency
             <br />

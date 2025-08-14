@@ -101,12 +101,10 @@ export function MemeticWarfareDashboard() {
           Initialize Memetic Warfare
         </Button>
         <div className="p-4 bg-muted/50 rounded-lg">
-          <h4 className="font-medium mb-2">
-            🧠 Cognitive Domination Guarantee
-          </h4>
+          <h4 className="font-medium mb-2">🧠 Cognitive Domination Guarantee</h4>
           <p className="text-sm text-muted-foreground">
-            Total psychological warfare capabilities through memetic infection,
-            mind control operations, and cognitive manipulation systems.
+            Total psychological warfare capabilities through memetic infection, mind control
+            operations, and cognitive manipulation systems.
           </p>
         </div>
       </CardContent>

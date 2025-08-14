@@ -121,9 +121,7 @@ export function CoralReefNFTMarketplace() {
                       </Badge>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {tool.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-3">{tool.description}</p>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Eco Impact</span>
@@ -131,13 +129,8 @@ export function CoralReefNFTMarketplace() {
                     </div>
                     <Progress value={tool.ecoImpact} className="h-1" />
                     <div className="flex justify-between items-center">
-                      <span className="text-cyan-400 font-bold">
-                        {tool.price} GAiA
-                      </span>
-                      <Button
-                        size="sm"
-                        className="bg-cyan-600 hover:bg-cyan-700"
-                      >
+                      <span className="text-cyan-400 font-bold">{tool.price} GAiA</span>
+                      <Button size="sm" className="bg-cyan-600 hover:bg-cyan-700">
                         Purchase
                       </Button>
                     </div>
@@ -151,48 +144,30 @@ export function CoralReefNFTMarketplace() {
         {selectedCategory === "landscapes" && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {landscapes.map((landscape) => (
-              <Card
-                key={landscape.id}
-                className="border-blue-500/20 bg-blue-900/20"
-              >
+              <Card key={landscape.id} className="border-blue-500/20 bg-blue-900/20">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-2xl">{landscape.image}</span>
                     <div>
-                      <h4 className="font-medium text-white">
-                        {landscape.name}
-                      </h4>
-                      <Badge className="bg-green-600 text-xs">
-                        {landscape.conservationStatus}
-                      </Badge>
+                      <h4 className="font-medium text-white">{landscape.name}</h4>
+                      <Badge className="bg-green-600 text-xs">{landscape.conservationStatus}</Badge>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {landscape.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-3">{landscape.description}</p>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Coral Health</span>
-                      <span className="text-green-400">
-                        {landscape.coralHealth}%
-                      </span>
+                      <span className="text-green-400">{landscape.coralHealth}%</span>
                     </div>
                     <Progress value={landscape.coralHealth} className="h-1" />
                     <div className="flex justify-between text-sm">
                       <span>Marine Life</span>
-                      <span className="text-blue-400">
-                        {landscape.marineLife}%
-                      </span>
+                      <span className="text-blue-400">{landscape.marineLife}%</span>
                     </div>
                     <Progress value={landscape.marineLife} className="h-1" />
                     <div className="flex justify-between items-center">
-                      <span className="text-blue-400 font-bold">
-                        {landscape.price} GAiA
-                      </span>
-                      <Button
-                        size="sm"
-                        className="bg-blue-600 hover:bg-blue-700"
-                      >
+                      <span className="text-blue-400 font-bold">{landscape.price} GAiA</span>
+                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
                         <Crown className="h-3 w-3 mr-1" />
                         Own Reef
                       </Button>

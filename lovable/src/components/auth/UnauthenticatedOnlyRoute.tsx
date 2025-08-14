@@ -5,9 +5,7 @@ interface UnauthenticatedOnlyRouteProps {
   children: React.ReactNode;
 }
 
-export function UnauthenticatedOnlyRoute({
-  children,
-}: UnauthenticatedOnlyRouteProps) {
+export function UnauthenticatedOnlyRoute({ children }: UnauthenticatedOnlyRouteProps) {
   const { user, loading } = useAuth();
 
   // Show loading state while validating
@@ -18,12 +16,8 @@ export function UnauthenticatedOnlyRoute({
           <div className="w-16 h-16 bg-green-500/20 rounded-full mx-auto animate-pulse flex items-center justify-center">
             <div className="w-8 h-8 bg-green-400 rounded-full animate-bounce"></div>
           </div>
-          <p className="text-green-400 font-medium">
-            Loading Gaia's Exchanges...
-          </p>
-          <p className="text-green-300 text-sm">
-            Checking authentication status
-          </p>
+          <p className="text-green-400 font-medium">Loading Gaia's Exchanges...</p>
+          <p className="text-green-300 text-sm">Checking authentication status</p>
         </div>
       </div>
     );

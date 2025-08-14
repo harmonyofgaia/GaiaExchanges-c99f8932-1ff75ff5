@@ -77,35 +77,16 @@ export function GlobalTrackingSystem() {
       console.log("🎯 GPS PRECISION - EXACT COORDINATES ACQUIRED");
 
       // Simulate satellite connections
-      setSatelliteConnections((prev) =>
-        Math.min(50, prev + Math.floor(Math.random() * 3)),
-      );
+      setSatelliteConnections((prev) => Math.min(50, prev + Math.floor(Math.random() * 3)));
 
       // Simulate global coverage expansion
       setGlobalCoverage((prev) => Math.min(99.9, prev + 0.1));
 
       // Simulate new device detection
       if (Math.random() < 0.3) {
-        const countries = [
-          "North Korea",
-          "Iran",
-          "Unknown Location",
-          "Dark Web",
-          "Tor Network",
-        ];
-        const cities = [
-          "Pyongyang",
-          "Tehran",
-          "Hidden",
-          "Anonymous",
-          "Encrypted",
-        ];
-        const threats: TrackedDevice["threatLevel"][] = [
-          "LOW",
-          "MEDIUM",
-          "HIGH",
-          "CRITICAL",
-        ];
+        const countries = ["North Korea", "Iran", "Unknown Location", "Dark Web", "Tor Network"];
+        const cities = ["Pyongyang", "Tehran", "Hidden", "Anonymous", "Encrypted"];
+        const threats: TrackedDevice["threatLevel"][] = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];
 
         const newDevice: TrackedDevice = {
           id: `device_${Date.now()}`,
@@ -121,14 +102,9 @@ export function GlobalTrackingSystem() {
           deviceType: ["mobile", "desktop", "tablet", "unknown"][
             Math.floor(Math.random() * 4)
           ] as TrackedDevice["deviceType"],
-          operatingSystem: [
-            "Windows",
-            "macOS",
-            "Linux",
-            "Android",
-            "iOS",
-            "Unknown",
-          ][Math.floor(Math.random() * 6)],
+          operatingSystem: ["Windows", "macOS", "Linux", "Android", "iOS", "Unknown"][
+            Math.floor(Math.random() * 6)
+          ],
           browser: "Suspicious Activity",
           lastSeen: new Date(),
           threatLevel: threats[Math.floor(Math.random() * threats.length)],
@@ -217,9 +193,7 @@ export function GlobalTrackingSystem() {
             <Badge className="bg-blue-600 animate-pulse">
               SATELLITES: {satelliteConnections}/50
             </Badge>
-            <Badge className="bg-green-600">
-              COVERAGE: {globalCoverage.toFixed(1)}%
-            </Badge>
+            <Badge className="bg-green-600">COVERAGE: {globalCoverage.toFixed(1)}%</Badge>
             <Badge className="bg-purple-600">TRACKING: ACTIVE</Badge>
           </div>
         </CardHeader>
@@ -227,38 +201,25 @@ export function GlobalTrackingSystem() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
               <Satellite className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {satelliteConnections}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Satellites Connected
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{satelliteConnections}</div>
+              <div className="text-sm text-muted-foreground">Satellites Connected</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
               <Globe className="h-8 w-8 mx-auto text-green-400 mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {globalCoverage.toFixed(1)}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Global Coverage
-              </div>
+              <div className="text-2xl font-bold text-green-400">{globalCoverage.toFixed(1)}%</div>
+              <div className="text-sm text-muted-foreground">Global Coverage</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
               <Target className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-              <div className="text-2xl font-bold text-purple-400">
-                {trackedDevices.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Devices Tracked
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{trackedDevices.length}</div>
+              <div className="text-sm text-muted-foreground">Devices Tracked</div>
             </div>
             <div className="text-center p-4 bg-red-900/30 rounded-lg">
               <AlertTriangle className="h-8 w-8 mx-auto text-red-400 mb-2" />
               <div className="text-2xl font-bold text-red-400">
                 {
                   trackedDevices.filter(
-                    (d) =>
-                      d.threatLevel === "CRITICAL" || d.threatLevel === "HIGH",
+                    (d) => d.threatLevel === "CRITICAL" || d.threatLevel === "HIGH"
                   ).length
                 }
               </div>
@@ -271,9 +232,7 @@ export function GlobalTrackingSystem() {
       {/* Tracked Devices */}
       <Card className="bg-black/30 border-blue-500/30">
         <CardHeader>
-          <CardTitle className="text-blue-400">
-            🎯 TRACKED DEVICES - GLOBAL LOCATIONS
-          </CardTitle>
+          <CardTitle className="text-blue-400">🎯 TRACKED DEVICES - GLOBAL LOCATIONS</CardTitle>
         </CardHeader>
         <CardContent>
           <ScrollArea className="h-96">
@@ -294,19 +253,12 @@ export function GlobalTrackingSystem() {
                   <CardContent className="p-4">
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex items-start gap-3">
-                        <div className="text-blue-400">
-                          {getDeviceIcon(device.deviceType)}
-                        </div>
+                        <div className="text-blue-400">{getDeviceIcon(device.deviceType)}</div>
                         <div>
-                          <h4 className="font-bold text-sm">
-                            🎯 Device: {device.id}
-                          </h4>
+                          <h4 className="font-bold text-sm">🎯 Device: {device.id}</h4>
+                          <p className="text-xs text-muted-foreground">📍 IP: {device.ip}</p>
                           <p className="text-xs text-muted-foreground">
-                            📍 IP: {device.ip}
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            🌍 Location: {device.location.city},{" "}
-                            {device.location.country}
+                            🌍 Location: {device.location.city}, {device.location.country}
                           </p>
                           <p className="text-xs text-muted-foreground">
                             📱 OS: {device.operatingSystem}
@@ -320,9 +272,7 @@ export function GlobalTrackingSystem() {
                         <Badge className={getThreatColor(device.threatLevel)}>
                           {device.threatLevel}
                         </Badge>
-                        <Badge className="bg-green-600 text-xs">
-                          🛰️ TRACKED
-                        </Badge>
+                        <Badge className="bg-green-600 text-xs">🛰️ TRACKED</Badge>
                       </div>
                     </div>
 
@@ -336,9 +286,7 @@ export function GlobalTrackingSystem() {
                       </div>
                       <div className="flex items-center gap-2">
                         <Eye className="h-3 w-3" />
-                        <span>
-                          Last Seen: {device.lastSeen.toLocaleString()}
-                        </span>
+                        <span>Last Seen: {device.lastSeen.toLocaleString()}</span>
                       </div>
                     </div>
 
@@ -351,10 +299,7 @@ export function GlobalTrackingSystem() {
                         <Target className="h-3 w-3 mr-1" />
                         🎯 Enhanced Track
                       </Button>
-                      <Button
-                        size="sm"
-                        className="bg-purple-600 hover:bg-purple-700 text-xs"
-                      >
+                      <Button size="sm" className="bg-purple-600 hover:bg-purple-700 text-xs">
                         <MapPin className="h-3 w-3 mr-1" />
                         📍 Live Location
                       </Button>

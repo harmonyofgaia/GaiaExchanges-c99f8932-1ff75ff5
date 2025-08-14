@@ -43,17 +43,16 @@ export function UltraAdminDashboard() {
     const updateStats = () => {
       setRealTimeStats((prev) => ({
         activeUsers: prev.activeUsers + Math.floor(Math.random() * 15 + 2),
-        totalTransactions:
-          prev.totalTransactions + Math.floor(Math.random() * 25 + 5),
+        totalTransactions: prev.totalTransactions + Math.floor(Math.random() * 25 + 5),
         globalReach: Math.min(100, prev.globalReach + Math.random() * 0.5),
         securityLevel: Math.max(
           99,
-          Math.min(100, prev.securityLevel + (Math.random() * 0.2 - 0.1)),
+          Math.min(100, prev.securityLevel + (Math.random() * 0.2 - 0.1))
         ),
         growthRate: prev.growthRate + (Math.random() * 5 - 2),
         communityScore: Math.max(
           90,
-          Math.min(100, prev.communityScore + (Math.random() * 1 - 0.5)),
+          Math.min(100, prev.communityScore + (Math.random() * 1 - 0.5))
         ),
       }));
     };
@@ -81,7 +80,7 @@ export function UltraAdminDashboard() {
       {
         description: `System control updated - Effects active immediately`,
         duration: 3000,
-      },
+      }
     );
   };
 
@@ -109,9 +108,7 @@ export function UltraAdminDashboard() {
           <CardTitle className="flex items-center gap-2 text-red-400">
             <Crown className="h-6 w-6" />
             🚀 ULTRA ADMIN COMMAND CENTER - REAL-TIME CONTROL
-            <Badge className="bg-red-600 text-white animate-pulse">
-              ADMIN ONLY
-            </Badge>
+            <Badge className="bg-red-600 text-white animate-pulse">ADMIN ONLY</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -145,9 +142,7 @@ export function UltraAdminDashboard() {
               <div className="text-2xl font-bold text-red-400">
                 {realTimeStats.securityLevel.toFixed(1)}%
               </div>
-              <div className="text-xs text-muted-foreground">
-                Security Level
-              </div>
+              <div className="text-xs text-muted-foreground">Security Level</div>
             </div>
 
             <div className="text-center p-3 rounded-lg bg-yellow-900/30 border border-yellow-500/20">
@@ -163,9 +158,7 @@ export function UltraAdminDashboard() {
               <div className="text-2xl font-bold text-cyan-400">
                 {realTimeStats.communityScore.toFixed(1)}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Community Score
-              </div>
+              <div className="text-xs text-muted-foreground">Community Score</div>
             </div>
           </div>
 
@@ -202,9 +195,7 @@ export function UltraAdminDashboard() {
                     </Badge>
                   </div>
                   <Button
-                    onClick={() =>
-                      toggleSystemControl(key as keyof typeof systemControls)
-                    }
+                    onClick={() => toggleSystemControl(key as keyof typeof systemControls)}
                     className={`w-full ${value ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}`}
                   >
                     {value ? "Disable" : "Activate"}
@@ -219,9 +210,7 @@ export function UltraAdminDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card className="border-blue-500/20">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  Performance Metrics
-                </CardTitle>
+                <CardTitle className="text-blue-400">Performance Metrics</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -250,9 +239,7 @@ export function UltraAdminDashboard() {
 
             <Card className="border-green-500/20">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  Security Analytics
-                </CardTitle>
+                <CardTitle className="text-green-400">Security Analytics</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -275,9 +262,7 @@ export function UltraAdminDashboard() {
         <TabsContent value="community" className="space-y-4">
           <Card className="border-purple-500/20">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                Community Health
-              </CardTitle>
+              <CardTitle className="text-purple-400">Community Health</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -303,9 +288,7 @@ export function UltraAdminDashboard() {
         <TabsContent value="global" className="space-y-4">
           <Card className="border-orange-500/20">
             <CardHeader>
-              <CardTitle className="text-orange-400">
-                Global Operations
-              </CardTitle>
+              <CardTitle className="text-orange-400">Global Operations</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -323,9 +306,7 @@ export function UltraAdminDashboard() {
                 </div>
                 <div className="text-center">
                   <div className="text-lg font-bold text-orange-400">∞</div>
-                  <div className="text-xs text-muted-foreground">
-                    Scalability
-                  </div>
+                  <div className="text-xs text-muted-foreground">Scalability</div>
                 </div>
               </div>
             </CardContent>

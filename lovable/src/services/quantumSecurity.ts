@@ -33,9 +33,7 @@ class QuantumSecurityService {
       const quantumFluctuation = (Math.sin(timestamp * Math.PI) + 1) * 127.5;
       const cosmicRadiation = Date.now() % 256;
 
-      quantumArray[i] = Math.floor(
-        (memoryEntropy + quantumFluctuation + cosmicRadiation) % 256,
-      );
+      quantumArray[i] = Math.floor((memoryEntropy + quantumFluctuation + cosmicRadiation) % 256);
     }
 
     return quantumArray;
@@ -97,11 +95,7 @@ class QuantumSecurityService {
   }
 
   // Quantum Entanglement Network
-  private async createQuantumEntanglement(
-    id: string,
-    nodeA: string,
-    nodeB: string,
-  ): Promise<void> {
+  private async createQuantumEntanglement(id: string, nodeA: string, nodeB: string): Promise<void> {
     const entanglement: QuantumEntanglement = {
       id,
       nodeA,
@@ -127,10 +121,7 @@ class QuantumSecurityService {
   }
 
   // Quantum-Resistant Signature Schemes
-  async createQuantumResistantSignature(
-    data: string,
-    keyId: string,
-  ): Promise<string> {
+  async createQuantumResistantSignature(data: string, keyId: string): Promise<string> {
     const key = this.quantumKeys.get(keyId);
     if (!key || !(await this.verifyQuantumState(keyId))) {
       throw new Error("Invalid or compromised quantum key");
@@ -159,19 +150,14 @@ class QuantumSecurityService {
       .join("");
   }
 
-  private async postQuantumSign(
-    hash: string,
-    key: Uint8Array,
-  ): Promise<string> {
+  private async postQuantumSign(hash: string, key: Uint8Array): Promise<string> {
     // Simulate lattice-based post-quantum signature
     const hashBytes = new TextEncoder().encode(hash);
     const signature = new Uint8Array(512); // Large signature size for post-quantum security
 
     for (let i = 0; i < signature.length; i++) {
       signature[i] =
-        (key[i % key.length] ^
-          hashBytes[i % hashBytes.length] ^
-          this.generateQuantumRandom(1)[0]) %
+        (key[i % key.length] ^ hashBytes[i % hashBytes.length] ^ this.generateQuantumRandom(1)[0]) %
         256;
     }
 

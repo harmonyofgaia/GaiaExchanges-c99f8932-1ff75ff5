@@ -39,8 +39,7 @@ export function MatrixRainBackground({
     }
 
     // Matrix characters
-    const matrixChars =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?";
+    const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?";
 
     const draw = () => {
       // Semi-transparent background to create trailing effect
@@ -52,8 +51,7 @@ export function MatrixRainBackground({
 
       // Draw characters
       for (let i = 0; i < drops.length; i++) {
-        const text =
-          matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
         // Reset drop to top randomly
@@ -62,8 +60,7 @@ export function MatrixRainBackground({
         }
 
         // Move drop down
-        drops[i] +=
-          speed * (intensity === "low" ? 0.5 : intensity === "high" ? 1.5 : 1);
+        drops[i] += speed * (intensity === "low" ? 0.5 : intensity === "high" ? 1.5 : 1);
       }
     };
 

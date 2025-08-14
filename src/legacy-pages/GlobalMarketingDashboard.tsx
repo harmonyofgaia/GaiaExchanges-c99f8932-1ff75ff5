@@ -13,12 +13,10 @@ const GlobalMarketingDashboard = () => {
             🚀 Global Marketing & Investor Acquisition
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Making Culture of Harmony #1 Worldwide - Finding 20 Investors × €100
-            in 1 Hour
+            Making Culture of Harmony #1 Worldwide - Finding 20 Investors × €100 in 1 Hour
           </p>
           <p className="text-sm text-green-400 mt-2">
-            🌟 "Seeds Will Form Into Music" - Building Path of Global Success
-            Together! 🌟
+            🌟 "Seeds Will Form Into Music" - Building Path of Global Success Together! 🌟
           </p>
         </div>
 

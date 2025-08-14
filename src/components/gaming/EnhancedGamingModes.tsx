@@ -23,8 +23,7 @@ export function EnhancedGamingModes() {
     {
       id: "tournament",
       name: "🏆 Tournament Mode",
-      description:
-        "Competitive tournaments with global rankings and massive prizes",
+      description: "Competitive tournaments with global rankings and massive prizes",
       icon: <Crown className="h-6 w-6" />,
       color: "from-yellow-600 to-orange-600",
       players: "2,847 active",
@@ -109,9 +108,7 @@ export function EnhancedGamingModes() {
             🔥 ENHANCED GAMING MODES
           </CardTitle>
           <div className="flex items-center gap-4">
-            <Badge className="bg-green-600 animate-pulse">
-              ✅ ALL MODES ACTIVE
-            </Badge>
+            <Badge className="bg-green-600 animate-pulse">✅ ALL MODES ACTIVE</Badge>
             <Badge className="bg-blue-600">🎮 Advanced Features</Badge>
             <Badge className="bg-purple-600">🚀 Quantum Enhanced</Badge>
           </div>
@@ -120,24 +117,15 @@ export function EnhancedGamingModes() {
 
       <Tabs defaultValue="modes" className="w-full">
         <TabsList className="grid w-full grid-cols-3 bg-black/20 mb-6">
-          <TabsTrigger
-            value="modes"
-            className="data-[state=active]:bg-purple-600"
-          >
+          <TabsTrigger value="modes" className="data-[state=active]:bg-purple-600">
             <Crown className="h-4 w-4 mr-2" />
             Game Modes
           </TabsTrigger>
-          <TabsTrigger
-            value="styles"
-            className="data-[state=active]:bg-blue-600"
-          >
+          <TabsTrigger value="styles" className="data-[state=active]:bg-blue-600">
             <Star className="h-4 w-4 mr-2" />
             Game Styles
           </TabsTrigger>
-          <TabsTrigger
-            value="advanced"
-            className="data-[state=active]:bg-cyan-600"
-          >
+          <TabsTrigger value="advanced" className="data-[state=active]:bg-cyan-600">
             <Sparkles className="h-4 w-4 mr-2" />
             Advanced
           </TabsTrigger>
@@ -156,9 +144,7 @@ export function EnhancedGamingModes() {
                     {mode.name}
                   </CardTitle>
                   <div className="flex gap-2 flex-wrap">
-                    <Badge className={`bg-gradient-to-r ${mode.color}`}>
-                      ACTIVE
-                    </Badge>
+                    <Badge className={`bg-gradient-to-r ${mode.color}`}>ACTIVE</Badge>
                     <Badge className="bg-blue-600">
                       <Users className="h-3 w-3 mr-1" />
                       {mode.players}
@@ -166,20 +152,12 @@ export function EnhancedGamingModes() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground mb-3 text-sm">
-                    {mode.description}
-                  </p>
+                  <p className="text-muted-foreground mb-3 text-sm">{mode.description}</p>
                   <div className="mb-4">
-                    <h4 className="text-xs font-bold text-white mb-2">
-                      Key Features:
-                    </h4>
+                    <h4 className="text-xs font-bold text-white mb-2">Key Features:</h4>
                     <div className="flex flex-wrap gap-1">
                       {mode.features.map((feature, index) => (
-                        <Badge
-                          key={index}
-                          variant="outline"
-                          className="text-xs"
-                        >
+                        <Badge key={index} variant="outline" className="text-xs">
                           {feature}
                         </Badge>
                       ))}
@@ -213,27 +191,16 @@ export function EnhancedGamingModes() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {advancedFeatures.map((feature, index) => (
-                  <div
-                    key={index}
-                    className="p-4 bg-black/30 rounded-lg border border-cyan-500/20"
-                  >
+                  <div key={index} className="p-4 bg-black/30 rounded-lg border border-cyan-500/20">
                     <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-bold text-cyan-400">
-                        {feature.name}
-                      </h4>
+                      <h4 className="font-bold text-cyan-400">{feature.name}</h4>
                       <Badge
-                        className={
-                          feature.status === "active"
-                            ? "bg-green-600"
-                            : "bg-yellow-600"
-                        }
+                        className={feature.status === "active" ? "bg-green-600" : "bg-yellow-600"}
                       >
                         {feature.status.toUpperCase()}
                       </Badge>
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      {feature.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{feature.description}</p>
                   </div>
                 ))}
               </div>
@@ -250,32 +217,20 @@ export function EnhancedGamingModes() {
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center p-4 bg-yellow-900/20 rounded">
-                  <div className="text-2xl font-bold text-yellow-400">
-                    15,432
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    Tournament Winners
-                  </div>
+                  <div className="text-2xl font-bold text-yellow-400">15,432</div>
+                  <div className="text-xs text-muted-foreground">Tournament Winners</div>
                 </div>
                 <div className="text-center p-4 bg-green-900/20 rounded">
                   <div className="text-2xl font-bold text-green-400">98.7%</div>
-                  <div className="text-xs text-muted-foreground">
-                    Server Uptime
-                  </div>
+                  <div className="text-xs text-muted-foreground">Server Uptime</div>
                 </div>
                 <div className="text-center p-4 bg-blue-900/20 rounded">
-                  <div className="text-2xl font-bold text-blue-400">
-                    280 FPS
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    Max Performance
-                  </div>
+                  <div className="text-2xl font-bold text-blue-400">280 FPS</div>
+                  <div className="text-xs text-muted-foreground">Max Performance</div>
                 </div>
                 <div className="text-center p-4 bg-purple-900/20 rounded">
                   <div className="text-2xl font-bold text-purple-400">∞</div>
-                  <div className="text-xs text-muted-foreground">
-                    Possibilities
-                  </div>
+                  <div className="text-xs text-muted-foreground">Possibilities</div>
                 </div>
               </div>
             </CardContent>
@@ -286,9 +241,7 @@ export function EnhancedGamingModes() {
       {/* System Status Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-4">
-          <h4 className="font-medium text-purple-400 mb-2">
-            🚀 Enhanced Gaming Features
-          </h4>
+          <h4 className="font-medium text-purple-400 mb-2">🚀 Enhanced Gaming Features</h4>
           <div className="text-sm text-purple-300">
             ✅ Quantum-enhanced game physics engine
             <br />
@@ -304,9 +257,7 @@ export function EnhancedGamingModes() {
         </div>
 
         <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-          <h4 className="font-medium text-green-400 mb-2">
-            🌍 Gaming Ecosystem Status
-          </h4>
+          <h4 className="font-medium text-green-400 mb-2">🌍 Gaming Ecosystem Status</h4>
           <div className="text-sm text-green-300">
             ✅ All game modes operational
             <br />

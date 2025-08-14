@@ -116,32 +116,22 @@ export function BundledAdminPages() {
             🚀 BUNDLED ADMIN COMMAND CENTER
           </CardTitle>
           <p className="text-muted-foreground">
-            Unified control center for Plan Recovery, GitHub Integration & Admin
-            Management
+            Unified control center for Plan Recovery, GitHub Integration & Admin Management
           </p>
         </CardHeader>
       </Card>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger
-            value="plan-recovery"
-            className="flex items-center gap-2"
-          >
+          <TabsTrigger value="plan-recovery" className="flex items-center gap-2">
             <FileText className="h-4 w-4" />
             Plan Recovery
           </TabsTrigger>
-          <TabsTrigger
-            value="github-integration"
-            className="flex items-center gap-2"
-          >
+          <TabsTrigger value="github-integration" className="flex items-center gap-2">
             <Github className="h-4 w-4" />
             GitHub Control
           </TabsTrigger>
-          <TabsTrigger
-            value="admin-management"
-            className="flex items-center gap-2"
-          >
+          <TabsTrigger value="admin-management" className="flex items-center gap-2">
             <Settings className="h-4 w-4" />
             Admin Management
           </TabsTrigger>
@@ -158,9 +148,7 @@ export function BundledAdminPages() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">
-                    Overall Recovery Progress
-                  </span>
+                  <span className="text-sm text-muted-foreground">Overall Recovery Progress</span>
                   <Badge className="bg-blue-600">{recoveryProgress}%</Badge>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2">
@@ -205,9 +193,7 @@ export function BundledAdminPages() {
 
             <Card className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-500/30">
               <CardHeader>
-                <CardTitle className="text-lg text-green-400">
-                  Feature Recovery Tracker
-                </CardTitle>
+                <CardTitle className="text-lg text-green-400">Feature Recovery Tracker</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -221,10 +207,7 @@ export function BundledAdminPages() {
                         <span className="text-sm">{feature.name}</span>
                       </div>
                       <div className="flex gap-2">
-                        <Badge
-                          className={getStatusColor(feature.status)}
-                          variant="outline"
-                        >
+                        <Badge className={getStatusColor(feature.status)} variant="outline">
                           {feature.status}
                         </Badge>
                         <Badge
@@ -259,9 +242,7 @@ export function BundledAdminPages() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">
-                    Connection Status
-                  </span>
+                  <span className="text-sm text-muted-foreground">Connection Status</span>
                   <Badge className={getStatusColor(githubSync)}>
                     {githubSync === "syncing" ? "Syncing..." : "Connected"}
                   </Badge>
@@ -289,9 +270,7 @@ export function BundledAdminPages() {
 
             <Card className="bg-gradient-to-br from-indigo-900/20 to-purple-900/20 border border-indigo-500/30">
               <CardHeader>
-                <CardTitle className="text-lg text-indigo-400">
-                  Repository Features
-                </CardTitle>
+                <CardTitle className="text-lg text-indigo-400">Repository Features</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -302,33 +281,21 @@ export function BundledAdminPages() {
                     >
                       <span className="text-sm">{feature.name}</span>
                       <div className="flex gap-2 items-center">
-                        <Badge className={getStatusColor(feature.status)}>
-                          {feature.status}
-                        </Badge>
+                        <Badge className={getStatusColor(feature.status)}>{feature.status}</Badge>
                         {feature.lastSync && (
-                          <span className="text-xs text-muted-foreground">
-                            {feature.lastSync}
-                          </span>
+                          <span className="text-xs text-muted-foreground">{feature.lastSync}</span>
                         )}
                         {feature.deploys && (
-                          <span className="text-xs text-blue-400">
-                            {feature.deploys} deploys
-                          </span>
+                          <span className="text-xs text-blue-400">{feature.deploys} deploys</span>
                         )}
                         {feature.issues && (
-                          <span className="text-xs text-yellow-400">
-                            {feature.issues} issues
-                          </span>
+                          <span className="text-xs text-yellow-400">{feature.issues} issues</span>
                         )}
                         {feature.rules && (
-                          <span className="text-xs text-green-400">
-                            {feature.rules} rules
-                          </span>
+                          <span className="text-xs text-green-400">{feature.rules} rules</span>
                         )}
                         {feature.backups && (
-                          <span className="text-xs text-purple-400">
-                            {feature.backups} backups
-                          </span>
+                          <span className="text-xs text-purple-400">{feature.backups} backups</span>
                         )}
                       </div>
                     </div>
@@ -356,13 +323,9 @@ export function BundledAdminPages() {
                   >
                     <div className="flex items-center gap-2">
                       {getStatusIcon(feature.status)}
-                      <span className="text-sm font-medium">
-                        {feature.name}
-                      </span>
+                      <span className="text-sm font-medium">{feature.name}</span>
                     </div>
-                    <Badge className={getStatusColor(feature.status)}>
-                      {feature.status}
-                    </Badge>
+                    <Badge className={getStatusColor(feature.status)}>{feature.status}</Badge>
                   </div>
                 ))}
               </div>
@@ -372,9 +335,9 @@ export function BundledAdminPages() {
                   ✅ Bundle Integration Complete
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  Plan Recovery, GitHub Pages, and Admin Management have been
-                  successfully bundled into this unified command center. All
-                  functions are now accessible from a single interface.
+                  Plan Recovery, GitHub Pages, and Admin Management have been successfully bundled
+                  into this unified command center. All functions are now accessible from a single
+                  interface.
                 </p>
               </div>
             </CardContent>

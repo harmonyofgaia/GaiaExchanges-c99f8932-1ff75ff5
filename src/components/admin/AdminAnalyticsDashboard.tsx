@@ -24,8 +24,7 @@ export function AdminAnalyticsDashboard() {
               <span className="font-bold">COMMUNITY PROTECTION ANALYTICS</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              🔒 Encrypted • 👻 Invisible to malicious software • 🛡️ Admin-only
-              access
+              🔒 Encrypted • 👻 Invisible to malicious software • 🛡️ Admin-only access
             </p>
           </div>
         </CardContent>

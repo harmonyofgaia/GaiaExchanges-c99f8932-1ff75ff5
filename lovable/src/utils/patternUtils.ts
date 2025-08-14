@@ -6,11 +6,7 @@ export interface PatternNode {
   connections: string[];
 }
 
-export function createPatternNode(
-  x: number,
-  y: number,
-  intensity: number = 0.5,
-): PatternNode {
+export function createPatternNode(x: number, y: number, intensity: number = 0.5): PatternNode {
   return {
     id: Math.random().toString(36).substr(2, 9),
     x,
@@ -28,7 +24,7 @@ export class Quadtree {
 
   constructor(
     boundary: { x: number; y: number; width: number; height: number },
-    capacity: number = 4,
+    capacity: number = 4
   ) {
     this.boundary = boundary;
     this.capacity = capacity;
@@ -70,12 +66,7 @@ export class Quadtree {
     this.divided = true;
   }
 
-  query(range: {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-  }): PatternNode[] {
+  query(range: { x: number; y: number; width: number; height: number }): PatternNode[] {
     const found: PatternNode[] = [];
 
     this.points.forEach((point) => {
@@ -89,7 +80,7 @@ export class Quadtree {
 
   private rangeContains(
     range: { x: number; y: number; width: number; height: number },
-    point: PatternNode,
+    point: PatternNode
   ): boolean {
     return (
       point.x >= range.x &&

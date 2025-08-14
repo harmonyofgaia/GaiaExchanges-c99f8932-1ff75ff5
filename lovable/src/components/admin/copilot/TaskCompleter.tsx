@@ -21,25 +21,17 @@ interface TaskCompleterProps {
   toolId?: string;
 }
 
-export function TaskCompleter({
-  selectedTask,
-  toolName,
-  toolId,
-}: TaskCompleterProps) {
-  const [taskStatus, setTaskStatus] = useState(
-    selectedTask?.status || "pending",
-  );
+export function TaskCompleter({ selectedTask, toolName, toolId }: TaskCompleterProps) {
+  const [taskStatus, setTaskStatus] = useState(selectedTask?.status || "pending");
   const [completionResult, setCompletionResult] = useState<string | null>(null);
   const [failureReason, setFailureReason] = useState<string | null>(null);
 
   const executeTask = useCallback(
     async (taskId: string) => {
-      console.log(
-        `Executing task ${taskId}${toolName ? ` for ${toolName}` : ""}`,
-      );
+      console.log(`Executing task ${taskId}${toolName ? ` for ${toolName}` : ""}`);
       // Task execution logic here
     },
-    [toolName],
+    [toolName]
   );
 
   useEffect(() => {
@@ -67,12 +59,8 @@ export function TaskCompleter({
           <>
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <p className="text-sm font-medium text-gray-400">
-                  Status: {taskStatus}
-                </p>
-                <p className="text-xl font-bold text-white">
-                  {selectedTask.description}
-                </p>
+                <p className="text-sm font-medium text-gray-400">Status: {taskStatus}</p>
+                <p className="text-xl font-bold text-white">{selectedTask.description}</p>
                 {toolName && (
                   <p className="text-sm text-gray-500">
                     Tool: {toolName} {toolId && `(${toolId})`}
@@ -111,9 +99,7 @@ export function TaskCompleter({
               <div className="rounded-md border border-red-500/50 bg-red-900/20 p-4">
                 <div className="flex items-center space-x-2">
                   <AlertTriangle className="h-4 w-4 text-red-400" />
-                  <p className="text-sm font-medium text-red-400">
-                    Failure Reason:
-                  </p>
+                  <p className="text-sm font-medium text-red-400">Failure Reason:</p>
                 </div>
                 <p className="text-sm text-red-300">
                   {failureReason || selectedTask.failureReason || "Unknown"}
@@ -125,9 +111,7 @@ export function TaskCompleter({
               <div className="rounded-md border border-green-500/50 bg-green-900/20 p-4">
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="h-4 w-4 text-green-400" />
-                  <p className="text-sm font-medium text-green-400">
-                    Completion Result:
-                  </p>
+                  <p className="text-sm font-medium text-green-400">Completion Result:</p>
                 </div>
                 <p className="text-sm text-green-300">{completionResult}</p>
               </div>
@@ -150,10 +134,7 @@ export function TaskCompleter({
                   >
                     Complete Task
                   </Button>
-                  <Button
-                    onClick={() => setTaskStatus("failed")}
-                    variant="destructive"
-                  >
+                  <Button onClick={() => setTaskStatus("failed")} variant="destructive">
                     Mark as Failed
                   </Button>
                 </>
@@ -162,8 +143,7 @@ export function TaskCompleter({
           </>
         ) : (
           <p className="text-gray-500">
-            No task selected. Please select a task to view details and take
-            action.
+            No task selected. Please select a task to view details and take action.
           </p>
         )}
       </CardContent>

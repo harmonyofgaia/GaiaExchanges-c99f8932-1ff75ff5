@@ -5,15 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  ArrowUpDown,
-  Zap,
-  TrendingUp,
-  Shield,
-  Globe,
-  Coins,
-  Activity,
-} from "lucide-react";
+import { ArrowUpDown, Zap, TrendingUp, Shield, Globe, Coins, Activity } from "lucide-react";
 import { toast } from "sonner";
 import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice } from "@/constants/gaia";
 
@@ -49,9 +41,7 @@ export function EnhancedSwapSystem() {
   const swapInterval = useRef<NodeJS.Timeout>(undefined);
 
   // Get current swap pair
-  const currentPair = swapPairs.find(
-    (pair) => pair.from === fromToken && pair.to === toToken,
-  );
+  const currentPair = swapPairs.find((pair) => pair.from === fromToken && pair.to === toToken);
 
   useEffect(() => {
     console.log("💱 ENHANCED SWAP SYSTEM - MULTI-DEX AGGREGATION ACTIVE");
@@ -61,7 +51,7 @@ export function EnhancedSwapSystem() {
     // Fetch user configuration
     const fetchUserConfig = async () => {
       console.log("📊 Enhanced Swap System: Fetching user configuration");
-      return userConfig;
+      // Configuration is already initialized in state
     };
 
     fetchUserConfig();
@@ -104,7 +94,7 @@ export function EnhancedSwapSystem() {
           ...pair,
           rate: pair.rate * (1 + (Math.random() - 0.5) * 0.001),
           volume24h: pair.volume24h + Math.random() * 10000,
-        })),
+        }))
       );
     }, 3000);
 
@@ -118,9 +108,7 @@ export function EnhancedSwapSystem() {
     setFromAmount(value);
 
     if (value && currentPair) {
-      const calculatedAmount = (parseFloat(value) * currentPair.rate).toFixed(
-        6,
-      );
+      const calculatedAmount = (parseFloat(value) * currentPair.rate).toFixed(6);
       setToAmount(calculatedAmount);
     } else {
       setToAmount("");
@@ -132,9 +120,7 @@ export function EnhancedSwapSystem() {
     setToAmount(value);
 
     if (value && currentPair) {
-      const calculatedAmount = (parseFloat(value) / currentPair.rate).toFixed(
-        6,
-      );
+      const calculatedAmount = (parseFloat(value) / currentPair.rate).toFixed(6);
       setFromAmount(calculatedAmount);
     } else {
       setFromAmount("");
@@ -164,9 +150,7 @@ export function EnhancedSwapSystem() {
       // Simulate swap processing
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      toast.success(
-        `Successfully swapped ${fromAmount} ${fromToken} for ${toAmount} ${toToken}`,
-      );
+      toast.success(`Successfully swapped ${fromAmount} ${fromToken} for ${toAmount} ${toToken}`);
 
       // Clear amounts
       setFromAmount("");
@@ -187,8 +171,7 @@ export function EnhancedSwapSystem() {
             Enhanced Multi-DEX Swap Aggregator
           </CardTitle>
           <p className="text-sm text-muted-foreground">
-            15x faster swaps with optimal routing across multiple decentralized
-            exchanges
+            15x faster swaps with optimal routing across multiple decentralized exchanges
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -269,20 +252,12 @@ export function EnhancedSwapSystem() {
                       </span>
                     </div>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-muted-foreground">
-                        24h Volume
-                      </span>
-                      <span className="text-sm">
-                        ${currentPair.volume24h.toLocaleString()}
-                      </span>
+                      <span className="text-sm text-muted-foreground">24h Volume</span>
+                      <span className="text-sm">${currentPair.volume24h.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">
-                        Liquidity
-                      </span>
-                      <span className="text-sm">
-                        ${currentPair.liquidity.toLocaleString()}
-                      </span>
+                      <span className="text-sm text-muted-foreground">Liquidity</span>
+                      <span className="text-sm">${currentPair.liquidity.toLocaleString()}</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -312,8 +287,8 @@ export function EnhancedSwapSystem() {
               <Card>
                 <CardContent className="p-4">
                   <p className="text-center text-muted-foreground">
-                    Limit orders coming soon! Set your desired price and let the
-                    system execute automatically.
+                    Limit orders coming soon! Set your desired price and let the system execute
+                    automatically.
                   </p>
                 </CardContent>
               </Card>
@@ -326,9 +301,7 @@ export function EnhancedSwapSystem() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">
-                      Slippage Tolerance
-                    </label>
+                    <label className="text-sm font-medium">Slippage Tolerance</label>
                     <div className="flex gap-2">
                       {[0.1, 0.5, 1.0, 2.0].map((value) => (
                         <Button
@@ -339,11 +312,7 @@ export function EnhancedSwapSystem() {
                               slippageTolerance: value,
                             }))
                           }
-                          variant={
-                            userConfig.slippageTolerance === value
-                              ? "default"
-                              : "outline"
-                          }
+                          variant={userConfig.slippageTolerance === value ? "default" : "outline"}
                           size="sm"
                         >
                           {value}%
@@ -379,30 +348,22 @@ export function EnhancedSwapSystem() {
             <div className="text-center space-y-1">
               <Shield className="h-5 w-5 mx-auto text-green-400" />
               <div className="text-sm font-medium">Secure</div>
-              <div className="text-xs text-muted-foreground">
-                Audited Smart Contracts
-              </div>
+              <div className="text-xs text-muted-foreground">Audited Smart Contracts</div>
             </div>
             <div className="text-center space-y-1">
               <Zap className="h-5 w-5 mx-auto text-yellow-400" />
               <div className="text-sm font-medium">Fast</div>
-              <div className="text-xs text-muted-foreground">
-                15x Faster Execution
-              </div>
+              <div className="text-xs text-muted-foreground">15x Faster Execution</div>
             </div>
             <div className="text-center space-y-1">
               <TrendingUp className="h-5 w-5 mx-auto text-blue-400" />
               <div className="text-sm font-medium">Best Rates</div>
-              <div className="text-xs text-muted-foreground">
-                Multi-DEX Aggregation
-              </div>
+              <div className="text-xs text-muted-foreground">Multi-DEX Aggregation</div>
             </div>
             <div className="text-center space-y-1">
               <Globe className="h-5 w-5 mx-auto text-purple-400" />
               <div className="text-sm font-medium">Global</div>
-              <div className="text-xs text-muted-foreground">
-                Cross-Chain Support
-              </div>
+              <div className="text-xs text-muted-foreground">Cross-Chain Support</div>
             </div>
           </div>
         </CardContent>

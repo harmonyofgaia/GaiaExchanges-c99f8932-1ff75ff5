@@ -35,8 +35,7 @@ export default function LandscapeBuilder() {
 
   const createLandscape = () => {
     toast.success("🌍 Landscape Created!", {
-      description:
-        "New ecosystem generated with environmental restoration protocols",
+      description: "New ecosystem generated with environmental restoration protocols",
       duration: 4000,
     });
   };
@@ -78,27 +77,21 @@ export default function LandscapeBuilder() {
             <Card className="border-green-500/30 bg-green-900/20">
               <CardContent className="p-4 text-center">
                 <Mountain className="h-8 w-8 mx-auto text-green-400 mb-2" />
-                <Button className="w-full bg-green-600 hover:bg-green-700">
-                  Create Mountains
-                </Button>
+                <Button className="w-full bg-green-600 hover:bg-green-700">Create Mountains</Button>
               </CardContent>
             </Card>
 
             <Card className="border-blue-500/30 bg-blue-900/20">
               <CardContent className="p-4 text-center">
                 <Trees className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  Plant Forests
-                </Button>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700">Plant Forests</Button>
               </CardContent>
             </Card>
 
             <Card className="border-cyan-500/30 bg-cyan-900/20">
               <CardContent className="p-4 text-center">
                 <Waves className="h-8 w-8 mx-auto text-cyan-400 mb-2" />
-                <Button className="w-full bg-cyan-600 hover:bg-cyan-700">
-                  Create Waterways
-                </Button>
+                <Button className="w-full bg-cyan-600 hover:bg-cyan-700">Create Waterways</Button>
               </CardContent>
             </Card>
 
@@ -135,49 +128,31 @@ export default function LandscapeBuilder() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="border-green-500/30 bg-green-900/20">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  🌲 Forest Ecosystems
-                </CardTitle>
+                <CardTitle className="text-green-400">🌲 Forest Ecosystems</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Create diverse forest environments
-                </p>
-                <Button className="w-full bg-green-600 hover:bg-green-700">
-                  Generate Forest
-                </Button>
+                <p className="text-muted-foreground mb-4">Create diverse forest environments</p>
+                <Button className="w-full bg-green-600 hover:bg-green-700">Generate Forest</Button>
               </CardContent>
             </Card>
 
             <Card className="border-blue-500/30 bg-blue-900/20">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  🌊 Aquatic Systems
-                </CardTitle>
+                <CardTitle className="text-blue-400">🌊 Aquatic Systems</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Build lakes, rivers, and wetlands
-                </p>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  Create Waters
-                </Button>
+                <p className="text-muted-foreground mb-4">Build lakes, rivers, and wetlands</p>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700">Create Waters</Button>
               </CardContent>
             </Card>
 
             <Card className="border-orange-500/30 bg-orange-900/20">
               <CardHeader>
-                <CardTitle className="text-orange-400">
-                  🏜️ Desert Landscapes
-                </CardTitle>
+                <CardTitle className="text-orange-400">🏜️ Desert Landscapes</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Design arid and semi-arid regions
-                </p>
-                <Button className="w-full bg-orange-600 hover:bg-orange-700">
-                  Build Desert
-                </Button>
+                <p className="text-muted-foreground mb-4">Design arid and semi-arid regions</p>
+                <Button className="w-full bg-orange-600 hover:bg-orange-700">Build Desert</Button>
               </CardContent>
             </Card>
           </div>
@@ -193,9 +168,7 @@ export default function LandscapeBuilder() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-                <h4 className="font-bold text-green-400 mb-3">
-                  🌍 Active Restoration Projects:
-                </h4>
+                <h4 className="font-bold text-green-400 mb-3">🌍 Active Restoration Projects:</h4>
                 <div className="text-sm text-green-300 space-y-2">
                   <div>• Coral Reef Restoration: 15,000 reefs rebuilt</div>
                   <div>• Forest Regeneration: 2.5M trees planted</div>
@@ -218,18 +191,14 @@ export default function LandscapeBuilder() {
             </CardHeader>
             <CardContent className="text-center space-y-4">
               <p className="text-lg text-purple-300">
-                Transform scrap materials into landscape-building resources
-                using aura fusion technology
+                Transform scrap materials into landscape-building resources using aura fusion
+                technology
               </p>
 
               <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-4 mb-6">
-                <h4 className="font-bold text-purple-400 mb-2">
-                  🔮 Exclusive Scrapyard Features:
-                </h4>
+                <h4 className="font-bold text-purple-400 mb-2">🔮 Exclusive Scrapyard Features:</h4>
                 <div className="text-sm text-purple-300 space-y-1">
-                  <div>
-                    ✨ Convert any scrap into quantum building materials
-                  </div>
+                  <div>✨ Convert any scrap into quantum building materials</div>
                   <div>⚡ Reality-bending landscape transformation tools</div>
                   <div>🌟 Aura-powered ecosystem generation</div>
                   <div>💎 Exclusive tools only available to admin users</div>

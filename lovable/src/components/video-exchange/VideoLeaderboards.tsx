@@ -60,18 +60,14 @@ export function VideoLeaderboards() {
                   size="sm"
                   onClick={() => setSelectedPeriod(period)}
                 >
-                  {period.charAt(0).toUpperCase() +
-                    period.slice(1).replace("-", " ")}
+                  {period.charAt(0).toUpperCase() + period.slice(1).replace("-", " ")}
                 </Button>
               ))}
             </div>
 
             <div className="space-y-3">
               {leaderboardData.map((user, index) => (
-                <div
-                  key={user.rank}
-                  className="flex items-center gap-3 p-3 bg-muted rounded-lg"
-                >
+                <div key={user.rank} className="flex items-center gap-3 p-3 bg-muted rounded-lg">
                   <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold">
                     {user.rank === 1 ? (
                       <Crown className="h-4 w-4" />
@@ -85,14 +81,10 @@ export function VideoLeaderboards() {
                   </div>
                   <div className="flex-1">
                     <div className="font-semibold">{user.name}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {user.badge}
-                    </div>
+                    <div className="text-sm text-muted-foreground">{user.badge}</div>
                   </div>
                   <div className="text-right">
-                    <div className="font-bold text-yellow-400">
-                      {user.points.toLocaleString()}
-                    </div>
+                    <div className="font-bold text-yellow-400">{user.points.toLocaleString()}</div>
                     <div className="text-xs text-muted-foreground">points</div>
                   </div>
                 </div>

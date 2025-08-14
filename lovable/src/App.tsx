@@ -1,9 +1,6 @@
 import { lazy, Suspense, Component, ReactNode } from "react";
 // ErrorBoundary component to catch runtime errors
-class ErrorBoundary extends Component<
-  { children: ReactNode },
-  { hasError: boolean; error: any }
-> {
+class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: any }> {
   constructor(props: { children: ReactNode }) {
     super(props);
     this.state = { hasError: false, error: null };
@@ -35,12 +32,7 @@ class ErrorBoundary extends Component<
     return this.props.children;
   }
 }
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
 import { Navbar } from "./components/Navbar";
 import { GaiaLogo } from "./components/GaiaLogo";
@@ -51,15 +43,9 @@ import { AnimatedEarthLogo } from "./components/branding/AnimatedEarthLogo";
 import { PersistentAudioControls } from "./components/audio/PersistentAudioControls";
 
 const EcoAvatar = lazy(() => import("./pages/EcoAvatar"));
-const CommunityEngagementHub = lazy(
-  () => import("./pages/CommunityEngagementHub"),
-);
-const ImpactMeasurementSystem = lazy(
-  () => import("./pages/ImpactMeasurementSystem"),
-);
-const SeaGreenPsychohistorical = lazy(
-  () => import("./pages/SeaGreenPsychohistorical"),
-);
+const CommunityEngagementHub = lazy(() => import("./pages/CommunityEngagementHub"));
+const ImpactMeasurementSystem = lazy(() => import("./pages/ImpactMeasurementSystem"));
+const SeaGreenPsychohistorical = lazy(() => import("./pages/SeaGreenPsychohistorical"));
 const GaiaTokenStatus = lazy(() => import("./pages/GaiaTokenStatus"));
 const DeploymentCenter = lazy(() => import("./pages/DeploymentCenter"));
 const VirtualWorld = lazy(() => import("./pages/VirtualWorld"));
@@ -82,18 +68,14 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Pricing = lazy(() => import("./pages/Pricing"));
 const LiveTracking = lazy(() => import("./pages/LiveTracking"));
 const GaiasProjects = lazy(() => import("./pages/GaiasProjects"));
-const GaiaPrivateBlockchainSwapToken = lazy(
-  () => import("./pages/GaiaPrivateBlockchainSwapToken"),
-);
+const GaiaPrivateBlockchainSwapToken = lazy(() => import("./pages/GaiaPrivateBlockchainSwapToken"));
 const PrivateBlockchain = lazy(() => import("./pages/PrivateBlockchain"));
 const SecureAdmin = lazy(() => import("./pages/SecureAdmin"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
-const EarningActivitiesDashboard = lazy(
-  () => import("./pages/EarningActivitiesDashboard"),
-);
+const EarningActivitiesDashboard = lazy(() => import("./pages/EarningActivitiesDashboard"));
 const EnhancedLeaderboard = lazy(() => import("./pages/EnhancedLeaderboard"));
 const DecentralizedProjectFundingPools = lazy(
-  () => import("./pages/DecentralizedProjectFundingPools"),
+  () => import("./pages/DecentralizedProjectFundingPools")
 );
 const Home = lazy(() => import("./pages/Home"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -104,10 +86,7 @@ function App() {
   return (
     <ErrorBoundary>
       <Router>
-        <div
-          className="min-h-screen bg-background text-foreground"
-          data-router="true"
-        >
+        <div className="min-h-screen bg-background text-foreground" data-router="true">
           <CrossPagePersistence />
           <HoneypotRedirect />
           <Navbar />
@@ -129,32 +108,14 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route
-                  path="/green-impact-dashboard"
-                  element={<GreenImpactDashboard />}
-                />
+                <Route path="/green-impact-dashboard" element={<GreenImpactDashboard />} />
                 <Route path="/eco-avatar" element={<EcoAvatar />} />
-                <Route
-                  path="/community-engagement-hub"
-                  element={<CommunityEngagementHub />}
-                />
+                <Route path="/community-engagement-hub" element={<CommunityEngagementHub />} />
                 {/* Partnership management moved to secure admin only */}
-                <Route
-                  path="/impact-measurement-system"
-                  element={<ImpactMeasurementSystem />}
-                />
-                <Route
-                  path="/sea-green-psychohistorical"
-                  element={<SeaGreenPsychohistorical />}
-                />
-                <Route
-                  path="/gaia-token-status"
-                  element={<GaiaTokenStatus />}
-                />
-                <Route
-                  path="/deployment-center"
-                  element={<DeploymentCenter />}
-                />
+                <Route path="/impact-measurement-system" element={<ImpactMeasurementSystem />} />
+                <Route path="/sea-green-psychohistorical" element={<SeaGreenPsychohistorical />} />
+                <Route path="/gaia-token-status" element={<GaiaTokenStatus />} />
+                <Route path="/deployment-center" element={<DeploymentCenter />} />
                 <Route path="/virtual-world" element={<VirtualWorld />} />
                 <Route path="/animal-welfare" element={<AnimalWelfare />} />
                 <Route path="/gaming" element={<Gaming />} />
@@ -163,59 +124,29 @@ function App() {
                 <Route path="/wallet" element={<Wallet />} />
                 <Route path="/video-exchange" element={<VideoExchange />} />
                 <Route path="/streaming-shows" element={<StreamingShows />} />
-                <Route
-                  path="/gaia-bike-ecosystem"
-                  element={<GaiaBikeEcosystem />}
-                />
+                <Route path="/gaia-bike-ecosystem" element={<GaiaBikeEcosystem />} />
                 <Route path="/token-mining" element={<TokenMining />} />
-                <Route
-                  path="/green-investments"
-                  element={<GreenInvestments />}
-                />
+                <Route path="/green-investments" element={<GreenInvestments />} />
                 <Route path="/coin-crafter" element={<CoinCrafter />} />
-                <Route
-                  path="/landscape-builder"
-                  element={<LandscapeBuilder />}
-                />
-                <Route
-                  path="/aura-land-scrapyard"
-                  element={<AuraLandScrapyard />}
-                />
-                <Route
-                  path="/comprehensive-status"
-                  element={<ComprehensiveStatus />}
-                />
+                <Route path="/landscape-builder" element={<LandscapeBuilder />} />
+                <Route path="/aura-land-scrapyard" element={<AuraLandScrapyard />} />
+                <Route path="/comprehensive-status" element={<ComprehensiveStatus />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/pricing" element={<Pricing />} />
-                <Route
-                  path="/admin"
-                  element={<Navigate to="/secure-admin" replace />}
-                />
+                <Route path="/admin" element={<Navigate to="/secure-admin" replace />} />
                 <Route path="/live-tracking" element={<LiveTracking />} />
                 <Route path="/gaias-projects" element={<GaiasProjects />} />
                 <Route
                   path="/gaia-private-blockchain-swap-token"
                   element={<GaiaPrivateBlockchainSwapToken />}
                 />
-                <Route
-                  path="/private-blockchain"
-                  element={<PrivateBlockchain />}
-                />
+                <Route path="/private-blockchain" element={<PrivateBlockchain />} />
                 <Route path="/secure-admin" element={<SecureAdmin />} />
                 <Route path="/admin-login" element={<AdminLogin />} />
-                <Route
-                  path="/earning-activities"
-                  element={<EarningActivitiesDashboard />}
-                />
-                <Route
-                  path="/enhanced-leaderboard"
-                  element={<EnhancedLeaderboard />}
-                />
-                <Route
-                  path="/project-funding"
-                  element={<DecentralizedProjectFundingPools />}
-                />
+                <Route path="/earning-activities" element={<EarningActivitiesDashboard />} />
+                <Route path="/enhanced-leaderboard" element={<EnhancedLeaderboard />} />
+                <Route path="/project-funding" element={<DecentralizedProjectFundingPools />} />
               </Routes>
             </Suspense>
           </main>

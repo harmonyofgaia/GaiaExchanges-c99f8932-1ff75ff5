@@ -103,9 +103,7 @@ export function EnhancedCoinCrafter() {
                 <div className="text-3xl">💪</div>
                 <div
                   className={`text-4xl mx-2 transition-all duration-300 ${
-                    craftingPhase === "hammering"
-                      ? "animate-bounce scale-125"
-                      : "scale-100"
+                    craftingPhase === "hammering" ? "animate-bounce scale-125" : "scale-100"
                   }`}
                 >
                   🔨
@@ -147,17 +145,12 @@ export function EnhancedCoinCrafter() {
 
                 {/* Steel ingot transforming to coin */}
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  {craftingPhase === "preparation" && (
-                    <div className="text-3xl">⬜</div>
-                  )}
-                  {craftingPhase === "heating" && (
-                    <div className="text-3xl animate-pulse">🟧</div>
-                  )}
+                  {craftingPhase === "preparation" && <div className="text-3xl">⬜</div>}
+                  {craftingPhase === "heating" && <div className="text-3xl animate-pulse">🟧</div>}
                   {craftingPhase === "hammering" && (
                     <div className="text-3xl animate-bounce">🟨</div>
                   )}
-                  {(craftingPhase === "finishing" ||
-                    craftingPhase === "complete") && (
+                  {(craftingPhase === "finishing" || craftingPhase === "complete") && (
                     <div className="text-3xl animate-spin">🪙</div>
                   )}
                 </div>
@@ -186,12 +179,8 @@ export function EnhancedCoinCrafter() {
 
             {/* Finished Coins Stack */}
             <div className="flex flex-col items-center">
-              <div className="text-4xl">
-                {craftingPhase === "complete" ? "💰" : "🪙"}
-              </div>
-              <div className="text-sm text-green-400">
-                {currentBatch} GAiA Coins
-              </div>
+              <div className="text-4xl">{craftingPhase === "complete" ? "💰" : "🪙"}</div>
+              <div className="text-sm text-green-400">{currentBatch} GAiA Coins</div>
             </div>
           </div>
 
@@ -202,17 +191,13 @@ export function EnhancedCoinCrafter() {
               <span className="text-orange-300">{progress}%</span>
             </div>
             <Progress value={progress} className="h-3 bg-orange-900/30" />
-            <div className="text-center text-sm text-orange-200">
-              {getPhaseDescription()}
-            </div>
+            <div className="text-center text-sm text-orange-200">{getPhaseDescription()}</div>
           </div>
 
           {/* Status Badge */}
           <Badge
             className={`text-lg px-4 py-2 ${
-              craftingPhase === "complete"
-                ? "bg-green-600"
-                : "bg-orange-600 animate-pulse"
+              craftingPhase === "complete" ? "bg-green-600" : "bg-orange-600 animate-pulse"
             }`}
           >
             {craftingPhase === "complete"
@@ -224,23 +209,15 @@ export function EnhancedCoinCrafter() {
         {/* Crafting Statistics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="text-center p-4 bg-green-900/20 rounded-lg border border-green-500/20">
-            <div className="text-2xl font-bold text-green-400">
-              {totalCrafted.toLocaleString()}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Total GAiA Crafted
-            </div>
+            <div className="text-2xl font-bold text-green-400">{totalCrafted.toLocaleString()}</div>
+            <div className="text-sm text-muted-foreground">Total GAiA Crafted</div>
           </div>
           <div className="text-center p-4 bg-orange-900/20 rounded-lg border border-orange-500/20">
-            <div className="text-2xl font-bold text-orange-400">
-              {currentBatch}
-            </div>
+            <div className="text-2xl font-bold text-orange-400">{currentBatch}</div>
             <div className="text-sm text-muted-foreground">Current Batch</div>
           </div>
           <div className="text-center p-4 bg-blue-900/20 rounded-lg border border-blue-500/20">
-            <div className="text-2xl font-bold text-blue-400">
-              {hammerStrikes}/5
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{hammerStrikes}/5</div>
             <div className="text-sm text-muted-foreground">Hammer Strikes</div>
           </div>
           <div className="text-center p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
@@ -258,15 +235,11 @@ export function EnhancedCoinCrafter() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div>
               <div className="text-red-300">Forge Temperature:</div>
-              <div className="font-mono text-xs text-red-400">
-                2,847°C (Dragon Fire)
-              </div>
+              <div className="font-mono text-xs text-red-400">2,847°C (Dragon Fire)</div>
             </div>
             <div>
               <div className="text-orange-300">Steel Quality:</div>
-              <div className="font-mono text-xs text-orange-400">
-                99.9% Pure Gaia Steel
-              </div>
+              <div className="font-mono text-xs text-orange-400">99.9% Pure Gaia Steel</div>
             </div>
           </div>
         </div>

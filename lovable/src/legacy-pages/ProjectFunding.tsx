@@ -28,17 +28,14 @@ export default function ProjectFunding() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-sm text-muted-foreground">
-                Remove plastic waste from oceans using advanced filtration
-                systems
+                Remove plastic waste from oceans using advanced filtration systems
               </p>
               <Progress value={75} className="w-full" />
               <div className="flex justify-between text-sm">
                 <span>75% funded</span>
                 <span>$150,000 / $200,000</span>
               </div>
-              <Button className="w-full bg-green-600 hover:bg-green-700">
-                Fund Project
-              </Button>
+              <Button className="w-full bg-green-600 hover:bg-green-700">Fund Project</Button>
             </CardContent>
           </Card>
 
@@ -58,9 +55,7 @@ export default function ProjectFunding() {
                 <span>45% funded</span>
                 <span>$45,000 / $100,000</span>
               </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                Fund Project
-              </Button>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700">Fund Project</Button>
             </CardContent>
           </Card>
 
@@ -80,9 +75,7 @@ export default function ProjectFunding() {
                 <span>90% funded</span>
                 <span>$135,000 / $150,000</span>
               </div>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                Fund Project
-              </Button>
+              <Button className="w-full bg-purple-600 hover:bg-purple-700">Fund Project</Button>
             </CardContent>
           </Card>
         </div>

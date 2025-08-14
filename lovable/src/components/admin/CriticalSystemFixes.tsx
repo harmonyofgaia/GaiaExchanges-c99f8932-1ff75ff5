@@ -3,14 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  AlertTriangle,
-  CheckCircle,
-  Settings,
-  Database,
-  Zap,
-  RefreshCw,
-} from "lucide-react";
+import { AlertTriangle, CheckCircle, Settings, Database, Zap, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 
 interface SystemIssue {
@@ -107,8 +100,8 @@ export function CriticalSystemFixes() {
             prev.map((issue) =>
               issue.status === "pending" && Math.random() > 0.7
                 ? { ...issue, status: "in-progress" }
-                : issue,
-            ),
+                : issue
+            )
           );
         }
       }, 5000);
@@ -119,9 +112,7 @@ export function CriticalSystemFixes() {
 
   const fixIssue = (issueId: string) => {
     setSystemIssues((prev) =>
-      prev.map((issue) =>
-        issue.id === issueId ? { ...issue, status: "completed" } : issue,
-      ),
+      prev.map((issue) => (issue.id === issueId ? { ...issue, status: "completed" } : issue))
     );
 
     toast.success("🔧 Issue Fixed!", {
@@ -193,12 +184,8 @@ export function CriticalSystemFixes() {
     }
   };
 
-  const criticalIssues = systemIssues.filter(
-    (issue) => issue.severity === "critical",
-  ).length;
-  const completedIssues = systemIssues.filter(
-    (issue) => issue.status === "completed",
-  ).length;
+  const criticalIssues = systemIssues.filter((issue) => issue.severity === "critical").length;
+  const completedIssues = systemIssues.filter((issue) => issue.status === "completed").length;
   const totalIssues = systemIssues.length;
 
   return (
@@ -214,23 +201,15 @@ export function CriticalSystemFixes() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-400">
-                {criticalIssues}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Critical Issues
-              </div>
+              <div className="text-2xl font-bold text-red-400">{criticalIssues}</div>
+              <div className="text-sm text-muted-foreground">Critical Issues</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">
-                {completedIssues}
-              </div>
+              <div className="text-2xl font-bold text-green-400">{completedIssues}</div>
               <div className="text-sm text-muted-foreground">Fixed</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                {systemHealth.toFixed(1)}%
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{systemHealth.toFixed(1)}%</div>
               <div className="text-sm text-muted-foreground">System Health</div>
             </div>
             <div className="text-center">
@@ -244,9 +223,7 @@ export function CriticalSystemFixes() {
           <div className="mt-6">
             <div className="flex justify-between mb-2">
               <span className="text-sm font-medium">Overall System Health</span>
-              <span className="text-sm text-orange-400">
-                {systemHealth.toFixed(1)}%
-              </span>
+              <span className="text-sm text-orange-400">{systemHealth.toFixed(1)}%</span>
             </div>
             <Progress value={systemHealth} className="h-3" />
           </div>
@@ -267,20 +244,13 @@ export function CriticalSystemFixes() {
               const CategoryIcon = getCategoryIcon(issue.category);
 
               return (
-                <div
-                  key={issue.id}
-                  className="p-4 rounded-lg border border-border/50 bg-card/30"
-                >
+                <div key={issue.id} className="p-4 rounded-lg border border-border/50 bg-card/30">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-start gap-3 flex-1">
                       <CategoryIcon className="h-5 w-5 text-orange-400 mt-0.5" />
                       <div className="flex-1">
-                        <h4 className="font-semibold text-white mb-1">
-                          {issue.title}
-                        </h4>
-                        <p className="text-sm text-muted-foreground mb-2">
-                          {issue.description}
-                        </p>
+                        <h4 className="font-semibold text-white mb-1">{issue.title}</h4>
+                        <p className="text-sm text-muted-foreground mb-2">{issue.description}</p>
                         <div className="flex gap-2">
                           <Badge className={getSeverityColor(issue.severity)}>
                             {issue.severity.toUpperCase()}
@@ -292,9 +262,7 @@ export function CriticalSystemFixes() {
                       </div>
                     </div>
                     <div className="flex flex-col items-end gap-2">
-                      <Badge
-                        className={`${getStatusColor(issue.status)} text-white`}
-                      >
+                      <Badge className={`${getStatusColor(issue.status)} text-white`}>
                         {issue.status === "completed" ? (
                           <>
                             <CheckCircle className="h-3 w-3 mr-1" />
@@ -344,9 +312,7 @@ export function CriticalSystemFixes() {
           onClick={activateAutoFix}
           className={`font-bold py-6 ${autoFixEnabled ? "bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700" : "bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"} text-white`}
         >
-          <RefreshCw
-            className={`h-5 w-5 mr-2 ${autoFixEnabled ? "animate-spin" : ""}`}
-          />
+          <RefreshCw className={`h-5 w-5 mr-2 ${autoFixEnabled ? "animate-spin" : ""}`} />
           {autoFixEnabled ? "🔴 DISABLE AUTO-FIX" : "🤖 ACTIVATE AUTO-FIX"}
         </Button>
       </div>
@@ -361,9 +327,8 @@ export function CriticalSystemFixes() {
                 ⚠️ CRITICAL SYSTEM ISSUES DETECTED
               </h3>
               <p className="text-red-300">
-                {criticalIssues} critical database issues require immediate
-                attention. The Supabase function parameters need to be properly
-                configured for full system functionality.
+                {criticalIssues} critical database issues require immediate attention. The Supabase
+                function parameters need to be properly configured for full system functionality.
               </p>
               <Badge className="bg-red-600 text-white text-lg px-6 py-3">
                 DATABASE PRIORITY REPAIR REQUIRED

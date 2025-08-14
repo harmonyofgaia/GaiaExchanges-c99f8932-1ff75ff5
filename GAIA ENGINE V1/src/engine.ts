@@ -21,10 +21,7 @@ const engine = new GaiaEngine(config);
 
 // Register core modules
 engine.registerModule("modularSystem", new ModularSystem());
-engine.registerModule(
-  "storageSystem",
-  new StorageSystem({ type: "local", path: "./data" }),
-);
+engine.registerModule("storageSystem", new StorageSystem({ type: "local", path: "./data" }));
 engine.registerModule("pluginSystem", new PluginSystem());
 engine.registerModule("aiIntegration", new AIIntegration());
 engine.registerModule("uiFramework", new UIFramework());

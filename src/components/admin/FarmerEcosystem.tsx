@@ -58,8 +58,7 @@ export function FarmerEcosystem() {
     {
       id: "1",
       title: "Sustainable Harvest Festival",
-      description:
-        "Community gathering celebrating organic farming and permaculture techniques",
+      description: "Community gathering celebrating organic farming and permaculture techniques",
       date: "2024-08-15",
       location: "Green Valley Farm, California",
       ticketPrice: 45,
@@ -71,8 +70,7 @@ export function FarmerEcosystem() {
     {
       id: "2",
       title: "Regenerative Agriculture Workshop",
-      description:
-        "Educational workshop on soil restoration and biodiversity enhancement",
+      description: "Educational workshop on soil restoration and biodiversity enhancement",
       date: "2024-09-20",
       location: "EcoFarm Institute, Oregon",
       ticketPrice: 120,
@@ -84,8 +82,7 @@ export function FarmerEcosystem() {
     {
       id: "3",
       title: "Forest Garden Symposium",
-      description:
-        "Sharing knowledge about food forests and layered ecosystems",
+      description: "Sharing knowledge about food forests and layered ecosystems",
       date: "2024-07-10",
       location: "Woodland Preserve, Vermont",
       ticketPrice: 75,
@@ -147,18 +144,12 @@ export function FarmerEcosystem() {
     }
   };
 
-  const totalEventRevenue = farmEvents.reduce(
-    (sum, event) => sum + event.profitGenerated,
-    0,
-  );
+  const totalEventRevenue = farmEvents.reduce((sum, event) => sum + event.profitGenerated, 0);
   const totalForestInvestment = forestProjects.reduce(
     (sum, project) => sum + project.totalInvestment,
-    0,
+    0
   );
-  const totalForestLayers = forestProjects.reduce(
-    (sum, project) => sum + project.layers,
-    0,
-  );
+  const totalForestLayers = forestProjects.reduce((sum, project) => sum + project.layers, 0);
 
   const handleCreateEvent = () => {
     // In a real app, this would create a new event
@@ -181,8 +172,7 @@ export function FarmerEcosystem() {
             🌱 FARMER ECOSYSTEM COMMAND CENTER
           </CardTitle>
           <p className="text-muted-foreground">
-            Create land events, generate profits, and build 7-layered living
-            forests worldwide
+            Create land events, generate profits, and build 7-layered living forests worldwide
           </p>
         </CardHeader>
       </Card>
@@ -194,12 +184,8 @@ export function FarmerEcosystem() {
             <div className="flex items-center gap-2">
               <Calendar className="h-5 w-5 text-blue-400" />
               <div>
-                <div className="text-2xl font-bold text-blue-400">
-                  {farmEvents.length}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Total Events
-                </div>
+                <div className="text-2xl font-bold text-blue-400">{farmEvents.length}</div>
+                <div className="text-sm text-muted-foreground">Total Events</div>
               </div>
             </div>
           </CardContent>
@@ -213,9 +199,7 @@ export function FarmerEcosystem() {
                 <div className="text-2xl font-bold text-green-400">
                   ${totalEventRevenue.toLocaleString()}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Event Revenue
-                </div>
+                <div className="text-sm text-muted-foreground">Event Revenue</div>
               </div>
             </div>
           </CardContent>
@@ -226,12 +210,8 @@ export function FarmerEcosystem() {
             <div className="flex items-center gap-2">
               <Trees className="h-5 w-5 text-purple-400" />
               <div>
-                <div className="text-2xl font-bold text-purple-400">
-                  {forestProjects.length}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Forest Projects
-                </div>
+                <div className="text-2xl font-bold text-purple-400">{forestProjects.length}</div>
+                <div className="text-sm text-muted-foreground">Forest Projects</div>
               </div>
             </div>
           </CardContent>
@@ -242,12 +222,8 @@ export function FarmerEcosystem() {
             <div className="flex items-center gap-2">
               <Crown className="h-5 w-5 text-yellow-400" />
               <div>
-                <div className="text-2xl font-bold text-yellow-400">
-                  {totalForestLayers}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Forest Layers
-                </div>
+                <div className="text-2xl font-bold text-yellow-400">{totalForestLayers}</div>
+                <div className="text-sm text-muted-foreground">Forest Layers</div>
               </div>
             </div>
           </CardContent>
@@ -266,9 +242,7 @@ export function FarmerEcosystem() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border border-cyan-500/30">
               <CardHeader>
-                <CardTitle className="text-lg text-cyan-400">
-                  Recent Event Activity
-                </CardTitle>
+                <CardTitle className="text-lg text-cyan-400">Recent Event Activity</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {farmEvents.slice(0, 3).map((event) => (
@@ -278,18 +252,12 @@ export function FarmerEcosystem() {
                   >
                     <div>
                       <div className="font-medium text-sm">{event.title}</div>
-                      <div className="text-xs text-muted-foreground">
-                        {event.location}
-                      </div>
+                      <div className="text-xs text-muted-foreground">{event.location}</div>
                     </div>
                     <div className="flex gap-2 items-center">
-                      <Badge className={getStatusColor(event.status)}>
-                        {event.status}
-                      </Badge>
+                      <Badge className={getStatusColor(event.status)}>{event.status}</Badge>
                       {event.profitGenerated > 0 && (
-                        <span className="text-green-400 text-sm">
-                          ${event.profitGenerated}
-                        </span>
+                        <span className="text-green-400 text-sm">${event.profitGenerated}</span>
                       )}
                     </div>
                   </div>
@@ -308,9 +276,7 @@ export function FarmerEcosystem() {
                   <div key={project.id} className="p-3 bg-gray-800/50 rounded">
                     <div className="flex items-center justify-between mb-2">
                       <div className="font-medium text-sm">{project.name}</div>
-                      <Badge className={getStatusColor(project.status)}>
-                        {project.status}
-                      </Badge>
+                      <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
                     </div>
                     <div className="flex items-center gap-4 text-xs text-muted-foreground">
                       <span>{project.location}</span>
@@ -345,36 +311,27 @@ export function FarmerEcosystem() {
                   <div className="text-2xl font-bold text-green-400">
                     ${totalEventRevenue.toLocaleString()}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Total Event Profits
-                  </div>
+                  <div className="text-sm text-muted-foreground">Total Event Profits</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-purple-400">
                     ${totalForestInvestment.toLocaleString()}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Forest Investment
-                  </div>
+                  <div className="text-sm text-muted-foreground">Forest Investment</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-cyan-400">
-                    {totalForestLayers} / 21
-                  </div>
+                  <div className="text-2xl font-bold text-cyan-400">{totalForestLayers} / 21</div>
                   <div className="text-sm text-muted-foreground">
                     Layers Created (Target: 7 per forest)
                   </div>
                 </div>
               </div>
               <div className="mt-4 p-4 bg-green-900/20 border border-green-500/30 rounded-lg">
-                <h4 className="text-green-400 font-semibold mb-2">
-                  🌱 Ecosystem Impact
-                </h4>
+                <h4 className="text-green-400 font-semibold mb-2">🌱 Ecosystem Impact</h4>
                 <p className="text-sm text-muted-foreground">
-                  Every farmer event generates profits that directly fund the
-                  creation of 7-layered living forests. These forests provide
-                  sustainable food production, carbon sequestration, and
-                  biodiversity restoration.
+                  Every farmer event generates profits that directly fund the creation of 7-layered
+                  living forests. These forests provide sustainable food production, carbon
+                  sequestration, and biodiversity restoration.
                 </p>
               </div>
             </CardContent>
@@ -384,30 +341,21 @@ export function FarmerEcosystem() {
         <TabsContent value="events" className="space-y-4">
           <Card className="bg-gradient-to-br from-indigo-900/20 to-purple-900/20 border border-indigo-500/30">
             <CardHeader>
-              <CardTitle className="text-lg text-indigo-400">
-                🎪 Farm Events Management
-              </CardTitle>
+              <CardTitle className="text-lg text-indigo-400">🎪 Farm Events Management</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {farmEvents.map((event) => (
-                  <Card
-                    key={event.id}
-                    className="bg-gray-800/50 border border-gray-700/50"
-                  >
+                  <Card key={event.id} className="bg-gray-800/50 border border-gray-700/50">
                     <CardContent className="p-4">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
                             <Star className="h-4 w-4 text-yellow-400" />
                             <h3 className="font-semibold">{event.title}</h3>
-                            <Badge className={getStatusColor(event.status)}>
-                              {event.status}
-                            </Badge>
+                            <Badge className={getStatusColor(event.status)}>{event.status}</Badge>
                           </div>
-                          <p className="text-sm text-muted-foreground mb-2">
-                            {event.description}
-                          </p>
+                          <p className="text-sm text-muted-foreground mb-2">{event.description}</p>
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                             <div className="flex items-center gap-1">
                               <MapPin className="h-3 w-3" />
@@ -418,8 +366,7 @@ export function FarmerEcosystem() {
                               {event.date}
                             </div>
                             <div className="flex items-center gap-1">
-                              <Coins className="h-3 w-3" />${event.ticketPrice}{" "}
-                              ticket
+                              <Coins className="h-3 w-3" />${event.ticketPrice} ticket
                             </div>
                             <div className="flex items-center gap-1">
                               <Users className="h-3 w-3" />
@@ -429,8 +376,8 @@ export function FarmerEcosystem() {
                           {event.profitGenerated > 0 && (
                             <div className="mt-2 p-2 bg-green-900/20 border border-green-500/30 rounded">
                               <span className="text-green-400 text-sm font-medium">
-                                💰 Profit Generated: ${event.profitGenerated} →{" "}
-                                {event.forestLayers} Forest Layers Funded
+                                💰 Profit Generated: ${event.profitGenerated} → {event.forestLayers}{" "}
+                                Forest Layers Funded
                               </span>
                             </div>
                           )}
@@ -447,17 +394,12 @@ export function FarmerEcosystem() {
         <TabsContent value="forests" className="space-y-4">
           <Card className="bg-gradient-to-br from-green-900/20 to-teal-900/20 border border-green-500/30">
             <CardHeader>
-              <CardTitle className="text-lg text-green-400">
-                🌳 7-Layered Living Forests
-              </CardTitle>
+              <CardTitle className="text-lg text-green-400">🌳 7-Layered Living Forests</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {forestProjects.map((project) => (
-                  <Card
-                    key={project.id}
-                    className="bg-gray-800/50 border border-gray-700/50"
-                  >
+                  <Card key={project.id} className="bg-gray-800/50 border border-gray-700/50">
                     <CardContent className="p-4">
                       <div className="flex items-start justify-between mb-3">
                         <div>
@@ -465,13 +407,9 @@ export function FarmerEcosystem() {
                             <Trees className="h-4 w-4 text-green-400" />
                             {project.name}
                           </h3>
-                          <p className="text-sm text-muted-foreground">
-                            {project.location}
-                          </p>
+                          <p className="text-sm text-muted-foreground">{project.location}</p>
                         </div>
-                        <Badge className={getStatusColor(project.status)}>
-                          {project.status}
-                        </Badge>
+                        <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
                       </div>
 
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3 text-sm">
@@ -482,30 +420,21 @@ export function FarmerEcosystem() {
                           </div>
                         </div>
                         <div>
-                          <span className="text-muted-foreground">
-                            Investment:
-                          </span>
+                          <span className="text-muted-foreground">Investment:</span>
                           <div className="font-medium text-blue-400">
                             ${project.totalInvestment.toLocaleString()}
                           </div>
                         </div>
                         <div>
-                          <span className="text-muted-foreground">
-                            Completion:
-                          </span>
+                          <span className="text-muted-foreground">Completion:</span>
                           <div className="font-medium text-purple-400">
                             {project.completionDate}
                           </div>
                         </div>
                         <div>
-                          <span className="text-muted-foreground">
-                            Progress:
-                          </span>
+                          <span className="text-muted-foreground">Progress:</span>
                           <div className="font-medium text-yellow-400">
-                            {Math.round(
-                              (project.layers / project.targetLayers) * 100,
-                            )}
-                            %
+                            {Math.round((project.layers / project.targetLayers) * 100)}%
                           </div>
                         </div>
                       </div>
@@ -522,8 +451,8 @@ export function FarmerEcosystem() {
                       {project.layers === project.targetLayers && (
                         <div className="mt-2 p-2 bg-green-900/30 border border-green-500/50 rounded">
                           <span className="text-green-400 text-sm font-medium">
-                            🎉 Complete 7-Layer Ecosystem! Providing sustainable
-                            food, carbon capture & biodiversity.
+                            🎉 Complete 7-Layer Ecosystem! Providing sustainable food, carbon
+                            capture & biodiversity.
                           </span>
                         </div>
                       )}
@@ -546,40 +475,28 @@ export function FarmerEcosystem() {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium mb-2 block">
-                    Event Title
-                  </label>
+                  <label className="text-sm font-medium mb-2 block">Event Title</label>
                   <Input
                     value={newEvent.title}
-                    onChange={(e) =>
-                      setNewEvent({ ...newEvent, title: e.target.value })
-                    }
+                    onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
                     placeholder="Enter event name..."
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-2 block">
-                    Location
-                  </label>
+                  <label className="text-sm font-medium mb-2 block">Location</label>
                   <Input
                     value={newEvent.location}
-                    onChange={(e) =>
-                      setNewEvent({ ...newEvent, location: e.target.value })
-                    }
+                    onChange={(e) => setNewEvent({ ...newEvent, location: e.target.value })}
                     placeholder="Event location..."
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-2 block">
-                  Description
-                </label>
+                <label className="text-sm font-medium mb-2 block">Description</label>
                 <Textarea
                   value={newEvent.description}
-                  onChange={(e) =>
-                    setNewEvent({ ...newEvent, description: e.target.value })
-                  }
+                  onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
                   placeholder="Describe your farm event..."
                   rows={3}
                 />
@@ -587,9 +504,7 @@ export function FarmerEcosystem() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium mb-2 block">
-                    Ticket Price ($)
-                  </label>
+                  <label className="text-sm font-medium mb-2 block">Ticket Price ($)</label>
                   <Input
                     type="number"
                     value={newEvent.ticketPrice}
@@ -603,9 +518,7 @@ export function FarmerEcosystem() {
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-2 block">
-                    Expected Attendees
-                  </label>
+                  <label className="text-sm font-medium mb-2 block">Expected Attendees</label>
                   <Input
                     type="number"
                     value={newEvent.expectedAttendees}
@@ -621,30 +534,18 @@ export function FarmerEcosystem() {
               </div>
 
               <div className="p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
-                <h4 className="text-blue-400 font-semibold mb-2">
-                  📊 Projected Impact
-                </h4>
+                <h4 className="text-blue-400 font-semibold mb-2">📊 Projected Impact</h4>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-muted-foreground">
-                      Estimated Revenue:
-                    </span>
+                    <span className="text-muted-foreground">Estimated Revenue:</span>
                     <div className="font-medium text-green-400">
-                      $
-                      {(
-                        newEvent.ticketPrice * newEvent.expectedAttendees
-                      ).toLocaleString()}
+                      ${(newEvent.ticketPrice * newEvent.expectedAttendees).toLocaleString()}
                     </div>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">
-                      Forest Layers Fundable:
-                    </span>
+                    <span className="text-muted-foreground">Forest Layers Fundable:</span>
                     <div className="font-medium text-purple-400">
-                      {Math.floor(
-                        (newEvent.ticketPrice * newEvent.expectedAttendees) /
-                          5000,
-                      )}{" "}
+                      {Math.floor((newEvent.ticketPrice * newEvent.expectedAttendees) / 5000)}{" "}
                       layers
                     </div>
                   </div>

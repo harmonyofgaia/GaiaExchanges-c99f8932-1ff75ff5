@@ -23,12 +23,7 @@ export function WildlifeConservationActions() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (
-      !conservationType ||
-      !speciesHelped ||
-      !habitatArea ||
-      !activityDuration
-    ) {
+    if (!conservationType || !speciesHelped || !habitatArea || !activityDuration) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -43,8 +38,7 @@ export function WildlifeConservationActions() {
     };
 
     const points =
-      (basePoints[conservationType as keyof typeof basePoints] || 50) +
-      parseFloat(habitatArea) * 2;
+      (basePoints[conservationType as keyof typeof basePoints] || 50) + parseFloat(habitatArea) * 2;
     const tokens = Math.floor(points * 0.25);
 
     const activity = {
@@ -68,7 +62,7 @@ export function WildlifeConservationActions() {
 
     addActivity(activity);
     toast.success(
-      `Wildlife conservation recorded! +${Math.floor(points)} points earned for protecting nature`,
+      `Wildlife conservation recorded! +${Math.floor(points)} points earned for protecting nature`
     );
     setConservationType("");
     setSpeciesHelped("");
@@ -87,23 +81,14 @@ export function WildlifeConservationActions() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Conservation Activity
-            </label>
-            <Select
-              value={conservationType}
-              onValueChange={setConservationType}
-            >
+            <label className="block text-sm font-medium mb-2">Conservation Activity</label>
+            <Select value={conservationType} onValueChange={setConservationType}>
               <SelectTrigger>
                 <SelectValue placeholder="Select conservation type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="habitat_restoration">
-                  Habitat Restoration (100 pts)
-                </SelectItem>
-                <SelectItem value="species_monitoring">
-                  Species Monitoring (75 pts)
-                </SelectItem>
+                <SelectItem value="habitat_restoration">Habitat Restoration (100 pts)</SelectItem>
+                <SelectItem value="species_monitoring">Species Monitoring (75 pts)</SelectItem>
                 <SelectItem value="nest_box_installation">
                   Nest Box Installation (50 pts)
                 </SelectItem>
@@ -113,17 +98,13 @@ export function WildlifeConservationActions() {
                 <SelectItem value="wildlife_corridor_creation">
                   Wildlife Corridor Creation (120 pts)
                 </SelectItem>
-                <SelectItem value="pollinator_garden">
-                  Pollinator Garden (60 pts)
-                </SelectItem>
+                <SelectItem value="pollinator_garden">Pollinator Garden (60 pts)</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Species/Wildlife Helped
-            </label>
+            <label className="block text-sm font-medium mb-2">Species/Wildlife Helped</label>
             <Input
               value={speciesHelped}
               onChange={(e) => setSpeciesHelped(e.target.value)}
@@ -132,9 +113,7 @@ export function WildlifeConservationActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Habitat Area (m²)
-            </label>
+            <label className="block text-sm font-medium mb-2">Habitat Area (m²)</label>
             <Input
               type="number"
               value={habitatArea}
@@ -145,9 +124,7 @@ export function WildlifeConservationActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Time Invested (hours)
-            </label>
+            <label className="block text-sm font-medium mb-2">Time Invested (hours)</label>
             <Input
               type="number"
               step="0.5"
@@ -169,9 +146,8 @@ export function WildlifeConservationActions() {
 
         <div className="mt-4 p-3 bg-emerald-900/20 rounded-lg border border-emerald-500/30">
           <p className="text-sm text-emerald-300">
-            💡 <strong>Biodiversity Bonus:</strong> Wildlife conservation
-            activities get premium multipliers for protecting endangered
-            species!
+            💡 <strong>Biodiversity Bonus:</strong> Wildlife conservation activities get premium
+            multipliers for protecting endangered species!
           </p>
         </div>
       </CardContent>

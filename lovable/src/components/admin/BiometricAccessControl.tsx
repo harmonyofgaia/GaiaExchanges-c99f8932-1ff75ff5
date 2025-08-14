@@ -33,9 +33,7 @@ export function BiometricAccessControl() {
         if (newAccuracy >= 95) {
           clearInterval(scanInterval);
           setVerifiedScans((prev) => prev + 1);
-          console.log(
-            `🔐 ${type.toUpperCase()} SCAN VERIFIED - ADMIN ACCESS GRANTED`,
-          );
+          console.log(`🔐 ${type.toUpperCase()} SCAN VERIFIED - ADMIN ACCESS GRANTED`);
 
           return {
             ...prev,
@@ -123,16 +121,12 @@ export function BiometricAccessControl() {
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-black/30 p-4 rounded-lg border border-indigo-500/20">
-            <div className="text-2xl font-bold text-indigo-400">
-              {securityLevel}%
-            </div>
+            <div className="text-2xl font-bold text-indigo-400">{securityLevel}%</div>
             <div className="text-sm text-indigo-300">Security Level</div>
           </div>
 
           <div className="bg-black/30 p-4 rounded-lg border border-purple-500/20">
-            <div className="text-2xl font-bold text-purple-400">
-              {verifiedScans}
-            </div>
+            <div className="text-2xl font-bold text-purple-400">{verifiedScans}</div>
             <div className="text-sm text-purple-300">Verified Scans</div>
           </div>
 
@@ -143,19 +137,13 @@ export function BiometricAccessControl() {
         </div>
 
         {currentScan && (
-          <div
-            className={`p-4 rounded-lg border ${getBiometricColor(currentScan.type)}`}
-          >
+          <div className={`p-4 rounded-lg border ${getBiometricColor(currentScan.type)}`}>
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
                 {getBiometricIcon(currentScan.type)}
-                <span className="font-semibold capitalize">
-                  {currentScan.type} Scan
-                </span>
+                <span className="font-semibold capitalize">{currentScan.type} Scan</span>
               </div>
-              <span
-                className={`font-semibold ${getStatusColor(currentScan.status)}`}
-              >
+              <span className={`font-semibold ${getStatusColor(currentScan.status)}`}>
                 {currentScan.status.toUpperCase()}
               </span>
             </div>
@@ -218,9 +206,7 @@ export function BiometricAccessControl() {
         </div>
 
         <div className="bg-black/20 p-4 rounded-lg border border-indigo-500/20">
-          <h3 className="text-indigo-400 font-semibold mb-3">
-            Active Security Protocols
-          </h3>
+          <h3 className="text-indigo-400 font-semibold mb-3">Active Security Protocols</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
             <div className="flex justify-between">
               <span className="text-blue-300">Multi-Factor Authentication</span>
@@ -242,9 +228,7 @@ export function BiometricAccessControl() {
         </div>
 
         <div className="text-center p-4 bg-gradient-to-r from-indigo-900/20 to-purple-900/20 rounded-lg border border-indigo-500/20">
-          <div className="text-indigo-400 font-bold">
-            🔐 BIOMETRIC SECURITY STATUS
-          </div>
+          <div className="text-indigo-400 font-bold">🔐 BIOMETRIC SECURITY STATUS</div>
           <div className="text-green-400 text-sm mt-1">
             ULTIMATE PROTECTION • DNA VERIFIED • QUANTUM SECURED
           </div>

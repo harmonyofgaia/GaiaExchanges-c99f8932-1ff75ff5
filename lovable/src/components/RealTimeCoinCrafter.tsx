@@ -17,26 +17,18 @@ export function RealTimeCoinCrafter() {
   const [forgeTemperature, setForgeTemperature] = useState(1847);
 
   useEffect(() => {
-    console.log(
-      "🏭 REAL-TIME GAiA COIN CRAFTER INITIALIZED - 100 COINS/MONTH TARGET",
-    );
+    console.log("🏭 REAL-TIME GAiA COIN CRAFTER INITIALIZED - 100 COINS/MONTH TARGET");
 
     const craftingInterval = setInterval(() => {
       const now = new Date();
-      const daysInMonth = new Date(
-        now.getFullYear(),
-        now.getMonth() + 1,
-        0,
-      ).getDate();
+      const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
       const dayOfMonth = now.getDate();
       const expectedCoins = Math.floor((dayOfMonth / daysInMonth) * 100);
 
       setMonthlyProgress((dayOfMonth / daysInMonth) * 100);
       setCoinsThisMonth(expectedCoins);
       setTotalLifetimeCoins((prev) => prev + (Math.random() < 0.1 ? 1 : 0));
-      setNextCoinIn((prev) =>
-        prev > 0 ? prev - 1 : Math.floor(Math.random() * 600) + 300,
-      );
+      setNextCoinIn((prev) => (prev > 0 ? prev - 1 : Math.floor(Math.random() * 600) + 300));
       setForgeTemperature((prev) => 1800 + Math.random() * 100);
 
       // Trigger hammer animation
@@ -46,9 +38,7 @@ export function RealTimeCoinCrafter() {
       }
 
       if (Math.random() < 0.05) {
-        console.log(
-          `🪙 Real-time crafting: ${expectedCoins}/100 GAiA coins this month`,
-        );
+        console.log(`🪙 Real-time crafting: ${expectedCoins}/100 GAiA coins this month`);
       }
     }, 60000);
 
@@ -57,11 +47,7 @@ export function RealTimeCoinCrafter() {
 
   const daysUntilReset = () => {
     const now = new Date();
-    const lastDay = new Date(
-      now.getFullYear(),
-      now.getMonth() + 1,
-      0,
-    ).getDate();
+    const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
     return lastDay - now.getDate();
   };
 
@@ -81,12 +67,8 @@ export function RealTimeCoinCrafter() {
           >
             {isRealTimeCrafting ? "🔥 FORGE ACTIVE" : "❄️ COOLING DOWN"}
           </Badge>
-          <Badge className="bg-yellow-600 text-white">
-            🎯 TARGET: 100 GAiA/MONTH
-          </Badge>
-          <Badge className="bg-red-600 text-white">
-            🌡️ {forgeTemperature}°C
-          </Badge>
+          <Badge className="bg-yellow-600 text-white">🎯 TARGET: 100 GAiA/MONTH</Badge>
+          <Badge className="bg-red-600 text-white">🌡️ {forgeTemperature}°C</Badge>
         </div>
       </CardHeader>
 
@@ -94,38 +76,26 @@ export function RealTimeCoinCrafter() {
         {/* Monthly Crafting Progress */}
         <div className="space-y-3">
           <div className="flex justify-between items-center">
-            <span className="font-bold text-orange-400">
-              Monthly Crafting Progress
-            </span>
-            <span className="text-orange-300">
-              {coinsThisMonth}/100 GAiA coins
-            </span>
+            <span className="font-bold text-orange-400">Monthly Crafting Progress</span>
+            <span className="text-orange-300">{coinsThisMonth}/100 GAiA coins</span>
           </div>
           <Progress value={monthlyProgress} className="h-4 bg-black/40" />
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
             <div className="text-center p-3 bg-orange-900/30 rounded border border-orange-500/30">
-              <div className="text-2xl font-bold text-orange-400">
-                {coinsThisMonth}
-              </div>
+              <div className="text-2xl font-bold text-orange-400">{coinsThisMonth}</div>
               <div className="text-muted-foreground">This Month</div>
             </div>
             <div className="text-center p-3 bg-yellow-900/30 rounded border border-yellow-500/30">
-              <div className="text-2xl font-bold text-yellow-400">
-                {totalLifetimeCoins}
-              </div>
+              <div className="text-2xl font-bold text-yellow-400">{totalLifetimeCoins}</div>
               <div className="text-muted-foreground">Total Forged</div>
             </div>
             <div className="text-center p-3 bg-red-900/30 rounded border border-red-500/30">
-              <div className="text-2xl font-bold text-red-400">
-                {nextCoinIn}min
-              </div>
+              <div className="text-2xl font-bold text-red-400">{nextCoinIn}min</div>
               <div className="text-muted-foreground">Next Coin</div>
             </div>
             <div className="text-center p-3 bg-purple-900/30 rounded border border-purple-500/30">
-              <div className="text-2xl font-bold text-purple-400">
-                {daysUntilReset()}
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{daysUntilReset()}</div>
               <div className="text-muted-foreground">Days Left</div>
             </div>
           </div>
@@ -159,9 +129,7 @@ export function RealTimeCoinCrafter() {
             <div className="flex flex-col items-center relative">
               <div className="text-5xl">⚒️</div>
               {hammerAnimation && (
-                <div className="absolute -top-2 text-yellow-400 animate-ping">
-                  ✨
-                </div>
+                <div className="absolute -top-2 text-yellow-400 animate-ping">✨</div>
               )}
               <div className="text-xs text-orange-400 mt-2">Anvil</div>
             </div>
@@ -203,18 +171,12 @@ export function RealTimeCoinCrafter() {
             {isRealTimeCrafting ? "Cool Forge" : "Heat Forge"}
           </Button>
 
-          <Button
-            variant="outline"
-            className="border-orange-500/30 text-orange-400"
-          >
+          <Button variant="outline" className="border-orange-500/30 text-orange-400">
             <Timer className="h-4 w-4 mr-2" />
             Forge Analytics
           </Button>
 
-          <Button
-            variant="outline"
-            className="border-yellow-500/30 text-yellow-400"
-          >
+          <Button variant="outline" className="border-yellow-500/30 text-yellow-400">
             <Coins className="h-4 w-4 mr-2" />
             Export Report
           </Button>
@@ -233,9 +195,9 @@ export function RealTimeCoinCrafter() {
           </h4>
           <div className="text-sm text-orange-300 space-y-2">
             <p>
-              Our legendary Master Craftsman forges 100 premium GAiA coins
-              monthly using ancient techniques combined with quantum-level
-              precision. Each coin is hand-crafted with love and joy protocols.
+              Our legendary Master Craftsman forges 100 premium GAiA coins monthly using ancient
+              techniques combined with quantum-level precision. Each coin is hand-crafted with love
+              and joy protocols.
             </p>
             <div className="grid grid-cols-2 gap-4 mt-4">
               <div>

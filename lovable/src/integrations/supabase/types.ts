@@ -1,10 +1,4 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[];
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type Database = {
   // Allows to automatically instanciate createClient with right options
@@ -3877,9 +3871,7 @@ export type Database = {
         }[];
       };
       diagnose_table_dependencies: {
-        Args:
-          | Record<PropertyKey, never>
-          | { schema_name: string; table_name: string };
+        Args: Record<PropertyKey, never> | { schema_name: string; table_name: string };
         Returns: {
           dependent_object: string;
           object_type: string;
@@ -4577,9 +4569,7 @@ export type Database = {
         }[];
       };
       safe_execute: {
-        Args:
-          | { p_function_name: string; p_params?: Json }
-          | { p_query: string };
+        Args: { p_function_name: string; p_params?: Json } | { p_query: string };
         Returns: Record<string, unknown>;
       };
       safe_uuid_convert: {
@@ -4824,14 +4814,7 @@ export type Database = {
         | "quantum_layer";
       security_level: "low" | "medium" | "high" | "maximum";
       trading_pair_status: "active" | "inactive" | "maintenance";
-      transaction_type:
-        | "buy"
-        | "sell"
-        | "transfer"
-        | "stake"
-        | "unstake"
-        | "reward"
-        | "burn";
+      transaction_type: "buy" | "sell" | "transfer" | "stake" | "unstake" | "reward" | "burn";
       user_role: "user" | "trader" | "admin" | "moderator";
     };
     CompositeTypes: {
@@ -4842,10 +4825,7 @@ export type Database = {
 
 type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">;
 
-type DefaultSchema = DatabaseWithoutInternals[Extract<
-  keyof Database,
-  "public"
->];
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">];
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends
@@ -4866,10 +4846,8 @@ export type Tables<
     }
     ? R
     : never
-  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])
-    ? (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] & DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
         Row: infer R;
       }
       ? R
@@ -4992,15 +4970,7 @@ export const Constants = {
       ],
       security_level: ["low", "medium", "high", "maximum"],
       trading_pair_status: ["active", "inactive", "maintenance"],
-      transaction_type: [
-        "buy",
-        "sell",
-        "transfer",
-        "stake",
-        "unstake",
-        "reward",
-        "burn",
-      ],
+      transaction_type: ["buy", "sell", "transfer", "stake", "unstake", "reward", "burn"],
       user_role: ["user", "trader", "admin", "moderator"],
     },
   },

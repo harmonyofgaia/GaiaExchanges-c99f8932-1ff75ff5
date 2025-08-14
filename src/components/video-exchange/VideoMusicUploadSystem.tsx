@@ -76,12 +76,9 @@ export function VideoMusicUploadSystem() {
           setIsUploading(false);
           const tokensEarned = Math.floor(Math.random() * 50) + 25;
           setUserTokens((prev) => prev + tokensEarned);
-          toast.success(
-            `🎵 Music uploaded! Earned ${tokensEarned} ${GAIA_TOKEN.SYMBOL} tokens`,
-            {
-              description: "Your performance is being processed for approval",
-            },
-          );
+          toast.success(`🎵 Music uploaded! Earned ${tokensEarned} ${GAIA_TOKEN.SYMBOL} tokens`, {
+            description: "Your performance is being processed for approval",
+          });
           return 100;
         }
         return prev + 10;
@@ -98,9 +95,7 @@ export function VideoMusicUploadSystem() {
             <div className="flex items-center gap-3">
               <Coins className="h-6 w-6 text-green-400" />
               <div>
-                <div className="text-2xl font-bold text-green-400">
-                  {userTokens}
-                </div>
+                <div className="text-2xl font-bold text-green-400">{userTokens}</div>
                 <div className="text-sm text-muted-foreground">
                   {GAIA_TOKEN.SYMBOL} Tokens from Music
                 </div>
@@ -122,8 +117,7 @@ export function VideoMusicUploadSystem() {
               Upload Musical Performance
             </CardTitle>
             <p className="text-sm text-muted-foreground">
-              Share your music and earn {GAIA_TOKEN.SYMBOL} tokens based on
-              plays and engagement
+              Share your music and earn {GAIA_TOKEN.SYMBOL} tokens based on plays and engagement
             </p>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -144,10 +138,7 @@ export function VideoMusicUploadSystem() {
 
             <div className="space-y-2">
               <Label htmlFor="genre">Genre</Label>
-              <Input
-                id="genre"
-                placeholder="Electronic Eco, Ambient Nature, etc..."
-              />
+              <Input id="genre" placeholder="Electronic Eco, Ambient Nature, etc..." />
             </div>
 
             <div className="space-y-2">
@@ -179,9 +170,7 @@ export function VideoMusicUploadSystem() {
             </Button>
 
             <div className="p-4 bg-green-900/20 border border-green-500/20 rounded-lg">
-              <h4 className="font-bold text-green-400 mb-2">
-                Token Earning System
-              </h4>
+              <h4 className="font-bold text-green-400 mb-2">Token Earning System</h4>
               <div className="text-sm text-muted-foreground space-y-1">
                 <div>• Upload bonus: 25 {GAIA_TOKEN.SYMBOL} tokens</div>
                 <div>• Play rewards: 0.1 token per play</div>
@@ -209,9 +198,7 @@ export function VideoMusicUploadSystem() {
                     <div className="flex items-start justify-between mb-2">
                       <div>
                         <h4 className="font-medium">{track.title}</h4>
-                        <p className="text-sm text-muted-foreground">
-                          by {track.artist}
-                        </p>
+                        <p className="text-sm text-muted-foreground">by {track.artist}</p>
                       </div>
                       <Badge
                         variant={
@@ -230,9 +217,7 @@ export function VideoMusicUploadSystem() {
                       <Badge variant="outline" className="text-xs">
                         {track.genre}
                       </Badge>
-                      <span className="text-xs text-muted-foreground">
-                        • {track.duration}
-                      </span>
+                      <span className="text-xs text-muted-foreground">• {track.duration}</span>
                     </div>
 
                     <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">

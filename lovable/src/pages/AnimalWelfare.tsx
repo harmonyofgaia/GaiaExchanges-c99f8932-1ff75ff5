@@ -89,9 +89,7 @@ export default function AnimalWelfare() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
-                  Immersive VR experiences coming soon!
-                </p>
+                <p className="text-muted-foreground">Immersive VR experiences coming soon!</p>
               </CardContent>
             </Card>
           </TabsContent>
@@ -108,8 +106,7 @@ export default function AnimalWelfare() {
                   🎮 Gaming Integration Hub
                 </CardTitle>
                 <p className="text-muted-foreground">
-                  Use your animal contributions in various games and earn
-                  rewards for conservation
+                  Use your animal contributions in various games and earn rewards for conservation
                 </p>
               </CardHeader>
               <CardContent>

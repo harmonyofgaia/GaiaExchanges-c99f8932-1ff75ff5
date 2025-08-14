@@ -84,16 +84,14 @@ export function BeeHotelActions() {
             disabled={loading}
             className="w-full bg-yellow-600 hover:bg-yellow-700"
           >
-            {loading
-              ? "Recording..."
-              : "🏠 Record Bee Hotel Action (+25 Points)"}
+            {loading ? "Recording..." : "🏠 Record Bee Hotel Action (+25 Points)"}
           </Button>
         </form>
 
         <div className="mt-4 p-3 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
           <p className="text-sm text-yellow-300">
-            💡 <strong>Tip:</strong> Regular bee hotel maintenance supports
-            local pollinator populations and earns you GAiA tokens!
+            💡 <strong>Tip:</strong> Regular bee hotel maintenance supports local pollinator
+            populations and earns you GAiA tokens!
           </p>
         </div>
       </CardContent>

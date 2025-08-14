@@ -31,10 +31,7 @@ export function SystemIntegrityChecker() {
 
     try {
       // Check database connection
-      const { data, error } = await supabase
-        .from("admin_metrics")
-        .select("id")
-        .limit(1);
+      const { data, error } = await supabase.from("admin_metrics").select("id").limit(1);
       health.database = !error;
 
       // Check storage
@@ -99,9 +96,7 @@ export function SystemIntegrityChecker() {
               size="sm"
               className="bg-blue-600 hover:bg-blue-700"
             >
-              <RefreshCw
-                className={`h-4 w-4 mr-2 ${isChecking ? "animate-spin" : ""}`}
-              />
+              <RefreshCw className={`h-4 w-4 mr-2 ${isChecking ? "animate-spin" : ""}`} />
               {isChecking ? "Checking..." : "Refresh"}
             </Button>
           </div>
@@ -109,8 +104,7 @@ export function SystemIntegrityChecker() {
           <div className="grid grid-cols-1 gap-3">
             {healthItems.map((item) => {
               const IconComponent = item.icon;
-              const isHealthy =
-                systemHealth[item.key as keyof typeof systemHealth];
+              const isHealthy = systemHealth[item.key as keyof typeof systemHealth];
 
               return (
                 <div
@@ -140,9 +134,7 @@ export function SystemIntegrityChecker() {
             <div className="text-2xl font-bold text-green-400">
               {Object.values(systemHealth).filter(Boolean).length}/5
             </div>
-            <div className="text-sm text-muted-foreground">
-              Systems Operational
-            </div>
+            <div className="text-sm text-muted-foreground">Systems Operational</div>
           </div>
         </div>
       </CardContent>

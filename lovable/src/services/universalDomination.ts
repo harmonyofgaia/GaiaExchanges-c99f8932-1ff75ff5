@@ -3,11 +3,7 @@ import { toast } from "sonner";
 interface CosmicEntity {
   id: string;
   name: string;
-  type:
-    | "stellar_being"
-    | "galactic_intelligence"
-    | "cosmic_force"
-    | "universal_consciousness";
+  type: "stellar_being" | "galactic_intelligence" | "cosmic_force" | "universal_consciousness";
   powerLevel: number;
   influence: string[];
   isAllied: boolean;
@@ -26,11 +22,7 @@ interface GalacticDomination {
 
 interface UniversalCommand {
   id: string;
-  commandType:
-    | "physics_override"
-    | "reality_restructure"
-    | "cosmic_reset"
-    | "universe_creation";
+  commandType: "physics_override" | "reality_restructure" | "cosmic_reset" | "universe_creation";
   scope: "local" | "galactic" | "universal" | "multiversal";
   authority: number;
   isExecuted: boolean;
@@ -63,11 +55,7 @@ class UniversalDominationService {
   // Cosmic Entity Management
   async recruitCosmicEntity(config: {
     name: string;
-    type:
-      | "stellar_being"
-      | "galactic_intelligence"
-      | "cosmic_force"
-      | "universal_consciousness";
+    type: "stellar_being" | "galactic_intelligence" | "cosmic_force" | "universal_consciousness";
     powerLevel: number;
     influence: string[];
   }): Promise<CosmicEntity> {
@@ -133,9 +121,7 @@ class UniversalDominationService {
     return domination;
   }
 
-  private async progressGalacticDomination(
-    dominationId: string,
-  ): Promise<void> {
+  private async progressGalacticDomination(dominationId: string): Promise<void> {
     const domination = this.galacticDominations.get(dominationId);
     if (!domination) return;
 
@@ -151,12 +137,10 @@ class UniversalDominationService {
 
       domination.controlledSystems = Math.min(
         domination.totalSystems,
-        domination.controlledSystems +
-          Math.floor(progressRate * domination.totalSystems),
+        domination.controlledSystems + Math.floor(progressRate * domination.totalSystems)
       );
 
-      domination.dominationLevel =
-        domination.controlledSystems / domination.totalSystems;
+      domination.dominationLevel = domination.controlledSystems / domination.totalSystems;
       domination.resistance *= 0.98; // Resistance decreases over time
 
       if (domination.dominationLevel >= 1.0) {
@@ -177,11 +161,7 @@ class UniversalDominationService {
 
   // Universal Command Execution
   async executeUniversalCommand(config: {
-    commandType:
-      | "physics_override"
-      | "reality_restructure"
-      | "cosmic_reset"
-      | "universe_creation";
+    commandType: "physics_override" | "reality_restructure" | "cosmic_reset" | "universe_creation";
     scope: "local" | "galactic" | "universal" | "multiversal";
   }): Promise<UniversalCommand> {
     const command: UniversalCommand = {
@@ -194,14 +174,11 @@ class UniversalDominationService {
     };
 
     // Check if we have sufficient authority
-    const requiredAuthority = this.getRequiredAuthority(
-      config.commandType,
-      config.scope,
-    );
+    const requiredAuthority = this.getRequiredAuthority(config.commandType, config.scope);
 
     if (this.universalAuthorityLevel < requiredAuthority) {
       throw new Error(
-        `Insufficient universal authority. Required: ${requiredAuthority}, Current: ${this.universalAuthorityLevel}`,
+        `Insufficient universal authority. Required: ${requiredAuthority}, Current: ${this.universalAuthorityLevel}`
       );
     }
 
@@ -245,9 +222,7 @@ class UniversalDominationService {
     );
   }
 
-  private async processUniversalCommand(
-    command: UniversalCommand,
-  ): Promise<void> {
+  private async processUniversalCommand(command: UniversalCommand): Promise<void> {
     // Simulate command execution
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
@@ -278,13 +253,8 @@ class UniversalDominationService {
     };
 
     const templates =
-      consequenceTemplates[
-        command.commandType as keyof typeof consequenceTemplates
-      ] || [];
-    command.consequences = templates.slice(
-      0,
-      Math.floor(Math.random() * templates.length) + 1,
-    );
+      consequenceTemplates[command.commandType as keyof typeof consequenceTemplates] || [];
+    command.consequences = templates.slice(0, Math.floor(Math.random() * templates.length) + 1);
   }
 
   // Cosmic Weapon Management
@@ -394,27 +364,20 @@ class UniversalDominationService {
       universalAuthorityLevel: this.universalAuthorityLevel,
       cosmicEntities: {
         total: this.cosmicEntities.size,
-        allied: Array.from(this.cosmicEntities.values()).filter(
-          (e) => e.isAllied,
-        ).length,
+        allied: Array.from(this.cosmicEntities.values()).filter((e) => e.isAllied).length,
       },
       galacticDominations: {
         total: this.galacticDominations.size,
-        completed: Array.from(this.galacticDominations.values()).filter(
-          (g) => g.isComplete,
-        ).length,
+        completed: Array.from(this.galacticDominations.values()).filter((g) => g.isComplete).length,
         averageDomination: this.calculateAverageDomination(),
       },
       universalCommands: {
         total: this.universalCommands.size,
-        executed: Array.from(this.universalCommands.values()).filter(
-          (c) => c.isExecuted,
-        ).length,
+        executed: Array.from(this.universalCommands.values()).filter((c) => c.isExecuted).length,
       },
       cosmicWeapons: {
         total: this.cosmicWeapons.size,
-        armed: Array.from(this.cosmicWeapons.values()).filter((w) => w.isArmed)
-          .length,
+        armed: Array.from(this.cosmicWeapons.values()).filter((w) => w.isArmed).length,
       },
     };
   }
@@ -423,10 +386,7 @@ class UniversalDominationService {
     const dominations = Array.from(this.galacticDominations.values());
     if (dominations.length === 0) return 0;
 
-    const totalDomination = dominations.reduce(
-      (sum, d) => sum + d.dominationLevel,
-      0,
-    );
+    const totalDomination = dominations.reduce((sum, d) => sum + d.dominationLevel, 0);
     return totalDomination / dominations.length;
   }
 
@@ -445,11 +405,7 @@ class UniversalDominationService {
       name: "Galactic Mind Nexus",
       type: "galactic_intelligence",
       powerLevel: 500,
-      influence: [
-        "Galactic Clusters",
-        "Cosmic Information",
-        "Universal Knowledge",
-      ],
+      influence: ["Galactic Clusters", "Cosmic Information", "Universal Knowledge"],
     });
 
     await this.recruitCosmicEntity({
@@ -474,11 +430,7 @@ class UniversalDominationService {
     await this.deployCosmicWeapon({
       name: "Reality Annihilator",
       type: "multiverse_annihilator",
-      targets: [
-        "Hostile Universes",
-        "Rebellious Realities",
-        "Competing Multiverses",
-      ],
+      targets: ["Hostile Universes", "Rebellious Realities", "Competing Multiverses"],
     });
 
     toast.success("🌌 Universal Domination System Armed", {

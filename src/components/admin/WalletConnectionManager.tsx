@@ -33,9 +33,7 @@ interface WalletConnection {
 }
 
 export function WalletConnectionManager() {
-  const [walletConnections, setWalletConnections] = useState<
-    WalletConnection[]
-  >([
+  const [walletConnections, setWalletConnections] = useState<WalletConnection[]>([
     {
       id: "1",
       project_name: "Global Reforestation Initiative",
@@ -143,9 +141,7 @@ export function WalletConnectionManager() {
     if (!editingId || !editData) return;
 
     setWalletConnections((prev) =>
-      prev.map((conn) =>
-        conn.id === editingId ? { ...conn, ...editData } : conn,
-      ),
+      prev.map((conn) => (conn.id === editingId ? { ...conn, ...editData } : conn))
     );
 
     toast.success("🔒 ADMIN: Wallet Connection Updated", {
@@ -181,20 +177,12 @@ export function WalletConnectionManager() {
     }
 
     setWalletConnections((prev) =>
-      prev.map((conn) =>
-        conn.id === id ? { ...conn, allocation_percentage: percentage } : conn,
-      ),
+      prev.map((conn) => (conn.id === id ? { ...conn, allocation_percentage: percentage } : conn))
     );
   };
 
-  const totalAllocation = walletConnections.reduce(
-    (sum, w) => sum + w.allocation_percentage,
-    0,
-  );
-  const totalReceived = walletConnections.reduce(
-    (sum, w) => sum + w.total_received,
-    0,
-  );
+  const totalAllocation = walletConnections.reduce((sum, w) => sum + w.allocation_percentage, 0);
+  const totalReceived = walletConnections.reduce((sum, w) => sum + w.total_received, 0);
 
   return (
     <div className="space-y-6">
@@ -204,40 +192,27 @@ export function WalletConnectionManager() {
           <CardTitle className="flex items-center gap-2 text-red-400">
             <Shield className="h-6 w-6" />
             🔒 ADMIN WALLET CONNECTION MANAGER
-            <Badge className="bg-red-600 text-white animate-pulse">
-              INVISIBLE TO OUTSIDERS
-            </Badge>
+            <Badge className="bg-red-600 text-white animate-pulse">INVISIBLE TO OUTSIDERS</Badge>
           </CardTitle>
           <p className="text-red-300">
-            Full control over all wallet connections, reinvestment flows, and
-            burning processes
+            Full control over all wallet connections, reinvestment flows, and burning processes
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center p-3 rounded-lg bg-green-900/30">
-              <div className="text-2xl font-bold text-green-400">
-                {walletConnections.length}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Active Connections
-              </div>
+              <div className="text-2xl font-bold text-green-400">{walletConnections.length}</div>
+              <div className="text-xs text-muted-foreground">Active Connections</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-blue-900/30">
-              <div className="text-2xl font-bold text-blue-400">
-                {totalAllocation}%
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Total Allocation
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{totalAllocation}%</div>
+              <div className="text-xs text-muted-foreground">Total Allocation</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-purple-900/30">
               <div className="text-2xl font-bold text-purple-400">
                 {totalReceived.toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Total GAIA Distributed
-              </div>
+              <div className="text-xs text-muted-foreground">Total GAIA Distributed</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-orange-900/30">
               <div className="text-2xl font-bold text-orange-400">100%</div>
@@ -257,9 +232,7 @@ export function WalletConnectionManager() {
             <CardContent className="p-6">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div
-                    className={`p-2 rounded-lg ${getCategoryColor(connection.category)}`}
-                  >
+                  <div className={`p-2 rounded-lg ${getCategoryColor(connection.category)}`}>
                     {getCategoryIcon(connection.category)}
                   </div>
                   <div>
@@ -291,19 +264,13 @@ export function WalletConnectionManager() {
                         className="text-xs mt-1"
                       />
                     ) : (
-                      <p className="text-xs text-muted-foreground">
-                        {connection.description}
-                      </p>
+                      <p className="text-xs text-muted-foreground">{connection.description}</p>
                     )}
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge
-                    className={
-                      connection.status === "active"
-                        ? "bg-green-600"
-                        : "bg-gray-600"
-                    }
+                    className={connection.status === "active" ? "bg-green-600" : "bg-gray-600"}
                   >
                     {connection.status.toUpperCase()}
                   </Badge>
@@ -321,11 +288,7 @@ export function WalletConnectionManager() {
                       </Button>
                     </div>
                   ) : (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => startEdit(connection)}
-                    >
+                    <Button size="sm" variant="outline" onClick={() => startEdit(connection)}>
                       <Pencil className="h-3 w-3" />
                     </Button>
                   )}
@@ -334,9 +297,7 @@ export function WalletConnectionManager() {
 
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">
-                    Allocation:
-                  </span>
+                  <span className="text-sm text-muted-foreground">Allocation:</span>
                   {editingId === connection.id ? (
                     <div className="flex items-center gap-2">
                       <Input
@@ -347,8 +308,7 @@ export function WalletConnectionManager() {
                         onChange={(e) =>
                           setEditData((prev) => ({
                             ...prev,
-                            allocation_percentage:
-                              parseInt(e.target.value) || 0,
+                            allocation_percentage: parseInt(e.target.value) || 0,
                           }))
                         }
                         className="w-16 text-xs"
@@ -370,9 +330,7 @@ export function WalletConnectionManager() {
                 </div>
 
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">
-                    Total Received:
-                  </span>
+                  <span className="text-sm text-muted-foreground">Total Received:</span>
                   <span className="font-bold">
                     {connection.total_received.toLocaleString()} GAIA
                   </span>
@@ -380,9 +338,7 @@ export function WalletConnectionManager() {
 
                 <div className="bg-black/30 p-3 rounded">
                   <div className="flex items-center justify-between mb-2">
-                    <Label className="text-xs text-muted-foreground">
-                      Wallet Address:
-                    </Label>
+                    <Label className="text-xs text-muted-foreground">Wallet Address:</Label>
                     <Button
                       size="sm"
                       variant="ghost"
@@ -424,24 +380,14 @@ export function WalletConnectionManager() {
       {/* Admin Actions */}
       <Card className="border-blue-500/30">
         <CardHeader>
-          <CardTitle className="text-blue-400">
-            🚀 Admin Quick Actions
-          </CardTitle>
+          <CardTitle className="text-blue-400">🚀 Admin Quick Actions</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Button className="bg-green-600 hover:bg-green-700">
-              Add New Project
-            </Button>
-            <Button className="bg-orange-600 hover:bg-orange-700">
-              Export Connections
-            </Button>
-            <Button className="bg-purple-600 hover:bg-purple-700">
-              Backup Settings
-            </Button>
-            <Button className="bg-red-600 hover:bg-red-700">
-              Emergency Stop
-            </Button>
+            <Button className="bg-green-600 hover:bg-green-700">Add New Project</Button>
+            <Button className="bg-orange-600 hover:bg-orange-700">Export Connections</Button>
+            <Button className="bg-purple-600 hover:bg-purple-700">Backup Settings</Button>
+            <Button className="bg-red-600 hover:bg-red-700">Emergency Stop</Button>
           </div>
         </CardContent>
       </Card>

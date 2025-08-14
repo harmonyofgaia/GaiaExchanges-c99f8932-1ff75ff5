@@ -13,8 +13,7 @@ const AppStoreSubmission = () => {
           App Store Submission Center
         </h1>
         <p className="text-xl text-muted-foreground mt-2">
-          Complete package for submitting Harmony of Gaia to Apple App Store and
-          Google Play Store
+          Complete package for submitting Harmony of Gaia to Apple App Store and Google Play Store
         </p>
         <Badge className="mt-4 bg-gradient-to-r from-green-600 to-blue-600 text-white text-lg px-6 py-2">
           Ready for Manual Submission
@@ -126,9 +125,7 @@ const AppStoreSubmission = () => {
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <h4 className="font-medium text-blue-400 mb-2">
-                      📱 Complete Documentation
-                    </h4>
+                    <h4 className="font-medium text-blue-400 mb-2">📱 Complete Documentation</h4>
                     <ul className="text-sm space-y-1 text-muted-foreground">
                       <li>✅ Privacy Policy (GDPR & CCPA compliant)</li>
                       <li>✅ Terms of Service (International)</li>
@@ -137,9 +134,7 @@ const AppStoreSubmission = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-medium text-purple-400 mb-2">
-                      🔧 Technical Assets
-                    </h4>
+                    <h4 className="font-medium text-purple-400 mb-2">🔧 Technical Assets</h4>
                     <ul className="text-sm space-y-1 text-muted-foreground">
                       <li>✅ Official Gaia Logo (App Icon ready)</li>
                       <li>✅ Working Web Application</li>
@@ -150,15 +145,12 @@ const AppStoreSubmission = () => {
                 </div>
 
                 <div className="mt-4 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
-                  <h4 className="font-medium text-yellow-400 mb-2">
-                    ⚠️ Manual Steps Required
-                  </h4>
+                  <h4 className="font-medium text-yellow-400 mb-2">⚠️ Manual Steps Required</h4>
                   <p className="text-sm text-muted-foreground">
-                    You'll need to personally create developer accounts, build
-                    the mobile app versions, and submit through the official app
-                    store portals. This ensures your complete control over the
-                    submission process and maintains security of your developer
-                    credentials.
+                    You'll need to personally create developer accounts, build the mobile app
+                    versions, and submit through the official app store portals. This ensures your
+                    complete control over the submission process and maintains security of your
+                    developer credentials.
                   </p>
                 </div>
               </div>

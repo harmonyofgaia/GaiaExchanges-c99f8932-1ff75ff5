@@ -64,7 +64,7 @@ export function QuantumSecurityDashboard() {
         prev.map((metric) => ({
           ...metric,
           value: Math.min(100, metric.value + (Math.random() - 0.5) * 0.1),
-        })),
+        }))
       );
 
       // Simulate blocked attacks
@@ -113,8 +113,7 @@ export function QuantumSecurityDashboard() {
             🛡️ QUANTUM SECURITY CONTROL CENTER
           </CardTitle>
           <p className="text-center text-lg text-red-300">
-            Advanced 4-Step Breach Protocol • 100 Invisible Defense Walls •
-            AI-Powered Protection
+            Advanced 4-Step Breach Protocol • 100 Invisible Defense Walls • AI-Powered Protection
           </p>
         </CardHeader>
       </Card>
@@ -138,9 +137,7 @@ export function QuantumSecurityDashboard() {
               <Activity className="h-5 w-5 text-blue-400" />
               <span className="font-bold text-blue-400">System Uptime</span>
             </div>
-            <div className="text-2xl font-bold text-blue-400">
-              {systemUptime.toFixed(2)}%
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{systemUptime.toFixed(2)}%</div>
             <div className="text-xs text-blue-300">24/7 Monitoring</div>
           </CardContent>
         </Card>
@@ -164,9 +161,7 @@ export function QuantumSecurityDashboard() {
               <AlertTriangle className="h-5 w-5 text-orange-400" />
               <span className="font-bold text-orange-400">Active Threats</span>
             </div>
-            <div className="text-2xl font-bold text-orange-400">
-              {activeThreats}
-            </div>
+            <div className="text-2xl font-bold text-orange-400">{activeThreats}</div>
             <div className="text-xs text-orange-300">All Neutralized</div>
           </CardContent>
         </Card>
@@ -175,9 +170,7 @@ export function QuantumSecurityDashboard() {
       {/* Security Metrics */}
       <Card className="border-blue-500/30">
         <CardHeader>
-          <CardTitle className="text-blue-400">
-            🔒 Security Metrics Dashboard
-          </CardTitle>
+          <CardTitle className="text-blue-400">🔒 Security Metrics Dashboard</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -187,21 +180,15 @@ export function QuantumSecurityDashboard() {
                   <div className="flex items-center justify-between mb-3">
                     <h4 className="font-semibold">{metric.name}</h4>
                     <div className="flex items-center gap-2">
-                      <Badge className={getStatusColor(metric.status)}>
-                        {metric.status}
-                      </Badge>
-                      <span className="text-sm">
-                        {getTrendIcon(metric.trend)}
-                      </span>
+                      <Badge className={getStatusColor(metric.status)}>{metric.status}</Badge>
+                      <span className="text-sm">{getTrendIcon(metric.trend)}</span>
                     </div>
                   </div>
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Performance</span>
-                      <span className="text-green-400">
-                        {metric.value.toFixed(1)}%
-                      </span>
+                      <span className="text-green-400">{metric.value.toFixed(1)}%</span>
                     </div>
                     <Progress value={metric.value} className="h-3" />
                   </div>
@@ -215,9 +202,7 @@ export function QuantumSecurityDashboard() {
       {/* Invisible Defense Walls */}
       <Card className="border-purple-500/30">
         <CardHeader>
-          <CardTitle className="text-purple-400">
-            👻 100 Invisible Defense Walls Status
-          </CardTitle>
+          <CardTitle className="text-purple-400">👻 100 Invisible Defense Walls Status</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -244,14 +229,10 @@ export function QuantumSecurityDashboard() {
           </div>
 
           <div className="mt-6 p-4 bg-gradient-to-r from-purple-900/30 to-black rounded-lg border border-purple-500/30">
-            <h4 className="font-bold text-purple-400 mb-2">
-              🔮 Invisible Wall Technology
-            </h4>
+            <h4 className="font-bold text-purple-400 mb-2">🔮 Invisible Wall Technology</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
-                <div className="text-purple-300 font-medium">
-                  Advanced Features:
-                </div>
+                <div className="text-purple-300 font-medium">Advanced Features:</div>
                 <ul className="text-muted-foreground space-y-1">
                   <li>• Quantum encryption layers</li>
                   <li>• Neural pattern recognition</li>
@@ -260,9 +241,7 @@ export function QuantumSecurityDashboard() {
                 </ul>
               </div>
               <div>
-                <div className="text-purple-300 font-medium">
-                  Protection Coverage:
-                </div>
+                <div className="text-purple-300 font-medium">Protection Coverage:</div>
                 <ul className="text-muted-foreground space-y-1">
                   <li>• Admin authentication systems</li>
                   <li>• Token transaction security</li>
@@ -278,9 +257,7 @@ export function QuantumSecurityDashboard() {
       {/* AI Defense Network */}
       <Card className="border-cyan-500/30">
         <CardHeader>
-          <CardTitle className="text-cyan-400">
-            🧠 AI Defense Network Status
-          </CardTitle>
+          <CardTitle className="text-cyan-400">🧠 AI Defense Network Status</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -290,9 +267,7 @@ export function QuantumSecurityDashboard() {
                 <h4 className="font-semibold text-cyan-400">Neural Analysis</h4>
               </div>
               <div className="text-2xl font-bold text-cyan-400 mb-1">97.8%</div>
-              <div className="text-sm text-muted-foreground">
-                Pattern Recognition Accuracy
-              </div>
+              <div className="text-sm text-muted-foreground">Pattern Recognition Accuracy</div>
             </div>
 
             <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/30">
@@ -300,27 +275,17 @@ export function QuantumSecurityDashboard() {
                 <Zap className="h-6 w-6 text-green-400" />
                 <h4 className="font-semibold text-green-400">Response Time</h4>
               </div>
-              <div className="text-2xl font-bold text-green-400 mb-1">
-                0.003s
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Average Threat Response
-              </div>
+              <div className="text-2xl font-bold text-green-400 mb-1">0.003s</div>
+              <div className="text-sm text-muted-foreground">Average Threat Response</div>
             </div>
 
             <div className="p-4 bg-orange-900/20 rounded-lg border border-orange-500/30">
               <div className="flex items-center gap-3 mb-3">
                 <Globe className="h-6 w-6 text-orange-400" />
-                <h4 className="font-semibold text-orange-400">
-                  Global Network
-                </h4>
+                <h4 className="font-semibold text-orange-400">Global Network</h4>
               </div>
-              <div className="text-2xl font-bold text-orange-400 mb-1">
-                24/7
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Worldwide Monitoring
-              </div>
+              <div className="text-2xl font-bold text-orange-400 mb-1">24/7</div>
+              <div className="text-sm text-muted-foreground">Worldwide Monitoring</div>
             </div>
           </div>
         </CardContent>

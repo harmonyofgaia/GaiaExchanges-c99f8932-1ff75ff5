@@ -3,17 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  MapPin,
-  Activity,
-  Heart,
-  Thermometer,
-  Eye,
-  Camera,
-  Radio,
-  Zap,
-  Clock,
-} from "lucide-react";
+import { MapPin, Activity, Heart, Thermometer, Eye, Camera, Radio, Zap, Clock } from "lucide-react";
 
 interface AnimalTracking {
   id: string;
@@ -133,10 +123,8 @@ export function LiveAnimalTracker({ animals }: LiveAnimalTrackerProps) {
   const activateCamera = (animalId: string) => {
     setTrackingData((prev) =>
       prev.map((animal) =>
-        animal.id === animalId
-          ? { ...animal, cameraActive: !animal.cameraActive }
-          : animal,
-      ),
+        animal.id === animalId ? { ...animal, cameraActive: !animal.cameraActive } : animal
+      )
     );
   };
 
@@ -149,14 +137,11 @@ export function LiveAnimalTracker({ animals }: LiveAnimalTrackerProps) {
           vitals: {
             ...animal.vitals,
             heartRate: animal.vitals.heartRate + (Math.random() - 0.5) * 4,
-            stress: Math.max(
-              0,
-              Math.min(100, animal.vitals.stress + (Math.random() - 0.5) * 3),
-            ),
+            stress: Math.max(0, Math.min(100, animal.vitals.stress + (Math.random() - 0.5) * 3)),
           },
           batteryLevel: Math.max(0, animal.batteryLevel - Math.random() * 0.1),
           lastUpdate: "Just now",
-        })),
+        }))
       );
     }, 5000);
 
@@ -172,8 +157,8 @@ export function LiveAnimalTracker({ animals }: LiveAnimalTrackerProps) {
             📡 24/7 Live Animal Tracking System
           </CardTitle>
           <p className="text-muted-foreground">
-            Real-time GPS tracking, vital signs monitoring, and live camera
-            feeds for all rescued animals.
+            Real-time GPS tracking, vital signs monitoring, and live camera feeds for all rescued
+            animals.
           </p>
         </CardHeader>
       </Card>
@@ -188,9 +173,7 @@ export function LiveAnimalTracker({ animals }: LiveAnimalTrackerProps) {
                     <div className="text-4xl">{animal.emoji}</div>
                     <div>
                       <h3 className="font-bold text-lg">{animal.name}</h3>
-                      <p className="text-muted-foreground text-sm">
-                        {animal.species}
-                      </p>
+                      <p className="text-muted-foreground text-sm">{animal.species}</p>
                     </div>
                   </div>
                   <Badge
@@ -205,16 +188,12 @@ export function LiveAnimalTracker({ animals }: LiveAnimalTrackerProps) {
                 <div className="bg-blue-900/20 p-3 rounded border border-blue-500/20">
                   <div className="flex items-center gap-2 mb-2">
                     <MapPin className="h-4 w-4 text-blue-400" />
-                    <span className="text-sm font-semibold text-blue-400">
-                      Live Location
-                    </span>
+                    <span className="text-sm font-semibold text-blue-400">Live Location</span>
                   </div>
                   <div className="text-xs font-mono">
                     <div>Lat: {animal.location.lat.toFixed(6)}</div>
                     <div>Lng: {animal.location.lng.toFixed(6)}</div>
-                    <div className="text-green-400">
-                      Accuracy: ±{animal.location.accuracy}m
-                    </div>
+                    <div className="text-green-400">Accuracy: ±{animal.location.accuracy}m</div>
                   </div>
                 </div>
 
@@ -233,9 +212,7 @@ export function LiveAnimalTracker({ animals }: LiveAnimalTrackerProps) {
                   <div className="bg-yellow-900/20 p-3 rounded border border-yellow-500/20">
                     <div className="flex items-center gap-2 mb-1">
                       <Thermometer className="h-3 w-3 text-yellow-400" />
-                      <span className="text-xs text-yellow-400">
-                        Temperature
-                      </span>
+                      <span className="text-xs text-yellow-400">Temperature</span>
                     </div>
                     <div className="text-lg font-bold">
                       {animal.vitals.temperature.toFixed(1)}°C
@@ -251,21 +228,15 @@ export function LiveAnimalTracker({ animals }: LiveAnimalTrackerProps) {
                       <span className="text-sm">Current Activity</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-lg">
-                        {getActivityIcon(animal.vitals.activity)}
-                      </span>
-                      <span className="font-semibold capitalize">
-                        {animal.vitals.activity}
-                      </span>
+                      <span className="text-lg">{getActivityIcon(animal.vitals.activity)}</span>
+                      <span className="font-semibold capitalize">{animal.vitals.activity}</span>
                     </div>
                   </div>
 
                   <div>
                     <div className="flex justify-between text-sm mb-1">
                       <span>Stress Level</span>
-                      <span
-                        className={`font-bold ${getStressColor(animal.vitals.stress)}`}
-                      >
+                      <span className={`font-bold ${getStressColor(animal.vitals.stress)}`}>
                         {animal.vitals.stress.toFixed(0)}%
                       </span>
                     </div>
@@ -284,11 +255,7 @@ export function LiveAnimalTracker({ animals }: LiveAnimalTrackerProps) {
                     {animal.cameraActive ? "🟢 Camera ON" : "⚫ Camera OFF"}
                   </Button>
 
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border-purple-500/50"
-                  >
+                  <Button variant="outline" size="sm" className="border-purple-500/50">
                     <Eye className="h-4 w-4 mr-2" />
                     Live Feed
                   </Button>

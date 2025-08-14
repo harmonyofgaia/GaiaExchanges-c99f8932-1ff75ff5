@@ -22,8 +22,7 @@ export function GitHubRepositories() {
   const repositories = [
     {
       name: "gaia-exchanges",
-      description:
-        "Main Gaia's Exchanges application - Culture of Harmony trading platform",
+      description: "Main Gaia's Exchanges application - Culture of Harmony trading platform",
       url: `${baseUrl}/gaia-exchanges`,
       language: "TypeScript",
       stars: 1250,
@@ -36,8 +35,7 @@ export function GitHubRepositories() {
     },
     {
       name: "gaia-token-contract",
-      description:
-        "GAiA Token smart contract implementation - Seeds forming into music",
+      description: "GAiA Token smart contract implementation - Seeds forming into music",
       url: `${baseUrl}/gaia-token-contract`,
       language: "Solidity",
       stars: 892,
@@ -49,8 +47,7 @@ export function GitHubRepositories() {
     },
     {
       name: "gaia-mobile-app",
-      description:
-        "Native mobile applications for iOS and Android - Harmony on mobile",
+      description: "Native mobile applications for iOS and Android - Harmony on mobile",
       url: `${baseUrl}/gaia-mobile-app`,
       language: "React Native",
       stars: 743,
@@ -62,8 +59,7 @@ export function GitHubRepositories() {
     },
     {
       name: "gaia-web3-dapp",
-      description:
-        "Decentralized application interface for Web3 trading - DeFi harmony",
+      description: "Decentralized application interface for Web3 trading - DeFi harmony",
       url: `${baseUrl}/gaia-web3-dapp`,
       language: "TypeScript",
       stars: 567,
@@ -75,8 +71,7 @@ export function GitHubRepositories() {
     },
     {
       name: "culture-of-harmony",
-      description:
-        "Main Culture of Harmony project - Bringing smiles to every soul",
+      description: "Main Culture of Harmony project - Bringing smiles to every soul",
       url: `${baseUrl}/culture-of-harmony`,
       language: "Documentation",
       stars: 432,
@@ -89,8 +84,7 @@ export function GitHubRepositories() {
     },
     {
       name: "gaia-security-audits",
-      description:
-        "Security audit reports and penetration testing - Ultimate security wall",
+      description: "Security audit reports and penetration testing - Ultimate security wall",
       url: `${baseUrl}/gaia-security-audits`,
       language: "Documentation",
       stars: 234,
@@ -140,8 +134,7 @@ export function GitHubRepositories() {
           Culture of Harmony - Official GitHub Organization
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Open source, transparent, and community-driven development - "Seeds
-          Will Form Into Music"
+          Open source, transparent, and community-driven development - "Seeds Will Form Into Music"
         </p>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -154,16 +147,12 @@ export function GitHubRepositories() {
               <div className="space-y-3">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2">
-                    <div className={`p-1 rounded ${repo.color} text-white`}>
-                      {repo.icon}
-                    </div>
+                    <div className={`p-1 rounded ${repo.color} text-white`}>{repo.icon}</div>
                     <div>
                       <h3 className="font-semibold text-sm flex items-center gap-2">
                         {repo.name}
                         {repo.isMain && (
-                          <Badge className="bg-green-600 text-white text-xs">
-                            MAIN
-                          </Badge>
+                          <Badge className="bg-green-600 text-white text-xs">MAIN</Badge>
                         )}
                       </h3>
                       <Badge variant="outline" className="text-xs">
@@ -180,19 +169,13 @@ export function GitHubRepositories() {
                     >
                       <Download className="h-3 w-3" />
                     </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleRepositoryClick(repo)}
-                    >
+                    <Button size="sm" variant="outline" onClick={() => handleRepositoryClick(repo)}>
                       <ExternalLink className="h-3 w-3" />
                     </Button>
                   </div>
                 </div>
 
-                <p className="text-xs text-muted-foreground line-clamp-2">
-                  {repo.description}
-                </p>
+                <p className="text-xs text-muted-foreground line-clamp-2">{repo.description}</p>
 
                 <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-3">
@@ -261,11 +244,7 @@ export function GitHubRepositories() {
                 </a>
               </Button>
               <Button size="sm" variant="outline" asChild>
-                <a
-                  href={`${baseUrl}/culture-of-harmony`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={`${baseUrl}/culture-of-harmony`} target="_blank" rel="noopener noreferrer">
                   <Star className="h-4 w-4 mr-2" />
                   Culture of Harmony
                 </a>
@@ -273,13 +252,9 @@ export function GitHubRepositories() {
             </div>
 
             <div className="pt-3 text-xs text-green-400">
-              <p>
-                🎵 "Seeds Will Form Into Music" - Bringing Smiles to Every Soul
-                🎵
-              </p>
+              <p>🎵 "Seeds Will Form Into Music" - Bringing Smiles to Every Soul 🎵</p>
               <p className="mt-1 text-muted-foreground">
-                Doesn't matter if you're Black or White - We create harmony for
-                everyone
+                Doesn't matter if you're Black or White - We create harmony for everyone
               </p>
             </div>
           </div>

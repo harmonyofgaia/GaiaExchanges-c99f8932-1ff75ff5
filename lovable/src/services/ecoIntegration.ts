@@ -3,12 +3,7 @@ import { useState, useEffect } from "react";
 
 export interface EcoMission {
   id: string;
-  type:
-    | "bike_ride"
-    | "tree_planting"
-    | "recycling"
-    | "green_energy"
-    | "ocean_cleanup";
+  type: "bike_ride" | "tree_planting" | "recycling" | "green_energy" | "ocean_cleanup";
   title: string;
   description: string;
   carbonImpact: number; // kg CO2 reduced
@@ -191,11 +186,9 @@ class EcoIntegrationService {
       "ocean_cleanup",
     ];
 
-    const randomType =
-      missionTypes[Math.floor(Math.random() * missionTypes.length)];
+    const randomType = missionTypes[Math.floor(Math.random() * missionTypes.length)];
     const missionTemplates = this.getMissionTemplates(randomType);
-    const template =
-      missionTemplates[Math.floor(Math.random() * missionTemplates.length)];
+    const template = missionTemplates[Math.floor(Math.random() * missionTemplates.length)];
 
     const newMission: EcoMission = {
       id: `mission-${Date.now()}`,
@@ -333,10 +326,7 @@ class EcoIntegrationService {
     // Award rewards
     this.userProfile.totalCarbonReduced += mission.carbonImpact;
     this.userProfile.totalTokensEarned += mission.tokenReward;
-    this.userProfile.activeMissions = Math.max(
-      0,
-      this.userProfile.activeMissions - 1,
-    );
+    this.userProfile.activeMissions = Math.max(0, this.userProfile.activeMissions - 1);
     this.userProfile.completedMissions++;
 
     // Update level and rank
@@ -371,7 +361,7 @@ class EcoIntegrationService {
     this.userProfile.totalTokensEarned += tokenEarned;
 
     console.log(
-      `🚴 GAIA Bike activity recorded: ${distance}km, ${carbonSaved.toFixed(2)}kg CO2 saved`,
+      `🚴 GAIA Bike activity recorded: ${distance}km, ${carbonSaved.toFixed(2)}kg CO2 saved`
     );
 
     this.updateUserLevel();
@@ -405,7 +395,7 @@ class EcoIntegrationService {
       switch (badge.id) {
         case "tree-hugger": {
           const treeMissions = this.availableMissions.filter(
-            (m) => m.type === "tree_planting" && m.status === "completed",
+            (m) => m.type === "tree_planting" && m.status === "completed"
           ).length;
           earned = treeMissions >= 10;
           break;
@@ -414,7 +404,7 @@ class EcoIntegrationService {
         case "distance-rider": {
           const totalDistance = this.userProfile.bikeActivities.reduce(
             (sum, a) => sum + a.distance,
-            0,
+            0
           );
           earned = totalDistance >= 100;
           break;

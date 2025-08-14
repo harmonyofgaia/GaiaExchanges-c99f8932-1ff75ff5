@@ -86,8 +86,8 @@ export function CloudRecoverySystem() {
               dataSync: 100,
               lastAccess: new Date(),
             }
-          : device,
-      ),
+          : device
+      )
     );
 
     toast.success("🔄 Device Recovery Initiated!", {
@@ -111,12 +111,11 @@ export function CloudRecoverySystem() {
         recoveryReady: true,
         dataSync: 100,
         lastAccess: new Date(),
-      })),
+      }))
     );
 
     toast.success("🎯 FULL SYSTEM RECOVERY COMPLETE!", {
-      description:
-        "All devices synchronized with latest admin data and settings",
+      description: "All devices synchronized with latest admin data and settings",
       duration: 8000,
     });
 
@@ -146,11 +145,8 @@ export function CloudRecoverySystem() {
       setRecoveryDevices((prev) =>
         prev.map((device) => ({
           ...device,
-          dataSync: Math.max(
-            85,
-            Math.min(100, device.dataSync + (Math.random() - 0.3) * 2),
-          ),
-        })),
+          dataSync: Math.max(85, Math.min(100, device.dataSync + (Math.random() - 0.3) * 2)),
+        }))
       );
     }, 5000);
 
@@ -165,9 +161,7 @@ export function CloudRecoverySystem() {
           <CardTitle className="flex items-center gap-2 text-green-400">
             <RotateCcw className="h-6 w-6" />
             🔄 CLOUD RECOVERY SYSTEM - 4 DEVICE PROTECTION
-            <Badge className="bg-green-600 text-white animate-pulse">
-              ALWAYS READY
-            </Badge>
+            <Badge className="bg-green-600 text-white animate-pulse">ALWAYS READY</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -175,9 +169,7 @@ export function CloudRecoverySystem() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-4 rounded-lg bg-green-900/30 border border-green-500/20">
               <CheckCircle className="h-8 w-8 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {recoveryStats.readyDevices}
-              </div>
+              <div className="text-2xl font-bold text-green-400">{recoveryStats.readyDevices}</div>
               <div className="text-sm text-muted-foreground">Ready Devices</div>
             </div>
 
@@ -228,9 +220,7 @@ export function CloudRecoverySystem() {
                 className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border"
               >
                 <div className="flex items-center gap-4">
-                  <div className="text-blue-400">
-                    {getDeviceIcon(device.type)}
-                  </div>
+                  <div className="text-blue-400">{getDeviceIcon(device.type)}</div>
                   <div>
                     <div className="font-medium">{device.name}</div>
                     <div className="text-sm text-muted-foreground">
@@ -239,9 +229,7 @@ export function CloudRecoverySystem() {
                     <div className="flex items-center gap-2 mt-1">
                       <span className="text-xs">Data Sync:</span>
                       <Progress value={device.dataSync} className="w-20 h-2" />
-                      <span className="text-xs">
-                        {device.dataSync.toFixed(1)}%
-                      </span>
+                      <span className="text-xs">{device.dataSync.toFixed(1)}%</span>
                     </div>
                   </div>
                 </div>
@@ -272,9 +260,7 @@ export function CloudRecoverySystem() {
       {/* Recovery Settings */}
       <Card className="bg-gradient-to-r from-blue-900/20 to-green-900/20 border border-blue-500/20">
         <CardHeader>
-          <CardTitle className="text-blue-400">
-            🔧 Recovery Configuration Settings
-          </CardTitle>
+          <CardTitle className="text-blue-400">🔧 Recovery Configuration Settings</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -288,14 +274,10 @@ export function CloudRecoverySystem() {
                     {key.replace(/([A-Z])/g, " $1").trim()}
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    {key === "autoSync" &&
-                      "Automatically sync data across all devices"}
-                    {key === "emergencyBackup" &&
-                      "Create emergency backups during recovery"}
-                    {key === "crossDeviceRecovery" &&
-                      "Enable recovery from any admin device"}
-                    {key === "quantumEncryption" &&
-                      "Use quantum-resistant encryption for all data"}
+                    {key === "autoSync" && "Automatically sync data across all devices"}
+                    {key === "emergencyBackup" && "Create emergency backups during recovery"}
+                    {key === "crossDeviceRecovery" && "Enable recovery from any admin device"}
+                    {key === "quantumEncryption" && "Use quantum-resistant encryption for all data"}
                   </div>
                 </div>
                 <Badge className={value ? "bg-green-600" : "bg-red-600"}>

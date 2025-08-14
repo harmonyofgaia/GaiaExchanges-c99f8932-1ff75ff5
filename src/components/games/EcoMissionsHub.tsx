@@ -20,8 +20,7 @@ export function EcoMissionsHub() {
     {
       id: 1,
       title: "Plant 100 Virtual Trees",
-      description:
-        "Help reforest the digital world by planting trees in various game environments",
+      description: "Help reforest the digital world by planting trees in various game environments",
       progress: 67,
       target: 100,
       reward: 500,
@@ -32,8 +31,7 @@ export function EcoMissionsHub() {
     {
       id: 2,
       title: "Clean Ocean Waters",
-      description:
-        "Remove plastic waste from virtual oceans to protect marine life",
+      description: "Remove plastic waste from virtual oceans to protect marine life",
       progress: 23,
       target: 50,
       reward: 750,
@@ -44,8 +42,7 @@ export function EcoMissionsHub() {
     {
       id: 3,
       title: "Build Recycling Centers",
-      description:
-        "Construct recycling facilities to process digital waste efficiently",
+      description: "Construct recycling facilities to process digital waste efficiently",
       progress: 100,
       target: 100,
       reward: 1000,
@@ -56,8 +53,7 @@ export function EcoMissionsHub() {
     {
       id: 4,
       title: "Install Wind Turbines",
-      description:
-        "Generate clean energy by building wind farms across virtual landscapes",
+      description: "Generate clean energy by building wind farms across virtual landscapes",
       progress: 0,
       target: 25,
       reward: 1250,
@@ -76,14 +72,11 @@ export function EcoMissionsHub() {
 
   const handleStartMission = (missionId: number) => {
     setMissions((prev) =>
-      prev.map((m) =>
-        m.id === missionId ? { ...m, status: "active", progress: 1 } : m,
-      ),
+      prev.map((m) => (m.id === missionId ? { ...m, status: "active", progress: 1 } : m))
     );
 
     toast.success("🎯 Mission Started!", {
-      description:
-        "Your eco-mission is now active. Start making environmental impact!",
+      description: "Your eco-mission is now active. Start making environmental impact!",
     });
   };
 
@@ -128,16 +121,12 @@ export function EcoMissionsHub() {
       {/* Stats Overview */}
       <Card className="bg-gradient-to-r from-green-900/30 to-blue-900/30 border-green-500/30">
         <CardHeader>
-          <CardTitle className="text-green-400">
-            🌍 Your Environmental Impact
-          </CardTitle>
+          <CardTitle className="text-green-400">🌍 Your Environmental Impact</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-3 bg-yellow-900/20 rounded-lg">
-              <div className="text-2xl font-bold text-yellow-400">
-                {playerStats.totalReward}
-              </div>
+              <div className="text-2xl font-bold text-yellow-400">{playerStats.totalReward}</div>
               <div className="text-sm text-muted-foreground">GAiA Tokens</div>
             </div>
             <div className="text-center p-3 bg-green-900/20 rounded-lg">
@@ -147,15 +136,11 @@ export function EcoMissionsHub() {
               <div className="text-sm text-muted-foreground">Completed</div>
             </div>
             <div className="text-center p-3 bg-blue-900/20 rounded-lg">
-              <div className="text-2xl font-bold text-blue-400">
-                {playerStats.activeStreak}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{playerStats.activeStreak}</div>
               <div className="text-sm text-muted-foreground">Day Streak</div>
             </div>
             <div className="text-center p-3 bg-purple-900/20 rounded-lg">
-              <div className="text-2xl font-bold text-purple-400">
-                {playerStats.ecoImpact}
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{playerStats.ecoImpact}</div>
               <div className="text-sm text-muted-foreground">Eco Score</div>
             </div>
           </div>
@@ -181,14 +166,10 @@ export function EcoMissionsHub() {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <IconComponent
-                      className={`h-8 w-8 ${getIconColor(mission.color)}`}
-                    />
+                    <IconComponent className={`h-8 w-8 ${getIconColor(mission.color)}`} />
                     <div>
                       <CardTitle className="text-lg">{mission.title}</CardTitle>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {mission.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">{mission.description}</p>
                     </div>
                   </div>
                   <Badge className={getStatusColor(mission.status)}>
@@ -204,18 +185,13 @@ export function EcoMissionsHub() {
                       {mission.progress}/{mission.target}
                     </span>
                   </div>
-                  <Progress
-                    value={(mission.progress / mission.target) * 100}
-                    className="h-2"
-                  />
+                  <Progress value={(mission.progress / mission.target) * 100} className="h-2" />
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Trophy className="h-4 w-4 text-yellow-400" />
-                    <span className="text-yellow-400 font-bold">
-                      {mission.reward} GAiA
-                    </span>
+                    <span className="text-yellow-400 font-bold">{mission.reward} GAiA</span>
                   </div>
 
                   <div className="flex gap-2">
@@ -231,11 +207,7 @@ export function EcoMissionsHub() {
                     )}
 
                     {mission.status === "active" && (
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="border-blue-500/30"
-                      >
+                      <Button size="sm" variant="outline" className="border-blue-500/30">
                         <Clock className="h-4 w-4 mr-2" />
                         In Progress
                       </Button>

@@ -29,35 +29,25 @@ const Contact = () => {
               <div className="text-center p-6 bg-blue-900/30 rounded-lg border border-blue-500/30">
                 <Mail className="h-12 w-12 mx-auto text-blue-400 animate-pulse mb-4" />
                 <div className="text-xl font-bold text-blue-400">Email</div>
-                <div className="text-sm text-muted-foreground">
-                  harmony@gaia-universe.com
-                </div>
+                <div className="text-sm text-muted-foreground">harmony@gaia-universe.com</div>
               </div>
 
               <div className="text-center p-6 bg-purple-900/30 rounded-lg border border-purple-500/30">
                 <MessageCircle className="h-12 w-12 mx-auto text-purple-400 animate-pulse mb-4" />
-                <div className="text-xl font-bold text-purple-400">
-                  Community
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Join our Discord
-                </div>
+                <div className="text-xl font-bold text-purple-400">Community</div>
+                <div className="text-sm text-muted-foreground">Join our Discord</div>
               </div>
 
               <div className="text-center p-6 bg-green-900/30 rounded-lg border border-green-500/30">
                 <Globe className="h-12 w-12 mx-auto text-green-400 animate-pulse mb-4" />
                 <div className="text-xl font-bold text-green-400">Website</div>
-                <div className="text-sm text-muted-foreground">
-                  gaia-harmony.com
-                </div>
+                <div className="text-sm text-muted-foreground">gaia-harmony.com</div>
               </div>
 
               <div className="text-center p-6 bg-pink-900/30 rounded-lg border border-pink-500/30">
                 <Heart className="h-12 w-12 mx-auto text-pink-400 animate-pulse mb-4" />
                 <div className="text-xl font-bold text-pink-400">Support</div>
-                <div className="text-sm text-muted-foreground">
-                  24/7 Quantum Help
-                </div>
+                <div className="text-sm text-muted-foreground">24/7 Quantum Help</div>
               </div>
             </div>
           </CardContent>

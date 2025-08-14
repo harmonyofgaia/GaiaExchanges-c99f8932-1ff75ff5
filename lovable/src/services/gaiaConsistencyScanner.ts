@@ -131,15 +131,10 @@ class GaiaConsistencyScanner {
 
     // Determine overall status
     const criticalIssues = issues.filter((i) => i.severity === "high").length;
-    const needsUpdateIssues = issues.filter(
-      (i) => i.status === "NEEDS_UPDATE",
-    ).length;
-    const inconsistentIssues = issues.filter(
-      (i) => i.status === "INCONSISTENT",
-    ).length;
+    const needsUpdateIssues = issues.filter((i) => i.status === "NEEDS_UPDATE").length;
+    const inconsistentIssues = issues.filter((i) => i.status === "INCONSISTENT").length;
 
-    let overallStatus: "CONSISTENT" | "NEEDS_UPDATE" | "INCONSISTENT" =
-      "CONSISTENT";
+    let overallStatus: "CONSISTENT" | "NEEDS_UPDATE" | "INCONSISTENT" = "CONSISTENT";
     if (inconsistentIssues > 0) {
       overallStatus = "INCONSISTENT";
     } else if (needsUpdateIssues > 0 || criticalIssues > 0) {
@@ -148,21 +143,16 @@ class GaiaConsistencyScanner {
 
     const summary = {
       totalComponents: componentIntegrations.length,
-      fullyIntegrated: componentIntegrations.filter(
-        (c) => c.integrationLevel === "FULL",
-      ).length,
-      partiallyIntegrated: componentIntegrations.filter(
-        (c) => c.integrationLevel === "PARTIAL",
-      ).length,
-      notIntegrated: componentIntegrations.filter(
-        (c) => c.integrationLevel === "NONE",
-      ).length,
+      fullyIntegrated: componentIntegrations.filter((c) => c.integrationLevel === "FULL").length,
+      partiallyIntegrated: componentIntegrations.filter((c) => c.integrationLevel === "PARTIAL")
+        .length,
+      notIntegrated: componentIntegrations.filter((c) => c.integrationLevel === "NONE").length,
       criticalIssues,
     };
 
     console.log(`✅ GAiA Consistency Scan Complete. Status: ${overallStatus}`);
     console.log(
-      `📊 Summary: ${summary.fullyIntegrated}/${summary.totalComponents} fully integrated`,
+      `📊 Summary: ${summary.fullyIntegrated}/${summary.totalComponents} fully integrated`
     );
 
     return {
@@ -173,16 +163,14 @@ class GaiaConsistencyScanner {
     };
   }
 
-  private async checkComponentIntegration(
-    component: any,
-  ): Promise<ComponentIntegration> {
+  private async checkComponentIntegration(component: any): Promise<ComponentIntegration> {
     const issues: ConsistencyIssue[] = [];
 
     // Simulate checking if component has proper GAiA integration
     const shouldHaveIntegration = this.requiredIntegrationPatterns.some(
       (pattern) =>
         component.name.toLowerCase().includes(pattern.toLowerCase()) ||
-        component.path.toLowerCase().includes(pattern.toLowerCase()),
+        component.path.toLowerCase().includes(pattern.toLowerCase())
     );
 
     // Mock integration checking based on known components
@@ -203,11 +191,7 @@ class GaiaConsistencyScanner {
 
     const partiallyIntegratedComponents = ["Exchange Page", "TokenMining Page"];
 
-    const notIntegratedComponents = [
-      "CoinCrafter Page",
-      "FeeVault Page",
-      "MusicPlatform Page",
-    ];
+    const notIntegratedComponents = ["CoinCrafter Page", "FeeVault Page", "MusicPlatform Page"];
 
     if (knownIntegratedComponents.includes(component.name)) {
       hasGaiaIntegration = true;
@@ -217,26 +201,19 @@ class GaiaConsistencyScanner {
       integrationLevel = "PARTIAL";
       issues.push({
         file: component.path,
-        issue:
-          "Component has partial GAiA token integration but could be enhanced",
+        issue: "Component has partial GAiA token integration but could be enhanced",
         severity: "medium",
         status: "NEEDS_UPDATE",
-        recommendation:
-          "Add full GAiA token integration with official addresses and branding",
+        recommendation: "Add full GAiA token integration with official addresses and branding",
       });
-    } else if (
-      notIntegratedComponents.includes(component.name) &&
-      shouldHaveIntegration
-    ) {
+    } else if (notIntegratedComponents.includes(component.name) && shouldHaveIntegration) {
       integrationLevel = "NONE";
       issues.push({
         file: component.path,
-        issue:
-          "Component should have GAiA token integration but currently missing",
+        issue: "Component should have GAiA token integration but currently missing",
         severity: "high",
         status: "MISSING",
-        recommendation:
-          "Implement GAiA token integration using GAIA_TOKEN constants",
+        recommendation: "Implement GAiA token integration using GAIA_TOKEN constants",
       });
     }
 
@@ -265,12 +242,10 @@ class GaiaConsistencyScanner {
     } else {
       issues.push({
         file: "src/services/gaiaTokenService.ts",
-        issue:
-          "Hardcoded addresses in gaiaTokenService do not match GAIA_TOKEN constants",
+        issue: "Hardcoded addresses in gaiaTokenService do not match GAIA_TOKEN constants",
         severity: "high",
         status: "INCONSISTENT",
-        recommendation:
-          "Import and use GAIA_TOKEN constants instead of hardcoded addresses",
+        recommendation: "Import and use GAIA_TOKEN constants instead of hardcoded addresses",
       });
     }
 
@@ -296,23 +271,14 @@ COMPONENT INTEGRATION STATUS:
 
     scanResult.componentIntegrations.forEach((comp) => {
       const status =
-        comp.integrationLevel === "FULL"
-          ? "✅"
-          : comp.integrationLevel === "PARTIAL"
-            ? "⚠️"
-            : "❌";
+        comp.integrationLevel === "FULL" ? "✅" : comp.integrationLevel === "PARTIAL" ? "⚠️" : "❌";
       report += `${status} ${comp.name} (${comp.integrationLevel})\n`;
     });
 
     if (scanResult.issues.length > 0) {
       report += `\nISSUES FOUND:\n`;
       scanResult.issues.forEach((issue, index) => {
-        const icon =
-          issue.severity === "high"
-            ? "🚨"
-            : issue.severity === "medium"
-              ? "⚠️"
-              : "ℹ️";
+        const icon = issue.severity === "high" ? "🚨" : issue.severity === "medium" ? "⚠️" : "ℹ️";
         report += `${icon} ${issue.status}: ${issue.issue}\n`;
         report += `   File: ${issue.file}\n`;
         report += `   Fix: ${issue.recommendation}\n\n`;

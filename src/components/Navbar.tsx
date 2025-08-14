@@ -131,11 +131,7 @@ export function Navbar() {
             {/* More Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center space-x-1"
-                >
+                <Button variant="ghost" size="sm" className="flex items-center space-x-1">
                   <span>More</span>
                   <ChevronDown className="h-4 w-4" />
                 </Button>
@@ -145,17 +141,11 @@ export function Navbar() {
                   const Icon = item.icon;
                   return (
                     <DropdownMenuItem key={item.path} asChild>
-                      <Link
-                        to={item.path}
-                        className="flex items-center space-x-2 w-full"
-                      >
+                      <Link to={item.path} className="flex items-center space-x-2 w-full">
                         <Icon className="h-4 w-4" />
                         <span>{item.name}</span>
                         {item.badge && (
-                          <Badge
-                            variant="secondary"
-                            className="ml-auto text-xs"
-                          >
+                          <Badge variant="secondary" className="ml-auto text-xs">
                             {item.badge}
                           </Badge>
                         )}
@@ -175,11 +165,7 @@ export function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               className="relative"
             >
-              {isOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>

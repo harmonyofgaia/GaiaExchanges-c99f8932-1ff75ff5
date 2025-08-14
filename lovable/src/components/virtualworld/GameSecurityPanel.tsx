@@ -4,16 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
-import {
-  Shield,
-  Lock,
-  Eye,
-  AlertTriangle,
-  CheckCircle,
-  Zap,
-  Globe,
-  Users,
-} from "lucide-react";
+import { Shield, Lock, Eye, AlertTriangle, CheckCircle, Zap, Globe, Users } from "lucide-react";
 
 export function GameSecurityPanel() {
   const [securityLevel, setSecurityLevel] = useState(98);
@@ -81,9 +72,7 @@ export function GameSecurityPanel() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSecurityLevel((prev) =>
-        Math.min(100, prev + (Math.random() - 0.5) * 2),
-      );
+      setSecurityLevel((prev) => Math.min(100, prev + (Math.random() - 0.5) * 2));
       setActivePlayers((prev) => prev + Math.floor((Math.random() - 0.5) * 20));
     }, 5000);
 
@@ -116,27 +105,19 @@ export function GameSecurityPanel() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-green-900/30 rounded border border-green-500/20">
-              <div className="text-3xl font-bold text-green-400">
-                {securityLevel.toFixed(1)}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Security Level
-              </div>
+              <div className="text-3xl font-bold text-green-400">{securityLevel.toFixed(1)}%</div>
+              <div className="text-sm text-muted-foreground">Security Level</div>
               <Progress value={securityLevel} className="mt-2" />
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded border border-blue-500/20">
               <div className="text-3xl font-bold text-blue-400">
                 {activePlayers.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Protected Players
-              </div>
+              <div className="text-sm text-muted-foreground">Protected Players</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded border border-purple-500/20">
               <div className="text-3xl font-bold text-purple-400">24/7</div>
-              <div className="text-sm text-muted-foreground">
-                Active Monitoring
-              </div>
+              <div className="text-sm text-muted-foreground">Active Monitoring</div>
             </div>
           </div>
         </CardContent>
@@ -154,9 +135,7 @@ export function GameSecurityPanel() {
                     <Icon className={`h-8 w-8 ${feature.color}`} />
                     <div>
                       <h4 className="font-bold">{feature.name}</h4>
-                      <p className="text-sm text-muted-foreground">
-                        {feature.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{feature.description}</p>
                     </div>
                   </div>
                   <Badge className="bg-green-600 text-white">
@@ -183,12 +162,8 @@ export function GameSecurityPanel() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="text-sm font-medium">
-                    Anti-Cheat Protection
-                  </label>
-                  <p className="text-xs text-muted-foreground">
-                    Real-time cheat detection
-                  </p>
+                  <label className="text-sm font-medium">Anti-Cheat Protection</label>
+                  <p className="text-xs text-muted-foreground">Real-time cheat detection</p>
                 </div>
                 <Switch
                   checked={securitySettings.antiCheat}
@@ -204,9 +179,7 @@ export function GameSecurityPanel() {
               <div className="flex items-center justify-between">
                 <div>
                   <label className="text-sm font-medium">Data Protection</label>
-                  <p className="text-xs text-muted-foreground">
-                    Enhanced data encryption
-                  </p>
+                  <p className="text-xs text-muted-foreground">Enhanced data encryption</p>
                 </div>
                 <Switch
                   checked={securitySettings.dataProtection}
@@ -221,12 +194,8 @@ export function GameSecurityPanel() {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="text-sm font-medium">
-                    Real-Time Monitoring
-                  </label>
-                  <p className="text-xs text-muted-foreground">
-                    24/7 security surveillance
-                  </p>
+                  <label className="text-sm font-medium">Real-Time Monitoring</label>
+                  <p className="text-xs text-muted-foreground">24/7 security surveillance</p>
                 </div>
                 <Switch
                   checked={securitySettings.realTimeMonitoring}
@@ -243,12 +212,8 @@ export function GameSecurityPanel() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="text-sm font-medium">
-                    Encrypted Communication
-                  </label>
-                  <p className="text-xs text-muted-foreground">
-                    Secure chat and voice
-                  </p>
+                  <label className="text-sm font-medium">Encrypted Communication</label>
+                  <p className="text-xs text-muted-foreground">Secure chat and voice</p>
                 </div>
                 <Switch
                   checked={securitySettings.encryptedCommunication}
@@ -264,9 +229,7 @@ export function GameSecurityPanel() {
               <div className="flex items-center justify-between">
                 <div>
                   <label className="text-sm font-medium">DDoS Protection</label>
-                  <p className="text-xs text-muted-foreground">
-                    Attack prevention system
-                  </p>
+                  <p className="text-xs text-muted-foreground">Attack prevention system</p>
                 </div>
                 <Switch
                   checked={securitySettings.ddosProtection}
@@ -281,12 +244,8 @@ export function GameSecurityPanel() {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="text-sm font-medium">
-                    Behavior Analysis
-                  </label>
-                  <p className="text-xs text-muted-foreground">
-                    AI-powered threat detection
-                  </p>
+                  <label className="text-sm font-medium">Behavior Analysis</label>
+                  <p className="text-xs text-muted-foreground">AI-powered threat detection</p>
                 </div>
                 <Switch
                   checked={securitySettings.behaviorAnalysis}
@@ -357,17 +316,11 @@ export function GameSecurityPanel() {
               <Shield className="h-5 w-5 mr-2" />
               Lock Down System
             </Button>
-            <Button
-              variant="outline"
-              className="h-16 border-yellow-500 text-yellow-400"
-            >
+            <Button variant="outline" className="h-16 border-yellow-500 text-yellow-400">
               <Eye className="h-5 w-5 mr-2" />
               Force Security Scan
             </Button>
-            <Button
-              variant="outline"
-              className="h-16 border-blue-500 text-blue-400"
-            >
+            <Button variant="outline" className="h-16 border-blue-500 text-blue-400">
               <Users className="h-5 w-5 mr-2" />
               Review Active Sessions
             </Button>

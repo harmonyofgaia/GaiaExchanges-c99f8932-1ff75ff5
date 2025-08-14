@@ -37,8 +37,7 @@ export function EnhancedNeuroBackground({
 
     // Enhanced neural network parameters based on pattern
     const nodeCount = Math.floor(
-      (intensity === "low" ? 30 : intensity === "medium" ? 60 : 100) *
-        (neuralDensity / 100),
+      (intensity === "low" ? 30 : intensity === "medium" ? 60 : 100) * (neuralDensity / 100)
     );
     interface Node {
       x: number;
@@ -100,7 +99,7 @@ export function EnhancedNeuroBackground({
       index: number,
       total: number,
       canvas: HTMLCanvasElement,
-      pattern: string,
+      pattern: string
     ) {
       // Move lexical declarations outside case blocks
       let angle: number,
@@ -131,12 +130,8 @@ export function EnhancedNeuroBackground({
           angle = (index / total) * Math.PI * 2 + Math.random() * 0.5;
           radius = 100 + Math.random() * 200;
           const node: Node = {
-            x:
-              canvas.width / 2 + Math.cos(angle) * radius + Math.random() * 100,
-            y:
-              canvas.height / 2 +
-              Math.sin(angle) * radius +
-              Math.random() * 100,
+            x: canvas.width / 2 + Math.cos(angle) * radius + Math.random() * 100,
+            y: canvas.height / 2 + Math.sin(angle) * radius + Math.random() * 100,
             vx: Math.cos(angle + Math.PI / 2) * speed,
             vy: Math.sin(angle + Math.PI / 2) * speed,
             radius: 3 + Math.random() * 6,
@@ -279,7 +274,7 @@ export function EnhancedNeuroBackground({
       canvas: HTMLCanvasElement,
       pattern: string,
       time: number,
-      color: string,
+      color: string
     ) {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
@@ -295,7 +290,7 @@ export function EnhancedNeuroBackground({
             0,
             centerX,
             centerY,
-            maxRadius,
+            maxRadius
           );
           gradient.addColorStop(0, "rgba(20, 0, 40, 0.9)");
           gradient.addColorStop(0.3, "rgba(40, 0, 80, 0.8)");
@@ -304,32 +299,20 @@ export function EnhancedNeuroBackground({
           break;
 
         case "abstract":
-          gradient = ctx.createLinearGradient(
-            0,
-            0,
-            canvas.width,
-            canvas.height,
-          );
+          gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
           gradient.addColorStop(
             0,
-            `rgba(${Math.sin(time) * 20 + 10}, 0, ${Math.cos(time) * 30 + 20}, 0.9)`,
+            `rgba(${Math.sin(time) * 20 + 10}, 0, ${Math.cos(time) * 30 + 20}, 0.9)`
           );
           gradient.addColorStop(0.5, "rgba(5, 0, 15, 0.8)");
           gradient.addColorStop(
             1,
-            `rgba(0, ${Math.sin(time + 1) * 10 + 5}, ${Math.cos(time + 1) * 20 + 10}, 0.95)`,
+            `rgba(0, ${Math.sin(time + 1) * 10 + 5}, ${Math.cos(time + 1) * 20 + 10}, 0.95)`
           );
           break;
 
         case "organic":
-          gradient = ctx.createRadialGradient(
-            centerX,
-            centerY,
-            0,
-            centerX,
-            centerY,
-            maxRadius,
-          );
+          gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius);
           gradient.addColorStop(0, "rgba(0, 20, 10, 0.9)");
           gradient.addColorStop(0.4, "rgba(0, 40, 20, 0.8)");
           gradient.addColorStop(0.8, "rgba(0, 15, 5, 0.85)");
@@ -344,14 +327,7 @@ export function EnhancedNeuroBackground({
           break;
 
         default:
-          gradient = ctx.createRadialGradient(
-            centerX,
-            centerY,
-            0,
-            centerX,
-            centerY,
-            maxRadius,
-          );
+          gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius);
           gradient.addColorStop(0, "rgba(5, 0, 15, 0.9)");
           gradient.addColorStop(0.5, "rgba(10, 0, 30, 0.8)");
           gradient.addColorStop(1, "rgba(0, 0, 0, 0.95)");
@@ -366,7 +342,7 @@ export function EnhancedNeuroBackground({
       pattern: string,
       time: number,
       speed: number,
-      canvas: HTMLCanvasElement,
+      canvas: HTMLCanvasElement
     ) {
       switch (pattern) {
         case "creative":
@@ -394,8 +370,7 @@ export function EnhancedNeuroBackground({
 
           node.vx += Math.sin(node.flowField.x) * 0.15;
           node.vy += Math.cos(node.flowField.y) * 0.15;
-          node.radius =
-            node.radius * 0.9 + (4 + Math.sin(node.breathing) * 3) * 0.1;
+          node.radius = node.radius * 0.9 + (4 + Math.sin(node.breathing) * 3) * 0.1;
           break;
 
         case "geometric":
@@ -433,7 +408,7 @@ export function EnhancedNeuroBackground({
       connection: Connection,
       pattern: string,
       time: number,
-      color: string,
+      color: string
     ) {
       const pulseX = fromNode.x + (toNode.x - fromNode.x) * connection.pulse;
       const pulseY = fromNode.y + (toNode.y - fromNode.y) * connection.pulse;
@@ -444,11 +419,8 @@ export function EnhancedNeuroBackground({
       switch (pattern) {
         case "creative": {
           // Creative multi-colored connections
-          const creativePulse = Math.sin(
-            time * 3 + connection.pulse * Math.PI * 2,
-          );
-          const creativeOpacity =
-            connection.strength * 0.4 * (0.5 + creativePulse * 0.5);
+          const creativePulse = Math.sin(time * 3 + connection.pulse * Math.PI * 2);
+          const creativeOpacity = connection.strength * 0.4 * (0.5 + creativePulse * 0.5);
 
           ctx.strokeStyle = `rgba(${colorValues.r + creativePulse * 50}, ${colorValues.g + creativePulse * 30}, ${colorValues.b}, ${creativeOpacity})`;
           ctx.lineWidth = 1 + Math.abs(creativePulse) * 2;
@@ -466,15 +438,15 @@ export function EnhancedNeuroBackground({
               0,
               pulseX,
               pulseY,
-              pulseSize,
+              pulseSize
             );
             pulseGradient.addColorStop(
               0,
-              `rgba(${colorValues.r}, ${colorValues.g + 100}, ${colorValues.b}, 0.9)`,
+              `rgba(${colorValues.r}, ${colorValues.g + 100}, ${colorValues.b}, 0.9)`
             );
             pulseGradient.addColorStop(
               1,
-              `rgba(${colorValues.r}, ${colorValues.g + 100}, ${colorValues.b}, 0)`,
+              `rgba(${colorValues.r}, ${colorValues.g + 100}, ${colorValues.b}, 0)`
             );
 
             ctx.fillStyle = pulseGradient;
@@ -487,8 +459,7 @@ export function EnhancedNeuroBackground({
         case "abstract": {
           // Abstract flowing connections
           const abstractWave = Math.sin(time * 2 + connection.distance * 0.01);
-          const abstractOpacity =
-            connection.strength * 0.3 * (0.7 + abstractWave * 0.3);
+          const abstractOpacity = connection.strength * 0.3 * (0.7 + abstractWave * 0.3);
 
           ctx.strokeStyle = `rgba(${colorValues.r}, ${colorValues.g + abstractWave * 80}, ${colorValues.b + abstractWave * 50}, ${abstractOpacity})`;
           ctx.lineWidth = 1;
@@ -507,8 +478,7 @@ export function EnhancedNeuroBackground({
         case "organic": {
           // Organic flowing connections
           const organicFlow = Math.sin(time + connection.distance * 0.02);
-          const organicOpacity =
-            connection.strength * 0.5 * (0.6 + organicFlow * 0.4);
+          const organicOpacity = connection.strength * 0.5 * (0.6 + organicFlow * 0.4);
 
           ctx.strokeStyle = `rgba(${Math.floor(colorValues.r * 0.7)}, ${colorValues.g + 50}, ${Math.floor(colorValues.b * 0.8)}, ${organicOpacity})`;
           ctx.lineWidth = 2 + Math.abs(organicFlow);
@@ -564,7 +534,7 @@ export function EnhancedNeuroBackground({
       node: Node,
       pattern: string,
       time: number,
-      color: string,
+      color: string
     ) {
       const colorValues = hexToRgb(color);
       const activityGlow = 0.5 + node.activity * 0.5;
@@ -579,48 +549,48 @@ export function EnhancedNeuroBackground({
             0,
             node.x,
             node.y,
-            node.radius * 2,
+            node.radius * 2
           );
 
           switch (node.type) {
             case 0: // Pulsing circle
               nodeGradient.addColorStop(
                 0,
-                `rgba(${colorValues.r}, ${colorValues.g + 100}, ${colorValues.b}, ${activityGlow})`,
+                `rgba(${colorValues.r}, ${colorValues.g + 100}, ${colorValues.b}, ${activityGlow})`
               );
               nodeGradient.addColorStop(
                 1,
-                `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`,
+                `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`
               );
               break;
             case 1: // Sparkling star
               nodeGradient.addColorStop(
                 0,
-                `rgba(255, ${colorValues.g + 150}, 255, ${activityGlow})`,
+                `rgba(255, ${colorValues.g + 150}, 255, ${activityGlow})`
               );
               nodeGradient.addColorStop(
                 1,
-                `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`,
+                `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`
               );
               break;
             case 2: // Energy core
               nodeGradient.addColorStop(
                 0,
-                `rgba(${colorValues.r + 100}, 255, ${colorValues.b + 100}, ${activityGlow})`,
+                `rgba(${colorValues.r + 100}, 255, ${colorValues.b + 100}, ${activityGlow})`
               );
               nodeGradient.addColorStop(
                 1,
-                `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`,
+                `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`
               );
               break;
             case 3: // Harmonic resonator
               nodeGradient.addColorStop(
                 0,
-                `rgba(255, 255, ${colorValues.b + 150}, ${activityGlow})`,
+                `rgba(255, 255, ${colorValues.b + 150}, ${activityGlow})`
               );
               nodeGradient.addColorStop(
                 1,
-                `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`,
+                `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`
               );
               break;
           }
@@ -640,15 +610,15 @@ export function EnhancedNeuroBackground({
             0,
             node.x,
             node.y,
-            node.radius * 1.5,
+            node.radius * 1.5
           );
           abstractGradient.addColorStop(
             0,
-            `rgba(${colorValues.r + 50}, ${colorValues.g + 80}, ${colorValues.b + 50}, ${activityGlow * morphGlow})`,
+            `rgba(${colorValues.r + 50}, ${colorValues.g + 80}, ${colorValues.b + 50}, ${activityGlow * morphGlow})`
           );
           abstractGradient.addColorStop(
             1,
-            `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`,
+            `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`
           );
 
           ctx.fillStyle = abstractGradient;
@@ -659,23 +629,22 @@ export function EnhancedNeuroBackground({
         }
         case "organic": {
           // Organic breathing nodes
-          const breathingRadius =
-            node.radius * (0.8 + Math.sin(node.breathing!) * 0.2);
+          const breathingRadius = node.radius * (0.8 + Math.sin(node.breathing!) * 0.2);
           const organicGradient = ctx.createRadialGradient(
             node.x,
             node.y,
             0,
             node.x,
             node.y,
-            breathingRadius * 1.2,
+            breathingRadius * 1.2
           );
           organicGradient.addColorStop(
             0,
-            `rgba(${Math.floor(colorValues.r * 0.8)}, ${colorValues.g + 80}, ${Math.floor(colorValues.b * 0.9)}, ${activityGlow})`,
+            `rgba(${Math.floor(colorValues.r * 0.8)}, ${colorValues.g + 80}, ${Math.floor(colorValues.b * 0.9)}, ${activityGlow})`
           );
           organicGradient.addColorStop(
             1,
-            `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`,
+            `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`
           );
 
           ctx.fillStyle = organicGradient;
@@ -692,15 +661,15 @@ export function EnhancedNeuroBackground({
             0,
             node.x,
             node.y,
-            node.radius,
+            node.radius
           );
           geometricGradient.addColorStop(
             0,
-            `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, ${activityGlow})`,
+            `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, ${activityGlow})`
           );
           geometricGradient.addColorStop(
             1,
-            `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`,
+            `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`
           );
 
           ctx.fillStyle = geometricGradient;
@@ -708,15 +677,12 @@ export function EnhancedNeuroBackground({
 
           // Draw polygon based on sides
           const angleStep = (Math.PI * 2) / node.sides!;
-          ctx.moveTo(
-            node.x + Math.cos(0) * node.radius,
-            node.y + Math.sin(0) * node.radius,
-          );
+          ctx.moveTo(node.x + Math.cos(0) * node.radius, node.y + Math.sin(0) * node.radius);
 
           for (let i = 1; i <= node.sides!; i++) {
             ctx.lineTo(
               node.x + Math.cos(angleStep * i) * node.radius,
-              node.y + Math.sin(angleStep * i) * node.radius,
+              node.y + Math.sin(angleStep * i) * node.radius
             );
           }
 
@@ -732,15 +698,15 @@ export function EnhancedNeuroBackground({
             0,
             node.x,
             node.y,
-            node.radius,
+            node.radius
           );
           defaultGradient.addColorStop(
             0,
-            `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, ${activityGlow})`,
+            `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, ${activityGlow})`
           );
           defaultGradient.addColorStop(
             1,
-            `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`,
+            `rgba(${colorValues.r}, ${colorValues.g}, ${colorValues.b}, 0)`
           );
 
           ctx.fillStyle = defaultGradient;
@@ -756,13 +722,7 @@ export function EnhancedNeuroBackground({
       time += 0.01 * speed;
 
       // Enhanced background with pattern-specific gradients
-      const bgGradient = createPatternBackground(
-        ctx,
-        canvas,
-        pattern,
-        time,
-        color,
-      );
+      const bgGradient = createPatternBackground(ctx, canvas, pattern, time, color);
       ctx.fillStyle = bgGradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -803,15 +763,7 @@ export function EnhancedNeuroBackground({
         if (connection.pulse > 1) connection.pulse = 0;
 
         // Pattern-specific connection rendering
-        drawPatternConnection(
-          ctx,
-          fromNode,
-          toNode,
-          connection,
-          pattern,
-          time,
-          color,
-        );
+        drawPatternConnection(ctx, fromNode, toNode, connection, pattern, time, color);
       });
 
       // Update and draw enhanced nodes

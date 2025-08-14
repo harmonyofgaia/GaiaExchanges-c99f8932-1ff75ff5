@@ -89,36 +89,25 @@ export function TokenStakingSystem() {
             {/* User Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="p-4 bg-purple-900/30 rounded-lg border border-purple-500/20 text-center">
-                <div className="text-2xl font-bold text-purple-400">
-                  {userBalance}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Available GAiA
-                </div>
+                <div className="text-2xl font-bold text-purple-400">{userBalance}</div>
+                <div className="text-sm text-muted-foreground">Available GAiA</div>
               </div>
               <div className="p-4 bg-green-900/30 rounded-lg border border-green-500/20 text-center">
                 <div className="text-2xl font-bold text-green-400">500</div>
-                <div className="text-sm text-muted-foreground">
-                  Currently Staked
-                </div>
+                <div className="text-sm text-muted-foreground">Currently Staked</div>
               </div>
               <div className="p-4 bg-blue-900/30 rounded-lg border border-blue-500/20 text-center">
                 <div className="text-2xl font-bold text-blue-400">12.5</div>
-                <div className="text-sm text-muted-foreground">
-                  Rewards Earned
-                </div>
+                <div className="text-sm text-muted-foreground">Rewards Earned</div>
               </div>
             </div>
 
             {/* Staking Pools */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-purple-400">
-                Available Staking Pools
-              </h3>
+              <h3 className="text-lg font-semibold text-purple-400">Available Staking Pools</h3>
 
               {stakingPools.map((pool) => {
-                const poolUtilization =
-                  (pool.totalStaked / pool.maxCapacity) * 100;
+                const poolUtilization = (pool.totalStaked / pool.maxCapacity) * 100;
                 const userHasStake = pool.userStaked > 0;
 
                 return (
@@ -126,9 +115,7 @@ export function TokenStakingSystem() {
                     <CardContent className="p-6">
                       <div className="flex justify-between items-start mb-4">
                         <div>
-                          <h4 className="text-xl font-bold text-purple-400">
-                            {pool.name}
-                          </h4>
+                          <h4 className="text-xl font-bold text-purple-400">{pool.name}</h4>
                           <p className="text-sm text-muted-foreground">
                             {pool.duration} day lock period • {pool.apy}% APY
                           </p>
@@ -162,11 +149,7 @@ export function TokenStakingSystem() {
                                 Your Stake: {pool.userStaked} GAiA
                               </div>
                               <div className="text-sm text-muted-foreground">
-                                Earning{" "}
-                                {((pool.userStaked * pool.apy) / 365).toFixed(
-                                  2,
-                                )}{" "}
-                                GAiA/day
+                                Earning {((pool.userStaked * pool.apy) / 365).toFixed(2)} GAiA/day
                               </div>
                             </div>
                             <Button
@@ -192,9 +175,7 @@ export function TokenStakingSystem() {
                         </Button>
                         <Button
                           variant="outline"
-                          onClick={() =>
-                            stakeTokens(pool.id, pool.minStake * 2)
-                          }
+                          onClick={() => stakeTokens(pool.id, pool.minStake * 2)}
                           disabled={userBalance < pool.minStake * 2}
                         >
                           Stake {pool.minStake * 2} GAiA
@@ -206,10 +187,7 @@ export function TokenStakingSystem() {
                           <TrendingUp className="h-4 w-4 text-purple-400" />
                           <span className="text-purple-300">
                             Projected earnings:{" "}
-                            {(
-                              (pool.minStake * pool.apy * pool.multiplier) /
-                              100
-                            ).toFixed(0)}{" "}
+                            {((pool.minStake * pool.apy * pool.multiplier) / 100).toFixed(0)}{" "}
                             GAiA/year
                           </span>
                         </div>

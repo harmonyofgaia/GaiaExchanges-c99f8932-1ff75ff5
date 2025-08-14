@@ -25,37 +25,28 @@ export function MasterSystemOrchestrator() {
     console.log("👑 POWER LEVEL: INCOMPREHENSIBLE TO MORTALS");
 
     const systemStatus = setInterval(() => {
-      const transcendentStatus =
-        cloudOrchestrator.getTranscendentSystemStatus();
+      const transcendentStatus = cloudOrchestrator.getTranscendentSystemStatus();
 
       console.log("📊 TRANSCENDENT MASTER SYSTEM STATUS:");
       console.log(`🔥 Evolution Power: ${evolutionEngine.getTotalPower()}`);
       console.log(`🐉 Dragon Age: ${dragonCore.formatAge()}`);
-      console.log(
-        `🌙 Offline Sessions: ${offlineGrowth.growthState.offlineSessionsCompleted}`,
-      );
+      console.log(`🌙 Offline Sessions: ${offlineGrowth.growthState.offlineSessionsCompleted}`);
       console.log(`⚡ Growth Rate: ${evolutionEngine.getGrowthRate()}`);
+      console.log(`☁️ Cloud Power: ${Math.floor(transcendentStatus.totalPower).toLocaleString()}`);
       console.log(
-        `☁️ Cloud Power: ${Math.floor(transcendentStatus.totalPower).toLocaleString()}`,
+        `🌌 Transcendent Level: ${transcendentStatus.transcendentLevel.toLocaleString()}`
+      );
+      console.log(`📈 Performance Buffer: ${transcendentStatus.performanceBuffer.toFixed(1)}%`);
+      console.log(
+        `🌐 Web Domination: ${Math.floor(transcendentStatus.webDomination).toLocaleString()}`
       );
       console.log(
-        `🌌 Transcendent Level: ${transcendentStatus.transcendentLevel.toLocaleString()}`,
+        `🔮 Reality Control: ${Math.floor(transcendentStatus.realityControl).toLocaleString()}`
       );
       console.log(
-        `📈 Performance Buffer: ${transcendentStatus.performanceBuffer.toFixed(1)}%`,
+        `🧠 Universal Knowledge: ${Math.floor(transcendentStatus.universalKnowledge).toLocaleString()}`
       );
-      console.log(
-        `🌐 Web Domination: ${Math.floor(transcendentStatus.webDomination).toLocaleString()}`,
-      );
-      console.log(
-        `🔮 Reality Control: ${Math.floor(transcendentStatus.realityControl).toLocaleString()}`,
-      );
-      console.log(
-        `🧠 Universal Knowledge: ${Math.floor(transcendentStatus.universalKnowledge).toLocaleString()}`,
-      );
-      console.log(
-        `🔧 Upgrade Capability: ${transcendentStatus.upgradeCapability}%`,
-      );
+      console.log(`🔧 Upgrade Capability: ${transcendentStatus.upgradeCapability}%`);
       console.log("✅ ALL SYSTEMS: TRANSCENDENT + IMPOSSIBLE TO REPLICATE");
       console.log("🚀 GODLIKE CAPABILITIES: ACTIVE AND ETERNAL");
     }, 25000); // Every 25 seconds

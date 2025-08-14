@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -97,23 +91,17 @@ export function DailyEngineAutomation() {
             } else if (task.status === "running" && task.progress < 100) {
               const increment = Math.random() * 15;
               const newProgress = Math.min(100, task.progress + increment);
-              const newStatus =
-                newProgress >= 100
-                  ? ("completed" as const)
-                  : ("running" as const);
+              const newStatus = newProgress >= 100 ? ("completed" as const) : ("running" as const);
               return { ...task, progress: newProgress, status: newStatus };
             }
             return task;
-          }),
+          })
         );
 
         setTacticalMovements((prev) => ({
           defensive: Math.min(100, prev.defensive + Math.random() * 3),
           offensive: Math.min(100, prev.offensive + Math.random() * 2),
-          reconnaissance: Math.min(
-            100,
-            prev.reconnaissance + Math.random() * 4,
-          ),
+          reconnaissance: Math.min(100, prev.reconnaissance + Math.random() * 4),
         }));
       }, 1000);
 
@@ -176,9 +164,7 @@ export function DailyEngineAutomation() {
     }
   };
 
-  const completedTasks = tasks.filter(
-    (task) => task.status === "completed",
-  ).length;
+  const completedTasks = tasks.filter((task) => task.status === "completed").length;
   const totalTasks = tasks.length;
   const overallProgress = (completedTasks / totalTasks) * 100;
 
@@ -190,11 +176,7 @@ export function DailyEngineAutomation() {
             <div>
               <CardTitle className="flex items-center gap-2">
                 🔄 Daily Engine Task Automation
-                <Badge
-                  className={
-                    isAutomationActive ? "bg-green-500" : "bg-gray-500"
-                  }
-                >
+                <Badge className={isAutomationActive ? "bg-green-500" : "bg-gray-500"}>
                   {isAutomationActive ? "ACTIVE" : "STANDBY"}
                 </Badge>
               </CardTitle>
@@ -205,16 +187,9 @@ export function DailyEngineAutomation() {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <span className="text-sm">Automation</span>
-                <Switch
-                  checked={isAutomationActive}
-                  onCheckedChange={toggleAutomation}
-                />
+                <Switch checked={isAutomationActive} onCheckedChange={toggleAutomation} />
               </div>
-              <Button
-                onClick={executeEmergencyProtocol}
-                variant="destructive"
-                size="sm"
-              >
+              <Button onClick={executeEmergencyProtocol} variant="destructive" size="sm">
                 🚨 Emergency Protocol
               </Button>
             </div>
@@ -224,29 +199,21 @@ export function DailyEngineAutomation() {
         <CardContent className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg">
-              <div className="text-2xl font-bold text-blue-600">
-                {overallProgress.toFixed(1)}%
-              </div>
-              <div className="text-sm text-blue-700 dark:text-blue-300">
-                Overall Progress
-              </div>
+              <div className="text-2xl font-bold text-blue-600">{overallProgress.toFixed(1)}%</div>
+              <div className="text-sm text-blue-700 dark:text-blue-300">Overall Progress</div>
               <Progress value={overallProgress} className="mt-2" />
             </div>
             <div className="bg-green-50 dark:bg-green-950 p-4 rounded-lg">
               <div className="text-2xl font-bold text-green-600">
                 {completedTasks}/{totalTasks}
               </div>
-              <div className="text-sm text-green-700 dark:text-green-300">
-                Tasks Completed
-              </div>
+              <div className="text-sm text-green-700 dark:text-green-300">Tasks Completed</div>
             </div>
             <div className="bg-purple-50 dark:bg-purple-950 p-4 rounded-lg">
               <div className="text-2xl font-bold text-purple-600">
                 {isAutomationActive ? "ACTIVE" : "STANDBY"}
               </div>
-              <div className="text-sm text-purple-700 dark:text-purple-300">
-                System Status
-              </div>
+              <div className="text-sm text-purple-700 dark:text-purple-300">System Status</div>
             </div>
           </div>
 
@@ -258,12 +225,8 @@ export function DailyEngineAutomation() {
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-medium text-sm">{task.name}</span>
                     <div className="flex gap-1">
-                      <Badge className={getPriorityColor(task.priority)}>
-                        {task.priority}
-                      </Badge>
-                      <Badge className={getStatusColor(task.status)}>
-                        {task.status}
-                      </Badge>
+                      <Badge className={getPriorityColor(task.priority)}>{task.priority}</Badge>
+                      <Badge className={getStatusColor(task.status)}>{task.status}</Badge>
                     </div>
                   </div>
                   <Progress value={task.progress} className="h-2" />
@@ -276,9 +239,7 @@ export function DailyEngineAutomation() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-3">
-              ⚔️ Tactical Defense Movements
-            </h4>
+            <h4 className="font-semibold mb-3">⚔️ Tactical Defense Movements</h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="border rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
@@ -305,10 +266,7 @@ export function DailyEngineAutomation() {
                     {tacticalMovements.reconnaissance.toFixed(1)}%
                   </span>
                 </div>
-                <Progress
-                  value={tacticalMovements.reconnaissance}
-                  className="h-3"
-                />
+                <Progress value={tacticalMovements.reconnaissance} className="h-3" />
               </div>
             </div>
           </div>

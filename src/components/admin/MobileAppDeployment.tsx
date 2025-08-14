@@ -72,14 +72,12 @@ export function MobileAppDeployment() {
     },
   ]);
 
-  const [deploymentMetrics, setDeploymentMetrics] = useState<DeploymentMetrics>(
-    {
-      totalDownloads: 478418,
-      activeUsers: 89234,
-      crashRate: 0.02,
-      performance: 98.5,
-    },
-  );
+  const [deploymentMetrics, setDeploymentMetrics] = useState<DeploymentMetrics>({
+    totalDownloads: 478418,
+    activeUsers: 89234,
+    crashRate: 0.02,
+    performance: 98.5,
+  });
 
   const [isDeploying, setIsDeploying] = useState(false);
 
@@ -97,7 +95,7 @@ export function MobileAppDeployment() {
         prev.map((store) => ({
           ...store,
           downloads: store.downloads + Math.floor(Math.random() * 20),
-        })),
+        }))
       );
     }, 10000);
 
@@ -157,7 +155,7 @@ export function MobileAppDeployment() {
       prev.map((store) => ({
         ...store,
         status: store.status === "rejected" ? "pending" : store.status,
-      })),
+      }))
     );
 
     setTimeout(() => {
@@ -167,7 +165,7 @@ export function MobileAppDeployment() {
           status: "live" as const,
           version: "2.1.2",
           lastUpdate: "Just now",
-        })),
+        }))
       );
       setIsDeploying(false);
       toast.success("✅ Successfully deployed to all app stores!");
@@ -178,10 +176,8 @@ export function MobileAppDeployment() {
     toast.success(`🔄 Updating ${storeName}...`);
     setAppStores((prev) =>
       prev.map((store) =>
-        store.name === storeName
-          ? { ...store, status: "pending" as const }
-          : store,
-      ),
+        store.name === storeName ? { ...store, status: "pending" as const } : store
+      )
     );
 
     setTimeout(() => {
@@ -194,8 +190,8 @@ export function MobileAppDeployment() {
                 version: "2.1.2",
                 lastUpdate: "Just now",
               }
-            : store,
-        ),
+            : store
+        )
       );
       toast.success(`✅ ${storeName} updated successfully!`);
     }, 5000);
@@ -217,9 +213,7 @@ export function MobileAppDeployment() {
               <div className="text-2xl font-bold text-green-400">
                 {deploymentMetrics.totalDownloads.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Downloads
-              </div>
+              <div className="text-sm text-muted-foreground">Total Downloads</div>
             </div>
             <div className="text-center p-4 bg-blue-900/20 rounded-lg">
               <div className="text-2xl font-bold text-blue-400">
@@ -282,18 +276,14 @@ export function MobileAppDeployment() {
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Status</span>
-                      <Badge
-                        className={`${getStatusColor(store.status)} text-white text-xs`}
-                      >
+                      <Badge className={`${getStatusColor(store.status)} text-white text-xs`}>
                         {store.status.toUpperCase()}
                       </Badge>
                     </div>
 
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Downloads</span>
-                      <span className="text-green-400">
-                        {store.downloads.toLocaleString()}
-                      </span>
+                      <span className="text-green-400">{store.downloads.toLocaleString()}</span>
                     </div>
 
                     <div className="flex justify-between text-sm">
@@ -331,9 +321,7 @@ export function MobileAppDeployment() {
       {/* Cross-Platform Optimization */}
       <Card className="border-green-500/30 bg-green-900/20">
         <CardHeader>
-          <CardTitle className="text-green-400">
-            🌐 Cross-Platform Optimization
-          </CardTitle>
+          <CardTitle className="text-green-400">🌐 Cross-Platform Optimization</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">

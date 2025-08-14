@@ -16,10 +16,7 @@ export const isAddressMigrated = async (address: string): Promise<boolean> => {
 };
 
 // Function to migrate an address
-export const migrateAddress = async (
-  oldAddress: string,
-  newAddress: string,
-): Promise<boolean> => {
+export const migrateAddress = async (oldAddress: string, newAddress: string): Promise<boolean> => {
   try {
     // Mock implementation - in reality this would insert into migration table
     console.log("Migrating address from:", oldAddress, "to:", newAddress);
@@ -27,9 +24,7 @@ export const migrateAddress = async (
     return true;
   } catch (error) {
     console.error("Error migrating address:", error);
-    toast.error(
-      `Migration failed: ${error instanceof Error ? error.message : "Unknown error"}`,
-    );
+    toast.error(`Migration failed: ${error instanceof Error ? error.message : "Unknown error"}`);
     return false;
   }
 };
@@ -48,7 +43,7 @@ export const fetchMigrationHistory = async (): Promise<unknown[]> => {
 
 // Helper function to validate and migrate addresses
 export const validateAndMigrateAddress = async (
-  address: string,
+  address: string
 ): Promise<{ isValid: boolean; report: string[] }> => {
   const report: string[] = [];
   let isValid = true;
@@ -76,9 +71,7 @@ export const validateAndMigrateAddress = async (
 
     // Additional validation checks
     if (address.includes("0x")) {
-      report.push(
-        "Address appears to be Ethereum format, expected Solana format",
-      );
+      report.push("Address appears to be Ethereum format, expected Solana format");
       isValid = false;
     }
 
@@ -86,9 +79,7 @@ export const validateAndMigrateAddress = async (
       report.push("Address format is valid");
     }
   } catch (error) {
-    report.push(
-      `Validation error: ${error instanceof Error ? error.message : "Unknown error"}`,
-    );
+    report.push(`Validation error: ${error instanceof Error ? error.message : "Unknown error"}`);
     isValid = false;
   }
 
@@ -96,10 +87,7 @@ export const validateAndMigrateAddress = async (
 };
 
 // Enhanced migration function
-export const migrateAddressWithValidation = async (
-  oldAddress: string,
-  newAddress: string,
-) => {
+export const migrateAddressWithValidation = async (oldAddress: string, newAddress: string) => {
   const oldValidation = await validateAndMigrateAddress(oldAddress);
   const newValidation = await validateAndMigrateAddress(newAddress);
 
@@ -117,14 +105,8 @@ export const migrateAddressWithValidation = async (
 };
 
 // Function to trigger address migration with validation
-export const triggerAddressMigration = async (
-  oldAddress: string,
-  newAddress: string,
-) => {
-  const migrationResult = await migrateAddressWithValidation(
-    oldAddress,
-    newAddress,
-  );
+export const triggerAddressMigration = async (oldAddress: string, newAddress: string) => {
+  const migrationResult = await migrateAddressWithValidation(oldAddress, newAddress);
 
   if (migrationResult.migrationRecommended) {
     // Proceed with migration

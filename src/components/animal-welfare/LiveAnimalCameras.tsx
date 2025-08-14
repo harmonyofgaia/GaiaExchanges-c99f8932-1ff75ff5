@@ -53,7 +53,7 @@ export function LiveAnimalCameras() {
       donationRaised: 3240,
     },
     {
-      id: "2", 
+      id: "2",
       name: "Giant Panda Sanctuary",
       location: "Chengdu Research Base",
       country: "China",
@@ -86,7 +86,7 @@ export function LiveAnimalCameras() {
       id: "4",
       name: "Great White Shark Cage",
       location: "Guadalupe Island",
-      country: "Mexico", 
+      country: "Mexico",
       species: ["Great White Sharks", "Sea Lions"],
       viewers: 3456,
       isLive: true,
@@ -133,7 +133,7 @@ export function LiveAnimalCameras() {
   const [mutedCameras, setMutedCameras] = useState<Set<string>>(new Set());
 
   const togglePlay = (cameraId: string) => {
-    setPlayingCameras(prev => {
+    setPlayingCameras((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(cameraId)) {
         newSet.delete(cameraId);
@@ -147,7 +147,7 @@ export function LiveAnimalCameras() {
   };
 
   const toggleMute = (cameraId: string) => {
-    setMutedCameras(prev => {
+    setMutedCameras((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(cameraId)) {
         newSet.delete(cameraId);
@@ -161,11 +161,9 @@ export function LiveAnimalCameras() {
   };
 
   const donateToCamera = (cameraId: string, amount: number) => {
-    setCameras(prev => 
-      prev.map(cam => 
-        cam.id === cameraId 
-          ? { ...cam, donationRaised: cam.donationRaised + amount }
-          : cam
+    setCameras((prev) =>
+      prev.map((cam) =>
+        cam.id === cameraId ? { ...cam, donationRaised: cam.donationRaised + amount } : cam
       )
     );
     toast.success("💝 Donation sent!", {
@@ -188,7 +186,7 @@ export function LiveAnimalCameras() {
           <div className="flex justify-center gap-4 flex-wrap mt-4">
             <Badge className="bg-green-600">
               <Wifi className="h-4 w-4 mr-1" />
-              {cameras.filter(c => c.isLive).length} Live Feeds
+              {cameras.filter((c) => c.isLive).length} Live Feeds
             </Badge>
             <Badge className="bg-blue-600">
               <Users className="h-4 w-4 mr-1" />
@@ -213,263 +211,273 @@ export function LiveAnimalCameras() {
 
         <TabsContent value="live" className="space-y-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {cameras.filter(cam => cam.isLive).map(camera => (
-              <Card key={camera.id} className="border-green-500/30 bg-gray-900/50">
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-green-400 flex items-center gap-2">
-                        <Camera className="h-5 w-5" />
-                        {camera.name}
-                      </CardTitle>
-                      <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
-                        <MapPin className="h-4 w-4" />
-                        {camera.location}, {camera.country}
-                      </p>
+            {cameras
+              .filter((cam) => cam.isLive)
+              .map((camera) => (
+                <Card key={camera.id} className="border-green-500/30 bg-gray-900/50">
+                  <CardHeader>
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <CardTitle className="text-green-400 flex items-center gap-2">
+                          <Camera className="h-5 w-5" />
+                          {camera.name}
+                        </CardTitle>
+                        <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
+                          <MapPin className="h-4 w-4" />
+                          {camera.location}, {camera.country}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <Badge className="bg-red-600 animate-pulse">🔴 LIVE</Badge>
+                        <p className="text-sm text-green-400 mt-1 flex items-center gap-1">
+                          <Users className="h-4 w-4" />
+                          {camera.viewers.toLocaleString()}
+                        </p>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <Badge className="bg-red-600 animate-pulse">
-                        🔴 LIVE
-                      </Badge>
-                      <p className="text-sm text-green-400 mt-1 flex items-center gap-1">
-                        <Users className="h-4 w-4" />
-                        {camera.viewers.toLocaleString()}
-                      </p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  {/* Simulated Video Player */}
-                  <div className="relative bg-black aspect-video rounded-lg mb-4 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-900/50 to-blue-900/50 flex items-center justify-center">
-                      {playingCameras.has(camera.id) ? (
-                        <div className="text-center">
-                          <div className="animate-pulse text-green-400 text-2xl mb-2">📹</div>
-                          <p className="text-green-400">Live Feed Playing</p>
-                          <p className="text-xs text-muted-foreground">{camera.quality} Quality</p>
+                  </CardHeader>
+                  <CardContent>
+                    {/* Simulated Video Player */}
+                    <div className="relative bg-black aspect-video rounded-lg mb-4 overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-green-900/50 to-blue-900/50 flex items-center justify-center">
+                        {playingCameras.has(camera.id) ? (
+                          <div className="text-center">
+                            <div className="animate-pulse text-green-400 text-2xl mb-2">📹</div>
+                            <p className="text-green-400">Live Feed Playing</p>
+                            <p className="text-xs text-muted-foreground">
+                              {camera.quality} Quality
+                            </p>
+                          </div>
+                        ) : (
+                          <div className="text-center">
+                            <Play className="h-16 w-16 text-white/50 mb-2" />
+                            <p className="text-white/70">Click to start live feed</p>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Video Controls */}
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-2 flex justify-between items-center">
+                        <div className="flex gap-2">
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => togglePlay(camera.id)}
+                            className="text-white hover:bg-white/20"
+                          >
+                            {playingCameras.has(camera.id) ? (
+                              <Pause className="h-4 w-4" />
+                            ) : (
+                              <Play className="h-4 w-4" />
+                            )}
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => toggleMute(camera.id)}
+                            className="text-white hover:bg-white/20"
+                          >
+                            {mutedCameras.has(camera.id) ? (
+                              <VolumeX className="h-4 w-4" />
+                            ) : (
+                              <Volume2 className="h-4 w-4" />
+                            )}
+                          </Button>
                         </div>
-                      ) : (
-                        <div className="text-center">
-                          <Play className="h-16 w-16 text-white/50 mb-2" />
-                          <p className="text-white/70">Click to start live feed</p>
+                        <div className="flex items-center gap-2">
+                          <Badge className="bg-blue-600">{camera.quality}</Badge>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            className="text-white hover:bg-white/20"
+                          >
+                            <Maximize className="h-4 w-4" />
+                          </Button>
                         </div>
-                      )}
+                      </div>
                     </div>
-                    
-                    {/* Video Controls */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-2 flex justify-between items-center">
+
+                    <div className="space-y-3">
+                      <p className="text-sm">{camera.description}</p>
+
+                      <div className="flex justify-between text-sm">
+                        <span>Species: {camera.species.join(", ")}</span>
+                        <span className="text-green-400">{camera.lastActivity}</span>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span>Camera Support Fund</span>
+                          <span>
+                            {((camera.donationRaised / camera.donationGoal) * 100).toFixed(1)}%
+                          </span>
+                        </div>
+                        <div className="w-full bg-gray-700 rounded-full h-2">
+                          <div
+                            className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                            style={{
+                              width: `${(camera.donationRaised / camera.donationGoal) * 100}%`,
+                            }}
+                          />
+                        </div>
+                        <div className="flex justify-between text-sm text-muted-foreground">
+                          <span>{camera.donationRaised} GAiA raised</span>
+                          <span>{camera.donationGoal} GAiA goal</span>
+                        </div>
+                      </div>
+
                       <div className="flex gap-2">
                         <Button
                           size="sm"
-                          variant="ghost"
-                          onClick={() => togglePlay(camera.id)}
-                          className="text-white hover:bg-white/20"
+                          onClick={() => donateToCamera(camera.id, 25)}
+                          className="bg-green-600 hover:bg-green-700"
                         >
-                          {playingCameras.has(camera.id) ? 
-                            <Pause className="h-4 w-4" /> : 
-                            <Play className="h-4 w-4" />
-                          }
+                          💚 25 GAiA
                         </Button>
                         <Button
                           size="sm"
-                          variant="ghost"
-                          onClick={() => toggleMute(camera.id)}
-                          className="text-white hover:bg-white/20"
+                          onClick={() => donateToCamera(camera.id, 100)}
+                          className="bg-blue-600 hover:bg-blue-700"
                         >
-                          {mutedCameras.has(camera.id) ? 
-                            <VolumeX className="h-4 w-4" /> : 
-                            <Volume2 className="h-4 w-4" />
-                          }
+                          📹 100 GAiA
                         </Button>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge className="bg-blue-600">{camera.quality}</Badge>
                         <Button
                           size="sm"
-                          variant="ghost"
-                          className="text-white hover:bg-white/20"
+                          onClick={() => donateToCamera(camera.id, 250)}
+                          className="bg-purple-600 hover:bg-purple-700"
                         >
-                          <Maximize className="h-4 w-4" />
+                          ⭐ 250 GAiA
                         </Button>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <p className="text-sm">{camera.description}</p>
-                    
-                    <div className="flex justify-between text-sm">
-                      <span>Species: {camera.species.join(", ")}</span>
-                      <span className="text-green-400">{camera.lastActivity}</span>
-                    </div>
-
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span>Camera Support Fund</span>
-                        <span>{((camera.donationRaised / camera.donationGoal) * 100).toFixed(1)}%</span>
-                      </div>
-                      <div className="w-full bg-gray-700 rounded-full h-2">
-                        <div 
-                          className="bg-green-600 h-2 rounded-full transition-all duration-300"
-                          style={{ width: `${(camera.donationRaised / camera.donationGoal) * 100}%` }}
-                        />
-                      </div>
-                      <div className="flex justify-between text-sm text-muted-foreground">
-                        <span>{camera.donationRaised} GAiA raised</span>
-                        <span>{camera.donationGoal} GAiA goal</span>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-2">
-                      <Button 
-                        size="sm"
-                        onClick={() => donateToCamera(camera.id, 25)}
-                        className="bg-green-600 hover:bg-green-700"
-                      >
-                        💚 25 GAiA
-                      </Button>
-                      <Button 
-                        size="sm"
-                        onClick={() => donateToCamera(camera.id, 100)}
-                        className="bg-blue-600 hover:bg-blue-700"
-                      >
-                        📹 100 GAiA
-                      </Button>
-                      <Button 
-                        size="sm"
-                        onClick={() => donateToCamera(camera.id, 250)}
-                        className="bg-purple-600 hover:bg-purple-700"
-                      >
-                        ⭐ 250 GAiA
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              ))}
           </div>
         </TabsContent>
 
         <TabsContent value="wildlife" className="space-y-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {cameras.filter(cam => 
-              cam.species.some(s => ["Elephants", "Giant Pandas", "Gray Wolves"].includes(s))
-            ).map(camera => (
-              <Card key={camera.id} className="border-orange-500/30 bg-orange-900/20">
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-orange-400 flex items-center gap-2">
-                        <Camera className="h-5 w-5" />
-                        {camera.name}
-                      </CardTitle>
-                      <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
-                        <MapPin className="h-4 w-4" />
-                        {camera.location}, {camera.country}
-                      </p>
+            {cameras
+              .filter((cam) =>
+                cam.species.some((s) => ["Elephants", "Giant Pandas", "Gray Wolves"].includes(s))
+              )
+              .map((camera) => (
+                <Card key={camera.id} className="border-orange-500/30 bg-orange-900/20">
+                  <CardHeader>
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <CardTitle className="text-orange-400 flex items-center gap-2">
+                          <Camera className="h-5 w-5" />
+                          {camera.name}
+                        </CardTitle>
+                        <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
+                          <MapPin className="h-4 w-4" />
+                          {camera.location}, {camera.country}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        {camera.isLive ? (
+                          <Badge className="bg-green-600">🔴 LIVE</Badge>
+                        ) : (
+                          <Badge className="bg-gray-600">⏸️ OFFLINE</Badge>
+                        )}
+                      </div>
                     </div>
-                    <div className="text-right">
-                      {camera.isLive ? (
-                        <Badge className="bg-green-600">🔴 LIVE</Badge>
-                      ) : (
-                        <Badge className="bg-gray-600">⏸️ OFFLINE</Badge>
-                      )}
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm mb-3">{camera.description}</p>
-                  <p className="text-sm text-muted-foreground">
-                    Species: {camera.species.join(", ")}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Managed by: {camera.sanctuary}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm mb-3">{camera.description}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Species: {camera.species.join(", ")}
+                    </p>
+                    <p className="text-sm text-muted-foreground">Managed by: {camera.sanctuary}</p>
+                  </CardContent>
+                </Card>
+              ))}
           </div>
         </TabsContent>
 
         <TabsContent value="marine" className="space-y-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {cameras.filter(cam => 
-              cam.species.some(s => ["Great White Sharks", "Leatherback Turtles", "Green Turtles"].includes(s))
-            ).map(camera => (
-              <Card key={camera.id} className="border-blue-500/30 bg-blue-900/20">
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-blue-400 flex items-center gap-2">
-                        <Camera className="h-5 w-5" />
-                        {camera.name}
-                      </CardTitle>
-                      <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
-                        <MapPin className="h-4 w-4" />
-                        {camera.location}, {camera.country}
-                      </p>
+            {cameras
+              .filter((cam) =>
+                cam.species.some((s) =>
+                  ["Great White Sharks", "Leatherback Turtles", "Green Turtles"].includes(s)
+                )
+              )
+              .map((camera) => (
+                <Card key={camera.id} className="border-blue-500/30 bg-blue-900/20">
+                  <CardHeader>
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <CardTitle className="text-blue-400 flex items-center gap-2">
+                          <Camera className="h-5 w-5" />
+                          {camera.name}
+                        </CardTitle>
+                        <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
+                          <MapPin className="h-4 w-4" />
+                          {camera.location}, {camera.country}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        {camera.isLive ? (
+                          <Badge className="bg-green-600">🔴 LIVE</Badge>
+                        ) : (
+                          <Badge className="bg-gray-600">⏸️ OFFLINE</Badge>
+                        )}
+                      </div>
                     </div>
-                    <div className="text-right">
-                      {camera.isLive ? (
-                        <Badge className="bg-green-600">🔴 LIVE</Badge>
-                      ) : (
-                        <Badge className="bg-gray-600">⏸️ OFFLINE</Badge>
-                      )}
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm mb-3">{camera.description}</p>
-                  <p className="text-sm text-muted-foreground">
-                    Species: {camera.species.join(", ")}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Managed by: {camera.sanctuary}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm mb-3">{camera.description}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Species: {camera.species.join(", ")}
+                    </p>
+                    <p className="text-sm text-muted-foreground">Managed by: {camera.sanctuary}</p>
+                  </CardContent>
+                </Card>
+              ))}
           </div>
         </TabsContent>
 
         <TabsContent value="rescue" className="space-y-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {cameras.filter(cam => 
-              cam.name.includes("Rehabilitation") || cam.name.includes("Sanctuary")
-            ).map(camera => (
-              <Card key={camera.id} className="border-purple-500/30 bg-purple-900/20">
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-purple-400 flex items-center gap-2">
-                        <Heart className="h-5 w-5" />
-                        {camera.name}
-                      </CardTitle>
-                      <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
-                        <MapPin className="h-4 w-4" />
-                        {camera.location}, {camera.country}
-                      </p>
+            {cameras
+              .filter(
+                (cam) => cam.name.includes("Rehabilitation") || cam.name.includes("Sanctuary")
+              )
+              .map((camera) => (
+                <Card key={camera.id} className="border-purple-500/30 bg-purple-900/20">
+                  <CardHeader>
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <CardTitle className="text-purple-400 flex items-center gap-2">
+                          <Heart className="h-5 w-5" />
+                          {camera.name}
+                        </CardTitle>
+                        <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
+                          <MapPin className="h-4 w-4" />
+                          {camera.location}, {camera.country}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        {camera.isLive ? (
+                          <Badge className="bg-green-600">🔴 LIVE</Badge>
+                        ) : (
+                          <Badge className="bg-gray-600">⏸️ OFFLINE</Badge>
+                        )}
+                      </div>
                     </div>
-                    <div className="text-right">
-                      {camera.isLive ? (
-                        <Badge className="bg-green-600">🔴 LIVE</Badge>
-                      ) : (
-                        <Badge className="bg-gray-600">⏸️ OFFLINE</Badge>
-                      )}
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm mb-3">{camera.description}</p>
-                  <p className="text-sm text-muted-foreground">
-                    Species: {camera.species.join(", ")}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Managed by: {camera.sanctuary}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm mb-3">{camera.description}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Species: {camera.species.join(", ")}
+                    </p>
+                    <p className="text-sm text-muted-foreground">Managed by: {camera.sanctuary}</p>
+                  </CardContent>
+                </Card>
+              ))}
           </div>
         </TabsContent>
       </Tabs>

@@ -5,15 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import {
-  Shield,
-  Lock,
-  Eye,
-  EyeOff,
-  Globe,
-  Users,
-  AlertTriangle,
-} from "lucide-react";
+import { Shield, Lock, Eye, EyeOff, Globe, Users, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 import { AdminDashboardTabs } from "@/components/admin/AdminDashboardTabs";
 import { useSecureAdmin } from "@/hooks/useSecureAdmin";
@@ -29,8 +21,7 @@ export default function AdminLogin() {
   const [isLoading, setIsLoading] = useState(false);
   const [clientIP, setClientIP] = useState("");
   const [activeSessions, setActiveSessions] = useState(0);
-  const { isAdmin, adminSession, grantAdminAccess, revokeAdminAccess } =
-    useSecureAdmin();
+  const { isAdmin, adminSession, grantAdminAccess, revokeAdminAccess } = useSecureAdmin();
 
   useEffect(() => {
     // Get client IP information
@@ -60,10 +51,7 @@ export default function AdminLogin() {
 
     try {
       // Enhanced admin credentials check with IP exclusivity
-      if (
-        credentials.username === "Synatic" &&
-        credentials.password === "Freedom!oul19922323"
-      ) {
+      if (credentials.username === "Synatic" && credentials.password === "Freedom!oul19922323") {
         // Check for existing admin session
         const existingAdminIP = localStorage.getItem("gaia-admin-ip");
         if (existingAdminIP && existingAdminIP !== clientIP) {
@@ -132,36 +120,23 @@ export default function AdminLogin() {
                 Complete System Control • Secure Access • Global Management
               </p>
               <div className="flex gap-4 mt-4">
-                <Badge
-                  variant="outline"
-                  className="border-green-500/50 text-green-400"
-                >
+                <Badge variant="outline" className="border-green-500/50 text-green-400">
                   <Globe className="h-3 w-3 mr-1" />
                   IP: {clientIP}
                 </Badge>
-                <Badge
-                  variant="outline"
-                  className="border-blue-500/50 text-blue-400"
-                >
+                <Badge variant="outline" className="border-blue-500/50 text-blue-400">
                   <Shield className="h-3 w-3 mr-1" />
                   Exclusive Session
                 </Badge>
                 {adminSession && (
-                  <Badge
-                    variant="outline"
-                    className="border-purple-500/50 text-purple-400"
-                  >
+                  <Badge variant="outline" className="border-purple-500/50 text-purple-400">
                     <Users className="h-3 w-3 mr-1" />
                     Session: {adminSession.id.substring(0, 8)}...
                   </Badge>
                 )}
               </div>
             </div>
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              className="border-red-500/30"
-            >
+            <Button onClick={handleLogout} variant="outline" className="border-red-500/30">
               <Lock className="h-4 w-4 mr-2" />
               Logout
             </Button>
@@ -195,9 +170,7 @@ export default function AdminLogin() {
               {activeSessions > 0 && (
                 <div className="flex items-center justify-center gap-2 text-xs">
                   <AlertTriangle className="h-3 w-3 text-yellow-400" />
-                  <span className="text-yellow-300">
-                    Warning: Admin session active elsewhere
-                  </span>
+                  <span className="text-yellow-300">Warning: Admin session active elsewhere</span>
                 </div>
               )}
             </div>
@@ -253,11 +226,7 @@ export default function AdminLogin() {
                   className="absolute right-1 top-1 h-8 w-8 p-0 text-green-400"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </Button>
               </div>
             </div>

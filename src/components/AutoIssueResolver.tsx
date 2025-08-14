@@ -10,8 +10,7 @@ export function AutoIssueResolver() {
   const { issues, lastCheck, securityLevel } = useAutoIssueResolver();
 
   const systemStats = {
-    systemHealth:
-      securityLevel === "HIGH" ? 100 : securityLevel === "MEDIUM" ? 85 : 60,
+    systemHealth: securityLevel === "HIGH" ? 100 : securityLevel === "MEDIUM" ? 85 : 60,
     checkInterval: "3s",
     activeIssues: issues.filter((i) => !i.resolved).length,
     securityLevel,
@@ -32,9 +31,8 @@ export function AutoIssueResolver() {
 
           <div className="bg-gradient-to-r from-purple-900/20 to-green-900/20 border border-purple-500/20 rounded-lg p-3">
             <p className="text-sm text-center text-purple-300">
-              🛡️ <strong>Advanced Security Monitoring Active</strong> - Full
-              cybersecurity protection for Harmony of Gaia Exchange and
-              Community
+              🛡️ <strong>Advanced Security Monitoring Active</strong> - Full cybersecurity
+              protection for Harmony of Gaia Exchange and Community
             </p>
           </div>
 

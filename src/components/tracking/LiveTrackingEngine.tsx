@@ -2,15 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Activity,
-  TrendingUp,
-  Zap,
-  Globe,
-  Shield,
-  Database,
-  BarChart3,
-} from "lucide-react";
+import { Activity, TrendingUp, Zap, Globe, Shield, Database, BarChart3 } from "lucide-react";
 import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice } from "@/constants/gaia";
 
 interface GAiATrackingMetrics {
@@ -64,7 +56,7 @@ export function LiveTrackingEngine() {
   useEffect(() => {
     console.log(
       "🌍 Official GAiA Tracking Engine: Connected to wallet:",
-      GAIA_TOKEN.WALLET_ADDRESS,
+      GAIA_TOKEN.WALLET_ADDRESS
     );
     console.log("📄 Official GAiA Contract:", GAIA_TOKEN.CONTRACT_ADDRESS);
 
@@ -101,40 +93,23 @@ export function LiveTrackingEngine() {
       setLiveEvents((prev) => [newEvent, ...prev.slice(0, 49)]);
 
       setMetrics((prev) => ({
-        realTimeTransactions:
-          prev.realTimeTransactions + Math.floor(Math.random() * 75),
+        realTimeTransactions: prev.realTimeTransactions + Math.floor(Math.random() * 75),
         gaiaMarketVolume: prev.gaiaMarketVolume + Math.random() * 750000,
         gaiaHolders: prev.gaiaHolders + Math.floor(Math.random() * 15),
-        networkSpeed:
-          GAIA_METRICS.NETWORK_SPEED + Math.floor(Math.random() * 750),
+        networkSpeed: GAIA_METRICS.NETWORK_SPEED + Math.floor(Math.random() * 750),
         securityScore: GAIA_METRICS.SECURITY_SCORE,
         performanceMultiplier: 15 + Math.random() * 3,
         ecosystemHealth: Math.min(
           GAIA_METRICS.ECOSYSTEM_HEALTH,
-          prev.ecosystemHealth + Math.random() * 0.15,
+          prev.ecosystemHealth + Math.random() * 0.15
         ),
-        globalReach: Math.min(
-          195,
-          prev.globalReach + Math.floor(Math.random() * 3),
-        ),
-        gaiaPrice: Math.max(
-          0.00001,
-          prev.gaiaPrice + (Math.random() - 0.5) * 0.000008,
-        ),
-        gaiaMarketCap: Math.max(
-          1000000,
-          prev.gaiaMarketCap + (Math.random() - 0.5) * 15000000,
-        ),
-        userEngagement: Math.min(
-          99.9,
-          prev.userEngagement + (Math.random() - 0.5) * 0.8,
-        ),
+        globalReach: Math.min(195, prev.globalReach + Math.floor(Math.random() * 3)),
+        gaiaPrice: Math.max(0.00001, prev.gaiaPrice + (Math.random() - 0.5) * 0.000008),
+        gaiaMarketCap: Math.max(1000000, prev.gaiaMarketCap + (Math.random() - 0.5) * 15000000),
+        userEngagement: Math.min(99.9, prev.userEngagement + (Math.random() - 0.5) * 0.8),
       }));
 
-      console.log(
-        "🌍 OFFICIAL GAiA ECOSYSTEM - Live tracking update:",
-        newEvent,
-      );
+      console.log("🌍 OFFICIAL GAiA ECOSYSTEM - Live tracking update:", newEvent);
     };
 
     const generateOfficialGAiAEventDescription = () => {
@@ -170,9 +145,7 @@ export function LiveTrackingEngine() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Official GAiA Transactions
-                </p>
+                <p className="text-sm text-muted-foreground">Official GAiA Transactions</p>
                 <p className="text-2xl font-bold text-green-400">
                   {metrics.realTimeTransactions.toLocaleString()}
                 </p>
@@ -189,9 +162,7 @@ export function LiveTrackingEngine() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Official GAiA Market Volume
-                </p>
+                <p className="text-sm text-muted-foreground">Official GAiA Market Volume</p>
                 <p className="text-2xl font-bold text-blue-400">
                   {formatCurrency(metrics.gaiaMarketVolume)}
                 </p>
@@ -208,15 +179,11 @@ export function LiveTrackingEngine() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Official GAiA Price
-                </p>
+                <p className="text-sm text-muted-foreground">Official GAiA Price</p>
                 <p className="text-2xl font-bold text-purple-400">
                   {formatCurrency(metrics.gaiaPrice)}
                 </p>
-                <Badge className="mt-1 bg-purple-600 text-white text-xs">
-                  OFFICIAL LIVE PRICE
-                </Badge>
+                <Badge className="mt-1 bg-purple-600 text-white text-xs">OFFICIAL LIVE PRICE</Badge>
               </div>
               <Zap className="h-8 w-8 text-purple-400" />
             </div>
@@ -227,15 +194,11 @@ export function LiveTrackingEngine() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Official GAiA Holders
-                </p>
+                <p className="text-sm text-muted-foreground">Official GAiA Holders</p>
                 <p className="text-2xl font-bold text-yellow-400">
                   {metrics.gaiaHolders.toLocaleString()}
                 </p>
-                <Badge className="mt-1 bg-yellow-600 text-white text-xs">
-                  OFFICIAL COMMUNITY
-                </Badge>
+                <Badge className="mt-1 bg-yellow-600 text-white text-xs">OFFICIAL COMMUNITY</Badge>
               </div>
               <Globe className="h-8 w-8 text-yellow-400" />
             </div>
@@ -254,9 +217,7 @@ export function LiveTrackingEngine() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">
-                  User Engagement
-                </span>
+                <span className="text-sm text-muted-foreground">User Engagement</span>
                 <span className="text-sm font-bold text-green-400">
                   {metrics.userEngagement.toFixed(1)}%
                 </span>
@@ -265,20 +226,14 @@ export function LiveTrackingEngine() {
             </div>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">
-                  Security Score
-                </span>
-                <span className="text-sm font-bold text-blue-400">
-                  {metrics.securityScore}%
-                </span>
+                <span className="text-sm text-muted-foreground">Security Score</span>
+                <span className="text-sm font-bold text-blue-400">{metrics.securityScore}%</span>
               </div>
               <Progress value={metrics.securityScore} className="h-2" />
             </div>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">
-                  Ecosystem Health
-                </span>
+                <span className="text-sm text-muted-foreground">Ecosystem Health</span>
                 <span className="text-sm font-bold text-purple-400">
                   {metrics.ecosystemHealth.toFixed(1)}%
                 </span>
@@ -305,14 +260,10 @@ export function LiveTrackingEngine() {
               >
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
-                    <Badge
-                      className={`text-xs ${getEventBadgeColor(event.type)}`}
-                    >
+                    <Badge className={`text-xs ${getEventBadgeColor(event.type)}`}>
                       {event.type}
                     </Badge>
-                    <span className="text-xs text-muted-foreground">
-                      {event.location}
-                    </span>
+                    <span className="text-xs text-muted-foreground">{event.location}</span>
                     <span className="text-xs text-green-400">
                       {event.performanceBoost.toFixed(1)}x boost
                     </span>
@@ -320,9 +271,7 @@ export function LiveTrackingEngine() {
                   <p className="text-sm mt-1">{event.description}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-bold text-green-400">
-                    {formatCurrency(event.value)}
-                  </p>
+                  <p className="text-sm font-bold text-green-400">{formatCurrency(event.value)}</p>
                   <p className="text-xs text-muted-foreground">
                     {event.timestamp.toLocaleTimeString()}
                   </p>
@@ -346,11 +295,9 @@ export function LiveTrackingEngine() {
               </span>{" "}
               speeds than any existing platform, with{" "}
               <span className="text-blue-400 font-bold">100% security</span> and
-              <span className="text-purple-400 font-bold"> zero downtime</span>.
-              Connected to official wallet:{" "}
-              <span className="text-green-400 font-bold text-xs">
-                {GAIA_TOKEN.WALLET_ADDRESS}
-              </span>
+              <span className="text-purple-400 font-bold"> zero downtime</span>. Connected to
+              official wallet:{" "}
+              <span className="text-green-400 font-bold text-xs">{GAIA_TOKEN.WALLET_ADDRESS}</span>
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-4">
               <Badge className="bg-green-600 text-white text-sm py-2 px-4">

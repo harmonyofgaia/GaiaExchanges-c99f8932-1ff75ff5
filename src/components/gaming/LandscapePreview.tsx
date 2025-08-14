@@ -19,9 +19,7 @@ interface Landscape {
 
 export function LandscapePreview() {
   const [landscapes, setLandscapes] = useState<Landscape[]>([]);
-  const [selectedLandscape, setSelectedLandscape] = useState<Landscape | null>(
-    null,
-  );
+  const [selectedLandscape, setSelectedLandscape] = useState<Landscape | null>(null);
 
   useEffect(() => {
     const landscapeData: Landscape[] = [
@@ -106,13 +104,9 @@ export function LandscapePreview() {
 
   const enterLandscape = (landscape: Landscape) => {
     console.log(`🌍 ENTERING LANDSCAPE: ${landscape.name}`);
-    console.log(
-      `💾 LOADING: ${landscape.memorySize} of ultra-high quality data`,
-    );
+    console.log(`💾 LOADING: ${landscape.memorySize} of ultra-high quality data`);
     console.log(`🎮 PLAYERS: ${landscape.playerCount} currently exploring`);
-    console.log(
-      `🦾 BIO-MECHANICAL: ${landscape.biomechanicalCount} entities active`,
-    );
+    console.log(`🦾 BIO-MECHANICAL: ${landscape.biomechanicalCount} entities active`);
 
     toast.success(`🌍 Entering ${landscape.name}!`, {
       description: `Loading ${landscape.memorySize} of quantum-enhanced landscape data`,
@@ -143,8 +137,7 @@ export function LandscapePreview() {
           🌍 ULTRA-HIGH QUALITY LANDSCAPE SHOWCASE
         </CardTitle>
         <p className="text-muted-foreground">
-          400TB+ quantum-enhanced worlds with endless possibilities and
-          biomechanical fusion
+          400TB+ quantum-enhanced worlds with endless possibilities and biomechanical fusion
         </p>
       </CardHeader>
 
@@ -163,28 +156,20 @@ export function LandscapePreview() {
               <CardContent className="p-4">
                 <div className="flex items-center gap-2 mb-2">
                   {getTypeIcon(landscape.type)}
-                  <h4 className="font-bold text-white text-sm">
-                    {landscape.name}
-                  </h4>
+                  <h4 className="font-bold text-white text-sm">{landscape.name}</h4>
                 </div>
                 <div className="space-y-1 text-xs">
                   <div className="flex justify-between">
                     <span>Memory:</span>
-                    <span className="text-blue-400">
-                      {landscape.memorySize}
-                    </span>
+                    <span className="text-blue-400">{landscape.memorySize}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Players:</span>
-                    <span className="text-green-400">
-                      {landscape.playerCount.toLocaleString()}
-                    </span>
+                    <span className="text-green-400">{landscape.playerCount.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Quality:</span>
-                    <span className="text-yellow-400">
-                      {landscape.qualityLevel}%
-                    </span>
+                    <span className="text-yellow-400">{landscape.qualityLevel}%</span>
                   </div>
                 </div>
                 <Progress value={landscape.qualityLevel} className="h-2 mt-2" />
@@ -204,42 +189,32 @@ export function LandscapePreview() {
                     {getTypeIcon(selectedLandscape.type)}
                     {selectedLandscape.name}
                   </h3>
-                  <p className="text-muted-foreground mb-4">
-                    {selectedLandscape.description}
-                  </p>
+                  <p className="text-muted-foreground mb-4">{selectedLandscape.description}</p>
 
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div className="text-center p-3 bg-black/30 rounded">
                       <div className="text-2xl font-bold text-blue-400">
                         {selectedLandscape.memorySize}
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        Memory Size
-                      </div>
+                      <div className="text-xs text-muted-foreground">Memory Size</div>
                     </div>
                     <div className="text-center p-3 bg-black/30 rounded">
                       <div className="text-2xl font-bold text-green-400">
                         {selectedLandscape.playerCount.toLocaleString()}
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        Active Players
-                      </div>
+                      <div className="text-xs text-muted-foreground">Active Players</div>
                     </div>
                     <div className="text-center p-3 bg-black/30 rounded">
                       <div className="text-2xl font-bold text-red-400">
                         {selectedLandscape.biomechanicalCount}
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        Bio-Mechanical
-                      </div>
+                      <div className="text-xs text-muted-foreground">Bio-Mechanical</div>
                     </div>
                     <div className="text-center p-3 bg-black/30 rounded">
                       <div className="text-2xl font-bold text-purple-400">
                         {selectedLandscape.qualityLevel}%
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        Quality Level
-                      </div>
+                      <div className="text-xs text-muted-foreground">Quality Level</div>
                     </div>
                   </div>
 
@@ -261,9 +236,7 @@ export function LandscapePreview() {
                         {selectedLandscape.type === "forest" && "🌲"}
                         {selectedLandscape.type === "quantum" && "⚡"}
                       </div>
-                      <div className="text-2xl font-bold text-white mb-2">
-                        ULTRA-HIGH QUALITY
-                      </div>
+                      <div className="text-2xl font-bold text-white mb-2">ULTRA-HIGH QUALITY</div>
                       <div className="text-lg text-blue-400 animate-pulse">
                         Quantum-Enhanced • 280 FPS Ready
                       </div>

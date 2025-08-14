@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -53,9 +47,7 @@ export function AuthPage() {
     if (error) {
       setError(error.message || "Failed to sign up");
     } else {
-      setSuccess(
-        "Account created successfully! Please check your email to verify your account.",
-      );
+      setSuccess("Account created successfully! Please check your email to verify your account.");
     }
 
     setIsLoading(false);
@@ -68,22 +60,17 @@ export function AuthPage() {
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-2">
             <Leaf className="h-8 w-8 text-green-400" />
-            <h1 className="text-3xl font-bold text-green-400">
-              Gaia's Exchanges
-            </h1>
+            <h1 className="text-3xl font-bold text-green-400">Gaia's Exchanges</h1>
           </div>
           <p className="text-muted-foreground">
-            Join the Culture of Harmony ecosystem - Your gateway to
-            eco-conscious trading
+            Join the Culture of Harmony ecosystem - Your gateway to eco-conscious trading
           </p>
         </div>
 
         {/* Auth Card */}
         <Card className="border-green-500/20">
           <CardHeader>
-            <CardTitle className="text-center">
-              Welcome to Gaia's Exchanges
-            </CardTitle>
+            <CardTitle className="text-center">Welcome to Gaia's Exchanges</CardTitle>
             <CardDescription className="text-center">
               Sign in to your account or create a new one
             </CardDescription>
@@ -183,18 +170,14 @@ export function AuthPage() {
             {error && (
               <Alert className="mt-4 border-red-500/20 bg-red-500/10">
                 <AlertCircle className="h-4 w-4 text-red-400" />
-                <AlertDescription className="text-red-400">
-                  {error}
-                </AlertDescription>
+                <AlertDescription className="text-red-400">{error}</AlertDescription>
               </Alert>
             )}
 
             {success && (
               <Alert className="mt-4 border-green-500/20 bg-green-500/10">
                 <Shield className="h-4 w-4 text-green-400" />
-                <AlertDescription className="text-green-400">
-                  {success}
-                </AlertDescription>
+                <AlertDescription className="text-green-400">{success}</AlertDescription>
               </Alert>
             )}
           </CardContent>

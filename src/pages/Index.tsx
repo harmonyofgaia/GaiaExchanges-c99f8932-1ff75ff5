@@ -20,8 +20,7 @@ export default function Index() {
               🌍 Harmony of Gaia
             </CardTitle>
             <p className="text-center text-2xl text-muted-foreground mt-4">
-              World's Most Transparent Environmental Token • Complete Community
-              Trust
+              World's Most Transparent Environmental Token • Complete Community Trust
             </p>
             <div className="flex justify-center gap-2 mt-6 flex-wrap">
               <Badge className="bg-green-600 text-white text-lg px-4 py-2">
@@ -53,38 +52,30 @@ export default function Index() {
               🌱 Our Mission: Heal the Planet Together
             </h2>
             <p className="text-xl text-cyan-300 max-w-4xl mx-auto">
-              "We Are a Strong Creative Open Minded Circuit To Happiness. Seeds
-              Will Form Into Music. Enjoy This Massive Good Vibration. We Create
-              a New Cult Till the End Of the World."
+              "We Are a Strong Creative Open Minded Circuit To Happiness. Seeds Will Form Into
+              Music. Enjoy This Massive Good Vibration. We Create a New Cult Till the End Of the
+              World."
             </p>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
               <div className="p-4 bg-green-900/30 rounded-lg">
                 <Globe className="h-8 w-8 mx-auto text-green-400 mb-2" />
                 <h3 className="font-bold text-green-400">Global Impact</h3>
-                <p className="text-sm text-green-300">
-                  Environmental projects worldwide
-                </p>
+                <p className="text-sm text-green-300">Environmental projects worldwide</p>
               </div>
               <div className="p-4 bg-blue-900/30 rounded-lg">
                 <Shield className="h-8 w-8 mx-auto text-blue-400 mb-2" />
                 <h3 className="font-bold text-blue-400">Complete Trust</h3>
-                <p className="text-sm text-blue-300">
-                  100% transparent operations
-                </p>
+                <p className="text-sm text-blue-300">100% transparent operations</p>
               </div>
               <div className="p-4 bg-purple-900/30 rounded-lg">
                 <Heart className="h-8 w-8 mx-auto text-purple-400 mb-2" />
                 <h3 className="font-bold text-purple-400">Community Love</h3>
-                <p className="text-sm text-purple-300">
-                  Built for believers, not traders
-                </p>
+                <p className="text-sm text-purple-300">Built for believers, not traders</p>
               </div>
               <div className="p-4 bg-orange-900/30 rounded-lg">
                 <TrendingUp className="h-8 w-8 mx-auto text-orange-400 mb-2" />
                 <h3 className="font-bold text-orange-400">Stable Growth</h3>
-                <p className="text-sm text-orange-300">
-                  Long-term sustainable value
-                </p>
+                <p className="text-sm text-orange-300">Long-term sustainable value</p>
               </div>
             </div>
           </CardContent>
@@ -97,8 +88,7 @@ export default function Index() {
               💎 Join the Environmental Revolution
             </h2>
             <p className="text-xl text-green-300">
-              Every transaction helps heal our planet • Every holder makes a
-              difference
+              Every transaction helps heal our planet • Every holder makes a difference
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
               <Link to="/wallet">

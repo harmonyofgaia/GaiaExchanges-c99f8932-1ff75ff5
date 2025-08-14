@@ -96,10 +96,7 @@ export function AIFighterCompanion() {
       setCompanion((prev) => ({
         ...prev,
         experience: prev.experience + Math.floor(Math.random() * 10) + 5,
-        learningProgress: Math.min(
-          100,
-          prev.learningProgress + Math.random() * 2,
-        ),
+        learningProgress: Math.min(100, prev.learningProgress + Math.random() * 2),
       }));
 
       // AI sends helpful messages occasionally
@@ -160,8 +157,7 @@ export function AIFighterCompanion() {
   const startAITraining = () => {
     setIsTraining(true);
     toast.success("🤖 AI Training Started!", {
-      description:
-        "ARIA is analyzing your fighting patterns for personalized training!",
+      description: "ARIA is analyzing your fighting patterns for personalized training!",
       duration: 5000,
     });
 
@@ -241,20 +237,12 @@ export function AIFighterCompanion() {
 
               <div className="space-y-2">
                 <div className="flex items-center justify-center gap-2">
-                  <span className="text-lg">
-                    {getMoodEmoji(companion.mood)}
-                  </span>
-                  <span className="text-sm text-muted-foreground capitalize">
-                    {companion.mood}
-                  </span>
+                  <span className="text-lg">{getMoodEmoji(companion.mood)}</span>
+                  <span className="text-sm text-muted-foreground capitalize">{companion.mood}</span>
                 </div>
                 <div className="text-sm">
-                  <div className="font-semibold text-purple-400">
-                    {companion.personality}
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    {companion.specialization}
-                  </div>
+                  <div className="font-semibold text-purple-400">{companion.personality}</div>
+                  <div className="text-xs text-muted-foreground">{companion.specialization}</div>
                 </div>
               </div>
             </div>
@@ -264,9 +252,7 @@ export function AIFighterCompanion() {
               <div>
                 <div className="flex justify-between text-sm mb-2">
                   <span>AI Learning Progress</span>
-                  <span className="text-purple-400">
-                    {companion.learningProgress}%
-                  </span>
+                  <span className="text-purple-400">{companion.learningProgress}%</span>
                 </div>
                 <Progress value={companion.learningProgress} className="h-3" />
               </div>
@@ -274,14 +260,9 @@ export function AIFighterCompanion() {
               <div>
                 <div className="flex justify-between text-sm mb-2">
                   <span>Experience Points</span>
-                  <span className="text-blue-400">
-                    {companion.experience.toLocaleString()}
-                  </span>
+                  <span className="text-blue-400">{companion.experience.toLocaleString()}</span>
                 </div>
-                <Progress
-                  value={(companion.experience % 1000) / 10}
-                  className="h-2"
-                />
+                <Progress value={(companion.experience % 1000) / 10} className="h-2" />
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-xs">
@@ -349,9 +330,7 @@ export function AIFighterCompanion() {
                       {msg.sender === "ARIA" && <Bot className="h-3 w-3" />}
                       {msg.sender}
                     </span>
-                    <span className="text-xs text-muted-foreground">
-                      {msg.time}
-                    </span>
+                    <span className="text-xs text-muted-foreground">{msg.time}</span>
                   </div>
                   <div className="text-sm">{msg.message}</div>
                 </div>
@@ -384,24 +363,17 @@ export function AIFighterCompanion() {
           </CardHeader>
           <CardContent className="space-y-4">
             {aiInsights.map((insight, index) => (
-              <div
-                key={index}
-                className="p-3 bg-black/30 rounded-lg border border-border/30"
-              >
+              <div key={index} className="p-3 bg-black/30 rounded-lg border border-border/30">
                 <div className="flex items-start gap-2">
                   {getInsightIcon(insight.type)}
                   <div className="flex-1">
                     <div className="flex justify-between items-start mb-1">
-                      <span className="text-sm font-semibold capitalize">
-                        {insight.type}
-                      </span>
+                      <span className="text-sm font-semibold capitalize">{insight.type}</span>
                       <Badge className="bg-gray-600 text-white text-xs">
                         {insight.confidence}% confident
                       </Badge>
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                      {insight.insight}
-                    </div>
+                    <div className="text-sm text-muted-foreground">{insight.insight}</div>
                   </div>
                 </div>
               </div>
@@ -410,12 +382,10 @@ export function AIFighterCompanion() {
             <div className="mt-4 p-3 bg-gradient-to-r from-green-900/30 to-blue-900/30 rounded-lg border border-green-500/20">
               <div className="text-center">
                 <Brain className="h-6 w-6 text-green-400 mx-auto mb-2" />
-                <div className="text-sm font-bold text-green-400 mb-1">
-                  AI Recommendation
-                </div>
+                <div className="text-sm font-bold text-green-400 mb-1">AI Recommendation</div>
                 <div className="text-xs text-muted-foreground">
-                  Focus on defensive timing drills for 10 minutes to improve
-                  your counter-attack success rate by 18%!
+                  Focus on defensive timing drills for 10 minutes to improve your counter-attack
+                  success rate by 18%!
                 </div>
               </div>
             </div>

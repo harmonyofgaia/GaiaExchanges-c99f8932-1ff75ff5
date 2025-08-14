@@ -6,9 +6,8 @@ const GaiaEngineBlueprintPage = () => {
     <div style={{ padding: 32 }}>
       <h1>GAIA Engine Blueprint</h1>
       <p>
-        Access the full GAIA Engine Blueprint document below. This page provides
-        a detailed, actionable plan for the engine's architecture, modules, and
-        development process.
+        Access the full GAIA Engine Blueprint document below. This page provides a detailed,
+        actionable plan for the engine's architecture, modules, and development process.
       </p>
       <a
         href="/GAIA_ENGINE_BLUEPRINT.md"

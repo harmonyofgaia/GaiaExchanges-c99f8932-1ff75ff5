@@ -79,12 +79,7 @@ interface GDPRRequest {
   id: string;
   user_id: string;
   username: string;
-  request_type:
-    | "access"
-    | "correction"
-    | "deletion"
-    | "portability"
-    | "restriction";
+  request_type: "access" | "correction" | "deletion" | "portability" | "restriction";
   status: "submitted" | "processing" | "completed" | "rejected";
   submission_date: Date;
   completion_date?: Date;
@@ -262,23 +257,15 @@ export function PrivacyWatchdog() {
   const updateMetrics = () => {
     setPrivacyMetrics((prev) => ({
       ...prev,
-      privacy_events_today:
-        prev.privacy_events_today + Math.floor(Math.random() * 3),
-      unauthorized_access_blocked:
-        prev.unauthorized_access_blocked + (Math.random() > 0.9 ? 1 : 0),
-      data_requests_processed:
-        prev.data_requests_processed + (Math.random() > 0.8 ? 1 : 0),
+      privacy_events_today: prev.privacy_events_today + Math.floor(Math.random() * 3),
+      unauthorized_access_blocked: prev.unauthorized_access_blocked + (Math.random() > 0.9 ? 1 : 0),
+      data_requests_processed: prev.data_requests_processed + (Math.random() > 0.8 ? 1 : 0),
     }));
   };
 
   const simulatePrivacyEvent = () => {
     if (Math.random() > 0.85) {
-      const eventTypes = [
-        "data_access",
-        "login_attempt",
-        "data_export",
-        "permission_change",
-      ];
+      const eventTypes = ["data_access", "login_attempt", "data_export", "permission_change"];
       const severities = ["low", "medium", "high"];
       const randomEvent: PrivacyEvent = {
         id: `event-${Date.now()}`,
@@ -286,9 +273,7 @@ export function PrivacyWatchdog() {
         user_id: `user-${Math.floor(Math.random() * 1000)}`,
         username: `User${Math.floor(Math.random() * 1000)}`,
         description: "Automated privacy event detection",
-        severity: severities[
-          Math.floor(Math.random() * severities.length)
-        ] as any,
+        severity: severities[Math.floor(Math.random() * severities.length)] as any,
         status: "pending",
         timestamp: new Date(),
         ip_address: `192.168.1.${Math.floor(Math.random() * 255)}`,
@@ -303,10 +288,8 @@ export function PrivacyWatchdog() {
   const resolvePrivacyEvent = (eventId: string) => {
     setPrivacyEvents((prev) =>
       prev.map((event) =>
-        event.id === eventId
-          ? { ...event, status: "resolved" as const }
-          : event,
-      ),
+        event.id === eventId ? { ...event, status: "resolved" as const } : event
+      )
     );
 
     const event = privacyEvents.find((e) => e.id === eventId);
@@ -318,9 +301,7 @@ export function PrivacyWatchdog() {
 
   const blockPrivacyEvent = (eventId: string) => {
     setPrivacyEvents((prev) =>
-      prev.map((event) =>
-        event.id === eventId ? { ...event, status: "blocked" as const } : event,
-      ),
+      prev.map((event) => (event.id === eventId ? { ...event, status: "blocked" as const } : event))
     );
 
     const event = privacyEvents.find((e) => e.id === eventId);
@@ -330,10 +311,7 @@ export function PrivacyWatchdog() {
     });
   };
 
-  const processGDPRRequest = (
-    requestId: string,
-    action: "approve" | "reject",
-  ) => {
+  const processGDPRRequest = (requestId: string, action: "approve" | "reject") => {
     setGDPRRequests((prev) =>
       prev.map((request) =>
         request.id === requestId
@@ -346,8 +324,8 @@ export function PrivacyWatchdog() {
                   ? "Request processed successfully"
                   : "Request rejected due to insufficient verification",
             }
-          : request,
-      ),
+          : request
+      )
     );
 
     const request = gdprRequests.find((r) => r.id === requestId);
@@ -437,7 +415,7 @@ export function PrivacyWatchdog() {
   };
 
   const filteredEvents = privacyEvents.filter(
-    (event) => selectedFilter === "all" || event.status === selectedFilter,
+    (event) => selectedFilter === "all" || event.status === selectedFilter
   );
 
   return (
@@ -456,9 +434,7 @@ export function PrivacyWatchdog() {
               <div className="text-2xl font-bold text-blue-400">
                 {privacyMetrics.total_users_protected.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Users Protected
-              </div>
+              <div className="text-sm text-muted-foreground">Users Protected</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-400">
@@ -470,25 +446,19 @@ export function PrivacyWatchdog() {
               <div className="text-2xl font-bold text-purple-400">
                 {privacyMetrics.data_requests_processed}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Requests Processed
-              </div>
+              <div className="text-sm text-muted-foreground">Requests Processed</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-400">
                 {privacyMetrics.gdpr_compliance_score.toFixed(1)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                GDPR Compliance
-              </div>
+              <div className="text-sm text-muted-foreground">GDPR Compliance</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-red-400">
                 {privacyMetrics.unauthorized_access_blocked}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Blocked
-              </div>
+              <div className="text-sm text-muted-foreground">Threats Blocked</div>
             </div>
             <div className="text-center">
               <Badge
@@ -501,15 +471,10 @@ export function PrivacyWatchdog() {
               >
                 {privacyMetrics.data_retention_active ? "Active" : "Inactive"}
               </Badge>
-              <div className="text-sm text-muted-foreground">
-                Data Retention
-              </div>
+              <div className="text-sm text-muted-foreground">Data Retention</div>
             </div>
             <div className="text-center">
-              <Badge
-                variant="outline"
-                className="border-green-500/50 text-green-400"
-              >
+              <Badge variant="outline" className="border-green-500/50 text-green-400">
                 {privacyMetrics.encryption_status}
               </Badge>
               <div className="text-sm text-muted-foreground">Encryption</div>
@@ -579,22 +544,18 @@ export function PrivacyWatchdog() {
           <Card className="border-gray-500/20">
             <CardContent className="pt-4">
               <div className="flex gap-2 flex-wrap">
-                {["all", "pending", "investigating", "resolved", "blocked"].map(
-                  (filter) => (
-                    <Button
-                      key={filter}
-                      variant={
-                        selectedFilter === filter ? "default" : "outline"
-                      }
-                      size="sm"
-                      onClick={() => setSelectedFilter(filter)}
-                      className="capitalize"
-                    >
-                      <Filter className="h-3 w-3 mr-1" />
-                      {filter === "all" ? "All Events" : filter}
-                    </Button>
-                  ),
-                )}
+                {["all", "pending", "investigating", "resolved", "blocked"].map((filter) => (
+                  <Button
+                    key={filter}
+                    variant={selectedFilter === filter ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedFilter(filter)}
+                    className="capitalize"
+                  >
+                    <Filter className="h-3 w-3 mr-1" />
+                    {filter === "all" ? "All Events" : filter}
+                  </Button>
+                ))}
               </div>
             </CardContent>
           </Card>
@@ -608,20 +569,12 @@ export function PrivacyWatchdog() {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         {getTypeIcon(event.type)}
-                        <h3 className="font-semibold text-white">
-                          {event.description}
-                        </h3>
-                        <Badge
-                          variant="outline"
-                          className={getSeverityColor(event.severity)}
-                        >
+                        <h3 className="font-semibold text-white">{event.description}</h3>
+                        <Badge variant="outline" className={getSeverityColor(event.severity)}>
                           {getSeverityIcon(event.severity)}
                           {event.severity}
                         </Badge>
-                        <Badge
-                          variant="outline"
-                          className={getStatusColor(event.status)}
-                        >
+                        <Badge variant="outline" className={getStatusColor(event.status)}>
                           {getStatusIcon(event.status)}
                           {event.status}
                         </Badge>
@@ -630,23 +583,15 @@ export function PrivacyWatchdog() {
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3 text-sm">
                         <div>
                           <div className="text-muted-foreground">User</div>
-                          <div className="font-medium text-white">
-                            {event.username}
-                          </div>
+                          <div className="font-medium text-white">{event.username}</div>
                         </div>
                         <div>
-                          <div className="text-muted-foreground">
-                            IP Address
-                          </div>
-                          <div className="font-medium text-blue-400">
-                            {event.ip_address}
-                          </div>
+                          <div className="text-muted-foreground">IP Address</div>
+                          <div className="font-medium text-blue-400">{event.ip_address}</div>
                         </div>
                         <div>
                           <div className="text-muted-foreground">Location</div>
-                          <div className="font-medium text-purple-400">
-                            {event.location}
-                          </div>
+                          <div className="font-medium text-purple-400">{event.location}</div>
                         </div>
                         <div>
                           <div className="text-muted-foreground">Time</div>
@@ -657,8 +602,7 @@ export function PrivacyWatchdog() {
                       </div>
 
                       <div className="text-sm text-muted-foreground">
-                        Type: {event.type.replace("_", " ")} • ID:{" "}
-                        {event.user_id}
+                        Type: {event.type.replace("_", " ")} • ID: {event.user_id}
                       </div>
                     </div>
 
@@ -703,28 +647,17 @@ export function PrivacyWatchdog() {
         <TabsContent value="gdpr" className="space-y-4">
           <div className="space-y-4">
             {gdprRequests.map((request) => (
-              <Card
-                key={request.id}
-                className="border-purple-500/20 bg-black/20"
-              >
+              <Card key={request.id} className="border-purple-500/20 bg-black/20">
                 <CardContent className="pt-4">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <FileText className="h-5 w-5 text-purple-400" />
-                        <h3 className="font-semibold text-white">
-                          {request.description}
-                        </h3>
-                        <Badge
-                          variant="outline"
-                          className="border-purple-500/50 text-purple-400"
-                        >
+                        <h3 className="font-semibold text-white">{request.description}</h3>
+                        <Badge variant="outline" className="border-purple-500/50 text-purple-400">
                           {request.request_type}
                         </Badge>
-                        <Badge
-                          variant="outline"
-                          className={getStatusColor(request.status)}
-                        >
+                        <Badge variant="outline" className={getStatusColor(request.status)}>
                           {request.status}
                         </Badge>
                       </div>
@@ -732,9 +665,7 @@ export function PrivacyWatchdog() {
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-3 text-sm">
                         <div>
                           <div className="text-muted-foreground">User</div>
-                          <div className="font-medium text-white">
-                            {request.username}
-                          </div>
+                          <div className="font-medium text-white">{request.username}</div>
                         </div>
                         <div>
                           <div className="text-muted-foreground">Submitted</div>
@@ -744,9 +675,7 @@ export function PrivacyWatchdog() {
                         </div>
                         {request.completion_date && (
                           <div>
-                            <div className="text-muted-foreground">
-                              Completed
-                            </div>
+                            <div className="text-muted-foreground">Completed</div>
                             <div className="font-medium text-green-400">
                               {request.completion_date.toLocaleDateString()}
                             </div>
@@ -764,9 +693,7 @@ export function PrivacyWatchdog() {
                         <>
                           <Button
                             size="sm"
-                            onClick={() =>
-                              processGDPRRequest(request.id, "approve")
-                            }
+                            onClick={() => processGDPRRequest(request.id, "approve")}
                             className="bg-green-600 hover:bg-green-700"
                           >
                             <CheckCircle className="h-3 w-3 mr-1" />
@@ -775,9 +702,7 @@ export function PrivacyWatchdog() {
                           <Button
                             size="sm"
                             variant="outline"
-                            onClick={() =>
-                              processGDPRRequest(request.id, "reject")
-                            }
+                            onClick={() => processGDPRRequest(request.id, "reject")}
                             className="border-red-500/50 text-red-400"
                           >
                             <XCircle className="h-3 w-3 mr-1" />
@@ -813,10 +738,7 @@ export function PrivacyWatchdog() {
                         <h3 className="font-semibold text-white">
                           {access.data_type.replace("_", " ")}
                         </h3>
-                        <Badge
-                          variant="outline"
-                          className="border-green-500/50 text-green-400"
-                        >
+                        <Badge variant="outline" className="border-green-500/50 text-green-400">
                           {access.access_level}
                         </Badge>
                       </div>
@@ -824,9 +746,7 @@ export function PrivacyWatchdog() {
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3 text-sm">
                         <div>
                           <div className="text-muted-foreground">User</div>
-                          <div className="font-medium text-white">
-                            {access.username}
-                          </div>
+                          <div className="font-medium text-white">{access.username}</div>
                         </div>
                         <div>
                           <div className="text-muted-foreground">Purpose</div>
@@ -835,9 +755,7 @@ export function PrivacyWatchdog() {
                           </div>
                         </div>
                         <div>
-                          <div className="text-muted-foreground">
-                            Authorized By
-                          </div>
+                          <div className="text-muted-foreground">Authorized By</div>
                           <div className="font-medium text-purple-400">
                             {access.authorized_by.replace("_", " ")}
                           </div>
@@ -851,9 +769,7 @@ export function PrivacyWatchdog() {
                       </div>
 
                       <div className="space-y-1">
-                        <div className="text-sm font-medium text-white">
-                          Accessed Fields:
-                        </div>
+                        <div className="text-sm font-medium text-white">Accessed Fields:</div>
                         <div className="flex flex-wrap gap-1">
                           {access.accessed_fields.map((field, index) => (
                             <Badge
@@ -893,45 +809,31 @@ export function PrivacyWatchdog() {
           <div className="grid gap-4 md:grid-cols-2">
             <Card className="border-blue-500/20">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  Privacy Protection Settings
-                </CardTitle>
+                <CardTitle className="text-blue-400">Privacy Protection Settings</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span>Real-time Monitoring</span>
-                    <Badge
-                      variant="outline"
-                      className="border-green-500/50 text-green-400"
-                    >
+                    <Badge variant="outline" className="border-green-500/50 text-green-400">
                       Enabled
                     </Badge>
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Data Encryption</span>
-                    <Badge
-                      variant="outline"
-                      className="border-green-500/50 text-green-400"
-                    >
+                    <Badge variant="outline" className="border-green-500/50 text-green-400">
                       AES-256
                     </Badge>
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Access Logging</span>
-                    <Badge
-                      variant="outline"
-                      className="border-green-500/50 text-green-400"
-                    >
+                    <Badge variant="outline" className="border-green-500/50 text-green-400">
                       Comprehensive
                     </Badge>
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Data Retention</span>
-                    <Badge
-                      variant="outline"
-                      className="border-blue-500/50 text-blue-400"
-                    >
+                    <Badge variant="outline" className="border-blue-500/50 text-blue-400">
                       GDPR Compliant
                     </Badge>
                   </div>
@@ -941,23 +843,16 @@ export function PrivacyWatchdog() {
 
             <Card className="border-purple-500/20">
               <CardHeader>
-                <CardTitle className="text-purple-400">
-                  Compliance Status
-                </CardTitle>
+                <CardTitle className="text-purple-400">Compliance Status</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>GDPR Compliance</span>
-                      <span>
-                        {privacyMetrics.gdpr_compliance_score.toFixed(1)}%
-                      </span>
+                      <span>{privacyMetrics.gdpr_compliance_score.toFixed(1)}%</span>
                     </div>
-                    <Progress
-                      value={privacyMetrics.gdpr_compliance_score}
-                      className="h-2"
-                    />
+                    <Progress value={privacyMetrics.gdpr_compliance_score} className="h-2" />
                   </div>
 
                   <div className="space-y-2">

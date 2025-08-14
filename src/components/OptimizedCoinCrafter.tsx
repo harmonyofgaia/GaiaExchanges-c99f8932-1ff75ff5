@@ -19,12 +19,8 @@ export function OptimizedCoinCrafter() {
       // Update optimized crafting metrics
       setTotalCrafted((prev) => prev + Math.floor(Math.random() * 25) + 15);
       setCraftingSpeed((prev) => prev + (Math.random() - 0.5) * 5);
-      setEfficiency((prev) =>
-        Math.max(95, Math.min(100, prev + (Math.random() - 0.5) * 0.5)),
-      );
-      setElectricPower((prev) =>
-        Math.max(80, Math.min(100, prev + (Math.random() - 0.5) * 2)),
-      );
+      setEfficiency((prev) => Math.max(95, Math.min(100, prev + (Math.random() - 0.5) * 0.5)));
+      setElectricPower((prev) => Math.max(80, Math.min(100, prev + (Math.random() - 0.5) * 2)));
     }, 2000);
 
     return () => clearInterval(interval);
@@ -47,8 +43,7 @@ export function OptimizedCoinCrafter() {
     <Card className="bg-gradient-to-br from-cyan-900/30 to-purple-900/30 border-cyan-500/30">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-cyan-400">
-          <Factory className="h-6 w-6" />⚡ OPTIMIZED NEURAL-ELECTRIC COIN
-          CRAFTER
+          <Factory className="h-6 w-6" />⚡ OPTIMIZED NEURAL-ELECTRIC COIN CRAFTER
         </CardTitle>
         <div className="flex items-center gap-2">
           <Button
@@ -66,30 +61,22 @@ export function OptimizedCoinCrafter() {
         {/* Optimization Status */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="text-center p-4 bg-cyan-900/20 rounded-lg border border-cyan-500/20">
-            <div className="text-2xl font-bold text-cyan-400">
-              {craftingSpeed.toFixed(1)}
-            </div>
+            <div className="text-2xl font-bold text-cyan-400">{craftingSpeed.toFixed(1)}</div>
             <div className="text-sm text-muted-foreground">Coins/Min</div>
             <div className="text-xs text-cyan-300 mt-1">Neural Speed</div>
           </div>
           <div className="text-center p-4 bg-green-900/20 rounded-lg border border-green-500/20">
-            <div className="text-2xl font-bold text-green-400">
-              {totalCrafted.toLocaleString()}
-            </div>
+            <div className="text-2xl font-bold text-green-400">{totalCrafted.toLocaleString()}</div>
             <div className="text-sm text-muted-foreground">Total Crafted</div>
             <div className="text-xs text-green-300 mt-1">Optimized</div>
           </div>
           <div className="text-center p-4 bg-yellow-900/20 rounded-lg border border-yellow-500/20">
-            <div className="text-2xl font-bold text-yellow-400">
-              {efficiency.toFixed(1)}%
-            </div>
+            <div className="text-2xl font-bold text-yellow-400">{efficiency.toFixed(1)}%</div>
             <div className="text-sm text-muted-foreground">Efficiency</div>
             <div className="text-xs text-yellow-300 mt-1">System</div>
           </div>
           <div className="text-center p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
-            <div className="text-2xl font-bold text-purple-400">
-              {electricPower.toFixed(0)}%
-            </div>
+            <div className="text-2xl font-bold text-purple-400">{electricPower.toFixed(0)}%</div>
             <div className="text-sm text-muted-foreground">Electric Power</div>
             <div className="text-xs text-purple-300 mt-1">Neural Grid</div>
           </div>
@@ -105,10 +92,7 @@ export function OptimizedCoinCrafter() {
           <div className="flex items-center justify-center space-x-8">
             <div className="flex flex-col items-center">
               <div className="text-3xl relative">
-                ⚡
-                <div className="absolute -top-1 -right-1 text-lg animate-pulse">
-                  🔋
-                </div>
+                ⚡<div className="absolute -top-1 -right-1 text-lg animate-pulse">🔋</div>
               </div>
               <div className="text-xs text-blue-400">Electric Core</div>
             </div>
@@ -146,10 +130,7 @@ export function OptimizedCoinCrafter() {
             <Zap className="h-4 w-4 mr-2" />
             Boost Neural Optimization
           </Button>
-          <Button
-            variant="outline"
-            className="border-cyan-500/30 text-cyan-400"
-          >
+          <Button variant="outline" className="border-cyan-500/30 text-cyan-400">
             <TrendingUp className="h-4 w-4 mr-2" />
             View Performance Analytics
           </Button>
@@ -157,12 +138,10 @@ export function OptimizedCoinCrafter() {
 
         {/* Connection Status */}
         <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-          <h4 className="font-medium text-green-400 mb-2">
-            🌍 Connected to Official GAiA Network
-          </h4>
+          <h4 className="font-medium text-green-400 mb-2">🌍 Connected to Official GAiA Network</h4>
           <div className="text-sm text-green-300">
-            Optimized system directly connected to GAiA token ecosystem with
-            enhanced neural-electric processing.
+            Optimized system directly connected to GAiA token ecosystem with enhanced
+            neural-electric processing.
           </div>
         </div>
       </CardContent>

@@ -81,10 +81,7 @@ export default function AdminVisualControls() {
           </div>
 
           <div className="flex gap-2">
-            <Button
-              onClick={applyChanges}
-              className="bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={applyChanges} className="bg-purple-600 hover:bg-purple-700">
               <Wand2 className="h-4 w-4 mr-2" />
               Apply Changes
             </Button>

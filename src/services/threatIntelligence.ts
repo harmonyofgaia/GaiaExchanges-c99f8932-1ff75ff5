@@ -2,13 +2,7 @@ import { toast } from "sonner";
 
 interface ThreatSignature {
   id: string;
-  type:
-    | "malware"
-    | "phishing"
-    | "injection"
-    | "ddos"
-    | "zero-day"
-    | "social-engineering";
+  type: "malware" | "phishing" | "injection" | "ddos" | "zero-day" | "social-engineering";
   pattern: string;
   severity: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
   confidence: number;
@@ -66,9 +60,7 @@ class ThreatIntelligenceService {
       }
     });
 
-    this.threatPredictions = [...this.threatPredictions, ...predictions].slice(
-      -100,
-    );
+    this.threatPredictions = [...this.threatPredictions, ...predictions].slice(-100);
 
     if (predictions.length > 0) {
       console.log("🔮 AI Threat Predictions Generated:", predictions.length);
@@ -149,11 +141,7 @@ class ThreatIntelligenceService {
     };
 
     this.globalThreatFeed.push(mockThreatData);
-    console.log(
-      `🔗 Connected to ${source}:`,
-      mockThreatData.threats,
-      "threats",
-    );
+    console.log(`🔗 Connected to ${source}:`, mockThreatData.threats, "threats");
   }
 
   private async updateGlobalThreatFeed(): Promise<void> {
@@ -165,33 +153,21 @@ class ThreatIntelligenceService {
     });
 
     if (newSignatures.length > 0) {
-      console.log(
-        "📡 Global Threat Feed Updated:",
-        newSignatures.length,
-        "new signatures",
-      );
+      console.log("📡 Global Threat Feed Updated:", newSignatures.length, "new signatures");
     }
   }
 
   private async fetchLatestThreatSignatures(): Promise<ThreatSignature[]> {
     // Simulate fetching new threat signatures
     const signatures: ThreatSignature[] = [];
-    const threatTypes = [
-      "malware",
-      "phishing",
-      "injection",
-      "ddos",
-      "zero-day",
-    ] as const;
+    const threatTypes = ["malware", "phishing", "injection", "ddos", "zero-day"] as const;
 
     for (let i = 0; i < Math.floor(Math.random() * 5); i++) {
       const signature: ThreatSignature = {
         id: `sig-${Date.now()}-${i}`,
         type: threatTypes[Math.floor(Math.random() * threatTypes.length)],
         pattern: this.generateThreatPattern(),
-        severity: ["LOW", "MEDIUM", "HIGH", "CRITICAL"][
-          Math.floor(Math.random() * 4)
-        ] as any,
+        severity: ["LOW", "MEDIUM", "HIGH", "CRITICAL"][Math.floor(Math.random() * 4)] as any,
         confidence: Math.random() * 0.3 + 0.7,
         lastSeen: Date.now(),
         description: "Global threat intelligence signature",
@@ -272,11 +248,7 @@ class ThreatIntelligenceService {
 
     // Pattern analysis
     const suspiciousPatterns = pattern.patterns.filter(
-      (p) =>
-        p.includes("admin") ||
-        p.includes("config") ||
-        p.includes("..") ||
-        p.includes("script"),
+      (p) => p.includes("admin") || p.includes("config") || p.includes("..") || p.includes("script")
     );
     score += (suspiciousPatterns.length / pattern.patterns.length) * 0.4;
 
@@ -325,7 +297,7 @@ class ThreatIntelligenceService {
     ];
 
     const foundPatterns = suspiciousPatterns.filter((pattern) =>
-      content.toLowerCase().includes(pattern.toLowerCase()),
+      content.toLowerCase().includes(pattern.toLowerCase())
     );
 
     if (foundPatterns.length > 0) {
@@ -401,8 +373,7 @@ class ThreatIntelligenceService {
     let bestScore = 0;
 
     Object.entries(threatTypes).forEach(([type, patterns]) => {
-      const matchScore =
-        patterns.filter((p) => features.includes(p)).length / patterns.length;
+      const matchScore = patterns.filter((p) => features.includes(p)).length / patterns.length;
       if (matchScore > bestScore) {
         bestScore = matchScore;
         bestMatch = type;
@@ -423,9 +394,7 @@ class ThreatIntelligenceService {
       behaviorPatterns: this.behaviorPatterns.size,
       predictions: this.threatPredictions.length,
       globalSources: this.globalThreatFeed.length,
-      blockedIPs: Array.from(this.behaviorPatterns.values()).filter(
-        (p) => p.isBlocklisted,
-      ).length,
+      blockedIPs: Array.from(this.behaviorPatterns.values()).filter((p) => p.isBlocklisted).length,
     };
   }
 

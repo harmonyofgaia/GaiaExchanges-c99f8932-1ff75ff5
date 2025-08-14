@@ -4,17 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import {
-  Leaf,
-  Plus,
-  Edit,
-  Trash2,
-  Save,
-  TreePine,
-  Droplets,
-  Wind,
-  Sun,
-} from "lucide-react";
+import { Leaf, Plus, Edit, Trash2, Save, TreePine, Droplets, Wind, Sun } from "lucide-react";
 import { toast } from "sonner";
 
 interface GreenProject {
@@ -33,8 +23,7 @@ export function GreenProjectManager() {
     {
       id: "1",
       title: "Ocean Cleanup Initiative",
-      description:
-        "Large-scale ocean plastic removal using advanced filtration systems",
+      description: "Large-scale ocean plastic removal using advanced filtration systems",
       category: "ocean",
       budget: 250000,
       status: "active",
@@ -44,8 +33,7 @@ export function GreenProjectManager() {
     {
       id: "2",
       title: "Forest Restoration Program",
-      description:
-        "Planting native trees in deforested areas across multiple continents",
+      description: "Planting native trees in deforested areas across multiple continents",
       category: "trees",
       budget: 180000,
       status: "active",
@@ -228,17 +216,11 @@ export function GreenProjectManager() {
                   />
                 </div>
                 <div className="flex gap-2">
-                  <Button
-                    onClick={addProject}
-                    className="bg-green-600 hover:bg-green-700"
-                  >
+                  <Button onClick={addProject} className="bg-green-600 hover:bg-green-700">
                     <Save className="h-4 w-4 mr-2" />
                     Save Project
                   </Button>
-                  <Button
-                    onClick={() => setShowAddForm(false)}
-                    variant="outline"
-                  >
+                  <Button onClick={() => setShowAddForm(false)} variant="outline">
                     Cancel
                   </Button>
                 </div>
@@ -256,43 +238,28 @@ export function GreenProjectManager() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         {getCategoryIcon(project.category)}
-                        <h5 className="font-bold text-white">
-                          {project.title}
-                        </h5>
+                        <h5 className="font-bold text-white">{project.title}</h5>
                         <Badge
                           className={`${getCategoryColor(project.category)} text-white text-xs`}
                         >
                           {project.category.toUpperCase()}
                         </Badge>
-                        <Badge
-                          className={`${getStatusColor(project.status)} text-white text-xs`}
-                        >
+                        <Badge className={`${getStatusColor(project.status)} text-white text-xs`}>
                           {project.status.toUpperCase()}
                         </Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {project.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground mb-2">{project.description}</p>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-sm">
-                        <div>
-                          💰 Budget: {project.budget.toLocaleString()} GAiA
-                        </div>
+                        <div>💰 Budget: {project.budget.toLocaleString()} GAiA</div>
                         <div>🎯 Impact: {project.impact}</div>
-                        <div>
-                          📅 Started:{" "}
-                          {new Date(project.startDate).toLocaleDateString()}
-                        </div>
+                        <div>📅 Started: {new Date(project.startDate).toLocaleDateString()}</div>
                       </div>
                     </div>
                     <div className="flex gap-2 ml-4">
                       <Button size="sm" variant="outline">
                         <Edit className="h-3 w-3" />
                       </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => deleteProject(project.id)}
-                      >
+                      <Button size="sm" variant="outline" onClick={() => deleteProject(project.id)}>
                         <Trash2 className="h-3 w-3" />
                       </Button>
                     </div>
@@ -305,30 +272,20 @@ export function GreenProjectManager() {
           {/* Project Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-3 rounded-lg bg-green-900/30">
-              <div className="text-2xl font-bold text-green-400">
-                {projects.length}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Total Projects
-              </div>
+              <div className="text-2xl font-bold text-green-400">{projects.length}</div>
+              <div className="text-xs text-muted-foreground">Total Projects</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-blue-900/30">
               <div className="text-2xl font-bold text-blue-400">
                 {projects.filter((p) => p.status === "active").length}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Active Projects
-              </div>
+              <div className="text-xs text-muted-foreground">Active Projects</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-yellow-900/30">
               <div className="text-2xl font-bold text-yellow-400">
-                {projects
-                  .reduce((sum, p) => sum + p.budget, 0)
-                  .toLocaleString()}
+                {projects.reduce((sum, p) => sum + p.budget, 0).toLocaleString()}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Total Budget (GAiA)
-              </div>
+              <div className="text-xs text-muted-foreground">Total Budget (GAiA)</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-purple-900/30">
               <div className="text-2xl font-bold text-purple-400">

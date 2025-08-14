@@ -59,7 +59,7 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
     category.components.map((comp: any, compIndex: number) => {
       const phi = Math.acos(-1 + (2 * (catIndex * 5 + compIndex)) / (categories.length * 5 - 1));
       const theta = Math.sqrt(categories.length * 5 * Math.PI) * phi;
-      
+
       return {
         id: `${category.id}-${compIndex}`,
         title: comp.title,
@@ -84,7 +84,7 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
       const theta1 = Math.random() * 2 * Math.PI;
       const phi2 = Math.random() * Math.PI;
       const theta2 = Math.random() * 2 * Math.PI;
-      
+
       lines.push({
         id: i,
         start: {
@@ -105,7 +105,7 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
   function getColorFromCategory(categoryId: string): string {
     const colors: Record<string, string> = {
       foundation: "#10b981",
-      lifestyle: "#3b82f6", 
+      lifestyle: "#3b82f6",
       environmental: "#059669",
       community: "#8b5cf6",
       travel: "#06b6d4",
@@ -115,7 +115,10 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
     return colors[categoryId] || "#ffffff";
   }
 
-  function project3DTo2D(point: { x: number; y: number; z: number }, rotation: { x: number; y: number }) {
+  function project3DTo2D(
+    point: { x: number; y: number; z: number },
+    rotation: { x: number; y: number }
+  ) {
     // Apply rotation
     const cosX = Math.cos(rotation.x);
     const sinX = Math.sin(rotation.x);
@@ -125,7 +128,7 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
     // Rotate around Y axis
     const x1 = point.x * cosY - point.z * sinY;
     const z1 = point.x * sinY + point.z * cosY;
-    
+
     // Rotate around X axis
     const y2 = point.y * cosX - z1 * sinX;
     const z2 = point.y * sinX + z1 * cosX;
@@ -133,7 +136,7 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
     // Project to 2D (simple perspective projection)
     const distance = 500;
     const scale = distance / (distance + z2);
-    
+
     return {
       x: x1 * scale + 250,
       y: y2 * scale + 250,
@@ -147,19 +150,22 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
     lastMousePos.current = { x: e.clientX, y: e.clientY };
   }, []);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!isDragging) return;
-    
-    const deltaX = e.clientX - lastMousePos.current.x;
-    const deltaY = e.clientY - lastMousePos.current.y;
-    
-    setRotation(prev => ({
-      x: prev.x + deltaY * 0.01,
-      y: prev.y + deltaX * 0.01,
-    }));
-    
-    lastMousePos.current = { x: e.clientX, y: e.clientY };
-  }, [isDragging]);
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isDragging) return;
+
+      const deltaX = e.clientX - lastMousePos.current.x;
+      const deltaY = e.clientY - lastMousePos.current.y;
+
+      setRotation((prev) => ({
+        x: prev.x + deltaY * 0.01,
+        y: prev.y + deltaX * 0.01,
+      }));
+
+      lastMousePos.current = { x: e.clientX, y: e.clientY };
+    },
+    [isDragging]
+  );
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
@@ -167,11 +173,11 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
 
   useEffect(() => {
     if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove as any);
-      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener("mousemove", handleMouseMove as any);
+      document.addEventListener("mouseup", handleMouseUp);
       return () => {
-        document.removeEventListener('mousemove', handleMouseMove as any);
-        document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener("mousemove", handleMouseMove as any);
+        document.removeEventListener("mouseup", handleMouseUp);
       };
     }
   }, [isDragging, handleMouseMove, handleMouseUp]);
@@ -180,7 +186,7 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
   useEffect(() => {
     if (!isDragging) {
       const interval = setInterval(() => {
-        setRotation(prev => ({
+        setRotation((prev) => ({
           ...prev,
           y: prev.y + 0.005,
         }));
@@ -218,9 +224,9 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
           {matrixLines.map((line) => {
             const startProjected = project3DTo2D(line.start, rotation);
             const endProjected = project3DTo2D(line.end, rotation);
-            
+
             if (!startProjected.visible && !endProjected.visible) return null;
-            
+
             return (
               <motion.line
                 key={line.id}
@@ -242,7 +248,7 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
               />
             );
           })}
-          
+
           {/* SVG Gradients */}
           <defs>
             <linearGradient id="matrixGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -256,11 +262,11 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
         {/* Globe Points */}
         {globePoints.map((point) => {
           const projected = project3DTo2D(point.position, rotation);
-          
+
           if (!projected.visible) return null;
-          
+
           const IconComponent = point.icon;
-          
+
           return (
             <motion.div
               key={point.id}
@@ -292,10 +298,8 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
                   boxShadow: `0 0 20px ${point.color}40`,
                 }}
               >
-                <IconComponent 
-                  className="w-5 h-5" 
-                />
-                
+                <IconComponent className="w-5 h-5" />
+
                 {/* Pulsing Ring */}
                 <motion.div
                   className="absolute inset-0 rounded-full border-2"
@@ -323,8 +327,10 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
                     style={{ borderColor: point.color }}
                   >
                     <div className="font-semibold">{point.title}</div>
-                    <div className="text-xs opacity-75">{point.points} • {point.difficulty}</div>
-                    <div 
+                    <div className="text-xs opacity-75">
+                      {point.points} • {point.difficulty}
+                    </div>
+                    <div
                       className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1 w-0 h-0"
                       style={{
                         borderLeft: "5px solid transparent",
@@ -370,9 +376,9 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
         <div className="space-y-1 text-xs">
           {categories.map((cat) => (
             <div key={cat.id} className="flex items-center gap-2">
-              <div 
+              <div
                 className="w-3 h-3 rounded-full border"
-                style={{ 
+                style={{
                   backgroundColor: `${getColorFromCategory(cat.id)}20`,
                   borderColor: getColorFromCategory(cat.id),
                 }}

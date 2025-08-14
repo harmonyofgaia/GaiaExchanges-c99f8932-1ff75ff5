@@ -80,31 +80,22 @@ export function CrossPlatformCompatibility() {
   const [overallCompatibility, setOverallCompatibility] = useState(0);
 
   useEffect(() => {
-    const totalCompatibility = platforms.reduce(
-      (sum, platform) => sum + platform.compatibility,
-      0,
-    );
+    const totalCompatibility = platforms.reduce((sum, platform) => sum + platform.compatibility, 0);
     const avgCompatibility = totalCompatibility / platforms.length;
     setOverallCompatibility(avgCompatibility);
 
     const optimizeCompatibility = setInterval(() => {
       setPlatforms((prev) =>
         prev.map((platform) => {
-          if (
-            platform.compatibility < 100 &&
-            platform.status !== "deprecated"
-          ) {
+          if (platform.compatibility < 100 && platform.status !== "deprecated") {
             const improvement = Math.min(1, 100 - platform.compatibility);
             return {
               ...platform,
-              compatibility: Math.min(
-                100,
-                platform.compatibility + improvement,
-              ),
+              compatibility: Math.min(100, platform.compatibility + improvement),
             };
           }
           return platform;
-        }),
+        })
       );
     }, 10000);
 
@@ -127,7 +118,7 @@ export function CrossPlatformCompatibility() {
           };
         }
         return platform;
-      }),
+      })
     );
 
     console.log("📱 BlackBerry compatibility optimization completed");
@@ -169,9 +160,7 @@ export function CrossPlatformCompatibility() {
               <div className="text-4xl font-bold text-blue-400 mb-2">
                 {overallCompatibility.toFixed(1)}%
               </div>
-              <p className="text-muted-foreground">
-                Overall Compatibility Score
-              </p>
+              <p className="text-muted-foreground">Overall Compatibility Score</p>
               <Progress value={overallCompatibility} className="mt-3" />
             </div>
           </div>
@@ -193,9 +182,7 @@ export function CrossPlatformCompatibility() {
                   <div className="text-blue-400">{platform.icon}</div>
                   <div>
                     <div className="font-medium">{platform.name}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {platform.version}
-                    </div>
+                    <div className="text-sm text-muted-foreground">{platform.version}</div>
                   </div>
                 </div>
 
@@ -206,14 +193,10 @@ export function CrossPlatformCompatibility() {
                     >
                       {platform.compatibility.toFixed(1)}%
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      Compatible
-                    </div>
+                    <div className="text-xs text-muted-foreground">Compatible</div>
                   </div>
 
-                  <Badge
-                    className={`${getStatusColor(platform.status)} text-white`}
-                  >
+                  <Badge className={`${getStatusColor(platform.status)} text-white`}>
                     {platform.status}
                   </Badge>
 
@@ -231,10 +214,7 @@ export function CrossPlatformCompatibility() {
       </Card>
 
       <div className="flex gap-4 flex-wrap">
-        <Button
-          onClick={optimizeForBlackBerry}
-          className="bg-orange-600 hover:bg-orange-700"
-        >
+        <Button onClick={optimizeForBlackBerry} className="bg-orange-600 hover:bg-orange-700">
           <Smartphone className="h-4 w-4 mr-2" />
           Optimize BlackBerry Support
         </Button>
@@ -255,19 +235,13 @@ export function CrossPlatformCompatibility() {
         <CardContent>
           <div className="space-y-3">
             <p className="text-sm text-orange-300">
-              Special optimization protocols for BlackBerry OS 10.3+ devices
-              with enhanced security and performance adaptations for legacy
-              hardware constraints.
+              Special optimization protocols for BlackBerry OS 10.3+ devices with enhanced security
+              and performance adaptations for legacy hardware constraints.
             </p>
             <div className="bg-orange-500/10 p-3 rounded-lg mt-3">
-              <div className="text-sm font-medium text-orange-400">
-                Legacy Compatibility Status
-              </div>
+              <div className="text-sm font-medium text-orange-400">Legacy Compatibility Status</div>
               <Progress
-                value={
-                  platforms.find((p) => p.name === "BlackBerry")
-                    ?.compatibility || 0
-                }
+                value={platforms.find((p) => p.name === "BlackBerry")?.compatibility || 0}
                 className="mt-2"
               />
             </div>

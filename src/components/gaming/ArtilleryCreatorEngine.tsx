@@ -83,15 +83,7 @@ export function ArtilleryCreatorEngine() {
   ];
 
   const weaponShapes = ["beam", "orb", "wave", "spiral", "network", "field"];
-  const effectOptions = [
-    "sparkle",
-    "glow",
-    "pulse",
-    "shimmer",
-    "ripple",
-    "aurora",
-    "quantum",
-  ];
+  const effectOptions = ["sparkle", "glow", "pulse", "shimmer", "ripple", "aurora", "quantum"];
 
   const handleCreateWeapon = () => {
     if (!currentWeapon.name || !currentWeapon.description) {
@@ -168,17 +160,15 @@ export function ArtilleryCreatorEngine() {
           🛠️ ARTILLERY CREATOR ENGINE - Design Your Game Tools
         </CardTitle>
         <p className="text-muted-foreground">
-          Create custom weapons, tools, and equipment for environmental healing
-          and neural enhancement games
+          Create custom weapons, tools, and equipment for environmental healing and neural
+          enhancement games
         </p>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="creator" className="space-y-6">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="creator">Create New</TabsTrigger>
-            <TabsTrigger value="arsenal">
-              My Arsenal ({createdWeapons.length})
-            </TabsTrigger>
+            <TabsTrigger value="arsenal">My Arsenal ({createdWeapons.length})</TabsTrigger>
             <TabsTrigger value="community">Community Designs</TabsTrigger>
           </TabsList>
 
@@ -204,16 +194,12 @@ export function ArtilleryCreatorEngine() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-purple-400 mb-2">
-                    Type
-                  </label>
+                  <label className="block text-sm font-medium text-purple-400 mb-2">Type</label>
                   <div className="grid grid-cols-2 gap-2">
                     {weaponTypes.map((type) => (
                       <Button
                         key={type.id}
-                        variant={
-                          currentWeapon.type === type.id ? "default" : "outline"
-                        }
+                        variant={currentWeapon.type === type.id ? "default" : "outline"}
                         onClick={() =>
                           setCurrentWeapon((prev) => ({
                             ...prev,
@@ -224,9 +210,7 @@ export function ArtilleryCreatorEngine() {
                       >
                         <div>
                           <div className="font-medium text-sm">{type.name}</div>
-                          <div className="text-xs text-muted-foreground">
-                            {type.description}
-                          </div>
+                          <div className="text-xs text-muted-foreground">{type.description}</div>
                         </div>
                       </Button>
                     ))}
@@ -352,9 +336,7 @@ export function ArtilleryCreatorEngine() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-purple-400 mb-2">
-                    Color
-                  </label>
+                  <label className="block text-sm font-medium text-purple-400 mb-2">Color</label>
                   <input
                     type="color"
                     value={currentWeapon.design?.color || "#00ff88"}
@@ -381,11 +363,7 @@ export function ArtilleryCreatorEngine() {
                     {weaponShapes.map((shape) => (
                       <Button
                         key={shape}
-                        variant={
-                          currentWeapon.design?.shape === shape
-                            ? "default"
-                            : "outline"
-                        }
+                        variant={currentWeapon.design?.shape === shape ? "default" : "outline"}
                         onClick={() =>
                           setCurrentWeapon((prev) => ({
                             ...prev,
@@ -446,53 +424,35 @@ export function ArtilleryCreatorEngine() {
                   >
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2 text-sm">
-                        <span className="text-2xl">
-                          {getTypeIcon(weapon.type)}
-                        </span>
+                        <span className="text-2xl">{getTypeIcon(weapon.type)}</span>
                         {weapon.name}
                         <Badge className="bg-green-600 text-xs">Active</Badge>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
-                      <p className="text-sm text-muted-foreground">
-                        {weapon.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{weapon.description}</p>
 
                       <div className="grid grid-cols-3 gap-2 text-xs">
                         <div className="text-center">
-                          <div className="text-green-400 font-bold">
-                            {weapon.power}
-                          </div>
+                          <div className="text-green-400 font-bold">{weapon.power}</div>
                           <div className="text-muted-foreground">Power</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-blue-400 font-bold">
-                            {weapon.range}
-                          </div>
+                          <div className="text-blue-400 font-bold">{weapon.range}</div>
                           <div className="text-muted-foreground">Range</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-yellow-400 font-bold">
-                            {weapon.accuracy}
-                          </div>
+                          <div className="text-yellow-400 font-bold">{weapon.accuracy}</div>
                           <div className="text-muted-foreground">Accuracy</div>
                         </div>
                       </div>
 
                       <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="flex-1 text-xs"
-                        >
+                        <Button size="sm" variant="outline" className="flex-1 text-xs">
                           <Share2 className="h-3 w-3 mr-1" />
                           Share
                         </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="flex-1 text-xs"
-                        >
+                        <Button size="sm" variant="outline" className="flex-1 text-xs">
                           <Download className="h-3 w-3 mr-1" />
                           Export
                         </Button>

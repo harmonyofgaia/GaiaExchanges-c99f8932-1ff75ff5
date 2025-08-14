@@ -76,9 +76,7 @@ interface CommunityVaultStats {
 }
 
 function AnimalWelfareControlPanel() {
-  const [searchedAnimals, setSearchedAnimals] = useState<AISearchedAnimal[]>(
-    [],
-  );
+  const [searchedAnimals, setSearchedAnimals] = useState<AISearchedAnimal[]>([]);
   const [fundingMetrics, setFundingMetrics] = useState<FundingMetrics>({
     vaultFunding: {
       totalAllocated: 2450000,
@@ -102,9 +100,7 @@ function AnimalWelfareControlPanel() {
     communityEngagement: 94,
   });
   const [aiMonitoringActive, setAiMonitoringActive] = useState(true);
-  const [selectedAnimal, setSelectedAnimal] = useState<AISearchedAnimal | null>(
-    null,
-  );
+  const [selectedAnimal, setSelectedAnimal] = useState<AISearchedAnimal | null>(null);
 
   useEffect(() => {
     // Initialize with sample AI-discovered animals
@@ -160,28 +156,15 @@ function AnimalWelfareControlPanel() {
           emotionalState: {
             sadness: Math.max(
               10,
-              animal.emotionalState.sadness +
-                Math.floor(Math.random() * 10 - 5),
+              animal.emotionalState.sadness + Math.floor(Math.random() * 10 - 5)
             ),
-            hope: Math.min(
-              100,
-              animal.emotionalState.hope + Math.floor(Math.random() * 8 - 2),
-            ),
-            fear: Math.max(
-              5,
-              animal.emotionalState.fear + Math.floor(Math.random() * 12 - 6),
-            ),
-            trust: Math.min(
-              100,
-              animal.emotionalState.trust + Math.floor(Math.random() * 6 - 1),
-            ),
+            hope: Math.min(100, animal.emotionalState.hope + Math.floor(Math.random() * 8 - 2)),
+            fear: Math.max(5, animal.emotionalState.fear + Math.floor(Math.random() * 12 - 6)),
+            trust: Math.min(100, animal.emotionalState.trust + Math.floor(Math.random() * 6 - 1)),
           },
-          rescueProgress: Math.min(
-            100,
-            animal.rescueProgress + Math.floor(Math.random() * 3),
-          ),
+          rescueProgress: Math.min(100, animal.rescueProgress + Math.floor(Math.random() * 3)),
           lastUpdate: new Date().toISOString(),
-        })),
+        }))
       );
     }, 12000);
 
@@ -286,11 +269,7 @@ function AnimalWelfareControlPanel() {
                     )}
                     {aiMonitoringActive ? "AI Active" : "AI Paused"}
                   </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleAISearchOverride}
-                  >
+                  <Button variant="outline" size="sm" onClick={handleAISearchOverride}>
                     <Settings className="h-4 w-4 mr-1" />
                     Override Parameters
                   </Button>
@@ -302,9 +281,7 @@ function AnimalWelfareControlPanel() {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-blue-300">
-                    Recently Discovered Animals
-                  </h4>
+                  <h4 className="font-semibold text-blue-300">Recently Discovered Animals</h4>
                   {searchedAnimals.map((animal) => (
                     <Card
                       key={animal.id}
@@ -315,12 +292,8 @@ function AnimalWelfareControlPanel() {
                         <div className="flex justify-between items-start mb-2">
                           <div>
                             <h5 className="font-medium">{animal.name}</h5>
-                            <p className="text-xs text-muted-foreground">
-                              {animal.species}
-                            </p>
-                            <p className="text-xs text-blue-400">
-                              {animal.cardId}
-                            </p>
+                            <p className="text-xs text-muted-foreground">{animal.species}</p>
+                            <p className="text-xs text-blue-400">{animal.cardId}</p>
                           </div>
                           <Badge
                             variant={
@@ -343,10 +316,7 @@ function AnimalWelfareControlPanel() {
                             <span>Rescue Progress</span>
                             <span>{animal.rescueProgress}%</span>
                           </div>
-                          <Progress
-                            value={animal.rescueProgress}
-                            className="h-1"
-                          />
+                          <Progress value={animal.rescueProgress} className="h-1" />
                         </div>
                       </CardContent>
                     </Card>
@@ -355,18 +325,12 @@ function AnimalWelfareControlPanel() {
 
                 {selectedAnimal && (
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-blue-300">
-                      Animal Details & Controls
-                    </h4>
+                    <h4 className="font-semibold text-blue-300">Animal Details & Controls</h4>
                     <Card className="border-blue-500/30">
                       <CardContent className="p-4 space-y-4">
                         <div>
-                          <h5 className="font-medium text-lg">
-                            {selectedAnimal.name}
-                          </h5>
-                          <p className="text-sm text-muted-foreground">
-                            {selectedAnimal.species}
-                          </p>
+                          <h5 className="font-medium text-lg">{selectedAnimal.name}</h5>
+                          <p className="text-sm text-muted-foreground">{selectedAnimal.species}</p>
                           <div className="flex items-center gap-2 mt-2">
                             <Wallet className="h-4 w-4 text-green-400" />
                             <span className="text-xs font-mono">
@@ -383,9 +347,7 @@ function AnimalWelfareControlPanel() {
                             <div>
                               <div className="flex justify-between text-xs">
                                 <span>Sadness</span>
-                                <span>
-                                  {selectedAnimal.emotionalState.sadness}%
-                                </span>
+                                <span>{selectedAnimal.emotionalState.sadness}%</span>
                               </div>
                               <Progress
                                 value={selectedAnimal.emotionalState.sadness}
@@ -395,9 +357,7 @@ function AnimalWelfareControlPanel() {
                             <div>
                               <div className="flex justify-between text-xs">
                                 <span>Hope</span>
-                                <span>
-                                  {selectedAnimal.emotionalState.hope}%
-                                </span>
+                                <span>{selectedAnimal.emotionalState.hope}%</span>
                               </div>
                               <Progress
                                 value={selectedAnimal.emotionalState.hope}
@@ -407,9 +367,7 @@ function AnimalWelfareControlPanel() {
                             <div>
                               <div className="flex justify-between text-xs">
                                 <span>Fear</span>
-                                <span>
-                                  {selectedAnimal.emotionalState.fear}%
-                                </span>
+                                <span>{selectedAnimal.emotionalState.fear}%</span>
                               </div>
                               <Progress
                                 value={selectedAnimal.emotionalState.fear}
@@ -419,9 +377,7 @@ function AnimalWelfareControlPanel() {
                             <div>
                               <div className="flex justify-between text-xs">
                                 <span>Trust</span>
-                                <span>
-                                  {selectedAnimal.emotionalState.trust}%
-                                </span>
+                                <span>{selectedAnimal.emotionalState.trust}%</span>
                               </div>
                               <Progress
                                 value={selectedAnimal.emotionalState.trust}
@@ -435,9 +391,7 @@ function AnimalWelfareControlPanel() {
                           <Button
                             size="sm"
                             variant="outline"
-                            onClick={() =>
-                              handleForceFundingRelease(selectedAnimal.cardId)
-                            }
+                            onClick={() => handleForceFundingRelease(selectedAnimal.cardId)}
                           >
                             <Zap className="h-4 w-4 mr-1" />
                             Emergency Fund
@@ -473,28 +427,21 @@ function AnimalWelfareControlPanel() {
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
                     <div className="text-xl font-bold text-green-400">
-                      $
-                      {fundingMetrics.vaultFunding.totalAllocated.toLocaleString()}
+                      ${fundingMetrics.vaultFunding.totalAllocated.toLocaleString()}
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      Total Allocated
-                    </p>
+                    <p className="text-xs text-muted-foreground">Total Allocated</p>
                   </div>
                   <div>
                     <div className="text-xl font-bold text-blue-400">
                       {fundingMetrics.vaultFunding.activeRescues}
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      Active Rescues
-                    </p>
+                    <p className="text-xs text-muted-foreground">Active Rescues</p>
                   </div>
                   <div>
                     <div className="text-xl font-bold text-orange-400">
                       {fundingMetrics.vaultFunding.pendingReleases}
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      Pending Releases
-                    </p>
+                    <p className="text-xs text-muted-foreground">Pending Releases</p>
                   </div>
                 </div>
                 <div className="space-y-2">
@@ -521,28 +468,21 @@ function AnimalWelfareControlPanel() {
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
                     <div className="text-xl font-bold text-purple-400">
-                      $
-                      {fundingMetrics.marketplaceFunding.nftSales.toLocaleString()}
+                      ${fundingMetrics.marketplaceFunding.nftSales.toLocaleString()}
                     </div>
                     <p className="text-xs text-muted-foreground">NFT Sales</p>
                   </div>
                   <div>
                     <div className="text-xl font-bold text-pink-400">
-                      $
-                      {fundingMetrics.marketplaceFunding.directDonations.toLocaleString()}
+                      ${fundingMetrics.marketplaceFunding.directDonations.toLocaleString()}
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      Direct Donations
-                    </p>
+                    <p className="text-xs text-muted-foreground">Direct Donations</p>
                   </div>
                   <div>
                     <div className="text-xl font-bold text-cyan-400">
-                      $
-                      {fundingMetrics.marketplaceFunding.totalRevenue.toLocaleString()}
+                      ${fundingMetrics.marketplaceFunding.totalRevenue.toLocaleString()}
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      Total Revenue
-                    </p>
+                    <p className="text-xs text-muted-foreground">Total Revenue</p>
                   </div>
                 </div>
                 <div className="space-y-2">
@@ -579,9 +519,7 @@ function AnimalWelfareControlPanel() {
                   <p className="text-sm text-muted-foreground">Active Events</p>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-green-400">
-                    {vaultStats.totalGifts}
-                  </div>
+                  <div className="text-2xl font-bold text-green-400">{vaultStats.totalGifts}</div>
                   <p className="text-sm text-muted-foreground">Total Gifts</p>
                 </div>
                 <div>
@@ -609,9 +547,7 @@ function AnimalWelfareControlPanel() {
                   <CardContent className="p-4 text-center">
                     <CheckCircle className="h-8 w-8 text-green-400 mx-auto mb-2" />
                     <div className="text-2xl font-bold text-green-400">330</div>
-                    <p className="text-sm text-muted-foreground">
-                      Successfully Rescued
-                    </p>
+                    <p className="text-sm text-muted-foreground">Successfully Rescued</p>
                     <Badge className="mt-2 bg-green-600">↑ 15 this week</Badge>
                   </CardContent>
                 </Card>
@@ -619,12 +555,8 @@ function AnimalWelfareControlPanel() {
                 <Card className="border-orange-500/30">
                   <CardContent className="p-4 text-center">
                     <Clock className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-orange-400">
-                      528
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      Active Rescues
-                    </p>
+                    <div className="text-2xl font-bold text-orange-400">528</div>
+                    <p className="text-sm text-muted-foreground">Active Rescues</p>
                     <Badge className="mt-2 bg-orange-600">↑ 23 today</Badge>
                   </CardContent>
                 </Card>
@@ -633,18 +565,14 @@ function AnimalWelfareControlPanel() {
                   <CardContent className="p-4 text-center">
                     <AlertTriangle className="h-8 w-8 text-red-400 mx-auto mb-2" />
                     <div className="text-2xl font-bold text-red-400">858</div>
-                    <p className="text-sm text-muted-foreground">
-                      Awaiting Rescue
-                    </p>
+                    <p className="text-sm text-muted-foreground">Awaiting Rescue</p>
                     <Badge className="mt-2 bg-red-600">↑ 42 discovered</Badge>
                   </CardContent>
                 </Card>
               </div>
 
               <div className="space-y-3">
-                <h4 className="font-semibold text-cyan-300">
-                  Dashboard Control Actions
-                </h4>
+                <h4 className="font-semibold text-cyan-300">Dashboard Control Actions</h4>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                   <Button variant="outline" size="sm">
                     <Activity className="h-4 w-4 mr-1" />
@@ -679,20 +607,14 @@ function AnimalWelfareControlPanel() {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-red-300">
-                    Active Mission Control
-                  </h4>
+                  <h4 className="font-semibold text-red-300">Active Mission Control</h4>
                   <div className="space-y-2">
                     <Card className="border-orange-500/30 bg-orange-900/10">
                       <CardContent className="p-3">
                         <div className="flex justify-between items-center">
                           <div>
-                            <h5 className="font-medium">
-                              Operation Arctic Freedom
-                            </h5>
-                            <p className="text-xs text-muted-foreground">
-                              Luna - Siberian Tiger
-                            </p>
+                            <h5 className="font-medium">Operation Arctic Freedom</h5>
+                            <p className="text-xs text-muted-foreground">Luna - Siberian Tiger</p>
                           </div>
                           <Badge className="bg-orange-600">In Progress</Badge>
                         </div>
@@ -714,12 +636,8 @@ function AnimalWelfareControlPanel() {
                       <CardContent className="p-3">
                         <div className="flex justify-between items-center">
                           <div>
-                            <h5 className="font-medium">
-                              Operation Sky Guardian
-                            </h5>
-                            <p className="text-xs text-muted-foreground">
-                              Sunny - Golden Eagle
-                            </p>
+                            <h5 className="font-medium">Operation Sky Guardian</h5>
+                            <p className="text-xs text-muted-foreground">Sunny - Golden Eagle</p>
                           </div>
                           <Badge className="bg-green-600">Near Complete</Badge>
                         </div>
@@ -740,9 +658,7 @@ function AnimalWelfareControlPanel() {
                 </div>
 
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-red-300">
-                    Emergency Controls
-                  </h4>
+                  <h4 className="font-semibold text-red-300">Emergency Controls</h4>
                   <div className="space-y-2">
                     <Button className="w-full" variant="destructive">
                       <AlertTriangle className="h-4 w-4 mr-2" />

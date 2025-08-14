@@ -200,33 +200,27 @@ export function DefenseCreatureArmy() {
               ...creature,
               status: creature.status === "active" ? "training" : "active",
             }
-          : creature,
-      ),
+          : creature
+      )
     );
     toast.success("Creature status updated!");
   };
 
   const batchActivateCreatures = () => {
-    setCreatures((prev) =>
-      prev.map((creature) => ({ ...creature, status: "active" })),
-    );
+    setCreatures((prev) => prev.map((creature) => ({ ...creature, status: "active" })));
     toast.success("All creatures activated!");
   };
 
   const batchDeployCreatures = () => {
-    setCreatures((prev) =>
-      prev.map((creature) => ({ ...creature, status: "defending" })),
-    );
+    setCreatures((prev) => prev.map((creature) => ({ ...creature, status: "defending" })));
     toast.success("All creatures deployed for defense!");
   };
 
   const resetCreatureStats = (id: string) => {
     setCreatures((prev) =>
       prev.map((creature) =>
-        creature.id === id
-          ? { ...creature, threatsEliminated: 0, level: 1, power: 1000 }
-          : creature,
-      ),
+        creature.id === id ? { ...creature, threatsEliminated: 0, level: 1, power: 1000 } : creature
+      )
     );
     toast.success("Creature stats reset!");
   };
@@ -240,20 +234,13 @@ export function DefenseCreatureArmy() {
 
   useEffect(() => {
     const updateStats = () => {
-      const totalPower = creatures.reduce(
-        (sum, creature) => sum + creature.power,
-        0,
-      );
+      const totalPower = creatures.reduce((sum, creature) => sum + creature.power, 0);
       const activeCreatures = creatures.filter(
-        (c) => c.status === "active" || c.status === "defending",
+        (c) => c.status === "active" || c.status === "defending"
       ).length;
-      const totalThreats = creatures.reduce(
-        (sum, creature) => sum + creature.threatsEliminated,
-        0,
-      );
+      const totalThreats = creatures.reduce((sum, creature) => sum + creature.threatsEliminated, 0);
       const averageLevel =
-        creatures.reduce((sum, creature) => sum + creature.level, 0) /
-        creatures.length;
+        creatures.reduce((sum, creature) => sum + creature.level, 0) / creatures.length;
 
       setArmyStats({
         totalPower,
@@ -269,20 +256,17 @@ export function DefenseCreatureArmy() {
             if (Math.random() < 0.2) {
               return {
                 ...creature,
-                threatsEliminated:
-                  creature.threatsEliminated + Math.floor(Math.random() * 3),
+                threatsEliminated: creature.threatsEliminated + Math.floor(Math.random() * 3),
                 power: creature.power + Math.floor(Math.random() * 1000),
               };
             }
             return creature;
-          }),
+          })
         );
       }
 
       console.log("🛡️ DEFENSE CREATURE ARMY - MAXIMUM PROTECTION ACTIVE");
-      console.log(
-        `🐉 ${creatures.length} Legendary Creatures Defending System`,
-      );
+      console.log(`🐉 ${creatures.length} Legendary Creatures Defending System`);
       console.log(`⚡ Total Army Power: ${totalPower.toLocaleString()}`);
       console.log("🦅 Sky Surveillance Active - 24/7 Monitoring");
       console.log("🐺 Pack Hunting Mode - Tracking All Threats");
@@ -302,7 +286,7 @@ export function DefenseCreatureArmy() {
         ...creature,
         status: "defending",
         power: creature.power * 1.5,
-      })),
+      }))
     );
 
     toast.success("🛡️ ALL CREATURES DEPLOYED!", {
@@ -352,10 +336,7 @@ export function DefenseCreatureArmy() {
               <Sword className="h-4 w-4 mr-1" />
               Deploy All
             </Button>
-            <Button
-              onClick={deployAllCreatures}
-              className="bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={deployAllCreatures} className="bg-purple-600 hover:bg-purple-700">
               <Sword className="h-5 w-5 mr-2" />
               🛡️ MAXIMUM DEFENSE MODE
             </Button>
@@ -373,12 +354,8 @@ export function DefenseCreatureArmy() {
 
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
               <Activity className="h-8 w-8 mx-auto text-green-400 mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {armyStats.activeCreatures}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Guardians
-              </div>
+              <div className="text-2xl font-bold text-green-400">{armyStats.activeCreatures}</div>
+              <div className="text-sm text-muted-foreground">Active Guardians</div>
             </div>
 
             <div className="text-center p-4 bg-purple-900/30 rounded-lg">
@@ -386,16 +363,12 @@ export function DefenseCreatureArmy() {
               <div className="text-2xl font-bold text-purple-400">
                 {armyStats.totalThreatsEliminated}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Eliminated
-              </div>
+              <div className="text-sm text-muted-foreground">Threats Eliminated</div>
             </div>
 
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
               <Crown className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {armyStats.averageLevel}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{armyStats.averageLevel}</div>
               <div className="text-sm text-muted-foreground">Average Level</div>
             </div>
           </div>
@@ -423,9 +396,7 @@ export function DefenseCreatureArmy() {
                   <span className="text-2xl">{creature.emoji}</span>
                   <span className="text-sm">{creature.name}</span>
                 </div>
-                <Badge
-                  className={`${getStatusColor(creature.status)} text-white`}
-                >
+                <Badge className={`${getStatusColor(creature.status)} text-white`}>
                   {creature.status.toUpperCase()}
                 </Badge>
               </CardTitle>
@@ -434,51 +405,32 @@ export function DefenseCreatureArmy() {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Level</span>
-                  <span className="text-orange-400 font-bold">
-                    {creature.level}
-                  </span>
+                  <span className="text-orange-400 font-bold">{creature.level}</span>
                 </div>
-                <Progress
-                  value={(creature.level / 100) * 100}
-                  className="h-2"
-                />
+                <Progress value={(creature.level / 100) * 100} className="h-2" />
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Power</span>
-                  <span className="text-red-400 font-bold">
-                    {creature.power.toLocaleString()}
-                  </span>
+                  <span className="text-red-400 font-bold">{creature.power.toLocaleString()}</span>
                 </div>
-                <Progress
-                  value={Math.min((creature.power / 100000) * 100, 100)}
-                  className="h-2"
-                />
+                <Progress value={Math.min((creature.power / 100000) * 100, 100)} className="h-2" />
               </div>
 
               <div className="text-xs text-muted-foreground">
-                <div className="font-semibold text-yellow-400 mb-1">
-                  Special Ability:
-                </div>
+                <div className="font-semibold text-yellow-400 mb-1">Special Ability:</div>
                 <div>{creature.specialAbility}</div>
               </div>
 
               <div className="flex justify-between items-center pt-2 border-t border-orange-500/20">
-                <span className="text-xs text-muted-foreground">
-                  Eliminated:
-                </span>
-                <Badge className="bg-green-600 text-white">
-                  {creature.threatsEliminated}
-                </Badge>
+                <span className="text-xs text-muted-foreground">Eliminated:</span>
+                <Badge className="bg-green-600 text-white">{creature.threatsEliminated}</Badge>
               </div>
 
               <div className="flex gap-1 pt-2">
                 <Switch
-                  checked={
-                    creature.status === "active" ||
-                    creature.status === "defending"
-                  }
+                  checked={creature.status === "active" || creature.status === "defending"}
                   onCheckedChange={() => toggleCreatureStatus(creature.id)}
                 />
                 <Button
@@ -506,34 +458,27 @@ export function DefenseCreatureArmy() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-green-200">
             <div className="space-y-2">
               <div>
-                🐉 <strong>Alpha Dragon:</strong> Ultimate guardian with quantum
-                fire breath
+                🐉 <strong>Alpha Dragon:</strong> Ultimate guardian with quantum fire breath
               </div>
               <div>
-                🦅 <strong>Sky Eagle:</strong> Aerial surveillance from space to
-                ground
+                🦅 <strong>Sky Eagle:</strong> Aerial surveillance from space to ground
               </div>
               <div>
-                🐺 <strong>Pack Wolf:</strong> Coordinates army-wide threat
-                responses
+                🐺 <strong>Pack Wolf:</strong> Coordinates army-wide threat responses
               </div>
               <div>
-                🦁 <strong>King Lion:</strong> Royal protector with paralyzing
-                roar
+                🦁 <strong>King Lion:</strong> Royal protector with paralyzing roar
               </div>
             </div>
             <div className="space-y-2">
               <div>
-                🐒 <strong>7 AI Monkeys:</strong> Code analysis and network
-                protection
+                🐒 <strong>7 AI Monkeys:</strong> Code analysis and network protection
               </div>
               <div>
-                ⚡ <strong>Combined Power:</strong> Over 1 million defense
-                points
+                ⚡ <strong>Combined Power:</strong> Over 1 million defense points
               </div>
               <div>
-                🎯 <strong>24/7 Active:</strong> Never sleeping, always
-                protecting
+                🎯 <strong>24/7 Active:</strong> Never sleeping, always protecting
               </div>
               <div>
                 🌍 <strong>Global Coverage:</strong> Defending worldwide systems

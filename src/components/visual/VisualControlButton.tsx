@@ -9,16 +9,7 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import {
-  Settings,
-  Brush,
-  Lock,
-  Unlock,
-  Palette,
-  LayoutDashboard,
-  Zap,
-  Eye,
-} from "lucide-react";
+import { Settings, Brush, Lock, Unlock, Palette, LayoutDashboard, Zap, Eye } from "lucide-react";
 import { useLock } from "@/components/providers/ThemeProvider";
 import { toast } from "sonner";
 import { VisualControlMenu } from "./VisualControlMenu";
@@ -31,15 +22,12 @@ export function VisualControlButton() {
 
   const handleLockToggle = () => {
     toggleLock();
-    toast.success(
-      isLocked ? "Visual controls unlocked" : "Visual controls locked",
-      {
-        description: isLocked
-          ? "You can now modify visual settings"
-          : "Visual settings are now protected",
-        duration: 2000,
-      },
-    );
+    toast.success(isLocked ? "Visual controls unlocked" : "Visual controls locked", {
+      description: isLocked
+        ? "You can now modify visual settings"
+        : "Visual settings are now protected",
+      duration: 2000,
+    });
   };
 
   const handleOpenFullMenu = () => {
@@ -86,19 +74,10 @@ export function VisualControlButton() {
             >
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-2">
-                  {isLocked ? (
-                    <Lock className="h-4 w-4" />
-                  ) : (
-                    <Unlock className="h-4 w-4" />
-                  )}
-                  <span>
-                    {isLocked ? "Controls Locked" : "Controls Unlocked"}
-                  </span>
+                  {isLocked ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
+                  <span>{isLocked ? "Controls Locked" : "Controls Unlocked"}</span>
                 </div>
-                <Badge
-                  variant={isLocked ? "destructive" : "secondary"}
-                  className="text-xs"
-                >
+                <Badge variant={isLocked ? "destructive" : "secondary"} className="text-xs">
                   {isLocked ? "Protected" : "Editable"}
                 </Badge>
               </div>
@@ -181,9 +160,7 @@ export function VisualControlButton() {
           <div className="bg-background/95 backdrop-blur-sm border border-primary/30 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-primary">
-                  Enhanced Visual Control Panel
-                </h2>
+                <h2 className="text-2xl font-bold text-primary">Enhanced Visual Control Panel</h2>
                 <Button
                   variant="ghost"
                   size="sm"

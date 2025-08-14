@@ -92,10 +92,7 @@ export default function GaiaFantasyMMORPG() {
       setPlayer((prev) => ({
         ...prev,
         experience: prev.experience + 50,
-        level:
-          prev.experience + 50 >= prev.level * 100
-            ? prev.level + 1
-            : prev.level,
+        level: prev.experience + 50 >= prev.level * 100 ? prev.level + 1 : prev.level,
       }));
       setCurrentQuest(null);
       toast.success("✅ Quest Completed!", {
@@ -127,12 +124,8 @@ export default function GaiaFantasyMMORPG() {
               <Badge className="bg-green-600 animate-pulse">
                 👥 {gameStats.playersOnline.toLocaleString()} Online
               </Badge>
-              <Badge className="bg-blue-600">
-                🏆 {gameStats.totalQuests} Quests Available
-              </Badge>
-              <Badge className="bg-purple-600">
-                ⚔️ {gameStats.guildsActive} Active Guilds
-              </Badge>
+              <Badge className="bg-blue-600">🏆 {gameStats.totalQuests} Quests Available</Badge>
+              <Badge className="bg-purple-600">⚔️ {gameStats.guildsActive} Active Guilds</Badge>
               <Badge className="bg-orange-600 animate-pulse">
                 🌟 {gameStats.worldEvents} World Events
               </Badge>
@@ -151,8 +144,7 @@ export default function GaiaFantasyMMORPG() {
             <CardContent className="text-center space-y-6">
               <div className="text-6xl animate-bounce">🌍⚔️🌍</div>
               <p className="text-lg text-muted-foreground">
-                Join millions of players in the ultimate environmental adventure
-                MMORPG
+                Join millions of players in the ultimate environmental adventure MMORPG
               </p>
               <Button
                 onClick={startGame}
@@ -169,21 +161,15 @@ export default function GaiaFantasyMMORPG() {
             {/* Player Stats */}
             <Card className="border-green-500/30 bg-green-900/20">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  🧙‍♂️ Player Status
-                </CardTitle>
+                <CardTitle className="text-green-400">🧙‍♂️ Player Status</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <div className="flex justify-between">
-                    <span className="text-green-400 font-bold">
-                      {player.name}
-                    </span>
+                    <span className="text-green-400 font-bold">{player.name}</span>
                     <Badge className="bg-green-600">Level {player.level}</Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    {player.class}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{player.class}</p>
                   <p className="text-sm text-blue-400">📍 {player.location}</p>
                 </div>
 
@@ -194,10 +180,7 @@ export default function GaiaFantasyMMORPG() {
                       {player.health}/{player.maxHealth}
                     </span>
                   </div>
-                  <Progress
-                    value={(player.health / player.maxHealth) * 100}
-                    className="h-2"
-                  />
+                  <Progress value={(player.health / player.maxHealth) * 100} className="h-2" />
 
                   <div className="flex justify-between text-sm">
                     <span className="text-blue-400">⚡ Mana</span>
@@ -205,10 +188,7 @@ export default function GaiaFantasyMMORPG() {
                       {player.mana}/{player.maxMana}
                     </span>
                   </div>
-                  <Progress
-                    value={(player.mana / player.maxMana) * 100}
-                    className="h-2"
-                  />
+                  <Progress value={(player.mana / player.maxMana) * 100} className="h-2" />
 
                   <div className="flex justify-between text-sm">
                     <span className="text-yellow-400">⭐ Experience</span>
@@ -232,37 +212,23 @@ export default function GaiaFantasyMMORPG() {
               <CardContent className="space-y-4">
                 <div className="text-center">
                   <div className="text-6xl mb-4">🌲🏔️🌊</div>
-                  <h3 className="text-xl font-bold text-blue-400">
-                    Harmony Forest
-                  </h3>
+                  <h3 className="text-xl font-bold text-blue-400">Harmony Forest</h3>
                   <p className="text-sm text-muted-foreground">
                     A mystical realm where environmental magic flows freely
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
-                  <Button
-                    variant="outline"
-                    className="border-green-500/30 text-green-400"
-                  >
+                  <Button variant="outline" className="border-green-500/30 text-green-400">
                     🌲 Forest Path
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="border-blue-500/30 text-blue-400"
-                  >
+                  <Button variant="outline" className="border-blue-500/30 text-blue-400">
                     🌊 Crystal Lake
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="border-purple-500/30 text-purple-400"
-                  >
+                  <Button variant="outline" className="border-purple-500/30 text-purple-400">
                     🏔️ Mountain Peak
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="border-yellow-500/30 text-yellow-400"
-                  >
+                  <Button variant="outline" className="border-yellow-500/30 text-yellow-400">
                     🌅 Solar Plains
                   </Button>
                 </div>
@@ -272,29 +238,21 @@ export default function GaiaFantasyMMORPG() {
             {/* Quests */}
             <Card className="border-purple-500/30 bg-purple-900/20">
               <CardHeader>
-                <CardTitle className="text-purple-400">
-                  ⚔️ Active Quests
-                </CardTitle>
+                <CardTitle className="text-purple-400">⚔️ Active Quests</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {currentQuest ? (
                   <div className="p-4 bg-yellow-900/20 border border-yellow-500/30 rounded-lg">
-                    <h4 className="text-yellow-400 font-bold">
-                      🌟 Current Quest
-                    </h4>
+                    <h4 className="text-yellow-400 font-bold">🌟 Current Quest</h4>
                     <p className="text-sm">{currentQuest}</p>
                     <div className="mt-2">
                       <Progress value={Math.random() * 100} className="h-2" />
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Quest in progress...
-                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">Quest in progress...</p>
                     </div>
                   </div>
                 ) : (
                   <div className="space-y-2">
-                    <h4 className="text-purple-400 font-bold">
-                      Available Quests:
-                    </h4>
+                    <h4 className="text-purple-400 font-bold">Available Quests:</h4>
                     {availableQuests.map((quest, index) => (
                       <Button
                         key={index}
@@ -316,9 +274,7 @@ export default function GaiaFantasyMMORPG() {
         {/* Live Game Statistics */}
         <Card className="border-orange-500/30 bg-orange-900/20">
           <CardHeader>
-            <CardTitle className="text-orange-400">
-              📊 Live Game Statistics
-            </CardTitle>
+            <CardTitle className="text-orange-400">📊 Live Game Statistics</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -327,36 +283,22 @@ export default function GaiaFantasyMMORPG() {
                 <div className="text-2xl font-bold text-green-400">
                   {gameStats.playersOnline.toLocaleString()}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Players Online
-                </div>
+                <div className="text-sm text-muted-foreground">Players Online</div>
               </div>
               <div className="text-center p-4 bg-blue-900/20 rounded-lg">
                 <Trophy className="h-8 w-8 mx-auto text-blue-400" />
-                <div className="text-2xl font-bold text-blue-400">
-                  {gameStats.totalQuests}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Total Quests
-                </div>
+                <div className="text-2xl font-bold text-blue-400">{gameStats.totalQuests}</div>
+                <div className="text-sm text-muted-foreground">Total Quests</div>
               </div>
               <div className="text-center p-4 bg-purple-900/20 rounded-lg">
                 <Shield className="h-8 w-8 mx-auto text-purple-400" />
-                <div className="text-2xl font-bold text-purple-400">
-                  {gameStats.guildsActive}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Active Guilds
-                </div>
+                <div className="text-2xl font-bold text-purple-400">{gameStats.guildsActive}</div>
+                <div className="text-sm text-muted-foreground">Active Guilds</div>
               </div>
               <div className="text-center p-4 bg-orange-900/20 rounded-lg">
                 <Zap className="h-8 w-8 mx-auto text-orange-400" />
-                <div className="text-2xl font-bold text-orange-400">
-                  {gameStats.worldEvents}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  World Events
-                </div>
+                <div className="text-2xl font-bold text-orange-400">{gameStats.worldEvents}</div>
+                <div className="text-sm text-muted-foreground">World Events</div>
               </div>
             </div>
           </CardContent>

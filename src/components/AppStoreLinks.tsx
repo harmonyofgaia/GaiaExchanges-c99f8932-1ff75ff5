@@ -40,8 +40,7 @@ export function AppStoreLinks() {
       platform: "Android",
       icon: "🤖",
       url: cultureOfHarmonyUrl,
-      fallbackUrl:
-        "https://play.google.com/store/search?q=gaia+exchanges&c=apps",
+      fallbackUrl: "https://play.google.com/store/search?q=gaia+exchanges&c=apps",
       rating: 4.8,
       downloads: "500K+",
       size: "34.7 MB",
@@ -171,14 +170,9 @@ export function AppStoreLinks() {
               <h3 className="font-semibold text-green-400">
                 🌍 Culture of Harmony - Main Platform
               </h3>
-              <p className="text-sm text-muted-foreground">
-                Official Gaia's Exchanges Website
-              </p>
+              <p className="text-sm text-muted-foreground">Official Gaia's Exchanges Website</p>
             </div>
-            <Button
-              onClick={openCultureOfHarmony}
-              className="bg-green-600 hover:bg-green-700"
-            >
+            <Button onClick={openCultureOfHarmony} className="bg-green-600 hover:bg-green-700">
               <Globe className="h-4 w-4 mr-2" />
               Access Now
             </Button>
@@ -202,9 +196,7 @@ export function AppStoreLinks() {
                           {store.platform}
                         </Badge>
                         {store.isWorking && (
-                          <Badge className="bg-green-600 text-white text-xs">
-                            Working
-                          </Badge>
+                          <Badge className="bg-green-600 text-white text-xs">Working</Badge>
                         )}
                       </div>
                     </div>
@@ -224,9 +216,7 @@ export function AppStoreLinks() {
                     <span className="text-muted-foreground">Status:</span>
                     <div className="flex items-center gap-1">
                       <CheckCircle className="h-3 w-3 text-green-400" />
-                      <span className="font-semibold text-green-400">
-                        {store.downloads}
-                      </span>
+                      <span className="font-semibold text-green-400">{store.downloads}</span>
                     </div>
                   </div>
 
@@ -256,9 +246,7 @@ export function AppStoreLinks() {
 
         <div className="pt-4 border-t border-border/20">
           <div className="text-center space-y-3">
-            <h4 className="font-semibold text-cyan-400">
-              🌍 Culture of Harmony - Global Features
-            </h4>
+            <h4 className="font-semibold text-cyan-400">🌍 Culture of Harmony - Global Features</h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
               <div className="flex items-center gap-2">
                 <Globe className="h-4 w-4 text-blue-400" />
@@ -279,10 +267,7 @@ export function AppStoreLinks() {
             </div>
 
             <div className="pt-3 text-xs text-muted-foreground">
-              <p>
-                ✅ Open Source on GitHub | 🔒 End-to-end encryption | 🌍 24/7
-                global support
-              </p>
+              <p>✅ Open Source on GitHub | 🔒 End-to-end encryption | 🌍 24/7 global support</p>
               <p className="mt-1 text-green-400">
                 🎯 "Seeds Will Form Into Music" - Culture of Harmony
               </p>

@@ -222,9 +222,7 @@ export function RealWorldImpactTracker() {
         <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/30">
           <CardContent className="pt-6 text-center">
             <Heart className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-            <div className="text-3xl font-bold text-purple-400">
-              {metrics.wildlifeProtected}
-            </div>
+            <div className="text-3xl font-bold text-purple-400">{metrics.wildlifeProtected}</div>
             <div className="text-sm text-purple-300">Animals Protected</div>
             <div className="text-xs text-muted-foreground mt-1">
               +{Math.floor(Math.random() * 3) + 1} today
@@ -261,12 +259,8 @@ export function RealWorldImpactTracker() {
 
             <div className="text-center p-4 bg-purple-900/30 rounded border border-purple-500/20">
               <Droplets className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-purple-400">
-                {userContribution.gaiaSpent}
-              </div>
-              <div className="text-sm text-purple-300">
-                GAIA for Environment
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{userContribution.gaiaSpent}</div>
+              <div className="text-sm text-purple-300">GAIA for Environment</div>
             </div>
 
             <div className="text-center p-4 bg-orange-900/30 rounded border border-orange-500/20">
@@ -300,15 +294,11 @@ export function RealWorldImpactTracker() {
                       {getProjectIcon(project.type)}
                       <CardTitle className="text-lg">{project.name}</CardTitle>
                     </div>
-                    <Badge className="bg-gray-600 text-white text-xs">
-                      {project.location}
-                    </Badge>
+                    <Badge className="bg-gray-600 text-white text-xs">{project.location}</Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="text-sm text-muted-foreground">
-                    {project.description}
-                  </div>
+                  <div className="text-sm text-muted-foreground">{project.description}</div>
 
                   {/* Funding Progress */}
                   <div>
@@ -328,20 +318,15 @@ export function RealWorldImpactTracker() {
                     <div className="text-sm font-semibold text-green-400 mb-1">
                       🌟 Real Impact Achieved:
                     </div>
-                    <div className="text-xs text-muted-foreground">
-                      {project.impact}
-                    </div>
+                    <div className="text-xs text-muted-foreground">{project.impact}</div>
                   </div>
 
                   {/* Live Updates */}
                   {Math.random() > 0.5 && (
                     <div className="p-2 bg-green-900/20 rounded border border-green-500/20">
-                      <div className="text-xs text-green-400 font-semibold">
-                        🔴 LIVE UPDATE:
-                      </div>
+                      <div className="text-xs text-green-400 font-semibold">🔴 LIVE UPDATE:</div>
                       <div className="text-xs text-muted-foreground">
-                        New progress recorded {Math.floor(Math.random() * 60)}{" "}
-                        minutes ago
+                        New progress recorded {Math.floor(Math.random() * 60)} minutes ago
                       </div>
                     </div>
                   )}
@@ -367,31 +352,24 @@ export function RealWorldImpactTracker() {
               Your Gaming is Changing the World!
             </div>
             <div className="text-muted-foreground mb-6">
-              Real environmental projects funded by the GAIA gaming community
-              across 47 countries
+              Real environmental projects funded by the GAIA gaming community across 47 countries
             </div>
 
             <div className="grid grid-cols-3 gap-4 text-sm">
               <div className="p-3 bg-green-900/30 rounded">
                 <Flower2 className="h-6 w-6 text-green-400 mx-auto mb-1" />
                 <div className="font-bold text-green-400">47</div>
-                <div className="text-xs text-muted-foreground">
-                  Habitats Restored
-                </div>
+                <div className="text-xs text-muted-foreground">Habitats Restored</div>
               </div>
               <div className="p-3 bg-blue-900/30 rounded">
                 <Fish className="h-6 w-6 text-blue-400 mx-auto mb-1" />
                 <div className="font-bold text-blue-400">892</div>
-                <div className="text-xs text-muted-foreground">
-                  Marine Animals Saved
-                </div>
+                <div className="text-xs text-muted-foreground">Marine Animals Saved</div>
               </div>
               <div className="p-3 bg-yellow-900/30 rounded">
                 <Sun className="h-6 w-6 text-yellow-400 mx-auto mb-1" />
                 <div className="font-bold text-yellow-400">5.4MW</div>
-                <div className="text-xs text-muted-foreground">
-                  Clean Energy Generated
-                </div>
+                <div className="text-xs text-muted-foreground">Clean Energy Generated</div>
               </div>
             </div>
           </div>

@@ -31,15 +31,13 @@ interface QuantumTask {
 export function QuantumImprovementPlan() {
   const [quantumAnalysisComplete, setQuantumAnalysisComplete] = useState(false);
   const [trainingProgress, setTrainingProgress] = useState(0);
-  const [futurePredictionAccuracy, setFuturePredictionAccuracy] =
-    useState(97.8);
+  const [futurePredictionAccuracy, setFuturePredictionAccuracy] = useState(97.8);
 
   const quantumTasks: QuantumTask[] = [
     {
       id: "investor-magnet",
       title: "🧲 INVESTOR MAGNETISM ENGINE",
-      description:
-        "Quantum-powered investor attraction system with predictive analytics",
+      description: "Quantum-powered investor attraction system with predictive analytics",
       priority: "CRITICAL",
       progress: 45,
       estimatedDays: 7,
@@ -49,25 +47,21 @@ export function QuantumImprovementPlan() {
     {
       id: "exchange-domination",
       title: "🏛️ MAJOR EXCHANGE DOMINATION",
-      description:
-        "Simultaneous listings on Binance, Coinbase, Revolut, Kraken",
+      description: "Simultaneous listings on Binance, Coinbase, Revolut, Kraken",
       priority: "CRITICAL",
       progress: 78,
       estimatedDays: 14,
-      quantumPrediction:
-        "Legal docs complete, 85% chance of approval within 21 days",
+      quantumPrediction: "Legal docs complete, 85% chance of approval within 21 days",
       futureImpact: 100,
     },
     {
       id: "viral-marketing",
       title: "🚀 VIRAL MARKETING EXPLOSION",
-      description:
-        "Global viral campaign reaching 10M+ people with invisible tracking",
+      description: "Global viral campaign reaching 10M+ people with invisible tracking",
       priority: "HIGH",
       progress: 62,
       estimatedDays: 10,
-      quantumPrediction:
-        "Will generate 2M+ social impressions and 50K new users",
+      quantumPrediction: "Will generate 2M+ social impressions and 50K new users",
       futureImpact: 85,
     },
     {
@@ -77,15 +71,13 @@ export function QuantumImprovementPlan() {
       priority: "HIGH",
       progress: 35,
       estimatedDays: 21,
-      quantumPrediction:
-        "Will increase trading volume by 300% and stabilize price",
+      quantumPrediction: "Will increase trading volume by 300% and stabilize price",
       futureImpact: 80,
     },
     {
       id: "mobile-app",
       title: "📱 MOBILE APP ECOSYSTEM",
-      description:
-        "iOS/Android apps with gaming, trading, and community features",
+      description: "iOS/Android apps with gaming, trading, and community features",
       priority: "HIGH",
       progress: 25,
       estimatedDays: 45,
@@ -140,9 +132,7 @@ export function QuantumImprovementPlan() {
         return newProgress;
       });
 
-      setFuturePredictionAccuracy((prev) =>
-        Math.min(99.9, prev + Math.random() * 0.1),
-      );
+      setFuturePredictionAccuracy((prev) => Math.min(99.9, prev + Math.random() * 0.1));
     }, 1000);
 
     return () => clearInterval(trainingInterval);
@@ -171,9 +161,7 @@ export function QuantumImprovementPlan() {
             <Brain className="h-6 w-6 animate-pulse" />
             🧠 QUANTUM IMPROVEMENT PLAN - 20 QUANTUM COMPUTERS ACTIVE
             {quantumAnalysisComplete && (
-              <Badge className="bg-green-600 animate-pulse">
-                ANALYSIS COMPLETE
-              </Badge>
+              <Badge className="bg-green-600 animate-pulse">ANALYSIS COMPLETE</Badge>
             )}
           </CardTitle>
         </CardHeader>
@@ -184,9 +172,7 @@ export function QuantumImprovementPlan() {
               <div className="text-2xl font-bold text-purple-400">
                 {trainingProgress.toFixed(1)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Quantum Training
-              </div>
+              <div className="text-sm text-muted-foreground">Quantum Training</div>
               <Progress value={trainingProgress} className="h-2 mt-2" />
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
@@ -194,16 +180,12 @@ export function QuantumImprovementPlan() {
               <div className="text-2xl font-bold text-blue-400">
                 {futurePredictionAccuracy.toFixed(1)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Future Prediction
-              </div>
+              <div className="text-sm text-muted-foreground">Future Prediction</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
               <Target className="h-8 w-8 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">20</div>
-              <div className="text-sm text-muted-foreground">
-                Quantum Computers
-              </div>
+              <div className="text-sm text-muted-foreground">Quantum Computers</div>
             </div>
           </div>
 
@@ -213,8 +195,8 @@ export function QuantumImprovementPlan() {
                 🚀 QUANTUM ANALYSIS COMPLETE - READY FOR BIG UPDATE!
               </div>
               <div className="text-center text-sm text-muted-foreground">
-                All systems trained and optimized. Future prediction algorithms
-                active. Ready to execute master plan for global domination.
+                All systems trained and optimized. Future prediction algorithms active. Ready to
+                execute master plan for global domination.
               </div>
             </div>
           )}
@@ -231,40 +213,28 @@ export function QuantumImprovementPlan() {
               <div className="flex justify-between items-start mb-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-lg font-bold text-white">
-                      {task.title}
-                    </h3>
-                    <Badge
-                      className={`${getPriorityColor(task.priority)} text-white`}
-                    >
+                    <h3 className="text-lg font-bold text-white">{task.title}</h3>
+                    <Badge className={`${getPriorityColor(task.priority)} text-white`}>
                       {task.priority}
                     </Badge>
                   </div>
-                  <p className="text-muted-foreground mb-3">
-                    {task.description}
-                  </p>
+                  <p className="text-muted-foreground mb-3">{task.description}</p>
 
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-400">Progress</span>
-                      <span className="text-sm font-bold text-green-400">
-                        {task.progress}%
-                      </span>
+                      <span className="text-sm font-bold text-green-400">{task.progress}%</span>
                     </div>
                     <Progress value={task.progress} className="h-2" />
 
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
                         <span className="text-gray-400">ETA: </span>
-                        <span className="text-blue-400 font-bold">
-                          {task.estimatedDays} days
-                        </span>
+                        <span className="text-blue-400 font-bold">{task.estimatedDays} days</span>
                       </div>
                       <div>
                         <span className="text-gray-400">Impact: </span>
-                        <span className="text-purple-400 font-bold">
-                          {task.futureImpact}%
-                        </span>
+                        <span className="text-purple-400 font-bold">{task.futureImpact}%</span>
                       </div>
                     </div>
 
@@ -272,9 +242,7 @@ export function QuantumImprovementPlan() {
                       <div className="text-xs text-blue-400 font-bold mb-1">
                         🔮 QUANTUM PREDICTION:
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        {task.quantumPrediction}
-                      </div>
+                      <div className="text-xs text-muted-foreground">{task.quantumPrediction}</div>
                     </div>
                   </div>
                 </div>

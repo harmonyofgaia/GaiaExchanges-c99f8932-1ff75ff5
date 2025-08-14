@@ -65,18 +65,13 @@ export function IPControlCenter() {
               <div className="flex items-center gap-4">
                 <div>
                   <div className="font-semibold font-mono">{ip.ip}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {ip.location}
-                  </div>
+                  <div className="text-sm text-muted-foreground">{ip.location}</div>
                   <div className="text-xs text-muted-foreground">
-                    First seen: {ip.firstSeen} • Last activity:{" "}
-                    {ip.lastActivity}
+                    First seen: {ip.firstSeen} • Last activity: {ip.lastActivity}
                   </div>
                   <div className="text-xs text-muted-foreground">
                     Users: {ip.userCount} • Risk Level:{" "}
-                    <span className={getRiskColor(ip.riskLevel)}>
-                      {ip.riskLevel.toUpperCase()}
-                    </span>
+                    <span className={getRiskColor(ip.riskLevel)}>{ip.riskLevel.toUpperCase()}</span>
                   </div>
                 </div>
                 <Badge className={`${getStatusColor(ip.status)} text-white`}>

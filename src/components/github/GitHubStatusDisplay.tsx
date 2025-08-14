@@ -6,9 +6,7 @@ interface GitHubStatusDisplayProps {
   githubStatus: GitHubStatus;
 }
 
-export function GitHubStatusDisplay({
-  githubStatus,
-}: GitHubStatusDisplayProps) {
+export function GitHubStatusDisplay({ githubStatus }: GitHubStatusDisplayProps) {
   return (
     <div className="flex items-center justify-between p-3 rounded-lg bg-muted/20">
       <div className="flex items-center gap-3">
@@ -20,23 +18,15 @@ export function GitHubStatusDisplay({
         <div>
           <div className="font-semibold flex items-center gap-2">
             {githubStatus.organization}/{githubStatus.repository}
-            {githubStatus.isPrivate && (
-              <Lock className="h-4 w-4 text-green-400" />
-            )}
+            {githubStatus.isPrivate && <Lock className="h-4 w-4 text-green-400" />}
           </div>
           <div className="text-sm text-muted-foreground">
-            {githubStatus.isConnected
-              ? "Repository Connected & Secured"
-              : "Repository Not Found"}
+            {githubStatus.isConnected ? "Repository Connected & Secured" : "Repository Not Found"}
           </div>
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <Badge
-          className={
-            githubStatus.isConnected ? "bg-green-600" : "bg-orange-600"
-          }
-        >
+        <Badge className={githubStatus.isConnected ? "bg-green-600" : "bg-orange-600"}>
           {githubStatus.isConnected ? "Connected" : "Pending"}
         </Badge>
         {githubStatus.isPrivate && (

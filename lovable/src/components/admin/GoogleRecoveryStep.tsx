@@ -38,20 +38,14 @@ export function GoogleRecoveryStep({ onComplete }: GoogleRecoveryStepProps) {
         <div className="text-center space-y-4">
           <QrCode className="h-8 w-8 text-green-400 mx-auto" />
           <h4 className="font-bold text-green-400">Google Authenticator</h4>
-          <p className="text-sm text-muted-foreground">
-            Enter your 6-digit authenticator code
-          </p>
+          <p className="text-sm text-muted-foreground">Enter your 6-digit authenticator code</p>
 
           <div className="space-y-3">
             <Input
               type="text"
               placeholder="000000"
               value={verificationCode}
-              onChange={(e) =>
-                setVerificationCode(
-                  e.target.value.replace(/\D/g, "").slice(0, 6),
-                )
-              }
+              onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
               className="text-center text-lg font-mono"
               maxLength={6}
             />

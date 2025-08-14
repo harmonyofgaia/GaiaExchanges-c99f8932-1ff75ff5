@@ -5,8 +5,7 @@ const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 interface ContactEmailRequest {
@@ -25,15 +24,8 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const {
-      name,
-      email,
-      subject,
-      message,
-      contactType,
-      to,
-      timestamp,
-    }: ContactEmailRequest = await req.json();
+    const { name, email, subject, message, contactType, to, timestamp }: ContactEmailRequest =
+      await req.json();
 
     console.log("Sending contact email:", {
       name,

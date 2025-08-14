@@ -69,8 +69,7 @@ export function PhantomRecoveryEngine() {
           "Wallet Drainer Neutralized",
         ];
 
-        const randomThreat =
-          threats[Math.floor(Math.random() * threats.length)];
+        const randomThreat = threats[Math.floor(Math.random() * threats.length)];
         console.log(`🚨 THREAT DETECTED: ${randomThreat}`);
 
         toast.error(`🚨 Threat Detected!`, {
@@ -142,7 +141,7 @@ export function PhantomRecoveryEngine() {
 
     console.log("✅ SCAN COMPLETE - THREATS IDENTIFIED");
     console.log(
-      `🚨 CRITICAL THREATS FOUND: ${mockThreats.filter((t) => t.threat_level === "critical").length}`,
+      `🚨 CRITICAL THREATS FOUND: ${mockThreats.filter((t) => t.threat_level === "critical").length}`
     );
   };
 
@@ -224,34 +223,20 @@ export function PhantomRecoveryEngine() {
           </CardTitle>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">
-                {recoveredWallets}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Wallets Recovered
-              </div>
+              <div className="text-2xl font-bold text-green-400">{recoveredWallets}</div>
+              <div className="text-sm text-muted-foreground">Wallets Recovered</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-400">
-                {threatsRemoved}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Removed
-              </div>
+              <div className="text-2xl font-bold text-red-400">{threatsRemoved}</div>
+              <div className="text-sm text-muted-foreground">Threats Removed</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                {activeSessions.length}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Sessions
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{activeSessions.length}</div>
+              <div className="text-sm text-muted-foreground">Active Sessions</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-400">24/7</div>
-              <div className="text-sm text-muted-foreground">
-                Protection Active
-              </div>
+              <div className="text-sm text-muted-foreground">Protection Active</div>
             </div>
           </div>
         </CardHeader>
@@ -266,9 +251,7 @@ export function PhantomRecoveryEngine() {
 
             <TabsContent value="scan" className="space-y-4">
               <div className="space-y-4">
-                <h4 className="text-lg font-bold text-green-400">
-                  🔍 Deep Wallet Security Scan
-                </h4>
+                <h4 className="text-lg font-bold text-green-400">🔍 Deep Wallet Security Scan</h4>
                 <div className="flex gap-4">
                   <Input
                     placeholder="Enter wallet address to scan for security threats..."
@@ -290,34 +273,22 @@ export function PhantomRecoveryEngine() {
                   <Card className="border-blue-500/30 bg-blue-900/20">
                     <CardContent className="p-4 text-center">
                       <Globe className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-                      <div className="font-bold text-blue-400">
-                        Browser Scan
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        All extensions checked
-                      </div>
+                      <div className="font-bold text-blue-400">Browser Scan</div>
+                      <div className="text-sm text-muted-foreground">All extensions checked</div>
                     </CardContent>
                   </Card>
                   <Card className="border-purple-500/30 bg-purple-900/20">
                     <CardContent className="p-4 text-center">
                       <Database className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-                      <div className="font-bold text-purple-400">
-                        System Scan
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Malware detection
-                      </div>
+                      <div className="font-bold text-purple-400">System Scan</div>
+                      <div className="text-sm text-muted-foreground">Malware detection</div>
                     </CardContent>
                   </Card>
                   <Card className="border-orange-500/30 bg-orange-900/20">
                     <CardContent className="p-4 text-center">
                       <Shield className="h-8 w-8 mx-auto text-orange-400 mb-2" />
-                      <div className="font-bold text-orange-400">
-                        Network Scan
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Connection analysis
-                      </div>
+                      <div className="font-bold text-orange-400">Network Scan</div>
+                      <div className="text-sm text-muted-foreground">Connection analysis</div>
                     </CardContent>
                   </Card>
                 </div>
@@ -326,9 +297,7 @@ export function PhantomRecoveryEngine() {
 
             <TabsContent value="threats" className="space-y-4">
               <div className="flex justify-between items-center">
-                <h4 className="text-lg font-bold text-red-400">
-                  🚨 Detected Security Threats
-                </h4>
+                <h4 className="text-lg font-bold text-red-400">🚨 Detected Security Threats</h4>
                 {scanResults.length > 0 && (
                   <Button
                     onClick={removeAllThreats}
@@ -345,9 +314,7 @@ export function PhantomRecoveryEngine() {
                 <Card className="border-green-500/30 bg-green-900/20">
                   <CardContent className="p-8 text-center">
                     <CheckCircle className="h-12 w-12 mx-auto text-green-400 mb-4" />
-                    <div className="text-lg font-bold text-green-400">
-                      No Threats Detected
-                    </div>
+                    <div className="text-lg font-bold text-green-400">No Threats Detected</div>
                     <div className="text-muted-foreground">
                       Run a wallet scan to check for security threats
                     </div>
@@ -356,35 +323,24 @@ export function PhantomRecoveryEngine() {
               ) : (
                 <div className="space-y-3">
                   {scanResults.map((threat) => (
-                    <Card
-                      key={threat.id}
-                      className="border-red-500/30 bg-red-900/20"
-                    >
+                    <Card key={threat.id} className="border-red-500/30 bg-red-900/20">
                       <CardContent className="p-4">
                         <div className="flex justify-between items-start mb-2">
                           <div className="flex items-center gap-2">
-                            <span className="text-xl">
-                              {getThreatIcon(threat.type)}
-                            </span>
+                            <span className="text-xl">{getThreatIcon(threat.type)}</span>
                             <div>
-                              <div className="font-bold text-white">
-                                {threat.name}
-                              </div>
+                              <div className="font-bold text-white">{threat.name}</div>
                               <div className="text-sm text-red-400">
                                 {threat.type.toUpperCase()}
                               </div>
                             </div>
                           </div>
                           <div className="flex gap-2">
-                            <Badge
-                              className={getThreatColor(threat.threat_level)}
-                            >
+                            <Badge className={getThreatColor(threat.threat_level)}>
                               {threat.threat_level.toUpperCase()}
                             </Badge>
                             {threat.wallet_access && (
-                              <Badge className="bg-purple-600">
-                                WALLET ACCESS
-                              </Badge>
+                              <Badge className="bg-purple-600">WALLET ACCESS</Badge>
                             )}
                           </div>
                         </div>
@@ -399,21 +355,15 @@ export function PhantomRecoveryEngine() {
             </TabsContent>
 
             <TabsContent value="recovery" className="space-y-4">
-              <h4 className="text-lg font-bold text-blue-400">
-                🛡️ Wallet Recovery Status
-              </h4>
+              <h4 className="text-lg font-bold text-blue-400">🛡️ Wallet Recovery Status</h4>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="border-green-500/30 bg-green-900/20">
                   <CardHeader>
-                    <CardTitle className="text-green-400">
-                      Recovery Success Rate
-                    </CardTitle>
+                    <CardTitle className="text-green-400">Recovery Success Rate</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-4xl font-bold text-green-400 mb-2">
-                      98.7%
-                    </div>
+                    <div className="text-4xl font-bold text-green-400 mb-2">98.7%</div>
                     <p className="text-sm text-muted-foreground">
                       Successfully recovered wallet access for community members
                     </p>
@@ -422,14 +372,10 @@ export function PhantomRecoveryEngine() {
 
                 <Card className="border-blue-500/30 bg-blue-900/20">
                   <CardHeader>
-                    <CardTitle className="text-blue-400">
-                      Average Recovery Time
-                    </CardTitle>
+                    <CardTitle className="text-blue-400">Average Recovery Time</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-4xl font-bold text-blue-400 mb-2">
-                      4.2min
-                    </div>
+                    <div className="text-4xl font-bold text-blue-400 mb-2">4.2min</div>
                     <p className="text-sm text-muted-foreground">
                       Fast automated threat removal and wallet restoration
                     </p>
@@ -439,9 +385,7 @@ export function PhantomRecoveryEngine() {
 
               <Card className="border-purple-500/30 bg-purple-900/20">
                 <CardHeader>
-                  <CardTitle className="text-purple-400">
-                    Recovery Process
-                  </CardTitle>
+                  <CardTitle className="text-purple-400">Recovery Process</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex items-center gap-3">
@@ -473,44 +417,30 @@ export function PhantomRecoveryEngine() {
             </TabsContent>
 
             <TabsContent value="stats" className="space-y-4">
-              <h4 className="text-lg font-bold text-cyan-400">
-                📊 Global Protection Statistics
-              </h4>
+              <h4 className="text-lg font-bold text-cyan-400">📊 Global Protection Statistics</h4>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <Card className="border-green-500/30 bg-green-900/20 text-center p-4">
-                  <div className="text-3xl font-bold text-green-400">
-                    15,847
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Wallets Protected
-                  </div>
+                  <div className="text-3xl font-bold text-green-400">15,847</div>
+                  <div className="text-sm text-muted-foreground">Wallets Protected</div>
                 </Card>
                 <Card className="border-red-500/30 bg-red-900/20 text-center p-4">
                   <div className="text-3xl font-bold text-red-400">42,193</div>
-                  <div className="text-sm text-muted-foreground">
-                    Threats Blocked
-                  </div>
+                  <div className="text-sm text-muted-foreground">Threats Blocked</div>
                 </Card>
                 <Card className="border-blue-500/30 bg-blue-900/20 text-center p-4">
                   <div className="text-3xl font-bold text-blue-400">$2.4M</div>
-                  <div className="text-sm text-muted-foreground">
-                    Funds Recovered
-                  </div>
+                  <div className="text-sm text-muted-foreground">Funds Recovered</div>
                 </Card>
                 <Card className="border-purple-500/30 bg-purple-900/20 text-center p-4">
                   <div className="text-3xl font-bold text-purple-400">24/7</div>
-                  <div className="text-sm text-muted-foreground">
-                    Active Protection
-                  </div>
+                  <div className="text-sm text-muted-foreground">Active Protection</div>
                 </Card>
               </div>
 
               <Card className="border-yellow-500/30 bg-yellow-900/20">
                 <CardHeader>
-                  <CardTitle className="text-yellow-400">
-                    🏆 Community Impact
-                  </CardTitle>
+                  <CardTitle className="text-yellow-400">🏆 Community Impact</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">

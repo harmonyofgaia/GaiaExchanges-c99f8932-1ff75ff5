@@ -89,14 +89,11 @@ export function EcoTravelRewards() {
     };
 
     const basePoints = travelMultipliers[travelType] || 100;
-    const transportBonus =
-      (transportMultipliers[transportation] || 1) * basePoints;
+    const transportBonus = (transportMultipliers[transportation] || 1) * basePoints;
     const durationBonus = parseFloat(duration) * 20;
     const offsetBonus = carbonOffset ? parseFloat(carbonOffset) * 10 : 0;
 
-    const totalPoints = Math.floor(
-      transportBonus + durationBonus + offsetBonus,
-    );
+    const totalPoints = Math.floor(transportBonus + durationBonus + offsetBonus);
     const tokens = Math.floor(totalPoints * 0.25);
 
     const activity = {
@@ -121,7 +118,7 @@ export function EcoTravelRewards() {
 
     addActivity(activity);
     toast.success(
-      `✈️ Eco travel recorded! +${totalPoints} points earned for sustainable exploration!`,
+      `✈️ Eco travel recorded! +${totalPoints} points earned for sustainable exploration!`
     );
     setTravelType("");
     setDestination("");
@@ -155,14 +152,10 @@ export function EcoTravelRewards() {
       <CardContent className="space-y-6">
         {/* Travel Impact Dashboard */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-cyan-400">
-            🌍 Your Travel Impact
-          </h3>
+          <h3 className="text-lg font-semibold text-cyan-400">🌍 Your Travel Impact</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-cyan-900/30 rounded-lg border border-cyan-500/20">
-              <div className="text-2xl font-bold text-cyan-400">
-                {recentTrips.length}
-              </div>
+              <div className="text-2xl font-bold text-cyan-400">{recentTrips.length}</div>
               <div className="text-sm text-muted-foreground">Eco Trips</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
@@ -193,20 +186,13 @@ export function EcoTravelRewards() {
             Recent Sustainable Adventures
           </h4>
           {recentTrips.map((trip) => (
-            <div
-              key={trip.id}
-              className="p-4 bg-cyan-900/20 rounded-lg border border-cyan-500/20"
-            >
+            <div key={trip.id} className="p-4 bg-cyan-900/20 rounded-lg border border-cyan-500/20">
               <div className="flex justify-between items-start mb-3">
                 <div className="flex items-start gap-3">
                   <TreePine className="h-6 w-6 text-cyan-400 mt-1" />
                   <div>
-                    <h5 className="font-semibold text-cyan-300">
-                      {trip.destination}
-                    </h5>
-                    <p className="text-sm text-muted-foreground">
-                      {trip.impact}
-                    </p>
+                    <h5 className="font-semibold text-cyan-300">{trip.destination}</h5>
+                    <p className="text-sm text-muted-foreground">{trip.impact}</p>
                     <div className="flex items-center gap-4 mt-2 text-sm">
                       <span className="flex items-center gap-1">
                         {getTransportIcon(trip.transportation)}
@@ -221,18 +207,12 @@ export function EcoTravelRewards() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-bold text-yellow-400">
-                    +{trip.earnings} GAiA
-                  </div>
-                  <Badge className="bg-green-600">
-                    {trip.type.replace("_", " ")}
-                  </Badge>
+                  <div className="font-bold text-yellow-400">+{trip.earnings} GAiA</div>
+                  <Badge className="bg-green-600">{trip.type.replace("_", " ")}</Badge>
                 </div>
               </div>
               <Progress value={85} className="h-2" />
-              <div className="text-xs text-muted-foreground mt-1">
-                85% carbon neutral journey
-              </div>
+              <div className="text-xs text-muted-foreground mt-1">85% carbon neutral journey</div>
             </div>
           ))}
         </div>
@@ -249,46 +229,28 @@ export function EcoTravelRewards() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Travel Type
-              </label>
+              <label className="block text-sm font-medium mb-2">Travel Type</label>
               <Select value={travelType} onValueChange={setTravelType}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select travel type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="eco_lodge">
-                    🏡 Eco Lodge Stay (200 pts)
-                  </SelectItem>
-                  <SelectItem value="camping">
-                    ⛺ Nature Camping (150 pts)
-                  </SelectItem>
-                  <SelectItem value="volunteer_tourism">
-                    🤝 Volunteer Tourism (300 pts)
-                  </SelectItem>
-                  <SelectItem value="conservation_trip">
-                    🦋 Conservation Trip (400 pts)
-                  </SelectItem>
-                  <SelectItem value="local_tourism">
-                    🏘️ Local Tourism (100 pts)
-                  </SelectItem>
+                  <SelectItem value="eco_lodge">🏡 Eco Lodge Stay (200 pts)</SelectItem>
+                  <SelectItem value="camping">⛺ Nature Camping (150 pts)</SelectItem>
+                  <SelectItem value="volunteer_tourism">🤝 Volunteer Tourism (300 pts)</SelectItem>
+                  <SelectItem value="conservation_trip">🦋 Conservation Trip (400 pts)</SelectItem>
+                  <SelectItem value="local_tourism">🏘️ Local Tourism (100 pts)</SelectItem>
                   <SelectItem value="sustainable_resort">
                     🌿 Sustainable Resort (180 pts)
                   </SelectItem>
-                  <SelectItem value="agritourism">
-                    🚜 Agritourism (220 pts)
-                  </SelectItem>
-                  <SelectItem value="educational_tour">
-                    📚 Educational Tour (250 pts)
-                  </SelectItem>
+                  <SelectItem value="agritourism">🚜 Agritourism (220 pts)</SelectItem>
+                  <SelectItem value="educational_tour">📚 Educational Tour (250 pts)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Destination
-              </label>
+              <label className="block text-sm font-medium mb-2">Destination</label>
               <Input
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
@@ -297,32 +259,22 @@ export function EcoTravelRewards() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Transportation Method
-              </label>
+              <label className="block text-sm font-medium mb-2">Transportation Method</label>
               <Select value={transportation} onValueChange={setTransportation}>
                 <SelectTrigger>
                   <SelectValue placeholder="How did you get there?" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="bicycle">
-                    🚲 Bicycle (3x multiplier)
-                  </SelectItem>
-                  <SelectItem value="walking">
-                    🚶 Walking (2.5x multiplier)
-                  </SelectItem>
-                  <SelectItem value="train_bus">
-                    🚂 Train/Bus (2x multiplier)
-                  </SelectItem>
+                  <SelectItem value="bicycle">🚲 Bicycle (3x multiplier)</SelectItem>
+                  <SelectItem value="walking">🚶 Walking (2.5x multiplier)</SelectItem>
+                  <SelectItem value="train_bus">🚂 Train/Bus (2x multiplier)</SelectItem>
                   <SelectItem value="electric_vehicle">
                     ⚡ Electric Vehicle (1.8x multiplier)
                   </SelectItem>
                   <SelectItem value="public_transport">
                     🚌 Public Transport (2.2x multiplier)
                   </SelectItem>
-                  <SelectItem value="carpool">
-                    👥 Carpool (1.7x multiplier)
-                  </SelectItem>
+                  <SelectItem value="carpool">👥 Carpool (1.7x multiplier)</SelectItem>
                   <SelectItem value="hybrid_vehicle">
                     🔋 Hybrid Vehicle (1.5x multiplier)
                   </SelectItem>
@@ -334,9 +286,7 @@ export function EcoTravelRewards() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Duration (days)
-              </label>
+              <label className="block text-sm font-medium mb-2">Duration (days)</label>
               <Input
                 type="number"
                 step="0.5"
@@ -362,22 +312,16 @@ export function EcoTravelRewards() {
             </div>
           </div>
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-cyan-600 hover:bg-cyan-700"
-          >
-            {loading
-              ? "Recording Travel..."
-              : "✈️ Record Eco Travel Experience"}
+          <Button type="submit" disabled={loading} className="w-full bg-cyan-600 hover:bg-cyan-700">
+            {loading ? "Recording Travel..." : "✈️ Record Eco Travel Experience"}
           </Button>
         </form>
 
         <div className="p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/20">
           <p className="text-sm text-cyan-300">
-            💡 <strong>Travel Smart:</strong> Sustainable travel earns massive
-            rewards! Choose eco-friendly transportation and accommodations to
-            maximize your GAiA earnings while protecting the planet!
+            💡 <strong>Travel Smart:</strong> Sustainable travel earns massive rewards! Choose
+            eco-friendly transportation and accommodations to maximize your GAiA earnings while
+            protecting the planet!
           </p>
         </div>
       </CardContent>

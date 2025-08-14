@@ -3,10 +3,7 @@ export class TypeValidator {
   static validateTokenConfig(config: Record<string, unknown>): string[] {
     const errors: string[] = [];
 
-    if (
-      !config.CONTRACT_ADDRESS ||
-      typeof config.CONTRACT_ADDRESS !== "string"
-    ) {
+    if (!config.CONTRACT_ADDRESS || typeof config.CONTRACT_ADDRESS !== "string") {
       errors.push("CONTRACT_ADDRESS must be a valid string");
     }
 

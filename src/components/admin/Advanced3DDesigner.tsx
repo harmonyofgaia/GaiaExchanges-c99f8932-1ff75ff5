@@ -4,17 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Box,
-  Zap,
-  Palette,
-  Wrench,
-  Sword,
-  Shield,
-  Eye,
-  Brain,
-  Globe,
-} from "lucide-react";
+import { Box, Zap, Palette, Wrench, Sword, Shield, Eye, Brain, Globe } from "lucide-react";
 import { toast } from "sonner";
 
 interface DesignProject {
@@ -27,9 +17,7 @@ interface DesignProject {
 }
 
 export function Advanced3DDesigner() {
-  const [activeProject, setActiveProject] = useState<DesignProject | null>(
-    null,
-  );
+  const [activeProject, setActiveProject] = useState<DesignProject | null>(null);
   const [chatInput, setChatInput] = useState("");
   const [designHistory, setDesignHistory] = useState<string[]>([]);
   const [aiLearning, setAiLearning] = useState(true);
@@ -41,15 +29,9 @@ export function Advanced3DDesigner() {
     if (gameTracking) {
       const interval = setInterval(() => {
         console.log("🎮 TRACKING TOP GAMES - LEARNING MECHANICS");
-        console.log(
-          "🔍 ANALYZING: Fortnite, Minecraft, Valorant, Apex Legends",
-        );
-        console.log(
-          "🧠 AI LEARNING: Movement patterns, weapon mechanics, landscape design",
-        );
-        console.log(
-          "⚡ PERFORMANCE BOOST: 100x improvement calculations active",
-        );
+        console.log("🔍 ANALYZING: Fortnite, Minecraft, Valorant, Apex Legends");
+        console.log("🧠 AI LEARNING: Movement patterns, weapon mechanics, landscape design");
+        console.log("⚡ PERFORMANCE BOOST: 100x improvement calculations active");
 
         // Simulate learning from other games
         const gameInsights = [
@@ -59,12 +41,8 @@ export function Advanced3DDesigner() {
           "Resource management optimized based on top games",
         ];
 
-        const randomInsight =
-          gameInsights[Math.floor(Math.random() * gameInsights.length)];
-        setDesignHistory((prev) => [
-          `🎯 AI LEARNED: ${randomInsight}`,
-          ...prev.slice(0, 9),
-        ]);
+        const randomInsight = gameInsights[Math.floor(Math.random() * gameInsights.length)];
+        setDesignHistory((prev) => [`🎯 AI LEARNED: ${randomInsight}`, ...prev.slice(0, 9)]);
       }, 8000);
 
       return () => clearInterval(interval);
@@ -139,14 +117,9 @@ export function Advanced3DDesigner() {
       "Perfect! This design pattern appears in 23 successful games. Optimizing for maximum impact.",
     ];
 
-    const response =
-      aiResponses[Math.floor(Math.random() * aiResponses.length)];
+    const response = aiResponses[Math.floor(Math.random() * aiResponses.length)];
 
-    setDesignHistory((prev) => [
-      `👤 YOU: ${chatInput}`,
-      `🤖 AI: ${response}`,
-      ...prev.slice(0, 8),
-    ]);
+    setDesignHistory((prev) => [`👤 YOU: ${chatInput}`, `🤖 AI: ${response}`, ...prev.slice(0, 8)]);
 
     setChatInput("");
     toast.success("🤖 AI Designer Responded!", {
@@ -166,9 +139,7 @@ export function Advanced3DDesigner() {
             <Badge className={`${aiLearning ? "bg-green-600" : "bg-gray-600"}`}>
               🧠 AI Learning: {aiLearning ? "ACTIVE" : "INACTIVE"}
             </Badge>
-            <Badge
-              className={`${gameTracking ? "bg-blue-600" : "bg-gray-600"}`}
-            >
+            <Badge className={`${gameTracking ? "bg-blue-600" : "bg-gray-600"}`}>
               🎮 Game Tracking: {gameTracking ? "ANALYZING" : "PAUSED"}
             </Badge>
           </div>
@@ -218,22 +189,16 @@ export function Advanced3DDesigner() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div className="bg-black/40 p-4 rounded-lg">
-                  <h4 className="text-lg font-bold text-cyan-400 mb-2">
-                    🎯 Current Project
-                  </h4>
+                  <h4 className="text-lg font-bold text-cyan-400 mb-2">🎯 Current Project</h4>
                   <div className="text-white">{activeProject.name}</div>
-                  <div className="text-sm text-muted-foreground">
-                    Type: {activeProject.type}
-                  </div>
+                  <div className="text-sm text-muted-foreground">Type: {activeProject.type}</div>
                   <div className="text-sm text-green-400">
                     Performance: {activeProject.performance}% optimized
                   </div>
                 </div>
 
                 <div className="bg-black/40 p-4 rounded-lg">
-                  <h4 className="text-lg font-bold text-yellow-400 mb-2">
-                    🤖 AI Suggestions
-                  </h4>
+                  <h4 className="text-lg font-bold text-yellow-400 mb-2">🤖 AI Suggestions</h4>
                   <div className="space-y-2">
                     {activeProject.aiSuggestions.map((suggestion, index) => (
                       <div key={index} className="text-sm text-gray-300">
@@ -246,9 +211,7 @@ export function Advanced3DDesigner() {
 
               <div className="space-y-4">
                 <div className="bg-black/40 p-4 rounded-lg">
-                  <h4 className="text-lg font-bold text-purple-400 mb-2">
-                    💬 AI Designer Chat
-                  </h4>
+                  <h4 className="text-lg font-bold text-purple-400 mb-2">💬 AI Designer Chat</h4>
                   <div className="flex gap-2 mb-3">
                     <Input
                       placeholder="Describe what you want to create..."
@@ -262,10 +225,7 @@ export function Advanced3DDesigner() {
                   </div>
                   <div className="max-h-60 overflow-y-auto space-y-1">
                     {designHistory.map((entry, index) => (
-                      <div
-                        key={index}
-                        className="text-xs text-gray-300 p-2 bg-black/20 rounded"
-                      >
+                      <div key={index} className="text-xs text-gray-300 p-2 bg-black/20 rounded">
                         {entry}
                       </div>
                     ))}
@@ -277,9 +237,7 @@ export function Advanced3DDesigner() {
 
           {/* 3D Canvas */}
           <div className="bg-black/40 p-4 rounded-lg">
-            <h4 className="text-lg font-bold text-cyan-400 mb-4">
-              🎨 3D Design Canvas
-            </h4>
+            <h4 className="text-lg font-bold text-cyan-400 mb-4">🎨 3D Design Canvas</h4>
             <canvas
               ref={canvasRef}
               width="800"
@@ -287,8 +245,7 @@ export function Advanced3DDesigner() {
               className="w-full bg-gradient-to-br from-gray-800 to-gray-900 rounded border-2 border-cyan-500/30"
             />
             <div className="mt-2 text-center text-sm text-muted-foreground">
-              AI-powered 3D design space - Real-time rendering with game
-              analysis
+              AI-powered 3D design space - Real-time rendering with game analysis
             </div>
           </div>
         </CardContent>

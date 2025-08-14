@@ -48,9 +48,7 @@ export function ReferralSystem() {
       </CardHeader>
       <CardContent className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-2">
-            Your Referral Code
-          </label>
+          <label className="block text-sm font-medium mb-2">Your Referral Code</label>
           <div className="flex gap-2">
             <Input value={referralCode} readOnly className="bg-purple-900/20" />
             <Button onClick={copyReferralCode} variant="outline" size="icon">
@@ -61,9 +59,7 @@ export function ReferralSystem() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Track Referral
-            </label>
+            <label className="block text-sm font-medium mb-2">Track Referral</label>
             <Input
               value={referredUser}
               onChange={(e) => setReferredUser(e.target.value)}
@@ -82,8 +78,7 @@ export function ReferralSystem() {
 
         <div className="p-3 bg-purple-900/20 rounded-lg border border-purple-500/30">
           <p className="text-sm text-purple-300">
-            💡 <strong>Earn:</strong> 50 points per referral + ongoing bonuses
-            from their activities
+            💡 <strong>Earn:</strong> 50 points per referral + ongoing bonuses from their activities
           </p>
         </div>
       </CardContent>

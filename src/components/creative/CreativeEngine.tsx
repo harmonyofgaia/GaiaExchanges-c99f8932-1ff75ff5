@@ -90,9 +90,7 @@ export function CreativeEngine({
   const [isProcessing, setIsProcessing] = useState(false);
   const [assets, setAssets] = useState<CreativeAsset[]>([]);
   const [templates, setTemplates] = useState<DesignTemplate[]>([]);
-  const [selectedAsset, setSelectedAsset] = useState<CreativeAsset | null>(
-    null,
-  );
+  const [selectedAsset, setSelectedAsset] = useState<CreativeAsset | null>(null);
   const [processingParams, setProcessingParams] = useState({
     style: "abstract",
     intensity: 50,
@@ -136,9 +134,7 @@ export function CreativeEngine({
     localStorage.setItem("gaia-design-templates", JSON.stringify(templates));
   }, [templates]);
 
-  const handleFileUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
@@ -188,7 +184,7 @@ export function CreativeEngine({
   };
 
   const generateVariants = async (
-    asset: CreativeAsset,
+    asset: CreativeAsset
   ): Promise<CreativeAsset["processedVariants"]> => {
     // Simulate creative processing - in real implementation, this would use advanced algorithms
     const variants = {
@@ -201,30 +197,22 @@ export function CreativeEngine({
     return variants;
   };
 
-  const generateAbstractVariant = async (
-    asset: CreativeAsset,
-  ): Promise<string> => {
+  const generateAbstractVariant = async (asset: CreativeAsset): Promise<string> => {
     // Simulate abstract art generation from the source asset
     return asset.url; // Placeholder - would process the asset into abstract art
   };
 
-  const generateAnimatedVariant = async (
-    asset: CreativeAsset,
-  ): Promise<string> => {
+  const generateAnimatedVariant = async (asset: CreativeAsset): Promise<string> => {
     // Simulate living animation generation
     return asset.url; // Placeholder - would create living animations
   };
 
-  const generateNeuralVariant = async (
-    asset: CreativeAsset,
-  ): Promise<string> => {
+  const generateNeuralVariant = async (asset: CreativeAsset): Promise<string> => {
     // Simulate neural network pattern generation
     return asset.url; // Placeholder - would create neural-inspired patterns
   };
 
-  const generateLiquidVariant = async (
-    asset: CreativeAsset,
-  ): Promise<string> => {
+  const generateLiquidVariant = async (asset: CreativeAsset): Promise<string> => {
     // Simulate liquid animation generation
     return asset.url; // Placeholder - would create liquid flow animations
   };
@@ -283,13 +271,7 @@ export function CreativeEngine({
     // Add procedural patterns
     for (let i = 0; i < 50; i++) {
       ctx.beginPath();
-      ctx.arc(
-        Math.random() * 400,
-        Math.random() * 300,
-        Math.random() * 20 + 5,
-        0,
-        Math.PI * 2,
-      );
+      ctx.arc(Math.random() * 400, Math.random() * 300, Math.random() * 20 + 5, 0, Math.PI * 2);
       ctx.fillStyle = `hsla(${Math.random() * 360}, 70%, 60%, 0.6)`;
       ctx.fill();
     }
@@ -427,9 +409,7 @@ export function CreativeEngine({
                             />
                           )}
                         </div>
-                        <p className="text-sm text-gray-300 truncate">
-                          {asset.name}
-                        </p>
+                        <p className="text-sm text-gray-300 truncate">{asset.name}</p>
                         <Badge variant="outline" className="text-xs">
                           {asset.type}
                         </Badge>
@@ -461,9 +441,7 @@ export function CreativeEngine({
                         <SelectItem value="abstract">Abstract Art</SelectItem>
                         <SelectItem value="neural">Neural Networks</SelectItem>
                         <SelectItem value="liquid">Liquid Dynamics</SelectItem>
-                        <SelectItem value="geometric">
-                          Geometric Patterns
-                        </SelectItem>
+                        <SelectItem value="geometric">Geometric Patterns</SelectItem>
                         <SelectItem value="organic">Organic Forms</SelectItem>
                         <SelectItem value="cyberpunk">Cyberpunk</SelectItem>
                       </SelectContent>
@@ -471,9 +449,7 @@ export function CreativeEngine({
                   </div>
 
                   <div>
-                    <Label className="text-gray-300">
-                      Intensity: {processingParams.intensity}
-                    </Label>
+                    <Label className="text-gray-300">Intensity: {processingParams.intensity}</Label>
                     <Slider
                       value={[processingParams.intensity]}
                       onValueChange={([value]) =>
@@ -559,14 +535,10 @@ export function CreativeEngine({
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="complementary">
-                          Complementary
-                        </SelectItem>
+                        <SelectItem value="complementary">Complementary</SelectItem>
                         <SelectItem value="triadic">Triadic</SelectItem>
                         <SelectItem value="analogous">Analogous</SelectItem>
-                        <SelectItem value="monochromatic">
-                          Monochromatic
-                        </SelectItem>
+                        <SelectItem value="monochromatic">Monochromatic</SelectItem>
                         <SelectItem value="rainbow">Rainbow</SelectItem>
                       </SelectContent>
                     </Select>
@@ -596,33 +568,27 @@ export function CreativeEngine({
                     <CardContent>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {selectedAsset.processedVariants &&
-                          Object.entries(selectedAsset.processedVariants).map(
-                            ([type, url]) => (
-                              <Card key={type} className="bg-gray-700/50">
-                                <CardContent className="p-4">
-                                  <div className="aspect-square bg-gray-600 rounded mb-2 flex items-center justify-center">
-                                    <img
-                                      src={url}
-                                      alt={`${type} variant`}
-                                      className="w-full h-full object-cover rounded"
-                                    />
-                                  </div>
-                                  <p className="text-sm text-gray-300 capitalize">
-                                    {type}
-                                  </p>
-                                  <Button
-                                    size="sm"
-                                    className="w-full mt-2"
-                                    onClick={() =>
-                                      toast.success(`Applied ${type} variant`)
-                                    }
-                                  >
-                                    Apply
-                                  </Button>
-                                </CardContent>
-                              </Card>
-                            ),
-                          )}
+                          Object.entries(selectedAsset.processedVariants).map(([type, url]) => (
+                            <Card key={type} className="bg-gray-700/50">
+                              <CardContent className="p-4">
+                                <div className="aspect-square bg-gray-600 rounded mb-2 flex items-center justify-center">
+                                  <img
+                                    src={url}
+                                    alt={`${type} variant`}
+                                    className="w-full h-full object-cover rounded"
+                                  />
+                                </div>
+                                <p className="text-sm text-gray-300 capitalize">{type}</p>
+                                <Button
+                                  size="sm"
+                                  className="w-full mt-2"
+                                  onClick={() => toast.success(`Applied ${type} variant`)}
+                                >
+                                  Apply
+                                </Button>
+                              </CardContent>
+                            </Card>
+                          ))}
                       </div>
 
                       <Button
@@ -649,12 +615,8 @@ export function CreativeEngine({
               {templates.length === 0 ? (
                 <div className="text-center py-8">
                   <Layers className="mx-auto w-12 h-12 text-gray-400 mb-4" />
-                  <p className="text-gray-400">
-                    No design templates created yet
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Process assets to create templates
-                  </p>
+                  <p className="text-gray-400">No design templates created yet</p>
+                  <p className="text-sm text-gray-500">Process assets to create templates</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -667,12 +629,8 @@ export function CreativeEngine({
                         <div className="aspect-video bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-lg mb-3 flex items-center justify-center">
                           <Palette className="w-8 h-8 text-gray-400" />
                         </div>
-                        <h4 className="font-medium text-gray-200 mb-1">
-                          {template.name}
-                        </h4>
-                        <p className="text-sm text-gray-400 mb-3">
-                          {template.description}
-                        </p>
+                        <h4 className="font-medium text-gray-200 mb-1">{template.name}</h4>
+                        <p className="text-sm text-gray-400 mb-3">{template.description}</p>
                         <div className="flex gap-2 mb-3">
                           {template.colors.slice(0, 4).map((color, index) => (
                             <div

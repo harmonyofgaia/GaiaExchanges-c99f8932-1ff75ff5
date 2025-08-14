@@ -137,26 +137,25 @@ export function ArtistStreamingPlatform() {
         totalEarnings: 0,
         totalTokensBurned: 0,
         activeStreams: 0,
-      },
+      }
     );
 
     setStreamingStats(stats);
+  }, [liveStreams]);
 
+  useEffect(() => {
     // Simulate live updates
     const interval = setInterval(() => {
       setLiveStreams((prev) =>
         prev.map((stream) => ({
           ...stream,
-          viewers: Math.max(
-            50,
-            stream.viewers + Math.floor((Math.random() - 0.5) * 100),
-          ),
+          viewers: Math.max(50, stream.viewers + Math.floor((Math.random() - 0.5) * 100)),
           likes: stream.likes + Math.floor(Math.random() * 10),
           comments: stream.comments + Math.floor(Math.random() * 5),
           earnings: stream.earnings + Math.random() * 5,
           tokensEarned: stream.tokensEarned + Math.floor(Math.random() * 10),
           tokensBurned: stream.tokensBurned + Math.floor(Math.random() * 2),
-        })),
+        }))
       );
     }, 5000);
 
@@ -167,10 +166,7 @@ export function ArtistStreamingPlatform() {
     try {
       // Burn tokens as part of the tipping process
       const burnAmount = Math.floor(tipAmount * 0.1); // 10% of tip gets burned
-      const burnSuccess = await gaiaTokenService.burnTokens(
-        burnAmount,
-        `Tip for ${stream.artist}`,
-      );
+      const burnSuccess = await gaiaTokenService.burnTokens(burnAmount, `Tip for ${stream.artist}`);
 
       if (burnSuccess) {
         toast.success(`💝 Tipped ${stream.artist}!`, {
@@ -187,8 +183,8 @@ export function ArtistStreamingPlatform() {
                   earnings: s.earnings + tipAmount,
                   tokensBurned: s.tokensBurned + burnAmount,
                 }
-              : s,
-          ),
+              : s
+          )
         );
       }
     } catch (error) {
@@ -244,8 +240,8 @@ export function ArtistStreamingPlatform() {
             🎭 GAiA Artist Streaming Platform - Live Shows & Token Burning
           </CardTitle>
           <p className="text-muted-foreground">
-            Support artists with GAiA tokens while contributing to environmental
-            impact through token burning
+            Support artists with GAiA tokens while contributing to environmental impact through
+            token burning
           </p>
         </CardHeader>
         <CardContent>
@@ -260,9 +256,7 @@ export function ArtistStreamingPlatform() {
               <div className="text-2xl font-bold text-green-400">
                 {streamingStats.activeStreams}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Active Streams
-              </div>
+              <div className="text-sm text-muted-foreground">Active Streams</div>
             </div>
             <div className="text-center p-4 bg-yellow-900/30 border border-yellow-500/20 rounded-lg">
               <div className="text-2xl font-bold text-yellow-400">
@@ -270,9 +264,7 @@ export function ArtistStreamingPlatform() {
                   maximumFractionDigits: 0,
                 })}
               </div>
-              <div className="text-sm text-muted-foreground">
-                GAiA Earned by Artists
-              </div>
+              <div className="text-sm text-muted-foreground">GAiA Earned by Artists</div>
             </div>
             <div className="text-center p-4 bg-orange-900/30 border border-orange-500/20 rounded-lg">
               <div className="text-2xl font-bold text-orange-400">
@@ -307,9 +299,7 @@ export function ArtistStreamingPlatform() {
                 ) : (
                   <div className="text-center">
                     <Camera className="h-16 w-16 text-purple-400 mx-auto mb-2" />
-                    <div className="text-sm text-muted-foreground">
-                      Live Stream Preview
-                    </div>
+                    <div className="text-sm text-muted-foreground">Live Stream Preview</div>
                   </div>
                 )}
 
@@ -325,9 +315,7 @@ export function ArtistStreamingPlatform() {
 
                 {/* Category Badge */}
                 <div className="absolute top-2 right-2">
-                  <Badge
-                    className={`${getCategoryColor(stream.category)} text-white`}
-                  >
+                  <Badge className={`${getCategoryColor(stream.category)} text-white`}>
                     {getCategoryIcon(stream.category)}
                     <span className="ml-1">{stream.category}</span>
                   </Badge>
@@ -351,9 +339,7 @@ export function ArtistStreamingPlatform() {
 
               {/* Stream Info */}
               <div>
-                <h3 className="font-bold text-lg text-white mb-1">
-                  {stream.title}
-                </h3>
+                <h3 className="font-bold text-lg text-white mb-1">{stream.title}</h3>
                 <p className="text-purple-400 font-medium">{stream.artist}</p>
               </div>
 
@@ -369,18 +355,14 @@ export function ArtistStreamingPlatform() {
                   </div>
                 </div>
                 <div>
-                  <div className="text-lg font-bold text-blue-400">
-                    {stream.comments}
-                  </div>
+                  <div className="text-lg font-bold text-blue-400">{stream.comments}</div>
                   <div className="text-xs text-muted-foreground flex items-center justify-center gap-1">
                     <MessageCircle className="h-3 w-3" />
                     Comments
                   </div>
                 </div>
                 <div>
-                  <div className="text-lg font-bold text-green-400">
-                    {stream.tokensEarned}
-                  </div>
+                  <div className="text-lg font-bold text-green-400">{stream.tokensEarned}</div>
                   <div className="text-xs text-muted-foreground flex items-center justify-center gap-1">
                     <DollarSign className="h-3 w-3" />
                     GAiA Earned
@@ -395,9 +377,7 @@ export function ArtistStreamingPlatform() {
                     <Flame className="h-3 w-3 text-orange-400" />
                     Tokens Burned for Impact:
                   </span>
-                  <span className="text-orange-400 font-bold">
-                    {stream.tokensBurned}
-                  </span>
+                  <span className="text-orange-400 font-bold">{stream.tokensBurned}</span>
                 </div>
                 <Progress
                   value={(stream.tokensBurned / stream.tokensEarned) * 100}
@@ -413,9 +393,7 @@ export function ArtistStreamingPlatform() {
                     min="1"
                     max="1000"
                     value={tipAmount}
-                    onChange={(e) =>
-                      setTipAmount(parseInt(e.target.value) || 10)
-                    }
+                    onChange={(e) => setTipAmount(parseInt(e.target.value) || 10)}
                     className="flex-1"
                     placeholder="Tip amount"
                   />
@@ -471,9 +449,8 @@ export function ArtistStreamingPlatform() {
               </code>
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              Every tip and interaction burns GAiA tokens for real environmental
-              impact while supporting amazing artists. Join the creative
-              community that makes a difference!
+              Every tip and interaction burns GAiA tokens for real environmental impact while
+              supporting amazing artists. Join the creative community that makes a difference!
             </p>
             <div className="flex justify-center gap-4 text-xs mt-3">
               <Badge className="bg-purple-600 text-white">

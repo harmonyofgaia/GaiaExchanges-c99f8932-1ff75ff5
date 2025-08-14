@@ -78,7 +78,7 @@ export function useEarningActivities(userId: string) {
   };
 
   const recordBeeHotel = async (
-    data: Record<string, string | number | boolean | null | undefined>,
+    data: Record<string, string | number | boolean | null | undefined>
   ) => {
     const activity: EarningActivity = {
       id: Date.now().toString(),
@@ -97,7 +97,7 @@ export function useEarningActivities(userId: string) {
   };
 
   const recordWaterSaving = async (
-    data: Record<string, string | number | boolean | null | undefined>,
+    data: Record<string, string | number | boolean | null | undefined>
   ) => {
     const activity: EarningActivity = {
       id: Date.now().toString(),
@@ -116,7 +116,7 @@ export function useEarningActivities(userId: string) {
   };
 
   const recordEnvironmentalEducation = async (
-    data: Record<string, string | number | boolean | null | undefined>,
+    data: Record<string, string | number | boolean | null | undefined>
   ) => {
     const activity: EarningActivity = {
       id: Date.now().toString(),
@@ -135,7 +135,7 @@ export function useEarningActivities(userId: string) {
   };
 
   const recordHomeGrownFood = async (
-    data: Record<string, string | number | boolean | null | undefined>,
+    data: Record<string, string | number | boolean | null | undefined>
   ) => {
     const activity: EarningActivity = {
       id: Date.now().toString(),
@@ -154,7 +154,7 @@ export function useEarningActivities(userId: string) {
   };
 
   const processReferral = async (
-    data: Record<string, string | number | boolean | null | undefined>,
+    data: Record<string, string | number | boolean | null | undefined>
   ) => {
     const activity: EarningActivity = {
       id: Date.now().toString(),
@@ -173,7 +173,7 @@ export function useEarningActivities(userId: string) {
   };
 
   const recordSkillBasedWork = async (
-    data: Record<string, string | number | boolean | null | undefined>,
+    data: Record<string, string | number | boolean | null | undefined>
   ) => {
     const activity: EarningActivity = {
       id: Date.now().toString(),

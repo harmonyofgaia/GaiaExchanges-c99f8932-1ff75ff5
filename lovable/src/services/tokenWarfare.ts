@@ -85,10 +85,7 @@ class TokenWarfareService {
       supplyChange = -Math.floor(this.totalSupply * 0.01); // Burn 1%
       recommendedAction = "burn";
       reasoning = "High demand detected - reducing supply to increase value";
-    } else if (
-      marketConditions.demand < 30 &&
-      marketConditions.holders > 5000
-    ) {
+    } else if (marketConditions.demand < 30 && marketConditions.holders > 5000) {
       // Low demand but many holders, consider strategic minting
       supplyChange = Math.floor(this.totalSupply * 0.005); // Mint 0.5%
       recommendedAction = "mint";
@@ -123,9 +120,7 @@ class TokenWarfareService {
   }
 
   // Token Burn Optimization Engine
-  async executeBurnStrategy(
-    strategy: "conservative" | "aggressive" | "adaptive",
-  ): Promise<{
+  async executeBurnStrategy(strategy: "conservative" | "aggressive" | "adaptive"): Promise<{
     burnAmount: number;
     burnReason: string;
     impact: string;
@@ -151,9 +146,7 @@ class TokenWarfareService {
 
       case "adaptive":
         marketPressure = Math.random();
-        burnAmount = Math.floor(
-          this.totalSupply * (0.005 + marketPressure * 0.02),
-        );
+        burnAmount = Math.floor(this.totalSupply * (0.005 + marketPressure * 0.02));
         burnReason = "AI-driven adaptive burning";
         impact = "Optimized market response";
         break;
@@ -241,11 +234,7 @@ class TokenWarfareService {
       this.stakingRewards.set(tier.tierId, tier);
     });
 
-    console.log(
-      "💎 Multi-Tiered Staking System Initialized:",
-      stakingTiers.length,
-      "tiers",
-    );
+    console.log("💎 Multi-Tiered Staking System Initialized:", stakingTiers.length, "tiers");
   }
 
   // Token Governance Voting System
@@ -280,7 +269,7 @@ class TokenWarfareService {
   async voteOnProposal(
     proposalId: string,
     vote: "for" | "against" | "abstain",
-    votingPower: number,
+    votingPower: number
   ): Promise<void> {
     const proposal = this.governanceProposals.get(proposalId);
     if (!proposal) throw new Error("Proposal not found");
@@ -290,8 +279,7 @@ class TokenWarfareService {
     proposal.votes[vote] += votingPower;
 
     // Check if proposal should pass
-    const totalVotes =
-      proposal.votes.for + proposal.votes.against + proposal.votes.abstain;
+    const totalVotes = proposal.votes.for + proposal.votes.against + proposal.votes.abstain;
     const threshold = this.totalSupply * 0.1; // 10% of total supply
 
     if (totalVotes >= threshold) {
@@ -321,8 +309,7 @@ class TokenWarfareService {
       volumeRisk: Math.random() * 0.3,
     };
 
-    pool.riskLevel =
-      (riskFactors.impermanentLoss + riskFactors.volumeRisk) * 100;
+    pool.riskLevel = (riskFactors.impermanentLoss + riskFactors.volumeRisk) * 100;
     pool.isProtected = true;
 
     // Implement protection mechanisms
@@ -333,13 +320,7 @@ class TokenWarfareService {
       "Liquidity Lock Mechanisms",
     ];
 
-    console.log(
-      "🛡️ Liquidity Pool Protected:",
-      poolId,
-      "with",
-      protections.length,
-      "mechanisms",
-    );
+    console.log("🛡️ Liquidity Pool Protected:", poolId, "with", protections.length, "mechanisms");
 
     toast.success("🛡️ Liquidity Pool Secured", {
       description: `Pool ${poolId} now has advanced protection`,
@@ -356,9 +337,7 @@ class TokenWarfareService {
     ];
 
     // Monitor for flash loan attack patterns
-    const detectedAttacks = suspiciousPatterns.filter(
-      () => Math.random() > 0.95,
-    ); // 5% chance each
+    const detectedAttacks = suspiciousPatterns.filter(() => Math.random() > 0.95); // 5% chance each
 
     if (detectedAttacks.length > 0) {
       console.warn("⚠️ Flash Loan Attack Patterns Detected:", detectedAttacks);
@@ -391,11 +370,9 @@ class TokenWarfareService {
       burnedTokens: this.burnedTokens,
       stakingTiers: this.stakingRewards.size,
       activeProposals: Array.from(this.governanceProposals.values()).filter(
-        (p) => p.status === "active",
+        (p) => p.status === "active"
       ).length,
-      protectedPools: Array.from(this.liquidityPools.values()).filter(
-        (p) => p.isProtected,
-      ).length,
+      protectedPools: Array.from(this.liquidityPools.values()).filter((p) => p.isProtected).length,
       tokenMechanisms: this.tokenMechanisms.size,
     };
   }

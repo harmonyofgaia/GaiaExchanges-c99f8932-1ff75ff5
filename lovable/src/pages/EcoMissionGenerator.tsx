@@ -63,8 +63,7 @@ export default function EcoMissionGenerator() {
     const insights: AIInsight[] = [
       {
         type: "carbon_reduction",
-        message:
-          "Tree planting missions show 23% higher completion rates in urban areas",
+        message: "Tree planting missions show 23% higher completion rates in urban areas",
         confidence: 87,
         actionable: true,
         action: "Focus on urban tree planting initiatives",
@@ -97,8 +96,7 @@ export default function EcoMissionGenerator() {
     {
       id: "tree-planting-1",
       title: "Urban Forest Expansion",
-      description:
-        "Plant native trees in designated urban areas to improve air quality",
+      description: "Plant native trees in designated urban areas to improve air quality",
       mission_type: "tree_planting",
       difficulty_level: 3,
       tokens_reward: 150,
@@ -118,8 +116,7 @@ export default function EcoMissionGenerator() {
     {
       id: "ocean-cleanup-1",
       title: "Coastal Debris Removal",
-      description:
-        "Remove plastic waste and debris from beach and coastal areas",
+      description: "Remove plastic waste and debris from beach and coastal areas",
       mission_type: "ocean_cleanup",
       difficulty_level: 2,
       tokens_reward: 100,
@@ -207,9 +204,7 @@ export default function EcoMissionGenerator() {
         <Navbar />
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
-            <div className="text-2xl text-green-400">
-              Loading AI mission generator...
-            </div>
+            <div className="text-2xl text-green-400">Loading AI mission generator...</div>
           </div>
         </div>
       </div>
@@ -225,8 +220,8 @@ export default function EcoMissionGenerator() {
             🤖 AI Eco Mission Generator
           </h1>
           <p className="text-xl text-muted-foreground mt-2">
-            Advanced AI generates personalized environmental missions based on
-            your location and impact potential
+            Advanced AI generates personalized environmental missions based on your location and
+            impact potential
           </p>
         </div>
 
@@ -245,16 +240,10 @@ export default function EcoMissionGenerator() {
                   key={index}
                   className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/20"
                 >
-                  <div className="text-sm font-medium text-blue-400 mb-2">
-                    {insight.type}
-                  </div>
-                  <div className="text-xs text-muted-foreground mb-2">
-                    {insight.message}
-                  </div>
+                  <div className="text-sm font-medium text-blue-400 mb-2">{insight.type}</div>
+                  <div className="text-xs text-muted-foreground mb-2">{insight.message}</div>
                   <div className="flex justify-between items-center">
-                    <Badge className="bg-blue-600 text-xs">
-                      {insight.confidence}% confidence
-                    </Badge>
+                    <Badge className="bg-blue-600 text-xs">{insight.confidence}% confidence</Badge>
                     {insight.actionable && insight.action && (
                       <Button size="sm" variant="outline" className="text-xs">
                         Apply
@@ -297,26 +286,18 @@ export default function EcoMissionGenerator() {
             >
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-white">
-                  <span className="text-2xl">
-                    {getMissionIcon(mission.mission_type)}
-                  </span>
+                  <span className="text-2xl">{getMissionIcon(mission.mission_type)}</span>
                   {mission.title}
                 </CardTitle>
                 <div className="flex gap-2">
-                  <Badge
-                    className={getDifficultyColor(mission.difficulty_level)}
-                  >
+                  <Badge className={getDifficultyColor(mission.difficulty_level)}>
                     {getDifficultyText(mission.difficulty_level)}
                   </Badge>
-                  <Badge className="bg-green-600">
-                    {mission.tokens_reward} GAiA
-                  </Badge>
+                  <Badge className="bg-green-600">{mission.tokens_reward} GAiA</Badge>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  {mission.description}
-                </p>
+                <p className="text-muted-foreground mb-4">{mission.description}</p>
 
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
@@ -328,13 +309,7 @@ export default function EcoMissionGenerator() {
 
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Status</span>
-                    <Badge
-                      className={
-                        mission.status === "active"
-                          ? "bg-green-600"
-                          : "bg-gray-600"
-                      }
-                    >
+                    <Badge className={mission.status === "active" ? "bg-green-600" : "bg-gray-600"}>
                       {mission.status}
                     </Badge>
                   </div>
@@ -346,9 +321,7 @@ export default function EcoMissionGenerator() {
                         <span
                           key={star}
                           className={
-                            star <= mission.difficulty_level
-                              ? "text-yellow-400"
-                              : "text-gray-600"
+                            star <= mission.difficulty_level ? "text-yellow-400" : "text-gray-600"
                           }
                         >
                           ⭐
@@ -360,9 +333,7 @@ export default function EcoMissionGenerator() {
 
                 <Button className="w-full mt-6 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
                   <Target className="h-4 w-4 mr-2" />
-                  {mission.status === "available"
-                    ? "Start Mission"
-                    : "View Progress"}
+                  {mission.status === "available" ? "Start Mission" : "View Progress"}
                 </Button>
               </CardContent>
             </Card>

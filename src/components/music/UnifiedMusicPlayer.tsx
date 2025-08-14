@@ -35,32 +35,29 @@ export function UnifiedMusicPlayer() {
   const [isMinimized, setIsMinimized] = useState(false);
   const [playlist, setPlaylist] = useState<Track[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const playTrack = useCallback(
-    async (track: Track) => {
-      if (!audioRef.current) return;
+  const playTrack = useCallback(async (track: Track) => {
+    if (!audioRef.current) return;
 
-      try {
-        const audioUrl = track.storage_path
-          ? `https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/admin-media/${track.storage_path}`
-          : track.url;
+    try {
+      const audioUrl = track.storage_path
+        ? `https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/admin-media/${track.storage_path}`
+        : track.url;
 
-        if (audioUrl) {
-          audioRef.current.src = audioUrl;
-          await audioRef.current.play();
-          setIsPlaying(true);
-          setCurrentTrack(track);
-          toast.success(`🎵 Now playing: ${track.original_name || track.name}`);
-        }
-      } catch (error) {
-        console.error("Failed to play track:", error);
-        toast.error("Failed to play audio file");
+      if (audioUrl) {
+        audioRef.current.src = audioUrl;
+        await audioRef.current.play();
+        setIsPlaying(true);
+        setCurrentTrack(track);
+        toast.success(`🎵 Now playing: ${track.original_name || track.name}`);
       }
-    },
-    [],
-  );
+    } catch (error) {
+      console.error("Failed to play track:", error);
+      toast.error("Failed to play audio file");
+    }
+  }, []);
 
   const playNext = useCallback(() => {
     if (playlist.length === 0) return;
@@ -84,7 +81,7 @@ export function UnifiedMusicPlayer() {
             setIsVisible(true);
             console.log(
               "🎵 Unified Music Player Loaded:",
-              mediaData.name || mediaData.original_name,
+              mediaData.name || mediaData.original_name
             );
           }
         } catch (error) {
@@ -243,8 +240,7 @@ export function UnifiedMusicPlayer() {
 
   const playPrevious = () => {
     if (playlist.length === 0) return;
-    const prevIndex =
-      currentIndex === 0 ? playlist.length - 1 : currentIndex - 1;
+    const prevIndex = currentIndex === 0 ? playlist.length - 1 : currentIndex - 1;
     setCurrentIndex(prevIndex);
     playTrack(playlist[prevIndex]);
   };
@@ -366,11 +362,7 @@ export function UnifiedMusicPlayer() {
               onClick={togglePlay}
               className="h-8 w-8 p-0 text-primary hover:text-primary/80"
             >
-              {isPlaying ? (
-                <Pause className="h-4 w-4" />
-              ) : (
-                <Play className="h-4 w-4" />
-              )}
+              {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
             </Button>
 
             {!isMinimized && (
@@ -393,11 +385,7 @@ export function UnifiedMusicPlayer() {
                     onClick={toggleMute}
                     className="h-6 w-6 p-0 text-primary hover:text-primary/80"
                   >
-                    {isMuted ? (
-                      <VolumeX className="h-3 w-3" />
-                    ) : (
-                      <Volume2 className="h-3 w-3" />
-                    )}
+                    {isMuted ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
                   </Button>
                   <Slider
                     value={[volume * 100]}

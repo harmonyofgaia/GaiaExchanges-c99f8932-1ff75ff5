@@ -53,21 +53,13 @@ export const HeroSection = () => {
           </div>
           <div className="border-2 border-red-400/30 rounded-lg p-4 bg-black/20">
             <p className="text-lg text-red-300 font-semibold leading-relaxed">
-              We are{" "}
-              <span className="text-red-400 font-bold">
-                NOT GAIA Everworld!
-              </span>{" "}
-              We are{" "}
-              <span className="text-green-400 font-bold">GAiA Token</span> - a
-              completely separate, exclusive project powered by{" "}
+              We are <span className="text-red-400 font-bold">NOT GAIA Everworld!</span> We are{" "}
+              <span className="text-green-400 font-bold">GAiA Token</span> - a completely separate,
+              exclusive project powered by{" "}
               <span className="text-blue-400 font-bold">
                 Harmony of Gaia Projects Creator Business
               </span>
-              , empowered by{" "}
-              <span className="text-purple-400 font-bold">
-                Culture of Harmony
-              </span>
-              .
+              , empowered by <span className="text-purple-400 font-bold">Culture of Harmony</span>.
             </p>
           </div>
         </div>
@@ -93,9 +85,7 @@ export const HeroSection = () => {
                     <div className="text-3xl font-bold text-yellow-400 mb-2">
                       #{ranking.position}
                     </div>
-                    <div className="text-white font-semibold mb-2">
-                      {ranking.title}
-                    </div>
+                    <div className="text-white font-semibold mb-2">{ranking.title}</div>
                     <Badge className="bg-gradient-to-r from-yellow-600 to-orange-600 text-white text-xs animate-pulse">
                       {ranking.badge}
                     </Badge>
@@ -109,8 +99,8 @@ export const HeroSection = () => {
                 🌟 THE MOST PURE AND ECOLOGIC FRIENDLY TRIBE IN THE UNIVERSE 🌟
               </div>
               <p className="text-yellow-300 text-sm">
-                Leading the world in environmental protection, community
-                harmony, and innovative blockchain solutions
+                Leading the world in environmental protection, community harmony, and innovative
+                blockchain solutions
               </p>
             </div>
           </CardContent>
@@ -128,9 +118,7 @@ export const HeroSection = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div className="flex flex-col items-center p-3 bg-black/20 rounded-lg">
-                <span className="text-green-400 font-semibold">
-                  Our Contract:
-                </span>
+                <span className="text-green-400 font-semibold">Our Contract:</span>
                 <code className="mt-2 bg-black/30 px-2 py-1 rounded text-xs font-mono">
                   {GAIA_TOKEN.CONTRACT_ADDRESS}
                 </code>
@@ -143,8 +131,7 @@ export const HeroSection = () => {
               </div>
             </div>
             <p className="text-muted-foreground mt-4 text-center italic">
-              Exclusive GAiA Token ecosystem with dragon-level security -
-              Culture of Harmony powered
+              Exclusive GAiA Token ecosystem with dragon-level security - Culture of Harmony powered
             </p>
           </div>
         </div>

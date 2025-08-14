@@ -4,16 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
-import {
-  Headphones,
-  Wifi,
-  Settings,
-  Eye,
-  Volume2,
-  Gamepad2,
-  Zap,
-  Monitor,
-} from "lucide-react";
+import { Headphones, Wifi, Settings, Eye, Volume2, Gamepad2, Zap, Monitor } from "lucide-react";
 import { toast } from "sonner";
 
 interface VRConnectionManagerProps {
@@ -21,10 +12,7 @@ interface VRConnectionManagerProps {
   isConnected: boolean;
 }
 
-export function VRConnectionManager({
-  onConnectionChange,
-  isConnected,
-}: VRConnectionManagerProps) {
+export function VRConnectionManager({ onConnectionChange, isConnected }: VRConnectionManagerProps) {
   const [connectionStatus, setConnectionStatus] = useState<
     "disconnected" | "connecting" | "connected"
   >("disconnected");
@@ -103,15 +91,11 @@ export function VRConnectionManager({
               <div className="text-sm text-muted-foreground">VR Status</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded border border-blue-500/20">
-              <div className="text-2xl font-bold text-blue-400">
-                {vrSettings.resolution}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{vrSettings.resolution}</div>
               <div className="text-sm text-muted-foreground">Resolution</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded border border-green-500/20">
-              <div className="text-2xl font-bold text-green-400">
-                {vrSettings.refreshRate}Hz
-              </div>
+              <div className="text-2xl font-bold text-green-400">{vrSettings.refreshRate}Hz</div>
               <div className="text-sm text-muted-foreground">Refresh Rate</div>
             </div>
           </div>
@@ -165,22 +149,15 @@ export function VRConnectionManager({
                   <Headphones className="h-6 w-6 text-purple-400" />
                   <div>
                     <h4 className="font-bold">{device.name}</h4>
-                    <p className="text-sm text-muted-foreground">
-                      {device.status}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{device.status}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="text-right">
                     <div className="text-sm font-medium">Compatibility</div>
-                    <Progress
-                      value={device.compatibility}
-                      className="w-24 h-2"
-                    />
+                    <Progress value={device.compatibility} className="w-24 h-2" />
                   </div>
-                  <Badge className="bg-green-600 text-white">
-                    {device.compatibility}%
-                  </Badge>
+                  <Badge className="bg-green-600 text-white">{device.compatibility}%</Badge>
                 </div>
               </div>
             ))}
@@ -202,9 +179,7 @@ export function VRConnectionManager({
               <div className="flex items-center justify-between">
                 <div>
                   <label className="text-sm font-medium">Motion Tracking</label>
-                  <p className="text-xs text-muted-foreground">
-                    Full body movement detection
-                  </p>
+                  <p className="text-xs text-muted-foreground">Full body movement detection</p>
                 </div>
                 <Switch
                   checked={vrSettings.trackingEnabled}
@@ -220,9 +195,7 @@ export function VRConnectionManager({
               <div className="flex items-center justify-between">
                 <div>
                   <label className="text-sm font-medium">Haptic Feedback</label>
-                  <p className="text-xs text-muted-foreground">
-                    Touch and vibration responses
-                  </p>
+                  <p className="text-xs text-muted-foreground">Touch and vibration responses</p>
                 </div>
                 <Switch
                   checked={vrSettings.hapticFeedback}
@@ -240,9 +213,7 @@ export function VRConnectionManager({
               <div className="flex items-center justify-between">
                 <div>
                   <label className="text-sm font-medium">Enhanced Audio</label>
-                  <p className="text-xs text-muted-foreground">
-                    3D spatial audio effects
-                  </p>
+                  <p className="text-xs text-muted-foreground">3D spatial audio effects</p>
                 </div>
                 <Switch
                   checked={vrSettings.audioEnhanced}
@@ -257,12 +228,8 @@ export function VRConnectionManager({
 
               <div className="flex items-center justify-between">
                 <div>
-                  <label className="text-sm font-medium">
-                    Environmental Effects
-                  </label>
-                  <p className="text-xs text-muted-foreground">
-                    Weather and particle effects
-                  </p>
+                  <label className="text-sm font-medium">Environmental Effects</label>
+                  <p className="text-xs text-muted-foreground">Weather and particle effects</p>
                 </div>
                 <Switch
                   checked={vrSettings.environmentalEffects}
@@ -279,9 +246,7 @@ export function VRConnectionManager({
 
           {/* VR Features Preview */}
           <div className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-lg p-4 border border-purple-500/20">
-            <h4 className="font-bold text-purple-400 mb-3">
-              🌟 VR Experience Features
-            </h4>
+            <h4 className="font-bold text-purple-400 mb-3">🌟 VR Experience Features</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div className="flex items-center gap-2">
                 <span className="text-green-400">✓</span>

@@ -132,7 +132,7 @@ class DynamicRewardSystem {
     }
     return Math.max(
       baseMultiplier * DynamicRewardSystem.MINIMUM_MULTIPLIER_RATIO,
-      DynamicRewardSystem.ABSOLUTE_MINIMUM_MULTIPLIER,
+      DynamicRewardSystem.ABSOLUTE_MINIMUM_MULTIPLIER
     ); // Minimum guaranteed
   }
 }
@@ -177,14 +177,9 @@ interface PayoutCaps {
 }
 
 class AntiDrainProtection {
-  validatePayout(
-    amount: number,
-    userId: string,
-    vaultHealth: VaultHealthMetrics,
-  ): boolean {
+  validatePayout(amount: number, userId: string, vaultHealth: VaultHealthMetrics): boolean {
     // Input validation
-    if (typeof amount !== "number" || !isFinite(amount) || amount <= 0)
-      return false;
+    if (typeof amount !== "number" || !isFinite(amount) || amount <= 0) return false;
     if (typeof userId !== "string" || userId.trim() === "") return false;
 
     const userDailyTotal = this.getUserDailyTotal(userId);
@@ -196,8 +191,7 @@ class AntiDrainProtection {
     if (userDailyTotal + amount > caps.maxDailyUserPayout) return false;
     if (systemHourlyTotal + amount > caps.maxHourlySystemPayout) return false;
     if (amount > caps.maxSingleTransactionPayout) return false;
-    if (vaultHealth.availableBalance - amount < caps.emergencyBrakeThreshold)
-      return false;
+    if (vaultHealth.availableBalance - amount < caps.emergencyBrakeThreshold) return false;
 
     return true;
   }
@@ -266,32 +260,16 @@ class EmergencyRecovery {
 
     switch (plan.stage) {
       case "GENTLE_RECOVERY":
-        plan.actions = [
-          "reduce_payouts_10%",
-          "increase_fees_5%",
-          "pause_bonuses",
-        ];
+        plan.actions = ["reduce_payouts_10%", "increase_fees_5%", "pause_bonuses"];
         break;
       case "MODERATE_RECOVERY":
-        plan.actions = [
-          "reduce_payouts_30%",
-          "increase_fees_15%",
-          "pause_new_features",
-        ];
+        plan.actions = ["reduce_payouts_30%", "increase_fees_15%", "pause_new_features"];
         break;
       case "AGGRESSIVE_RECOVERY":
-        plan.actions = [
-          "minimum_payouts_only",
-          "maximum_fees",
-          "pause_all_bonuses",
-        ];
+        plan.actions = ["minimum_payouts_only", "maximum_fees", "pause_all_bonuses"];
         break;
       case "EMERGENCY_LOCKDOWN":
-        plan.actions = [
-          "pause_all_payouts",
-          "emergency_fees",
-          "community_vote",
-        ];
+        plan.actions = ["pause_all_payouts", "emergency_fees", "community_vote"];
         break;
     }
 

@@ -82,15 +82,11 @@ export function useUserProfile() {
 
       // Only update fields that exist in the profiles table
       const profileUpdates: Record<string, unknown> = {};
-      if (updates.full_name !== undefined)
-        profileUpdates.full_name = updates.full_name;
+      if (updates.full_name !== undefined) profileUpdates.full_name = updates.full_name;
       // Note: avatar_url is not included since it doesn't exist in the current schema
 
       if (Object.keys(profileUpdates).length > 0) {
-        const { error } = await supabase
-          .from("profiles")
-          .update(profileUpdates)
-          .eq("id", user.id);
+        const { error } = await supabase.from("profiles").update(profileUpdates).eq("id", user.id);
 
         if (error) {
           setError(error.message);

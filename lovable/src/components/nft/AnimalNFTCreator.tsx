@@ -34,35 +34,26 @@ export function AnimalNFTCreator() {
             🎨 Animal NFT Creator
           </CardTitle>
           <p className="text-muted-foreground">
-            Create unique animal NFTs connected to real wildlife conservation
-            efforts
+            Create unique animal NFTs connected to real wildlife conservation efforts
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-medium text-green-400 mb-2 block">
-                Animal Name
-              </label>
+              <label className="text-sm font-medium text-green-400 mb-2 block">Animal Name</label>
               <Input
                 placeholder="e.g., Thunder the Eagle"
                 value={animalNFT.name}
-                onChange={(e) =>
-                  setAnimalNFT((prev) => ({ ...prev, name: e.target.value }))
-                }
+                onChange={(e) => setAnimalNFT((prev) => ({ ...prev, name: e.target.value }))}
                 className="border-green-500/20"
               />
             </div>
             <div>
-              <label className="text-sm font-medium text-blue-400 mb-2 block">
-                Species
-              </label>
+              <label className="text-sm font-medium text-blue-400 mb-2 block">Species</label>
               <Input
                 placeholder="e.g., Golden Eagle"
                 value={animalNFT.species}
-                onChange={(e) =>
-                  setAnimalNFT((prev) => ({ ...prev, species: e.target.value }))
-                }
+                onChange={(e) => setAnimalNFT((prev) => ({ ...prev, species: e.target.value }))}
                 className="border-blue-500/20"
               />
             </div>
@@ -74,9 +65,7 @@ export function AnimalNFTCreator() {
             </label>
             <Slider
               value={animalNFT.rarity}
-              onValueChange={(value) =>
-                setAnimalNFT((prev) => ({ ...prev, rarity: value }))
-              }
+              onValueChange={(value) => setAnimalNFT((prev) => ({ ...prev, rarity: value }))}
               max={100}
               min={1}
               step={1}
@@ -117,10 +106,7 @@ export function AnimalNFTCreator() {
             </div>
           </div>
 
-          <Button
-            onClick={handleCreateNFT}
-            className="w-full bg-green-600 hover:bg-green-700"
-          >
+          <Button onClick={handleCreateNFT} className="w-full bg-green-600 hover:bg-green-700">
             <Camera className="h-4 w-4 mr-2" />
             Create Animal NFT
           </Button>
@@ -145,9 +131,7 @@ export function AnimalNFTCreator() {
                 {animalNFT.species || "Species not specified"}
               </p>
               <div className="flex justify-center gap-2 mt-4">
-                <Badge className="bg-purple-600">
-                  Rarity: {animalNFT.rarity[0]}%
-                </Badge>
+                <Badge className="bg-purple-600">Rarity: {animalNFT.rarity[0]}%</Badge>
                 <Badge className="bg-green-600">
                   Conservation: {animalNFT.conservationValue[0]}%
                 </Badge>
@@ -158,9 +142,7 @@ export function AnimalNFTCreator() {
           <div className="mt-6 space-y-3">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Powered by:</span>
-              <span className="text-green-400 font-bold">
-                {GAIA_TOKEN.SYMBOL} Token
-              </span>
+              <span className="text-green-400 font-bold">{GAIA_TOKEN.SYMBOL} Token</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Network:</span>

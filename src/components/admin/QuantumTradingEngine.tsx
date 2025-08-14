@@ -4,14 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
-import {
-  TrendingUp,
-  DollarSign,
-  Target,
-  Zap,
-  Crown,
-  Users,
-} from "lucide-react";
+import { TrendingUp, DollarSign, Target, Zap, Crown, Users } from "lucide-react";
 import { toast } from "sonner";
 
 export function QuantumTradingEngine() {
@@ -45,31 +38,21 @@ export function QuantumTradingEngine() {
   useEffect(() => {
     const tradingInterval = setInterval(() => {
       console.log("💰 QUANTUM TRADING ENGINE - MAXIMUM PROFIT MODE");
-      console.log(
-        "🎯 DYNAMIC PRICING: Higher value = Fewer buyers for perfect balance",
-      );
-      console.log(
-        "👥 INVESTOR MAGNETISM: Attracting perfect investors automatically",
-      );
+      console.log("🎯 DYNAMIC PRICING: Higher value = Fewer buyers for perfect balance");
+      console.log("👥 INVESTOR MAGNETISM: Attracting perfect investors automatically");
 
       // Simulate dynamic pricing based on demand
       setTradingMetrics((prev) => {
-        const newValue =
-          prev.gaiaTokenValue * (1 + (Math.random() - 0.5) * 0.02);
+        const newValue = prev.gaiaTokenValue * (1 + (Math.random() - 0.5) * 0.02);
         const buyerReduction = Math.max(0.1, 1 - (newValue - 0.002) * 100); // Higher price = fewer buyers
 
         return {
           ...prev,
           gaiaTokenValue: newValue,
-          totalMarketCap:
-            prev.totalMarketCap * (1 + (Math.random() - 0.5) * 0.01),
+          totalMarketCap: prev.totalMarketCap * (1 + (Math.random() - 0.5) * 0.01),
           dailyVolume: prev.dailyVolume * buyerReduction,
-          investorsAttracted:
-            prev.investorsAttracted + (Math.random() > 0.7 ? 1 : 0),
-          marketingReach: Math.min(
-            100,
-            prev.marketingReach + Math.random() * 0.5,
-          ),
+          investorsAttracted: prev.investorsAttracted + (Math.random() > 0.7 ? 1 : 0),
+          marketingReach: Math.min(100, prev.marketingReach + Math.random() * 0.5),
         };
       });
 
@@ -82,22 +65,16 @@ export function QuantumTradingEngine() {
           "Tech Venture Capital",
           "Sustainable Fund",
         ];
-        const platforms = [
-          "LinkedIn",
-          "Discord",
-          "Telegram",
-          "Twitter",
-          "Email",
-        ];
+        const platforms = ["LinkedIn", "Discord", "Telegram", "Twitter", "Email"];
 
         const newInvestor = {
           id: Date.now().toString(),
           name: investors[Math.floor(Math.random() * investors.length)],
           platform: platforms[Math.floor(Math.random() * platforms.length)],
           investment: Math.floor(Math.random() * 500000) + 50000,
-          status: ["interested", "negotiating"][
-            Math.floor(Math.random() * 2)
-          ] as "interested" | "negotiating",
+          status: ["interested", "negotiating"][Math.floor(Math.random() * 2)] as
+            | "interested"
+            | "negotiating",
           priority:
             Math.random() > 0.7
               ? "high"
@@ -116,8 +93,7 @@ export function QuantumTradingEngine() {
 
   const activateInvestorMagnet = () => {
     toast.success("🧲 INVESTOR MAGNET ACTIVATED!", {
-      description:
-        "Quantum algorithms now attracting perfect investors globally",
+      description: "Quantum algorithms now attracting perfect investors globally",
       duration: 8000,
     });
 
@@ -127,21 +103,16 @@ export function QuantumTradingEngine() {
       marketingReach: 100,
     }));
 
-    console.log(
-      "🧲 INVESTOR MAGNETISM: ATTRACTING HIGH-VALUE INVESTORS WORLDWIDE",
-    );
+    console.log("🧲 INVESTOR MAGNETISM: ATTRACTING HIGH-VALUE INVESTORS WORLDWIDE");
   };
 
   const activateViralMarketing = () => {
     toast.success("🚀 VIRAL MARKETING ACTIVATED!", {
-      description:
-        "Harmony of Gaia spreading across all platforms automatically",
+      description: "Harmony of Gaia spreading across all platforms automatically",
       duration: 5000,
     });
 
-    console.log(
-      "🚀 VIRAL MARKETING: GAIA TOKEN SPREADING ACROSS ALL PLATFORMS",
-    );
+    console.log("🚀 VIRAL MARKETING: GAIA TOKEN SPREADING ACROSS ALL PLATFORMS");
   };
 
   const getPriorityColor = (priority: string) => {
@@ -234,12 +205,9 @@ export function QuantumTradingEngine() {
         <CardContent>
           <div className="space-y-4">
             <div className="text-center space-y-2">
-              <h3 className="text-2xl font-bold text-orange-400">
-                ⚖️ PERFECT BALANCE ACHIEVED
-              </h3>
+              <h3 className="text-2xl font-bold text-orange-400">⚖️ PERFECT BALANCE ACHIEVED</h3>
               <p className="text-orange-300">
-                Higher coin value automatically reduces buyer count for optimal
-                market balance
+                Higher coin value automatically reduces buyer count for optimal market balance
               </p>
             </div>
 
@@ -251,23 +219,17 @@ export function QuantumTradingEngine() {
               </div>
               <div className="text-center">
                 <div className="text-xl font-bold text-blue-400">1.2x</div>
-                <div className="text-sm text-muted-foreground">
-                  Demand Multiplier
-                </div>
+                <div className="text-sm text-muted-foreground">Demand Multiplier</div>
                 <Progress value={60} className="mt-2" />
               </div>
               <div className="text-center">
                 <div className="text-xl font-bold text-purple-400">0.8x</div>
-                <div className="text-sm text-muted-foreground">
-                  Buyer Reduction
-                </div>
+                <div className="text-sm text-muted-foreground">Buyer Reduction</div>
                 <Progress value={80} className="mt-2" />
               </div>
               <div className="text-center">
                 <div className="text-xl font-bold text-yellow-400">Perfect</div>
-                <div className="text-sm text-muted-foreground">
-                  Balance Status
-                </div>
+                <div className="text-sm text-muted-foreground">Balance Status</div>
                 <Progress value={100} className="mt-2" />
               </div>
             </div>
@@ -287,12 +249,8 @@ export function QuantumTradingEngine() {
           <div className="space-y-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
-                <div className="text-2xl font-bold text-cyan-400">
-                  {investorLeads.length}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Active Leads
-                </div>
+                <div className="text-2xl font-bold text-cyan-400">{investorLeads.length}</div>
+                <div className="text-sm text-muted-foreground">Active Leads</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-green-400">
@@ -304,28 +262,19 @@ export function QuantumTradingEngine() {
                 <div className="text-2xl font-bold text-blue-400">
                   {investorLeads.filter((i) => i.priority === "high").length}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  High Priority
-                </div>
+                <div className="text-sm text-muted-foreground">High Priority</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-purple-400">
-                  $
-                  {investorLeads
-                    .reduce((sum, i) => sum + i.investment, 0)
-                    .toLocaleString()}
+                  ${investorLeads.reduce((sum, i) => sum + i.investment, 0).toLocaleString()}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Total Interest
-                </div>
+                <div className="text-sm text-muted-foreground">Total Interest</div>
               </div>
             </div>
 
             {/* Recent Investor Leads */}
             <div className="space-y-2">
-              <h4 className="font-semibold text-cyan-400">
-                🎯 Recent Investor Leads:
-              </h4>
+              <h4 className="font-semibold text-cyan-400">🎯 Recent Investor Leads:</h4>
               <div className="max-h-32 overflow-y-auto space-y-2">
                 {investorLeads.map((investor) => (
                   <div
@@ -338,20 +287,14 @@ export function QuantumTradingEngine() {
                       >
                         {investor.priority.toUpperCase()}
                       </Badge>
-                      <span className="text-sm font-medium">
-                        {investor.name}
-                      </span>
-                      <Badge className="bg-gray-600 text-white text-xs">
-                        {investor.platform}
-                      </Badge>
+                      <span className="text-sm font-medium">{investor.name}</span>
+                      <Badge className="bg-gray-600 text-white text-xs">{investor.platform}</Badge>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-bold text-green-400">
                         ${investor.investment.toLocaleString()}
                       </span>
-                      <Badge
-                        className={`${getStatusColor(investor.status)} text-white text-xs`}
-                      >
+                      <Badge className={`${getStatusColor(investor.status)} text-white text-xs`}>
                         {investor.status.toUpperCase()}
                       </Badge>
                     </div>

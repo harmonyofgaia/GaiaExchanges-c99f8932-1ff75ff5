@@ -20,13 +20,7 @@ import { toast } from "sonner";
 interface GlobalThreat {
   id: string;
   source: string;
-  type:
-    | "malware"
-    | "ddos"
-    | "phishing"
-    | "ransomware"
-    | "zero_day"
-    | "supply_chain";
+  type: "malware" | "ddos" | "phishing" | "ransomware" | "zero_day" | "supply_chain";
   severity: "low" | "medium" | "high" | "critical";
   region: string;
   timestamp: Date;
@@ -70,12 +64,7 @@ export function WorldwideDefenseMonitor() {
     "Oceania",
   ];
 
-  const tacticCategories = [
-    "prevention",
-    "detection",
-    "response",
-    "recovery",
-  ] as const;
+  const tacticCategories = ["prevention", "detection", "response", "recovery"] as const;
 
   // Enhanced Worldwide defense monitoring every 5 minutes with tech intelligence
   useEffect(() => {
@@ -83,11 +72,9 @@ export function WorldwideDefenseMonitor() {
       if (!monitoringActive) return;
 
       console.log(
-        "🌍 ADVANCED WORLDWIDE DEFENSE SCAN - Monitoring Global Threats + Tech Intelligence",
+        "🌍 ADVANCED WORLDWIDE DEFENSE SCAN - Monitoring Global Threats + Tech Intelligence"
       );
-      console.log(
-        "🧠 Analyzing threats, coding patterns, frameworks, and innovations globally",
-      );
+      console.log("🧠 Analyzing threats, coding patterns, frameworks, and innovations globally");
 
       const newThreats: GlobalThreat[] = [];
       const newTactics: DefenseTactic[] = [];
@@ -123,21 +110,13 @@ export function WorldwideDefenseMonitor() {
       for (let i = 0; i < Math.floor(Math.random() * 4) + 1; i++) {
         const threat: GlobalThreat = {
           id: `threat-${Date.now()}-${i}`,
-          source:
-            globalThreatSources[
-              Math.floor(Math.random() * globalThreatSources.length)
-            ],
-          type: advancedThreatTypes[
-            Math.floor(Math.random() * advancedThreatTypes.length)
-          ],
-          severity: ["low", "medium", "high", "critical"][
-            Math.floor(Math.random() * 4)
-          ] as any,
+          source: globalThreatSources[Math.floor(Math.random() * globalThreatSources.length)],
+          type: advancedThreatTypes[Math.floor(Math.random() * advancedThreatTypes.length)],
+          severity: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as any,
           region: regions[Math.floor(Math.random() * regions.length)],
           timestamp: new Date(),
           description: `Advanced AI-detected threat neutralized before impact - Tech superiority maintained`,
-          countermeasure:
-            "Quantum-level multi-layer defense protocol activated with tech analysis",
+          countermeasure: "Quantum-level multi-layer defense protocol activated with tech analysis",
           status: ["detected", "analyzing", "blocked", "neutralized"][
             Math.floor(Math.random() * 4)
           ] as any,
@@ -166,16 +145,10 @@ export function WorldwideDefenseMonitor() {
       for (let i = 0; i < 4; i++) {
         const tactic: DefenseTactic = {
           id: `tactic-${Date.now()}-${i}`,
-          name: advancedTactics[
-            Math.floor(Math.random() * advancedTactics.length)
-          ],
-          category:
-            tacticCategories[
-              Math.floor(Math.random() * tacticCategories.length)
-            ],
+          name: advancedTactics[Math.floor(Math.random() * advancedTactics.length)],
+          category: tacticCategories[Math.floor(Math.random() * tacticCategories.length)],
           effectiveness: Math.floor(Math.random() * 15) + 85, // 85-100%
-          implementation:
-            "AI-automated deployment with quantum security integration",
+          implementation: "AI-automated deployment with quantum security integration",
           lastUpdated: new Date(),
           globalRanking: Math.floor(Math.random() * 50) + 1,
         };
@@ -193,16 +166,11 @@ export function WorldwideDefenseMonitor() {
         threatsDetected: prev.threatsDetected + newThreats.length,
         tacticsUpdated: prev.tacticsUpdated + newTactics.length,
         defenseStrength: Math.min(100, prev.defenseStrength + 0.15),
-        globalRanking: Math.max(
-          1,
-          prev.globalRanking - Math.floor(Math.random() * 0.05),
-        ),
+        globalRanking: Math.max(1, prev.globalRanking - Math.floor(Math.random() * 0.05)),
       }));
 
       // Show critical threat alerts
-      const criticalThreats = newThreats.filter(
-        (t) => t.severity === "critical",
-      );
+      const criticalThreats = newThreats.filter((t) => t.severity === "critical");
       if (criticalThreats.length > 0) {
         toast.error("🚨 CRITICAL GLOBAL THREAT AUTO-NEUTRALIZED", {
           description: `${criticalThreats.length} critical threats detected and eliminated - Tech superiority maintained`,
@@ -210,16 +178,11 @@ export function WorldwideDefenseMonitor() {
         });
       }
 
-      console.log(
-        "🛡️ ADVANCED GLOBAL DEFENSE UPDATE COMPLETE - Always 10x ahead of threats",
-      );
+      console.log("🛡️ ADVANCED GLOBAL DEFENSE UPDATE COMPLETE - Always 10x ahead of threats");
     };
 
     // Run every 5 minutes (300,000 milliseconds) with enhanced scanning
-    monitorInterval.current = setInterval(
-      performAdvancedGlobalDefenseScan,
-      300000,
-    );
+    monitorInterval.current = setInterval(performAdvancedGlobalDefenseScan, 300000);
 
     // Initial enhanced scan
     performAdvancedGlobalDefenseScan();
@@ -236,8 +199,7 @@ export function WorldwideDefenseMonitor() {
       lastUpdated: new Date().toISOString(),
       tactics: defenseTactics,
       threats: globalThreats,
-      techAdvantage:
-        "10x ahead of all competition through continuous innovation",
+      techAdvantage: "10x ahead of all competition through continuous innovation",
       workingLinks: [
         "https://attack.mitre.org/ - MITRE ATT&CK Framework",
         "https://www.nist.gov/cyberframework - NIST Cybersecurity",
@@ -286,13 +248,10 @@ export function WorldwideDefenseMonitor() {
 
   const toggleMonitoring = () => {
     setMonitoringActive(!monitoringActive);
-    toast.success(
-      `🌍 Global Monitoring ${!monitoringActive ? "ACTIVATED" : "PAUSED"}`,
-      {
-        description: `Worldwide threat scanning ${!monitoringActive ? "resumed" : "temporarily paused"}`,
-        duration: 3000,
-      },
-    );
+    toast.success(`🌍 Global Monitoring ${!monitoringActive ? "ACTIVATED" : "PAUSED"}`, {
+      description: `Worldwide threat scanning ${!monitoringActive ? "resumed" : "temporarily paused"}`,
+      duration: 3000,
+    });
   };
 
   return (
@@ -312,8 +271,7 @@ export function WorldwideDefenseMonitor() {
                 🌍 WORLDWIDE DEFENSE COMMAND CENTER
               </div>
               <div className="text-sm font-normal text-red-400">
-                Global Monitoring • 5-Minute Updates • 195 Regions • Admin Only
-                Access
+                Global Monitoring • 5-Minute Updates • 195 Regions • Admin Only Access
               </div>
             </div>
           </CardTitle>
@@ -323,12 +281,8 @@ export function WorldwideDefenseMonitor() {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             <div className="text-center p-3 bg-red-900/20 rounded-lg border border-red-500/30">
               <Shield className="h-6 w-6 mx-auto text-red-400 mb-2" />
-              <div className="text-xl font-bold text-red-400">
-                {worldwideStats.threatsDetected}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Global Threats
-              </div>
+              <div className="text-xl font-bold text-red-400">{worldwideStats.threatsDetected}</div>
+              <div className="text-xs text-muted-foreground">Global Threats</div>
             </div>
 
             <div className="text-center p-3 bg-orange-900/20 rounded-lg border border-orange-500/30">
@@ -336,9 +290,7 @@ export function WorldwideDefenseMonitor() {
               <div className="text-xl font-bold text-orange-400">
                 {worldwideStats.regionsMonitored}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Regions Monitored
-              </div>
+              <div className="text-xs text-muted-foreground">Regions Monitored</div>
             </div>
 
             <div className="text-center p-3 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
@@ -346,9 +298,7 @@ export function WorldwideDefenseMonitor() {
               <div className="text-xl font-bold text-yellow-400">
                 {worldwideStats.tacticsUpdated}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Tactics Updated
-              </div>
+              <div className="text-xs text-muted-foreground">Tactics Updated</div>
             </div>
 
             <div className="text-center p-3 bg-green-900/20 rounded-lg border border-green-500/30">
@@ -356,9 +306,7 @@ export function WorldwideDefenseMonitor() {
               <div className="text-xl font-bold text-green-400">
                 {worldwideStats.defenseStrength}%
               </div>
-              <div className="text-xs text-muted-foreground">
-                Defense Strength
-              </div>
+              <div className="text-xs text-muted-foreground">Defense Strength</div>
             </div>
 
             <div className="text-center p-3 bg-purple-900/20 rounded-lg border border-purple-500/30">
@@ -366,9 +314,7 @@ export function WorldwideDefenseMonitor() {
               <div className="text-xl font-bold text-purple-400">
                 #{worldwideStats.globalRanking}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Global Ranking
-              </div>
+              <div className="text-xs text-muted-foreground">Global Ranking</div>
             </div>
           </div>
 
@@ -416,24 +362,16 @@ export function WorldwideDefenseMonitor() {
               <div className="flex items-center gap-2">
                 <div
                   className={`w-3 h-3 rounded-full ${
-                    monitoringActive
-                      ? "bg-green-400 animate-pulse"
-                      : "bg-gray-400"
+                    monitoringActive ? "bg-green-400 animate-pulse" : "bg-gray-400"
                   }`}
                 ></div>
-                <span
-                  className={
-                    monitoringActive ? "text-green-400" : "text-gray-400"
-                  }
-                >
+                <span className={monitoringActive ? "text-green-400" : "text-gray-400"}>
                   {monitoringActive
                     ? "Global Defense Active - 5-Minute Cycles"
                     : "Global Defense Paused"}
                 </span>
               </div>
-              <Badge
-                className={monitoringActive ? "bg-green-600" : "bg-gray-600"}
-              >
+              <Badge className={monitoringActive ? "bg-green-600" : "bg-gray-600"}>
                 Last Scan: {lastGlobalScan.toLocaleTimeString()}
               </Badge>
             </div>
@@ -454,17 +392,12 @@ export function WorldwideDefenseMonitor() {
             {globalThreats.length === 0 ? (
               <div className="text-center text-muted-foreground py-8">
                 <Shield className="h-12 w-12 mx-auto mb-3 text-green-400" />
-                <p className="text-lg font-medium">
-                  🌍 Global Perimeter Secure!
-                </p>
+                <p className="text-lg font-medium">🌍 Global Perimeter Secure!</p>
                 <p className="text-sm">No active threats detected worldwide</p>
               </div>
             ) : (
               globalThreats.map((threat) => (
-                <div
-                  key={threat.id}
-                  className="p-3 rounded-lg bg-card/50 border border-border/50"
-                >
+                <div key={threat.id} className="p-3 rounded-lg bg-card/50 border border-border/50">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
@@ -484,12 +417,9 @@ export function WorldwideDefenseMonitor() {
                         <Badge variant="outline">{threat.type}</Badge>
                         <Badge variant="outline">{threat.region}</Badge>
                       </div>
-                      <p className="text-sm font-medium">
-                        {threat.description}
-                      </p>
+                      <p className="text-sm font-medium">{threat.description}</p>
                       <p className="text-xs text-muted-foreground">
-                        {threat.source} •{" "}
-                        {threat.timestamp.toLocaleTimeString()}
+                        {threat.source} • {threat.timestamp.toLocaleTimeString()}
                       </p>
                     </div>
                     <CheckCircle className="h-5 w-5 text-green-400" />
@@ -512,10 +442,7 @@ export function WorldwideDefenseMonitor() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {defenseTactics.slice(0, 6).map((tactic) => (
-              <div
-                key={tactic.id}
-                className="p-4 rounded-lg bg-card/50 border border-border/50"
-              >
+              <div key={tactic.id} className="p-4 rounded-lg bg-card/50 border border-border/50">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="font-medium text-sm">{tactic.name}</h4>
                   <Badge className="bg-blue-600">#{tactic.globalRanking}</Badge>
@@ -523,14 +450,10 @@ export function WorldwideDefenseMonitor() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs">
                     <span>Effectiveness</span>
-                    <span className="text-green-400">
-                      {tactic.effectiveness}%
-                    </span>
+                    <span className="text-green-400">{tactic.effectiveness}%</span>
                   </div>
                   <Progress value={tactic.effectiveness} className="h-1" />
-                  <p className="text-xs text-muted-foreground">
-                    {tactic.implementation}
-                  </p>
+                  <p className="text-xs text-muted-foreground">{tactic.implementation}</p>
                 </div>
               </div>
             ))}

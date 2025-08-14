@@ -3,29 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Palette,
-  Download,
-  Upload,
-  Eye,
-  Star,
-  Clock,
-  Brush,
-  Sparkles,
-  Zap,
-} from "lucide-react";
+import { Palette, Download, Upload, Eye, Star, Clock, Brush, Sparkles, Zap } from "lucide-react";
 import { toast } from "sonner";
 
 interface VisualPreset {
   id: string;
   name: string;
-  category:
-    | "cyberpunk"
-    | "neural"
-    | "quantum"
-    | "bio"
-    | "holographic"
-    | "matrix";
+  category: "cyberpunk" | "neural" | "quantum" | "bio" | "holographic" | "matrix";
   background: {
     type: string;
     intensity: string;
@@ -137,9 +121,7 @@ const visualPresets: VisualPreset[] = [
 
 export function VisualLibrary() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [selectedPreset, setSelectedPreset] = useState<VisualPreset | null>(
-    null,
-  );
+  const [selectedPreset, setSelectedPreset] = useState<VisualPreset | null>(null);
 
   const filteredPresets =
     selectedCategory === "all"
@@ -157,9 +139,7 @@ export function VisualLibrary() {
     };
 
     localStorage.setItem("gaia-background-settings", JSON.stringify(settings));
-    window.dispatchEvent(
-      new CustomEvent("background-settings-changed", { detail: settings }),
-    );
+    window.dispatchEvent(new CustomEvent("background-settings-changed", { detail: settings }));
 
     toast.success(`Applied "${preset.name}" preset!`, {
       description: `Background: ${preset.background.type}, UI: ${preset.ui.fontSize}px font`,
@@ -220,17 +200,12 @@ export function VisualLibrary() {
 
                       <h3 className="font-medium mb-1">{preset.name}</h3>
                       <p className="text-sm text-muted-foreground mb-3 capitalize">
-                        {preset.category} • {preset.background.intensity}{" "}
-                        intensity
+                        {preset.category} • {preset.background.intensity} intensity
                       </p>
 
                       <div className="flex flex-wrap gap-1 mb-3">
                         {preset.tags.map((tag) => (
-                          <Badge
-                            key={tag}
-                            variant="outline"
-                            className="text-xs"
-                          >
+                          <Badge key={tag} variant="outline" className="text-xs">
                             {tag}
                           </Badge>
                         ))}
@@ -276,15 +251,11 @@ export function VisualLibrary() {
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <span className="text-muted-foreground">Background:</span>
-                    <p className="capitalize">
-                      {selectedPreset.background.type}
-                    </p>
+                    <p className="capitalize">{selectedPreset.background.type}</p>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Intensity:</span>
-                    <p className="capitalize">
-                      {selectedPreset.background.intensity}
-                    </p>
+                    <p className="capitalize">{selectedPreset.background.intensity}</p>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Color:</span>
@@ -312,10 +283,7 @@ export function VisualLibrary() {
                     <Sparkles className="h-4 w-4 mr-2" />
                     Apply This Style
                   </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => setSelectedPreset(null)}
-                  >
+                  <Button variant="outline" onClick={() => setSelectedPreset(null)}>
                     Cancel Preview
                   </Button>
                 </div>

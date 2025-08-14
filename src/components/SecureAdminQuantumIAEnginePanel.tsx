@@ -56,9 +56,7 @@ export default function SecureAdminQuantumIAEnginePanel() {
               <Zap className="h-4 w-4" />
               <span className="font-medium">Processing Power</span>
             </div>
-            <div className="text-2xl font-bold text-purple-300">
-              {processingPower}%
-            </div>
+            <div className="text-2xl font-bold text-purple-300">{processingPower}%</div>
           </div>
 
           <div className="bg-blue-900/20 border border-blue-500/20 rounded-lg p-3">
@@ -66,9 +64,7 @@ export default function SecureAdminQuantumIAEnginePanel() {
               <Activity className="h-4 w-4" />
               <span className="font-medium">Quantum Coherence</span>
             </div>
-            <div className="text-2xl font-bold text-blue-300">
-              {quantumCoherence}%
-            </div>
+            <div className="text-2xl font-bold text-blue-300">{quantumCoherence}%</div>
           </div>
         </div>
 
@@ -76,10 +72,7 @@ export default function SecureAdminQuantumIAEnginePanel() {
           <h4 className="font-medium text-purple-400">🔮 Quantum Insights</h4>
           <div className="space-y-1">
             {insights.map((insight, index) => (
-              <div
-                key={index}
-                className="text-sm text-purple-300/80 bg-purple-900/10 rounded p-2"
-              >
+              <div key={index} className="text-sm text-purple-300/80 bg-purple-900/10 rounded p-2">
                 {insight}
               </div>
             ))}

@@ -50,11 +50,7 @@ export function AuthTest() {
         </CardTitle>
         <div className="flex justify-center gap-2 mt-2">
           <Badge className={user ? "bg-green-500" : "bg-red-500"}>
-            {user ? (
-              <CheckCircle className="h-3 w-3 mr-1" />
-            ) : (
-              <XCircle className="h-3 w-3 mr-1" />
-            )}
+            {user ? <CheckCircle className="h-3 w-3 mr-1" /> : <XCircle className="h-3 w-3 mr-1" />}
             {user ? "User Logged In" : "No User Session"}
           </Badge>
         </div>
@@ -67,10 +63,7 @@ export function AuthTest() {
               <div className="text-green-800 font-medium">Welcome!</div>
               <div className="text-green-600 text-sm">{user.email}</div>
             </div>
-            <Button
-              onClick={signOut}
-              className="w-full bg-red-500 hover:bg-red-600"
-            >
+            <Button onClick={signOut} className="w-full bg-red-500 hover:bg-red-600">
               Sign Out
             </Button>
           </div>
@@ -120,9 +113,7 @@ export function AuthTest() {
               disabled={isTestingAuth || !testEmail || !testPassword}
               className="w-full bg-green-600 hover:bg-green-700"
             >
-              {isTestingAuth
-                ? "Testing..."
-                : `Test ${testMode === "signup" ? "Signup" : "Login"}`}
+              {isTestingAuth ? "Testing..." : `Test ${testMode === "signup" ? "Signup" : "Login"}`}
             </Button>
 
             {testResult && (

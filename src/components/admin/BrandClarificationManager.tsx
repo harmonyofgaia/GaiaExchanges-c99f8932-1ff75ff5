@@ -68,9 +68,7 @@ Project Authority: Harmony of Gaia Admin
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="bg-black/40 p-4 rounded-lg border border-red-500/30">
-            <h3 className="text-xl font-bold text-red-400 mb-4">
-              CRITICAL DISTINCTION REQUIRED
-            </h3>
+            <h3 className="text-xl font-bold text-red-400 mb-4">CRITICAL DISTINCTION REQUIRED</h3>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <Badge className="bg-red-600">NOT US</Badge>
@@ -90,21 +88,13 @@ Project Authority: Harmony of Gaia Admin
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="text-center p-4 bg-green-900/40 rounded-lg border border-green-500/30">
               <CheckCircle className="h-8 w-8 mx-auto text-green-400 mb-2" />
-              <div className="text-lg font-bold text-green-400">
-                CORRECT WALLET
-              </div>
-              <code className="text-xs text-green-300 break-all">
-                {GAIA_TOKEN.WALLET_ADDRESS}
-              </code>
+              <div className="text-lg font-bold text-green-400">CORRECT WALLET</div>
+              <code className="text-xs text-green-300 break-all">{GAIA_TOKEN.WALLET_ADDRESS}</code>
             </div>
             <div className="text-center p-4 bg-blue-900/40 rounded-lg border border-blue-500/30">
               <CheckCircle className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-lg font-bold text-blue-400">
-                CORRECT CONTRACT
-              </div>
-              <code className="text-xs text-blue-300 break-all">
-                {GAIA_TOKEN.CONTRACT_ADDRESS}
-              </code>
+              <div className="text-lg font-bold text-blue-400">CORRECT CONTRACT</div>
+              <code className="text-xs text-blue-300 break-all">{GAIA_TOKEN.CONTRACT_ADDRESS}</code>
             </div>
           </div>
 
@@ -115,10 +105,7 @@ Project Authority: Harmony of Gaia Admin
             <div className="bg-black/60 p-4 rounded text-sm text-gray-300 font-mono whitespace-pre-line max-h-40 overflow-y-auto">
               {officialStatement}
             </div>
-            <Button
-              onClick={copyStatement}
-              className="mt-3 bg-yellow-600 hover:bg-yellow-700"
-            >
+            <Button onClick={copyStatement} className="mt-3 bg-yellow-600 hover:bg-yellow-700">
               <Copy className="h-4 w-4 mr-2" />
               Copy Official Statement
             </Button>
@@ -141,9 +128,8 @@ Project Authority: Harmony of Gaia Admin
                 DOCUMENTS READY FOR DEPLOYMENT
               </div>
               <p className="text-green-300 text-sm">
-                Official brand clarification documents have been prepared and
-                are ready for all partnership agreements and public
-                communications.
+                Official brand clarification documents have been prepared and are ready for all
+                partnership agreements and public communications.
               </p>
             </div>
           )}

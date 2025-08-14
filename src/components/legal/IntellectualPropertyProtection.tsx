@@ -86,21 +86,16 @@ export function IntellectualPropertyProtection() {
 
         <div className="text-center p-6 bg-gradient-to-r from-red-900/40 to-purple-900/40 rounded-lg border-2 border-red-500/50">
           <Zap className="h-12 w-12 mx-auto text-red-400 mb-4 animate-pulse" />
-          <h3 className="text-2xl font-bold text-red-400 mb-2">
-            ⚡ QUANTUM PROTECTION ACTIVE
-          </h3>
+          <h3 className="text-2xl font-bold text-red-400 mb-2">⚡ QUANTUM PROTECTION ACTIVE</h3>
           <p className="text-muted-foreground mb-4">
-            Our intellectual property is protected by the most advanced quantum
-            security systems ever created. Any attempt to copy, steal, or
-            replicate our technology will be detected instantly and prosecuted
-            to the full extent of the law.
+            Our intellectual property is protected by the most advanced quantum security systems
+            ever created. Any attempt to copy, steal, or replicate our technology will be detected
+            instantly and prosecuted to the full extent of the law.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-green-400">100%</div>
-              <div className="text-xs text-muted-foreground">
-                Detection Rate
-              </div>
+              <div className="text-xs text-muted-foreground">Detection Rate</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-400">24/7</div>
@@ -119,17 +114,14 @@ export function IntellectualPropertyProtection() {
 
         <div className="text-center text-sm text-muted-foreground">
           <p className="font-bold text-red-400 mb-2">
-            🚨 WARNING: VIOLATION OF THESE TERMS WILL RESULT IN IMMEDIATE LEGAL
-            ACTION
+            🚨 WARNING: VIOLATION OF THESE TERMS WILL RESULT IN IMMEDIATE LEGAL ACTION
           </p>
           <p>
-            This technology is exclusively owned by Harmony of Gaia / GAiA Token
-            project. All rights reserved. Protected by international copyright
-            and patent laws.
+            This technology is exclusively owned by Harmony of Gaia / GAiA Token project. All rights
+            reserved. Protected by international copyright and patent laws.
           </p>
           <p className="mt-2 text-xs">
-            Last Updated: {new Date().toLocaleDateString()} | Quantum Security
-            Level: MAXIMUM
+            Last Updated: {new Date().toLocaleDateString()} | Quantum Security Level: MAXIMUM
           </p>
         </div>
       </CardContent>

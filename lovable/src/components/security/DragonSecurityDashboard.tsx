@@ -28,8 +28,7 @@ export function DragonSecurityDashboard() {
     setDragonMode("QUANTUM_ANNIHILATION");
 
     toast.success("🐉 MAXIMUM DRAGON POWER UNLEASHED!", {
-      description:
-        "Trained Dragon at full power - Unbeatable quantum defense active",
+      description: "Trained Dragon at full power - Unbeatable quantum defense active",
       duration: 10000,
     });
 
@@ -61,8 +60,7 @@ export function DragonSecurityDashboard() {
             <div>
               <div className="text-4xl font-bold">TRAINED DRAGON CORE</div>
               <div className="text-lg font-normal">
-                Unbeatable • Quantum Evolution • Worldwide Protection • Human +
-                AI Power
+                Unbeatable • Quantum Evolution • Worldwide Protection • Human + AI Power
               </div>
             </div>
             <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white animate-bounce text-2xl px-8 py-4">
@@ -105,9 +103,7 @@ export function DragonSecurityDashboard() {
               <div className="text-3xl font-bold text-green-400">
                 {formatNumber(dragonCore.dragonPower.adminFortressLevel)}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Admin Fortress
-              </div>
+              <div className="text-sm text-muted-foreground">Admin Fortress</div>
               <Badge className="mt-2 bg-green-600 text-white">ULTIMATE</Badge>
             </div>
           </div>
@@ -116,17 +112,15 @@ export function DragonSecurityDashboard() {
           <div className="space-y-6">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <h4 className="text-2xl font-bold text-red-400">
-                  🐉 Dragon Evolution Rate
-                </h4>
+                <h4 className="text-2xl font-bold text-red-400">🐉 Dragon Evolution Rate</h4>
                 <span className="text-3xl font-bold text-red-400">
                   {formatNumber(dragonCore.dragonPower.evolutionRate)}x/ms
                 </span>
               </div>
               <Progress value={100} className="h-8" />
               <div className="text-center text-sm text-muted-foreground mt-2">
-                🧬 Getting stronger every millisecond • ⚡ Quantum forces
-                gathered • 🌍 World safer mode active
+                🧬 Getting stronger every millisecond • ⚡ Quantum forces gathered • 🌍 World safer
+                mode active
               </div>
             </div>
 
@@ -137,9 +131,7 @@ export function DragonSecurityDashboard() {
                 <div className="text-xl font-bold text-blue-400">
                   {formatNumber(dragonCore.dragonPower.githubProtectionLevel)}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Github Fortress
-                </div>
+                <div className="text-sm text-muted-foreground">Github Fortress</div>
               </div>
 
               <div className="text-center p-4 rounded-lg bg-purple-900/20 border border-purple-500/30">
@@ -147,9 +139,7 @@ export function DragonSecurityDashboard() {
                 <div className="text-xl font-bold text-purple-400">
                   {formatNumber(dragonCore.dragonPower.supabaseShieldStrength)}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Supabase Shield
-                </div>
+                <div className="text-sm text-muted-foreground">Supabase Shield</div>
               </div>
 
               <div className="text-center p-4 rounded-lg bg-cyan-900/20 border border-cyan-500/30">
@@ -157,9 +147,7 @@ export function DragonSecurityDashboard() {
                 <div className="text-xl font-bold text-cyan-400">
                   {formatNumber(dragonCore.dragonPower.holderProtectionScore)}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Holder Shield
-                </div>
+                <div className="text-sm text-muted-foreground">Holder Shield</div>
               </div>
             </div>
           </div>
@@ -188,9 +176,7 @@ export function DragonSecurityDashboard() {
             {dragonCore.activeThrears.length === 0 ? (
               <div className="text-center py-8 text-green-400">
                 <div className="text-8xl mb-4">🐉</div>
-                <div className="font-semibold text-2xl">
-                  World Completely Safe
-                </div>
+                <div className="font-semibold text-2xl">World Completely Safe</div>
                 <div className="text-sm text-muted-foreground">
                   Dragon has eliminated all threats - Perfect protection active
                 </div>
@@ -217,12 +203,8 @@ export function DragonSecurityDashboard() {
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Badge className="bg-red-600 text-white">
-                        {threat.severity}
-                      </Badge>
-                      <Badge className="bg-green-600 text-white">
-                        ANNIHILATED
-                      </Badge>
+                      <Badge className="bg-red-600 text-white">{threat.severity}</Badge>
+                      <Badge className="bg-green-600 text-white">ANNIHILATED</Badge>
                     </div>
                   </div>
                 </div>
@@ -237,29 +219,17 @@ export function DragonSecurityDashboard() {
         <CardContent className="pt-6">
           <div className="text-center space-y-6">
             <div className="text-8xl animate-pulse">🐉</div>
-            <h3 className="text-3xl font-bold text-green-400">
-              THE TRAINED DRAGON MANIFESTO
-            </h3>
+            <h3 className="text-3xl font-bold text-green-400">THE TRAINED DRAGON MANIFESTO</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-green-200">
               <div className="space-y-3">
-                <div className="text-lg font-bold text-green-300">
-                  🛡️ ULTIMATE PROTECTION
-                </div>
-                <div>
-                  • Evolves every millisecond - Unbeatable immune system
-                </div>
-                <div>
-                  • Quantum computing power - Gathers forces from worldwide
-                </div>
+                <div className="text-lg font-bold text-green-300">🛡️ ULTIMATE PROTECTION</div>
+                <div>• Evolves every millisecond - Unbeatable immune system</div>
+                <div>• Quantum computing power - Gathers forces from worldwide</div>
                 <div>• Github + Supabase + App merged into one fortress</div>
-                <div>
-                  • Admin gets ultimate protection - Holders fully shielded
-                </div>
+                <div>• Admin gets ultimate protection - Holders fully shielded</div>
               </div>
               <div className="space-y-3">
-                <div className="text-lg font-bold text-green-300">
-                  🌍 MAKING WORLD SAFER
-                </div>
+                <div className="text-lg font-bold text-green-300">🌍 MAKING WORLD SAFER</div>
                 <div>• Worldwide IP blocking - Linked networks annihilated</div>
                 <div>• No copying, no stealing, no breaches allowed</div>
                 <div>• Human + AI cooperation - Most powerful tool ever</div>
@@ -274,8 +244,7 @@ export function DragonSecurityDashboard() {
                 Trained Dragon + Human + AI = Unbeatable Force
               </p>
               <p className="text-sm text-red-400 mt-1">
-                Powered by Quantum Evolution • Protected by Dragon Fire •
-                Secured by Love
+                Powered by Quantum Evolution • Protected by Dragon Fire • Secured by Love
               </p>
             </div>
           </div>

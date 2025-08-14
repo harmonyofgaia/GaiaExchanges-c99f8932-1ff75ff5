@@ -22,8 +22,7 @@ export function NeuralElectricBackground({
   const [synapses, setSynapses] = useState<Synapse[]>([]);
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
 
-  const synapseCount =
-    intensity === "low" ? 8 : intensity === "medium" ? 15 : 25;
+  const synapseCount = intensity === "low" ? 8 : intensity === "medium" ? 15 : 25;
 
   useEffect(() => {
     const newSynapses = Array.from({ length: synapseCount }, (_, i) => ({
@@ -58,11 +57,8 @@ export function NeuralElectricBackground({
           y: synapse.y + (synapse.targetY - synapse.y) * synapse.speed * 0.01,
           targetX: synapse.targetX + (Math.random() - 0.5) * 2,
           targetY: synapse.targetY + (Math.random() - 0.5) * 2,
-          intensity: Math.max(
-            0.1,
-            Math.min(1, synapse.intensity + (Math.random() - 0.5) * 0.1),
-          ),
-        })),
+          intensity: Math.max(0.1, Math.min(1, synapse.intensity + (Math.random() - 0.5) * 0.1)),
+        }))
       );
     }, 100);
 
@@ -83,10 +79,7 @@ export function NeuralElectricBackground({
   };
 
   return (
-    <div
-      className="fixed inset-0 pointer-events-none overflow-hidden"
-      style={{ zIndex: -2 }}
-    >
+    <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: -2 }}>
       {/* Base neural background */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black" />
 
@@ -114,8 +107,7 @@ export function NeuralElectricBackground({
         {synapses.map((synapse, index) => {
           const nextSynapse = synapses[(index + 1) % synapses.length];
           const distance = Math.sqrt(
-            Math.pow(synapse.x - mousePos.x, 2) +
-              Math.pow(synapse.y - mousePos.y, 2),
+            Math.pow(synapse.x - mousePos.x, 2) + Math.pow(synapse.y - mousePos.y, 2)
           );
           const mouseInfluence = Math.max(0, 1 - distance / 30);
 

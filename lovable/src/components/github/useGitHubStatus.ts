@@ -32,9 +32,7 @@ export function useGitHubStatus() {
       try {
         // Since we're using Google Sites, we'll assume it's always available
         console.log("✅ Culture of Harmony website is online and accessible");
-        console.log(
-          "🔒 Ensuring maximum security for Culture of Harmony project",
-        );
+        console.log("🔒 Ensuring maximum security for Culture of Harmony project");
 
         setGitHubStatus((prev) => ({
           ...prev,

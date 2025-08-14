@@ -34,8 +34,7 @@ export function InteractiveVideoPlayer() {
       user: "EcoWarrior Sarah",
       avatar:
         "https://images.unsplash.com/photo-1494790108755-2616c96f40b3?w=40&h=40&fit=crop&crop=face",
-      content:
-        "Great tips! I've been implementing these changes in my daily routine.",
+      content: "Great tips! I've been implementing these changes in my daily routine.",
       timestamp: "2 hours ago",
       likes: 15,
     },
@@ -44,8 +43,7 @@ export function InteractiveVideoPlayer() {
       user: "Green Tech Mike",
       avatar:
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face",
-      content:
-        "The solar panel installation guide was extremely helpful. Thank you!",
+      content: "The solar panel installation guide was extremely helpful. Thank you!",
       timestamp: "4 hours ago",
       likes: 23,
     },
@@ -54,8 +52,7 @@ export function InteractiveVideoPlayer() {
       user: "Nature Lover Emma",
       avatar:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
-      content:
-        "We need more content like this to raise awareness about climate change.",
+      content: "We need more content like this to raise awareness about climate change.",
       timestamp: "1 day ago",
       likes: 31,
     },
@@ -99,12 +96,8 @@ export function InteractiveVideoPlayer() {
             <div className="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
               <div className="text-center text-white">
                 <Play className="h-20 w-20 mx-auto mb-4 opacity-60" />
-                <p className="text-lg font-medium">
-                  Solar Energy Solutions for Your Home
-                </p>
-                <p className="text-sm opacity-75">
-                  Environmental Education • 10:00
-                </p>
+                <p className="text-lg font-medium">Solar Energy Solutions for Your Home</p>
+                <p className="text-sm opacity-75">Environmental Education • 10:00</p>
               </div>
             </div>
 
@@ -127,11 +120,7 @@ export function InteractiveVideoPlayer() {
                     onClick={handlePlayPause}
                     className="text-white hover:bg-white/20"
                   >
-                    {isPlaying ? (
-                      <Pause className="h-5 w-5" />
-                    ) : (
-                      <Play className="h-5 w-5" />
-                    )}
+                    {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
                   </Button>
 
                   <div className="flex items-center gap-2">
@@ -150,18 +139,10 @@ export function InteractiveVideoPlayer() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="text-white hover:bg-white/20"
-                  >
+                  <Button size="sm" variant="ghost" className="text-white hover:bg-white/20">
                     <Settings className="h-4 w-4" />
                   </Button>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="text-white hover:bg-white/20"
-                  >
+                  <Button size="sm" variant="ghost" className="text-white hover:bg-white/20">
                     <Maximize className="h-4 w-4" />
                   </Button>
                 </div>
@@ -171,13 +152,10 @@ export function InteractiveVideoPlayer() {
 
           {/* Video Info */}
           <div className="p-6">
-            <h2 className="text-xl font-bold mb-2">
-              Solar Energy Solutions for Your Home
-            </h2>
+            <h2 className="text-xl font-bold mb-2">Solar Energy Solutions for Your Home</h2>
             <p className="text-muted-foreground mb-4">
-              Learn how to transition to renewable energy with practical solar
-              panel installation tips and cost-effective solutions for
-              sustainable living.
+              Learn how to transition to renewable energy with practical solar panel installation
+              tips and cost-effective solutions for sustainable living.
             </p>
 
             <div className="flex items-center justify-between mb-4">
@@ -188,9 +166,7 @@ export function InteractiveVideoPlayer() {
                 </Avatar>
                 <div>
                   <p className="font-semibold">Green Tech Mike</p>
-                  <p className="text-sm text-muted-foreground">
-                    8.9K subscribers
-                  </p>
+                  <p className="text-sm text-muted-foreground">8.9K subscribers</p>
                 </div>
                 <Button size="sm" className="bg-green-600 hover:bg-green-700">
                   Subscribe
@@ -281,12 +257,8 @@ export function InteractiveVideoPlayer() {
                 </Avatar>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="font-semibold text-sm">
-                      {comment.user}
-                    </span>
-                    <span className="text-xs text-muted-foreground">
-                      {comment.timestamp}
-                    </span>
+                    <span className="font-semibold text-sm">{comment.user}</span>
+                    <span className="text-xs text-muted-foreground">{comment.timestamp}</span>
                   </div>
                   <p className="text-sm mb-2">{comment.content}</p>
                   <div className="flex items-center gap-3">

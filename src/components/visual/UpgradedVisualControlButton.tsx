@@ -175,15 +175,12 @@ export function UpgradedVisualControlButton() {
 
   const handleLockToggle = () => {
     toggleLock();
-    toast.success(
-      isLocked ? "Visual controls unlocked" : "Visual controls locked",
-      {
-        description: isLocked
-          ? "You can now modify all visual settings"
-          : "All visual settings are now protected",
-        duration: 2000,
-      },
-    );
+    toast.success(isLocked ? "Visual controls unlocked" : "Visual controls locked", {
+      description: isLocked
+        ? "You can now modify all visual settings"
+        : "All visual settings are now protected",
+      duration: 2000,
+    });
   };
 
   const handleOpenFullPanel = () => {
@@ -219,19 +216,17 @@ export function UpgradedVisualControlButton() {
           effect,
           enabled: !activeEffects[effect as keyof typeof activeEffects],
         },
-      }),
+      })
     );
 
     toast.success(
       `${effect.charAt(0).toUpperCase() + effect.slice(1)} effect ${
-        activeEffects[effect as keyof typeof activeEffects]
-          ? "disabled"
-          : "enabled"
+        activeEffects[effect as keyof typeof activeEffects] ? "disabled" : "enabled"
       }`,
       {
         description: "Visual effect applied to the interface",
         duration: 2000,
-      },
+      }
     );
   };
 
@@ -254,9 +249,7 @@ export function UpgradedVisualControlButton() {
 
     // Reset all effects first
     setActiveEffects((prev) => {
-      const reset = Object.fromEntries(
-        Object.keys(prev).map((key) => [key, false]),
-      );
+      const reset = Object.fromEntries(Object.keys(prev).map((key) => [key, false]));
       return reset as typeof prev;
     });
 
@@ -288,10 +281,7 @@ export function UpgradedVisualControlButton() {
     const colors = palettes[palette as keyof typeof palettes];
     if (colors) {
       document.documentElement.style.setProperty("--primary", colors.primary);
-      document.documentElement.style.setProperty(
-        "--secondary",
-        colors.secondary,
-      );
+      document.documentElement.style.setProperty("--secondary", colors.secondary);
       document.documentElement.style.setProperty("--accent", colors.accent);
 
       toast.success(`Applied ${palette} color palette!`);
@@ -379,19 +369,11 @@ export function UpgradedVisualControlButton() {
             >
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-3">
-                  {isLocked ? (
-                    <Lock className="h-6 w-6" />
-                  ) : (
-                    <Unlock className="h-6 w-6" />
-                  )}
+                  {isLocked ? <Lock className="h-6 w-6" /> : <Unlock className="h-6 w-6" />}
                   <div>
-                    <span className="font-bold text-lg">
-                      {isLocked ? "LOCKED" : "UNLOCKED"}
-                    </span>
+                    <span className="font-bold text-lg">{isLocked ? "LOCKED" : "UNLOCKED"}</span>
                     <p className="text-xs text-muted-foreground">
-                      {isLocked
-                        ? "All controls protected"
-                        : "Full access enabled"}
+                      {isLocked ? "All controls protected" : "Full access enabled"}
                     </p>
                   </div>
                 </div>
@@ -412,9 +394,7 @@ export function UpgradedVisualControlButton() {
                 <Wand2 className="h-5 w-5 mr-3" />
                 <div>
                   <span className="font-semibold">Design Presets</span>
-                  <p className="text-xs text-muted-foreground">
-                    Professional themes
-                  </p>
+                  <p className="text-xs text-muted-foreground">Professional themes</p>
                 </div>
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="bg-black/95 backdrop-blur-md w-64">
@@ -438,9 +418,7 @@ export function UpgradedVisualControlButton() {
                 <Palette className="h-5 w-5 mr-3" />
                 <div>
                   <span className="font-semibold">Color Palettes</span>
-                  <p className="text-xs text-muted-foreground">
-                    Curated color schemes
-                  </p>
+                  <p className="text-xs text-muted-foreground">Curated color schemes</p>
                 </div>
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="bg-black/95 backdrop-blur-md w-56">
@@ -464,9 +442,7 @@ export function UpgradedVisualControlButton() {
                 <Lightning className="h-5 w-5 mr-3" />
                 <div>
                   <span className="font-semibold">Advanced Effects</span>
-                  <p className="text-xs text-muted-foreground">
-                    Premium animations
-                  </p>
+                  <p className="text-xs text-muted-foreground">Premium animations</p>
                 </div>
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="bg-black/95 backdrop-blur-md w-64">
@@ -477,24 +453,15 @@ export function UpgradedVisualControlButton() {
                   <Sparkles className="h-4 w-4 mr-2" />
                   Particles {activeEffects.particles && "✨"}
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => handleQuickEffect("aurora")}
-                  disabled={isLocked}
-                >
+                <DropdownMenuItem onClick={() => handleQuickEffect("aurora")} disabled={isLocked}>
                   <Sun className="h-4 w-4 mr-2" />
                   Aurora Borealis {activeEffects.aurora && "✨"}
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => handleQuickEffect("hologram")}
-                  disabled={isLocked}
-                >
+                <DropdownMenuItem onClick={() => handleQuickEffect("hologram")} disabled={isLocked}>
                   <Atom className="h-4 w-4 mr-2" />
                   Hologram {activeEffects.hologram && "✨"}
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => handleQuickEffect("neon")}
-                  disabled={isLocked}
-                >
+                <DropdownMenuItem onClick={() => handleQuickEffect("neon")} disabled={isLocked}>
                   <Lightbulb className="h-4 w-4 mr-2" />
                   Neon Glow {activeEffects.neon && "✨"}
                 </DropdownMenuItem>
@@ -512,17 +479,11 @@ export function UpgradedVisualControlButton() {
                   <Gem className="h-4 w-4 mr-2" />
                   Glassmorphism {activeEffects.glassmorphism && "✨"}
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => handleQuickEffect("neural")}
-                  disabled={isLocked}
-                >
+                <DropdownMenuItem onClick={() => handleQuickEffect("neural")} disabled={isLocked}>
                   <Network className="h-4 w-4 mr-2" />
                   Neural Network {activeEffects.neural && "✨"}
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => handleQuickEffect("cosmic")}
-                  disabled={isLocked}
-                >
+                <DropdownMenuItem onClick={() => handleQuickEffect("cosmic")} disabled={isLocked}>
                   <Rocket className="h-4 w-4 mr-2" />
                   Cosmic Portal {activeEffects.cosmic && "✨"}
                 </DropdownMenuItem>
@@ -535,16 +496,11 @@ export function UpgradedVisualControlButton() {
                 <Wrench className="h-5 w-5 mr-3" />
                 <div>
                   <span className="font-semibold">Professional Tools</span>
-                  <p className="text-xs text-muted-foreground">
-                    Advanced design features
-                  </p>
+                  <p className="text-xs text-muted-foreground">Advanced design features</p>
                 </div>
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="bg-black/95 backdrop-blur-md w-72">
-                <DropdownMenuItem
-                  onClick={handleOpenFullPanel}
-                  disabled={isLocked}
-                >
+                <DropdownMenuItem onClick={handleOpenFullPanel} disabled={isLocked}>
                   <Crown className="h-4 w-4 mr-2" />
                   Master Control Panel
                 </DropdownMenuItem>
@@ -585,9 +541,7 @@ export function UpgradedVisualControlButton() {
                 <Orbit className="h-5 w-5 mr-3" />
                 <div>
                   <span className="font-semibold">Animation Studio</span>
-                  <p className="text-xs text-muted-foreground">
-                    Motion & transitions
-                  </p>
+                  <p className="text-xs text-muted-foreground">Motion & transitions</p>
                 </div>
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="bg-black/95 backdrop-blur-md w-64">
@@ -624,9 +578,7 @@ export function UpgradedVisualControlButton() {
                 <Monitor className="h-5 w-5 mr-3" />
                 <div>
                   <span className="font-semibold">Responsive Design</span>
-                  <p className="text-xs text-muted-foreground">
-                    Multi-device optimization
-                  </p>
+                  <p className="text-xs text-muted-foreground">Multi-device optimization</p>
                 </div>
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="bg-black/95 backdrop-blur-md w-64">
@@ -655,9 +607,7 @@ export function UpgradedVisualControlButton() {
                 <Camera className="h-5 w-5 mr-3" />
                 <div>
                   <span className="font-semibold">Media Studio</span>
-                  <p className="text-xs text-muted-foreground">
-                    Capture & create
-                  </p>
+                  <p className="text-xs text-muted-foreground">Capture & create</p>
                 </div>
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="bg-black/95 backdrop-blur-md w-64">
@@ -695,16 +645,11 @@ export function UpgradedVisualControlButton() {
                 <HardDrive className="h-5 w-5 mr-3" />
                 <div>
                   <span className="font-semibold">Project Manager</span>
-                  <p className="text-xs text-muted-foreground">
-                    Save & load designs
-                  </p>
+                  <p className="text-xs text-muted-foreground">Save & load designs</p>
                 </div>
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="bg-black/95 backdrop-blur-md w-64">
-                <DropdownMenuItem
-                  onClick={handleExportTheme}
-                  disabled={isLocked}
-                >
+                <DropdownMenuItem onClick={handleExportTheme} disabled={isLocked}>
                   <Download className="h-4 w-4 mr-2" />
                   Export Complete Theme
                 </DropdownMenuItem>
@@ -738,9 +683,7 @@ export function UpgradedVisualControlButton() {
               <Wand2 className="h-6 w-6 mr-3" />
               <div className="flex flex-col">
                 <span className="text-lg">🎨 MASTER STUDIO</span>
-                <span className="text-xs opacity-90">
-                  Ultimate Design Control
-                </span>
+                <span className="text-xs opacity-90">Ultimate Design Control</span>
               </div>
             </DropdownMenuItem>
           </DropdownMenuContent>

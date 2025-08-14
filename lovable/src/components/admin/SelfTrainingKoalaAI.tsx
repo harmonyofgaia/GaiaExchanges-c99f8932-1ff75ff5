@@ -61,12 +61,7 @@ export function SelfTrainingKoalaAI() {
       ];
 
       const randomIssue = issues[Math.floor(Math.random() * issues.length)];
-      const issueType =
-        Math.random() > 0.7
-          ? "critical"
-          : Math.random() > 0.5
-            ? "high"
-            : "medium";
+      const issueType = Math.random() > 0.7 ? "critical" : Math.random() > 0.5 ? "high" : "medium";
 
       if (Math.random() > 0.6) {
         const newIssue: SystemIssue = {
@@ -149,9 +144,7 @@ export function SelfTrainingKoalaAI() {
 
       if (Math.random() > 0.7) {
         const improvement =
-          securityImprovements[
-            Math.floor(Math.random() * securityImprovements.length)
-          ];
+          securityImprovements[Math.floor(Math.random() * securityImprovements.length)];
         console.log(`🛡️ KOALA AI SECURITY: ${improvement}`);
       }
     }, 12000); // Every 12 seconds
@@ -207,9 +200,7 @@ export function SelfTrainingKoalaAI() {
               </div>
             </div>
             <div className="ml-auto flex items-center gap-2">
-              <Badge
-                className={`${isActive ? "bg-green-600" : "bg-red-600"} animate-pulse`}
-              >
+              <Badge className={`${isActive ? "bg-green-600" : "bg-red-600"} animate-pulse`}>
                 {isActive ? "ACTIVE" : "INACTIVE"}
               </Badge>
             </div>
@@ -218,32 +209,20 @@ export function SelfTrainingKoalaAI() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400">
-                {intelligenceLevel}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                AI Intelligence
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{intelligenceLevel}%</div>
+              <div className="text-sm text-muted-foreground">AI Intelligence</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">
-                {totalIssuesFixed}
-              </div>
+              <div className="text-3xl font-bold text-green-400">{totalIssuesFixed}</div>
               <div className="text-sm text-muted-foreground">Issues Fixed</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400">
-                {learningSpeed}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Learning Speed
-              </div>
+              <div className="text-3xl font-bold text-blue-400">{learningSpeed}%</div>
+              <div className="text-sm text-muted-foreground">Learning Speed</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-orange-400">24/7</div>
-              <div className="text-sm text-muted-foreground">
-                Active Monitoring
-              </div>
+              <div className="text-sm text-muted-foreground">Active Monitoring</div>
             </div>
           </div>
         </CardContent>
@@ -267,12 +246,8 @@ export function SelfTrainingKoalaAI() {
                 <div className="flex items-center gap-3">
                   <span className="text-xl">{getTypeIcon(issue.type)}</span>
                   <div>
-                    <div className="font-medium text-white">
-                      {issue.description}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      Fixed in {issue.fix_time}ms
-                    </div>
+                    <div className="font-medium text-white">{issue.description}</div>
+                    <div className="text-xs text-muted-foreground">Fixed in {issue.fix_time}ms</div>
                   </div>
                 </div>
                 <Badge className={getSeverityColor(issue.severity)}>
@@ -293,22 +268,13 @@ export function SelfTrainingKoalaAI() {
           </CardHeader>
           <CardContent className="space-y-3">
             {learningData.map((learning) => (
-              <div
-                key={learning.id}
-                className="p-3 bg-black/30 rounded border border-blue-500/20"
-              >
+              <div key={learning.id} className="p-3 bg-black/30 rounded border border-blue-500/20">
                 <div className="flex justify-between items-start mb-2">
-                  <div className="font-medium text-white">
-                    {learning.solution}
-                  </div>
-                  <Badge className="bg-blue-600">
-                    {learning.success_rate}%
-                  </Badge>
+                  <div className="font-medium text-white">{learning.solution}</div>
+                  <Badge className="bg-blue-600">{learning.success_rate}%</Badge>
                 </div>
                 <div className="flex justify-between items-center">
-                  <div className="text-xs text-blue-300">
-                    {learning.issue_type.toUpperCase()}
-                  </div>
+                  <div className="text-xs text-blue-300">{learning.issue_type.toUpperCase()}</div>
                   <div className="text-xs text-muted-foreground">
                     {learning.learned_at.toLocaleTimeString()}
                   </div>
@@ -332,30 +298,22 @@ export function SelfTrainingKoalaAI() {
             <div className="p-4 bg-black/30 rounded text-center">
               <Target className="h-8 w-8 mx-auto text-red-400 mb-2" />
               <div className="font-bold text-red-400">Route Fixing</div>
-              <div className="text-xs text-muted-foreground">
-                Automatic routing repair
-              </div>
+              <div className="text-xs text-muted-foreground">Automatic routing repair</div>
             </div>
             <div className="p-4 bg-black/30 rounded text-center">
               <Shield className="h-8 w-8 mx-auto text-green-400 mb-2" />
               <div className="font-bold text-green-400">Security</div>
-              <div className="text-xs text-muted-foreground">
-                Admin protection
-              </div>
+              <div className="text-xs text-muted-foreground">Admin protection</div>
             </div>
             <div className="p-4 bg-black/30 rounded text-center">
               <Cpu className="h-8 w-8 mx-auto text-blue-400 mb-2" />
               <div className="font-bold text-blue-400">Performance</div>
-              <div className="text-xs text-muted-foreground">
-                Speed optimization
-              </div>
+              <div className="text-xs text-muted-foreground">Speed optimization</div>
             </div>
             <div className="p-4 bg-black/30 rounded text-center">
               <Activity className="h-8 w-8 mx-auto text-purple-400 mb-2" />
               <div className="font-bold text-purple-400">Monitoring</div>
-              <div className="text-xs text-muted-foreground">
-                24/7 system watch
-              </div>
+              <div className="text-xs text-muted-foreground">24/7 system watch</div>
             </div>
           </div>
         </CardContent>

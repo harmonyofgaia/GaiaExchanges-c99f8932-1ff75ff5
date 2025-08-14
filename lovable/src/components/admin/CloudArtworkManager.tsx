@@ -60,8 +60,7 @@ export function CloudArtworkManager() {
       setArtworks(data || []);
 
       // Calculate storage stats
-      const totalSize =
-        data?.reduce((sum, artwork) => sum + (artwork.file_size || 0), 0) || 0;
+      const totalSize = data?.reduce((sum, artwork) => sum + (artwork.file_size || 0), 0) || 0;
       setTotalStorage(totalSize);
 
       setStorageStats({
@@ -115,20 +114,14 @@ export function CloudArtworkManager() {
   };
 
   const deleteArtwork = async (artwork: CloudArtwork) => {
-    if (
-      !confirm(
-        "Are you sure you want to delete this artwork from cloud storage?",
-      )
-    ) {
+    if (!confirm("Are you sure you want to delete this artwork from cloud storage?")) {
       return;
     }
 
     try {
       // Delete from storage
       if (artwork.cloud_path) {
-        await supabase.storage
-          .from("artwork-files")
-          .remove([artwork.cloud_path]);
+        await supabase.storage.from("artwork-files").remove([artwork.cloud_path]);
       }
 
       // Delete from database
@@ -172,9 +165,7 @@ export function CloudArtworkManager() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-blue-400">
-                {storageStats.totalFiles}
-              </div>
+              <div className="text-3xl font-bold text-blue-400">{storageStats.totalFiles}</div>
               <div className="text-sm text-muted-foreground">Total Files</div>
             </div>
             <div className="text-center space-y-2">
@@ -225,19 +216,13 @@ export function CloudArtworkManager() {
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <Badge className="bg-blue-600 text-white">
-                        {artwork.artwork_type}
-                      </Badge>
+                      <Badge className="bg-blue-600 text-white">{artwork.artwork_type}</Badge>
                       <div className="flex items-center gap-1">
-                        {artwork.cloud_url && (
-                          <Cloud className="h-4 w-4 text-blue-400" />
-                        )}
+                        {artwork.cloud_url && <Cloud className="h-4 w-4 text-blue-400" />}
                         <CheckCircle className="h-4 w-4 text-green-400" />
                       </div>
                     </div>
-                    <p className="text-xs text-muted-foreground line-clamp-2">
-                      {artwork.prompt}
-                    </p>
+                    <p className="text-xs text-muted-foreground line-clamp-2">{artwork.prompt}</p>
                     <div className="text-xs text-blue-400">
                       Size: {formatFileSize(artwork.file_size || 0)}
                     </div>
@@ -286,15 +271,11 @@ export function CloudArtworkManager() {
                     <div className="text-sm space-y-1">
                       <div className="flex justify-between">
                         <span>Total Files:</span>
-                        <span className="font-mono">
-                          {storageStats.totalFiles}
-                        </span>
+                        <span className="font-mono">{storageStats.totalFiles}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Total Size:</span>
-                        <span className="font-mono">
-                          {formatFileSize(storageStats.totalSize)}
-                        </span>
+                        <span className="font-mono">{formatFileSize(storageStats.totalSize)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Average Size:</span>
@@ -336,42 +317,27 @@ export function CloudArtworkManager() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center space-y-2">
                   <div className="text-2xl font-bold text-blue-400">
-                    {
-                      artworks.filter((a) => a.artwork_type === "abstract")
-                        .length
-                    }
+                    {artworks.filter((a) => a.artwork_type === "abstract").length}
                   </div>
                   <div className="text-xs text-muted-foreground">Abstract</div>
                 </div>
                 <div className="text-center space-y-2">
                   <div className="text-2xl font-bold text-purple-400">
-                    {
-                      artworks.filter((a) => a.artwork_type === "atmospheric")
-                        .length
-                    }
+                    {artworks.filter((a) => a.artwork_type === "atmospheric").length}
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    Atmospheric
-                  </div>
+                  <div className="text-xs text-muted-foreground">Atmospheric</div>
                 </div>
                 <div className="text-center space-y-2">
                   <div className="text-2xl font-bold text-green-400">
-                    {
-                      artworks.filter((a) => a.artwork_type === "nature_fusion")
-                        .length
-                    }
+                    {artworks.filter((a) => a.artwork_type === "nature_fusion").length}
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    Nature Fusion
-                  </div>
+                  <div className="text-xs text-muted-foreground">Nature Fusion</div>
                 </div>
                 <div className="text-center space-y-2">
                   <div className="text-2xl font-bold text-yellow-400">
                     {artworks.reduce((sum, a) => sum + (a.downloads || 0), 0)}
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    Total Downloads
-                  </div>
+                  <div className="text-xs text-muted-foreground">Total Downloads</div>
                 </div>
               </div>
             </CardContent>

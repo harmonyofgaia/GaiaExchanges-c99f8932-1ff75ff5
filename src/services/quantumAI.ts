@@ -153,7 +153,7 @@ class QuantumAIService {
   async createQuantumAISynergy(
     quantumComputerId: string,
     aiModelId: string,
-    supercomputerId: string,
+    supercomputerId: string
   ): Promise<QuantumAISynergy> {
     const synergy: QuantumAISynergy = {
       quantumComputerId,
@@ -176,10 +176,7 @@ class QuantumAIService {
       "Optimized global resource allocation",
     ];
 
-    synergy.achievements = achievements.slice(
-      0,
-      Math.floor(Math.random() * 3) + 1,
-    );
+    synergy.achievements = achievements.slice(0, Math.floor(Math.random() * 3) + 1);
 
     console.log("🌟 Quantum-AI Synergy Created:", {
       synergyId,
@@ -196,21 +193,19 @@ class QuantumAIService {
 
   // Quantum Algorithm Execution
   async executeQuantumAlgorithm(algorithm: string, data: any): Promise<any> {
-    const availableComputers = Array.from(
-      this.quantumComputers.values(),
-    ).filter((qc) => qc.isOnline);
+    const availableComputers = Array.from(this.quantumComputers.values()).filter(
+      (qc) => qc.isOnline
+    );
 
     if (availableComputers.length === 0) {
       throw new Error("No quantum computers available");
     }
 
     const bestComputer = availableComputers.reduce((best, current) =>
-      current.qubits > best.qubits ? current : best,
+      current.qubits > best.qubits ? current : best
     );
 
-    console.log(
-      `🔮 Executing quantum algorithm "${algorithm}" on ${bestComputer.name}`,
-    );
+    console.log(`🔮 Executing quantum algorithm "${algorithm}" on ${bestComputer.name}`);
 
     // Simulate quantum algorithm execution
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -264,28 +259,25 @@ class QuantumAIService {
       isActive: this.isSystemActive,
       quantumComputers: {
         total: this.quantumComputers.size,
-        online: Array.from(this.quantumComputers.values()).filter(
-          (qc) => qc.isOnline,
-        ).length,
+        online: Array.from(this.quantumComputers.values()).filter((qc) => qc.isOnline).length,
         totalQubits: Array.from(this.quantumComputers.values()).reduce(
           (sum, qc) => sum + qc.qubits,
-          0,
+          0
         ),
       },
       aiModels: {
         total: this.aiModels.size,
-        active: Array.from(this.aiModels.values()).filter((ai) => ai.isActive)
-          .length,
+        active: Array.from(this.aiModels.values()).filter((ai) => ai.isActive).length,
         averageAccuracy: this.calculateAverageAccuracy(),
       },
       supercomputers: {
         total: this.supercomputerClusters.size,
         operational: Array.from(this.supercomputerClusters.values()).filter(
-          (sc) => sc.isOperational,
+          (sc) => sc.isOperational
         ).length,
         totalCores: Array.from(this.supercomputerClusters.values()).reduce(
           (sum, sc) => sum + sc.totalCores,
-          0,
+          0
         ),
       },
       synergies: this.quantumAISynergies.size,
@@ -293,15 +285,10 @@ class QuantumAIService {
   }
 
   private calculateAverageAccuracy(): number {
-    const activeModels = Array.from(this.aiModels.values()).filter(
-      (ai) => ai.isActive,
-    );
+    const activeModels = Array.from(this.aiModels.values()).filter((ai) => ai.isActive);
     if (activeModels.length === 0) return 0;
 
-    const totalAccuracy = activeModels.reduce(
-      (sum, ai) => sum + ai.accuracy,
-      0,
-    );
+    const totalAccuracy = activeModels.reduce((sum, ai) => sum + ai.accuracy, 0);
     return totalAccuracy / activeModels.length;
   }
 
@@ -326,12 +313,7 @@ class QuantumAIService {
       name: "Neural Supreme",
       type: "quantum_ai",
       parameters: 1000000000000, // 1 trillion parameters
-      capabilities: [
-        "NLP",
-        "Computer Vision",
-        "Quantum Computing",
-        "General Intelligence",
-      ],
+      capabilities: ["NLP", "Computer Vision", "Quantum Computing", "General Intelligence"],
     });
 
     await this.createAIModel({

@@ -138,9 +138,7 @@ export default function ArtistStreaming() {
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-1">
               <h3 className="font-bold text-white">{artist.name}</h3>
-              {artist.isLive && (
-                <Badge className="bg-red-600 animate-pulse">🔴 LIVE</Badge>
-              )}
+              {artist.isLive && <Badge className="bg-red-600 animate-pulse">🔴 LIVE</Badge>}
             </div>
             <p className="text-sm text-muted-foreground">{artist.genre}</p>
             <div className="flex items-center gap-2 text-sm text-purple-400">
@@ -154,9 +152,7 @@ export default function ArtistStreaming() {
           <div className="mb-4 p-3 bg-black/20 rounded-lg">
             <div className="flex items-center gap-2 mb-1">
               <Music className="h-4 w-4 text-green-400" />
-              <span className="text-sm font-medium text-green-400">
-                Now Playing
-              </span>
+              <span className="text-sm font-medium text-green-400">Now Playing</span>
             </div>
             <p className="text-white font-semibold">{artist.currentSong}</p>
           </div>
@@ -185,9 +181,7 @@ export default function ArtistStreaming() {
               <Badge variant="outline" className="text-xs">
                 {track.genre}
               </Badge>
-              <span className="text-xs text-muted-foreground">
-                {track.duration}
-              </span>
+              <span className="text-xs text-muted-foreground">{track.duration}</span>
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <TrendingUp className="h-3 w-3" />
                 {track.plays.toLocaleString()}
@@ -249,30 +243,18 @@ export default function ArtistStreaming() {
                     <Music className="h-8 w-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white">
-                      {currentTrack.title}
-                    </h3>
-                    <p className="text-muted-foreground">
-                      {currentTrack.artist}
-                    </p>
-                    <Badge className="bg-green-600 mt-1">
-                      {currentTrack.genre}
-                    </Badge>
+                    <h3 className="text-xl font-bold text-white">{currentTrack.title}</h3>
+                    <p className="text-muted-foreground">{currentTrack.artist}</p>
+                    <Badge className="bg-green-600 mt-1">{currentTrack.genre}</Badge>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <Button
-                    onClick={
-                      isPlaying ? handlePause : () => handlePlay(currentTrack)
-                    }
+                    onClick={isPlaying ? handlePause : () => handlePlay(currentTrack)}
                     size="lg"
                     className="bg-green-600 hover:bg-green-700"
                   >
-                    {isPlaying ? (
-                      <Pause className="h-6 w-6" />
-                    ) : (
-                      <Play className="h-6 w-6" />
-                    )}
+                    {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
                   </Button>
                   <Button size="lg" variant="outline">
                     <Volume2 className="h-6 w-6" />
@@ -293,9 +275,7 @@ export default function ArtistStreaming() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="flex-1"
               />
-              <Button className="bg-purple-600 hover:bg-purple-700">
-                Search
-              </Button>
+              <Button className="bg-purple-600 hover:bg-purple-700">Search</Button>
             </div>
           </CardContent>
         </Card>
@@ -332,18 +312,14 @@ export default function ArtistStreaming() {
             <CardContent className="p-4 text-center">
               <Headphones className="h-6 w-6 text-purple-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-purple-400">12.5K</div>
-              <div className="text-xs text-muted-foreground">
-                Active Listeners
-              </div>
+              <div className="text-xs text-muted-foreground">Active Listeners</div>
             </CardContent>
           </Card>
           <Card className="bg-green-900/30 border-green-500/30">
             <CardContent className="p-4 text-center">
               <Music className="h-6 w-6 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">847</div>
-              <div className="text-xs text-muted-foreground">
-                Available Tracks
-              </div>
+              <div className="text-xs text-muted-foreground">Available Tracks</div>
             </CardContent>
           </Card>
           <Card className="bg-blue-900/30 border-blue-500/30">

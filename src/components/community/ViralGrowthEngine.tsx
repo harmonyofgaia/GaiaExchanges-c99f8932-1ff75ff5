@@ -70,15 +70,12 @@ export function ViralGrowthEngine() {
     const updateMetrics = () => {
       setViralMetrics((prev) => ({
         shareScore: Math.min(100, prev.shareScore + Math.random() * 3),
-        influenceLevel: Math.min(
-          100,
-          prev.influenceLevel + Math.random() * 2.5,
-        ),
+        influenceLevel: Math.min(100, prev.influenceLevel + Math.random() * 2.5),
         communityPower: Math.min(100, prev.communityPower + Math.random() * 2),
         globalReach: Math.min(100, prev.globalReach + Math.random() * 1.5),
         viralCoefficient: Math.max(
           1.0,
-          Math.min(5.0, prev.viralCoefficient + (Math.random() * 0.2 - 0.1)),
+          Math.min(5.0, prev.viralCoefficient + (Math.random() * 0.2 - 0.1))
         ),
       }));
 
@@ -105,8 +102,7 @@ export function ViralGrowthEngine() {
 
   const activateViralBoost = () => {
     toast.success("🚀 VIRAL BOOST ACTIVATED!", {
-      description:
-        "Maximum sharing power unlocked - Global domination mode engaged!",
+      description: "Maximum sharing power unlocked - Global domination mode engaged!",
       duration: 6000,
     });
 
@@ -120,10 +116,8 @@ export function ViralGrowthEngine() {
   const completeChallenge = (challengeId: number) => {
     setChallenges((prev) =>
       prev.map((challenge) =>
-        challenge.id === challengeId
-          ? { ...challenge, completed: true, progress: 100 }
-          : challenge,
-      ),
+        challenge.id === challengeId ? { ...challenge, completed: true, progress: 100 } : challenge
+      )
     );
 
     const challenge = challenges.find((c) => c.id === challengeId);
@@ -141,9 +135,7 @@ export function ViralGrowthEngine() {
           <CardTitle className="flex items-center gap-2 text-orange-400">
             <Rocket className="h-6 w-6" />
             🚀 VIRAL GROWTH ENGINE - COMMUNITY DOMINATION MODE
-            <Badge className="bg-orange-600 text-white animate-pulse">
-              SPREADING WORLDWIDE
-            </Badge>
+            <Badge className="bg-orange-600 text-white animate-pulse">SPREADING WORLDWIDE</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -162,13 +154,8 @@ export function ViralGrowthEngine() {
               <div className="text-2xl font-bold text-purple-400">
                 {viralMetrics.influenceLevel.toFixed(1)}%
               </div>
-              <div className="text-xs text-muted-foreground">
-                Influence Level
-              </div>
-              <Progress
-                value={viralMetrics.influenceLevel}
-                className="mt-2 h-2"
-              />
+              <div className="text-xs text-muted-foreground">Influence Level</div>
+              <Progress value={viralMetrics.influenceLevel} className="mt-2 h-2" />
             </div>
 
             <div className="text-center p-4 rounded-lg bg-green-900/30 border border-green-500/20">
@@ -176,13 +163,8 @@ export function ViralGrowthEngine() {
               <div className="text-2xl font-bold text-green-400">
                 {viralMetrics.communityPower.toFixed(1)}%
               </div>
-              <div className="text-xs text-muted-foreground">
-                Community Power
-              </div>
-              <Progress
-                value={viralMetrics.communityPower}
-                className="mt-2 h-2"
-              />
+              <div className="text-xs text-muted-foreground">Community Power</div>
+              <Progress value={viralMetrics.communityPower} className="mt-2 h-2" />
             </div>
 
             <div className="text-center p-4 rounded-lg bg-blue-900/30 border border-blue-500/20">
@@ -200,8 +182,7 @@ export function ViralGrowthEngine() {
               Viral Coefficient: {viralMetrics.viralCoefficient.toFixed(2)}x
             </div>
             <div className="text-sm text-muted-foreground">
-              Each person you reach brings{" "}
-              {viralMetrics.viralCoefficient.toFixed(1)} more people!
+              Each person you reach brings {viralMetrics.viralCoefficient.toFixed(1)} more people!
             </div>
           </div>
 
@@ -225,16 +206,11 @@ export function ViralGrowthEngine() {
         </CardHeader>
         <CardContent className="space-y-4">
           {challenges.map((challenge) => (
-            <div
-              key={challenge.id}
-              className="p-4 border border-border/50 rounded-lg bg-muted/20"
-            >
+            <div key={challenge.id} className="p-4 border border-border/50 rounded-lg bg-muted/20">
               <div className="flex items-center justify-between mb-2">
                 <h4 className="font-semibold">{challenge.title}</h4>
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-yellow-600 text-white">
-                    {challenge.reward}
-                  </Badge>
+                  <Badge className="bg-yellow-600 text-white">{challenge.reward}</Badge>
                   {challenge.completed && (
                     <Badge className="bg-green-600 text-white">COMPLETED</Badge>
                   )}
@@ -274,27 +250,19 @@ export function ViralGrowthEngine() {
               <div
                 key={user.rank}
                 className={`flex items-center justify-between p-3 rounded-lg ${
-                  user.name === "You"
-                    ? "bg-green-900/30 border border-green-500/30"
-                    : "bg-muted/20"
+                  user.name === "You" ? "bg-green-900/30 border border-green-500/30" : "bg-muted/20"
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <div className="text-2xl">{user.badge}</div>
                   <div>
                     <div className="font-semibold">{user.name}</div>
-                    <div className="text-xs text-muted-foreground">
-                      Rank #{user.rank}
-                    </div>
+                    <div className="text-xs text-muted-foreground">Rank #{user.rank}</div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-bold text-yellow-400">
-                    {user.score.toLocaleString()}
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    Influence Points
-                  </div>
+                  <div className="font-bold text-yellow-400">{user.score.toLocaleString()}</div>
+                  <div className="text-xs text-muted-foreground">Influence Points</div>
                 </div>
               </div>
             ))}
@@ -312,35 +280,28 @@ export function ViralGrowthEngine() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/20">
                 <Target className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-                <h4 className="font-semibold text-blue-400 mb-2">
-                  Social Media Blitz
-                </h4>
+                <h4 className="font-semibold text-blue-400 mb-2">Social Media Blitz</h4>
                 <p className="text-sm text-muted-foreground">
                   Share on all platforms with our viral hashtags
                 </p>
               </div>
               <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/20">
                 <Users className="h-6 w-6 text-green-400 mx-auto mb-2" />
-                <h4 className="font-semibold text-green-400 mb-2">
-                  Influencer Network
-                </h4>
+                <h4 className="font-semibold text-green-400 mb-2">Influencer Network</h4>
                 <p className="text-sm text-muted-foreground">
                   Connect with crypto and sustainability influencers
                 </p>
               </div>
               <div className="p-4 bg-purple-900/20 rounded-lg border border-purple-500/20">
                 <Heart className="h-6 w-6 text-purple-400 mx-auto mb-2" />
-                <h4 className="font-semibold text-purple-400 mb-2">
-                  Community Love
-                </h4>
+                <h4 className="font-semibold text-purple-400 mb-2">Community Love</h4>
                 <p className="text-sm text-muted-foreground">
                   Build genuine connections and spread harmony
                 </p>
               </div>
             </div>
             <p className="text-sm text-green-400 font-bold">
-              🎵 "Seeds Will Form Into Music" - Every share creates a symphony
-              of growth! 🎵
+              🎵 "Seeds Will Form Into Music" - Every share creates a symphony of growth! 🎵
             </p>
           </div>
         </CardContent>

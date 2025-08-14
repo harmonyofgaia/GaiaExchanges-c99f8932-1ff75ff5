@@ -72,13 +72,9 @@ export function InvisibleDefenseDashboard() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Ghost className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">
-                Stealth Communications
-              </span>
+              <span className="text-sm font-medium">Stealth Communications</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.stealthCommunications}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.stealthCommunications}</div>
           </div>
 
           <div className="space-y-2">
@@ -86,9 +82,7 @@ export function InvisibleDefenseDashboard() {
               <Network className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Obfuscated Traffic</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.obfuscatedTraffic}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.obfuscatedTraffic}</div>
           </div>
 
           <div className="space-y-2">
@@ -96,9 +90,7 @@ export function InvisibleDefenseDashboard() {
               <Radar className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Active Decoys</span>
             </div>
-            <div className="text-2xl font-bold text-primary">
-              {status.activeDecoys}
-            </div>
+            <div className="text-2xl font-bold text-primary">{status.activeDecoys}</div>
           </div>
         </div>
 
@@ -108,9 +100,7 @@ export function InvisibleDefenseDashboard() {
               <Shield className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Quantum Cloaking</span>
             </div>
-            <div className="text-xl font-bold">
-              {status.quantumCloaking} Active
-            </div>
+            <div className="text-xl font-bold">{status.quantumCloaking} Active</div>
           </div>
 
           <div className="space-y-2">
@@ -118,9 +108,7 @@ export function InvisibleDefenseDashboard() {
               <EyeOff className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Attacks Deflected</span>
             </div>
-            <div className="text-xl font-bold">
-              {status.totalAttacksDeflected}
-            </div>
+            <div className="text-xl font-bold">{status.totalAttacksDeflected}</div>
           </div>
         </div>
 
@@ -130,11 +118,7 @@ export function InvisibleDefenseDashboard() {
             Initialize Invisible Defense
           </Button>
 
-          <Button
-            onClick={handleCreateStealthMessage}
-            variant="outline"
-            size="sm"
-          >
+          <Button onClick={handleCreateStealthMessage} variant="outline" size="sm">
             <Ghost className="h-4 w-4 mr-2" />
             Create Stealth Message
           </Button>
@@ -157,13 +141,11 @@ export function InvisibleDefenseDashboard() {
         </div>
 
         <div className="p-4 bg-muted/50 rounded-lg">
-          <h4 className="font-medium mb-2">
-            👻 Complete Invisibility Guarantee
-          </h4>
+          <h4 className="font-medium mb-2">👻 Complete Invisibility Guarantee</h4>
           <p className="text-sm text-muted-foreground">
-            Our invisible defense system provides undetectable protection
-            through quantum cloaking, phantom decoys, and stealth communication
-            protocols. Complete operational invisibility achieved.
+            Our invisible defense system provides undetectable protection through quantum cloaking,
+            phantom decoys, and stealth communication protocols. Complete operational invisibility
+            achieved.
           </p>
         </div>
       </CardContent>

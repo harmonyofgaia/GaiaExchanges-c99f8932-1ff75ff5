@@ -47,8 +47,9 @@ export function EnhancedBackgroundManager({
   settings: propSettings,
   className = "",
 }: EnhancedBackgroundManagerProps) {
-  const [currentSettings, setCurrentSettings] =
-    useState<EnhancedBackgroundSettings>(propSettings || DEFAULT_SETTINGS);
+  const [currentSettings, setCurrentSettings] = useState<EnhancedBackgroundSettings>(
+    propSettings || DEFAULT_SETTINGS
+  );
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
 
@@ -79,15 +80,12 @@ export function EnhancedBackgroundManager({
       }
     };
 
-    window.addEventListener(
-      "background-settings-changed",
-      handleSettingsChange as EventListener,
-    );
+    window.addEventListener("background-settings-changed", handleSettingsChange as EventListener);
 
     return () => {
       window.removeEventListener(
         "background-settings-changed",
-        handleSettingsChange as EventListener,
+        handleSettingsChange as EventListener
       );
     };
   }, [isLocked]);
@@ -100,24 +98,13 @@ export function EnhancedBackgroundManager({
       setIsTransitioning(true);
 
       setTimeout(() => {
-        const backgroundTypes: EnhancedBackgroundType[] = [
-          "matrix",
-          "neural",
-          "puzzle",
-        ];
+        const backgroundTypes: EnhancedBackgroundType[] = ["matrix", "neural", "puzzle"];
         const colors = ["#00ff00", "#00ffff", "#ff00ff", "#ffff00", "#ff0080"];
-        const intensities: Array<"low" | "medium" | "high"> = [
-          "low",
-          "medium",
-          "high",
-        ];
+        const intensities: Array<"low" | "medium" | "high"> = ["low", "medium", "high"];
 
         const newSettings: EnhancedBackgroundSettings = {
-          type: backgroundTypes[
-            Math.floor(Math.random() * backgroundTypes.length)
-          ],
-          intensity:
-            intensities[Math.floor(Math.random() * intensities.length)],
+          type: backgroundTypes[Math.floor(Math.random() * backgroundTypes.length)],
+          intensity: intensities[Math.floor(Math.random() * intensities.length)],
           color: colors[Math.floor(Math.random() * colors.length)],
           speed: Math.random() * 2 + 0.5,
           autoGenerate: true,
@@ -127,10 +114,7 @@ export function EnhancedBackgroundManager({
 
         setCurrentSettings(newSettings);
         // Save the auto-generated settings
-        localStorage.setItem(
-          "gaia-background-settings",
-          JSON.stringify(newSettings),
-        );
+        localStorage.setItem("gaia-background-settings", JSON.stringify(newSettings));
         setIsTransitioning(false);
       }, 1000);
     }, ANIMATION_CYCLE_DURATION);
@@ -208,8 +192,6 @@ export function EnhancedBackgroundManager({
 export function updateBackgroundConfig(config: EnhancedBackgroundSettings) {
   // Update background config and save to localStorage
   localStorage.setItem("gaia-background-settings", JSON.stringify(config));
-  window.dispatchEvent(
-    new CustomEvent("background-settings-changed", { detail: config }),
-  );
+  window.dispatchEvent(new CustomEvent("background-settings-changed", { detail: config }));
   console.log("Background config updated:", config);
 }

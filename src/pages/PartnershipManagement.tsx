@@ -2,14 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Handshake,
-  Building,
-  Users,
-  TrendingUp,
-  Globe,
-  Star,
-} from "lucide-react";
+import { Handshake, Building, Users, TrendingUp, Globe, Star } from "lucide-react";
 
 export default function PartnershipManagement() {
   return (
@@ -23,17 +16,11 @@ export default function PartnershipManagement() {
             Strategic Partnerships for Environmental Impact
           </p>
           <div className="flex gap-4 mt-4">
-            <Badge
-              variant="outline"
-              className="border-green-500/50 text-green-400"
-            >
+            <Badge variant="outline" className="border-green-500/50 text-green-400">
               <Building className="h-3 w-3 mr-1" />
               47 Active Partners
             </Badge>
-            <Badge
-              variant="outline"
-              className="border-blue-500/50 text-blue-400"
-            >
+            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
               <Globe className="h-3 w-3 mr-1" />
               Global Network
             </Badge>
@@ -50,54 +37,40 @@ export default function PartnershipManagement() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-white">47</div>
-              <p className="text-xs text-muted-foreground">
-                +12% from last quarter
-              </p>
+              <p className="text-xs text-muted-foreground">+12% from last quarter</p>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-blue-400">
-                Total Revenue
-              </CardTitle>
+              <CardTitle className="text-sm font-medium text-blue-400">Total Revenue</CardTitle>
               <TrendingUp className="h-4 w-4 text-blue-400" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-white">$2.4M</div>
-              <p className="text-xs text-muted-foreground">
-                Quarterly partnership revenue
-              </p>
+              <p className="text-xs text-muted-foreground">Quarterly partnership revenue</p>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-purple-900/20 to-black/50 border-purple-500/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-purple-400">
-                Impact Projects
-              </CardTitle>
+              <CardTitle className="text-sm font-medium text-purple-400">Impact Projects</CardTitle>
               <Globe className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-white">127</div>
-              <p className="text-xs text-muted-foreground">
-                Environmental initiatives
-              </p>
+              <p className="text-xs text-muted-foreground">Environmental initiatives</p>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-yellow-900/20 to-black/50 border-yellow-500/20">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-yellow-400">
-                Partner Rating
-              </CardTitle>
+              <CardTitle className="text-sm font-medium text-yellow-400">Partner Rating</CardTitle>
               <Star className="h-4 w-4 text-yellow-400" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-white">4.8/5</div>
-              <p className="text-xs text-muted-foreground">
-                Average satisfaction
-              </p>
+              <p className="text-xs text-muted-foreground">Average satisfaction</p>
             </CardContent>
           </Card>
         </div>
@@ -105,21 +78,14 @@ export default function PartnershipManagement() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                Strategic Partners
-              </CardTitle>
+              <CardTitle className="text-green-400">Strategic Partners</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="p-3 bg-green-900/20 rounded-lg border border-green-500/20">
                   <div className="flex justify-between items-start mb-2">
-                    <h4 className="font-medium text-green-400">
-                      GreenTech Solutions
-                    </h4>
-                    <Badge
-                      variant="outline"
-                      className="border-green-500/30 text-green-400 text-xs"
-                    >
+                    <h4 className="font-medium text-green-400">GreenTech Solutions</h4>
+                    <Badge variant="outline" className="border-green-500/30 text-green-400 text-xs">
                       Tier 1
                     </Badge>
                   </div>
@@ -135,13 +101,8 @@ export default function PartnershipManagement() {
 
                 <div className="p-3 bg-blue-900/20 rounded-lg border border-blue-500/20">
                   <div className="flex justify-between items-start mb-2">
-                    <h4 className="font-medium text-blue-400">
-                      Ocean Conservancy
-                    </h4>
-                    <Badge
-                      variant="outline"
-                      className="border-blue-500/30 text-blue-400 text-xs"
-                    >
+                    <h4 className="font-medium text-blue-400">Ocean Conservancy</h4>
+                    <Badge variant="outline" className="border-blue-500/30 text-blue-400 text-xs">
                       Tier 1
                     </Badge>
                   </div>
@@ -157,9 +118,7 @@ export default function PartnershipManagement() {
 
                 <div className="p-3 bg-purple-900/20 rounded-lg border border-purple-500/20">
                   <div className="flex justify-between items-start mb-2">
-                    <h4 className="font-medium text-purple-400">
-                      Wildlife Foundation
-                    </h4>
+                    <h4 className="font-medium text-purple-400">Wildlife Foundation</h4>
                     <Badge
                       variant="outline"
                       className="border-purple-500/30 text-purple-400 text-xs"
@@ -182,9 +141,7 @@ export default function PartnershipManagement() {
 
           <Card className="bg-gradient-to-br from-blue-900/20 to-black/50 border-blue-500/20">
             <CardHeader>
-              <CardTitle className="text-blue-400">
-                Partnership Actions
-              </CardTitle>
+              <CardTitle className="text-blue-400">Partnership Actions</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 gap-4">

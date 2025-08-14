@@ -63,13 +63,9 @@ export function FutureProofSecurityEngine() {
   useEffect(() => {
     const performQuantumDefenseMonitoring = async () => {
       try {
-        console.log(
-          "⚡ QUANTUM DEFENSE MONITORING - 20 QUANTUM COMPUTERS SYNCHRONIZED",
-        );
+        console.log("⚡ QUANTUM DEFENSE MONITORING - 20 QUANTUM COMPUTERS SYNCHRONIZED");
         console.log("🛡️ LEVEL 1: Basic Firewall Protection");
-        console.log(
-          "🔥 LEVEL 2: Advanced Defense Wall (IP-Specific Targeting)",
-        );
+        console.log("🔥 LEVEL 2: Advanced Defense Wall (IP-Specific Targeting)");
         console.log("👻 ENHANCED INVISIBILITY: Only after Level 2 breach");
 
         const userIP = await fetch("https://api.ipify.org?format=json")
@@ -104,9 +100,7 @@ export function FutureProofSecurityEngine() {
                   threatLevel: "HIGH",
                   attackType: "LEVEL_1_BREACH",
                   geolocation: "Level 1 defense monitoring",
-                  deviceFingerprint: btoa(
-                    navigator.userAgent + screen.width + screen.height,
-                  ),
+                  deviceFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
                   networkSignature: `Level 1 threat: ${pattern}`,
                   behaviorPattern: `LEVEL 1 BREACH: ${pattern}`,
                   preventionAction: "MONITORING_INCREASED",
@@ -115,8 +109,7 @@ export function FutureProofSecurityEngine() {
                 });
 
                 toast.warning(`⚠️ Level 1 Defense Alert - IP: ${userIP}`, {
-                  description:
-                    "Suspicious activity detected. Increased monitoring active.",
+                  description: "Suspicious activity detected. Increased monitoring active.",
                   duration: 8000,
                 });
 
@@ -167,9 +160,7 @@ export function FutureProofSecurityEngine() {
                   threatLevel: "CRITICAL",
                   attackType: "LEVEL_2_DEFENSE_BREACH",
                   geolocation: "Advanced defense wall breached",
-                  deviceFingerprint: btoa(
-                    navigator.userAgent + screen.width + screen.height,
-                  ),
+                  deviceFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
                   networkSignature: `Level 2 breach: ${pattern}`,
                   behaviorPattern: `CRITICAL LEVEL 2 BREACH: ${pattern}`,
                   preventionAction: "PREPARING_ENHANCED_INVISIBILITY",
@@ -183,12 +174,8 @@ export function FutureProofSecurityEngine() {
                   duration: 15000,
                 });
 
-                console.log(
-                  `🔥 LEVEL 2 DEFENSE BREACH FROM SPECIFIC IP: ${userIP}`,
-                );
-                console.log(
-                  "⚡ QUANTUM COMPUTERS ACTIVATING ENHANCED PROTOCOLS",
-                );
+                console.log(`🔥 LEVEL 2 DEFENSE BREACH FROM SPECIFIC IP: ${userIP}`);
+                console.log("⚡ QUANTUM COMPUTERS ACTIVATING ENHANCED PROTOCOLS");
 
                 setMetrics((prev) => ({
                   ...prev,
@@ -200,15 +187,9 @@ export function FutureProofSecurityEngine() {
                   if (!invisibleIPs.current.has(userIP)) {
                     invisibleIPs.current.add(userIP);
 
-                    console.log(
-                      `👻 ENHANCED INVISIBILITY ACTIVATED FOR SPECIFIC IP: ${userIP}`,
-                    );
-                    console.log(
-                      "🌐 IP-SPECIFIC QUANTUM INVISIBILITY: Only this IP affected",
-                    );
-                    console.log(
-                      "⚡ 20 QUANTUM COMPUTERS: Synchronized invisibility protocol",
-                    );
+                    console.log(`👻 ENHANCED INVISIBILITY ACTIVATED FOR SPECIFIC IP: ${userIP}`);
+                    console.log("🌐 IP-SPECIFIC QUANTUM INVISIBILITY: Only this IP affected");
+                    console.log("⚡ 20 QUANTUM COMPUTERS: Synchronized invisibility protocol");
 
                     const invisibilityThreat: ThreatIntelligence = {
                       id: `enhanced-invisibility-${Date.now()}`,
@@ -218,35 +199,25 @@ export function FutureProofSecurityEngine() {
                       threatLevel: "CRITICAL",
                       attackType: "QUANTUM_ENHANCED_INVISIBILITY",
                       geolocation: "Quantum-level IP-specific protection",
-                      deviceFingerprint: btoa(
-                        navigator.userAgent + screen.width + screen.height,
-                      ),
+                      deviceFingerprint: btoa(navigator.userAgent + screen.width + screen.height),
                       networkSignature: `Quantum invisibility for IP: ${userIP}`,
-                      behaviorPattern:
-                        "LEVEL 2 BREACH - QUANTUM INVISIBILITY PROTOCOL ACTIVATED",
+                      behaviorPattern: "LEVEL 2 BREACH - QUANTUM INVISIBILITY PROTOCOL ACTIVATED",
                       preventionAction: "QUANTUM_INVISIBILITY_ACTIVE_IP_ONLY",
                       status: "ENHANCED_INVISIBILITY",
                       defenseLevel: 3,
                     };
 
-                    setThreats((prev) => [
-                      invisibilityThreat,
-                      ...prev.slice(0, 19),
-                    ]);
+                    setThreats((prev) => [invisibilityThreat, ...prev.slice(0, 19)]);
 
-                    toast.error(
-                      `👻 QUANTUM INVISIBILITY ACTIVE - IP: ${userIP}`,
-                      {
-                        description:
-                          "Level 2 breach triggered quantum invisibility. This IP is now invisible to all systems.",
-                        duration: 20000,
-                      },
-                    );
+                    toast.error(`👻 QUANTUM INVISIBILITY ACTIVE - IP: ${userIP}`, {
+                      description:
+                        "Level 2 breach triggered quantum invisibility. This IP is now invisible to all systems.",
+                      duration: 20000,
+                    });
 
                     setMetrics((prev) => ({
                       ...prev,
-                      enhancedInvisibilityActive:
-                        prev.enhancedInvisibilityActive + 1,
+                      enhancedInvisibilityActive: prev.enhancedInvisibilityActive + 1,
                     }));
                   }
                 }, 3000);
@@ -272,24 +243,18 @@ export function FutureProofSecurityEngine() {
             threatsBlocked: prev.threatsBlocked + newThreats.length,
             attacksNeutralized:
               prev.attacksNeutralized +
-              newThreats.filter((t) => t.status === "ENHANCED_INVISIBILITY")
-                .length,
+              newThreats.filter((t) => t.status === "ENHANCED_INVISIBILITY").length,
             lastUpdate: new Date(),
           }));
         }
 
-        console.log(
-          "⚡ QUANTUM DEFENSE MONITORING COMPLETE - ALL 20 COMPUTERS ACTIVE",
-        );
+        console.log("⚡ QUANTUM DEFENSE MONITORING COMPLETE - ALL 20 COMPUTERS ACTIVE");
       } catch (error) {
         console.log("🔒 Quantum security engine self-protected:", error);
       }
     };
 
-    securityInterval.current = setInterval(
-      performQuantumDefenseMonitoring,
-      4000,
-    );
+    securityInterval.current = setInterval(performQuantumDefenseMonitoring, 4000);
     performQuantumDefenseMonitoring();
 
     return () => {

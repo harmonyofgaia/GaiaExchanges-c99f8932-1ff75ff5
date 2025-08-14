@@ -13,14 +13,11 @@ type BackgroundStyle =
   | "matrix";
 
 export function useGlobalBackground() {
-  const [backgroundStyle, setBackgroundStyle] =
-    useState<BackgroundStyle>("classic");
+  const [backgroundStyle, setBackgroundStyle] = useState<BackgroundStyle>("classic");
 
   useEffect(() => {
     // Load background preference from localStorage
-    const savedBackground = localStorage.getItem(
-      "harmony-background",
-    ) as BackgroundStyle;
+    const savedBackground = localStorage.getItem("harmony-background") as BackgroundStyle;
     if (savedBackground) {
       setBackgroundStyle(savedBackground);
     }
@@ -44,7 +41,7 @@ export function useGlobalBackground() {
       new StorageEvent("storage", {
         key: "harmony-background",
         newValue: style,
-      }),
+      })
     );
   };
 

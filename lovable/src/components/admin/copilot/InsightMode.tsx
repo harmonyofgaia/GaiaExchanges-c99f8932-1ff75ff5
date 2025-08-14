@@ -95,12 +95,7 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
     setRealTimeStats(mockStats);
 
     // Add new log entry
-    const logLevels: ("info" | "warn" | "error" | "debug")[] = [
-      "info",
-      "warn",
-      "error",
-      "debug",
-    ];
+    const logLevels: ("info" | "warn" | "error" | "debug")[] = ["info", "warn", "error", "debug"];
     const newLog: LogEntry = {
       id: Date.now().toString(),
       timestamp: new Date(),
@@ -170,17 +165,11 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
         <CardContent className="p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Eye
-                className={`h-5 w-5 ${insightActive ? "text-green-400" : "text-gray-400"}`}
-              />
+              <Eye className={`h-5 w-5 ${insightActive ? "text-green-400" : "text-gray-400"}`} />
               <div>
-                <h3 className="font-semibold text-purple-400">
-                  🔍 Einstein Insight Mode
-                </h3>
+                <h3 className="font-semibold text-purple-400">🔍 Einstein Insight Mode</h3>
                 <p className="text-sm text-gray-400">
-                  {insightActive
-                    ? "Real-time monitoring active"
-                    : "Click to enable deep insights"}
+                  {insightActive ? "Real-time monitoring active" : "Click to enable deep insights"}
                 </p>
               </div>
             </div>
@@ -192,11 +181,7 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
                   onClick={() => setIsAutoRefresh(!isAutoRefresh)}
                   className="border-blue-500/30"
                 >
-                  {isAutoRefresh ? (
-                    <Pause className="h-4 w-4" />
-                  ) : (
-                    <Play className="h-4 w-4" />
-                  )}
+                  {isAutoRefresh ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
                   {isAutoRefresh ? "Pause" : "Resume"}
                 </Button>
               )}
@@ -242,20 +227,13 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
               <TabsContent value="stats" className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                   {realTimeStats.map((stat, index) => (
-                    <Card
-                      key={index}
-                      className={`border ${getStatusColor(stat.status)}`}
-                    >
+                    <Card key={index} className={`border ${getStatusColor(stat.status)}`}>
                       <CardContent className="p-4">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm text-gray-400">
-                            {stat.name}
-                          </span>
+                          <span className="text-sm text-gray-400">{stat.name}</span>
                           <span>{getTrendIcon(stat.trend)}</span>
                         </div>
-                        <div className="text-lg font-bold text-white">
-                          {stat.value}
-                        </div>
+                        <div className="text-lg font-bold text-white">{stat.value}</div>
                         {stat.change !== undefined && (
                           <div
                             className={`text-xs ${stat.change >= 0 ? "text-green-400" : "text-red-400"}`}
@@ -277,18 +255,10 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
                       <CardContent className="p-3">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <Badge
-                              variant={
-                                log.level === "error"
-                                  ? "destructive"
-                                  : "secondary"
-                              }
-                            >
+                            <Badge variant={log.level === "error" ? "destructive" : "secondary"}>
                               {log.level.toUpperCase()}
                             </Badge>
-                            <span className="text-sm text-gray-300">
-                              {log.message}
-                            </span>
+                            <span className="text-sm text-gray-300">{log.message}</span>
                           </div>
                           <span className="text-xs text-gray-500">
                             {log.timestamp.toLocaleTimeString()}
@@ -315,9 +285,7 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
                         <CardContent className="p-3">
                           <div className="flex items-center gap-2">
                             <AlertTriangle className="h-4 w-4 text-red-400" />
-                            <span className="text-sm text-red-300">
-                              {error.message}
-                            </span>
+                            <span className="text-sm text-red-300">{error.message}</span>
                             <span className="text-xs text-gray-500 ml-auto">
                               {error.timestamp.toLocaleTimeString()}
                             </span>
@@ -340,25 +308,15 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
                     </CardHeader>
                     <CardContent className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-xs text-gray-400">
-                          Connection Pool:
-                        </span>
-                        <span className="text-xs text-green-400">
-                          Active (8/10)
-                        </span>
+                        <span className="text-xs text-gray-400">Connection Pool:</span>
+                        <span className="text-xs text-green-400">Active (8/10)</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-xs text-gray-400">
-                          Query Cache:
-                        </span>
-                        <span className="text-xs text-green-400">
-                          85% Hit Rate
-                        </span>
+                        <span className="text-xs text-gray-400">Query Cache:</span>
+                        <span className="text-xs text-green-400">85% Hit Rate</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-xs text-gray-400">
-                          Transactions/sec:
-                        </span>
+                        <span className="text-xs text-gray-400">Transactions/sec:</span>
                         <span className="text-xs text-green-400">45.2</span>
                       </div>
                     </CardContent>
@@ -377,15 +335,11 @@ export function InsightMode({ children, toolName, toolId }: InsightModeProps) {
                         <span className="text-xs text-green-400">32ms</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-xs text-gray-400">
-                          Throughput:
-                        </span>
+                        <span className="text-xs text-gray-400">Throughput:</span>
                         <span className="text-xs text-green-400">2.4 MB/s</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-xs text-gray-400">
-                          Packet Loss:
-                        </span>
+                        <span className="text-xs text-gray-400">Packet Loss:</span>
                         <span className="text-xs text-green-400">0.01%</span>
                       </div>
                     </CardContent>

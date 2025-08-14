@@ -2,16 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Brain,
-  Zap,
-  Globe,
-  Shield,
-  AlertTriangle,
-  TrendingUp,
-  Users,
-  Target,
-} from "lucide-react";
+import { Brain, Zap, Globe, Shield, AlertTriangle, TrendingUp, Users, Target } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 
 export default function SeaGreenPsychohistorical() {
@@ -24,28 +15,18 @@ export default function SeaGreenPsychohistorical() {
             🧠 Sea Green Psychohistorical Project
           </h1>
           <p className="text-xl text-muted-foreground mt-2">
-            Advanced AI-Powered Environmental Future Prediction & Solution
-            Generation
+            Advanced AI-Powered Environmental Future Prediction & Solution Generation
           </p>
           <div className="flex gap-4 mt-4">
-            <Badge
-              variant="outline"
-              className="border-teal-500/50 text-teal-400"
-            >
+            <Badge variant="outline" className="border-teal-500/50 text-teal-400">
               <Brain className="h-3 w-3 mr-1" />
               AI Predictions
             </Badge>
-            <Badge
-              variant="outline"
-              className="border-green-500/50 text-green-400"
-            >
+            <Badge variant="outline" className="border-green-500/50 text-green-400">
               <Globe className="h-3 w-3 mr-1" />
               Global Analysis
             </Badge>
-            <Badge
-              variant="outline"
-              className="border-blue-500/50 text-blue-400"
-            >
+            <Badge variant="outline" className="border-blue-500/50 text-blue-400">
               <Zap className="h-3 w-3 mr-1" />
               Real-time Processing
             </Badge>
@@ -62,9 +43,7 @@ export default function SeaGreenPsychohistorical() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-white">87.3%</div>
-              <p className="text-xs text-muted-foreground">
-                Environmental forecasting
-              </p>
+              <p className="text-xs text-muted-foreground">Environmental forecasting</p>
             </CardContent>
           </Card>
 
@@ -90,9 +69,7 @@ export default function SeaGreenPsychohistorical() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-white">234</div>
-              <p className="text-xs text-muted-foreground">
-                Solutions in progress
-              </p>
+              <p className="text-xs text-muted-foreground">Solutions in progress</p>
             </CardContent>
           </Card>
 
@@ -113,21 +90,14 @@ export default function SeaGreenPsychohistorical() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <Card className="bg-gradient-to-br from-teal-900/20 to-black/50 border-teal-500/20">
             <CardHeader>
-              <CardTitle className="text-teal-400">
-                Psychohistorical Analysis Engine
-              </CardTitle>
+              <CardTitle className="text-teal-400">Psychohistorical Analysis Engine</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="p-3 bg-teal-900/20 rounded-lg border border-teal-500/20">
                   <div className="flex justify-between items-center mb-2">
-                    <h4 className="font-medium text-teal-400">
-                      Climate Pattern Analysis
-                    </h4>
-                    <Badge
-                      variant="outline"
-                      className="border-teal-500/30 text-teal-400 text-xs"
-                    >
+                    <h4 className="font-medium text-teal-400">Climate Pattern Analysis</h4>
+                    <Badge variant="outline" className="border-teal-500/30 text-teal-400 text-xs">
                       Active
                     </Badge>
                   </div>
@@ -139,13 +109,8 @@ export default function SeaGreenPsychohistorical() {
 
                 <div className="p-3 bg-green-900/20 rounded-lg border border-green-500/20">
                   <div className="flex justify-between items-center mb-2">
-                    <h4 className="font-medium text-green-400">
-                      Ecosystem Modeling
-                    </h4>
-                    <Badge
-                      variant="outline"
-                      className="border-green-500/30 text-green-400 text-xs"
-                    >
+                    <h4 className="font-medium text-green-400">Ecosystem Modeling</h4>
+                    <Badge variant="outline" className="border-green-500/30 text-green-400 text-xs">
                       Learning
                     </Badge>
                   </div>
@@ -157,13 +122,8 @@ export default function SeaGreenPsychohistorical() {
 
                 <div className="p-3 bg-blue-900/20 rounded-lg border border-blue-500/20">
                   <div className="flex justify-between items-center mb-2">
-                    <h4 className="font-medium text-blue-400">
-                      Social Impact Forecasting
-                    </h4>
-                    <Badge
-                      variant="outline"
-                      className="border-blue-500/30 text-blue-400 text-xs"
-                    >
+                    <h4 className="font-medium text-blue-400">Social Impact Forecasting</h4>
+                    <Badge variant="outline" className="border-blue-500/30 text-blue-400 text-xs">
                       Analyzing
                     </Badge>
                   </div>
@@ -175,9 +135,7 @@ export default function SeaGreenPsychohistorical() {
 
                 <div className="p-3 bg-purple-900/20 rounded-lg border border-purple-500/20">
                   <div className="flex justify-between items-center mb-2">
-                    <h4 className="font-medium text-purple-400">
-                      Technology Integration
-                    </h4>
+                    <h4 className="font-medium text-purple-400">Technology Integration</h4>
                     <Badge
                       variant="outline"
                       className="border-purple-500/30 text-purple-400 text-xs"
@@ -186,9 +144,7 @@ export default function SeaGreenPsychohistorical() {
                     </Badge>
                   </div>
                   <Progress value={94} className="h-2 mb-2" />
-                  <p className="text-xs text-muted-foreground">
-                    Green tech adoption predictions
-                  </p>
+                  <p className="text-xs text-muted-foreground">Green tech adoption predictions</p>
                 </div>
               </div>
             </CardContent>
@@ -196,47 +152,30 @@ export default function SeaGreenPsychohistorical() {
 
           <Card className="bg-gradient-to-br from-green-900/20 to-black/50 border-green-500/20">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                AI-Generated Solutions
-              </CardTitle>
+              <CardTitle className="text-green-400">AI-Generated Solutions</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="p-3 bg-green-900/20 rounded-lg border border-green-500/20">
                   <div className="flex items-start justify-between mb-2">
-                    <h4 className="font-medium text-green-400">
-                      Ocean Plastic Harvesting
-                    </h4>
-                    <Badge
-                      variant="outline"
-                      className="border-green-500/30 text-green-400 text-xs"
-                    >
+                    <h4 className="font-medium text-green-400">Ocean Plastic Harvesting</h4>
+                    <Badge variant="outline" className="border-green-500/30 text-green-400 text-xs">
                       High Impact
                     </Badge>
                   </div>
                   <p className="text-xs text-muted-foreground mb-2">
-                    AI-designed autonomous cleanup vessels for microplastic
-                    removal
+                    AI-designed autonomous cleanup vessels for microplastic removal
                   </p>
                   <div className="flex justify-between text-xs">
-                    <span className="text-muted-foreground">
-                      Feasibility: 94%
-                    </span>
-                    <span className="text-green-400">
-                      Implementation: Ready
-                    </span>
+                    <span className="text-muted-foreground">Feasibility: 94%</span>
+                    <span className="text-green-400">Implementation: Ready</span>
                   </div>
                 </div>
 
                 <div className="p-3 bg-blue-900/20 rounded-lg border border-blue-500/20">
                   <div className="flex items-start justify-between mb-2">
-                    <h4 className="font-medium text-blue-400">
-                      Urban Carbon Capture
-                    </h4>
-                    <Badge
-                      variant="outline"
-                      className="border-blue-500/30 text-blue-400 text-xs"
-                    >
+                    <h4 className="font-medium text-blue-400">Urban Carbon Capture</h4>
+                    <Badge variant="outline" className="border-blue-500/30 text-blue-400 text-xs">
                       Medium Impact
                     </Badge>
                   </div>
@@ -244,20 +183,14 @@ export default function SeaGreenPsychohistorical() {
                     Building-integrated CO₂ absorption systems
                   </p>
                   <div className="flex justify-between text-xs">
-                    <span className="text-muted-foreground">
-                      Feasibility: 78%
-                    </span>
-                    <span className="text-blue-400">
-                      Implementation: Planning
-                    </span>
+                    <span className="text-muted-foreground">Feasibility: 78%</span>
+                    <span className="text-blue-400">Implementation: Planning</span>
                   </div>
                 </div>
 
                 <div className="p-3 bg-purple-900/20 rounded-lg border border-purple-500/20">
                   <div className="flex items-start justify-between mb-2">
-                    <h4 className="font-medium text-purple-400">
-                      Ecosystem Regeneration
-                    </h4>
+                    <h4 className="font-medium text-purple-400">Ecosystem Regeneration</h4>
                     <Badge
                       variant="outline"
                       className="border-purple-500/30 text-purple-400 text-xs"
@@ -269,12 +202,8 @@ export default function SeaGreenPsychohistorical() {
                     Biome restoration through species reintroduction algorithms
                   </p>
                   <div className="flex justify-between text-xs">
-                    <span className="text-muted-foreground">
-                      Feasibility: 67%
-                    </span>
-                    <span className="text-purple-400">
-                      Implementation: Research
-                    </span>
+                    <span className="text-muted-foreground">Feasibility: 67%</span>
+                    <span className="text-purple-400">Implementation: Research</span>
                   </div>
                 </div>
               </div>
@@ -292,25 +221,19 @@ export default function SeaGreenPsychohistorical() {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="p-2 bg-red-900/30 rounded border border-red-500/30">
-                <div className="text-sm font-medium text-red-400">
-                  Critical Deforestation Alert
-                </div>
+                <div className="text-sm font-medium text-red-400">Critical Deforestation Alert</div>
                 <div className="text-xs text-muted-foreground">
                   Amazon Basin - Immediate action required
                 </div>
               </div>
               <div className="p-2 bg-orange-900/30 rounded border border-orange-500/30">
-                <div className="text-sm font-medium text-orange-400">
-                  Ocean Temperature Rise
-                </div>
+                <div className="text-sm font-medium text-orange-400">Ocean Temperature Rise</div>
                 <div className="text-xs text-muted-foreground">
                   Pacific Region - Monitoring escalated
                 </div>
               </div>
               <div className="p-2 bg-yellow-900/30 rounded border border-yellow-500/30">
-                <div className="text-sm font-medium text-yellow-400">
-                  Biodiversity Decline
-                </div>
+                <div className="text-sm font-medium text-yellow-400">Biodiversity Decline</div>
                 <div className="text-xs text-muted-foreground">
                   Southeast Asia - Intervention planned
                 </div>
@@ -327,25 +250,19 @@ export default function SeaGreenPsychohistorical() {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="p-2 bg-green-900/30 rounded border border-green-500/30">
-                <div className="text-sm font-medium text-green-400">
-                  Renewable Energy Growth
-                </div>
+                <div className="text-sm font-medium text-green-400">Renewable Energy Growth</div>
                 <div className="text-xs text-muted-foreground">
                   Global adoption up 23% this quarter
                 </div>
               </div>
               <div className="p-2 bg-blue-900/30 rounded border border-blue-500/30">
-                <div className="text-sm font-medium text-blue-400">
-                  Ocean Cleanup Success
-                </div>
+                <div className="text-sm font-medium text-blue-400">Ocean Cleanup Success</div>
                 <div className="text-xs text-muted-foreground">
                   Mediterranean recovery ahead of schedule
                 </div>
               </div>
               <div className="p-2 bg-purple-900/30 rounded border border-purple-500/30">
-                <div className="text-sm font-medium text-purple-400">
-                  Community Engagement
-                </div>
+                <div className="text-sm font-medium text-purple-400">Community Engagement</div>
                 <div className="text-xs text-muted-foreground">
                   Participation rates reaching new highs
                 </div>

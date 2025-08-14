@@ -164,8 +164,7 @@ export function AIEngineCapabilities() {
 
   useEffect(() => {
     const avgPower =
-      capabilities.reduce((sum, cap) => sum + cap.powerLevel, 0) /
-      capabilities.length;
+      capabilities.reduce((sum, cap) => sum + cap.powerLevel, 0) / capabilities.length;
     setOverallPower(avgPower);
 
     const interval = setInterval(() => {
@@ -222,9 +221,7 @@ export function AIEngineCapabilities() {
           <CardTitle className="flex items-center gap-2 text-blue-400">
             <Brain className="h-6 w-6 animate-pulse" />
             🧠 AI ENGINE CAPABILITIES - UNLIMITED POWER
-            <Badge className="bg-blue-600 text-white animate-pulse">
-              QUANTUM LEVEL
-            </Badge>
+            <Badge className="bg-blue-600 text-white animate-pulse">QUANTUM LEVEL</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -232,9 +229,7 @@ export function AIEngineCapabilities() {
             <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-2">
               {overallPower.toFixed(1)}%
             </div>
-            <div className="text-lg text-muted-foreground">
-              Overall AI Power Level
-            </div>
+            <div className="text-lg text-muted-foreground">Overall AI Power Level</div>
           </div>
 
           <div className="space-y-6">
@@ -245,8 +240,8 @@ export function AIEngineCapabilities() {
                   acc[cap.category].push(cap);
                   return acc;
                 },
-                {} as Record<string, AICapability[]>,
-              ),
+                {} as Record<string, AICapability[]>
+              )
             ).map(([category, caps]) => (
               <div key={category} className="space-y-3">
                 <h3
@@ -260,18 +255,14 @@ export function AIEngineCapabilities() {
                       <CardContent className="p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <div className="text-blue-400">{capability.icon}</div>
-                          <div className="font-semibold text-sm text-white">
-                            {capability.name}
-                          </div>
+                          <div className="font-semibold text-sm text-white">{capability.name}</div>
                         </div>
                         <p className="text-xs text-muted-foreground mb-3">
                           {capability.description}
                         </p>
                         <div className="flex items-center justify-between">
                           <div className="text-xs">
-                            <span className="text-green-400">
-                              {capability.powerLevel}%
-                            </span>
+                            <span className="text-green-400">{capability.powerLevel}%</span>
                           </div>
                           <Badge
                             className={`${getStatusColor(capability.status)} text-white text-xs`}
@@ -291,8 +282,8 @@ export function AIEngineCapabilities() {
             onClick={activateMaximumPower}
             className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white font-bold text-2xl py-12 mt-8"
           >
-            <InfinityIcon className="h-12 w-12 mr-4 animate-spin" />⚡ ACTIVATE
-            MAXIMUM AI POWER - UNLIMITED CAPABILITIES
+            <InfinityIcon className="h-12 w-12 mr-4 animate-spin" />⚡ ACTIVATE MAXIMUM AI POWER -
+            UNLIMITED CAPABILITIES
           </Button>
         </CardContent>
       </Card>

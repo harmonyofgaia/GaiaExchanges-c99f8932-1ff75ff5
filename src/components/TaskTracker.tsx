@@ -30,8 +30,7 @@ export function TaskTracker() {
       id: "1",
       category: "Design",
       title: "Custom Harmony of Gaia Logo",
-      description:
-        "Create brand new NFT marketplace logo with Culture of Harmony designs",
+      description: "Create brand new NFT marketplace logo with Culture of Harmony designs",
       status: "completed",
       priority: "high",
     },
@@ -55,8 +54,7 @@ export function TaskTracker() {
       id: "4",
       category: "Tools",
       title: "Investor Adjustment Tools",
-      description:
-        "Full adjustment tools for making project interesting to investors",
+      description: "Full adjustment tools for making project interesting to investors",
       status: "completed",
       priority: "high",
     },
@@ -106,8 +104,7 @@ export function TaskTracker() {
       id: "10",
       category: "Database",
       title: "Fix Supabase Functions Parameters",
-      description:
-        "4 issues to find and solve with detect functions parameters not set",
+      description: "4 issues to find and solve with detect functions parameters not set",
       status: "blocked",
       priority: "high",
       dependencies: ["Need specific error details from user"],
@@ -124,8 +121,7 @@ export function TaskTracker() {
       id: "12",
       category: "Integration",
       title: "Web Research & Updates",
-      description:
-        "Check web and update tools/landscaping to stay ahead of competition",
+      description: "Check web and update tools/landscaping to stay ahead of competition",
       status: "pending",
       priority: "medium",
     },
@@ -133,8 +129,7 @@ export function TaskTracker() {
       id: "13",
       category: "Economy",
       title: "Dynamic Coin Value System",
-      description:
-        "Implement system where higher coin value = fewer buyers for balance",
+      description: "Implement system where higher coin value = fewer buyers for balance",
       status: "pending",
       priority: "high",
     },
@@ -142,8 +137,7 @@ export function TaskTracker() {
       id: "14",
       category: "Marketing",
       title: "Prevent Marketing Stagnation",
-      description:
-        "Ensure continuous marketing flow and prevent project stalling",
+      description: "Ensure continuous marketing flow and prevent project stalling",
       status: "pending",
       priority: "high",
     },
@@ -209,7 +203,7 @@ export function TaskTracker() {
       acc[task.status].push(task);
       return acc;
     },
-    {} as Record<string, Task[]>,
+    {} as Record<string, Task[]>
   );
 
   return (
@@ -224,9 +218,7 @@ export function TaskTracker() {
             {completedTasks} / {totalTasks} Tasks Completed
           </div>
           <Progress value={completionPercentage} className="h-4 mb-2" />
-          <div className="text-cyan-400">
-            {completionPercentage}% Project Complete
-          </div>
+          <div className="text-cyan-400">{completionPercentage}% Project Complete</div>
         </div>
       </CardHeader>
       <CardContent>
@@ -246,27 +238,19 @@ export function TaskTracker() {
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         {getCategoryIcon(task.category)}
-                        <Badge className="bg-purple-600 text-white text-xs">
-                          {task.category}
-                        </Badge>
+                        <Badge className="bg-purple-600 text-white text-xs">{task.category}</Badge>
                       </div>
                       <div className="flex gap-2">
-                        <Badge
-                          className={`${getStatusColor(task.status)} text-white text-xs`}
-                        >
+                        <Badge className={`${getStatusColor(task.status)} text-white text-xs`}>
                           {task.status}
                         </Badge>
-                        <Badge
-                          className={`${getPriorityColor(task.priority)} text-white text-xs`}
-                        >
+                        <Badge className={`${getPriorityColor(task.priority)} text-white text-xs`}>
                           {task.priority}
                         </Badge>
                       </div>
                     </div>
                     <h4 className="font-bold text-white mb-2">{task.title}</h4>
-                    <p className="text-sm text-gray-300 mb-3">
-                      {task.description}
-                    </p>
+                    <p className="text-sm text-gray-300 mb-3">{task.description}</p>
                     {task.dependencies && (
                       <div className="text-xs text-yellow-400">
                         ⚠️ Blocked: {task.dependencies.join(", ")}
@@ -284,13 +268,11 @@ export function TaskTracker() {
             🚨 URGENT: Supabase Issues Need Attention
           </h3>
           <p className="text-gray-300 mb-4">
-            There are 4 Supabase function parameter issues that need to be
-            resolved. Please provide specific error messages or details about
-            these issues so they can be fixed.
+            There are 4 Supabase function parameter issues that need to be resolved. Please provide
+            specific error messages or details about these issues so they can be fixed.
           </p>
           <div className="text-yellow-400">
-            📝 Note: Without specific error details, these issues cannot be
-            resolved.
+            📝 Note: Without specific error details, these issues cannot be resolved.
           </div>
         </div>
       </CardContent>

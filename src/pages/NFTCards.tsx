@@ -51,8 +51,7 @@ export default function NFTCards() {
         power: 950,
         price: 2500,
         image: "🐉",
-        description:
-          "A majestic dragon that protects ancient forests from destruction",
+        description: "A majestic dragon that protects ancient forests from destruction",
         abilities: ["Forest Shield", "Nature's Wrath", "Healing Aura"],
         owned: false,
         creator: "EcoArtist_Prime",
@@ -65,8 +64,7 @@ export default function NFTCards() {
         power: 1200,
         price: 5000,
         image: "🔥",
-        description:
-          "Reborn from solar energy, this phoenix brings renewable power",
+        description: "Reborn from solar energy, this phoenix brings renewable power",
         abilities: ["Solar Flare", "Rebirth", "Energy Surge", "Light Shield"],
         owned: true,
         creator: "SolarMaster99",
@@ -79,8 +77,7 @@ export default function NFTCards() {
         power: 750,
         price: 1800,
         image: "🐋",
-        description:
-          "Guardian of the ocean depths, keeper of marine biodiversity",
+        description: "Guardian of the ocean depths, keeper of marine biodiversity",
         abilities: ["Tidal Wave", "Deep Dive", "Marine Healing"],
         owned: false,
         creator: "AquaDefender",
@@ -106,8 +103,7 @@ export default function NFTCards() {
         power: 650,
         price: 1500,
         image: "💎",
-        description:
-          "The heart of the earth's power, crystallized into pure energy",
+        description: "The heart of the earth's power, crystallized into pure energy",
         abilities: ["Earth Shake", "Crystal Shield", "Power Amplify"],
         owned: false,
         creator: "CrystalCrafter",
@@ -167,11 +163,8 @@ export default function NFTCards() {
   };
 
   const filteredCards = cards.filter((card) => {
-    const matchesSearch = card.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesRarity =
-      selectedRarity === "all" || card.rarity === selectedRarity;
+    const matchesSearch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesRarity = selectedRarity === "all" || card.rarity === selectedRarity;
     const matchesType = selectedType === "all" || card.type === selectedType;
     return matchesSearch && matchesRarity && matchesType;
   });
@@ -181,9 +174,7 @@ export default function NFTCards() {
       description: `Added to your collection for ${card.price} GAIA tokens`,
     });
     // Update card ownership
-    setCards((prev) =>
-      prev.map((c) => (c.id === card.id ? { ...c, owned: true } : c)),
-    );
+    setCards((prev) => prev.map((c) => (c.id === card.id ? { ...c, owned: true } : c)));
     setMyCards((prev) => [...prev, { ...card, owned: true }]);
   };
 
@@ -209,9 +200,7 @@ export default function NFTCards() {
     >
       <CardHeader className="pb-2">
         <div className="flex justify-between items-start">
-          <Badge
-            className={`${getRarityColor(card.rarity)} text-white text-xs`}
-          >
+          <Badge className={`${getRarityColor(card.rarity)} text-white text-xs`}>
             {card.rarity.toUpperCase()}
           </Badge>
           <div className="text-2xl">{getTypeIcon(card.type)}</div>
@@ -253,9 +242,7 @@ export default function NFTCards() {
         </div>
 
         {/* Creator */}
-        <div className="text-xs text-muted-foreground">
-          Created by: {card.creator}
-        </div>
+        <div className="text-xs text-muted-foreground">Created by: {card.creator}</div>
 
         {/* Action Button */}
         {card.owned ? (
@@ -281,9 +268,7 @@ export default function NFTCards() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center space-y-4">
           <div className="animate-spin text-6xl">🃏</div>
-          <h2 className="text-2xl font-bold text-primary">
-            Loading NFT Cards...
-          </h2>
+          <h2 className="text-2xl font-bold text-primary">Loading NFT Cards...</h2>
         </div>
       </div>
     );
@@ -316,9 +301,7 @@ export default function NFTCards() {
           <Card className="bg-blue-900/30 border-blue-500/30">
             <CardContent className="p-4 text-center">
               <Sparkles className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {cards.length}
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{cards.length}</div>
               <div className="text-sm text-muted-foreground">Total Cards</div>
             </CardContent>
           </Card>
@@ -326,9 +309,7 @@ export default function NFTCards() {
           <Card className="bg-green-900/30 border-green-500/30">
             <CardContent className="p-4 text-center">
               <Heart className="h-6 w-6 text-green-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {myCards.length}
-              </div>
+              <div className="text-2xl font-bold text-green-400">{myCards.length}</div>
               <div className="text-sm text-muted-foreground">My Collection</div>
             </CardContent>
           </Card>
@@ -358,10 +339,7 @@ export default function NFTCards() {
               <TabsTrigger value="create">🎨 Create</TabsTrigger>
             </TabsList>
 
-            <Button
-              onClick={createCard}
-              className="bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={createCard} className="bg-purple-600 hover:bg-purple-700">
               <Plus className="h-4 w-4 mr-2" />
               Create NFT
             </Button>
@@ -448,17 +426,11 @@ export default function NFTCards() {
               <CardContent className="text-center py-12">
                 <div className="space-y-4">
                   <div className="text-6xl">🎨</div>
-                  <h3 className="text-2xl font-bold">
-                    Card Creator Coming Soon!
-                  </h3>
+                  <h3 className="text-2xl font-bold">Card Creator Coming Soon!</h3>
                   <p className="text-muted-foreground">
-                    Design your own eco-themed NFT cards with our advanced
-                    creation tools
+                    Design your own eco-themed NFT cards with our advanced creation tools
                   </p>
-                  <Button
-                    onClick={createCard}
-                    className="bg-purple-600 hover:bg-purple-700"
-                  >
+                  <Button onClick={createCard} className="bg-purple-600 hover:bg-purple-700">
                     <Sparkles className="h-4 w-4 mr-2" />
                     Open Card Creator
                   </Button>

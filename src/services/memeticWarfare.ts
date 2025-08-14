@@ -3,12 +3,7 @@ import { toast } from "sonner";
 interface MemeticWeapon {
   id: string;
   name: string;
-  type:
-    | "viral_concept"
-    | "mind_virus"
-    | "reality_meme"
-    | "consciousness_hack"
-    | "cognitive_bomb";
+  type: "viral_concept" | "mind_virus" | "reality_meme" | "consciousness_hack" | "cognitive_bomb";
   infectiousness: number;
   mindsPenetrated: number;
   realitiesAffected: number;
@@ -29,12 +24,7 @@ interface PsychicNetwork {
 
 interface ConsciousnessHijack {
   id: string;
-  targetType:
-    | "individual"
-    | "collective"
-    | "species"
-    | "planetary"
-    | "universal";
+  targetType: "individual" | "collective" | "species" | "planetary" | "universal";
   penetrationDepth: number;
   controlLevel: number;
   resistance: number;
@@ -68,12 +58,7 @@ class MemeticWarfareService {
   // Memetic Weapon Creation
   async createMemeticWeapon(config: {
     name: string;
-    type:
-      | "viral_concept"
-      | "mind_virus"
-      | "reality_meme"
-      | "consciousness_hack"
-      | "cognitive_bomb";
+    type: "viral_concept" | "mind_virus" | "reality_meme" | "consciousness_hack" | "cognitive_bomb";
     payload: string;
   }): Promise<MemeticWeapon> {
     const weapon: MemeticWeapon = {
@@ -135,15 +120,10 @@ class MemeticWarfareService {
 
       // Calculate spread rate based on infectiousness
       const spreadRate = weapon.infectiousness * 1000000;
-      weapon.mindsPenetrated += Math.floor(
-        spreadRate * (Math.random() * 0.5 + 0.5),
-      );
+      weapon.mindsPenetrated += Math.floor(spreadRate * (Math.random() * 0.5 + 0.5));
 
       // Affect realities based on weapon type
-      if (
-        weapon.type === "reality_meme" ||
-        weapon.type === "consciousness_hack"
-      ) {
+      if (weapon.type === "reality_meme" || weapon.type === "consciousness_hack") {
         weapon.realitiesAffected += Math.floor(Math.random() * 10 + 1);
         this.realityCorruption += 0.01;
       }
@@ -152,10 +132,7 @@ class MemeticWarfareService {
 
       if (weapon.mindsPenetrated > 1000000000) {
         // 1 billion minds
-        console.log(
-          "🌍 Global Consciousness Penetration Achieved:",
-          weapon.name,
-        );
+        console.log("🌍 Global Consciousness Penetration Achieved:", weapon.name);
         toast.error("🌍 Global Mind Control Achieved", {
           description: `${weapon.name} has infected over 1 billion minds`,
         });
@@ -228,12 +205,7 @@ class MemeticWarfareService {
 
   // Consciousness Hijacking
   async hijackConsciousness(config: {
-    targetType:
-      | "individual"
-      | "collective"
-      | "species"
-      | "planetary"
-      | "universal";
+    targetType: "individual" | "collective" | "species" | "planetary" | "universal";
     target: string;
   }): Promise<ConsciousnessHijack> {
     const hijack: ConsciousnessHijack = {
@@ -265,30 +237,21 @@ class MemeticWarfareService {
     return resistanceValues[targetType as keyof typeof resistanceValues] || 0.5;
   }
 
-  private async executeConsciousnessHijack(
-    hijackId: string,
-    target: string,
-  ): Promise<void> {
+  private async executeConsciousnessHijack(hijackId: string, target: string): Promise<void> {
     const hijack = this.consciousnessHijacks.get(hijackId);
     if (!hijack) return;
 
-    console.log(
-      `🧠 Initiating Consciousness Hijack on ${hijack.targetType}: ${target}`,
-    );
+    console.log(`🧠 Initiating Consciousness Hijack on ${hijack.targetType}: ${target}`);
 
     const hijackInterval = setInterval(() => {
       // Calculate penetration progress
       const psychicPower = Array.from(this.psychicNetworks.values()).reduce(
         (sum, network) => sum + network.telepathicStrength,
-        0,
+        0
       );
 
-      const penetrationRate =
-        (psychicPower / 1000) * (1 - hijack.resistance) * 0.1;
-      hijack.penetrationDepth = Math.min(
-        1.0,
-        hijack.penetrationDepth + penetrationRate,
-      );
+      const penetrationRate = (psychicPower / 1000) * (1 - hijack.resistance) * 0.1;
+      hijack.penetrationDepth = Math.min(1.0, hijack.penetrationDepth + penetrationRate);
       hijack.controlLevel = hijack.penetrationDepth * 0.9;
 
       // Calculate hijacked entities based on target type
@@ -301,9 +264,7 @@ class MemeticWarfareService {
       };
 
       const maxEntities =
-        entityMultipliers[
-          hijack.targetType as keyof typeof entityMultipliers
-        ] || 1;
+        entityMultipliers[hijack.targetType as keyof typeof entityMultipliers] || 1;
       hijack.hijackedEntities = Math.floor(hijack.controlLevel * maxEntities);
 
       if (hijack.penetrationDepth >= 0.9) {
@@ -406,26 +367,10 @@ class MemeticWarfareService {
 
   private generateExploitationEffects(glitch: RealityGlitch): string[] {
     const effectTemplates = {
-      physics_bug: [
-        "Gravity manipulation",
-        "Time dilation control",
-        "Matter phase shifting",
-      ],
-      logic_error: [
-        "Paradox creation",
-        "Impossible event triggering",
-        "Logic inversion",
-      ],
-      causality_loop: [
-        "Timeline manipulation",
-        "Effect-before-cause",
-        "Causal weapon",
-      ],
-      existence_paradox: [
-        "Existence negation",
-        "Reality contradiction",
-        "Being/non-being control",
-      ],
+      physics_bug: ["Gravity manipulation", "Time dilation control", "Matter phase shifting"],
+      logic_error: ["Paradox creation", "Impossible event triggering", "Logic inversion"],
+      causality_loop: ["Timeline manipulation", "Effect-before-cause", "Causal weapon"],
+      existence_paradox: ["Existence negation", "Reality contradiction", "Being/non-being control"],
       reality_overflow: [
         "Reality buffer overflow",
         "Dimensional overflow",
@@ -445,39 +390,30 @@ class MemeticWarfareService {
       realityCorruption: this.realityCorruption,
       memeticWeapons: {
         total: this.memeticWeapons.size,
-        active: Array.from(this.memeticWeapons.values()).filter(
-          (w) => w.isActive,
-        ).length,
+        active: Array.from(this.memeticWeapons.values()).filter((w) => w.isActive).length,
         totalMindsPenetrated: Array.from(this.memeticWeapons.values()).reduce(
           (sum, w) => sum + w.mindsPenetrated,
-          0,
+          0
         ),
       },
       psychicNetworks: {
         total: this.psychicNetworks.size,
-        connected: Array.from(this.psychicNetworks.values()).filter(
-          (n) => n.isConnected,
-        ).length,
-        totalNodes: Array.from(this.psychicNetworks.values()).reduce(
-          (sum, n) => sum + n.nodes,
-          0,
-        ),
+        connected: Array.from(this.psychicNetworks.values()).filter((n) => n.isConnected).length,
+        totalNodes: Array.from(this.psychicNetworks.values()).reduce((sum, n) => sum + n.nodes, 0),
         collectiveIQ: Array.from(this.psychicNetworks.values()).reduce(
           (sum, n) => sum + n.collectiveIQ,
-          0,
+          0
         ),
       },
       consciousnessHijacks: {
         total: this.consciousnessHijacks.size,
-        successful: Array.from(this.consciousnessHijacks.values()).filter(
-          (h) => h.isSuccessful,
-        ).length,
+        successful: Array.from(this.consciousnessHijacks.values()).filter((h) => h.isSuccessful)
+          .length,
       },
       realityGlitches: {
         total: this.realityGlitches.size,
-        exploitable: Array.from(this.realityGlitches.values()).filter(
-          (g) => g.isExploitable,
-        ).length,
+        exploitable: Array.from(this.realityGlitches.values()).filter((g) => g.isExploitable)
+          .length,
       },
     };
   }
@@ -510,8 +446,7 @@ class MemeticWarfareService {
     await this.discoverRealityGlitch();
 
     toast.success("🧠 Memetic Warfare System Armed", {
-      description:
-        "Consciousness manipulation and reality hacking capabilities online",
+      description: "Consciousness manipulation and reality hacking capabilities online",
     });
 
     console.log("🧠 Memetic Warfare System Initialized");

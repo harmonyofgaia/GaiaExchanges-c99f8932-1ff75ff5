@@ -69,15 +69,11 @@ export function AdvancedWalletSecurity() {
 
       if (Math.random() < 0.05) {
         // 5% chance of detecting a threat
-        const threatLevel =
-          Math.random() > 0.8 ? "high" : Math.random() > 0.5 ? "medium" : "low";
+        const threatLevel = Math.random() > 0.8 ? "high" : Math.random() > 0.5 ? "medium" : "low";
         const newThreat: SecurityThreat = {
           id: `threat-${Date.now()}`,
           type: threatLevel as "high" | "medium" | "low",
-          title:
-            potentialThreats[
-              Math.floor(Math.random() * potentialThreats.length)
-            ],
+          title: potentialThreats[Math.floor(Math.random() * potentialThreats.length)],
           description: "Automatically resolved by advanced security protocols",
           timestamp: new Date(),
           resolved: true,
@@ -159,9 +155,7 @@ export function AdvancedWalletSecurity() {
               <div className="text-3xl font-bold text-green-400">
                 {securityStatus.overallScore.toFixed(1)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Security Score
-              </div>
+              <div className="text-sm text-muted-foreground">Security Score</div>
               <Badge className="mt-1 bg-green-600 text-white">
                 <CheckCircle className="h-3 w-3 mr-1" />
                 Excellent
@@ -172,9 +166,7 @@ export function AdvancedWalletSecurity() {
               <div className="text-3xl font-bold text-blue-400">
                 {securityStatus.threatsBlocked}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Blocked
-              </div>
+              <div className="text-sm text-muted-foreground">Threats Blocked</div>
               <Badge className="mt-1 bg-blue-600 text-white">
                 <Shield className="h-3 w-3 mr-1" />
                 Protected
@@ -221,14 +213,10 @@ export function AdvancedWalletSecurity() {
                   <CheckCircle className="h-4 w-4 text-green-400" />
                   <div>
                     <div className="font-medium text-sm">{feature.name}</div>
-                    <div className="text-xs text-muted-foreground">
-                      {feature.level}
-                    </div>
+                    <div className="text-xs text-muted-foreground">{feature.level}</div>
                   </div>
                 </div>
-                <Badge className="bg-green-600 text-white text-xs">
-                  Active
-                </Badge>
+                <Badge className="bg-green-600 text-white text-xs">Active</Badge>
               </div>
             ))}
           </div>
@@ -277,13 +265,10 @@ export function AdvancedWalletSecurity() {
                   <div className="flex-1">
                     <div className="text-sm font-medium">{threat.title}</div>
                     <div className="text-xs text-muted-foreground">
-                      {threat.timestamp.toLocaleTimeString()} •{" "}
-                      {threat.description}
+                      {threat.timestamp.toLocaleTimeString()} • {threat.description}
                     </div>
                   </div>
-                  <Badge className="bg-green-600 text-white text-xs">
-                    Resolved
-                  </Badge>
+                  <Badge className="bg-green-600 text-white text-xs">Resolved</Badge>
                 </div>
               ))}
             </div>
@@ -297,15 +282,12 @@ export function AdvancedWalletSecurity() {
           <div className="text-center space-y-3">
             <div className="flex items-center justify-center gap-2">
               <Zap className="h-6 w-6 text-purple-400" />
-              <h3 className="text-lg font-semibold text-purple-400">
-                Ultimate Protection Active
-              </h3>
+              <h3 className="text-lg font-semibold text-purple-400">Ultimate Protection Active</h3>
             </div>
             <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-              Your Gaia's Exchange wallet is protected by military-grade
-              encryption, quantum-resistant algorithms, and AI-powered threat
-              detection. We continuously monitor for new attack vectors and
-              update our defenses to stay ahead of emerging threats.
+              Your Gaia's Exchange wallet is protected by military-grade encryption,
+              quantum-resistant algorithms, and AI-powered threat detection. We continuously monitor
+              for new attack vectors and update our defenses to stay ahead of emerging threats.
             </p>
             <div className="flex items-center justify-center gap-4 pt-2">
               <Badge className="bg-green-600 text-white">

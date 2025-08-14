@@ -21,8 +21,7 @@ export function CommunityIllustrations() {
 
   const handleAccessDenied = () => {
     toast.error("🔒 ACCESS RESTRICTED", {
-      description:
-        "Community artworks are now admin-only for background creation",
+      description: "Community artworks are now admin-only for background creation",
       duration: 4000,
     });
   };
@@ -46,13 +45,10 @@ export function CommunityIllustrations() {
           <div className="text-center space-y-6">
             <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-6">
               <Crown className="h-16 w-16 text-red-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-red-400 mb-2">
-                Admin Authorization Required
-              </h3>
+              <h3 className="text-xl font-bold text-red-400 mb-2">Admin Authorization Required</h3>
               <p className="text-red-300 mb-4">
-                Community artworks are now exclusively used for background
-                creation and GAiA token sales. Only administrators can access
-                this system to maintain quality and control.
+                Community artworks are now exclusively used for background creation and GAiA token
+                sales. Only administrators can access this system to maintain quality and control.
               </p>
               <div className="space-y-2 text-sm text-muted-foreground">
                 <div>• All artworks moved to secure cloud storage</div>
@@ -62,11 +58,7 @@ export function CommunityIllustrations() {
               </div>
             </div>
 
-            <Button
-              onClick={handleAccessDenied}
-              className="bg-red-600 hover:bg-red-700"
-              size="lg"
-            >
+            <Button onClick={handleAccessDenied} className="bg-red-600 hover:bg-red-700" size="lg">
               <Lock className="h-4 w-4 mr-2" />
               Request Admin Access
             </Button>

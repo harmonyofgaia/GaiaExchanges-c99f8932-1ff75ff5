@@ -49,9 +49,7 @@ interface ValidationItem {
 }
 
 export function V2PlusValidator() {
-  const [validationCategories, setValidationCategories] = useState<
-    ValidationCategory[]
-  >([
+  const [validationCategories, setValidationCategories] = useState<ValidationCategory[]>([
     {
       id: "security-foundation",
       name: "Secure Admin Foundation",
@@ -368,9 +366,7 @@ export function V2PlusValidator() {
               </div>
               <Progress value={overallProgress} className="h-3" />
             </div>
-            <Badge className="bg-green-600 text-white px-4 py-2">
-              127 Features Ready
-            </Badge>
+            <Badge className="bg-green-600 text-white px-4 py-2">127 Features Ready</Badge>
           </div>
         </CardContent>
       </Card>
@@ -411,9 +407,7 @@ export function V2PlusValidator() {
                           </Badge>
                         )}
                       </div>
-                      <p className="text-sm text-muted-foreground">
-                        {item.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{item.description}</p>
                     </div>
                   </div>
                 ))}
@@ -432,27 +426,19 @@ export function V2PlusValidator() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-green-900/20 rounded-lg border border-green-500/30">
               <div className="text-2xl font-bold text-green-400">24</div>
-              <div className="text-sm text-muted-foreground">
-                Validated Items
-              </div>
+              <div className="text-sm text-muted-foreground">Validated Items</div>
             </div>
             <div className="text-center p-4 bg-blue-900/20 rounded-lg border border-blue-500/30">
               <div className="text-2xl font-bold text-blue-400">6</div>
-              <div className="text-sm text-muted-foreground">
-                System Categories
-              </div>
+              <div className="text-sm text-muted-foreground">System Categories</div>
             </div>
             <div className="text-center p-4 bg-purple-900/20 rounded-lg border border-purple-500/30">
               <div className="text-2xl font-bold text-purple-400">127</div>
-              <div className="text-sm text-muted-foreground">
-                Total Features
-              </div>
+              <div className="text-sm text-muted-foreground">Total Features</div>
             </div>
             <div className="text-center p-4 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
               <div className="text-2xl font-bold text-yellow-400">100%</div>
-              <div className="text-sm text-muted-foreground">
-                Compliance Rate
-              </div>
+              <div className="text-sm text-muted-foreground">Compliance Rate</div>
             </div>
           </div>
         </CardContent>

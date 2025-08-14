@@ -29,9 +29,7 @@ export function CommunityCleanupActions() {
     }
 
     const points =
-      parseFloat(wasteCollected) * 10 +
-      parseInt(participantCount) * 5 +
-      parseFloat(duration) * 2;
+      parseFloat(wasteCollected) * 10 + parseInt(participantCount) * 5 + parseFloat(duration) * 2;
     const tokens = Math.floor(points * 0.2);
 
     const activity = {
@@ -55,7 +53,7 @@ export function CommunityCleanupActions() {
 
     addActivity(activity);
     toast.success(
-      `Community cleanup recorded! +${Math.floor(points)} points earned for leadership`,
+      `Community cleanup recorded! +${Math.floor(points)} points earned for leadership`
     );
     setLocationArea("");
     setParticipantCount("");
@@ -74,9 +72,7 @@ export function CommunityCleanupActions() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Cleanup Location
-            </label>
+            <label className="block text-sm font-medium mb-2">Cleanup Location</label>
             <Select value={locationArea} onValueChange={setLocationArea}>
               <SelectTrigger>
                 <SelectValue placeholder="Select cleanup area" />
@@ -84,9 +80,7 @@ export function CommunityCleanupActions() {
               <SelectContent>
                 <SelectItem value="beach">Beach/Waterfront</SelectItem>
                 <SelectItem value="park">Park/Recreation Area</SelectItem>
-                <SelectItem value="neighborhood">
-                  Neighborhood Streets
-                </SelectItem>
+                <SelectItem value="neighborhood">Neighborhood Streets</SelectItem>
                 <SelectItem value="forest">Forest/Trail</SelectItem>
                 <SelectItem value="river">River/Stream</SelectItem>
                 <SelectItem value="urban">Urban Area</SelectItem>
@@ -95,9 +89,7 @@ export function CommunityCleanupActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Number of Participants
-            </label>
+            <label className="block text-sm font-medium mb-2">Number of Participants</label>
             <Input
               type="number"
               value={participantCount}
@@ -108,9 +100,7 @@ export function CommunityCleanupActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Waste Collected (kg)
-            </label>
+            <label className="block text-sm font-medium mb-2">Waste Collected (kg)</label>
             <Input
               type="number"
               step="0.1"
@@ -122,9 +112,7 @@ export function CommunityCleanupActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Duration (hours)
-            </label>
+            <label className="block text-sm font-medium mb-2">Duration (hours)</label>
             <Input
               type="number"
               step="0.5"
@@ -140,16 +128,14 @@ export function CommunityCleanupActions() {
             disabled={loading}
             className="w-full bg-purple-600 hover:bg-purple-700"
           >
-            {loading
-              ? "Recording..."
-              : "🧹 Record Community Cleanup Leadership"}
+            {loading ? "Recording..." : "🧹 Record Community Cleanup Leadership"}
           </Button>
         </form>
 
         <div className="mt-4 p-3 bg-purple-900/20 rounded-lg border border-purple-500/30">
           <p className="text-sm text-purple-300">
-            💡 <strong>Leadership Bonus:</strong> Community events earn extra
-            points for organizing and inspiring others!
+            💡 <strong>Leadership Bonus:</strong> Community events earn extra points for organizing
+            and inspiring others!
           </p>
         </div>
       </CardContent>

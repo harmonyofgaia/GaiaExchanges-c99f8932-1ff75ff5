@@ -58,7 +58,7 @@ export function HomeBackground() {
         0,
         canvas.width / 2,
         canvas.height / 2,
-        Math.max(canvas.width, canvas.height) / 2,
+        Math.max(canvas.width, canvas.height) / 2
       );
       gradient.addColorStop(0, "rgba(0, 255, 255, 0.03)");
       gradient.addColorStop(0.3, "rgba(255, 0, 255, 0.02)");
@@ -103,8 +103,7 @@ export function HomeBackground() {
 
         // Draw trail
         particle.trail.forEach((point, trailIndex) => {
-          const trailAlpha =
-            (trailIndex / particle.trail.length) * point.alpha * 0.5;
+          const trailAlpha = (trailIndex / particle.trail.length) * point.alpha * 0.5;
           ctx.save();
           ctx.globalAlpha = trailAlpha;
           ctx.fillStyle = particle.color;
@@ -125,7 +124,7 @@ export function HomeBackground() {
           0,
           particle.x,
           particle.y,
-          particle.size * 4,
+          particle.size * 4
         );
         glowGradient.addColorStop(0, particle.color);
         glowGradient.addColorStop(1, "transparent");
@@ -189,8 +188,7 @@ export function HomeBackground() {
         ref={canvasRef}
         className="fixed inset-0 w-full h-full -z-20"
         style={{
-          background:
-            "linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #0f0f0f 100%)",
+          background: "linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #0f0f0f 100%)",
         }}
       />
       <EnhancedHomeBackground />

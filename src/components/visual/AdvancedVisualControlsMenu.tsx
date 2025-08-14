@@ -319,16 +319,11 @@ export function AdvancedVisualControlsMenu() {
             🎨 ADVANCED VISUAL CONTROL CENTER
           </CardTitle>
           <p className="text-muted-foreground">
-            Never-before-built design control system with media library and
-            real-time customization
+            Never-before-built design control system with media library and real-time customization
           </p>
         </CardHeader>
         <CardContent>
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="w-full"
-          >
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-6">
               <TabsTrigger value="design">🎨 Design</TabsTrigger>
               <TabsTrigger value="colors">🌈 Colors</TabsTrigger>
@@ -380,9 +375,7 @@ export function AdvancedVisualControlsMenu() {
                     </div>
 
                     <div>
-                      <Label>
-                        Container Width: {designConfig.spacing.container}px
-                      </Label>
+                      <Label>Container Width: {designConfig.spacing.container}px</Label>
                       <Slider
                         value={[designConfig.spacing.container]}
                         onValueChange={(value) =>
@@ -416,9 +409,7 @@ export function AdvancedVisualControlsMenu() {
                     </div>
 
                     <div>
-                      <Label>
-                        Border Radius: {designConfig.spacing.borderRadius}px
-                      </Label>
+                      <Label>Border Radius: {designConfig.spacing.borderRadius}px</Label>
                       <Slider
                         value={[designConfig.spacing.borderRadius]}
                         onValueChange={(value) =>
@@ -517,157 +508,136 @@ export function AdvancedVisualControlsMenu() {
 
             <TabsContent value="colors" className="space-y-6 mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {Object.entries(designConfig.colors).map(
-                  ([colorName, colorValue]) => (
-                    <Card key={colorName} className="border-purple-500/30">
-                      <CardHeader>
-                        <CardTitle className="capitalize text-purple-400">
-                          {colorName} Color
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div
-                          className="w-full h-20 rounded-lg border-2 border-white/20"
-                          style={{ backgroundColor: colorValue }}
-                        />
-                        <Input
-                          type="color"
-                          value={colorValue}
-                          onChange={(e) =>
-                            setDesignConfig((prev) => ({
-                              ...prev,
-                              colors: {
-                                ...prev.colors,
-                                [colorName]: e.target.value,
-                              },
-                            }))
-                          }
-                          className="h-12"
-                        />
-                        <Input
-                          value={colorValue}
-                          onChange={(e) =>
-                            setDesignConfig((prev) => ({
-                              ...prev,
-                              colors: {
-                                ...prev.colors,
-                                [colorName]: e.target.value,
-                              },
-                            }))
-                          }
-                          placeholder="#000000"
-                        />
-                      </CardContent>
-                    </Card>
-                  ),
-                )}
+                {Object.entries(designConfig.colors).map(([colorName, colorValue]) => (
+                  <Card key={colorName} className="border-purple-500/30">
+                    <CardHeader>
+                      <CardTitle className="capitalize text-purple-400">
+                        {colorName} Color
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div
+                        className="w-full h-20 rounded-lg border-2 border-white/20"
+                        style={{ backgroundColor: colorValue }}
+                      />
+                      <Input
+                        type="color"
+                        value={colorValue}
+                        onChange={(e) =>
+                          setDesignConfig((prev) => ({
+                            ...prev,
+                            colors: {
+                              ...prev.colors,
+                              [colorName]: e.target.value,
+                            },
+                          }))
+                        }
+                        className="h-12"
+                      />
+                      <Input
+                        value={colorValue}
+                        onChange={(e) =>
+                          setDesignConfig((prev) => ({
+                            ...prev,
+                            colors: {
+                              ...prev.colors,
+                              [colorName]: e.target.value,
+                            },
+                          }))
+                        }
+                        placeholder="#000000"
+                      />
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </TabsContent>
 
             <TabsContent value="typography" className="space-y-6 mt-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {Object.entries(designConfig.fonts).map(
-                  ([fontType, fontValue]) => (
-                    <Card key={fontType} className="border-blue-500/30">
-                      <CardHeader>
-                        <CardTitle className="capitalize text-blue-400">
-                          {fontType} Font
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <Select
-                          value={fontValue}
-                          onValueChange={(value) =>
-                            setDesignConfig((prev) => ({
-                              ...prev,
-                              fonts: { ...prev.fonts, [fontType]: value },
-                            }))
-                          }
-                        >
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Inter">Inter</SelectItem>
-                            <SelectItem value="Roboto">Roboto</SelectItem>
-                            <SelectItem value="Open Sans">Open Sans</SelectItem>
-                            <SelectItem value="Playfair Display">
-                              Playfair Display
-                            </SelectItem>
-                            <SelectItem value="Space Grotesk">
-                              Space Grotesk
-                            </SelectItem>
-                            <SelectItem value="Orbitron">Orbitron</SelectItem>
-                            <SelectItem value="Fira Code">Fira Code</SelectItem>
-                            <SelectItem value="JetBrains Mono">
-                              JetBrains Mono
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
+                {Object.entries(designConfig.fonts).map(([fontType, fontValue]) => (
+                  <Card key={fontType} className="border-blue-500/30">
+                    <CardHeader>
+                      <CardTitle className="capitalize text-blue-400">{fontType} Font</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <Select
+                        value={fontValue}
+                        onValueChange={(value) =>
+                          setDesignConfig((prev) => ({
+                            ...prev,
+                            fonts: { ...prev.fonts, [fontType]: value },
+                          }))
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Inter">Inter</SelectItem>
+                          <SelectItem value="Roboto">Roboto</SelectItem>
+                          <SelectItem value="Open Sans">Open Sans</SelectItem>
+                          <SelectItem value="Playfair Display">Playfair Display</SelectItem>
+                          <SelectItem value="Space Grotesk">Space Grotesk</SelectItem>
+                          <SelectItem value="Orbitron">Orbitron</SelectItem>
+                          <SelectItem value="Fira Code">Fira Code</SelectItem>
+                          <SelectItem value="JetBrains Mono">JetBrains Mono</SelectItem>
+                        </SelectContent>
+                      </Select>
 
-                        <div className="p-4 bg-black/20 rounded-lg">
-                          <div
-                            style={{ fontFamily: fontValue }}
-                            className="text-lg"
-                          >
-                            {fontType === "heading" && "Sample Heading Text"}
-                            {fontType === "body" &&
-                              "Sample body text for reading"}
-                            {fontType === "mono" && 'const code = "sample";'}
-                          </div>
+                      <div className="p-4 bg-black/20 rounded-lg">
+                        <div style={{ fontFamily: fontValue }} className="text-lg">
+                          {fontType === "heading" && "Sample Heading Text"}
+                          {fontType === "body" && "Sample body text for reading"}
+                          {fontType === "mono" && 'const code = "sample";'}
                         </div>
-                      </CardContent>
-                    </Card>
-                  ),
-                )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </TabsContent>
 
             <TabsContent value="effects" className="space-y-6 mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {Object.entries(designConfig.effects).map(
-                  ([effectName, effectValue]) => (
-                    <Card key={effectName} className="border-yellow-500/30">
-                      <CardHeader>
-                        <CardTitle className="capitalize text-yellow-400 flex items-center gap-2">
-                          <Sparkles className="h-5 w-5" />
-                          {effectName}
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div className="flex items-center justify-between">
-                          <Label className="capitalize">
-                            {effectName.replace(/([A-Z])/g, " $1")}
-                          </Label>
-                          <Switch
-                            checked={effectValue}
-                            onCheckedChange={(checked) =>
-                              setDesignConfig((prev) => ({
-                                ...prev,
-                                effects: {
-                                  ...prev.effects,
-                                  [effectName]: checked,
-                                },
-                              }))
-                            }
-                          />
-                        </div>
+                {Object.entries(designConfig.effects).map(([effectName, effectValue]) => (
+                  <Card key={effectName} className="border-yellow-500/30">
+                    <CardHeader>
+                      <CardTitle className="capitalize text-yellow-400 flex items-center gap-2">
+                        <Sparkles className="h-5 w-5" />
+                        {effectName}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <Label className="capitalize">
+                          {effectName.replace(/([A-Z])/g, " $1")}
+                        </Label>
+                        <Switch
+                          checked={effectValue}
+                          onCheckedChange={(checked) =>
+                            setDesignConfig((prev) => ({
+                              ...prev,
+                              effects: {
+                                ...prev.effects,
+                                [effectName]: checked,
+                              },
+                            }))
+                          }
+                        />
+                      </div>
 
-                        <div className="text-sm text-muted-foreground">
-                          {effectName === "shadows" &&
-                            "Adds depth with drop shadows"}
-                          {effectName === "animations" &&
-                            "Enables smooth transitions"}
-                          {effectName === "blur" && "Background blur effects"}
-                          {effectName === "gradient" && "Gradient backgrounds"}
-                          {effectName === "particles" &&
-                            "Animated particle system"}
-                          {effectName === "glow" && "Neon glow effects"}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ),
-                )}
+                      <div className="text-sm text-muted-foreground">
+                        {effectName === "shadows" && "Adds depth with drop shadows"}
+                        {effectName === "animations" && "Enables smooth transitions"}
+                        {effectName === "blur" && "Background blur effects"}
+                        {effectName === "gradient" && "Gradient backgrounds"}
+                        {effectName === "particles" && "Animated particle system"}
+                        {effectName === "glow" && "Neon glow effects"}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </TabsContent>
 
@@ -721,17 +691,13 @@ export function AdvancedVisualControlsMenu() {
                             ) : (
                               <div className="text-center">
                                 {getFileIcon(file.type)}
-                                <div className="text-xs mt-1">
-                                  {file.type.toUpperCase()}
-                                </div>
+                                <div className="text-xs mt-1">{file.type.toUpperCase()}</div>
                               </div>
                             )}
                           </div>
 
                           <div className="space-y-2">
-                            <div className="font-semibold text-sm truncate">
-                              {file.name}
-                            </div>
+                            <div className="font-semibold text-sm truncate">{file.name}</div>
                             <div className="flex items-center justify-between text-xs text-muted-foreground">
                               <Badge variant="outline" className="text-xs">
                                 {file.category}
@@ -740,19 +706,11 @@ export function AdvancedVisualControlsMenu() {
                             </div>
 
                             <div className="flex gap-1">
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                className="flex-1"
-                              >
+                              <Button size="sm" variant="outline" className="flex-1">
                                 <Eye className="h-3 w-3 mr-1" />
                                 View
                               </Button>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                className="flex-1"
-                              >
+                              <Button size="sm" variant="outline" className="flex-1">
                                 <Download className="h-3 w-3 mr-1" />
                                 Use
                               </Button>
@@ -777,12 +735,8 @@ export function AdvancedVisualControlsMenu() {
                     className="border-indigo-500/30 hover:border-indigo-500/50 transition-colors cursor-pointer"
                   >
                     <CardHeader>
-                      <CardTitle className="text-indigo-400">
-                        {preset.name}
-                      </CardTitle>
-                      <p className="text-sm text-muted-foreground">
-                        {preset.description}
-                      </p>
+                      <CardTitle className="text-indigo-400">{preset.name}</CardTitle>
+                      <p className="text-sm text-muted-foreground">{preset.description}</p>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="flex gap-2">
@@ -799,23 +753,14 @@ export function AdvancedVisualControlsMenu() {
 
                       <div className="space-y-2 text-xs">
                         <div>Font: {preset.config.fonts.heading}</div>
+                        <div>Container: {preset.config.spacing.container}px</div>
                         <div>
-                          Container: {preset.config.spacing.container}px
-                        </div>
-                        <div>
-                          Effects:{" "}
-                          {
-                            Object.values(preset.config.effects).filter(Boolean)
-                              .length
-                          }{" "}
+                          Effects: {Object.values(preset.config.effects).filter(Boolean).length}{" "}
                           enabled
                         </div>
                       </div>
 
-                      <Button
-                        className="w-full"
-                        onClick={() => applyDesignPreset(preset)}
-                      >
+                      <Button className="w-full" onClick={() => applyDesignPreset(preset)}>
                         <Brush className="h-4 w-4 mr-2" />
                         Apply Preset
                       </Button>

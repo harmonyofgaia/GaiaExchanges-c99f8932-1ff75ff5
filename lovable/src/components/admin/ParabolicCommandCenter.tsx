@@ -40,9 +40,7 @@ export function ParabolicCommandCenter() {
             <Badge className="bg-pink-600 animate-pulse">
               👑 GOD MODE: {godModeActive ? "ACTIVE" : "INACTIVE"}
             </Badge>
-            <Badge className="bg-blue-600 animate-pulse">
-              🌟 STATUS: OMNIPOTENT
-            </Badge>
+            <Badge className="bg-blue-600 animate-pulse">🌟 STATUS: OMNIPOTENT</Badge>
           </div>
         </CardHeader>
         <CardContent className="relative space-y-6">
@@ -79,9 +77,7 @@ export function ParabolicCommandCenter() {
           </div>
 
           <div className="bg-black/50 rounded-lg p-6 border border-purple-500/30">
-            <h4 className="text-xl font-bold text-purple-400 mb-4">
-              🎭 PARABOLIC ABILITIES
-            </h4>
+            <h4 className="text-xl font-bold text-purple-400 mb-4">🎭 PARABOLIC ABILITIES</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div className="space-y-2">
                 <div className="flex justify-between">

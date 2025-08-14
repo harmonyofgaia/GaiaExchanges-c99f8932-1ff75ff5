@@ -4,8 +4,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.7.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 const openAIApiKey = Deno.env.get("OPENAI_API_KEY");
@@ -42,25 +41,22 @@ serve(async (req) => {
       `${prompt}, ultra high resolution, masterpiece quality, professional artwork`;
 
     // Advanced image generation with GPT-Image-1
-    const response = await fetch(
-      "https://api.openai.com/v1/images/generations",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${openAIApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "gpt-image-1",
-          prompt: enhancedPrompt,
-          n: 1,
-          size: size || "1024x1024",
-          quality: quality || "high",
-          output_format: "png",
-          background: "auto",
-        }),
+    const response = await fetch("https://api.openai.com/v1/images/generations", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${openAIApiKey}`,
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({
+        model: "gpt-image-1",
+        prompt: enhancedPrompt,
+        n: 1,
+        size: size || "1024x1024",
+        quality: quality || "high",
+        output_format: "png",
+        background: "auto",
+      }),
+    });
 
     const data = await response.json();
 
@@ -73,7 +69,7 @@ serve(async (req) => {
     // Store in database
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
     const { data: insertData, error } = await supabase
@@ -113,7 +109,7 @@ serve(async (req) => {
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-      },
+      }
     );
   } catch (error) {
     console.error("🔥 IMAGE QUANTUM ERROR:", error);
@@ -126,7 +122,7 @@ serve(async (req) => {
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-      },
+      }
     );
   }
 });

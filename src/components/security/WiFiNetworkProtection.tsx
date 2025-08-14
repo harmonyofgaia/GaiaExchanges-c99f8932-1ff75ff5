@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Wifi,
-  Shield,
-  Lock,
-  Eye,
-  Zap,
-  Globe,
-  Router,
-  Signal,
-} from "lucide-react";
+import { Wifi, Shield, Lock, Eye, Zap, Globe, Router, Signal } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -53,9 +44,7 @@ export function WiFiNetworkProtection() {
       if (!wifiProtectionActive) return;
 
       try {
-        console.log(
-          "📶 GAIA WIFI PROTECTION - Maximum Network Security Active",
-        );
+        console.log("📶 GAIA WIFI PROTECTION - Maximum Network Security Active");
 
         const newThreats: NetworkThreat[] = [];
 
@@ -76,17 +65,10 @@ export function WiFiNetworkProtection() {
           if (Math.random() < 0.1) {
             // 10% chance of detecting threat
             const threat =
-              suspiciousPatterns[
-                Math.floor(Math.random() * suspiciousPatterns.length)
-              ];
+              suspiciousPatterns[Math.floor(Math.random() * suspiciousPatterns.length)];
             newThreats.push({
               id: `wifi-threat-${Date.now()}`,
-              type:
-                Math.random() > 0.7
-                  ? "CRITICAL"
-                  : Math.random() > 0.4
-                    ? "HIGH"
-                    : "MEDIUM",
+              type: Math.random() > 0.7 ? "CRITICAL" : Math.random() > 0.4 ? "HIGH" : "MEDIUM",
               source: `Network Scan - ${threat}`,
               description: `WiFi security threat detected: ${threat.replace(/_/g, " ")}`,
               blocked: true,
@@ -106,8 +88,7 @@ export function WiFiNetworkProtection() {
                 id: `encryption-warning-${Date.now()}`,
                 type: "MEDIUM",
                 source: "Encryption Analysis",
-                description:
-                  "Weak network connection detected - Enhanced encryption applied",
+                description: "Weak network connection detected - Enhanced encryption applied",
                 blocked: true,
                 timestamp: new Date(),
               });
@@ -129,8 +110,7 @@ export function WiFiNetworkProtection() {
               id: `fingerprint-protection-${Date.now()}`,
               type: "HIGH",
               source: "Device Protection",
-              description:
-                "Advanced device fingerprinting blocked - Privacy protected",
+              description: "Advanced device fingerprinting blocked - Privacy protected",
               blocked: true,
               timestamp: new Date(),
             });
@@ -148,7 +128,7 @@ export function WiFiNetworkProtection() {
 
           // Log critical threats to database
           for (const threat of newThreats.filter(
-            (t) => t.type === "CRITICAL" || t.type === "HIGH",
+            (t) => t.type === "CRITICAL" || t.type === "HIGH"
           )) {
             try {
               await supabase.from("security_events").insert({
@@ -166,11 +146,9 @@ export function WiFiNetworkProtection() {
           // Update metrics
           setMetrics((prev) => ({
             ...prev,
-            threatsBlocked:
-              prev.threatsBlocked + newThreats.filter((t) => t.blocked).length,
+            threatsBlocked: prev.threatsBlocked + newThreats.filter((t) => t.blocked).length,
             vulnerabilitiesFound:
-              prev.vulnerabilitiesFound +
-              newThreats.filter((t) => !t.blocked).length,
+              prev.vulnerabilitiesFound + newThreats.filter((t) => !t.blocked).length,
             lastScan: new Date(),
           }));
 
@@ -192,10 +170,7 @@ export function WiFiNetworkProtection() {
             const rtt = connection.rtt || 50;
             const downlink = connection.downlink || 10;
 
-            const strengthScore = Math.min(
-              100,
-              Math.max(60, 100 - rtt / 10 + downlink * 2),
-            );
+            const strengthScore = Math.min(100, Math.max(60, 100 - rtt / 10 + downlink * 2));
 
             setMetrics((prev) => ({
               ...prev,
@@ -263,45 +238,29 @@ export function WiFiNetworkProtection() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center p-4 rounded-lg bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-500/30">
               <Signal className="h-8 w-8 mx-auto text-green-400 mb-2" />
-              <div className="text-2xl font-bold text-green-400">
-                {metrics.networkStrength}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Network Strength
-              </div>
+              <div className="text-2xl font-bold text-green-400">{metrics.networkStrength}%</div>
+              <div className="text-sm text-muted-foreground">Network Strength</div>
               <Badge className="mt-2 bg-green-600 text-white">MAXIMUM</Badge>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30">
               <Lock className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-xl font-bold text-blue-400">
-                {metrics.encryptionLevel}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Encryption Level
-              </div>
+              <div className="text-xl font-bold text-blue-400">{metrics.encryptionLevel}</div>
+              <div className="text-sm text-muted-foreground">Encryption Level</div>
               <Badge className="mt-2 bg-blue-600 text-white">QUANTUM</Badge>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-gradient-to-br from-red-500/20 to-pink-500/20 border border-red-500/30">
               <Shield className="h-8 w-8 mx-auto text-red-400 mb-2" />
-              <div className="text-2xl font-bold text-red-400">
-                {metrics.threatsBlocked}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Blocked
-              </div>
+              <div className="text-2xl font-bold text-red-400">{metrics.threatsBlocked}</div>
+              <div className="text-sm text-muted-foreground">Threats Blocked</div>
               <Badge className="mt-2 bg-red-600 text-white">ACTIVE</Badge>
             </div>
 
             <div className="text-center p-4 rounded-lg bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-purple-500/30">
               <Router className="h-8 w-8 mx-auto text-purple-400 mb-2" />
-              <div className="text-2xl font-bold text-purple-400">
-                {metrics.secureConnections}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Secure Connections
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{metrics.secureConnections}</div>
+              <div className="text-sm text-muted-foreground">Secure Connections</div>
               <Badge className="mt-2 bg-purple-600 text-white">PROTECTED</Badge>
             </div>
           </div>
@@ -309,17 +268,12 @@ export function WiFiNetworkProtection() {
           {/* Network Strength Progress */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h4 className="text-xl font-bold text-cyan-400">
-                📶 Network Security Level
-              </h4>
-              <span className="text-2xl font-bold text-cyan-400">
-                {metrics.networkStrength}%
-              </span>
+              <h4 className="text-xl font-bold text-cyan-400">📶 Network Security Level</h4>
+              <span className="text-2xl font-bold text-cyan-400">{metrics.networkStrength}%</span>
             </div>
             <Progress value={metrics.networkStrength} className="h-6" />
             <p className="text-center text-sm text-muted-foreground">
-              🔐 Quantum Encrypted • 🛡️ Real-time Protection • 🚫 Intrusion
-              Blocked
+              🔐 Quantum Encrypted • 🛡️ Real-time Protection • 🚫 Intrusion Blocked
             </p>
           </div>
 
@@ -335,9 +289,7 @@ export function WiFiNetworkProtection() {
           {/* Recent Threats */}
           {threats.length > 0 && (
             <div className="space-y-4">
-              <h4 className="text-lg font-bold text-red-400">
-                🚨 Recent Network Threats:
-              </h4>
+              <h4 className="text-lg font-bold text-red-400">🚨 Recent Network Threats:</h4>
               <div className="max-h-64 overflow-y-auto space-y-2">
                 {threats.slice(0, 10).map((threat) => (
                   <div
@@ -347,12 +299,8 @@ export function WiFiNetworkProtection() {
                     <div className="flex items-center gap-3">
                       <Eye className="h-4 w-4 text-red-400" />
                       <div>
-                        <div className="font-medium text-red-400">
-                          {threat.source}
-                        </div>
-                        <div className="text-sm text-red-300">
-                          {threat.description}
-                        </div>
+                        <div className="font-medium text-red-400">{threat.source}</div>
+                        <div className="text-sm text-red-300">{threat.description}</div>
                       </div>
                     </div>
                     <div className="text-right">
@@ -382,13 +330,10 @@ export function WiFiNetworkProtection() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-3">
-                <h5 className="font-bold text-cyan-400">
-                  🛡️ NETWORK SECURITY:
-                </h5>
+                <h5 className="font-bold text-cyan-400">🛡️ NETWORK SECURITY:</h5>
                 <ul className="text-sm space-y-1 text-cyan-200">
                   <li className="flex items-center gap-2">
-                    <Lock className="h-4 w-4" /> Quantum WPA3-Enterprise
-                    Encryption
+                    <Lock className="h-4 w-4" /> Quantum WPA3-Enterprise Encryption
                   </li>
                   <li className="flex items-center gap-2">
                     <Shield className="h-4 w-4" /> Real-time Intrusion Detection
@@ -403,9 +348,7 @@ export function WiFiNetworkProtection() {
               </div>
 
               <div className="space-y-3">
-                <h5 className="font-bold text-blue-400">
-                  📶 ADVANCED FEATURES:
-                </h5>
+                <h5 className="font-bold text-blue-400">📶 ADVANCED FEATURES:</h5>
                 <ul className="text-sm space-y-1 text-blue-200">
                   <li className="flex items-center gap-2">
                     <Router className="h-4 w-4" /> Evil Twin AP Detection

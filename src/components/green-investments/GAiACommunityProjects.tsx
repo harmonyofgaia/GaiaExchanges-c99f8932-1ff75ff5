@@ -23,9 +23,7 @@ import { toast } from "sonner";
 
 export function GAiACommunityProjects() {
   const [projects, setProjects] = useState(GAIA_PROJECTS);
-  const [subscribedProjects, setSubscribedProjects] = useState<Set<string>>(
-    new Set(),
-  );
+  const [subscribedProjects, setSubscribedProjects] = useState<Set<string>>(new Set());
   const [showRestorer, setShowRestorer] = useState(false);
   const [restoredData, setRestoredData] = useState<any>(null);
 
@@ -42,11 +40,11 @@ export function GAiACommunityProjects() {
           currentFunding: project.currentFunding
             ? Math.min(
                 project.fundingGoal || 0,
-                project.currentFunding + Math.floor(Math.random() * 2000),
+                project.currentFunding + Math.floor(Math.random() * 2000)
               )
             : 0,
           participants: project.participants + Math.floor(Math.random() * 5),
-        })),
+        }))
       );
     }, 8000);
 
@@ -141,16 +139,12 @@ export function GAiACommunityProjects() {
           </div>
 
           <CardTitle className="text-2xl text-purple-400 flex items-center gap-3">
-            {isSubscribed && (
-              <Heart className="h-6 w-6 text-red-400 animate-pulse" />
-            )}
+            {isSubscribed && <Heart className="h-6 w-6 text-red-400 animate-pulse" />}
             <Brain className="h-8 w-8 text-green-400" />
             {project.title}
           </CardTitle>
 
-          <p className="text-purple-300/90 text-lg leading-relaxed">
-            {project.description}
-          </p>
+          <p className="text-purple-300/90 text-lg leading-relaxed">{project.description}</p>
         </CardHeader>
 
         <CardContent className="space-y-6">
@@ -183,25 +177,21 @@ export function GAiACommunityProjects() {
               ))}
             </div>
             <div className="mt-3 text-xs text-purple-400/70">
-              📊 {project.publicationsPlanned} research publications planned •
-              Continuous updates
+              📊 {project.publicationsPlanned} research publications planned • Continuous updates
             </div>
           </div>
 
           <div className="space-y-3">
             <div className="flex justify-between text-sm">
-              <span className="text-purple-400 font-medium">
-                Research Funding Progress
-              </span>
+              <span className="text-purple-400 font-medium">Research Funding Progress</span>
               <span className="text-purple-300 font-bold">
-                {project.currentFunding?.toLocaleString()} /{" "}
-                {project.fundingGoal.toLocaleString()} GAiA
+                {project.currentFunding?.toLocaleString()} / {project.fundingGoal.toLocaleString()}{" "}
+                GAiA
               </span>
             </div>
             <Progress value={fundingPercentage} className="h-3" />
             <div className="text-xs text-purple-300/60">
-              {fundingPercentage.toFixed(1)}% funded • Perpetual research
-              commitment
+              {fundingPercentage.toFixed(1)}% funded • Perpetual research commitment
             </div>
           </div>
 
@@ -218,9 +208,7 @@ export function GAiACommunityProjects() {
               <Target className="h-4 w-4" />
               {project.progress}% complete
             </div>
-            <div
-              className={`flex items-center gap-1 ${getImpactColor(project.impact)}`}
-            >
+            <div className={`flex items-center gap-1 ${getImpactColor(project.impact)}`}>
               <Award className="h-4 w-4" />
               {project.impact} Impact
             </div>
@@ -229,15 +217,11 @@ export function GAiACommunityProjects() {
           <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-emerald-500/20 rounded-lg p-4">
             <div className="flex items-center gap-2 text-emerald-400 mb-2">
               <Globe className="h-5 w-5" />
-              <span className="font-medium">
-                Revolutionary Impact Potential
-              </span>
+              <span className="font-medium">Revolutionary Impact Potential</span>
             </div>
             <p className="text-emerald-300/90 mb-2">{project.expectedImpact}</p>
             {project.location && (
-              <p className="text-xs text-emerald-400/60">
-                🌍 {project.location}
-              </p>
+              <p className="text-xs text-emerald-400/60">🌍 {project.location}</p>
             )}
           </div>
 
@@ -251,9 +235,7 @@ export function GAiACommunityProjects() {
               }`}
               size="lg"
             >
-              <Heart
-                className={`h-5 w-5 mr-2 ${isSubscribed ? "fill-current" : ""}`}
-              />
+              <Heart className={`h-5 w-5 mr-2 ${isSubscribed ? "fill-current" : ""}`} />
               {isSubscribed ? "Unsubscribe" : "Subscribe & Support Research"}
             </Button>
             <Button
@@ -280,9 +262,7 @@ export function GAiACommunityProjects() {
       <Card
         key={project.id}
         className={`bg-gradient-to-br from-green-900/30 to-purple-900/30 border-green-500/30 transition-all duration-300 hover:scale-105 ${
-          isSubscribed
-            ? "ring-2 ring-green-400/50 shadow-lg shadow-green-400/20"
-            : ""
+          isSubscribed ? "ring-2 ring-green-400/50 shadow-lg shadow-green-400/20" : ""
         }`}
       >
         <CardHeader>
@@ -292,15 +272,11 @@ export function GAiACommunityProjects() {
             </Badge>
             <div className="flex items-center gap-1">
               <Clock className="h-4 w-4 text-orange-400" />
-              <span className="text-sm text-orange-400">
-                {project.deadline}
-              </span>
+              <span className="text-sm text-orange-400">{project.deadline}</span>
             </div>
           </div>
           <CardTitle className="text-green-400 flex items-center gap-2">
-            {isSubscribed && (
-              <Heart className="h-5 w-5 text-red-400 animate-pulse" />
-            )}
+            {isSubscribed && <Heart className="h-5 w-5 text-red-400 animate-pulse" />}
             {project.title}
           </CardTitle>
         </CardHeader>
@@ -349,9 +325,7 @@ export function GAiACommunityProjects() {
               <Target className="h-4 w-4" />
               {project.progress}% complete
             </div>
-            <div
-              className={`flex items-center gap-1 ${getImpactColor(project.impact)}`}
-            >
+            <div className={`flex items-center gap-1 ${getImpactColor(project.impact)}`}>
               <Award className="h-4 w-4" />
               {project.impact} Impact
             </div>
@@ -363,13 +337,9 @@ export function GAiACommunityProjects() {
                 <Globe className="h-4 w-4" />
                 <span className="font-medium">Expected Impact</span>
               </div>
-              <p className="text-sm text-emerald-300/80">
-                {project.expectedImpact}
-              </p>
+              <p className="text-sm text-emerald-300/80">{project.expectedImpact}</p>
               {project.location && (
-                <p className="text-xs text-emerald-400/60 mt-1">
-                  📍 {project.location}
-                </p>
+                <p className="text-xs text-emerald-400/60 mt-1">📍 {project.location}</p>
               )}
             </div>
           )}
@@ -378,15 +348,11 @@ export function GAiACommunityProjects() {
             <Button
               onClick={() => handleSubscribe(project.id, project.title)}
               className={`flex-1 ${
-                isSubscribed
-                  ? "bg-red-600 hover:bg-red-700"
-                  : "bg-green-600 hover:bg-green-700"
+                isSubscribed ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"
               }`}
               size="sm"
             >
-              <Heart
-                className={`h-4 w-4 mr-1 ${isSubscribed ? "fill-current" : ""}`}
-              />
+              <Heart className={`h-4 w-4 mr-1 ${isSubscribed ? "fill-current" : ""}`} />
               {isSubscribed ? "Unsubscribe" : "Subscribe & Support"}
             </Button>
             <Button
@@ -410,12 +376,11 @@ export function GAiACommunityProjects() {
           🌱 GAiA SOUL PROJECTS - HARMONY ECOSYSTEM
         </h2>
         <p className="text-green-300 text-lg">
-          Original creative projects from the Culture of Harmony • Environmental
-          Impact • Community Driven
+          Original creative projects from the Culture of Harmony • Environmental Impact • Community
+          Driven
         </p>
         <div className="text-sm text-purple-400 mt-2">
-          ✨ Subscribed to {subscribedProjects.size} projects • Supporting
-          Global Harmony
+          ✨ Subscribed to {subscribedProjects.size} projects • Supporting Global Harmony
         </div>
 
         <Button
@@ -427,18 +392,14 @@ export function GAiACommunityProjects() {
         </Button>
       </div>
 
-      {showRestorer && (
-        <ProjectDataRestorer onDataRestored={handleDataRestored} />
-      )}
+      {showRestorer && <ProjectDataRestorer onDataRestored={handleDataRestored} />}
 
       {restoredData && (
         <Card className="border-emerald-500/50 bg-gradient-to-r from-emerald-900/30 to-green-900/30">
           <CardContent className="pt-4">
             <div className="text-center text-emerald-400">
               <Globe className="h-8 w-8 mx-auto mb-2" />
-              <div className="text-lg font-bold">
-                ✨ Original Data Successfully Restored!
-              </div>
+              <div className="text-lg font-bold">✨ Original Data Successfully Restored!</div>
               <div className="text-sm text-emerald-300/80 mt-1">
                 Your authentic GAiA project information is now active
               </div>
@@ -455,12 +416,9 @@ export function GAiACommunityProjects() {
               <Star className="h-4 w-4 mr-1" />
               FEATURED BREAKTHROUGH RESEARCH
             </Badge>
-            <h3 className="text-2xl font-bold text-purple-400">
-              Bio-Inspired Neuroregeneration
-            </h3>
+            <h3 className="text-2xl font-bold text-purple-400">Bio-Inspired Neuroregeneration</h3>
             <p className="text-muted-foreground mt-2">
-              Revolutionary research combining plant biology with human neural
-              recovery
+              Revolutionary research combining plant biology with human neural recovery
             </p>
           </div>
           {renderFeaturedProject(featuredProject)}

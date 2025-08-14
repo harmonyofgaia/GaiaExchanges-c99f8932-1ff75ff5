@@ -167,64 +167,34 @@ export function ThreatDetectionEngine() {
           // Simulate realistic metric changes
           switch (metric.name) {
             case "Server CPU Usage":
-              newValue = Math.max(
-                10,
-                Math.min(95, metric.value + (Math.random() - 0.5) * 10),
-              );
+              newValue = Math.max(10, Math.min(95, metric.value + (Math.random() - 0.5) * 10));
               break;
             case "Memory Usage":
-              newValue = Math.max(
-                20,
-                Math.min(90, metric.value + (Math.random() - 0.5) * 5),
-              );
+              newValue = Math.max(20, Math.min(90, metric.value + (Math.random() - 0.5) * 5));
               break;
             case "Database Performance":
-              newValue = Math.max(
-                70,
-                Math.min(100, metric.value + (Math.random() - 0.5) * 3),
-              );
+              newValue = Math.max(70, Math.min(100, metric.value + (Math.random() - 0.5) * 3));
               break;
             case "Network Latency":
-              newValue = Math.max(
-                20,
-                Math.min(300, metric.value + (Math.random() - 0.5) * 20),
-              );
+              newValue = Math.max(20, Math.min(300, metric.value + (Math.random() - 0.5) * 20));
               break;
             case "API Response Time":
-              newValue = Math.max(
-                50,
-                Math.min(800, metric.value + (Math.random() - 0.5) * 50),
-              );
+              newValue = Math.max(50, Math.min(800, metric.value + (Math.random() - 0.5) * 50));
               break;
             case "Active Sessions":
-              newValue = Math.max(
-                500,
-                Math.min(3000, metric.value + (Math.random() - 0.5) * 100),
-              );
+              newValue = Math.max(500, Math.min(3000, metric.value + (Math.random() - 0.5) * 100));
               break;
             case "Failed Login Attempts":
-              newValue = Math.max(
-                0,
-                Math.min(100, metric.value + (Math.random() - 0.7) * 5),
-              );
+              newValue = Math.max(0, Math.min(100, metric.value + (Math.random() - 0.7) * 5));
               break;
             case "File System Integrity":
-              newValue = Math.max(
-                95,
-                Math.min(100, metric.value + (Math.random() - 0.8) * 2),
-              );
+              newValue = Math.max(95, Math.min(100, metric.value + (Math.random() - 0.8) * 2));
               break;
             case "Network Traffic":
-              newValue = Math.max(
-                100,
-                Math.min(2000, metric.value + (Math.random() - 0.5) * 100),
-              );
+              newValue = Math.max(100, Math.min(2000, metric.value + (Math.random() - 0.5) * 100));
               break;
             case "Error Rate":
-              newValue = Math.max(
-                0,
-                Math.min(5, metric.value + (Math.random() - 0.8) * 0.1),
-              );
+              newValue = Math.max(0, Math.min(5, metric.value + (Math.random() - 0.8) * 0.1));
               break;
           }
 
@@ -241,10 +211,7 @@ export function ThreatDetectionEngine() {
           } else {
             if (newValue > metric.threshold * 0.9) status = "warning";
             if (newValue > metric.threshold) status = "critical";
-            if (
-              metric.name.includes("Integrity") ||
-              metric.name.includes("Performance")
-            ) {
+            if (metric.name.includes("Integrity") || metric.name.includes("Performance")) {
               if (newValue < metric.threshold) status = "critical";
               if (newValue < metric.threshold * 1.1) status = "warning";
             }
@@ -256,7 +223,7 @@ export function ThreatDetectionEngine() {
             status,
             lastChecked: Date.now(),
           };
-        }),
+        })
       );
 
       // Generate threat indicators based on system anomalies
@@ -306,19 +273,12 @@ export function ThreatDetectionEngine() {
 
       // Update overall health
       setSystemMetrics((current) => {
-        const healthyCount = current.filter(
-          (m) => m.status === "healthy",
-        ).length;
-        const warningCount = current.filter(
-          (m) => m.status === "warning",
-        ).length;
-        const criticalCount = current.filter(
-          (m) => m.status === "critical",
-        ).length;
+        const healthyCount = current.filter((m) => m.status === "healthy").length;
+        const warningCount = current.filter((m) => m.status === "warning").length;
+        const criticalCount = current.filter((m) => m.status === "critical").length;
 
         const healthScore =
-          ((healthyCount * 100 + warningCount * 70 + criticalCount * 30) /
-            (current.length * 100)) *
+          ((healthyCount * 100 + warningCount * 70 + criticalCount * 30) / (current.length * 100)) *
           100;
         setOverallHealth(healthScore);
 
@@ -326,9 +286,7 @@ export function ThreatDetectionEngine() {
       });
 
       // Update active scans
-      setActiveScans((prev) =>
-        Math.max(8, Math.min(20, prev + (Math.random() - 0.5) * 3)),
-      );
+      setActiveScans((prev) => Math.max(8, Math.min(20, prev + (Math.random() - 0.5) * 3)));
     }, 2000);
 
     return () => clearInterval(monitoringInterval);
@@ -368,15 +326,9 @@ export function ThreatDetectionEngine() {
     return "bg-green-500";
   };
 
-  const healthyMetrics = systemMetrics.filter(
-    (m) => m.status === "healthy",
-  ).length;
-  const warningMetrics = systemMetrics.filter(
-    (m) => m.status === "warning",
-  ).length;
-  const criticalMetrics = systemMetrics.filter(
-    (m) => m.status === "critical",
-  ).length;
+  const healthyMetrics = systemMetrics.filter((m) => m.status === "healthy").length;
+  const warningMetrics = systemMetrics.filter((m) => m.status === "warning").length;
+  const criticalMetrics = systemMetrics.filter((m) => m.status === "critical").length;
 
   return (
     <div className="space-y-6">
@@ -384,12 +336,8 @@ export function ThreatDetectionEngine() {
         <div className="flex items-center space-x-4">
           <Eye className="h-8 w-8 text-blue-500" />
           <div>
-            <h2 className="text-2xl font-bold">
-              Real-Time Threat Detection Engine
-            </h2>
-            <p className="text-muted-foreground">
-              Infrastructure Monitoring & Analysis
-            </p>
+            <h2 className="text-2xl font-bold">Real-Time Threat Detection Engine</h2>
+            <p className="text-muted-foreground">Infrastructure Monitoring & Analysis</p>
           </div>
         </div>
         <Badge variant={monitoringActive ? "default" : "secondary"}>
@@ -404,9 +352,7 @@ export function ThreatDetectionEngine() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Overall Health</p>
-                <p className="text-2xl font-bold">
-                  {overallHealth.toFixed(1)}%
-                </p>
+                <p className="text-2xl font-bold">{overallHealth.toFixed(1)}%</p>
               </div>
               <CheckCircle
                 className={`h-8 w-8 ${overallHealth > 95 ? "text-green-500" : overallHealth > 85 ? "text-yellow-500" : "text-red-500"}`}
@@ -432,9 +378,7 @@ export function ThreatDetectionEngine() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Threats Detected
-                </p>
+                <p className="text-sm text-muted-foreground">Threats Detected</p>
                 <p className="text-2xl font-bold">{threats.length}</p>
               </div>
               <AlertTriangle className="h-8 w-8 text-orange-500" />
@@ -463,9 +407,7 @@ export function ThreatDetectionEngine() {
             <span>Infrastructure Monitoring</span>
             <div className="flex space-x-2 ml-auto">
               <Badge variant="default">{healthyMetrics} Healthy</Badge>
-              {warningMetrics > 0 && (
-                <Badge variant="secondary">{warningMetrics} Warning</Badge>
-              )}
+              {warningMetrics > 0 && <Badge variant="secondary">{warningMetrics} Warning</Badge>}
               {criticalMetrics > 0 && (
                 <Badge variant="destructive">{criticalMetrics} Critical</Badge>
               )}
@@ -477,15 +419,10 @@ export function ThreatDetectionEngine() {
             {systemMetrics.map((metric) => {
               const Icon = metric.icon;
               return (
-                <div
-                  key={metric.id}
-                  className="border rounded-lg p-4 space-y-3"
-                >
+                <div key={metric.id} className="border rounded-lg p-4 space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <Icon
-                        className={`h-5 w-5 ${getStatusColor(metric.status)}`}
-                      />
+                      <Icon className={`h-5 w-5 ${getStatusColor(metric.status)}`} />
                       <h4 className="font-medium text-sm">{metric.name}</h4>
                     </div>
                     <Badge variant={getStatusBadgeVariant(metric.status)}>
@@ -497,8 +434,7 @@ export function ThreatDetectionEngine() {
                     <div className="flex justify-between text-sm">
                       <span>Current</span>
                       <span className="font-mono">
-                        {typeof metric.value === "number" &&
-                        metric.value % 1 !== 0
+                        {typeof metric.value === "number" && metric.value % 1 !== 0
                           ? metric.value.toFixed(2)
                           : Math.floor(metric.value)}
                         {metric.unit}
@@ -512,17 +448,13 @@ export function ThreatDetectionEngine() {
                       </span>
                     </div>
                     <Progress
-                      value={Math.min(
-                        100,
-                        (metric.value / metric.threshold) * 100,
-                      )}
+                      value={Math.min(100, (metric.value / metric.threshold) * 100)}
                       className="h-2"
                     />
                   </div>
 
                   <div className="text-xs text-muted-foreground">
-                    Last checked:{" "}
-                    {new Date(metric.lastChecked).toLocaleTimeString()}
+                    Last checked: {new Date(metric.lastChecked).toLocaleTimeString()}
                   </div>
                 </div>
               );
@@ -555,28 +487,17 @@ export function ThreatDetectionEngine() {
                   className="flex items-center justify-between p-3 border rounded-lg"
                 >
                   <div className="flex items-center space-x-3">
-                    <div
-                      className={`w-3 h-3 rounded-full ${getSeverityColor(threat.severity)}`}
-                    />
+                    <div className={`w-3 h-3 rounded-full ${getSeverityColor(threat.severity)}`} />
                     <div className="flex-1">
                       <div className="flex items-center space-x-2">
                         <p className="font-medium">{threat.type}</p>
-                        <Badge variant="outline">
-                          Severity {threat.severity}/10
-                        </Badge>
+                        <Badge variant="outline">Severity {threat.severity}/10</Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground">
-                        {threat.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{threat.description}</p>
                       <div className="flex items-center space-x-4 text-xs text-muted-foreground mt-1">
                         <span>Source: {threat.source}</span>
-                        <span>
-                          Confidence: {Math.floor(threat.confidence)}%
-                        </span>
-                        <span>
-                          Detected:{" "}
-                          {new Date(threat.detected).toLocaleTimeString()}
-                        </span>
+                        <span>Confidence: {Math.floor(threat.confidence)}%</span>
+                        <span>Detected: {new Date(threat.detected).toLocaleTimeString()}</span>
                       </div>
                     </div>
                   </div>

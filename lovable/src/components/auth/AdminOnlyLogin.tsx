@@ -26,8 +26,7 @@ export function AdminOnlyLogin({ onAdminLogin }: AdminOnlyLoginProps) {
     try {
       // Admin credentials verification
       const isValidAdmin =
-        credentials.username === "Synatic" &&
-        credentials.password === "harmonyquantumvaultaccess";
+        credentials.username === "Synatic" && credentials.password === "harmonyquantumvaultaccess";
 
       if (isValidAdmin) {
         onAdminLogin();
@@ -117,11 +116,7 @@ export function AdminOnlyLogin({ onAdminLogin }: AdminOnlyLoginProps) {
                   className="absolute right-1 top-1 h-8 w-8 p-0 text-green-400"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </Button>
               </div>
             </div>

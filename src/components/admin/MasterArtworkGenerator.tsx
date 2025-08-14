@@ -114,7 +114,7 @@ export function MasterArtworkGenerator() {
 
       if (mockArtworks.length > 0) {
         const best = mockArtworks.reduce((prev, current) =>
-          prev.downloads > current.downloads ? prev : current,
+          prev.downloads > current.downloads ? prev : current
         );
         setBestArtwork(best);
       }
@@ -145,8 +145,7 @@ export function MasterArtworkGenerator() {
   const generateNewArtwork = async () => {
     setIsGenerating(true);
     try {
-      const randomPrompt =
-        basePrompts[Math.floor(Math.random() * basePrompts.length)];
+      const randomPrompt = basePrompts[Math.floor(Math.random() * basePrompts.length)];
 
       // Enhanced prompt with reference to uploaded artwork styles
       const enhancedPrompt = `${randomPrompt}, inspired by neural circuit designs and matrix digital aesthetics, high quality digital art, vibrant neon colors, dramatic lighting effects, professional cyberpunk artwork`;
@@ -183,21 +182,18 @@ export function MasterArtworkGenerator() {
 
         // Automatically save to secure cloud storage (admin only)
         try {
-          const cloudResponse = await fetch(
-            "/functions/v1/save-artwork-to-cloud",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                artworkId: newArtwork.id,
-                imageData: result.image,
-                artworkType: selectedStyle,
-                prompt: enhancedPrompt,
-              }),
+          const cloudResponse = await fetch("/functions/v1/save-artwork-to-cloud", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
             },
-          );
+            body: JSON.stringify({
+              artworkId: newArtwork.id,
+              imageData: result.image,
+              artworkType: selectedStyle,
+              prompt: enhancedPrompt,
+            }),
+          });
 
           const cloudResult = await cloudResponse.json();
 
@@ -232,11 +228,7 @@ export function MasterArtworkGenerator() {
     try {
       // Update download count locally
       setArtworks((prev) =>
-        prev.map((art) =>
-          art.id === artwork.id
-            ? { ...art, downloads: art.downloads + 1 }
-            : art,
-        ),
+        prev.map((art) => (art.id === artwork.id ? { ...art, downloads: art.downloads + 1 } : art))
       );
 
       // Create download link
@@ -272,8 +264,7 @@ export function MasterArtworkGenerator() {
                 Neural Matrix Art Generator
               </div>
               <div className="text-sm font-normal text-purple-400">
-                AI-Powered Neural Circuit & Matrix Art Creation - Inspired by
-                Your Uploads
+                AI-Powered Neural Circuit & Matrix Art Creation - Inspired by Your Uploads
               </div>
             </div>
             <Sparkles className="h-6 w-6 text-green-400 animate-bounce" />
@@ -287,10 +278,9 @@ export function MasterArtworkGenerator() {
               🔒 Admin-Only Neural Art Cloud Storage
             </h3>
             <p className="text-xs text-blue-300">
-              ✨ All generated neural artworks are automatically saved to secure
-              cloud storage accessible only by admin users. Your cybernetic
-              creations are protected with quantum-level security and neural
-              encryption.
+              ✨ All generated neural artworks are automatically saved to secure cloud storage
+              accessible only by admin users. Your cybernetic creations are protected with
+              quantum-level security and neural encryption.
             </p>
           </div>
 
@@ -315,36 +305,27 @@ export function MasterArtworkGenerator() {
               ))}
             </div>
             <p className="text-xs text-green-300 mt-2">
-              🧠 These neural circuit and matrix designs inspire the AI to
-              create cybernetic pathways, bioelectric connections, and
-              futuristic digital art with lightning effects
+              🧠 These neural circuit and matrix designs inspire the AI to create cybernetic
+              pathways, bioelectric connections, and futuristic digital art with lightning effects
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-purple-400">
-                {totalGenerated}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Neural Artworks Created
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{totalGenerated}</div>
+              <div className="text-sm text-muted-foreground">Neural Artworks Created</div>
             </div>
             <div className="text-center space-y-2">
               <div className="text-3xl font-bold text-green-400">
                 {autoGenerate ? formatTime(nextUpdateIn) : "Paused"}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Next Neural Generation
-              </div>
+              <div className="text-sm text-muted-foreground">Next Neural Generation</div>
             </div>
             <div className="text-center space-y-2">
               <div className="text-3xl font-bold text-cyan-400">
                 {artworks.reduce((sum, art) => sum + (art.downloads || 0), 0)}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Downloads
-              </div>
+              <div className="text-sm text-muted-foreground">Total Downloads</div>
             </div>
             <div className="text-center space-y-2">
               <div className="text-3xl font-bold text-yellow-400">100%</div>
@@ -397,8 +378,7 @@ export function MasterArtworkGenerator() {
             <div className="mb-6">
               <Progress value={75} className="h-3" />
               <p className="text-sm text-center mt-2 text-purple-300">
-                Creating neural matrix artwork inspired by your cybernetic
-                references...
+                Creating neural matrix artwork inspired by your cybernetic references...
               </p>
             </div>
           )}
@@ -438,9 +418,7 @@ export function MasterArtworkGenerator() {
                       />
                     </div>
                     <div className="p-3">
-                      <Badge className="mb-2 bg-green-600 text-white">
-                        Reference #{index + 1}
-                      </Badge>
+                      <Badge className="mb-2 bg-green-600 text-white">Reference #{index + 1}</Badge>
                       <p className="text-xs text-muted-foreground">
                         {index < 3
                           ? "Atmospheric Lighting"
@@ -454,9 +432,8 @@ export function MasterArtworkGenerator() {
               </div>
               <div className="mt-6 text-center">
                 <p className="text-sm text-green-300">
-                  🎨 These references inspire the AI to create similar
-                  atmospheric effects, color palettes, and artistic styles in
-                  generated artworks.
+                  🎨 These references inspire the AI to create similar atmospheric effects, color
+                  palettes, and artistic styles in generated artworks.
                 </p>
               </div>
             </CardContent>
@@ -480,16 +457,10 @@ export function MasterArtworkGenerator() {
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <Badge className="bg-purple-600 text-white">
-                        {artwork.artwork_type}
-                      </Badge>
-                      <Badge className="bg-green-600 text-white">
-                        NFT Ready
-                      </Badge>
+                      <Badge className="bg-purple-600 text-white">{artwork.artwork_type}</Badge>
+                      <Badge className="bg-green-600 text-white">NFT Ready</Badge>
                     </div>
-                    <p className="text-xs text-muted-foreground line-clamp-2">
-                      {artwork.prompt}
-                    </p>
+                    <p className="text-xs text-muted-foreground line-clamp-2">{artwork.prompt}</p>
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-purple-400">
                         Downloads: {artwork.downloads || 0}
@@ -541,24 +512,16 @@ export function MasterArtworkGenerator() {
                       <h3 className="text-xl font-bold text-yellow-400 mb-2">
                         {bestArtwork.artwork_type} Masterpiece
                       </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {bestArtwork.prompt}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{bestArtwork.prompt}</p>
                     </div>
                     <div className="space-y-2">
                       <div className="flex justify-between">
                         <span>Downloads:</span>
-                        <span className="font-bold text-yellow-400">
-                          {bestArtwork.downloads}
-                        </span>
+                        <span className="font-bold text-yellow-400">{bestArtwork.downloads}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Generated:</span>
-                        <span>
-                          {new Date(
-                            bestArtwork.generated_at,
-                          ).toLocaleDateString()}
-                        </span>
+                        <span>{new Date(bestArtwork.generated_at).toLocaleDateString()}</span>
                       </div>
                     </div>
                     <Button
@@ -583,17 +546,11 @@ export function MasterArtworkGenerator() {
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {artworkTypes.map((type) => {
-                  const count = artworks.filter(
-                    (art) => art.artwork_type === type.value,
-                  ).length;
+                  const count = artworks.filter((art) => art.artwork_type === type.value).length;
                   return (
                     <div key={type.value} className="text-center space-y-2">
-                      <div className="text-2xl font-bold text-purple-400">
-                        {count}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        {type.label}
-                      </div>
+                      <div className="text-2xl font-bold text-purple-400">{count}</div>
+                      <div className="text-xs text-muted-foreground">{type.label}</div>
                     </div>
                   );
                 })}

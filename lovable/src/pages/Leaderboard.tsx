@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Trophy,
-  Crown,
-  Star,
-  TrendingUp,
-  Users,
-  Globe,
-  Medal,
-  Award,
-} from "lucide-react";
+import { Trophy, Crown, Star, TrendingUp, Users, Globe, Medal, Award } from "lucide-react";
 
 interface LeaderboardEntry {
   rank: number;
@@ -102,11 +93,7 @@ export default function Leaderboard() {
       case 3:
         return <Award className="h-6 w-6 text-orange-400" />;
       default:
-        return (
-          <span className="text-lg font-bold text-muted-foreground">
-            #{rank}
-          </span>
-        );
+        return <span className="text-lg font-bold text-muted-foreground">#{rank}</span>;
     }
   };
 
@@ -122,9 +109,7 @@ export default function Leaderboard() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  {getRankIcon(leader.rank)}
-                </div>
+                <div className="flex items-center gap-2">{getRankIcon(leader.rank)}</div>
                 <div className="text-4xl">{leader.avatar}</div>
                 <div>
                   <div className="flex items-center gap-2">
@@ -164,9 +149,7 @@ export default function Leaderboard() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center space-y-4">
           <div className="animate-spin text-6xl">🏆</div>
-          <h2 className="text-2xl font-bold text-primary">
-            Loading Global Leaderboard...
-          </h2>
+          <h2 className="text-2xl font-bold text-primary">Loading Global Leaderboard...</h2>
         </div>
       </div>
     );
@@ -183,8 +166,7 @@ export default function Leaderboard() {
             </CardTitle>
             <div className="text-center space-y-2">
               <p className="text-xl text-muted-foreground">
-                Compete with eco-warriors worldwide and earn your place among
-                the champions!
+                Compete with eco-warriors worldwide and earn your place among the champions!
               </p>
               <div className="flex justify-center gap-4">
                 <Badge className="bg-yellow-600">🌍 Global Competition</Badge>
@@ -201,9 +183,7 @@ export default function Leaderboard() {
             <CardContent className="p-6 text-center">
               <Users className="h-8 w-8 text-purple-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-purple-400">127,439</div>
-              <div className="text-sm text-muted-foreground">
-                Active Players
-              </div>
+              <div className="text-sm text-muted-foreground">Active Players</div>
             </CardContent>
           </Card>
 
@@ -287,29 +267,19 @@ export default function Leaderboard() {
         <Card className="border-orange-500/30 bg-gradient-to-r from-orange-900/30 to-red-900/30">
           <CardContent className="p-6">
             <div className="text-center space-y-4">
-              <h3 className="text-2xl font-bold text-orange-400">
-                Your Current Ranking
-              </h3>
+              <h3 className="text-2xl font-bold text-orange-400">Your Current Ranking</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-2">
                   <div className="text-3xl font-bold text-white">#847</div>
-                  <div className="text-sm text-muted-foreground">
-                    Global Rank
-                  </div>
+                  <div className="text-sm text-muted-foreground">Global Rank</div>
                 </div>
                 <div className="space-y-2">
-                  <div className="text-3xl font-bold text-yellow-400">
-                    1,247
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Total Points
-                  </div>
+                  <div className="text-3xl font-bold text-yellow-400">1,247</div>
+                  <div className="text-sm text-muted-foreground">Total Points</div>
                 </div>
                 <div className="space-y-2">
                   <div className="text-3xl font-bold text-green-400">249</div>
-                  <div className="text-sm text-muted-foreground">
-                    Total Tokens
-                  </div>
+                  <div className="text-sm text-muted-foreground">Total Tokens</div>
                 </div>
               </div>
               <Button className="bg-orange-600 hover:bg-orange-700">

@@ -72,9 +72,7 @@ export function RecyclingActions() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Material Type
-            </label>
+            <label className="block text-sm font-medium mb-2">Material Type</label>
             <Select value={materialType} onValueChange={setMaterialType}>
               <SelectTrigger>
                 <SelectValue placeholder="Select material type" />
@@ -84,23 +82,15 @@ export function RecyclingActions() {
                 <SelectItem value="glass">Glass (2x multiplier)</SelectItem>
                 <SelectItem value="metal">Metal (5x multiplier)</SelectItem>
                 <SelectItem value="paper">Paper (1.5x multiplier)</SelectItem>
-                <SelectItem value="electronics">
-                  Electronics (10x multiplier)
-                </SelectItem>
-                <SelectItem value="batteries">
-                  Batteries (15x multiplier)
-                </SelectItem>
-                <SelectItem value="organic">
-                  Organic Waste (2x multiplier)
-                </SelectItem>
+                <SelectItem value="electronics">Electronics (10x multiplier)</SelectItem>
+                <SelectItem value="batteries">Batteries (15x multiplier)</SelectItem>
+                <SelectItem value="organic">Organic Waste (2x multiplier)</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Weight (kg)
-            </label>
+            <label className="block text-sm font-medium mb-2">Weight (kg)</label>
             <Input
               type="number"
               step="0.1"
@@ -112,9 +102,7 @@ export function RecyclingActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Recycling Location
-            </label>
+            <label className="block text-sm font-medium mb-2">Recycling Location</label>
             <Input
               value={recyclingCenter}
               onChange={(e) => setRecyclingCenter(e.target.value)}
@@ -122,19 +110,15 @@ export function RecyclingActions() {
             />
           </div>
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-cyan-600 hover:bg-cyan-700"
-          >
+          <Button type="submit" disabled={loading} className="w-full bg-cyan-600 hover:bg-cyan-700">
             {loading ? "Recording..." : "♻️ Record Recycling Activity"}
           </Button>
         </form>
 
         <div className="mt-4 p-3 bg-cyan-900/20 rounded-lg border border-cyan-500/30">
           <p className="text-sm text-cyan-300">
-            💡 <strong>Circular Economy:</strong> Different materials have
-            different point multipliers based on environmental impact!
+            💡 <strong>Circular Economy:</strong> Different materials have different point
+            multipliers based on environmental impact!
           </p>
         </div>
       </CardContent>

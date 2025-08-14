@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Globe,
-  Users,
-  Gamepad2,
-  Zap,
-  Crown,
-  Star,
-  Rocket,
-  Cpu,
-} from "lucide-react";
+import { Globe, Users, Gamepad2, Zap, Crown, Star, Rocket, Cpu } from "lucide-react";
 import { toast } from "sonner";
 import { UniversalGaiaLogo } from "@/components/branding/UniversalGaiaLogo";
 import LandscapeBuilder from "@/legacy-pages/LandscapeBuilder";
@@ -31,31 +22,27 @@ export default function VirtualWorld() {
     gameEngine: "Harmony Quantum Engine v3.0",
   });
 
-  const [selectedLandscape, setSelectedLandscape] =
-    useState("underground-winter");
+  const [selectedLandscape, setSelectedLandscape] = useState("underground-winter");
 
   const premadeLandscapes = [
     {
       id: "underground-winter",
       name: "Underground Winter Fortress",
-      description:
-        "Massive underground kingdom with frozen waterfalls and crystal caves",
+      description: "Massive underground kingdom with frozen waterfalls and crystal caves",
       graphics: "8K Ultra HDR",
       style: "Fantasy Epic",
     },
     {
       id: "halo-station",
       name: "Halo Space Station",
-      description:
-        "Futuristic space station with gravity rings and plasma weapons",
+      description: "Futuristic space station with gravity rings and plasma weapons",
       graphics: "8K Ray-Traced",
       style: "Sci-Fi Action",
     },
     {
       id: "god-of-war-realm",
       name: "God of War Nordic Realm",
-      description:
-        "Norse mythology world with ancient temples and mythical creatures",
+      description: "Norse mythology world with ancient temples and mythical creatures",
       graphics: "8K Photorealistic",
       style: "Mythological",
     },
@@ -135,9 +122,7 @@ export default function VirtualWorld() {
             <Tabs defaultValue="world" className="w-full">
               <TabsList className="grid w-full grid-cols-6">
                 <TabsTrigger value="world">🌍 Virtual World</TabsTrigger>
-                <TabsTrigger value="minecraft">
-                  ⛏️ Minecraft Builder
-                </TabsTrigger>
+                <TabsTrigger value="minecraft">⛏️ Minecraft Builder</TabsTrigger>
                 <TabsTrigger value="builder">🏗️ Landscape Builder</TabsTrigger>
                 <TabsTrigger value="advanced">⚡ Advanced Creator</TabsTrigger>
                 <TabsTrigger value="manager">📁 My Landscapes</TabsTrigger>
@@ -168,9 +153,7 @@ export default function VirtualWorld() {
                     <div className="text-2xl font-black text-purple-400">
                       {worldState.graphicsQuality}
                     </div>
-                    <div className="text-sm text-purple-300">
-                      Graphics Quality
-                    </div>
+                    <div className="text-sm text-purple-300">Graphics Quality</div>
                   </div>
 
                   <div className="text-center p-4 bg-green-900/50 rounded-lg border-2 border-green-500/50">
@@ -204,12 +187,8 @@ export default function VirtualWorld() {
                               {landscape.description}
                             </div>
                             <div className="space-y-2">
-                              <Badge className="bg-blue-600 text-white">
-                                {landscape.graphics}
-                              </Badge>
-                              <Badge className="bg-purple-600 text-white">
-                                {landscape.style}
-                              </Badge>
+                              <Badge className="bg-blue-600 text-white">{landscape.graphics}</Badge>
+                              <Badge className="bg-purple-600 text-white">{landscape.style}</Badge>
                             </div>
                             <Button
                               onClick={() => setSelectedLandscape(landscape.id)}
@@ -236,32 +215,20 @@ export default function VirtualWorld() {
                         </div>
                         <div className="text-xl text-cyan-300">
                           Current World:{" "}
-                          {
-                            premadeLandscapes.find(
-                              (l) => l.id === selectedLandscape,
-                            )?.name
-                          }
+                          {premadeLandscapes.find((l) => l.id === selectedLandscape)?.name}
                         </div>
-                        <div className="text-lg text-blue-300">
-                          Engine: {worldState.gameEngine}
-                        </div>
+                        <div className="text-lg text-blue-300">Engine: {worldState.gameEngine}</div>
                         <div className="grid grid-cols-3 gap-4 text-sm">
                           <div className="text-center">
-                            <div className="text-2xl font-bold text-green-400">
-                              8K
-                            </div>
+                            <div className="text-2xl font-bold text-green-400">8K</div>
                             <div>Ultra Graphics</div>
                           </div>
                           <div className="text-center">
-                            <div className="text-2xl font-bold text-purple-400">
-                              ∞
-                            </div>
+                            <div className="text-2xl font-bold text-purple-400">∞</div>
                             <div>Cloud Power</div>
                           </div>
                           <div className="text-center">
-                            <div className="text-2xl font-bold text-yellow-400">
-                              VR
-                            </div>
+                            <div className="text-2xl font-bold text-yellow-400">VR</div>
                             <div>Ready</div>
                           </div>
                         </div>
@@ -336,9 +303,7 @@ export default function VirtualWorld() {
               <TabsContent value="restoration">
                 <div className="text-center py-16">
                   <div className="text-6xl mb-6">🌱</div>
-                  <h2 className="text-3xl font-bold text-white mb-4">
-                    Environmental Restoration
-                  </h2>
+                  <h2 className="text-3xl font-bold text-white mb-4">Environmental Restoration</h2>
                   <p className="text-muted-foreground mb-8">
                     AI-powered ecosystem restoration and regeneration tools
                   </p>

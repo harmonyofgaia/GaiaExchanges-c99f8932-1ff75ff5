@@ -170,8 +170,8 @@ const GreenInvestments = () => {
             🌱 Green Investments
           </h1>
           <p className="text-xl text-muted-foreground mt-4">
-            Invest in environmental projects • Support sustainable initiatives •
-            Make a positive impact
+            Invest in environmental projects • Support sustainable initiatives • Make a positive
+            impact
           </p>
           <div className="text-sm text-green-400 mt-2">
             ✨ Powered by GAiA Token • Community Driven • Transparent Impact
@@ -190,18 +190,12 @@ const GreenInvestments = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div className="text-center p-4 bg-green-800/20 rounded-lg">
                 <Leaf className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-green-400">
-                  Environmental
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Impact Projects
-                </div>
+                <div className="text-2xl font-bold text-green-400">Environmental</div>
+                <div className="text-sm text-muted-foreground">Impact Projects</div>
               </div>
               <div className="text-center p-4 bg-blue-800/20 rounded-lg">
                 <TrendingUp className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-blue-400">
-                  Sustainable
-                </div>
+                <div className="text-2xl font-bold text-blue-400">Sustainable</div>
                 <div className="text-sm text-muted-foreground">Returns</div>
               </div>
               <div className="text-center p-4 bg-purple-800/20 rounded-lg">
@@ -211,12 +205,8 @@ const GreenInvestments = () => {
               </div>
               <div className="text-center p-4 bg-orange-800/20 rounded-lg">
                 <Shield className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-orange-400">
-                  Protection
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  & Prevention
-                </div>
+                <div className="text-2xl font-bold text-orange-400">Protection</div>
+                <div className="text-sm text-muted-foreground">& Prevention</div>
               </div>
             </div>
           </CardContent>
@@ -235,8 +225,7 @@ const GreenInvestments = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {originalProjects.map((project) => {
-              const fundingPercentage =
-                (project.currentFunding / project.fundingGoal) * 100;
+              const fundingPercentage = (project.currentFunding / project.fundingGoal) * 100;
 
               return (
                 <Card
@@ -245,9 +234,7 @@ const GreenInvestments = () => {
                 >
                   <CardHeader>
                     <div className="flex items-center justify-between">
-                      <Badge
-                        className={`bg-gradient-to-r ${project.color} text-white`}
-                      >
+                      <Badge className={`bg-gradient-to-r ${project.color} text-white`}>
                         {project.category}
                       </Badge>
                       <div className="text-2xl">{project.icon}</div>
@@ -275,9 +262,7 @@ const GreenInvestments = () => {
                         <span className="text-green-300/60">
                           {fundingPercentage.toFixed(1)}% funded
                         </span>
-                        <span className="text-blue-400">
-                          {project.backers} backers
-                        </span>
+                        <span className="text-blue-400">{project.backers} backers</span>
                       </div>
                     </div>
 
@@ -310,12 +295,9 @@ const GreenInvestments = () => {
               <Flame className="h-4 w-4 mr-1" />
               FEATURED INVESTMENT PROJECT
             </Badge>
-            <h2 className="text-3xl font-bold text-orange-400">
-              SandProtect Initiative
-            </h2>
+            <h2 className="text-3xl font-bold text-orange-400">SandProtect Initiative</h2>
             <p className="text-muted-foreground mt-2">
-              Revolutionary sand barrier technology with multiple investment
-              tiers and proven ROI
+              Revolutionary sand barrier technology with multiple investment tiers and proven ROI
             </p>
           </div>
           <SandProtectInvestmentProject />
@@ -332,8 +314,7 @@ const GreenInvestments = () => {
               Advanced Wildfire Sand Barrier Technology
             </h2>
             <p className="text-muted-foreground mt-2">
-              Deep dive into the technical implementation and real-time
-              monitoring systems
+              Deep dive into the technical implementation and real-time monitoring systems
             </p>
           </div>
           <WildfireSandProtection />
@@ -358,8 +339,7 @@ const GreenInvestments = () => {
                 💰 Green Investment Management
               </CardTitle>
               <p className="text-blue-300">
-                Configure your fees to automatically support environmental
-                projects
+                Configure your fees to automatically support environmental projects
               </p>
             </CardHeader>
             <CardContent>
@@ -376,14 +356,11 @@ const GreenInvestments = () => {
                 <TabsContent value="projects" className="space-y-6">
                   <Card className="border-green-500/30 bg-green-900/20">
                     <CardHeader>
-                      <CardTitle className="text-green-400">
-                        🌱 Project Impact Dashboard
-                      </CardTitle>
+                      <CardTitle className="text-green-400">🌱 Project Impact Dashboard</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-muted-foreground">
-                        Real-time project funding and environmental impact
-                        metrics coming soon!
+                        Real-time project funding and environmental impact metrics coming soon!
                       </p>
                     </CardContent>
                   </Card>

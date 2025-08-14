@@ -66,9 +66,7 @@ export function CompostingActions() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Compost Type
-            </label>
+            <label className="block text-sm font-medium mb-2">Compost Type</label>
             <Select value={compostType} onValueChange={setCompostType}>
               <SelectTrigger>
                 <SelectValue placeholder="Select compost type" />
@@ -77,18 +75,14 @@ export function CompostingActions() {
                 <SelectItem value="kitchen_scraps">Kitchen Scraps</SelectItem>
                 <SelectItem value="yard_waste">Yard Waste</SelectItem>
                 <SelectItem value="food_waste">Food Waste</SelectItem>
-                <SelectItem value="paper_cardboard">
-                  Paper & Cardboard
-                </SelectItem>
+                <SelectItem value="paper_cardboard">Paper & Cardboard</SelectItem>
                 <SelectItem value="mixed_organic">Mixed Organic</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Organic Waste Weight (kg)
-            </label>
+            <label className="block text-sm font-medium mb-2">Organic Waste Weight (kg)</label>
             <Input
               type="number"
               step="0.1"
@@ -100,9 +94,7 @@ export function CompostingActions() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Composting Method
-            </label>
+            <label className="block text-sm font-medium mb-2">Composting Method</label>
             <Select value={compostMethod} onValueChange={setCompostMethod}>
               <SelectTrigger>
                 <SelectValue placeholder="Select composting method" />
@@ -112,9 +104,7 @@ export function CompostingActions() {
                 <SelectItem value="tumbler">Tumbler</SelectItem>
                 <SelectItem value="vermicomposting">Vermicomposting</SelectItem>
                 <SelectItem value="bokashi">Bokashi</SelectItem>
-                <SelectItem value="community_program">
-                  Community Program
-                </SelectItem>
+                <SelectItem value="community_program">Community Program</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -124,16 +114,14 @@ export function CompostingActions() {
             disabled={loading}
             className="w-full bg-orange-600 hover:bg-orange-700"
           >
-            {loading
-              ? "Recording..."
-              : "🍂 Record Composting (+5 Points per kg)"}
+            {loading ? "Recording..." : "🍂 Record Composting (+5 Points per kg)"}
           </Button>
         </form>
 
         <div className="mt-4 p-3 bg-orange-900/20 rounded-lg border border-orange-500/30">
           <p className="text-sm text-orange-300">
-            💡 <strong>Soil Health:</strong> Composting reduces landfill waste
-            and creates nutrient-rich soil amendments!
+            💡 <strong>Soil Health:</strong> Composting reduces landfill waste and creates
+            nutrient-rich soil amendments!
           </p>
         </div>
       </CardContent>

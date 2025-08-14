@@ -37,8 +37,7 @@ export function CallToAction() {
           Ready to Join the Green Revolution?
         </h2>
         <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Experience the future of sustainable finance and entertainment with
-          GAiA's ecosystem
+          Experience the future of sustainable finance and entertainment with GAiA's ecosystem
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 justify-center max-w-6xl mx-auto">
           <Button

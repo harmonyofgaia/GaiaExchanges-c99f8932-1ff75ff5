@@ -28,10 +28,7 @@ export function UltimateDefensiveBarrier() {
         <CardHeader>
           <CardTitle className="text-purple-400 flex items-center gap-2">
             🔮 Ultimate Defensive Barrier System
-            <Badge
-              variant="outline"
-              className="border-purple-500 text-purple-400"
-            >
+            <Badge variant="outline" className="border-purple-500 text-purple-400">
               MAXIMUM PROTECTION
             </Badge>
           </CardTitle>
@@ -45,22 +42,15 @@ export function UltimateDefensiveBarrier() {
               >
                 <CardContent className="p-4">
                   <div className="text-center">
-                    <div className="text-xl font-bold text-purple-400">
-                      {layer.name}
-                    </div>
-                    <div className="text-2xl font-bold text-green-400 mt-2">
-                      {layer.power}%
-                    </div>
+                    <div className="text-xl font-bold text-purple-400">{layer.name}</div>
+                    <div className="text-2xl font-bold text-green-400 mt-2">{layer.power}%</div>
                     <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
                       <div
                         className="bg-purple-500 h-2 rounded-full"
                         style={{ width: `${layer.power}%` }}
                       ></div>
                     </div>
-                    <Badge
-                      variant="outline"
-                      className="mt-2 border-green-500/50 text-green-400"
-                    >
+                    <Badge variant="outline" className="mt-2 border-green-500/50 text-green-400">
                       {layer.status.toUpperCase()}
                     </Badge>
                   </div>
@@ -71,9 +61,7 @@ export function UltimateDefensiveBarrier() {
 
           <Card className="border-red-500/30 bg-gradient-to-br from-red-900/20 to-orange-900/20">
             <CardHeader>
-              <CardTitle className="text-red-400">
-                🚫 Threat Neutralization Report
-              </CardTitle>
+              <CardTitle className="text-red-400">🚫 Threat Neutralization Report</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -83,17 +71,10 @@ export function UltimateDefensiveBarrier() {
                     className="flex items-center justify-between p-3 border border-red-500/20 rounded-lg"
                   >
                     <div>
-                      <div className="text-red-400 font-semibold">
-                        {threat.type}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Blocked: {threat.blocked}
-                      </div>
+                      <div className="text-red-400 font-semibold">{threat.type}</div>
+                      <div className="text-sm text-muted-foreground">Blocked: {threat.blocked}</div>
                     </div>
-                    <Badge
-                      variant="outline"
-                      className="border-green-500 text-green-400"
-                    >
+                    <Badge variant="outline" className="border-green-500 text-green-400">
                       {threat.rate}
                     </Badge>
                   </div>
@@ -103,13 +84,8 @@ export function UltimateDefensiveBarrier() {
           </Card>
 
           <div className="flex gap-4 mt-6">
-            <Button className="bg-purple-600 hover:bg-purple-700">
-              ⚡ Boost Barrier Power
-            </Button>
-            <Button
-              variant="outline"
-              className="border-indigo-500 text-indigo-400"
-            >
+            <Button className="bg-purple-600 hover:bg-purple-700">⚡ Boost Barrier Power</Button>
+            <Button variant="outline" className="border-indigo-500 text-indigo-400">
               🔧 Configure Layers
             </Button>
             <Button variant="outline" className="border-red-500 text-red-400">

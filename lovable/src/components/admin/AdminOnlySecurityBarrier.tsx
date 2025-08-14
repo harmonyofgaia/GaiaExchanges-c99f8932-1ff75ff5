@@ -24,8 +24,7 @@ export function AdminOnlySecurityBarrier() {
           "🌟 Admin godfather authority confirmed",
         ];
 
-        const event =
-          securityEvents[Math.floor(Math.random() * securityEvents.length)];
+        const event = securityEvents[Math.floor(Math.random() * securityEvents.length)];
         toast.success("🛡️ Security Enhanced!", {
           description: event,
           duration: 3000,

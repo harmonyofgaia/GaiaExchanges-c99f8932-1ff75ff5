@@ -96,10 +96,7 @@ export default function VideoUpload() {
 
               <div className="space-y-2">
                 <Label htmlFor="tags">Tags</Label>
-                <Input
-                  id="tags"
-                  placeholder="eco, environment, green, sustainable..."
-                />
+                <Input id="tags" placeholder="eco, environment, green, sustainable..." />
               </div>
 
               {isUploading && (
@@ -127,9 +124,7 @@ export default function VideoUpload() {
               </Button>
 
               <div className="p-4 bg-green-900/20 border border-green-500/20 rounded-lg">
-                <h4 className="font-bold text-green-400 mb-2">
-                  Earning Potential
-                </h4>
+                <h4 className="font-bold text-green-400 mb-2">Earning Potential</h4>
                 <div className="text-sm text-muted-foreground space-y-1">
                   <div>• Base reward: 50 GAIA tokens</div>
                   <div>• Duration bonus: +1 token per 10 seconds</div>
@@ -155,13 +150,7 @@ export default function VideoUpload() {
                     <CardContent className="p-4">
                       <div className="flex items-start justify-between mb-2">
                         <h4 className="font-medium">{video.title}</h4>
-                        <Badge
-                          variant={
-                            video.status === "approved"
-                              ? "default"
-                              : "secondary"
-                          }
-                        >
+                        <Badge variant={video.status === "approved" ? "default" : "secondary"}>
                           {video.status}
                         </Badge>
                       </div>
@@ -204,9 +193,7 @@ export default function VideoUpload() {
             <CardContent className="p-4 text-center">
               <Video className="h-8 w-8 text-green-400 mx-auto mb-2" />
               <div className="text-2xl font-bold text-green-400">247</div>
-              <div className="text-sm text-muted-foreground">
-                Videos Uploaded
-              </div>
+              <div className="text-sm text-muted-foreground">Videos Uploaded</div>
             </CardContent>
           </Card>
           <Card className="border-blue-500/30 bg-blue-900/10">

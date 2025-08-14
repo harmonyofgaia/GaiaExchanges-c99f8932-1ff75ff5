@@ -35,8 +35,7 @@ export function ComprehensiveSecurityMonitor() {
       status: "ATTACKING",
       efficiency: 100,
       threatsBlocked: 1247,
-      description:
-        "Actively attacking malicious IPs and shutting down their systems",
+      description: "Actively attacking malicious IPs and shutting down their systems",
     },
     {
       name: "Wallet Protection Fortress",
@@ -95,9 +94,7 @@ export function ComprehensiveSecurityMonitor() {
 
   useEffect(() => {
     const runComprehensiveMonitoring = () => {
-      console.log(
-        "🔍 COMPREHENSIVE SECURITY MONITOR - FULL SPECTRUM PROTECTION",
-      );
+      console.log("🔍 COMPREHENSIVE SECURITY MONITOR - FULL SPECTRUM PROTECTION");
 
       // Simulate security events
       if (Math.random() < 0.2) {
@@ -106,11 +103,13 @@ export function ComprehensiveSecurityMonitor() {
         updatedModules[moduleIndex].threatsBlocked += 1;
 
         // Rotate status for dynamic display
-        const statuses: Array<
-          "ACTIVE" | "MONITORING" | "DEFENDING" | "ATTACKING"
-        > = ["ACTIVE", "MONITORING", "DEFENDING", "ATTACKING"];
-        updatedModules[moduleIndex].status =
-          statuses[Math.floor(Math.random() * statuses.length)];
+        const statuses: Array<"ACTIVE" | "MONITORING" | "DEFENDING" | "ATTACKING"> = [
+          "ACTIVE",
+          "MONITORING",
+          "DEFENDING",
+          "ATTACKING",
+        ];
+        updatedModules[moduleIndex].status = statuses[Math.floor(Math.random() * statuses.length)];
 
         setSecurityModules(updatedModules);
 
@@ -123,10 +122,7 @@ export function ComprehensiveSecurityMonitor() {
       }
 
       // Update overall metrics
-      const totalThreats = securityModules.reduce(
-        (sum, module) => sum + module.threatsBlocked,
-        0,
-      );
+      const totalThreats = securityModules.reduce((sum, module) => sum + module.threatsBlocked, 0);
       const avgEfficiency =
         securityModules.reduce((sum, module) => sum + module.efficiency, 0) /
         securityModules.length;
@@ -183,7 +179,7 @@ export function ComprehensiveSecurityMonitor() {
           ...module,
           efficiency: 100,
           status: "ACTIVE",
-        })),
+        }))
       );
 
       toast.success("✅ FULL SYSTEM SCAN COMPLETE", {
@@ -209,45 +205,29 @@ export function ComprehensiveSecurityMonitor() {
               <div className="text-3xl font-bold text-green-400">
                 {overallSecurityScore.toFixed(1)}%
               </div>
-              <div className="text-sm text-muted-foreground">
-                Overall Security
-              </div>
+              <div className="text-sm text-muted-foreground">Overall Security</div>
               <Progress value={overallSecurityScore} className="mt-2" />
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-red-400">
-                {activeThreats}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Active Threats
-              </div>
+              <div className="text-3xl font-bold text-red-400">{activeThreats}</div>
+              <div className="text-sm text-muted-foreground">Active Threats</div>
               <Badge className="mt-2 bg-green-600 text-white">MINIMAL</Badge>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400">
-                {systemUptime}
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{systemUptime}</div>
               <div className="text-sm text-muted-foreground">System Uptime</div>
               <Badge className="mt-2 bg-purple-600 text-white">EXCELLENT</Badge>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-yellow-400">
-                {securityModules.reduce(
-                  (sum, module) => sum + module.threatsBlocked,
-                  0,
-                )}
+                {securityModules.reduce((sum, module) => sum + module.threatsBlocked, 0)}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Threats Blocked
-              </div>
+              <div className="text-sm text-muted-foreground">Total Threats Blocked</div>
               <Badge className="mt-2 bg-yellow-600 text-white">TODAY</Badge>
             </div>
           </div>
 
-          <Button
-            onClick={executeFullSystemScan}
-            className="w-full bg-blue-600 hover:bg-blue-700"
-          >
+          <Button onClick={executeFullSystemScan} className="w-full bg-blue-600 hover:bg-blue-700">
             <Crosshair className="h-4 w-4 mr-2" />
             Execute Full System Security Scan
           </Button>
@@ -267,9 +247,7 @@ export function ComprehensiveSecurityMonitor() {
             <CardContent className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">Status</span>
-                <Badge
-                  className={`text-white text-xs ${getStatusColor(module.status)}`}
-                >
+                <Badge className={`text-white text-xs ${getStatusColor(module.status)}`}>
                   {module.status}
                 </Badge>
               </div>
@@ -283,12 +261,8 @@ export function ComprehensiveSecurityMonitor() {
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">
-                  Threats Blocked
-                </span>
-                <span className="text-xs font-medium text-red-400">
-                  {module.threatsBlocked}
-                </span>
+                <span className="text-xs text-muted-foreground">Threats Blocked</span>
+                <span className="text-xs font-medium text-red-400">{module.threatsBlocked}</span>
               </div>
 
               <p className="text-xs text-gray-400">{module.description}</p>
@@ -301,9 +275,7 @@ export function ComprehensiveSecurityMonitor() {
       <Card className="border-green-500/30 bg-gradient-to-r from-green-900/30 to-emerald-900/30">
         <CardContent className="pt-6">
           <div className="text-center space-y-4">
-            <h3 className="text-2xl font-bold text-green-400">
-              🛡️ WATERCLOSED SECURITY GUARANTEE
-            </h3>
+            <h3 className="text-2xl font-bold text-green-400">🛡️ WATERCLOSED SECURITY GUARANTEE</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-green-200">
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
@@ -346,8 +318,7 @@ export function ComprehensiveSecurityMonitor() {
               <p className="text-blue-200 font-medium">
                 "Most Powerful Engagement Between Humans and AI" <br />
                 <span className="text-xs text-blue-300">
-                  Powered by Synatic & Harmony of Gaia - The Massively Token
-                  Underdog
+                  Powered by Synatic & Harmony of Gaia - The Massively Token Underdog
                 </span>
               </p>
             </div>

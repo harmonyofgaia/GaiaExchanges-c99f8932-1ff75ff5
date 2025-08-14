@@ -33,14 +33,7 @@ export function EnhancedAnimatedBackground() {
 
     // Initialize particles
     const particleCount = 100;
-    const colors = [
-      "#00ffff",
-      "#ff00ff",
-      "#ffff00",
-      "#00ff00",
-      "#ff0080",
-      "#8000ff",
-    ];
+    const colors = ["#00ffff", "#ff00ff", "#ffff00", "#00ff00", "#ff0080", "#8000ff"];
 
     for (let i = 0; i < particleCount; i++) {
       particlesRef.current.push({

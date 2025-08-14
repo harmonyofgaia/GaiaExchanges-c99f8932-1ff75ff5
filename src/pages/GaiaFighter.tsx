@@ -34,9 +34,7 @@ export default function GaiaFighter() {
         <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400">
           ⚔️ GAIA FIGHTER PRO
         </h1>
-        <p className="text-muted-foreground mt-2">
-          Ultimate combat system with global tournaments
-        </p>
+        <p className="text-muted-foreground mt-2">Ultimate combat system with global tournaments</p>
       </div>
 
       {/* Player Stats */}
@@ -50,15 +48,11 @@ export default function GaiaFighter() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-400">
-                Level {playerLevel}
-              </div>
+              <div className="text-2xl font-bold text-red-400">Level {playerLevel}</div>
               <div className="text-sm text-muted-foreground">Fighter Level</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-orange-400">
-                {playerXP}
-              </div>
+              <div className="text-2xl font-bold text-orange-400">{playerXP}</div>
               <div className="text-sm text-muted-foreground">Experience</div>
             </div>
             <div className="space-y-2">
@@ -98,8 +92,7 @@ export default function GaiaFighter() {
                   <div>
                     <div className="font-bold">{fighter.name}</div>
                     <div className="text-sm text-muted-foreground">
-                      Level {fighter.level} • {fighter.element} •{" "}
-                      {fighter.difficulty}
+                      Level {fighter.level} • {fighter.element} • {fighter.difficulty}
                     </div>
                   </div>
                   <Button
@@ -129,9 +122,7 @@ export default function GaiaFighter() {
               <div className="text-center">
                 <Badge className="bg-yellow-600 mb-4">SEASON 3 ACTIVE</Badge>
                 <div className="text-lg font-bold">Current Ranking: #127</div>
-                <div className="text-sm text-muted-foreground">
-                  out of 15,247 players
-                </div>
+                <div className="text-sm text-muted-foreground">out of 15,247 players</div>
               </div>
 
               <div className="space-y-2">

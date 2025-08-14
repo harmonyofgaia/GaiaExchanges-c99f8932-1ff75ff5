@@ -3,37 +3,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Wallet,
-  TrendingUp,
-  DollarSign,
-  Shield,
-  Zap,
-  Copy,
-  ExternalLink,
-} from "lucide-react";
+import { Wallet, TrendingUp, DollarSign, Shield, Zap, Copy, ExternalLink } from "lucide-react";
 import { useWallets } from "@/hooks/useWallets";
-import {
-  GAIA_TOKEN,
-  GAIA_METRICS,
-  formatGaiaPrice,
-  formatGaiaNumber,
-} from "@/constants/gaia";
+import { GAIA_TOKEN, GAIA_METRICS, formatGaiaPrice, formatGaiaNumber } from "@/constants/gaia";
 import { toast } from "sonner";
 
 export function GaiaWallet() {
   const { wallets, loading } = useWallets();
   const [realTimeBalance, setRealTimeBalance] = useState<number>(2847.5);
-  const [currentPrice, setCurrentPrice] = useState<number>(
-    GAIA_TOKEN.INITIAL_PRICE,
-  );
+  const [currentPrice, setCurrentPrice] = useState<number>(GAIA_TOKEN.INITIAL_PRICE);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setRealTimeBalance((prev) => prev + (Math.random() - 0.5) * 10);
-      setCurrentPrice((prev) =>
-        Math.max(0.00001, prev + (Math.random() - 0.5) * 0.000005),
-      );
+      setCurrentPrice((prev) => Math.max(0.00001, prev + (Math.random() - 0.5) * 0.000005));
     }, 3000);
 
     return () => clearInterval(interval);
@@ -76,17 +59,13 @@ export function GaiaWallet() {
             <Wallet className="h-6 w-6" />
             🌍 Official GAiA Wallet - Harmony of Culture
           </CardTitle>
-          <p className="text-muted-foreground">
-            Connected to official GAiA token on Pump.fun
-          </p>
+          <p className="text-muted-foreground">Connected to official GAiA token on Pump.fun</p>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Official Wallet Address Display */}
           <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-blue-400 font-bold">
-                Official GAiA Wallet Address:
-              </span>
+              <span className="text-blue-400 font-bold">Official GAiA Wallet Address:</span>
               <div className="flex gap-2">
                 <Button
                   onClick={copyOfficialWalletAddress}
@@ -116,9 +95,7 @@ export function GaiaWallet() {
           {/* Official Contract Address Display */}
           <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-purple-400 font-bold">
-                Official GAiA Contract Address:
-              </span>
+              <span className="text-purple-400 font-bold">Official GAiA Contract Address:</span>
               <Button
                 onClick={copyOfficialContractAddress}
                 variant="outline"
@@ -140,9 +117,7 @@ export function GaiaWallet() {
               <CardContent className="pt-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-muted-foreground">
-                      Official GAiA Balance
-                    </p>
+                    <p className="text-sm text-muted-foreground">Official GAiA Balance</p>
                     <p className="text-xl font-bold text-green-400">
                       {formatGaiaNumber(realTimeBalance)}
                     </p>
@@ -156,9 +131,7 @@ export function GaiaWallet() {
               <CardContent className="pt-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-muted-foreground">
-                      Official GAiA Price
-                    </p>
+                    <p className="text-sm text-muted-foreground">Official GAiA Price</p>
                     <p className="text-xl font-bold text-blue-400">
                       {formatGaiaPrice(currentPrice)}
                     </p>
@@ -172,9 +145,7 @@ export function GaiaWallet() {
               <CardContent className="pt-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-muted-foreground">
-                      Official USD Value
-                    </p>
+                    <p className="text-sm text-muted-foreground">Official USD Value</p>
                     <p className="text-xl font-bold text-purple-400">
                       {formatGaiaPrice(realTimeBalance * currentPrice)}
                     </p>

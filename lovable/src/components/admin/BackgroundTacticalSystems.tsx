@@ -352,46 +352,28 @@ export function BackgroundTacticalSystems() {
             return {
               ...system,
               last_deployment: newLog.action,
-              cpu_usage: Math.max(
-                10,
-                Math.min(95, system.cpu_usage + (Math.random() - 0.5) * 10),
-              ),
+              cpu_usage: Math.max(10, Math.min(95, system.cpu_usage + (Math.random() - 0.5) * 10)),
               memory_usage: Math.max(
                 15,
-                Math.min(95, system.memory_usage + (Math.random() - 0.5) * 8),
+                Math.min(95, system.memory_usage + (Math.random() - 0.5) * 8)
               ),
-              network_traffic: Math.max(
-                10,
-                system.network_traffic + (Math.random() - 0.5) * 50,
-              ),
-              uptime: Math.max(
-                85,
-                Math.min(100, system.uptime + (Math.random() - 0.48) * 0.5),
-              ),
+              network_traffic: Math.max(10, system.network_traffic + (Math.random() - 0.5) * 50),
+              uptime: Math.max(85, Math.min(100, system.uptime + (Math.random() - 0.48) * 0.5)),
             };
           }
 
           // Normal fluctuations
           return {
             ...system,
-            cpu_usage: Math.max(
-              5,
-              Math.min(90, system.cpu_usage + (Math.random() - 0.5) * 5),
-            ),
+            cpu_usage: Math.max(5, Math.min(90, system.cpu_usage + (Math.random() - 0.5) * 5)),
             memory_usage: Math.max(
               10,
-              Math.min(95, system.memory_usage + (Math.random() - 0.5) * 3),
+              Math.min(95, system.memory_usage + (Math.random() - 0.5) * 3)
             ),
-            network_traffic: Math.max(
-              5,
-              system.network_traffic + (Math.random() - 0.5) * 20,
-            ),
-            uptime: Math.max(
-              80,
-              Math.min(100, system.uptime + (Math.random() - 0.49) * 0.1),
-            ),
+            network_traffic: Math.max(5, system.network_traffic + (Math.random() - 0.5) * 20),
+            uptime: Math.max(80, Math.min(100, system.uptime + (Math.random() - 0.49) * 0.1)),
           };
-        }),
+        })
       );
 
       // Update overview
@@ -468,7 +450,7 @@ export function BackgroundTacticalSystems() {
         status: "active",
         uptime: 100,
         threat_level: "green",
-      })),
+      }))
     );
   };
 
@@ -487,8 +469,8 @@ export function BackgroundTacticalSystems() {
             <Satellite className="h-6 w-6 text-blue-400 animate-pulse" />
           </CardTitle>
           <p className="text-blue-400">
-            19 Advanced Systems • Autonomous Operation • Real-time Deployment •
-            Military Intelligence
+            19 Advanced Systems • Autonomous Operation • Real-time Deployment • Military
+            Intelligence
           </p>
         </CardHeader>
         <CardContent>
@@ -498,9 +480,7 @@ export function BackgroundTacticalSystems() {
                 <div className="text-2xl font-bold text-green-400">
                   {systemOverview.active_systems}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Active Systems
-                </div>
+                <div className="text-xs text-muted-foreground">Active Systems</div>
               </CardContent>
             </Card>
             <Card className="bg-yellow-900/30 border-yellow-500/50">
@@ -524,9 +504,7 @@ export function BackgroundTacticalSystems() {
                 <div className="text-2xl font-bold text-purple-400">
                   {systemOverview.total_uptime.toFixed(1)}%
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Total Uptime
-                </div>
+                <div className="text-xs text-muted-foreground">Total Uptime</div>
               </CardContent>
             </Card>
             <Card className="bg-orange-900/30 border-orange-500/50">
@@ -542,9 +520,7 @@ export function BackgroundTacticalSystems() {
                 <div className="text-2xl font-bold text-cyan-400">
                   {systemOverview.total_traffic.toFixed(0)}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Network MB/s
-                </div>
+                <div className="text-xs text-muted-foreground">Network MB/s</div>
               </CardContent>
             </Card>
           </div>
@@ -572,13 +548,9 @@ export function BackgroundTacticalSystems() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   {getCategoryIcon(system.category)}
-                  <h4 className="font-semibold text-white text-sm">
-                    {system.name}
-                  </h4>
+                  <h4 className="font-semibold text-white text-sm">{system.name}</h4>
                 </div>
-                <Badge
-                  className={`${getStatusColor(system.status)} text-white text-xs`}
-                >
+                <Badge className={`${getStatusColor(system.status)} text-white text-xs`}>
                   {system.status.toUpperCase()}
                 </Badge>
               </div>
@@ -587,15 +559,11 @@ export function BackgroundTacticalSystems() {
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div>
                   <div className="text-muted-foreground">Uptime</div>
-                  <div className="text-green-400 font-bold">
-                    {system.uptime.toFixed(1)}%
-                  </div>
+                  <div className="text-green-400 font-bold">{system.uptime.toFixed(1)}%</div>
                 </div>
                 <div>
                   <div className="text-muted-foreground">Threat Level</div>
-                  <div
-                    className={`font-bold ${getThreatColor(system.threat_level)}`}
-                  >
+                  <div className={`font-bold ${getThreatColor(system.threat_level)}`}>
                     {system.threat_level.toUpperCase()}
                   </div>
                 </div>
@@ -604,24 +572,18 @@ export function BackgroundTacticalSystems() {
               <div className="space-y-2">
                 <div className="flex justify-between text-xs">
                   <span className="text-muted-foreground">CPU</span>
-                  <span className="text-blue-400">
-                    {system.cpu_usage.toFixed(0)}%
-                  </span>
+                  <span className="text-blue-400">{system.cpu_usage.toFixed(0)}%</span>
                 </div>
                 <Progress value={system.cpu_usage} className="h-1" />
 
                 <div className="flex justify-between text-xs">
                   <span className="text-muted-foreground">Memory</span>
-                  <span className="text-purple-400">
-                    {system.memory_usage.toFixed(0)}%
-                  </span>
+                  <span className="text-purple-400">{system.memory_usage.toFixed(0)}%</span>
                 </div>
                 <Progress value={system.memory_usage} className="h-1" />
               </div>
 
-              <div className="text-green-300 text-xs">
-                Last: {system.last_deployment}
-              </div>
+              <div className="text-green-300 text-xs">Last: {system.last_deployment}</div>
             </CardContent>
           </Card>
         ))}
@@ -654,17 +616,13 @@ export function BackgroundTacticalSystems() {
                       <AlertTriangle className="h-4 w-4 text-red-400" />
                     )}
                     <div>
-                      <div className="font-semibold text-white text-sm">
-                        {log.action}
-                      </div>
+                      <div className="font-semibold text-white text-sm">{log.action}</div>
                       <div className="text-xs text-muted-foreground">
                         {log.system} • {log.details}
                       </div>
                     </div>
                   </div>
-                  <div className="text-xs text-cyan-400">
-                    {log.timestamp.toLocaleTimeString()}
-                  </div>
+                  <div className="text-xs text-cyan-400">{log.timestamp.toLocaleTimeString()}</div>
                 </div>
               ))
             )}

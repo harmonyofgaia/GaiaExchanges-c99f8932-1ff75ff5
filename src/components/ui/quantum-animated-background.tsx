@@ -64,13 +64,7 @@ export function QuantumAnimatedBackground() {
 
   // Initialize particles with quantum properties
   const createParticle = (id: number): Particle => {
-    const types: Particle["type"][] = [
-      "star",
-      "gaia",
-      "coral",
-      "quantum",
-      "harmony",
-    ];
+    const types: Particle["type"][] = ["star", "gaia", "coral", "quantum", "harmony"];
     const type = types[Math.floor(Math.random() * types.length)];
 
     const colors = {
@@ -114,9 +108,7 @@ export function QuantumAnimatedBackground() {
   // Initialize particles
   useEffect(() => {
     if (dimensions.width && dimensions.height) {
-      const newParticles = Array.from({ length: 150 }, (_, i) =>
-        createParticle(i),
-      );
+      const newParticles = Array.from({ length: 150 }, (_, i) => createParticle(i));
       setParticles(newParticles);
     }
   }, [dimensions]);
@@ -163,8 +155,7 @@ export function QuantumAnimatedBackground() {
           const y =
             canvas.height / 2 +
             Math.sin(x * wave.frequency + wavePhase) * wave.amplitude +
-            Math.sin(x * wave.frequency * 2 + wavePhase * 1.5) *
-              (wave.amplitude * 0.3);
+            Math.sin(x * wave.frequency * 2 + wavePhase * 1.5) * (wave.amplitude * 0.3);
 
           if (x === 0) {
             ctx.moveTo(x, y);
@@ -231,8 +222,7 @@ export function QuantumAnimatedBackground() {
               ctx.beginPath();
               for (let i = 0; i < 5; i++) {
                 const angle = (i * Math.PI * 2) / 5;
-                const radius =
-                  i % 2 === 0 ? particle.size : particle.size * 0.5;
+                const radius = i % 2 === 0 ? particle.size : particle.size * 0.5;
                 const x = Math.cos(angle) * radius;
                 const y = Math.sin(angle) * radius;
                 if (i === 0) ctx.moveTo(x, y);
@@ -254,7 +244,7 @@ export function QuantumAnimatedBackground() {
                 ctx.moveTo(0, 0);
                 ctx.lineTo(
                   Math.cos(angle) * particle.size * 2,
-                  Math.sin(angle) * particle.size * 2,
+                  Math.sin(angle) * particle.size * 2
                 );
                 ctx.lineWidth = 1;
                 ctx.strokeStyle = particle.color;
@@ -272,12 +262,12 @@ export function QuantumAnimatedBackground() {
                 ctx.moveTo(0, 0);
                 ctx.lineTo(
                   Math.cos(angle) * particle.size * 1.5,
-                  Math.sin(angle) * particle.size * 1.5,
+                  Math.sin(angle) * particle.size * 1.5
                 );
                 // Add sub-branches
                 ctx.lineTo(
                   Math.cos(angle + 0.5) * particle.size * 0.8,
-                  Math.sin(angle + 0.5) * particle.size * 0.8,
+                  Math.sin(angle + 0.5) * particle.size * 0.8
                 );
                 ctx.stroke();
               }
@@ -289,8 +279,7 @@ export function QuantumAnimatedBackground() {
               ctx.lineWidth = 1;
               for (let i = 0; i < 8; i++) {
                 const angle = (i * Math.PI * 2) / 8;
-                const radius =
-                  particle.size * (1 + Math.sin(time * 0.1 + i) * 0.5);
+                const radius = particle.size * (1 + Math.sin(time * 0.1 + i) * 0.5);
                 ctx.beginPath();
                 ctx.arc(0, 0, radius, angle, angle + Math.PI / 4);
                 ctx.stroke();
@@ -305,12 +294,7 @@ export function QuantumAnimatedBackground() {
               ctx.fill();
               // Add note stem
               ctx.beginPath();
-              ctx.rect(
-                particle.size * 0.6,
-                -particle.size * 2,
-                2,
-                particle.size * 2,
-              );
+              ctx.rect(particle.size * 0.6, -particle.size * 2, 2, particle.size * 2);
               ctx.fill();
               break;
           }
@@ -345,13 +329,7 @@ export function QuantumAnimatedBackground() {
       // Add quantum text effect in corners
       ctx.font = "12px monospace";
       ctx.fillStyle = "rgba(34, 197, 94, 0.3)";
-      const quantumText = [
-        "QUANTUM",
-        "HARMONY",
-        "GAIA",
-        "LIBERATION",
-        "INFINITE",
-      ];
+      const quantumText = ["QUANTUM", "HARMONY", "GAIA", "LIBERATION", "INFINITE"];
       quantumText.forEach((text, i) => {
         const x = 20 + (i % 2) * (canvas.width - 100);
         const y = 30 + Math.floor(i / 2) * 25;
@@ -377,8 +355,7 @@ export function QuantumAnimatedBackground() {
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
       style={{
-        background:
-          "radial-gradient(ellipse at center, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.95) 100%)",
+        background: "radial-gradient(ellipse at center, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.95) 100%)",
       }}
     />
   );

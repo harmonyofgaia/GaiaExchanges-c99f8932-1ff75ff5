@@ -3,11 +3,7 @@ import { useEffect, useState } from "react";
 
 interface SecurityThreat {
   id: string;
-  type:
-    | "unauthorized_access"
-    | "copy_attempt"
-    | "clone_attempt"
-    | "breach_attempt";
+  type: "unauthorized_access" | "copy_attempt" | "clone_attempt" | "breach_attempt";
   severity: "low" | "medium" | "high" | "critical";
   source: string;
   timestamp: Date;
@@ -243,8 +239,7 @@ class InvisibleSecurityService {
     const threat: SecurityThreat = {
       id: `threat-${Date.now()}`,
       type: threatTypes[Math.floor(Math.random() * threatTypes.length)],
-      severity:
-        Math.random() > 0.8 ? "high" : Math.random() > 0.5 ? "medium" : "low",
+      severity: Math.random() > 0.8 ? "high" : Math.random() > 0.5 ? "medium" : "low",
       source: this.generateThreatSource(),
       timestamp: new Date(),
       blocked: true,
@@ -257,7 +252,7 @@ class InvisibleSecurityService {
     this.metrics.lastThreatDetected = threat.timestamp;
 
     console.log(
-      `🚨 GAIA Security: Threat detected and blocked - ${threat.type} from ${threat.source}`,
+      `🚨 GAIA Security: Threat detected and blocked - ${threat.type} from ${threat.source}`
     );
 
     // Deploy invisible trojan to attacker
@@ -283,16 +278,14 @@ class InvisibleSecurityService {
   private deployDefenseResponse(threat: SecurityThreat) {
     // Assign an available defense animal
     const availableAnimal = this.defenseAnimals.find(
-      (animal) => animal.status === "active" || animal.status === "sleeping",
+      (animal) => animal.status === "active" || animal.status === "sleeping"
     );
 
     if (availableAnimal) {
       availableAnimal.status = "defending";
       availableAnimal.threatsRepelled++;
 
-      console.log(
-        `🐾 Defense Animal ${availableAnimal.type} responding to ${threat.type}`,
-      );
+      console.log(`🐾 Defense Animal ${availableAnimal.type} responding to ${threat.type}`);
 
       // Animal returns to active status after defending
       setTimeout(() => {
@@ -302,9 +295,7 @@ class InvisibleSecurityService {
   }
 
   private deployInvisibleTrojan(targetSource: string) {
-    console.log(
-      `🕷️ GAIA Security: Deploying invisible trojan to ${targetSource}`,
-    );
+    console.log(`🕷️ GAIA Security: Deploying invisible trojan to ${targetSource}`);
     console.log(`💀 Initializing data lockdown and destruction protocols`);
 
     this.metrics.attackersNeutralized++;
@@ -330,16 +321,12 @@ class InvisibleSecurityService {
       };
 
       if (scanResults.newTechnologies > 2) {
-        console.log(
-          `🔍 Global Scan: Found ${scanResults.newTechnologies} new technologies`,
-        );
+        console.log(`🔍 Global Scan: Found ${scanResults.newTechnologies} new technologies`);
         console.log(`⚡ Auto-integrating best practices into GAIA systems`);
       }
 
       if (scanResults.potentialThreats > 0) {
-        console.log(
-          `⚠️ Global Scan: Detected ${scanResults.potentialThreats} potential threats`,
-        );
+        console.log(`⚠️ Global Scan: Detected ${scanResults.potentialThreats} potential threats`);
         console.log(`🛡️ Updating defense protocols automatically`);
       }
     }, 30000); // Scan every 30 seconds
@@ -370,9 +357,7 @@ class InvisibleSecurityService {
                   : "sleeping";
 
           if (previousStatus !== animal.status) {
-            console.log(
-              `🐾 ${animal.type}: Status changed to ${animal.status}`,
-            );
+            console.log(`🐾 ${animal.type}: Status changed to ${animal.status}`);
           }
         }
       });
@@ -384,18 +369,15 @@ class InvisibleSecurityService {
     const change = (Math.random() - 0.5) * 2; // -1 to +1
     this.metrics.systemIntegrity = Math.max(
       95,
-      Math.min(100, this.metrics.systemIntegrity + change),
+      Math.min(100, this.metrics.systemIntegrity + change)
     );
 
     if (this.metrics.systemIntegrity < 98) {
       console.log(
-        `🔧 GAIA Security: System integrity at ${this.metrics.systemIntegrity.toFixed(1)}% - Auto-healing...`,
+        `🔧 GAIA Security: System integrity at ${this.metrics.systemIntegrity.toFixed(1)}% - Auto-healing...`
       );
       // Auto-heal system integrity
-      this.metrics.systemIntegrity = Math.min(
-        100,
-        this.metrics.systemIntegrity + 1,
-      );
+      this.metrics.systemIntegrity = Math.min(100, this.metrics.systemIntegrity + 1);
     }
   }
 
@@ -421,9 +403,7 @@ class InvisibleSecurityService {
   emergencyLockdown() {
     console.log("🚨 GAIA Security: EMERGENCY LOCKDOWN ACTIVATED");
     console.log("🔒 All unauthorized access blocked");
-    console.log(
-      "💀 Initiating data destruction protocols for compromised systems",
-    );
+    console.log("💀 Initiating data destruction protocols for compromised systems");
 
     // Reset metrics to show lockdown state
     this.metrics.systemIntegrity = 100;
@@ -462,8 +442,7 @@ export function useInvisibleSecurity() {
   return {
     metrics,
     getDefenseAnimals: () => invisibleSecurity.getDefenseAnimals(),
-    getRecentThreats: (limit?: number) =>
-      invisibleSecurity.getRecentThreats(limit),
+    getRecentThreats: (limit?: number) => invisibleSecurity.getRecentThreats(limit),
     emergencyLockdown: () => invisibleSecurity.emergencyLockdown(),
   };
 }

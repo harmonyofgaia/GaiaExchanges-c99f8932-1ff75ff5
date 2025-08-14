@@ -115,10 +115,7 @@ export function SecurePsychohistoricalAdmin() {
         feasibilityScore: 65,
         impactScore: 98,
         riskLevel: "high",
-        safetyFlags: [
-          "requires_expert_review",
-          "potential_environmental_impact",
-        ],
+        safetyFlags: ["requires_expert_review", "potential_environmental_impact"],
         generatedAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
         status: "pending",
         implementationPriority: 9,
@@ -126,8 +123,7 @@ export function SecurePsychohistoricalAdmin() {
       {
         id: "review-2",
         title: "Atmospheric Carbon Crystallization",
-        description:
-          "Process to convert atmospheric CO2 into solid carbon crystals for storage",
+        description: "Process to convert atmospheric CO2 into solid carbon crystals for storage",
         category: "conservation",
         feasibilityScore: 45,
         impactScore: 95,
@@ -140,8 +136,7 @@ export function SecurePsychohistoricalAdmin() {
       {
         id: "review-3",
         title: "Biodegradable Electronics Initiative",
-        description:
-          "Fully compostable electronic devices to eliminate e-waste",
+        description: "Fully compostable electronic devices to eliminate e-waste",
         category: "waste_reduction",
         feasibilityScore: 78,
         impactScore: 86,
@@ -161,8 +156,7 @@ export function SecurePsychohistoricalAdmin() {
         type: "security",
         severity: "medium",
         message: "Unusual pattern detected in idea generation",
-        details:
-          "AI system generated 47 similar solutions in 10 minutes - possible feedback loop",
+        details: "AI system generated 47 similar solutions in 10 minutes - possible feedback loop",
         timestamp: new Date(Date.now() - 15 * 60 * 1000),
         resolved: false,
         source: "PsychohistoricalEngine",
@@ -172,8 +166,7 @@ export function SecurePsychohistoricalAdmin() {
         type: "quality",
         severity: "low",
         message: "Feasibility scores declining",
-        details:
-          "Average feasibility score dropped from 78% to 65% over past 24 hours",
+        details: "Average feasibility score dropped from 78% to 65% over past 24 hours",
         timestamp: new Date(Date.now() - 45 * 60 * 1000),
         resolved: false,
         source: "QualityMonitor",
@@ -207,42 +200,29 @@ export function SecurePsychohistoricalAdmin() {
       // Simulate real-time updates
       setAdminStats((prev) => ({
         ...prev,
-        systemHealth: Math.max(
-          85,
-          Math.min(99, prev.systemHealth + (Math.random() - 0.5) * 2),
-        ),
-        totalIdeasReviewed:
-          prev.totalIdeasReviewed + Math.floor(Math.random() * 3),
+        systemHealth: Math.max(85, Math.min(99, prev.systemHealth + (Math.random() - 0.5) * 2)),
+        totalIdeasReviewed: prev.totalIdeasReviewed + Math.floor(Math.random() * 3),
       }));
     }, 10000);
 
     return () => clearInterval(interval);
   };
 
-  const reviewIdea = (
-    ideaId: string,
-    action: "approve" | "reject" | "flag",
-    notes?: string,
-  ) => {
+  const reviewIdea = (ideaId: string, action: "approve" | "reject" | "flag", notes?: string) => {
     setIdeasForReview((prev) =>
       prev.map((idea) => {
         if (idea.id === ideaId) {
           return {
             ...idea,
             status:
-              action === "approve"
-                ? "approved"
-                : action === "reject"
-                  ? "rejected"
-                  : "flagged",
+              action === "approve" ? "approved" : action === "reject" ? "rejected" : "flagged",
             reviewedBy: "Admin",
             reviewNotes:
-              notes ||
-              `${action.charAt(0).toUpperCase() + action.slice(1)}ed by administrator`,
+              notes || `${action.charAt(0).toUpperCase() + action.slice(1)}ed by administrator`,
           };
         }
         return idea;
-      }),
+      })
     );
 
     const idea = ideasForReview.find((i) => i.id === ideaId);
@@ -253,9 +233,7 @@ export function SecurePsychohistoricalAdmin() {
 
   const resolveAlert = (alertId: string) => {
     setSystemAlerts((prev) =>
-      prev.map((alert) =>
-        alert.id === alertId ? { ...alert, resolved: true } : alert,
-      ),
+      prev.map((alert) => (alert.id === alertId ? { ...alert, resolved: true } : alert))
     );
     toast.success("Alert resolved");
   };
@@ -313,15 +291,12 @@ export function SecurePsychohistoricalAdmin() {
               Secure Access Required
             </CardTitle>
             <p className="text-muted-foreground">
-              Enter administrator credentials to access the psychohistorical
-              admin dashboard
+              Enter administrator credentials to access the psychohistorical admin dashboard
             </p>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-white">
-                Security Code
-              </label>
+              <label className="text-sm font-medium text-white">Security Code</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <input
@@ -334,10 +309,7 @@ export function SecurePsychohistoricalAdmin() {
                 />
               </div>
             </div>
-            <Button
-              onClick={authenticate}
-              className="w-full bg-blue-600 hover:bg-blue-700"
-            >
+            <Button onClick={authenticate} className="w-full bg-blue-600 hover:bg-blue-700">
               <Shield className="h-4 w-4 mr-2" />
               Authenticate
             </Button>
@@ -360,18 +332,14 @@ export function SecurePsychohistoricalAdmin() {
               <div className="text-2xl font-bold text-green-400">
                 {adminStats.totalIdeasReviewed}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Ideas Reviewed
-              </div>
+              <div className="text-xs text-muted-foreground">Ideas Reviewed</div>
             </div>
           </CardContent>
         </Card>
         <Card className="border-blue-500/20">
           <CardContent className="pt-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-400">
-                {adminStats.approvalRate}%
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{adminStats.approvalRate}%</div>
               <div className="text-xs text-muted-foreground">Approval Rate</div>
             </div>
           </CardContent>
@@ -382,18 +350,14 @@ export function SecurePsychohistoricalAdmin() {
               <div className="text-2xl font-bold text-purple-400">
                 {adminStats.averageReviewTime}m
               </div>
-              <div className="text-xs text-muted-foreground">
-                Avg Review Time
-              </div>
+              <div className="text-xs text-muted-foreground">Avg Review Time</div>
             </div>
           </CardContent>
         </Card>
         <Card className="border-yellow-500/20">
           <CardContent className="pt-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400">
-                {adminStats.activeFlagged}
-              </div>
+              <div className="text-2xl font-bold text-yellow-400">{adminStats.activeFlagged}</div>
               <div className="text-xs text-muted-foreground">Flagged Items</div>
             </div>
           </CardContent>
@@ -411,12 +375,8 @@ export function SecurePsychohistoricalAdmin() {
         <Card className="border-red-500/20">
           <CardContent className="pt-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-400">
-                {adminStats.securityIncidents}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Security Incidents
-              </div>
+              <div className="text-2xl font-bold text-red-400">{adminStats.securityIncidents}</div>
+              <div className="text-xs text-muted-foreground">Security Incidents</div>
             </div>
           </CardContent>
         </Card>
@@ -449,26 +409,21 @@ export function SecurePsychohistoricalAdmin() {
                   size="sm"
                   onClick={() => setActiveFilter("pending")}
                 >
-                  Pending (
-                  {ideasForReview.filter((i) => i.status === "pending").length})
+                  Pending ({ideasForReview.filter((i) => i.status === "pending").length})
                 </Button>
                 <Button
                   variant={activeFilter === "flagged" ? "default" : "outline"}
                   size="sm"
                   onClick={() => setActiveFilter("flagged")}
                 >
-                  Flagged (
-                  {ideasForReview.filter((i) => i.status === "flagged").length})
+                  Flagged ({ideasForReview.filter((i) => i.status === "flagged").length})
                 </Button>
               </div>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {ideasForReview
-                  .filter(
-                    (idea) =>
-                      activeFilter === "all" || idea.status === activeFilter,
-                  )
+                  .filter((idea) => activeFilter === "all" || idea.status === activeFilter)
                   .map((idea) => (
                     <div
                       key={idea.id}
@@ -477,13 +432,8 @@ export function SecurePsychohistoricalAdmin() {
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
-                            <h4 className="font-medium text-white">
-                              {idea.title}
-                            </h4>
-                            <Badge
-                              variant="outline"
-                              className={getRiskColor(idea.riskLevel)}
-                            >
+                            <h4 className="font-medium text-white">{idea.title}</h4>
+                            <Badge variant="outline" className={getRiskColor(idea.riskLevel)}>
                               {idea.riskLevel} risk
                             </Badge>
                             <Badge
@@ -493,9 +443,7 @@ export function SecurePsychohistoricalAdmin() {
                               Priority: {idea.implementationPriority}
                             </Badge>
                           </div>
-                          <p className="text-sm text-muted-foreground mb-3">
-                            {idea.description}
-                          </p>
+                          <p className="text-sm text-muted-foreground mb-3">{idea.description}</p>
 
                           {/* Safety Flags */}
                           {idea.safetyFlags.length > 0 && (
@@ -515,32 +463,20 @@ export function SecurePsychohistoricalAdmin() {
 
                           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
                             <div>
-                              <span className="text-muted-foreground">
-                                Feasibility:{" "}
-                              </span>
+                              <span className="text-muted-foreground">Feasibility: </span>
                               <span className="font-bold text-green-400">
                                 {idea.feasibilityScore}%
                               </span>
                             </div>
                             <div>
-                              <span className="text-muted-foreground">
-                                Impact:{" "}
-                              </span>
-                              <span className="font-bold text-blue-400">
-                                {idea.impactScore}%
-                              </span>
+                              <span className="text-muted-foreground">Impact: </span>
+                              <span className="font-bold text-blue-400">{idea.impactScore}%</span>
                             </div>
                             <div>
-                              <span className="text-muted-foreground">
-                                Generated:{" "}
-                              </span>
+                              <span className="text-muted-foreground">Generated: </span>
                               <span className="font-bold text-purple-400">
-                                {Math.floor(
-                                  (Date.now() - idea.generatedAt.getTime()) /
-                                    1000 /
-                                    60,
-                                )}
-                                m ago
+                                {Math.floor((Date.now() - idea.generatedAt.getTime()) / 1000 / 60)}m
+                                ago
                               </span>
                             </div>
                           </div>
@@ -548,9 +484,7 @@ export function SecurePsychohistoricalAdmin() {
 
                         <div className="flex items-center gap-2 ml-4">
                           {getStatusIcon(idea.status)}
-                          <span className="text-sm capitalize">
-                            {idea.status}
-                          </span>
+                          <span className="text-sm capitalize">{idea.status}</span>
                         </div>
                       </div>
 
@@ -587,12 +521,8 @@ export function SecurePsychohistoricalAdmin() {
 
                       {idea.reviewNotes && (
                         <div className="mt-3 p-2 bg-black/30 rounded border border-gray-500/20">
-                          <div className="text-xs text-muted-foreground">
-                            Review Notes:
-                          </div>
-                          <div className="text-sm text-white">
-                            {idea.reviewNotes}
-                          </div>
+                          <div className="text-xs text-muted-foreground">Review Notes:</div>
+                          <div className="text-sm text-white">{idea.reviewNotes}</div>
                         </div>
                       )}
                     </div>
@@ -624,44 +554,24 @@ export function SecurePsychohistoricalAdmin() {
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <Badge
-                            variant="outline"
-                            className={getSeverityColor(alert.severity)}
-                          >
+                          <Badge variant="outline" className={getSeverityColor(alert.severity)}>
                             {alert.severity}
                           </Badge>
-                          <Badge
-                            variant="outline"
-                            className="border-gray-500/50 text-gray-400"
-                          >
+                          <Badge variant="outline" className="border-gray-500/50 text-gray-400">
                             {alert.type}
                           </Badge>
                           <span className="text-xs text-muted-foreground">
-                            {Math.floor(
-                              (Date.now() - alert.timestamp.getTime()) /
-                                1000 /
-                                60,
-                            )}
-                            m ago
+                            {Math.floor((Date.now() - alert.timestamp.getTime()) / 1000 / 60)}m ago
                           </span>
                         </div>
-                        <h4 className="font-medium text-white mb-1">
-                          {alert.message}
-                        </h4>
-                        <p className="text-sm text-muted-foreground mb-2">
-                          {alert.details}
-                        </p>
-                        <div className="text-xs text-muted-foreground">
-                          Source: {alert.source}
-                        </div>
+                        <h4 className="font-medium text-white mb-1">{alert.message}</h4>
+                        <p className="text-sm text-muted-foreground mb-2">{alert.details}</p>
+                        <div className="text-xs text-muted-foreground">Source: {alert.source}</div>
                       </div>
 
                       <div className="ml-4">
                         {alert.resolved ? (
-                          <Badge
-                            variant="outline"
-                            className="border-green-500/50 text-green-400"
-                          >
+                          <Badge variant="outline" className="border-green-500/50 text-green-400">
                             <CheckCircle className="h-3 w-3 mr-1" />
                             Resolved
                           </Badge>
@@ -713,9 +623,7 @@ export function SecurePsychohistoricalAdmin() {
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="text-center p-2 bg-black/30 rounded">
                       <div className="font-bold text-blue-400">847</div>
-                      <div className="text-muted-foreground">
-                        Active Streams
-                      </div>
+                      <div className="text-muted-foreground">Active Streams</div>
                     </div>
                     <div className="text-center p-2 bg-black/30 rounded">
                       <div className="font-bold text-purple-400">99.7%</div>

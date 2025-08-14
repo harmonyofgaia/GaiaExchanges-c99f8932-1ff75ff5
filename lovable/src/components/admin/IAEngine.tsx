@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -20,9 +14,9 @@ interface IAMetrics {
 }
 
 export function IAEngine() {
-  const [status, setStatus] = useState<
-    "offline" | "initializing" | "active" | "supercharged"
-  >("offline");
+  const [status, setStatus] = useState<"offline" | "initializing" | "active" | "supercharged">(
+    "offline"
+  );
   const [metrics, setMetrics] = useState<IAMetrics>({
     intelligence: 0,
     learning: 0,
@@ -96,13 +90,10 @@ export function IAEngine() {
             <div>
               <CardTitle className="flex items-center gap-2">
                 🧠 IA Artificial Input Engine
-                <Badge className={getStatusColor()}>
-                  {status.toUpperCase()}
-                </Badge>
+                <Badge className={getStatusColor()}>{status.toUpperCase()}</Badge>
               </CardTitle>
               <CardDescription>
-                Advanced AI system for global information gathering and threat
-                prevention
+                Advanced AI system for global information gathering and threat prevention
               </CardDescription>
             </div>
             <div className="flex gap-2">
@@ -130,9 +121,7 @@ export function IAEngine() {
               <Progress value={metrics.intelligence} className="mt-1" />
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-primary">
-                {metrics.learning.toFixed(1)}%
-              </div>
+              <div className="text-2xl font-bold text-primary">{metrics.learning.toFixed(1)}%</div>
               <div className="text-sm text-muted-foreground">Learning</div>
               <Progress value={metrics.learning} className="mt-1" />
             </div>
@@ -161,20 +150,12 @@ export function IAEngine() {
 
           <div className="grid grid-cols-2 gap-4 pt-4">
             <div className="bg-green-50 dark:bg-green-950 p-4 rounded-lg">
-              <div className="text-3xl font-bold text-green-600">
-                {threatsPrevented}
-              </div>
-              <div className="text-sm text-green-700 dark:text-green-300">
-                Threats Prevented
-              </div>
+              <div className="text-3xl font-bold text-green-600">{threatsPrevented}</div>
+              <div className="text-sm text-green-700 dark:text-green-300">Threats Prevented</div>
             </div>
             <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg">
-              <div className="text-3xl font-bold text-blue-600">
-                {informationGathered}
-              </div>
-              <div className="text-sm text-blue-700 dark:text-blue-300">
-                Data Points Gathered
-              </div>
+              <div className="text-3xl font-bold text-blue-600">{informationGathered}</div>
+              <div className="text-sm text-blue-700 dark:text-blue-300">Data Points Gathered</div>
             </div>
           </div>
 

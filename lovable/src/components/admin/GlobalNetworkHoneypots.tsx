@@ -45,16 +45,12 @@ export function GlobalNetworkHoneypots() {
       ][Math.floor(Math.random() * 8)],
       sourceIP: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
       timestamp: new Date().toLocaleTimeString(),
-      severity: ["low", "medium", "high", "critical"][
-        Math.floor(Math.random() * 4)
-      ] as any,
+      severity: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as any,
     });
 
     const interval = setInterval(() => {
       setCapturedAttacks((prev) => prev + Math.floor(Math.random() * 15));
-      setActiveHoneypots((prev) =>
-        Math.max(240, Math.min(255, prev + (Math.random() - 0.5) * 5)),
-      );
+      setActiveHoneypots((prev) => Math.max(240, Math.min(255, prev + (Math.random() - 0.5) * 5)));
 
       if (Math.random() > 0.6) {
         setRecentCaptures((prev) => [generateCapture(), ...prev.slice(0, 7)]);
@@ -94,9 +90,7 @@ export function GlobalNetworkHoneypots() {
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-black/30 p-4 rounded-lg border border-green-500/20">
-            <div className="text-2xl font-bold text-green-400">
-              {activeHoneypots}
-            </div>
+            <div className="text-2xl font-bold text-green-400">{activeHoneypots}</div>
             <div className="text-sm text-green-300">Active Honeypots</div>
           </div>
 
@@ -108,9 +102,7 @@ export function GlobalNetworkHoneypots() {
           </div>
 
           <div className="bg-black/30 p-4 rounded-lg border border-blue-500/20">
-            <div className="text-2xl font-bold text-blue-400">
-              {globalCoverage}%
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{globalCoverage}%</div>
             <div className="text-sm text-blue-300">Global Coverage</div>
           </div>
         </div>
@@ -148,9 +140,7 @@ export function GlobalNetworkHoneypots() {
             </h3>
             <div className="space-y-2 max-h-40 overflow-y-auto">
               {recentCaptures.length === 0 ? (
-                <div className="text-center text-gray-400 py-4">
-                  🔍 Monitoring for threats...
-                </div>
+                <div className="text-center text-gray-400 py-4">🔍 Monitoring for threats...</div>
               ) : (
                 recentCaptures.map((capture) => (
                   <div key={capture.id} className="text-xs">
@@ -192,9 +182,7 @@ export function GlobalNetworkHoneypots() {
         </div>
 
         <div className="text-center p-4 bg-gradient-to-r from-green-900/20 to-teal-900/20 rounded-lg border border-green-500/20">
-          <div className="text-green-400 font-bold">
-            🕷️ GLOBAL HONEYPOT STATUS
-          </div>
+          <div className="text-green-400 font-bold">🕷️ GLOBAL HONEYPOT STATUS</div>
           <div className="text-green-400 text-sm mt-1">
             247 TRAPS ACTIVE • WORLDWIDE COVERAGE • CAPTURING ALL THREATS
           </div>

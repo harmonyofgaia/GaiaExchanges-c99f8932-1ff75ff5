@@ -5,24 +5,14 @@ import { GameNavigationHub } from "@/components/gaming/GameNavigationHub";
 import { GaiaGameHub } from "@/components/gaming/GaiaGameHub";
 import { EnhancedGamingModes } from "@/components/gaming/EnhancedGamingModes";
 import { Link } from "react-router-dom";
-import {
-  Gamepad2,
-  Crown,
-  Users,
-  Star,
-  Building2,
-  Target,
-  Sparkles,
-  Rocket,
-} from "lucide-react";
+import { Gamepad2, Crown, Users, Star, Building2, Target, Sparkles, Rocket } from "lucide-react";
 
 const Gaming = () => {
   const featuredGames = [
     {
       title: "🌍 GAIA Fantasy MMORPG",
       path: "/game/gaia-fantasy-mmorpg",
-      description:
-        "Massive multiplayer environmental adventure with real impact",
+      description: "Massive multiplayer environmental adventure with real impact",
       icon: <Crown className="h-6 w-6" />,
       color: "from-green-600 to-blue-600",
       players: "28,934",
@@ -83,14 +73,10 @@ const Gaming = () => {
                     {game.icon}
                     {game.title}
                   </CardTitle>
-                  <div className="text-sm text-blue-300">
-                    👥 {game.players} active players
-                  </div>
+                  <div className="text-sm text-blue-300">👥 {game.players} active players</div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground mb-4 text-sm">
-                    {game.description}
-                  </p>
+                  <p className="text-muted-foreground mb-4 text-sm">{game.description}</p>
                   <Link to={game.path}>
                     <Button
                       className={`w-full bg-gradient-to-r ${game.color} text-white font-bold`}
@@ -107,24 +93,15 @@ const Gaming = () => {
           {/* Unified Gaming Tabs */}
           <Tabs defaultValue="hub" className="w-full">
             <TabsList className="grid w-full grid-cols-3 bg-black/20 mb-8">
-              <TabsTrigger
-                value="hub"
-                className="data-[state=active]:bg-purple-600"
-              >
+              <TabsTrigger value="hub" className="data-[state=active]:bg-purple-600">
                 <Crown className="h-4 w-4 mr-2" />
                 🎮 Game Hub
               </TabsTrigger>
-              <TabsTrigger
-                value="navigation"
-                className="data-[state=active]:bg-blue-600"
-              >
+              <TabsTrigger value="navigation" className="data-[state=active]:bg-blue-600">
                 <Gamepad2 className="h-4 w-4 mr-2" />
                 🚀 Navigation
               </TabsTrigger>
-              <TabsTrigger
-                value="enhanced"
-                className="data-[state=active]:bg-green-600"
-              >
+              <TabsTrigger value="enhanced" className="data-[state=active]:bg-green-600">
                 <Sparkles className="h-4 w-4 mr-2" />
                 🔥 Enhanced Modes
               </TabsTrigger>
@@ -146,45 +123,29 @@ const Gaming = () => {
           {/* Gaming Statistics */}
           <Card className="mt-8 border-blue-500/30 bg-blue-900/20">
             <CardHeader>
-              <CardTitle className="text-blue-400">
-                🏆 Live Gaming Statistics
-              </CardTitle>
+              <CardTitle className="text-blue-400">🏆 Live Gaming Statistics</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="text-center p-4 bg-green-900/20 rounded-lg">
                   <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-green-400">
-                    43,126
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Active Players
-                  </div>
+                  <div className="text-2xl font-bold text-green-400">43,126</div>
+                  <div className="text-sm text-muted-foreground">Active Players</div>
                 </div>
                 <div className="text-center p-4 bg-blue-900/20 rounded-lg">
                   <Gamepad2 className="h-8 w-8 text-blue-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-blue-400">12+</div>
-                  <div className="text-sm text-muted-foreground">
-                    Games Available
-                  </div>
+                  <div className="text-sm text-muted-foreground">Games Available</div>
                 </div>
                 <div className="text-center p-4 bg-purple-900/20 rounded-lg">
                   <Star className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-purple-400">
-                    1,247,561
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    High Scores
-                  </div>
+                  <div className="text-2xl font-bold text-purple-400">1,247,561</div>
+                  <div className="text-sm text-muted-foreground">High Scores</div>
                 </div>
                 <div className="text-center p-4 bg-orange-900/20 rounded-lg">
                   <Crown className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-orange-400">
-                    2,847
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Tournaments
-                  </div>
+                  <div className="text-2xl font-bold text-orange-400">2,847</div>
+                  <div className="text-sm text-muted-foreground">Tournaments</div>
                 </div>
               </div>
             </CardContent>
@@ -192,9 +153,7 @@ const Gaming = () => {
 
           {/* Blockchain Integration Status */}
           <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-            <h4 className="font-medium text-green-400 mb-2">
-              ⛓️ GAIA Blockchain Network Status
-            </h4>
+            <h4 className="font-medium text-green-400 mb-2">⛓️ GAIA Blockchain Network Status</h4>
             <div className="text-sm text-green-300">
               ✅ Private blockchain network operational as gaming motherboard
               <br />

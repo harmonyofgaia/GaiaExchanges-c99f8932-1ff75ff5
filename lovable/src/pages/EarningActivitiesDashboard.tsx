@@ -124,12 +124,7 @@ export default function EarningActivitiesDashboard() {
       category: "environmental",
       basePoints: 10,
       component: <WaterSavingActions />,
-      examples: [
-        "Rain collection",
-        "Greywater reuse",
-        "Leak repair",
-        "Low-flow fixtures",
-      ],
+      examples: ["Rain collection", "Greywater reuse", "Leak repair", "Low-flow fixtures"],
     },
     {
       id: "home_grown_food",
@@ -140,12 +135,7 @@ export default function EarningActivitiesDashboard() {
       category: "sustainability",
       basePoints: 20,
       component: <HomeGrownFoodActions />,
-      examples: [
-        "Vegetable gardens",
-        "Herb cultivation",
-        "Fruit trees",
-        "Seed sharing",
-      ],
+      examples: ["Vegetable gardens", "Herb cultivation", "Fruit trees", "Seed sharing"],
     },
     {
       id: "bee_hotel",
@@ -156,12 +146,7 @@ export default function EarningActivitiesDashboard() {
       category: "biodiversity",
       basePoints: 25,
       component: <BeeHotelActions />,
-      examples: [
-        "Bamboo tubes",
-        "Wood blocks",
-        "Clay tubes",
-        "Mixed materials",
-      ],
+      examples: ["Bamboo tubes", "Wood blocks", "Clay tubes", "Mixed materials"],
     },
     {
       id: "environmental_education",
@@ -172,12 +157,7 @@ export default function EarningActivitiesDashboard() {
       category: "education",
       basePoints: 15,
       component: <EnvironmentalEducationActions />,
-      examples: [
-        "Course completion",
-        "Teaching others",
-        "Content creation",
-        "Research",
-      ],
+      examples: ["Course completion", "Teaching others", "Content creation", "Research"],
     },
     {
       id: "referral",
@@ -188,12 +168,7 @@ export default function EarningActivitiesDashboard() {
       category: "community",
       basePoints: 50,
       component: <ReferralSystem />,
-      examples: [
-        "Friend invitations",
-        "Family referrals",
-        "Community building",
-        "Network growth",
-      ],
+      examples: ["Friend invitations", "Family referrals", "Community building", "Network growth"],
     },
     {
       id: "skill_based",
@@ -204,14 +179,7 @@ export default function EarningActivitiesDashboard() {
       category: "professional",
       basePoints: 10,
       component: <SkillBasedEarning />,
-      examples: [
-        "Programming",
-        "Design",
-        "Writing",
-        "Consulting",
-        "Teaching",
-        "Translation",
-      ],
+      examples: ["Programming", "Design", "Writing", "Consulting", "Teaching", "Translation"],
     },
     {
       id: "carbon_credit",
@@ -222,12 +190,7 @@ export default function EarningActivitiesDashboard() {
       category: "climate",
       basePoints: 30,
       component: <CarbonCreditActions />,
-      examples: [
-        "Tree planting",
-        "Renewable energy",
-        "Carbon sequestration",
-        "Emission reduction",
-      ],
+      examples: ["Tree planting", "Renewable energy", "Carbon sequestration", "Emission reduction"],
     },
     {
       id: "mission_voting",
@@ -238,12 +201,7 @@ export default function EarningActivitiesDashboard() {
       category: "governance",
       basePoints: 25,
       component: <MissionVotingActions />,
-      examples: [
-        "Mission approval",
-        "Budget allocation",
-        "Priority setting",
-        "Impact assessment",
-      ],
+      examples: ["Mission approval", "Budget allocation", "Priority setting", "Impact assessment"],
     },
     {
       id: "location_mission",
@@ -254,12 +212,7 @@ export default function EarningActivitiesDashboard() {
       category: "community",
       basePoints: 35,
       component: <LocationMissionActions />,
-      examples: [
-        "Local cleanups",
-        "Area surveys",
-        "Community projects",
-        "Regional initiatives",
-      ],
+      examples: ["Local cleanups", "Area surveys", "Community projects", "Regional initiatives"],
     },
     {
       id: "nft_marketplace",
@@ -270,12 +223,7 @@ export default function EarningActivitiesDashboard() {
       category: "digital",
       basePoints: 20,
       component: <NFTMarketplaceActions />,
-      examples: [
-        "Eco art creation",
-        "NFT trading",
-        "Digital collectibles",
-        "Impact certificates",
-      ],
+      examples: ["Eco art creation", "NFT trading", "Digital collectibles", "Impact certificates"],
     },
     {
       id: "emergency_response",
@@ -286,12 +234,7 @@ export default function EarningActivitiesDashboard() {
       category: "emergency",
       basePoints: 100,
       component: <EmergencyResponseActions />,
-      examples: [
-        "Wildfire support",
-        "Flood assistance",
-        "Disaster relief",
-        "Crisis coordination",
-      ],
+      examples: ["Wildfire support", "Flood assistance", "Disaster relief", "Crisis coordination"],
     },
     {
       id: "long_term_commitment",
@@ -302,12 +245,7 @@ export default function EarningActivitiesDashboard() {
       category: "lifestyle",
       basePoints: 40,
       component: <LongTermCommitmentActions />,
-      examples: [
-        "Daily actions",
-        "Weekly challenges",
-        "Monthly goals",
-        "Yearly pledges",
-      ],
+      examples: ["Daily actions", "Weekly challenges", "Monthly goals", "Yearly pledges"],
     },
     {
       id: "innovation",
@@ -318,13 +256,7 @@ export default function EarningActivitiesDashboard() {
       category: "innovation",
       basePoints: 75,
       component: <InnovationBonusActions />,
-      examples: [
-        "New solutions",
-        "Improvements",
-        "Research",
-        "Patents",
-        "Open source",
-      ],
+      examples: ["New solutions", "Improvements", "Research", "Patents", "Open source"],
     },
     {
       id: "accessibility",
@@ -335,12 +267,7 @@ export default function EarningActivitiesDashboard() {
       category: "inclusion",
       basePoints: 30,
       component: <AccessibilityRewardActions />,
-      examples: [
-        "Inclusive design",
-        "Accessibility testing",
-        "Barrier removal",
-        "Education",
-      ],
+      examples: ["Inclusive design", "Accessibility testing", "Barrier removal", "Education"],
     },
   ];
 
@@ -418,8 +345,7 @@ export default function EarningActivitiesDashboard() {
   ];
 
   const filteredActivities = allEarningActivities.filter(
-    (activity) =>
-      selectedCategory === "all" || activity.category === selectedCategory,
+    (activity) => selectedCategory === "all" || activity.category === selectedCategory
   );
 
   return (
@@ -430,8 +356,7 @@ export default function EarningActivitiesDashboard() {
           🌍 Earning Activities Dashboard
         </h1>
         <p className="text-muted-foreground text-lg">
-          Complete eco-friendly activities and earn GAiA tokens while making a
-          positive impact
+          Complete eco-friendly activities and earn GAiA tokens while making a positive impact
         </p>
       </div>
 
@@ -468,12 +393,8 @@ export default function EarningActivitiesDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Current Level</p>
-                <p className="text-3xl font-bold text-purple-400">
-                  {userLevel}
-                </p>
-                <p className="text-xs text-purple-300">
-                  2,340 XP to next level
-                </p>
+                <p className="text-3xl font-bold text-purple-400">{userLevel}</p>
+                <p className="text-xs text-purple-300">2,340 XP to next level</p>
               </div>
               <Trophy className="h-8 w-8 text-purple-400" />
             </div>
@@ -485,9 +406,7 @@ export default function EarningActivitiesDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Activities</p>
-                <p className="text-3xl font-bold text-orange-400">
-                  {totalActivities}
-                </p>
+                <p className="text-3xl font-bold text-orange-400">{totalActivities}</p>
                 <p className="text-xs text-orange-300">12 this week</p>
               </div>
               <Target className="h-8 w-8 text-orange-400" />
@@ -501,9 +420,7 @@ export default function EarningActivitiesDashboard() {
         <CardContent className="p-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-purple-400">
-                Level Progress
-              </h3>
+              <h3 className="text-lg font-semibold text-purple-400">Level Progress</h3>
               <Badge className="bg-purple-600">Level {userLevel}</Badge>
             </div>
             <Progress value={75} className="h-3" />
@@ -517,10 +434,7 @@ export default function EarningActivitiesDashboard() {
 
       {/* Filter Controls */}
       <div className="flex flex-wrap gap-4">
-        <Select
-          value={selectedTimeFilter}
-          onValueChange={setSelectedTimeFilter}
-        >
+        <Select value={selectedTimeFilter} onValueChange={setSelectedTimeFilter}>
           <SelectTrigger className="w-40">
             <SelectValue />
           </SelectTrigger>
@@ -564,9 +478,7 @@ export default function EarningActivitiesDashboard() {
                 <div className="text-4xl">{achievement.icon}</div>
                 <h4 className="font-semibold text-sm">{achievement.name}</h4>
                 <Progress value={achievement.progress} className="h-2" />
-                <p className="text-xs text-muted-foreground">
-                  {achievement.progress}% complete
-                </p>
+                <p className="text-xs text-muted-foreground">{achievement.progress}% complete</p>
                 <Badge
                   className={`text-xs ${
                     achievement.rarity === "legendary"
@@ -613,9 +525,7 @@ export default function EarningActivitiesDashboard() {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground">
-                    {activity.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{activity.description}</p>
 
                   <div className="space-y-2">
                     <h4 className="text-sm font-semibold">Examples:</h4>
@@ -626,9 +536,7 @@ export default function EarningActivitiesDashboard() {
                     </ul>
                   </div>
 
-                  {activity.component && (
-                    <div className="mt-4">{activity.component}</div>
-                  )}
+                  {activity.component && <div className="mt-4">{activity.component}</div>}
                 </CardContent>
               </Card>
             ))}
@@ -652,20 +560,14 @@ export default function EarningActivitiesDashboard() {
                   >
                     <div className="space-y-1">
                       <h4 className="font-semibold">{activity.title}</h4>
-                      <p className="text-sm text-muted-foreground">
-                        {activity.description}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{activity.description}</p>
                       <p className="text-xs text-muted-foreground">
                         {activity.timestamp.toLocaleString()}
                       </p>
                     </div>
                     <div className="text-right space-y-1">
-                      <Badge className="bg-green-600">
-                        +{activity.pointsEarned} points
-                      </Badge>
-                      <Badge className="bg-blue-600">
-                        +{activity.tokensEarned} tokens
-                      </Badge>
+                      <Badge className="bg-green-600">+{activity.pointsEarned} points</Badge>
+                      <Badge className="bg-blue-600">+{activity.tokensEarned} tokens</Badge>
                     </div>
                   </div>
                 ))}
@@ -692,9 +594,7 @@ function MissionVotingActions() {
 function LocationMissionActions() {
   return (
     <div className="p-4 bg-red-900/20 rounded-lg border border-red-500/30">
-      <p className="text-sm text-red-300">
-        Complete location-based environmental missions
-      </p>
+      <p className="text-sm text-red-300">Complete location-based environmental missions</p>
     </div>
   );
 }
@@ -712,9 +612,7 @@ function NFTMarketplaceActions() {
 function EmergencyResponseActions() {
   return (
     <div className="p-4 bg-red-900/20 rounded-lg border border-red-500/30">
-      <p className="text-sm text-red-300">
-        Respond to environmental emergencies and disasters
-      </p>
+      <p className="text-sm text-red-300">Respond to environmental emergencies and disasters</p>
     </div>
   );
 }
@@ -722,9 +620,7 @@ function EmergencyResponseActions() {
 function LongTermCommitmentActions() {
   return (
     <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/30">
-      <p className="text-sm text-green-300">
-        Maintain long-term environmental commitments
-      </p>
+      <p className="text-sm text-green-300">Maintain long-term environmental commitments</p>
     </div>
   );
 }
@@ -742,9 +638,7 @@ function InnovationBonusActions() {
 function AccessibilityRewardActions() {
   return (
     <div className="p-4 bg-blue-900/20 rounded-lg border border-blue-500/30">
-      <p className="text-sm text-blue-300">
-        Make sustainability accessible to everyone
-      </p>
+      <p className="text-sm text-blue-300">Make sustainability accessible to everyone</p>
     </div>
   );
 }

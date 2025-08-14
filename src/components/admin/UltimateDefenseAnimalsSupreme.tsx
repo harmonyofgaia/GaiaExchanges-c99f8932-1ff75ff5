@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Shield,
-  Zap,
-  Crown,
-  Target,
-  Activity,
-  Flame,
-  Sword,
-  Star,
-} from "lucide-react";
+import { Shield, Zap, Crown, Target, Activity, Flame, Sword, Star } from "lucide-react";
 import { toast } from "sonner";
 
 interface SupremeDefenseAnimal {
@@ -376,9 +367,7 @@ export function UltimateDefenseAnimalsSupreme() {
 
   useEffect(() => {
     const runSupremeDefense = () => {
-      console.log(
-        "🌌 ULTIMATE DEFENSE ANIMALS SUPREME - COSMIC GUARDIANS ACTIVE",
-      );
+      console.log("🌌 ULTIMATE DEFENSE ANIMALS SUPREME - COSMIC GUARDIANS ACTIVE");
       console.log("⭐ UNIVERSAL THREAT LEVEL 100 - REALITY PROTECTION MAXIMUM");
       console.log("🐲 14 SUPREME COSMIC GUARDIANS - OMNIPOTENT DEFENSE");
 
@@ -391,7 +380,7 @@ export function UltimateDefenseAnimalsSupreme() {
             animal.threatsAnnihilated + Math.floor(Math.random() * 1000) + 500;
 
           console.log(
-            `${animal.emoji} ${animal.name}: Supreme Power ${newSupremePower.toLocaleString()} - Annihilated: ${newThreatsAnnihilated.toLocaleString()}`,
+            `${animal.emoji} ${animal.name}: Supreme Power ${newSupremePower.toLocaleString()} - Annihilated: ${newThreatsAnnihilated.toLocaleString()}`
           );
 
           return {
@@ -404,7 +393,7 @@ export function UltimateDefenseAnimalsSupreme() {
             dimensionalControl: 100,
             timeSpaceDistortion: 100,
           };
-        }),
+        })
       );
 
       // Supreme cosmic threat responses
@@ -424,15 +413,11 @@ export function UltimateDefenseAnimalsSupreme() {
           "reality_paradigm_shift_threat",
         ];
 
-        const threat =
-          supremeThreats[Math.floor(Math.random() * supremeThreats.length)];
-        const respondingAnimal =
-          supremeAnimals[Math.floor(Math.random() * supremeAnimals.length)];
+        const threat = supremeThreats[Math.floor(Math.random() * supremeThreats.length)];
+        const respondingAnimal = supremeAnimals[Math.floor(Math.random() * supremeAnimals.length)];
 
         console.log(`🚨 SUPREME THREAT DETECTED: ${threat}`);
-        console.log(
-          `🌌 ${respondingAnimal.name} COSMIC RESPONSE: THREAT COMPLETELY ANNIHILATED`,
-        );
+        console.log(`🌌 ${respondingAnimal.name} COSMIC RESPONSE: THREAT COMPLETELY ANNIHILATED`);
         console.log("⭐ REALITY REMAINS STABLE - UNIVERSE PROTECTED");
 
         toast.error("🌌 SUPREME DEFENSE ACTIVATED!", {
@@ -443,23 +428,17 @@ export function UltimateDefenseAnimalsSupreme() {
         setSupremeMetrics((prev) => ({
           ...prev,
           universalThreatsAnnihilated: prev.universalThreatsAnnihilated + 1,
-          realityDistortions:
-            prev.realityDistortions + Math.floor(Math.random() * 5),
-          dimensionalIncursions:
-            prev.dimensionalIncursions + Math.floor(Math.random() * 3),
-          timelineProtected:
-            prev.timelineProtected + Math.floor(Math.random() * 10),
+          realityDistortions: prev.realityDistortions + Math.floor(Math.random() * 5),
+          dimensionalIncursions: prev.dimensionalIncursions + Math.floor(Math.random() * 3),
+          timelineProtected: prev.timelineProtected + Math.floor(Math.random() * 10),
         }));
       }
 
       // Update supreme metrics
-      const totalPower = supremeAnimals.reduce(
-        (sum, animal) => sum + animal.supremePower,
-        0,
-      );
+      const totalPower = supremeAnimals.reduce((sum, animal) => sum + animal.supremePower, 0);
       const totalAnnihilated = supremeAnimals.reduce(
         (sum, animal) => sum + animal.threatsAnnihilated,
-        0,
+        0
       );
 
       setSupremeMetrics((prev) => ({
@@ -468,9 +447,7 @@ export function UltimateDefenseAnimalsSupreme() {
         universalThreatsAnnihilated: totalAnnihilated,
       }));
 
-      console.log(
-        "✅ SUPREME DEFENSE CYCLE COMPLETE - UNIVERSE ABSOLUTELY PROTECTED",
-      );
+      console.log("✅ SUPREME DEFENSE CYCLE COMPLETE - UNIVERSE ABSOLUTELY PROTECTED");
     };
 
     // Run every 2 seconds for supreme speed
@@ -490,12 +467,11 @@ export function UltimateDefenseAnimalsSupreme() {
         supremePower: animal.supremePower * 10,
         cosmicLevel: 100,
         universalThreatLevel: 100,
-      })),
+      }))
     );
 
     toast.success("🌌 COSMIC SUPREMACY ACTIVATED!", {
-      description:
-        "All supreme animals achieved cosmic omnipotence - Reality absolutely protected",
+      description: "All supreme animals achieved cosmic omnipotence - Reality absolutely protected",
       duration: 8000,
     });
   };
@@ -526,10 +502,7 @@ export function UltimateDefenseAnimalsSupreme() {
             🌌 ULTIMATE DEFENSE ANIMALS SUPREME - COSMIC GUARDIANS
           </CardTitle>
           <div className="flex gap-2 flex-wrap">
-            <Button
-              onClick={activateCosmicSupremacy}
-              className="bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={activateCosmicSupremacy} className="bg-purple-600 hover:bg-purple-700">
               <Star className="h-4 w-4 mr-2" />
               🌌 COSMIC SUPREMACY MODE
             </Button>
@@ -547,12 +520,8 @@ export function UltimateDefenseAnimalsSupreme() {
 
             <div className="text-center p-4 bg-blue-900/30 rounded-lg">
               <Crown className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {supremeMetrics.cosmicAnimals}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Cosmic Guardians
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{supremeMetrics.cosmicAnimals}</div>
+              <div className="text-sm text-muted-foreground">Cosmic Guardians</div>
             </div>
 
             <div className="text-center p-4 bg-red-900/30 rounded-lg">
@@ -560,9 +529,7 @@ export function UltimateDefenseAnimalsSupreme() {
               <div className="text-2xl font-bold text-red-400">
                 {supremeMetrics.universalThreatsAnnihilated}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Universal Threats
-              </div>
+              <div className="text-sm text-muted-foreground">Universal Threats</div>
             </div>
 
             <div className="text-center p-4 bg-green-900/30 rounded-lg">
@@ -578,9 +545,7 @@ export function UltimateDefenseAnimalsSupreme() {
               <div className="text-2xl font-bold text-orange-400">
                 {supremeMetrics.dimensionalIncursions}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Dimensions Protected
-              </div>
+              <div className="text-sm text-muted-foreground">Dimensions Protected</div>
             </div>
 
             <div className="text-center p-4 bg-yellow-900/30 rounded-lg">
@@ -588,9 +553,7 @@ export function UltimateDefenseAnimalsSupreme() {
               <div className="text-2xl font-bold text-yellow-400">
                 {supremeMetrics.timelineProtected}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Timelines Secured
-              </div>
+              <div className="text-sm text-muted-foreground">Timelines Secured</div>
             </div>
           </div>
 
@@ -608,9 +571,7 @@ export function UltimateDefenseAnimalsSupreme() {
                         {animal.name.split(" ").slice(0, 3).join(" ")}
                       </span>
                     </div>
-                    <Badge
-                      className={`${getStatusColor(animal.status)} text-white text-xs`}
-                    >
+                    <Badge className={`${getStatusColor(animal.status)} text-white text-xs`}>
                       SUPREME
                     </Badge>
                   </CardTitle>
@@ -625,9 +586,7 @@ export function UltimateDefenseAnimalsSupreme() {
                     </div>
                     <div className="flex justify-between">
                       <span>Cosmic Level:</span>
-                      <span className="text-blue-400 font-bold">
-                        {animal.cosmicLevel}%
-                      </span>
+                      <span className="text-blue-400 font-bold">{animal.cosmicLevel}%</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Reality Control:</span>
@@ -643,27 +602,21 @@ export function UltimateDefenseAnimalsSupreme() {
                     </div>
                     <div className="flex justify-between">
                       <span>Annihilated:</span>
-                      <span className="text-red-400 font-bold">
-                        {animal.threatsAnnihilated}
-                      </span>
+                      <span className="text-red-400 font-bold">{animal.threatsAnnihilated}</span>
                     </div>
                   </div>
 
                   <div className="pt-2 border-t border-indigo-500/20">
-                    <div className="text-xs text-muted-foreground mb-1">
-                      Supreme Abilities:
-                    </div>
+                    <div className="text-xs text-muted-foreground mb-1">Supreme Abilities:</div>
                     <div className="flex flex-wrap gap-1">
-                      {animal.supremeAbilities
-                        .slice(0, 2)
-                        .map((ability, index) => (
-                          <span
-                            key={index}
-                            className="px-1 py-0.5 bg-indigo-700/30 rounded text-xs text-indigo-300"
-                          >
-                            {ability}
-                          </span>
-                        ))}
+                      {animal.supremeAbilities.slice(0, 2).map((ability, index) => (
+                        <span
+                          key={index}
+                          className="px-1 py-0.5 bg-indigo-700/30 rounded text-xs text-indigo-300"
+                        >
+                          {ability}
+                        </span>
+                      ))}
                     </div>
                   </div>
 
@@ -686,46 +639,36 @@ export function UltimateDefenseAnimalsSupreme() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-cyan-200">
             <div className="space-y-2">
               <div>
-                🐲 <strong>Supreme Alpha Dragon:</strong> Omnipotent cosmic fire
-                breath control
+                🐲 <strong>Supreme Alpha Dragon:</strong> Omnipotent cosmic fire breath control
               </div>
               <div>
-                🔥 <strong>Cosmic Phoenix:</strong> Universal rebirth and star
-                creation
+                🔥 <strong>Cosmic Phoenix:</strong> Universal rebirth and star creation
               </div>
               <div>
-                🐙 <strong>Dimensional Kraken:</strong> Space-time tentacle
-                mastery
+                🐙 <strong>Dimensional Kraken:</strong> Space-time tentacle mastery
               </div>
               <div>
-                🌊 <strong>Quantum Leviathan:</strong> Probability tsunami
-                control
+                🌊 <strong>Quantum Leviathan:</strong> Probability tsunami control
               </div>
               <div>
-                🦅 <strong>Astral Griffin:</strong> Galaxy surveillance and
-                stellar winds
+                🦅 <strong>Astral Griffin:</strong> Galaxy surveillance and stellar winds
               </div>
               <div>
-                🐍 <strong>Ethereal Basilisk:</strong> Cosmic death gaze and
-                reality kill
+                🐍 <strong>Ethereal Basilisk:</strong> Cosmic death gaze and reality kill
               </div>
               <div>
-                🐉 <strong>Void Hydra:</strong> Infinite head multiplication in
-                void
+                🐉 <strong>Void Hydra:</strong> Infinite head multiplication in void
               </div>
             </div>
             <div className="space-y-2">
               <div>
-                🐲 <strong>Celestial Chimera:</strong> Trinity fusion cosmic
-                control
+                🐲 <strong>Celestial Chimera:</strong> Trinity fusion cosmic control
               </div>
               <div>
-                🐨 <strong>Universal Koala:</strong> Reality code and algorithm
-                mastery
+                🐨 <strong>Universal Koala:</strong> Reality code and algorithm mastery
               </div>
               <div>
-                🐬 <strong>Galactic Dolphin:</strong> Cosmic intelligence
-                network
+                🐬 <strong>Galactic Dolphin:</strong> Cosmic intelligence network
               </div>
               <div>
                 🦅 <strong>Stellar Eagle:</strong> Star formation command system
@@ -734,12 +677,10 @@ export function UltimateDefenseAnimalsSupreme() {
                 🐺 <strong>Plasma Wolf:</strong> Solar energy pack coordination
               </div>
               <div>
-                🦁 <strong>Neutron Lion:</strong> Neutron star roar and cosmic
-                kingdom
+                🦁 <strong>Neutron Lion:</strong> Neutron star roar and cosmic kingdom
               </div>
               <div>
-                🐒 <strong>Cyber Monkey Prime:</strong> Universal algorithm
-                mastery
+                🐒 <strong>Cyber Monkey Prime:</strong> Universal algorithm mastery
               </div>
             </div>
           </div>

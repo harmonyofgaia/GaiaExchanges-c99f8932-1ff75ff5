@@ -32,17 +32,14 @@ interface MarketplaceItem {
   tokensRequired: number;
 }
 
-export function LandscapeMarketplace({
-  onPurchase,
-}: LandscapeMarketplaceProps) {
+export function LandscapeMarketplace({ onPurchase }: LandscapeMarketplaceProps) {
   const [userTokens] = useState(2847);
 
   const marketplaceItems: MarketplaceItem[] = [
     {
       id: 1,
       name: "🌊 Coral Reef Paradise",
-      description:
-        "Stunning underwater world with token burning coral restoration",
+      description: "Stunning underwater world with token burning coral restoration",
       price: 150,
       icon: Fish,
       rarity: "epic",
@@ -62,8 +59,7 @@ export function LandscapeMarketplace({
     {
       id: 3,
       name: "🌲 Enchanted Burning Forest",
-      description:
-        "Magical forest where every action burns tokens for real trees",
+      description: "Magical forest where every action burns tokens for real trees",
       price: 300,
       icon: TreePine,
       rarity: "legendary",
@@ -73,8 +69,7 @@ export function LandscapeMarketplace({
     {
       id: 4,
       name: "🔥 Volcanic Token Forge",
-      description:
-        "Active volcano landscape for maximum token burning experience",
+      description: "Active volcano landscape for maximum token burning experience",
       price: 250,
       icon: Flame,
       rarity: "epic",
@@ -182,9 +177,7 @@ export function LandscapeMarketplace({
                     <Icon className="h-8 w-8 text-blue-400" />
                     <div>
                       <CardTitle className="text-lg">{item.name}</CardTitle>
-                      <Badge
-                        className={`${getRarityColor(item.rarity)} text-white text-xs mt-1`}
-                      >
+                      <Badge className={`${getRarityColor(item.rarity)} text-white text-xs mt-1`}>
                         <Star className="h-2 w-2 mr-1" />
                         {item.rarity.toUpperCase()}
                       </Badge>
@@ -193,19 +186,13 @@ export function LandscapeMarketplace({
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm text-muted-foreground">
-                  {item.description}
-                </p>
+                <p className="text-sm text-muted-foreground">{item.description}</p>
 
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">
-                      Environmental Impact:
-                    </span>
+                    <span className="text-sm font-medium">Environmental Impact:</span>
                   </div>
-                  <p className="text-xs text-green-400">
-                    {item.environmentalImpact}
-                  </p>
+                  <p className="text-xs text-green-400">{item.environmentalImpact}</p>
                 </div>
 
                 <div className="space-y-2">
@@ -216,10 +203,7 @@ export function LandscapeMarketplace({
                       <span className="font-bold">{item.tokensRequired}</span>
                     </div>
                   </div>
-                  <Progress
-                    value={(userTokens / item.tokensRequired) * 100}
-                    className="h-2"
-                  />
+                  <Progress value={(userTokens / item.tokensRequired) * 100} className="h-2" />
                 </div>
 
                 <Button
@@ -252,27 +236,19 @@ export function LandscapeMarketplace({
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center p-4 bg-green-900/30 rounded border border-green-500/20">
               <div className="text-2xl font-bold text-green-400">847,250</div>
-              <div className="text-sm text-muted-foreground">
-                Tokens Burned via Purchases
-              </div>
+              <div className="text-sm text-muted-foreground">Tokens Burned via Purchases</div>
             </div>
             <div className="text-center p-4 bg-blue-900/30 rounded border border-blue-500/20">
               <div className="text-2xl font-bold text-blue-400">2,547</div>
-              <div className="text-sm text-muted-foreground">
-                Landscapes Sold
-              </div>
+              <div className="text-sm text-muted-foreground">Landscapes Sold</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded border border-purple-500/20">
               <div className="text-2xl font-bold text-purple-400">$152,840</div>
-              <div className="text-sm text-muted-foreground">
-                Environmental Funding
-              </div>
+              <div className="text-sm text-muted-foreground">Environmental Funding</div>
             </div>
             <div className="text-center p-4 bg-orange-900/30 rounded border border-orange-500/20">
               <div className="text-2xl font-bold text-orange-400">24/7</div>
-              <div className="text-sm text-muted-foreground">
-                Active Marketplace
-              </div>
+              <div className="text-sm text-muted-foreground">Active Marketplace</div>
             </div>
           </div>
         </CardContent>

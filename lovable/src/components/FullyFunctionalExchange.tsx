@@ -32,8 +32,8 @@ export function FullyFunctionalExchange() {
               🚫 STAKING REMOVED - NO GAMBLING ALLOWED
             </div>
             <p className="text-red-300 text-sm mt-1">
-              We permanently removed staking to prevent gambling and ensure
-              long-term stability. GAiA is for believers, not speculators.
+              We permanently removed staking to prevent gambling and ensure long-term stability.
+              GAiA is for believers, not speculators.
             </p>
           </div>
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 mt-2">
@@ -67,23 +67,17 @@ export function FullyFunctionalExchange() {
             <div className="text-center p-4 bg-green-900/20 rounded-lg border border-green-500/20">
               <Heart className="h-8 w-8 text-green-400 mx-auto mb-2" />
               <h4 className="font-bold text-green-400">For Believers</h4>
-              <p className="text-green-300 text-sm">
-                Long-term environmental advocates
-              </p>
+              <p className="text-green-300 text-sm">Long-term environmental advocates</p>
             </div>
             <div className="text-center p-4 bg-blue-900/20 rounded-lg border border-blue-500/20">
               <Shield className="h-8 w-8 text-blue-400 mx-auto mb-2" />
               <h4 className="font-bold text-blue-400">Stable Forever</h4>
-              <p className="text-blue-300 text-sm">
-                No gambling, no speculation
-              </p>
+              <p className="text-blue-300 text-sm">No gambling, no speculation</p>
             </div>
             <div className="text-center p-4 bg-orange-900/20 rounded-lg border border-orange-500/20">
               <TrendingUp className="h-8 w-8 text-orange-400 mx-auto mb-2" />
               <h4 className="font-bold text-orange-400">Pure Investment</h4>
-              <p className="text-orange-300 text-sm">
-                Environmental impact focus
-              </p>
+              <p className="text-orange-300 text-sm">Environmental impact focus</p>
             </div>
           </div>
         </CardContent>

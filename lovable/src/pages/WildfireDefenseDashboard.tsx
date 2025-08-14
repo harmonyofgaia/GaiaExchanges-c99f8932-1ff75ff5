@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -197,24 +191,17 @@ const WildfireDefenseDashboard = () => {
     }
   };
 
-  const handleCannonControl = (
-    cannonId: string,
-    action: "deploy" | "recall" | "test",
-  ) => {
+  const handleCannonControl = (cannonId: string, action: "deploy" | "recall" | "test") => {
     setSandCannons((cannons) =>
       cannons.map((cannon) =>
         cannon.id === cannonId
           ? {
               ...cannon,
               status:
-                action === "deploy"
-                  ? "deployed"
-                  : action === "recall"
-                    ? "active"
-                    : cannon.status,
+                action === "deploy" ? "deployed" : action === "recall" ? "active" : cannon.status,
             }
-          : cannon,
-      ),
+          : cannon
+      )
     );
   };
 
@@ -227,9 +214,7 @@ const WildfireDefenseDashboard = () => {
             <div className="flex items-center">
               <Shield className="h-10 w-10 text-red-600 mr-3" />
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">
-                  Wildfire Defense Dashboard
-                </h1>
+                <h1 className="text-3xl font-bold text-gray-900">Wildfire Defense Dashboard</h1>
                 <p className="text-lg text-gray-600">
                   Real-time forest protection monitoring & control
                 </p>
@@ -254,13 +239,8 @@ const WildfireDefenseDashboard = () => {
                 </Button>
               </div>
               <div className="flex items-center space-x-2">
-                <Bell
-                  className={`h-5 w-5 ${alertsEnabled ? "text-red-600" : "text-gray-400"}`}
-                />
-                <Switch
-                  checked={alertsEnabled}
-                  onCheckedChange={setAlertsEnabled}
-                />
+                <Bell className={`h-5 w-5 ${alertsEnabled ? "text-red-600" : "text-gray-400"}`} />
+                <Switch checked={alertsEnabled} onCheckedChange={setAlertsEnabled} />
               </div>
             </div>
           </div>
@@ -275,26 +255,17 @@ const WildfireDefenseDashboard = () => {
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {activeAlerts.map((alert) => (
-                <Alert
-                  key={alert.id}
-                  className={`border-2 ${getSeverityColor(alert.severity)}`}
-                >
+                <Alert key={alert.id} className={`border-2 ${getSeverityColor(alert.severity)}`}>
                   <AlertTriangle className="h-4 w-4" />
                   <AlertDescription>
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <div className="font-semibold">
-                          {alert.location.address}
-                        </div>
+                        <div className="font-semibold">{alert.location.address}</div>
                         <div className="text-sm opacity-75">
-                          Detected:{" "}
-                          {new Date(alert.detectedAt).toLocaleTimeString()}
+                          Detected: {new Date(alert.detectedAt).toLocaleTimeString()}
                         </div>
                       </div>
-                      <Badge
-                        variant="outline"
-                        className={getSeverityColor(alert.severity)}
-                      >
+                      <Badge variant="outline" className={getSeverityColor(alert.severity)}>
                         {alert.severity.toUpperCase()}
                       </Badge>
                     </div>
@@ -343,9 +314,7 @@ const WildfireDefenseDashboard = () => {
                   <div className="text-2xl font-bold text-gray-900">
                     {sandCannons.filter((c) => c.status === "active").length}
                   </div>
-                  <div className="text-sm text-gray-600">
-                    Sand Cannons Online
-                  </div>
+                  <div className="text-sm text-gray-600">Sand Cannons Online</div>
                 </CardContent>
               </Card>
 
@@ -357,9 +326,7 @@ const WildfireDefenseDashboard = () => {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-gray-900">
-                    {activeAlerts.length}
-                  </div>
+                  <div className="text-2xl font-bold text-gray-900">{activeAlerts.length}</div>
                   <div className="text-sm text-gray-600">Active Alerts</div>
                 </CardContent>
               </Card>
@@ -386,14 +353,9 @@ const WildfireDefenseDashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-gray-900">
-                    {sandCannons.reduce(
-                      (sum, cannon) => sum + cannon.firesExtinguished,
-                      0,
-                    )}
+                    {sandCannons.reduce((sum, cannon) => sum + cannon.firesExtinguished, 0)}
                   </div>
-                  <div className="text-sm text-gray-600">
-                    Fires Extinguished
-                  </div>
+                  <div className="text-sm text-gray-600">Fires Extinguished</div>
                 </CardContent>
               </Card>
             </div>
@@ -463,9 +425,7 @@ const WildfireDefenseDashboard = () => {
                     </div>
                     <div className="flex items-center justify-between">
                       <span>System Uptime</span>
-                      <span className="font-semibold text-green-600">
-                        99.9%
-                      </span>
+                      <span className="font-semibold text-green-600">99.9%</span>
                     </div>
                   </div>
                 </CardContent>
@@ -502,12 +462,8 @@ const WildfireDefenseDashboard = () => {
                                 className={`w-3 h-3 rounded-full ${getStatusColor(cannon.status)}`}
                               ></div>
                               <div>
-                                <div className="font-semibold">
-                                  {cannon.name}
-                                </div>
-                                <div className="text-sm text-gray-600">
-                                  {cannon.id}
-                                </div>
+                                <div className="font-semibold">{cannon.name}</div>
+                                <div className="text-sm text-gray-600">{cannon.id}</div>
                               </div>
                             </div>
                             <Badge variant="outline" className="capitalize">
@@ -531,8 +487,7 @@ const WildfireDefenseDashboard = () => {
                             <div className="flex items-center space-x-2">
                               <MapPin className="h-4 w-4 text-purple-500" />
                               <span>
-                                Fires: {cannon.firesExtinguished}/
-                                {cannon.firesDetected}
+                                Fires: {cannon.firesExtinguished}/{cannon.firesDetected}
                               </span>
                             </div>
                           </div>
@@ -558,9 +513,7 @@ const WildfireDefenseDashboard = () => {
                       <div className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
                           <Button
-                            onClick={() =>
-                              handleCannonControl(selectedCannon.id, "deploy")
-                            }
+                            onClick={() => handleCannonControl(selectedCannon.id, "deploy")}
                             disabled={selectedCannon.status === "deployed"}
                             className="w-full"
                           >
@@ -568,9 +521,7 @@ const WildfireDefenseDashboard = () => {
                             Deploy
                           </Button>
                           <Button
-                            onClick={() =>
-                              handleCannonControl(selectedCannon.id, "recall")
-                            }
+                            onClick={() => handleCannonControl(selectedCannon.id, "recall")}
                             disabled={selectedCannon.status !== "deployed"}
                             variant="outline"
                             className="w-full"
@@ -580,9 +531,7 @@ const WildfireDefenseDashboard = () => {
                           </Button>
                         </div>
                         <Button
-                          onClick={() =>
-                            handleCannonControl(selectedCannon.id, "test")
-                          }
+                          onClick={() => handleCannonControl(selectedCannon.id, "test")}
                           variant="outline"
                           className="w-full"
                         >
@@ -595,9 +544,7 @@ const WildfireDefenseDashboard = () => {
                         </Button>
 
                         <div className="pt-4 border-t">
-                          <h4 className="font-semibold mb-3">
-                            Range Adjustment
-                          </h4>
+                          <h4 className="font-semibold mb-3">Range Adjustment</h4>
                           <Slider
                             value={[selectedCannon.range]}
                             onValueChange={([value]) => {
@@ -605,8 +552,8 @@ const WildfireDefenseDashboard = () => {
                                 cannons.map((cannon) =>
                                   cannon.id === selectedCannon.id
                                     ? { ...cannon, range: value }
-                                    : cannon,
-                                ),
+                                    : cannon
+                                )
                               );
                               setSelectedCannon({
                                 ...selectedCannon,
@@ -639,7 +586,7 @@ const WildfireDefenseDashboard = () => {
                                 ? Math.round(
                                     (selectedCannon.firesExtinguished /
                                       selectedCannon.firesDetected) *
-                                      100,
+                                      100
                                   )
                                 : 0}
                               %
@@ -732,9 +679,7 @@ const WildfireDefenseDashboard = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span>Detection Accuracy</span>
-                      <span className="font-semibold text-green-600">
-                        99.5%
-                      </span>
+                      <span className="font-semibold text-green-600">99.5%</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span>False Positives</span>
@@ -764,9 +709,7 @@ const WildfireDefenseDashboard = () => {
                 <div className="h-64 bg-gradient-to-r from-green-200 via-yellow-200 to-red-200 rounded-lg flex items-center justify-center">
                   <div className="text-center">
                     <MapPin className="h-12 w-12 text-gray-600 mx-auto mb-2" />
-                    <p className="text-gray-600">
-                      Interactive heat map would be displayed here
-                    </p>
+                    <p className="text-gray-600">Interactive heat map would be displayed here</p>
                     <p className="text-sm text-gray-500">
                       Showing fire risk levels across protected areas
                     </p>
@@ -789,49 +732,25 @@ const WildfireDefenseDashboard = () => {
                 <CardContent>
                   <div className="space-y-6">
                     <div>
-                      <label className="text-sm font-medium block mb-2">
-                        Alert Sensitivity
-                      </label>
-                      <Slider
-                        defaultValue={[75]}
-                        max={100}
-                        step={5}
-                        className="w-full"
-                      />
-                      <div className="text-xs text-gray-500 mt-1">
-                        Current: High Sensitivity
-                      </div>
+                      <label className="text-sm font-medium block mb-2">Alert Sensitivity</label>
+                      <Slider defaultValue={[75]} max={100} step={5} className="w-full" />
+                      <div className="text-xs text-gray-500 mt-1">Current: High Sensitivity</div>
                     </div>
 
                     <div>
                       <label className="text-sm font-medium block mb-2">
                         Auto-Response Threshold
                       </label>
-                      <Slider
-                        defaultValue={[80]}
-                        max={100}
-                        step={5}
-                        className="w-full"
-                      />
-                      <div className="text-xs text-gray-500 mt-1">
-                        Deploy at 80% confidence
-                      </div>
+                      <Slider defaultValue={[80]} max={100} step={5} className="w-full" />
+                      <div className="text-xs text-gray-500 mt-1">Deploy at 80% confidence</div>
                     </div>
 
                     <div>
                       <label className="text-sm font-medium block mb-2">
                         Network Scan Frequency
                       </label>
-                      <Slider
-                        defaultValue={[15]}
-                        max={60}
-                        min={5}
-                        step={5}
-                        className="w-full"
-                      />
-                      <div className="text-xs text-gray-500 mt-1">
-                        Every 15 minutes
-                      </div>
+                      <Slider defaultValue={[15]} max={60} min={5} step={5} className="w-full" />
+                      <div className="text-xs text-gray-500 mt-1">Every 15 minutes</div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
@@ -918,9 +837,7 @@ const WildfireDefenseDashboard = () => {
                 <CardContent>
                   <div className="text-2xl font-bold text-green-600">24s</div>
                   <div className="text-sm text-gray-600">Average</div>
-                  <div className="text-xs text-green-600">
-                    ↓ 12% from last week
-                  </div>
+                  <div className="text-xs text-green-600">↓ 12% from last week</div>
                 </CardContent>
               </Card>
 
@@ -931,9 +848,7 @@ const WildfireDefenseDashboard = () => {
                 <CardContent>
                   <div className="text-2xl font-bold text-green-600">96.7%</div>
                   <div className="text-sm text-gray-600">Fire Suppression</div>
-                  <div className="text-xs text-green-600">
-                    ↑ 2.1% from last month
-                  </div>
+                  <div className="text-xs text-green-600">↑ 2.1% from last month</div>
                 </CardContent>
               </Card>
 
@@ -944,9 +859,7 @@ const WildfireDefenseDashboard = () => {
                 <CardContent>
                   <div className="text-2xl font-bold text-blue-600">750</div>
                   <div className="text-sm text-gray-600">Hectares</div>
-                  <div className="text-xs text-blue-600">
-                    ↑ 50 hectares this month
-                  </div>
+                  <div className="text-xs text-blue-600">↑ 50 hectares this month</div>
                 </CardContent>
               </Card>
 
@@ -965,17 +878,13 @@ const WildfireDefenseDashboard = () => {
             <Card>
               <CardHeader>
                 <CardTitle>Performance Trends</CardTitle>
-                <CardDescription>
-                  System performance metrics over the last 30 days
-                </CardDescription>
+                <CardDescription>System performance metrics over the last 30 days</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
                   <div className="text-center">
                     <TrendingUp className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-                    <p className="text-gray-600">
-                      Performance charts would be displayed here
-                    </p>
+                    <p className="text-gray-600">Performance charts would be displayed here</p>
                     <p className="text-sm text-gray-500">
                       Response times, success rates, and system uptime
                     </p>

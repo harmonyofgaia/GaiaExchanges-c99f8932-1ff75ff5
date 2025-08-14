@@ -61,8 +61,8 @@ const Gaming = () => {
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-lg text-muted-foreground mb-6">
-                The ultimate environmental fantasy adventure - Build, explore,
-                and save virtual worlds while making real environmental impact!
+                The ultimate environmental fantasy adventure - Build, explore, and save virtual
+                worlds while making real environmental impact!
               </p>
               <Link to="/game/gaia-fantasy-mmorpg">
                 <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-3 px-8">
@@ -93,9 +93,7 @@ const Gaming = () => {
                   )}
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground mb-4">
-                    {game.description}
-                  </p>
+                  <p className="text-muted-foreground mb-4">{game.description}</p>
                   <Link to={game.path}>
                     <Button
                       className={`w-full bg-gradient-to-r ${game.color} hover:opacity-90 text-white font-bold`}
@@ -112,45 +110,29 @@ const Gaming = () => {
           {/* Gaming Stats */}
           <Card className="mt-8 border-blue-500/30 bg-blue-900/20">
             <CardHeader>
-              <CardTitle className="text-blue-400">
-                🏆 Gaming Statistics
-              </CardTitle>
+              <CardTitle className="text-blue-400">🏆 Gaming Statistics</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="text-center p-4 bg-green-900/20 rounded-lg">
                   <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-green-400">
-                    15,247
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Active Players
-                  </div>
+                  <div className="text-2xl font-bold text-green-400">15,247</div>
+                  <div className="text-sm text-muted-foreground">Active Players</div>
                 </div>
                 <div className="text-center p-4 bg-blue-900/20 rounded-lg">
                   <Gamepad2 className="h-8 w-8 text-blue-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-blue-400">4</div>
-                  <div className="text-sm text-muted-foreground">
-                    Available Games
-                  </div>
+                  <div className="text-sm text-muted-foreground">Available Games</div>
                 </div>
                 <div className="text-center p-4 bg-purple-900/20 rounded-lg">
                   <Star className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-purple-400">
-                    892,561
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    High Scores
-                  </div>
+                  <div className="text-2xl font-bold text-purple-400">892,561</div>
+                  <div className="text-sm text-muted-foreground">High Scores</div>
                 </div>
                 <div className="text-center p-4 bg-orange-900/20 rounded-lg">
                   <Crown className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-orange-400">
-                    1,247
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    Tournaments
-                  </div>
+                  <div className="text-2xl font-bold text-orange-400">1,247</div>
+                  <div className="text-sm text-muted-foreground">Tournaments</div>
                 </div>
               </div>
             </CardContent>
@@ -159,9 +141,7 @@ const Gaming = () => {
           {/* Environmental Impact */}
           <Card className="mt-8 border-green-500/30 bg-green-900/20">
             <CardHeader>
-              <CardTitle className="text-green-400">
-                🌍 Environmental Gaming Impact
-              </CardTitle>
+              <CardTitle className="text-green-400">🌍 Environmental Gaming Impact</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
@@ -169,20 +149,11 @@ const Gaming = () => {
                   🌱 Real-World Impact Through Gaming:
                 </h4>
                 <div className="text-sm text-green-300 space-y-1">
-                  <div>
-                    • Every game session contributes to real environmental
-                    projects
-                  </div>
-                  <div>
-                    • GAIA MMORPG: 15,000 real trees planted through gameplay
-                  </div>
-                  <div>
-                    • Snake Arena: 2,500 square meters of coral reef restored
-                  </div>
+                  <div>• Every game session contributes to real environmental projects</div>
+                  <div>• GAIA MMORPG: 15,000 real trees planted through gameplay</div>
+                  <div>• Snake Arena: 2,500 square meters of coral reef restored</div>
                   <div>• Gaia Fighter: 500 tons of ocean plastic removed</div>
-                  <div>
-                    • Gaming achievements unlock real-world conservation efforts
-                  </div>
+                  <div>• Gaming achievements unlock real-world conservation efforts</div>
                 </div>
               </div>
             </CardContent>

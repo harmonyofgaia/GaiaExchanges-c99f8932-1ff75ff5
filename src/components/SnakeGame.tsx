@@ -33,12 +33,7 @@ export function SnakeGame() {
       head.y += direction.y;
 
       // Check wall collision
-      if (
-        head.x < 0 ||
-        head.x >= BOARD_SIZE ||
-        head.y < 0 ||
-        head.y >= BOARD_SIZE
-      ) {
+      if (head.x < 0 || head.x >= BOARD_SIZE || head.y < 0 || head.y >= BOARD_SIZE) {
         setGameOver(true);
         setIsPlaying(false);
         toast.error("Game Over! Hit the wall! 🐍", {
@@ -48,9 +43,7 @@ export function SnakeGame() {
       }
 
       // Check self collision
-      if (
-        newSnake.some((segment) => segment.x === head.x && segment.y === head.y)
-      ) {
+      if (newSnake.some((segment) => segment.x === head.x && segment.y === head.y)) {
         setGameOver(true);
         setIsPlaying(false);
         toast.error("Game Over! Snake ate itself! 🐍", {
@@ -151,9 +144,7 @@ export function SnakeGame() {
         </CardTitle>
         <div className="flex gap-4">
           <Badge className="bg-blue-600 text-white">Score: {score}</Badge>
-          <Badge className="bg-purple-600 text-white">
-            High Score: {highScore}
-          </Badge>
+          <Badge className="bg-purple-600 text-white">High Score: {highScore}</Badge>
           <Badge className="bg-green-600 text-white">
             GAiA Earned: {gaiaTokensEarned.toFixed(1)}
           </Badge>
@@ -162,18 +153,11 @@ export function SnakeGame() {
       <CardContent className="space-y-4">
         {/* Game Controls */}
         <div className="flex gap-2 justify-center">
-          <Button
-            onClick={startGame}
-            className="bg-green-600 hover:bg-green-700"
-          >
+          <Button onClick={startGame} className="bg-green-600 hover:bg-green-700">
             <Play className="h-4 w-4 mr-2" />
             Start
           </Button>
-          <Button
-            onClick={pauseGame}
-            disabled={!isPlaying && !gameOver}
-            variant="outline"
-          >
+          <Button onClick={pauseGame} disabled={!isPlaying && !gameOver} variant="outline">
             <Pause className="h-4 w-4 mr-2" />
             Pause
           </Button>
@@ -197,9 +181,7 @@ export function SnakeGame() {
               const x = index % BOARD_SIZE;
               const y = Math.floor(index / BOARD_SIZE);
 
-              const isSnake = snake.some(
-                (segment) => segment.x === x && segment.y === y,
-              );
+              const isSnake = snake.some((segment) => segment.x === x && segment.y === y);
               const isHead = snake[0]?.x === x && snake[0]?.y === y;
               const isFood = food.x === x && food.y === y;
 
@@ -234,9 +216,7 @@ export function SnakeGame() {
             <Trophy className="h-8 w-8 text-red-400 mx-auto mb-2" />
             <h3 className="text-red-400 font-bold">Game Over!</h3>
             <p className="text-muted-foreground">Final Score: {score}</p>
-            <p className="text-green-400">
-              GAiA Tokens Earned: {gaiaTokensEarned.toFixed(1)}
-            </p>
+            <p className="text-green-400">GAiA Tokens Earned: {gaiaTokensEarned.toFixed(1)}</p>
           </div>
         )}
       </CardContent>

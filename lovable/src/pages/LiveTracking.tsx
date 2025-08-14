@@ -20,8 +20,7 @@ export default function LiveTracking() {
             🛰️ Live Tracking Command Center
           </CardTitle>
           <p className="text-center text-xl text-muted-foreground">
-            Omniscient GPS tracking with quantum-level accuracy and global
-            coverage
+            Omniscient GPS tracking with quantum-level accuracy and global coverage
           </p>
         </CardHeader>
       </Card>

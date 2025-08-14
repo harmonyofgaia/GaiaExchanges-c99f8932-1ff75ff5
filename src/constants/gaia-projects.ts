@@ -41,8 +41,7 @@ export const GAIA_PROJECTS: GAiAProject[] = [
   {
     id: "2",
     title: "🌊 Ocean Cleanup Technology",
-    description:
-      "Deploying autonomous drones to collect plastic waste from ocean surfaces.",
+    description: "Deploying autonomous drones to collect plastic waste from ocean surfaces.",
     status: "active",
     tags: ["Ocean Conservation", "Technology", "Clean Environment"],
     fundingGoal: 75000,
@@ -58,8 +57,7 @@ export const GAIA_PROJECTS: GAiAProject[] = [
   {
     id: "3",
     title: "🌿 Urban Forest Expansion",
-    description:
-      "Creating green corridors in urban areas to improve air quality and biodiversity.",
+    description: "Creating green corridors in urban areas to improve air quality and biodiversity.",
     status: "completed",
     tags: ["Reforestation", "Urban Planning", "Air Quality"],
     fundingGoal: 30000,
@@ -108,8 +106,7 @@ export const GAIA_PROJECTS: GAiAProject[] = [
   {
     id: "5",
     title: "🚗 Electric Vehicle Infrastructure",
-    description:
-      "Building charging stations and supporting clean transportation networks.",
+    description: "Building charging stations and supporting clean transportation networks.",
     status: "planning",
     tags: ["Transportation", "Clean Energy", "Infrastructure"],
     fundingGoal: 120000,
@@ -119,15 +116,13 @@ export const GAIA_PROJECTS: GAiAProject[] = [
     reward: 1200,
     progress: 21,
     impact: "High",
-    expectedImpact:
-      "Will support 500+ electric vehicles with charging infrastructure",
+    expectedImpact: "Will support 500+ electric vehicles with charging infrastructure",
     location: "Urban Centers",
   },
   {
     id: "6",
     title: "♻️ Waste Reduction Systems",
-    description:
-      "Advanced recycling and waste management solutions for communities.",
+    description: "Advanced recycling and waste management solutions for communities.",
     status: "active",
     tags: ["Waste Management", "Recycling", "Community Health"],
     fundingGoal: 65000,
@@ -137,8 +132,7 @@ export const GAIA_PROJECTS: GAiAProject[] = [
     reward: 650,
     progress: 48,
     impact: "Medium",
-    expectedImpact:
-      "Will reduce community waste by 60% through advanced recycling",
+    expectedImpact: "Will reduce community waste by 60% through advanced recycling",
     location: "Metropolitan Areas",
   },
 ];

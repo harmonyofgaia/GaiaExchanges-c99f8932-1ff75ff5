@@ -38,8 +38,7 @@ export default function SecureAdmin() {
                   🔒 SECURE ADMIN CONTROL CENTER
                 </h1>
                 <p className="text-xl text-muted-foreground">
-                  Advanced security monitoring, blockchain management, and
-                  administrative controls
+                  Advanced security monitoring, blockchain management, and administrative controls
                 </p>
               </div>
               <Tabs defaultValue="dashboard" className="w-full">
@@ -47,9 +46,7 @@ export default function SecureAdmin() {
                   <TabsTrigger value="dashboard">🏠 Dashboard</TabsTrigger>
                   <TabsTrigger value="security">🛡️ Security Center</TabsTrigger>
                   <TabsTrigger value="threats">⚠️ Threat Monitor</TabsTrigger>
-                  <TabsTrigger value="blockchain">
-                    ⛓️ Blockchain Admin
-                  </TabsTrigger>
+                  <TabsTrigger value="blockchain">⛓️ Blockchain Admin</TabsTrigger>
                 </TabsList>
                 <TabsContent value="dashboard">
                   <div className="space-y-6">
@@ -88,9 +85,7 @@ export default function SecureAdmin() {
                 <TabsContent value="threats">
                   <Card className="border-orange-500/30 bg-gradient-to-br from-orange-900/30 to-yellow-900/30">
                     <CardHeader>
-                      <CardTitle className="text-orange-400">
-                        ⚠️ Real-time Threat Log
-                      </CardTitle>
+                      <CardTitle className="text-orange-400">⚠️ Real-time Threat Log</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
@@ -114,37 +109,19 @@ export default function SecureAdmin() {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div className="bg-green-900/30 p-4 rounded-lg border border-green-500/30">
-                            <div className="text-green-400 font-bold">
-                              Network Security
-                            </div>
-                            <div className="text-2xl font-bold text-green-400">
-                              100%
-                            </div>
-                            <div className="text-xs text-muted-foreground">
-                              All systems secure
-                            </div>
+                            <div className="text-green-400 font-bold">Network Security</div>
+                            <div className="text-2xl font-bold text-green-400">100%</div>
+                            <div className="text-xs text-muted-foreground">All systems secure</div>
                           </div>
                           <div className="bg-blue-900/30 p-4 rounded-lg border border-blue-500/30">
-                            <div className="text-blue-400 font-bold">
-                              Threat Level
-                            </div>
-                            <div className="text-2xl font-bold text-blue-400">
-                              MINIMAL
-                            </div>
-                            <div className="text-xs text-muted-foreground">
-                              No active threats
-                            </div>
+                            <div className="text-blue-400 font-bold">Threat Level</div>
+                            <div className="text-2xl font-bold text-blue-400">MINIMAL</div>
+                            <div className="text-xs text-muted-foreground">No active threats</div>
                           </div>
                           <div className="bg-purple-900/30 p-4 rounded-lg border border-purple-500/30">
-                            <div className="text-purple-400 font-bold">
-                              Defense Status
-                            </div>
-                            <div className="text-2xl font-bold text-purple-400">
-                              ACTIVE
-                            </div>
-                            <div className="text-xs text-muted-foreground">
-                              All defenses online
-                            </div>
+                            <div className="text-purple-400 font-bold">Defense Status</div>
+                            <div className="text-2xl font-bold text-purple-400">ACTIVE</div>
+                            <div className="text-xs text-muted-foreground">All defenses online</div>
                           </div>
                         </div>
                       </div>
@@ -165,26 +142,18 @@ export default function SecureAdmin() {
                           GAIA Private Blockchain Administration
                         </h3>
                         <p className="text-muted-foreground mb-6">
-                          Advanced blockchain management tools and network
-                          administration features. Monitor nodes, validate
-                          transactions, and manage network security protocols.
+                          Advanced blockchain management tools and network administration features.
+                          Monitor nodes, validate transactions, and manage network security
+                          protocols.
                         </p>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div className="bg-green-900/30 p-4 rounded-lg">
-                            <div className="text-green-400 font-bold">
-                              Network Nodes
-                            </div>
-                            <div className="text-2xl font-bold text-green-400">
-                              1,247
-                            </div>
+                            <div className="text-green-400 font-bold">Network Nodes</div>
+                            <div className="text-2xl font-bold text-green-400">1,247</div>
                           </div>
                           <div className="bg-blue-900/30 p-4 rounded-lg">
-                            <div className="text-blue-400 font-bold">
-                              Block Height
-                            </div>
-                            <div className="text-2xl font-bold text-blue-400">
-                              2,847,592
-                            </div>
+                            <div className="text-blue-400 font-bold">Block Height</div>
+                            <div className="text-2xl font-bold text-blue-400">2,847,592</div>
                           </div>
                         </div>
                       </div>

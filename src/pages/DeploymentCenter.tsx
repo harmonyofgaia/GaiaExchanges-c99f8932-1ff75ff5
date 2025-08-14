@@ -59,8 +59,7 @@ export function DeploymentCenter() {
   ]);
 
   const [isDeploying, setIsDeploying] = useState(false);
-  const [deploymentAssistantActive, setDeploymentAssistantActive] =
-    useState(false);
+  const [deploymentAssistantActive, setDeploymentAssistantActive] = useState(false);
 
   useEffect(() => {
     console.log("🚀 DEPLOYMENT CENTER - Advanced CI/CD Pipeline Active");
@@ -72,10 +71,7 @@ export function DeploymentCenter() {
       setDeploymentStages((prev) =>
         prev.map((stage) => {
           if (stage.status === "active" && stage.progress < 100) {
-            const newProgress = Math.min(
-              stage.progress + Math.random() * 5,
-              100,
-            );
+            const newProgress = Math.min(stage.progress + Math.random() * 5, 100);
             const newStatus = newProgress >= 100 ? "completed" : "active";
             const newMessage =
               newProgress >= 100
@@ -90,7 +86,7 @@ export function DeploymentCenter() {
             };
           }
           return stage;
-        }),
+        })
       );
     }, 2000);
 
@@ -124,7 +120,7 @@ export function DeploymentCenter() {
           ...stage,
           progress: index < 3 ? 100 : stage.progress,
           status: index < 3 ? "completed" : stage.status,
-        })),
+        }))
       );
 
       toast.success("✅ Deployment Successful!", {
@@ -199,13 +195,10 @@ export function DeploymentCenter() {
                   <div className="flex gap-2 flex-wrap">
                     <Badge
                       className={
-                        deploymentAssistantActive
-                          ? "bg-green-600 animate-pulse"
-                          : "bg-gray-600"
+                        deploymentAssistantActive ? "bg-green-600 animate-pulse" : "bg-gray-600"
                       }
                     >
-                      AI ASSISTANT{" "}
-                      {deploymentAssistantActive ? "ACTIVE" : "STANDBY"}
+                      AI ASSISTANT {deploymentAssistantActive ? "ACTIVE" : "STANDBY"}
                     </Badge>
                     <Badge className="bg-blue-600">AUTOMATED</Badge>
                     <Badge className="bg-purple-600">SECURE</Badge>
@@ -220,9 +213,7 @@ export function DeploymentCenter() {
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-3">
                           {getStatusIcon(stage.status)}
-                          <span
-                            className={`font-medium ${getStatusColor(stage.status)}`}
-                          >
+                          <span className={`font-medium ${getStatusColor(stage.status)}`}>
                             {stage.stage}
                           </span>
                         </div>
@@ -243,9 +234,7 @@ export function DeploymentCenter() {
                       <div className="mb-2">
                         <Progress value={stage.progress} className="h-2" />
                       </div>
-                      <p className="text-sm text-muted-foreground">
-                        {stage.message}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{stage.message}</p>
                     </div>
                   ))}
                 </CardContent>
@@ -255,9 +244,7 @@ export function DeploymentCenter() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="border-blue-500/30">
                   <CardHeader>
-                    <CardTitle className="text-blue-400">
-                      🤖 AI Deployment Assistant
-                    </CardTitle>
+                    <CardTitle className="text-blue-400">🤖 AI Deployment Assistant</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <p className="text-muted-foreground">
@@ -285,9 +272,7 @@ export function DeploymentCenter() {
 
                 <Card className="border-green-500/30">
                   <CardHeader>
-                    <CardTitle className="text-green-400">
-                      🚀 Deploy to Production
-                    </CardTitle>
+                    <CardTitle className="text-green-400">🚀 Deploy to Production</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <p className="text-muted-foreground">
@@ -318,17 +303,13 @@ export function DeploymentCenter() {
             <TabsContent value="monitoring" className="space-y-6">
               <Card className="border-yellow-500/30">
                 <CardHeader>
-                  <CardTitle className="text-yellow-400">
-                    📊 System Monitoring
-                  </CardTitle>
+                  <CardTitle className="text-yellow-400">📊 System Monitoring</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-center p-8 text-muted-foreground">
                     <Activity className="h-16 w-16 mx-auto mb-4 text-yellow-400" />
                     <p className="text-lg">Real-time monitoring dashboard</p>
-                    <p className="text-sm">
-                      Track performance, uptime, and system health
-                    </p>
+                    <p className="text-sm">Track performance, uptime, and system health</p>
                   </div>
                 </CardContent>
               </Card>
@@ -337,17 +318,13 @@ export function DeploymentCenter() {
             <TabsContent value="security" className="space-y-6">
               <Card className="border-red-500/30">
                 <CardHeader>
-                  <CardTitle className="text-red-400">
-                    🛡️ Security Center
-                  </CardTitle>
+                  <CardTitle className="text-red-400">🛡️ Security Center</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-center p-8 text-muted-foreground">
                     <Shield className="h-16 w-16 mx-auto mb-4 text-red-400" />
                     <p className="text-lg">Advanced security scanning</p>
-                    <p className="text-sm">
-                      Vulnerability assessment and protection
-                    </p>
+                    <p className="text-sm">Vulnerability assessment and protection</p>
                   </div>
                 </CardContent>
               </Card>
@@ -356,9 +333,7 @@ export function DeploymentCenter() {
             <TabsContent value="analytics" className="space-y-6">
               <Card className="border-purple-500/30">
                 <CardHeader>
-                  <CardTitle className="text-purple-400">
-                    📈 Deployment Analytics
-                  </CardTitle>
+                  <CardTitle className="text-purple-400">📈 Deployment Analytics</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-center p-8 text-muted-foreground">

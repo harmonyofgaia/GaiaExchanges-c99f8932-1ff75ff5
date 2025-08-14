@@ -84,11 +84,8 @@ export function SystemHealthDashboard() {
       setHealthMetrics((prev) =>
         prev.map((metric) => ({
           ...metric,
-          value: Math.max(
-            85,
-            Math.min(100, metric.value + (Math.random() - 0.5) * 2),
-          ),
-        })),
+          value: Math.max(85, Math.min(100, metric.value + (Math.random() - 0.5) * 2)),
+        }))
       );
 
       setSystemStatus((prev) => ({
@@ -155,13 +152,8 @@ export function SystemHealthDashboard() {
         prev.map((metric) => ({
           ...metric,
           value: Math.min(100, metric.value + Math.random() * 5),
-          status:
-            metric.value > 95
-              ? "excellent"
-              : metric.value > 80
-                ? "good"
-                : "warning",
-        })),
+          status: metric.value > 95 ? "excellent" : metric.value > 80 ? "good" : "warning",
+        }))
       );
 
       toast.success("✅ Health Check Complete", {
@@ -190,29 +182,21 @@ export function SystemHealthDashboard() {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-green-400">
-                {systemStatus.uptime}
-              </div>
+              <div className="text-3xl font-bold text-green-400">{systemStatus.uptime}</div>
               <div className="text-sm text-muted-foreground">Uptime</div>
             </div>
             <div className="text-center space-y-2">
               <div className="text-3xl font-bold text-blue-400">
                 {systemStatus.totalRequests.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Total Requests
-              </div>
+              <div className="text-sm text-muted-foreground">Total Requests</div>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-purple-400">
-                {systemStatus.successRate}%
-              </div>
+              <div className="text-3xl font-bold text-purple-400">{systemStatus.successRate}%</div>
               <div className="text-sm text-muted-foreground">Success Rate</div>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-cyan-400">
-                {systemStatus.activeUsers}
-              </div>
+              <div className="text-3xl font-bold text-cyan-400">{systemStatus.activeUsers}</div>
               <div className="text-sm text-muted-foreground">Active Users</div>
             </div>
           </div>
@@ -236,9 +220,7 @@ export function SystemHealthDashboard() {
 
               <div className="space-y-2">
                 <div className="flex justify-between items-end">
-                  <span
-                    className={`text-2xl font-bold ${getStatusColor(metric.status)}`}
-                  >
+                  <span className={`text-2xl font-bold ${getStatusColor(metric.status)}`}>
                     {metric.value.toFixed(1)}
                     {metric.unit}
                   </span>
@@ -342,10 +324,7 @@ export function SystemHealthDashboard() {
 
       {/* Actions */}
       <div className="flex gap-4">
-        <Button
-          onClick={runHealthCheck}
-          className="bg-gradient-to-r from-green-600 to-blue-600"
-        >
+        <Button onClick={runHealthCheck} className="bg-gradient-to-r from-green-600 to-blue-600">
           <Activity className="h-4 w-4 mr-2" />
           Run Health Check
         </Button>

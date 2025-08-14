@@ -1,13 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Download,
-  Eye,
-  Shield,
-  Activity,
-  DollarSign,
-  TrendingUp,
-} from "lucide-react";
+import { Download, Eye, Shield, Activity, DollarSign, TrendingUp } from "lucide-react";
 import { MatrixWalletDisplay } from "@/components/MatrixWalletDisplay";
 import { LiveWalletMonitor } from "@/components/LiveWalletMonitor";
 import { GAIA_TOKEN } from "@/constants/gaia";
@@ -49,7 +42,7 @@ const Transparency = () => {
               acc[metric.metric_name] = metric.metric_value;
               return acc;
             },
-            {} as Record<string, number>,
+            {} as Record<string, number>
           ) || {};
 
         setSystemMetrics({
@@ -77,12 +70,9 @@ const Transparency = () => {
 
       <div className="container mx-auto px-4 py-8 relative z-10">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-cyan-400 mb-4">
-            🔥 LIVE TRANSPARENCY CENTER
-          </h1>
+          <h1 className="text-4xl font-bold text-cyan-400 mb-4">🔥 LIVE TRANSPARENCY CENTER</h1>
           <p className="text-muted-foreground">
-            Real-time GAiA token monitoring with live blockchain data -
-            Connected to Admin Wallet
+            Real-time GAiA token monitoring with live blockchain data - Connected to Admin Wallet
           </p>
           <div className="text-sm text-green-400 mt-2">
             <div>Connected to: {GAIA_TOKEN.CONTRACT_ADDRESS}</div>
@@ -108,9 +98,7 @@ const Transparency = () => {
           <Card className="border-green-500/30 bg-green-900/20">
             <CardContent className="pt-6 text-center">
               <Activity className="h-12 w-12 text-green-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-green-400 mb-2">
-                Live System
-              </h3>
+              <h3 className="text-xl font-bold text-green-400 mb-2">Live System</h3>
               <div className="text-2xl font-bold text-white">
                 {systemMetrics.totalUsers.toLocaleString()}
               </div>
@@ -121,9 +109,7 @@ const Transparency = () => {
           <Card className="border-blue-500/30 bg-blue-900/20">
             <CardContent className="pt-6 text-center">
               <DollarSign className="h-12 w-12 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-blue-400 mb-2">
-                Transactions
-              </h3>
+              <h3 className="text-xl font-bold text-blue-400 mb-2">Transactions</h3>
               <div className="text-2xl font-bold text-white">
                 {systemMetrics.activeTransactions.toLocaleString()}
               </div>
@@ -135,24 +121,16 @@ const Transparency = () => {
             <CardContent className="pt-6 text-center">
               <TrendingUp className="h-12 w-12 text-purple-400 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-purple-400 mb-2">Uptime</h3>
-              <div className="text-2xl font-bold text-white">
-                {systemMetrics.systemUptime}%
-              </div>
-              <p className="text-sm text-muted-foreground">
-                System Reliability
-              </p>
+              <div className="text-2xl font-bold text-white">{systemMetrics.systemUptime}%</div>
+              <p className="text-sm text-muted-foreground">System Reliability</p>
             </CardContent>
           </Card>
 
           <Card className="border-orange-500/30 bg-orange-900/20">
             <CardContent className="pt-6 text-center">
               <Shield className="h-12 w-12 text-orange-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-orange-400 mb-2">
-                Security
-              </h3>
-              <div className="text-2xl font-bold text-white">
-                {systemMetrics.securityLevel}/100
-              </div>
+              <h3 className="text-xl font-bold text-orange-400 mb-2">Security</h3>
+              <div className="text-2xl font-bold text-white">{systemMetrics.securityLevel}/100</div>
               <p className="text-sm text-muted-foreground">Security Score</p>
             </CardContent>
           </Card>
@@ -162,9 +140,7 @@ const Transparency = () => {
         {tokenData && (
           <Card className="border-yellow-500/30 bg-yellow-900/20 mb-8">
             <CardHeader>
-              <CardTitle className="text-yellow-400">
-                📊 Live Token Performance
-              </CardTitle>
+              <CardTitle className="text-yellow-400">📊 Live Token Performance</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -172,34 +148,26 @@ const Transparency = () => {
                   <div className="text-xl font-bold text-yellow-400">
                     ${tokenData.price.toFixed(8)}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Current Price
-                  </div>
+                  <div className="text-sm text-muted-foreground">Current Price</div>
                 </div>
                 <div className="text-center p-3 bg-green-900/30 rounded">
                   <div className="text-xl font-bold text-green-400">
                     {tokenData.priceChange24h >= 0 ? "+" : ""}
                     {tokenData.priceChange24h.toFixed(2)}%
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    24h Change
-                  </div>
+                  <div className="text-sm text-muted-foreground">24h Change</div>
                 </div>
                 <div className="text-center p-3 bg-blue-900/30 rounded">
                   <div className="text-xl font-bold text-blue-400">
                     ${tokenData.volume24h.toLocaleString()}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    24h Volume
-                  </div>
+                  <div className="text-sm text-muted-foreground">24h Volume</div>
                 </div>
                 <div className="text-center p-3 bg-purple-900/30 rounded">
                   <div className="text-xl font-bold text-purple-400">
                     {tokenData.holders.toLocaleString()}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Token Holders
-                  </div>
+                  <div className="text-sm text-muted-foreground">Token Holders</div>
                 </div>
               </div>
             </CardContent>
@@ -209,12 +177,9 @@ const Transparency = () => {
         <Card className="border-cyan-500/30 bg-cyan-900/20">
           <CardContent className="pt-6 text-center">
             <Eye className="h-16 w-16 text-cyan-400 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-cyan-400 mb-4">
-              100% Live Transparency
-            </h3>
+            <h3 className="text-2xl font-bold text-cyan-400 mb-4">100% Live Transparency</h3>
             <p className="text-muted-foreground mb-4">
-              Complete transparency with live blockchain verification and
-              Matrix-powered monitoring
+              Complete transparency with live blockchain verification and Matrix-powered monitoring
             </p>
             <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-4">
               <div className="text-sm text-cyan-300 space-y-2">

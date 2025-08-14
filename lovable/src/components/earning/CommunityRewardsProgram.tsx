@@ -66,8 +66,7 @@ export function CommunityRewardsProgram() {
     {
       id: "3",
       name: "Tree Adoption Certificate",
-      description:
-        "Adopt a tree in your name and receive quarterly growth updates",
+      description: "Adopt a tree in your name and receive quarterly growth updates",
       cost: 1000,
       category: "experience",
       icon: "🌳",
@@ -92,8 +91,7 @@ export function CommunityRewardsProgram() {
     {
       id: "6",
       name: "Renewable Energy 50% Discount",
-      description:
-        "Special discount on solar panels and renewable energy systems",
+      description: "Special discount on solar panels and renewable energy systems",
       cost: 1500,
       category: "discount",
       discount: 50,
@@ -201,8 +199,7 @@ export function CommunityRewardsProgram() {
     },
   ];
 
-  const currentLevel =
-    userLevels.find((l) => l.level === userLevel) || userLevels[0];
+  const currentLevel = userLevels.find((l) => l.level === userLevel) || userLevels[0];
   const nextLevel = userLevels.find((l) => l.level === userLevel + 1);
 
   const claimReward = (reward: Reward) => {
@@ -234,31 +231,19 @@ export function CommunityRewardsProgram() {
         {/* User Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="text-center p-4 bg-yellow-900/30 rounded-lg border border-yellow-500/20">
-            <div className="text-2xl font-bold text-yellow-400">
-              {userPoints.toLocaleString()}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Available Points
-            </div>
+            <div className="text-2xl font-bold text-yellow-400">{userPoints.toLocaleString()}</div>
+            <div className="text-sm text-muted-foreground">Available Points</div>
           </div>
           <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
-            <div className={`text-2xl font-bold ${currentLevel.color}`}>
-              {currentLevel.name}
-            </div>
+            <div className={`text-2xl font-bold ${currentLevel.color}`}>{currentLevel.name}</div>
             <div className="text-sm text-muted-foreground">Current Level</div>
           </div>
           <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
-            <div className="text-2xl font-bold text-blue-400">
-              {currentLevel.multiplier}x
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Point Multiplier
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{currentLevel.multiplier}x</div>
+            <div className="text-sm text-muted-foreground">Point Multiplier</div>
           </div>
           <div className="text-center p-4 bg-green-900/30 rounded-lg border border-green-500/20">
-            <div className="text-2xl font-bold text-green-400">
-              {weeklyStreak}
-            </div>
+            <div className="text-2xl font-bold text-green-400">{weeklyStreak}</div>
             <div className="text-sm text-muted-foreground">Week Streak</div>
           </div>
         </div>
@@ -320,51 +305,34 @@ export function CommunityRewardsProgram() {
           </TabsList>
 
           <TabsContent value="discounts" className="space-y-4">
-            <h3 className="text-lg font-semibold text-green-400">
-              💸 Community Discounts
-            </h3>
+            <h3 className="text-lg font-semibold text-green-400">💸 Community Discounts</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {getRewardsByCategory("discount").map((reward) => (
-                <Card
-                  key={reward.id}
-                  className="border-green-500/30 bg-green-900/10"
-                >
+                <Card key={reward.id} className="border-green-500/30 bg-green-900/10">
                   <CardContent className="p-4">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <span className="text-2xl">{reward.icon}</span>
                         <div>
-                          <h4 className="font-semibold text-green-400">
-                            {reward.name}
-                          </h4>
+                          <h4 className="font-semibold text-green-400">{reward.name}</h4>
                           {reward.discount && (
-                            <Badge className="bg-green-600 text-xs">
-                              {reward.discount}% OFF
-                            </Badge>
+                            <Badge className="bg-green-600 text-xs">{reward.discount}% OFF</Badge>
                           )}
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-lg font-bold text-yellow-400">
-                          {reward.cost}
-                        </div>
-                        <div className="text-xs text-muted-foreground">
-                          points
-                        </div>
+                        <div className="text-lg font-bold text-yellow-400">{reward.cost}</div>
+                        <div className="text-xs text-muted-foreground">points</div>
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      {reward.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground mb-3">{reward.description}</p>
                     <Button
                       onClick={() => claimReward(reward)}
                       disabled={userPoints < reward.cost}
                       className="w-full bg-green-600 hover:bg-green-700"
                       size="sm"
                     >
-                      {userPoints >= reward.cost
-                        ? "Claim Reward"
-                        : "Not Enough Points"}
+                      {userPoints >= reward.cost ? "Claim Reward" : "Not Enough Points"}
                     </Button>
                   </CardContent>
                 </Card>
@@ -373,51 +341,32 @@ export function CommunityRewardsProgram() {
           </TabsContent>
 
           <TabsContent value="experiences" className="space-y-4">
-            <h3 className="text-lg font-semibold text-blue-400">
-              🎯 Environmental Experiences
-            </h3>
+            <h3 className="text-lg font-semibold text-blue-400">🎯 Environmental Experiences</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {getRewardsByCategory("experience").map((reward) => (
-                <Card
-                  key={reward.id}
-                  className="border-blue-500/30 bg-blue-900/10"
-                >
+                <Card key={reward.id} className="border-blue-500/30 bg-blue-900/10">
                   <CardContent className="p-4">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <span className="text-2xl">{reward.icon}</span>
                         <div>
-                          <h4 className="font-semibold text-blue-400">
-                            {reward.name}
-                          </h4>
-                          {reward.limited && (
-                            <Badge className="bg-red-600 text-xs">
-                              Limited
-                            </Badge>
-                          )}
+                          <h4 className="font-semibold text-blue-400">{reward.name}</h4>
+                          {reward.limited && <Badge className="bg-red-600 text-xs">Limited</Badge>}
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-lg font-bold text-yellow-400">
-                          {reward.cost}
-                        </div>
-                        <div className="text-xs text-muted-foreground">
-                          points
-                        </div>
+                        <div className="text-lg font-bold text-yellow-400">{reward.cost}</div>
+                        <div className="text-xs text-muted-foreground">points</div>
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      {reward.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground mb-3">{reward.description}</p>
                     <Button
                       onClick={() => claimReward(reward)}
                       disabled={userPoints < reward.cost}
                       className="w-full bg-blue-600 hover:bg-blue-700"
                       size="sm"
                     >
-                      {userPoints >= reward.cost
-                        ? "Claim Experience"
-                        : "Not Enough Points"}
+                      {userPoints >= reward.cost ? "Claim Experience" : "Not Enough Points"}
                     </Button>
                   </CardContent>
                 </Card>
@@ -426,51 +375,34 @@ export function CommunityRewardsProgram() {
           </TabsContent>
 
           <TabsContent value="exclusive" className="space-y-4">
-            <h3 className="text-lg font-semibold text-purple-400">
-              👑 Exclusive Rewards
-            </h3>
+            <h3 className="text-lg font-semibold text-purple-400">👑 Exclusive Rewards</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {getRewardsByCategory("exclusive").map((reward) => (
-                <Card
-                  key={reward.id}
-                  className="border-purple-500/30 bg-purple-900/10"
-                >
+                <Card key={reward.id} className="border-purple-500/30 bg-purple-900/10">
                   <CardContent className="p-4">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <span className="text-2xl">{reward.icon}</span>
                         <div>
-                          <h4 className="font-semibold text-purple-400">
-                            {reward.name}
-                          </h4>
+                          <h4 className="font-semibold text-purple-400">{reward.name}</h4>
                           {reward.limited && (
-                            <Badge className="bg-red-600 text-xs animate-pulse">
-                              Exclusive
-                            </Badge>
+                            <Badge className="bg-red-600 text-xs animate-pulse">Exclusive</Badge>
                           )}
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-lg font-bold text-yellow-400">
-                          {reward.cost}
-                        </div>
-                        <div className="text-xs text-muted-foreground">
-                          points
-                        </div>
+                        <div className="text-lg font-bold text-yellow-400">{reward.cost}</div>
+                        <div className="text-xs text-muted-foreground">points</div>
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      {reward.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground mb-3">{reward.description}</p>
                     <Button
                       onClick={() => claimReward(reward)}
                       disabled={userPoints < reward.cost}
                       className="w-full bg-purple-600 hover:bg-purple-700"
                       size="sm"
                     >
-                      {userPoints >= reward.cost
-                        ? "Claim Exclusive"
-                        : "Not Enough Points"}
+                      {userPoints >= reward.cost ? "Claim Exclusive" : "Not Enough Points"}
                     </Button>
                   </CardContent>
                 </Card>
@@ -497,13 +429,9 @@ export function CommunityRewardsProgram() {
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className={`text-2xl font-bold ${level.color}`}>
-                          {level.level}
-                        </div>
+                        <div className={`text-2xl font-bold ${level.color}`}>{level.level}</div>
                         <div>
-                          <h4 className={`font-semibold ${level.color}`}>
-                            {level.name}
-                          </h4>
+                          <h4 className={`font-semibold ${level.color}`}>{level.name}</h4>
                           <div className="text-sm text-muted-foreground">
                             {level.pointsRequired} points required
                           </div>
@@ -513,9 +441,7 @@ export function CommunityRewardsProgram() {
                         <div className={`text-lg font-bold ${level.color}`}>
                           {level.multiplier}x
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          Multiplier
-                        </div>
+                        <div className="text-xs text-muted-foreground">Multiplier</div>
                       </div>
                     </div>
                     <div className="mt-3 flex flex-wrap gap-1">
@@ -526,9 +452,7 @@ export function CommunityRewardsProgram() {
                       ))}
                     </div>
                     {level.level === userLevel && (
-                      <Badge className="mt-2 bg-yellow-600">
-                        Current Level
-                      </Badge>
+                      <Badge className="mt-2 bg-yellow-600">Current Level</Badge>
                     )}
                   </CardContent>
                 </Card>

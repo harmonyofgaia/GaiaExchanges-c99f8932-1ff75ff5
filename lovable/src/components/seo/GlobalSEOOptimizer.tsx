@@ -3,15 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import {
-  Search,
-  Globe,
-  TrendingUp,
-  Star,
-  Target,
-  Crown,
-  Zap,
-} from "lucide-react";
+import { Search, Globe, TrendingUp, Star, Target, Crown, Zap } from "lucide-react";
 
 export function GlobalSEOOptimizer() {
   // Inject enhanced SEO meta tags and structured data for #1 Google ranking
@@ -40,8 +32,7 @@ export function GlobalSEOOptimizer() {
       },
       {
         name: "googlebot",
-        content:
-          "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+        content: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
       },
       { name: "bingbot", content: "index, follow" },
       { name: "geo.region", content: "Global" },
@@ -52,8 +43,7 @@ export function GlobalSEOOptimizer() {
       // Enhanced Open Graph tags
       {
         property: "og:title",
-        content:
-          "Culture of Harmony - World's #1 Sustainable Cryptocurrency Platform",
+        content: "Culture of Harmony - World's #1 Sustainable Cryptocurrency Platform",
       },
       {
         property: "og:description",
@@ -69,8 +59,7 @@ export function GlobalSEOOptimizer() {
       { property: "og:site_name", content: "Culture of Harmony" },
       {
         property: "og:image",
-        content:
-          "https://sites.google.com/view/culture-of-harmony/gaia-token-logo.png",
+        content: "https://sites.google.com/view/culture-of-harmony/gaia-token-logo.png",
       },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
@@ -89,8 +78,7 @@ export function GlobalSEOOptimizer() {
       },
       {
         name: "twitter:image",
-        content:
-          "https://sites.google.com/view/culture-of-harmony/gaia-token-logo.png",
+        content: "https://sites.google.com/view/culture-of-harmony/gaia-token-logo.png",
       },
       { name: "twitter:creator", content: "@CultureHarmony" },
       { name: "twitter:site", content: "@GAiAToken" },
@@ -119,7 +107,7 @@ export function GlobalSEOOptimizer() {
 
     metaTags.forEach((tag) => {
       let metaElement = document.querySelector(
-        `meta[name="${tag.name}"], meta[property="${tag.property}"]`,
+        `meta[name="${tag.name}"], meta[property="${tag.property}"]`
       ) as HTMLMetaElement;
       if (!metaElement) {
         metaElement = document.createElement("meta") as HTMLMetaElement;
@@ -141,8 +129,7 @@ export function GlobalSEOOptimizer() {
           name: "Culture of Harmony - GAiA Token",
           description: "World's #1 sustainable cryptocurrency platform",
           publisher: {
-            "@id":
-              "https://sites.google.com/view/culture-of-harmony/#organization",
+            "@id": "https://sites.google.com/view/culture-of-harmony/#organization",
           },
           potentialAction: [
             {
@@ -159,16 +146,14 @@ export function GlobalSEOOptimizer() {
         },
         {
           "@type": "Organization",
-          "@id":
-            "https://sites.google.com/view/culture-of-harmony/#organization",
+          "@id": "https://sites.google.com/view/culture-of-harmony/#organization",
           name: "Culture of Harmony",
           url: "https://sites.google.com/view/culture-of-harmony/",
           logo: {
             "@type": "ImageObject",
             inLanguage: "en-US",
             url: "https://sites.google.com/view/culture-of-harmony/logo.png",
-            contentUrl:
-              "https://sites.google.com/view/culture-of-harmony/logo.png",
+            contentUrl: "https://sites.google.com/view/culture-of-harmony/logo.png",
             width: 512,
             height: 512,
             caption: "Culture of Harmony",
@@ -202,8 +187,7 @@ export function GlobalSEOOptimizer() {
             worstRating: "1",
           },
           author: {
-            "@id":
-              "https://sites.google.com/view/culture-of-harmony/#organization",
+            "@id": "https://sites.google.com/view/culture-of-harmony/#organization",
           },
         },
         {
@@ -233,7 +217,7 @@ export function GlobalSEOOptimizer() {
     };
 
     let scriptElement = document.querySelector(
-      'script[type="application/ld+json"]',
+      'script[type="application/ld+json"]'
     ) as HTMLScriptElement;
     if (!scriptElement) {
       scriptElement = document.createElement("script") as HTMLScriptElement;
@@ -243,9 +227,7 @@ export function GlobalSEOOptimizer() {
     scriptElement.textContent = JSON.stringify(structuredData);
 
     // Add canonical URL
-    let canonicalElement = document.querySelector(
-      'link[rel="canonical"]',
-    ) as HTMLLinkElement;
+    let canonicalElement = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
     if (!canonicalElement) {
       canonicalElement = document.createElement("link") as HTMLLinkElement;
       canonicalElement.rel = "canonical";
@@ -280,7 +262,7 @@ export function GlobalSEOOptimizer() {
 
     linkTags.forEach((linkTag) => {
       let linkElement = document.querySelector(
-        `link[rel="${linkTag.rel}"][hreflang="${linkTag.hreflang}"]`,
+        `link[rel="${linkTag.rel}"][hreflang="${linkTag.hreflang}"]`
       ) as HTMLLinkElement;
       if (!linkElement) {
         linkElement = document.createElement("link") as HTMLLinkElement;
@@ -308,8 +290,7 @@ export function GlobalSEOOptimizer() {
     ];
 
     toast.success("🚀 #1 GOOGLE RANKING ACTIVATION!", {
-      description:
-        "Culture of Harmony submitted to ALL major search engines for GLOBAL DOMINANCE!",
+      description: "Culture of Harmony submitted to ALL major search engines for GLOBAL DOMINANCE!",
       duration: 6000,
     });
 
@@ -335,8 +316,7 @@ export function GlobalSEOOptimizer() {
     ];
 
     toast.success("⭐ PREMIUM BACKLINK GENERATION!", {
-      description:
-        "Creating HIGH-AUTHORITY backlinks across premium platforms for #1 ranking!",
+      description: "Creating HIGH-AUTHORITY backlinks across premium platforms for #1 ranking!",
       duration: 5000,
     });
 
@@ -380,8 +360,7 @@ export function GlobalSEOOptimizer() {
           🚀 ULTIMATE GLOBAL SEO DOMINATION ENGINE
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Making Culture of Harmony #1 on Google and ALL search engines
-          WORLDWIDE
+          Making Culture of Harmony #1 on Google and ALL search engines WORLDWIDE
         </p>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -438,11 +417,7 @@ export function GlobalSEOOptimizer() {
                 "Sustainable Crypto Exchange",
                 "Green Investment Opportunities",
               ].map((keyword, index) => (
-                <Badge
-                  key={index}
-                  variant="outline"
-                  className="text-green-400 border-green-500/50"
-                >
+                <Badge key={index} variant="outline" className="text-green-400 border-green-500/50">
                   {keyword}
                 </Badge>
               ))}
@@ -508,9 +483,9 @@ export function GlobalSEOOptimizer() {
             👑 "SEEDS WILL FORM INTO MUSIC" - ACHIEVING #1 GLOBAL RANKING! 👑
           </h4>
           <p className="text-sm text-muted-foreground mb-4">
-            Culture of Harmony and GAiA Token are now OPTIMIZED for #1 ranking
-            on Google and all search engines worldwide! Advanced SEO, premium
-            backlinks, and global keyword domination ACTIVATED!
+            Culture of Harmony and GAiA Token are now OPTIMIZED for #1 ranking on Google and all
+            search engines worldwide! Advanced SEO, premium backlinks, and global keyword domination
+            ACTIVATED!
           </p>
           <Button className="bg-gradient-to-r from-gold-600 via-green-600 to-blue-600 hover:opacity-90 text-white font-bold px-8 py-3">
             <Zap className="h-5 w-5 mr-2" />

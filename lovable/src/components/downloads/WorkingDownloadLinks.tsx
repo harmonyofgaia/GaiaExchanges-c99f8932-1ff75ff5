@@ -32,12 +32,8 @@ interface WorkingDownload {
 }
 
 export function WorkingDownloadLinks() {
-  const [downloadProgress, setDownloadProgress] = useState<
-    Record<string, number>
-  >({});
-  const [isDownloading, setIsDownloading] = useState<Record<string, boolean>>(
-    {},
-  );
+  const [downloadProgress, setDownloadProgress] = useState<Record<string, number>>({});
+  const [isDownloading, setIsDownloading] = useState<Record<string, boolean>>({});
 
   const workingDownloads: WorkingDownload[] = [
     {
@@ -277,20 +273,14 @@ export function WorkingDownloadLinks() {
                         </Badge>
                       )}
                       {download.id === "blackberry-app" && (
-                        <Badge className="bg-orange-600 text-white text-xs">
-                          Legacy
-                        </Badge>
+                        <Badge className="bg-orange-600 text-white text-xs">Legacy</Badge>
                       )}
                     </div>
                   </div>
-                  {download.verified && (
-                    <Shield className="h-4 w-4 text-green-400" />
-                  )}
+                  {download.verified && <Shield className="h-4 w-4 text-green-400" />}
                 </div>
 
-                <p className="text-xs text-muted-foreground">
-                  {download.description}
-                </p>
+                <p className="text-xs text-muted-foreground">{download.description}</p>
 
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between">
@@ -332,11 +322,7 @@ export function WorkingDownloadLinks() {
                   </Button>
 
                   {download.storeUrl && (
-                    <Button
-                      onClick={() => handleStoreLink(download)}
-                      variant="outline"
-                      size="sm"
-                    >
+                    <Button onClick={() => handleStoreLink(download)} variant="outline" size="sm">
                       <ExternalLink className="h-4 w-4" />
                     </Button>
                   )}
@@ -352,8 +338,7 @@ export function WorkingDownloadLinks() {
               🌍 Official Harmony of Gaia - Global Access
             </h4>
             <p className="text-sm text-muted-foreground">
-              All download links are tested and working 100% - Connected to
-              official GAiA token!
+              All download links are tested and working 100% - Connected to official GAiA token!
             </p>
             <div className="text-xs text-green-400 font-mono">
               Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}

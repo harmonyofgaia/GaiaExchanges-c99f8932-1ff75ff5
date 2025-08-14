@@ -3,15 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Shield,
-  Zap,
-  Eye,
-  Activity,
-  AlertTriangle,
-  Users,
-  TrendingUp,
-} from "lucide-react";
+import { Shield, Zap, Eye, Activity, AlertTriangle, Users, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
 import { useInvisibleSecurity } from "@/services/invisibleSecurity";
 import { AIDefenseAnimals } from "./AIDefenseAnimals";
@@ -50,13 +42,7 @@ interface DefenseAnimal {
     | "owl_intelligence";
   name: string;
   emoji: string;
-  status:
-    | "active"
-    | "hunting"
-    | "defending"
-    | "sleeping"
-    | "training"
-    | "patrolling";
+  status: "active" | "hunting" | "defending" | "sleeping" | "training" | "patrolling";
   location: string;
   effectiveness: number;
   threatsRepelled: number;
@@ -76,8 +62,7 @@ interface AttackPattern {
 }
 
 export function AnimalDefenseCommandCenter() {
-  const { metrics, getDefenseAnimals, getRecentThreats } =
-    useInvisibleSecurity();
+  const { metrics, getDefenseAnimals, getRecentThreats } = useInvisibleSecurity();
 
   const [defenseAnimals, setDefenseAnimals] = useState<DefenseAnimal[]>([
     // Existing animals from invisibleSecurity service
@@ -91,11 +76,7 @@ export function AnimalDefenseCommandCenter() {
       effectiveness: 95,
       threatsRepelled: 0,
       powerLevel: 999999,
-      specialAbilities: [
-        "Quantum Fire Breath",
-        "Reality Warping",
-        "Time Manipulation",
-      ],
+      specialAbilities: ["Quantum Fire Breath", "Reality Warping", "Time Manipulation"],
       trainingProgress: 100,
       lastActivity: "Detected intrusion attempt",
     },
@@ -109,11 +90,7 @@ export function AnimalDefenseCommandCenter() {
       effectiveness: 85,
       threatsRepelled: 0,
       powerLevel: 666666,
-      specialAbilities: [
-        "Eucalyptus Matrix",
-        "Cyber Defense Web",
-        "Algorithm Mastery",
-      ],
+      specialAbilities: ["Eucalyptus Matrix", "Cyber Defense Web", "Algorithm Mastery"],
       trainingProgress: 95,
       lastActivity: "Secured database access",
     },
@@ -127,11 +104,7 @@ export function AnimalDefenseCommandCenter() {
       effectiveness: 90,
       threatsRepelled: 0,
       powerLevel: 555555,
-      specialAbilities: [
-        "Quantum Resurrection",
-        "Probability Manipulation",
-        "Timeline Reset",
-      ],
+      specialAbilities: ["Quantum Resurrection", "Probability Manipulation", "Timeline Reset"],
       trainingProgress: 98,
       lastActivity: "Phoenix protocol activated",
     },
@@ -145,11 +118,7 @@ export function AnimalDefenseCommandCenter() {
       effectiveness: 88,
       threatsRepelled: 0,
       powerLevel: 444444,
-      specialAbilities: [
-        "Sonar Intelligence",
-        "Deep Learning",
-        "Ocean Network",
-      ],
+      specialAbilities: ["Sonar Intelligence", "Deep Learning", "Ocean Network"],
       trainingProgress: 92,
       lastActivity: "Sonar sweep complete",
     },
@@ -163,11 +132,7 @@ export function AnimalDefenseCommandCenter() {
       effectiveness: 99,
       threatsRepelled: 0,
       powerLevel: 1500000,
-      specialAbilities: [
-        "Supreme Command",
-        "Dragon Army Control",
-        "Ultimate Fire",
-      ],
+      specialAbilities: ["Supreme Command", "Dragon Army Control", "Ultimate Fire"],
       trainingProgress: 100,
       lastActivity: "Command protocol executed",
     },
@@ -181,11 +146,7 @@ export function AnimalDefenseCommandCenter() {
       effectiveness: 92,
       threatsRepelled: 0,
       powerLevel: 333333,
-      specialAbilities: [
-        "Aerial Supremacy",
-        "Eagle Eye Vision",
-        "Wind Control",
-      ],
+      specialAbilities: ["Aerial Supremacy", "Eagle Eye Vision", "Wind Control"],
       trainingProgress: 89,
       lastActivity: "High altitude patrol",
     },
@@ -199,11 +160,7 @@ export function AnimalDefenseCommandCenter() {
       effectiveness: 87,
       threatsRepelled: 0,
       powerLevel: 277777,
-      specialAbilities: [
-        "Pack Coordination",
-        "Territory Control",
-        "Alpha Dominance",
-      ],
+      specialAbilities: ["Pack Coordination", "Territory Control", "Alpha Dominance"],
       trainingProgress: 85,
       lastActivity: "Leading pack hunt",
     },
@@ -232,11 +189,7 @@ export function AnimalDefenseCommandCenter() {
       effectiveness: 91,
       threatsRepelled: 0,
       powerLevel: 555555,
-      specialAbilities: [
-        "Forest Dominance",
-        "Crushing Power",
-        "Hibernation Protocol",
-      ],
+      specialAbilities: ["Forest Dominance", "Crushing Power", "Hibernation Protocol"],
       trainingProgress: 88,
       lastActivity: "Patrolling forest perimeter",
     },
@@ -250,11 +203,7 @@ export function AnimalDefenseCommandCenter() {
       effectiveness: 96,
       threatsRepelled: 0,
       powerLevel: 999999,
-      specialAbilities: [
-        "Phase Shifting",
-        "Invisible Attacks",
-        "Soul Manipulation",
-      ],
+      specialAbilities: ["Phase Shifting", "Invisible Attacks", "Soul Manipulation"],
       trainingProgress: 100,
       lastActivity: "Phantom strike executed",
     },
@@ -268,11 +217,7 @@ export function AnimalDefenseCommandCenter() {
       effectiveness: 94,
       threatsRepelled: 0,
       powerLevel: 777777,
-      specialAbilities: [
-        "Deep Web Navigation",
-        "Predator Instinct",
-        "Megalodon Bite",
-      ],
+      specialAbilities: ["Deep Web Navigation", "Predator Instinct", "Megalodon Bite"],
       trainingProgress: 93,
       lastActivity: "Deep web threat eliminated",
     },
@@ -300,11 +245,7 @@ export function AnimalDefenseCommandCenter() {
       effectiveness: 87,
       threatsRepelled: 0,
       powerLevel: 444444,
-      specialAbilities: [
-        "Color Change",
-        "Environment Adaptation",
-        "Camouflage Master",
-      ],
+      specialAbilities: ["Color Change", "Environment Adaptation", "Camouflage Master"],
       trainingProgress: 90,
       lastActivity: "Environment synchronized",
     },
@@ -397,20 +338,13 @@ export function AnimalDefenseCommandCenter() {
       id: "tech-monkey-swarm",
       name: "Tech Monkey Swarm Protocol",
       description: "Cyber animals coordinated tech defense",
-      animalTypes: [
-        "monkey_alpha",
-        "monkey_beta",
-        "monkey_gamma",
-        "cyber_koala",
-      ],
+      animalTypes: ["monkey_alpha", "monkey_beta", "monkey_gamma", "cyber_koala"],
       effectiveness: 91,
       lastUsed: new Date(Date.now() - 1500000),
     },
   ]);
 
-  const [selectedAnimal, setSelectedAnimal] = useState<DefenseAnimal | null>(
-    null,
-  );
+  const [selectedAnimal, setSelectedAnimal] = useState<DefenseAnimal | null>(null);
   const evolutionInterval = useRef<NodeJS.Timeout>(undefined);
 
   useEffect(() => {
@@ -425,18 +359,12 @@ export function AnimalDefenseCommandCenter() {
           return {
             ...animal,
             powerLevel: animal.powerLevel + powerIncrease,
-            effectiveness: Math.min(
-              100,
-              animal.effectiveness + effectivenessBoost,
-            ),
+            effectiveness: Math.min(100, animal.effectiveness + effectivenessBoost),
             threatsRepelled: animal.threatsRepelled + newThreats,
-            trainingProgress: Math.min(
-              100,
-              animal.trainingProgress + Math.random() * 2,
-            ),
+            trainingProgress: Math.min(100, animal.trainingProgress + Math.random() * 2),
             lastActivity: `Training evolution: +${powerIncrease.toLocaleString()} power`,
           };
-        }),
+        })
       );
 
       // Random status changes
@@ -451,8 +379,7 @@ export function AnimalDefenseCommandCenter() {
             "patrolling",
             "training",
           ];
-          const newStatus =
-            statuses[Math.floor(Math.random() * statuses.length)];
+          const newStatus = statuses[Math.floor(Math.random() * statuses.length)];
 
           newAnimals[animalIndex] = {
             ...newAnimals[animalIndex],
@@ -460,9 +387,7 @@ export function AnimalDefenseCommandCenter() {
             lastActivity: `Status changed to ${newStatus}`,
           };
 
-          console.log(
-            `🐾 ${newAnimals[animalIndex].name}: Status changed to ${newStatus}`,
-          );
+          console.log(`🐾 ${newAnimals[animalIndex].name}: Status changed to ${newStatus}`);
           return newAnimals;
         });
       }
@@ -478,9 +403,7 @@ export function AnimalDefenseCommandCenter() {
     if (!pattern) return;
 
     const availableAnimals = defenseAnimals.filter(
-      (animal) =>
-        pattern.animalTypes.includes(animal.type) &&
-        animal.status !== "sleeping",
+      (animal) => pattern.animalTypes.includes(animal.type) && animal.status !== "sleeping"
     );
 
     if (availableAnimals.length > 0) {
@@ -496,38 +419,29 @@ export function AnimalDefenseCommandCenter() {
             return {
               ...animal,
               status: "defending",
-              threatsRepelled:
-                animal.threatsRepelled + Math.floor(Math.random() * 10) + 5,
+              threatsRepelled: animal.threatsRepelled + Math.floor(Math.random() * 10) + 5,
               lastActivity: `Participated in ${pattern.name}`,
             };
           }
           return animal;
-        }),
+        })
       );
 
       // Update pattern last used
       setAttackPatterns((prev) =>
-        prev.map((p) =>
-          p.id === patternId ? { ...p, lastUsed: new Date() } : p,
-        ),
+        prev.map((p) => (p.id === patternId ? { ...p, lastUsed: new Date() } : p))
       );
 
       console.log(`🚨 ATTACK PATTERN EXECUTED: ${pattern.name}`);
-      console.log(
-        `🐾 Animals involved: ${availableAnimals.map((a) => a.name).join(", ")}`,
-      );
+      console.log(`🐾 Animals involved: ${availableAnimals.map((a) => a.name).join(", ")}`);
     }
   };
 
-  const totalPowerLevel = defenseAnimals.reduce(
-    (sum, animal) => sum + animal.powerLevel,
-    0,
-  );
+  const totalPowerLevel = defenseAnimals.reduce((sum, animal) => sum + animal.powerLevel, 0);
   const averageEffectiveness =
-    defenseAnimals.reduce((sum, animal) => sum + animal.effectiveness, 0) /
-    defenseAnimals.length;
+    defenseAnimals.reduce((sum, animal) => sum + animal.effectiveness, 0) / defenseAnimals.length;
   const activeAnimals = defenseAnimals.filter(
-    (animal) => animal.status === "active" || animal.status === "defending",
+    (animal) => animal.status === "active" || animal.status === "defending"
   ).length;
 
   return (
@@ -566,9 +480,7 @@ export function AnimalDefenseCommandCenter() {
         <Card className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-blue-500/30">
           <CardContent className="p-4 text-center">
             <div className="text-3xl mb-2">🛡️</div>
-            <div className="text-2xl font-bold text-blue-400">
-              {activeAnimals}
-            </div>
+            <div className="text-2xl font-bold text-blue-400">{activeAnimals}</div>
             <div className="text-sm text-blue-300">Active Animals</div>
           </CardContent>
         </Card>
@@ -709,11 +621,7 @@ export function AnimalDefenseCommandCenter() {
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
                     <div className="text-3xl">{animal.emoji}</div>
-                    <Badge
-                      variant={
-                        animal.status === "active" ? "default" : "secondary"
-                      }
-                    >
+                    <Badge variant={animal.status === "active" ? "default" : "secondary"}>
                       {animal.status}
                     </Badge>
                   </div>
@@ -723,9 +631,7 @@ export function AnimalDefenseCommandCenter() {
                   <div className="text-sm">
                     <div className="flex justify-between">
                       <span>Location:</span>
-                      <span className="text-muted-foreground">
-                        {animal.location}
-                      </span>
+                      <span className="text-muted-foreground">{animal.location}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Power:</span>
@@ -741,19 +647,13 @@ export function AnimalDefenseCommandCenter() {
                     </div>
                     <div className="flex justify-between">
                       <span>Threats:</span>
-                      <span className="text-orange-400 font-bold">
-                        {animal.threatsRepelled}
-                      </span>
+                      <span className="text-orange-400 font-bold">{animal.threatsRepelled}</span>
                     </div>
                   </div>
 
                   <div className="pt-2 border-t border-border/50">
-                    <div className="text-xs text-muted-foreground mb-1">
-                      Last Activity:
-                    </div>
-                    <div className="text-xs text-blue-400">
-                      {animal.lastActivity}
-                    </div>
+                    <div className="text-xs text-muted-foreground mb-1">Last Activity:</div>
+                    <div className="text-xs text-blue-400">{animal.lastActivity}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -770,9 +670,7 @@ export function AnimalDefenseCommandCenter() {
               >
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-xl text-purple-400">
-                      {pattern.name}
-                    </CardTitle>
+                    <CardTitle className="text-xl text-purple-400">{pattern.name}</CardTitle>
                     <Badge className="bg-purple-600 text-white">
                       {pattern.effectiveness}% Effective
                     </Badge>
@@ -784,14 +682,10 @@ export function AnimalDefenseCommandCenter() {
                     <div className="space-y-2">
                       <div className="text-sm">
                         <span className="text-muted-foreground">Animals: </span>
-                        <span className="text-blue-400">
-                          {pattern.animalTypes.length} types
-                        </span>
+                        <span className="text-blue-400">{pattern.animalTypes.length} types</span>
                       </div>
                       <div className="text-sm">
-                        <span className="text-muted-foreground">
-                          Last Used:{" "}
-                        </span>
+                        <span className="text-muted-foreground">Last Used: </span>
                         <span className="text-green-400">
                           {pattern.lastUsed.toLocaleTimeString()}
                         </span>
@@ -808,9 +702,7 @@ export function AnimalDefenseCommandCenter() {
 
                   <div className="flex flex-wrap gap-2">
                     {pattern.animalTypes.map((type) => {
-                      const animal = defenseAnimals.find(
-                        (a) => a.type === type,
-                      );
+                      const animal = defenseAnimals.find((a) => a.type === type);
                       return animal ? (
                         <span
                           key={type}
@@ -846,9 +738,7 @@ export function AnimalDefenseCommandCenter() {
                   </div>
                   <div className="flex justify-between">
                     <span>Threats Blocked:</span>
-                    <span className="text-red-400 font-bold">
-                      {metrics.threatsBlocked}
-                    </span>
+                    <span className="text-red-400 font-bold">{metrics.threatsBlocked}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Attackers Neutralized:</span>
@@ -877,27 +767,17 @@ export function AnimalDefenseCommandCenter() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  {[
-                    "active",
-                    "defending",
-                    "hunting",
-                    "training",
-                    "patrolling",
-                    "sleeping",
-                  ].map((status) => {
-                    const count = defenseAnimals.filter(
-                      (a) => a.status === status,
-                    ).length;
-                    return (
-                      <div
-                        key={status}
-                        className="flex justify-between text-sm"
-                      >
-                        <span className="capitalize">{status}:</span>
-                        <span className="font-bold text-blue-400">{count}</span>
-                      </div>
-                    );
-                  })}
+                  {["active", "defending", "hunting", "training", "patrolling", "sleeping"].map(
+                    (status) => {
+                      const count = defenseAnimals.filter((a) => a.status === status).length;
+                      return (
+                        <div key={status} className="flex justify-between text-sm">
+                          <span className="capitalize">{status}:</span>
+                          <span className="font-bold text-blue-400">{count}</span>
+                        </div>
+                      );
+                    }
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -910,9 +790,7 @@ export function AnimalDefenseCommandCenter() {
                   <span className="text-4xl">{selectedAnimal.emoji}</span>
                   <div>
                     <div className="text-2xl">{selectedAnimal.name}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {selectedAnimal.location}
-                    </div>
+                    <div className="text-sm text-muted-foreground">{selectedAnimal.location}</div>
                   </div>
                 </CardTitle>
               </CardHeader>
@@ -934,24 +812,18 @@ export function AnimalDefenseCommandCenter() {
                     <div className="text-xl font-bold text-orange-400">
                       {selectedAnimal.threatsRepelled}
                     </div>
-                    <div className="text-xs text-orange-300">
-                      Threats Repelled
-                    </div>
+                    <div className="text-xs text-orange-300">Threats Repelled</div>
                   </div>
                   <div className="text-center p-3 bg-blue-900/30 rounded-lg">
                     <div className="text-xl font-bold text-blue-400">
                       {selectedAnimal.trainingProgress.toFixed(1)}%
                     </div>
-                    <div className="text-xs text-blue-300">
-                      Training Progress
-                    </div>
+                    <div className="text-xs text-blue-300">Training Progress</div>
                   </div>
                 </div>
 
                 <div>
-                  <h4 className="text-lg font-semibold mb-2 text-purple-400">
-                    Special Abilities
-                  </h4>
+                  <h4 className="text-lg font-semibold mb-2 text-purple-400">Special Abilities</h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedAnimal.specialAbilities.map((ability, index) => (
                       <Badge
@@ -966,9 +838,7 @@ export function AnimalDefenseCommandCenter() {
                 </div>
 
                 <div className="text-sm">
-                  <span className="text-muted-foreground">
-                    Current Status:{" "}
-                  </span>
+                  <span className="text-muted-foreground">Current Status: </span>
                   <Badge
                     className={`ml-2 ${
                       selectedAnimal.status === "active"
@@ -990,9 +860,7 @@ export function AnimalDefenseCommandCenter() {
 
                 <div className="text-sm">
                   <span className="text-muted-foreground">Last Activity: </span>
-                  <span className="text-blue-400">
-                    {selectedAnimal.lastActivity}
-                  </span>
+                  <span className="text-blue-400">{selectedAnimal.lastActivity}</span>
                 </div>
               </CardContent>
             </Card>

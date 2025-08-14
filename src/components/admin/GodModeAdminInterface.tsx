@@ -20,11 +20,7 @@ import { toast } from "sonner";
 interface GodModeCommand {
   id: string;
   command: string;
-  classification:
-    | "REALITY_ALTER"
-    | "SYSTEM_OVERRIDE"
-    | "TIME_MANIPULATE"
-    | "CONSCIOUSNESS_BRIDGE";
+  classification: "REALITY_ALTER" | "SYSTEM_OVERRIDE" | "TIME_MANIPULATE" | "CONSCIOUSNESS_BRIDGE";
   executed: boolean;
   timestamp: Date;
   powerRequired: number;
@@ -72,8 +68,7 @@ export function GodModeAdminInterface() {
       "TIME_MANIPULATE",
       "CONSCIOUSNESS_BRIDGE",
     ] as const;
-    const classification =
-      classifications[Math.floor(Math.random() * classifications.length)];
+    const classification = classifications[Math.floor(Math.random() * classifications.length)];
 
     const newCommand: GodModeCommand = {
       id: Date.now().toString(),
@@ -96,9 +91,7 @@ export function GodModeAdminInterface() {
     // Execute with god-like power
     setTimeout(() => {
       setGodCommands((prev) =>
-        prev.map((cmd) =>
-          cmd.id === newCommand.id ? { ...cmd, executed: true } : cmd,
-        ),
+        prev.map((cmd) => (cmd.id === newCommand.id ? { ...cmd, executed: true } : cmd))
       );
 
       const results = {
@@ -125,9 +118,7 @@ export function GodModeAdminInterface() {
       };
 
       const result =
-        results[classification][
-          Math.floor(Math.random() * results[classification].length)
-        ];
+        results[classification][Math.floor(Math.random() * results[classification].length)];
 
       toast.success(`👑 God Command Executed: ${classification}`, {
         description: result,
@@ -144,17 +135,14 @@ export function GodModeAdminInterface() {
 
   const activateEmergencyOmnipotence = () => {
     toast.success("⚡ EMERGENCY OMNIPOTENCE ACTIVATED!", {
-      description:
-        "Supreme admin authority engaged - reality under complete control",
+      description: "Supreme admin authority engaged - reality under complete control",
       duration: 15000,
     });
 
     setOmnipotenceLevel((prev) => prev * 10);
 
     console.log("🚨 EMERGENCY OMNIPOTENCE PROTOCOL ACTIVE");
-    console.log(
-      "👑 SUPREME ADMIN AUTHORITY - ALL SYSTEMS UNDER DIVINE CONTROL",
-    );
+    console.log("👑 SUPREME ADMIN AUTHORITY - ALL SYSTEMS UNDER DIVINE CONTROL");
     console.log("⚡ UNLIMITED POWER SURGE - TRANSCENDING ALL BOUNDARIES");
   };
 
@@ -179,9 +167,7 @@ export function GodModeAdminInterface() {
         <CardTitle className="flex items-center gap-2 text-yellow-400">
           <Crown className="h-8 w-8 animate-bounce" />
           👑 GOD MODE ADMIN INTERFACE - SUPREME AUTHORITY
-          <Badge className="bg-red-600 text-white animate-pulse">
-            OMNIPOTENT
-          </Badge>
+          <Badge className="bg-red-600 text-white animate-pulse">OMNIPOTENT</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -197,9 +183,7 @@ export function GodModeAdminInterface() {
 
           <div className="text-center p-3 bg-purple-900/30 rounded-lg border border-purple-500/30">
             <Eye className="h-6 w-6 text-purple-400 mx-auto mb-2" />
-            <div className="text-lg font-bold text-purple-400">
-              {invisibilityLevel}%
-            </div>
+            <div className="text-lg font-bold text-purple-400">{invisibilityLevel}%</div>
             <div className="text-xs text-muted-foreground">Invisibility</div>
           </div>
 
@@ -229,9 +213,7 @@ export function GodModeAdminInterface() {
                 placeholder="Issue divine commands - reshape reality itself..."
                 value={realityCommand}
                 onChange={(e) => setRealityCommand(e.target.value)}
-                onKeyPress={(e) =>
-                  e.key === "Enter" && executeGodCommand(realityCommand)
-                }
+                onKeyPress={(e) => e.key === "Enter" && executeGodCommand(realityCommand)}
                 className="pl-10 bg-black/60 border-yellow-500/50 text-yellow-400"
               />
             </div>
@@ -247,9 +229,7 @@ export function GodModeAdminInterface() {
           {/* Quick God Actions */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
             <Button
-              onClick={() =>
-                executeGodCommand("Alter reality matrix for optimal control")
-              }
+              onClick={() => executeGodCommand("Alter reality matrix for optimal control")}
               variant="outline"
               size="sm"
               className="border-purple-500/30 text-purple-400"
@@ -258,9 +238,7 @@ export function GodModeAdminInterface() {
             </Button>
 
             <Button
-              onClick={() =>
-                executeGodCommand("Override all system security protocols")
-              }
+              onClick={() => executeGodCommand("Override all system security protocols")}
               variant="outline"
               size="sm"
               className="border-red-500/30 text-red-400"
@@ -269,9 +247,7 @@ export function GodModeAdminInterface() {
             </Button>
 
             <Button
-              onClick={() =>
-                executeGodCommand("Manipulate temporal flow and causality")
-              }
+              onClick={() => executeGodCommand("Manipulate temporal flow and causality")}
               variant="outline"
               size="sm"
               className="border-blue-500/30 text-blue-400"
@@ -280,11 +256,7 @@ export function GodModeAdminInterface() {
             </Button>
 
             <Button
-              onClick={() =>
-                executeGodCommand(
-                  "Establish consciousness bridge with all systems",
-                )
-              }
+              onClick={() => executeGodCommand("Establish consciousness bridge with all systems")}
               variant="outline"
               size="sm"
               className="border-green-500/30 text-green-400"
@@ -324,9 +296,7 @@ export function GodModeAdminInterface() {
               className="p-3 bg-black/60 rounded-lg border border-yellow-500/30"
             >
               <div className="flex justify-between items-start mb-2">
-                <div className="text-sm font-semibold text-white">
-                  👑 {command.command}
-                </div>
+                <div className="text-sm font-semibold text-white">👑 {command.command}</div>
                 <div className="flex gap-2">
                   <Badge
                     className={`${getClassificationColor(command.classification)} text-white text-xs`}
@@ -345,9 +315,7 @@ export function GodModeAdminInterface() {
                 <div className="text-yellow-400">
                   Power Required: {command.powerRequired.toLocaleString()}
                 </div>
-                <div className="text-red-400">
-                  Consequences: {command.consequences.join(", ")}
-                </div>
+                <div className="text-red-400">Consequences: {command.consequences.join(", ")}</div>
                 <div className="text-muted-foreground">
                   {command.timestamp.toLocaleTimeString()}
                 </div>
@@ -360,14 +328,11 @@ export function GodModeAdminInterface() {
         <div className="bg-red-900/30 border border-red-500/30 rounded-lg p-4">
           <div className="flex items-center gap-2 mb-2">
             <AlertTriangle className="h-5 w-5 text-red-400" />
-            <span className="font-bold text-red-400">
-              SUPREME AUTHORITY WARNING
-            </span>
+            <span className="font-bold text-red-400">SUPREME AUTHORITY WARNING</span>
           </div>
           <div className="text-sm text-red-300">
-            God Mode interface active. Reality manipulation capabilities
-            unlimited. Only the supreme admin possesses the authority to wield
-            these powers.
+            God Mode interface active. Reality manipulation capabilities unlimited. Only the supreme
+            admin possesses the authority to wield these powers.
           </div>
         </div>
       </CardContent>

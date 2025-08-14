@@ -3,16 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import {
-  Cloud,
-  Download,
-  Image,
-  Sparkles,
-  Palette,
-  Zap,
-  DollarSign,
-  Flame,
-} from "lucide-react";
+import { Cloud, Download, Image, Sparkles, Palette, Zap, DollarSign, Flame } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -136,8 +127,7 @@ export function EnhancedArtworkCloud() {
       "bioelectric-symphony",
       "cosmic-pathways",
     ];
-    const randomStyle =
-      masterStyles[Math.floor(Math.random() * masterStyles.length)];
+    const randomStyle = masterStyles[Math.floor(Math.random() * masterStyles.length)];
 
     // Simulate advanced AI artwork generation with mixed styles
     setTimeout(async () => {
@@ -187,9 +177,7 @@ export function EnhancedArtworkCloud() {
 
   const toggleForSale = (artworkId: string) => {
     setArtworks((prev) =>
-      prev.map((art) =>
-        art.id === artworkId ? { ...art, forSale: !art.forSale } : art,
-      ),
+      prev.map((art) => (art.id === artworkId ? { ...art, forSale: !art.forSale } : art))
     );
 
     const artwork = artworks.find((art) => art.id === artworkId);
@@ -224,12 +212,11 @@ export function EnhancedArtworkCloud() {
           <div className="space-y-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-300 mb-2">
-                {artworks.length} Background Artworks •{" "}
-                {artworks.filter((a) => a.forSale).length} For Sale
+                {artworks.length} Background Artworks • {artworks.filter((a) => a.forSale).length}{" "}
+                For Sale
               </div>
               <div className="text-sm text-muted-foreground">
-                Admin-only access • Background creation • GAiA token sales •
-                Burn rate optimization
+                Admin-only access • Background creation • GAiA token sales • Burn rate optimization
               </div>
             </div>
 
@@ -277,28 +264,18 @@ export function EnhancedArtworkCloud() {
 
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <h4 className="font-semibold text-white text-sm truncate">
-                    {artwork.name}
-                  </h4>
+                  <h4 className="font-semibold text-white text-sm truncate">{artwork.name}</h4>
                   {getTypeIcon(artwork.type)}
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-purple-600 text-white text-xs">
-                    BACKGROUND
-                  </Badge>
-                  <span className="text-xs text-muted-foreground">
-                    {artwork.style}
-                  </span>
+                  <Badge className="bg-purple-600 text-white text-xs">BACKGROUND</Badge>
+                  <span className="text-xs text-muted-foreground">{artwork.style}</span>
                 </div>
 
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-green-400">
-                    {artwork.gaiaPrice} GAiA
-                  </span>
-                  <span className="text-orange-400">
-                    {artwork.burnRate}% burn
-                  </span>
+                  <span className="text-green-400">{artwork.gaiaPrice} GAiA</span>
+                  <span className="text-orange-400">{artwork.burnRate}% burn</span>
                 </div>
 
                 <div className="space-y-2">
@@ -341,28 +318,16 @@ export function EnhancedArtworkCloud() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
               <div className="bg-green-900/20 p-3 rounded border border-green-500/30">
-                <div className="text-lg font-bold text-green-400">
-                  ✅ ACTIVE
-                </div>
-                <div className="text-muted-foreground">
-                  Artwork Sales → Burn Rate
-                </div>
+                <div className="text-lg font-bold text-green-400">✅ ACTIVE</div>
+                <div className="text-muted-foreground">Artwork Sales → Burn Rate</div>
               </div>
               <div className="bg-blue-900/20 p-3 rounded border border-blue-500/30">
-                <div className="text-lg font-bold text-blue-400">
-                  ✅ CONNECTED
-                </div>
-                <div className="text-muted-foreground">
-                  GAiA Token Integration
-                </div>
+                <div className="text-lg font-bold text-blue-400">✅ CONNECTED</div>
+                <div className="text-muted-foreground">GAiA Token Integration</div>
               </div>
               <div className="bg-purple-900/20 p-3 rounded border border-purple-500/30">
-                <div className="text-lg font-bold text-purple-400">
-                  ✅ OPERATIONAL
-                </div>
-                <div className="text-muted-foreground">
-                  Cloud Storage System
-                </div>
+                <div className="text-lg font-bold text-purple-400">✅ OPERATIONAL</div>
+                <div className="text-muted-foreground">Cloud Storage System</div>
               </div>
             </div>
           </div>

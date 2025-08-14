@@ -88,7 +88,7 @@ ${promotionalContent.socialMediaPosts
     (post, i) => `
 POST ${i + 1}:
 ${post}
-`,
+`
   )
   .join("\n")}
 
@@ -134,8 +134,7 @@ Generated: ${new Date().toLocaleDateString()}
     URL.revokeObjectURL(url);
 
     toast.success("Promotional Content Library Downloaded!", {
-      description:
-        "Complete marketing arsenal ready for environmental revolution",
+      description: "Complete marketing arsenal ready for environmental revolution",
       duration: 3000,
     });
   };
@@ -155,10 +154,7 @@ Generated: ${new Date().toLocaleDateString()}
                 Complete marketing library for environmental revolution
               </p>
             </div>
-            <Button
-              onClick={downloadAllContent}
-              className="bg-purple-600 hover:bg-purple-700"
-            >
+            <Button onClick={downloadAllContent} className="bg-purple-600 hover:bg-purple-700">
               <Download className="h-4 w-4 mr-2" />
               Download All Content
             </Button>
@@ -195,9 +191,7 @@ Generated: ${new Date().toLocaleDateString()}
                     <Button
                       size="sm"
                       onClick={() => copyToClipboard(headline, "Headline")}
-                      variant={
-                        copiedContent === headline ? "default" : "outline"
-                      }
+                      variant={copiedContent === headline ? "default" : "outline"}
                     >
                       <Copy className="h-3 w-3" />
                     </Button>
@@ -219,19 +213,12 @@ Generated: ${new Date().toLocaleDateString()}
             <CardContent>
               <div className="space-y-4">
                 {promotionalContent.socialMediaPosts.map((post, index) => (
-                  <div
-                    key={index}
-                    className="p-4 bg-muted/20 rounded-lg space-y-3"
-                  >
+                  <div key={index} className="p-4 bg-muted/20 rounded-lg space-y-3">
                     <div className="flex items-center justify-between">
-                      <Badge className="bg-blue-600 text-white">
-                        Post {index + 1}
-                      </Badge>
+                      <Badge className="bg-blue-600 text-white">Post {index + 1}</Badge>
                       <Button
                         size="sm"
-                        onClick={() =>
-                          copyToClipboard(post, "Social Media Post")
-                        }
+                        onClick={() => copyToClipboard(post, "Social Media Post")}
                         variant={copiedContent === post ? "default" : "outline"}
                       >
                         <Copy className="h-3 w-3" />
@@ -264,9 +251,7 @@ Generated: ${new Date().toLocaleDateString()}
                     <Button
                       size="sm"
                       onClick={() => copyToClipboard(benefit, "Benefit")}
-                      variant={
-                        copiedContent === benefit ? "default" : "outline"
-                      }
+                      variant={copiedContent === benefit ? "default" : "outline"}
                     >
                       <Copy className="h-3 w-3" />
                     </Button>
@@ -285,20 +270,13 @@ Generated: ${new Date().toLocaleDateString()}
             <CardContent>
               <div className="space-y-3">
                 {promotionalContent.reasons.map((reason, index) => (
-                  <div
-                    key={index}
-                    className="p-3 bg-muted/20 rounded-lg space-y-2"
-                  >
+                  <div key={index} className="p-3 bg-muted/20 rounded-lg space-y-2">
                     <div className="flex items-center justify-between">
-                      <Badge className="bg-orange-600 text-white">
-                        Reason {index + 1}
-                      </Badge>
+                      <Badge className="bg-orange-600 text-white">Reason {index + 1}</Badge>
                       <Button
                         size="sm"
                         onClick={() => copyToClipboard(reason, "Reason")}
-                        variant={
-                          copiedContent === reason ? "default" : "outline"
-                        }
+                        variant={copiedContent === reason ? "default" : "outline"}
                       >
                         <Copy className="h-3 w-3" />
                       </Button>
@@ -314,9 +292,7 @@ Generated: ${new Date().toLocaleDateString()}
         <TabsContent value="cta" className="space-y-4">
           <Card className="border-red-500/30">
             <CardHeader>
-              <CardTitle className="text-red-400">
-                Call-to-Action Phrases
-              </CardTitle>
+              <CardTitle className="text-red-400">Call-to-Action Phrases</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -349,18 +325,17 @@ Generated: ${new Date().toLocaleDateString()}
               Our Mission Statement
             </h3>
             <p className="text-lg leading-relaxed max-w-4xl mx-auto">
-              "We bark our way through barriers of many projects to deploy ideas
-              and businesses, helping the green planet rebuild and recover every
-              particle on microscopical level. So we dive deep into our race to
-              find and build a better place. Keep yourself surrounded in an Open
-              Minded SPACE!"
+              "We bark our way through barriers of many projects to deploy ideas and businesses,
+              helping the green planet rebuild and recover every particle on microscopical level. So
+              we dive deep into our race to find and build a better place. Keep yourself surrounded
+              in an Open Minded SPACE!"
             </p>
             <div className="flex justify-center">
               <Button
                 onClick={() =>
                   copyToClipboard(
                     "We bark our way through barriers of many projects to deploy ideas and businesses, helping the green planet rebuild and recover every particle on microscopical level. So we dive deep into our race to find and build a better place. Keep yourself surrounded in an Open Minded SPACE!",
-                    "Mission Statement",
+                    "Mission Statement"
                   )
                 }
                 className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"

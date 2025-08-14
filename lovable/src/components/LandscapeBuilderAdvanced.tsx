@@ -96,13 +96,7 @@ export function LandscapeBuilderAdvanced() {
   useEffect(() => {
     if (weatherSystem) {
       const weatherInterval = setInterval(() => {
-        const effects = [
-          "🌧️ Rain",
-          "☀️ Sunshine",
-          "❄️ Snow",
-          "🌪️ Storm",
-          "🌈 Rainbow",
-        ];
+        const effects = ["🌧️ Rain", "☀️ Sunshine", "❄️ Snow", "🌪️ Storm", "🌈 Rainbow"];
         const effect = effects[Math.floor(Math.random() * effects.length)];
         toast.info(`Weather: ${effect}`, { duration: 2000 });
       }, 8000);
@@ -113,13 +107,9 @@ export function LandscapeBuilderAdvanced() {
   // Physics Engine Simulation
   useEffect(() => {
     if (physicsEngine) {
-      console.log(
-        "🔬 PHYSICS ENGINE ACTIVE: Simulating gravity, erosion, and natural forces",
-      );
+      console.log("🔬 PHYSICS ENGINE ACTIVE: Simulating gravity, erosion, and natural forces");
       const physicsInterval = setInterval(() => {
-        console.log(
-          "⚡ Physics calculations: Water flow, wind effects, geological changes",
-        );
+        console.log("⚡ Physics calculations: Water flow, wind effects, geological changes");
       }, 5000);
       return () => clearInterval(physicsInterval);
     }
@@ -127,9 +117,7 @@ export function LandscapeBuilderAdvanced() {
 
   const handleToolChange = (tool: string) => {
     setSelectedTool(tool as ItemType);
-    toast.info(
-      `🛠️ Tool selected: ${tool.charAt(0).toUpperCase() + tool.slice(1)}`,
-    );
+    toast.info(`🛠️ Tool selected: ${tool.charAt(0).toUpperCase() + tool.slice(1)}`);
   };
 
   const handleBrushSizeChange = (value: number[]) => {
@@ -171,9 +159,7 @@ export function LandscapeBuilderAdvanced() {
 
   const handleAutoModeToggle = () => {
     setIsAutoMode((prev) => !prev);
-    toast.success(
-      isAutoMode ? "⏹️ Auto Mode Disabled" : "⚡ Auto Mode Enabled!",
-    );
+    toast.success(isAutoMode ? "⏹️ Auto Mode Disabled" : "⚡ Auto Mode Enabled!");
   };
 
   const handleAIModeToggle = () => {
@@ -238,22 +224,16 @@ export function LandscapeBuilderAdvanced() {
           🏔️ Advanced Landscape Builder - AI Powered Creation Engine
         </CardTitle>
         <div className="flex gap-2 flex-wrap">
-          <Badge
-            className={`${aiMode ? "bg-green-600 animate-pulse" : "bg-gray-600"}`}
-          >
+          <Badge className={`${aiMode ? "bg-green-600 animate-pulse" : "bg-gray-600"}`}>
             🧠 AI Mode: {aiMode ? "ACTIVE" : "INACTIVE"}
           </Badge>
           <Badge className={`${weatherSystem ? "bg-blue-600" : "bg-gray-600"}`}>
             🌦️ Weather: {weatherSystem ? "ON" : "OFF"}
           </Badge>
-          <Badge
-            className={`${physicsEngine ? "bg-orange-600" : "bg-gray-600"}`}
-          >
+          <Badge className={`${physicsEngine ? "bg-orange-600" : "bg-gray-600"}`}>
             🔬 Physics: {physicsEngine ? "ACTIVE" : "OFF"}
           </Badge>
-          <Badge
-            className={`${realTimeMode ? "bg-cyan-600 animate-bounce" : "bg-gray-600"}`}
-          >
+          <Badge className={`${realTimeMode ? "bg-cyan-600 animate-bounce" : "bg-gray-600"}`}>
             ⚡ Real-Time: {realTimeMode ? "ON" : "OFF"}
           </Badge>
         </div>
@@ -262,9 +242,7 @@ export function LandscapeBuilderAdvanced() {
       <CardContent className="space-y-6">
         {/* Landscape Name Input */}
         <div className="space-y-2">
-          <label className="text-sm font-medium text-purple-400">
-            Landscape Name:
-          </label>
+          <label className="text-sm font-medium text-purple-400">Landscape Name:</label>
           <div className="flex gap-2">
             <Input
               placeholder="Enter your landscape name..."
@@ -272,10 +250,7 @@ export function LandscapeBuilderAdvanced() {
               onChange={(e) => setLandscapeName(e.target.value)}
               className="border-purple-500/20"
             />
-            <Button
-              onClick={handleSaveLandscape}
-              className="bg-green-600 hover:bg-green-700"
-            >
+            <Button onClick={handleSaveLandscape} className="bg-green-600 hover:bg-green-700">
               💾 Save
             </Button>
           </div>
@@ -423,9 +398,7 @@ export function LandscapeBuilderAdvanced() {
           {/* Statistics */}
           <div className="mt-4 grid grid-cols-4 gap-4 text-center">
             <div className="bg-purple-900/30 p-3 rounded">
-              <div className="text-2xl font-bold text-purple-400">
-                {items.length}
-              </div>
+              <div className="text-2xl font-bold text-purple-400">{items.length}</div>
               <div className="text-sm text-muted-foreground">Items Placed</div>
             </div>
             <div className="bg-green-900/30 p-3 rounded">
@@ -456,9 +429,7 @@ export function LandscapeBuilderAdvanced() {
             Import Landscape
           </Button>
           <div className="text-center">
-            <div className="text-lg font-bold text-purple-400">
-              ☁️ Unlimited Cloud Storage
-            </div>
+            <div className="text-lg font-bold text-purple-400">☁️ Unlimited Cloud Storage</div>
             <div className="text-sm text-muted-foreground">
               Save infinite landscapes with AI enhancement
             </div>

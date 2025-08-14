@@ -114,7 +114,7 @@ export function SystemStatusChecker() {
           responseTime: Math.floor(Math.random() * 100) + 10,
           uptime: Math.max(95, check.uptime + (Math.random() - 0.5) * 2),
           status: Math.random() > 0.95 ? "warning" : "online",
-        })),
+        }))
       );
 
       setOverallHealth(Math.floor(Math.random() * 5) + 96);
@@ -185,21 +185,15 @@ export function SystemStatusChecker() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center space-y-2">
-              <div className="text-4xl font-bold text-green-400">
-                {overallHealth}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Overall Health
-              </div>
+              <div className="text-4xl font-bold text-green-400">{overallHealth}%</div>
+              <div className="text-sm text-muted-foreground">Overall Health</div>
               <Progress value={overallHealth} className="h-2" />
             </div>
             <div className="text-center space-y-2">
               <div className="text-4xl font-bold text-blue-400">
                 {systemChecks.filter((s) => s.status === "online").length}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Systems Online
-              </div>
+              <div className="text-sm text-muted-foreground">Systems Online</div>
             </div>
             <div className="text-center space-y-2">
               <div className="text-4xl font-bold text-yellow-400">
@@ -210,8 +204,7 @@ export function SystemStatusChecker() {
             <div className="text-center space-y-2">
               <div className="text-4xl font-bold text-cyan-400">
                 {Math.floor(
-                  systemChecks.reduce((sum, s) => sum + s.responseTime, 0) /
-                    systemChecks.length,
+                  systemChecks.reduce((sum, s) => sum + s.responseTime, 0) / systemChecks.length
                 )}
                 ms
               </div>
@@ -249,27 +242,19 @@ export function SystemStatusChecker() {
                   {getStatusIcon(check.status)}
                   <h3 className="font-semibold">{check.name}</h3>
                 </div>
-                <Badge className={getStatusColor(check.status)}>
-                  {check.status.toUpperCase()}
-                </Badge>
+                <Badge className={getStatusColor(check.status)}>{check.status.toUpperCase()}</Badge>
               </div>
 
-              <p className="text-sm text-muted-foreground mb-3">
-                {check.description}
-              </p>
+              <p className="text-sm text-muted-foreground mb-3">{check.description}</p>
 
               <div className="grid grid-cols-3 gap-4 text-sm">
                 <div>
                   <div className="text-muted-foreground">Uptime</div>
-                  <div className="font-bold text-green-400">
-                    {check.uptime.toFixed(1)}%
-                  </div>
+                  <div className="font-bold text-green-400">{check.uptime.toFixed(1)}%</div>
                 </div>
                 <div>
                   <div className="text-muted-foreground">Response</div>
-                  <div className="font-bold text-blue-400">
-                    {check.responseTime}ms
-                  </div>
+                  <div className="font-bold text-blue-400">{check.responseTime}ms</div>
                 </div>
                 <div>
                   <div className="text-muted-foreground">Last Check</div>
@@ -304,9 +289,7 @@ export function SystemStatusChecker() {
             <Card className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border border-green-500/30">
               <CardContent className="p-4 text-center">
                 <Smartphone className="h-8 w-8 mx-auto mb-2 text-green-400" />
-                <h4 className="font-bold text-green-400 mb-2">
-                  Google Play Store
-                </h4>
+                <h4 className="font-bold text-green-400 mb-2">Google Play Store</h4>
                 <Badge
                   className={`${
                     appStoreStatus.googlePlay === "preparing"
@@ -318,18 +301,14 @@ export function SystemStatusChecker() {
                 >
                   {appStoreStatus.googlePlay.toUpperCase()}
                 </Badge>
-                <p className="text-xs text-muted-foreground">
-                  Android app optimization complete
-                </p>
+                <p className="text-xs text-muted-foreground">Android app optimization complete</p>
               </CardContent>
             </Card>
 
             <Card className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 border border-blue-500/30">
               <CardContent className="p-4 text-center">
                 <Globe className="h-8 w-8 mx-auto mb-2 text-blue-400" />
-                <h4 className="font-bold text-blue-400 mb-2">
-                  Apple App Store
-                </h4>
+                <h4 className="font-bold text-blue-400 mb-2">Apple App Store</h4>
                 <Badge
                   className={`${
                     appStoreStatus.appleStore === "preparing"
@@ -341,24 +320,16 @@ export function SystemStatusChecker() {
                 >
                   {appStoreStatus.appleStore.toUpperCase()}
                 </Badge>
-                <p className="text-xs text-muted-foreground">
-                  iOS app ready for review
-                </p>
+                <p className="text-xs text-muted-foreground">iOS app ready for review</p>
               </CardContent>
             </Card>
 
             <Card className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/30">
               <CardContent className="p-4 text-center">
                 <Shield className="h-8 w-8 mx-auto mb-2 text-purple-400" />
-                <h4 className="font-bold text-purple-400 mb-2">
-                  Legal Contract
-                </h4>
-                <Badge className="bg-green-600 mb-2">
-                  {appStoreStatus.contract.toUpperCase()}
-                </Badge>
-                <p className="text-xs text-muted-foreground">
-                  All agreements finalized
-                </p>
+                <h4 className="font-bold text-purple-400 mb-2">Legal Contract</h4>
+                <Badge className="bg-green-600 mb-2">{appStoreStatus.contract.toUpperCase()}</Badge>
+                <p className="text-xs text-muted-foreground">All agreements finalized</p>
               </CardContent>
             </Card>
           </div>
@@ -366,9 +337,7 @@ export function SystemStatusChecker() {
           <div className="bg-gradient-to-r from-green-900/30 to-blue-900/30 p-4 rounded-lg border border-green-500/30">
             <div className="flex items-center gap-3 mb-3">
               <Zap className="h-6 w-6 text-yellow-400" />
-              <h4 className="text-lg font-bold text-green-400">
-                Fast Growing Stable Ship Status
-              </h4>
+              <h4 className="text-lg font-bold text-green-400">Fast Growing Stable Ship Status</h4>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div className="text-center">
@@ -381,9 +350,7 @@ export function SystemStatusChecker() {
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-purple-400">📈</div>
-                <div className="text-muted-foreground">
-                  Scalable Architecture
-                </div>
+                <div className="text-muted-foreground">Scalable Architecture</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-yellow-400">🌟</div>

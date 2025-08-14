@@ -41,13 +41,9 @@ interface Session {
 }
 
 export function MentorshipProgram() {
-  const [userRole, setUserRole] = useState<"student" | "mentor" | "both">(
-    "student",
-  );
+  const [userRole, setUserRole] = useState<"student" | "mentor" | "both">("student");
   const [selectedMentor, setSelectedMentor] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<
-    "browse" | "sessions" | "progress"
-  >("browse");
+  const [activeTab, setActiveTab] = useState<"browse" | "sessions" | "progress">("browse");
 
   const handleRoleSwitch = (role: "student" | "mentor" | "both") => {
     setUserRole(role);
@@ -88,8 +84,7 @@ export function MentorshipProgram() {
               size="sm"
               className={userRole === role ? "bg-purple-600" : ""}
             >
-              {role === "student" ? "🎓" : role === "mentor" ? "👨‍🏫" : "🤝"}{" "}
-              {role.toUpperCase()}
+              {role === "student" ? "🎓" : role === "mentor" ? "👨‍🏫" : "🤝"} {role.toUpperCase()}
             </Button>
           ))}
         </div>
@@ -130,9 +125,7 @@ export function MentorshipProgram() {
               onClick={() => setActiveTab(key)}
               variant={activeTab === key ? "default" : "outline"}
               size="sm"
-              className={
-                activeTab === key ? "bg-purple-600" : "border-purple-500/30"
-              }
+              className={activeTab === key ? "bg-purple-600" : "border-purple-500/30"}
             >
               <Icon className="h-4 w-4 mr-1" />
               {label}
@@ -143,9 +136,7 @@ export function MentorshipProgram() {
         {/* Browse Mentors Tab */}
         {activeTab === "browse" && (
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-purple-400">
-              🔍 Find Your Perfect Mentor
-            </h3>
+            <h3 className="text-lg font-bold text-purple-400">🔍 Find Your Perfect Mentor</h3>
 
             {/* Mentor Categories */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -164,25 +155,16 @@ export function MentorshipProgram() {
             {/* Mentor Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {mockMentors.map((mentor) => (
-                <Card
-                  key={mentor.id}
-                  className="border-purple-500/30 bg-purple-900/10"
-                >
+                <Card key={mentor.id} className="border-purple-500/30 bg-purple-900/10">
                   <CardHeader className="pb-3">
                     <div className="flex items-center gap-3">
                       <Avatar>
                         <AvatarImage src={mentor.avatar} />
-                        <AvatarFallback>
-                          {mentor.name.slice(0, 2)}
-                        </AvatarFallback>
+                        <AvatarFallback>{mentor.name.slice(0, 2)}</AvatarFallback>
                       </Avatar>
                       <div>
-                        <h4 className="font-semibold text-purple-400">
-                          {mentor.name}
-                        </h4>
-                        <p className="text-sm text-muted-foreground">
-                          {mentor.specialty}
-                        </p>
+                        <h4 className="font-semibold text-purple-400">{mentor.name}</h4>
+                        <p className="text-sm text-muted-foreground">{mentor.specialty}</p>
                       </div>
                     </div>
                   </CardHeader>
@@ -197,10 +179,7 @@ export function MentorshipProgram() {
 
                     <div className="flex flex-wrap gap-1">
                       {mentor.skills.slice(0, 3).map((skill) => (
-                        <Badge
-                          key={skill}
-                          className="text-xs bg-purple-600/20 text-purple-300"
-                        >
+                        <Badge key={skill} className="text-xs bg-purple-600/20 text-purple-300">
                           {skill}
                         </Badge>
                       ))}
@@ -233,75 +212,59 @@ export function MentorshipProgram() {
         )}
 
         {/* My Sessions Tab */}
-        {activeTab === "sessions" &&
-          (userRole === "student" || userRole === "both") && (
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-purple-400">
-                📅 Your Mentorship Sessions
-              </h3>
+        {activeTab === "sessions" && (userRole === "student" || userRole === "both") && (
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-purple-400">📅 Your Mentorship Sessions</h3>
 
-              <div className="grid gap-4">
-                {mockSessions.map((session) => (
-                  <Card
-                    key={session.id}
-                    className="border-blue-500/30 bg-blue-900/10"
-                  >
-                    <CardContent className="p-4">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h4 className="font-semibold text-blue-400">
-                            {session.topic}
-                          </h4>
-                          <p className="text-sm text-muted-foreground">
-                            with {session.mentorName} • {session.date} at{" "}
-                            {session.time}
-                          </p>
-                          <div className="flex items-center gap-2 mt-2">
-                            <Badge
-                              className={`${
-                                session.status === "completed"
-                                  ? "bg-green-600"
-                                  : session.status === "upcoming"
-                                    ? "bg-blue-600"
-                                    : "bg-yellow-600"
-                              } text-white`}
-                            >
-                              {session.status}
-                            </Badge>
-                            <span className="text-xs text-muted-foreground">
-                              {session.duration}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex gap-2">
-                          <Button size="sm" variant="outline">
-                            <MessageCircle className="h-3 w-3 mr-1" />
-                            Chat
-                          </Button>
-                          {session.status === "upcoming" && (
-                            <Button
-                              size="sm"
-                              className="bg-blue-600 hover:bg-blue-700"
-                            >
-                              <Calendar className="h-3 w-3 mr-1" />
-                              Join
-                            </Button>
-                          )}
+            <div className="grid gap-4">
+              {mockSessions.map((session) => (
+                <Card key={session.id} className="border-blue-500/30 bg-blue-900/10">
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-semibold text-blue-400">{session.topic}</h4>
+                        <p className="text-sm text-muted-foreground">
+                          with {session.mentorName} • {session.date} at {session.time}
+                        </p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <Badge
+                            className={`${
+                              session.status === "completed"
+                                ? "bg-green-600"
+                                : session.status === "upcoming"
+                                  ? "bg-blue-600"
+                                  : "bg-yellow-600"
+                            } text-white`}
+                          >
+                            {session.status}
+                          </Badge>
+                          <span className="text-xs text-muted-foreground">{session.duration}</span>
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="outline">
+                          <MessageCircle className="h-3 w-3 mr-1" />
+                          Chat
+                        </Button>
+                        {session.status === "upcoming" && (
+                          <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                            <Calendar className="h-3 w-3 mr-1" />
+                            Join
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
-          )}
+          </div>
+        )}
 
         {/* Progress Tracking Tab */}
         {activeTab === "progress" && (
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-purple-400">
-              📊 Your Learning Journey
-            </h3>
+            <h3 className="text-lg font-bold text-purple-400">📊 Your Learning Journey</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Learning Progress */}
@@ -321,12 +284,8 @@ export function MentorshipProgram() {
                   ].map((item) => (
                     <div key={item.skill} className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-sm text-green-300">
-                          {item.skill}
-                        </span>
-                        <span className="text-sm text-green-400">
-                          {item.progress}%
-                        </span>
+                        <span className="text-sm text-green-300">{item.skill}</span>
+                        <span className="text-sm text-green-400">{item.progress}%</span>
                       </div>
                       <Progress value={item.progress} className="h-2" />
                     </div>
@@ -350,10 +309,7 @@ export function MentorshipProgram() {
                     { name: "Community Leader", earned: false },
                     { name: "Mentor Graduate", earned: false },
                   ].map((achievement) => (
-                    <div
-                      key={achievement.name}
-                      className="flex items-center gap-3"
-                    >
+                    <div key={achievement.name} className="flex items-center gap-3">
                       <div
                         className={`w-3 h-3 rounded-full ${
                           achievement.earned ? "bg-yellow-400" : "bg-gray-600"
@@ -361,9 +317,7 @@ export function MentorshipProgram() {
                       />
                       <span
                         className={`text-sm ${
-                          achievement.earned
-                            ? "text-yellow-300"
-                            : "text-gray-400"
+                          achievement.earned ? "text-yellow-300" : "text-gray-400"
                         }`}
                       >
                         {achievement.name}
@@ -393,9 +347,7 @@ export function MentorshipProgram() {
                 </div>
                 <div className="text-center p-4 bg-orange-900/30 rounded-lg">
                   <div className="text-2xl font-bold text-orange-400">47</div>
-                  <div className="text-sm text-orange-300">
-                    Sessions This Month
-                  </div>
+                  <div className="text-sm text-orange-300">Sessions This Month</div>
                 </div>
                 <div className="text-center p-4 bg-orange-900/30 rounded-lg">
                   <div className="text-2xl font-bold text-orange-400">4.8</div>
@@ -408,17 +360,11 @@ export function MentorshipProgram() {
                   <Calendar className="h-4 w-4 mr-2" />
                   Manage Schedule
                 </Button>
-                <Button
-                  variant="outline"
-                  className="border-orange-500/30 text-orange-400"
-                >
+                <Button variant="outline" className="border-orange-500/30 text-orange-400">
                   <MessageCircle className="h-4 w-4 mr-2" />
                   Student Messages
                 </Button>
-                <Button
-                  variant="outline"
-                  className="border-orange-500/30 text-orange-400"
-                >
+                <Button variant="outline" className="border-orange-500/30 text-orange-400">
                   <Zap className="h-4 w-4 mr-2" />
                   Update Profile
                 </Button>
@@ -447,12 +393,7 @@ const mockMentors = [
     rating: 4.9,
     totalSessions: 156,
     avatar: "",
-    skills: [
-      "Environmental Science",
-      "Carbon Footprint",
-      "Green Energy",
-      "Waste Management",
-    ],
+    skills: ["Environmental Science", "Carbon Footprint", "Green Energy", "Waste Management"],
   },
   {
     id: "2",
@@ -470,12 +411,7 @@ const mockMentors = [
     rating: 4.9,
     totalSessions: 203,
     avatar: "",
-    skills: [
-      "Leadership",
-      "Community Building",
-      "Project Management",
-      "Communication",
-    ],
+    skills: ["Leadership", "Community Building", "Project Management", "Communication"],
   },
 ];
 

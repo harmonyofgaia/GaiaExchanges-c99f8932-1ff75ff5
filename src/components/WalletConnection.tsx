@@ -32,10 +32,7 @@ export function WalletConnection() {
         if (solanaProvider.isConnected && solanaProvider.publicKey) {
           setIsConnected(true);
           setWalletAddress(solanaProvider.publicKey.toString());
-          console.log(
-            "✅ Wallet already connected:",
-            solanaProvider.publicKey.toString(),
-          );
+          console.log("✅ Wallet already connected:", solanaProvider.publicKey.toString());
         }
       }
     } catch (error) {
@@ -149,9 +146,7 @@ export function WalletConnection() {
             <div className="p-4 bg-green-900/20 rounded-lg border border-green-500/20">
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
-                  <div className="text-sm text-muted-foreground">
-                    Wallet Address
-                  </div>
+                  <div className="text-sm text-muted-foreground">Wallet Address</div>
                   <div className="font-mono text-sm text-green-400">
                     {`${walletAddress.slice(0, 8)}...${walletAddress.slice(-8)}`}
                   </div>

@@ -82,17 +82,11 @@ export function InteractiveFoodMap() {
             <div className="bg-green-900/30 rounded-lg border border-green-500/20 p-6 min-h-[400px] flex items-center justify-center">
               <div className="text-center space-y-4">
                 <MapPin className="h-12 w-12 text-green-400 mx-auto" />
-                <h3 className="text-xl font-bold text-green-400">
-                  Interactive Map
-                </h3>
+                <h3 className="text-xl font-bold text-green-400">Interactive Map</h3>
                 <p className="text-muted-foreground">
-                  Map integration coming soon - will show real-time locations of
-                  food growers
+                  Map integration coming soon - will show real-time locations of food growers
                 </p>
-                <Button
-                  onClick={registerFoodGrower}
-                  className="bg-green-600 hover:bg-green-700"
-                >
+                <Button onClick={registerFoodGrower} className="bg-green-600 hover:bg-green-700">
                   <Plus className="h-4 w-4 mr-2" />
                   Register as Food Grower (+50 Points)
                 </Button>
@@ -101,9 +95,7 @@ export function InteractiveFoodMap() {
 
             {/* Grower List */}
             <div className="space-y-3">
-              <h3 className="text-lg font-semibold text-green-400">
-                Active Food Growers
-              </h3>
+              <h3 className="text-lg font-semibold text-green-400">Active Food Growers</h3>
               {foodGrowers.map((grower) => (
                 <div
                   key={grower.id}
@@ -115,35 +107,22 @@ export function InteractiveFoodMap() {
                   onClick={() => setSelectedGrower(grower)}
                 >
                   <div className="flex justify-between items-start mb-2">
-                    <h4 className="font-semibold text-green-400">
-                      {grower.name}
-                    </h4>
+                    <h4 className="font-semibold text-green-400">{grower.name}</h4>
                     <div className="flex gap-1">
                       {grower.isVerified && (
-                        <Badge className="bg-green-600 text-white">
-                          Verified
-                        </Badge>
+                        <Badge className="bg-green-600 text-white">Verified</Badge>
                       )}
                       {grower.shareSeeds && (
-                        <Badge
-                          variant="outline"
-                          className="border-yellow-500 text-yellow-400"
-                        >
+                        <Badge variant="outline" className="border-yellow-500 text-yellow-400">
                           Seeds
                         </Badge>
                       )}
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {grower.location.address}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-2">{grower.location.address}</p>
                   <div className="flex flex-wrap gap-1 mb-2">
                     {grower.crops.map((crop) => (
-                      <Badge
-                        key={crop}
-                        variant="outline"
-                        className="text-xs border-green-500/30"
-                      >
+                      <Badge key={crop} variant="outline" className="text-xs border-green-500/30">
                         {crop}
                       </Badge>
                     ))}

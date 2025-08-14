@@ -32,34 +32,22 @@ export function VideoAdminControl() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="p-3 bg-muted rounded-lg text-center">
                   <Eye className="h-6 w-6 mx-auto mb-2 text-blue-400" />
-                  <div className="text-sm text-muted-foreground">
-                    Videos Under Review
-                  </div>
-                  <div className="text-lg font-bold text-blue-400">
-                    {moderationQueue}
-                  </div>
+                  <div className="text-sm text-muted-foreground">Videos Under Review</div>
+                  <div className="text-lg font-bold text-blue-400">{moderationQueue}</div>
                 </div>
                 <div className="p-3 bg-muted rounded-lg text-center">
                   <Flag className="h-6 w-6 mx-auto mb-2 text-red-400" />
-                  <div className="text-sm text-muted-foreground">
-                    Flagged Content
-                  </div>
-                  <div className="text-lg font-bold text-red-400">
-                    {flaggedContent}
-                  </div>
+                  <div className="text-sm text-muted-foreground">Flagged Content</div>
+                  <div className="text-lg font-bold text-red-400">{flaggedContent}</div>
                 </div>
                 <div className="p-3 bg-muted rounded-lg text-center">
                   <Users className="h-6 w-6 mx-auto mb-2 text-green-400" />
-                  <div className="text-sm text-muted-foreground">
-                    Active Moderators
-                  </div>
+                  <div className="text-sm text-muted-foreground">Active Moderators</div>
                   <div className="text-lg font-bold text-green-400">12</div>
                 </div>
                 <div className="p-3 bg-muted rounded-lg text-center">
                   <BarChart3 className="h-6 w-6 mx-auto mb-2 text-purple-400" />
-                  <div className="text-sm text-muted-foreground">
-                    Daily Reports
-                  </div>
+                  <div className="text-sm text-muted-foreground">Daily Reports</div>
                   <div className="text-lg font-bold text-purple-400">47</div>
                 </div>
               </div>
@@ -79,8 +67,7 @@ export function VideoAdminControl() {
               </div>
               <div className="p-4 bg-muted rounded-lg">
                 <p className="text-muted-foreground">
-                  Moderation tools and queue management interface would be
-                  implemented here.
+                  Moderation tools and queue management interface would be implemented here.
                 </p>
               </div>
             </TabsContent>
@@ -88,8 +75,7 @@ export function VideoAdminControl() {
             <TabsContent value="analytics" className="space-y-4">
               <div className="p-4 bg-muted rounded-lg">
                 <p className="text-muted-foreground">
-                  Analytics dashboard with platform metrics and insights would
-                  be implemented here.
+                  Analytics dashboard with platform metrics and insights would be implemented here.
                 </p>
               </div>
             </TabsContent>

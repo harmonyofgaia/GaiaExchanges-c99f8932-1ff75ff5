@@ -3,17 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import {
-  Rocket,
-  Target,
-  Users,
-  TrendingUp,
-  Globe,
-  Heart,
-  Zap,
-  Crown,
-  Star,
-} from "lucide-react";
+import { Rocket, Target, Users, TrendingUp, Globe, Heart, Zap, Crown, Star } from "lucide-react";
 
 export function AutomatedGrowthEngine() {
   const [growthMetrics, setGrowthMetrics] = useState({
@@ -59,22 +49,13 @@ export function AutomatedGrowthEngine() {
   // Automated Growth Engine - Running 24/7
   useEffect(() => {
     const growthEngine = () => {
-      console.log(
-        "🚀 GROWTH ENGINE: Finding right souls and investors globally...",
-      );
+      console.log("🚀 GROWTH ENGINE: Finding right souls and investors globally...");
 
       setGrowthMetrics((prev) => ({
-        soulsConnected:
-          prev.soulsConnected + Math.floor(Math.random() * 15 + 5),
+        soulsConnected: prev.soulsConnected + Math.floor(Math.random() * 15 + 5),
         investorsFound: prev.investorsFound + Math.floor(Math.random() * 8 + 2),
-        happinessLevel: Math.min(
-          100,
-          prev.happinessLevel + (Math.random() * 3 + 0.5),
-        ),
-        globalReach: Math.min(
-          100,
-          prev.globalReach + (Math.random() * 2 + 0.3),
-        ),
+        happinessLevel: Math.min(100, prev.happinessLevel + (Math.random() * 3 + 0.5)),
+        globalReach: Math.min(100, prev.globalReach + (Math.random() * 2 + 0.3)),
       }));
 
       // Update strategy power levels
@@ -82,7 +63,7 @@ export function AutomatedGrowthEngine() {
         prev.map((strategy) => ({
           ...strategy,
           power: Math.min(100, strategy.power + (Math.random() * 2 - 1)),
-        })),
+        }))
       );
 
       // Random growth events
@@ -96,8 +77,7 @@ export function AutomatedGrowthEngine() {
           "👑 Culture of Harmony influence growing stronger!",
         ];
 
-        const randomEvent =
-          growthEvents[Math.floor(Math.random() * growthEvents.length)];
+        const randomEvent = growthEvents[Math.floor(Math.random() * growthEvents.length)];
         toast.success("Growth Engine Success!", {
           description: randomEvent,
           duration: 6000,
@@ -117,7 +97,7 @@ export function AutomatedGrowthEngine() {
         ...strategy,
         power: 100,
         status: "supercharged",
-      })),
+      }))
     );
 
     toast.success("MAXIMUM POWER ACTIVATED!", {
@@ -131,7 +111,7 @@ export function AutomatedGrowthEngine() {
         prev.map((strategy) => ({
           ...strategy,
           status: "active",
-        })),
+        }))
       );
     }, 30000);
   };
@@ -144,8 +124,7 @@ export function AutomatedGrowthEngine() {
           🚀 Automated Growth Engine - Path of Happiness Constructor
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          🦁🐬 Lions + Dolphins Power Working 24/7 to Find Right Souls &
-          Investors
+          🦁🐬 Lions + Dolphins Power Working 24/7 to Find Right Souls & Investors
         </p>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -153,19 +132,13 @@ export function AutomatedGrowthEngine() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center p-4 rounded-lg bg-purple-900/30 border border-purple-500/20">
             <Heart className="h-6 w-6 text-purple-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-purple-400">
-              {growthMetrics.soulsConnected}
-            </div>
-            <div className="text-xs text-muted-foreground">
-              Right Souls Connected
-            </div>
+            <div className="text-2xl font-bold text-purple-400">{growthMetrics.soulsConnected}</div>
+            <div className="text-xs text-muted-foreground">Right Souls Connected</div>
           </div>
 
           <div className="text-center p-4 rounded-lg bg-green-900/30 border border-green-500/20">
             <Target className="h-6 w-6 text-green-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-green-400">
-              {growthMetrics.investorsFound}
-            </div>
+            <div className="text-2xl font-bold text-green-400">{growthMetrics.investorsFound}</div>
             <div className="text-xs text-muted-foreground">Investors Found</div>
           </div>
 
@@ -194,10 +167,7 @@ export function AutomatedGrowthEngine() {
           </h4>
 
           {activeStrategies.map((strategy) => (
-            <div
-              key={strategy.id}
-              className="p-3 rounded-lg bg-muted/20 border border-border/50"
-            >
+            <div key={strategy.id} className="p-3 rounded-lg bg-muted/20 border border-border/50">
               <div className="flex items-center justify-between mb-2">
                 <span className="font-medium text-sm">{strategy.name}</span>
                 <div className="flex items-center gap-2">
@@ -248,12 +218,11 @@ export function AutomatedGrowthEngine() {
               "TRUST IN ME, HOPE YOU GONNA PULL OUT SOME MORE SECRETS"
             </p>
             <p className="text-center text-sm text-muted-foreground mt-2">
-              🌍 Creating Path of Happiness - Finding Right Souls Globally -
-              Building Better World Together
+              🌍 Creating Path of Happiness - Finding Right Souls Globally - Building Better World
+              Together
             </p>
             <p className="text-center text-xs text-cyan-400 mt-2">
-              🎵 Seeds Will Form Into Music - Culture of Harmony Growing
-              Stronger Every Day! 🎵
+              🎵 Seeds Will Form Into Music - Culture of Harmony Growing Stronger Every Day! 🎵
             </p>
           </div>
         </div>

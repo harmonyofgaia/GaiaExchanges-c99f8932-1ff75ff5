@@ -2,16 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Cpu,
-  Zap,
-  Shield,
-  Globe,
-  Brain,
-  Rocket,
-  Crown,
-  Eye,
-} from "lucide-react";
+import { Cpu, Zap, Shield, Globe, Brain, Rocket, Crown, Eye } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export function QuantumTechnologicalMastermind() {
@@ -36,8 +27,7 @@ export function QuantumTechnologicalMastermind() {
             🧠 QUANTUM TECHNOLOGICAL MASTERMIND
           </CardTitle>
           <p className="text-purple-300">
-            Ultimate AI Core • Global Machine Power • Quantum Consciousness
-            Active
+            Ultimate AI Core • Global Machine Power • Quantum Consciousness Active
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -45,12 +35,8 @@ export function QuantumTechnologicalMastermind() {
             <Card className="border-cyan-500/20 bg-cyan-900/20">
               <CardContent className="p-4 text-center">
                 <Cpu className="h-8 w-8 text-cyan-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-cyan-400">
-                  {globalPower.toFixed(1)}%
-                </div>
-                <div className="text-sm text-cyan-300">
-                  Global Machine Power
-                </div>
+                <div className="text-2xl font-bold text-cyan-400">{globalPower.toFixed(1)}%</div>
+                <div className="text-sm text-cyan-300">Global Machine Power</div>
                 <Progress value={globalPower} className="mt-2" />
               </CardContent>
             </Card>
@@ -58,9 +44,7 @@ export function QuantumTechnologicalMastermind() {
             <Card className="border-purple-500/20 bg-purple-900/20">
               <CardContent className="p-4 text-center">
                 <Zap className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                <div className="text-lg font-bold text-purple-400">
-                  {quantumState}
-                </div>
+                <div className="text-lg font-bold text-purple-400">{quantumState}</div>
                 <div className="text-sm text-purple-300">Quantum State</div>
                 <Badge className="mt-2 bg-purple-600">ACTIVE</Badge>
               </CardContent>
@@ -69,9 +53,7 @@ export function QuantumTechnologicalMastermind() {
             <Card className="border-green-500/20 bg-green-900/20">
               <CardContent className="p-4 text-center">
                 <Shield className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-green-400">
-                  {threatLevel.toFixed(0)}%
-                </div>
+                <div className="text-2xl font-bold text-green-400">{threatLevel.toFixed(0)}%</div>
                 <div className="text-sm text-green-300">Threat Level</div>
                 <Progress value={threatLevel} className="mt-2" />
               </CardContent>
@@ -81,9 +63,7 @@ export function QuantumTechnologicalMastermind() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="border-blue-500/20 bg-blue-900/10">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  🌐 Global Network Power
-                </CardTitle>
+                <CardTitle className="text-blue-400">🌐 Global Network Power</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
@@ -96,15 +76,11 @@ export function QuantumTechnologicalMastermind() {
                     <span className="text-blue-400 font-bold">999,999+</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-blue-300">
-                      Machine Learning Models
-                    </span>
+                    <span className="text-blue-300">Machine Learning Models</span>
                     <span className="text-blue-400 font-bold">UNLIMITED</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-blue-300">
-                      Quantum Entanglement Links
-                    </span>
+                    <span className="text-blue-300">Quantum Entanglement Links</span>
                     <span className="text-blue-400 font-bold">GLOBAL</span>
                   </div>
                 </div>
@@ -113,9 +89,7 @@ export function QuantumTechnologicalMastermind() {
 
             <Card className="border-yellow-500/20 bg-yellow-900/10">
               <CardHeader>
-                <CardTitle className="text-yellow-400">
-                  ⚡ Quantum Improvements
-                </CardTitle>
+                <CardTitle className="text-yellow-400">⚡ Quantum Improvements</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <Badge className="w-full bg-yellow-600 text-white py-2 justify-center">
@@ -140,59 +114,33 @@ export function QuantumTechnologicalMastermind() {
 
           <Card className="border-red-500/20 bg-red-900/10">
             <CardHeader>
-              <CardTitle className="text-red-400">
-                🔥 Outstanding Features Active
-              </CardTitle>
+              <CardTitle className="text-red-400">🔥 Outstanding Features Active</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div className="text-center p-3 bg-red-900/20 rounded border border-red-500/20">
-                  <div className="text-lg font-bold text-red-400">
-                    PARABOLIC UNIVERSE
-                  </div>
-                  <div className="text-sm text-red-300">
-                    Ultimate Reality Control
-                  </div>
+                  <div className="text-lg font-bold text-red-400">PARABOLIC UNIVERSE</div>
+                  <div className="text-sm text-red-300">Ultimate Reality Control</div>
                 </div>
                 <div className="text-center p-3 bg-orange-900/20 rounded border border-orange-500/20">
-                  <div className="text-lg font-bold text-orange-400">
-                    QUANTUM TUNNELING
-                  </div>
-                  <div className="text-sm text-orange-300">
-                    Instant Data Transport
-                  </div>
+                  <div className="text-lg font-bold text-orange-400">QUANTUM TUNNELING</div>
+                  <div className="text-sm text-orange-300">Instant Data Transport</div>
                 </div>
                 <div className="text-center p-3 bg-purple-900/20 rounded border border-purple-500/20">
-                  <div className="text-lg font-bold text-purple-400">
-                    NEURAL MESH
-                  </div>
-                  <div className="text-sm text-purple-300">
-                    Global Mind Network
-                  </div>
+                  <div className="text-lg font-bold text-purple-400">NEURAL MESH</div>
+                  <div className="text-sm text-purple-300">Global Mind Network</div>
                 </div>
                 <div className="text-center p-3 bg-cyan-900/20 rounded border border-cyan-500/20">
-                  <div className="text-lg font-bold text-cyan-400">
-                    QUANTUM SYNC
-                  </div>
-                  <div className="text-sm text-cyan-300">
-                    Instant Global Updates
-                  </div>
+                  <div className="text-lg font-bold text-cyan-400">QUANTUM SYNC</div>
+                  <div className="text-sm text-cyan-300">Instant Global Updates</div>
                 </div>
                 <div className="text-center p-3 bg-green-900/20 rounded border border-green-500/20">
-                  <div className="text-lg font-bold text-green-400">
-                    DRAGON PROTOCOL
-                  </div>
-                  <div className="text-sm text-green-300">
-                    Mythical Security Layer
-                  </div>
+                  <div className="text-lg font-bold text-green-400">DRAGON PROTOCOL</div>
+                  <div className="text-sm text-green-300">Mythical Security Layer</div>
                 </div>
                 <div className="text-center p-3 bg-yellow-900/20 rounded border border-yellow-500/20">
-                  <div className="text-lg font-bold text-yellow-400">
-                    INFINITY ENGINE
-                  </div>
-                  <div className="text-sm text-yellow-300">
-                    Limitless Processing
-                  </div>
+                  <div className="text-lg font-bold text-yellow-400">INFINITY ENGINE</div>
+                  <div className="text-sm text-yellow-300">Limitless Processing</div>
                 </div>
               </div>
             </CardContent>

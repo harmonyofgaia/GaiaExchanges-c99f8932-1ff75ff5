@@ -70,20 +70,18 @@ export function ComprehensiveDefenseOverview() {
       ];
 
       if (Math.random() < 0.3) {
-        const newActivity =
-          activities[Math.floor(Math.random() * activities.length)];
+        const newActivity = activities[Math.floor(Math.random() * activities.length)];
         setRecentActivity((prev) => [newActivity, ...prev.slice(0, 9)]);
       }
 
       // Update stats
       setOverviewStats((prev) => ({
         ...prev,
-        totalThreatsRepelled:
-          prev.totalThreatsRepelled + Math.floor(Math.random() * 5),
+        totalThreatsRepelled: prev.totalThreatsRepelled + Math.floor(Math.random() * 5),
         combinedPower: prev.combinedPower + Math.floor(Math.random() * 10000),
         systemIntegrity: Math.max(
           95,
-          Math.min(100, prev.systemIntegrity + (Math.random() - 0.5) * 2),
+          Math.min(100, prev.systemIntegrity + (Math.random() - 0.5) * 2)
         ),
       }));
     };
@@ -126,9 +124,7 @@ export function ComprehensiveDefenseOverview() {
             </CardTitle>
             <div className="flex gap-2 flex-wrap">
               <Badge className="bg-green-600">✅ ALL SYSTEMS OPERATIONAL</Badge>
-              <Badge className="bg-purple-600">
-                ♾️ IMMORTAL PROTECTION: ACTIVE
-              </Badge>
+              <Badge className="bg-purple-600">♾️ IMMORTAL PROTECTION: ACTIVE</Badge>
               <Badge className="bg-blue-600">🔒 SECURITY LEVEL: MAXIMUM</Badge>
             </div>
           </CardHeader>
@@ -139,9 +135,7 @@ export function ComprehensiveDefenseOverview() {
                 <div className="text-2xl font-bold text-green-400">
                   {overviewStats.totalAnimals}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Total Defense Animals
-                </div>
+                <div className="text-sm text-muted-foreground">Total Defense Animals</div>
               </div>
 
               <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/30">
@@ -149,9 +143,7 @@ export function ComprehensiveDefenseOverview() {
                 <div className="text-2xl font-bold text-purple-400">
                   {overviewStats.immortalCreatures}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Immortal Creatures
-                </div>
+                <div className="text-sm text-muted-foreground">Immortal Creatures</div>
               </div>
 
               <div className="text-center p-4 bg-red-900/30 rounded-lg border border-red-500/30">
@@ -159,9 +151,7 @@ export function ComprehensiveDefenseOverview() {
                 <div className="text-2xl font-bold text-red-400">
                   {overviewStats.totalThreatsRepelled}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Threats Repelled
-                </div>
+                <div className="text-sm text-muted-foreground">Threats Repelled</div>
               </div>
 
               <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/30">
@@ -169,9 +159,7 @@ export function ComprehensiveDefenseOverview() {
                 <div className="text-2xl font-bold text-blue-400">
                   {overviewStats.combinedPower.toLocaleString()}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Combined Power
-                </div>
+                <div className="text-sm text-muted-foreground">Combined Power</div>
               </div>
             </div>
 
@@ -183,33 +171,20 @@ export function ComprehensiveDefenseOverview() {
                     {overviewStats.systemIntegrity.toFixed(1)}%
                   </span>
                 </div>
-                <Progress
-                  value={overviewStats.systemIntegrity}
-                  className="h-3"
-                />
+                <Progress value={overviewStats.systemIntegrity} className="h-3" />
               </div>
 
               <div>
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-purple-400">
-                    ⚡ Defense Effectiveness
-                  </span>
-                  <span className="text-purple-400">
-                    {overviewStats.defenseEffectiveness}%
-                  </span>
+                  <span className="text-purple-400">⚡ Defense Effectiveness</span>
+                  <span className="text-purple-400">{overviewStats.defenseEffectiveness}%</span>
                 </div>
-                <Progress
-                  value={overviewStats.defenseEffectiveness}
-                  className="h-3"
-                />
+                <Progress value={overviewStats.defenseEffectiveness} className="h-3" />
               </div>
             </div>
 
             <div className="flex gap-2 flex-wrap">
-              <Button
-                onClick={deployAllDefenses}
-                className="bg-red-600 hover:bg-red-700"
-              >
+              <Button onClick={deployAllDefenses} className="bg-red-600 hover:bg-red-700">
                 <PlayCircle className="h-4 w-4 mr-1" />
                 🚨 DEPLOY ALL DEFENSES
               </Button>
@@ -292,14 +267,10 @@ export function ComprehensiveDefenseOverview() {
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>🌟 Quantum Level:</span>
-                  <span className="text-yellow-400 font-bold">
-                    TRANSCENDENT
-                  </span>
+                  <span className="text-yellow-400 font-bold">TRANSCENDENT</span>
                 </div>
                 <div className="mt-3 p-2 bg-purple-800/30 rounded text-xs text-center">
-                  <div className="text-purple-300">
-                    Status: ETERNAL PROTECTION
-                  </div>
+                  <div className="text-purple-300">Status: ETERNAL PROTECTION</div>
                 </div>
               </div>
             </CardContent>
@@ -316,9 +287,7 @@ export function ComprehensiveDefenseOverview() {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>🛡️ Threats Blocked:</span>
-                  <span className="text-green-400 font-bold">
-                    {securityMetrics.threatsBlocked}
-                  </span>
+                  <span className="text-green-400 font-bold">{securityMetrics.threatsBlocked}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span>💀 Attackers Neutralized:</span>
@@ -329,15 +298,9 @@ export function ComprehensiveDefenseOverview() {
                 <div className="flex justify-between text-sm">
                   <span>🔍 Global Scanning:</span>
                   <Badge
-                    className={
-                      securityMetrics.globalScanningActive
-                        ? "bg-green-600"
-                        : "bg-red-600"
-                    }
+                    className={securityMetrics.globalScanningActive ? "bg-green-600" : "bg-red-600"}
                   >
-                    {securityMetrics.globalScanningActive
-                      ? "ACTIVE"
-                      : "INACTIVE"}
+                    {securityMetrics.globalScanningActive ? "ACTIVE" : "INACTIVE"}
                   </Badge>
                 </div>
                 <div className="flex justify-between text-sm">
@@ -393,26 +356,21 @@ export function ComprehensiveDefenseOverview() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-green-200">
               <div className="space-y-2">
                 <div>
-                  ✅ <strong>AI Animals:</strong> 14 guardians active and
-                  protecting
+                  ✅ <strong>AI Animals:</strong> 14 guardians active and protecting
                 </div>
                 <div>
-                  ✅ <strong>Creature Army:</strong> 12 legendary defenders
-                  deployed
+                  ✅ <strong>Creature Army:</strong> 12 legendary defenders deployed
                 </div>
                 <div>
-                  ✅ <strong>Immortal Core:</strong> 11 eternal protectors
-                  online
+                  ✅ <strong>Immortal Core:</strong> 11 eternal protectors online
                 </div>
               </div>
               <div className="space-y-2">
                 <div>
-                  ⚡ <strong>Combined Power:</strong> Over 8.5 million defense
-                  points
+                  ⚡ <strong>Combined Power:</strong> Over 8.5 million defense points
                 </div>
                 <div>
-                  🌍 <strong>Global Coverage:</strong> Worldwide protection
-                  active
+                  🌍 <strong>Global Coverage:</strong> Worldwide protection active
                 </div>
                 <div>
                   🔒 <strong>Security Level:</strong> Maximum protection engaged

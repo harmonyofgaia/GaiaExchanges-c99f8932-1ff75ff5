@@ -2,16 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
-import {
-  Gamepad2,
-  Mountain,
-  Coins,
-  Sword,
-  Building2,
-  Crown,
-  Rocket,
-  Sparkles,
-} from "lucide-react";
+import { Gamepad2, Mountain, Coins, Sword, Building2, Crown, Rocket, Sparkles } from "lucide-react";
 
 export function GameNavigationHub() {
   const navigate = useNavigate();
@@ -76,16 +67,11 @@ export function GameNavigationHub() {
             🎮 GAIA GAMING NAVIGATION HUB
           </CardTitle>
           <div className="text-center">
-            <Badge className="bg-green-600 animate-pulse mr-2">
-              ✅ ALL GAMES ACTIVE
-            </Badge>
+            <Badge className="bg-green-600 animate-pulse mr-2">✅ ALL GAMES ACTIVE</Badge>
             <Badge className="bg-blue-600 mr-2">
               👥{" "}
               {games
-                .reduce(
-                  (sum, game) => sum + parseInt(game.players.replace(",", "")),
-                  0,
-                )
+                .reduce((sum, game) => sum + parseInt(game.players.replace(",", "")), 0)
                 .toLocaleString()}{" "}
               Online
             </Badge>
@@ -107,9 +93,7 @@ export function GameNavigationHub() {
                 {game.name}
               </CardTitle>
               <div className="flex gap-2">
-                <Badge className={`bg-gradient-to-r ${game.color}`}>
-                  {game.status}
-                </Badge>
+                <Badge className={`bg-gradient-to-r ${game.color}`}>{game.status}</Badge>
                 <Badge className="bg-blue-600">👥 {game.players} Online</Badge>
               </div>
             </CardHeader>
@@ -133,12 +117,10 @@ export function GameNavigationHub() {
       <Card className="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/50">
         <CardContent className="p-6 text-center">
           <div className="text-6xl mb-4 animate-bounce">🌟</div>
-          <h3 className="text-2xl font-bold text-yellow-400 mb-2">
-            ALL GAMES FULLY OPERATIONAL
-          </h3>
+          <h3 className="text-2xl font-bold text-yellow-400 mb-2">ALL GAMES FULLY OPERATIONAL</h3>
           <p className="text-muted-foreground mb-4">
-            Quantum game engine running at maximum capacity • All links active •
-            Cloud storage unlimited
+            Quantum game engine running at maximum capacity • All links active • Cloud storage
+            unlimited
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-3 bg-green-900/20 rounded-lg">

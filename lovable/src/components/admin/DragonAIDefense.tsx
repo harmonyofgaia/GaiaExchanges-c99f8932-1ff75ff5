@@ -48,9 +48,7 @@ export function DragonAIDefense() {
     const interval = setInterval(() => {
       if (isActive) {
         setDragonLevel((prev) => prev + Math.floor(Math.random() * 3) + 1);
-        setDragonPower(
-          (prev) => prev + Math.floor(Math.random() * 5000) + 1000,
-        );
+        setDragonPower((prev) => prev + Math.floor(Math.random() * 5000) + 1000);
         setDefenseStrength((prev) => Math.min(100, prev + Math.random() * 2));
 
         // Occasionally block new threats
@@ -66,9 +64,7 @@ export function DragonAIDefense() {
   const toggleDefense = () => {
     setIsActive(!isActive);
     if (notifications) {
-      toast.success(
-        isActive ? "🐉 Dragon Defense Paused" : "🐉 Dragon Defense Activated!",
-      );
+      toast.success(isActive ? "🐉 Dragon Defense Paused" : "🐉 Dragon Defense Activated!");
     }
   };
 
@@ -100,9 +96,7 @@ export function DragonAIDefense() {
               <div className="text-3xl font-bold text-red-400">
                 Level {dragonLevel.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Dragon Evolution
-              </div>
+              <div className="text-sm text-muted-foreground">Dragon Evolution</div>
             </div>
             <div className="text-center p-4 bg-orange-900/20 rounded-lg">
               <div className="text-3xl font-bold text-orange-400">
@@ -111,20 +105,14 @@ export function DragonAIDefense() {
               <div className="text-sm text-muted-foreground">Power Units</div>
             </div>
             <div className="text-center p-4 bg-green-900/20 rounded-lg">
-              <div className="text-3xl font-bold text-green-400">
-                {defenseStrength.toFixed(1)}%
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Defense Strength
-              </div>
+              <div className="text-3xl font-bold text-green-400">{defenseStrength.toFixed(1)}%</div>
+              <div className="text-sm text-muted-foreground">Defense Strength</div>
             </div>
             <div className="text-center p-4 bg-purple-900/20 rounded-lg">
               <div className="text-3xl font-bold text-purple-400">
                 {threatsBlocked.toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">
-                Threats Blocked
-              </div>
+              <div className="text-sm text-muted-foreground">Threats Blocked</div>
             </div>
           </div>
         </CardContent>
@@ -143,9 +131,7 @@ export function DragonAIDefense() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="border-blue-500/30">
               <CardHeader>
-                <CardTitle className="text-blue-400">
-                  Defense Controls
-                </CardTitle>
+                <CardTitle className="text-blue-400">Defense Controls</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Button
@@ -190,9 +176,7 @@ export function DragonAIDefense() {
 
             <Card className="border-green-500/30">
               <CardHeader>
-                <CardTitle className="text-green-400">
-                  Real-time Metrics
-                </CardTitle>
+                <CardTitle className="text-green-400">Real-time Metrics</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
@@ -208,19 +192,12 @@ export function DragonAIDefense() {
                     <span>Dragon Energy</span>
                     <span>{((dragonPower % 1000000) / 10000).toFixed(1)}%</span>
                   </div>
-                  <Progress
-                    value={(dragonPower % 1000000) / 10000}
-                    className="h-2"
-                  />
+                  <Progress value={(dragonPower % 1000000) / 10000} className="h-2" />
                 </div>
 
                 <div className="text-xs text-muted-foreground space-y-1">
-                  <div>
-                    • Active Monitoring: {isActive ? "Enabled" : "Disabled"}
-                  </div>
-                  <div>
-                    • Last Threat: {Math.floor(Math.random() * 30)} minutes ago
-                  </div>
+                  <div>• Active Monitoring: {isActive ? "Enabled" : "Disabled"}</div>
+                  <div>• Last Threat: {Math.floor(Math.random() * 30)} minutes ago</div>
                   <div>• Success Rate: 99.97%</div>
                 </div>
               </CardContent>
@@ -235,9 +212,7 @@ export function DragonAIDefense() {
         <TabsContent value="threats">
           <Card className="border-purple-500/30">
             <CardHeader>
-              <CardTitle className="text-purple-400">
-                Threat Intelligence
-              </CardTitle>
+              <CardTitle className="text-purple-400">Threat Intelligence</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -290,9 +265,7 @@ export function DragonAIDefense() {
                         <CheckCircle className="h-3 w-3 mr-1" />
                         {threat.status}
                       </Badge>
-                      <span className="text-xs text-muted-foreground">
-                        {threat.time}
-                      </span>
+                      <span className="text-xs text-muted-foreground">{threat.time}</span>
                     </div>
                   </div>
                 ))}
@@ -304,9 +277,7 @@ export function DragonAIDefense() {
         <TabsContent value="evolution">
           <Card className="border-yellow-500/30">
             <CardHeader>
-              <CardTitle className="text-yellow-400">
-                Dragon Evolution Stats
-              </CardTitle>
+              <CardTitle className="text-yellow-400">Dragon Evolution Stats</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -315,27 +286,21 @@ export function DragonAIDefense() {
                   <div className="text-2xl font-bold text-yellow-400">
                     +{Math.floor(Math.random() * 50) + 10}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Levels Today
-                  </div>
+                  <div className="text-sm text-muted-foreground">Levels Today</div>
                 </div>
                 <div className="text-center p-4 bg-blue-900/20 rounded-lg">
                   <Brain className="h-8 w-8 text-blue-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-blue-400">
                     {Math.floor(Math.random() * 100) + 50}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    AI Learning Rate
-                  </div>
+                  <div className="text-sm text-muted-foreground">AI Learning Rate</div>
                 </div>
                 <div className="text-center p-4 bg-red-900/20 rounded-lg">
                   <Flame className="h-8 w-8 text-red-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-red-400">
                     {Math.floor(Math.random() * 1000) + 500}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Power Multiplier
-                  </div>
+                  <div className="text-sm text-muted-foreground">Power Multiplier</div>
                 </div>
               </div>
             </CardContent>
@@ -345,9 +310,7 @@ export function DragonAIDefense() {
         <TabsContent value="settings">
           <Card className="border-gray-500/30">
             <CardHeader>
-              <CardTitle className="text-gray-400">
-                Dragon Configuration
-              </CardTitle>
+              <CardTitle className="text-gray-400">Dragon Configuration</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">

@@ -42,8 +42,7 @@ export function CommunityGovernance() {
     {
       id: "2",
       title: "Partner with Solar Companies",
-      description:
-        "Establish partnerships with solar panel companies for token discounts",
+      description: "Establish partnerships with solar panel companies for token discounts",
       type: "partnership",
       status: "passed",
       votesFor: 2156,
@@ -71,22 +70,18 @@ export function CommunityGovernance() {
         proposal.id === proposalId
           ? {
               ...proposal,
-              votesFor: support
-                ? proposal.votesFor + userVotingPower
-                : proposal.votesFor,
+              votesFor: support ? proposal.votesFor + userVotingPower : proposal.votesFor,
               votesAgainst: !support
                 ? proposal.votesAgainst + userVotingPower
                 : proposal.votesAgainst,
               totalVotes: proposal.totalVotes + userVotingPower,
             }
-          : proposal,
-      ),
+          : proposal
+      )
     );
 
     setUserVotes((prev) => new Set(prev).add(proposalId));
-    toast.success(
-      `Vote cast successfully! Your ${userVotingPower} voting power has been applied.`,
-    );
+    toast.success(`Vote cast successfully! Your ${userVotingPower} voting power has been applied.`);
   };
 
   const submitProposal = () => {
@@ -143,17 +138,11 @@ export function CommunityGovernance() {
             <div className="p-4 bg-yellow-900/20 rounded-lg border border-yellow-500/20">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-semibold text-yellow-400">
-                    Your Voting Power
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Based on your GAiA token holdings
-                  </p>
+                  <h3 className="font-semibold text-yellow-400">Your Voting Power</h3>
+                  <p className="text-sm text-muted-foreground">Based on your GAiA token holdings</p>
                 </div>
                 <div className="text-right">
-                  <div className="text-2xl font-bold text-yellow-400">
-                    {userVotingPower}
-                  </div>
+                  <div className="text-2xl font-bold text-yellow-400">{userVotingPower}</div>
                   <div className="text-sm text-muted-foreground">Votes</div>
                 </div>
               </div>
@@ -161,18 +150,13 @@ export function CommunityGovernance() {
 
             {/* Active Proposals */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-yellow-400">
-                Community Proposals
-              </h3>
+              <h3 className="text-lg font-semibold text-yellow-400">Community Proposals</h3>
 
               {proposals.map((proposal) => {
                 const hasVoted = userVotes.has(proposal.id);
                 const supportPercentage =
-                  proposal.totalVotes > 0
-                    ? (proposal.votesFor / proposal.totalVotes) * 100
-                    : 0;
-                const quorumPercentage =
-                  (proposal.totalVotes / proposal.quorum) * 100;
+                  proposal.totalVotes > 0 ? (proposal.votesFor / proposal.totalVotes) * 100 : 0;
+                const quorumPercentage = (proposal.totalVotes / proposal.quorum) * 100;
 
                 return (
                   <Card key={proposal.id} className="border-yellow-500/20">
@@ -181,19 +165,15 @@ export function CommunityGovernance() {
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
                             {getStatusIcon(proposal.status)}
-                            <h4 className="text-xl font-bold">
-                              {proposal.title}
-                            </h4>
+                            <h4 className="text-xl font-bold">{proposal.title}</h4>
                             <Badge className={getTypeColor(proposal.type)}>
                               {proposal.type.toUpperCase()}
                             </Badge>
                           </div>
-                          <p className="text-muted-foreground mb-3">
-                            {proposal.description}
-                          </p>
+                          <p className="text-muted-foreground mb-3">{proposal.description}</p>
                           <div className="text-sm text-muted-foreground">
-                            Proposed by: {proposal.proposedBy} • Required:{" "}
-                            {proposal.requiredTokens} GAiA to propose
+                            Proposed by: {proposal.proposedBy} • Required: {proposal.requiredTokens}{" "}
+                            GAiA to propose
                           </div>
                         </div>
 
@@ -212,8 +192,7 @@ export function CommunityGovernance() {
                           <div className="flex justify-between text-sm">
                             <span>Support</span>
                             <span>
-                              {proposal.votesFor} for • {proposal.votesAgainst}{" "}
-                              against
+                              {proposal.votesFor} for • {proposal.votesAgainst} against
                             </span>
                           </div>
                           <Progress value={supportPercentage} className="h-3" />

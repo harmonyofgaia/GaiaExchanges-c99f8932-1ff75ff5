@@ -104,19 +104,14 @@ export default function DAOGovernance() {
         if (proposal.id === proposalId) {
           return {
             ...proposal,
-            votesFor:
-              vote === "for"
-                ? proposal.votesFor + voteAmount
-                : proposal.votesFor,
+            votesFor: vote === "for" ? proposal.votesFor + voteAmount : proposal.votesFor,
             votesAgainst:
-              vote === "against"
-                ? proposal.votesAgainst + voteAmount
-                : proposal.votesAgainst,
+              vote === "against" ? proposal.votesAgainst + voteAmount : proposal.votesAgainst,
             totalVotes: proposal.totalVotes + voteAmount,
           };
         }
         return proposal;
-      }),
+      })
     );
 
     setVotingPower((prev) => prev - voteAmount);
@@ -210,9 +205,7 @@ export default function DAOGovernance() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-purple-400">
-                  Your Tokens
-                </p>
+                <p className="text-sm font-medium text-purple-400">Your Tokens</p>
                 <p className="text-2xl font-bold text-purple-400">
                   {userTokenBalance.toLocaleString()}
                 </p>
@@ -226,12 +219,8 @@ export default function DAOGovernance() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-blue-400">
-                  Voting Power
-                </p>
-                <p className="text-2xl font-bold text-blue-400">
-                  {votingPower.toLocaleString()}
-                </p>
+                <p className="text-sm font-medium text-blue-400">Voting Power</p>
+                <p className="text-2xl font-bold text-blue-400">{votingPower.toLocaleString()}</p>
               </div>
               <Vote className="h-8 w-8 text-blue-400" />
             </div>
@@ -242,9 +231,7 @@ export default function DAOGovernance() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-green-400">
-                  Active Proposals
-                </p>
+                <p className="text-sm font-medium text-green-400">Active Proposals</p>
                 <p className="text-2xl font-bold text-green-400">
                   {proposals.filter((p) => p.status === "active").length}
                 </p>
@@ -258,12 +245,8 @@ export default function DAOGovernance() {
           <CardContent className="pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-orange-400">
-                  Total Proposals
-                </p>
-                <p className="text-2xl font-bold text-orange-400">
-                  {proposals.length}
-                </p>
+                <p className="text-sm font-medium text-orange-400">Total Proposals</p>
+                <p className="text-2xl font-bold text-orange-400">{proposals.length}</p>
               </div>
               <TrendingUp className="h-8 w-8 text-orange-400" />
             </div>
@@ -287,28 +270,20 @@ export default function DAOGovernance() {
       {showCreateProposal && (
         <Card className="border-purple-500/50 bg-purple-900/20">
           <CardHeader>
-            <CardTitle className="text-purple-400">
-              📝 Create New Proposal
-            </CardTitle>
+            <CardTitle className="text-purple-400">📝 Create New Proposal</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <label className="text-sm font-medium mb-2 block">
-                Proposal Title
-              </label>
+              <label className="text-sm font-medium mb-2 block">Proposal Title</label>
               <Input
                 value={newProposal.title}
-                onChange={(e) =>
-                  setNewProposal((prev) => ({ ...prev, title: e.target.value }))
-                }
+                onChange={(e) => setNewProposal((prev) => ({ ...prev, title: e.target.value }))}
                 placeholder="Enter proposal title..."
               />
             </div>
 
             <div>
-              <label className="text-sm font-medium mb-2 block">
-                Description
-              </label>
+              <label className="text-sm font-medium mb-2 block">Description</label>
               <Textarea
                 value={newProposal.description}
                 onChange={(e) =>
@@ -343,9 +318,7 @@ export default function DAOGovernance() {
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-2 block">
-                  Required Tokens
-                </label>
+                <label className="text-sm font-medium mb-2 block">Required Tokens</label>
                 <Input
                   type="number"
                   value={newProposal.requiredTokens}
@@ -361,16 +334,10 @@ export default function DAOGovernance() {
             </div>
 
             <div className="flex gap-2">
-              <Button
-                onClick={handleCreateProposal}
-                className="bg-purple-600 hover:bg-purple-700"
-              >
+              <Button onClick={handleCreateProposal} className="bg-purple-600 hover:bg-purple-700">
                 Submit Proposal
               </Button>
-              <Button
-                variant="outline"
-                onClick={() => setShowCreateProposal(false)}
-              >
+              <Button variant="outline" onClick={() => setShowCreateProposal(false)}>
                 Cancel
               </Button>
             </div>
@@ -382,18 +349,12 @@ export default function DAOGovernance() {
       <div className="space-y-4">
         {proposals.map((proposal) => {
           const progressFor =
-            (proposal.votesFor /
-              Math.max(proposal.quorum, proposal.totalVotes)) *
-            100;
+            (proposal.votesFor / Math.max(proposal.quorum, proposal.totalVotes)) * 100;
           const progressAgainst =
-            (proposal.votesAgainst /
-              Math.max(proposal.quorum, proposal.totalVotes)) *
-            100;
+            (proposal.votesAgainst / Math.max(proposal.quorum, proposal.totalVotes)) * 100;
           const timeLeft = Math.max(0, proposal.endTime.getTime() - Date.now());
           const daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-          const hoursLeft = Math.floor(
-            (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-          );
+          const hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
           return (
             <Card key={proposal.id} className="border-gray-700">
@@ -402,9 +363,7 @@ export default function DAOGovernance() {
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
                       <h3 className="text-xl font-bold">{proposal.title}</h3>
-                      <Badge
-                        className={`${getStatusColor(proposal.status)} text-white`}
-                      >
+                      <Badge className={`${getStatusColor(proposal.status)} text-white`}>
                         {getStatusIcon(proposal.status)}
                         {proposal.status.toUpperCase()}
                       </Badge>
@@ -412,9 +371,7 @@ export default function DAOGovernance() {
                         {proposal.type.toUpperCase()}
                       </Badge>
                     </div>
-                    <p className="text-muted-foreground">
-                      {proposal.description}
-                    </p>
+                    <p className="text-muted-foreground">{proposal.description}</p>
                     <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
                       <span>By: {proposal.proposer}</span>
                       {proposal.status === "active" && (
@@ -453,10 +410,7 @@ export default function DAOGovernance() {
                         {progressAgainst.toFixed(1)}%
                       </span>
                     </div>
-                    <Progress
-                      value={progressAgainst}
-                      className="h-2 bg-gray-700"
-                    >
+                    <Progress value={progressAgainst} className="h-2 bg-gray-700">
                       <div
                         className="h-full bg-red-500 rounded-full"
                         style={{ width: `${progressAgainst}%` }}

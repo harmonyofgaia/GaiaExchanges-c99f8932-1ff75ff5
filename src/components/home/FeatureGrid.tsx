@@ -1,17 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Shield,
-  Zap,
-  Users,
-  Globe,
-  Crown,
-  Flame,
-  Eye,
-  Lock,
-  Sparkles,
-  Star,
-} from "lucide-react";
+import { Shield, Zap, Users, Globe, Crown, Flame, Eye, Lock, Sparkles, Star } from "lucide-react";
 
 export const FeatureGrid = () => {
   const features = [
@@ -90,8 +79,7 @@ export const FeatureGrid = () => {
           🚀 REVOLUTIONARY FEATURES - WORLD'S MOST ADVANCED PLATFORM
         </h2>
         <p className="text-xl text-muted-foreground">
-          Powered by Culture of Harmony • Dragon-Level Security • Quantum
-          Technology
+          Powered by Culture of Harmony • Dragon-Level Security • Quantum Technology
         </p>
       </div>
 

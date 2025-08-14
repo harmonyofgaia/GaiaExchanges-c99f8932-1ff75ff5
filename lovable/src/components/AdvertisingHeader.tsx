@@ -13,10 +13,7 @@ export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
   className = "",
 }) => {
   const handleLogoClick = () => {
-    window.open(
-      "https://sites.google.com/view/culture-of-harmony/harmony-of-gaia",
-      "_blank",
-    );
+    window.open("https://sites.google.com/view/culture-of-harmony/harmony-of-gaia", "_blank");
   };
 
   return (
@@ -31,12 +28,8 @@ export const AdvertisingHeader: React.FC<AdvertisingHeaderProps> = ({
           <div className="mb-4 cursor-pointer" onClick={handleLogoClick}>
             <GaiaLogo size="lg" variant="glow" className="mx-auto" />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 drop-shadow-lg">
-            {title}
-          </h1>
-          <p className="text-green-300 text-lg md:text-xl font-medium drop-shadow-md">
-            {subtitle}
-          </p>
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 drop-shadow-lg">{title}</h1>
+          <p className="text-green-300 text-lg md:text-xl font-medium drop-shadow-md">{subtitle}</p>
           <div className="mt-4 px-6 py-2 bg-green-500/20 backdrop-blur-sm rounded-full border border-green-400/30">
             <span className="text-green-300 text-sm font-medium">
               World's Most Secure GAiA Crypto Exchange

@@ -156,7 +156,7 @@ export function FuturisticAnimationStudio() {
         hole.x,
         hole.y,
         hole.x + wobble,
-        hole.y + dripLength,
+        hole.y + dripLength
       );
       glueGradient.addColorStop(0, "#39ff14");
       glueGradient.addColorStop(0.3, "#32cd32");
@@ -172,7 +172,7 @@ export function FuturisticAnimationStudio() {
         dripLength / 2,
         0,
         0,
-        Math.PI * 2,
+        Math.PI * 2
       );
       ctx.fill();
 
@@ -271,10 +271,7 @@ export function FuturisticAnimationStudio() {
     }
   };
 
-  const drawHolographicAnimation = (
-    ctx: CanvasRenderingContext2D,
-    time: number,
-  ) => {
+  const drawHolographicAnimation = (ctx: CanvasRenderingContext2D, time: number) => {
     // Holographic interference patterns
     for (let i = 0; i < 50; i++) {
       const angle = (i / 50) * Math.PI * 2;
@@ -299,11 +296,7 @@ export function FuturisticAnimationStudio() {
         const y = ((time * 100 + j * 30) % 600) - 300;
         ctx.fillStyle = `hsla(120, 100%, ${50 + j * 3}%, ${1 - j * 0.06})`;
         ctx.font = "16px monospace";
-        ctx.fillText(
-          String.fromCharCode(0x30a0 + Math.floor(Math.random() * 96)),
-          x,
-          y,
-        );
+        ctx.fillText(String.fromCharCode(0x30a0 + Math.floor(Math.random() * 96)), x, y);
       }
     }
   };
@@ -320,15 +313,9 @@ export function FuturisticAnimationStudio() {
           Math.sin((x + y + time * 40) * 0.01);
 
         const index = (y * 200 + x) * 4;
-        imageData.data[index] = Math.floor(
-          (Math.sin(value * Math.PI) + 1) * 127.5,
-        ); // R
-        imageData.data[index + 1] = Math.floor(
-          (Math.sin(value * Math.PI + 2) + 1) * 127.5,
-        ); // G
-        imageData.data[index + 2] = Math.floor(
-          (Math.sin(value * Math.PI + 4) + 1) * 127.5,
-        ); // B
+        imageData.data[index] = Math.floor((Math.sin(value * Math.PI) + 1) * 127.5); // R
+        imageData.data[index + 1] = Math.floor((Math.sin(value * Math.PI + 2) + 1) * 127.5); // G
+        imageData.data[index + 2] = Math.floor((Math.sin(value * Math.PI + 4) + 1) * 127.5); // B
         imageData.data[index + 3] = 255; // A
       }
     }
@@ -370,10 +357,7 @@ export function FuturisticAnimationStudio() {
     });
   };
 
-  const drawQuantumAnimation = (
-    ctx: CanvasRenderingContext2D,
-    time: number,
-  ) => {
+  const drawQuantumAnimation = (ctx: CanvasRenderingContext2D, time: number) => {
     // Quantum field visualization
     for (let i = 0; i < 100; i++) {
       const angle = Math.random() * Math.PI * 2;
@@ -410,10 +394,7 @@ export function FuturisticAnimationStudio() {
     }
   };
 
-  const drawBioElectricAnimation = (
-    ctx: CanvasRenderingContext2D,
-    time: number,
-  ) => {
+  const drawBioElectricAnimation = (ctx: CanvasRenderingContext2D, time: number) => {
     // Bio-electric pulses
     for (let i = 0; i < 6; i++) {
       const angle = (i / 6) * Math.PI * 2;
@@ -574,17 +555,11 @@ export function FuturisticAnimationStudio() {
               style={{ maxHeight: "400px" }}
             />
             <div className="absolute top-2 left-2 flex gap-2">
-              <Badge className="bg-purple-600 text-white">
-                {selectedStyle.toUpperCase()}
-              </Badge>
-              <Badge className="bg-pink-600 text-white">
-                Frame: {currentFrame}
-              </Badge>
+              <Badge className="bg-purple-600 text-white">{selectedStyle.toUpperCase()}</Badge>
+              <Badge className="bg-pink-600 text-white">Frame: {currentFrame}</Badge>
             </div>
             <div className="absolute top-2 right-2">
-              <Badge className="bg-cyan-600 text-white">
-                {animationSpeed[0]} FPS
-              </Badge>
+              <Badge className="bg-cyan-600 text-white">{animationSpeed[0]} FPS</Badge>
             </div>
           </div>
 

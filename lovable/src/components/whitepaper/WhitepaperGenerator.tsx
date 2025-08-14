@@ -31,9 +31,8 @@ export function WhitepaperGenerator() {
                 🌍 GAIA Whitepaper & Documentation
               </h3>
               <p className="text-muted-foreground mb-6">
-                Comprehensive documentation for the GAIA ecosystem, including
-                technical specifications, tokenomics, roadmap, and community
-                guidelines.
+                Comprehensive documentation for the GAIA ecosystem, including technical
+                specifications, tokenomics, roadmap, and community guidelines.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4 mb-6">
@@ -60,18 +59,14 @@ export function WhitepaperGenerator() {
                 disabled={isGenerating}
                 className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 text-lg"
               >
-                {isGenerating
-                  ? "Generating..."
-                  : "Generate Complete Whitepaper"}
+                {isGenerating ? "Generating..." : "Generate Complete Whitepaper"}
               </Button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
               <Card className="border-green-500/30">
                 <CardHeader>
-                  <CardTitle className="text-green-400 text-lg">
-                    Ecosystem Features
-                  </CardTitle>
+                  <CardTitle className="text-green-400 text-lg">Ecosystem Features</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2 text-sm">
@@ -86,9 +81,7 @@ export function WhitepaperGenerator() {
 
               <Card className="border-blue-500/30">
                 <CardHeader>
-                  <CardTitle className="text-blue-400 text-lg">
-                    Technical Architecture
-                  </CardTitle>
+                  <CardTitle className="text-blue-400 text-lg">Technical Architecture</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2 text-sm">

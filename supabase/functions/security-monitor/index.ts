@@ -3,8 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 serve(async (req) => {
@@ -15,13 +14,13 @@ serve(async (req) => {
   try {
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? "",
+      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
     );
 
     const {
       data: { user },
     } = await supabaseClient.auth.getUser(
-      req.headers.get("Authorization")?.replace("Bearer ", "") ?? "",
+      req.headers.get("Authorization")?.replace("Bearer ", "") ?? ""
     );
 
     if (!user) {
@@ -74,11 +73,7 @@ serve(async (req) => {
 
     // Auto-remediation for critical issues
     if (scanResults.criticalIssues > 0) {
-      await performAutoRemediation(
-        supabaseClient,
-        scanResults,
-        scanRecord[0].id,
-      );
+      await performAutoRemediation(supabaseClient, scanResults, scanRecord[0].id);
     }
 
     return new Response(
@@ -87,7 +82,7 @@ serve(async (req) => {
         scanId: scanRecord[0].id,
         results: scanResults,
       }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
     console.error("Security monitor error:", error);
@@ -119,18 +114,13 @@ async function performSecurityScan(supabaseClient: any) {
       acc.low += check.low || 0;
       return acc;
     },
-    { critical: 0, high: 0, medium: 0, low: 0 },
+    { critical: 0, high: 0, medium: 0, low: 0 }
   );
 
-  const totalIssues =
-    issues.critical + issues.high + issues.medium + issues.low;
+  const totalIssues = issues.critical + issues.high + issues.medium + issues.low;
   const complianceScore = Math.max(
-    100 -
-      (issues.critical * 25 +
-        issues.high * 10 +
-        issues.medium * 5 +
-        issues.low * 1),
-    0,
+    100 - (issues.critical * 25 + issues.high * 10 + issues.medium * 5 + issues.low * 1),
+    0
   );
 
   return {
@@ -216,10 +206,7 @@ async function checkThreatDetection(supabaseClient: any) {
     .from("threat_intelligence")
     .select("*")
     .eq("status", "active")
-    .gte(
-      "detected_at",
-      new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-    );
+    .gte("detected_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
 
   return {
     status: threats?.length === 0 ? "secure" : "alert",
@@ -231,11 +218,7 @@ async function checkThreatDetection(supabaseClient: any) {
   };
 }
 
-async function performAutoRemediation(
-  supabaseClient: any,
-  scanResults: any,
-  scanId: string,
-) {
+async function performAutoRemediation(supabaseClient: any, scanResults: any, scanId: string) {
   // Log remediation attempts
   const remediationLogs = [];
 
@@ -252,8 +235,6 @@ async function performAutoRemediation(
 
   // Store remediation logs
   if (remediationLogs.length > 0) {
-    await supabaseClient
-      .from("security_remediation_logs")
-      .insert(remediationLogs);
+    await supabaseClient.from("security_remediation_logs").insert(remediationLogs);
   }
 }

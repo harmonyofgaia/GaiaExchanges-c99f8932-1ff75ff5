@@ -17,16 +17,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
-import {
-  TreePine,
-  Droplets,
-  Zap,
-  Recycle,
-  Globe,
-  TrendingUp,
-  Award,
-  Target,
-} from "lucide-react";
+import { TreePine, Droplets, Zap, Recycle, Globe, TrendingUp, Award, Target } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 
 interface ImpactData {
@@ -208,13 +199,9 @@ export default function ImpactMetrics() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className={impact.color}>{impact.icon}</div>
-                      <CardTitle className="text-lg">
-                        {impact.category}
-                      </CardTitle>
+                      <CardTitle className="text-lg">{impact.category}</CardTitle>
                     </div>
-                    <Badge
-                      className={`${impact.change >= 0 ? "bg-green-600" : "bg-red-600"}`}
-                    >
+                    <Badge className={`${impact.change >= 0 ? "bg-green-600" : "bg-red-600"}`}>
                       {impact.change >= 0 ? "+" : ""}
                       {impact.change}%
                     </Badge>
@@ -224,15 +211,13 @@ export default function ImpactMetrics() {
                   <div className="text-3xl font-bold mb-2 text-white">
                     {impact.value.toLocaleString()}
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    {impact.unit}
-                  </div>
+                  <div className="text-sm text-muted-foreground">{impact.unit}</div>
                   <div className="mt-4">
                     <div className="flex items-center gap-2 text-sm">
                       <TrendingUp className="h-4 w-4 text-green-400" />
                       <span className="text-green-400">
-                        +{((impact.value * impact.change) / 100).toFixed(1)}{" "}
-                        {impact.unit} this {selectedTimeframe}
+                        +{((impact.value * impact.change) / 100).toFixed(1)} {impact.unit} this{" "}
+                        {selectedTimeframe}
                       </span>
                     </div>
                   </div>
@@ -254,20 +239,15 @@ export default function ImpactMetrics() {
                 {globalMetrics.map((metric) => (
                   <div key={metric.title}>
                     <div className="flex justify-between mb-2">
-                      <span className="text-sm font-medium">
-                        {metric.title}
-                      </span>
+                      <span className="text-sm font-medium">{metric.title}</span>
                       <span className="text-sm text-muted-foreground">
                         {Math.round((metric.current / metric.target) * 100)}%
                       </span>
                     </div>
-                    <Progress
-                      value={(metric.current / metric.target) * 100}
-                      className="h-2 mb-1"
-                    />
+                    <Progress value={(metric.current / metric.target) * 100} className="h-2 mb-1" />
                     <div className="text-xs text-muted-foreground">
-                      {metric.current.toLocaleString()} /{" "}
-                      {metric.target.toLocaleString()} {metric.unit}
+                      {metric.current.toLocaleString()} / {metric.target.toLocaleString()}{" "}
+                      {metric.unit}
                     </div>
                   </div>
                 ))}
@@ -299,13 +279,9 @@ export default function ImpactMetrics() {
                       >
                         {achievement.title}
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        {achievement.description}
-                      </div>
+                      <div className="text-xs text-muted-foreground">{achievement.description}</div>
                     </div>
-                    {achievement.earned && (
-                      <Badge className="bg-green-600">✓</Badge>
-                    )}
+                    {achievement.earned && <Badge className="bg-green-600">✓</Badge>}
                   </div>
                 ))}
               </CardContent>
@@ -333,30 +309,10 @@ export default function ImpactMetrics() {
                       borderRadius: "8px",
                     }}
                   />
-                  <Line
-                    type="monotone"
-                    dataKey="carbon"
-                    stroke="#34D399"
-                    strokeWidth={2}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="water"
-                    stroke="#60A5FA"
-                    strokeWidth={2}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="energy"
-                    stroke="#FCD34D"
-                    strokeWidth={2}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="waste"
-                    stroke="#A78BFA"
-                    strokeWidth={2}
-                  />
+                  <Line type="monotone" dataKey="carbon" stroke="#34D399" strokeWidth={2} />
+                  <Line type="monotone" dataKey="water" stroke="#60A5FA" strokeWidth={2} />
+                  <Line type="monotone" dataKey="energy" stroke="#FCD34D" strokeWidth={2} />
+                  <Line type="monotone" dataKey="waste" stroke="#A78BFA" strokeWidth={2} />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>
@@ -365,9 +321,7 @@ export default function ImpactMetrics() {
           {/* Impact Distribution */}
           <Card className="bg-gray-900/50 border-gray-700/30">
             <CardHeader>
-              <CardTitle className="text-blue-400">
-                🥧 Impact Distribution
-              </CardTitle>
+              <CardTitle className="text-blue-400">🥧 Impact Distribution</CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -380,9 +334,7 @@ export default function ImpactMetrics() {
                     outerRadius={100}
                     paddingAngle={5}
                     dataKey="value"
-                    label={({ name, percent }) =>
-                      `${name}: ${(percent * 100).toFixed(0)}%`
-                    }
+                    label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
                   >
                     {pieData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
@@ -408,17 +360,13 @@ export default function ImpactMetrics() {
               <div className="text-center">
                 <div className="text-3xl mb-2">🌱</div>
                 <div className="text-2xl font-bold text-green-400">300kg</div>
-                <div className="text-sm text-muted-foreground">
-                  Carbon Offset Goal
-                </div>
+                <div className="text-sm text-muted-foreground">Carbon Offset Goal</div>
                 <Progress value={82.5} className="mt-2" />
               </div>
               <div className="text-center">
                 <div className="text-3xl mb-2">💧</div>
                 <div className="text-2xl font-bold text-blue-400">2000L</div>
-                <div className="text-sm text-muted-foreground">
-                  Water Saving Goal
-                </div>
+                <div className="text-sm text-muted-foreground">Water Saving Goal</div>
                 <Progress value={91.7} className="mt-2" />
               </div>
               <div className="text-center">
@@ -430,9 +378,7 @@ export default function ImpactMetrics() {
               <div className="text-center">
                 <div className="text-3xl mb-2">♻️</div>
                 <div className="text-2xl font-bold text-purple-400">100kg</div>
-                <div className="text-sm text-muted-foreground">
-                  Recycling Goal
-                </div>
+                <div className="text-sm text-muted-foreground">Recycling Goal</div>
                 <Progress value={89.3} className="mt-2" />
               </div>
             </div>

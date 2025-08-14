@@ -13,17 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
 import { useEarningActivities } from "@/hooks/useEarningSystem";
-import {
-  Bus,
-  Train,
-  Zap,
-  MapPin,
-  Clock,
-  Route,
-  Ticket,
-  CreditCard,
-  Award,
-} from "lucide-react";
+import { Bus, Train, Zap, MapPin, Clock, Route, Ticket, CreditCard, Award } from "lucide-react";
 
 export function PublicTransportRewards() {
   const [transportType, setTransportType] = useState("");
@@ -97,13 +87,9 @@ export function PublicTransportRewards() {
 
     const basePoints = parseFloat(distance) * 2;
     const transportBonus =
-      basePoints *
-      (transportMultipliers[
-        transportType as keyof typeof transportMultipliers
-      ] || 1);
+      basePoints * (transportMultipliers[transportType as keyof typeof transportMultipliers] || 1);
     const ticketBonus = ticketType
-      ? transportBonus *
-        (ticketMultipliers[ticketType as keyof typeof ticketMultipliers] || 1)
+      ? transportBonus * (ticketMultipliers[ticketType as keyof typeof ticketMultipliers] || 1)
       : transportBonus;
 
     const totalPoints = Math.floor(ticketBonus);
@@ -131,7 +117,7 @@ export function PublicTransportRewards() {
 
     addActivity(activity);
     toast.success(
-      `🚌 Public transport trip recorded! +${totalPoints} points earned for choosing sustainable transport!`,
+      `🚌 Public transport trip recorded! +${totalPoints} points earned for choosing sustainable transport!`
     );
     setTransportType("");
     setDistance("");
@@ -169,42 +155,26 @@ export function PublicTransportRewards() {
       <CardContent className="space-y-6">
         {/* Weekly Transport Stats */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-blue-400">
-            📊 Your Green Commuting Impact
-          </h3>
+          <h3 className="text-lg font-semibold text-blue-400">📊 Your Green Commuting Impact</h3>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             <div className="text-center p-4 bg-blue-900/30 rounded-lg border border-blue-500/20">
-              <div className="text-xl font-bold text-blue-400">
-                {weeklyStats.totalTrips}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Trips This Week
-              </div>
+              <div className="text-xl font-bold text-blue-400">{weeklyStats.totalTrips}</div>
+              <div className="text-xs text-muted-foreground">Trips This Week</div>
             </div>
             <div className="text-center p-4 bg-cyan-900/30 rounded-lg border border-cyan-500/20">
-              <div className="text-xl font-bold text-cyan-400">
-                {weeklyStats.totalDistance}km
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Distance Traveled
-              </div>
+              <div className="text-xl font-bold text-cyan-400">{weeklyStats.totalDistance}km</div>
+              <div className="text-xs text-muted-foreground">Distance Traveled</div>
             </div>
             <div className="text-center p-4 bg-green-900/30 rounded-lg border border-green-500/20">
-              <div className="text-xl font-bold text-green-400">
-                {weeklyStats.co2Saved}kg
-              </div>
+              <div className="text-xl font-bold text-green-400">{weeklyStats.co2Saved}kg</div>
               <div className="text-xs text-muted-foreground">CO2 Saved</div>
             </div>
             <div className="text-center p-4 bg-yellow-900/30 rounded-lg border border-yellow-500/20">
-              <div className="text-xl font-bold text-yellow-400">
-                ${weeklyStats.moneySaved}
-              </div>
+              <div className="text-xl font-bold text-yellow-400">${weeklyStats.moneySaved}</div>
               <div className="text-xs text-muted-foreground">Money Saved</div>
             </div>
             <div className="text-center p-4 bg-purple-900/30 rounded-lg border border-purple-500/20">
-              <div className="text-xl font-bold text-purple-400">
-                {weeklyStats.tokensEarned}
-              </div>
+              <div className="text-xl font-bold text-purple-400">{weeklyStats.tokensEarned}</div>
               <div className="text-xs text-muted-foreground">GAiA Earned</div>
             </div>
           </div>
@@ -231,9 +201,7 @@ export function PublicTransportRewards() {
                 </div>
               </div>
               <div className="text-right">
-                <div className="font-bold text-yellow-400">
-                  +{trip.tokens} GAiA
-                </div>
+                <div className="font-bold text-yellow-400">+{trip.tokens} GAiA</div>
                 <Badge className="bg-green-600">Verified</Badge>
               </div>
             </div>
@@ -252,41 +220,25 @@ export function PublicTransportRewards() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Transport Type
-              </label>
+              <label className="block text-sm font-medium mb-2">Transport Type</label>
               <Select value={transportType} onValueChange={setTransportType}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select transport type" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="bus">🚌 Bus (1.5x multiplier)</SelectItem>
-                  <SelectItem value="metro">
-                    🚇 Metro/Subway (1.8x multiplier)
-                  </SelectItem>
-                  <SelectItem value="train">
-                    🚂 Train (2x multiplier)
-                  </SelectItem>
-                  <SelectItem value="tram">
-                    🚋 Tram (1.6x multiplier)
-                  </SelectItem>
-                  <SelectItem value="ferry">
-                    ⛴️ Ferry (2.2x multiplier)
-                  </SelectItem>
-                  <SelectItem value="bicycle_share">
-                    🚲 Bike Share (2.5x multiplier)
-                  </SelectItem>
-                  <SelectItem value="scooter_share">
-                    🛴 E-Scooter Share (2x multiplier)
-                  </SelectItem>
+                  <SelectItem value="metro">🚇 Metro/Subway (1.8x multiplier)</SelectItem>
+                  <SelectItem value="train">🚂 Train (2x multiplier)</SelectItem>
+                  <SelectItem value="tram">🚋 Tram (1.6x multiplier)</SelectItem>
+                  <SelectItem value="ferry">⛴️ Ferry (2.2x multiplier)</SelectItem>
+                  <SelectItem value="bicycle_share">🚲 Bike Share (2.5x multiplier)</SelectItem>
+                  <SelectItem value="scooter_share">🛴 E-Scooter Share (2x multiplier)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Route/Line
-              </label>
+              <label className="block text-sm font-medium mb-2">Route/Line</label>
               <Input
                 value={route}
                 onChange={(e) => setRoute(e.target.value)}
@@ -295,9 +247,7 @@ export function PublicTransportRewards() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Distance (km)
-              </label>
+              <label className="block text-sm font-medium mb-2">Distance (km)</label>
               <Input
                 type="number"
                 step="0.1"
@@ -309,9 +259,7 @@ export function PublicTransportRewards() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Duration (minutes)
-              </label>
+              <label className="block text-sm font-medium mb-2">Duration (minutes)</label>
               <Input
                 type="number"
                 value={duration}
@@ -322,53 +270,33 @@ export function PublicTransportRewards() {
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium mb-2">
-                Ticket Type (Optional)
-              </label>
+              <label className="block text-sm font-medium mb-2">Ticket Type (Optional)</label>
               <Select value={ticketType} onValueChange={setTicketType}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select ticket type for bonus" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="monthly_pass">
-                    📅 Monthly Pass (1.3x bonus)
-                  </SelectItem>
-                  <SelectItem value="weekly_pass">
-                    📅 Weekly Pass (1.2x bonus)
-                  </SelectItem>
-                  <SelectItem value="day_pass">
-                    📅 Day Pass (1.1x bonus)
-                  </SelectItem>
-                  <SelectItem value="student_discount">
-                    🎓 Student Discount (1.4x bonus)
-                  </SelectItem>
-                  <SelectItem value="senior_discount">
-                    👴 Senior Discount (1.4x bonus)
-                  </SelectItem>
-                  <SelectItem value="single_ticket">
-                    🎫 Single Ticket (1x)
-                  </SelectItem>
+                  <SelectItem value="monthly_pass">📅 Monthly Pass (1.3x bonus)</SelectItem>
+                  <SelectItem value="weekly_pass">📅 Weekly Pass (1.2x bonus)</SelectItem>
+                  <SelectItem value="day_pass">📅 Day Pass (1.1x bonus)</SelectItem>
+                  <SelectItem value="student_discount">🎓 Student Discount (1.4x bonus)</SelectItem>
+                  <SelectItem value="senior_discount">👴 Senior Discount (1.4x bonus)</SelectItem>
+                  <SelectItem value="single_ticket">🎫 Single Ticket (1x)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700"
-          >
-            {loading
-              ? "Recording Trip..."
-              : "🚌 Record Public Transport Journey (+2 pts per km)"}
+          <Button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700">
+            {loading ? "Recording Trip..." : "🚌 Record Public Transport Journey (+2 pts per km)"}
           </Button>
         </form>
 
         <div className="p-4 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-500/20">
           <p className="text-sm text-blue-300">
-            💡 <strong>Commuter Champion:</strong> Regular public transport use
-            earns consistent rewards! Monthly passes and student discounts
-            provide bonus multipliers for sustainable commuting!
+            💡 <strong>Commuter Champion:</strong> Regular public transport use earns consistent
+            rewards! Monthly passes and student discounts provide bonus multipliers for sustainable
+            commuting!
           </p>
         </div>
       </CardContent>

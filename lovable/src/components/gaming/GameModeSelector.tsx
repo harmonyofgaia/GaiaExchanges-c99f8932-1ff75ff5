@@ -83,9 +83,7 @@ export function GameModeSelector() {
   return (
     <Card className="border-blue-500/30 bg-blue-900/20">
       <CardHeader>
-        <CardTitle className="text-blue-400">
-          🎮 Detailed Game Mode Selection
-        </CardTitle>
+        <CardTitle className="text-blue-400">🎮 Detailed Game Mode Selection</CardTitle>
         <p className="text-muted-foreground text-sm">
           Choose your preferred gameplay style and challenge level
         </p>
@@ -97,43 +95,27 @@ export function GameModeSelector() {
               key={index}
               className="p-4 bg-purple-900/20 rounded-lg border border-purple-500/20 hover:scale-105 transition-all"
             >
-              <h4 className="font-semibold text-purple-400 mb-2">
-                {mode.name}
-              </h4>
-              <p className="text-sm text-muted-foreground mb-3">
-                {mode.description}
-              </p>
+              <h4 className="font-semibold text-purple-400 mb-2">{mode.name}</h4>
+              <p className="text-sm text-muted-foreground mb-3">{mode.description}</p>
 
               <div className="space-y-2 mb-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">
-                    Difficulty:
-                  </span>
-                  <Badge className={getDifficultyColor(mode.difficulty)}>
-                    {mode.difficulty}
-                  </Badge>
+                  <span className="text-xs text-muted-foreground">Difficulty:</span>
+                  <Badge className={getDifficultyColor(mode.difficulty)}>{mode.difficulty}</Badge>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">
-                    Players:
-                  </span>
+                  <span className="text-xs text-muted-foreground">Players:</span>
                   <div className="flex items-center gap-1">
                     <Users className="h-3 w-3 text-blue-400" />
-                    <span className="text-blue-400 text-xs">
-                      {mode.players}
-                    </span>
+                    <span className="text-blue-400 text-xs">{mode.players}</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">
-                    Duration:
-                  </span>
+                  <span className="text-xs text-muted-foreground">Duration:</span>
                   <span className="text-cyan-400 text-xs">{mode.duration}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">
-                    Rewards:
-                  </span>
+                  <span className="text-xs text-muted-foreground">Rewards:</span>
                   <span className="text-green-400 text-xs">{mode.rewards}</span>
                 </div>
               </div>

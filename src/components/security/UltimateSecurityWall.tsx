@@ -1,14 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  Shield,
-  Lock,
-  Zap,
-  Eye,
-  AlertTriangle,
-  CheckCircle,
-} from "lucide-react";
+import { Shield, Lock, Zap, Eye, AlertTriangle, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 
 interface SecurityLayer {
@@ -76,12 +69,11 @@ export function UltimateSecurityWall() {
       setSecurityLayers((prev) =>
         prev.map((layer) => ({
           ...layer,
-          threatsBlocked:
-            layer.threatsBlocked + Math.floor(Math.random() * 100),
+          threatsBlocked: layer.threatsBlocked + Math.floor(Math.random() * 100),
           lastThreatBlocked: new Date(),
           strength: 100, // Always at maximum
           status: Math.random() > 0.5 ? "defending" : "active",
-        })),
+        }))
       );
 
       // Maintain perfect protection
@@ -91,8 +83,7 @@ export function UltimateSecurityWall() {
       // Log ultimate security status
       if (Math.random() < 0.1) {
         toast.success("🛡️ ULTIMATE DEFENSE ACTIVE", {
-          description:
-            "All quantum threats neutralized - Community protected forever",
+          description: "All quantum threats neutralized - Community protected forever",
           duration: 3000,
         });
       }
@@ -165,36 +156,26 @@ export function UltimateSecurityWall() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
             <div className="p-4 bg-green-900/30 rounded border border-green-500/20">
-              <div className="text-3xl font-bold text-green-400">
-                {quantumProtection}%
-              </div>
+              <div className="text-3xl font-bold text-green-400">{quantumProtection}%</div>
               <div className="text-sm text-green-300">Quantum Protection</div>
-              <div className="text-xs text-muted-foreground">
-                Unbreakable Forever
-              </div>
+              <div className="text-xs text-muted-foreground">Unbreakable Forever</div>
             </div>
             <div className="p-4 bg-purple-900/30 rounded border border-purple-500/20">
               <div className="text-3xl font-bold text-purple-400">∞</div>
               <div className="text-sm text-purple-300">Defense Layers</div>
-              <div className="text-xs text-muted-foreground">
-                Infinite Protection
-              </div>
+              <div className="text-xs text-muted-foreground">Infinite Protection</div>
             </div>
             <div className="p-4 bg-blue-900/30 rounded border border-blue-500/20">
               <div className="text-3xl font-bold text-blue-400">0</div>
               <div className="text-sm text-blue-300">Successful Attacks</div>
-              <div className="text-xs text-muted-foreground">
-                Eternal Record
-              </div>
+              <div className="text-xs text-muted-foreground">Eternal Record</div>
             </div>
           </div>
         </div>
 
         {/* Security Layers */}
         <div className="space-y-4">
-          <h4 className="text-lg font-bold text-cyan-400">
-            🔒 Multi-Dimensional Security Layers
-          </h4>
+          <h4 className="text-lg font-bold text-cyan-400">🔒 Multi-Dimensional Security Layers</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {securityLayers.map((layer) => (
               <Card
@@ -207,22 +188,16 @@ export function UltimateSecurityWall() {
                       {getStatusIcon(layer.status)}
                       <span className="font-bold text-white">{layer.name}</span>
                     </div>
-                    <Badge className="bg-green-600 text-white">
-                      {layer.strength}%
-                    </Badge>
+                    <Badge className="bg-green-600 text-white">{layer.strength}%</Badge>
                   </div>
 
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Status:</span>
-                      <span className="text-green-400 font-bold">
-                        {layer.status.toUpperCase()}
-                      </span>
+                      <span className="text-green-400 font-bold">{layer.status.toUpperCase()}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">
-                        Threats Blocked:
-                      </span>
+                      <span className="text-muted-foreground">Threats Blocked:</span>
                       <span className="text-red-400 font-bold">
                         {layer.threatsBlocked.toLocaleString()}
                       </span>
@@ -242,9 +217,7 @@ export function UltimateSecurityWall() {
 
         {/* Threat Intelligence */}
         <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
-          <h4 className="text-lg font-bold text-red-400 mb-3">
-            🚨 Continuous Threat Monitoring
-          </h4>
+          <h4 className="text-lg font-bold text-red-400 mb-3">🚨 Continuous Threat Monitoring</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
             <div>
               <div className="text-red-400 font-bold">0</div>
@@ -268,35 +241,27 @@ export function UltimateSecurityWall() {
         {/* Ultimate Security Guarantee */}
         <div className="bg-gradient-to-r from-gold-900/20 to-purple-900/20 border border-gold-500/30 rounded-lg p-6">
           <div className="text-center space-y-4">
-            <h3 className="text-2xl font-bold text-gold-400">
-              ⚡ QUANTUM SECURITY GUARANTEE ⚡
-            </h3>
+            <h3 className="text-2xl font-bold text-gold-400">⚡ QUANTUM SECURITY GUARANTEE ⚡</h3>
             <div className="space-y-2 text-lg">
               <p className="text-green-400">
-                ✅ Admin Account:{" "}
-                <span className="font-bold">INVULNERABLE FOREVER</span>
+                ✅ Admin Account: <span className="font-bold">INVULNERABLE FOREVER</span>
               </p>
               <p className="text-blue-400">
-                ✅ System Protection:{" "}
-                <span className="font-bold">QUANTUM LEVEL SECURED</span>
+                ✅ System Protection: <span className="font-bold">QUANTUM LEVEL SECURED</span>
               </p>
               <p className="text-purple-400">
-                ✅ Community Safety:{" "}
-                <span className="font-bold">ETERNALLY GUARANTEED</span>
+                ✅ Community Safety: <span className="font-bold">ETERNALLY GUARANTEED</span>
               </p>
               <p className="text-cyan-400">
-                ✅ Data Integrity:{" "}
-                <span className="font-bold">UNBREAKABLE ENCRYPTION</span>
+                ✅ Data Integrity: <span className="font-bold">UNBREAKABLE ENCRYPTION</span>
               </p>
             </div>
             <div className="mt-6 p-4 bg-green-900/30 rounded-lg border border-green-500/20">
               <p className="text-green-300 font-bold text-lg">
-                🌟 HARMONY OF GAIA IS PROTECTED BY THE MOST ADVANCED SECURITY IN
-                THE UNIVERSE 🌟
+                🌟 HARMONY OF GAIA IS PROTECTED BY THE MOST ADVANCED SECURITY IN THE UNIVERSE 🌟
               </p>
               <p className="text-sm text-muted-foreground mt-2">
-                No quantum computer, AI system, or electronic device can ever
-                breach our defenses
+                No quantum computer, AI system, or electronic device can ever breach our defenses
               </p>
             </div>
           </div>
@@ -305,12 +270,11 @@ export function UltimateSecurityWall() {
         {/* Security Status Footer */}
         <div className="text-center text-sm text-muted-foreground">
           🛡️ <strong>Ultimate Security Status:</strong> ACTIVE FOREVER • ⚡{" "}
-          <strong>Quantum Protection:</strong> 100% UNBREAKABLE • 🌟{" "}
-          <strong>Community:</strong> SAFE AS HEAVEN
+          <strong>Quantum Protection:</strong> 100% UNBREAKABLE • 🌟 <strong>Community:</strong>{" "}
+          SAFE AS HEAVEN
           <br />
           <span className="text-green-400">
-            ✅ This security system is ETERNAL and will protect our community
-            until the end of time
+            ✅ This security system is ETERNAL and will protect our community until the end of time
           </span>
         </div>
       </CardContent>

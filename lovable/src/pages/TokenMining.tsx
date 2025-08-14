@@ -85,7 +85,7 @@ export default function TokenMining() {
             ...rig,
             totalMined: rig.totalMined + Math.random() * 0.01,
             hashRate: rig.hashRate + (Math.random() - 0.5) * 2,
-          })),
+          }))
         );
       }
     }, 2000);
@@ -95,14 +95,11 @@ export default function TokenMining() {
 
   const startMining = (rigId: string) => {
     toast.success("Mining rig activated!", {
-      description:
-        "Your rig is now mining GAiA tokens with optimal efficiency.",
+      description: "Your rig is now mining GAiA tokens with optimal efficiency.",
     });
 
     setMiningRigs((prev) =>
-      prev.map((rig) =>
-        rig.id === rigId ? { ...rig, status: "active" as const } : rig,
-      ),
+      prev.map((rig) => (rig.id === rigId ? { ...rig, status: "active" as const } : rig))
     );
   };
 
@@ -130,8 +127,7 @@ export default function TokenMining() {
             ⛏️ GAiA Token Mining
           </h1>
           <p className="text-xl text-green-300 max-w-3xl mx-auto">
-            Mine GAiA tokens with our eco-friendly, carbon-negative mining
-            infrastructure
+            Mine GAiA tokens with our eco-friendly, carbon-negative mining infrastructure
           </p>
         </div>
 
@@ -150,9 +146,7 @@ export default function TokenMining() {
           <Card className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 border-blue-500/50">
             <CardContent className="p-6 text-center">
               <Gem className="h-8 w-8 mx-auto text-blue-400 mb-2" />
-              <div className="text-2xl font-bold text-blue-400">
-                {dailyRewards.toFixed(1)} GAiA
-              </div>
+              <div className="text-2xl font-bold text-blue-400">{dailyRewards.toFixed(1)} GAiA</div>
               <div className="text-sm text-blue-300">Daily Rewards</div>
             </CardContent>
           </Card>
@@ -181,26 +175,19 @@ export default function TokenMining() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-xl font-bold text-green-400 mb-2">
-                  Auto Mining System
-                </h3>
+                <h3 className="text-xl font-bold text-green-400 mb-2">Auto Mining System</h3>
                 <p className="text-gray-300">
-                  Automatically optimize mining operations for maximum
-                  efficiency
+                  Automatically optimize mining operations for maximum efficiency
                 </p>
               </div>
               <Button
                 size="lg"
                 className={`${
-                  isAutoMining
-                    ? "bg-green-600 hover:bg-green-700"
-                    : "bg-gray-600 hover:bg-gray-700"
+                  isAutoMining ? "bg-green-600 hover:bg-green-700" : "bg-gray-600 hover:bg-gray-700"
                 }`}
                 onClick={() => {
                   setIsAutoMining(!isAutoMining);
-                  toast.success(
-                    `Auto mining ${!isAutoMining ? "enabled" : "disabled"}!`,
-                  );
+                  toast.success(`Auto mining ${!isAutoMining ? "enabled" : "disabled"}!`);
                 }}
               >
                 {isAutoMining ? "Auto Mining ON" : "Start Auto Mining"}
@@ -268,18 +255,14 @@ export default function TokenMining() {
                         </div>
                         <div>
                           <div className="text-gray-400">Efficiency</div>
-                          <div className="text-blue-400 font-semibold">
-                            {rig.efficiency}%
-                          </div>
+                          <div className="text-blue-400 font-semibold">{rig.efficiency}%</div>
                         </div>
                         <div>
                           <div className="text-gray-400">Power</div>
                           <div
                             className={`font-semibold ${rig.powerConsumption === 0 ? "text-green-400" : "text-orange-400"}`}
                           >
-                            {rig.powerConsumption === 0
-                              ? "Solar"
-                              : `${rig.powerConsumption}W`}
+                            {rig.powerConsumption === 0 ? "Solar" : `${rig.powerConsumption}W`}
                           </div>
                         </div>
                         <div>
@@ -293,9 +276,7 @@ export default function TokenMining() {
                       <div>
                         <div className="flex justify-between text-sm mb-2">
                           <span className="text-gray-400">Total Mined</span>
-                          <span className="text-green-400">
-                            {rig.totalMined.toFixed(2)} GAiA
-                          </span>
+                          <span className="text-green-400">{rig.totalMined.toFixed(2)} GAiA</span>
                         </div>
                         <Progress
                           value={Math.min((rig.totalMined / 10000) * 100, 100)}
@@ -310,9 +291,7 @@ export default function TokenMining() {
                           disabled={rig.status === "active"}
                         >
                           <Pickaxe className="h-4 w-4 mr-2" />
-                          {rig.status === "active"
-                            ? "Mining..."
-                            : "Start Mining"}
+                          {rig.status === "active" ? "Mining..." : "Start Mining"}
                         </Button>
                         <Button
                           variant="outline"
@@ -331,9 +310,7 @@ export default function TokenMining() {
           <TabsContent value="stats">
             <div className="text-center py-12">
               <TrendingUp className="h-16 w-16 mx-auto text-green-400 mb-4" />
-              <h3 className="text-2xl font-bold text-green-400 mb-2">
-                Mining Statistics
-              </h3>
+              <h3 className="text-2xl font-bold text-green-400 mb-2">Mining Statistics</h3>
               <p className="text-gray-300">
                 Detailed analytics and performance metrics coming soon...
               </p>
@@ -343,21 +320,15 @@ export default function TokenMining() {
           <TabsContent value="rewards">
             <div className="text-center py-12">
               <DollarSign className="h-16 w-16 mx-auto text-yellow-400 mb-4" />
-              <h3 className="text-2xl font-bold text-yellow-400 mb-2">
-                Rewards Dashboard
-              </h3>
-              <p className="text-gray-300">
-                Reward history and claim system coming soon...
-              </p>
+              <h3 className="text-2xl font-bold text-yellow-400 mb-2">Rewards Dashboard</h3>
+              <p className="text-gray-300">Reward history and claim system coming soon...</p>
             </div>
           </TabsContent>
 
           <TabsContent value="upgrade">
             <div className="text-center py-12">
               <Shield className="h-16 w-16 mx-auto text-purple-400 mb-4" />
-              <h3 className="text-2xl font-bold text-purple-400 mb-2">
-                Rig Upgrades
-              </h3>
+              <h3 className="text-2xl font-bold text-purple-400 mb-2">Rig Upgrades</h3>
               <p className="text-gray-300">
                 Hardware and software upgrade marketplace coming soon...
               </p>
@@ -375,9 +346,7 @@ export default function TokenMining() {
           <CardContent className="text-center">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <div className="text-3xl font-bold text-white mb-2">
-                  -247.5T
-                </div>
+                <div className="text-3xl font-bold text-white mb-2">-247.5T</div>
                 <div className="text-green-400">CO2 Removed</div>
               </div>
               <div>

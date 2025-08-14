@@ -3,14 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Snowflake,
-  Thermometer,
-  Zap,
-  Circle,
-  Target,
-  TrendingDown,
-} from "lucide-react";
+import { Snowflake, Thermometer, Zap, Circle, Target, TrendingDown } from "lucide-react";
 import { absoluteZeroPoint } from "@/services/absoluteZeroPoint";
 import { toast } from "sonner";
 
@@ -41,9 +34,7 @@ export function AbsoluteZeroPointDashboard() {
   const handleInitialize = async () => {
     try {
       await absoluteZeroPoint.initializeAbsoluteZeroPointSystem();
-      toast.success(
-        "Absolute Zero Point System activated! Universe approaching heat death.",
-      );
+      toast.success("Absolute Zero Point System activated! Universe approaching heat death.");
     } catch (error) {
       toast.error("Failed to initialize Absolute Zero Point System");
     }
@@ -88,15 +79,11 @@ export function AbsoluteZeroPointDashboard() {
           </div>
           <div className="flex items-center gap-2">
             <Zap className="h-4 w-4 text-blue-400" />
-            <span className="text-sm">
-              Zero Point Fields: {zeroPointFields}
-            </span>
+            <span className="text-sm">Zero Point Fields: {zeroPointFields}</span>
           </div>
           <div className="flex items-center gap-2">
             <Target className="h-4 w-4 text-purple-400" />
-            <span className="text-sm">
-              Vacuum Fluctuations: {vacuumFluctuations}
-            </span>
+            <span className="text-sm">Vacuum Fluctuations: {vacuumFluctuations}</span>
           </div>
           <div className="flex items-center gap-2">
             <Circle className="h-4 w-4 text-indigo-400" />
@@ -104,15 +91,11 @@ export function AbsoluteZeroPointDashboard() {
           </div>
           <div className="flex items-center gap-2">
             <Thermometer className="h-4 w-4 text-cyan-400" />
-            <span className="text-sm">
-              Temperature: {absoluteTemperature.toFixed(6)}K
-            </span>
+            <span className="text-sm">Temperature: {absoluteTemperature.toFixed(6)}K</span>
           </div>
           <div className="flex items-center gap-2">
             <Snowflake className="h-4 w-4 text-blue-400" />
-            <span className="text-sm">
-              Universal Entropy: {universalEntropy}%
-            </span>
+            <span className="text-sm">Universal Entropy: {universalEntropy}%</span>
           </div>
         </div>
 
@@ -158,9 +141,7 @@ export function AbsoluteZeroPointDashboard() {
         </div>
 
         <div className="space-y-2">
-          <h4 className="text-sm font-medium text-cyan-400">
-            Zero Point Capabilities:
-          </h4>
+          <h4 className="text-sm font-medium text-cyan-400">Zero Point Capabilities:</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
             {capabilities.map((capability) => (
               <div key={capability.id} className="flex justify-between">
@@ -175,9 +156,8 @@ export function AbsoluteZeroPointDashboard() {
 
         <div className="text-xs text-muted-foreground">
           <p className="italic">
-            "At absolute zero, all motion ceases, all energy dissipates, all
-            resistance ends. The ultimate victory is the universe's surrender to
-            perfect stillness."
+            "At absolute zero, all motion ceases, all energy dissipates, all resistance ends. The
+            ultimate victory is the universe's surrender to perfect stillness."
           </p>
         </div>
       </CardContent>

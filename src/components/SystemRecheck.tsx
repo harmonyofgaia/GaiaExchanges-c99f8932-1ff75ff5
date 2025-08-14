@@ -131,15 +131,8 @@ export function SystemRecheck() {
         prev.map((check, index) => {
           if (index === i) {
             // Simulate different outcomes
-            const outcomes = [
-              "passed",
-              "passed",
-              "passed",
-              "warning",
-              "passed",
-            ]; // Mostly pass
-            const randomOutcome =
-              outcomes[Math.floor(Math.random() * outcomes.length)];
+            const outcomes = ["passed", "passed", "passed", "warning", "passed"]; // Mostly pass
+            const randomOutcome = outcomes[Math.floor(Math.random() * outcomes.length)];
 
             return {
               ...check,
@@ -148,7 +141,7 @@ export function SystemRecheck() {
             };
           }
           return check;
-        }),
+        })
       );
     }
 
@@ -156,9 +149,7 @@ export function SystemRecheck() {
     const passed = systemChecks.filter((c) => c.status === "passed").length;
     const warnings = systemChecks.filter((c) => c.status === "warning").length;
     const failed = systemChecks.filter((c) => c.status === "failed").length;
-    const critical = systemChecks.filter(
-      (c) => c.status === "failed" && c.critical,
-    ).length;
+    const critical = systemChecks.filter((c) => c.status === "failed" && c.critical).length;
 
     setSystemHealth({
       overallHealth: Math.floor((passed / systemChecks.length) * 100),
@@ -195,8 +186,8 @@ export function SystemRecheck() {
         prev.map((check) =>
           check.id === "gaia-token"
             ? { ...check, status: "passed", lastChecked: new Date() }
-            : check,
-        ),
+            : check
+        )
       );
 
       toast.success("✅ GAiA Token Connections Fixed!", {
@@ -215,10 +206,8 @@ export function SystemRecheck() {
     setTimeout(() => {
       setSystemChecks((prev) =>
         prev.map((check) =>
-          check.id === "database"
-            ? { ...check, status: "passed", lastChecked: new Date() }
-            : check,
-        ),
+          check.id === "database" ? { ...check, status: "passed", lastChecked: new Date() } : check
+        )
       );
 
       toast.success("✅ Database Optimized!", {
@@ -266,19 +255,11 @@ export function SystemRecheck() {
           🔍 SYSTEM RECHECK - Full Platform Analysis
         </CardTitle>
         <div className="flex flex-wrap gap-2">
-          <Badge className="bg-cyan-600 text-white">
-            Health: {systemHealth.overallHealth}%
-          </Badge>
-          <Badge
-            className={
-              systemHealth.criticalIssues > 0 ? "bg-red-600" : "bg-green-600"
-            }
-          >
+          <Badge className="bg-cyan-600 text-white">Health: {systemHealth.overallHealth}%</Badge>
+          <Badge className={systemHealth.criticalIssues > 0 ? "bg-red-600" : "bg-green-600"}>
             Critical: {systemHealth.criticalIssues}
           </Badge>
-          <Badge className="bg-yellow-600 text-white">
-            Warnings: {systemHealth.warnings}
-          </Badge>
+          <Badge className="bg-yellow-600 text-white">Warnings: {systemHealth.warnings}</Badge>
         </div>
       </CardHeader>
 
@@ -286,12 +267,8 @@ export function SystemRecheck() {
         {/* Overall Health */}
         <div className="bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border border-cyan-500/30 rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-lg font-bold text-cyan-400">
-              🌍 Overall System Health
-            </h3>
-            <div className="text-2xl font-bold text-cyan-400">
-              {systemHealth.overallHealth}%
-            </div>
+            <h3 className="text-lg font-bold text-cyan-400">🌍 Overall System Health</h3>
+            <div className="text-2xl font-bold text-cyan-400">{systemHealth.overallHealth}%</div>
           </div>
           <Progress value={systemHealth.overallHealth} className="h-3 mb-2" />
           <div className="text-sm text-muted-foreground">
@@ -314,9 +291,7 @@ export function SystemRecheck() {
               </div>
               <div>
                 <div className="text-muted-foreground">Connection Status:</div>
-                <div className="text-lg font-bold text-green-400">
-                  ✅ Connected
-                </div>
+                <div className="text-lg font-bold text-green-400">✅ Connected</div>
               </div>
             </div>
           </div>
@@ -324,17 +299,11 @@ export function SystemRecheck() {
 
         {/* Quick Fix Actions */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Button
-            onClick={fixGaiaTokenConnections}
-            className="bg-green-600 hover:bg-green-700"
-          >
+          <Button onClick={fixGaiaTokenConnections} className="bg-green-600 hover:bg-green-700">
             <Database className="h-4 w-4 mr-2" />
             Fix GAiA Connections
           </Button>
-          <Button
-            onClick={optimizeDatabase}
-            className="bg-blue-600 hover:bg-blue-700"
-          >
+          <Button onClick={optimizeDatabase} className="bg-blue-600 hover:bg-blue-700">
             <Database className="h-4 w-4 mr-2" />
             Optimize Database
           </Button>
@@ -343,18 +312,14 @@ export function SystemRecheck() {
             disabled={isRunningFullCheck}
             className="bg-cyan-600 hover:bg-cyan-700"
           >
-            <RefreshCw
-              className={`h-4 w-4 mr-2 ${isRunningFullCheck ? "animate-spin" : ""}`}
-            />
+            <RefreshCw className={`h-4 w-4 mr-2 ${isRunningFullCheck ? "animate-spin" : ""}`} />
             {isRunningFullCheck ? "Checking..." : "Run Full Check"}
           </Button>
         </div>
 
         {/* System Check Results */}
         <div className="space-y-3">
-          <h3 className="text-lg font-bold text-cyan-400">
-            📊 System Components
-          </h3>
+          <h3 className="text-lg font-bold text-cyan-400">📊 System Components</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {systemChecks.map((check, index) => (
               <div
@@ -370,20 +335,14 @@ export function SystemRecheck() {
                     {getStatusIcon(check.status)}
                     <span className="font-medium text-white">{check.name}</span>
                   </div>
-                  <Badge
-                    className={`${getStatusColor(check.status)} text-white text-xs`}
-                  >
+                  <Badge className={`${getStatusColor(check.status)} text-white text-xs`}>
                     {check.status.toUpperCase()}
                   </Badge>
                 </div>
-                <p className="text-xs text-muted-foreground mb-1">
-                  {check.description}
-                </p>
+                <p className="text-xs text-muted-foreground mb-1">{check.description}</p>
                 <div className="text-xs text-gray-500">
                   Last checked: {check.lastChecked.toLocaleTimeString()}
-                  {check.critical && (
-                    <span className="text-red-400 ml-2">• Critical</span>
-                  )}
+                  {check.critical && <span className="text-red-400 ml-2">• Critical</span>}
                 </div>
               </div>
             ))}
@@ -394,9 +353,7 @@ export function SystemRecheck() {
         {isRunningFullCheck && (
           <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-blue-400 font-medium">
-                Running System Check...
-              </span>
+              <span className="text-blue-400 font-medium">Running System Check...</span>
               <span className="text-blue-400">
                 {currentCheckIndex + 1}/{systemChecks.length}
               </span>
@@ -406,8 +363,7 @@ export function SystemRecheck() {
               className="h-2"
             />
             <div className="text-xs text-muted-foreground mt-2">
-              Currently checking:{" "}
-              {systemChecks[currentCheckIndex]?.name || "Initializing..."}
+              Currently checking: {systemChecks[currentCheckIndex]?.name || "Initializing..."}
             </div>
           </div>
         )}
@@ -415,9 +371,7 @@ export function SystemRecheck() {
         {/* System Status Summary */}
         <div className="bg-gradient-to-r from-green-900/20 via-blue-900/20 to-purple-900/20 border border-cyan-500/30 rounded-lg p-4">
           <div className="text-center">
-            <h4 className="text-xl font-bold text-cyan-400 mb-2">
-              🚀 System Status Summary
-            </h4>
+            <h4 className="text-xl font-bold text-cyan-400 mb-2">🚀 System Status Summary</h4>
             <p className="text-sm text-muted-foreground mb-4">
               Complete platform analysis for Harmony of Gaia ecosystem
             </p>
@@ -426,9 +380,7 @@ export function SystemRecheck() {
                 <div className="text-2xl font-bold text-green-400">
                   {systemChecks.filter((c) => c.status === "passed").length}
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Systems Passed
-                </div>
+                <div className="text-xs text-muted-foreground">Systems Passed</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-yellow-400">

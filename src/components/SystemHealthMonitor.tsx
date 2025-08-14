@@ -33,8 +33,7 @@ export function SystemHealthMonitor() {
     const monitorSystemHealth = () => {
       // Update system health based on security systems
       const threatsBlocked =
-        (quantumCore.metrics.quantumKeysActive ? 1 : 0) +
-        (systemHealth.threats_blocked || 0);
+        (quantumCore.metrics.quantumKeysActive ? 1 : 0) + (systemHealth.threats_blocked || 0);
 
       setSystemHealth({
         overall_status: "optimal",
@@ -51,12 +50,10 @@ export function SystemHealthMonitor() {
 
       // Log health status
       if (Math.random() < 0.05) {
-        console.log(
-          "💚 SYSTEM HEALTH: OPTIMAL - All security systems operating perfectly",
-        );
+        console.log("💚 SYSTEM HEALTH: OPTIMAL - All security systems operating perfectly");
         console.log(`🛡️ Threats Blocked: ${threatsBlocked.toLocaleString()}`);
         console.log(
-          `⚡ Quantum Protection: ${quantumCore.metrics.isQuantumSecure ? "ACTIVE" : "STANDBY"}`,
+          `⚡ Quantum Protection: ${quantumCore.metrics.isQuantumSecure ? "ACTIVE" : "STANDBY"}`
         );
       }
     };
@@ -67,7 +64,7 @@ export function SystemHealthMonitor() {
     return () => {
       if (healthInterval.current) clearInterval(healthInterval.current);
     };
-  }, [quantumCore, masterSecurity]);
+  }, [quantumCore, masterSecurity, systemHealth.threats_blocked]);
 
   return {
     systemHealth,

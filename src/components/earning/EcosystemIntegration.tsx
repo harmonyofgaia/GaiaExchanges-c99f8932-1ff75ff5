@@ -84,11 +84,7 @@ export function EcosystemIntegration() {
       type: "carbon",
       status: "available",
       description: "Trade verified carbon credits using GAiA tokens",
-      benefits: [
-        "Real impact verification",
-        "Global marketplace",
-        "Instant settlements",
-      ],
+      benefits: ["Real impact verification", "Global marketplace", "Instant settlements"],
     },
     {
       id: "3",
@@ -156,9 +152,7 @@ export function EcosystemIntegration() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Partner Network */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-cyan-400">
-                🤝 Partner Network
-              </h3>
+              <h3 className="text-lg font-semibold text-cyan-400">🤝 Partner Network</h3>
 
               {partners.map((partner) => {
                 const Icon = getCategoryIcon(partner.category);
@@ -171,9 +165,7 @@ export function EcosystemIntegration() {
                           <div className="text-2xl">{partner.logo}</div>
                           <div>
                             <h4 className="font-semibold">{partner.name}</h4>
-                            <p className="text-sm text-muted-foreground">
-                              {partner.description}
-                            </p>
+                            <p className="text-sm text-muted-foreground">{partner.description}</p>
                           </div>
                         </div>
                         <Icon className="h-5 w-5 text-cyan-400" />
@@ -181,9 +173,7 @@ export function EcosystemIntegration() {
 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <Badge className="bg-green-600">
-                            {partner.discount}% OFF
-                          </Badge>
+                          <Badge className="bg-green-600">{partner.discount}% OFF</Badge>
                           <span className="text-sm text-muted-foreground">
                             {partner.tokensRequired} GAiA required
                           </span>
@@ -193,9 +183,7 @@ export function EcosystemIntegration() {
                           size="sm"
                           onClick={() => connectPartner(partner.id)}
                           disabled={partner.isConnected}
-                          variant={
-                            partner.isConnected ? "secondary" : "default"
-                          }
+                          variant={partner.isConnected ? "secondary" : "default"}
                         >
                           {partner.isConnected ? (
                             <>
@@ -215,9 +203,7 @@ export function EcosystemIntegration() {
 
             {/* System Integrations */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-cyan-400">
-                🔗 System Integrations
-              </h3>
+              <h3 className="text-lg font-semibold text-cyan-400">🔗 System Integrations</h3>
 
               {integrations.map((integration) => (
                 <Card key={integration.id} className="border-blue-500/20">
@@ -252,14 +238,9 @@ export function EcosystemIntegration() {
                       className="w-full"
                       onClick={() => connectIntegration(integration.id)}
                       disabled={
-                        integration.status === "coming-soon" ||
-                        integration.status === "connected"
+                        integration.status === "coming-soon" || integration.status === "connected"
                       }
-                      variant={
-                        integration.status === "connected"
-                          ? "secondary"
-                          : "default"
-                      }
+                      variant={integration.status === "connected" ? "secondary" : "default"}
                     >
                       {integration.status === "connected"
                         ? "✅ Connected"
@@ -275,27 +256,19 @@ export function EcosystemIntegration() {
 
           {/* Integration Stats */}
           <div className="mt-6 p-4 bg-cyan-900/20 rounded-lg border border-cyan-500/30">
-            <h4 className="font-semibold text-cyan-400 mb-3">
-              📊 Integration Benefits
-            </h4>
+            <h4 className="font-semibold text-cyan-400 mb-3">📊 Integration Benefits</h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
               <div>
                 <div className="text-2xl font-bold text-green-400">$245</div>
-                <div className="text-xs text-muted-foreground">
-                  Saved through discounts
-                </div>
+                <div className="text-xs text-muted-foreground">Saved through discounts</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-blue-400">8</div>
-                <div className="text-xs text-muted-foreground">
-                  Connected services
-                </div>
+                <div className="text-xs text-muted-foreground">Connected services</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-purple-400">2.4x</div>
-                <div className="text-xs text-muted-foreground">
-                  Token utility multiplier
-                </div>
+                <div className="text-xs text-muted-foreground">Token utility multiplier</div>
               </div>
             </div>
           </div>

@@ -33,16 +33,8 @@ export const ChartTooltipContent = React.forwardRef<
   }
 >(
   (
-    {
-      active,
-      payload,
-      label,
-      hideLabel = false,
-      hideIndicator = false,
-      className,
-      ...props
-    },
-    ref,
+    { active, payload, label, hideLabel = false, hideIndicator = false, className, ...props },
+    ref
   ) => {
     if (!active || !payload?.length) {
       return null;
@@ -51,23 +43,15 @@ export const ChartTooltipContent = React.forwardRef<
     return (
       <div
         ref={ref}
-        className={cn(
-          "rounded-lg border bg-background p-2 shadow-sm",
-          className,
-        )}
+        className={cn("rounded-lg border bg-background p-2 shadow-sm", className)}
         {...props}
       >
-        {!hideLabel && label && (
-          <div className="text-sm font-medium">{label}</div>
-        )}
+        {!hideLabel && label && <div className="text-sm font-medium">{label}</div>}
         <div className="space-y-1">
           {payload.map((entry: any, index: number) => (
             <div key={index} className="flex items-center gap-2">
               {!hideIndicator && (
-                <div
-                  className="h-2 w-2 rounded-full"
-                  style={{ backgroundColor: entry.color }}
-                />
+                <div className="h-2 w-2 rounded-full" style={{ backgroundColor: entry.color }} />
               )}
               <span className="text-sm">
                 {entry.name}: {entry.value}
@@ -77,7 +61,7 @@ export const ChartTooltipContent = React.forwardRef<
         </div>
       </div>
     );
-  },
+  }
 );
 ChartTooltipContent.displayName = "ChartTooltipContent";
 
@@ -95,20 +79,11 @@ export const ChartLegendContent = React.forwardRef<
   }
 
   return (
-    <div
-      ref={ref}
-      className={cn("flex items-center justify-center gap-4", className)}
-      {...props}
-    >
+    <div ref={ref} className={cn("flex items-center justify-center gap-4", className)} {...props}>
       {payload.map((entry: any, index: number) => (
         <div key={index} className="flex items-center gap-2">
-          <div
-            className="h-2 w-2 rounded-full"
-            style={{ backgroundColor: entry.color }}
-          />
-          <span className="text-sm">
-            {entry.value || entry[nameKey || "value"]}
-          </span>
+          <div className="h-2 w-2 rounded-full" style={{ backgroundColor: entry.color }} />
+          <span className="text-sm">{entry.value || entry[nameKey || "value"]}</span>
         </div>
       ))}
     </div>

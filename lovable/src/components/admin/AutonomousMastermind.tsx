@@ -32,8 +32,7 @@ export function AutonomousMastermind() {
     {
       id: "1",
       name: "Quantum Security Enhancement",
-      description:
-        "Implement quantum-resistant encryption across all admin functions",
+      description: "Implement quantum-resistant encryption across all admin functions",
       status: "pending",
       priority: "high",
       autoApply: true,
@@ -51,8 +50,7 @@ export function AutonomousMastermind() {
     {
       id: "3",
       name: "Invisible Admin Cloaking System",
-      description:
-        "Make admin presence completely undetectable to external systems",
+      description: "Make admin presence completely undetectable to external systems",
       status: "pending",
       priority: "high",
       autoApply: true,
@@ -79,8 +77,7 @@ export function AutonomousMastermind() {
     {
       id: "6",
       name: "Autonomous Transaction Monitoring",
-      description:
-        "Self-learning system for detecting financial irregularities",
+      description: "Self-learning system for detecting financial irregularities",
       status: "pending",
       priority: "high",
       autoApply: true,
@@ -89,8 +86,7 @@ export function AutonomousMastermind() {
     {
       id: "7",
       name: "Quantum Communication Network",
-      description:
-        "Establish unhackable communication channels for admin operations",
+      description: "Establish unhackable communication channels for admin operations",
       status: "pending",
       priority: "medium",
       autoApply: true,
@@ -115,9 +111,7 @@ export function AutonomousMastermind() {
   useEffect(() => {
     if (!autoApplyEnabled) return;
 
-    const pendingFeatures = features.filter(
-      (f) => f.status === "pending" && f.autoApply,
-    );
+    const pendingFeatures = features.filter((f) => f.status === "pending" && f.autoApply);
     if (pendingFeatures.length === 0) return;
 
     const nextFeature = pendingFeatures[0];
@@ -149,7 +143,7 @@ export function AutonomousMastermind() {
           return { ...f, status: "analyzing" as const, progress: 10 };
         }
         return f;
-      }),
+      })
     );
 
     // Reset countdown
@@ -159,13 +153,10 @@ export function AutonomousMastermind() {
     const feature = features.find((f) => f.id === featureId);
     if (!feature) return;
 
-    toast.success(
-      `🧠 ${isAutomatic ? "Auto-Applying" : "Applying"}: ${feature.name}`,
-      {
-        description: "Mastermind system activating...",
-        duration: 3000,
-      },
-    );
+    toast.success(`🧠 ${isAutomatic ? "Auto-Applying" : "Applying"}: ${feature.name}`, {
+      description: "Mastermind system activating...",
+      duration: 3000,
+    });
 
     // Simulate implementation progress
     const progressInterval = setInterval(() => {
@@ -184,7 +175,7 @@ export function AutonomousMastermind() {
             return { ...f, progress: Math.min(newProgress, 95) };
           }
           return f;
-        }),
+        })
       );
     }, 1500);
   };
@@ -234,18 +225,14 @@ export function AutonomousMastermind() {
               <div className="text-lg font-bold text-green-400">
                 {features.filter((f) => f.status === "complete").length}
               </div>
-              <div className="text-xs text-muted-foreground">
-                Active Features
-              </div>
+              <div className="text-xs text-muted-foreground">Active Features</div>
             </div>
             <div className="text-center p-3 rounded-lg bg-blue-900/30">
               <Activity className="h-6 w-6 text-blue-400 mx-auto mb-2" />
               <div className="text-lg font-bold text-blue-400">
                 {
-                  features.filter(
-                    (f) =>
-                      f.status === "analyzing" || f.status === "implementing",
-                  ).length
+                  features.filter((f) => f.status === "analyzing" || f.status === "implementing")
+                    .length
                 }
               </div>
               <div className="text-xs text-muted-foreground">Processing</div>
@@ -300,23 +287,16 @@ export function AutonomousMastermind() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <h4 className="font-semibold">{feature.name}</h4>
-                    <Badge
-                      className={`text-xs text-white ${getStatusColor(feature.status)}`}
-                    >
+                    <Badge className={`text-xs text-white ${getStatusColor(feature.status)}`}>
                       {feature.status.toUpperCase()}
                     </Badge>
-                    <span
-                      className={`text-xs font-bold ${getPriorityColor(feature.priority)}`}
-                    >
+                    <span className={`text-xs font-bold ${getPriorityColor(feature.priority)}`}>
                       {feature.priority.toUpperCase()} PRIORITY
                     </span>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {feature.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-2">{feature.description}</p>
 
-                  {(feature.status === "analyzing" ||
-                    feature.status === "implementing") && (
+                  {(feature.status === "analyzing" || feature.status === "implementing") && (
                     <div className="space-y-1">
                       <div className="flex justify-between text-xs">
                         <span>Implementation Progress</span>
@@ -362,20 +342,15 @@ export function AutonomousMastermind() {
         <CardContent className="pt-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="font-semibold text-cyan-400">
-                Autonomous Enhancement System
-              </h4>
+              <h4 className="font-semibold text-cyan-400">Autonomous Enhancement System</h4>
               <p className="text-sm text-muted-foreground">
-                Automatically applies mastermind features after 20 seconds of no
-                admin response
+                Automatically applies mastermind features after 20 seconds of no admin response
               </p>
             </div>
             <Button
               onClick={() => setAutoApplyEnabled(!autoApplyEnabled)}
               className={
-                autoApplyEnabled
-                  ? "bg-green-600 hover:bg-green-700"
-                  : "bg-red-600 hover:bg-red-700"
+                autoApplyEnabled ? "bg-green-600 hover:bg-green-700" : "bg-red-600 hover:bg-red-700"
               }
             >
               <Lock className="h-4 w-4 mr-2" />

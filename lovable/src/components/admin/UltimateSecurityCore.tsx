@@ -43,19 +43,12 @@ export function UltimateSecurityCore() {
       if (Math.random() > 0.8) {
         const newThreat = {
           id: Date.now().toString(),
-          type: [
-            "SQL Injection",
-            "DDoS Attack",
-            "Phishing Attempt",
-            "Brute Force",
-          ][Math.floor(Math.random() * 4)],
-          ip: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
-          location: ["Unknown", "Russia", "China", "North Korea"][
+          type: ["SQL Injection", "DDoS Attack", "Phishing Attempt", "Brute Force"][
             Math.floor(Math.random() * 4)
           ],
-          severity: ["HIGH", "CRITICAL"][Math.floor(Math.random() * 2)] as
-            | "HIGH"
-            | "CRITICAL",
+          ip: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
+          location: ["Unknown", "Russia", "China", "North Korea"][Math.floor(Math.random() * 4)],
+          severity: ["HIGH", "CRITICAL"][Math.floor(Math.random() * 2)] as "HIGH" | "CRITICAL",
           blocked: true,
         };
 
@@ -82,9 +75,7 @@ export function UltimateSecurityCore() {
       adminProtection: 200,
     });
 
-    console.log(
-      "👑 ULTIMATE SECURITY: GOD MODE ACTIVATED - UNBREAKABLE FORTRESS",
-    );
+    console.log("👑 ULTIMATE SECURITY: GOD MODE ACTIVATED - UNBREAKABLE FORTRESS");
   };
 
   const getSeverityColor = (severity: string) => {
@@ -115,10 +106,7 @@ export function UltimateSecurityCore() {
             <div className="text-3xl font-bold text-purple-400 mb-2">
               {securityMetrics.quantumEncryption}%
             </div>
-            <Progress
-              value={Math.min(100, securityMetrics.quantumEncryption)}
-              className="mb-2"
-            />
+            <Progress value={Math.min(100, securityMetrics.quantumEncryption)} className="mb-2" />
             <Badge className="bg-purple-600 text-white">UNBREAKABLE</Badge>
           </CardContent>
         </Card>
@@ -150,10 +138,7 @@ export function UltimateSecurityCore() {
             <div className="text-3xl font-bold text-blue-400 mb-2">
               {securityMetrics.biometricSecurity}%
             </div>
-            <Progress
-              value={Math.min(100, securityMetrics.biometricSecurity)}
-              className="mb-2"
-            />
+            <Progress value={Math.min(100, securityMetrics.biometricSecurity)} className="mb-2" />
             <Badge className="bg-blue-600 text-white">EYE SCAN ACTIVE</Badge>
           </CardContent>
         </Card>
@@ -171,12 +156,8 @@ export function UltimateSecurityCore() {
           <div className="space-y-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
-                <div className="text-2xl font-bold text-green-400">
-                  {activeThreats.length}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Active Threats
-                </div>
+                <div className="text-2xl font-bold text-green-400">{activeThreats.length}</div>
+                <div className="text-sm text-muted-foreground">Active Threats</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-red-400">
@@ -186,23 +167,17 @@ export function UltimateSecurityCore() {
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-purple-400">100%</div>
-                <div className="text-sm text-muted-foreground">
-                  Success Rate
-                </div>
+                <div className="text-sm text-muted-foreground">Success Rate</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-400">∞</div>
-                <div className="text-sm text-muted-foreground">
-                  Protection Level
-                </div>
+                <div className="text-sm text-muted-foreground">Protection Level</div>
               </div>
             </div>
 
             {/* Recent Threats */}
             <div className="space-y-2">
-              <h4 className="font-semibold text-orange-400">
-                🚨 Recent Threats Neutralized:
-              </h4>
+              <h4 className="font-semibold text-orange-400">🚨 Recent Threats Neutralized:</h4>
               <div className="max-h-32 overflow-y-auto space-y-2">
                 {activeThreats.map((threat) => (
                   <div
@@ -210,23 +185,15 @@ export function UltimateSecurityCore() {
                     className="flex items-center justify-between p-2 rounded bg-red-500/10 border border-red-500/20"
                   >
                     <div className="flex items-center gap-2">
-                      <Badge
-                        className={`${getSeverityColor(threat.severity)} text-white text-xs`}
-                      >
+                      <Badge className={`${getSeverityColor(threat.severity)} text-white text-xs`}>
                         {threat.severity}
                       </Badge>
                       <span className="text-sm">{threat.type}</span>
-                      <span className="text-xs text-muted-foreground">
-                        {threat.ip}
-                      </span>
+                      <span className="text-xs text-muted-foreground">{threat.ip}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Badge className="bg-green-600 text-white text-xs">
-                        ✅ BLOCKED
-                      </Badge>
-                      <span className="text-xs text-muted-foreground">
-                        {threat.location}
-                      </span>
+                      <Badge className="bg-green-600 text-white text-xs">✅ BLOCKED</Badge>
+                      <span className="text-xs text-muted-foreground">{threat.location}</span>
                     </div>
                   </div>
                 ))}
@@ -247,9 +214,7 @@ export function UltimateSecurityCore() {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <h4 className="font-semibold text-green-400">
-                🛡️ Active Security Features:
-              </h4>
+              <h4 className="font-semibold text-green-400">🛡️ Active Security Features:</h4>
               <ul className="space-y-1 text-sm text-green-300">
                 <li>✅ Quantum encryption layer active</li>
                 <li>✅ VPN disruption satellites online</li>
@@ -262,9 +227,7 @@ export function UltimateSecurityCore() {
               </ul>
             </div>
             <div className="space-y-2">
-              <h4 className="font-semibold text-green-400">
-                👑 Admin Privileges:
-              </h4>
+              <h4 className="font-semibold text-green-400">👑 Admin Privileges:</h4>
               <ul className="space-y-1 text-sm text-green-300">
                 <li>✅ Transaction reversal (2 weeks)</li>
                 <li>✅ Emergency shutdown control</li>

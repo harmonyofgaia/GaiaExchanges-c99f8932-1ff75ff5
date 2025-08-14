@@ -13,9 +13,7 @@ import { useEnhanced2FAAuth } from "./Enhanced2FAAuthProvider";
 
 export function SessionDurationSelector() {
   const { sessionDuration, setSessionDuration } = useEnhanced2FAAuth();
-  const [selectedDuration, setSelectedDuration] = useState(
-    sessionDuration.toString(),
-  );
+  const [selectedDuration, setSelectedDuration] = useState(sessionDuration.toString());
 
   const handleUpdateDuration = () => {
     const hours = parseInt(selectedDuration);
@@ -60,18 +58,14 @@ export function SessionDurationSelector() {
             </SelectContent>
           </Select>
 
-          <Button
-            onClick={handleUpdateDuration}
-            className="w-full bg-blue-600 hover:bg-blue-700"
-          >
+          <Button onClick={handleUpdateDuration} className="w-full bg-blue-600 hover:bg-blue-700">
             <Shield className="h-4 w-4 mr-2" />
             Update Session Duration
           </Button>
         </div>
 
         <div className="text-xs text-muted-foreground text-center">
-          Current session: {sessionDuration} hours • Security active across all
-          GAIA services
+          Current session: {sessionDuration} hours • Security active across all GAIA services
         </div>
       </CardContent>
     </Card>

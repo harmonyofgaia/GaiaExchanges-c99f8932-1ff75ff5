@@ -86,8 +86,7 @@ export function FeeDestinationManager() {
       }
 
       toast.success("🌍 Green Project Configuration Saved!", {
-        description:
-          "Your fees will now support environmental projects automatically.",
+        description: "Your fees will now support environmental projects automatically.",
         duration: 4000,
       });
     } catch (error) {
@@ -115,8 +114,8 @@ export function FeeDestinationManager() {
             🌍 Green Project Fee Configuration
           </CardTitle>
           <p className="text-green-300">
-            Configure how your transaction fees automatically support global
-            environmental initiatives
+            Configure how your transaction fees automatically support global environmental
+            initiatives
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -127,8 +126,8 @@ export function FeeDestinationManager() {
                 🌱 Green Project Reinvestment (Recommended)
               </Label>
               <p className="text-sm text-muted-foreground">
-                All fees automatically go to verified environmental projects -
-                helping save our planet
+                All fees automatically go to verified environmental projects - helping save our
+                planet
               </p>
             </div>
             <Switch
@@ -136,9 +135,7 @@ export function FeeDestinationManager() {
               onCheckedChange={(checked) =>
                 setConfig({
                   ...config,
-                  preferred_fee_destination: checked
-                    ? "green_projects"
-                    : "vault",
+                  preferred_fee_destination: checked ? "green_projects" : "vault",
                   zero_fee_enabled: false,
                 })
               }
@@ -148,19 +145,14 @@ export function FeeDestinationManager() {
           {/* Zero Fee Option */}
           <div className="flex items-center justify-between p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
             <div>
-              <Label className="text-base font-medium text-blue-400">
-                Zero Fee Mode
-              </Label>
+              <Label className="text-base font-medium text-blue-400">Zero Fee Mode</Label>
               <p className="text-sm text-muted-foreground">
-                Enable completely free transactions (no environmental
-                contribution)
+                Enable completely free transactions (no environmental contribution)
               </p>
             </div>
             <Switch
               checked={config.zero_fee_enabled}
-              onCheckedChange={(checked) =>
-                setConfig({ ...config, zero_fee_enabled: checked })
-              }
+              onCheckedChange={(checked) => setConfig({ ...config, zero_fee_enabled: checked })}
             />
           </div>
 
@@ -190,8 +182,7 @@ export function FeeDestinationManager() {
                   </Badge>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Recommended: 0.1% (0.001) - Ultra low fees that make a big
-                  environmental impact
+                  Recommended: 0.1% (0.001) - Ultra low fees that make a big environmental impact
                 </p>
               </div>
 
@@ -211,15 +202,9 @@ export function FeeDestinationManager() {
                     <SelectItem value="green_projects">
                       🌱 Green Projects (Recommended - Save Earth)
                     </SelectItem>
-                    <SelectItem value="vault">
-                      🏦 Community Vault (Admin Surprises)
-                    </SelectItem>
-                    <SelectItem value="burning">
-                      🔥 Token Burning (Increase Value)
-                    </SelectItem>
-                    <SelectItem value="humanity">
-                      ❤️ Humanity Fund (Global Aid)
-                    </SelectItem>
+                    <SelectItem value="vault">🏦 Community Vault (Admin Surprises)</SelectItem>
+                    <SelectItem value="burning">🔥 Token Burning (Increase Value)</SelectItem>
+                    <SelectItem value="humanity">❤️ Humanity Fund (Global Aid)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -275,14 +260,10 @@ export function FeeDestinationManager() {
             <div className="p-3 rounded-lg bg-muted/30">
               <div className="font-medium">Destination:</div>
               <div className="text-sm text-muted-foreground">
-                {config.preferred_fee_destination === "green_projects" &&
-                  "🌱 Green Projects"}
-                {config.preferred_fee_destination === "vault" &&
-                  "🏦 Community Vault"}
-                {config.preferred_fee_destination === "burning" &&
-                  "🔥 Token Burning"}
-                {config.preferred_fee_destination === "humanity" &&
-                  "❤️ Humanity Fund"}
+                {config.preferred_fee_destination === "green_projects" && "🌱 Green Projects"}
+                {config.preferred_fee_destination === "vault" && "🏦 Community Vault"}
+                {config.preferred_fee_destination === "burning" && "🔥 Token Burning"}
+                {config.preferred_fee_destination === "humanity" && "❤️ Humanity Fund"}
               </div>
             </div>
           </div>

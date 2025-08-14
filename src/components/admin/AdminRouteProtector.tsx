@@ -11,9 +11,7 @@ export function AdminRouteProtector() {
   useEffect(() => {
     const protectAdminRoutes = async () => {
       const adminRoutes = ["/admin", "/secure-admin", "/secure-vault"];
-      const isAdminRoute = adminRoutes.some((route) =>
-        location.pathname.includes(route),
-      );
+      const isAdminRoute = adminRoutes.some((route) => location.pathname.includes(route));
 
       if (isAdminRoute) {
         // Check if user is authenticated
@@ -26,10 +24,10 @@ export function AdminRouteProtector() {
         try {
           // Check if user has valid admin account
           const { data: adminAccount, error } = await supabase
-            .from('admin_users')
-            .select('*')
-            .eq('user_id', user.id)
-            .eq('is_active', true)
+            .from("admin_users")
+            .select("*")
+            .eq("user_id", user.id)
+            .eq("is_active", true)
             .maybeSingle();
 
           if (error || !adminAccount) {
@@ -41,7 +39,6 @@ export function AdminRouteProtector() {
           // Valid admin - apply security measures
           console.log("🛡️ ADMIN ROUTE PROTECTED - SECURE ACCESS VERIFIED");
           document.title = "GAIA - Secure Admin Portal";
-
         } catch (error) {
           console.error("Admin verification error:", error);
           navigate("/", { replace: true });

@@ -162,9 +162,7 @@ export function ActionLedgerControlPanel() {
 
   const handleReverseAction = (actionId: string) => {
     setActionLogs((prev) =>
-      prev.map((log) =>
-        log.id === actionId ? { ...log, status: "reversed" as const } : log,
-      ),
+      prev.map((log) => (log.id === actionId ? { ...log, status: "reversed" as const } : log))
     );
     toast.success("🔄 Action successfully reversed", {
       description: "System state has been restored to previous configuration",
@@ -173,8 +171,7 @@ export function ActionLedgerControlPanel() {
 
   const handleEmergencyRollback = () => {
     toast.warning("⚠️ Emergency rollback initiated", {
-      description:
-        "All reversible actions from the last hour are being rolled back",
+      description: "All reversible actions from the last hour are being rolled back",
     });
     setActionLogs((prev) =>
       prev.map((log) => {
@@ -183,13 +180,12 @@ export function ActionLedgerControlPanel() {
         return actionTime > oneHourAgo && log.reversible
           ? { ...log, status: "reversed" as const }
           : log;
-      }),
+      })
     );
   };
 
   const filteredLogs = actionLogs.filter((log) => {
-    const matchesCategory =
-      filterCategory === "all" || log.category === filterCategory;
+    const matchesCategory = filterCategory === "all" || log.category === filterCategory;
     const matchesSearch =
       log.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
       log.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -206,22 +202,17 @@ export function ActionLedgerControlPanel() {
             📋 Action Ledger & Control Panel
           </CardTitle>
           <p className="text-muted-foreground">
-            Real-time action monitoring with reversible controls and system
-            rollback capabilities
+            Real-time action monitoring with reversible controls and system rollback capabilities
           </p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             <div className="p-3 bg-green-900/20 rounded-lg text-center">
-              <div className="text-xl font-bold text-green-400">
-                {systemMetrics.totalActions}
-              </div>
+              <div className="text-xl font-bold text-green-400">{systemMetrics.totalActions}</div>
               <div className="text-xs text-muted-foreground">Total Actions</div>
             </div>
             <div className="p-3 bg-blue-900/20 rounded-lg text-center">
-              <div className="text-xl font-bold text-blue-400">
-                {systemMetrics.todayActions}
-              </div>
+              <div className="text-xl font-bold text-blue-400">{systemMetrics.todayActions}</div>
               <div className="text-xs text-muted-foreground">Today</div>
             </div>
             <div className="p-3 bg-yellow-900/20 rounded-lg text-center">
@@ -231,24 +222,16 @@ export function ActionLedgerControlPanel() {
               <div className="text-xs text-muted-foreground">Reversible</div>
             </div>
             <div className="p-3 bg-red-900/20 rounded-lg text-center">
-              <div className="text-xl font-bold text-red-400">
-                {systemMetrics.criticalActions}
-              </div>
+              <div className="text-xl font-bold text-red-400">{systemMetrics.criticalActions}</div>
               <div className="text-xs text-muted-foreground">Critical</div>
             </div>
             <div className="p-3 bg-purple-900/20 rounded-lg text-center">
-              <div className="text-xl font-bold text-purple-400">
-                {systemMetrics.systemHealth}%
-              </div>
+              <div className="text-xl font-bold text-purple-400">{systemMetrics.systemHealth}%</div>
               <div className="text-xs text-muted-foreground">Health</div>
             </div>
             <div className="p-3 bg-cyan-900/20 rounded-lg text-center">
-              <div className="text-xl font-bold text-cyan-400">
-                {systemMetrics.activeControls}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Active Controls
-              </div>
+              <div className="text-xl font-bold text-cyan-400">{systemMetrics.activeControls}</div>
+              <div className="text-xs text-muted-foreground">Active Controls</div>
             </div>
           </div>
         </CardContent>
@@ -318,16 +301,10 @@ export function ActionLedgerControlPanel() {
                           <div className="flex items-center gap-2">
                             {getCategoryIcon(log.category)}
                             <span className="font-medium">{log.action}</span>
-                            <Badge className={getStatusColor(log.status)}>
-                              {log.status}
-                            </Badge>
-                            <Badge className={getImpactColor(log.impact)}>
-                              {log.impact}
-                            </Badge>
+                            <Badge className={getStatusColor(log.status)}>{log.status}</Badge>
+                            <Badge className={getImpactColor(log.impact)}>{log.impact}</Badge>
                           </div>
-                          <p className="text-sm text-muted-foreground">
-                            {log.description}
-                          </p>
+                          <p className="text-sm text-muted-foreground">{log.description}</p>
                           <div className="flex items-center gap-4 text-xs text-muted-foreground">
                             <span className="flex items-center gap-1">
                               <User className="h-3 w-3" />
@@ -380,9 +357,7 @@ export function ActionLedgerControlPanel() {
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="autorollback">
-                    Auto-rollback on Critical Errors
-                  </Label>
+                  <Label htmlFor="autorollback">Auto-rollback on Critical Errors</Label>
                   <Switch
                     id="autorollback"
                     checked={autoRollbackEnabled}
@@ -407,21 +382,15 @@ export function ActionLedgerControlPanel() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-sm">Authentication Status</span>
-                    <Badge className="text-green-400 bg-green-900/30">
-                      Active
-                    </Badge>
+                    <Badge className="text-green-400 bg-green-900/30">Active</Badge>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm">Quantum Encryption</span>
-                    <Badge className="text-green-400 bg-green-900/30">
-                      Enabled
-                    </Badge>
+                    <Badge className="text-green-400 bg-green-900/30">Enabled</Badge>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm">Audit Logging</span>
-                    <Badge className="text-green-400 bg-green-900/30">
-                      Active
-                    </Badge>
+                    <Badge className="text-green-400 bg-green-900/30">Active</Badge>
                   </div>
                 </div>
                 <Button className="w-full" variant="outline">
@@ -457,9 +426,7 @@ export function ActionLedgerControlPanel() {
                 <Button
                   variant="outline"
                   className="border-orange-500/30 text-orange-400 hover:bg-orange-900/20"
-                  onClick={() =>
-                    toast.warning("Feature requires admin confirmation")
-                  }
+                  onClick={() => toast.warning("Feature requires admin confirmation")}
                 >
                   <RotateCcw className="h-4 w-4 mr-2" />
                   Rollback Last 24h
@@ -467,11 +434,7 @@ export function ActionLedgerControlPanel() {
                 <Button
                   variant="outline"
                   className="border-red-500/30 text-red-400 hover:bg-red-900/20"
-                  onClick={() =>
-                    toast.error(
-                      "Emergency protocol requires dual authorization",
-                    )
-                  }
+                  onClick={() => toast.error("Emergency protocol requires dual authorization")}
                 >
                   <AlertTriangle className="h-4 w-4 mr-2" />
                   Emergency Reset
@@ -479,19 +442,12 @@ export function ActionLedgerControlPanel() {
               </div>
               <Card className="bg-red-900/10 border-red-500/20">
                 <CardContent className="p-4">
-                  <p className="text-sm text-red-400 mb-2">
-                    ⚠️ Important Safety Information:
-                  </p>
+                  <p className="text-sm text-red-400 mb-2">⚠️ Important Safety Information:</p>
                   <ul className="text-xs text-muted-foreground space-y-1">
                     <li>• Only reversible actions can be rolled back</li>
-                    <li>
-                      • Emergency rollback affects all changes in the specified
-                      timeframe
-                    </li>
+                    <li>• Emergency rollback affects all changes in the specified timeframe</li>
                     <li>• All rollback actions are logged and auditable</li>
-                    <li>
-                      • Critical operations require dual administrator approval
-                    </li>
+                    <li>• Critical operations require dual administrator approval</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -503,53 +459,39 @@ export function ActionLedgerControlPanel() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <Card className="border-green-500/30">
               <CardHeader>
-                <CardTitle className="text-green-400 text-sm">
-                  System Health
-                </CardTitle>
+                <CardTitle className="text-green-400 text-sm">System Health</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-green-400">98.7%</div>
                 <div className="flex items-center gap-2 mt-2">
                   <CheckCircle className="h-4 w-4 text-green-400" />
-                  <span className="text-xs text-muted-foreground">
-                    All systems operational
-                  </span>
+                  <span className="text-xs text-muted-foreground">All systems operational</span>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="border-blue-500/30">
               <CardHeader>
-                <CardTitle className="text-blue-400 text-sm">
-                  Active Sessions
-                </CardTitle>
+                <CardTitle className="text-blue-400 text-sm">Active Sessions</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-blue-400">12</div>
                 <div className="flex items-center gap-2 mt-2">
                   <User className="h-4 w-4 text-blue-400" />
-                  <span className="text-xs text-muted-foreground">
-                    Admin sessions active
-                  </span>
+                  <span className="text-xs text-muted-foreground">Admin sessions active</span>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="border-purple-500/30">
               <CardHeader>
-                <CardTitle className="text-purple-400 text-sm">
-                  Security Level
-                </CardTitle>
+                <CardTitle className="text-purple-400 text-sm">Security Level</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-purple-400">
-                  Maximum
-                </div>
+                <div className="text-2xl font-bold text-purple-400">Maximum</div>
                 <div className="flex items-center gap-2 mt-2">
                   <Shield className="h-4 w-4 text-purple-400" />
-                  <span className="text-xs text-muted-foreground">
-                    Quantum protected
-                  </span>
+                  <span className="text-xs text-muted-foreground">Quantum protected</span>
                 </div>
               </CardContent>
             </Card>
@@ -557,9 +499,7 @@ export function ActionLedgerControlPanel() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-cyan-400">
-                Live System Events
-              </CardTitle>
+              <CardTitle className="text-cyan-400">Live System Events</CardTitle>
             </CardHeader>
             <CardContent>
               <ScrollArea className="h-48">
@@ -568,20 +508,19 @@ export function ActionLedgerControlPanel() {
                     [{new Date().toLocaleTimeString()}] System health check: OK
                   </div>
                   <div className="text-blue-400">
-                    [{new Date(Date.now() - 30000).toLocaleTimeString()}]
-                    Security scan completed: No threats detected
+                    [{new Date(Date.now() - 30000).toLocaleTimeString()}] Security scan completed:
+                    No threats detected
                   </div>
                   <div className="text-yellow-400">
-                    [{new Date(Date.now() - 60000).toLocaleTimeString()}]
-                    Database backup initiated
+                    [{new Date(Date.now() - 60000).toLocaleTimeString()}] Database backup initiated
                   </div>
                   <div className="text-green-400">
-                    [{new Date(Date.now() - 90000).toLocaleTimeString()}]
-                    Real-time monitoring: Active
+                    [{new Date(Date.now() - 90000).toLocaleTimeString()}] Real-time monitoring:
+                    Active
                   </div>
                   <div className="text-purple-400">
-                    [{new Date(Date.now() - 120000).toLocaleTimeString()}]
-                    Quantum encryption: Verified
+                    [{new Date(Date.now() - 120000).toLocaleTimeString()}] Quantum encryption:
+                    Verified
                   </div>
                 </div>
               </ScrollArea>
