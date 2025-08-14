@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 // Safe useAuth that handles missing AuthProvider
@@ -24,17 +24,7 @@ export function useSecureAdmin() {
   const [isValidating, setIsValidating] = useState(true);
   const { user } = useSafeAuth();
 
-  useEffect(() => {
-    if (user) {
-      validateAdminSession();
-    } else {
-      setIsAdmin(false);
-      setAdminSession(null);
-      setIsValidating(false);
-    }
-  }, [user]);
-
-  const validateAdminSession = async () => {
+  const validateAdminSession = useCallback(async () => {
     if (!user) {
       setIsValidating(false);
       return;
@@ -71,7 +61,17 @@ export function useSecureAdmin() {
     } finally {
       setIsValidating(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      validateAdminSession();
+    } else {
+      setIsAdmin(false);
+      setAdminSession(null);
+      setIsValidating(false);
+    }
+  }, [user, validateAdminSession]);
 
   const grantAdminAccess = async (): Promise<boolean> => {
     if (!user) return false;

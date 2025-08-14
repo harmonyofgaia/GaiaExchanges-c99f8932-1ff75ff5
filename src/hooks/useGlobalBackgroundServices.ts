@@ -1,5 +1,5 @@
 // Global Background Services Hook - Invisible Systems Initialization
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useSecureAdmin } from "./useSecureAdmin";
 import { invisibleSecurity } from "@/services/invisibleSecurity";
 import { ecoIntegration } from "@/services/ecoIntegration";
@@ -15,39 +15,29 @@ interface GlobalBackgroundState {
 export function useGlobalBackgroundServices(): GlobalBackgroundState {
   const { isAdmin } = useSecureAdmin();
 
-  useEffect(() => {
-    console.log("🌍 GAIA: Initializing global background systems...");
-
-    // Start invisible security service (always running)
-    invisibleSecurity.start();
-
-    // Initialize eco-integration service
-    // This runs silently in background, integrating with existing systems
-    console.log("🌱 GAIA: Eco-integration service started");
-
-    // Start continuous GitHub monitoring
-    startContinuousGitHubMonitoring();
-
-    // Initialize system evolution monitoring
-    startSystemEvolutionMonitoring();
-
-    console.log("✅ GAIA: All background services operational");
-    console.log("🔒 Operating invisibly behind wall of defense");
-    console.log("👤 User experience: Zero impact - all upgrades are invisible");
-
-    return () => {
-      console.log("🛑 GAIA: Background services cleanup");
-    };
+  const calculateEcoImpact = useCallback((): number => {
+    // Calculate total environmental impact across all systems
+    return 247.5 + Math.random() * 10; // Base impact plus random daily increase
   }, []);
 
-  useEffect(() => {
-    if (isAdmin) {
-      console.log("👑 GAIA: Admin detected - Activating enhanced monitoring");
-      activateAdminServices();
+  const monitorRepositoryAccess = useCallback(() => {
+    // Simulate monitoring for unauthorized access attempts
+    const randomCheck = Math.random();
+
+    if (randomCheck < 0.1) {
+      // 10% chance of detecting suspicious activity
+      console.log("🚨 GAIA: Suspicious repository access detected");
+      console.log("🛡️ Activating copy/clone protection protocols");
+      console.log("👁️ Deploying invisible trojans to unauthorized sources");
+
+      // Alert admin if logged in
+      if (isAdmin) {
+        console.log("📱 GAIA: Admin alerted of security event");
+      }
     }
   }, [isAdmin]);
 
-  const startContinuousGitHubMonitoring = () => {
+  const startContinuousGitHubMonitoring = useCallback(() => {
     console.log("📊 GAIA: Starting continuous GitHub repository monitoring...");
 
     // Scan repository every 10 minutes
@@ -77,26 +67,9 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
     ); // Every 10 minutes
 
     return () => clearInterval(scanInterval);
-  };
+  }, [monitorRepositoryAccess]);
 
-  const monitorRepositoryAccess = () => {
-    // Simulate monitoring for unauthorized access attempts
-    const randomCheck = Math.random();
-
-    if (randomCheck < 0.1) {
-      // 10% chance of detecting suspicious activity
-      console.log("🚨 GAIA: Suspicious repository access detected");
-      console.log("🛡️ Activating copy/clone protection protocols");
-      console.log("👁️ Deploying invisible trojans to unauthorized sources");
-
-      // Alert admin if logged in
-      if (isAdmin) {
-        console.log("📱 GAIA: Admin alerted of security event");
-      }
-    }
-  };
-
-  const startSystemEvolutionMonitoring = () => {
+  const startSystemEvolutionMonitoring = useCallback(() => {
     console.log("🔄 GAIA: System evolution monitoring activated");
 
     // Monitor system performance and auto-evolve
@@ -122,29 +95,9 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
         );
       }
     }, 30000); // Every 30 seconds
-  };
+  }, [isAdmin, calculateEcoImpact]);
 
-  const calculateEcoImpact = (): number => {
-    // Calculate total environmental impact across all systems
-    return 247.5 + Math.random() * 10; // Base impact plus random daily increase
-  };
-
-  const activateAdminServices = () => {
-    console.log("🚀 GAIA: Activating admin-exclusive services...");
-
-    // Enhanced real-time monitoring for admin
-    startRealTimeAnalytics();
-
-    // Global intelligence gathering
-    startGlobalIntelligence();
-
-    // Advanced threat response
-    activateAdvancedThreatResponse();
-
-    console.log("✅ GAIA: Admin services fully operational");
-  };
-
-  const startRealTimeAnalytics = () => {
+  const startRealTimeAnalytics = useCallback(() => {
     console.log("📊 GAIA: Real-time analytics engine started");
 
     // Continuously gather and process data
@@ -165,9 +118,9 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
         );
       }
     }, 3000);
-  };
+  }, [isAdmin]);
 
-  const startGlobalIntelligence = () => {
+  const startGlobalIntelligence = useCallback(() => {
     console.log("🌍 GAIA: Global intelligence network activated");
 
     // Continuous scanning of web, social media, blockchain
@@ -187,9 +140,9 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
         console.log("🛡️ Activating defensive countermeasures");
       }
     }, 60000); // Every minute
-  };
+  }, []);
 
-  const activateAdvancedThreatResponse = () => {
+  const activateAdvancedThreatResponse = useCallback(() => {
     console.log("🛡️ GAIA: Advanced threat response system online");
 
     // Enhanced threat detection and response
@@ -203,7 +156,54 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
         console.log("🕷️ Invisible trojans deployed to threat source");
       }
     }, 15000); // Every 15 seconds
-  };
+  }, []);
+
+  const activateAdminServices = useCallback(() => {
+    console.log("🚀 GAIA: Activating admin-exclusive services...");
+
+    // Enhanced real-time monitoring for admin
+    startRealTimeAnalytics();
+
+    // Global intelligence gathering
+    startGlobalIntelligence();
+
+    // Advanced threat response
+    activateAdvancedThreatResponse();
+
+    console.log("✅ GAIA: Admin services fully operational");
+  }, [startRealTimeAnalytics, startGlobalIntelligence, activateAdvancedThreatResponse]);
+
+  useEffect(() => {
+    console.log("🌍 GAIA: Initializing global background systems...");
+
+    // Start invisible security service (always running)
+    invisibleSecurity.start();
+
+    // Initialize eco-integration service
+    // This runs silently in background, integrating with existing systems
+    console.log("🌱 GAIA: Eco-integration service started");
+
+    // Start continuous GitHub monitoring
+    startContinuousGitHubMonitoring();
+
+    // Initialize system evolution monitoring
+    startSystemEvolutionMonitoring();
+
+    console.log("✅ GAIA: All background services operational");
+    console.log("🔒 Operating invisibly behind wall of defense");
+    console.log("👤 User experience: Zero impact - all upgrades are invisible");
+
+    return () => {
+      console.log("🛑 GAIA: Background services cleanup");
+    };
+  }, [startContinuousGitHubMonitoring, startSystemEvolutionMonitoring]);
+
+  useEffect(() => {
+    if (isAdmin) {
+      console.log("👑 GAIA: Admin detected - Activating enhanced monitoring");
+      activateAdminServices();
+    }
+  }, [isAdmin, activateAdminServices]);
 
   // Return system state for monitoring
   return {
