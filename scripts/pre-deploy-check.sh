@@ -91,7 +91,7 @@ if npm run build > /dev/null 2>&1; then
 else
     echo -e "${RED}✗${NC} Build failed"
 fi
-TOTAL_CHECKS=$((TOTAL_CHECKS + 5))
+TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
 
 echo ""
 echo "🔒 Security Verification"
