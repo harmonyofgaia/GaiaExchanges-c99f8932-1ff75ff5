@@ -135,7 +135,9 @@ export function SupremeSearchTracking() {
             accessLevel: ["surface", "deep", "core", "quantum"][
               Math.floor(Math.random() * 4)
             ] as unknown,
-            status: ["scanning", "breached", "controlled"][Math.floor(Math.random() * 3)] as unknown,
+            status: ["scanning", "breached", "controlled"][
+              Math.floor(Math.random() * 3)
+            ] as unknown,
             dataExtracted: Math.floor(Math.random() * 1000),
           };
 

@@ -62,7 +62,7 @@ serve(async (req) => {
   }
 });
 
-async function runSecurityScan(supabaseClient: any, scanType: string) {
+async function runSecurityScan(supabaseClient: unknown, scanType: string) {
   try {
     // Call the security monitor function
     const response = await fetch(`${Deno.env.get("SUPABASE_URL")}/functions/v1/security-monitor`, {
@@ -82,7 +82,7 @@ async function runSecurityScan(supabaseClient: any, scanType: string) {
   }
 }
 
-async function runThreatDetection(supabaseClient: any) {
+async function runThreatDetection(supabaseClient: unknown) {
   try {
     // Simulate threat intelligence gathering
     const threats = await gatherThreatIntelligence(supabaseClient);
@@ -103,7 +103,7 @@ async function runThreatDetection(supabaseClient: any) {
   }
 }
 
-async function runPerformanceScan(supabaseClient: any) {
+async function runPerformanceScan(supabaseClient: unknown) {
   try {
     // Simulate performance monitoring
     const performanceMetrics = {
@@ -124,7 +124,7 @@ async function runPerformanceScan(supabaseClient: any) {
   }
 }
 
-async function generateWeeklyReport(supabaseClient: any) {
+async function generateWeeklyReport(supabaseClient: unknown) {
   try {
     // Call the weekly report function
     const response = await fetch(
@@ -146,7 +146,7 @@ async function generateWeeklyReport(supabaseClient: any) {
   }
 }
 
-async function gatherThreatIntelligence(supabaseClient: any) {
+async function gatherThreatIntelligence(supabaseClient: unknown) {
   // Simulate threat intelligence from various sources
   const threats = [];
 

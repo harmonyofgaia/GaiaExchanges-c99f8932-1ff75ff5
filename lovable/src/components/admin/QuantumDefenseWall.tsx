@@ -247,7 +247,9 @@ export function QuantumDefenseWall() {
                 "Data Exfiltration",
                 "Privilege Escalation",
               ][Math.floor(Math.random() * 5)],
-              severity: ["critical", "high", "medium", "low"][Math.floor(Math.random() * 4)] as unknown,
+              severity: ["critical", "high", "medium", "low"][
+                Math.floor(Math.random() * 4)
+              ] as unknown,
               source_ip: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
               location: ["Unknown", "China", "Russia", "North Korea", "Iran", "Anonymous Proxy"][
                 Math.floor(Math.random() * 6)

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -48,7 +48,7 @@ export function LandscapeBuilderAdvanced() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Advanced AI Enhancement System
-  const autoEnhanceLandscape = () => {
+  const autoEnhanceLandscape = useCallback(() => {
     if (!aiMode) return;
 
     const enhancementTypes = ["tree", "mountain", "water", "building"];
@@ -83,14 +83,14 @@ export function LandscapeBuilderAdvanced() {
         duration: 3000,
       });
     }
-  };
+  }, [aiMode, brushSize]);
 
   useEffect(() => {
     if (isAutoMode || aiMode) {
       const interval = setInterval(autoEnhanceLandscape, aiMode ? 1500 : 3000);
       return () => clearInterval(interval);
     }
-  }, [isAutoMode, aiMode, brushSize, selectedTool]);
+  }, [isAutoMode, aiMode, brushSize, selectedTool, autoEnhanceLandscape]);
 
   // Weather System Effects
   useEffect(() => {

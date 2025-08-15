@@ -10,7 +10,7 @@ interface AdminOnlyLoginProps {
 export function AdminOnlyLogin({ onAdminLogin }: AdminOnlyLoginProps) {
   useEffect(() => {
     console.warn("AdminOnlyLogin is deprecated. Use SecureAdminLogin instead.");
-  }, []);
+  }, [warn]);
 
   return <SecureAdminLogin onAdminLogin={onAdminLogin} />;
 }

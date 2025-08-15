@@ -40,7 +40,7 @@ export function LiveVaultStats() {
     // Update stats every 10 seconds
     const interval = setInterval(fetchLiveStats, 10000);
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchLiveStats]);
 
   const fetchLiveStats = async () => {
     try {

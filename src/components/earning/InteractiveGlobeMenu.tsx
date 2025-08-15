@@ -169,7 +169,7 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
-  }, []);
+  }, [useCallback, setIsDragging]);
 
   useEffect(() => {
     if (isDragging) {

@@ -52,7 +52,7 @@ export function QuantumGameInventory() {
   useEffect(() => {
     initializeQuantumInventory();
     generateGameLevels();
-  }, []);
+  }, [initializeQuantumInventory]);
 
   const initializeQuantumInventory = () => {
     const assets: GameAsset[] = [

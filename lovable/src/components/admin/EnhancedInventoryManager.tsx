@@ -41,9 +41,9 @@ export function EnhancedInventoryManager() {
 
   useEffect(() => {
     loadEnhancedInventory();
-  }, []);
+  }, [loadEnhancedInventory]);
 
-  const loadEnhancedInventory = () => {
+  const loadEnhancedInventory = useCallback(() => {
     const items: InventoryItem[] = [
       // Mythical Weapons
       {
@@ -57,7 +57,7 @@ export function EnhancedInventoryManager() {
         fileSize: "15.7 GB",
         value: 1000000,
         quantity: 1,
-      },
+      }, [const, items, id]);,
       {
         id: "weapon-myth-002",
         name: "⚡ Thunder God's Hammer",

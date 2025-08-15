@@ -68,7 +68,7 @@ export function SystemIntegrityChecker() {
     checkSystemHealth();
     const interval = setInterval(checkSystemHealth, 300000); // Check every 5 minutes
     return () => clearInterval(interval);
-  }, []);
+  }, [checkSystemHealth]);
 
   const healthItems = [
     { key: "database", label: "Database Connection", icon: Database },

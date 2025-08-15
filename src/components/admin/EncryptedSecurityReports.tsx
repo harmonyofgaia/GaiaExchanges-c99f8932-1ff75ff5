@@ -28,9 +28,9 @@ export function EncryptedSecurityReports() {
     const reportInterval = setInterval(generateDailyReport, 24 * 60 * 60 * 1000);
 
     return () => clearInterval(reportInterval);
-  }, []);
+  }, [generateDailyReport]);
 
-  const generateDailyReport = () => {
+  const generateDailyReport = useCallback(() => {
     console.log("📊 GENERATING ENCRYPTED DAILY SECURITY REPORT");
 
     const improvements = [
@@ -64,7 +64,7 @@ export function EncryptedSecurityReports() {
     setReports((prev) => [newReport, ...prev.slice(0, 9)]);
 
     console.log("🔐 DAILY SECURITY REPORT GENERATED - ENCRYPTED AND SECURED");
-  };
+  }, []);
 
   const downloadEncryptedPDF = async () => {
     if (!currentReport) return;

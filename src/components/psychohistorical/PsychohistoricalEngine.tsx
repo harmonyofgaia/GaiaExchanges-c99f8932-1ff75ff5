@@ -79,7 +79,7 @@ export function PsychohistoricalEngine() {
     initializePredictionModels();
     initializeGeneratedIdeas();
     startRealTimeUpdates();
-  }, []);
+  }, [initializeDataStreams]);
 
   const initializeDataStreams = () => {
     const streams: DataStream[] = [

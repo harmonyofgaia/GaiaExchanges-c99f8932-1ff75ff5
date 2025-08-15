@@ -108,9 +108,9 @@ export function SnakeWormsIntegration() {
 
       return newSnake;
     });
-  }, [direction, gameState, worms]);
+  }, [direction, gameState, worms, initiateWormBattle]);
 
-  const initiateWormBattle = (worm: Worm) => {
+  const initiateWormBattle = useCallback((worm: Worm) => {
     const damage = selectedWeapon.damage + Math.floor(Math.random() * 25);
 
     setWorms(
@@ -126,7 +126,7 @@ export function SnakeWormsIntegration() {
                   score: stats.score + 100,
                   wormsDestroyed: stats.wormsDestroyed + 1,
                   gaiaTokensEarned: stats.gaiaTokensEarned + 2.5,
-                }));
+                }, [worm, const, damage]);));
 
                 toast.success(`🐍 Snake Victory!`, {
                   description: `Worm destroyed with ${selectedWeapon.icon} ${selectedWeapon.name}! +2.5 GAiA earned!`,
@@ -153,7 +153,7 @@ export function SnakeWormsIntegration() {
     );
   };
 
-  const fireWeapon = (targetX: number, targetY: number) => {
+  const fireWeapon = useCallback((targetX: number, targetY: number) => {
     if (gameState !== "playing") return;
 
     // Check if any worms are in weapon radius
@@ -167,7 +167,7 @@ export function SnakeWormsIntegration() {
 
     hitWorms.forEach((worm) => {
       initiateWormBattle(worm);
-    });
+    }, [targetX, number, targetY]););
 
     if (hitWorms.length === 0) {
       toast.info("🎯 Missed!", {
@@ -211,7 +211,7 @@ export function SnakeWormsIntegration() {
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [direction, gameState, snake, selectedWeapon]);
+  }, [direction, gameState, snake, selectedWeapon, fireWeapon]);
 
   const startGame = () => {
     setGameState("playing");

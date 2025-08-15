@@ -107,7 +107,7 @@ export function PsychohistoricalIntegration() {
     initializeLeaderboard();
     initializeUserStats();
     startRealTimeUpdates();
-  }, []);
+  }, [initializeTokenData]);
 
   const initializeTokenData = () => {
     const rewards: TokenReward[] = [

@@ -134,7 +134,9 @@ export function UltimateIntelligenceHub() {
         id: Math.random().toString(36),
         identifier: `TGT-${Math.floor(Math.random() * 99999)}`,
         location: locations[Math.floor(Math.random() * locations.length)],
-        status: ["monitoring", "infiltrated", "controlled"][Math.floor(Math.random() * 3)] as unknown,
+        status: ["monitoring", "infiltrated", "controlled"][
+          Math.floor(Math.random() * 3)
+        ] as unknown,
         threat_level: Math.floor(Math.random() * 100),
         last_activity: new Date(),
       };

@@ -97,7 +97,7 @@ export function SystemHealthChecker() {
   useEffect(() => {
     // Run initial system check
     runSystemCheck();
-  }, []);
+  }, [runSystemCheck]);
 
   const getStatusIcon = (status: string) => {
     switch (status) {

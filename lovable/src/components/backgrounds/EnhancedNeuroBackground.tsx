@@ -121,7 +121,9 @@ export function EnhancedNeuroBackground({
           break;
 
         case "abstract":
-          const angle = (index / total) * Math.PI * 2 + Math.random() * 0.5;
+          {
+            const angle = (index / total) * Math.PI * 2 + Math.random() * 0.5;
+          }
           const radius = 100 + Math.random() * 200;
           node = {
             x: canvas.width / 2 + Math.cos(angle) * radius + Math.random() * 100,
@@ -157,7 +159,9 @@ export function EnhancedNeuroBackground({
           break;
 
         case "geometric":
-          const gridSize = Math.sqrt(total);
+          {
+            const gridSize = Math.sqrt(total);
+          }
           const cellWidth = canvas.width / gridSize;
           const cellHeight = canvas.height / gridSize;
           const gridX = (index % gridSize) * cellWidth + cellWidth / 2;

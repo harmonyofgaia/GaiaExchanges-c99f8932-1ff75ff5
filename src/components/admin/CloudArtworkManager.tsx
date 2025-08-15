@@ -45,7 +45,7 @@ export function CloudArtworkManager() {
 
   useEffect(() => {
     loadCloudArtworks();
-  }, []);
+  }, [loadCloudArtworks]);
 
   const loadCloudArtworks = async () => {
     try {

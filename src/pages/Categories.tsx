@@ -585,7 +585,9 @@ export default function Categories() {
         case "alphabetical":
           return a.title.localeCompare(b.title);
         case "difficulty":
-          const difficultyOrder = { Easy: 1, Medium: 2, Hard: 3, Advanced: 4 };
+          {
+            const difficultyOrder = { Easy: 1, Medium: 2, Hard: 3, Advanced: 4 };
+          }
           return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
         default:
           return 0;

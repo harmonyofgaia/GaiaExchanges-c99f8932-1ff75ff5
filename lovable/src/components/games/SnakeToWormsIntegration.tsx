@@ -172,11 +172,11 @@ export function SnakeToWormsIntegration() {
   };
 
   // Worms game logic
-  const fireWeapon = (targetX: number, targetY: number) => {
+  const fireWeapon = useCallback((targetX: number, targetY: number) => {
     if (!selectedWorm || !wormsGameActive) return;
 
     // Create explosion effect
-    const explosion = { x: targetX, y: targetY };
+    const explosion = { x: targetX, y: targetY }, [targetX, number, targetY]);
     setExplosions((prev) => [...prev, explosion]);
 
     // Remove explosion after animation

@@ -33,7 +33,7 @@ export function GaiaCoinCrafter() {
       "🏭 GAiA Coin Crafter: Connected to official token address:",
       GAIA_TOKEN.WALLET_ADDRESS
     );
-  }, []);
+  }, [log]);
 
   return (
     <div className="space-y-6">

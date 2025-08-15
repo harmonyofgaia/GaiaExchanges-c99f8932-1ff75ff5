@@ -48,7 +48,7 @@ export function SystemConsistencyScanner() {
     const interval = setInterval(runConsistencyCheck, 30000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [runConsistencyCheck]);
 
   return (
     <div className="space-y-6">

@@ -71,7 +71,7 @@ export function EnhancedPersistentMusicPlayer() {
       !window.location.hostname.includes("127.0.0.1") &&
       !window.location.hostname.includes(".app"); // Lovable staging
     setIsDeveloperMode(!isProduction);
-  }, []);
+  }, [includes]);
 
   useEffect(() => {
     // Load saved playlists and current track

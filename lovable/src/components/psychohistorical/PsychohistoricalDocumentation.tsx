@@ -104,7 +104,7 @@ export function PsychohistoricalDocumentation() {
     initializeKnowledgePatterns();
     initializeGlobalInsights();
     startRealTimeUpdates();
-  }, []);
+  }, [initializeDocumentation]);
 
   const initializeDocumentation = () => {
     const docs: DocumentationEntry[] = [

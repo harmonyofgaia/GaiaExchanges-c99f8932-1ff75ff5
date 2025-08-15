@@ -90,7 +90,7 @@ export default function EcoMissionGenerator() {
   useEffect(() => {
     loadMissions();
     generateAIInsights();
-  }, []);
+  }, [loadMissions]);
 
   const mockMissions: EcoMission[] = [
     {

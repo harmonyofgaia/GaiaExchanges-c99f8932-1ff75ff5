@@ -26,7 +26,7 @@ export function BigHolderContracts() {
   useEffect(() => {
     fetchContracts();
     getUserIP();
-  }, []);
+  }, [fetchContracts]);
 
   const getUserIP = async () => {
     try {

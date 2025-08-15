@@ -55,7 +55,7 @@ export function GamingAssetsManager() {
 
   useEffect(() => {
     loadGameAssets();
-  }, []);
+  }, [loadGameAssets]);
 
   const loadGameAssets = () => {
     const gameAssets: GameAsset[] = [

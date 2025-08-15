@@ -11,7 +11,7 @@
  * - Maintains dashboard functionality even when individual tabs fail
  */
 
-import React, { Component, ReactNode } from "react";
+import React, { Component, ReactNode , useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertTriangle, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";

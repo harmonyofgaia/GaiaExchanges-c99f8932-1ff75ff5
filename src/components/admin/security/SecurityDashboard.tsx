@@ -81,7 +81,7 @@ export function SecurityDashboard() {
 
   useEffect(() => {
     loadSecurityData();
-  }, []);
+  }, [loadSecurityData]);
 
   const loadSecurityData = async () => {
     setLoading(true);

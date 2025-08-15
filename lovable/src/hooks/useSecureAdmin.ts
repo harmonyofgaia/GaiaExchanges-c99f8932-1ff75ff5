@@ -13,7 +13,7 @@ export function useSecureAdmin() {
 
   useEffect(() => {
     validateAdminSession();
-  }, []);
+  }, [validateAdminSession]);
 
   const validateAdminSession = () => {
     try {

@@ -36,7 +36,7 @@ serve(async (req) => {
   }
 });
 
-async function generateWeeklySecurityReport(supabaseClient: any) {
+async function generateWeeklySecurityReport(supabaseClient: unknown) {
   const endDate = new Date();
   const startDate = new Date(endDate.getTime() - 7 * 24 * 60 * 60 * 1000); // 7 days ago
 
@@ -99,7 +99,7 @@ async function generateWeeklySecurityReport(supabaseClient: any) {
   };
 }
 
-function generateSecurityInsights(metrics: any, scans: any[], threats: any[]) {
+function generateSecurityInsights(metrics: unknown, scans: unknown[], threats: unknown[]) {
   const insights = [];
 
   // Compliance trend
@@ -145,7 +145,7 @@ function generateSecurityInsights(metrics: any, scans: any[], threats: any[]) {
   return insights;
 }
 
-function generateSecurityRecommendations(metrics: any, scans: any[], threats: any[]) {
+function generateSecurityRecommendations(metrics: unknown, scans: unknown[], threats: unknown[]) {
   const recommendations = [];
 
   // Compliance recommendations
@@ -196,9 +196,9 @@ function generateSecurityRecommendations(metrics: any, scans: any[], threats: an
 }
 
 function generateHTMLReport(
-  metrics: any,
-  insights: any[],
-  recommendations: any[],
+  metrics: unknown,
+  insights: unknown[],
+  recommendations: unknown[],
   startDate: Date,
   endDate: Date
 ) {

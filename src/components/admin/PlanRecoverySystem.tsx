@@ -57,7 +57,7 @@ function PlanRecoverySystem() {
     // Initialize and start 24/7 monitoring
     initializePlanRecovery();
     startRealTimeMonitoring();
-  }, []);
+  }, [initializePlanRecovery]);
 
   const initializePlanRecovery = async () => {
     setIsScanning(true);

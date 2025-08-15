@@ -42,7 +42,7 @@ const GaiaConsistencyStatus = () => {
 
   useEffect(() => {
     runConsistencyScan();
-  }, []);
+  }, [runConsistencyScan]);
 
   const getStatusIcon = (status: string) => {
     switch (status) {

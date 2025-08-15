@@ -26,7 +26,7 @@ export function OptimizedMouseAttraction() {
 
   const handleMouseLeave = useCallback(() => {
     mouseRef.current.active = false;
-  }, []);
+  }, [useCallback]);
 
   // Initialize canvas and particles
   useEffect(() => {

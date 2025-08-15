@@ -184,7 +184,18 @@ export function TetrisGame() {
         }
       }
     },
-    [currentPiece, isPlaying, gameOver, board, score, gaiaTokensEarned, level, lines]
+    [
+      currentPiece,
+      isPlaying,
+      gameOver,
+      board,
+      score,
+      gaiaTokensEarned,
+      level,
+      lines,
+      isValidMove,
+      placePiece,
+    ]
   );
 
   const rotatePieceHandler = () => {

@@ -19,7 +19,7 @@ export function useEcoIntegration() {
       ecoScore: 85,
       activities: ["Water Conservation", "Solar Energy", "Tree Planting"],
     });
-  }, []);
+  }, [setUserProfile]);
 
   return {
     userProfile,

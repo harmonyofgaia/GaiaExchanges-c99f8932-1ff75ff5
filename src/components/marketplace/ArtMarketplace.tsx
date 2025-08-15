@@ -53,7 +53,7 @@ export function ArtMarketplace() {
     // Auto-refresh every 30 seconds for live updates
     const interval = setInterval(fetchMarketplaceItems, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchMarketplaceItems]);
 
   const fetchMarketplaceItems = async () => {
     try {

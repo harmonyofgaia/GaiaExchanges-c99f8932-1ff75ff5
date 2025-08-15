@@ -61,7 +61,7 @@ export default function DecentralizedProjectFundingPools() {
 
   useEffect(() => {
     loadProjects();
-  }, []);
+  }, [loadProjects]);
 
   const mockProjects: GreenProject[] = [
     {

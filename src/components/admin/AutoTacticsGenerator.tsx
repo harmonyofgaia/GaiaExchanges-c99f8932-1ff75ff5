@@ -36,7 +36,7 @@ export function AutoTacticsGenerator() {
     // Auto-generate new tactics daily
     const interval = setInterval(generateDailyTactics, 24 * 60 * 60 * 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [generateDailyTactics]);
 
   const generateDailyTactics = async () => {
     setIsGenerating(true);

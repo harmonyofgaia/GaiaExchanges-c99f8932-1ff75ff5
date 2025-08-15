@@ -51,7 +51,7 @@ export function UltimateWalletProtection() {
       description: "👑 Harmony of Gaia and all holders now have MAXIMUM security",
       duration: 8000,
     });
-  }, []);
+  }, [success]);
 
   const launchMaximumProtection = () => {
     setIsLaunchingMaximumProtection(true);

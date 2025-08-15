@@ -69,7 +69,7 @@ export function ProLandscapeBuilder() {
     initializeCloudStorage();
     loadSavedProjects();
     startRealTimeRendering();
-  }, []);
+  }, [initializeCloudStorage]);
 
   const initializeCloudStorage = () => {
     console.log("🌩️ CLOUD STORAGE INITIALIZED - UNLIMITED CAPACITY");

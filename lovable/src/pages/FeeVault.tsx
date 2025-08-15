@@ -54,7 +54,7 @@ const FeeVault = () => {
     // Auto-refresh every 5 seconds for live updates
     const interval = setInterval(fetchVaultData, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchVaultData]);
 
   const fetchVaultData = async () => {
     try {

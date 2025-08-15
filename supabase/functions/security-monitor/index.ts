@@ -93,7 +93,7 @@ serve(async (req) => {
   }
 });
 
-async function performSecurityScan(supabaseClient: any) {
+async function performSecurityScan(supabaseClient: unknown) {
   const startTime = Date.now();
 
   // Simulate comprehensive security checks
@@ -136,7 +136,7 @@ async function performSecurityScan(supabaseClient: any) {
   };
 }
 
-async function checkRLSPolicies(supabaseClient: any) {
+async function checkRLSPolicies(supabaseClient: unknown) {
   // Check for tables without RLS enabled
   const { data: tables } = await supabaseClient.rpc("get_tables_without_rls");
 
@@ -150,7 +150,7 @@ async function checkRLSPolicies(supabaseClient: any) {
   };
 }
 
-async function checkFunctionSecurity(supabaseClient: any) {
+async function checkFunctionSecurity(supabaseClient: unknown) {
   // Check for functions with mutable search paths
   const { data: functions } = await supabaseClient.rpc("find_unsafe_functions");
 
@@ -164,7 +164,7 @@ async function checkFunctionSecurity(supabaseClient: any) {
   };
 }
 
-async function checkDatabaseIndexes(supabaseClient: any) {
+async function checkDatabaseIndexes(supabaseClient: unknown) {
   // Check for missing indexes on foreign keys
   return {
     status: "optimized",
@@ -176,7 +176,7 @@ async function checkDatabaseIndexes(supabaseClient: any) {
   };
 }
 
-async function checkAuthConfiguration(supabaseClient: any) {
+async function checkAuthConfiguration(supabaseClient: unknown) {
   // Check authentication settings
   return {
     status: "secure",
@@ -188,7 +188,7 @@ async function checkAuthConfiguration(supabaseClient: any) {
   };
 }
 
-async function checkAPIEndpoints(supabaseClient: any) {
+async function checkAPIEndpoints(supabaseClient: unknown) {
   // Check API endpoint security
   return {
     status: "secure",
@@ -200,7 +200,7 @@ async function checkAPIEndpoints(supabaseClient: any) {
   };
 }
 
-async function checkThreatDetection(supabaseClient: any) {
+async function checkThreatDetection(supabaseClient: unknown) {
   // Check for recent threats
   const { data: threats } = await supabaseClient
     .from("threat_intelligence")
@@ -218,7 +218,11 @@ async function checkThreatDetection(supabaseClient: any) {
   };
 }
 
-async function performAutoRemediation(supabaseClient: any, scanResults: any, scanId: string) {
+async function performAutoRemediation(
+  supabaseClient: unknown,
+  scanResults: unknown,
+  scanId: string
+) {
   // Log remediation attempts
   const remediationLogs = [];
 

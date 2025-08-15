@@ -87,7 +87,7 @@ export function Creative3DTools() {
 
   useEffect(() => {
     initializeCanvas();
-  }, []);
+  }, [initializeCanvas]);
 
   const initializeCanvas = () => {
     const canvas = canvasRef.current;

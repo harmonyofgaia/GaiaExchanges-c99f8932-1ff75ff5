@@ -28,7 +28,7 @@ export function RevolutionaryMasterPlan() {
   useEffect(() => {
     initializeMasterPlan();
     startAutoApprovalSystem();
-  }, []);
+  }, [initializeMasterPlan]);
 
   const initializeMasterPlan = () => {
     const revolutionaryIdeas: MasterPlanItem[] = [
