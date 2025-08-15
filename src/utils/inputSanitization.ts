@@ -2,33 +2,7 @@
  * Comprehensive input sanitization utilities
  */
 
-// XSS-prone characters and their safe replacements
-const XSS_PATTERNS = [
-  {
-    pattern: /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
-    replacement: "",
-  },
-  {
-    pattern: /<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi,
-    replacement: "",
-  },
-  {
-    pattern: /<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi,
-    replacement: "",
-  },
-  {
-    pattern: /<embed\b[^<]*(?:(?!<\/embed>)<[^<]*)*<\/embed>/gi,
-    replacement: "",
-  },
-  {
-    pattern: /<applet\b[^<]*(?:(?!<\/applet>)<[^<]*)*<\/applet>/gi,
-    replacement: "",
-  },
-  { pattern: /javascript:/gi, replacement: "" },
-  { pattern: /vbscript:/gi, replacement: "" },
-  { pattern: /data:text\/html/gi, replacement: "" },
-  { pattern: /on\w+\s*=/gi, replacement: "" },
-];
+import sanitizeHtml from "sanitize-html";
 
 /**
  * Sanitizes input by removing potentially dangerous XSS vectors
@@ -36,23 +10,15 @@ const XSS_PATTERNS = [
 export function sanitizeInput(input: string): string {
   if (!input || typeof input !== "string") return "";
 
-  let sanitized = input.trim();
-
-  // Apply XSS pattern removal
-  XSS_PATTERNS.forEach(({ pattern, replacement }) => {
-    sanitized = sanitized.replace(pattern, replacement);
+  // Use sanitize-html to remove dangerous tags and attributes
+  const sanitized = sanitizeHtml(input, {
+    allowedTags: [], // Remove all HTML tags
+    allowedAttributes: {}, // Remove all attributes
+    allowedSchemes: ["http", "https", "mailto"], // Only allow safe URL schemes
+    disallowedTagsMode: "discard",
   });
 
-  // Encode HTML entities for remaining tags
-  sanitized = sanitized
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#x27;")
-    .replace(/\//g, "&#x2F;");
-
-  return sanitized;
+  return sanitized.trim();
 }
 
 /**
