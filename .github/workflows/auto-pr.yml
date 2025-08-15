@@ -3,8 +3,6 @@ name: Auto PR and Smart Split
   push:
     branches:
       - "**"
-    tags:
-      ignore:
     tags-ignore:
       - "**"
 permissions:

@@ -22,9 +22,9 @@ if [[ "${CURRENT_BRANCH}" == "${BASE_BRANCH}" ]]; then
   exit 0
 fi
 
-# Ensure we have the base branch locally
 # Ensure we have the base branch locally and synchronize it with remote
 git fetch origin "${BASE_BRANCH}" && git checkout "${BASE_BRANCH}" && git reset --hard "origin/${BASE_BRANCH}"
+git checkout "${CURRENT_BRANCH}"
 
 # List changed files vs base
 mapfile -t FILES < <(git diff --name-only "${BASE_BRANCH}...HEAD" | grep -v '^$' || true)
@@ -172,20 +172,6 @@ for entry in "${TOPIC_JSON[@]}"; do
     }
   }
 
-  if [[ -n "${files}" ]]; then
-    # Use a more robust approach to checkout files
-    for file in ${files}; do
-      if [[ -f "${file}" ]]; then
-        git checkout "${CURRENT_BRANCH}" -- "${file}" 2>/dev/null || echo "Warning: Could not checkout ${file}"
-      fi
-    done
-  if [[ ${#files[@]} -gt 0 ]]; then
-    # Use a more robust approach to checkout files
-    for file in "${files[@]}"; do
-      if [[ -f "${file}" ]]; then
-        git checkout "${CURRENT_BRANCH}" -- "${file}" 2>/dev/null || echo "Warning: Could not checkout ${file}"
-      fi
-    done
   if [[ ${#file_array[@]} -gt 0 ]]; then
     # Use a more robust approach to checkout files
     for file in "${file_array[@]}"; do
