@@ -20,7 +20,7 @@ jobs:
           node-version: "20"
           cache: "npm"
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm ci
       - name: Run pre-deployment checks
         run: npm run pre-deploy
         continue-on-error: true
@@ -60,7 +60,7 @@ jobs:
           node-version: "18"
           cache: "npm"
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm ci
       - name: Set platform
         id: set_platform
         run: echo "platform=vercel" >> $GITHUB_OUTPUT
@@ -99,7 +99,7 @@ jobs:
           node-version: "18"
           cache: "npm"
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm ci
       - name: Build for production
         run: |
           if [ -z "$VITE_SUPABASE_URL" ]; then export VITE_SUPABASE_URL="https://placeholder.supabase.co"; fi
@@ -144,7 +144,7 @@ jobs:
           node-version: "18"
           cache: "npm"
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm ci
       - name: Build for GitHub Pages
         run: |
           if [ -z "$VITE_SUPABASE_URL" ]; then export VITE_SUPABASE_URL="https://placeholder.supabase.co"; fi
