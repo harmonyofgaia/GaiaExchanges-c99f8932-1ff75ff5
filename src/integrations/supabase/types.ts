@@ -862,6 +862,39 @@ export type Database = {
           },
         ]
       }
+      auth_rate_limits: {
+        Row: {
+          attempt_type: string
+          attempts: number
+          blocked_until: string | null
+          created_at: string
+          first_attempt: string
+          id: string
+          identifier: string
+          last_attempt: string
+        }
+        Insert: {
+          attempt_type: string
+          attempts?: number
+          blocked_until?: string | null
+          created_at?: string
+          first_attempt?: string
+          id?: string
+          identifier: string
+          last_attempt?: string
+        }
+        Update: {
+          attempt_type?: string
+          attempts?: number
+          blocked_until?: string | null
+          created_at?: string
+          first_attempt?: string
+          id?: string
+          identifier?: string
+          last_attempt?: string
+        }
+        Relationships: []
+      }
       bad_example: {
         Row: {
           id: number
@@ -2871,6 +2904,42 @@ export type Database = {
           log_level?: string
           request_context?: Json | null
           severity_score?: number | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      security_monitoring: {
+        Row: {
+          created_at: string
+          event_data: Json
+          event_type: string
+          id: string
+          ip_address: unknown | null
+          resolved: boolean | null
+          severity: string
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_data?: Json
+          event_type: string
+          id?: string
+          ip_address?: unknown | null
+          resolved?: boolean | null
+          severity?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_data?: Json
+          event_type?: string
+          id?: string
+          ip_address?: unknown | null
+          resolved?: boolean | null
+          severity?: string
+          user_agent?: string | null
           user_id?: string | null
         }
         Relationships: []
@@ -5566,6 +5635,14 @@ export type Database = {
               p_error_message?: string
               p_ip_address?: unknown
               p_log_level: string
+              p_user_id?: string
+            }
+          | {
+              p_event_data?: Json
+              p_event_type: string
+              p_ip_address?: unknown
+              p_severity: string
+              p_user_agent?: string
               p_user_id?: string
             }
         Returns: number
