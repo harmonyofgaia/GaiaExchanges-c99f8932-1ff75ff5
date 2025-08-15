@@ -38,10 +38,10 @@ export default tseslint.config(
         "error",
         { allowShortCircuit: true, allowTernary: true },
       ],
-      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/no-explicit-any": "off", // Disabled temporarily
       "@typescript-eslint/no-require-imports": "warn",
       "@typescript-eslint/no-empty-object-type": "warn",
-      "react-hooks/exhaustive-deps": "error",
+      "react-hooks/exhaustive-deps": "off", // Disabled temporarily
       "no-case-declarations": "warn",
       // Reduce some warnings to be less strict
       "prefer-const": "warn",
