@@ -43,8 +43,9 @@ export function useSecureAdmin() {
 
     try {
       // 🔒 SECURE: Use the enhanced security validation function
-      const { data: isValidAdmin, error } = await supabase
-        .rpc("validate_admin_session_security");
+      const { data: isValidAdmin, error } = await supabase.rpc(
+        "validate_admin_session_security",
+      );
 
       if (error) {
         console.error("Error validating admin session:", error);
@@ -62,16 +63,18 @@ export function useSecureAdmin() {
         if (adminAccount) {
           // Create secure session token
           const sessionToken = `session-${Date.now()}-${Math.random().toString(36).substr(2, 16)}`;
-          
+
           // Create admin security session
           const { error: sessionError } = await supabase
             .from("admin_security_sessions")
-            .insert([{
-              user_id: user.id,
-              session_token: sessionToken,
-              ip_address: null, // In production, capture real IP
-              user_agent: navigator.userAgent,
-            }]);
+            .insert([
+              {
+                user_id: user.id,
+                session_token: sessionToken,
+                ip_address: null, // In production, capture real IP
+                user_agent: navigator.userAgent,
+              },
+            ]);
 
           if (!sessionError) {
             setIsAdmin(true);
@@ -85,8 +88,11 @@ export function useSecureAdmin() {
             await supabase.rpc("log_security_event", {
               p_user_id: user.id,
               p_action: "admin_session_created",
-              p_details: { session_token: sessionToken, method: "secure_validation" },
-              p_risk_score: 2
+              p_details: {
+                session_token: sessionToken,
+                method: "secure_validation",
+              },
+              p_risk_score: 2,
             });
           } else {
             setIsAdmin(false);
@@ -104,15 +110,20 @@ export function useSecureAdmin() {
       console.error("Error validating admin session:", error);
       setIsAdmin(false);
       setAdminSession(null);
-      
+
       // Log security incident for validation failures
       try {
-        await supabase.from("security_incidents").insert([{
-          incident_type: "admin_validation_failure",
-          severity: "medium",
-          user_id: user.id,
-          details: { error: error.message, timestamp: new Date().toISOString() }
-        }]);
+        await supabase.from("security_incidents").insert([
+          {
+            incident_type: "admin_validation_failure",
+            severity: "medium",
+            user_id: user.id,
+            details: {
+              error: error.message,
+              timestamp: new Date().toISOString(),
+            },
+          },
+        ]);
       } catch (logError) {
         console.error("Failed to log security incident:", logError);
       }
@@ -144,14 +155,14 @@ export function useSecureAdmin() {
       }
 
       // Log the admin access grant
-      await supabase.rpc('log_admin_action', {
-        action_name: 'admin_access_granted',
+      await supabase.rpc("log_admin_action", {
+        action_name: "admin_access_granted",
         action_details: {
           session_token: sessionToken,
           user_id: user.id,
           timestamp: new Date().toISOString(),
-          method: 'secure_session_creation'
-        }
+          method: "secure_session_creation",
+        },
       });
 
       await validateAdminSession();
@@ -175,29 +186,31 @@ export function useSecureAdmin() {
       }
 
       // 🔒 SECURE: Log admin session revocation for audit trail
-      await supabase.rpc('log_security_event', {
+      await supabase.rpc("log_security_event", {
         p_user_id: user.id,
-        p_action: 'admin_access_revoked',
+        p_action: "admin_access_revoked",
         p_details: {
           session_id: adminSession.id,
           timestamp: new Date().toISOString(),
-          method: 'secure_revocation'
+          method: "secure_revocation",
         },
-        p_risk_score: 1
+        p_risk_score: 1,
       });
 
       console.log("Admin session securely revoked with audit logging");
     } catch (error) {
       console.error("Error revoking admin access:", error);
-      
+
       // Log security incident for revocation failures
       try {
-        await supabase.from("security_incidents").insert([{
-          incident_type: "admin_revocation_failure",
-          severity: "high",
-          user_id: user.id,
-          details: { error: error.message, session_id: adminSession.id }
-        }]);
+        await supabase.from("security_incidents").insert([
+          {
+            incident_type: "admin_revocation_failure",
+            severity: "high",
+            user_id: user.id,
+            details: { error: error.message, session_id: adminSession.id },
+          },
+        ]);
       } catch (logError) {
         console.error("Failed to log security incident:", logError);
       }
@@ -212,13 +225,13 @@ export function useSecureAdmin() {
 
     try {
       // 🔒 SECURE: Log session extension with audit trail
-      await supabase.rpc('log_admin_action', {
-        action_name: 'admin_session_extended',
+      await supabase.rpc("log_admin_action", {
+        action_name: "admin_session_extended",
         action_details: {
           user_id: user.id,
           timestamp: new Date().toISOString(),
-          method: 'secure_extension'
-        }
+          method: "secure_extension",
+        },
       });
 
       console.log("Admin session securely extended with audit logging");

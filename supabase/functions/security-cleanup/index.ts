@@ -25,8 +25,9 @@ serve(async (req) => {
     switch (action) {
       case "cleanup_security_tables": {
         // Clean up old security records
-        const { data: cleanupResult, error } = await supabase
-          .rpc("cleanup_security_tables");
+        const { data: cleanupResult, error } = await supabase.rpc(
+          "cleanup_security_tables",
+        );
 
         if (error) {
           console.error("Security cleanup error:", error);
@@ -60,11 +61,12 @@ serve(async (req) => {
         const healthChecks = [];
 
         // Check for unresolved critical incidents
-        const { data: criticalIncidents, error: incidentsError } = await supabase
-          .from("security_incidents")
-          .select("count")
-          .eq("resolved", false)
-          .eq("severity", "critical");
+        const { data: criticalIncidents, error: incidentsError } =
+          await supabase
+            .from("security_incidents")
+            .select("count")
+            .eq("resolved", false)
+            .eq("severity", "critical");
 
         if (!incidentsError) {
           healthChecks.push({
@@ -76,11 +78,12 @@ serve(async (req) => {
 
         // Check for rate limit violations in last hour
         const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
-        const { data: rateLimitViolations, error: rateLimitError } = await supabase
-          .from("rate_limits")
-          .select("count")
-          .not("blocked_until", "is", null)
-          .gte("updated_at", oneHourAgo);
+        const { data: rateLimitViolations, error: rateLimitError } =
+          await supabase
+            .from("rate_limits")
+            .select("count")
+            .not("blocked_until", "is", null)
+            .gte("updated_at", oneHourAgo);
 
         if (!rateLimitError) {
           healthChecks.push({
@@ -120,10 +123,12 @@ serve(async (req) => {
           });
         }
 
-        const overallStatus = healthChecks.every(check => check.status === "PASS") 
-          ? "HEALTHY" 
-          : healthChecks.some(check => check.status === "FAIL") 
-            ? "CRITICAL" 
+        const overallStatus = healthChecks.every(
+          (check) => check.status === "PASS",
+        )
+          ? "HEALTHY"
+          : healthChecks.some((check) => check.status === "FAIL")
+            ? "CRITICAL"
             : "WARNING";
 
         return new Response(
@@ -163,15 +168,17 @@ serve(async (req) => {
         // Create emergency incident
         const { error: incidentError } = await supabase
           .from("security_incidents")
-          .insert([{
-            incident_type: "emergency_lockdown",
-            severity: "critical",
-            details: {
-              triggered_by: "security_cleanup_function",
-              timestamp: new Date().toISOString(),
-              reason: "Emergency lockdown initiated"
-            }
-          }]);
+          .insert([
+            {
+              incident_type: "emergency_lockdown",
+              severity: "critical",
+              details: {
+                triggered_by: "security_cleanup_function",
+                timestamp: new Date().toISOString(),
+                reason: "Emergency lockdown initiated",
+              },
+            },
+          ]);
 
         return new Response(
           JSON.stringify({
@@ -179,8 +186,8 @@ serve(async (req) => {
             message: "Emergency lockdown completed",
             actions_taken: [
               "All admin sessions deactivated",
-              "Emergency incident logged"
-            ]
+              "Emergency incident logged",
+            ],
           }),
           {
             headers: { ...corsHeaders, "Content-Type": "application/json" },

@@ -10,11 +10,13 @@ export function SecurityEnhancedApp({ children }: SecurityEnhancedAppProps) {
     // 🔒 SECURITY: Content Security Policy
     const csp = {
       "default-src": "'self'",
-      "script-src": "'self' 'unsafe-inline' 'unsafe-eval' https://api.lovable.dev https://slheudxfcqqppyphyobq.supabase.co",
+      "script-src":
+        "'self' 'unsafe-inline' 'unsafe-eval' https://api.lovable.dev https://slheudxfcqqppyphyobq.supabase.co",
       "style-src": "'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src": "'self' https://fonts.gstatic.com",
       "img-src": "'self' data: https: blob:",
-      "connect-src": "'self' https://api.lovable.dev https://slheudxfcqqppyphyobq.supabase.co wss://slheudxfcqqppyphyobq.supabase.co",
+      "connect-src":
+        "'self' https://api.lovable.dev https://slheudxfcqqppyphyobq.supabase.co wss://slheudxfcqqppyphyobq.supabase.co",
       "frame-src": "'none'",
       "object-src": "'none'",
       "base-uri": "'self'",
