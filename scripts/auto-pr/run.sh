@@ -158,7 +158,7 @@ readarray -t TOPIC_JSON < <(jq -c "${MAP_JQ}" .auto-pr-decision.json)
 declare -A CHILD_PRS
 for entry in "${TOPIC_JSON[@]}"; do
   name=$(jq -r '.name' <<<"$entry")
-  files=$(jq -r '.files[]' <<<"$entry" | tr '\n' ' ')
+  mapfile -t file_array < <(jq -r '.files[]' <<<"$entry")
   topic_branch="auto/${CURRENT_BRANCH}/${name}"
 
   echo "Preparing topic branch: ${topic_branch}"
