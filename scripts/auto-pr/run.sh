@@ -23,7 +23,8 @@ if [[ "${CURRENT_BRANCH}" == "${BASE_BRANCH}" ]]; then
 fi
 
 # Ensure we have the base branch locally
-git fetch origin "${BASE_BRANCH}:${BASE_BRANCH}" || git fetch origin "${BASE_BRANCH}"
+# Ensure we have the base branch locally and synchronize it with remote
+git fetch origin "${BASE_BRANCH}" && git checkout "${BASE_BRANCH}" && git reset --hard "origin/${BASE_BRANCH}"
 
 # List changed files vs base
 mapfile -t FILES < <(git diff --name-only "${BASE_BRANCH}...HEAD" | grep -v '^$' || true)
