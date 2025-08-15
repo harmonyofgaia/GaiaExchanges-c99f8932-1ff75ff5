@@ -3,6 +3,10 @@
   "name": "lovable-app",
   "private": true,
   "version": "1.0.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "pre-deploy": "echo \"No pre-deploy steps required\"",
     "dev": "vite",
