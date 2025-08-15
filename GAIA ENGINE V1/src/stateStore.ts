@@ -11,11 +11,18 @@ export class StateStore<S> {
   set(next: S) {
     if (Object.is(this.state, next)) return;
     this.state = next;
-    for (const l of Array.from(this.listeners)) { try { l(this.state); } catch { } }
+    for (const l of Array.from(this.listeners)) { 
+      try { 
+        l(this.state); 
+      } catch (error) {
+        // Silently ignore listener errors to prevent one failing listener from affecting others
+        console.warn('StateStore listener error:', error);
+      }
+    }
   }
 
   patch(partial: Partial<S>) {
-    this.set(Object.assign(Array.isArray(this.state) ? ([] as any) : {}, this.state as any, partial));
+    this.set(Object.assign(Array.isArray(this.state) ? ([] as S) : ({} as S), this.state, partial));
   }
 
   subscribe(fn: Listener<S>) {

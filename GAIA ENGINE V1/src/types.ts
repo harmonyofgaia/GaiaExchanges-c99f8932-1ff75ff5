@@ -2,7 +2,7 @@
 export type GaiaTick = { now: number; delta: number; frame: number };
 export type GaiaEvent<T extends string = string, P = unknown> = { type: T; payload: P; at: number };
 
-export interface GaiaBehavior<S = any, C = any> {
+export interface GaiaBehavior<S = Record<string, unknown>, C = Record<string, unknown>> {
   id: string;
   describe?(state: S, ctx: C): string;
   step(state: S, tick: GaiaTick, ctx: C): S;
