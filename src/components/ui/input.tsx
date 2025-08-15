@@ -1,11 +1,27 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { sanitizeInput } from "@/utils/inputSanitization";
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  sanitize?: boolean;
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
+  ({ className, type, sanitize = false, onChange, ...props }, ref) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (sanitize && onChange) {
+        const sanitized = sanitizeInput(e.target.value);
+        const syntheticEvent = {
+          ...e,
+          target: { ...e.target, value: sanitized }
+        } as React.ChangeEvent<HTMLInputElement>;
+        onChange(syntheticEvent);
+      } else if (onChange) {
+        onChange(e);
+      }
+    };
+
     return (
       <input
         type={type}
@@ -14,6 +30,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className,
         )}
         ref={ref}
+        onChange={handleChange}
         {...props}
       />
     );
