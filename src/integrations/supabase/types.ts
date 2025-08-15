@@ -4061,6 +4061,17 @@ export type Database = {
         }
         Relationships: []
       }
+      security_dashboard_summary: {
+        Row: {
+          created_at: string | null
+          event_category: string | null
+          event_type: string | null
+          filtered_details: Json | null
+          severity_level: string | null
+          status: string | null
+        }
+        Relationships: []
+      }
       slow_queries: {
         Row: {
           calls: number | null
