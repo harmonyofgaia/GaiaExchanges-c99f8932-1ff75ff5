@@ -14,10 +14,11 @@ if [[ "${CURRENT_BRANCH}" == "${BASE_BRANCH}" ]]; then
   exit 0
 fi
 
-git fetch origin "${BASE_BRANCH}:${BASE_BRANCH}"
+# Ensure we have the base branch locally
+git fetch origin "${BASE_BRANCH}:${BASE_BRANCH}" || git fetch origin "${BASE_BRANCH}"
 
 # List changed files vs base
-mapfile -t FILES < <(git diff --name-only "origin/${BASE_BRANCH}...HEAD" | grep -v '^$' || true)
+mapfile -t FILES < <(git diff --name-only "${BASE_BRANCH}...HEAD" | grep -v '^$' || true)
 if [[ ${#FILES[@]} -eq 0 ]]; then
   echo "No changes vs ${BASE_BRANCH}. Exiting."
   exit 0
@@ -91,15 +92,18 @@ create_or_update_pr() {
   local body="$3"
   local draft="$4"
 
-  if gh pr list --head "${src_branch}" --json number --jq '.[0].number' >/dev/null 2>&1; then
-    local prnum
-    prnum=$(gh pr list --head "${src_branch}" --json number --jq '.[0].number')
+  local prnum
+  prnum=$(gh pr list --head "${src_branch}" --json number --jq '.[0].number' 2>/dev/null || echo "")
+  
+  if [[ -n "${prnum}" && "${prnum}" != "null" ]]; then
     echo "Updating PR #${prnum} (${src_branch})"
     gh pr edit "${prnum}" --title "${title}" --body "${body}" $( [[ "${draft}" == "true" ]] && echo "--draft" || echo "--ready" )
     echo "${prnum}"
   else
     echo "Creating PR from ${src_branch} -> ${BASE_BRANCH}"
-    gh pr create -B "${BASE_BRANCH}" -H "${src_branch}" --title "${title}" --body "${body}" $( [[ "${draft}" == "true" ]] && echo "--draft" )
+    local draft_flag=""
+    [[ "${draft}" == "true" ]] && draft_flag="--draft"
+    gh pr create -B "${BASE_BRANCH}" -H "${src_branch}" --title "${title}" --body "${body}" ${draft_flag}
   fi
 }
 
@@ -128,11 +132,11 @@ for entry in "${TOPIC_JSON[@]}"; do
   topic_branch="auto/${CURRENT_BRANCH}/${name}"
 
   echo "Preparing topic branch: ${topic_branch}"
-  git checkout -B "${topic_branch}" "origin/${BASE_BRANCH}"
+  git checkout -B "${topic_branch}" "${BASE_BRANCH}"
 
   if [[ -n "${files}" ]]; then
-    git checkout "${CURRENT_BRANCH}" -- ${files} || true
-    git add ${files} || true
+    git checkout "${CURRENT_BRANCH}" -- ${files} 2>/dev/null || true
+    git add ${files} 2>/dev/null || true
   fi
 
   if git diff --cached --quiet; then

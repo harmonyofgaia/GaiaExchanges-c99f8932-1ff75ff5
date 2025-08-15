@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - "**"
-    tags-ignore:
-      - "**"
+    tags:
+      - "!**"
 permissions:
   contents: write
   pull-requests: write
@@ -16,7 +16,7 @@ env:
   GH_TOKEN: ${{ github.token }}
 jobs:
   auto-pr:
-    if: startsWith(github.ref, 'refs/heads/') && github.ref_name != env.BASE_BRANCH
+    if: startsWith(github.ref, 'refs/heads/') && github.ref_name != 'main'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -27,11 +27,18 @@ jobs:
         run: |
           git config --global user.name "auto-pr-bot"
           git config --global user.email "actions@users.noreply.github.com"
-          git fetch origin ${BASE_BRANCH}:${BASE_BRANCH} --prune
+          git fetch origin ${BASE_BRANCH}:${BASE_BRANCH} --prune || true
+          git checkout ${BASE_BRANCH} >/dev/null 2>&1 || true
+          git checkout ${GITHUB_REF_NAME}
       - name: Install PyYAML
         run: |
           python3 -m pip install --user --upgrade pip
           python3 -m pip install --user pyyaml
+      - name: Setup GitHub CLI
+        run: |
+          which gh || (echo "GitHub CLI not found" && exit 1)
+          gh --version
+          gh auth status
       - name: Run smart split / create PRs
         env:
           GITHUB_TOKEN: ${{ github.token }}
