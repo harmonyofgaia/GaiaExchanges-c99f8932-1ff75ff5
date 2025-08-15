@@ -95,7 +95,6 @@ jobs:
             "orgId": "${VERCEL_ORG_ID}"
           }
           EOF
-          npx vercel --version
           npx vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
 
       - name: Deploy to Vercel (Primary)
