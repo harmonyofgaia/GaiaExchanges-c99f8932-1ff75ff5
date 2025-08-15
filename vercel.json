@@ -2,7 +2,7 @@
   "buildCommand": "npm run build:vercel",
   "outputDirectory": "dist",
   "devCommand": "npm run dev",
-  "installCommand": "npm install",
+  "installCommand": "npm ci",
   "rewrites": [
     {
       "source": "/(.*)",
@@ -10,6 +10,7 @@
     }
   ],
   "env": {
-    "SKIP_LINT": "true"
+    "SKIP_LINT": "true",
+    "CI": "true"
   }
 }
