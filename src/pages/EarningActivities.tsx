@@ -461,20 +461,8 @@ export default function EarningActivities() {
           points: "Transport bonus",
           difficulty: "Medium",
         },
-        {
-          component: GaiaBikeEarning,
-          icon: Bike,
-          title: "GAiA Bike System",
-          points: "2 pts/km",
-          difficulty: "Easy",
-        },
-        {
-          component: InteractiveFoodMap,
-          icon: MapPin,
-          title: "Local Food Map",
-          points: "Discovery bonus",
-          difficulty: "Easy",
-        },
+        // GAiA Bike System moved to Live Activities tab
+        // Food Map moved to Live Activities tab
       ],
     },
     {
@@ -486,13 +474,7 @@ export default function EarningActivities() {
       completedCount: 11,
       totalCount: 15,
       components: [
-        {
-          component: CommunityRewardsProgram,
-          icon: Gift,
-          title: "Rewards Program",
-          points: "Tier-based",
-          difficulty: "Advanced",
-        },
+        // Community Rewards Program moved to Achievements tab
         {
           component: AdvancedTokenMechanics,
           icon: Coins,
@@ -869,6 +851,8 @@ export default function EarningActivities() {
 
             <div className="space-y-8">
               <InteractiveEcoBikeMap />
+              <GaiaBikeEarning />
+              <InteractiveFoodMap />
               <EnergyConsumptionTracker />
               <AdvancedCommunityFeatures />
               <PartyEventEarning />
