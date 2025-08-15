@@ -5,7 +5,8 @@ name: Auto PR and Smart Split
       - "**"
     tags:
       ignore:
-        - "**"
+    tags-ignore:
+      - "**"
 permissions:
   contents: write
   pull-requests: write
