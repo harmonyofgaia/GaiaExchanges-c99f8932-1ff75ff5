@@ -4809,6 +4809,10 @@ export type Database = {
           scenario: string
         }[]
       }
+      detect_admin_compromise: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       diagnose_auth_issues: {
         Args: Record<PropertyKey, never>
         Returns: {
