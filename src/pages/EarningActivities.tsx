@@ -316,13 +316,7 @@ export default function EarningActivities() {
       completedCount: 18,
       totalCount: 20,
       components: [
-        {
-          component: EnhancedHomeGrownFoodTracker,
-          icon: Carrot,
-          title: "Home Food Growing",
-          points: "Variable",
-          difficulty: "Medium",
-        },
+        // Enhanced Home Grown Food Tracker moved to Live Activities tab
         {
           component: EnergyConsumptionTracker,
           icon: Zap,
@@ -853,6 +847,7 @@ export default function EarningActivities() {
               <InteractiveEcoBikeMap />
               <GaiaBikeEarning />
               <InteractiveFoodMap />
+              <EnhancedHomeGrownFoodTracker />
               <EnergyConsumptionTracker />
               <AdvancedCommunityFeatures />
               <PartyEventEarning />
