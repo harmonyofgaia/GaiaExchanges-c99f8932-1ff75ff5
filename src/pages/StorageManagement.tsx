@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,7 +30,7 @@ interface StorageFile {
   url: string;
   bucket: string;
   created_at: string;
-  metadata?: any;
+  metadata?: Record<string, unknown>;
 }
 
 export default function StorageManagement() {
@@ -41,55 +41,55 @@ export default function StorageManagement() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBucket, setSelectedBucket] = useState("all");
 
-  const buckets = [
+  const buckets = useMemo(() => [
     { id: "artwork-files", name: "Artwork Files", icon: Image },
     { id: "video-uploads", name: "Videos", icon: Video },
     { id: "audio-files", name: "Audio", icon: Music },
     { id: "documents", name: "Documents", icon: FileText },
-  ];
+  ], []);
 
   useEffect(() => {
     loadFiles();
-  }, [selectedBucket]);
+  }, [selectedBucket, loadFiles]);
 
-  const loadFiles = async () => {
-    setLoading(true);
-    try {
-      // Load files from all buckets or specific bucket
-      const allFiles: StorageFile[] = [];
+    const loadFiles = useCallback(async () => {
+      setLoading(true);
+      try {
+        // Load files from all buckets or specific bucket
+        const allFiles: StorageFile[] = [];
 
-      for (const bucket of buckets) {
-        if (selectedBucket === "all" || selectedBucket === bucket.id) {
-          const { data, error } = await supabase.storage
-            .from(bucket.id)
-            .list("", { limit: 100, offset: 0 });
+        for (const bucket of buckets) {
+          if (selectedBucket === "all" || selectedBucket === bucket.id) {
+            const { data, error } = await supabase.storage
+              .from(bucket.id)
+              .list("", { limit: 100, offset: 0 });
 
-          if (data && !error) {
-            const bucketFiles = data.map((file) => ({
-              id: file.id || file.name,
-              name: file.name,
-              size: file.metadata?.size || 0,
-              type: getFileType(file.name),
-              url: supabase.storage.from(bucket.id).getPublicUrl(file.name).data
-                .publicUrl,
-              bucket: bucket.id,
-              created_at: file.created_at || new Date().toISOString(),
-              metadata: file.metadata,
-            })) as StorageFile[];
+            if (data && !error) {
+              const bucketFiles = data.map((file) => ({
+                id: file.id || file.name,
+                name: file.name,
+                size: file.metadata?.size || 0,
+                type: getFileType(file.name),
+                url: supabase.storage.from(bucket.id).getPublicUrl(file.name).data
+                  .publicUrl,
+                bucket: bucket.id,
+                created_at: file.created_at || new Date().toISOString(),
+                metadata: file.metadata,
+              })) as StorageFile[];
 
-            allFiles.push(...bucketFiles);
+              allFiles.push(...bucketFiles);
+            }
           }
         }
-      }
 
-      setFiles(allFiles);
-    } catch (error) {
-      console.error("Error loading files:", error);
-      toast.error("Failed to load files");
-    } finally {
-      setLoading(false);
-    }
-  };
+        setFiles(allFiles);
+      } catch (error) {
+        console.error("Error loading files:", error);
+        toast.error("Failed to load files");
+      } finally {
+        setLoading(false);
+      }
+    }, [buckets, selectedBucket]);
 
   const getFileType = (fileName: string): StorageFile["type"] => {
     const ext = fileName.split(".").pop()?.toLowerCase();
@@ -249,7 +249,7 @@ export default function StorageManagement() {
               <p className="text-muted-foreground mb-4">
                 Images, videos, audio, and documents supported
               </p>
-              <input
+              <input title="File Name" placeholder="Enter file name" 
                 type="file"
                 multiple
                 accept="*/*"
@@ -298,7 +298,7 @@ export default function StorageManagement() {
                 className="pl-10"
               />
             </div>
-            <select
+            <select title="Bucket Selector"
               value={selectedBucket}
               onChange={(e) => setSelectedBucket(e.target.value)}
               className="px-3 py-2 border border-border rounded-md bg-background"

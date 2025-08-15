@@ -24,7 +24,7 @@ interface BurningOption {
   id: string;
   name: string;
   description: string;
-  icon: any;
+  icon: React.ElementType;
   color: string;
   percentage: number;
 }

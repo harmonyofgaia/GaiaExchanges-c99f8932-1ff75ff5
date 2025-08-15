@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 
@@ -13,6 +12,14 @@ const config: Config = {
     "./src/components/**/*.tsx",
     "./src/components/**/*.ts",
     "./src/**/*.css",
+  ],
+  safelist: [
+    "bg-background",
+    "bg-background/30",
+    "bg-background/50",
+    "bg-background/80",
+    "bg-background/90",
+    "bg-background/95"
   ],
   prefix: "",
   theme: {
@@ -81,7 +88,5 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config;
-
-export default config;
+  plugins: [tailwindcssAnimate],
+} satisfies

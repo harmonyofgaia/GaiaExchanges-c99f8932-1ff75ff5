@@ -37,7 +37,7 @@ interface GreenProject {
   carbon_impact_target: number;
   biodiversity_score: number;
   verification_status: string;
-  project_data: any;
+  project_data: Record<string, unknown>;
   created_at: string;
   created_by: string;
   governance_score?: number;
@@ -61,8 +61,8 @@ interface GovernanceProposal {
 
 interface VerificationData {
   satellite_images: string[];
-  iot_readings: any[];
-  third_party_audits: any[];
+  iot_readings: Record<string, unknown>[];
+  third_party_audits: Record<string, unknown>[];
   community_reports: number;
 }
 

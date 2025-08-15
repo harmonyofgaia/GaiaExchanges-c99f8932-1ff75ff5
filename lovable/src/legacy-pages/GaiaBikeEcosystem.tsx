@@ -38,7 +38,7 @@ interface BikeSession {
   bike_type: "gaia_bike" | "regular_bike";
   start_time: string;
   end_time: string;
-  route_data: any;
+  route_data: Record<string, unknown>;
   eco_impact: {
     carbon_saved: number;
     air_quality_points: number;
@@ -49,7 +49,7 @@ interface BikeSession {
 interface FoodPlace {
   id: string;
   name: string;
-  location_data: any;
+  location_data: Record<string, unknown>;
   food_types: string[];
   owner_id: string;
   verified: boolean;
@@ -80,7 +80,7 @@ interface Challenge {
 const GaiaBikeEcosystem = () => {
   const { user } = useAuth();
   const [isTracking, setIsTracking] = useState(false);
-  const [currentSession, setCurrentSession] = useState<any>(null);
+  const [currentSession, setCurrentSession] = useState<BikeSession | null>(null);
   const [totalTokens, setTotalTokens] = useState(0);
   const [bikeType, setBikeType] = useState<"gaia_bike" | "regular_bike">(
     "regular_bike",
