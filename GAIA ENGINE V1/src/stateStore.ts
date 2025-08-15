@@ -22,7 +22,16 @@ export class StateStore<S> {
   }
 
   patch(partial: Partial<S>) {
-    this.set(Object.assign(Array.isArray(this.state) ? ([] as S) : ({} as S), this.state, partial));
+    if (Array.isArray(this.state)) {
+      // For arrays, merge using spread (shallow copy)
+      this.set([...(this.state as unknown as any[]), ...(partial as unknown as any[])] as unknown as S);
+    } else if (typeof this.state === 'object' && this.state !== null) {
+      // For objects, merge using spread
+      this.set({ ...this.state, ...partial } as S);
+    } else {
+      // For primitives or unsupported types, do nothing or throw
+      console.warn('StateStore.patch: Cannot patch non-object/non-array state');
+    }
   }
 
   subscribe(fn: Listener<S>) {
