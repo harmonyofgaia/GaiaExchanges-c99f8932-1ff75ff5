@@ -2,7 +2,10 @@
 
 export type NumericState = Record<string, number>;
 
-export function createRandomDriftBehavior(keys: string[], epsilon = 0.01): GaiaBehavior<NumericState, void> {
+export function createRandomDriftBehavior(
+  keys: string[],
+  epsilon = 0.01,
+): GaiaBehavior<NumericState, void> {
   return {
     id: "random-drift",
     describe: (s) => `Drifting keys(${keys.join(",")}) ±${epsilon}`,
@@ -14,6 +17,6 @@ export function createRandomDriftBehavior(keys: string[], epsilon = 0.01): GaiaB
         next[k] = v + delta;
       }
       return next;
-    }
+    },
   };
 }

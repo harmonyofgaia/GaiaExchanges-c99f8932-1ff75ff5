@@ -33,17 +33,35 @@ export default function Exchange() {
   const { tokenData, hasRealData, isLoading } = useGaiaTokenData();
 
   // Use REAL GAiA token data or fallback to current values
-  const currentPrice = hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE;
-  const priceChange = hasRealData && tokenData ? tokenData.priceChange24h : 12.5;
+  const currentPrice =
+    hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE;
+  const priceChange =
+    hasRealData && tokenData ? tokenData.priceChange24h : 12.5;
   const volume24h = hasRealData && tokenData ? tokenData.volume24h : 8750000;
   const marketCap = hasRealData && tokenData ? tokenData.marketCap : 278687500;
   const holders = hasRealData && tokenData ? tokenData.holders : 12450;
-  const transactions = hasRealData && tokenData ? tokenData.transactions24h : 45780;
+  const transactions =
+    hasRealData && tokenData ? tokenData.transactions24h : 45780;
 
   const tradingPairs = [
-    { pair: `${GAIA_TOKEN.SYMBOL}/USDT`, price: currentPrice, change: priceChange, volume: volume24h },
-    { pair: `${GAIA_TOKEN.SYMBOL}/USDC`, price: currentPrice * 0.999, change: priceChange * 0.95, volume: volume24h * 0.6 },
-    { pair: `${GAIA_TOKEN.SYMBOL}/SOL`, price: currentPrice / 150, change: priceChange * 0.8, volume: volume24h * 0.4 },
+    {
+      pair: `${GAIA_TOKEN.SYMBOL}/USDT`,
+      price: currentPrice,
+      change: priceChange,
+      volume: volume24h,
+    },
+    {
+      pair: `${GAIA_TOKEN.SYMBOL}/USDC`,
+      price: currentPrice * 0.999,
+      change: priceChange * 0.95,
+      volume: volume24h * 0.6,
+    },
+    {
+      pair: `${GAIA_TOKEN.SYMBOL}/SOL`,
+      price: currentPrice / 150,
+      change: priceChange * 0.8,
+      volume: volume24h * 0.4,
+    },
   ];
 
   const handleTrade = () => {
@@ -57,7 +75,7 @@ export default function Exchange() {
       {
         description: `Order submitted to ${GAIA_TOKEN.NAME} on ${GAIA_TOKEN.NETWORK}`,
         duration: 3000,
-      }
+      },
     );
     setAmount("");
     setPrice("");
@@ -88,11 +106,17 @@ export default function Exchange() {
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <Badge variant="outline" className="border-green-500/50 text-green-400">
+              <Badge
+                variant="outline"
+                className="border-green-500/50 text-green-400"
+              >
                 <Heart className="h-3 w-3 mr-1" />
                 Network Health: 99.8%
               </Badge>
-              <Badge variant="outline" className="border-blue-500/50 text-blue-400">
+              <Badge
+                variant="outline"
+                className="border-blue-500/50 text-blue-400"
+              >
                 <Network className="h-3 w-3 mr-1" />
                 120 Nodes
               </Badge>
@@ -103,10 +127,8 @@ export default function Exchange() {
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-          
           {/* Main Trading Interface */}
           <div className="xl:col-span-2 space-y-6">
-            
             {/* Price Chart Area */}
             <Card className="bg-gradient-to-br from-green-900/20 to-blue-900/20 border-green-500/30">
               <CardHeader>
@@ -119,12 +141,21 @@ export default function Exchange() {
                     <span className="text-2xl font-bold text-green-400">
                       ${currentPrice.toFixed(6)}
                     </span>
-                    <div className={`flex items-center gap-1 ${priceChange >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                      {priceChange >= 0 ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
+                    <div
+                      className={`flex items-center gap-1 ${priceChange >= 0 ? "text-green-400" : "text-red-400"}`}
+                    >
+                      {priceChange >= 0 ? (
+                        <ArrowUpRight className="h-4 w-4" />
+                      ) : (
+                        <ArrowDownRight className="h-4 w-4" />
+                      )}
                       <span>{Math.abs(priceChange).toFixed(2)}%</span>
                     </div>
                     {!hasRealData && (
-                      <Badge variant="outline" className="text-yellow-400 border-yellow-500/50">
+                      <Badge
+                        variant="outline"
+                        className="text-yellow-400 border-yellow-500/50"
+                      >
                         Demo Data
                       </Badge>
                     )}
@@ -137,8 +168,12 @@ export default function Exchange() {
                   <div className="text-center">
                     <LineChart className="h-16 w-16 mx-auto text-green-400 mb-4" />
                     <p className="text-muted-foreground">Live Trading Chart</p>
-                    <p className="text-sm text-muted-foreground">Real-time price movements for {GAIA_TOKEN.NAME}</p>
-                    <p className="text-xs text-green-400">Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Real-time price movements for {GAIA_TOKEN.NAME}
+                    </p>
+                    <p className="text-xs text-green-400">
+                      Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}
+                    </p>
                   </div>
                 </div>
 
@@ -149,15 +184,20 @@ export default function Exchange() {
                       key={pair.pair}
                       className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                         selectedPair === pair.pair
-                          ? 'border-green-500/50 bg-green-500/10'
-                          : 'border-border/50 bg-card/50 hover:border-green-500/30'
+                          ? "border-green-500/50 bg-green-500/10"
+                          : "border-border/50 bg-card/50 hover:border-green-500/30"
                       }`}
                       onClick={() => setSelectedPair(pair.pair)}
                     >
                       <div className="text-sm font-medium">{pair.pair}</div>
-                      <div className="text-lg font-bold">${pair.price.toFixed(6)}</div>
-                      <div className={`text-sm ${pair.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                        {pair.change >= 0 ? '+' : ''}{pair.change.toFixed(2)}%
+                      <div className="text-lg font-bold">
+                        ${pair.price.toFixed(6)}
+                      </div>
+                      <div
+                        className={`text-sm ${pair.change >= 0 ? "text-green-400" : "text-red-400"}`}
+                      >
+                        {pair.change >= 0 ? "+" : ""}
+                        {pair.change.toFixed(2)}%
                       </div>
                     </div>
                   ))}
@@ -168,16 +208,38 @@ export default function Exchange() {
             {/* Market Statistics */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { label: "24h Volume", value: `$${formatNumber(volume24h)}`, icon: Activity, color: "text-blue-400" },
-                { label: "Market Cap", value: `$${formatNumber(marketCap)}`, icon: DollarSign, color: "text-green-400" },
-                { label: "Holders", value: formatNumber(holders), icon: Users, color: "text-purple-400" },
-                { label: "24h Transactions", value: formatNumber(transactions), icon: Database, color: "text-yellow-400" },
+                {
+                  label: "24h Volume",
+                  value: `$${formatNumber(volume24h)}`,
+                  icon: Activity,
+                  color: "text-blue-400",
+                },
+                {
+                  label: "Market Cap",
+                  value: `$${formatNumber(marketCap)}`,
+                  icon: DollarSign,
+                  color: "text-green-400",
+                },
+                {
+                  label: "Holders",
+                  value: formatNumber(holders),
+                  icon: Users,
+                  color: "text-purple-400",
+                },
+                {
+                  label: "24h Transactions",
+                  value: formatNumber(transactions),
+                  icon: Database,
+                  color: "text-yellow-400",
+                },
               ].map((stat, index) => (
                 <Card key={index} className="bg-card/50">
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm text-muted-foreground">{stat.label}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {stat.label}
+                        </p>
                         <p className="text-xl font-bold">{stat.value}</p>
                       </div>
                       <stat.icon className={`h-6 w-6 ${stat.color}`} />
@@ -202,7 +264,9 @@ export default function Exchange() {
                 <div className="p-4 bg-background/50 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium">GAiA Balance:</span>
-                    <span className="text-lg font-bold text-green-400">1,250.75 GAiA</span>
+                    <span className="text-lg font-bold text-green-400">
+                      1,250.75 GAiA
+                    </span>
                   </div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium">USD Value:</span>
@@ -211,19 +275,26 @@ export default function Exchange() {
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Wallet Address:</span>
+                    <span className="text-sm text-muted-foreground">
+                      Wallet Address:
+                    </span>
                     <code className="text-xs text-green-400 bg-green-900/20 px-2 py-1 rounded">
-                      {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 12)}...{GAIA_TOKEN.WALLET_ADDRESS.slice(-8)}
+                      {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 12)}...
+                      {GAIA_TOKEN.WALLET_ADDRESS.slice(-8)}
                     </code>
                   </div>
                 </div>
-                
+
                 <div className="p-4 bg-green-900/10 border border-green-500/20 rounded-lg">
-                  <h4 className="text-green-400 font-bold mb-2">Fee Structure - 100% Transparent</h4>
+                  <h4 className="text-green-400 font-bold mb-2">
+                    Fee Structure - 100% Transparent
+                  </h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>Trading Fee:</span>
-                      <span className="text-green-400">0% (Community Funded)</span>
+                      <span className="text-green-400">
+                        0% (Community Funded)
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span>Network Fee:</span>
@@ -267,7 +338,9 @@ export default function Exchange() {
                     className="w-full p-3 bg-background border border-border rounded-lg"
                   >
                     {tradingPairs.map((pair) => (
-                      <option key={pair.pair} value={pair.pair}>{pair.pair}</option>
+                      <option key={pair.pair} value={pair.pair}>
+                        {pair.pair}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -322,11 +395,17 @@ export default function Exchange() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Network Fee:</span>
-                    <span className="text-blue-400">~0.001 {GAIA_TOKEN.SYMBOL}</span>
+                    <span className="text-blue-400">
+                      ~0.001 {GAIA_TOKEN.SYMBOL}
+                    </span>
                   </div>
                   <div className="flex justify-between text-sm font-medium mt-2 pt-2 border-t border-border/50">
                     <span>Total:</span>
-                    <span>{amount && price ? `$${(parseFloat(amount) * parseFloat(price)).toFixed(2)}` : '$0.00'}</span>
+                    <span>
+                      {amount && price
+                        ? `$${(parseFloat(amount) * parseFloat(price)).toFixed(2)}`
+                        : "$0.00"}
+                    </span>
                   </div>
                 </div>
 
@@ -356,7 +435,7 @@ export default function Exchange() {
                   </div>
                   <Progress value={99.8} className="h-2" />
                 </div>
-                
+
                 <div>
                   <div className="flex justify-between mb-2">
                     <span className="text-sm">Active Nodes</span>
@@ -367,8 +446,13 @@ export default function Exchange() {
 
                 <div className="pt-2 border-t border-border/50">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">Carbon Impact:</span>
-                    <Badge variant="outline" className="border-green-500/50 text-green-400">
+                    <span className="text-sm text-muted-foreground">
+                      Carbon Impact:
+                    </span>
+                    <Badge
+                      variant="outline"
+                      className="border-green-500/50 text-green-400"
+                    >
                       -100% CO2
                     </Badge>
                   </div>

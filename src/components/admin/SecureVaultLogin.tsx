@@ -5,7 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Shield, Lock, Eye, EyeOff, Crown, Globe, AlertTriangle } from "lucide-react";
+import {
+  Shield,
+  Lock,
+  Eye,
+  EyeOff,
+  Crown,
+  Globe,
+  AlertTriangle,
+} from "lucide-react";
 import { toast } from "sonner";
 import { AdminDashboardTabs } from "./AdminDashboardTabs";
 import { useAuth } from "@/components/auth/AuthProvider";
@@ -60,15 +68,15 @@ export function SecureVaultLogin() {
 
       // 🔒 SECURE: No localStorage usage for admin session
       setIsAuthenticated(true);
-      
+
       // Log successful admin login
-      await supabase.rpc('log_admin_action', {
-        action_name: 'secure_admin_login_success',
+      await supabase.rpc("log_admin_action", {
+        action_name: "secure_admin_login_success",
         action_details: {
           user_id: (await supabase.auth.getUser()).data.user?.id,
           timestamp: new Date().toISOString(),
-          login_method: 'supabase_auth'
-        }
+          login_method: "supabase_auth",
+        },
       });
 
       toast.success("🌍 GAIA Admin Access Granted!", {
@@ -90,19 +98,19 @@ export function SecureVaultLogin() {
   const handleLogout = async () => {
     try {
       // Log admin logout
-      await supabase.rpc('log_admin_action', {
-        action_name: 'secure_admin_logout',
+      await supabase.rpc("log_admin_action", {
+        action_name: "secure_admin_logout",
         action_details: {
           user_id: user?.id,
           timestamp: new Date().toISOString(),
-          logout_method: 'secure_supabase_auth'
-        }
+          logout_method: "secure_supabase_auth",
+        },
       });
 
       // 🔒 SECURE: Use Supabase auth sign out
       await supabase.auth.signOut();
       setIsAuthenticated(false);
-      
+
       toast.success("🚪 Admin session terminated", {
         description: "Secure logout completed",
         duration: 3000,
