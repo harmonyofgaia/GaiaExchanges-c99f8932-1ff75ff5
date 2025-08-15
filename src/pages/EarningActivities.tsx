@@ -532,41 +532,7 @@ export default function EarningActivities() {
       completedCount: 6,
       totalCount: 10,
       components: [
-        {
-          component: CommunityGovernance,
-          icon: Crown,
-          title: "Community Governance",
-          points: "Voting power",
-          difficulty: "Advanced",
-        },
-        {
-          component: EcosystemIntegration,
-          icon: Globe,
-          title: "Ecosystem Integration",
-          points: "Cross-platform",
-          difficulty: "Advanced",
-        },
-        {
-          component: MentorshipProgram,
-          icon: GraduationCap,
-          title: "Mentorship Program",
-          points: "Knowledge sharing",
-          difficulty: "Medium",
-        },
-        {
-          component: EnhancedBadgeSystem,
-          icon: Award,
-          title: "Badge System",
-          points: "Achievement unlocks",
-          difficulty: "Easy",
-        },
-        {
-          component: PhotoVerificationSystem,
-          icon: Camera,
-          title: "Photo Verification",
-          points: "Verification bonus",
-          difficulty: "Easy",
-        },
+        // Modules moved to main achievements tab
       ],
     },
   ];
@@ -922,9 +888,12 @@ export default function EarningActivities() {
 
             <div className="space-y-8">
               <EnhancedBadgeSystem />
+              <PhotoVerificationSystem />
+              <MentorshipProgram />
+              <EcosystemIntegration />
+              <CommunityGovernance />
               <CommunityRewardsProgram />
               <AdvancedTokenMechanics />
-              <MentorshipProgram />
             </div>
           </TabsContent>
         </Tabs>
