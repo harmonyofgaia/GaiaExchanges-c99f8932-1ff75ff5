@@ -74,7 +74,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: production-build
-          path: .
+          path: dist
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
