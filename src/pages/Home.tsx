@@ -26,6 +26,7 @@ import { ThemeSelector } from "@/components/ThemeSelector";
 import { EnhancedPersistentMusicPlayer } from "@/components/music/EnhancedPersistentMusicPlayer";
 import { UpgradedVisualControlButton } from "@/components/visual/UpgradedVisualControlButton";
 
+
 export default function Home() {
   const [stats, setStats] = useState({
     totalUsers: 12589,
@@ -162,6 +163,13 @@ export default function Home() {
               <div className="text-sm text-purple-300/80">Projects Funded</div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Feature Showcase - Coming Soon */}
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+            🚀 Amazing Features Coming Soon
+          </h2>
         </div>
 
         {/* Live Earnings Display */}

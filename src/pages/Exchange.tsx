@@ -21,60 +21,30 @@ import {
   ArrowDownRight,
 } from "lucide-react";
 import { toast } from "sonner";
-
-interface GaiaMetrics {
-  price: number;
-  change24h: number;
-  volume24h: number;
-  marketCap: number;
-  totalSupply: number;
-  circulatingSupply: number;
-  networkHealth: number;
-  activeNodes: number;
-  totalTransactions: number;
-  tradingPairs: number;
-}
+import { GAIA_TOKEN } from "@/constants/gaia";
+import { useGaiaTokenData } from "@/hooks/useGaiaTokenData";
 
 export default function Exchange() {
   const [tradeType, setTradeType] = useState<"buy" | "sell">("buy");
   const [amount, setAmount] = useState("");
   const [price, setPrice] = useState("");
-  const [selectedPair, setSelectedPair] = useState("GAiA/USDT");
+  const [selectedPair, setSelectedPair] = useState(`${GAIA_TOKEN.SYMBOL}/USDT`);
 
-  const [metrics, setMetrics] = useState<GaiaMetrics>({
-    price: 1.2847,
-    change24h: 12.5,
-    volume24h: 8920000,
-    marketCap: 125000000,
-    totalSupply: 100000000,
-    circulatingSupply: 75000000,
-    networkHealth: 99.8,
-    activeNodes: 120,
-    totalTransactions: 2847592,
-    tradingPairs: 8,
-  });
+  const { tokenData, hasRealData, isLoading } = useGaiaTokenData();
+
+  // Use REAL GAiA token data or fallback to current values
+  const currentPrice = hasRealData && tokenData ? tokenData.price : GAIA_TOKEN.INITIAL_PRICE;
+  const priceChange = hasRealData && tokenData ? tokenData.priceChange24h : 12.5;
+  const volume24h = hasRealData && tokenData ? tokenData.volume24h : 8750000;
+  const marketCap = hasRealData && tokenData ? tokenData.marketCap : 278687500;
+  const holders = hasRealData && tokenData ? tokenData.holders : 12450;
+  const transactions = hasRealData && tokenData ? tokenData.transactions24h : 45780;
 
   const tradingPairs = [
-    { pair: "GAiA/USDT", price: 1.2847, change: 12.5, volume: 8920000 },
-    { pair: "GAiA/BTC", price: 0.0000191, change: 8.3, volume: 2140000 },
-    { pair: "GAiA/ETH", price: 0.000335, change: 15.7, volume: 3450000 },
-    { pair: "GAiA/SOL", price: 0.00647, change: 6.2, volume: 1890000 },
+    { pair: `${GAIA_TOKEN.SYMBOL}/USDT`, price: currentPrice, change: priceChange, volume: volume24h },
+    { pair: `${GAIA_TOKEN.SYMBOL}/USDC`, price: currentPrice * 0.999, change: priceChange * 0.95, volume: volume24h * 0.6 },
+    { pair: `${GAIA_TOKEN.SYMBOL}/SOL`, price: currentPrice / 150, change: priceChange * 0.8, volume: volume24h * 0.4 },
   ];
-
-  // Real-time updates
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMetrics(prev => ({
-        ...prev,
-        price: prev.price * (1 + (Math.random() - 0.5) * 0.002),
-        change24h: prev.change24h + (Math.random() - 0.5) * 0.1,
-        volume24h: prev.volume24h + Math.floor(Math.random() * 10000),
-        totalTransactions: prev.totalTransactions + Math.floor(Math.random() * 10) + 1,
-      }));
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   const handleTrade = () => {
     if (!amount || !price) {
@@ -83,9 +53,9 @@ export default function Exchange() {
     }
 
     toast.success(
-      `${tradeType.toUpperCase()} order placed: ${amount} GAiA at $${price}`,
+      `${tradeType.toUpperCase()} order placed: ${amount} ${GAIA_TOKEN.SYMBOL} at $${price}`,
       {
-        description: "Order submitted to Gaia's Private Blockchain",
+        description: `Order submitted to ${GAIA_TOKEN.NAME} on ${GAIA_TOKEN.NETWORK}`,
         duration: 3000,
       }
     );
@@ -120,11 +90,11 @@ export default function Exchange() {
             <div className="flex items-center gap-4">
               <Badge variant="outline" className="border-green-500/50 text-green-400">
                 <Heart className="h-3 w-3 mr-1" />
-                Network Health: {metrics.networkHealth}%
+                Network Health: 99.8%
               </Badge>
               <Badge variant="outline" className="border-blue-500/50 text-blue-400">
                 <Network className="h-3 w-3 mr-1" />
-                {metrics.activeNodes} Nodes
+                120 Nodes
               </Badge>
             </div>
           </div>
@@ -143,16 +113,21 @@ export default function Exchange() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2">
                     <Coins className="h-6 w-6 text-green-400" />
-                    GAiA Token - Live Trading
+                    {GAIA_TOKEN.NAME} - Live Trading
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     <span className="text-2xl font-bold text-green-400">
-                      ${metrics.price.toFixed(4)}
+                      ${currentPrice.toFixed(6)}
                     </span>
-                    <div className={`flex items-center gap-1 ${metrics.change24h >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                      {metrics.change24h >= 0 ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
-                      <span>{Math.abs(metrics.change24h).toFixed(2)}%</span>
+                    <div className={`flex items-center gap-1 ${priceChange >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                      {priceChange >= 0 ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
+                      <span>{Math.abs(priceChange).toFixed(2)}%</span>
                     </div>
+                    {!hasRealData && (
+                      <Badge variant="outline" className="text-yellow-400 border-yellow-500/50">
+                        Demo Data
+                      </Badge>
+                    )}
                   </div>
                 </div>
               </CardHeader>
@@ -162,7 +137,8 @@ export default function Exchange() {
                   <div className="text-center">
                     <LineChart className="h-16 w-16 mx-auto text-green-400 mb-4" />
                     <p className="text-muted-foreground">Live Trading Chart</p>
-                    <p className="text-sm text-muted-foreground">Real-time price movements on Gaia's Blockchain</p>
+                    <p className="text-sm text-muted-foreground">Real-time price movements for {GAIA_TOKEN.NAME}</p>
+                    <p className="text-xs text-green-400">Contract: {GAIA_TOKEN.CONTRACT_ADDRESS}</p>
                   </div>
                 </div>
 
@@ -192,10 +168,10 @@ export default function Exchange() {
             {/* Market Statistics */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { label: "24h Volume", value: `$${formatNumber(metrics.volume24h)}`, icon: Activity, color: "text-blue-400" },
-                { label: "Market Cap", value: `$${formatNumber(metrics.marketCap)}`, icon: DollarSign, color: "text-green-400" },
-                { label: "Circulating Supply", value: formatNumber(metrics.circulatingSupply), icon: Coins, color: "text-purple-400" },
-                { label: "Total Transactions", value: formatNumber(metrics.totalTransactions), icon: Database, color: "text-yellow-400" },
+                { label: "24h Volume", value: `$${formatNumber(volume24h)}`, icon: Activity, color: "text-blue-400" },
+                { label: "Market Cap", value: `$${formatNumber(marketCap)}`, icon: DollarSign, color: "text-green-400" },
+                { label: "Holders", value: formatNumber(holders), icon: Users, color: "text-purple-400" },
+                { label: "24h Transactions", value: formatNumber(transactions), icon: Database, color: "text-yellow-400" },
               ].map((stat, index) => (
                 <Card key={index} className="bg-card/50">
                   <CardContent className="p-4">
@@ -256,7 +232,7 @@ export default function Exchange() {
 
                 <div>
                   <label className="text-sm text-muted-foreground mb-2 block">
-                    Amount (GAiA)
+                    Amount ({GAIA_TOKEN.SYMBOL})
                   </label>
                   <Input
                     type="number"
@@ -287,7 +263,7 @@ export default function Exchange() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Network Fee:</span>
-                    <span className="text-blue-400">~0.001 GAiA</span>
+                    <span className="text-blue-400">~0.001 {GAIA_TOKEN.SYMBOL}</span>
                   </div>
                   <div className="flex justify-between text-sm font-medium mt-2 pt-2 border-t border-border/50">
                     <span>Total:</span>
@@ -317,17 +293,17 @@ export default function Exchange() {
                 <div>
                   <div className="flex justify-between mb-2">
                     <span className="text-sm">Network Health</span>
-                    <span className="text-sm font-medium">{metrics.networkHealth}%</span>
+                    <span className="text-sm font-medium">99.8%</span>
                   </div>
-                  <Progress value={metrics.networkHealth} className="h-2" />
+                  <Progress value={99.8} className="h-2" />
                 </div>
                 
                 <div>
                   <div className="flex justify-between mb-2">
                     <span className="text-sm">Active Nodes</span>
-                    <span className="text-sm font-medium">{metrics.activeNodes}</span>
+                    <span className="text-sm font-medium">120</span>
                   </div>
-                  <Progress value={(metrics.activeNodes / 150) * 100} className="h-2" />
+                  <Progress value={80} className="h-2" />
                 </div>
 
                 <div className="pt-2 border-t border-border/50">

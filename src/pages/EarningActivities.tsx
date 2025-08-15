@@ -1,4 +1,5 @@
 import { useState, Suspense, lazy } from "react";
+import { EarningCategories } from "./EarningCategories";
 // Dynamic imports for all large feature components
 const GaiaBikeEarning = lazy(() =>
   import("@/components/earning/GaiaBikeEarning").then((m) => ({
@@ -229,11 +230,8 @@ import {
 export default function EarningActivities() {
   // State for search query
   const [searchQuery, setSearchQuery] = useState("");
-  // State for selected activity
-  const [selectedActivity, setSelectedActivity] = useState<{
-    category: string;
-    activityId: string;
-  } | null>(null);
+  // State for selected category
+  const [selectedCategory, setSelectedCategory] = useState<any | null>(null);
   // State for active tab
   const [activeTab, setActiveTab] = useState("overview");
   // User stats
@@ -247,6 +245,20 @@ export default function EarningActivities() {
     communityRank: 47,
     streakDays: 23,
   });
+
+  // If a category is selected, show the category view
+  if (selectedCategory) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-green-900/20 p-6">
+        <div className="container mx-auto">
+          <EarningCategories
+            category={selectedCategory}
+            onBack={() => setSelectedCategory(null)}
+          />
+        </div>
+      </div>
+    );
+  }
 
   const earningCategories = [
     {
@@ -584,26 +596,7 @@ export default function EarningActivities() {
   );
 
   const handleActivitySelect = (category: string, activityId: string) => {
-    setSelectedActivity({ category, activityId });
-    setActiveTab("categories");
-  };
-
-  const getSelectedActivityComponent = () => {
-    if (!selectedActivity) return null;
-
-    const category = earningCategories.find(
-      (cat) => cat.id === selectedActivity.category,
-    );
-    if (!category) return null;
-
-    const activityIndex = parseInt(selectedActivity.activityId.split("-")[1]);
-    const activity = category.components[activityIndex];
-
-    return activity ? (
-      <Suspense fallback={<div>Loading activity...</div>}>
-        <activity.component key={selectedActivity.activityId} />
-      </Suspense>
-    ) : null;
+    setSelectedCategory(earningCategories.find(cat => cat.id === category) || null);
   };
 
   return (
@@ -765,19 +758,34 @@ export default function EarningActivities() {
               categories={earningCategories}
             />
 
-            {/* Selected Activity Display */}
-            {selectedActivity && getSelectedActivityComponent() && (
+            {/* Selected Category Display */}
+            {selectedCategory && (
               <div className="mt-8 space-y-4">
                 <div className="text-center">
                   <h3 className="text-2xl font-bold text-primary mb-2">
-                    Selected Activity
+                    Selected Category: {selectedCategory.title}
                   </h3>
                   <p className="text-muted-foreground">
-                    Click on another globe point to switch activities
+                    Click on another globe point to switch categories
                   </p>
                 </div>
                 <div className="bg-black/20 rounded-2xl p-6 border border-cyan-500/30">
-                  {getSelectedActivityComponent()}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {selectedCategory.components.slice(0, 4).map((comp: any, index: number) => (
+                      <Card key={index} className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 border-green-500/30">
+                        <CardContent className="p-4">
+                          <div className="flex items-center gap-3 mb-2">
+                            <comp.icon className="h-6 w-6 text-green-400" />
+                            <h4 className="font-bold text-green-400">{comp.title}</h4>
+                          </div>
+                          <p className="text-sm text-muted-foreground mb-2">Reward: {comp.points}</p>
+                          <Badge variant="outline" className="text-xs">
+                            {comp.difficulty}
+                          </Badge>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
@@ -787,10 +795,10 @@ export default function EarningActivities() {
           <TabsContent value="overview" className="space-y-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredCategories.map((category) => (
-                <Card
+                 <Card
                   key={category.id}
                   className={`border-2 ${category.borderColor} bg-gradient-to-br ${category.color} hover:scale-105 transition-all duration-300 cursor-pointer`}
-                  onClick={() => setActiveTab("categories")}
+                  onClick={() => setSelectedCategory(category)}
                 >
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between mb-2">
