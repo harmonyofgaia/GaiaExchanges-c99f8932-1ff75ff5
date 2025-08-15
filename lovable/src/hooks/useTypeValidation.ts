@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { TypeValidator } from "@/utils/type-validator";
 import { GAIA_TOKEN, GAIA_METRICS } from "@/constants/gaia";
 
-export const useTypeValidation = (componentName: string) => {
+const useTypeValidation = (componentName: string) => {
   useEffect(() => {
     console.log(`🔍 Running type validation for ${componentName}`);
 
@@ -33,3 +33,6 @@ export const useTypeValidation = (componentName: string) => {
     },
   };
 };
+
+
+export default useTypeValidation;

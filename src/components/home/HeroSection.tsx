@@ -16,7 +16,7 @@ import {
 import { GAIA_TOKEN } from "@/constants/gaia";
 import { EnhancedArtisticTitle } from "./EnhancedArtisticTitle";
 
-export const HeroSection = () => {
+const HeroSection = () => {
   const worldRankings = [
     {
       position: 1,
@@ -158,3 +158,6 @@ export const HeroSection = () => {
     </div>
   );
 };
+
+
+export default HeroSection;

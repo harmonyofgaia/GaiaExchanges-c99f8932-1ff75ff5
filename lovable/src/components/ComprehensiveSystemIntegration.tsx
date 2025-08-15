@@ -3,7 +3,7 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Zap, Shield, Globe, Crown } from "lucide-react";
 
-export const ComprehensiveSystemIntegration = () => {
+const ComprehensiveSystemIntegration = () => {
   return (
     <div className="space-y-6">
       <Card className="border-2 border-blue-500/50 bg-gradient-to-r from-blue-900/30 to-cyan-900/30">
@@ -117,3 +117,6 @@ export const ComprehensiveSystemIntegration = () => {
     </div>
   );
 };
+
+
+export default ComprehensiveSystemIntegration;

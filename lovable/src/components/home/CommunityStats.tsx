@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
-export const CommunityStats = () => {
+const CommunityStats = () => {
   return (
     <Card className="border-4 border-gradient-to-r from-green-500 via-blue-500 to-purple-500 bg-gradient-to-r from-green-900/20 via-blue-900/20 to-purple-900/20 mb-12 relative overflow-hidden">
       {/* Abstract art background */}
@@ -56,3 +56,6 @@ export const CommunityStats = () => {
     </Card>
   );
 };
+
+
+export default CommunityStats;

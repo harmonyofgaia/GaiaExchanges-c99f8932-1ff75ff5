@@ -4,7 +4,7 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { HardDrive, Zap, Database, Server, CloudUpload, BarChart3 } from "lucide-react";
 
-export const StorageUpgradePanel = () => {
+const StorageUpgradePanel = () => {
   const storageStats = [
     {
       label: "Current Storage",
@@ -172,3 +172,6 @@ export const StorageUpgradePanel = () => {
     </div>
   );
 };
+
+
+export default StorageUpgradePanel;

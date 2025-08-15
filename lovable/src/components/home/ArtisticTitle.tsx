@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const ArtisticTitle = () => {
+const ArtisticTitle = () => {
   const [glowIntensity, setGlowIntensity] = useState(1);
 
   useEffect(() => {
@@ -237,3 +237,6 @@ export const ArtisticTitle = () => {
     </div>
   );
 };
+
+
+export default ArtisticTitle;

@@ -95,7 +95,7 @@ export function UnifiedServiceOrchestrator() {
     return () => {
       if (orchestratorInterval.current) clearInterval(orchestratorInterval.current);
     };
-  }, [services.length]);
+  }, [services]);
 
   return {
     services,

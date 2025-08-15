@@ -256,7 +256,7 @@ export function TetrisGame() {
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [movePiece, isPlaying, gameOver]);
+  }, [movePiece, isPlaying, gameOver, dropPiece, rotatePieceHandler]);
 
   const startGame = () => {
     setBoard(

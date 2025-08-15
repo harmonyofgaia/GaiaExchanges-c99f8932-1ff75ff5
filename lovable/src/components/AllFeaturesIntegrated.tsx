@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Shield, Globe, Gamepad2, TrendingUp, Zap, Crown, Star, Activity } from "lucide-react";
 
-export const AllFeaturesIntegrated = () => {
+const AllFeaturesIntegrated = () => {
   return (
     <div className="space-y-6">
       <Card className="border-2 border-purple-500/50 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
@@ -158,3 +158,6 @@ export const AllFeaturesIntegrated = () => {
     </div>
   );
 };
+
+
+export default AllFeaturesIntegrated;

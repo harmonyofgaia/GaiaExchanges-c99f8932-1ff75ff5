@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Shield, Lock, Eye, Zap, Crown, Globe, AlertTriangle } from "lucide-react";
 
-export const SecurityPreview = () => {
+const SecurityPreview = () => {
   return (
     <div className="mb-12">
       <Card className="bg-gradient-to-r from-red-900/30 via-purple-900/30 to-blue-900/30 border-2 border-red-500/50 shadow-2xl shadow-red-500/20">
@@ -120,3 +120,6 @@ export const SecurityPreview = () => {
     </div>
   );
 };
+
+
+export default SecurityPreview;

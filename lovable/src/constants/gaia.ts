@@ -1,4 +1,4 @@
-export const GAIA_TOKEN = {
+const GAIA_TOKEN = {
   // Official GAiA Token Addresses
   WALLET_ADDRESS: "ERS1S7HqgSEh6edNVQzq2eZWSCw3jprJELHvLZ4LAzeY", // Main GAiA token wallet
   CONTRACT_ADDRESS: "t7Tnf5m4K1dhNu5Cx6pocQjZ5o5rNqicg5aDcgBpump",
@@ -109,3 +109,6 @@ export const getOfficialTokenStatus = () => ({
   active: true,
   lastVerified: new Date().toISOString(),
 });
+
+
+export default getOfficialTokenStatus;

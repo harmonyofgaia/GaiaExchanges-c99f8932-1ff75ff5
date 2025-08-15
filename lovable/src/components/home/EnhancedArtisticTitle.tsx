@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const EnhancedArtisticTitle = () => {
+const EnhancedArtisticTitle = () => {
   const [currentFont, setCurrentFont] = useState("Playfair Display");
   const [glowIntensity, setGlowIntensity] = useState(1);
 
@@ -203,3 +203,6 @@ export const EnhancedArtisticTitle = () => {
     </div>
   );
 };
+
+
+export default EnhancedArtisticTitle;

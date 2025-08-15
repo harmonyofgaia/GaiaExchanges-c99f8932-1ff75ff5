@@ -109,3 +109,6 @@ export const getOfficialTokenStatus = () => ({
   active: true,
   lastVerified: new Date().toISOString(),
 });
+
+
+export default getOfficialTokenStatus;

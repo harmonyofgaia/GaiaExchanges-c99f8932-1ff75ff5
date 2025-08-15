@@ -11,7 +11,7 @@ interface BackgroundStyle {
   matrix: boolean;
 }
 
-export const EnhancedHomeBackground = () => {
+const EnhancedHomeBackground = () => {
   const [backgroundConfig, setBackgroundConfig] = useState<BackgroundStyle>({
     style: "neural-matrix",
     intensity: 80,
@@ -81,3 +81,6 @@ export const EnhancedHomeBackground = () => {
     </>
   );
 };
+
+
+export default EnhancedHomeBackground;

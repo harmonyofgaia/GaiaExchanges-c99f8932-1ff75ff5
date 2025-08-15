@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Zap, Users, Globe, Crown, Flame, Eye, Lock, Sparkles, Star } from "lucide-react";
 
-export const FeatureGrid = () => {
+const FeatureGrid = () => {
   const features = [
     {
       icon: Flame,
@@ -161,3 +161,6 @@ export const FeatureGrid = () => {
     </div>
   );
 };
+
+
+export default FeatureGrid;

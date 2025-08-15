@@ -54,7 +54,7 @@ export function QuantumGameInventory() {
     generateGameLevels();
   }, [initializeQuantumInventory]);
 
-  const initializeQuantumInventory = () => {
+  const initializeQuantumInventory = useCallback(() => {
     const assets: GameAsset[] = [
       {
         id: "1",
@@ -65,7 +65,7 @@ export function QuantumGameInventory() {
         memorySize: "15.7 TB",
         description: "Self-evolving biomechanical weapon with quantum DNA integration",
         quantumEnhanced: true,
-      },
+      }, []),
       {
         id: "2",
         name: "🌊 Infinite Ocean World",

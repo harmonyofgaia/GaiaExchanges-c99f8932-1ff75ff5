@@ -57,7 +57,7 @@ export function GamingAssetsManager() {
     loadGameAssets();
   }, [loadGameAssets]);
 
-  const loadGameAssets = () => {
+  const loadGameAssets = useCallback(() => {
     const gameAssets: GameAsset[] = [
       // Armor Assets
       {
@@ -69,7 +69,7 @@ export function GamingAssetsManager() {
         filePath: "/assets/armor/dragon-helmet.fbx",
         previewImage: "/lovable-uploads/93093efd-1912-4361-987d-424e6cf8e1df.png",
         description: "Legendary helmet with fire resistance and enhanced vision",
-        gameplayStats: { defense: 85, magic: 45 },
+        gameplayStats: { defense: 85, magic: 45 }, []),
         compatibility: ["Unity", "Unreal Engine", "GAiA Engine"],
         createdDate: new Date("2024-01-15"),
         lastModified: new Date("2024-01-20"),
