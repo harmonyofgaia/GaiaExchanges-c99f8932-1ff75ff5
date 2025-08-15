@@ -685,6 +685,13 @@ export type Database = {
             foreignKeyName: "animal_conservation_activities_camera_id_fkey"
             columns: ["camera_id"]
             isOneToOne: false
+            referencedRelation: "animal_cameras_public"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "animal_conservation_activities_camera_id_fkey"
+            columns: ["camera_id"]
+            isOneToOne: false
             referencedRelation: "live_animal_cameras"
             referencedColumns: ["id"]
           },
@@ -803,6 +810,13 @@ export type Database = {
           updated_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "animal_nfts_camera_id_fkey"
+            columns: ["camera_id"]
+            isOneToOne: false
+            referencedRelation: "animal_cameras_public"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "animal_nfts_camera_id_fkey"
             columns: ["camera_id"]
@@ -3976,6 +3990,54 @@ export type Database = {
       }
     }
     Views: {
+      animal_cameras_public: {
+        Row: {
+          animal_species: string | null
+          camera_metadata: Json | null
+          camera_name: string | null
+          conservation_partner: string | null
+          country: string | null
+          created_at: string | null
+          description: string | null
+          id: string | null
+          is_active: boolean | null
+          location: string | null
+          stream_url: string | null
+          updated_at: string | null
+          viewers_count: number | null
+        }
+        Insert: {
+          animal_species?: string | null
+          camera_metadata?: never
+          camera_name?: string | null
+          conservation_partner?: string | null
+          country?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string | null
+          is_active?: boolean | null
+          location?: string | null
+          stream_url?: string | null
+          updated_at?: string | null
+          viewers_count?: number | null
+        }
+        Update: {
+          animal_species?: string | null
+          camera_metadata?: never
+          camera_name?: string | null
+          conservation_partner?: string | null
+          country?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string | null
+          is_active?: boolean | null
+          location?: string | null
+          stream_url?: string | null
+          updated_at?: string | null
+          viewers_count?: number | null
+        }
+        Relationships: []
+      }
       auth_comprehensive_debug_view: {
         Row: {
           created_at: string | null
@@ -5222,6 +5284,10 @@ export type Database = {
       get_admin_user_id: {
         Args: { role_or_user_id: string }
         Returns: string
+      }
+      get_camera_approximate_location: {
+        Args: { camera_id: string }
+        Returns: Json
       }
       get_current_auth_context: {
         Args: Record<PropertyKey, never>
