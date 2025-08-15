@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-
+import crypto from "crypto";
 // Try to import useAuth safely, falling back to a no-op
 let useAuth: () => { user: any } = () => ({ user: null });
 try {
@@ -62,7 +62,7 @@ export function useSecureAdmin() {
 
         if (adminAccount) {
           // Create secure session token
-          const sessionToken = `session-${Date.now()}-${Math.random().toString(36).substr(2, 16)}`;
+          const sessionToken = `session-${Date.now()}-${crypto.randomBytes(16).toString("hex")}`;
 
           // Create admin security session
           const { error: sessionError } = await supabase
