@@ -76,7 +76,7 @@ export default function Home() {
           intensity: "low",
           color: "#00ff00",
           speed: 0.5,
-          autoGenerate: true,
+          autoGenerate: false,
         }}
       />
 
