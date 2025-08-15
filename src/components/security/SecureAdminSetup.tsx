@@ -8,7 +8,11 @@ import { Shield, UserPlus, AlertTriangle, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { supabase } from "@/integrations/supabase/client";
-import { validateEmail, validatePasswordStrength, sanitizeInput } from "./SecurityEnhancedApp";
+import {
+  validateEmail,
+  validatePasswordStrength,
+  sanitizeInput,
+} from "./SecurityEnhancedApp";
 
 export function SecureAdminSetup() {
   const { signUp } = useAuth();
@@ -29,7 +33,7 @@ export function SecureAdminSetup() {
     try {
       // 🔒 SECURITY: Input validation and sanitization
       const sanitizedEmail = sanitizeInput(credentials.email.toLowerCase());
-      
+
       if (!validateEmail(sanitizedEmail)) {
         toast.error("🚫 Invalid Email", {
           description: "Please enter a valid email address",
@@ -89,8 +93,11 @@ export function SecureAdminSetup() {
       }
 
       // Get user from current auth session since signUp might not return user data immediately
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
-      
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
       if (userError || !user) {
         toast.error("🚫 User Creation Failed", {
           description: "No user data available after signup",
@@ -105,7 +112,7 @@ export function SecureAdminSetup() {
         {
           admin_email: sanitizedEmail,
           admin_user_id: user.id,
-        }
+        },
       );
 
       if (adminError) {
@@ -118,7 +125,8 @@ export function SecureAdminSetup() {
       }
 
       toast.success("👑 SECURE ADMIN CREATED!", {
-        description: "Initial admin account created successfully. Please check your email to verify your account.",
+        description:
+          "Initial admin account created successfully. Please check your email to verify your account.",
         duration: 10000,
       });
 
@@ -128,7 +136,6 @@ export function SecureAdminSetup() {
         password: "",
         confirmPassword: "",
       });
-
     } catch (error) {
       console.error("Secure admin setup error:", error);
       toast.error("🛡️ Security Setup Error", {
@@ -200,7 +207,8 @@ export function SecureAdminSetup() {
               <span>One-Time Setup Only</span>
             </div>
             <p className="text-xs text-yellow-200 mt-1">
-              This creates the first admin account. Additional admins must be created by existing super admins.
+              This creates the first admin account. Additional admins must be
+              created by existing super admins.
             </p>
           </div>
 
@@ -259,13 +267,17 @@ export function SecureAdminSetup() {
               {credentials.password && (
                 <div className="flex gap-2 mt-2">
                   <Badge
-                    variant={passwordValidation.strength === "strong" ? "default" : "destructive"}
+                    variant={
+                      passwordValidation.strength === "strong"
+                        ? "default"
+                        : "destructive"
+                    }
                     className={
                       passwordValidation.strength === "strong"
                         ? "bg-green-600"
                         : passwordValidation.strength === "medium"
-                        ? "bg-yellow-600"
-                        : "bg-red-600"
+                          ? "bg-yellow-600"
+                          : "bg-red-600"
                     }
                   >
                     {passwordValidation.strength} password
@@ -293,20 +305,26 @@ export function SecureAdminSetup() {
                 autoComplete="new-password"
                 required
               />
-              {credentials.confirmPassword && credentials.password !== credentials.confirmPassword && (
-                <p className="text-red-400 text-xs">Passwords do not match</p>
-              )}
-              {credentials.confirmPassword && credentials.password === credentials.confirmPassword && (
-                <div className="flex items-center gap-1 text-green-400 text-xs">
-                  <CheckCircle className="h-3 w-3" />
-                  <span>Passwords match</span>
-                </div>
-              )}
+              {credentials.confirmPassword &&
+                credentials.password !== credentials.confirmPassword && (
+                  <p className="text-red-400 text-xs">Passwords do not match</p>
+                )}
+              {credentials.confirmPassword &&
+                credentials.password === credentials.confirmPassword && (
+                  <div className="flex items-center gap-1 text-green-400 text-xs">
+                    <CheckCircle className="h-3 w-3" />
+                    <span>Passwords match</span>
+                  </div>
+                )}
             </div>
 
             <Button
               type="submit"
-              disabled={isLoading || !passwordValidation.isValid || credentials.password !== credentials.confirmPassword}
+              disabled={
+                isLoading ||
+                !passwordValidation.isValid ||
+                credentials.password !== credentials.confirmPassword
+              }
               className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold py-3"
             >
               <UserPlus className="h-5 w-5 mr-2" />

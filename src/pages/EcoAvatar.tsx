@@ -132,7 +132,10 @@ export default function EcoAvatar() {
     },
   ];
 
-  const updateAvatar = <K extends keyof AvatarCustomization>(field: K, value: AvatarCustomization[K]) => {
+  const updateAvatar = <K extends keyof AvatarCustomization>(
+    field: K,
+    value: AvatarCustomization[K],
+  ) => {
     setAvatar((prev) => ({ ...prev, [field]: value }));
   };
 

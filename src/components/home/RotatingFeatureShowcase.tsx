@@ -2,18 +2,18 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  Leaf, 
-  Shield, 
-  Coins, 
-  Users, 
-  Zap, 
-  Globe, 
-  Heart, 
+import {
+  Leaf,
+  Shield,
+  Coins,
+  Users,
+  Zap,
+  Globe,
+  Heart,
   TrendingUp,
   Sparkles,
   ArrowRight,
-  Star
+  Star,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -21,63 +21,69 @@ const features = [
   {
     id: 1,
     title: "Carbon-Negative Trading",
-    description: "Every transaction removes CO2 from the atmosphere. Trade and heal the Earth simultaneously.",
+    description:
+      "Every transaction removes CO2 from the atmosphere. Trade and heal the Earth simultaneously.",
     icon: Leaf,
     color: "from-green-400 to-emerald-500",
     bgColor: "from-green-900/30 to-emerald-900/30",
     highlight: "100% Carbon Negative",
-    video: "🌱 Eco-Friendly Revolution"
+    video: "🌱 Eco-Friendly Revolution",
   },
   {
     id: 2,
     title: "Zero-Fee Community Exchange",
-    description: "No trading fees, no hidden costs. All profits go to environmental restoration projects.",
+    description:
+      "No trading fees, no hidden costs. All profits go to environmental restoration projects.",
     icon: Coins,
     color: "from-blue-400 to-cyan-500",
     bgColor: "from-blue-900/30 to-cyan-900/30",
     highlight: "0% Trading Fees",
-    video: "💰 Fair Trading Platform"
+    video: "💰 Fair Trading Platform",
   },
   {
     id: 3,
     title: "Blockchain for Believers",
-    description: "Built for long-term environmental advocates, not day traders. Stable, secure, meaningful.",
+    description:
+      "Built for long-term environmental advocates, not day traders. Stable, secure, meaningful.",
     icon: Shield,
     color: "from-purple-400 to-pink-500",
     bgColor: "from-purple-900/30 to-pink-900/30",
     highlight: "Anti-Speculation",
-    video: "🛡️ Secure & Stable"
+    video: "🛡️ Secure & Stable",
   },
   {
     id: 4,
     title: "Global Community Impact",
-    description: "Join thousands of believers worldwide working together for environmental restoration.",
+    description:
+      "Join thousands of believers worldwide working together for environmental restoration.",
     icon: Globe,
     color: "from-yellow-400 to-orange-500",
     bgColor: "from-yellow-900/30 to-orange-900/30",
     highlight: "12,450+ Holders",
-    video: "🌍 Global Movement"
+    video: "🌍 Global Movement",
   },
   {
     id: 5,
     title: "Instant Earth Healing",
-    description: "Real-time environmental projects funded by every transaction. See your impact immediately.",
+    description:
+      "Real-time environmental projects funded by every transaction. See your impact immediately.",
     icon: Heart,
     color: "from-red-400 to-pink-500",
     bgColor: "from-red-900/30 to-pink-900/30",
     highlight: "Live Impact Tracking",
-    video: "❤️ Heal the Planet"
+    video: "❤️ Heal the Planet",
   },
   {
     id: 6,
     title: "Revolutionary Technology",
-    description: "Advanced private blockchain technology that scales with your environmental impact.",
+    description:
+      "Advanced private blockchain technology that scales with your environmental impact.",
     icon: Zap,
     color: "from-indigo-400 to-purple-500",
     bgColor: "from-indigo-900/30 to-purple-900/30",
     highlight: "Next-Gen Blockchain",
-    video: "⚡ Future Technology"
-  }
+    video: "⚡ Future Technology",
+  },
 ];
 
 export function RotatingFeatureShowcase() {
@@ -86,7 +92,7 @@ export function RotatingFeatureShowcase() {
 
   useEffect(() => {
     if (!isPlaying) return;
-    
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % features.length);
     }, 4000);
@@ -122,9 +128,11 @@ export function RotatingFeatureShowcase() {
                 transition={{ duration: 0.8, ease: "easeInOut" }}
                 className="absolute inset-0"
               >
-                <Card className={`h-full bg-gradient-to-br ${currentFeature.bgColor} border-2 border-opacity-50 relative overflow-hidden`}>
+                <Card
+                  className={`h-full bg-gradient-to-br ${currentFeature.bgColor} border-2 border-opacity-50 relative overflow-hidden`}
+                >
                   <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-transparent" />
-                  
+
                   {/* Floating Particles */}
                   <div className="absolute inset-0">
                     {Array.from({ length: 12 }).map((_, i) => (
@@ -152,18 +160,28 @@ export function RotatingFeatureShowcase() {
                   <CardContent className="h-full flex flex-col justify-center items-center text-center relative z-10 p-8">
                     {/* Icon with Glow Effect */}
                     <motion.div
-                      animate={{ 
+                      animate={{
                         rotate: [0, 360],
-                        scale: [1, 1.1, 1]
+                        scale: [1, 1.1, 1],
                       }}
-                      transition={{ 
-                        rotate: { duration: 8, repeat: Infinity, ease: "linear" },
-                        scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                      transition={{
+                        rotate: {
+                          duration: 8,
+                          repeat: Infinity,
+                          ease: "linear",
+                        },
+                        scale: {
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        },
                       }}
                       className={`mb-6 p-6 rounded-full bg-gradient-to-r ${currentFeature.color} shadow-2xl relative`}
                     >
                       <Icon className="h-16 w-16 text-white" />
-                      <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${currentFeature.color} blur-xl opacity-50 -z-10`} />
+                      <div
+                        className={`absolute inset-0 rounded-full bg-gradient-to-r ${currentFeature.color} blur-xl opacity-50 -z-10`}
+                      />
                     </motion.div>
 
                     {/* Video/Intro Text */}
@@ -173,8 +191,8 @@ export function RotatingFeatureShowcase() {
                       transition={{ delay: 0.3 }}
                       className="mb-4"
                     >
-                      <Badge 
-                        variant="outline" 
+                      <Badge
+                        variant="outline"
                         className={`border-white/50 text-white bg-gradient-to-r ${currentFeature.color} text-lg px-4 py-2`}
                       >
                         <Sparkles className="h-4 w-4 mr-2" />
@@ -229,16 +247,16 @@ export function RotatingFeatureShowcase() {
             >
               {isPlaying ? "⏸️ Pause" : "▶️ Play"}
             </Button>
-            
+
             <div className="flex gap-2">
               {features.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
                   className={`w-3 h-3 rounded-full transition-all ${
-                    index === currentIndex 
-                      ? 'bg-green-400 scale-125' 
-                      : 'bg-white/30 hover:bg-white/50'
+                    index === currentIndex
+                      ? "bg-green-400 scale-125"
+                      : "bg-white/30 hover:bg-white/50"
                   }`}
                 />
               ))}
@@ -247,7 +265,9 @@ export function RotatingFeatureShowcase() {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setCurrentIndex((prev) => (prev + 1) % features.length)}
+              onClick={() =>
+                setCurrentIndex((prev) => (prev + 1) % features.length)
+              }
               className="border-blue-500/50 text-blue-400"
             >
               Next <ArrowRight className="h-3 w-3 ml-1" />
@@ -267,14 +287,22 @@ export function RotatingFeatureShowcase() {
                   onClick={() => setCurrentIndex(features.indexOf(feature))}
                   className="cursor-pointer hover:opacity-100 transition-opacity"
                 >
-                  <Card className={`bg-gradient-to-r ${feature.bgColor} border border-white/20 hover:border-white/40 transition-all`}>
+                  <Card
+                    className={`bg-gradient-to-r ${feature.bgColor} border border-white/20 hover:border-white/40 transition-all`}
+                  >
                     <CardContent className="p-4 flex items-center gap-3">
-                      <div className={`p-2 rounded-lg bg-gradient-to-r ${feature.color}`}>
+                      <div
+                        className={`p-2 rounded-lg bg-gradient-to-r ${feature.color}`}
+                      >
                         <FeatureIcon className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-white text-sm">{feature.title}</h4>
-                        <p className="text-white/70 text-xs">{feature.highlight}</p>
+                        <h4 className="font-bold text-white text-sm">
+                          {feature.title}
+                        </h4>
+                        <p className="text-white/70 text-xs">
+                          {feature.highlight}
+                        </p>
                       </div>
                     </CardContent>
                   </Card>

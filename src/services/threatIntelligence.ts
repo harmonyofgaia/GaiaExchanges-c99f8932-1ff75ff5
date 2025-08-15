@@ -376,7 +376,7 @@ class ThreatIntelligenceService {
 
     // Convert input to string for analysis
     const inputStr = typeof input === "string" ? input : JSON.stringify(input);
-    
+
     if (inputStr.includes("script")) features.push("script_content");
     if (inputStr.includes("eval")) features.push("code_evaluation");
     if (inputStr.includes("http")) features.push("url_reference");
