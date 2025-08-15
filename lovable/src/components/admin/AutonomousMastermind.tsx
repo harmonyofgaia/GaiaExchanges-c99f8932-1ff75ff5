@@ -145,7 +145,6 @@ export function AutonomousMastermind() {
         return f;
       })
     );
-
     // Reset countdown
     setCountdownTimer(null);
     setPendingFeature(null);
