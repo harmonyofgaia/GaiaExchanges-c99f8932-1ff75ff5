@@ -1,0 +1,54 @@
+shared:
+  - ".github/**"
+  - ".gitignore"
+  - "**/package-lock.json"
+  - "**/yarn.lock"
+  - "**/pnpm-lock.yaml"
+  - "**/poetry.lock"
+  - "**/requirements*.txt"
+  - "**/Pipfile.lock"
+  - "**/go.sum"
+  - "**/Gemfile.lock"
+  - "**/*.csproj"
+  - "**/*.sln"
+  - "Dockerfile*"
+  - "docker/**"
+topics:
+  - name: frontend
+    globs:
+      - "apps/web/**"
+      - "web/**"
+      - "ui/**"
+      - "**/*.tsx"
+      - "**/*.ts"
+      - "**/*.jsx"
+      - "**/*.vue"
+      - "**/package.json"
+  - name: backend
+    globs:
+      - "apps/api/**"
+      - "server/**"
+      - "api/**"
+      - "**/*.py"
+      - "**/*.go"
+      - "**/*.java"
+      - "**/*.kt"
+      - "**/*.rb"
+  - name: infra
+    globs:
+      - "infra/**"
+      - "terraform/**"
+      - "k8s/**"
+      - "helm/**"
+      - ".github/workflows/**"
+  - name: docs
+    globs:
+      - "docs/**"
+      - "**/*.md"
+      - "**/*.rst"
+  - name: data
+    globs:
+      - "migrations/**"
+      - "db/**"
+      - "**/*migration*"
+      - "**/*.sql"

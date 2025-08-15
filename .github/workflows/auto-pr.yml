@@ -1,0 +1,38 @@
+name: Auto PR and Smart Split
+on:
+  push:
+    branches:
+      - "**"
+    tags-ignore:
+      - "**"
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  BASE_BRANCH: main
+  GH_TOKEN: ${{ github.token }}
+jobs:
+  auto-pr:
+    if: startsWith(github.ref, 'refs/heads/') && github.ref_name != env.BASE_BRANCH
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Ensure base fetched
+        run: |
+          git config --global user.name "auto-pr-bot"
+          git config --global user.email "actions@users.noreply.github.com"
+          git fetch origin ${BASE_BRANCH}:${BASE_BRANCH} --prune
+      - name: Install PyYAML
+        run: |
+          python3 -m pip install --user --upgrade pip
+          python3 -m pip install --user pyyaml
+      - name: Run smart split / create PRs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: bash scripts/auto-pr/run.sh
