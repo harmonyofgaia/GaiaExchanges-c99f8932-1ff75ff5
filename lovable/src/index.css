@@ -1,169 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+﻿@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 142.1 76.2% 36.3%;
-    --radius: 0.75rem;
-  }
-
-  .light {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 142.1 76.2% 36.3%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 142.4 71.8% 29.2%;
-  }
-
-  .mellow {
-    --background: 30 20% 95%;
-    --foreground: 30 50% 15%;
-    --card: 30 20% 98%;
-    --card-foreground: 30 50% 15%;
-    --popover: 30 20% 98%;
-    --popover-foreground: 30 50% 15%;
-    --primary: 25 80% 55%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 35 30% 85%;
-    --secondary-foreground: 30 50% 15%;
-    --muted: 35 30% 85%;
-    --muted-foreground: 30 30% 45%;
-    --accent: 35 30% 85%;
-    --accent-foreground: 30 50% 15%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 30 25% 80%;
-    --input: 30 25% 80%;
-    --ring: 25 80% 55%;
-  }
-
-  .space {
-    --background: 230 30% 8%;
-    --foreground: 210 40% 98%;
-    --card: 230 30% 12%;
-    --card-foreground: 210 40% 98%;
-    --popover: 230 30% 12%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 270 100% 65%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 240 20% 20%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 240 20% 20%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 280 80% 50%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 240 30% 25%;
-    --input: 240 30% 25%;
-    --ring: 270 100% 65%;
-  }
-
-  .forest {
-    --background: 120 20% 12%;
-    --foreground: 120 30% 95%;
-    --card: 120 25% 16%;
-    --card-foreground: 120 30% 95%;
-    --popover: 120 25% 16%;
-    --popover-foreground: 120 30% 95%;
-    --primary: 120 60% 50%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 120 15% 25%;
-    --secondary-foreground: 120 30% 95%;
-    --muted: 120 15% 25%;
-    --muted-foreground: 120 20% 65%;
-    --accent: 100 80% 45%;
-    --accent-foreground: 120 30% 95%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 120 20% 30%;
-    --input: 120 20% 30%;
-    --ring: 120 60% 50%;
-  }
-
-  .ocean {
-    --background: 200 30% 10%;
-    --foreground: 200 40% 95%;
-    --card: 200 35% 14%;
-    --card-foreground: 200 40% 95%;
-    --popover: 200 35% 14%;
-    --popover-foreground: 200 40% 95%;
-    --primary: 190 80% 55%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 200 25% 22%;
-    --secondary-foreground: 200 40% 95%;
-    --muted: 200 25% 22%;
-    --muted-foreground: 200 20% 65%;
-    --accent: 180 100% 45%;
-    --accent-foreground: 200 40% 95%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 200 30% 28%;
-    --input: 200 30% 28%;
-    --ring: 190 80% 55%;
-  }
+/* Editor theme tokens (separate from in-game visuals) */
+:root {
+  --background: 222 20% 8%;
+  --foreground: 0 0% 100%;
+  --primary: 262 83% 58%;
+  --secondary: 192 82% 45%;
+  --muted: 220 14% 23%;
+  --accent: 292 84% 61%;
+  --border: 220 13% 18%;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+.dark {
+  --background: 222 20% 6%;
+  --foreground: 0 0% 100%;
+  --primary: 262 83% 58%;
+  --secondary: 192 82% 45%;
+  --muted: 220 14% 23%;
+  --accent: 292 84% 61%;
+  --border: 220 13% 18%;
+}
+
+/* Optional: Classic Matrix editor theme (does not affect games) */
+:root[data-editor-theme="matrix"] {
+  --background: 120 10% 4%;
+  --accent: 146 78% 53%;
 }

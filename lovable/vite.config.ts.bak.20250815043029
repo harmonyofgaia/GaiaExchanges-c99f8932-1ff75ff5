@@ -2,21 +2,12 @@
 import react from "@vitejs/plugin-react";
 import tailwind from "@tailwindcss/postcss";
 import autoprefixer from "autoprefixer";
-import { fileURLToPath } from "node:url";
-import { dirname, resolve as resolvePath } from "node:path";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [react()],
   css: {
     postcss: {
       plugins: [tailwind, autoprefixer],
-    },
-  },
-  resolve: {
-    alias: {
-      "@": resolvePath(__dirname, "./src"),
     },
   },
 });
