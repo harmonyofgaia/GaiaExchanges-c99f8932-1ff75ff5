@@ -1,0 +1,2 @@
+﻿/* Shim to keep any legacy imports working; prefer importing index.css */
+@import "./index.css";
