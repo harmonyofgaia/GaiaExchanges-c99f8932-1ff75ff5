@@ -670,15 +670,14 @@ export default function EarningActivities() {
             </TabsTrigger>
           </TabsList>
 
-          {/* Globe Tab */}
+          {/* Globe Menu Tab with Rich Content + Piano */}
           <TabsContent value="globe" className="space-y-8">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-cyan-400 mb-3">
                 🌍 Interactive Activity Globe
               </h2>
               <p className="text-lg text-muted-foreground">
-                Navigate through activities using our 3D matrix-style globe
-                interface
+                Navigate through activities using our 3D matrix-style globe interface
               </p>
             </div>
 
@@ -694,6 +693,147 @@ export default function EarningActivities() {
                 if (category) setSelectedCategory(category);
               }} />
             </div>
+
+            {/* Selected Category Display with Rich Content */}
+            {selectedCategory && (
+              <div className="mt-8 space-y-6">
+                <div className="text-center">
+                  <h3 className="text-3xl font-bold text-primary mb-2">
+                    {selectedCategory.title}
+                  </h3>
+                  <p className="text-lg text-muted-foreground mb-4">
+                    {selectedCategory.description}
+                  </p>
+                  <div className="flex justify-center items-center gap-4">
+                    <Badge className="bg-primary/20 text-primary text-lg px-4 py-2">
+                      {selectedCategory.completedCount}/{selectedCategory.totalCount} Completed
+                    </Badge>
+                    <Progress
+                      value={(selectedCategory.completedCount / selectedCategory.totalCount) * 100}
+                      className="w-48 h-4"
+                    />
+                  </div>
+                </div>
+
+                {/* Rich Activity Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {selectedCategory.components.map((comp: any, index: number) => (
+                    <Card key={index} className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 border-green-500/30 hover:scale-105 transition-all duration-300 cursor-pointer group">
+                      <CardHeader className="pb-3">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="p-2 rounded-full bg-gradient-to-r from-green-600 to-blue-600">
+                            <comp.icon className="h-6 w-6 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-green-400 text-lg">{comp.title}</h4>
+                            <Badge className={getDifficultyColor(comp.difficulty)} variant="outline">
+                              {comp.difficulty}
+                            </Badge>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-muted-foreground">Reward:</span>
+                          <span className="text-lg font-bold text-yellow-400">{comp.points}</span>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <div className="flex justify-between text-sm">
+                            <span className="text-muted-foreground">Progress:</span>
+                            <span className="text-green-400">75%</span>
+                          </div>
+                          <Progress value={75} className="h-2" />
+                        </div>
+
+                        <div className="space-y-2">
+                          <h5 className="font-medium text-primary">Key Features:</h5>
+                          <ul className="text-sm text-muted-foreground space-y-1">
+                            <li className="flex items-center gap-2">
+                              <CheckCircle className="h-3 w-3 text-green-400" />
+                              Photo verification system
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <CheckCircle className="h-3 w-3 text-green-400" />
+                              Real-time tracking
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <CheckCircle className="h-3 w-3 text-green-400" />
+                              Community leaderboards
+                            </li>
+                          </ul>
+                        </div>
+
+                        <div className="pt-2 border-t border-gray-700">
+                          <Button 
+                            className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+                            onClick={() => {
+                              // Navigate to full component view
+                              console.log(`Opening full view for ${comp.title}`);
+                            }}
+                          >
+                            <Zap className="h-4 w-4 mr-2" />
+                            Start Activity
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                {/* Detailed Statistics */}
+                <Card className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 border-blue-500/30">
+                  <CardHeader>
+                    <CardTitle className="text-blue-400 flex items-center gap-2">
+                      <TrendingUp className="h-5 w-5" />
+                      Category Statistics
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-green-400">{selectedCategory.completedCount}</div>
+                        <div className="text-sm text-muted-foreground">Completed</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-yellow-400">{selectedCategory.totalCount - selectedCategory.completedCount}</div>
+                        <div className="text-sm text-muted-foreground">Remaining</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-blue-400">
+                          {Math.round((selectedCategory.completedCount / selectedCategory.totalCount) * 100)}%
+                        </div>
+                        <div className="text-sm text-muted-foreground">Progress</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-purple-400">2,450</div>
+                        <div className="text-sm text-muted-foreground">Tokens Earned</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button 
+                    size="lg"
+                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
+                  >
+                    <Star className="h-5 w-5 mr-2" />
+                    View All {selectedCategory.title} Activities
+                  </Button>
+                  <Button 
+                    size="lg"
+                    variant="outline"
+                    className="border-blue-500/30 text-blue-400 hover:bg-blue-900/20"
+                    onClick={() => setSelectedCategory(null)}
+                  >
+                    <Globe className="h-5 w-5 mr-2" />
+                    Back to Globe Menu
+                  </Button>
+                </div>
+              </div>
+            )}
           </TabsContent>
 
           {/* Overview Tab */}
