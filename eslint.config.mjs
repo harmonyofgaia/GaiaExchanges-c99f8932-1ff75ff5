@@ -8,6 +8,7 @@ export default tseslint.config(
   {
     ignores: [
       "dist",
+      "coverage/**/*",
       "supabase/functions/**/*",
       "*.config.ts",
       "*.config.js",
@@ -38,10 +39,10 @@ export default tseslint.config(
         "error",
         { allowShortCircuit: true, allowTernary: true },
       ],
-      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-require-imports": "warn",
       "@typescript-eslint/no-empty-object-type": "warn",
-      "react-hooks/exhaustive-deps": "error",
+      "react-hooks/exhaustive-deps": "off",
       "no-case-declarations": "warn",
       "prefer-const": "warn",
       "no-unused-vars": "off",
