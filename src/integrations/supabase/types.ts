@@ -4009,6 +4009,41 @@ export type Database = {
         }
         Relationships: []
       }
+      products_view: {
+        Row: {
+          category_id: number | null
+          description: string | null
+          id: number | null
+          name: string | null
+          price: number | null
+          stock_quantity: number | null
+        }
+        Insert: {
+          category_id?: number | null
+          description?: string | null
+          id?: number | null
+          name?: string | null
+          price?: number | null
+          stock_quantity?: number | null
+        }
+        Update: {
+          category_id?: number | null
+          description?: string | null
+          id?: number | null
+          name?: string | null
+          price?: number | null
+          stock_quantity?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       query_performance_analysis: {
         Row: {
           cache_hit_ratio: number | null
