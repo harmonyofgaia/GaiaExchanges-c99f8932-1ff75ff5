@@ -124,7 +124,7 @@ export default function TaskReverser() {
   };
 
   const getCategoryIcon = (category: string) => {
-    const icons: Record<string, any> = {
+    const icons: Record<string, React.ElementType> = {
       admin: Shield,
       ai: Zap,
       general: Settings,
@@ -135,14 +135,14 @@ export default function TaskReverser() {
 
   const groupedFeatures =
     features?.reduce(
-      (acc, feature) => {
+      (acc: Record<string, unknown[]>, feature: { category: string }) => {
         if (!acc[feature.category]) {
           acc[feature.category] = [];
         }
         acc[feature.category].push(feature);
         return acc;
       },
-      {} as Record<string, any[]>,
+      {} as Record<string, unknown[]>,
     ) || {};
 
   if (!user) {

@@ -1,39 +1,176 @@
 import { useState, Suspense, lazy } from "react";
+import { EarningCategories } from "./EarningCategories";
 // Dynamic imports for all large feature components
-const GaiaBikeEarning = lazy(() => import("@/components/earning/GaiaBikeEarning").then(m => ({ default: m.GaiaBikeEarning })));
-const EnhancedBadgeSystem = lazy(() => import("@/components/earning/EnhancedBadgeSystem").then(m => ({ default: m.EnhancedBadgeSystem })));
-const PhotoVerificationSystem = lazy(() => import("@/components/earning/PhotoVerificationSystem").then(m => ({ default: m.PhotoVerificationSystem })));
-const LocationBasedMissions = lazy(() => import("@/components/community/LocationBasedMissions").then(m => ({ default: m.LocationBasedMissions })));
-const CommunityProjectVoting = lazy(() => import("@/components/community/CommunityProjectVoting").then(m => ({ default: m.CommunityProjectVoting })));
-const TeamChallenges = lazy(() => import("@/components/earning/TeamChallenges").then(m => ({ default: m.TeamChallenges })));
-const TokenStakingSystem = lazy(() => import("@/components/earning/TokenStakingSystem").then(m => ({ default: m.TokenStakingSystem })));
-const AdvancedTokenMechanics = lazy(() => import("@/components/earning/AdvancedTokenMechanics").then(m => ({ default: m.AdvancedTokenMechanics })));
-const CommunityGovernance = lazy(() => import("@/components/community/CommunityGovernance").then(m => ({ default: m.CommunityGovernance })));
-const InteractiveFoodMap = lazy(() => import("@/components/community/InteractiveFoodMap").then(m => ({ default: m.InteractiveFoodMap })));
-const EcosystemIntegration = lazy(() => import("@/components/earning/EcosystemIntegration").then(m => ({ default: m.EcosystemIntegration })));
-const MentorshipProgram = lazy(() => import("@/components/earning/MentorshipProgram").then(m => ({ default: m.MentorshipProgram })));
-const BeeHotelActions = lazy(() => import("@/components/earning/BeeHotelActions").then(m => ({ default: m.BeeHotelActions })));
-const WaterSavingActions = lazy(() => import("@/components/earning/WaterSavingActions").then(m => ({ default: m.WaterSavingActions })));
-const CarbonCreditActions = lazy(() => import("@/components/earning/CarbonCreditActions").then(m => ({ default: m.CarbonCreditActions })));
-const EnvironmentalEducationActions = lazy(() => import("@/components/earning/EnvironmentalEducationActions").then(m => ({ default: m.EnvironmentalEducationActions })));
-const HomeGrownFoodActions = lazy(() => import("@/components/earning/HomeGrownFoodActions").then(m => ({ default: m.HomeGrownFoodActions })));
-const ReferralSystem = lazy(() => import("@/components/earning/ReferralSystem").then(m => ({ default: m.ReferralSystem })));
-const SkillBasedEarning = lazy(() => import("@/components/earning/SkillBasedEarning").then(m => ({ default: m.SkillBasedEarning })));
-const TreePlantingActions = lazy(() => import("@/components/earning/TreePlantingActions").then(m => ({ default: m.TreePlantingActions })));
-const SolarPanelActions = lazy(() => import("@/components/earning/SolarPanelActions").then(m => ({ default: m.SolarPanelActions })));
-const RecyclingActions = lazy(() => import("@/components/earning/RecyclingActions").then(m => ({ default: m.RecyclingActions })));
-const CompostingActions = lazy(() => import("@/components/earning/CompostingActions").then(m => ({ default: m.CompostingActions })));
-const CommunityCleanupActions = lazy(() => import("@/components/earning/CommunityCleanupActions").then(m => ({ default: m.CommunityCleanupActions })));
-const WildlifeConservationActions = lazy(() => import("@/components/earning/WildlifeConservationActions").then(m => ({ default: m.WildlifeConservationActions })));
-const CommunityRewardsProgram = lazy(() => import("@/components/earning/CommunityRewardsProgram").then(m => ({ default: m.CommunityRewardsProgram })));
-const AdvancedCommunityFeatures = lazy(() => import("@/components/earning/AdvancedCommunityFeatures").then(m => ({ default: m.AdvancedCommunityFeatures })));
-const PartyEventEarning = lazy(() => import("@/components/earning/PartyEventEarning").then(m => ({ default: m.PartyEventEarning })));
-const EcoTravelRewards = lazy(() => import("@/components/earning/EcoTravelRewards").then(m => ({ default: m.EcoTravelRewards })));
-const InteractiveEcoBikeMap = lazy(() => import("@/components/earning/InteractiveEcoBikeMap").then(m => ({ default: m.InteractiveEcoBikeMap })));
-const EnhancedHomeGrownFoodTracker = lazy(() => import("@/components/earning/EnhancedHomeGrownFoodTracker").then(m => ({ default: m.EnhancedHomeGrownFoodTracker })));
-const PublicTransportRewards = lazy(() => import("@/components/earning/PublicTransportRewards").then(m => ({ default: m.PublicTransportRewards })));
-const GreenShoppingRewards = lazy(() => import("@/components/earning/GreenShoppingRewards").then(m => ({ default: m.GreenShoppingRewards })));
-const EnergyConsumptionTracker = lazy(() => import("@/components/earning/EnergyConsumptionTracker").then(m => ({ default: m.EnergyConsumptionTracker })));
+const GaiaBikeEarning = lazy(() =>
+  import("@/components/earning/GaiaBikeEarning").then((m) => ({
+    default: m.GaiaBikeEarning,
+  })),
+);
+const EnhancedBadgeSystem = lazy(() =>
+  import("@/components/earning/EnhancedBadgeSystem").then((m) => ({
+    default: m.EnhancedBadgeSystem,
+  })),
+);
+const PhotoVerificationSystem = lazy(() =>
+  import("@/components/earning/PhotoVerificationSystem").then((m) => ({
+    default: m.PhotoVerificationSystem,
+  })),
+);
+const LocationBasedMissions = lazy(() =>
+  import("@/components/community/LocationBasedMissions").then((m) => ({
+    default: m.LocationBasedMissions,
+  })),
+);
+const CommunityProjectVoting = lazy(() =>
+  import("@/components/community/CommunityProjectVoting").then((m) => ({
+    default: m.CommunityProjectVoting,
+  })),
+);
+const TeamChallenges = lazy(() =>
+  import("@/components/earning/TeamChallenges").then((m) => ({
+    default: m.TeamChallenges,
+  })),
+);
+const TokenStakingSystem = lazy(() =>
+  import("@/components/earning/TokenStakingSystem").then((m) => ({
+    default: m.TokenStakingSystem,
+  })),
+);
+const AdvancedTokenMechanics = lazy(() =>
+  import("@/components/earning/AdvancedTokenMechanics").then((m) => ({
+    default: m.AdvancedTokenMechanics,
+  })),
+);
+const CommunityGovernance = lazy(() =>
+  import("@/components/community/CommunityGovernance").then((m) => ({
+    default: m.CommunityGovernance,
+  })),
+);
+const InteractiveFoodMap = lazy(() =>
+  import("@/components/community/InteractiveFoodMap").then((m) => ({
+    default: m.InteractiveFoodMap,
+  })),
+);
+const EcosystemIntegration = lazy(() =>
+  import("@/components/earning/EcosystemIntegration").then((m) => ({
+    default: m.EcosystemIntegration,
+  })),
+);
+const MentorshipProgram = lazy(() =>
+  import("@/components/earning/MentorshipProgram").then((m) => ({
+    default: m.MentorshipProgram,
+  })),
+);
+const BeeHotelActions = lazy(() =>
+  import("@/components/earning/BeeHotelActions").then((m) => ({
+    default: m.BeeHotelActions,
+  })),
+);
+const WaterSavingActions = lazy(() =>
+  import("@/components/earning/WaterSavingActions").then((m) => ({
+    default: m.WaterSavingActions,
+  })),
+);
+const CarbonCreditActions = lazy(() =>
+  import("@/components/earning/CarbonCreditActions").then((m) => ({
+    default: m.CarbonCreditActions,
+  })),
+);
+const EnvironmentalEducationActions = lazy(() =>
+  import("@/components/earning/EnvironmentalEducationActions").then((m) => ({
+    default: m.EnvironmentalEducationActions,
+  })),
+);
+const HomeGrownFoodActions = lazy(() =>
+  import("@/components/earning/HomeGrownFoodActions").then((m) => ({
+    default: m.HomeGrownFoodActions,
+  })),
+);
+const ReferralSystem = lazy(() =>
+  import("@/components/earning/ReferralSystem").then((m) => ({
+    default: m.ReferralSystem,
+  })),
+);
+const SkillBasedEarning = lazy(() =>
+  import("@/components/earning/SkillBasedEarning").then((m) => ({
+    default: m.SkillBasedEarning,
+  })),
+);
+const TreePlantingActions = lazy(() =>
+  import("@/components/earning/TreePlantingActions").then((m) => ({
+    default: m.TreePlantingActions,
+  })),
+);
+const SolarPanelActions = lazy(() =>
+  import("@/components/earning/SolarPanelActions").then((m) => ({
+    default: m.SolarPanelActions,
+  })),
+);
+const RecyclingActions = lazy(() =>
+  import("@/components/earning/RecyclingActions").then((m) => ({
+    default: m.RecyclingActions,
+  })),
+);
+const CompostingActions = lazy(() =>
+  import("@/components/earning/CompostingActions").then((m) => ({
+    default: m.CompostingActions,
+  })),
+);
+const CommunityCleanupActions = lazy(() =>
+  import("@/components/earning/CommunityCleanupActions").then((m) => ({
+    default: m.CommunityCleanupActions,
+  })),
+);
+const WildlifeConservationActions = lazy(() =>
+  import("@/components/earning/WildlifeConservationActions").then((m) => ({
+    default: m.WildlifeConservationActions,
+  })),
+);
+const CommunityRewardsProgram = lazy(() =>
+  import("@/components/earning/CommunityRewardsProgram").then((m) => ({
+    default: m.CommunityRewardsProgram,
+  })),
+);
+const AdvancedCommunityFeatures = lazy(() =>
+  import("@/components/earning/AdvancedCommunityFeatures").then((m) => ({
+    default: m.AdvancedCommunityFeatures,
+  })),
+);
+const PartyEventEarning = lazy(() =>
+  import("@/components/earning/PartyEventEarning").then((m) => ({
+    default: m.PartyEventEarning,
+  })),
+);
+const EcoTravelRewards = lazy(() =>
+  import("@/components/earning/EcoTravelRewards").then((m) => ({
+    default: m.EcoTravelRewards,
+  })),
+);
+const InteractiveEcoBikeMap = lazy(() =>
+  import("@/components/earning/InteractiveEcoBikeMap").then((m) => ({
+    default: m.InteractiveEcoBikeMap,
+  })),
+);
+const EnhancedHomeGrownFoodTracker = lazy(() =>
+  import("@/components/earning/EnhancedHomeGrownFoodTracker").then((m) => ({
+    default: m.EnhancedHomeGrownFoodTracker,
+  })),
+);
+const PublicTransportRewards = lazy(() =>
+  import("@/components/earning/PublicTransportRewards").then((m) => ({
+    default: m.PublicTransportRewards,
+  })),
+);
+const GreenShoppingRewards = lazy(() =>
+  import("@/components/earning/GreenShoppingRewards").then((m) => ({
+    default: m.GreenShoppingRewards,
+  })),
+);
+const EnergyConsumptionTracker = lazy(() =>
+  import("@/components/earning/EnergyConsumptionTracker").then((m) => ({
+    default: m.EnergyConsumptionTracker,
+  })),
+);
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -93,11 +230,8 @@ import {
 export default function EarningActivities() {
   // State for search query
   const [searchQuery, setSearchQuery] = useState("");
-  // State for selected activity
-  const [selectedActivity, setSelectedActivity] = useState<{
-    category: string;
-    activityId: string;
-  } | null>(null);
+  // State for selected category
+  const [selectedCategory, setSelectedCategory] = useState<any | null>(null);
   // State for active tab
   const [activeTab, setActiveTab] = useState("overview");
   // User stats
@@ -111,6 +245,20 @@ export default function EarningActivities() {
     communityRank: 47,
     streakDays: 23,
   });
+
+  // If a category is selected, show the category view
+  if (selectedCategory) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-green-900/20 p-6">
+        <div className="container mx-auto">
+          <EarningCategories
+            category={selectedCategory}
+            onBack={() => setSelectedCategory(null)}
+          />
+        </div>
+      </div>
+    );
+  }
 
   const earningCategories = [
     {
@@ -448,24 +596,7 @@ export default function EarningActivities() {
   );
 
   const handleActivitySelect = (category: string, activityId: string) => {
-    setSelectedActivity({ category, activityId });
-    setActiveTab("categories");
-  };
-
-  const getSelectedActivityComponent = () => {
-    if (!selectedActivity) return null;
-    
-    const category = earningCategories.find(cat => cat.id === selectedActivity.category);
-    if (!category) return null;
-    
-    const activityIndex = parseInt(selectedActivity.activityId.split('-')[1]);
-    const activity = category.components[activityIndex];
-    
-    return activity ? (
-      <Suspense fallback={<div>Loading activity...</div>}>
-        <activity.component key={selectedActivity.activityId} />
-      </Suspense>
-    ) : null;
+    setSelectedCategory(earningCategories.find(cat => cat.id === category) || null);
   };
 
   return (
@@ -487,11 +618,11 @@ export default function EarningActivities() {
               ecosystem. Earn GAiA tokens while making a real impact on our
               planet! 🌍
             </p>
-            
+
             {/* Quick Access to Categories */}
             <div className="flex justify-center gap-4 mt-6">
-              <Button 
-                onClick={() => window.location.href = '/categories'}
+              <Button
+                onClick={() => (window.location.href = "/categories")}
                 className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2"
               >
                 <Globe className="h-4 w-4" />
@@ -584,10 +715,7 @@ export default function EarningActivities() {
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 mb-8 h-16 bg-black/20">
-            <TabsTrigger
-              value="globe"
-              className="text-base font-medium h-12"
-            >
+            <TabsTrigger value="globe" className="text-base font-medium h-12">
               🌍 Globe Menu
             </TabsTrigger>
             <TabsTrigger
@@ -620,28 +748,44 @@ export default function EarningActivities() {
                 🌍 Interactive Activity Globe
               </h2>
               <p className="text-lg text-muted-foreground">
-                Navigate through activities using our 3D matrix-style globe interface
+                Navigate through activities using our 3D matrix-style globe
+                interface
               </p>
             </div>
 
-            <InteractiveGlobeMenu 
+            <InteractiveGlobeMenu
               onActivitySelect={handleActivitySelect}
               categories={earningCategories}
             />
 
-            {/* Selected Activity Display */}
-            {selectedActivity && getSelectedActivityComponent() && (
+            {/* Selected Category Display */}
+            {selectedCategory && (
               <div className="mt-8 space-y-4">
                 <div className="text-center">
                   <h3 className="text-2xl font-bold text-primary mb-2">
-                    Selected Activity
+                    Selected Category: {selectedCategory.title}
                   </h3>
                   <p className="text-muted-foreground">
-                    Click on another globe point to switch activities
+                    Click on another globe point to switch categories
                   </p>
                 </div>
                 <div className="bg-black/20 rounded-2xl p-6 border border-cyan-500/30">
-                  {getSelectedActivityComponent()}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {selectedCategory.components.slice(0, 4).map((comp: any, index: number) => (
+                      <Card key={index} className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 border-green-500/30">
+                        <CardContent className="p-4">
+                          <div className="flex items-center gap-3 mb-2">
+                            <comp.icon className="h-6 w-6 text-green-400" />
+                            <h4 className="font-bold text-green-400">{comp.title}</h4>
+                          </div>
+                          <p className="text-sm text-muted-foreground mb-2">Reward: {comp.points}</p>
+                          <Badge variant="outline" className="text-xs">
+                            {comp.difficulty}
+                          </Badge>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
@@ -651,10 +795,10 @@ export default function EarningActivities() {
           <TabsContent value="overview" className="space-y-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredCategories.map((category) => (
-                <Card
+                 <Card
                   key={category.id}
                   className={`border-2 ${category.borderColor} bg-gradient-to-br ${category.color} hover:scale-105 transition-all duration-300 cursor-pointer`}
-                  onClick={() => setActiveTab("categories")}
+                  onClick={() => setSelectedCategory(category)}
                 >
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between mb-2">
@@ -819,4 +963,3 @@ export default function EarningActivities() {
     </div>
   );
 }
-

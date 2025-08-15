@@ -38,14 +38,14 @@ interface CleaningReward {
   id: string;
   user_id: string;
   activity_type: string;
-  location_data: any;
+  location_data: Record<string, unknown>;
   verification_method: string;
   tokens_earned: number;
-  environmental_impact: any;
+  environmental_impact: Record<string, unknown>;
   verified_at: string | null;
   created_at: string;
   satellite_verified?: boolean;
-  iot_sensor_data?: any;
+  iot_sensor_data?: Record<string, unknown>;
   blockchain_hash?: string;
   community_validation_score?: number;
   real_time_tracking?: boolean;

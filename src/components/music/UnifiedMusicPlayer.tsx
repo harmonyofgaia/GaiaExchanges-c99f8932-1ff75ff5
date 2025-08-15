@@ -35,32 +35,29 @@ export function UnifiedMusicPlayer() {
   const [isMinimized, setIsMinimized] = useState(false);
   const [playlist, setPlaylist] = useState<Track[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const playTrack = useCallback(
-    async (track: Track) => {
-      if (!audioRef.current) return;
+  const playTrack = useCallback(async (track: Track) => {
+    if (!audioRef.current) return;
 
-      try {
-        const audioUrl = track.storage_path
-          ? `https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/admin-media/${track.storage_path}`
-          : track.url;
+    try {
+      const audioUrl = track.storage_path
+        ? `https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/admin-media/${track.storage_path}`
+        : track.url;
 
-        if (audioUrl) {
-          audioRef.current.src = audioUrl;
-          await audioRef.current.play();
-          setIsPlaying(true);
-          setCurrentTrack(track);
-          toast.success(`🎵 Now playing: ${track.original_name || track.name}`);
-        }
-      } catch (error) {
-        console.error("Failed to play track:", error);
-        toast.error("Failed to play audio file");
+      if (audioUrl) {
+        audioRef.current.src = audioUrl;
+        await audioRef.current.play();
+        setIsPlaying(true);
+        setCurrentTrack(track);
+        toast.success(`🎵 Now playing: ${track.original_name || track.name}`);
       }
-    },
-    [],
-  );
+    } catch (error) {
+      console.error("Failed to play track:", error);
+      toast.error("Failed to play audio file");
+    }
+  }, []);
 
   const playNext = useCallback(() => {
     if (playlist.length === 0) return;

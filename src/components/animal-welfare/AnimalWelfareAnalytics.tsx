@@ -55,12 +55,22 @@ export function AnimalWelfareAnalytics() {
 
   // Species protection data
   const speciesData = [
-    { name: "Elephants", protected: 2847, endangered: 415000, percentage: 0.69 },
+    {
+      name: "Elephants",
+      protected: 2847,
+      endangered: 415000,
+      percentage: 0.69,
+    },
     { name: "Rhinos", protected: 1240, endangered: 27000, percentage: 4.59 },
     { name: "Tigers", protected: 890, endangered: 3900, percentage: 22.82 },
     { name: "Pandas", protected: 456, endangered: 1864, percentage: 24.46 },
-    { name: "Gorillas", protected: 234, endangered: 1000, percentage: 23.40 },
-    { name: "Sea Turtles", protected: 5678, endangered: 85000, percentage: 6.68 },
+    { name: "Gorillas", protected: 234, endangered: 1000, percentage: 23.4 },
+    {
+      name: "Sea Turtles",
+      protected: 5678,
+      endangered: 85000,
+      percentage: 6.68,
+    },
   ];
 
   // Monthly rescue trends
@@ -130,9 +140,10 @@ export function AnimalWelfareAnalytics() {
   // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
-      setRealTimeData(prev => ({
+      setRealTimeData((prev) => ({
         ...prev,
-        totalAnimalsProtected: prev.totalAnimalsProtected + Math.floor(Math.random() * 3),
+        totalAnimalsProtected:
+          prev.totalAnimalsProtected + Math.floor(Math.random() * 3),
         fundsRaised: prev.fundsRaised + Math.floor(Math.random() * 100),
         activeRescues: prev.activeRescues + (Math.random() > 0.8 ? 1 : 0),
       }));
@@ -151,7 +162,8 @@ export function AnimalWelfareAnalytics() {
             📊 ANIMAL WELFARE ANALYTICS DASHBOARD
           </CardTitle>
           <p className="text-center text-lg text-muted-foreground">
-            Real-time insights into global animal welfare impact and conservation efforts
+            Real-time insights into global animal welfare impact and
+            conservation efforts
           </p>
         </CardHeader>
       </Card>
@@ -165,8 +177,12 @@ export function AnimalWelfareAnalytics() {
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-muted-foreground">{metric.title}</p>
-                    <p className="text-2xl font-bold">{metric.value.toLocaleString()}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {metric.title}
+                    </p>
+                    <p className="text-2xl font-bold">
+                      {metric.value.toLocaleString()}
+                    </p>
                     <p className={`text-sm ${metric.color}`}>
                       {metric.change} from last month
                     </p>
@@ -194,7 +210,9 @@ export function AnimalWelfareAnalytics() {
             {/* Monthly Rescues Trend */}
             <Card className="border-green-500/30 bg-green-900/20">
               <CardHeader>
-                <CardTitle className="text-green-400">Monthly Animal Rescues</CardTitle>
+                <CardTitle className="text-green-400">
+                  Monthly Animal Rescues
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -202,18 +220,18 @@ export function AnimalWelfareAnalytics() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                     <XAxis dataKey="month" stroke="#9ca3af" />
                     <YAxis stroke="#9ca3af" />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: "#1f2937", 
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#1f2937",
                         border: "1px solid #10b981",
-                        borderRadius: "8px"
-                      }} 
+                        borderRadius: "8px",
+                      }}
                     />
-                    <Area 
-                      type="monotone" 
-                      dataKey="rescues" 
-                      stroke="#10b981" 
-                      fill="#10b981" 
+                    <Area
+                      type="monotone"
+                      dataKey="rescues"
+                      stroke="#10b981"
+                      fill="#10b981"
                       fillOpacity={0.3}
                     />
                   </AreaChart>
@@ -224,7 +242,9 @@ export function AnimalWelfareAnalytics() {
             {/* Funding Trends */}
             <Card className="border-blue-500/30 bg-blue-900/20">
               <CardHeader>
-                <CardTitle className="text-blue-400">Monthly Funding (GAiA)</CardTitle>
+                <CardTitle className="text-blue-400">
+                  Monthly Funding (GAiA)
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -232,17 +252,17 @@ export function AnimalWelfareAnalytics() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                     <XAxis dataKey="month" stroke="#9ca3af" />
                     <YAxis stroke="#9ca3af" />
-                    <Tooltip 
-                      contentStyle={{ 
-                        backgroundColor: "#1f2937", 
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#1f2937",
                         border: "1px solid #3b82f6",
-                        borderRadius: "8px"
-                      }} 
+                        borderRadius: "8px",
+                      }}
                     />
-                    <Line 
-                      type="monotone" 
-                      dataKey="funding" 
-                      stroke="#3b82f6" 
+                    <Line
+                      type="monotone"
+                      dataKey="funding"
+                      stroke="#3b82f6"
                       strokeWidth={3}
                       dot={{ fill: "#3b82f6", strokeWidth: 2, r: 6 }}
                     />
@@ -255,25 +275,35 @@ export function AnimalWelfareAnalytics() {
           {/* Recent Activity Feed */}
           <Card className="border-purple-500/30 bg-purple-900/20">
             <CardHeader>
-              <CardTitle className="text-purple-400">🔴 Live Activity Feed</CardTitle>
+              <CardTitle className="text-purple-400">
+                🔴 Live Activity Feed
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 p-3 bg-green-800/30 rounded-lg">
                   <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-sm">🐘 3 elephants rescued in Kenya - 2 minutes ago</span>
+                  <span className="text-sm">
+                    🐘 3 elephants rescued in Kenya - 2 minutes ago
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-blue-800/30 rounded-lg">
                   <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse" />
-                  <span className="text-sm">💰 500 GAiA donated to marine conservation - 4 minutes ago</span>
+                  <span className="text-sm">
+                    💰 500 GAiA donated to marine conservation - 4 minutes ago
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-orange-800/30 rounded-lg">
                   <div className="w-3 h-3 bg-orange-400 rounded-full animate-pulse" />
-                  <span className="text-sm">🎨 New Tiger NFT sold for 150 GAiA - 7 minutes ago</span>
+                  <span className="text-sm">
+                    🎨 New Tiger NFT sold for 150 GAiA - 7 minutes ago
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-purple-800/30 rounded-lg">
                   <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse" />
-                  <span className="text-sm">📹 New live camera activated in Amazon - 12 minutes ago</span>
+                  <span className="text-sm">
+                    📹 New live camera activated in Amazon - 12 minutes ago
+                  </span>
                 </div>
               </div>
             </CardContent>
@@ -285,7 +315,9 @@ export function AnimalWelfareAnalytics() {
             {/* Funding by Region */}
             <Card className="border-blue-500/30 bg-blue-900/20">
               <CardHeader>
-                <CardTitle className="text-blue-400">Funding by Region</CardTitle>
+                <CardTitle className="text-blue-400">
+                  Funding by Region
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -293,7 +325,10 @@ export function AnimalWelfareAnalytics() {
                     <div key={index} className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span>{region.name}</span>
-                        <span>{region.amount.toLocaleString()} GAiA ({region.percentage}%)</span>
+                        <span>
+                          {region.amount.toLocaleString()} GAiA (
+                          {region.percentage}%)
+                        </span>
                       </div>
                       <Progress value={region.percentage} className="h-2" />
                     </div>
@@ -305,7 +340,9 @@ export function AnimalWelfareAnalytics() {
             {/* Funding Distribution Chart */}
             <Card className="border-purple-500/30 bg-purple-900/20">
               <CardHeader>
-                <CardTitle className="text-purple-400">Funding Distribution</CardTitle>
+                <CardTitle className="text-purple-400">
+                  Funding Distribution
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -321,7 +358,10 @@ export function AnimalWelfareAnalytics() {
                       dataKey="amount"
                     >
                       {fundingByRegion.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={COLORS[index % COLORS.length]}
+                        />
                       ))}
                     </Pie>
                     <Tooltip />
@@ -335,7 +375,9 @@ export function AnimalWelfareAnalytics() {
         <TabsContent value="species" className="space-y-6">
           <Card className="border-orange-500/30 bg-orange-900/20">
             <CardHeader>
-              <CardTitle className="text-orange-400">Endangered Species Protection Progress</CardTitle>
+              <CardTitle className="text-orange-400">
+                Endangered Species Protection Progress
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
@@ -345,7 +387,8 @@ export function AnimalWelfareAnalytics() {
                       <div>
                         <h4 className="font-semibold">{species.name}</h4>
                         <p className="text-sm text-muted-foreground">
-                          {species.protected.toLocaleString()} protected of {species.endangered.toLocaleString()} endangered
+                          {species.protected.toLocaleString()} protected of{" "}
+                          {species.endangered.toLocaleString()} endangered
                         </p>
                       </div>
                       <Badge className="bg-orange-600">
@@ -363,7 +406,9 @@ export function AnimalWelfareAnalytics() {
         <TabsContent value="conservation" className="space-y-6">
           <Card className="border-green-500/30 bg-green-900/20">
             <CardHeader>
-              <CardTitle className="text-green-400">Environmental Impact Over Time</CardTitle>
+              <CardTitle className="text-green-400">
+                Environmental Impact Over Time
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={400}>
@@ -371,27 +416,27 @@ export function AnimalWelfareAnalytics() {
                   <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                   <XAxis dataKey="month" stroke="#9ca3af" />
                   <YAxis stroke="#9ca3af" />
-                  <Tooltip 
-                    contentStyle={{ 
-                      backgroundColor: "#1f2937", 
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#1f2937",
                       border: "1px solid #10b981",
-                      borderRadius: "8px"
-                    }} 
+                      borderRadius: "8px",
+                    }}
                   />
-                  <Area 
-                    type="monotone" 
-                    dataKey="carbonOffset" 
+                  <Area
+                    type="monotone"
+                    dataKey="carbonOffset"
                     stackId="1"
-                    stroke="#10b981" 
-                    fill="#10b981" 
+                    stroke="#10b981"
+                    fill="#10b981"
                     fillOpacity={0.6}
                   />
-                  <Area 
-                    type="monotone" 
-                    dataKey="treesPlanted" 
+                  <Area
+                    type="monotone"
+                    dataKey="treesPlanted"
                     stackId="2"
-                    stroke="#34d399" 
-                    fill="#34d399" 
+                    stroke="#34d399"
+                    fill="#34d399"
                     fillOpacity={0.6}
                   />
                 </AreaChart>
@@ -405,7 +450,9 @@ export function AnimalWelfareAnalytics() {
             {/* NFT Sales by Category */}
             <Card className="border-pink-500/30 bg-pink-900/20">
               <CardHeader>
-                <CardTitle className="text-pink-400">NFT Sales by Category</CardTitle>
+                <CardTitle className="text-pink-400">
+                  NFT Sales by Category
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -433,13 +480,17 @@ export function AnimalWelfareAnalytics() {
             {/* NFT Market Stats */}
             <Card className="border-cyan-500/30 bg-cyan-900/20">
               <CardHeader>
-                <CardTitle className="text-cyan-400">NFT Marketplace Statistics</CardTitle>
+                <CardTitle className="text-cyan-400">
+                  NFT Marketplace Statistics
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center p-3 bg-cyan-800/30 rounded-lg">
                     <span>Total NFTs Sold</span>
-                    <span className="font-bold text-cyan-400">{realTimeData.nftsSold.toLocaleString()}</span>
+                    <span className="font-bold text-cyan-400">
+                      {realTimeData.nftsSold.toLocaleString()}
+                    </span>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-cyan-800/30 rounded-lg">
                     <span>Average Sale Price</span>
@@ -447,7 +498,9 @@ export function AnimalWelfareAnalytics() {
                   </div>
                   <div className="flex justify-between items-center p-3 bg-cyan-800/30 rounded-lg">
                     <span>Total Volume</span>
-                    <span className="font-bold text-cyan-400">1,136,269 GAiA</span>
+                    <span className="font-bold text-cyan-400">
+                      1,136,269 GAiA
+                    </span>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-cyan-800/30 rounded-lg">
                     <span>Active Collectors</span>

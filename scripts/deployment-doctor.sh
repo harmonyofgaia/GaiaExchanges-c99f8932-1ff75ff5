@@ -47,7 +47,7 @@ print_header "ENVIRONMENT ANALYSIS"
 # Check Node.js version
 NODE_VERSION=$(node --version)
 echo "Node.js version: $NODE_VERSION"
-if [[ $NODE_VERSION =~ v1[8-9]\..*|v[2-9][0-9]\..* ]]; then
+if echo "$NODE_VERSION" | grep -E "v1[8-9]\.|v[2-9][0-9]\." > /dev/null; then
     print_success "Node.js version is compatible ($NODE_VERSION)"
 else
     print_issue "Node.js version may be too old ($NODE_VERSION)"
@@ -71,8 +71,8 @@ if [ -f "package.json" ]; then
     print_success "package.json exists"
     
     # Check for required scripts
-    REQUIRED_SCRIPTS=("build" "dev" "deploy")
-    for script in "${REQUIRED_SCRIPTS[@]}"; do
+    REQUIRED_SCRIPTS="build dev deploy"
+    for script in $REQUIRED_SCRIPTS; do
         if grep -q "\"$script\":" package.json; then
             print_success "Script '$script' is defined"
         else
@@ -110,8 +110,8 @@ else
 fi
 
 # Check deployment configuration files
-DEPLOYMENT_CONFIGS=("vercel.json" "netlify.toml")
-for config in "${DEPLOYMENT_CONFIGS[@]}"; do
+DEPLOYMENT_CONFIGS="vercel.json netlify.toml"
+for config in $DEPLOYMENT_CONFIGS; do
     if [ -f "$config" ]; then
         print_success "$config exists"
     else
@@ -178,8 +178,8 @@ fi
 print_header "DEPLOYMENT PLATFORM READINESS"
 
 # Check CLI tools
-DEPLOYMENT_TOOLS=("vercel" "netlify")
-for tool in "${DEPLOYMENT_TOOLS[@]}"; do
+DEPLOYMENT_TOOLS="vercel netlify"
+for tool in $DEPLOYMENT_TOOLS; do
     if command -v $tool &> /dev/null; then
         print_success "$tool CLI is available"
         
@@ -232,8 +232,8 @@ else
 fi
 
 # Check for sensitive files
-SENSITIVE_FILES=(".env" "*.key" "*.pem" "config.json")
-for pattern in "${SENSITIVE_FILES[@]}"; do
+SENSITIVE_FILES=".env *.key *.pem config.json"
+for pattern in $SENSITIVE_FILES; do
     if ls $pattern > /dev/null 2>&1; then
         if grep -q "$pattern" .gitignore 2>/dev/null; then
             print_success "Sensitive file '$pattern' is in .gitignore"

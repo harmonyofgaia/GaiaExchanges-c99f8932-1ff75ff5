@@ -48,7 +48,7 @@ export function GlobalAnimalRescue() {
       timeRemaining: "3 days",
     },
     {
-      id: "2", 
+      id: "2",
       location: "Serengeti, Tanzania",
       country: "Tanzania",
       species: "Elephants, Lions, Zebras",
@@ -62,7 +62,7 @@ export function GlobalAnimalRescue() {
     },
     {
       id: "3",
-      location: "Great Barrier Reef, Australia", 
+      location: "Great Barrier Reef, Australia",
       country: "Australia",
       species: "Sea Turtles, Dolphins, Fish",
       urgency: "high",
@@ -76,7 +76,7 @@ export function GlobalAnimalRescue() {
     {
       id: "4",
       location: "Madagascar",
-      country: "Madagascar", 
+      country: "Madagascar",
       species: "Lemurs, Fossas, Chameleons",
       urgency: "medium",
       animalsAffected: 680,
@@ -96,12 +96,12 @@ export function GlobalAnimalRescue() {
   });
 
   const donateToOperation = (operationId: string, amount: number) => {
-    setActiveOperations(ops => 
-      ops.map(op => 
-        op.id === operationId 
+    setActiveOperations((ops) =>
+      ops.map((op) =>
+        op.id === operationId
           ? { ...op, fundsRaised: op.fundsRaised + amount }
-          : op
-      )
+          : op,
+      ),
     );
     toast.success("🌍 Donation sent globally!", {
       description: `${amount} GAiA tokens donated to rescue operation`,
@@ -111,11 +111,16 @@ export function GlobalAnimalRescue() {
 
   const getUrgencyColor = (urgency: string) => {
     switch (urgency) {
-      case "critical": return "bg-red-600";
-      case "high": return "bg-orange-600";
-      case "medium": return "bg-yellow-600";
-      case "low": return "bg-green-600";
-      default: return "bg-gray-600";
+      case "critical":
+        return "bg-red-600";
+      case "high":
+        return "bg-orange-600";
+      case "medium":
+        return "bg-yellow-600";
+      case "low":
+        return "bg-green-600";
+      default:
+        return "bg-gray-600";
     }
   };
 
@@ -131,28 +136,36 @@ export function GlobalAnimalRescue() {
             <Badge className="bg-blue-600 p-4 text-center">
               <div className="flex flex-col items-center">
                 <Globe className="h-6 w-6 mb-2" />
-                <span className="text-xl font-bold">{globalStats.totalRescues.toLocaleString()}</span>
+                <span className="text-xl font-bold">
+                  {globalStats.totalRescues.toLocaleString()}
+                </span>
                 <span className="text-sm">Total Rescues</span>
               </div>
             </Badge>
             <Badge className="bg-red-600 p-4 text-center">
               <div className="flex flex-col items-center">
                 <AlertTriangle className="h-6 w-6 mb-2" />
-                <span className="text-xl font-bold">{globalStats.activeOperations}</span>
+                <span className="text-xl font-bold">
+                  {globalStats.activeOperations}
+                </span>
                 <span className="text-sm">Active Operations</span>
               </div>
             </Badge>
             <Badge className="bg-green-600 p-4 text-center">
               <div className="flex flex-col items-center">
                 <Heart className="h-6 w-6 mb-2" />
-                <span className="text-xl font-bold">{globalStats.animalsSaved.toLocaleString()}</span>
+                <span className="text-xl font-bold">
+                  {globalStats.animalsSaved.toLocaleString()}
+                </span>
                 <span className="text-sm">Animals Saved</span>
               </div>
             </Badge>
             <Badge className="bg-purple-600 p-4 text-center">
               <div className="flex flex-col items-center">
                 <Users className="h-6 w-6 mb-2" />
-                <span className="text-xl font-bold">{globalStats.partnersWorldwide}</span>
+                <span className="text-xl font-bold">
+                  {globalStats.partnersWorldwide}
+                </span>
                 <span className="text-sm">Global Partners</span>
               </div>
             </Badge>
@@ -170,9 +183,12 @@ export function GlobalAnimalRescue() {
 
         <TabsContent value="urgent" className="space-y-4">
           {activeOperations
-            .filter(op => op.urgency === "critical")
-            .map(operation => (
-              <Card key={operation.id} className="border-red-500/50 bg-red-900/20">
+            .filter((op) => op.urgency === "critical")
+            .map((operation) => (
+              <Card
+                key={operation.id}
+                className="border-red-500/50 bg-red-900/20"
+              >
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
@@ -181,7 +197,8 @@ export function GlobalAnimalRescue() {
                         {operation.location}
                       </CardTitle>
                       <p className="text-sm text-muted-foreground mt-1">
-                        {operation.species} • {operation.animalsAffected} animals affected
+                        {operation.species} • {operation.animalsAffected}{" "}
+                        animals affected
                       </p>
                     </div>
                     <div className="text-right">
@@ -197,36 +214,48 @@ export function GlobalAnimalRescue() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm mb-4">{operation.description}</p>
-                  
+
                   <div className="space-y-3">
                     <div className="flex justify-between text-sm">
                       <span>Funding Progress</span>
-                      <span>{((operation.fundsRaised / operation.fundsNeeded) * 100).toFixed(1)}%</span>
+                      <span>
+                        {(
+                          (operation.fundsRaised / operation.fundsNeeded) *
+                          100
+                        ).toFixed(1)}
+                        %
+                      </span>
                     </div>
-                    <Progress 
-                      value={(operation.fundsRaised / operation.fundsNeeded) * 100}
+                    <Progress
+                      value={
+                        (operation.fundsRaised / operation.fundsNeeded) * 100
+                      }
                       className="h-3"
                     />
                     <div className="flex justify-between text-sm text-muted-foreground">
-                      <span>{operation.fundsRaised.toLocaleString()} GAiA raised</span>
-                      <span>{operation.fundsNeeded.toLocaleString()} GAiA needed</span>
+                      <span>
+                        {operation.fundsRaised.toLocaleString()} GAiA raised
+                      </span>
+                      <span>
+                        {operation.fundsNeeded.toLocaleString()} GAiA needed
+                      </span>
                     </div>
                   </div>
 
                   <div className="flex gap-2 mt-4">
-                    <Button 
+                    <Button
                       onClick={() => donateToOperation(operation.id, 100)}
                       className="bg-red-600 hover:bg-red-700"
                     >
                       🚨 Emergency Donate 100 GAiA
                     </Button>
-                    <Button 
+                    <Button
                       onClick={() => donateToOperation(operation.id, 500)}
                       className="bg-orange-600 hover:bg-orange-700"
                     >
                       💰 Donate 500 GAiA
                     </Button>
-                    <Button 
+                    <Button
                       onClick={() => donateToOperation(operation.id, 1000)}
                       className="bg-yellow-600 hover:bg-yellow-700"
                     >
@@ -240,9 +269,12 @@ export function GlobalAnimalRescue() {
 
         <TabsContent value="active" className="space-y-4">
           {activeOperations
-            .filter(op => op.urgency !== "critical")
-            .map(operation => (
-              <Card key={operation.id} className="border-blue-500/30 bg-blue-900/20">
+            .filter((op) => op.urgency !== "critical")
+            .map((operation) => (
+              <Card
+                key={operation.id}
+                className="border-blue-500/30 bg-blue-900/20"
+              >
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
@@ -251,7 +283,8 @@ export function GlobalAnimalRescue() {
                         {operation.location}
                       </CardTitle>
                       <p className="text-sm text-muted-foreground mt-1">
-                        {operation.species} • {operation.animalsAffected} animals affected
+                        {operation.species} • {operation.animalsAffected}{" "}
+                        animals affected
                       </p>
                     </div>
                     <div className="text-right">
@@ -267,36 +300,48 @@ export function GlobalAnimalRescue() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm mb-4">{operation.description}</p>
-                  
+
                   <div className="space-y-3">
                     <div className="flex justify-between text-sm">
                       <span>Funding Progress</span>
-                      <span>{((operation.fundsRaised / operation.fundsNeeded) * 100).toFixed(1)}%</span>
+                      <span>
+                        {(
+                          (operation.fundsRaised / operation.fundsNeeded) *
+                          100
+                        ).toFixed(1)}
+                        %
+                      </span>
                     </div>
-                    <Progress 
-                      value={(operation.fundsRaised / operation.fundsNeeded) * 100}
+                    <Progress
+                      value={
+                        (operation.fundsRaised / operation.fundsNeeded) * 100
+                      }
                       className="h-3"
                     />
                     <div className="flex justify-between text-sm text-muted-foreground">
-                      <span>{operation.fundsRaised.toLocaleString()} GAiA raised</span>
-                      <span>{operation.fundsNeeded.toLocaleString()} GAiA needed</span>
+                      <span>
+                        {operation.fundsRaised.toLocaleString()} GAiA raised
+                      </span>
+                      <span>
+                        {operation.fundsNeeded.toLocaleString()} GAiA needed
+                      </span>
                     </div>
                   </div>
 
                   <div className="flex gap-2 mt-4">
-                    <Button 
+                    <Button
                       onClick={() => donateToOperation(operation.id, 50)}
                       className="bg-blue-600 hover:bg-blue-700"
                     >
                       💙 Support 50 GAiA
                     </Button>
-                    <Button 
+                    <Button
                       onClick={() => donateToOperation(operation.id, 200)}
                       className="bg-green-600 hover:bg-green-700"
                     >
                       🌿 Donate 200 GAiA
                     </Button>
-                    <Button 
+                    <Button
                       onClick={() => donateToOperation(operation.id, 500)}
                       className="bg-purple-600 hover:bg-purple-700"
                     >
@@ -321,22 +366,34 @@ export function GlobalAnimalRescue() {
                 <div className="flex items-center gap-3 p-3 bg-green-800/30 rounded-lg">
                   <CheckCircle className="h-5 w-5 text-green-400" />
                   <div>
-                    <p className="font-semibold">Australian Bushfire Recovery - Complete</p>
-                    <p className="text-sm text-muted-foreground">2,400 koalas and wildlife rescued</p>
+                    <p className="font-semibold">
+                      Australian Bushfire Recovery - Complete
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      2,400 koalas and wildlife rescued
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-green-800/30 rounded-lg">
                   <CheckCircle className="h-5 w-5 text-green-400" />
                   <div>
-                    <p className="font-semibold">Arctic Ice Protection - Complete</p>
-                    <p className="text-sm text-muted-foreground">1,800 polar bears protected</p>
+                    <p className="font-semibold">
+                      Arctic Ice Protection - Complete
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      1,800 polar bears protected
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-green-800/30 rounded-lg">
                   <CheckCircle className="h-5 w-5 text-green-400" />
                   <div>
-                    <p className="font-semibold">Borneo Orangutan Sanctuary - Complete</p>
-                    <p className="text-sm text-muted-foreground">950 orangutans relocated safely</p>
+                    <p className="font-semibold">
+                      Borneo Orangutan Sanctuary - Complete
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      950 orangutans relocated safely
+                    </p>
                   </div>
                 </div>
               </div>

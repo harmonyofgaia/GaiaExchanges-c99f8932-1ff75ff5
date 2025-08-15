@@ -51,8 +51,8 @@ echo ""
 echo "🔧 Configuration Verification"
 check "Environment example" "test -f .env.example"
 check "Vercel config" "test -f vercel.json"
-check "Tailwind config" "test -f tailwind.config.ts"
-check "PostCSS config" "test -f postcss.config.js"
+check "Tailwind config" "test -f tailwind.config.cjs"
+check "PostCSS config" "test -f postcss.config.cjs"
 
 echo ""
 echo "📦 Dependencies Verification"
@@ -91,7 +91,7 @@ if npm run build > /dev/null 2>&1; then
 else
     echo -e "${RED}✗${NC} Build failed"
 fi
-TOTAL_CHECKS=$((TOTAL_CHECKS + 5))
+TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
 
 echo ""
 echo "🔒 Security Verification"

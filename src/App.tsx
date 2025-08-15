@@ -72,7 +72,7 @@ function App() {
   return (
     <Router>
       <div
-        className="min-h-screen bg-background text-foreground"
+        className="min-h-screen bg-background text-foreground dark"
         data-router="true"
       >
         <CrossPagePersistence />

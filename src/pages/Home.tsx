@@ -26,6 +26,7 @@ import { ThemeSelector } from "@/components/ThemeSelector";
 import { EnhancedPersistentMusicPlayer } from "@/components/music/EnhancedPersistentMusicPlayer";
 import { UpgradedVisualControlButton } from "@/components/visual/UpgradedVisualControlButton";
 
+
 export default function Home() {
   const [stats, setStats] = useState({
     totalUsers: 12589,
@@ -79,15 +80,15 @@ export default function Home() {
       {/* Control Buttons */}
       <UpgradedVisualControlButton />
 
-      <div className="relative z-10 container mx-auto px-4 py-8">
+      <div className="relative z-10 container mx-auto px-4 py-12 max-w-5xl">
         {/* Hero Section */}
-        <div className="text-center space-y-6 mb-12">
-          <div className="flex items-center justify-center gap-4">
+        <div className="text-center space-y-8 mb-16">
+          <div className="flex items-center justify-center gap-6">
             <UniversalGaiaLogo size="lg" animated={true} />
             <GaiaLogo size="lg" variant="glow" />
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">
               Harmony of Gaia
             </h1>
@@ -101,7 +102,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mt-4">
             <Button
               size="lg"
               className="bg-green-600 hover:bg-green-700 text-white"
@@ -122,7 +123,7 @@ export default function Home() {
         </div>
 
         {/* Live Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
           <Card className="bg-green-900/20 border-green-500/30">
             <CardContent className="p-6 text-center">
               <Users className="h-8 w-8 text-green-400 mx-auto mb-2" />
@@ -164,13 +165,20 @@ export default function Home() {
           </Card>
         </div>
 
+        {/* Feature Showcase - Coming Soon */}
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+            🚀 Amazing Features Coming Soon
+          </h2>
+        </div>
+
         {/* Live Earnings Display */}
-        <div className="mb-12">
+        <div className="mb-16">
           <LiveEarningsDisplay />
         </div>
 
         {/* Featured Mission */}
-        <div className="mb-12">
+        <div className="mb-16">
           <h2 className="text-3xl font-bold text-green-400 mb-6 text-center">
             🌱 Featured Eco Mission
           </h2>
@@ -183,7 +191,7 @@ export default function Home() {
         <GaiaCommunityProjects />
 
         {/* Features Section */}
-        <div className="mt-12 space-y-8">
+        <div className="mt-16 space-y-10">
           <h2 className="text-3xl font-bold text-center text-green-400 mb-8">
             🌍 Why Choose Harmony of Gaia?
           </h2>

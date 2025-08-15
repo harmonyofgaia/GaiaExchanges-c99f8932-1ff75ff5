@@ -20,7 +20,19 @@ import {
 import { GAIA_TOKEN } from "@/constants/gaia";
 
 const GaiaConsistencyStatus = () => {
-  const [scanResult, setScanResult] = useState<any>(null);
+  interface ScanSummary {
+    totalComponents: number;
+    fullyIntegrated: number;
+    partiallyIntegrated: number;
+    criticalIssues: number;
+  }
+  interface ScanResult {
+    overallStatus: string;
+    summary: ScanSummary;
+    componentIntegrations: ComponentIntegration[];
+    issues: ConsistencyIssue[];
+  }
+  const [scanResult, setScanResult] = useState<ScanResult | null>(null);
   const [isScanning, setIsScanning] = useState(false);
   const [lastScanTime, setLastScanTime] = useState<Date | null>(null);
 
