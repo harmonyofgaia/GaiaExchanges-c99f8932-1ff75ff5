@@ -178,7 +178,14 @@ for entry in "${TOPIC_JSON[@]}"; do
         git checkout "${CURRENT_BRANCH}" -- "${file}" 2>/dev/null || echo "Warning: Could not checkout ${file}"
       fi
     done
-    git add ${files} 2>/dev/null || true
+  if [[ ${#files[@]} -gt 0 ]]; then
+    # Use a more robust approach to checkout files
+    for file in "${files[@]}"; do
+      if [[ -f "${file}" ]]; then
+        git checkout "${CURRENT_BRANCH}" -- "${file}" 2>/dev/null || echo "Warning: Could not checkout ${file}"
+      fi
+    done
+    git add "${files[@]}" 2>/dev/null || true
   fi
 
   if git diff --cached --quiet; then
