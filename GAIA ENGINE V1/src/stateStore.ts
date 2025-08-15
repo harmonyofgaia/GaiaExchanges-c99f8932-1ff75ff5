@@ -34,7 +34,7 @@ export class StateStore<S> {
   private patchArray(partial: Partial<S>) {
     // For arrays, merge using spread (shallow copy)
     // Patch specific indices using Object.assign
-    const newArray = [...(this.state as unknown as unknown[])];
+    const newArray = [...(this.state as any)];
     Object.assign(newArray, partial);
     this.set(newArray as S);
   }
