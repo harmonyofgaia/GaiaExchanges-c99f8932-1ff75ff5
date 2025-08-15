@@ -48,7 +48,6 @@ const FeeVault = () => {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
-
   const fetchVaultData = useCallback(async () => {
     try {
       console.log("🏦 VAULT: Fetching live vault data with quantum security");

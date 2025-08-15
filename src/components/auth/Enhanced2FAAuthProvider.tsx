@@ -10,7 +10,11 @@ interface AuthContextType {
   requires2FA: boolean;
   sessionDuration: number;
   signIn: (email: string, password: string) => Promise<{ error: AuthError | null }>;
-  signUp: (email: string, password: string, userData?: unknown) => Promise<{ error: AuthError | null }>;
+  signUp: (
+    email: string,
+    password: string,
+    userData?: unknown
+  ) => Promise<{ error: AuthError | null }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: AuthError | null }>;
   setSessionDuration: (hours: number) => void;

@@ -10,7 +10,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { TreePine, Mountain, Waves, Sun, Home, Palette, Save, Download, Eye, LucideIcon } from "lucide-react";
+import {
+  TreePine,
+  Mountain,
+  Waves,
+  Sun,
+  Home,
+  Palette,
+  Save,
+  Download,
+  Eye,
+  LucideIcon,
+} from "lucide-react";
 import { toast } from "sonner";
 import { GAIA_TOKEN } from "@/constants/gaia";
 

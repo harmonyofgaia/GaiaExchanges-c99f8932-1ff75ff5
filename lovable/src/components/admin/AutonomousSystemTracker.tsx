@@ -62,11 +62,7 @@ export function AutonomousSystemTracker() {
         <CardTitle className="flex items-center gap-2 text-cyan-400">
           <Activity className="h-6 w-6 animate-pulse" />
           🔄 AUTONOMOUS SYSTEM TRACKER - PHASE 1 ACTIVE
-          <Badge
-            className="bg-cyan-600 text-white animate-pulse"
-          >
-            REAL-TIME
-          </Badge>
+          <Badge className="bg-cyan-600 text-white animate-pulse">REAL-TIME</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">

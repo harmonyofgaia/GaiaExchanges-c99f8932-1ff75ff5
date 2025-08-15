@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -101,7 +101,7 @@ export default function PlanetCleaningRewardsSystem() {
       loadIoTReadings();
       loadGlobalMetrics();
     }
-  }, [user]);
+  }, [user, loadRewards]);
 
   const loadSatelliteData = async () => {
     // Mock satellite verification data
@@ -164,9 +164,9 @@ export default function PlanetCleaningRewardsSystem() {
     if (user) {
       loadRewards();
     }
-  }, [user]);
+  }, [user, loadRewards]);
 
-  const loadRewards = async () => {
+  const loadRewards = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from("planet_cleaning_rewards")
@@ -182,7 +182,7 @@ export default function PlanetCleaningRewardsSystem() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
 
   const submitCleaningActivity = async () => {
     if (!user) {

@@ -17,7 +17,7 @@ const GaiaConsistencyStatus = () => {
     overallScore: number;
     issues: Array<{
       component: string;
-      severity: 'low' | 'medium' | 'high' | 'critical';
+      severity: "low" | "medium" | "high" | "critical";
       message: string;
       resolution?: string;
     }>;
