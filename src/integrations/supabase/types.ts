@@ -5670,6 +5670,10 @@ export type Database = {
         }
         Returns: string
       }
+      log_security_event_system: {
+        Args: { p_details: Json; p_event_type: string; p_severity?: string }
+        Returns: undefined
+      }
       log_unsafe_functions: {
         Args: Record<PropertyKey, never>
         Returns: undefined
