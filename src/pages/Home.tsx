@@ -12,6 +12,9 @@ import {
   Trophy,
   Shield,
 } from "lucide-react";
+import { HeroSection } from "@/components/home/HeroSection";
+import { ExchangeLinks } from "@/components/home/ExchangeLinks";
+import { RotatingFeatureShowcase } from "@/components/home/RotatingFeatureShowcase";
 import { GaiaLogo } from "@/components/GaiaLogo";
 import { UniversalGaiaLogo } from "@/components/branding/UniversalGaiaLogo";
 import { EnhancedBackgroundManager } from "@/components/backgrounds/EnhancedBackgroundManager";
@@ -165,11 +168,9 @@ export default function Home() {
           </Card>
         </div>
 
-        {/* Feature Showcase - Coming Soon */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-            🚀 Amazing Features Coming Soon
-          </h2>
+        {/* Rotating Feature Showcase */}
+        <div className="mb-16">
+          <RotatingFeatureShowcase />
         </div>
 
         {/* Live Earnings Display */}
