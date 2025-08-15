@@ -48,13 +48,13 @@ export function AdvancedBackgroundControls({
   isLocked: boolean;
 }) {
   const [settings, setSettings] = useState<BackgroundSettings>({
-    isLocked: false,
+    isLocked: true, // Lock background to prevent changes
     isAnimated: true,
-    autoChange: true,
-    changeInterval: 30, // seconds
+    autoChange: false, // Disable auto-changing to prevent puzzle background
+    changeInterval: 30,
     intensity: 60,
     speed: 1,
-    type: "neural",
+    type: "matrix", // Force matrix type only
     layers: {
       primary: true,
       secondary: true,
@@ -71,8 +71,15 @@ export function AdvancedBackgroundControls({
     if (savedSettings) {
       try {
         const parsed = JSON.parse(savedSettings);
-        setSettings(parsed);
-        setTimeRemaining(parsed.changeInterval);
+        // Force matrix type and disable auto-change regardless of saved settings
+        const secureSettings = {
+          ...parsed,
+          type: "matrix",
+          autoChange: false,
+          isLocked: true
+        };
+        setSettings(secureSettings);
+        setTimeRemaining(secureSettings.changeInterval);
       } catch (error) {
         console.error("Failed to load background settings:", error);
       }
@@ -221,13 +228,13 @@ export function AdvancedBackgroundControls({
     if (isLocked) return;
 
     const defaults: BackgroundSettings = {
-      isLocked: false,
+      isLocked: true, // Keep locked to prevent auto-changes
       isAnimated: true,
-      autoChange: true,
+      autoChange: false, // Disable auto-change to prevent puzzle
       changeInterval: 30,
       intensity: 60,
       speed: 1,
-      type: "neural",
+      type: "matrix", // Force matrix only
       layers: {
         primary: true,
         secondary: true,
