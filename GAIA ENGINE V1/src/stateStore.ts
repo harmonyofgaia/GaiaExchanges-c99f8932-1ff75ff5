@@ -27,7 +27,7 @@ export class StateStore<S> {
     } else if (typeof this.state === 'object' && this.state !== null) {
       this.patchObject(partial);
     } else {
-      throw new Error('StateStore.patch: Cannot patch primitive or null state. Patch is only supported for object or array state types.');
+      throw new Error('StateStore.patch: Cannot patch primitive or null state. Use set() instead for primitive values, or initialize with an object/array state.');
     }
   }
 
