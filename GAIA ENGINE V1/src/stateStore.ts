@@ -11,13 +11,38 @@ export class StateStore<S> {
   set(next: S) {
     if (Object.is(this.state, next)) return;
     this.state = next;
-    for (const l of Array.from(this.listeners)) { try { l(this.state); } catch { } }
+    for (const l of Array.from(this.listeners)) { 
+      try { 
+        l(this.state); 
+      } catch (error) {
+        // Silently ignore listener errors to prevent one failing listener from affecting others
+        console.warn('StateStore listener error:', error);
+      }
+    }
   }
 
   patch(partial: Partial<S>) {
-    this.set(Object.assign(Array.isArray(this.state) ? ([] as any) : {}, this.state as any, partial));
+    if (Array.isArray(this.state)) {
+      this.patchArray(partial);
+    } else if (typeof this.state === 'object' && this.state !== null) {
+      this.patchObject(partial);
+    } else {
+      throw new Error('StateStore.patch: Cannot patch primitive or null state. Use set() instead for primitive values, or initialize with an object/array state.');
+    }
   }
 
+  private patchArray(partial: Partial<S>) {
+    // For arrays, merge using spread (shallow copy)
+    // Patch specific indices using Object.assign
+    const newArray = [...(this.state as unknown[])];
+    Object.assign(newArray, partial);
+    this.set(newArray as S);
+  }
+
+  private patchObject(partial: Partial<S>) {
+    // For objects, merge using spread
+    this.set({ ...this.state, ...partial } as S);
+  }
   subscribe(fn: Listener<S>) {
     this.listeners.add(fn);
     return () => this.listeners.delete(fn);

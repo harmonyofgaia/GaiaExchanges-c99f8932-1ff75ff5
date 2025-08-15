@@ -10,10 +10,18 @@ export class EventBus<E extends { type: string } = { type: string; payload?: unk
   }
 
   once<T extends E["type"]>(type: T, handler: Handler<E>) {
-    const off = this.on(type, async (evt) => {
-      try { await handler(evt); } finally { off(); }
-    });
-    return off;
+    let called = false;
+    const wrapper = async (evt: E) => {
+      if (called) return;
+      called = true;
+      try { 
+        await handler(evt); 
+      } finally { 
+        this.off(type, wrapper);
+      }
+    };
+    this.on(type, wrapper);
+    return () => this.off(type, wrapper);
   }
 
   off<T extends E["type"]>(type: T, handler: Handler<E>) {
@@ -28,14 +36,28 @@ export class EventBus<E extends { type: string } = { type: string; payload?: unk
   emit(event: E) {
     const set = this.listeners.get(event.type);
     if (!set || set.size === 0) return 0;
-    for (const h of Array.from(set)) { try { h(event); } catch { } }
+    for (const h of Array.from(set)) { 
+      try { 
+        h(event); 
+      } catch (error) {
+        // Silently ignore handler errors to prevent one failing handler from affecting others
+        console.warn('EventBus handler error:', error);
+      }
+    }
     return set.size;
   }
 
   async emitAsync(event: E) {
     const set = this.listeners.get(event.type);
     if (!set || set.size === 0) return 0;
-    await Promise.all(Array.from(set).map(async h => { try { await h(event); } catch { } }));
+    await Promise.all(Array.from(set).map(async h => { 
+      try { 
+        await h(event); 
+      } catch (error) {
+        // Silently ignore handler errors to prevent one failing handler from affecting others
+        console.warn('EventBus async handler error:', error);
+      }
+    }));
     return set.size;
   }
 }
