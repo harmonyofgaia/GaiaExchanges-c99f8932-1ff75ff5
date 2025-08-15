@@ -1,8 +1,8 @@
 {
-  "buildCommand": "npm run build:vercel",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "devCommand": "npm run dev",
-  "installCommand": "npm install",
+  "installCommand": "npm ci --legacy-peer-deps",
   "rewrites": [
     {
       "source": "/(.*)",
@@ -10,6 +10,6 @@
     }
   ],
   "env": {
-    "SKIP_LINT": "true"
+    "NODE_ENV": "production"
   }
 }

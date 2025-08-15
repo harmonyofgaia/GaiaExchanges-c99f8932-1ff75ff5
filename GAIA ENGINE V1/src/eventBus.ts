@@ -28,14 +28,14 @@ export class EventBus<E extends { type: string } = { type: string; payload?: unk
   emit(event: E) {
     const set = this.listeners.get(event.type);
     if (!set || set.size === 0) return 0;
-    for (const h of Array.from(set)) { try { h(event); } catch { } }
+    for (const h of Array.from(set)) { try { h(event); } catch (error) { console.warn('Event handler error:', error); } }
     return set.size;
   }
 
   async emitAsync(event: E) {
     const set = this.listeners.get(event.type);
     if (!set || set.size === 0) return 0;
-    await Promise.all(Array.from(set).map(async h => { try { await h(event); } catch { } }));
+    await Promise.all(Array.from(set).map(async h => { try { await h(event); } catch (error) { console.warn('Async event handler error:', error); } }));
     return set.size;
   }
 }
