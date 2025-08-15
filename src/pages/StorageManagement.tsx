@@ -26,7 +26,7 @@ interface StorageFile {
   id: string;
   name: string;
   size: number;
-  type: "image" | "video" | "audio" | "document";
+  type: "image" | "video" | "audio" | "document" | "other";
   url: string;
   bucket: string;
   created_at: string;
@@ -48,11 +48,20 @@ export default function StorageManagement() {
     { id: "documents", name: "Documents", icon: FileText },
   ], []);
 
-  useEffect(() => {
-    loadFiles();
-  }, [selectedBucket, loadFiles]);
+  const getFileType = (fileName: string): StorageFile["type"] => {
+    const ext = fileName.split(".").pop()?.toLowerCase();
+    if (["jpg", "jpeg", "png", "gif", "webp", "svg"].includes(ext || ""))
+      return "image";
+    if (["mp4", "avi", "mov", "wmv", "flv", "webm"].includes(ext || ""))
+      return "video";
+    if (["mp3", "wav", "ogg", "m4a", "aac"].includes(ext || ""))
+      return "audio";
+    if (["pdf", "doc", "docx", "txt", "rtf"].includes(ext || ""))
+      return "document";
+    return "other";
+  };
 
-    const loadFiles = useCallback(async () => {
+  const loadFiles = useCallback(async () => {
       setLoading(true);
       try {
         // Load files from all buckets or specific bucket
@@ -89,16 +98,11 @@ export default function StorageManagement() {
       } finally {
         setLoading(false);
       }
-    }, [buckets, selectedBucket]);
+    }, [buckets, selectedBucket, getFileType]);
 
-  const getFileType = (fileName: string): StorageFile["type"] => {
-    const ext = fileName.split(".").pop()?.toLowerCase();
-    if (["jpg", "jpeg", "png", "gif", "webp", "svg"].includes(ext || ""))
-      return "image";
-    if (["mp4", "mov", "avi", "webm"].includes(ext || "")) return "video";
-    if (["mp3", "wav", "ogg", "m4a"].includes(ext || "")) return "audio";
-    return "document";
-  };
+  useEffect(() => {
+    loadFiles();
+  }, [loadFiles]);
 
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,

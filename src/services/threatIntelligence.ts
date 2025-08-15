@@ -189,9 +189,9 @@ class ThreatIntelligenceService {
         id: `sig-${Date.now()}-${i}`,
         type: threatTypes[Math.floor(Math.random() * threatTypes.length)],
         pattern: this.generateThreatPattern(),
-        severity: ["LOW", "MEDIUM", "HIGH", "CRITICAL"][
+        severity: (["LOW", "MEDIUM", "HIGH", "CRITICAL"] as const)[
           Math.floor(Math.random() * 4)
-  ] as string[],
+        ] as ThreatSignature["severity"],
         confidence: Math.random() * 0.3 + 0.7,
         lastSeen: Date.now(),
         description: "Global threat intelligence signature",
@@ -372,15 +372,16 @@ class ThreatIntelligenceService {
   }
 
   private extractFeatures(input: Record<string, unknown>): string[] {
-    const features = [];
+    const features: string[] = [];
 
-    if (typeof input === "string") {
-      if (input.includes("script")) features.push("script_content");
-      if (input.includes("eval")) features.push("code_evaluation");
-      if (input.includes("http")) features.push("url_reference");
-      if (/[<>]/.test(input)) features.push("html_tags");
-      if (/'|"/.test(input)) features.push("quote_characters");
-    }
+    // Convert input to string for analysis
+    const inputStr = typeof input === "string" ? input : JSON.stringify(input);
+    
+    if (inputStr.includes("script")) features.push("script_content");
+    if (inputStr.includes("eval")) features.push("code_evaluation");
+    if (inputStr.includes("http")) features.push("url_reference");
+    if (/[<>]/.test(inputStr)) features.push("html_tags");
+    if (/'|"/.test(inputStr)) features.push("quote_characters");
 
     return features;
   }

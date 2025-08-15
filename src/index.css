@@ -142,6 +142,7 @@
 
 :root {
   --background: 0 0% 100%; /* Default background color, adjust as needed */
+  --radius: 0.5rem;
 }
 }
 
