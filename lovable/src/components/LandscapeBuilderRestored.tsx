@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { TreePine, Mountain, Waves, Sun, Home, Palette, Save, Download, Eye } from "lucide-react";
+import { TreePine, Mountain, Waves, Sun, Home, Palette, Save, Download, Eye, LucideIcon } from "lucide-react";
 import { toast } from "sonner";
 import { GAIA_TOKEN } from "@/constants/gaia";
 
@@ -53,7 +53,7 @@ export function LandscapeBuilderRestored() {
   const tools: {
     id: LandscapeElement["type"];
     name: string;
-    icon: any;
+    icon: LucideIcon;
     color: string;
   }[] = [
     { id: "tree", name: "Trees", icon: TreePine, color: "#228B22" },

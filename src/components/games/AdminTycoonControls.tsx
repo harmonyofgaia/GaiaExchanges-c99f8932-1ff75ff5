@@ -7,11 +7,31 @@ import { Progress } from "@/components/ui/progress";
 import { Crown, Shield, Zap, Target, Users, Brain } from "lucide-react";
 import { toast } from "sonner";
 
+interface PlayerData {
+  coins?: number;
+  level?: number;
+  experience?: number;
+  reputation?: number;
+  buildings?: Building[];
+  resources?: Record<string, number>;
+}
+
+interface Building {
+  id?: string;
+  name: string;
+  level: number;
+  income: number;
+  cost: number;
+  x: number;
+  y: number;
+  type?: string;
+}
+
 interface AdminControlsProps {
-  playerData: any;
-  setPlayerData: (data: any) => void;
-  buildings: any[];
-  setBuildings: (buildings: any[]) => void;
+  playerData: PlayerData;
+  setPlayerData: (data: PlayerData) => void;
+  buildings: Building[];
+  setBuildings: (buildings: Building[]) => void;
 }
 
 interface TrainedAnimal {
@@ -81,9 +101,9 @@ export function AdminTycoonControls({
   });
 
   const giveCoins = () => {
-    setPlayerData((prev: any) => ({
+    setPlayerData((prev: PlayerData) => ({
       ...prev,
-      coins: prev.coins + 10000,
+      coins: (prev.coins || 0) + 10000,
     }));
     toast.success("👑 Admin Bonus!", {
       description: "+10,000 coins added to your account",
@@ -92,7 +112,7 @@ export function AdminTycoonControls({
   };
 
   const maxLevel = () => {
-    setPlayerData((prev: any) => ({
+    setPlayerData((prev: PlayerData) => ({
       ...prev,
       level: 100,
       reputation: 100,
@@ -106,7 +126,7 @@ export function AdminTycoonControls({
   const buildMegaStructure = () => {
     const megaBuilding = {
       id: Date.now().toString(),
-      type: "mega_hotel" as any,
+      type: "mega_hotel",
       name: "Admin Mega Hotel",
       level: 50,
       income: 1000,

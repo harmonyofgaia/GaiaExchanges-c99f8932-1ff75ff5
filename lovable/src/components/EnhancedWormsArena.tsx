@@ -54,6 +54,15 @@ interface Tournament {
   startTime: Date;
 }
 
+interface LeaderboardEntry {
+  rank: number;
+  playerName: string;
+  wins: number;
+  losses: number;
+  winRate: number;
+  totalTokens: number;
+}
+
 export function EnhancedWormsArena() {
   const [playerWorms, setPlayerWorms] = useState<Worm[]>([]);
   const [selectedWorm, setSelectedWorm] = useState<Worm | null>(null);
@@ -61,7 +70,7 @@ export function EnhancedWormsArena() {
   const [battleResults, setBattleResults] = useState<BattleResult[]>([]);
   const [tournaments, setTournaments] = useState<Tournament[]>([]);
   const [playerTokens, setPlayerTokens] = useState(15420);
-  const [leaderboard, setLeaderboard] = useState<any[]>([]);
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
 
   const arenaInterval = useRef<NodeJS.Timeout>(undefined);
 

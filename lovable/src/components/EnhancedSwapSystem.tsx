@@ -101,7 +101,7 @@ export function EnhancedSwapSystem() {
     return () => {
       if (swapInterval.current) clearInterval(swapInterval.current);
     };
-  }, []);
+  }, [userConfig]);
 
   const handleFromAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

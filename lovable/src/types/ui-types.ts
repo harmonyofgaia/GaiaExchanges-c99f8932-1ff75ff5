@@ -70,7 +70,12 @@ export interface BikeSession {
   distance: number;
   tokens_earned: number;
   start_location: { lat: number; lng: number };
-  route_data: any;
+  route_data: {
+    coordinates: Array<{ lat: number; lng: number }>;
+    elevation?: number[];
+    waypoints?: string[];
+    total_time?: number;
+  };
   status: string;
   eco_impact: number;
 }
@@ -231,7 +236,11 @@ export interface ChatMessage {
   type: string;
   timestamp: string;
   reactions?: string[];
-  replyingTo?: any;
+  replyingTo?: {
+    id: string;
+    content: string;
+    sender: string;
+  };
 }
 
 // Subscription interface
@@ -247,10 +256,10 @@ export interface SolanaProvider {
   isPhantom?: boolean;
   connect: () => Promise<{ publicKey: { toString: () => string } }>;
   disconnect: () => Promise<void>;
-  signAndSendTransaction: (transaction: any) => Promise<any>;
+  signAndSendTransaction: (transaction: unknown) => Promise<unknown>;
   publicKey?: { toString: () => string };
   isConnected: boolean;
-  request: (options: any) => Promise<any>;
+  request: (options: unknown) => Promise<unknown>;
 }
 
 export interface WindowWithProviders extends Window {
@@ -288,8 +297,8 @@ export type ItemType =
 export interface ActionParameters {
   action: string;
   target?: string;
-  value?: any;
-  [key: string]: any;
+  value?: unknown;
+  [key: string]: unknown;
 }
 
 // Action log entry interface
@@ -365,7 +374,7 @@ export interface PartyEvent {
 }
 
 // Utility functions for type conversion from Supabase Json
-export const parseJsonField = <T>(jsonValue: any, fallback: T): T => {
+export const parseJsonField = <T>(jsonValue: unknown, fallback: T): T => {
   if (!jsonValue) return fallback;
   if (typeof jsonValue === "string") {
     try {

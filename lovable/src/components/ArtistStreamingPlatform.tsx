@@ -158,7 +158,7 @@ export function ArtistStreamingPlatform() {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [liveStreams]);
 
   const handleTipArtist = async (stream: LiveStream) => {
     try {

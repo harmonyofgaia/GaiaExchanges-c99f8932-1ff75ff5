@@ -9,6 +9,45 @@ interface EnhancedNeuroBackgroundProps {
   neuralDensity?: number;
 }
 
+interface NeuroNode {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  radius: number;
+  energy?: number;
+  connections?: number;
+  color?: {
+    r: number;
+    g: number;
+    b: number;
+  };
+  pulse?: number;
+  amplitude?: number;
+  frequency?: number;
+}
+
+interface NeuroConnection {
+  from: number;
+  to: number;
+  opacity: number;
+  strength?: number;
+}
+
+interface NeuroParticle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  life: number;
+  color?: {
+    r: number;
+    g: number;
+    b: number;
+  };
+}
+
 export function EnhancedNeuroBackground({
   intensity = "medium",
   color = "#4fc3f7",
@@ -39,9 +78,9 @@ export function EnhancedNeuroBackground({
     const nodeCount = Math.floor(
       (intensity === "low" ? 30 : intensity === "medium" ? 60 : 100) * (neuralDensity / 100)
     );
-    const nodes: any[] = [];
-    const connections: any[] = [];
-    const particles: any[] = [];
+    const nodes: NeuroNode[] = [];
+    const connections: NeuroConnection[] = [];
+    const particles: NeuroParticle[] = [];
 
     // Helper function to convert hex to RGB
     function hexToRgb(hex: string) {
@@ -62,7 +101,7 @@ export function EnhancedNeuroBackground({
       canvas: HTMLCanvasElement,
       pattern: string
     ) {
-      let node: any;
+      let node: NeuroNode;
 
       switch (pattern) {
         case "creative":
@@ -294,7 +333,7 @@ export function EnhancedNeuroBackground({
 
     // Helper function to update pattern-specific nodes
     function updatePatternNode(
-      node: any,
+      node: NeuroNode,
       pattern: string,
       time: number,
       speed: number,
@@ -359,9 +398,9 @@ export function EnhancedNeuroBackground({
     // Helper function to draw pattern-specific connections
     function drawPatternConnection(
       ctx: CanvasRenderingContext2D,
-      fromNode: any,
-      toNode: any,
-      connection: any,
+      fromNode: NeuroNode,
+      toNode: NeuroNode,
+      connection: NeuroConnection,
       pattern: string,
       time: number,
       color: string
@@ -486,7 +525,7 @@ export function EnhancedNeuroBackground({
     // Helper function to draw pattern-specific nodes
     function drawPatternNode(
       ctx: CanvasRenderingContext2D,
-      node: any,
+      node: NeuroNode,
       pattern: string,
       time: number,
       color: string
