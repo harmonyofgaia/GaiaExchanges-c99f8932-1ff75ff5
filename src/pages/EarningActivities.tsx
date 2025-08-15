@@ -233,7 +233,7 @@ export default function EarningActivities() {
   // State for selected category
   const [selectedCategory, setSelectedCategory] = useState<any | null>(null);
   // State for active tab
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState("globe");
   // User stats
   const [userStats] = useState({
     totalTokens: 4890,
@@ -700,6 +700,46 @@ export default function EarningActivities() {
               categories={earningCategories}
             />
 
+            {/* Featured Modules Section */}
+            <div className="mt-12 space-y-8">
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-green-400 mb-3">
+                  🏆 Featured Systems & Programs
+                </h3>
+                <p className="text-lg text-muted-foreground">
+                  Core earning systems and community features
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="space-y-6">
+                  <h4 className="text-xl font-bold text-yellow-400 text-center">Achievement Systems</h4>
+                  <EnhancedBadgeSystem />
+                  <PhotoVerificationSystem />
+                  <MentorshipProgram />
+                </div>
+                
+                <div className="space-y-6">
+                  <h4 className="text-xl font-bold text-blue-400 text-center">Community Features</h4>
+                  <EcosystemIntegration />
+                  <CommunityGovernance />
+                  <CommunityRewardsProgram />
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <h4 className="text-xl font-bold text-green-400 text-center">🔴 Live Activity Trackers</h4>
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                  <GaiaBikeEarning />
+                  <InteractiveFoodMap />
+                </div>
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                  <EnhancedHomeGrownFoodTracker />
+                  <InteractiveEcoBikeMap />
+                </div>
+              </div>
+            </div>
+
             {/* Selected Category Display */}
             {selectedCategory && (
               <div className="mt-8 space-y-4">
@@ -844,10 +884,6 @@ export default function EarningActivities() {
             </div>
 
             <div className="space-y-8">
-              <InteractiveEcoBikeMap />
-              <GaiaBikeEarning />
-              <InteractiveFoodMap />
-              <EnhancedHomeGrownFoodTracker />
               <EnergyConsumptionTracker />
               <AdvancedCommunityFeatures />
               <PartyEventEarning />
@@ -866,13 +902,8 @@ export default function EarningActivities() {
             </div>
 
             <div className="space-y-8">
-              <EnhancedBadgeSystem />
-              <PhotoVerificationSystem />
-              <MentorshipProgram />
-              <EcosystemIntegration />
-              <CommunityGovernance />
-              <CommunityRewardsProgram />
               <AdvancedTokenMechanics />
+              <TokenStakingSystem />
             </div>
           </TabsContent>
         </Tabs>
