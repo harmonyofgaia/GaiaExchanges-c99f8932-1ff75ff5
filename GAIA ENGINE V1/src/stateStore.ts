@@ -33,7 +33,8 @@ export class StateStore<S> {
       this.set({ ...this.state, ...partial } as S);
     } else {
       // For primitives or unsupported types, do nothing or throw
-      console.warn('StateStore.patch: Cannot patch non-object/non-array state');
+      // For primitives or unsupported types, throw an error
+      throw new Error('StateStore.patch: Cannot patch non-object/non-array state. Patch is only supported for object or array state types.');
     }
   }
 
