@@ -85,6 +85,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
       defaultTheme="dark"
       enableSystem={false}
       themes={Object.keys(AVAILABLE_THEMES)}
+      forcedTheme="dark"
       {...props}
     >
       <LockProvider>{children}</LockProvider>
