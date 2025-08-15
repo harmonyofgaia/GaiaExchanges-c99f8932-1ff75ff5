@@ -24,7 +24,10 @@ export class StateStore<S> {
   patch(partial: Partial<S>) {
     if (Array.isArray(this.state)) {
       // For arrays, merge using spread (shallow copy)
-      this.set([...(this.state as unknown as any[]), ...(partial as unknown as any[])] as unknown as S);
+      // For arrays, patch specific indices using Object.assign
+      const newArray = [...(this.state as unknown as any[])];
+      Object.assign(newArray, partial);
+      this.set(newArray as S);
     } else if (typeof this.state === 'object' && this.state !== null) {
       // For objects, merge using spread
       this.set({ ...this.state, ...partial } as S);
