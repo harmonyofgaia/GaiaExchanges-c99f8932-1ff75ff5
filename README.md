@@ -18,7 +18,7 @@ Changes made via Lovable will be committed automatically to this repo.
 
 If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+The only requirement is having Node.js 20.x & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
 Follow these steps:
 
@@ -29,12 +29,47 @@ git clone <YOUR_GIT_URL>
 # Step 2: Navigate to the project directory.
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Step 3: Use Node 20.x (recommended via nvm)
+nvm use  # Uses .nvmrc file
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Step 4: Install the necessary dependencies.
+npm install
+
+# Step 5: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
+
+## Development Commands
+
+```sh
+# Development
+npm run dev          # Start development server
+
+# Building & Testing
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run typecheck    # Run TypeScript type checking
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint issues automatically
+npm test             # Run tests
+```
+
+## Project Structure
+
+This project uses an npm workspace structure:
+
+- **Root workspace**: Main application with unified toolchain
+- **lovable/**: Frontend components and logic
+- **src/**: Core application source code
+
+## Technology Stack
+
+- **Node.js**: 20.x (LTS)
+- **Vite**: 7.x (build tool)
+- **TypeScript**: 5.9.x
+- **React**: 18.x with React Router 7.x
+- **Tailwind CSS**: v3 (design system)
+- **ESLint**: Code linting with React Hooks rules
 
 **Edit a file directly in GitHub**
 
@@ -54,10 +89,11 @@ npm run dev
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
+- **Vite 7.x**: Fast build tool and dev server
+- **TypeScript 5.9.x**: Type-safe JavaScript
+- **React 18.x**: UI framework with React Router 7.x
+- **Tailwind CSS v3**: Utility-first CSS framework
+- **shadcn-ui**: Reusable component library
 - Tailwind CSS
 
 ## How can I deploy this project?
