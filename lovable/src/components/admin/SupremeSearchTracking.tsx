@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -134,8 +134,8 @@ export function SupremeSearchTracking() {
             ][Math.floor(Math.random() * 7)],
             accessLevel: ["surface", "deep", "core", "quantum"][
               Math.floor(Math.random() * 4)
-            ] as any,
-            status: ["scanning", "breached", "controlled"][Math.floor(Math.random() * 3)] as any,
+            ] as unknown,
+            status: ["scanning", "breached", "controlled"][Math.floor(Math.random() * 3)] as unknown,
             dataExtracted: Math.floor(Math.random() * 1000),
           };
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Shield, Zap, Eye, Lock, AlertTriangle, Globe, Wifi, Database } from "lucide-react";
@@ -37,7 +37,7 @@ export function SelfTrainingDefenseSystem() {
       if (Math.random() < 0.4) {
         const newThreat: DefenseThreat = {
           id: `threat-${Date.now()}`,
-          level: ["medium", "high", "critical"][Math.floor(Math.random() * 3)] as any,
+          level: ["medium", "high", "critical"][Math.floor(Math.random() * 3)] as unknown,
           source: possibleThreats[Math.floor(Math.random() * possibleThreats.length)],
           blocked: true,
           timestamp: new Date(),

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -68,9 +68,9 @@ export function SelfTrainingKoalaAI() {
           id: Date.now().toString(),
           type: ["routing", "auth", "performance", "security"][
             Math.floor(Math.random() * 4)
-          ] as any,
+          ] as unknown,
           description: randomIssue,
-          severity: issueType as any,
+          severity: issueType as unknown,
           auto_fixed: true,
           fix_time: Math.floor(Math.random() * 500) + 50,
         };

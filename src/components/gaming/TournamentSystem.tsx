@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -205,7 +205,7 @@ export function TournamentSystem() {
             ].map((tab) => (
               <Button
                 key={tab.key}
-                onClick={() => setSelectedTab(tab.key as any)}
+                onClick={() => setSelectedTab(tab.key as unknown)}
                 className={`${
                   selectedTab === tab.key
                     ? "bg-gradient-to-r from-blue-600 to-purple-600"

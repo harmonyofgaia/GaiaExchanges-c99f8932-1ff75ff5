@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -52,8 +52,8 @@ export function ThunderstormDefense() {
           id: Math.random().toString(36),
           type: ["intrusion", "ddos", "malware", "data_breach"][
             Math.floor(Math.random() * 4)
-          ] as any,
-          severity: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as any,
+          ] as unknown,
+          severity: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as unknown,
           source: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
           timestamp: new Date(),
           blocked: defenseMode !== "passive",

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -271,11 +271,11 @@ export function PrehistoricCreaturesManager() {
     const newCreature: PrehistoricCreature = {
       id: `creature-${Date.now()}`,
       name: `${randomSpecies} Guardian`,
-      type: randomType as any,
+      type: randomType as unknown,
       species: randomSpecies,
       era: eras[Math.floor(Math.random() * eras.length)],
       sprite: sprites[Math.floor(Math.random() * sprites.length)],
-      rarity: randomRarity as any,
+      rarity: randomRarity as unknown,
       stats: {
         attack: Math.floor(Math.random() * 100) + 50,
         defense: Math.floor(Math.random() * 100) + 50,

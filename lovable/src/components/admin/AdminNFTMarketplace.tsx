@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -374,7 +374,7 @@ export function AdminNFTMarketplace() {
                     onChange={(e) =>
                       setNewNFT((prev) => ({
                         ...prev,
-                        category: e.target.value as any,
+                        category: e.target.value as unknown,
                       }))
                     }
                     className="w-full px-3 py-2 bg-muted border border-border rounded-md"
@@ -395,7 +395,7 @@ export function AdminNFTMarketplace() {
                     onChange={(e) =>
                       setNewNFT((prev) => ({
                         ...prev,
-                        rarity: e.target.value as any,
+                        rarity: e.target.value as unknown,
                       }))
                     }
                     className="w-full px-3 py-2 bg-muted border border-border rounded-md"

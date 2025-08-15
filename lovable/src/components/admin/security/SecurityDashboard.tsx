@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -96,7 +96,7 @@ export function SecurityDashboard() {
       if (!scanError && scanData) {
         const typedScans = scanData.map((scan) => ({
           ...scan,
-          scan_results: (scan.scan_results as any) || {},
+          scan_results: (scan.scan_results as unknown) || {},
         })) as SecurityScan[];
         setScans(typedScans);
       }
@@ -111,10 +111,10 @@ export function SecurityDashboard() {
       if (!threatError && threatData) {
         const typedThreats = threatData.map((threat) => ({
           ...threat,
-          threat_data: (threat.threat_data as any) || {},
+          threat_data: (threat.threat_data as unknown) || {},
           ip_address: (threat.ip_address as string) || null,
           user_agent: (threat.user_agent as string) || null,
-          geolocation: threat.geolocation as any,
+          geolocation: threat.geolocation as unknown,
         })) as ThreatIntelligence[];
         setThreats(typedThreats);
       }

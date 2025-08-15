@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,7 +19,7 @@ import { toast } from "sonner";
 
 export function CommunityRecoveryDashboard() {
   const [searchAddress, setSearchAddress] = useState("");
-  const [recoveryRequests, setRecoveryRequests] = useState<any[]>([]);
+  const [recoveryRequests, setRecoveryRequests] = useState<unknown[]>([]);
   const [walletAnalysis, setWalletAnalysis] = useState<unknown>(null);
   const [isScanning, setIsScanning] = useState(false);
 

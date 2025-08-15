@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -247,7 +247,7 @@ export function QuantumDefenseWall() {
                 "Data Exfiltration",
                 "Privilege Escalation",
               ][Math.floor(Math.random() * 5)],
-              severity: ["critical", "high", "medium", "low"][Math.floor(Math.random() * 4)] as any,
+              severity: ["critical", "high", "medium", "low"][Math.floor(Math.random() * 4)] as unknown,
               source_ip: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
               location: ["Unknown", "China", "Russia", "North Korea", "Iran", "Anonymous Proxy"][
                 Math.floor(Math.random() * 6)

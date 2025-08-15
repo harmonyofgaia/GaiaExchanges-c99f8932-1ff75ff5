@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -99,7 +99,7 @@ export function EncryptedDataVault() {
     if (phrase.toLowerCase() === correctPhrases[stage as keyof typeof correctPhrases]) {
       console.log(`🔑 RECOVERY PHRASE ${stage} VERIFIED - PROCEEDING TO NEXT BARRIER`);
 
-      const nextStage = `recovery-${stage + 1}` as any;
+      const nextStage = `recovery-${stage + 1}` as unknown;
       if (stage === 4) {
         setRecoveryStage("unlocked");
         toast.success("🎯 ALL RECOVERY PHRASES VERIFIED!", {

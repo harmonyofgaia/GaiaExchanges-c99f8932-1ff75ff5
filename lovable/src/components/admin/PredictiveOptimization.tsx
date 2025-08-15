@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -89,10 +89,10 @@ export function PredictiveOptimization() {
           id: Date.now().toString(),
           type: ["optimization", "security", "performance", "user_experience"][
             Math.floor(Math.random() * 4)
-          ] as any,
+          ] as unknown,
           prediction: newPredictions[Math.floor(Math.random() * newPredictions.length)],
           confidence: 80 + Math.random() * 20,
-          impact: ["medium", "high", "critical"][Math.floor(Math.random() * 3)] as any,
+          impact: ["medium", "high", "critical"][Math.floor(Math.random() * 3)] as unknown,
           autoApply: true,
           status: "predicted",
         };

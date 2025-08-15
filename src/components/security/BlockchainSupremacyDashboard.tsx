@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,8 +17,8 @@ export function BlockchainSupremacyDashboard() {
     secureChains: 0,
   });
 
-  const [contractScans, setContractScans] = useState<any[]>([]);
-  const [crossChainTxs, setCrossChainTxs] = useState<any[]>([]);
+  const [contractScans, setContractScans] = useState<unknown[]>([]);
+  const [crossChainTxs, setCrossChainTxs] = useState<unknown[]>([]);
   const [isInitializing, setIsInitializing] = useState(false);
 
   useEffect(() => {

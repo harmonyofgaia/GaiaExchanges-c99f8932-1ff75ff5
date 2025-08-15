@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -111,7 +111,7 @@ export function UltimateIntelligenceHub() {
       timestamp: new Date(),
       classification: ["public", "private", "classified", "top_secret"][
         Math.floor(Math.random() * 4)
-      ] as any,
+      ] as unknown,
     };
 
     setIntelligenceData((prev) => [newData, ...prev.slice(0, 19)]);
@@ -134,7 +134,7 @@ export function UltimateIntelligenceHub() {
         id: Math.random().toString(36),
         identifier: `TGT-${Math.floor(Math.random() * 99999)}`,
         location: locations[Math.floor(Math.random() * locations.length)],
-        status: ["monitoring", "infiltrated", "controlled"][Math.floor(Math.random() * 3)] as any,
+        status: ["monitoring", "infiltrated", "controlled"][Math.floor(Math.random() * 3)] as unknown,
         threat_level: Math.floor(Math.random() * 100),
         last_activity: new Date(),
       };

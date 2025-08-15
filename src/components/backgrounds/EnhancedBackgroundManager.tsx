@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { MatrixRainBackground } from "./MatrixRainBackground";
 import { NeuroBackground } from "./NeuroBackground";
 import { PuzzleBackground } from "./PuzzleBackground";

@@ -118,7 +118,7 @@ export function LandscapeStyleApplier({ onStyleApplied }: StyleApplierProps) {
   const applyLandscapeStyle = (style: LandscapeStyle) => {
     if (applyToInterface) {
       // Apply to global background
-      changeBackground(style.id.split("-")[0] as any);
+      changeBackground(style.id.split("-")[0] as unknown);
 
       // Apply CSS variables to document
       Object.entries(style.cssVars).forEach(([property, value]) => {

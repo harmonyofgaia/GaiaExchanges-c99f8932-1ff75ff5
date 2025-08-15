@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Volume2, VolumeX, Play, Pause, SkipForward, SkipBack, X } from "lucide-react";
@@ -12,7 +12,7 @@ export function PersistentMusicPlayer() {
   const [duration, setDuration] = useState(0);
   const [currentTrack, setCurrentTrack] = useState<unknown>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [playlist, setPlaylist] = useState<any[]>([]);
+  const [playlist, setPlaylist] = useState<unknown[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const audioRef = useRef<HTMLAudioElement>(null);

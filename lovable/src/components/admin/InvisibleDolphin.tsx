@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -63,7 +63,7 @@ export function InvisibleDolphin() {
             ][Math.floor(Math.random() * 8)],
             type: ["encrypted", "deleted", "hidden", "classified"][
               Math.floor(Math.random() * 4)
-            ] as any,
+            ] as unknown,
             size: `${(Math.random() * 999 + 1).toFixed(0)}MB`,
             timestamp: new Date(),
             extracted: Math.random() > 0.3,

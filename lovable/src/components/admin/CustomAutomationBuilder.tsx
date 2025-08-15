@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -460,7 +460,7 @@ export function CustomAutomationBuilder() {
             description: `${automation.name} is now ${newStatus}`,
             duration: 3000,
           });
-          return { ...automation, status: newStatus as any };
+          return { ...automation, status: newStatus as unknown };
         }
         return automation;
       })

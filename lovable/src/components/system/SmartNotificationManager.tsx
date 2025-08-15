@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { toast } from "sonner";
 import { shouldShowNotification } from "@/lib/utils";
 
@@ -94,7 +94,7 @@ export function SmartNotificationManager() {
 
   // Expose methods globally for other components to use
   useEffect(() => {
-    (window as any).gaiaNotifications = {
+    (window as unknown).gaiaNotifications = {
       showUpgradeNotification,
       showCriticalNotification,
       showSecurityAlert,

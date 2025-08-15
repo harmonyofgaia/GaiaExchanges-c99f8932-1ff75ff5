@@ -137,7 +137,7 @@ export default function TaskReverser() {
         acc[feature.category].push(feature);
         return acc;
       },
-      {} as Record<string, any[]>
+      {} as Record<string, unknown[]>
     ) || {};
 
   if (!user) {

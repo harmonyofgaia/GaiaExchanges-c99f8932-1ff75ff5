@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ import { CheckCircle, AlertTriangle, RefreshCw, Database, Shield } from "lucide-
 
 export function SystemConsistencyScanner() {
   const [scanResults, setScanResults] = useState({
-    tokenConsistency: null as any,
+    tokenConsistency: null as unknown,
     databaseIntegrity: 100,
     systemHealth: 98.7,
     lastScan: new Date(),

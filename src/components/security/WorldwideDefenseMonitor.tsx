@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -112,14 +112,14 @@ export function WorldwideDefenseMonitor() {
           id: `threat-${Date.now()}-${i}`,
           source: globalThreatSources[Math.floor(Math.random() * globalThreatSources.length)],
           type: advancedThreatTypes[Math.floor(Math.random() * advancedThreatTypes.length)],
-          severity: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as any,
+          severity: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as unknown,
           region: regions[Math.floor(Math.random() * regions.length)],
           timestamp: new Date(),
           description: `Advanced AI-detected threat neutralized before impact - Tech superiority maintained`,
           countermeasure: "Quantum-level multi-layer defense protocol activated with tech analysis",
           status: ["detected", "analyzing", "blocked", "neutralized"][
             Math.floor(Math.random() * 4)
-          ] as any,
+          ] as unknown,
         };
         newThreats.push(threat);
       }

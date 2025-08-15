@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -171,7 +171,7 @@ export function GreenProjectManager() {
                     onChange={(e) =>
                       setNewProject((prev) => ({
                         ...prev,
-                        category: e.target.value as any,
+                        category: e.target.value as unknown,
                       }))
                     }
                     className="px-3 py-2 bg-background border border-input rounded-md"

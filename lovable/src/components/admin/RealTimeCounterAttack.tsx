@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Zap, Target, Shield, Sword } from "lucide-react";
@@ -41,7 +41,7 @@ export function RealTimeCounterAttack() {
         "Evidence Collected",
         "Attacker Traced",
       ][Math.floor(Math.random() * 8)],
-      status: ["executing", "completed", "failed"][Math.floor(Math.random() * 3)] as any,
+      status: ["executing", "completed", "failed"][Math.floor(Math.random() * 3)] as unknown,
       timestamp: new Date().toLocaleTimeString(),
       effectiveness: Math.floor(Math.random() * 40) + 60,
     });

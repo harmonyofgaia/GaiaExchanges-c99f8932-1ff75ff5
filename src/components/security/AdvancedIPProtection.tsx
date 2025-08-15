@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -26,7 +26,7 @@ export function AdvancedIPProtection() {
     quantumShieldActive: true,
   });
 
-  const [ipThreats, setIpThreats] = useState<any[]>([]);
+  const [ipThreats, setIpThreats] = useState<unknown[]>([]);
   const [protectionActive, setProtectionActive] = useState(true);
   const securityInterval = useRef<NodeJS.Timeout>(undefined);
 
@@ -83,7 +83,7 @@ export function AdvancedIPProtection() {
         // 2. ADVANCED WIFI SECURITY MONITORING
         const monitorWiFiSecurity = () => {
           // Check connection quality and security
-          const connection = (navigator as any).connection;
+          const connection = (navigator as unknown).connection;
           if (connection) {
             const networkType = connection.effectiveType;
             const downlink = connection.downlink;

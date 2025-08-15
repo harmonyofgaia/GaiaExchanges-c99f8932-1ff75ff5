@@ -1,5 +1,5 @@
 // Global Background Services Hook - Invisible Systems Initialization
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useSecureAdmin } from "./useSecureAdmin";
 import { invisibleSecurity } from "@/services/invisibleSecurity";
 import { ecoIntegration } from "@/services/ecoIntegration";
@@ -38,16 +38,16 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
     return () => {
       console.log("🛑 GAIA: Background services cleanup");
     };
-  }, []);
+  }, [startContinuousGitHubMonitoring, startSystemEvolutionMonitoring]);
 
   useEffect(() => {
     if (isAdmin) {
       console.log("👑 GAIA: Admin detected - Activating enhanced monitoring");
       activateAdminServices();
     }
-  }, [isAdmin]);
+  }, [isAdmin, activateAdminServices]);
 
-  const startContinuousGitHubMonitoring = () => {
+  const startContinuousGitHubMonitoring = useCallback(() => {
     console.log("📊 GAIA: Starting continuous GitHub repository monitoring...");
 
     // Scan repository every 10 minutes
@@ -75,7 +75,7 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
     ); // Every 10 minutes
 
     return () => clearInterval(scanInterval);
-  };
+  }, [monitorRepositoryAccess]);
 
   const monitorRepositoryAccess = () => {
     // Simulate monitoring for unauthorized access attempts
@@ -94,7 +94,7 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
     }
   };
 
-  const startSystemEvolutionMonitoring = () => {
+  const startSystemEvolutionMonitoring = useCallback(() => {
     console.log("🔄 GAIA: System evolution monitoring activated");
 
     // Monitor system performance and auto-evolve
@@ -118,14 +118,14 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
         console.log(`🌱 Eco Impact: ${systemMetrics.ecoImpact.toFixed(2)}kg CO2 reduced`);
       }
     }, 30000); // Every 30 seconds
-  };
+  }, [isAdmin]);
 
   const calculateEcoImpact = (): number => {
     // Calculate total environmental impact across all systems
     return 247.5 + Math.random() * 10; // Base impact plus random daily increase
   };
 
-  const activateAdminServices = () => {
+  const activateAdminServices = useCallback(() => {
     console.log("🚀 GAIA: Activating admin-exclusive services...");
 
     // Enhanced real-time monitoring for admin
@@ -138,7 +138,7 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
     activateAdvancedThreatResponse();
 
     console.log("✅ GAIA: Admin services fully operational");
-  };
+  }, [startRealTimeAnalytics, startGlobalIntelligence, activateAdvancedThreatResponse]);
 
   const startRealTimeAnalytics = () => {
     console.log("📊 GAIA: Real-time analytics engine started");

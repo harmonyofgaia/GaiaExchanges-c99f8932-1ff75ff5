@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -269,11 +269,11 @@ export function PrivacyWatchdog() {
       const severities = ["low", "medium", "high"];
       const randomEvent: PrivacyEvent = {
         id: `event-${Date.now()}`,
-        type: eventTypes[Math.floor(Math.random() * eventTypes.length)] as any,
+        type: eventTypes[Math.floor(Math.random() * eventTypes.length)] as unknown,
         user_id: `user-${Math.floor(Math.random() * 1000)}`,
         username: `User${Math.floor(Math.random() * 1000)}`,
         description: "Automated privacy event detection",
-        severity: severities[Math.floor(Math.random() * severities.length)] as any,
+        severity: severities[Math.floor(Math.random() * severities.length)] as unknown,
         status: "pending",
         timestamp: new Date(),
         ip_address: `192.168.1.${Math.floor(Math.random() * 255)}`,

@@ -167,7 +167,7 @@ class ThreatIntelligenceService {
         id: `sig-${Date.now()}-${i}`,
         type: threatTypes[Math.floor(Math.random() * threatTypes.length)],
         pattern: this.generateThreatPattern(),
-        severity: ["LOW", "MEDIUM", "HIGH", "CRITICAL"][Math.floor(Math.random() * 4)] as any,
+        severity: ["LOW", "MEDIUM", "HIGH", "CRITICAL"][Math.floor(Math.random() * 4)] as unknown,
         confidence: Math.random() * 0.3 + 0.7,
         lastSeen: Date.now(),
         description: "Global threat intelligence signature",

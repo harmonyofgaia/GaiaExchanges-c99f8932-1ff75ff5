@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -306,7 +306,7 @@ export default function DAOGovernance() {
                   onChange={(e) =>
                     setNewProposal((prev) => ({
                       ...prev,
-                      type: e.target.value as any,
+                      type: e.target.value as unknown,
                     }))
                   }
                 >

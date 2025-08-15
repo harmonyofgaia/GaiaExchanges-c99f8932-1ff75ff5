@@ -173,10 +173,10 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
 
   useEffect(() => {
     if (isDragging) {
-      document.addEventListener("mousemove", handleMouseMove as any);
+      document.addEventListener("mousemove", handleMouseMove as unknown);
       document.addEventListener("mouseup", handleMouseUp);
       return () => {
-        document.removeEventListener("mousemove", handleMouseMove as any);
+        document.removeEventListener("mousemove", handleMouseMove as unknown);
         document.removeEventListener("mouseup", handleMouseUp);
       };
     }

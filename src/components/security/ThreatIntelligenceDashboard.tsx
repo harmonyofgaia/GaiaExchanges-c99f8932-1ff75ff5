@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ export function ThreatIntelligenceDashboard() {
     blockedIPs: 0,
   });
 
-  const [threatPredictions, setThreatPredictions] = useState<any[]>([]);
+  const [threatPredictions, setThreatPredictions] = useState<unknown[]>([]);
   const [isInitializing, setIsInitializing] = useState(false);
   const [monitoringStats, setMonitoringStats] = useState({
     threatsDetected: 0,

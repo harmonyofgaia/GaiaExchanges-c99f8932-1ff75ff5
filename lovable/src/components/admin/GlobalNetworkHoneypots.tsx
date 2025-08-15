@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Globe, Bug, Shield, MapPin } from "lucide-react";
@@ -45,7 +45,7 @@ export function GlobalNetworkHoneypots() {
       ][Math.floor(Math.random() * 8)],
       sourceIP: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
       timestamp: new Date().toLocaleTimeString(),
-      severity: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as any,
+      severity: ["low", "medium", "high", "critical"][Math.floor(Math.random() * 4)] as unknown,
     });
 
     const interval = setInterval(() => {

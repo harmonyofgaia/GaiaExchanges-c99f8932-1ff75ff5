@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -113,7 +113,7 @@ export function GlobalTechIntelligence() {
           id: `tech-${Date.now()}-${i}`,
           technology: emergingTechnologies[Math.floor(Math.random() * emergingTechnologies.length)],
           category: techCategories[Math.floor(Math.random() * techCategories.length)],
-          priority: ["critical", "high", "medium", "low"][Math.floor(Math.random() * 4)] as any,
+          priority: ["critical", "high", "medium", "low"][Math.floor(Math.random() * 4)] as unknown,
           description: "Cutting-edge technology detected - Implementation analysis complete",
           implementationPlan: "Strategic integration with our existing quantum systems",
           competitorUsage: Math.floor(Math.random() * 30), // 0-30% competitor usage

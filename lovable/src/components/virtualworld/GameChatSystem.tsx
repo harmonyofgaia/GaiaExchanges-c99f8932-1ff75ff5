@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -246,7 +246,7 @@ export function GameChatSystem({ activeUsers }: GameChatSystemProps) {
           user: randomUser.name,
           message: randomMessage,
           timestamp: new Date(),
-          type: randomType as any,
+          type: randomType as unknown,
           tokensBurned: randomType === "action" ? Math.floor(Math.random() * 100) + 10 : undefined,
           userLevel: randomUser.level,
           userBadge: randomUser.badge,

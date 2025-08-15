@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -45,8 +45,8 @@ export function NotificationSettings() {
     localStorage.setItem("notification_preferences", JSON.stringify(newPreferences));
 
     // Update global notification manager
-    if ((window as any).smartNotifications) {
-      (window as any).smartNotifications.updatePreferences(newPreferences);
+    if ((window as unknown).smartNotifications) {
+      (window as unknown).smartNotifications.updatePreferences(newPreferences);
     }
 
     toast.success("Preferences Updated", {

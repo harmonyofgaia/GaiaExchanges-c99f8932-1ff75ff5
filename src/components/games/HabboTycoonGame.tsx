@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -268,7 +268,7 @@ export function HabboTycoonGame() {
       {/* Game Mode Tabs */}
       <Tabs
         value={gameState}
-        onValueChange={(value) => setGameState(value as any)}
+        onValueChange={(value) => setGameState(value as unknown)}
         className="w-full"
       >
         <TabsList className="grid w-full grid-cols-4">

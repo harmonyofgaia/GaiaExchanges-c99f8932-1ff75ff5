@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -345,7 +345,7 @@ export function GameDevelopmentCloud() {
     const newAsset: GameAsset = {
       id: `custom-world-${Date.now()}`,
       name: customPrompt,
-      type: selectedAssetType as any,
+      type: selectedAssetType as unknown,
       quality: "mythic",
       description: `Custom ${selectedAssetType} designed for First Gaia World with WoW exploration, Rage combat, and Final Fantasy aesthetics`,
       cloudUrl: `/custom-worlds/${Date.now()}.png`,

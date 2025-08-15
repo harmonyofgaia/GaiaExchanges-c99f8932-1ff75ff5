@@ -97,7 +97,7 @@ export function ArtilleryCreatorEngine() {
       const newWeapon: CreatedWeapon = {
         id: `weapon_${Date.now()}`,
         name: currentWeapon.name!,
-        type: currentWeapon.type as any,
+        type: currentWeapon.type as unknown,
         description: currentWeapon.description!,
         power: currentWeapon.power || 50,
         range: currentWeapon.range || 50,
@@ -203,7 +203,7 @@ export function ArtilleryCreatorEngine() {
                         onClick={() =>
                           setCurrentWeapon((prev) => ({
                             ...prev,
-                            type: type.id as any,
+                            type: type.id as unknown,
                           }))
                         }
                         className="h-auto p-3 text-left"
