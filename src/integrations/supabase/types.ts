@@ -5348,6 +5348,14 @@ export type Database = {
         Args: { json_text: string }
         Returns: boolean
       }
+      is_security_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      is_super_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       is_system_admin: {
         Args: { user_id: string }
         Returns: boolean
