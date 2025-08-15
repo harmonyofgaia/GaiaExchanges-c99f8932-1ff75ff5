@@ -32,7 +32,6 @@ export class StateStore<S> {
       // For objects, merge using spread
       this.set({ ...this.state, ...partial } as S);
     } else {
-      // For primitives or unsupported types, do nothing or throw
       // For primitives or unsupported types, throw an error
       throw new Error('StateStore.patch: Cannot patch non-object/non-array state. Patch is only supported for object or array state types.');
     }
