@@ -42,25 +42,34 @@ export function useSecureAdmin() {
     }
 
     try {
-      // Check if user has admin account in database
-      const { data: adminAccount, error } = await supabase
-        .from("admin_users")
-        .select("*")
-        .eq("user_id", user.id)
-        .eq("is_active", true)
-        .maybeSingle();
+      // 🔒 SECURE: Use the new security definer function for validation
+      const { data: isValidAdmin, error } = await supabase
+        .rpc("validate_admin_session_security");
 
-      if (error && error.code !== "PGRST116") {
-        console.error("Error checking admin status:", error);
+      if (error) {
+        console.error("Error validating admin session:", error);
         setIsAdmin(false);
         setAdminSession(null);
-      } else if (adminAccount) {
-        setIsAdmin(true);
-        setAdminSession({
-          id: adminAccount.user_id,
-          timestamp: Date.now(),
-          level: "admin",
-        });
+      } else if (isValidAdmin) {
+        // Additional check to get admin account details
+        const { data: adminAccount } = await supabase
+          .from("admin_users")
+          .select("*")
+          .eq("user_id", user.id)
+          .eq("is_active", true)
+          .maybeSingle();
+
+        if (adminAccount) {
+          setIsAdmin(true);
+          setAdminSession({
+            id: adminAccount.user_id,
+            timestamp: Date.now(),
+            level: "admin",
+          });
+        } else {
+          setIsAdmin(false);
+          setAdminSession(null);
+        }
       } else {
         setIsAdmin(false);
         setAdminSession(null);
@@ -78,14 +87,15 @@ export function useSecureAdmin() {
     if (!user) return false;
 
     try {
-      // Create a secure session token
+      // 🔒 SECURE: Create secure admin session with audit logging
       const sessionToken = `session-${Date.now()}-${Math.random().toString(36).substr(2, 16)}`;
 
-      // Create admin session record
+      // Create admin session record with proper validation
       const { error } = await supabase.from("admin_sessions").insert([
         {
           session_token: sessionToken,
-          ip_address: "127.0.0.1", // Would be real IP in production
+          user_id: user.id,
+          ip_address: "127.0.0.1", // In production this would be the real client IP
           user_agent: navigator.userAgent,
         },
       ]);
@@ -94,6 +104,17 @@ export function useSecureAdmin() {
         console.error("Error creating admin session:", error);
         return false;
       }
+
+      // Log the admin access grant
+      await supabase.rpc('log_admin_action', {
+        action_name: 'admin_access_granted',
+        action_details: {
+          session_token: sessionToken,
+          user_id: user.id,
+          timestamp: new Date().toISOString(),
+          method: 'secure_session_creation'
+        }
+      });
 
       await validateAdminSession();
       return true;
@@ -107,8 +128,18 @@ export function useSecureAdmin() {
     if (!user || !adminSession) return;
 
     try {
-      // Clear admin session data - no need to update database in this simplified version
-      console.log("Admin session revoked");
+      // 🔒 SECURE: Log admin session revocation for audit trail
+      await supabase.rpc('log_admin_action', {
+        action_name: 'admin_access_revoked',
+        action_details: {
+          user_id: user.id,
+          session_id: adminSession.id,
+          timestamp: new Date().toISOString(),
+          method: 'secure_revocation'
+        }
+      });
+
+      console.log("Admin session securely revoked with audit logging");
     } catch (error) {
       console.error("Error revoking admin access:", error);
     }
@@ -121,8 +152,17 @@ export function useSecureAdmin() {
     if (!user || !isAdmin) return;
 
     try {
-      // Session extended - log for now in simplified version
-      console.log("Admin session extended");
+      // 🔒 SECURE: Log session extension with audit trail
+      await supabase.rpc('log_admin_action', {
+        action_name: 'admin_session_extended',
+        action_details: {
+          user_id: user.id,
+          timestamp: new Date().toISOString(),
+          method: 'secure_extension'
+        }
+      });
+
+      console.log("Admin session securely extended with audit logging");
     } catch (error) {
       console.error("Error extending session:", error);
     }

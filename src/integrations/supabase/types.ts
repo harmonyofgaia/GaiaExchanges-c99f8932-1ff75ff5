@@ -4670,6 +4670,10 @@ export type Database = {
           | { p_column_name: string; p_table_name: string }
         Returns: boolean
       }
+      create_initial_admin_user: {
+        Args: { admin_email: string; admin_user_id: string }
+        Returns: undefined
+      }
       create_monitoring_table: {
         Args: Record<PropertyKey, never>
         Returns: undefined
@@ -5144,6 +5148,10 @@ export type Database = {
           user_role: string
         }[]
       }
+      get_current_user_admin_status: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       get_current_user_details: {
         Args: Record<PropertyKey, never>
         Returns: {
@@ -5155,6 +5163,10 @@ export type Database = {
       get_current_user_id: {
         Args: Record<PropertyKey, never>
         Returns: string
+      }
+      get_current_user_is_super_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
       }
       get_filtered_records: {
         Args: {
@@ -5437,6 +5449,10 @@ export type Database = {
       list_vulnerable_schemas: {
         Args: Record<PropertyKey, never>
         Returns: string[]
+      }
+      log_admin_action: {
+        Args: { action_details?: Json; action_name: string }
+        Returns: undefined
       }
       log_audit_event: {
         Args: {
@@ -6003,6 +6019,10 @@ export type Database = {
       }
       validate_admin_session: {
         Args: { client_ip: unknown; token: string } | { session_token: string }
+        Returns: boolean
+      }
+      validate_admin_session_security: {
+        Args: Record<PropertyKey, never>
         Returns: boolean
       }
       validate_json_input: {
