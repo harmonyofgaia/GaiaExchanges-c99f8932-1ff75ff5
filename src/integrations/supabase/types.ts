@@ -4800,6 +4800,10 @@ export type Database = {
         Args: { dry_run?: boolean; max_risk_level?: number }
         Returns: Record<string, unknown>[]
       }
+      can_manage_admin_accounts: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       capture_slow_queries: {
         Args: { min_avg_time_ms?: number; min_calls?: number }
         Returns: undefined
