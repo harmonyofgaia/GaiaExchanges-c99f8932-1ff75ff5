@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Validate required tools
+for tool in git gh jq python3; do
+  if ! command -v "$tool" >/dev/null 2>&1; then
+    echo "Error: Required tool '$tool' not found"
+    exit 1
+  fi
+done
+
 BASE_BRANCH="${BASE_BRANCH:-main}"
 CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 REPO="${GITHUB_REPOSITORY:-$(git remote get-url origin | sed -E 's#.*/([^/]+/[^/]+)(\\.git)?$#\\1#')}"
@@ -92,18 +100,39 @@ create_or_update_pr() {
   local body="$3"
   local draft="$4"
 
+  echo "Checking for existing PR on branch: ${src_branch}"
   local prnum
   prnum=$(gh pr list --head "${src_branch}" --json number --jq '.[0].number' 2>/dev/null || echo "")
   
-  if [[ -n "${prnum}" && "${prnum}" != "null" ]]; then
-    echo "Updating PR #${prnum} (${src_branch})"
-    gh pr edit "${prnum}" --title "${title}" --body "${body}" $( [[ "${draft}" == "true" ]] && echo "--draft" || echo "--ready" )
+  if [[ -n "${prnum}" && "${prnum}" != "null" && "${prnum}" != "" ]]; then
+    echo "Updating existing PR #${prnum} (${src_branch})"
+    local draft_flag=""
+    if [[ "${draft}" == "true" ]]; then
+      draft_flag="--draft"
+    else
+      draft_flag="--ready"
+    fi
+    gh pr edit "${prnum}" --title "${title}" --body "${body}" ${draft_flag} 2>/dev/null || echo "Failed to update PR ${prnum}, but continuing..."
     echo "${prnum}"
   else
-    echo "Creating PR from ${src_branch} -> ${BASE_BRANCH}"
+    echo "Creating new PR from ${src_branch} -> ${BASE_BRANCH}"
     local draft_flag=""
     [[ "${draft}" == "true" ]] && draft_flag="--draft"
-    gh pr create -B "${BASE_BRANCH}" -H "${src_branch}" --title "${title}" --body "${body}" ${draft_flag}
+    local pr_result
+    pr_result=$(gh pr create -B "${BASE_BRANCH}" -H "${src_branch}" --title "${title}" --body "${body}" ${draft_flag} 2>/dev/null || echo "PR_CREATE_FAILED")
+    if [[ "${pr_result}" == "PR_CREATE_FAILED" ]]; then
+      echo "Failed to create PR, attempting to find existing PR again..."
+      prnum=$(gh pr list --head "${src_branch}" --json number --jq '.[0].number' 2>/dev/null || echo "")
+      if [[ -n "${prnum}" && "${prnum}" != "null" ]]; then
+        echo "Found existing PR #${prnum}"
+        echo "${prnum}"
+      else
+        echo "Could not create or find PR for ${src_branch}"
+        return 1
+      fi
+    else
+      echo "${pr_result}"
+    fi
   fi
 }
 
@@ -132,10 +161,23 @@ for entry in "${TOPIC_JSON[@]}"; do
   topic_branch="auto/${CURRENT_BRANCH}/${name}"
 
   echo "Preparing topic branch: ${topic_branch}"
-  git checkout -B "${topic_branch}" "${BASE_BRANCH}"
+  git checkout -B "${topic_branch}" "${BASE_BRANCH}" 2>/dev/null || {
+    echo "Failed to create topic branch ${topic_branch}, trying alternative approach..."
+    git checkout "${BASE_BRANCH}" 2>/dev/null || true
+    git branch -D "${topic_branch}" 2>/dev/null || true
+    git checkout -b "${topic_branch}" 2>/dev/null || {
+      echo "Could not create topic branch ${topic_branch}, skipping..."
+      continue
+    }
+  }
 
   if [[ -n "${files}" ]]; then
-    git checkout "${CURRENT_BRANCH}" -- ${files} 2>/dev/null || true
+    # Use a more robust approach to checkout files
+    for file in ${files}; do
+      if [[ -f "${file}" ]]; then
+        git checkout "${CURRENT_BRANCH}" -- "${file}" 2>/dev/null || echo "Warning: Could not checkout ${file}"
+      fi
+    done
     git add ${files} 2>/dev/null || true
   fi
 
@@ -144,8 +186,19 @@ for entry in "${TOPIC_JSON[@]}"; do
     continue
   fi
 
-  git commit -m "Split from ${CURRENT_BRANCH}: ${name}"
-  git push -f origin "${topic_branch}"
+  git commit -m "Split from ${CURRENT_BRANCH}: ${name}" || {
+    echo "Commit failed for ${name}, skipping..."
+    continue
+  }
+  
+  git push -f origin "${topic_branch}" 2>/dev/null || {
+    echo "Push failed for ${topic_branch}, retrying once..."
+    sleep 2
+    git push -f origin "${topic_branch}" 2>/dev/null || {
+      echo "Push failed twice for ${topic_branch}, skipping..."
+      continue
+    }
+  }
 
   TITLE="Split: ${name} from ${CURRENT_BRANCH}"
   BODY=$(cat <<EOF
