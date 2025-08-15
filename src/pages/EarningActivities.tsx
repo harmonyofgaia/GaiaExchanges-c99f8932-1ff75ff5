@@ -213,20 +213,6 @@ import {
   Lightbulb,
 } from "lucide-react";
 
-// Import all earning components
-// import { GaiaBikeEarning } from "@/components/earning/GaiaBikeEarning";
-// import { EnhancedBadgeSystem } from "@/components/earning/EnhancedBadgeSystem";
-// import { PhotoVerificationSystem } from "@/components/earning/PhotoVerificationSystem";
-// import { LocationBasedMissions } from "@/components/community/LocationBasedMissions";
-// import { CommunityProjectVoting } from "@/components/community/CommunityProjectVoting";
-// import { TeamChallenges } from "@/components/earning/TeamChallenges";
-// import { TokenStakingSystem } from "@/components/earning/TokenStakingSystem";
-// import { AdvancedTokenMechanics } from "@/components/earning/AdvancedTokenMechanics";
-// import { CommunityGovernance } from "@/components/community/CommunityGovernance";
-// import { InteractiveFoodMap } from "@/components/community/InteractiveFoodMap";
-// import { EcosystemIntegration } from "@/components/earning/EcosystemIntegration";
-// import { MentorshipProgram } from "@/components/earning/MentorshipProgram";
-
 export default function EarningActivities() {
   // State for search query
   const [searchQuery, setSearchQuery] = useState("");
@@ -700,198 +686,268 @@ export default function EarningActivities() {
               categories={earningCategories}
             />
 
-            {/* Piano Bar Featured Modules */}
+            {/* Real Piano Interface */}
             <div className="mt-12 space-y-8">
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-green-400 mb-3">
-                  🏆 Featured Systems & Programs
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-3">
+                  🎹 GAiA Activity Piano
                 </h3>
                 <p className="text-lg text-muted-foreground">
-                  Hover over each module to see detailed view
+                  Touch a piano key to preview, click to enter the full experience
                 </p>
               </div>
               
-              {/* Piano Bar Container */}
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-black/40 via-gray-900/30 to-black/40 p-8 border border-cyan-500/20">
-                
-                {/* Achievement Systems Piano Bar */}
-                <div className="mb-12">
-                  <h4 className="text-xl font-bold text-yellow-400 text-center mb-6">🎯 Achievement Systems</h4>
-                  <div className="flex gap-2 justify-center overflow-x-auto pb-4">
+              {/* Piano Container */}
+              <div className="relative mx-auto max-w-6xl">
+                <div className="bg-gradient-to-b from-amber-900/20 to-amber-950/40 rounded-2xl p-8 border-4 border-amber-700/30 shadow-2xl">
+                  
+                  {/* Piano Keys Container */}
+                  <div className="relative h-64 bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg shadow-inner border-2 border-gray-700 overflow-hidden">
                     
-                    {/* Enhanced Badge System Piano Key */}
-                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-yellow-500/10 to-yellow-900/20 rounded-lg border border-yellow-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
-                      <div className="relative p-4 h-full flex flex-col justify-between">
-                        <div className="text-center">
-                          <Award className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
-                          <h5 className="font-bold text-yellow-400 text-sm">Enhanced Badge System</h5>
+                    {/* White Keys */}
+                    <div className="absolute bottom-0 left-0 right-0 flex h-full">
+                      
+                      {/* Enhanced Badge System - C Key */}
+                      <div className="group relative flex-1 h-full border-r-2 border-gray-600 cursor-pointer">
+                        <div className="h-full bg-gradient-to-b from-white to-gray-100 hover:from-yellow-200 hover:to-yellow-100 transition-all duration-300 rounded-b-lg shadow-lg hover:shadow-xl transform hover:scale-105 flex flex-col items-center justify-end p-4">
+                          <Award className="h-8 w-8 text-yellow-600 mb-2 group-hover:animate-bounce" />
+                          <span className="text-xs font-bold text-gray-800 text-center">Badge System</span>
                         </div>
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-yellow-500/30">
-                            <EnhancedBadgeSystem />
+                        
+                        {/* Preview Popup */}
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100 z-50">
+                          <div className="bg-black/95 backdrop-blur-lg rounded-2xl border border-yellow-500/50 p-6 w-80 shadow-2xl">
+                            <div className="text-center mb-4">
+                              <Award className="h-12 w-12 text-yellow-400 mx-auto mb-2" />
+                              <h4 className="text-xl font-bold text-yellow-400">Enhanced Badge System</h4>
+                              <p className="text-sm text-gray-300">Achievement unlocks & progress tracking</p>
+                            </div>
+                            <div className="h-32 overflow-hidden rounded-lg border border-yellow-500/30">
+                              <Suspense fallback={<div className="animate-pulse bg-yellow-500/20 h-full" />}>
+                                <EnhancedBadgeSystem />
+                              </Suspense>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Photo Verification - D Key */}
+                      <div className="group relative flex-1 h-full border-r-2 border-gray-600 cursor-pointer">
+                        <div className="h-full bg-gradient-to-b from-white to-gray-100 hover:from-orange-200 hover:to-orange-100 transition-all duration-300 rounded-b-lg shadow-lg hover:shadow-xl transform hover:scale-105 flex flex-col items-center justify-end p-4">
+                          <Camera className="h-8 w-8 text-orange-600 mb-2 group-hover:animate-bounce" />
+                          <span className="text-xs font-bold text-gray-800 text-center">Photo Verify</span>
+                        </div>
+                        
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100 z-50">
+                          <div className="bg-black/95 backdrop-blur-lg rounded-2xl border border-orange-500/50 p-6 w-80 shadow-2xl">
+                            <div className="text-center mb-4">
+                              <Camera className="h-12 w-12 text-orange-400 mx-auto mb-2" />
+                              <h4 className="text-xl font-bold text-orange-400">Photo Verification System</h4>
+                              <p className="text-sm text-gray-300">Verify environmental activities with photos</p>
+                            </div>
+                            <div className="h-32 overflow-hidden rounded-lg border border-orange-500/30">
+                              <Suspense fallback={<div className="animate-pulse bg-orange-500/20 h-full" />}>
+                                <PhotoVerificationSystem />
+                              </Suspense>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Mentorship Program - E Key */}
+                      <div className="group relative flex-1 h-full border-r-2 border-gray-600 cursor-pointer">
+                        <div className="h-full bg-gradient-to-b from-white to-gray-100 hover:from-purple-200 hover:to-purple-100 transition-all duration-300 rounded-b-lg shadow-lg hover:shadow-xl transform hover:scale-105 flex flex-col items-center justify-end p-4">
+                          <GraduationCap className="h-8 w-8 text-purple-600 mb-2 group-hover:animate-bounce" />
+                          <span className="text-xs font-bold text-gray-800 text-center">Mentorship</span>
+                        </div>
+                        
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100 z-50">
+                          <div className="bg-black/95 backdrop-blur-lg rounded-2xl border border-purple-500/50 p-6 w-80 shadow-2xl">
+                            <div className="text-center mb-4">
+                              <GraduationCap className="h-12 w-12 text-purple-400 mx-auto mb-2" />
+                              <h4 className="text-xl font-bold text-purple-400">GAIA Mentorship Program</h4>
+                              <p className="text-sm text-gray-300">Learn from eco experts & share knowledge</p>
+                            </div>
+                            <div className="h-32 overflow-hidden rounded-lg border border-purple-500/30">
+                              <Suspense fallback={<div className="animate-pulse bg-purple-500/20 h-full" />}>
+                                <MentorshipProgram />
+                              </Suspense>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Ecosystem Integration - F Key */}
+                      <div className="group relative flex-1 h-full border-r-2 border-gray-600 cursor-pointer">
+                        <div className="h-full bg-gradient-to-b from-white to-gray-100 hover:from-blue-200 hover:to-blue-100 transition-all duration-300 rounded-b-lg shadow-lg hover:shadow-xl transform hover:scale-105 flex flex-col items-center justify-end p-4">
+                          <Globe className="h-8 w-8 text-blue-600 mb-2 group-hover:animate-bounce" />
+                          <span className="text-xs font-bold text-gray-800 text-center">Ecosystem</span>
+                        </div>
+                        
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100 z-50">
+                          <div className="bg-black/95 backdrop-blur-lg rounded-2xl border border-blue-500/50 p-6 w-80 shadow-2xl">
+                            <div className="text-center mb-4">
+                              <Globe className="h-12 w-12 text-blue-400 mx-auto mb-2" />
+                              <h4 className="text-xl font-bold text-blue-400">Ecosystem Integration</h4>
+                              <p className="text-sm text-gray-300">Connect with external platforms & services</p>
+                            </div>
+                            <div className="h-32 overflow-hidden rounded-lg border border-blue-500/30">
+                              <Suspense fallback={<div className="animate-pulse bg-blue-500/20 h-full" />}>
+                                <EcosystemIntegration />
+                              </Suspense>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Community Governance - G Key */}
+                      <div className="group relative flex-1 h-full border-r-2 border-gray-600 cursor-pointer">
+                        <div className="h-full bg-gradient-to-b from-white to-gray-100 hover:from-cyan-200 hover:to-cyan-100 transition-all duration-300 rounded-b-lg shadow-lg hover:shadow-xl transform hover:scale-105 flex flex-col items-center justify-end p-4">
+                          <Crown className="h-8 w-8 text-cyan-600 mb-2 group-hover:animate-bounce" />
+                          <span className="text-xs font-bold text-gray-800 text-center">Governance</span>
+                        </div>
+                        
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100 z-50">
+                          <div className="bg-black/95 backdrop-blur-lg rounded-2xl border border-cyan-500/50 p-6 w-80 shadow-2xl">
+                            <div className="text-center mb-4">
+                              <Crown className="h-12 w-12 text-cyan-400 mx-auto mb-2" />
+                              <h4 className="text-xl font-bold text-cyan-400">Community Governance</h4>
+                              <p className="text-sm text-gray-300">Vote on proposals & shape the future</p>
+                            </div>
+                            <div className="h-32 overflow-hidden rounded-lg border border-cyan-500/30">
+                              <Suspense fallback={<div className="animate-pulse bg-cyan-500/20 h-full" />}>
+                                <CommunityGovernance />
+                              </Suspense>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Community Rewards - A Key */}
+                      <div className="group relative flex-1 h-full border-r-2 border-gray-600 cursor-pointer">
+                        <div className="h-full bg-gradient-to-b from-white to-gray-100 hover:from-green-200 hover:to-green-100 transition-all duration-300 rounded-b-lg shadow-lg hover:shadow-xl transform hover:scale-105 flex flex-col items-center justify-end p-4">
+                          <Gift className="h-8 w-8 text-green-600 mb-2 group-hover:animate-bounce" />
+                          <span className="text-xs font-bold text-gray-800 text-center">Rewards</span>
+                        </div>
+                        
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100 z-50">
+                          <div className="bg-black/95 backdrop-blur-lg rounded-2xl border border-green-500/50 p-6 w-80 shadow-2xl">
+                            <div className="text-center mb-4">
+                              <Gift className="h-12 w-12 text-green-400 mx-auto mb-2" />
+                              <h4 className="text-xl font-bold text-green-400">Community Rewards</h4>
+                              <p className="text-sm text-gray-300">Tier-based rewards & special benefits</p>
+                            </div>
+                            <div className="h-32 overflow-hidden rounded-lg border border-green-500/30">
+                              <Suspense fallback={<div className="animate-pulse bg-green-500/20 h-full" />}>
+                                <CommunityRewardsProgram />
+                              </Suspense>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* GAiA Bike - B Key */}
+                      <div className="group relative flex-1 h-full cursor-pointer">
+                        <div className="h-full bg-gradient-to-b from-white to-gray-100 hover:from-emerald-200 hover:to-emerald-100 transition-all duration-300 rounded-b-lg shadow-lg hover:shadow-xl transform hover:scale-105 flex flex-col items-center justify-end p-4">
+                          <Bike className="h-8 w-8 text-emerald-600 mb-2 group-hover:animate-bounce" />
+                          <span className="text-xs font-bold text-gray-800 text-center">GAiA Bike</span>
+                        </div>
+                        
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100 z-50">
+                          <div className="bg-black/95 backdrop-blur-lg rounded-2xl border border-emerald-500/50 p-6 w-80 shadow-2xl">
+                            <div className="text-center mb-4">
+                              <Bike className="h-12 w-12 text-emerald-400 mx-auto mb-2" />
+                              <h4 className="text-xl font-bold text-emerald-400">GAiA Bike System</h4>
+                              <p className="text-sm text-gray-300">Earn tokens while cycling sustainably</p>
+                            </div>
+                            <div className="h-32 overflow-hidden rounded-lg border border-emerald-500/30">
+                              <Suspense fallback={<div className="animate-pulse bg-emerald-500/20 h-full" />}>
+                                <GaiaBikeEarning />
+                              </Suspense>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Photo Verification Piano Key */}
-                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-orange-500/10 to-orange-900/20 rounded-lg border border-orange-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
-                      <div className="relative p-4 h-full flex flex-col justify-between">
-                        <div className="text-center">
-                          <Camera className="h-8 w-8 text-orange-400 mx-auto mb-2" />
-                          <h5 className="font-bold text-orange-400 text-sm">Photo Verification</h5>
+                    {/* Black Keys */}
+                    <div className="absolute bottom-0 left-0 right-0 flex h-2/3">
+                      
+                      {/* Food Map - C# Key */}
+                      <div className="group relative w-8 ml-12 cursor-pointer">
+                        <div className="h-full bg-gradient-to-b from-gray-900 to-black hover:from-pink-800 hover:to-pink-900 transition-all duration-300 rounded-b-lg shadow-2xl hover:shadow-xl transform hover:scale-105 flex flex-col items-center justify-end p-2">
+                          <MapPin className="h-6 w-6 text-pink-400 mb-1 group-hover:animate-bounce" />
+                          <span className="text-xs font-bold text-pink-200 text-center transform -rotate-90 whitespace-nowrap">Food Map</span>
                         </div>
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-orange-500/30">
-                            <PhotoVerificationSystem />
+                        
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100 z-50">
+                          <div className="bg-black/95 backdrop-blur-lg rounded-2xl border border-pink-500/50 p-6 w-80 shadow-2xl">
+                            <div className="text-center mb-4">
+                              <MapPin className="h-12 w-12 text-pink-400 mx-auto mb-2" />
+                              <h4 className="text-xl font-bold text-pink-400">Food Growers Map</h4>
+                              <p className="text-sm text-gray-300">Discover local food producers & markets</p>
+                            </div>
+                            <div className="h-32 overflow-hidden rounded-lg border border-pink-500/30">
+                              <Suspense fallback={<div className="animate-pulse bg-pink-500/20 h-full" />}>
+                                <InteractiveFoodMap />
+                              </Suspense>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Mentorship Program Piano Key */}
-                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-purple-500/10 to-purple-900/20 rounded-lg border border-purple-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
-                      <div className="relative p-4 h-full flex flex-col justify-between">
-                        <div className="text-center">
-                          <GraduationCap className="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                          <h5 className="font-bold text-purple-400 text-sm">Mentorship Program</h5>
+                      {/* Home Food Tracker - D# Key */}
+                      <div className="group relative w-8 ml-16 cursor-pointer">
+                        <div className="h-full bg-gradient-to-b from-gray-900 to-black hover:from-amber-800 hover:to-amber-900 transition-all duration-300 rounded-b-lg shadow-2xl hover:shadow-xl transform hover:scale-105 flex flex-col items-center justify-end p-2">
+                          <Carrot className="h-6 w-6 text-amber-400 mb-1 group-hover:animate-bounce" />
+                          <span className="text-xs font-bold text-amber-200 text-center transform -rotate-90 whitespace-nowrap">Home Food</span>
                         </div>
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-purple-500/30">
-                            <MentorshipProgram />
+                        
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100 z-50">
+                          <div className="bg-black/95 backdrop-blur-lg rounded-2xl border border-amber-500/50 p-6 w-80 shadow-2xl">
+                            <div className="text-center mb-4">
+                              <Carrot className="h-12 w-12 text-amber-400 mx-auto mb-2" />
+                              <h4 className="text-xl font-bold text-amber-400">Home Food Tracker</h4>
+                              <p className="text-sm text-gray-300">Track your home-grown food production</p>
+                            </div>
+                            <div className="h-32 overflow-hidden rounded-lg border border-amber-500/30">
+                              <Suspense fallback={<div className="animate-pulse bg-amber-500/20 h-full" />}>
+                                <EnhancedHomeGrownFoodTracker />
+                              </Suspense>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Eco Bike Map - F# Key */}
+                      <div className="group relative w-8 ml-16 cursor-pointer">
+                        <div className="h-full bg-gradient-to-b from-gray-900 to-black hover:from-teal-800 hover:to-teal-900 transition-all duration-300 rounded-b-lg shadow-2xl hover:shadow-xl transform hover:scale-105 flex flex-col items-center justify-end p-2">
+                          <MapPin className="h-6 w-6 text-teal-400 mb-1 group-hover:animate-bounce" />
+                          <span className="text-xs font-bold text-teal-200 text-center transform -rotate-90 whitespace-nowrap">Bike Routes</span>
+                        </div>
+                        
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100 z-50">
+                          <div className="bg-black/95 backdrop-blur-lg rounded-2xl border border-teal-500/50 p-6 w-80 shadow-2xl">
+                            <div className="text-center mb-4">
+                              <MapPin className="h-12 w-12 text-teal-400 mx-auto mb-2" />
+                              <h4 className="text-xl font-bold text-teal-400">Eco Bike Routes</h4>
+                              <p className="text-sm text-gray-300">Discover sustainable cycling paths</p>
+                            </div>
+                            <div className="h-32 overflow-hidden rounded-lg border border-teal-500/30">
+                              <Suspense fallback={<div className="animate-pulse bg-teal-500/20 h-full" />}>
+                                <InteractiveEcoBikeMap />
+                              </Suspense>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                
-                {/* Community Features Piano Bar */}
-                <div className="mb-12">
-                  <h4 className="text-xl font-bold text-blue-400 text-center mb-6">🌐 Community Features</h4>
-                  <div className="flex gap-2 justify-center overflow-x-auto pb-4">
-                    
-                    {/* Ecosystem Integration Piano Key */}
-                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-blue-500/10 to-blue-900/20 rounded-lg border border-blue-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
-                      <div className="relative p-4 h-full flex flex-col justify-between">
-                        <div className="text-center">
-                          <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                          <h5 className="font-bold text-blue-400 text-sm">Ecosystem Integration</h5>
-                        </div>
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-blue-500/30">
-                            <EcosystemIntegration />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Community Governance Piano Key */}
-                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-cyan-500/10 to-cyan-900/20 rounded-lg border border-cyan-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
-                      <div className="relative p-4 h-full flex flex-col justify-between">
-                        <div className="text-center">
-                          <Crown className="h-8 w-8 text-cyan-400 mx-auto mb-2" />
-                          <h5 className="font-bold text-cyan-400 text-sm">Community Governance</h5>
-                        </div>
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-cyan-500/30">
-                            <CommunityGovernance />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Community Rewards Piano Key */}
-                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-green-500/10 to-green-900/20 rounded-lg border border-green-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
-                      <div className="relative p-4 h-full flex flex-col justify-between">
-                        <div className="text-center">
-                          <Gift className="h-8 w-8 text-green-400 mx-auto mb-2" />
-                          <h5 className="font-bold text-green-400 text-sm">Community Rewards</h5>
-                        </div>
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-green-500/30">
-                            <CommunityRewardsProgram />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Live Activity Trackers Piano Bar */}
-                <div>
-                  <h4 className="text-xl font-bold text-red-400 text-center mb-6">🔴 Live Activity Trackers</h4>
-                  <div className="flex gap-2 justify-center overflow-x-auto pb-4">
-                    
-                    {/* GAiA Bike Piano Key */}
-                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-emerald-500/10 to-emerald-900/20 rounded-lg border border-emerald-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
-                      <div className="relative p-4 h-full flex flex-col justify-between">
-                        <div className="text-center">
-                          <Bike className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
-                          <h5 className="font-bold text-emerald-400 text-sm">GAiA Bike System</h5>
-                        </div>
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-emerald-500/30">
-                            <GaiaBikeEarning />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Food Map Piano Key */}
-                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-pink-500/10 to-pink-900/20 rounded-lg border border-pink-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
-                      <div className="relative p-4 h-full flex flex-col justify-between">
-                        <div className="text-center">
-                          <MapPin className="h-8 w-8 text-pink-400 mx-auto mb-2" />
-                          <h5 className="font-bold text-pink-400 text-sm">Food Growers Map</h5>
-                        </div>
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-pink-500/30">
-                            <InteractiveFoodMap />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Home Food Tracker Piano Key */}
-                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-amber-500/10 to-amber-900/20 rounded-lg border border-amber-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
-                      <div className="relative p-4 h-full flex flex-col justify-between">
-                        <div className="text-center">
-                          <Carrot className="h-8 w-8 text-amber-400 mx-auto mb-2" />
-                          <h5 className="font-bold text-amber-400 text-sm">Home Food Tracker</h5>
-                        </div>
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-amber-500/30">
-                            <EnhancedHomeGrownFoodTracker />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Eco Bike Map Piano Key */}
-                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-teal-500/10 to-teal-900/20 rounded-lg border border-teal-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
-                      <div className="relative p-4 h-full flex flex-col justify-between">
-                        <div className="text-center">
-                          <MapPin className="h-8 w-8 text-teal-400 mx-auto mb-2" />
-                          <h5 className="font-bold text-teal-400 text-sm">Eco Bike Routes</h5>
-                        </div>
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-teal-500/30">
-                            <InteractiveEcoBikeMap />
-                          </div>
-                        </div>
-                      </div>
+                  {/* Piano Brand/Logo */}
+                  <div className="text-center mt-4">
+                    <div className="inline-block bg-gradient-to-r from-amber-700 to-amber-600 text-amber-100 px-6 py-2 rounded-full font-bold text-lg shadow-lg">
+                      🎹 GAiA Piano • Environmental Symphony
                     </div>
                   </div>
                 </div>
@@ -1023,7 +1079,15 @@ export default function EarningActivities() {
 
                 <div className="space-y-8">
                   {category.components.map((comp, index) => (
-                    <comp.component key={index} />
+                    <Suspense key={index} fallback={
+                      <Card className="border-gray-500/30">
+                        <CardContent className="p-8 text-center">
+                          <div className="animate-pulse">Loading component...</div>
+                        </CardContent>
+                      </Card>
+                    }>
+                      <comp.component />
+                    </Suspense>
                   ))}
                 </div>
               </div>
@@ -1042,9 +1106,15 @@ export default function EarningActivities() {
             </div>
 
             <div className="space-y-8">
-              <EnergyConsumptionTracker />
-              <AdvancedCommunityFeatures />
-              <PartyEventEarning />
+              <Suspense fallback={<div className="animate-pulse bg-gray-500/20 h-32 rounded" />}>
+                <EnergyConsumptionTracker />
+              </Suspense>
+              <Suspense fallback={<div className="animate-pulse bg-gray-500/20 h-32 rounded" />}>
+                <AdvancedCommunityFeatures />
+              </Suspense>
+              <Suspense fallback={<div className="animate-pulse bg-gray-500/20 h-32 rounded" />}>
+                <PartyEventEarning />
+              </Suspense>
             </div>
           </TabsContent>
 
@@ -1060,8 +1130,12 @@ export default function EarningActivities() {
             </div>
 
             <div className="space-y-8">
-              <AdvancedTokenMechanics />
-              <TokenStakingSystem />
+              <Suspense fallback={<div className="animate-pulse bg-gray-500/20 h-32 rounded" />}>
+                <AdvancedTokenMechanics />
+              </Suspense>
+              <Suspense fallback={<div className="animate-pulse bg-gray-500/20 h-32 rounded" />}>
+                <TokenStakingSystem />
+              </Suspense>
             </div>
           </TabsContent>
         </Tabs>
