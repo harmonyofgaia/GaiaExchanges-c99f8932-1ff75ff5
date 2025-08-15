@@ -41,7 +41,7 @@ export default tseslint.config(
       "@typescript-eslint/no-explicit-any": "off", // Disabled temporarily
       "@typescript-eslint/no-require-imports": "warn",
       "@typescript-eslint/no-empty-object-type": "warn",
-      "react-hooks/exhaustive-deps": "off", // Disabled temporarily
+      "react-hooks/exhaustive-deps": "warn",
       "no-case-declarations": "warn",
       // Reduce some warnings to be less strict
       "prefer-const": "warn",
