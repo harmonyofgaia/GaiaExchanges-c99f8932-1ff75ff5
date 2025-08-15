@@ -2078,20 +2078,31 @@ export type Database = {
           status: string | null
           timestamp: string | null
           user: string | null
+          user_id: string
         }
         Insert: {
           id?: never
           status?: string | null
           timestamp?: string | null
           user?: string | null
+          user_id: string
         }
         Update: {
           id?: never
           status?: string | null
           timestamp?: string | null
           user?: string | null
+          user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "orders_table_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "auth_comprehensive_debug_view"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       planet_cleaning_rewards: {
         Row: {
