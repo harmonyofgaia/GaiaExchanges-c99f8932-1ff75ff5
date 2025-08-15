@@ -311,7 +311,7 @@ describe("createTicker", () => {
     it("should handle performance.now availability", () => {
       // Mock performance.now being unavailable
       const originalPerformance = globalThis.performance;
-      globalThis.performance = undefined as any;
+      delete (globalThis as any).performance;
       
       const onTick = vi.fn();
       const ticker = createTicker(60, onTick);
