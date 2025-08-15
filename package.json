@@ -3,6 +3,16 @@
   "name": "lovable-app",
   "private": true,
   "version": "1.0.0",
+  "packageManager": "npm@10.8.2",
+  "workspaces": [
+    ".",
+    "lovable",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "pre-deploy": "echo \"No pre-deploy steps required\"",
     "dev": "vite",
@@ -12,6 +22,7 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .js,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.ts,.tsx --fix",
+    "typecheck": "npx tsc --noEmit",
     "lighthouse": "lighthouse http://localhost:5173 --output html --output-path ./lighthouse-report.html --chrome-flags=\"--headless\"",
     "prepare": "husky install",
     "test": "vitest run",
