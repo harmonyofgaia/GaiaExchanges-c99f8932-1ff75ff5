@@ -1,3 +1,4 @@
+---
 name: Auto PR and Smart Split
 "on":
   push:
@@ -17,7 +18,9 @@ env:
   GITHUB_REF_NAME: ${{ github.ref_name }}
 jobs:
   auto-pr:
-    if: startsWith(github.ref, 'refs/heads/') && github.ref_name != 'main'
+    if: >-
+      startsWith(github.ref, 'refs/heads/') &&
+      github.ref_name != 'main'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -28,9 +31,11 @@ jobs:
         run: |
           git config --global user.name "auto-pr-bot"
           git config --global user.email "actions@users.noreply.github.com"
-          git fetch origin ${BASE_BRANCH}:${BASE_BRANCH} --prune || git fetch origin ${BASE_BRANCH} || true
+          git fetch origin ${BASE_BRANCH}:${BASE_BRANCH} --prune || \
+            git fetch origin ${BASE_BRANCH} || true
           git checkout ${BASE_BRANCH} >/dev/null 2>&1 || true
-          git checkout "${GITHUB_REF_NAME}" || git checkout "${GITHUB_SHA}" || true
+          git checkout "${GITHUB_REF_NAME}" || \
+            git checkout "${GITHUB_SHA}" || true
       - name: Install PyYAML
         run: |
           python3 -m pip install --user --upgrade pip
@@ -39,8 +44,13 @@ jobs:
         run: |
           if ! which gh >/dev/null 2>&1; then
             echo "GitHub CLI not found, installing..."
-            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+            curl -fsSL \
+              https://cli.github.com/packages/githubcli-archive-keyring.gpg | \
+              sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+            echo "deb [arch=$(dpkg --print-architecture) \
+              signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] \
+              https://cli.github.com/packages stable main" | \
+              sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
             sudo apt update && sudo apt install gh -y
           fi
           gh --version

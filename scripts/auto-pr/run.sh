@@ -17,14 +17,73 @@ TOPIC_CFG=".github/pr-bot/topics.yml"
 
 echo "Auto-PR for ${REPO} on branch ${CURRENT_BRANCH} (actor: ${ACTOR}) base=${BASE_BRANCH}"
 
+# Ensure topic configuration directory exists
+if [[ ! -d ".github/pr-bot" ]]; then
+  echo "Warning: .github/pr-bot directory does not exist, creating it..."
+  mkdir -p ".github/pr-bot"
+fi
+
+# Ensure topic configuration file exists with minimal content if missing
+if [[ ! -f "${TOPIC_CFG}" ]]; then
+  echo "Warning: ${TOPIC_CFG} not found, creating minimal configuration..."
+  cat > "${TOPIC_CFG}" <<'EOF'
+shared:
+  - ".github/**"
+  - ".gitignore"
+  - "package-lock.json"
+  - "**/package-lock.json"
+  - "Dockerfile*"
+topics:
+  - name: frontend
+    globs:
+      - "**/*.tsx"
+      - "**/*.ts"
+      - "**/*.jsx"
+      - "**/*.js"
+      - "**/*.vue"
+  - name: backend
+    globs:
+      - "**/*.py"
+      - "**/*.go"
+      - "**/*.java"
+  - name: docs
+    globs:
+      - "**/*.md"
+      - "docs/**"
+EOF
+fi
+
 if [[ "${CURRENT_BRANCH}" == "${BASE_BRANCH}" ]]; then
   echo "On base branch; nothing to do."
   exit 0
 fi
 
 # Ensure we have the base branch locally and synchronize it with remote
-git fetch origin "${BASE_BRANCH}" && git checkout "${BASE_BRANCH}" && git reset --hard "origin/${BASE_BRANCH}"
-git checkout "${CURRENT_BRANCH}"
+echo "Fetching and synchronizing base branch: ${BASE_BRANCH}"
+if ! git fetch origin "${BASE_BRANCH}"; then
+  echo "Warning: Failed to fetch ${BASE_BRANCH}, trying to continue..."
+fi
+
+if git show-ref --verify --quiet "refs/heads/${BASE_BRANCH}"; then
+  git checkout "${BASE_BRANCH}" 2>/dev/null || {
+    echo "Warning: Could not checkout ${BASE_BRANCH}, trying to create from origin..."
+    git checkout -b "${BASE_BRANCH}" "origin/${BASE_BRANCH}" 2>/dev/null || true
+  }
+  git reset --hard "origin/${BASE_BRANCH}" 2>/dev/null || {
+    echo "Warning: Could not reset ${BASE_BRANCH} to origin, continuing..."
+  }
+else
+  echo "Creating local ${BASE_BRANCH} from origin..."
+  git checkout -b "${BASE_BRANCH}" "origin/${BASE_BRANCH}" 2>/dev/null || {
+    echo "Error: Could not create local ${BASE_BRANCH} branch"
+    exit 1
+  }
+fi
+
+git checkout "${CURRENT_BRANCH}" || {
+  echo "Error: Could not return to current branch ${CURRENT_BRANCH}"
+  exit 1
+}
 
 # List changed files vs base
 mapfile -t FILES < <(git diff --name-only "${BASE_BRANCH}...HEAD" | grep -v '^$' || true)
@@ -175,11 +234,28 @@ for entry in "${TOPIC_JSON[@]}"; do
   if [[ ${#file_array[@]} -gt 0 ]]; then
     # Use a more robust approach to checkout files
     for file in "${file_array[@]}"; do
-      if [[ -f "${file}" ]]; then
-        git checkout "${CURRENT_BRANCH}" -- "${file}" 2>/dev/null || echo "Warning: Could not checkout ${file}"
+      if git show "${CURRENT_BRANCH}:${file}" >/dev/null 2>&1; then
+        git checkout "${CURRENT_BRANCH}" -- "${file}" 2>/dev/null || {
+          echo "Warning: Could not checkout ${file}, trying alternative method..."
+          # Try to extract the file directly
+          if git show "${CURRENT_BRANCH}:${file}" > "${file}" 2>/dev/null; then
+            echo "Successfully extracted ${file} directly"
+          else
+            echo "Warning: Could not extract ${file}, skipping..."
+            continue
+          fi
+        }
+      else
+        echo "Warning: File ${file} does not exist in ${CURRENT_BRANCH}, skipping..."
+        continue
       fi
     done
-    git add "${file_array[@]}" 2>/dev/null || true
+    # Only add files that actually exist
+    for file in "${file_array[@]}"; do
+      if [[ -f "${file}" ]]; then
+        git add "${file}" 2>/dev/null || echo "Warning: Could not add ${file}"
+      fi
+    done
   fi
 
   if git diff --cached --quiet; then
@@ -210,9 +286,18 @@ Reason to split: ${REASON}
 Once child PRs are reviewed, the umbrella PR can be closed or converted to depend on merged children.
 EOF
 )
-  pr_url=$(create_or_update_pr "${topic_branch}" "${TITLE}" "${BODY}" "true")
-  pr_url=$(gh pr view --head "${topic_branch}" --json url --jq .url)
-  CHILD_PRS["${name}"]="${pr_url}"
+  pr_num=$(create_or_update_pr "${topic_branch}" "${TITLE}" "${BODY}" "true")
+  if [[ -n "${pr_num}" && "${pr_num}" != "PR_CREATE_FAILED" ]]; then
+    pr_url=$(gh pr view --head "${topic_branch}" --json url --jq .url 2>/dev/null || echo "")
+    if [[ -n "${pr_url}" ]]; then
+      CHILD_PRS["${name}"]="${pr_url}"
+    else
+      echo "Warning: Could not get URL for PR on ${topic_branch}"
+      CHILD_PRS["${name}"]="PR #${pr_num}"
+    fi
+  else
+    echo "Warning: Failed to create PR for ${topic_branch}"
+  fi
 
 done
 
