@@ -700,42 +700,200 @@ export default function EarningActivities() {
               categories={earningCategories}
             />
 
-            {/* Featured Modules Section */}
+            {/* Piano Bar Featured Modules */}
             <div className="mt-12 space-y-8">
               <div className="text-center">
                 <h3 className="text-2xl font-bold text-green-400 mb-3">
                   🏆 Featured Systems & Programs
                 </h3>
                 <p className="text-lg text-muted-foreground">
-                  Core earning systems and community features
+                  Hover over each module to see detailed view
                 </p>
               </div>
               
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="space-y-6">
-                  <h4 className="text-xl font-bold text-yellow-400 text-center">Achievement Systems</h4>
-                  <EnhancedBadgeSystem />
-                  <PhotoVerificationSystem />
-                  <MentorshipProgram />
-                </div>
+              {/* Piano Bar Container */}
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-black/40 via-gray-900/30 to-black/40 p-8 border border-cyan-500/20">
                 
-                <div className="space-y-6">
-                  <h4 className="text-xl font-bold text-blue-400 text-center">Community Features</h4>
-                  <EcosystemIntegration />
-                  <CommunityGovernance />
-                  <CommunityRewardsProgram />
-                </div>
-              </div>
+                {/* Achievement Systems Piano Bar */}
+                <div className="mb-12">
+                  <h4 className="text-xl font-bold text-yellow-400 text-center mb-6">🎯 Achievement Systems</h4>
+                  <div className="flex gap-2 justify-center overflow-x-auto pb-4">
+                    
+                    {/* Enhanced Badge System Piano Key */}
+                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-yellow-500/10 to-yellow-900/20 rounded-lg border border-yellow-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
+                      <div className="relative p-4 h-full flex flex-col justify-between">
+                        <div className="text-center">
+                          <Award className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
+                          <h5 className="font-bold text-yellow-400 text-sm">Enhanced Badge System</h5>
+                        </div>
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-yellow-500/30">
+                            <EnhancedBadgeSystem />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-              <div className="space-y-6">
-                <h4 className="text-xl font-bold text-green-400 text-center">🔴 Live Activity Trackers</h4>
-                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                  <GaiaBikeEarning />
-                  <InteractiveFoodMap />
+                    {/* Photo Verification Piano Key */}
+                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-orange-500/10 to-orange-900/20 rounded-lg border border-orange-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
+                      <div className="relative p-4 h-full flex flex-col justify-between">
+                        <div className="text-center">
+                          <Camera className="h-8 w-8 text-orange-400 mx-auto mb-2" />
+                          <h5 className="font-bold text-orange-400 text-sm">Photo Verification</h5>
+                        </div>
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-orange-500/30">
+                            <PhotoVerificationSystem />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Mentorship Program Piano Key */}
+                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-purple-500/10 to-purple-900/20 rounded-lg border border-purple-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
+                      <div className="relative p-4 h-full flex flex-col justify-between">
+                        <div className="text-center">
+                          <GraduationCap className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                          <h5 className="font-bold text-purple-400 text-sm">Mentorship Program</h5>
+                        </div>
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-purple-500/30">
+                            <MentorshipProgram />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                  <EnhancedHomeGrownFoodTracker />
-                  <InteractiveEcoBikeMap />
+
+                
+                {/* Community Features Piano Bar */}
+                <div className="mb-12">
+                  <h4 className="text-xl font-bold text-blue-400 text-center mb-6">🌐 Community Features</h4>
+                  <div className="flex gap-2 justify-center overflow-x-auto pb-4">
+                    
+                    {/* Ecosystem Integration Piano Key */}
+                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-blue-500/10 to-blue-900/20 rounded-lg border border-blue-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
+                      <div className="relative p-4 h-full flex flex-col justify-between">
+                        <div className="text-center">
+                          <Globe className="h-8 w-8 text-blue-400 mx-auto mb-2" />
+                          <h5 className="font-bold text-blue-400 text-sm">Ecosystem Integration</h5>
+                        </div>
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-blue-500/30">
+                            <EcosystemIntegration />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Community Governance Piano Key */}
+                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-cyan-500/10 to-cyan-900/20 rounded-lg border border-cyan-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
+                      <div className="relative p-4 h-full flex flex-col justify-between">
+                        <div className="text-center">
+                          <Crown className="h-8 w-8 text-cyan-400 mx-auto mb-2" />
+                          <h5 className="font-bold text-cyan-400 text-sm">Community Governance</h5>
+                        </div>
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-cyan-500/30">
+                            <CommunityGovernance />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Community Rewards Piano Key */}
+                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-green-500/10 to-green-900/20 rounded-lg border border-green-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
+                      <div className="relative p-4 h-full flex flex-col justify-between">
+                        <div className="text-center">
+                          <Gift className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                          <h5 className="font-bold text-green-400 text-sm">Community Rewards</h5>
+                        </div>
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-green-500/30">
+                            <CommunityRewardsProgram />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Live Activity Trackers Piano Bar */}
+                <div>
+                  <h4 className="text-xl font-bold text-red-400 text-center mb-6">🔴 Live Activity Trackers</h4>
+                  <div className="flex gap-2 justify-center overflow-x-auto pb-4">
+                    
+                    {/* GAiA Bike Piano Key */}
+                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-emerald-500/10 to-emerald-900/20 rounded-lg border border-emerald-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
+                      <div className="relative p-4 h-full flex flex-col justify-between">
+                        <div className="text-center">
+                          <Bike className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
+                          <h5 className="font-bold text-emerald-400 text-sm">GAiA Bike System</h5>
+                        </div>
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-emerald-500/30">
+                            <GaiaBikeEarning />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Food Map Piano Key */}
+                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-pink-500/10 to-pink-900/20 rounded-lg border border-pink-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
+                      <div className="relative p-4 h-full flex flex-col justify-between">
+                        <div className="text-center">
+                          <MapPin className="h-8 w-8 text-pink-400 mx-auto mb-2" />
+                          <h5 className="font-bold text-pink-400 text-sm">Food Growers Map</h5>
+                        </div>
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-pink-500/30">
+                            <InteractiveFoodMap />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Home Food Tracker Piano Key */}
+                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-amber-500/10 to-amber-900/20 rounded-lg border border-amber-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
+                      <div className="relative p-4 h-full flex flex-col justify-between">
+                        <div className="text-center">
+                          <Carrot className="h-8 w-8 text-amber-400 mx-auto mb-2" />
+                          <h5 className="font-bold text-amber-400 text-sm">Home Food Tracker</h5>
+                        </div>
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-amber-500/30">
+                            <EnhancedHomeGrownFoodTracker />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Eco Bike Map Piano Key */}
+                    <div className="group relative min-w-[200px] h-80 bg-gradient-to-b from-teal-500/10 to-teal-900/20 rounded-lg border border-teal-500/30 hover:scale-110 hover:z-10 transition-all duration-500 cursor-pointer overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
+                      <div className="relative p-4 h-full flex flex-col justify-between">
+                        <div className="text-center">
+                          <MapPin className="h-8 w-8 text-teal-400 mx-auto mb-2" />
+                          <h5 className="font-bold text-teal-400 text-sm">Eco Bike Routes</h5>
+                        </div>
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                          <div className="bg-black/80 rounded-lg p-3 backdrop-blur-sm border border-teal-500/30">
+                            <InteractiveEcoBikeMap />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
