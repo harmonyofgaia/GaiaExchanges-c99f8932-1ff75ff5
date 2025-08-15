@@ -190,6 +190,65 @@ export default function Exchange() {
 
           {/* Trading Panel */}
           <div className="space-y-6">
+            {/* Live Wallet Module */}
+            <Card className="bg-gradient-to-br from-cyan-900/20 to-teal-900/20 border-cyan-500/30">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-cyan-400" />
+                  Live Wallet Connection
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="p-4 bg-background/50 rounded-lg">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium">GAiA Balance:</span>
+                    <span className="text-lg font-bold text-green-400">1,250.75 GAiA</span>
+                  </div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium">USD Value:</span>
+                    <span className="text-lg font-bold text-blue-400">
+                      ${(1250.75 * currentPrice).toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">Wallet Address:</span>
+                    <code className="text-xs text-green-400 bg-green-900/20 px-2 py-1 rounded">
+                      {GAIA_TOKEN.WALLET_ADDRESS.slice(0, 12)}...{GAIA_TOKEN.WALLET_ADDRESS.slice(-8)}
+                    </code>
+                  </div>
+                </div>
+                
+                <div className="p-4 bg-green-900/10 border border-green-500/20 rounded-lg">
+                  <h4 className="text-green-400 font-bold mb-2">Fee Structure - 100% Transparent</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span>Trading Fee:</span>
+                      <span className="text-green-400">0% (Community Funded)</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Network Fee:</span>
+                      <span className="text-blue-400">0.001 GAiA (~$0.02)</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>All Fees Go To:</span>
+                      <span className="text-purple-400">Community Wallet</span>
+                    </div>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full mt-3 border-green-500/30 text-green-400"
+                    onClick={() => {
+                      navigator.clipboard.writeText(GAIA_TOKEN.WALLET_ADDRESS);
+                      toast.success("Community Wallet Address Copied!");
+                    }}
+                  >
+                    Copy Community Wallet Address
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
             <Card className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/30">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
