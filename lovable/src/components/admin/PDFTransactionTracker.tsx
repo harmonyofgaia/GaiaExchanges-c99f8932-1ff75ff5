@@ -38,7 +38,7 @@ interface WalletSummary {
   totalOutcome: number;
   transactionCount: number;
   color: string;
-  icon: any;
+  icon: unknown;
 }
 
 export function PDFTransactionTracker() {

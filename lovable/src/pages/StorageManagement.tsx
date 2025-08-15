@@ -30,7 +30,7 @@ interface StorageFile {
   url: string;
   bucket: string;
   created_at: string;
-  metadata?: any;
+  metadata?: unknown;
 }
 
 export default function StorageManagement() {

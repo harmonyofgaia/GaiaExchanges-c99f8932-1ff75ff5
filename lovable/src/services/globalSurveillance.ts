@@ -15,7 +15,7 @@ interface DeepWebMonitor {
   layer: "surface" | "deep" | "dark" | "marianas" | "quantum_void";
   marketplaces: string[];
   threatsFound: number;
-  intelligence: any[];
+  intelligence: unknown[];
   isActive: boolean;
 }
 
@@ -128,7 +128,7 @@ class GlobalSurveillanceService {
     }, 45000); // Scan every 45 seconds
   }
 
-  async getSatelliteIntelligence(): Promise<any> {
+  async getSatelliteIntelligence(): Promise<unknown> {
     const intelligence = {
       activeSatellites: Array.from(this.satelliteNetwork.values()).filter((s) => s.isActive).length,
       totalThreats: Array.from(this.satelliteNetwork.values()).reduce(
@@ -354,7 +354,7 @@ class GlobalSurveillanceService {
     return internationalThreat;
   }
 
-  private async activateInternationalPartners(threat: any): Promise<string[]> {
+  private async activateInternationalPartners(threat: unknown): Promise<string[]> {
     const allPartners = [
       "Five Eyes Alliance",
       "NATO Cyber Command",
@@ -395,7 +395,7 @@ class GlobalSurveillanceService {
     return activatedPartners;
   }
 
-  private async coordinateGlobalResponse(alert: any): Promise<void> {
+  private async coordinateGlobalResponse(alert: unknown): Promise<void> {
     console.log("🌐 Coordinating Global Response:", alert);
 
     // Automatically escalate to international coordination if severe

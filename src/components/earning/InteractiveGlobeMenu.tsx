@@ -42,7 +42,7 @@ interface GlobePoint {
 
 interface InteractiveGlobeMenuProps {
   onActivitySelect: (category: string, activityId: string) => void;
-  categories: any[];
+  categories: unknown[];
 }
 
 export function InteractiveGlobeMenu({ onActivitySelect, categories }: InteractiveGlobeMenuProps) {
@@ -56,7 +56,7 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
 
   // Generate globe points from categories
   const globePoints: GlobePoint[] = categories.flatMap((category, catIndex) =>
-    category.components.map((comp: any, compIndex: number) => {
+    category.components.map((comp: unknown, compIndex: number) => {
       const phi = Math.acos(-1 + (2 * (catIndex * 5 + compIndex)) / (categories.length * 5 - 1));
       const theta = Math.sqrt(categories.length * 5 * Math.PI) * phi;
 

@@ -13,7 +13,7 @@ export function BackgroundMediaEngine() {
   const [isVisible, setIsVisible] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [currentMedia, setCurrentMedia] = useState<any>(null);
+  const [currentMedia, setCurrentMedia] = useState<unknown>(null);
   const [preferences, setPreferences] = useState<MediaPreferences>({
     enabled: false,
     volume: 0.3,

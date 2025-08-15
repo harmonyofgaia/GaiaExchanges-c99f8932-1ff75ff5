@@ -303,7 +303,7 @@ export function BlockchainSupremacyDashboard() {
                       <div className="text-xs font-medium text-muted-foreground">
                         Vulnerabilities Found:
                       </div>
-                      {contract.vulnerabilities.map((vuln: any, i: number) => (
+                      {contract.vulnerabilities.map((vuln: unknown, i: number) => (
                         <div
                           key={i}
                           className="flex items-center justify-between p-2 bg-red-900/20 rounded border border-red-500/30"

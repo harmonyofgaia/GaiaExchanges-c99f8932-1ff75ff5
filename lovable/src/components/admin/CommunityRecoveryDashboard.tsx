@@ -20,7 +20,7 @@ import { toast } from "sonner";
 export function CommunityRecoveryDashboard() {
   const [searchAddress, setSearchAddress] = useState("");
   const [recoveryRequests, setRecoveryRequests] = useState<any[]>([]);
-  const [walletAnalysis, setWalletAnalysis] = useState<any>(null);
+  const [walletAnalysis, setWalletAnalysis] = useState<unknown>(null);
   const [isScanning, setIsScanning] = useState(false);
 
   // Generate sample recovery data

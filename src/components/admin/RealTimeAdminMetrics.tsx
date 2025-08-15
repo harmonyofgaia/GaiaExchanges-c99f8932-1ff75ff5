@@ -11,7 +11,7 @@ interface Metric {
   metric_value: number;
   metric_type: string;
   last_updated: string;
-  metadata: any;
+  metadata: unknown;
 }
 
 export function RealTimeAdminMetrics() {

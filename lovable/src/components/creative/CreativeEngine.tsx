@@ -68,10 +68,10 @@ interface DesignTemplate {
   id: string;
   name: string;
   description: string;
-  background: any;
+  background: unknown;
   colors: string[];
-  animations: any[];
-  effects: any[];
+  animations: unknown[];
+  effects: unknown[];
   created: Date;
   isDefault?: boolean;
 }
@@ -310,7 +310,7 @@ export function CreativeEngine({
     return ["#ff6b6b", "#4ecdc4", "#45b7d1", "#96ceb4", "#feca57"];
   };
 
-  const generateAnimationsFromAsset = (asset: CreativeAsset): any[] => {
+  const generateAnimationsFromAsset = (asset: CreativeAsset): unknown[] => {
     // Generate animation parameters based on asset properties
     return [
       {
@@ -331,7 +331,7 @@ export function CreativeEngine({
     ];
   };
 
-  const generateEffectsFromAsset = (asset: CreativeAsset): any[] => {
+  const generateEffectsFromAsset = (asset: CreativeAsset): unknown[] => {
     // Generate visual effects based on asset
     return [
       { type: "glow", intensity: 0.7, color: "#ffffff" },

@@ -2,11 +2,25 @@ import * as React from "react";
 import * as RechartsPrimitive from "recharts";
 import { cn } from "@/lib/utils";
 
+// Chart configuration and data types
+interface ChartConfig {
+  label?: string;
+  color?: string;
+  theme?: Record<string, string>;
+  [key: string]: unknown;
+}
+
+interface ChartDataPoint {
+  name?: string;
+  value?: number;
+  [key: string]: unknown;
+}
+
 // Simple chart components without complex type issues
 export const ChartContainer = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
-    config?: Record<string, any>;
+    config?: Record<string, ChartConfig>;
   }
 >(({ className, children, config, ...props }, ref) => {
   return (
@@ -23,7 +37,7 @@ export const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
     active?: boolean;
-    payload?: any[];
+    payload?: ChartDataPoint[];
     label?: string;
     hideLabel?: boolean;
     hideIndicator?: boolean;
@@ -48,7 +62,7 @@ export const ChartTooltipContent = React.forwardRef<
       >
         {!hideLabel && label && <div className="text-sm font-medium">{label}</div>}
         <div className="space-y-1">
-          {payload.map((entry: any, index: number) => (
+          {payload.map((entry: ChartDataPoint, index: number) => (
             <div key={index} className="flex items-center gap-2">
               {!hideIndicator && (
                 <div className="h-2 w-2 rounded-full" style={{ backgroundColor: entry.color }} />
@@ -70,7 +84,7 @@ export const ChartLegend = RechartsPrimitive.Legend;
 export const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
-    payload?: any[];
+    payload?: ChartDataPoint[];
     nameKey?: string;
   }
 >(({ className, payload, nameKey, ...props }, ref) => {
@@ -80,7 +94,7 @@ export const ChartLegendContent = React.forwardRef<
 
   return (
     <div ref={ref} className={cn("flex items-center justify-center gap-4", className)} {...props}>
-      {payload.map((entry: any, index: number) => (
+      {payload.map((entry: unknown, index: number) => (
         <div key={index} className="flex items-center gap-2">
           <div className="h-2 w-2 rounded-full" style={{ backgroundColor: entry.color }} />
           <span className="text-sm">{entry.value || entry[nameKey || "value"]}</span>

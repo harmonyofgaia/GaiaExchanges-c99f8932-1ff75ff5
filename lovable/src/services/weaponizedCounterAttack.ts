@@ -17,6 +17,14 @@ interface CounterAttack {
   evidence: string[];
 }
 
+interface SocialAttack {
+  id: string;
+  type: "phishing" | "pretexting" | "baiting" | "quid_pro_quo";
+  content: string;
+  target: string;
+  severity: string;
+}
+
 interface IPReputationWeapon {
   ip: string;
   reputation: number;
@@ -38,6 +46,16 @@ interface SocialEngineeringReversal {
   effectiveness: number;
 }
 
+interface AttackerData {
+  timestamp: number;
+  attackerIP: string;
+  attackVector: string;
+  collectedData: string;
+  fingerprints?: string[];
+  methods?: string[];
+  tools?: string[];
+}
+
 interface WeaponizedHoneypot {
   id: string;
   honeypotType: "web" | "ssh" | "database" | "email" | "quantum";
@@ -47,7 +65,7 @@ interface WeaponizedHoneypot {
     | "attacker_tracking"
     | "system_infection";
   attackersTrapped: number;
-  dataCollected: any[];
+  dataCollected: AttackerData[];
   isActive: boolean;
 }
 
@@ -265,7 +283,7 @@ class WeaponizedCounterAttackService {
     return reversal;
   }
 
-  private async generateReversalStrategy(attack: any): Promise<string> {
+  private async generateReversalStrategy(attack: SocialAttack): Promise<string> {
     const strategies = {
       phishing: "Counter-phishing with attacker intelligence gathering",
       pretexting: "Reverse pretexting to expose attacker identity",
@@ -276,7 +294,7 @@ class WeaponizedCounterAttackService {
     return strategies[attack.type as keyof typeof strategies] || "Generic reversal strategy";
   }
 
-  private async createReversalContent(attack: any): Promise<string> {
+  private async createReversalContent(attack: SocialAttack): Promise<string> {
     // Generate convincing counter-content
     const templates = {
       phishing: "Legitimate-looking response that actually gathers attacker data",
@@ -398,8 +416,8 @@ class WeaponizedCounterAttackService {
     if (!this.autoRetaliationEnabled) return;
 
     // Determine counter-attack type based on threat
-    let counterAttackType: any = "ddos_reflection";
-    let intensity: any = "moderate";
+    let counterAttackType: CounterAttack["attackType"] = "ddos_reflection";
+    let intensity: CounterAttack["intensity"] = "moderate";
 
     if (threatData.severity > 0.8) {
       counterAttackType = "quantum_retaliation";

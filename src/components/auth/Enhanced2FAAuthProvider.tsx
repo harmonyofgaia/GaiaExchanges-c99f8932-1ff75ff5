@@ -10,7 +10,7 @@ interface AuthContextType {
   requires2FA: boolean;
   sessionDuration: number;
   signIn: (email: string, password: string) => Promise<{ error: AuthError | null }>;
-  signUp: (email: string, password: string, userData?: any) => Promise<{ error: AuthError | null }>;
+  signUp: (email: string, password: string, userData?: unknown) => Promise<{ error: AuthError | null }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: AuthError | null }>;
   setSessionDuration: (hours: number) => void;
@@ -90,7 +90,7 @@ export function Enhanced2FAAuthProvider({ children }: { children: React.ReactNod
     return { error };
   };
 
-  const signUp = async (email: string, password: string, userData?: any) => {
+  const signUp = async (email: string, password: string, userData?: unknown) => {
     const redirectUrl = `${window.location.origin}/`;
 
     const { error } = await supabase.auth.signUp({

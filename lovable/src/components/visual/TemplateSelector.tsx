@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Palette, Wand2 } from "lucide-react";
 
 interface TemplateSelectorProps {
-  onTemplateApplied: (template: any) => void;
+  onTemplateApplied: (template: unknown) => void;
   isLocked?: boolean;
 }
 
@@ -32,7 +32,7 @@ export function TemplateSelector({ onTemplateApplied, isLocked = false }: Templa
     },
   ];
 
-  const handleApplyTemplate = (template: any) => {
+  const handleApplyTemplate = (template: unknown) => {
     if (isLocked) return;
     onTemplateApplied(template);
   };

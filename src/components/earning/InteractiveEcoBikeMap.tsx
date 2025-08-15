@@ -67,7 +67,7 @@ export function InteractiveEcoBikeMap() {
     },
   ]);
 
-  const [activeRide, setActiveRide] = useState<any>(null);
+  const [activeRide, setActiveRide] = useState<unknown>(null);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -89,7 +89,7 @@ export function InteractiveEcoBikeMap() {
     };
   }, [isRiding, activeRide]);
 
-  const startRide = (route: any) => {
+  const startRide = (route: unknown) => {
     setActiveRide(route);
     setIsRiding(true);
     setDistance(0);

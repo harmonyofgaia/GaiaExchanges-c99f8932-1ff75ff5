@@ -38,7 +38,7 @@ interface GreenProject {
 const GREEN_INVESTMENT_WALLET = "ABiVQHU118yDohUxB221P9JbCov52ucMtyG1i8AkwPm7";
 
 export function GreenInvestmentWalletManager() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
   const [config, setConfig] = useState<GreenInvestmentConfig>({
     default_fee_percentage: 0.001,
     preferred_fee_destination: "green_projects",

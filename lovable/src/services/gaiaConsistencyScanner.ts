@@ -163,7 +163,7 @@ class GaiaConsistencyScanner {
     };
   }
 
-  private async checkComponentIntegration(component: any): Promise<ComponentIntegration> {
+  private async checkComponentIntegration(component: unknown): Promise<ComponentIntegration> {
     const issues: ConsistencyIssue[] = [];
 
     // Simulate checking if component has proper GAiA integration

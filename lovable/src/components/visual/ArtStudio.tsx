@@ -31,7 +31,7 @@ interface ArtLayer {
 }
 
 export function ArtStudio() {
-  const [fabricCanvas, setFabricCanvas] = useState<any>(null);
+  const [fabricCanvas, setFabricCanvas] = useState<unknown>(null);
   const [activeTool, setActiveTool] = useState("brush");
   const [selectedColor, setSelectedColor] = useState("#000000");
   const [brushSize, setBrushSize] = useState(5);

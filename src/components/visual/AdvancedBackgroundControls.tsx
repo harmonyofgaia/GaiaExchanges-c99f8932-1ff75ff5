@@ -104,7 +104,7 @@ export function AdvancedBackgroundControls({ isLocked }: { isLocked: boolean }) 
     }
   };
 
-  const applySettingToDOM = (key: keyof BackgroundSettings, value: any) => {
+  const applySettingToDOM = (key: keyof BackgroundSettings, value: unknown) => {
     const root = document.documentElement;
 
     switch (key) {

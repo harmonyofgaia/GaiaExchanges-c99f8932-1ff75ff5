@@ -39,7 +39,7 @@ interface NFTCard {
   rarity: string;
   power_level: number;
   biodiversity_category: string;
-  card_metadata: any;
+  card_metadata: unknown;
   minted_at: string;
   is_tradeable: boolean;
   ecosystem_interactions?: string[];
@@ -47,7 +47,7 @@ interface NFTCard {
   real_world_impact?: number;
   evolution_stage?: number;
   max_evolution?: number;
-  trading_history?: any[];
+  trading_history?: unknown[];
   market_value?: number;
 }
 
@@ -70,8 +70,8 @@ interface ConservationPartnership {
 interface MarketplaceData {
   totalVolume: number;
   activeTraders: number;
-  topCollections: any[];
-  recentSales: any[];
+  topCollections: unknown[];
+  recentSales: unknown[];
   conservationFunding: number;
 }
 

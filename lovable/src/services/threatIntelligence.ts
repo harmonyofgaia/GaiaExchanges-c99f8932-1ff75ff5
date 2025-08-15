@@ -36,7 +36,7 @@ class ThreatIntelligenceService {
   private threatSignatures: Map<string, ThreatSignature> = new Map();
   private behaviorPatterns: Map<string, BehaviorPattern> = new Map();
   private threatPredictions: ThreatPrediction[] = [];
-  private globalThreatFeed: any[] = [];
+  private globalThreatFeed: unknown[] = [];
   private isMonitoringActive = false;
 
   // AI-Powered Predictive Attack Detection
@@ -327,7 +327,7 @@ class ThreatIntelligenceService {
   }
 
   // Neural Network Threat Classification
-  async classifyThreatWithNN(input: any): Promise<{
+  async classifyThreatWithNN(input: unknown): Promise<{
     classification: string;
     confidence: number;
     features: string[];
@@ -343,7 +343,7 @@ class ThreatIntelligenceService {
     };
   }
 
-  private extractFeatures(input: any): string[] {
+  private extractFeatures(input: unknown): string[] {
     const features = [];
 
     if (typeof input === "string") {

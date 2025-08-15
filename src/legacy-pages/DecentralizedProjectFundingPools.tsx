@@ -37,7 +37,7 @@ interface GreenProject {
   carbon_impact_target: number;
   biodiversity_score: number;
   verification_status: string;
-  project_data: any;
+  project_data: unknown;
   created_at: string;
   created_by: string;
   governance_score?: number;

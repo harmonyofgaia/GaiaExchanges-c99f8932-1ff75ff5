@@ -38,7 +38,7 @@ interface EcoMission {
   tokens_reward: number;
   carbon_impact: number;
   status: string;
-  completion_data: any;
+  completion_data: unknown;
   created_at: string;
   completed_at: string | null;
   ai_generated?: boolean;
@@ -51,7 +51,7 @@ interface EcoMission {
 
 interface AIGenerationParams {
   userLocation: string;
-  environmentalData: any;
+  environmentalData: unknown;
   userPreferences: string[];
   seasonality: string;
   communityNeeds: string[];

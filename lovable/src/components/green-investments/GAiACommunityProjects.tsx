@@ -25,7 +25,7 @@ export function GAiACommunityProjects() {
   const [projects, setProjects] = useState(GAIA_PROJECTS);
   const [subscribedProjects, setSubscribedProjects] = useState<Set<string>>(new Set());
   const [showRestorer, setShowRestorer] = useState(false);
-  const [restoredData, setRestoredData] = useState<any>(null);
+  const [restoredData, setRestoredData] = useState<unknown>(null);
 
   // Get featured project (neuroregeneration initiative)
   const featuredProject = projects.find((p) => p.isFeatured);
@@ -71,7 +71,7 @@ export function GAiACommunityProjects() {
     });
   };
 
-  const handleDataRestored = (data: any) => {
+  const handleDataRestored = (data: unknown) => {
     console.log("🌱 Original GAiA project data restored:", data);
     setRestoredData(data);
 
@@ -112,7 +112,7 @@ export function GAiACommunityProjects() {
     }
   };
 
-  const renderFeaturedProject = (project: any) => {
+  const renderFeaturedProject = (project: unknown) => {
     const fundingPercentage = project.fundingGoal
       ? ((project.currentFunding || 0) / project.fundingGoal) * 100
       : 0;
@@ -252,7 +252,7 @@ export function GAiACommunityProjects() {
     );
   };
 
-  const renderRegularProject = (project: any) => {
+  const renderRegularProject = (project: unknown) => {
     const fundingPercentage = project.fundingGoal
       ? ((project.currentFunding || 0) / project.fundingGoal) * 100
       : 0;

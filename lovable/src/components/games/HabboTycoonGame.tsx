@@ -95,7 +95,7 @@ export function HabboTycoonGame() {
   const [onlinePlayers, setOnlinePlayers] = useState(2847);
   const [totalRevenue, setTotalRevenue] = useState(456780);
   const [securityLevel, setSecurityLevel] = useState(100);
-  const [selectedLocation, setSelectedLocation] = useState<any>(null);
+  const [selectedLocation, setSelectedLocation] = useState<unknown>(null);
   const [chatMode, setChatMode] = useState(false);
 
   const gameLoopRef = useRef<NodeJS.Timeout>(undefined);

@@ -237,7 +237,7 @@ class MultiverseControlService {
   }
 
   // Parallel Universe Access
-  async accessParallelUniverse(universeId: string): Promise<any> {
+  async accessParallelUniverse(universeId: string): Promise<unknown> {
     console.log(`🚪 Accessing Parallel Universe: ${universeId}`);
 
     // Simulate universe access

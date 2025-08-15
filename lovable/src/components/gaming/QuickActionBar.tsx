@@ -22,7 +22,7 @@ import { toast } from "sonner";
 interface QuickAction {
   id: string;
   label: string;
-  icon: any;
+  icon: unknown;
   action: () => void;
   color: string;
   badge?: string;

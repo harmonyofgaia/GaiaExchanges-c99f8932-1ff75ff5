@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 export function InvisibleAdminProtection() {
   const protectionActive = useRef(false);
-  const originalEventHandlers = useRef<any>({});
+  const originalEventHandlers = useRef<unknown>({});
 
   useEffect(() => {
     const activateInvisibleProtection = () => {

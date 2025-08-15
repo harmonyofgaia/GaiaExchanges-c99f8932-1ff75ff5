@@ -39,7 +39,7 @@ interface NFTCard {
   rarity: string;
   power_level: number;
   biodiversity_category: string;
-  card_metadata: any;
+  card_metadata: unknown;
   minted_at: string;
   is_tradeable: boolean;
   ecosystem_interactions?: string[];

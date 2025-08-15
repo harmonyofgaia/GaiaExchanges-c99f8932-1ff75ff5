@@ -151,7 +151,7 @@ export function BackgroundManager() {
 // Render functions for different effects
 function renderParticles(
   ctx: CanvasRenderingContext2D,
-  particles: any[],
+  particles: unknown[],
   effect: BackgroundEffect,
   time: number
 ) {
@@ -199,7 +199,7 @@ function renderMatrix(ctx: CanvasRenderingContext2D, effect: BackgroundEffect, t
 
 function renderNeural(
   ctx: CanvasRenderingContext2D,
-  particles: any[],
+  particles: unknown[],
   effect: BackgroundEffect,
   time: number
 ) {

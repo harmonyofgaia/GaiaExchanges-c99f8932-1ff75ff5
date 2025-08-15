@@ -64,7 +64,7 @@ export function HabboTycoon() {
   });
 
   const [buildings, setBuildings] = useState<Building[]>([]);
-  const [selectedLocation, setSelectedLocation] = useState<any>(null);
+  const [selectedLocation, setSelectedLocation] = useState<unknown>(null);
   const [gameMode, setGameMode] = useState<"building" | "chatroom" | "world">("building");
   const [onlinePlayers, setOnlinePlayers] = useState(1547);
   const [totalRevenue, setTotalRevenue] = useState(0);

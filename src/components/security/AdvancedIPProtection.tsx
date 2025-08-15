@@ -38,7 +38,7 @@ export function AdvancedIPProtection() {
         console.log("🛡️ GAIA IP PROTECTION - MAXIMUM QUANTUM DEFENSE ACTIVE");
         console.log("🔐 TARGET IP PROTECTED WITH LIFELONG SECURITY WALL");
 
-        const newThreats: any[] = [];
+        const newThreats: unknown[] = [];
 
         // 1. QUANTUM IP ENCRYPTION SHIELD
         const activateQuantumIPShield = () => {
@@ -47,7 +47,7 @@ export function AdvancedIPProtection() {
 
           // Monitor all network requests for IP exposure
           const originalFetch = window.fetch;
-          window.fetch = async (...args: any[]) => {
+          window.fetch = async (...args: unknown[]) => {
             const url = args[0]?.toString() || "";
 
             // Block any attempt to reveal real IP

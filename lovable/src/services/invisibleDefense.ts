@@ -11,8 +11,8 @@ interface StealthCommunication {
 
 interface TrafficObfuscation {
   id: string;
-  originalTraffic: any;
-  obfuscatedTraffic: any;
+  originalTraffic: unknown;
+  obfuscatedTraffic: unknown;
   obfuscationType: "routing" | "timing" | "volume" | "protocol";
   effectiveness: number;
 }
@@ -160,7 +160,7 @@ class InvisibleDefenseService {
 
   // Traffic Obfuscation Engine
   async obfuscateNetworkTraffic(
-    trafficData: any,
+    trafficData: unknown,
     obfuscationType: "routing" | "timing" | "volume" | "protocol"
   ): Promise<TrafficObfuscation> {
     const obfuscation: TrafficObfuscation = {
@@ -183,7 +183,7 @@ class InvisibleDefenseService {
     return obfuscation;
   }
 
-  private async applyObfuscation(traffic: any, type: string): Promise<any> {
+  private async applyObfuscation(traffic: unknown, type: string): Promise<unknown> {
     switch (type) {
       case "routing":
         return {

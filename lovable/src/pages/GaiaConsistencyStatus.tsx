@@ -13,7 +13,7 @@ import {
 import { GAIA_TOKEN } from "@/constants/gaia";
 
 const GaiaConsistencyStatus = () => {
-  const [scanResult, setScanResult] = useState<any>(null);
+  const [scanResult, setScanResult] = useState<unknown>(null);
   const [isScanning, setIsScanning] = useState(false);
   const [lastScanTime, setLastScanTime] = useState<Date | null>(null);
 
