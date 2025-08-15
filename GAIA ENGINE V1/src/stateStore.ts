@@ -37,7 +37,26 @@ export class StateStore<S> {
       throw new Error('StateStore.patch: Cannot patch non-object/non-array state. Patch is only supported for object or array state types.');
     }
   }
+      this.patchArray(partial);
+    } else if (typeof this.state === 'object' && this.state !== null) {
+      this.patchObject(partial);
+    } else {
+      throw new Error('StateStore.patch: Cannot patch non-object/non-array state. Patch is only supported for object or array state types.');
+    }
+  }
 
+  private patchArray(partial: Partial<S>) {
+    // For arrays, merge using spread (shallow copy)
+    // Patch specific indices using Object.assign
+    const newArray = [...(this.state as unknown as any[])];
+    Object.assign(newArray, partial);
+    this.set(newArray as S);
+  }
+
+  private patchObject(partial: Partial<S>) {
+    // For objects, merge using spread
+    this.set({ ...this.state, ...partial } as S);
+  }
   subscribe(fn: Listener<S>) {
     this.listeners.add(fn);
     return () => this.listeners.delete(fn);
