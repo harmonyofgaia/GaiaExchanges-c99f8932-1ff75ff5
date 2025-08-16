@@ -76,7 +76,7 @@ export const GAIA_PROJECTS: GAiAProject[] = [
     id: "4",
     title: "🧠 Green Neuroregeneration Initiative",
     description:
-      "Bio-inspired research leveraging plant root growth mechanisms for human neural pathway regeneration, focusing on post-stroke recovery and neuroplasticity enhancement.",
+      "Bio-inspired research leveraging plant root growth mechanisms for human neural pathway regeneration, focusing on post-stroke recovery and neuroplasticity enhancement. Features groundbreaking Moringa oleifera (\"wonder tree\") × Blackberry (Rubus) synergy for neuroinflammation/oxidative stress reduction, plasticity/myelination support, and mitochondrial resilience. Incorporates gut–brain axis modulation and standardized extract approach for optimized bioavailability and BBB penetration.",
     status: "active",
     tags: [
       "Neuroregeneration",
@@ -84,6 +84,12 @@ export const GAIA_PROJECTS: GAiAProject[] = [
       "Medical Research",
       "Post-Stroke Recovery",
       "Neuroplasticity",
+      "Moringa",
+      "Blackberry",
+      "Anthocyanins",
+      "Isothiocyanates",
+      "Gut–Brain Axis",
+      "Mitochondria",
     ],
     fundingGoal: 250000,
     currentFunding: 89750,
@@ -93,12 +99,14 @@ export const GAIA_PROJECTS: GAiAProject[] = [
     progress: 36,
     impact: "Very High",
     expectedImpact:
-      "Revolutionary breakthrough in neural pathway regeneration using plant-inspired mechanisms for stroke recovery",
+      "Revolutionary breakthrough in neural pathway regeneration using plant-inspired mechanisms for stroke recovery. Standardized Moringa × Blackberry formulation with preclinical evidence and pharmacokinetic/blood-brain barrier data for enhanced neuroplasticity and mitochondrial function.",
     location: "Global Research Network",
     isFeatured: true,
     researchPhases: [
       "Root Growth Pattern Analysis",
       "Neural Pathway Mapping",
+      "Moringa × Blackberry Standardization",
+      "In vitro + In vivo Neuro Proof‑of‑Concept",
       "Bio-Mechanism Translation",
       "Clinical Trial Preparation",
     ],
