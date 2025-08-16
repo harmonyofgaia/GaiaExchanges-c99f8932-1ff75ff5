@@ -32,7 +32,22 @@ export function createPersistencePlugin<S, C>(opts: PersistenceOptions<S>): Gaia
           const now = (e as any).at as number;
           if (now - last >= throttle) {
             last = now;
-            opts.save(before((e as any).payload as S) as S);
+      type StateUpdatedEvent = { at: number; payload: S };
+      const off = engine.on("state:updated", (e: unknown) => {
+        try {
+          if (
+            typeof e === "object" &&
+            e !== null &&
+            "at" in e &&
+            typeof (e as { at: unknown }).at === "number" &&
+            "payload" in e
+          ) {
+            const event = e as StateUpdatedEvent;
+            const now = event.at;
+            if (now - last >= throttle) {
+              last = now;
+              opts.save(before(event.payload) as S);
+            }
           }
         } catch (err) {
           try { opts.onError?.(err); } catch {}
