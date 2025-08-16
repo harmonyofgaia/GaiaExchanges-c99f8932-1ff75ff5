@@ -144,7 +144,7 @@ export default function GreenInvestmentsBackground() {
           // Reset drop when it goes off screen (deterministic: based on drop index and font size)
             // Reset drop when it goes off screen (deterministic: based on drop index and font size)
             drops[i] = -(i * fontSize);
-          }
+            drops[i] = -Math.random() * 20;
         }
 
         // Draw growing roots
