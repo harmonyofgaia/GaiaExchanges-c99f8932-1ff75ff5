@@ -173,6 +173,7 @@ export default function GreenInvestmentsBackground() {
     
     
     
+    
 
     // Growing roots paths (SVG-like paths)
     const rootPaths: Array<{
