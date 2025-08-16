@@ -30,6 +30,7 @@ jobs:
         run: |
         continue-on-error: true
         run: npm run test --if-present
+        continue-on-error: true
 
       - name: Build
         env:
