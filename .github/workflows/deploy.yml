@@ -102,7 +102,7 @@ jobs:
         continue-on-error: true
         run: |
           echo "🚀 Deploying folder 'dist' to Vercel (production)..."
-          DEPLOYMENT_URL="$(npx vercel deploy dist --prod --yes --token "$VERCEL_TOKEN" | tail -n 1)"
+          DEPLOYMENT_URL="$(npx vercel deploy dist --prod --yes --token "$VERCEL_TOKEN" --json | jq -r '.url // empty')"
           echo "url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
           echo "✅ Vercel deployment attempted, URL: $DEPLOYMENT_URL"
 
