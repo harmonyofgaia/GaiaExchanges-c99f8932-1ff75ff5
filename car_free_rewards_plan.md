@@ -9,7 +9,10 @@ The Car-Free Rewards Initiative is designed to encourage and reward users for re
 1. Project Vision
 Encourage and reward users for not using their cars, promoting sustainable living, reducing emissions, and building a vibrant, eco-conscious community. The longer users go car-free, the greater their rewards, culminating in high-value gifts and recognition.
 
-2. User-Facing Features
+## Project Vision
+Encourage and reward users for not using their cars, promoting sustainable living, reducing emissions, and building a vibrant, eco-conscious community. The longer users go car-free, the greater their rewards, culminating in high-value gifts and recognition.
+
+## User-Facing Features
 A. Presence Across Earn and Green Investments (Explicit)
 - Green Investments Page (Project Card)
   - Dedicated "Car-Free Rewards" project card with impact stats (CO₂ saved, participants, streaks).
