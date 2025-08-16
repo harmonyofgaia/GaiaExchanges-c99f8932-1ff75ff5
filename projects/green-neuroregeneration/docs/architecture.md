@@ -5,7 +5,7 @@ Components
   - Stores method proposals and versions (ideas/<slug>).
   - Validates metadata and publishes to the Live Overview.
 - Matching Service
-  - Embedding-based semantic match (ideas × people) + constraint filters (skills, modality, indication, region).
+  - Embedding-based semantic match (cross-matching between method ideas and researcher profiles) + constraint filters (skills, modality, indication, region).
   - On match acceptance, provisions a secure chat room and SSO link.
 - Secure Chat Integration ("Habby Tycoon")
   - E2EE rooms per match; SSO with wallet-bound identity. Chat metadata only (room id) stored in our system.
