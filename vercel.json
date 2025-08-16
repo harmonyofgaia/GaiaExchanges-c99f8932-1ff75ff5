@@ -7,6 +7,5 @@
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "env": {
-    "SKIP_LINT": "true"
   }
 }
