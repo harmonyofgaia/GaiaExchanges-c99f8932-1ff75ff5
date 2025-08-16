@@ -143,7 +143,8 @@ export default function GreenInvestmentsBackground() {
           // Reset drop when it goes off screen (deterministic)
           // Reset drop when it goes off screen (deterministic: based on drop index and font size)
             // Reset drop when it goes off screen (deterministic: based on drop index and font size)
-            drops[i] = -(i * fontSize);
+          // Reset drop when it goes off screen (deterministic: based on drop index and font size)
+          if (y > height / dpr) {
             drops[i] = -Math.random() * 20;
         }
 
