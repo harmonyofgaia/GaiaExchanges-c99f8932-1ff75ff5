@@ -1,6 +1,11 @@
 $ErrorActionPreference = 'Stop'
 Remove-Module PSReadLine -ErrorAction SilentlyContinue
-cd 'C:\Users\synatic\GaiaExchanges-c99f8932-1ff75ff5'
+param(
+    [string]$TargetDir = (Get-Location)
+)
+$ErrorActionPreference = 'Stop'
+Remove-Module PSReadLine -ErrorAction SilentlyContinue
+cd $TargetDir
 
 git fetch origin --prune
 git switch --quiet main
