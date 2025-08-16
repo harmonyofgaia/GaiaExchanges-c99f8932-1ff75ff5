@@ -50,28 +50,20 @@ jobs:
           path: dist
           if-no-files-found: error
 
-  deploy_vercel:
-    name: Deploy to Vercel (main only)
+  deploy_netlify:
+    name: Deploy to Netlify (main only)
     needs: build_and_test
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-
-      - name: Check Vercel secrets
+      - name: Check Netlify secrets
         id: check_secrets
         run: |
-          if [[ -z "${{ secrets.VERCEL_TOKEN }}" || -z "${{ secrets.VERCEL_PROJECT_ID }}" || -z "${{ secrets.VERCEL_ORG_ID }}" ]]; then
-            echo "Missing Vercel secrets. Skipping deployment."
+          if [[ -z "${{ secrets.NETLIFY_AUTH_TOKEN }}" || -z "${{ secrets.NETLIFY_SITE_ID }}" ]]; then
+            echo "Missing Netlify secrets. Skipping deployment."
             echo "deploy=false" >> $GITHUB_OUTPUT
           else
-            echo "Vercel secrets available. Proceeding with deployment."
+            echo "Netlify secrets available. Proceeding with deployment."
             echo "deploy=true" >> $GITHUB_OUTPUT
           fi
 
@@ -82,41 +74,22 @@ jobs:
           name: dist
           path: dist
 
-      - name: Install Vercel CLI
+      - name: Install Netlify CLI
         if: steps.check_secrets.outputs.deploy == 'true'
-        run: npm install -g vercel@latest
+        run: npm install -g netlify-cli@latest
 
-      - name: Prepare Vercel project
+      - name: Deploy to Netlify
         if: steps.check_secrets.outputs.deploy == 'true'
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: |
-          mkdir -p .vercel
-          cat > .vercel/project.json <<EOF
-          {
-            "projectId": "$VERCEL_PROJECT_ID",
-            "orgId": "$VERCEL_ORG_ID"
-          }
-          EOF
-        env:
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-
-      - name: Sync Vercel settings
-        if: steps.check_secrets.outputs.deploy == 'true'
-        run: vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-
-      - name: Deploy to Vercel (prod)
-        if: steps.check_secrets.outputs.deploy == 'true'
-        run: vercel deploy dist --prod --yes --token "$VERCEL_TOKEN"
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          netlify deploy --prod --dir=dist --site=$NETLIFY_SITE_ID
 
       - name: Deployment skipped
         if: steps.check_secrets.outputs.deploy == 'false'
         run: |
-          echo "⚠️  Vercel deployment skipped due to missing secrets:"
-          echo "   - VERCEL_TOKEN"
-          echo "   - VERCEL_PROJECT_ID" 
-          echo "   - VERCEL_ORG_ID"
+          echo "⚠️  Netlify deployment skipped due to missing secrets:"
+          echo "   - NETLIFY_AUTH_TOKEN"
+          echo "   - NETLIFY_SITE_ID"
           echo "Please configure these secrets in your repository settings."
