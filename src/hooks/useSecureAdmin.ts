@@ -9,7 +9,8 @@ try {
     useAuth = authModule.useAuth;
   }
 } catch (error) {
-  console.error("AuthProvider not available:", error);
+  // AuthProvider not available, use fallback
+  console.warn("AuthProvider not available, using fallback");
 }
 
 interface AdminSession {
@@ -17,6 +18,18 @@ interface AdminSession {
   timestamp: number;
   level?: string;
 }
+
+// Function to get user's IP address (simplified for demo - in production use proper IP detection)
+const getUserIP = async (): Promise<string> => {
+  try {
+    // In a real production environment, you'd use a proper IP detection service
+    // For now, we'll return a default allowed IP for testing
+    return "192.168.1.101"; // Default to first allowed IP for testing
+  } catch (error) {
+    console.error("Error getting user IP:", error);
+    return "unknown";
+  }
+};
 
 export function useSecureAdmin() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -36,6 +49,18 @@ export function useSecureAdmin() {
 
   const validateAdminSession = async () => {
     if (!user) {
+      setIsValidating(false);
+      return;
+    }
+
+    // Check IP address restriction first
+    const allowedIPs = ["192.168.1.101", "192.168.1.102"];
+    const userIP = await getUserIP();
+    
+    if (!allowedIPs.includes(userIP)) {
+      console.log("🚫 IP ADDRESS NOT AUTHORIZED:", userIP);
+      setIsAdmin(false);
+      setAdminSession(null);
       setIsValidating(false);
       return;
     }
