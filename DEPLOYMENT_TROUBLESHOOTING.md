@@ -29,13 +29,13 @@ VITE_SUPABASE_ANON_KEY=your-actual-anonymous-key
 
 **For Production Deployment**:
 
-- **Vercel**: Set environment variables in project dashboard
 - **Netlify**: Set environment variables in site settings
+- **Vercel**: Set environment variables in project dashboard (manual deployments only)
 - **GitHub Pages**: Use GitHub Secrets in workflow
 
 ### 2. CLI Tools Not Found
 
-**Problem**: `vercel: command not found` or `netlify: command not found`
+**Problem**: `netlify: command not found` or `vercel: command not found`
 
 **Solutions**:
 
@@ -43,16 +43,16 @@ VITE_SUPABASE_ANON_KEY=your-actual-anonymous-key
 
 ```bash
 # These scripts automatically handle CLI tool installation
-npm run deploy:vercel    # Uses npx if CLI not installed
-npm run deploy:netlify   # Uses npx if CLI not installed
-npm run deploy:auto      # Runs checks and deploys
+npm run deploy:netlify    # Uses npx if CLI not installed (primary)
+npm run deploy:vercel     # Uses npx if CLI not installed (optional)
+npm run deploy:auto       # Runs checks and deploys
 ```
 
 **Option 2 - Install globally**:
 
 ```bash
-npm install -g vercel
 npm install -g netlify-cli
+npm install -g vercel      # optional for manual deployments
 ```
 
 **Option 3 - Use npx directly**:
@@ -95,8 +95,8 @@ npm run build 2>&1 | grep -i error
 1. **Secrets are set**:
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_ANON_KEY`
-   - `VERCEL_TOKEN` (for Vercel)
    - `NETLIFY_AUTH_TOKEN` and `NETLIFY_SITE_ID` (for Netlify)
+   - `VERCEL_TOKEN` (for manual Vercel deployments only)
 
 2. **Branch configuration**: Workflow only runs on `main` branch
 
@@ -109,8 +109,8 @@ npm run build 2>&1 | grep -i error
 **Solutions**:
 
 1. **Configure SPA routing**:
-   - **Netlify**: Already configured in `netlify.toml`
-   - **Vercel**: Already configured in `vercel.json`
+   - **Netlify**: Already configured in `netlify.toml` (primary platform)
+   - **Vercel**: Configure manually for optional deployments
    - **Apache**: Add `.htaccess` file
    - **Nginx**: Configure try_files directive
 
