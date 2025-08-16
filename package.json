@@ -24,7 +24,7 @@
     "lint:fix": "eslint . --ext .js,.ts,.tsx --fix",
     "typecheck": "npx tsc --noEmit",
     "lighthouse": "lighthouse http://localhost:5173 --output html --output-path ./lighthouse-report.html --chrome-flags=\"--headless\"",
-    "prepare": "if [ \"$NODE_ENV\" != \"production\" ] && [ \"$CI\" != \"true\" ]; then husky install; fi",
+    "prepare": "npx --yes husky",
     "test": "vitest run",
     "tailwind:build": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.output.css --minify",
     "deploy:complete": "sh ./scripts/deploy.sh && sh ./scripts/post-deploy-validate.sh",
