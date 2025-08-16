@@ -601,7 +601,7 @@ function RuleCreator({
             <label className="text-sm font-medium">Category</label>
             <Select
               value={formData.category || "security"}
-              onValueChange={(value: any) =>
+              onValueChange={(value: Rule['category']) =>
                 setFormData({ ...formData, category: value })
               }
             >
@@ -635,7 +635,7 @@ function RuleCreator({
             <label className="text-sm font-medium">Priority</label>
             <Select
               value={formData.priority || "medium"}
-              onValueChange={(value: any) =>
+              onValueChange={(value: Rule['priority']) =>
                 setFormData({ ...formData, priority: value })
               }
             >
@@ -654,7 +654,7 @@ function RuleCreator({
             <label className="text-sm font-medium">Enforcement</label>
             <Select
               value={formData.enforcement || "warning"}
-              onValueChange={(value: any) =>
+              onValueChange={(value: Rule['enforcement']) =>
                 setFormData({ ...formData, enforcement: value })
               }
             >

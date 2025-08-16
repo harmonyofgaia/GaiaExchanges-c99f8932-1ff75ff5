@@ -45,9 +45,9 @@ export function GlobalNetworkHoneypots() {
       ][Math.floor(Math.random() * 8)],
       sourceIP: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
       timestamp: new Date().toLocaleTimeString(),
-      severity: ["low", "medium", "high", "critical"][
+      severity: (["low", "medium", "high", "critical"] as const)[
         Math.floor(Math.random() * 4)
-      ] as any,
+      ] as HoneypotCapture['severity'],
     });
 
     const interval = setInterval(() => {
