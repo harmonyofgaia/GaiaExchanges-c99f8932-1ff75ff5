@@ -185,10 +185,9 @@ export default function GreenInvestmentsBackground() {
           style={{
             backgroundImage: `
               radial-gradient(circle at 50% 50%, rgba(0, 255, 166, 0.1) 0%, rgba(0, 255, 166, 0.05) 40%, transparent 70%),
-              url('/assets/hallway.jpg')
+              linear-gradient(135deg, rgba(4, 23, 14, 0.8) 0%, rgba(6, 78, 59, 0.6) 50%, rgba(4, 23, 14, 0.9) 100%)
             `,
-            backgroundBlendMode: "screen",
-            opacity: 0.8
+            backgroundBlendMode: "screen"
           }}
         />
         {/* Additional green neon tint overlay */}
@@ -224,7 +223,7 @@ export default function GreenInvestmentsBackground() {
           
           {/* Static root pattern that will be animated via CSS */}
           <path
-            d="M0,100% Q20,80% 40,85% T80,70% Q100,60% 120,75%"
+            d="M 0 100 Q 20 80 40 85 T 80 70 Q 100 60 120 75"
             stroke="url(#rootGradient)"
             strokeWidth="2"
             fill="none"
@@ -236,7 +235,7 @@ export default function GreenInvestmentsBackground() {
             }}
           />
           <path
-            d="M100%,90% Q80%,70% 60%,75% T20%,60% Q0%,50% -20%,65%"
+            d="M 100 90 Q 80 70 60 75 T 20 60 Q 0 50 -20 65"
             stroke="url(#rootGradient)"
             strokeWidth="1.5"
             fill="none"
