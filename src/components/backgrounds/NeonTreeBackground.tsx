@@ -45,7 +45,6 @@ export default function NeonTreeBackground() {
     const roots = ["#15c9ff22", "#00ff6e15", "#00b3ff20"];
 
     // Initial seed near bottom center, slightly randomized
-    const baseX = (width * 0.5 + rand(-40, 40)) / devicePixelRatio;
     const baseX = canvas.offsetWidth * 0.5 + rand(-40, 40);
     const baseY = canvas.offsetHeight * 0.92;
 
@@ -79,12 +78,7 @@ export default function NeonTreeBackground() {
     function step(now: number) {
       rafRef.current = requestAnimationFrame(step);
       const dt = now - last;
-
-
-    function step(now: number) {
-      rafRef.current = requestAnimationFrame(step);
-      const dt = now - last;
-      if (dt < MIN_DT) return;
+      if (dt < minDt) return;
       last = now;
 
       // Fade a bit to produce neon trails
