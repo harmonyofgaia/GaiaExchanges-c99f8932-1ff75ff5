@@ -83,7 +83,8 @@ export class GaiaEngine<S, C = unknown> {
     this.stop();
     (this as any).cfg = { ...this.cfg, fps: Math.max(1, Math.floor(fps)) };
     // @ts-expect-error reinit private in same class
-    this.ticker = createTicker(this.fps, (t) => this.onTick(t));
+    this._fps = Math.max(1, Math.floor(fps));
+    this.ticker = createTicker(this._fps, (t) => this.onTick(t));
     if (wasRunning) this.start();
   }
   resetState(next: S) { this.store.set(next); }
