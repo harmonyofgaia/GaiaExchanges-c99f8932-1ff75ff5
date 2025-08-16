@@ -141,7 +141,7 @@ export default function MasterForestBackground() {
 
         const grad = ctx.createLinearGradient(px, py, x1, y1);
         grad.addColorStop(0, "rgba(0, 255, 170, 0.00);");
-        grad.addColorStop(0.25, "rgba(0, 255, 170, 0.06);");
+        grad.addColorStop(0.25, "rgba(0, 255, 170, 0.06)");
         grad.addColorStop(0.55, "rgba(100, 255, 210, 0.05)");
         grad.addColorStop(1, "rgba(0, 255, 170, 0.00);");
 
