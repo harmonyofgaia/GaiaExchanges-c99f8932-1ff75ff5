@@ -8,6 +8,13 @@ Adapter Contract (abstract)
 - Sign.verify(message, signature): for proposal and vote receipts.
 - Vote.cast(ballotId, choice, weight, proof?: ZKProof | null): emits on-chain/off-chain receipt.
   - `proof` should be a zero-knowledge proof object (`ZKProof`) when sybil resistance or eligibility verification is required; otherwise, pass `null`.
+
+**ZKProof Object**
+- A `ZKProof` object should contain the necessary fields to represent a zero-knowledge proof, such as:
+  - `proof`: The cryptographic proof data (string or object).
+  - `publicSignals`: Any public signals or inputs required for verification.
+  - `protocol`: (optional) The protocol or scheme used (e.g., zkSNARK, zkSTARK).
+- For more details, refer to the [ZKProof specification](https://zkproof.org/) or your project's implementation.
 - Treasury.proposePayout(awardId, amount, recipient): submits to multisig/treasury.
 - Treasury.executePayout(proposalId): executes after approvals/timelock.
 - Identity.getReputation(user): returns sybil resistance signals.
