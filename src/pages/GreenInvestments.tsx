@@ -1,5 +1,4 @@
 import { GAiACommunityProjects } from "@/components/green-investments/GAiACommunityProjects";
-import { GaiaCommunityProjects } from "@/components/GaiaCommunityProjects";
 import { WildfireSandProtection } from "@/components/green-investments/WildfireSandProtection";
 import { SandProtectInvestmentProject } from "@/components/green-investments/SandProtectInvestmentProject";
 import { GreenInvestmentWalletManager } from "@/components/green-investments/GreenInvestmentWalletManager";
