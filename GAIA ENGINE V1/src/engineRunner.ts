@@ -86,6 +86,12 @@ export class GaiaEngine<S, C = unknown> {
     this._fps = Math.max(1, Math.floor(fps));
     this.ticker = createTicker(this._fps, (t) => this.onTick(t));
     if (wasRunning) this.start();
+    this.reinitTicker();
+    if (wasRunning) this.start();
+  }
+
+  private reinitTicker() {
+    this.ticker = createTicker(this.fps, (t) => this.onTick(t));
   }
   resetState(next: S) { this.store.set(next); }
 
