@@ -28,6 +28,32 @@ interface SupercomputerCluster {
   totalCores: number;
   totalRAM: number;
   networkSpeed: number;
+  isActive: boolean;
+  currentLoad: number;
+}
+
+// Quantum algorithm data types
+interface QuantumAlgorithmData {
+  input: Record<string, unknown>;
+  parameters?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
+}
+
+interface QuantumAlgorithmResult {
+  result: Record<string, unknown>;
+  executionTime: number;
+  quantumAdvantage: number;
+  fidelity: number;
+  metadata?: Record<string, unknown>;
+}
+
+// AI training data types  
+interface AITrainingData {
+  samples: Array<Record<string, unknown>>;
+  labels?: Array<unknown>;
+  parameters?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
+}
   isOperational: boolean;
   tasks: string[];
 }
@@ -195,7 +221,7 @@ class QuantumAIService {
   }
 
   // Quantum Algorithm Execution
-  async executeQuantumAlgorithm(algorithm: string, data: any): Promise<any> {
+  async executeQuantumAlgorithm(algorithm: string, data: QuantumAlgorithmData): Promise<QuantumAlgorithmResult> {
     const availableComputers = Array.from(
       this.quantumComputers.values(),
     ).filter((qc) => qc.isOnline);
@@ -234,7 +260,7 @@ class QuantumAIService {
   }
 
   // AI Training and Optimization
-  async trainAIModel(modelId: string, trainingData: any): Promise<void> {
+  async trainAIModel(modelId: string, trainingData: AITrainingData): Promise<void> {
     const model = this.aiModels.get(modelId);
     if (!model) throw new Error("AI model not found");
 

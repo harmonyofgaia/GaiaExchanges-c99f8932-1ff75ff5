@@ -23,6 +23,20 @@ interface MultiverseConnection {
   isEstablished: boolean;
 }
 
+interface ParallelUniverseData {
+  universeId: string;
+  physicsConstants: {
+    speedOfLight: number;
+    planckConstant: number;
+    gravitationalConstant: number;
+  };
+  timelineVariations: number;
+  inhabitedWorlds: number;
+  accessTimestamp: number;
+  stabilityIndex: number;
+  quantumSignature: string;
+}
+
 interface RealityManipulation {
   id: string;
   targetReality: string;
@@ -253,7 +267,7 @@ class MultiverseControlService {
   }
 
   // Parallel Universe Access
-  async accessParallelUniverse(universeId: string): Promise<any> {
+  async accessParallelUniverse(universeId: string): Promise<ParallelUniverseData> {
     console.log(`🚪 Accessing Parallel Universe: ${universeId}`);
 
     // Simulate universe access
