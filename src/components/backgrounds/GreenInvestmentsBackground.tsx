@@ -130,7 +130,8 @@ export default function GreenInvestmentsBackground() {
           drops[i] += 0.3;
           
           // Reset drop when it goes off screen
-          if (y > height / dpr && Math.random() > 0.99) {
+          // Reset drop when it goes off screen (deterministic)
+          if (y > height / dpr) {
             drops[i] = -10;
           }
         }
