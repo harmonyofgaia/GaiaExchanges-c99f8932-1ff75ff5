@@ -20,7 +20,7 @@ Award_t = min(BaseCap, RunwayCap, DrawCap) * PriceDamp
 
 Default k values:
 - k1 = 0.01 (max 1% of average treasury)
-- k2 = award that keeps runway ≥ 24 months post-award
+- k2 = min(1.0, (Runway_t - 24) / target_runway)  # ensures runway remains ≥ 24 months post-award
 - k3 = ≤ 20% of average positive net inflows
 
 Guardrails
