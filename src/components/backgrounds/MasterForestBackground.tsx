@@ -263,7 +263,7 @@ export default function MasterForestBackground() {
         height * 0.6,
         Math.max(width, height) * 0.8,
       );
-      radial.addColorStop(0, "rgba(0,0,0,0.00);");
+      radial.addColorStop(0, "rgba(0,0,0,0.00)");
       radial.addColorStop(0.55, "rgba(2, 10, 10, 0.12);");
       radial.addColorStop(1, "rgba(0,0,0,0.35);");
 
