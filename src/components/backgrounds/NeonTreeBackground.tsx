@@ -45,6 +45,7 @@ export default function NeonTreeBackground() {
     const roots = ["#15c9ff22", "#00ff6e15", "#00b3ff20"];
 
     // Initial seed near bottom center, slightly randomized
+    const baseX = (width * 0.5 + rand(-40, 40)) / devicePixelRatio;
     const baseX = canvas.offsetWidth * 0.5 + rand(-40, 40);
     const baseY = canvas.offsetHeight * 0.92;
 
@@ -63,7 +64,7 @@ export default function NeonTreeBackground() {
     makeBranch(baseX, baseY, -Math.PI / 2, 2.5, 340);
 
     // Background neural/matrix particles
-    const particles = Array.from({ length: particleCount }, () => ({
+    const particles = Array.from({ length: 110 }, () => ({
       x: rand(0, width / devicePixelRatio),
       y: rand(0, height / devicePixelRatio),
       vy: rand(0.15, 0.6),
@@ -78,7 +79,12 @@ export default function NeonTreeBackground() {
     function step(now: number) {
       rafRef.current = requestAnimationFrame(step);
       const dt = now - last;
-      if (dt < minDt) return;
+
+
+    function step(now: number) {
+      rafRef.current = requestAnimationFrame(step);
+      const dt = now - last;
+      if (dt < MIN_DT) return;
       last = now;
 
       // Fade a bit to produce neon trails
