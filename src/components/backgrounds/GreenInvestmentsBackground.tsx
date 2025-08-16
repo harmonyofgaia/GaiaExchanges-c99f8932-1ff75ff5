@@ -104,7 +104,6 @@ export default function GreenInvestmentsBackground() {
       for (let i = 0; i < columns; i++) {
         drops[i] = Math.random() * -500; // Start with staggered timing
       }
-    };
     function drawMatrixRain() {
       if (prefersReducedMotion) return;
       ctx.clearRect(0, 0, width, height);
