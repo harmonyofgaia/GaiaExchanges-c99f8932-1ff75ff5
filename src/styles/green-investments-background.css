@@ -1,69 +1,133 @@
 /* Green Investments page-only background 
- * Creates a three-layer background effect with animated tree
+ * Creates a spectacular multi-layer background effect with animated magical tree
  */
 
-/* Keyframes for the tree zoom-in animation */
-@keyframes treeZoomIn {
-  from {
-    background-size: 60% auto;
-    background-position: center 110%;
-  }
-  to {
-    background-size: 120% auto;
-    background-position: center 85%;
-  }
-}
-
-/* Keyframes for ambient aura pulse */
-@keyframes auraGlow {
+/* Enhanced keyframes for the magical tree growth animation */
+@keyframes magicalTreeGrowth {
   0% {
-    opacity: 0.3;
-    transform: scale(1);
+    background-size: 40% auto;
+    background-position: center 120%;
+    filter: brightness(0.8) saturate(0.7);
+  }
+  25% {
+    background-size: 60% auto;
+    background-position: center 105%;
+    filter: brightness(1.0) saturate(1.0);
   }
   50% {
-    opacity: 0.5;
-    transform: scale(1.1);
+    background-size: 80% auto;
+    background-position: center 95%;
+    filter: brightness(1.2) saturate(1.3);
+  }
+  75% {
+    background-size: 100% auto;
+    background-position: center 88%;
+    filter: brightness(1.1) saturate(1.2);
   }
   100% {
-    opacity: 0.3;
-    transform: scale(1);
+    background-size: 120% auto;
+    background-position: center 80%;
+    filter: brightness(1.0) saturate(1.0);
   }
 }
 
-/* Main page class for Green Investments background */
+/* Enhanced ambient magical aura pulse */
+@keyframes mysticalAura {
+  0% {
+    opacity: 0.2;
+    transform: scale(0.9) rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  33% {
+    opacity: 0.4;
+    transform: scale(1.1) rotate(2deg);
+    filter: hue-rotate(10deg);
+  }
+  66% {
+    opacity: 0.6;
+    transform: scale(1.2) rotate(-1deg);
+    filter: hue-rotate(-5deg);
+  }
+  100% {
+    opacity: 0.2;
+    transform: scale(0.9) rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+}
+
+/* Floating particles animation */
+@keyframes floatingParticles {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0px) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+/* Atmospheric shimmer effect */
+@keyframes atmosphericShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Main page class for Green Investments spectacular background */
 .page-green-investments {
   position: relative;
-  /* Three-layer background composition */
+  overflow: hidden;
+  
+  /* Multi-layer magical background composition */
   background-image: 
-    /* Layer 1 (top): Tree SVG with animation */
+    /* Layer 1 (top): Enhanced Magical Tree SVG */
     url('/assets/green-tree.svg'),
-    /* Layer 2 (middle): Ambient green aura */
-    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 40%, transparent 70%),
-    /* Layer 3 (bottom): Page gradient matching existing Tailwind colors */
-    linear-gradient(135deg, #000000 0%, #111827 35%, #064e3b 100%);
+    /* Layer 2: Intense magical aura */
+    radial-gradient(ellipse 90% 70% at 50% 55%, rgba(16, 185, 129, 0.25) 0%, rgba(34, 197, 94, 0.15) 30%, rgba(52, 211, 153, 0.08) 60%, transparent 80%),
+    /* Layer 3: Secondary atmospheric glow */
+    radial-gradient(ellipse 120% 80% at 30% 70%, rgba(6, 78, 59, 0.3) 0%, rgba(4, 120, 87, 0.15) 40%, transparent 70%),
+    /* Layer 4: Magical shimmer gradient */
+    linear-gradient(45deg, rgba(16, 185, 129, 0.05) 0%, rgba(34, 197, 94, 0.08) 25%, rgba(52, 211, 153, 0.06) 50%, rgba(6, 182, 212, 0.04) 75%, transparent 100%),
+    /* Layer 5 (bottom): Enhanced base gradient */
+    linear-gradient(135deg, #000000 0%, #0f172a 20%, #111827 40%, #065f46 70%, #064e3b 100%);
   
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  background-attachment: fixed, fixed, fixed;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-attachment: fixed, fixed, fixed, fixed, fixed;
   
-  /* Tree positioning and animation */
+  /* Magical positioning and sizing */
   background-position: 
-    center 95%,     /* Tree positioned lower initially */
-    center center,  /* Aura centered */
-    center center;  /* Gradient covers full area */
+    center 100%,     /* Tree positioned at bottom initially */
+    center 55%,      /* Main aura slightly below center */
+    30% 70%,         /* Secondary aura positioned asymmetrically */
+    center center,   /* Shimmer covers full area */
+    center center;   /* Base gradient covers full area */
   
   background-size: 
-    80% auto,       /* Tree starts smaller */
-    100% 100%,      /* Aura covers full area */
-    100% 100%;      /* Gradient covers full area */
+    50% auto,        /* Tree starts medium-small */
+    150% 120%,       /* Main aura is larger */
+    120% 100%,       /* Secondary aura */
+    200% 200%,       /* Shimmer effect larger for movement */
+    100% 100%;       /* Base gradient covers full area */
   
-  /* Apply the slow zoom animation to the tree layer */
-  animation: treeZoomIn 120s ease-in-out infinite alternate;
+  /* Apply the magical growth animation */
+  animation: magicalTreeGrowth 180s ease-in-out infinite alternate;
   
   /* Ensure background doesn't interfere with content */
   background-clip: padding-box;
 }
 
-/* Pseudo-element for additional ambient effects */
+/* Enhanced pseudo-element for mystical atmospheric effects */
 .page-green-investments::before {
   content: '';
   position: fixed;
@@ -71,9 +135,38 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 30% 70%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 70% 30%, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
-  animation: auraGlow 90s ease-in-out infinite;
+  background: 
+    /* Multiple mystical aura layers */
+    radial-gradient(circle at 25% 75%, rgba(16, 185, 129, 0.15) 0%, rgba(34, 197, 94, 0.08) 30%, transparent 60%),
+    radial-gradient(circle at 75% 25%, rgba(52, 211, 153, 0.12) 0%, rgba(6, 182, 212, 0.06) 35%, transparent 65%),
+    radial-gradient(circle at 60% 80%, rgba(5, 150, 105, 0.10) 0%, rgba(4, 120, 87, 0.05) 40%, transparent 70%),
+    /* Atmospheric shimmer */
+    linear-gradient(90deg, transparent 0%, rgba(34, 197, 94, 0.03) 20%, rgba(16, 185, 129, 0.05) 40%, rgba(52, 211, 153, 0.03) 60%, transparent 80%);
+  
+  background-size: 100% 100%, 100% 100%, 100% 100%, 300% 100%;
+  animation: 
+    mysticalAura 120s ease-in-out infinite,
+    atmosphericShimmer 45s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Additional magical floating particles layer */
+.page-green-investments::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle 2px at 15% 25%, rgba(34, 197, 94, 0.6) 0%, transparent 50%),
+    radial-gradient(circle 1px at 85% 15%, rgba(16, 185, 129, 0.7) 0%, transparent 50%),
+    radial-gradient(circle 3px at 25% 85%, rgba(52, 211, 153, 0.5) 0%, transparent 50%),
+    radial-gradient(circle 1px at 75% 75%, rgba(6, 182, 212, 0.6) 0%, transparent 50%),
+    radial-gradient(circle 2px at 45% 35%, rgba(34, 197, 94, 0.4) 0%, transparent 50%),
+    radial-gradient(circle 1px at 65% 65%, rgba(16, 185, 129, 0.5) 0%, transparent 50%);
+  animation: floatingParticles 25s ease-in-out infinite;
   pointer-events: none;
   z-index: -1;
 }
@@ -83,47 +176,93 @@
   .page-green-investments {
     /* Disable tree animation */
     animation: none;
-    /* Set tree to final static position */
+    /* Set tree to final static position with impressive scale */
     background-position: 
-      center 85%,     /* Tree final position */
-      center center,  /* Aura centered */
-      center center;  /* Gradient covers full area */
+      center 85%,     /* Tree final impressive position */
+      center 55%,     /* Main aura positioned */
+      30% 70%,        /* Secondary aura */
+      center center,  /* Shimmer static */
+      center center;  /* Base gradient */
     
     background-size: 
-      100% auto,      /* Tree final size */
-      100% 100%,      /* Aura covers full area */
-      100% 100%;      /* Gradient covers full area */
+      100% auto,      /* Tree final impressive size */
+      150% 120%,      /* Aura maintained */
+      120% 100%,      /* Secondary aura */
+      100% 100%,      /* Shimmer static */
+      100% 100%;      /* Base gradient */
   }
   
   .page-green-investments::before {
-    /* Disable aura animation */
+    /* Disable mystical animations */
+    animation: none;
+    opacity: 0.4;
+    transform: none;
+  }
+  
+  .page-green-investments::after {
+    /* Disable particle animations */
     animation: none;
     opacity: 0.3;
-    transform: none;
   }
 }
 
-/* Ensure content is always above the background */
+/* Ensure content is always above the magical background */
 .page-green-investments > * {
   position: relative;
   z-index: 1;
 }
 
-/* Fine-tune for different screen sizes */
+/* Enhanced responsive design for different screen sizes */
 @media (max-width: 768px) {
   .page-green-investments {
     background-size: 
-      120% auto,      /* Larger tree on mobile */
-      100% 100%,
-      100% 100%;
+      140% auto,      /* Larger tree on mobile for impact */
+      180% 140%,      /* Larger aura on mobile */
+      140% 120%,      /* Adjusted secondary aura */
+      250% 200%,      /* Enhanced shimmer on mobile */
+      100% 100%;      /* Base gradient */
+    
+    background-position:
+      center 90%,     /* Tree positioned higher on mobile */
+      center 60%,     /* Aura adjusted */
+      20% 75%,        /* Secondary aura repositioned */
+      center center,  /* Shimmer */
+      center center;  /* Base gradient */
+  }
+  
+  @keyframes magicalTreeGrowth {
+    0% {
+      background-size: 120% auto;
+      background-position: center 100%;
+      filter: brightness(0.9) saturate(0.8);
+    }
+    50% {
+      background-size: 160% auto;
+      background-position: center 85%;
+      filter: brightness(1.1) saturate(1.2);
+    }
+    100% {
+      background-size: 180% auto;
+      background-position: center 80%;
+      filter: brightness(1.0) saturate(1.0);
+    }
   }
   
   @media (prefers-reduced-motion: reduce) {
     .page-green-investments {
       background-size: 
-        140% auto,    /* Adjusted for mobile static view */
-        100% 100%,
-        100% 100%;
+        160% auto,    /* Impressive static mobile size */
+        180% 140%,    /* Aura maintained */
+        140% 120%,    /* Secondary aura */
+        100% 100%,    /* Shimmer static */
+        100% 100%;    /* Base gradient */
+        
+      background-position:
+        center 85%,   /* Final mobile position */
+        center 60%,   /* Aura */
+        20% 75%,      /* Secondary aura */
+        center center,/* Shimmer */
+        center center;/* Base gradient */
     }
   }
 }
@@ -131,19 +270,50 @@
 @media (min-width: 1920px) {
   .page-green-investments {
     background-size: 
-      60% auto,       /* Smaller tree on very large screens */
-      100% 100%,
-      100% 100%;
+      70% auto,       /* Smaller initial tree on very large screens */
+      140% 110%,      /* Proportional aura */
+      110% 90%,       /* Secondary aura */
+      180% 180%,      /* Enhanced shimmer */
+      100% 100%;      /* Base gradient */
   }
   
-  @keyframes treeZoomIn {
-    from {
-      background-size: 50% auto;
+  @keyframes magicalTreeGrowth {
+    0% {
+      background-size: 60% auto;
       background-position: center 110%;
+      filter: brightness(0.8) saturate(0.7);
     }
-    to {
+    25% {
+      background-size: 80% auto;
+      background-position: center 100%;
+      filter: brightness(1.0) saturate(1.0);
+    }
+    50% {
       background-size: 100% auto;
-      background-position: center 85%;
+      background-position: center 90%;
+      filter: brightness(1.2) saturate(1.3);
     }
+    75% {
+      background-size: 120% auto;
+      background-position: center 85%;
+      filter: brightness(1.1) saturate(1.2);
+    }
+    100% {
+      background-size: 140% auto;
+      background-position: center 75%;
+      filter: brightness(1.0) saturate(1.0);
+    }
+  }
+}
+
+/* Ultra-wide screen support */
+@media (min-width: 2560px) {
+  .page-green-investments {
+    background-size: 
+      50% auto,       /* Even smaller initial on ultra-wide */
+      120% 100%,      /* Proportional aura */
+      100% 80%,       /* Secondary aura */
+      150% 150%,      /* Shimmer */
+      100% 100%;      /* Base gradient */
   }
 }
