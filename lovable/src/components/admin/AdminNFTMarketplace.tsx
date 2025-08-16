@@ -374,7 +374,7 @@ export function AdminNFTMarketplace() {
                     onChange={(e) =>
                       setNewNFT((prev) => ({
                         ...prev,
-                        category: e.target.value as unknown,
+                        category: e.target.value as "armor" | "weapon" | "tool" | "landscape" | "enhancement",
                       }))
                     }
                     className="w-full px-3 py-2 bg-muted border border-border rounded-md"
