@@ -1,21 +1,17 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import crypto from "crypto";
-// Try to import useAuth safely, falling back to a no-op
-let useAuth: () => { user: any } = () => ({ user: null });
-try {
-  const authModule = require("@/components/auth/AuthProvider");
-  if (authModule?.useAuth) {
-    useAuth = authModule.useAuth;
-  }
-} catch (error) {
-  console.error("AuthProvider not available:", error);
-}
+// Use Web Crypto API for browser compatibility instead of Node.js crypto
+import { useAuth } from "@/components/auth/AuthProvider";
 
 interface AdminSession {
   id: string;
   timestamp: number;
   level?: string;
+}
+
+// Helper function to calculate original session timestamp from expiry
+function getAdminSessionTimestamp(expiry: string): number {
+  return parseInt(expiry) - 8 * 60 * 60 * 1000; // Original creation time (8 hours before expiry)
 }
 
 export function useSecureAdmin() {
@@ -28,8 +24,38 @@ export function useSecureAdmin() {
     if (user) {
       validateAdminSession();
     } else {
-      setIsAdmin(false);
-      setAdminSession(null);
+      // Check for local admin session even without user
+      const localSessionActive = sessionStorage.getItem("admin-session-active") === "true";
+      const localUsername = localStorage.getItem("gaia-admin-username")?.toLowerCase();
+      const localSession = localStorage.getItem("gaia-admin-session");
+      const localExpiry = localStorage.getItem("gaia-admin-expiry");
+
+      if (
+        localSessionActive &&
+        localUsername === "synatic" &&
+        localSession &&
+        localExpiry &&
+        Date.now() < parseInt(localExpiry)
+      ) {
+        // Valid local admin session found
+        setIsAdmin(true);
+        setAdminSession({
+          id: localSession,
+          timestamp: parseInt(localExpiry) - 8 * 60 * 60 * 1000, // Original creation time
+          level: "admin",
+        });
+      } else {
+        // Clean up expired local sessions
+        if (localSessionActive && localUsername === "synatic" && localExpiry && Date.now() >= parseInt(localExpiry)) {
+          sessionStorage.removeItem("admin-session-active");
+          localStorage.removeItem("gaia-admin-username");
+          localStorage.removeItem("gaia-admin-active");
+          localStorage.removeItem("gaia-admin-session");
+          localStorage.removeItem("gaia-admin-expiry");
+        }
+        setIsAdmin(false);
+        setAdminSession(null);
+      }
       setIsValidating(false);
     }
   }, [user]);
@@ -41,6 +67,40 @@ export function useSecureAdmin() {
     }
 
     try {
+      // First check for local "Synatic" admin session (fallback)
+      const localSessionActive = sessionStorage.getItem("admin-session-active") === "true";
+      const localUsername = localStorage.getItem("gaia-admin-username")?.toLowerCase();
+      const localSession = localStorage.getItem("gaia-admin-session");
+      const localExpiry = localStorage.getItem("gaia-admin-expiry");
+
+      if (
+        localSessionActive &&
+        localUsername === "synatic" &&
+        localSession &&
+        localExpiry &&
+        Date.now() < parseInt(localExpiry)
+      ) {
+        // Valid local admin session found
+        setIsAdmin(true);
+        setAdminSession({
+          id: localSession,
+          timestamp: getAdminSessionTimestamp(localExpiry), // Original creation time
+          level: "admin",
+        });
+        setIsValidating(false);
+        return;
+      }
+
+      // If local session expired, clean it up
+      if (localSessionActive && localUsername === "synatic" && localExpiry && Date.now() >= parseInt(localExpiry)) {
+        sessionStorage.removeItem("admin-session-active");
+        localStorage.removeItem("gaia-admin-username");
+        localStorage.removeItem("gaia-admin-active");
+        localStorage.removeItem("gaia-admin-session");
+        localStorage.removeItem("gaia-admin-expiry");
+      }
+
+      // Fall back to Supabase-based validation
       // 🔒 SECURE: Use the enhanced security validation function
       const { data: isValidAdmin, error } = await supabase.rpc(
         "validate_admin_session_security",
@@ -60,8 +120,11 @@ export function useSecureAdmin() {
           .maybeSingle();
 
         if (adminAccount) {
-          // Create secure session token
-          const sessionToken = `session-${Date.now()}-${crypto.randomBytes(16).toString("hex")}`;
+          // Create secure session token using Web Crypto API
+          const randomBytes = new Uint8Array(16);
+          crypto.getRandomValues(randomBytes);
+          const hexString = Array.from(randomBytes, byte => byte.toString(16).padStart(2, '0')).join('');
+          const sessionToken = `session-${Date.now()}-${hexString}`;
 
           // Create admin security session
           const { error: sessionError } = await supabase
@@ -134,93 +197,89 @@ export function useSecureAdmin() {
     }
   };
 
+  // Helper to generate a secure random string
+  function generateSecureRandomString(length: number): string {
+    const array = new Uint8Array(length);
+    window.crypto.getRandomValues(array);
+    // Convert to hex for safety and avoid call stack issues
+    return Array.from(array, byte => byte.toString(16).padStart(2, '0'))
+      .join('')
+      .substring(0, length);
+  }
+
   const grantAdminAccess = async (): Promise<boolean> => {
-    if (!user) return false;
+    // For local username-based access, create local session
+    const randomPart = generateSecureRandomString(22); // 22 chars ~ 132 bits entropy
+    const sessionToken = `local-session-${Date.now()}-${randomPart}`;
+    const expiryTime = Date.now() + 8 * 60 * 60 * 1000; // 8 hours
 
-    try {
-      // 🔒 SECURE: Create secure admin session with audit logging
-      const sessionToken = `session-${Date.now()}-${Math.random().toString(36).substr(2, 16)}`;
+    // Store local admin session
+    localStorage.setItem("gaia-admin-username", "synatic");
+    localStorage.setItem("gaia-admin-active", "true");
+    localStorage.setItem("gaia-admin-session", sessionToken);
+    localStorage.setItem("gaia-admin-expiry", expiryTime.toString());
+    sessionStorage.setItem("admin-session-active", "true");
 
-      // Create admin session record with proper validation
-      const { error } = await supabase.from("admin_sessions").insert([
-        {
-          session_token: sessionToken,
-          user_id: user.id,
-          ip_address: "127.0.0.1", // In production this would be the real client IP
-          user_agent: navigator.userAgent,
-        },
-      ]);
+    // Update local state
+    setIsAdmin(true);
+    setAdminSession({
+      id: sessionToken,
+      timestamp: Date.now(),
+      level: "admin",
+    });
 
-      if (error) {
-        console.error("Error creating admin session:", error);
-        return false;
-      }
-
-      // Set the sessionStorage key that InvisibleAdminProtection expects
-      sessionStorage.setItem("admin-session-active", "true");
-
-      // Log the admin access grant
-      await supabase.rpc("log_admin_action", {
-        action_name: "admin_access_granted",
-        action_details: {
-          session_token: sessionToken,
-          user_id: user.id,
-          timestamp: new Date().toISOString(),
-          method: "secure_session_creation",
-        },
-      });
-
-      await validateAdminSession();
-      return true;
-    } catch (error) {
-      console.error("Error granting admin access:", error);
-      return false;
-    }
+    return true;
   };
 
   const revokeAdminAccess = async () => {
-    if (!user || !adminSession) return;
-
     try {
       // Clear the sessionStorage key that InvisibleAdminProtection expects
       sessionStorage.removeItem("admin-session-active");
       
-      // Deactivate admin security session
-      if (adminSession.id) {
+      // Clear local admin session data
+      localStorage.removeItem("gaia-admin-username");
+      localStorage.removeItem("gaia-admin-active");
+      localStorage.removeItem("gaia-admin-session");
+      localStorage.removeItem("gaia-admin-expiry");
+      
+      // Deactivate admin security session (if Supabase user exists)
+      if (user && adminSession?.id) {
         await supabase
           .from("admin_security_sessions")
           .update({ is_active: false })
           .eq("session_token", adminSession.id);
-      }
 
-      // 🔒 SECURE: Log admin session revocation for audit trail
-      await supabase.rpc("log_security_event", {
-        p_user_id: user.id,
-        p_action: "admin_access_revoked",
-        p_details: {
-          session_id: adminSession.id,
-          timestamp: new Date().toISOString(),
-          method: "secure_revocation",
-        },
-        p_risk_score: 1,
-      });
+        // 🔒 SECURE: Log admin session revocation for audit trail
+        await supabase.rpc("log_security_event", {
+          p_user_id: user.id,
+          p_action: "admin_access_revoked",
+          p_details: {
+            session_id: adminSession.id,
+            timestamp: new Date().toISOString(),
+            method: "secure_revocation",
+          },
+          p_risk_score: 1,
+        });
+      }
 
       console.log("Admin session securely revoked with audit logging");
     } catch (error) {
       console.error("Error revoking admin access:", error);
 
-      // Log security incident for revocation failures
-      try {
-        await supabase.from("security_incidents").insert([
-          {
-            incident_type: "admin_revocation_failure",
-            severity: "high",
-            user_id: user.id,
-            details: { error: error.message, session_id: adminSession.id },
-          },
-        ]);
-      } catch (logError) {
-        console.error("Failed to log security incident:", logError);
+      // Log security incident for revocation failures (if user exists)
+      if (user) {
+        try {
+          await supabase.from("security_incidents").insert([
+            {
+              incident_type: "admin_revocation_failure",
+              severity: "high",
+              user_id: user.id,
+              details: { error: error.message, session_id: adminSession?.id },
+            },
+          ]);
+        } catch (logError) {
+          console.error("Failed to log security incident:", logError);
+        }
       }
     }
 

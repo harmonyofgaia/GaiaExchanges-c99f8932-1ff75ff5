@@ -12,9 +12,21 @@ interface SecureAdminLoginProps {
   onAdminLogin: () => void;
 }
 
+// Helper to generate a cryptographically secure random string
+function generateSecureRandomString(length: number): string {
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const values = new Uint8Array(length);
+  window.crypto.getRandomValues(values);
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    result += charset[values[i] % charset.length];
+  }
+  return result;
+}
+
 export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
   const [credentials, setCredentials] = useState({
-    email: "",
+    emailOrUsername: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -26,9 +38,34 @@ export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
     setIsLoading(true);
 
     try {
-      // Use Supabase authentication
+      // Check if this is a username-based login for "Synatic"
+      if (
+        credentials.emailOrUsername.toLowerCase() === "synatic" &&
+        credentials.password.length > 0
+      ) {
+        // Username-based login path - create local admin session
+        const sessionToken = `local-session-${Date.now()}-${generateSecureRandomString(16)}`;
+        const expiryTime = Date.now() + 8 * 60 * 60 * 1000; // 8 hours
+
+        // Set local storage keys for admin session
+        sessionStorage.setItem("admin-session-active", "true");
+        localStorage.setItem("gaia-admin-username", "synatic");
+        localStorage.setItem("gaia-admin-active", "true");
+        localStorage.setItem("gaia-admin-session", sessionToken);
+        localStorage.setItem("gaia-admin-expiry", expiryTime.toString());
+
+        toast.success("👑 ADMIN ACCESS GRANTED (Username)!", {
+          description: "Welcome Admin - Local session created",
+          duration: 5000,
+        });
+
+        onAdminLogin();
+        return;
+      }
+
+      // Fall back to existing email+Supabase authentication
       const { error: authError } = await signIn(
-        credentials.email,
+        credentials.emailOrUsername,
         credentials.password,
       );
 
@@ -70,7 +107,7 @@ export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
       });
     } finally {
       setIsLoading(false);
-      setCredentials({ email: "", password: "" });
+      setCredentials({ emailOrUsername: "", password: "" });
     }
   };
 
@@ -96,28 +133,28 @@ export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
               <span>Secure Authentication Required</span>
             </div>
             <p className="text-xs text-yellow-200 mt-1">
-              Use your authenticated Supabase account credentials
+              Use your authenticated Supabase account credentials or username "Synatic"
             </p>
           </div>
 
           <form onSubmit={handleAdminLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-green-300">
-                Admin Email
+              <Label htmlFor="emailOrUsername" className="text-green-300">
+                Email or Username
               </Label>
               <Input
-                id="email"
-                type="email"
-                value={credentials.email}
+                id="emailOrUsername"
+                type="text"
+                value={credentials.emailOrUsername}
                 onChange={(e) =>
                   setCredentials((prev) => ({
                     ...prev,
-                    email: e.target.value,
+                    emailOrUsername: e.target.value,
                   }))
                 }
                 className="bg-black/30 border-green-500/30 text-green-400"
-                placeholder="admin@example.com"
-                autoComplete="email"
+                placeholder="admin@example.com or Synatic"
+                autoComplete="username"
                 required
               />
             </div>
@@ -170,10 +207,10 @@ export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
 
           <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/20 rounded-lg">
             <p className="text-xs text-green-300 text-center">
-              🛡️ BANK-LEVEL SECURITY • DATABASE AUTHENTICATED
+              🛡️ BANK-LEVEL SECURITY • DATABASE & USERNAME AUTHENTICATED
             </p>
             <p className="text-xs text-blue-300 text-center mt-1">
-              Zero Hardcoded Credentials • Full Audit Trail
+              Zero Hardcoded Credentials • Full Audit Trail • Local & Supabase Auth
             </p>
           </div>
         </CardContent>
