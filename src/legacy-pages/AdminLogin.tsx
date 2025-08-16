@@ -37,7 +37,8 @@ export default function AdminLogin() {
     const getClientInfo = async () => {
       try {
         // Simulate getting client IP (in production, this would be from a service)
-        const ip = `192.168.1.${Math.floor(Math.random() * 255)}`;
+        // Use a fixed test IP (not in allowlist). In production, obtain client IP securely.
+        const ip = "192.168.1.200";
         setClientIP(ip);
       } catch (error) {
         console.error("Failed to get client info:", error);
