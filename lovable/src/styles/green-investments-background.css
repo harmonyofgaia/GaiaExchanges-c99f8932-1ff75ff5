@@ -1,0 +1,120 @@
+/* === Green Investments: softer, deeper, living forest hallway background === */
+/* Key change: top image comes from CSS var --gi-top-image with a safe fallback. */
+/* Also reduces overlay strength and adds a gentle vignette "hallway" depth. */
+
+@keyframes spectacularRealImageGrowth {
+  0% {
+    background-size: cover, 60% auto, 140% 110%, 100% 100%, 120% 100%, 200% 200%, 100% 100%, 100% 100%;
+    background-position: center center, center 98%, center 55%, center center, 35% 75%, center center, center center, center center;
+    filter: brightness(0.85) saturate(0.95) contrast(1.05) hue-rotate(0deg);
+  }
+  50% {
+    background-size: cover, 90% auto, 180% 150%, 100% 100%, 140% 120%, 240% 240%, 100% 100%, 100% 100%;
+    background-position: center center, center 88%, center 45%, center center, 25% 65%, center center, center center, center center;
+    filter: brightness(1.08) saturate(1.12) contrast(1.12) hue-rotate(6deg);
+  }
+  100% {
+    background-size: cover, 110% auto, 200% 170%, 100% 100%, 150% 130%, 260% 260%, 100% 100%, 100% 100%;
+    background-position: center center, center 85%, center 40%, center center, 20% 60%, center center, center center, center center;
+    filter: brightness(1.03) saturate(1.06) contrast(1.08) hue-rotate(0deg);
+  }
+}
+
+@keyframes atmosphericShimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.page-green-investments {
+  position: relative;
+  overflow: hidden;
+
+  background-image:
+    var(--gi-top-image, url('https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/public-bucket/474532511_916996390550718_6120896688604953563_n.jpg')),
+    url('/assets/green-tree.svg'),
+    radial-gradient(ellipse 140% 100% at 50% 70%, rgba(0, 0, 0, 0.55) 0%, rgba(8, 20, 18, 0.35) 38%, rgba(6, 24, 20, 0.12) 66%, transparent 82%),
+    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(16, 185, 129, 0.18) 0%, rgba(34, 197, 94, 0.12) 30%, rgba(52, 211, 153, 0.08) 60%, transparent 80%),
+    linear-gradient(rgba(6, 78, 59, 0.12), rgba(4, 120, 87, 0.10)),
+    radial-gradient(ellipse 120% 80% at 30% 70%, rgba(6, 78, 59, 0.10) 0%, rgba(4, 120, 87, 0.08) 40%, transparent 70%),
+    linear-gradient(45deg, rgba(16, 185, 129, 0.05) 0%, rgba(34, 197, 94, 0.07) 25%, rgba(52, 211, 153, 0.06) 50%, rgba(6, 182, 212, 0.05) 75%, transparent 100%),
+    linear-gradient(135deg, #000000 0%, #0b1220 20%, #0b1320 40%, #053f33 70%, #043428 100%);
+
+  background-repeat: no-repeat;
+  background-attachment:
+    scroll,
+    scroll,
+    fixed,
+    fixed,
+    fixed,
+    fixed,
+    fixed,
+    fixed;
+
+  background-size:
+    cover,
+    80% auto,
+    180% 140%,
+    100% 100%,
+    120% 100%,
+    160% 130%,
+    240% 220%,
+    100% 100%;
+
+  background-position:
+    center center,
+    center 90%,
+    center 60%,
+    center center,
+    30% 75%,
+    center center,
+    center center,
+    center center;
+
+  background-blend-mode:
+    normal,
+    screen,
+    multiply,
+    soft-light,
+    multiply,
+    color-dodge,
+    normal,
+    normal;
+
+  animation: spectacularRealImageGrowth 160s ease-in-out infinite alternate;
+  background-clip: padding-box;
+}
+
+.page-green-investments::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.16) 0%, rgba(34, 197, 94, 0.10) 30%, transparent 60%),
+    radial-gradient(circle at 80% 20%, rgba(52, 211, 153, 0.14) 0%, rgba(6, 182, 212, 0.08) 35%, transparent 65%),
+    linear-gradient(90deg, rgba(6, 78, 59, 0.08) 0%, rgba(16, 185, 129, 0.06) 20%, rgba(34, 197, 94, 0.08) 40%, rgba(52, 211, 153, 0.06) 60%, rgba(6, 182, 212, 0.06) 80%, transparent 100%);
+  opacity: 0.18;
+}
+
+.page-green-investments::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 4px at 12% 22%, rgba(34, 197, 94, 0.25) 0%, transparent 50%),
+    radial-gradient(circle 3px at 82% 32%, rgba(6, 182, 212, 0.25) 0%, transparent 50%),
+    radial-gradient(circle 3px at 52% 72%, rgba(52, 211, 153, 0.22) 0%, transparent 50%);
+  animation: atmosphericShimmer 48s ease-in-out infinite;
+  opacity: 0.10;
+}
+
+.page-green-investments > * { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .page-green-investments { animation: none; }
+}
