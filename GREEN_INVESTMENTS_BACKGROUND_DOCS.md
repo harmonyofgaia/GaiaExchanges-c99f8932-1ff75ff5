@@ -31,7 +31,6 @@ Successfully implemented a new background visual layer for the Green Investments
 1. `src/pages/GreenInvestments.tsx` - Updated to use new background component
 2. `src/components/backgrounds/GreenInvestmentsBackground.tsx` - New background component
 3. `src/styles/green-investments-new-background.css` - New CSS styles
-4. `public/assets/hallway.jpg` - Placeholder for hallway image
 
 ## Visual Effects
 - Subtle green neon tinting with radial gradients
@@ -48,8 +47,8 @@ Successfully implemented a new background visual layer for the Green Investments
 ## How to Customize
 - Adjust matrix rain opacity in the component (currently 0.15-0.2)
 - Modify roots animation speed via CSS `animation-duration`
-- Replace hallway.jpg with actual hallway image
-- Tweak neon tint colors in the CSS gradients
+- Tweak neon tint colors and gradients in the background component
+- Adjust radial gradient positions and intensities for different visual effects
 
 ## Testing Results
 - ✅ Build passes without errors
