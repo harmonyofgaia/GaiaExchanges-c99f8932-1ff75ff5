@@ -141,7 +141,9 @@ export function ArtistStreamingPlatform() {
     );
 
     setStreamingStats(stats);
+  }, [liveStreams]);
 
+  useEffect(() => {
     // Simulate live updates
     const interval = setInterval(() => {
       setLiveStreams((prev) =>

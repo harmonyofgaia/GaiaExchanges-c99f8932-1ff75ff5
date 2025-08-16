@@ -23,6 +23,19 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 
+// Supabase media file interface
+interface AdminMediaFile {
+  id: string;
+  original_name: string;
+  storage_path: string;
+  mime_type: string;
+  file_size: number;
+  category: string;
+  is_background_music: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 export function AdminMediaLibrary() {
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -31,7 +44,7 @@ export function AdminMediaLibrary() {
   const [isBackgroundMusic, setIsBackgroundMusic] = useState(false);
 
   // Music player state
-  const [currentTrack, setCurrentTrack] = useState<any>(null);
+  const [currentTrack, setCurrentTrack] = useState<AdminMediaFile | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
   const [currentTime, setCurrentTime] = useState(0);
@@ -188,7 +201,7 @@ export function AdminMediaLibrary() {
     }
   };
 
-  const deleteFile = async (file: any) => {
+  const deleteFile = async (file: AdminMediaFile) => {
     if (!confirm(`Are you sure you want to delete "${file.original_name}"?`)) {
       return;
     }
@@ -226,7 +239,7 @@ export function AdminMediaLibrary() {
     }
   };
 
-  const playTrack = async (file: any) => {
+  const playTrack = async (file: AdminMediaFile) => {
     if (!file.mime_type.startsWith("audio/")) return;
 
     const audioUrl = supabase.storage

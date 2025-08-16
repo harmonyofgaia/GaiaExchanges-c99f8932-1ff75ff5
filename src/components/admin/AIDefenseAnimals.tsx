@@ -47,6 +47,21 @@ interface AnimalDefense {
   emoji: string;
 }
 
+// Type for new animal creation data
+interface NewAnimalData {
+  name: string;
+  description: string;
+  effectiveness: number;
+  status: string;
+  location: string;
+  contributors: number;
+  emoji: string;
+}
+
+// Type for animal attribute updates
+type AnimalAttribute = keyof AnimalDefense;
+type AnimalAttributeValue = string | number;
+
 export function AIDefenseAnimals() {
   const [animalDefenses, setAnimalDefenses] = useState([
     {
@@ -268,7 +283,7 @@ export function AIDefenseAnimals() {
     toast.success("Animal status updated successfully!");
   };
 
-  const updateAnimalAttribute = (id: number, attribute: string, value: any) => {
+  const updateAnimalAttribute = (id: number, attribute: AnimalAttribute, value: AnimalAttributeValue) => {
     setAnimalDefenses((prev) =>
       prev.map((animal) =>
         animal.id === id ? { ...animal, [attribute]: value } : animal,
@@ -312,7 +327,7 @@ export function AIDefenseAnimals() {
     toast.success("Animal stats reset!");
   };
 
-  const addNewAnimal = (animalData: any) => {
+  const addNewAnimal = (animalData: NewAnimalData) => {
     const newAnimal = {
       ...animalData,
       id: Math.max(...animalDefenses.map((a) => a.id)) + 1,
