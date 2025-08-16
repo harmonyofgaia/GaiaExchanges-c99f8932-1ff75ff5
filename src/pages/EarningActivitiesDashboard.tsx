@@ -47,6 +47,7 @@ import { EnvironmentalEducationActions } from "@/components/earning/Environmenta
 import { ReferralSystem } from "@/components/earning/ReferralSystem";
 import { SkillBasedEarning } from "@/components/earning/SkillBasedEarning";
 import { CarbonCreditActions } from "@/components/earning/CarbonCreditActions";
+import CarFreeEarnTile from "@/components/earning/CarFreeEarnTile";
 import { useEarningActivities, useUserProfile } from "@/hooks/useEarningSystem";
 
 interface NewEarningActivity {
@@ -595,6 +596,7 @@ export default function EarningActivitiesDashboard() {
 
         <TabsContent value="activities" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <CarFreeEarnTile />
             {filteredActivities.map((activity) => (
               <Card
                 key={activity.id}
