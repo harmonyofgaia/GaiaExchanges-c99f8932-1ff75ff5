@@ -125,7 +125,7 @@ const GaiaBikeEcosystem = () => {
       initializeChallenges();
       getCurrentLocation();
     }
-  }, [user, fetchUserStats]);
+  }, [user]);
 
   // Real-time session tracking
   useEffect(() => {
