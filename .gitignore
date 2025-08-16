@@ -12,6 +12,16 @@ dist
 dist-ssr
 *.local
 
+# Test coverage
+coverage/
+*.lcov
+.nyc_output
+coverage/**/*.html
+coverage/**/*.css
+coverage/**/*.js
+coverage/**/*.json
+coverage/**/*.png
+
 # Environment files
 .env
 .env.local
@@ -22,6 +32,7 @@ dist-ssr
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
 .idea
 .DS_Store
 *.suo

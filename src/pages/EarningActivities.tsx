@@ -525,7 +525,9 @@ export default function EarningActivities() {
   );
 
   const handleActivitySelect = (category: string, activityId: string) => {
-    setSelectedCategory(earningCategories.find(cat => cat.id === category) || null);
+    setSelectedCategory(
+      earningCategories.find((cat) => cat.id === category) || null,
+    );
   };
 
   return (
@@ -677,7 +679,8 @@ export default function EarningActivities() {
                 🌍 Interactive Activity Globe
               </h2>
               <p className="text-lg text-muted-foreground">
-                Navigate through activities using our 3D matrix-style globe interface
+                Navigate through activities using our 3D matrix-style globe
+                interface
               </p>
             </div>
 
@@ -688,10 +691,14 @@ export default function EarningActivities() {
 
             {/* Enhanced GAiA Piano Interface */}
             <div className="mt-12">
-              <EnhancedGaiaPiano onCategorySelect={(categoryId) => {
-                const category = earningCategories.find(cat => cat.id === categoryId);
-                if (category) setSelectedCategory(category);
-              }} />
+              <EnhancedGaiaPiano
+                onCategorySelect={(categoryId) => {
+                  const category = earningCategories.find(
+                    (cat) => cat.id === categoryId,
+                  );
+                  if (category) setSelectedCategory(category);
+                }}
+              />
             </div>
 
             {/* Selected Category Display with Rich Content */}
@@ -706,10 +713,15 @@ export default function EarningActivities() {
                   </p>
                   <div className="flex justify-center items-center gap-4">
                     <Badge className="bg-primary/20 text-primary text-lg px-4 py-2">
-                      {selectedCategory.completedCount}/{selectedCategory.totalCount} Completed
+                      {selectedCategory.completedCount}/
+                      {selectedCategory.totalCount} Completed
                     </Badge>
                     <Progress
-                      value={(selectedCategory.completedCount / selectedCategory.totalCount) * 100}
+                      value={
+                        (selectedCategory.completedCount /
+                          selectedCategory.totalCount) *
+                        100
+                      }
                       className="w-48 h-4"
                     />
                   </div>
@@ -717,68 +729,88 @@ export default function EarningActivities() {
 
                 {/* Rich Activity Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {selectedCategory.components.map((comp: any, index: number) => (
-                    <Card key={index} className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 border-green-500/30 hover:scale-105 transition-all duration-300 cursor-pointer group">
-                      <CardHeader className="pb-3">
-                        <div className="flex items-center gap-3 mb-2">
-                          <div className="p-2 rounded-full bg-gradient-to-r from-green-600 to-blue-600">
-                            <comp.icon className="h-6 w-6 text-white" />
+                  {selectedCategory.components.map(
+                    (comp: any, index: number) => (
+                      <Card
+                        key={index}
+                        className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 border-green-500/30 hover:scale-105 transition-all duration-300 cursor-pointer group"
+                      >
+                        <CardHeader className="pb-3">
+                          <div className="flex items-center gap-3 mb-2">
+                            <div className="p-2 rounded-full bg-gradient-to-r from-green-600 to-blue-600">
+                              <comp.icon className="h-6 w-6 text-white" />
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-green-400 text-lg">
+                                {comp.title}
+                              </h4>
+                              <Badge
+                                className={getDifficultyColor(comp.difficulty)}
+                                variant="outline"
+                              >
+                                {comp.difficulty}
+                              </Badge>
+                            </div>
                           </div>
-                          <div>
-                            <h4 className="font-bold text-green-400 text-lg">{comp.title}</h4>
-                            <Badge className={getDifficultyColor(comp.difficulty)} variant="outline">
-                              {comp.difficulty}
-                            </Badge>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-muted-foreground">
+                              Reward:
+                            </span>
+                            <span className="text-lg font-bold text-yellow-400">
+                              {comp.points}
+                            </span>
                           </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm text-muted-foreground">Reward:</span>
-                          <span className="text-lg font-bold text-yellow-400">{comp.points}</span>
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <div className="flex justify-between text-sm">
-                            <span className="text-muted-foreground">Progress:</span>
-                            <span className="text-green-400">75%</span>
-                          </div>
-                          <Progress value={75} className="h-2" />
-                        </div>
 
-                        <div className="space-y-2">
-                          <h5 className="font-medium text-primary">Key Features:</h5>
-                          <ul className="text-sm text-muted-foreground space-y-1">
-                            <li className="flex items-center gap-2">
-                              <CheckCircle className="h-3 w-3 text-green-400" />
-                              Photo verification system
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <CheckCircle className="h-3 w-3 text-green-400" />
-                              Real-time tracking
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <CheckCircle className="h-3 w-3 text-green-400" />
-                              Community leaderboards
-                            </li>
-                          </ul>
-                        </div>
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm">
+                              <span className="text-muted-foreground">
+                                Progress:
+                              </span>
+                              <span className="text-green-400">75%</span>
+                            </div>
+                            <Progress value={75} className="h-2" />
+                          </div>
 
-                        <div className="pt-2 border-t border-gray-700">
-                          <Button 
-                            className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
-                            onClick={() => {
-                              // Navigate to full component view
-                              console.log(`Opening full view for ${comp.title}`);
-                            }}
-                          >
-                            <Zap className="h-4 w-4 mr-2" />
-                            Start Activity
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                          <div className="space-y-2">
+                            <h5 className="font-medium text-primary">
+                              Key Features:
+                            </h5>
+                            <ul className="text-sm text-muted-foreground space-y-1">
+                              <li className="flex items-center gap-2">
+                                <CheckCircle className="h-3 w-3 text-green-400" />
+                                Photo verification system
+                              </li>
+                              <li className="flex items-center gap-2">
+                                <CheckCircle className="h-3 w-3 text-green-400" />
+                                Real-time tracking
+                              </li>
+                              <li className="flex items-center gap-2">
+                                <CheckCircle className="h-3 w-3 text-green-400" />
+                                Community leaderboards
+                              </li>
+                            </ul>
+                          </div>
+
+                          <div className="pt-2 border-t border-gray-700">
+                            <Button
+                              className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+                              onClick={() => {
+                                // Navigate to full component view
+                                console.log(
+                                  `Opening full view for ${comp.title}`,
+                                );
+                              }}
+                            >
+                              <Zap className="h-4 w-4 mr-2" />
+                              Start Activity
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ),
+                  )}
                 </div>
 
                 {/* Detailed Statistics */}
@@ -792,22 +824,42 @@ export default function EarningActivities() {
                   <CardContent>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-green-400">{selectedCategory.completedCount}</div>
-                        <div className="text-sm text-muted-foreground">Completed</div>
+                        <div className="text-2xl font-bold text-green-400">
+                          {selectedCategory.completedCount}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Completed
+                        </div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-yellow-400">{selectedCategory.totalCount - selectedCategory.completedCount}</div>
-                        <div className="text-sm text-muted-foreground">Remaining</div>
+                        <div className="text-2xl font-bold text-yellow-400">
+                          {selectedCategory.totalCount -
+                            selectedCategory.completedCount}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Remaining
+                        </div>
                       </div>
                       <div className="text-center">
                         <div className="text-2xl font-bold text-blue-400">
-                          {Math.round((selectedCategory.completedCount / selectedCategory.totalCount) * 100)}%
+                          {Math.round(
+                            (selectedCategory.completedCount /
+                              selectedCategory.totalCount) *
+                              100,
+                          )}
+                          %
                         </div>
-                        <div className="text-sm text-muted-foreground">Progress</div>
+                        <div className="text-sm text-muted-foreground">
+                          Progress
+                        </div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-purple-400">2,450</div>
-                        <div className="text-sm text-muted-foreground">Tokens Earned</div>
+                        <div className="text-2xl font-bold text-purple-400">
+                          2,450
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Tokens Earned
+                        </div>
                       </div>
                     </div>
                   </CardContent>
@@ -815,14 +867,14 @@ export default function EarningActivities() {
 
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button 
+                  <Button
                     size="lg"
                     className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                   >
                     <Star className="h-5 w-5 mr-2" />
                     View All {selectedCategory.title} Activities
                   </Button>
-                  <Button 
+                  <Button
                     size="lg"
                     variant="outline"
                     className="border-blue-500/30 text-blue-400 hover:bg-blue-900/20"
@@ -840,7 +892,7 @@ export default function EarningActivities() {
           <TabsContent value="overview" className="space-y-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredCategories.map((category) => (
-                 <Card
+                <Card
                   key={category.id}
                   className={`border-2 ${category.borderColor} bg-gradient-to-br ${category.color} hover:scale-105 transition-all duration-300 cursor-pointer`}
                   onClick={() => setSelectedCategory(category)}
@@ -928,13 +980,18 @@ export default function EarningActivities() {
 
                 <div className="space-y-8">
                   {category.components.map((comp, index) => (
-                    <Suspense key={index} fallback={
-                      <Card className="border-gray-500/30">
-                        <CardContent className="p-8 text-center">
-                          <div className="animate-pulse">Loading component...</div>
-                        </CardContent>
-                      </Card>
-                    }>
+                    <Suspense
+                      key={index}
+                      fallback={
+                        <Card className="border-gray-500/30">
+                          <CardContent className="p-8 text-center">
+                            <div className="animate-pulse">
+                              Loading component...
+                            </div>
+                          </CardContent>
+                        </Card>
+                      }
+                    >
                       <comp.component />
                     </Suspense>
                   ))}
@@ -955,13 +1012,25 @@ export default function EarningActivities() {
             </div>
 
             <div className="space-y-8">
-              <Suspense fallback={<div className="animate-pulse bg-gray-500/20 h-32 rounded" />}>
+              <Suspense
+                fallback={
+                  <div className="animate-pulse bg-gray-500/20 h-32 rounded" />
+                }
+              >
                 <EnergyConsumptionTracker />
               </Suspense>
-              <Suspense fallback={<div className="animate-pulse bg-gray-500/20 h-32 rounded" />}>
+              <Suspense
+                fallback={
+                  <div className="animate-pulse bg-gray-500/20 h-32 rounded" />
+                }
+              >
                 <AdvancedCommunityFeatures />
               </Suspense>
-              <Suspense fallback={<div className="animate-pulse bg-gray-500/20 h-32 rounded" />}>
+              <Suspense
+                fallback={
+                  <div className="animate-pulse bg-gray-500/20 h-32 rounded" />
+                }
+              >
                 <PartyEventEarning />
               </Suspense>
             </div>
@@ -979,10 +1048,18 @@ export default function EarningActivities() {
             </div>
 
             <div className="space-y-8">
-              <Suspense fallback={<div className="animate-pulse bg-gray-500/20 h-32 rounded" />}>
+              <Suspense
+                fallback={
+                  <div className="animate-pulse bg-gray-500/20 h-32 rounded" />
+                }
+              >
                 <AdvancedTokenMechanics />
               </Suspense>
-              <Suspense fallback={<div className="animate-pulse bg-gray-500/20 h-32 rounded" />}>
+              <Suspense
+                fallback={
+                  <div className="animate-pulse bg-gray-500/20 h-32 rounded" />
+                }
+              >
                 <TokenStakingSystem />
               </Suspense>
             </div>

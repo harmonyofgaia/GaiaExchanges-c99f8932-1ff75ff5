@@ -14,7 +14,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         const sanitized = sanitizeInput(e.target.value);
         const syntheticEvent = {
           ...e,
-          target: { ...e.target, value: sanitized }
+          target: { ...e.target, value: sanitized },
         } as React.ChangeEvent<HTMLInputElement>;
         onChange(syntheticEvent);
       } else if (onChange) {

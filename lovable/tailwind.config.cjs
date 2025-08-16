@@ -20,7 +20,9 @@ module.exports = {
   plugins: [
     plugin(function ({ addUtilities, theme }) {
       addUtilities({
-        ".bg-background": { backgroundColor: String(theme("colors.background")) },
+        ".bg-background": {
+          backgroundColor: String(theme("colors.background")),
+        },
         ".text-foreground": { color: String(theme("colors.foreground")) },
         ".border-border": { borderColor: String(theme("colors.border")) },
       });

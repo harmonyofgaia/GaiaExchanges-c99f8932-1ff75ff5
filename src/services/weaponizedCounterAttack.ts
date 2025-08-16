@@ -423,8 +423,8 @@ class WeaponizedCounterAttackService {
     if (!this.autoRetaliationEnabled) return;
 
     // Determine counter-attack type based on threat
-  let counterAttackType: CounterAttack["attackType"] = "ddos_reflection";
-  let intensity: CounterAttack["intensity"] = "moderate";
+    let counterAttackType: CounterAttack["attackType"] = "ddos_reflection";
+    let intensity: CounterAttack["intensity"] = "moderate";
 
     if (threatData.severity > 0.8) {
       counterAttackType = "quantum_retaliation";
