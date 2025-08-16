@@ -71,7 +71,6 @@ interface NFTCard {
   evolution_stage?: number;
   max_evolution?: number;
   trading_history?: TradingHistoryEntry[];
-}
   market_value?: number;
 }
 
