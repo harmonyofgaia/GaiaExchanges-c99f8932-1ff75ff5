@@ -63,7 +63,62 @@ export default function GreenInvestmentsBackground() {
     
     
     
-    
+    let columns: number = 0;
+    let drops: number[] = [];
+
+    // Recalculate columns and drops on resize
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      width = rect.width * dpr;
+      height = rect.height * dpr;
+      canvas.width = width;
+      canvas.height = height;
+      ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform before scaling
+      ctx.scale(dpr, dpr);
+      columns = Math.floor(rect.width / fontSize);
+      drops = [];
+      for (let i = 0; i < columns; i++) {
+        drops[i] = Math.random() * -500; // Start with staggered timing
+      }
+    };
+    function drawMatrixRain() {
+      if (prefersReducedMotion) return;
+      ctx.clearRect(0, 0, width, height);
+      ctx.globalAlpha = 0.15;
+      ctx.fillStyle = "#0f0";
+      ctx.fillRect(0, 0, width, height);
+      ctx.globalAlpha = 1;
+      ctx.font = `${fontSize}px monospace`;
+      for (let i = 0; i < columns; i++) {
+        // Pick a random character
+        const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        ctx.fillStyle = "#b6ffb6";
+        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+        // Move drop down
+        if (drops[i] * fontSize > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        } else {
+          drops[i]++;
+        }
+      }
+    }
+
+    // Animation loop
+    function animate() {
+      drawMatrixRain();
+      rafRef.current = requestAnimationFrame(animate);
+    }
+    if (!prefersReducedMotion) {
+      animate();
+    }
+
+    // Cleanup
+    return () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+      resizeObserver.disconnect();
+    };
     let columns: number;
     let drops: number[];
     
