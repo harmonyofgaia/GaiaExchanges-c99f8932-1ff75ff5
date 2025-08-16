@@ -2,7 +2,36 @@
  * Creates a spectacular multi-layer background effect with animated magical tree
  */
 
-/* Enhanced keyframes for the magical tree growth animation */
+/* Enhanced keyframes for spectacular real image integration */
+@keyframes spectacularRealImageGrowth {
+  0% {
+    background-size: cover, 50% auto, 140% 110%, 100% 100%, 120% 100%, 200% 200%, 100% 100%;
+    background-position: center center, center 100%, center 55%, center center, 35% 75%, center center, center center;
+    filter: brightness(0.7) saturate(0.9) contrast(1.1) hue-rotate(0deg);
+  }
+  25% {
+    background-size: cover, 70% auto, 160% 130%, 100% 100%, 130% 110%, 220% 220%, 100% 100%;
+    background-position: center center, center 95%, center 50%, center center, 30% 70%, center center, center center;
+    filter: brightness(1.0) saturate(1.2) contrast(1.2) hue-rotate(5deg);
+  }
+  50% {
+    background-size: cover, 90% auto, 180% 150%, 100% 100%, 140% 120%, 240% 240%, 100% 100%;
+    background-position: center center, center 88%, center 45%, center center, 25% 65%, center center, center center;
+    filter: brightness(1.3) saturate(1.4) contrast(1.3) hue-rotate(10deg);
+  }
+  75% {
+    background-size: cover, 110% auto, 200% 170%, 100% 100%, 150% 130%, 260% 260%, 100% 100%;
+    background-position: center center, center 85%, center 40%, center center, 20% 60%, center center, center center;
+    filter: brightness(1.2) saturate(1.3) contrast(1.25) hue-rotate(8deg);
+  }
+  100% {
+    background-size: cover, 130% auto, 220% 180%, 100% 100%, 160% 140%, 280% 280%, 100% 100%;
+    background-position: center center, center 80%, center 35%, center center, 15% 55%, center center, center center;
+    filter: brightness(1.0) saturate(1.1) contrast(1.15) hue-rotate(0deg);
+  }
+}
+
+/* Original SVG-only animation (kept as fallback) */
 @keyframes magicalTreeGrowth {
   0% {
     background-size: 40% auto;
@@ -31,7 +60,41 @@
   }
 }
 
-/* Enhanced ambient magical aura pulse */
+/* Enhanced ambient magical aura pulse for real image integration */
+@keyframes enhancedMysticalAura {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.95) rotate(0deg);
+    filter: hue-rotate(0deg) brightness(1.0);
+  }
+  20% {
+    opacity: 0.5;
+    transform: scale(1.1) rotate(3deg);
+    filter: hue-rotate(15deg) brightness(1.2);
+  }
+  40% {
+    opacity: 0.7;
+    transform: scale(1.25) rotate(-2deg);
+    filter: hue-rotate(-10deg) brightness(1.4);
+  }
+  60% {
+    opacity: 0.6;
+    transform: scale(1.15) rotate(4deg);
+    filter: hue-rotate(20deg) brightness(1.3);
+  }
+  80% {
+    opacity: 0.4;
+    transform: scale(1.05) rotate(-1deg);
+    filter: hue-rotate(-5deg) brightness(1.1);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(0.95) rotate(0deg);
+    filter: hue-rotate(0deg) brightness(1.0);
+  }
+}
+
+/* Original mystical aura animation (kept as fallback) */
 @keyframes mysticalAura {
   0% {
     opacity: 0.2;
@@ -55,7 +118,31 @@
   }
 }
 
-/* Floating particles animation */
+/* Enhanced floating particles animation for real image integration */
+@keyframes enhancedFloatingParticles {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.4;
+  }
+  25% {
+    transform: translateY(-15px) translateX(5px) rotate(90deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-30px) translateX(-3px) rotate(180deg);
+    opacity: 1.0;
+  }
+  75% {
+    transform: translateY(-15px) translateX(8px) rotate(270deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(360deg);
+    opacity: 0.4;
+  }
+}
+
+/* Original floating particles animation (kept as fallback) */
 @keyframes floatingParticles {
   0% {
     transform: translateY(0px) rotate(0deg);
@@ -84,50 +171,61 @@
   }
 }
 
-/* Main page class for Green Investments spectacular background */
+/* Main page class for Green Investments spectacular background with Supabase integration */
 .page-green-investments {
   position: relative;
   overflow: hidden;
   
-  /* Multi-layer magical background composition */
+  /* Multi-layer magical background composition with real Supabase image */
   background-image: 
-    /* Layer 1 (top): Enhanced Magical Tree SVG */
+    /* Layer 1 (top): Your real tree image from Supabase */
+    url('https://slheudxfcqqppyphyobq.supabase.co/storage/v1/object/public/public-bucket/474532511_916996390550718_6120896688604953563_n.jpg'),
+    /* Layer 2: Enhanced Magical Tree SVG overlay for mystical enhancement */
     url('/assets/green-tree.svg'),
-    /* Layer 2: Intense magical aura */
-    radial-gradient(ellipse 90% 70% at 50% 55%, rgba(16, 185, 129, 0.25) 0%, rgba(34, 197, 94, 0.15) 30%, rgba(52, 211, 153, 0.08) 60%, transparent 80%),
-    /* Layer 3: Secondary atmospheric glow */
-    radial-gradient(ellipse 120% 80% at 30% 70%, rgba(6, 78, 59, 0.3) 0%, rgba(4, 120, 87, 0.15) 40%, transparent 70%),
-    /* Layer 4: Magical shimmer gradient */
-    linear-gradient(45deg, rgba(16, 185, 129, 0.05) 0%, rgba(34, 197, 94, 0.08) 25%, rgba(52, 211, 153, 0.06) 50%, rgba(6, 182, 212, 0.04) 75%, transparent 100%),
-    /* Layer 5 (bottom): Enhanced base gradient */
+    /* Layer 3: Intense magical aura blending */
+    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(16, 185, 129, 0.35) 0%, rgba(34, 197, 94, 0.25) 30%, rgba(52, 211, 153, 0.15) 60%, transparent 80%),
+    /* Layer 4: Mystical color grading overlay */
+    linear-gradient(rgba(6, 78, 59, 0.25), rgba(4, 120, 87, 0.2)),
+    /* Layer 5: Secondary atmospheric glow */
+    radial-gradient(ellipse 120% 80% at 30% 70%, rgba(6, 78, 59, 0.2) 0%, rgba(4, 120, 87, 0.1) 40%, transparent 70%),
+    /* Layer 6: Magical shimmer gradient */
+    linear-gradient(45deg, rgba(16, 185, 129, 0.08) 0%, rgba(34, 197, 94, 0.12) 25%, rgba(52, 211, 153, 0.1) 50%, rgba(6, 182, 212, 0.08) 75%, transparent 100%),
+    /* Layer 7 (bottom): Enhanced base gradient */
     linear-gradient(135deg, #000000 0%, #0f172a 20%, #111827 40%, #065f46 70%, #064e3b 100%);
   
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-  background-attachment: fixed, fixed, fixed, fixed, fixed;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-attachment: fixed, fixed, fixed, fixed, fixed, fixed, fixed;
   
-  /* Magical positioning and sizing */
+  /* Advanced blending modes for spectacular real image integration */
+  background-blend-mode: normal, screen, overlay, soft-light, multiply, color-dodge, normal;
+  
+  /* Spectacular positioning and sizing for real image integration */
   background-position: 
-    center 100%,     /* Tree positioned at bottom initially */
-    center 55%,      /* Main aura slightly below center */
+    center center,   /* Your real tree image centered and full */
+    center 90%,      /* SVG overlay positioned lower for enhancement */
+    center 50%,      /* Main magical aura centered */
+    center center,   /* Color grading overlay covers all */
     30% 70%,         /* Secondary aura positioned asymmetrically */
     center center,   /* Shimmer covers full area */
     center center;   /* Base gradient covers full area */
   
   background-size: 
-    50% auto,        /* Tree starts medium-small */
-    150% 120%,       /* Main aura is larger */
-    120% 100%,       /* Secondary aura */
-    200% 200%,       /* Shimmer effect larger for movement */
+    cover,           /* Your real image covers the entire viewport */
+    70% auto,        /* SVG overlay smaller for mystical accent */
+    160% 130%,       /* Enhanced magical aura larger */
+    100% 100%,       /* Color grading overlay full coverage */
+    130% 110%,       /* Secondary aura enhanced */
+    220% 220%,       /* Enhanced shimmer effect for movement */
     100% 100%;       /* Base gradient covers full area */
   
-  /* Apply the magical growth animation */
-  animation: magicalTreeGrowth 180s ease-in-out infinite alternate;
+  /* Apply the spectacular magical growth animation */
+  animation: spectacularRealImageGrowth 200s ease-in-out infinite alternate;
   
   /* Ensure background doesn't interfere with content */
   background-clip: padding-box;
 }
 
-/* Enhanced pseudo-element for mystical atmospheric effects */
+/* Enhanced pseudo-element for mystical atmospheric effects with real image */
 .page-green-investments::before {
   content: '';
   position: fixed;
@@ -136,22 +234,23 @@
   right: 0;
   bottom: 0;
   background: 
-    /* Multiple mystical aura layers */
-    radial-gradient(circle at 25% 75%, rgba(16, 185, 129, 0.15) 0%, rgba(34, 197, 94, 0.08) 30%, transparent 60%),
-    radial-gradient(circle at 75% 25%, rgba(52, 211, 153, 0.12) 0%, rgba(6, 182, 212, 0.06) 35%, transparent 65%),
-    radial-gradient(circle at 60% 80%, rgba(5, 150, 105, 0.10) 0%, rgba(4, 120, 87, 0.05) 40%, transparent 70%),
-    /* Atmospheric shimmer */
-    linear-gradient(90deg, transparent 0%, rgba(34, 197, 94, 0.03) 20%, rgba(16, 185, 129, 0.05) 40%, rgba(52, 211, 153, 0.03) 60%, transparent 80%);
+    /* Enhanced mystical aura layers optimized for real images */
+    radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.25) 0%, rgba(34, 197, 94, 0.15) 30%, transparent 60%),
+    radial-gradient(circle at 80% 20%, rgba(52, 211, 153, 0.22) 0%, rgba(6, 182, 212, 0.12) 35%, transparent 65%),
+    radial-gradient(circle at 50% 90%, rgba(5, 150, 105, 0.18) 0%, rgba(4, 120, 87, 0.1) 40%, transparent 70%),
+    radial-gradient(circle at 10% 30%, rgba(34, 197, 94, 0.15) 0%, rgba(16, 185, 129, 0.08) 35%, transparent 60%),
+    /* Enhanced atmospheric shimmer for real image enhancement */
+    linear-gradient(90deg, rgba(6, 78, 59, 0.15) 0%, rgba(16, 185, 129, 0.08) 20%, rgba(34, 197, 94, 0.12) 40%, rgba(52, 211, 153, 0.1) 60%, rgba(6, 182, 212, 0.08) 80%, transparent 100%);
   
-  background-size: 100% 100%, 100% 100%, 100% 100%, 300% 100%;
+  background-size: 120% 120%, 120% 120%, 120% 120%, 120% 120%, 350% 100%;
   animation: 
-    mysticalAura 120s ease-in-out infinite,
-    atmosphericShimmer 45s linear infinite;
+    enhancedMysticalAura 140s ease-in-out infinite,
+    atmosphericShimmer 50s linear infinite;
   pointer-events: none;
   z-index: -1;
 }
 
-/* Additional magical floating particles layer */
+/* Enhanced magical floating particles layer for real image */
 .page-green-investments::after {
   content: '';
   position: fixed;
@@ -160,49 +259,62 @@
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle 2px at 15% 25%, rgba(34, 197, 94, 0.6) 0%, transparent 50%),
-    radial-gradient(circle 1px at 85% 15%, rgba(16, 185, 129, 0.7) 0%, transparent 50%),
-    radial-gradient(circle 3px at 25% 85%, rgba(52, 211, 153, 0.5) 0%, transparent 50%),
-    radial-gradient(circle 1px at 75% 75%, rgba(6, 182, 212, 0.6) 0%, transparent 50%),
-    radial-gradient(circle 2px at 45% 35%, rgba(34, 197, 94, 0.4) 0%, transparent 50%),
-    radial-gradient(circle 1px at 65% 65%, rgba(16, 185, 129, 0.5) 0%, transparent 50%);
-  animation: floatingParticles 25s ease-in-out infinite;
+    /* Enhanced magical particles optimized for real image blend */
+    radial-gradient(circle 4px at 12% 25%, rgba(34, 197, 94, 0.8) 0%, transparent 50%),
+    radial-gradient(circle 3px at 88% 15%, rgba(16, 185, 129, 0.9) 0%, transparent 50%),
+    radial-gradient(circle 5px at 22% 88%, rgba(52, 211, 153, 0.7) 0%, transparent 50%),
+    radial-gradient(circle 3px at 78% 78%, rgba(6, 182, 212, 0.8) 0%, transparent 50%),
+    radial-gradient(circle 4px at 42% 32%, rgba(34, 197, 94, 0.6) 0%, transparent 50%),
+    radial-gradient(circle 2px at 68% 68%, rgba(16, 185, 129, 0.7) 0%, transparent 50%),
+    radial-gradient(circle 3px at 15% 65%, rgba(5, 150, 105, 0.5) 0%, transparent 50%),
+    radial-gradient(circle 2px at 85% 35%, rgba(4, 120, 87, 0.6) 0%, transparent 50%),
+    radial-gradient(circle 4px at 35% 15%, rgba(52, 211, 153, 0.4) 0%, transparent 50%),
+    radial-gradient(circle 3px at 65% 85%, rgba(6, 182, 212, 0.5) 0%, transparent 50%);
+  animation: enhancedFloatingParticles 30s ease-in-out infinite;
   pointer-events: none;
   z-index: -1;
 }
 
-/* Respect user's motion preferences */
+/* Respect user's motion preferences - Enhanced for real image */
 @media (prefers-reduced-motion: reduce) {
   .page-green-investments {
-    /* Disable tree animation */
+    /* Disable all animations */
     animation: none;
-    /* Set tree to final static position with impressive scale */
+    /* Set spectacular static layout for your real image */
     background-position: 
-      center 85%,     /* Tree final impressive position */
-      center 55%,     /* Main aura positioned */
-      30% 70%,        /* Secondary aura */
-      center center,  /* Shimmer static */
-      center center;  /* Base gradient */
+      center center,   /* Your real image perfectly centered */
+      center 85%,      /* SVG overlay positioned impressively */
+      center 50%,      /* Main aura positioned */
+      center center,   /* Color grading overlay */
+      25% 65%,         /* Secondary aura static */
+      center center,   /* Shimmer static */
+      center center;   /* Base gradient */
     
     background-size: 
-      100% auto,      /* Tree final impressive size */
-      150% 120%,      /* Aura maintained */
-      120% 100%,      /* Secondary aura */
-      100% 100%,      /* Shimmer static */
-      100% 100%;      /* Base gradient */
+      cover,           /* Your real image covers beautifully */
+      100% auto,       /* SVG final impressive size */
+      180% 150%,       /* Enhanced aura maintained */
+      100% 100%,       /* Color grading full */
+      140% 120%,       /* Secondary aura maintained */
+      100% 100%,       /* Shimmer static */
+      100% 100%;       /* Base gradient */
+    
+    /* Static filter for spectacular appearance */
+    filter: brightness(1.1) saturate(1.2) contrast(1.1);
   }
   
   .page-green-investments::before {
     /* Disable mystical animations */
     animation: none;
-    opacity: 0.4;
+    opacity: 0.5;
     transform: none;
+    filter: none;
   }
   
   .page-green-investments::after {
     /* Disable particle animations */
     animation: none;
-    opacity: 0.3;
+    opacity: 0.4;
   }
 }
 
@@ -212,108 +324,123 @@
   z-index: 1;
 }
 
-/* Enhanced responsive design for different screen sizes */
+/* Enhanced responsive design for different screen sizes with real image */
 @media (max-width: 768px) {
   .page-green-investments {
     background-size: 
-      140% auto,      /* Larger tree on mobile for impact */
-      180% 140%,      /* Larger aura on mobile */
-      140% 120%,      /* Adjusted secondary aura */
-      250% 200%,      /* Enhanced shimmer on mobile */
-      100% 100%;      /* Base gradient */
+      cover,           /* Your real image covers mobile perfectly */
+      160% auto,       /* SVG overlay larger on mobile for impact */
+      200% 160%,       /* Enhanced aura on mobile */
+      100% 100%,       /* Color grading maintained */
+      160% 140%,       /* Secondary aura enhanced on mobile */
+      280% 240%,       /* Enhanced shimmer on mobile */
+      100% 100%;       /* Base gradient */
     
     background-position:
-      center 90%,     /* Tree positioned higher on mobile */
-      center 60%,     /* Aura adjusted */
-      20% 75%,        /* Secondary aura repositioned */
-      center center,  /* Shimmer */
-      center center;  /* Base gradient */
+      center center,   /* Your real image centered on mobile */
+      center 85%,      /* SVG positioned higher on mobile */
+      center 55%,      /* Aura adjusted for mobile */
+      center center,   /* Color grading full */
+      25% 70%,         /* Secondary aura repositioned */
+      center center,   /* Shimmer */
+      center center;   /* Base gradient */
   }
   
-  @keyframes magicalTreeGrowth {
+  @keyframes spectacularRealImageGrowth {
     0% {
-      background-size: 120% auto;
-      background-position: center 100%;
-      filter: brightness(0.9) saturate(0.8);
+      background-size: cover, 140% auto, 180% 140%, 100% 100%, 150% 130%, 250% 220%, 100% 100%;
+      background-position: center center, center 95%, center 60%, center center, 30% 75%, center center, center center;
+      filter: brightness(0.8) saturate(1.0) contrast(1.1) hue-rotate(0deg);
     }
     50% {
-      background-size: 160% auto;
-      background-position: center 85%;
-      filter: brightness(1.1) saturate(1.2);
+      background-size: cover, 180% auto, 220% 180%, 100% 100%, 170% 150%, 300% 260%, 100% 100%;
+      background-position: center center, center 80%, center 50%, center center, 20% 65%, center center, center center;
+      filter: brightness(1.2) saturate(1.3) contrast(1.25) hue-rotate(8deg);
     }
     100% {
-      background-size: 180% auto;
-      background-position: center 80%;
-      filter: brightness(1.0) saturate(1.0);
+      background-size: cover, 200% auto, 240% 200%, 100% 100%, 180% 160%, 320% 280%, 100% 100%;
+      background-position: center center, center 75%, center 45%, center center, 15% 60%, center center, center center;
+      filter: brightness(1.0) saturate(1.1) contrast(1.15) hue-rotate(0deg);
     }
   }
   
   @media (prefers-reduced-motion: reduce) {
     .page-green-investments {
       background-size: 
-        160% auto,    /* Impressive static mobile size */
-        180% 140%,    /* Aura maintained */
-        140% 120%,    /* Secondary aura */
-        100% 100%,    /* Shimmer static */
-        100% 100%;    /* Base gradient */
+        cover,         /* Your real image covers mobile beautifully */
+        180% auto,     /* Impressive static mobile SVG size */
+        220% 180%,     /* Enhanced aura maintained */
+        100% 100%,     /* Color grading */
+        160% 140%,     /* Secondary aura maintained */
+        100% 100%,     /* Shimmer static */
+        100% 100%;     /* Base gradient */
         
       background-position:
-        center 85%,   /* Final mobile position */
-        center 60%,   /* Aura */
-        20% 75%,      /* Secondary aura */
-        center center,/* Shimmer */
-        center center;/* Base gradient */
+        center center, /* Your real image centered */
+        center 80%,    /* Final mobile SVG position */
+        center 55%,    /* Aura */
+        center center, /* Color grading */
+        25% 70%,       /* Secondary aura */
+        center center, /* Shimmer */
+        center center; /* Base gradient */
+        
+      filter: brightness(1.1) saturate(1.2) contrast(1.1);
     }
   }
 }
 
+/* Large screen optimization for real image */
 @media (min-width: 1920px) {
   .page-green-investments {
     background-size: 
-      70% auto,       /* Smaller initial tree on very large screens */
-      140% 110%,      /* Proportional aura */
-      110% 90%,       /* Secondary aura */
-      180% 180%,      /* Enhanced shimmer */
-      100% 100%;      /* Base gradient */
+      cover,           /* Your real image perfectly covers large screens */
+      80% auto,        /* SVG overlay smaller initial on very large screens */
+      160% 130%,       /* Proportional aura for large screens */
+      100% 100%,       /* Color grading maintained */
+      130% 110%,       /* Secondary aura proportional */
+      200% 200%,       /* Enhanced shimmer for large screens */
+      100% 100%;       /* Base gradient */
   }
   
-  @keyframes magicalTreeGrowth {
+  @keyframes spectacularRealImageGrowth {
     0% {
-      background-size: 60% auto;
-      background-position: center 110%;
-      filter: brightness(0.8) saturate(0.7);
+      background-size: cover, 60% auto, 140% 120%, 100% 100%, 120% 100%, 180% 180%, 100% 100%;
+      background-position: center center, center 105%, center 55%, center center, 35% 75%, center center, center center;
+      filter: brightness(0.7) saturate(0.9) contrast(1.1) hue-rotate(0deg);
     }
     25% {
-      background-size: 80% auto;
-      background-position: center 100%;
-      filter: brightness(1.0) saturate(1.0);
+      background-size: cover, 80% auto, 160% 140%, 100% 100%, 130% 110%, 200% 200%, 100% 100%;
+      background-position: center center, center 95%, center 50%, center center, 30% 70%, center center, center center;
+      filter: brightness(1.0) saturate(1.2) contrast(1.2) hue-rotate(5deg);
     }
     50% {
-      background-size: 100% auto;
-      background-position: center 90%;
-      filter: brightness(1.2) saturate(1.3);
+      background-size: cover, 100% auto, 180% 160%, 100% 100%, 140% 120%, 220% 220%, 100% 100%;
+      background-position: center center, center 85%, center 45%, center center, 25% 65%, center center, center center;
+      filter: brightness(1.3) saturate(1.4) contrast(1.3) hue-rotate(10deg);
     }
     75% {
-      background-size: 120% auto;
-      background-position: center 85%;
-      filter: brightness(1.1) saturate(1.2);
+      background-size: cover, 120% auto, 200% 180%, 100% 100%, 150% 130%, 240% 240%, 100% 100%;
+      background-position: center center, center 80%, center 40%, center center, 20% 60%, center center, center center;
+      filter: brightness(1.2) saturate(1.3) contrast(1.25) hue-rotate(8deg);
     }
     100% {
-      background-size: 140% auto;
-      background-position: center 75%;
-      filter: brightness(1.0) saturate(1.0);
+      background-size: cover, 140% auto, 220% 200%, 100% 100%, 160% 140%, 260% 260%, 100% 100%;
+      background-position: center center, center 75%, center 35%, center center, 15% 55%, center center, center center;
+      filter: brightness(1.0) saturate(1.1) contrast(1.15) hue-rotate(0deg);
     }
   }
 }
 
-/* Ultra-wide screen support */
+/* Ultra-wide screen support for real image */
 @media (min-width: 2560px) {
   .page-green-investments {
     background-size: 
-      50% auto,       /* Even smaller initial on ultra-wide */
-      120% 100%,      /* Proportional aura */
-      100% 80%,       /* Secondary aura */
-      150% 150%,      /* Shimmer */
-      100% 100%;      /* Base gradient */
+      cover,           /* Your real image perfectly covers ultra-wide */
+      60% auto,        /* SVG even smaller initial on ultra-wide */
+      140% 120%,       /* Proportional aura for ultra-wide */
+      100% 100%,       /* Color grading maintained */
+      120% 100%,       /* Secondary aura proportional */
+      170% 170%,       /* Shimmer optimized for ultra-wide */
+      100% 100%;       /* Base gradient */
   }
 }
