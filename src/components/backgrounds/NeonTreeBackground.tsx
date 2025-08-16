@@ -63,6 +63,7 @@ export default function NeonTreeBackground() {
     makeBranch(baseX, baseY, -Math.PI / 2, 2.5, 340);
 
     // Background neural/matrix particles
+    const particleCount = Math.min(120, Math.floor((width * height) / 15000));
     const particles = Array.from({ length: particleCount }, () => ({
       x: rand(0, width / devicePixelRatio),
       y: rand(0, height / devicePixelRatio),
