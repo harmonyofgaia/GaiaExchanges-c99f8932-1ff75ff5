@@ -60,36 +60,7 @@ export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
         });
 
         onAdminLogin();
-        credentials.emailOrUsername.toLowerCase() === "synatic"
-      ) {
-        // Check password against environment variable
-        const adminPassword = process.env.NEXT_PUBLIC_SYNATIC_ADMIN_PASSWORD || "";
-        if (credentials.password === adminPassword) {
-          // Username-based login path - create local admin session
-          const sessionToken = `local-session-${Date.now()}-${Math.random().toString(36).substr(2, 16)}`;
-          const expiryTime = Date.now() + 8 * 60 * 60 * 1000; // 8 hours
-
-          // Set local storage keys for admin session
-          sessionStorage.setItem("admin-session-active", "true");
-          localStorage.setItem("gaia-admin-username", "synatic");
-          localStorage.setItem("gaia-admin-active", "true");
-          localStorage.setItem("gaia-admin-session", sessionToken);
-          localStorage.setItem("gaia-admin-expiry", expiryTime.toString());
-
-          toast.success("👑 ADMIN ACCESS GRANTED (Username)!", {
-            description: "Welcome Admin - Local session created",
-            duration: 5000,
-          });
-
-          onAdminLogin();
-          return;
-        } else {
-          toast.error("🚫 ADMIN PASSWORD INCORRECT", {
-            description: "The password for this admin account is incorrect.",
-            duration: 5000,
-          });
-          return;
-        }
+        return;
       }
 
       // Fall back to existing email+Supabase authentication

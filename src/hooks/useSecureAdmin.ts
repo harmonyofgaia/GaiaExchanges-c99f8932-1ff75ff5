@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import crypto from "crypto";
+// Use Web Crypto API for browser compatibility instead of Node.js crypto
 // Try to import useAuth safely, falling back to a no-op
 let useAuth: () => { user: any } = () => ({ user: null });
 try {
@@ -16,6 +16,11 @@ interface AdminSession {
   id: string;
   timestamp: number;
   level?: string;
+}
+
+// Helper function to calculate original session timestamp from expiry
+function getAdminSessionTimestamp(expiry: string): number {
+  return parseInt(expiry) - 8 * 60 * 60 * 1000; // Original creation time (8 hours before expiry)
 }
 
 export function useSecureAdmin() {
@@ -124,8 +129,11 @@ export function useSecureAdmin() {
           .maybeSingle();
 
         if (adminAccount) {
-          // Create secure session token
-          const sessionToken = `session-${Date.now()}-${crypto.randomBytes(16).toString("hex")}`;
+          // Create secure session token using Web Crypto API
+          const randomBytes = new Uint8Array(16);
+          crypto.getRandomValues(randomBytes);
+          const hexString = Array.from(randomBytes, byte => byte.toString(16).padStart(2, '0')).join('');
+          const sessionToken = `session-${Date.now()}-${hexString}`;
 
           // Create admin security session
           const { error: sessionError } = await supabase
