@@ -1,0 +1,83 @@
+name: "New Research Method Proposal"
+description: "Propose a new neuroregeneration research method (methods only)"
+title: "[Method] <short title>"
+labels: ["method", "proposal"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Method title
+      placeholder: "e.g., Combinatorial CRISPRa for axon growth"
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: One-paragraph summary
+      placeholder: What does this method do and why is it novel?
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      multiple: false
+      options:
+        - high-throughput cellular perturbation
+        - spatial/single-cell multi-omics
+        - live phenotyping platforms
+        - neuroimmune/scar mapping
+        - connectomics-informed targets
+        - closed-loop stimulation (method)
+        - digital twins/causal inference
+        - federated/privacy-preserving analytics
+        - lab automation/active learning
+        - protein/RNA design
+        - exosome/EV cargo discovery
+        - vascular/glymphatic repair
+        - in vivo imaging/telemetry
+        - adaptive/N-of-1 trial methods
+    validations:
+      required: true
+  - type: textarea
+    id: endpoints
+    attributes:
+      label: Measurable endpoints
+      placeholder: Define primary/secondary endpoints and assays.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Minimal validation plan
+      placeholder: Bench → preclinical → human-proximal steps.
+    validations:
+      required: true
+  - type: textarea
+    id: green
+    attributes:
+      label: Green ops plan
+      placeholder: Energy/reagent footprint minimization; openness.
+  - type: checkboxes
+    id: skills
+    attributes:
+      label: Collaboration needs
+      options:
+        - label: CRISPR/perturbation
+        - label: iPSC/organoids
+        - label: Spatial omics
+        - label: MEA/phenotyping
+        - label: Imaging/EM
+        - label: ML/causal inference
+        - label: Federated/DP
+        - label: Robotics/automation
+        - label: Clinical trials
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints (region, time zone, IP, etc.)
+  - type: input
+    id: wallet
+    attributes:
+      label: Wallet (for identity)
+      placeholder: DID or address
