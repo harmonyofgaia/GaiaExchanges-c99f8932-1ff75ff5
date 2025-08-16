@@ -28,7 +28,8 @@ jobs:
 
       - name: Run tests (if configured)
         run: |
-          npm run test --if-present || echo "No tests configured or tests failed (continuing due to known SWC issues)"
+        continue-on-error: true
+        run: npm run test --if-present
 
       - name: Build
         env:
