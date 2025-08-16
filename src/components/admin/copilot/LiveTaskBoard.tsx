@@ -36,6 +36,16 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+// Task suggestion interface
+interface TaskSuggestion {
+  id: string;
+  type: 'optimization' | 'improvement' | 'alternative' | 'warning';
+  title: string;
+  description: string;
+  impact: 'low' | 'medium' | 'high';
+  effort: 'low' | 'medium' | 'high';
+}
+
 interface Task {
   id: string;
   title: string;
@@ -49,7 +59,7 @@ interface Task {
   createdAt: Date;
   startedAt?: Date;
   completedAt?: Date;
-  suggestions?: any[];
+  suggestions?: TaskSuggestion[];
 }
 
 const taskData: Task[] = [
@@ -153,7 +163,7 @@ export function LiveTaskBoard() {
     console.log("Auto-processing tasks...");
   }, [isAutoProcessing]);
 
-  const applySuggestion = useCallback((taskId: string, suggestion: any) => {
+  const applySuggestion = useCallback((taskId: string, suggestion: TaskSuggestion) => {
     console.log(`Applying suggestion to task ${taskId}:`, suggestion);
     // Apply suggestion logic here
   }, []);

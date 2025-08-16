@@ -10,10 +10,20 @@ export interface GaiaEngineConfig {
   plugins?: string[];
 }
 
+interface GaiaModule {
+  init?(engine: GaiaEngine): void;
+  shutdown?(): void;
+  listPlugins?(): unknown[];
+}
+
+interface PluginSystemModule extends GaiaModule {
+  listPlugins(): unknown[];
+}
+
 export class GaiaEngine {
   public status: EngineStatus = "initializing";
   public config: GaiaEngineConfig;
-  public modules: Record<string, unknown> = {};
+  public modules: Record<string, GaiaModule> = {};
 
   constructor(config: GaiaEngineConfig) {
     this.config = config;
@@ -24,15 +34,13 @@ export class GaiaEngine {
     this.status = "running";
     // Initialize all registered modules if they have an 'init' method
     for (const mod of Object.values(this.modules)) {
-      if (mod && typeof (mod as any).init === "function") {
-        (mod as any).init(this);
+      if (mod && mod.init) {
+        mod.init(this);
       }
     }
     // Optionally, initialize plugins if a plugin system is registered
-    if (
-      this.modules["pluginSystem"] &&
-      typeof (this.modules["pluginSystem"] as any).listPlugins === "function"
-    ) {
+    const pluginSystem = this.modules["pluginSystem"] as PluginSystemModule | undefined;
+    if (pluginSystem && pluginSystem.listPlugins) {
       // Plugins are assumed to be already activated on registration
     }
   }
@@ -41,13 +49,13 @@ export class GaiaEngine {
     this.status = "ready";
     // Graceful shutdown: call shutdown on all modules if available
     for (const mod of Object.values(this.modules)) {
-      if (mod && typeof (mod as any).shutdown === "function") {
-        (mod as any).shutdown();
+      if (mod && mod.shutdown) {
+        mod.shutdown();
       }
     }
   }
 
-  public registerModule(name: string, module: unknown) {
+  public registerModule(name: string, module: GaiaModule) {
     this.modules[name] = module;
   }
 }

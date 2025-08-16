@@ -35,9 +35,9 @@ export function AIThreatPredictionSystem() {
         "Advanced Persistent Threat",
       ][Math.floor(Math.random() * 8)],
       probability: Math.floor(Math.random() * 100),
-      severity: ["low", "medium", "high", "critical"][
+      severity: (["low", "medium", "high", "critical"] as const)[
         Math.floor(Math.random() * 4)
-      ] as any,
+      ] as ThreatPrediction['severity'],
       timeframe: ["15 minutes", "1 hour", "6 hours", "24 hours", "3 days"][
         Math.floor(Math.random() * 5)
       ],

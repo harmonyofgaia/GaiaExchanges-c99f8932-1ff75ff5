@@ -10,12 +10,48 @@ interface SatelliteNode {
   lastUpdate: number;
 }
 
+interface IntelligenceData {
+  id: string;
+  type: string;
+  severity: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+  source: string;
+  data: Record<string, unknown>;
+  timestamp: number;
+  verified: boolean;
+}
+
+interface SatelliteIntelligence {
+  activeSatellites: number;
+  totalThreats: number;
+  globalCoverage: string;
+  quantumMonitoring: boolean;
+  lastUpdate: number;
+  threatMap: Record<string, unknown>;
+}
+
+interface ThreatEvent {
+  type: string;
+  severity: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+  source: string;
+  data: Record<string, unknown>;
+  timestamp: number;
+}
+
+interface SecurityAlert {
+  satellite?: string;
+  threat: string;
+  coverage?: string[];
+  severity?: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+  timestamp?: number;
+  data?: Record<string, unknown>;
+}
+
 interface DeepWebMonitor {
   id: string;
   layer: "surface" | "deep" | "dark" | "marianas" | "quantum_void";
   marketplaces: string[];
   threatsFound: number;
-  intelligence: any[];
+  intelligence: IntelligenceData[];
   isActive: boolean;
 }
 
@@ -145,7 +181,7 @@ class GlobalSurveillanceService {
     }, 45000); // Scan every 45 seconds
   }
 
-  async getSatelliteIntelligence(): Promise<any> {
+  async getSatelliteIntelligence(): Promise<SatelliteIntelligence> {
     const intelligence = {
       activeSatellites: Array.from(this.satelliteNetwork.values()).filter(
         (s) => s.isActive,
@@ -421,7 +457,7 @@ class GlobalSurveillanceService {
     return internationalThreat;
   }
 
-  private async activateInternationalPartners(threat: any): Promise<string[]> {
+  private async activateInternationalPartners(threat: ThreatEvent): Promise<string[]> {
     const allPartners = [
       "Five Eyes Alliance",
       "NATO Cyber Command",
@@ -462,7 +498,7 @@ class GlobalSurveillanceService {
     return activatedPartners;
   }
 
-  private async coordinateGlobalResponse(alert: any): Promise<void> {
+  private async coordinateGlobalResponse(alert: SecurityAlert): Promise<void> {
     console.log("🌐 Coordinating Global Response:", alert);
 
     // Automatically escalate to international coordination if severe

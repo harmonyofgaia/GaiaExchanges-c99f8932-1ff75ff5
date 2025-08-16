@@ -92,7 +92,7 @@ export function AdminMediaLibrary() {
       audio.removeEventListener("timeupdate", updateTime);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, [currentTrack, mediaFiles]);
+  }, [currentTrack, mediaFiles, playTrack]);
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];

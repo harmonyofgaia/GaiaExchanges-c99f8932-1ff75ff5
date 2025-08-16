@@ -49,6 +49,15 @@ interface CrossChainTransaction {
   riskLevel: number;
 }
 
+interface CrossChainTransactionInput {
+  sourceChain: number;
+  targetChain: number;
+  amount: string;
+  token: string;
+  from: string;
+  to: string;
+}
+
 class BlockchainSecurityService {
   private monitoredChains: Map<number, BlockchainNode> = new Map();
   private smartContracts: Map<string, SmartContract> = new Map();
@@ -118,14 +127,7 @@ class BlockchainSecurityService {
     console.log("🌉 Multi-Chain Bridge Security Initialized");
   }
 
-  async secureCrossChainTransaction(tx: {
-    sourceChain: number;
-    targetChain: number;
-    amount: string;
-    token: string;
-    from: string;
-    to: string;
-  }): Promise<CrossChainTransaction> {
+  async secureCrossChainTransaction(tx: CrossChainTransactionInput): Promise<CrossChainTransaction> {
     const txId = `cross-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
     const crossChainTx: CrossChainTransaction = {
@@ -159,7 +161,7 @@ class BlockchainSecurityService {
 
   private async performCrossChainSecurityChecks(
     tx: CrossChainTransaction,
-    details: any,
+    details: CrossChainTransactionInput,
   ): Promise<{ checksPassed: string[]; riskLevel: number }> {
     const checks = [];
     let riskLevel = 0;

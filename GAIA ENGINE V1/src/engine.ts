@@ -1,5 +1,28 @@
 // --- Rapid Prototyping: GameLoop Integration ---
 import { GameLoop, Entity, Component } from "./gameLoop";
+
+// --- Type Definitions ---
+interface StatEntry {
+  key: string;
+  value: unknown;
+}
+
+interface StatsObject {
+  [key: string]: unknown;
+  inventory?: unknown[];
+  activeQuests?: unknown[];
+  completedQuests?: unknown[];
+}
+
+interface InventoryComponentData extends Component {
+  items: unknown[];
+}
+
+interface QuestComponentData extends Component {
+  activeQuests: unknown[];
+  completedQuests: unknown[];
+}
+
 // --- Gameplay Expansion: Inventory & Quest ---
 // --- Next Steps: Abilities, Equipment, Environment ---
 class AbilitiesComponent implements Component {
@@ -180,7 +203,7 @@ function updateAINPCBehavior(entity: Entity) {
 }
 updateAINPCBehavior(aiNPC);
 // --- Plugin System Expansion ---
-function triggerPluginEvent(event: string, data: any) {
+function triggerPluginEvent(event: string, data: unknown) {
   // Example: Plugin event hook
   console.log(`[PluginEvent] ${event}`, data);
 }
@@ -212,10 +235,10 @@ const liveStatsPanelComponent: UIComponent = {
     // In a real app, this would mount the React component to the DOM
     // For demo, just log the stats
     // Aggregate stats into an object
-    const statsObj: any = {};
+    const statsObj: StatsObject = {};
     const recentStats = liveStats.getRecentStats(10);
     if (Array.isArray(recentStats)) {
-      recentStats.forEach((stat: any) => {
+      recentStats.forEach((stat: StatEntry) => {
         if (stat && stat.key) {
           statsObj[stat.key] = stat.value;
         }
@@ -224,7 +247,7 @@ const liveStatsPanelComponent: UIComponent = {
     // Add inventory and quest stats
     const inventoryComp = player.getComponent("inventory");
     if (inventoryComp && "items" in inventoryComp) {
-      statsObj.inventory = (inventoryComp as any).items;
+      statsObj.inventory = (inventoryComp as InventoryComponent).items;
     } else {
       statsObj.inventory = [];
     }
@@ -234,8 +257,8 @@ const liveStatsPanelComponent: UIComponent = {
       "activeQuests" in questComp &&
       "completedQuests" in questComp
     ) {
-      statsObj.activeQuests = (questComp as any).activeQuests;
-      statsObj.completedQuests = (questComp as any).completedQuests;
+      statsObj.activeQuests = (questComp as QuestComponent).activeQuests;
+      statsObj.completedQuests = (questComp as QuestComponent).completedQuests;
     } else {
       statsObj.activeQuests = [];
       statsObj.completedQuests = [];
