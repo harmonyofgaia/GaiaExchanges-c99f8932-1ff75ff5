@@ -79,7 +79,12 @@ export default function NeonTreeBackground() {
     function step(now: number) {
       rafRef.current = requestAnimationFrame(step);
       const dt = now - last;
-      if (dt < minDt) return;
+
+
+    function step(now: number) {
+      rafRef.current = requestAnimationFrame(step);
+      const dt = now - last;
+      if (dt < MIN_DT) return;
       last = now;
 
       // Fade a bit to produce neon trails
