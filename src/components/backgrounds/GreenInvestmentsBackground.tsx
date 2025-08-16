@@ -55,7 +55,9 @@ export default function GreenInvestmentsBackground() {
     // Initialize drops
     for (let i = 0; i < columns; i++) {
       drops[i] = Math.random() * -500; // Start with staggered timing
-    }
+    // columns and drops are initialized in resize()
+    
+    // Initialize drops in resize()
 
     // Growing roots paths (SVG-like paths)
     const rootPaths: Array<{
