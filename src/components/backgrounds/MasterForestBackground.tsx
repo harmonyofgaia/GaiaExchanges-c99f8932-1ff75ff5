@@ -185,7 +185,9 @@ export default function MasterForestBackground() {
         const g = ctx.createLinearGradient(s.x, s.y, x2, y2);
         g.addColorStop(0, "rgba(0, 255, 166, 0.6);");
         g.addColorStop(0.5, "rgba(20, 255, 200, 0.55)");
-        g.addColorStop(1, "rgba(0, 200, 140, 0.5);");
+        g.addColorStop(0, "rgba(0, 255, 166, 0.6)");
+        g.addColorStop(0.5, "rgba(20, 255, 200, 0.55)");
+        g.addColorStop(1, "rgba(0, 200, 140, 0.5)");
 
         ctx.strokeStyle = g;
         ctx.lineWidth = Math.max(0.7, s.w);
