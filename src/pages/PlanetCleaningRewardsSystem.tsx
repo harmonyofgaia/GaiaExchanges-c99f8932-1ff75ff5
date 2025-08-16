@@ -2,8 +2,8 @@ type CleaningRewardRaw = Omit<
   CleaningReward,
   "location_data" | "environmental_impact"
 > & {
-  location_data: any;
-  environmental_impact: any;
+  location_data: Record<string, unknown>;
+  environmental_impact: Record<string, unknown>;
 };
 import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

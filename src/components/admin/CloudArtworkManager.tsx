@@ -17,6 +17,16 @@ import {
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
+// Cloud storage metadata interface
+interface StorageMetadata {
+  bucket: string;
+  provider: string;
+  mimeType: string;
+  lastModified?: string;
+  etag?: string;
+  [key: string]: unknown; // Allow additional metadata properties
+}
+
 interface CloudArtwork {
   id: string;
   prompt: string;
@@ -26,7 +36,7 @@ interface CloudArtwork {
   cloud_url: string;
   cloud_path: string;
   file_size: number;
-  storage_metadata: any;
+  storage_metadata: StorageMetadata;
   generated_at: string;
   downloads: number;
   nft_ready: boolean;

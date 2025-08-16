@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -38,7 +38,12 @@ interface BikeSession {
   bike_type: "gaia_bike" | "regular_bike";
   start_time: string;
   end_time: string;
-  route_data: any;
+  route_data: {
+    coordinates: Array<{ lat: number; lng: number }>;
+    distance: number;
+    duration: number;
+    waypoints?: Array<{ lat: number; lng: number; name?: string }>;
+  };
   eco_impact: {
     carbon_saved: number;
     air_quality_points: number;
@@ -49,7 +54,13 @@ interface BikeSession {
 interface FoodPlace {
   id: string;
   name: string;
-  location_data: any;
+  location_data: {
+    lat: number;
+    lng: number;
+    address?: string;
+    city?: string;
+    country?: string;
+  };
   food_types: string[];
   owner_id: string;
   verified: boolean;
@@ -80,7 +91,7 @@ interface Challenge {
 const GaiaBikeEcosystem = () => {
   const { user } = useAuth();
   const [isTracking, setIsTracking] = useState(false);
-  const [currentSession, setCurrentSession] = useState<any>(null);
+  const [currentSession, setCurrentSession] = useState<BikeSession | null>(null);
   const [totalTokens, setTotalTokens] = useState(0);
   const [bikeType, setBikeType] = useState<"gaia_bike" | "regular_bike">(
     "regular_bike",
@@ -191,7 +202,7 @@ const GaiaBikeEcosystem = () => {
     }
   };
 
-  const fetchUserStats = async () => {
+  const fetchUserStats = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from("bike_sessions")
@@ -236,7 +247,7 @@ const GaiaBikeEcosystem = () => {
     } catch (error) {
       console.error("Error fetching stats:", error);
     }
-  };
+  }, [user]);
 
   const startBikeSession = async () => {
     if (!user) {

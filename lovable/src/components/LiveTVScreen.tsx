@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -95,12 +95,16 @@ export function LiveTVScreen() {
   const [paymentAmount, setPaymentAmount] = useState<number>(50);
   const [totalTokensBurned, setTotalTokensBurned] = useState<number>(12450);
   const [totalEcologyFunding, setTotalEcologyFunding] = useState<number>(2490);
+  const initializedRef = useRef(false);
 
   useEffect(() => {
-    // Set the first live show as current
-    const liveShow = upcomingShows.find((show) => show.isLive);
-    if (liveShow) {
-      setCurrentShow(liveShow);
+    // Set the first live show as current (only once)
+    if (!initializedRef.current) {
+      const liveShow = upcomingShows.find((show) => show.isLive);
+      if (liveShow) {
+        setCurrentShow(liveShow);
+      }
+      initializedRef.current = true;
     }
 
     // Simulate live updates
@@ -122,7 +126,7 @@ export function LiveTVScreen() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [upcomingShows]);
 
   const handlePayForShow = (show: LiveShow) => {
     const burnAmount = Math.floor(paymentAmount * 0.2); // 20% of payment gets burned

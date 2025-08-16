@@ -1,5 +1,5 @@
 import { useState, Suspense, lazy } from "react";
-import { EarningCategories } from "./EarningCategories";
+import { EarningCategories, Category, CategoryComponent } from "./EarningCategories";
 // Dynamic imports for all large feature components
 const GaiaBikeEarning = lazy(() =>
   import("@/components/earning/GaiaBikeEarning").then((m) => ({
@@ -218,7 +218,7 @@ export default function EarningActivities() {
   // State for search query
   const [searchQuery, setSearchQuery] = useState("");
   // State for selected category
-  const [selectedCategory, setSelectedCategory] = useState<any | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   // State for active tab
   const [activeTab, setActiveTab] = useState("globe");
   // User stats
@@ -730,7 +730,7 @@ export default function EarningActivities() {
                 {/* Rich Activity Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {selectedCategory.components.map(
-                    (comp: any, index: number) => (
+                    (comp: CategoryComponent, index: number) => (
                       <Card
                         key={index}
                         className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 border-green-500/30 hover:scale-105 transition-all duration-300 cursor-pointer group"

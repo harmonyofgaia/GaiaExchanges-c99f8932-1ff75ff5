@@ -124,9 +124,9 @@ export function SnakeWormsIntegration() {
 
       return newSnake;
     });
-  }, [direction, gameState, worms]);
+  }, [direction, gameState, worms, initiateWormBattle]);
 
-  const initiateWormBattle = (worm: Worm) => {
+  const initiateWormBattle = useCallback((worm: Worm) => {
     const damage = selectedWeapon.damage + Math.floor(Math.random() * 25);
 
     setWorms(
@@ -170,9 +170,9 @@ export function SnakeWormsIntegration() {
           })
           .filter(Boolean) as Worm[],
     );
-  };
+  }, [selectedWeapon]);
 
-  const fireWeapon = (targetX: number, targetY: number) => {
+  const fireWeapon = useCallback((targetX: number, targetY: number) => {
     if (gameState !== "playing") return;
 
     // Check if any worms are in weapon radius
@@ -194,7 +194,7 @@ export function SnakeWormsIntegration() {
         duration: 2000,
       });
     }
-  };
+  }, [gameState, worms, selectedWeapon, initiateWormBattle]);
 
   useEffect(() => {
     if (gameState === "playing") {
@@ -230,7 +230,7 @@ export function SnakeWormsIntegration() {
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [direction, gameState, snake, selectedWeapon]);
+  }, [direction, gameState, snake, selectedWeapon, fireWeapon]);
 
   const startGame = () => {
     setGameState("playing");

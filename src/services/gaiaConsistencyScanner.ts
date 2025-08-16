@@ -8,6 +8,12 @@ export interface ConsistencyIssue {
   recommendation: string;
 }
 
+interface ComponentToCheck {
+  name: string;
+  path: string;
+  type: string;
+}
+
 export interface ComponentIntegration {
   name: string;
   path: string;
@@ -174,7 +180,7 @@ class GaiaConsistencyScanner {
   }
 
   private async checkComponentIntegration(
-    component: any,
+    component: ComponentToCheck,
   ): Promise<ComponentIntegration> {
     const issues: ConsistencyIssue[] = [];
 

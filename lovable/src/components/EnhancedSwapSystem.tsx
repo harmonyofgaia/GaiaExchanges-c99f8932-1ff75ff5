@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,14 +57,6 @@ export function EnhancedSwapSystem() {
     console.log("💱 ENHANCED SWAP SYSTEM - MULTI-DEX AGGREGATION ACTIVE");
     console.log("🌐 Connected to GAiA Token:", GAIA_TOKEN.CONTRACT_ADDRESS);
     console.log("⚡ 15x Faster Swaps Than Traditional DEXs");
-
-    // Fetch user configuration
-    const fetchUserConfig = async () => {
-      console.log("📊 Enhanced Swap System: Fetching user configuration");
-      return userConfig;
-    };
-
-    fetchUserConfig();
 
     // Initialize swap pairs with live data simulation
     const initializeSwapPairs = () => {
