@@ -119,7 +119,6 @@ export default function GreenInvestmentsBackground() {
       }
       resizeObserver.disconnect();
     };
-    let columns: number;
     let drops: number[];
     
     // columns and drops are initialized in resize()
