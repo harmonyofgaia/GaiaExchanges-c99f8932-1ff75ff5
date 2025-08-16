@@ -198,6 +198,28 @@ The **GREEN NEUROREGENERATION INITIATIVE** represents a revolutionary breakthrou
 
 ---
 
+## 🌿 Moringa × Blackberry Synergy Track
+
+### Research Overview
+
+This specialized track investigates the synergistic neuroprotective potential of Moringa oleifera ("wonder tree") and Blackberry (Rubus) extracts. The combination targets multiple neuroinflammation and neurodegeneration pathways:
+
+- **Moringa isothiocyanates + flavonoids**: Nrf2/ARE activation, NF-κB modulation, mitochondrial support
+- **Blackberry anthocyanins/ellagitannins → urolithin pathway**: Mitophagy enhancement, microglial modulation, synaptic plasticity
+- **Complementary mechanisms**: Oxidative stress reduction, neuroinflammation control, mitochondrial quality control, synaptic plasticity enhancement, myelination support
+
+### Research Documentation
+
+For detailed technical specifications, methodology, and implementation phases, see: [docs/green-neuroregeneration-initiative-moringa-blackberry.md](docs/green-neuroregeneration-initiative-moringa-blackberry.md)
+
+### Near-Term Actions (Phase 0–2 Highlights)
+
+- **Phase 0**: Literature review, freedom-to-operate analysis, analytical SOP development, supplier prequalification
+- **Phase 1**: Extract standardization and engineering, in silico pathway modeling for ADME/BBB penetration, candidate formulation selection  
+- **Phase 2**: In vitro neuronal assays (oxidative stress, neuroinflammation, synaptic function, myelination, mitochondrial function), safety profiling, microarray analysis for pathway validation
+
+---
+
 ## 🔮 Long-Term Vision
 
 The Green Neuroregeneration Initiative will establish the first scientifically-proven system that simultaneously heals human minds and natural environments. Through 24/7 research, community engagement, and continuous innovation, we will create a world where mental health problems are solved through environmental restoration, and environmental problems are solved through community healing activities.
