@@ -34,7 +34,7 @@ jobs:
       - name: Build
         env:
           # Provide dummy envs for PRs to avoid secret access. Real secrets only on push to main in deploy job.
-          VITE_SUPABASE_URL: ${{ github.event_name == 'pull_request' && 'http://localhost' || '' }}
+          VITE_SUPABASE_URL: ${{ github.event_name == 'pull_request' && 'https://placeholder.supabase.co' || '' }}
           VITE_SUPABASE_ANON_KEY: ${{ github.event_name == 'pull_request' && 'test-anon-key' || '' }}
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
