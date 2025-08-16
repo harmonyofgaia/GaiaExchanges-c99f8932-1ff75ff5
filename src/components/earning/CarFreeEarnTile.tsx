@@ -41,7 +41,7 @@ export function CarFreeEarnTile() {
         <div className="mt-3 flex gap-2">
           <Link to="/earning-activities">
             <Button className="bg-emerald-600 hover:bg-emerald-700">Start / Resume Streak</Button>
-          </Link>
+          <Button className="bg-emerald-600 hover:bg-emerald-700">Start / Resume Streak</Button>
           <Link to="/green-investments">
             <Button variant="outline" className="border-emerald-500/30 text-emerald-300">
               Learn More
