@@ -7,22 +7,36 @@ import { Input } from "@/components/ui/input";
 import { ArrowLeft, Search, Star, Trophy, Zap } from "lucide-react";
 import { GAIA_TOKEN } from "@/constants/gaia";
 
+export interface CategoryComponent {
+  title: string;
+  component: React.ComponentType;
+  description?: string;
+}
+
+export interface Category {
+  components: CategoryComponent[];
+  title?: string;
+  description?: string;
+  completedCount: number;
+  totalCount: number;
+}
+
 interface CategoryProps {
   onBack: () => void;
-  category: any;
+  category: Category;
 }
 
 export function EarningCategories({ onBack, category }: CategoryProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedActivity, setSelectedActivity] = useState<string | null>(null);
 
-  const filteredComponents = category.components.filter((comp: any) =>
+  const filteredComponents = category.components.filter((comp: CategoryComponent) =>
     comp.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   if (selectedActivity) {
     const selectedComponent = category.components.find(
-      (comp: any) => comp.title === selectedActivity,
+      (comp: CategoryComponent) => comp.title === selectedActivity,
     );
 
     if (selectedComponent) {
@@ -103,7 +117,7 @@ export function EarningCategories({ onBack, category }: CategoryProps) {
 
       {/* Activities Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredComponents.map((component: any, index: number) => (
+        {filteredComponents.map((component: CategoryComponent, index: number) => (
           <Card
             key={index}
             className={`${category.color} ${category.borderColor} border-2 cursor-pointer hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/20`}
