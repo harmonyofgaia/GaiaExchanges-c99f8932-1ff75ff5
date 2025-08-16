@@ -160,3 +160,6 @@
       sans-serif;
   }
 }
+
+/* Green Investments background styles */
+@import './styles/green-investments-background.css';
