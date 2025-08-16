@@ -50,7 +50,6 @@ check "TypeScript config" "test -f tsconfig.json"
 echo ""
 echo "🔧 Configuration Verification"
 check "Environment example" "test -f .env.example"
-check "Vercel config" "test -f vercel.json"
 check "Tailwind config" "test -f tailwind.config.cjs"
 check "PostCSS config" "test -f postcss.config.cjs"
 

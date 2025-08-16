@@ -50,10 +50,6 @@ Primary: Netlify (recommended)
   - `npm run build`
   - `npm run deploy:netlify`
 
-Optional (manual): Vercel
-
-- We keep an optional script: `npm run deploy:vercel` (requires Vercel CLI and a project linked in your environment). The repository no longer includes vercel.json or .vercel linkage by default.
-
 ## Build Status
 
 ✅ Builds and route handling are configured for Netlify (SPA redirects via `netlify.toml`).
