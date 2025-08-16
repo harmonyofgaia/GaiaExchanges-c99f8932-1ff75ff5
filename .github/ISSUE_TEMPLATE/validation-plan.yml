@@ -1,0 +1,32 @@
+name: "Validation Plan Update"
+description: "Track validation status for a method"
+title: "[Validation] <slug>"
+labels: ["validation"]
+body:
+  - type: input
+    id: slug
+    attributes:
+      label: Method slug
+      placeholder: "axon-growth-crispr-combo"
+    validations:
+      required: true
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options:
+        - proposal
+        - in-validation
+        - replicating
+        - archived
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence added
+      placeholder: Links to data, docs, preprints.
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks/ethics updates
