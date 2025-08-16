@@ -19,7 +19,11 @@ export function useFeatureFlag(key: FlagKey, defaultValue = true) {
           .eq("key", key)
           .maybeSingle();
 
-        if (error) console.error("feature flag error", error);
+        if (error) {
+          console.error("feature flag error", error);
+          if (isMounted) setEnabled(defaultValue);
+          return;
+        }
         if (isMounted && data && typeof data.enabled === "boolean") {
           setEnabled(data.enabled);
         }
