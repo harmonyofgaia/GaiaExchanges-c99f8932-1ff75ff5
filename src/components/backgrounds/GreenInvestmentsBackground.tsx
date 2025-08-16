@@ -23,7 +23,7 @@ export default function GreenInvestmentsBackground() {
     if (!ctx) return;
 
     // Cap DPR for performance
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = getDevicePixelRatio();
     let width = 0;
     let height = 0;
 
