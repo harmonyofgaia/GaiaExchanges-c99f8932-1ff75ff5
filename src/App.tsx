@@ -29,7 +29,6 @@ const StreamingShows = lazy(() => import("./pages/StreamingShows"));
 const GaiaBikeEcosystem = lazy(() => import("./pages/GaiaBikeEcosystem"));
 const TokenMining = lazy(() => import("./pages/TokenMining"));
 const GreenInvestments = lazy(() => import("./pages/GreenInvestments"));
-const CarFreeRewards = lazy(() => import("./pages/CarFreeRewards"));
 const CoinCrafter = lazy(() => import("./pages/CoinCrafter"));
 
 const GaiasProjects = lazy(() => import("./pages/GaiasProjects"));
@@ -127,7 +126,6 @@ function App() {
               />
               <Route path="/token-mining" element={<TokenMining />} />
               <Route path="/green-investments" element={<GreenInvestments />} />
-              <Route path="/car-free-rewards" element={<CarFreeRewards />} />
               <Route path="/coin-crafter" element={<CoinCrafter />} />
               <Route path="/landscape-builder" element={<LandscapeBuilder />} />
               <Route
