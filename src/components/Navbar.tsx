@@ -57,7 +57,6 @@ const navItems: NavItem[] = [
   { name: "Home", path: "/", icon: Home },
   { name: "Exchange", path: "/exchange", icon: ArrowRightLeft },
   { name: "Green Investments", path: "/green-investments", icon: TrendingUp },
-  { name: "Car‑Free Rewards", path: "/car-free-rewards", icon: Bike },
   { name: "Animal Welfare", path: "/animal-welfare", icon: Heart },
   { name: "Gaming Hub", path: "/gaming", icon: Gamepad2 },
   { name: "Wallet", path: "/wallet", icon: Wallet },
