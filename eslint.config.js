@@ -42,8 +42,7 @@ export default tseslint.config(
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-require-imports": "warn",
       "@typescript-eslint/no-empty-object-type": "warn",
-      // TODO: Fix React Hooks dependencies - currently too noisy for legacy codebase
-      "react-hooks/exhaustive-deps": "off",
+      "react-hooks/exhaustive-deps": "warn",
       "no-case-declarations": "warn",
       // Reduce some warnings to be less strict
       "prefer-const": "warn",
