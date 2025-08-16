@@ -59,7 +59,6 @@ export default function GreenInvestmentsBackground() {
     
     let columns: number = 0;
     let drops: number[] = [];
-    
     // columns and drops are initialized in resize()
     
     
