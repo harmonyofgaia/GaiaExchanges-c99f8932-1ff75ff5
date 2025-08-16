@@ -28,7 +28,7 @@ Default k values:
 Guardrails
 - Hard floor: treasury after award must keep ≥ 24 months runway.
 - Circuit breaker: if R_t ≤ 0 for 2 consecutive quarters → no award.
-- Price shock: if PriceDamp < 0.8 → reduce Award_t by additional 25%.
+- Price shock: if PriceDamp < PRICE_SHOCK_THRESHOLD → reduce Award_t by additional AWARD_REDUCTION_PERCENT.
 - Multisig + community sign-off with transparent rationale.
 
 Execution
