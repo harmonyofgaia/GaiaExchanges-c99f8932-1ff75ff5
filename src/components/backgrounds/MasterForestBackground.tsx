@@ -265,7 +265,7 @@ export default function MasterForestBackground() {
       );
       radial.addColorStop(0, "rgba(0,0,0,0.00)");
       radial.addColorStop(0.55, "rgba(2, 10, 10, 0.12);");
-      radial.addColorStop(1, "rgba(0,0,0,0.35);");
+      radial.addColorStop(1, "rgba(0,0,0,0.35)");
 
       ctx.save();
       ctx.globalAlpha = baseAlpha;
