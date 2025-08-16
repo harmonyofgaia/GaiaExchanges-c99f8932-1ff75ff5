@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -133,7 +133,7 @@ export function EinsteinTacticalAnimals() {
           intelligenceLevel: animal.intelligenceLevel * 1.001,
           quantumPower: animal.quantumPower * 1.002,
           threatsNeutralized: animal.threatsNeutralized + Math.floor(Math.random() * 10000),
-          evolutionStage: Math.min(animal.evolutionStage + 0.1, 100),
+          evolutionStage: Math.min(animal.evolutionStage + 0.1, 100)
         }))
       );
 

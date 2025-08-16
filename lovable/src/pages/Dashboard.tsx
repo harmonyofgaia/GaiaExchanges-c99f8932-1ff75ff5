@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -228,7 +228,7 @@ export default function Dashboard() {
       ...prev,
       totalAnimalsRescued: prev.totalAnimalsRescued + Math.floor(Math.random() * 3),
       totalCarbonOffset: prev.totalCarbonOffset + Math.floor(Math.random() * 1000),
-      totalUsersImpacting: prev.totalUsersImpacting + Math.floor(Math.random() * 5),
+      totalUsersImpacting: prev.totalUsersImpacting + Math.floor(Math.random() * 5)
     }));
   };
 

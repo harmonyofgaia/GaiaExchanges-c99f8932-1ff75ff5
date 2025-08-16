@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -97,7 +97,7 @@ export default function Marketplace() {
         totalValue: prev.totalValue + Math.floor(Math.random() * 1000),
         totalItems: prev.totalItems + Math.floor(Math.random() * 3),
         animalsSaved: prev.animalsSaved + (Math.random() > 0.9 ? 1 : 0),
-        landRestored: prev.landRestored + Math.floor(Math.random() * 10),
+        landRestored: prev.landRestored + Math.floor(Math.random() * 10)
       }));
     }, 5000);
 

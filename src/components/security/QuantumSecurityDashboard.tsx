@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -63,7 +63,7 @@ export function QuantumSecurityDashboard() {
       setSecurityMetrics((prev) =>
         prev.map((metric) => ({
           ...metric,
-          value: Math.min(100, metric.value + (Math.random() - 0.5) * 0.1),
+          value: Math.min(100, metric.value + (Math.random() - 0.5) * 0.1)
         }))
       );
 

@@ -108,7 +108,7 @@ export function PersistentEvolutionEngine() {
             quantumCore: prev.powerLevels.quantumCore * prev.evolutionRate,
             aiIntelligence: prev.powerLevels.aiIntelligence * prev.evolutionRate,
           },
-          lastActiveTimestamp: Date.now(),
+          lastActiveTimestamp: Date.now()
         };
 
         // Save to localStorage every evolution
@@ -148,7 +148,7 @@ export function PersistentEvolutionEngine() {
         console.log("🌙 TAB HIDDEN - OFFLINE GROWTH MODE ACTIVATED");
         setMetrics((prev) => ({
           ...prev,
-          lastActiveTimestamp: Date.now(),
+          lastActiveTimestamp: Date.now()
         }));
       }
     };
@@ -204,6 +204,6 @@ export function PersistentEvolutionEngine() {
     growsOffline: true,
     getGrowthRate: () => ((metrics.evolutionRate - 1) * 100).toFixed(4) + "% per second",
     getTotalPower: () => Math.floor(metrics.totalSystemPower).toLocaleString(),
-    getUptime: () => Math.floor((Date.now() - startTime.current) / 1000),
+    getUptime: () => Math.floor((Date.now() - startTime.current) / 1000)
   };
 }

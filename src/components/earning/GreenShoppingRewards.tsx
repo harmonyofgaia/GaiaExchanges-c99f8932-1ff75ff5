@@ -146,7 +146,7 @@ export function GreenShoppingRewards() {
         shopType,
         itemCategory,
         amount: parseFloat(amount),
-        certifications: certifications.join(","),
+        certifications: certifications.join(",")
         packaging,
       },
     };

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -31,7 +31,7 @@ export default function Home() {
         totalUsers: prev.totalUsers + Math.floor(Math.random() * 5),
         tokensEarned: prev.tokensEarned + Math.floor(Math.random() * 100),
         carbonOffset: prev.carbonOffset + Math.floor(Math.random() * 10),
-        projectsFunded: prev.projectsFunded + Math.floor(Math.random() * 2),
+        projectsFunded: prev.projectsFunded + Math.floor(Math.random() * 2)
       }));
     }, 3000);
 

@@ -297,7 +297,7 @@ export function CreativeNFTGenerator() {
         magic: Math.floor(Math.random() * 100),
         speed: Math.floor(Math.random() * 100),
         luck: Math.floor(Math.random() * 100),
-        charm: Math.floor(Math.random() * 100),
+        charm: Math.floor(Math.random() * 100)
       },
       specialAbilities: [`${randomTheme} Power`, "Enhanced Stats", "Special Effect"],
       tags: [randomTheme.toLowerCase(), randomCategory, "ai-generated"],

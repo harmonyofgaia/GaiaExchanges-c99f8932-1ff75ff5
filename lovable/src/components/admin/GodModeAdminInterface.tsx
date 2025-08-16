@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -71,7 +71,7 @@ export function GodModeAdminInterface() {
     const classification = classifications[Math.floor(Math.random() * classifications.length)];
 
     const newCommand: GodModeCommand = {
-      id: Date.now().toString(),
+      id: Date.now().toString()
       command,
       classification,
       executed: false,
@@ -83,7 +83,7 @@ export function GodModeAdminInterface() {
         "Universal constants adjusted",
         "Dimensional barriers transcended",
         "Consciousness network expanded",
-      ].slice(0, Math.floor(Math.random() * 3) + 1),
+      ].slice(0, Math.floor(Math.random() * 3) + 1)
     };
 
     setGodCommands((prev) => [newCommand, ...prev.slice(0, 9)]);

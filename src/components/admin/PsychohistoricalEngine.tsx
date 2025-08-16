@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -70,7 +70,7 @@ export function PsychohistoricalEngine() {
       setPredictions((prev) =>
         prev.map((p) => ({
           ...p,
-          probability: Math.max(10, Math.min(95, p.probability + (Math.random() - 0.5) * 10)),
+          probability: Math.max(10, Math.min(95, p.probability + (Math.random() - 0.5) * 10))
         }))
       );
     }, 3000);

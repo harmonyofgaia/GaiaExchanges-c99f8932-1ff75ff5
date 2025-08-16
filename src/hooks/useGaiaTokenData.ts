@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { gaiaTokenService, TokenData } from "@/services/gaiaTokenService";
 import { toast } from "sonner";
 import { shouldShowNotification } from "@/lib/utils";

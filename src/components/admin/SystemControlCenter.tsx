@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -35,31 +35,31 @@ export function SystemControlCenter() {
       service: "Database (Supabase)",
       status: "operational",
       uptime: 100,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       service: "Cloud Storage",
       status: "operational",
       uptime: 99.8,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       service: "Admin Dashboard",
       status: "operational",
       uptime: 100,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       service: "Security Systems",
       status: "operational",
       uptime: 100,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       service: "Background Services",
       status: "operational",
       uptime: 99.7,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
   ]);
 
@@ -79,7 +79,7 @@ export function SystemControlCenter() {
         prev.map((status) => ({
           ...status,
           lastCheck: new Date(),
-          uptime: Math.min(100, status.uptime + Math.random() * 0.1),
+          uptime: Math.min(100, status.uptime + Math.random() * 0.1)
         }))
       );
     }, 30000);

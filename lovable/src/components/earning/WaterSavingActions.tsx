@@ -28,7 +28,7 @@ export function WaterSavingActions() {
 
     try {
       await recordWaterSaving({
-        amount: parseInt(waterAmount),
+        amount: parseInt(waterAmount)
         actionType,
         duration: 30,
         verified: true,

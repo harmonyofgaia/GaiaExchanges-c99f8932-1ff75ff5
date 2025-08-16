@@ -56,7 +56,7 @@ export function WildlifeConservationActions() {
         conservationType,
         speciesHelped,
         habitatArea: parseFloat(habitatArea),
-        activityDuration: parseFloat(activityDuration),
+        activityDuration: parseFloat(activityDuration)
       },
     };
 

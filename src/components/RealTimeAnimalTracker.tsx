@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -94,7 +94,7 @@ export function RealTimeAnimalTracker() {
           location: {
             ...animal.location,
             lat: animal.location.lat + (Math.random() * 0.01 - 0.005),
-            lng: animal.location.lng + (Math.random() * 0.01 - 0.005),
+            lng: animal.location.lng + (Math.random() * 0.01 - 0.005)
           },
         }))
       );
@@ -102,7 +102,7 @@ export function RealTimeAnimalTracker() {
       setGlobalTracking((prev) => ({
         ...prev,
         dataPointsPerSecond: prev.dataPointsPerSecond + Math.floor(Math.random() * 100 - 50),
-        globalCoverage: Math.max(90, Math.min(100, prev.globalCoverage + Math.random() * 2 - 1)),
+        globalCoverage: Math.max(90, Math.min(100, prev.globalCoverage + Math.random() * 2 - 1))
       }));
     };
 

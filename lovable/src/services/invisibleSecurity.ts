@@ -1,5 +1,5 @@
 // Invisible Background Security Service - Operates behind the scenes
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 
 interface SecurityThreat {
   id: string;
@@ -317,7 +317,7 @@ class InvisibleSecurityService {
       const scanResults = {
         newTechnologies: Math.floor(Math.random() * 5),
         potentialThreats: Math.floor(Math.random() * 3),
-        securityUpdates: Math.floor(Math.random() * 2),
+        securityUpdates: Math.floor(Math.random() * 2)
       };
 
       if (scanResults.newTechnologies > 2) {
@@ -443,6 +443,6 @@ export function useInvisibleSecurity() {
     metrics,
     getDefenseAnimals: () => invisibleSecurity.getDefenseAnimals(),
     getRecentThreats: (limit?: number) => invisibleSecurity.getRecentThreats(limit),
-    emergencyLockdown: () => invisibleSecurity.emergencyLockdown(),
+    emergencyLockdown: () => invisibleSecurity.emergencyLockdown()
   };
 }

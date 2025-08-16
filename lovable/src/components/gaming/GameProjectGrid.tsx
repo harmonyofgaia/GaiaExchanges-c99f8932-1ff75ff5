@@ -163,7 +163,7 @@ export function GameProjectGrid() {
                   opacity: 1 - (index - (gameProjects.length - 4)) * 0.15,
                   transform: `translateX(${(index - (gameProjects.length - 4)) * 5}px)`,
                 }
-              : {}),
+              : {})
           }}
         >
           <div className="absolute top-2 right-2 opacity-20">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -103,7 +103,7 @@ export function WorldRankingDashboard() {
           ...coin,
           price: coin.price * (1 + (Math.random() - 0.5) * 0.01),
           change24h: coin.change24h + (Math.random() - 0.5) * 0.5,
-          volume: coin.volume * (1 + (Math.random() - 0.5) * 0.05),
+          volume: coin.volume * (1 + (Math.random() - 0.5) * 0.05)
         }))
       );
     }, 3000);

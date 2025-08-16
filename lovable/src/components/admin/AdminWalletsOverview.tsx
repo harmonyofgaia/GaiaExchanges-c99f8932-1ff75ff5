@@ -72,7 +72,7 @@ export const AdminWalletsOverview: React.FC = () => {
         p.wallet_address,
         p.allocation_percentage,
         p.total_received,
-      ]),
+      ])
     });
 
     // Animal Welfare
@@ -85,7 +85,7 @@ export const AdminWalletsOverview: React.FC = () => {
         p.wallet_address,
         p.allocation_percentage,
         p.total_received,
-      ]),
+      ])
     });
 
     // Community Vault (if any)
@@ -99,7 +99,7 @@ export const AdminWalletsOverview: React.FC = () => {
           p.wallet_address,
           p.allocation_percentage,
           p.total_received,
-        ]),
+        ])
       });
     }
 

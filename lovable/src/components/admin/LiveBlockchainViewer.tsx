@@ -145,7 +145,7 @@ export function LiveBlockchainViewer() {
 
   const downloadSecureReport = () => {
     const reportData = {
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toISOString()
       networkStats,
       currentBlock,
       recentTransactions: recentTransactions.slice(0, 100),

@@ -45,7 +45,7 @@ export function EncryptedDataVault() {
       type: "wallet",
       size: 2048,
       encrypted: true,
-      lastBackup: new Date(),
+      lastBackup: new Date()
     },
     {
       id: "2",
@@ -53,7 +53,7 @@ export function EncryptedDataVault() {
       type: "wallet",
       size: 1536,
       encrypted: true,
-      lastBackup: new Date(),
+      lastBackup: new Date()
     },
     {
       id: "3",
@@ -61,7 +61,7 @@ export function EncryptedDataVault() {
       type: "system",
       size: 4096,
       encrypted: true,
-      lastBackup: new Date(),
+      lastBackup: new Date()
     },
     {
       id: "4",
@@ -69,7 +69,7 @@ export function EncryptedDataVault() {
       type: "user-data",
       size: 8192,
       encrypted: true,
-      lastBackup: new Date(),
+      lastBackup: new Date()
     },
     {
       id: "5",
@@ -77,7 +77,7 @@ export function EncryptedDataVault() {
       type: "transaction",
       size: 16384,
       encrypted: true,
-      lastBackup: new Date(),
+      lastBackup: new Date()
     },
   ]);
   const [encryptionStatus, setEncryptionStatus] = useState({
@@ -131,7 +131,7 @@ export function EncryptedDataVault() {
 
       setEncryptionStatus((prev) => ({
         ...prev,
-        lastEncryption: new Date(),
+        lastEncryption: new Date()
       }));
 
       // Auto-backup when needed
@@ -141,7 +141,7 @@ export function EncryptedDataVault() {
         setEncryptedFiles((prev) =>
           prev.map((file) => ({
             ...file,
-            lastBackup: new Date(),
+            lastBackup: new Date()
           }))
         );
       }

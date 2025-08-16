@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -51,7 +51,7 @@ export default function GaiasProjects() {
       setProjects((prev) =>
         prev.map((project) => ({
           ...project,
-          funding: Math.min(project.target, project.funding + Math.floor(Math.random() * 5000)),
+          funding: Math.min(project.target, project.funding + Math.floor(Math.random() * 5000))
         }))
       );
     }, 10000);

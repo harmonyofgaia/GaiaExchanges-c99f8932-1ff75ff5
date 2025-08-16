@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback} from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -315,7 +315,7 @@ export function UpgradedVisualControlButton() {
     const themeData = {
       colors: document.documentElement.style.cssText,
       effects: activeEffects,
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toISOString()
     };
     const blob = new Blob([JSON.stringify(themeData, null, 2)], {
       type: "application/json",

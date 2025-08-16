@@ -452,7 +452,7 @@ export function FuturisticAnimationStudio() {
           basePrompt: `${selectedStyle} animation with ${selectedEffect} effects`,
           artworkType: "animation_frame",
           style: "futuristic_animation",
-        }),
+        })
       });
 
       if (response.ok) {

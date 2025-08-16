@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -68,7 +68,7 @@ export default function VirtualWorld() {
         setWorldState((prev) => ({
           ...prev,
           playersOnline: prev.playersOnline + Math.floor(Math.random() * 100),
-          worldsCreated: prev.worldsCreated + Math.floor(Math.random() * 5),
+          worldsCreated: prev.worldsCreated + Math.floor(Math.random() * 5)
         }));
 
         // World events

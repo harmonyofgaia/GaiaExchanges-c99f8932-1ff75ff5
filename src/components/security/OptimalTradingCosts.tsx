@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -75,7 +75,7 @@ export function OptimalTradingCosts() {
     targetFee: 0.0001,
     optimization: 99.9,
     savings: 99.9,
-    nextUpdate: new Date(Date.now() + 30000),
+    nextUpdate: new Date(Date.now() + 30000)
   });
 
   const [isOptimizing, setIsOptimizing] = useState(true);
@@ -103,7 +103,7 @@ export function OptimalTradingCosts() {
             targetFee: 0,
             optimization: Math.min(100, 99.9 + Math.random() * 0.1),
             savings: ((0.1 - newFee) / 0.1) * 100,
-            nextUpdate: new Date(Date.now() + 30000),
+            nextUpdate: new Date(Date.now() + 30000)
           };
         };
 
@@ -116,7 +116,7 @@ export function OptimalTradingCosts() {
               return {
                 ...cost,
                 fee: Math.max(0.0001, cost.fee * 0.995), // Always improving
-                optimization: Math.min(100, cost.optimization + 0.1),
+                optimization: Math.min(100, cost.optimization + 0.1)
               };
             } else {
               // Simulate competitor fee changes
@@ -124,7 +124,7 @@ export function OptimalTradingCosts() {
               return {
                 ...cost,
                 fee: Math.max(0.05, cost.fee + variation),
-                optimization: Math.max(60, cost.optimization + variation * 10),
+                optimization: Math.max(60, cost.optimization + variation * 10)
               };
             }
           });

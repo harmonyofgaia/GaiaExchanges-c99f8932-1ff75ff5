@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export function AdminRouteProtector() {

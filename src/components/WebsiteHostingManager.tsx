@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -89,12 +89,12 @@ export function WebsiteHostingManager() {
         ...prev,
         visitors: prev.visitors + Math.floor(Math.random() * 5),
         bandwidth: prev.bandwidth + Math.random() * 0.1,
-        uptime: Math.min(99.99, prev.uptime + Math.random() * 0.01),
+        uptime: Math.min(99.99, prev.uptime + Math.random() * 0.01)
       }));
 
       setDeploymentStats((prev) => ({
         ...prev,
-        totalTraffic: prev.totalTraffic + Math.floor(Math.random() * 3),
+        totalTraffic: prev.totalTraffic + Math.floor(Math.random() * 3)
       }));
     }, 5000);
 
@@ -173,7 +173,7 @@ export function WebsiteHostingManager() {
       setHostingStatus((prev) => ({
         ...prev,
         status: "active",
-        lastDeployment: new Date(),
+        lastDeployment: new Date()
       }));
       setIsDeploying(false);
 

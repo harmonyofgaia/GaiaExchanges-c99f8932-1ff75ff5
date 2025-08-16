@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -90,7 +90,7 @@ export function GitHubAdminIntegration() {
           securityScan: "QUANTUM_PASSED",
           lastCommit: new Date(),
           activeProtections: prev.activeProtections + (Math.random() > 0.4 ? 1 : 0),
-          quantumSecurityLevel: Math.min(99.99, prev.quantumSecurityLevel + 0.001),
+          quantumSecurityLevel: Math.min(99.99, prev.quantumSecurityLevel + 0.001)
         }));
       }
 

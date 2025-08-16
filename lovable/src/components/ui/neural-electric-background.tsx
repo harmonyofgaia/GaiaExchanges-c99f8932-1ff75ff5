@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 
 interface Synapse {
   id: number;
@@ -57,7 +57,7 @@ export function NeuralElectricBackground({
           y: synapse.y + (synapse.targetY - synapse.y) * synapse.speed * 0.01,
           targetX: synapse.targetX + (Math.random() - 0.5) * 2,
           targetY: synapse.targetY + (Math.random() - 0.5) * 2,
-          intensity: Math.max(0.1, Math.min(1, synapse.intensity + (Math.random() - 0.5) * 0.1)),
+          intensity: Math.max(0.1, Math.min(1, synapse.intensity + (Math.random() - 0.5) * 0.1))
         }))
       );
     }, 100);

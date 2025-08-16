@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -81,15 +81,15 @@ export function RealTimeAdminMetrics() {
         },
         {
           name: "system_load",
-          value: Math.max(0, Math.min(100, 20 + (Math.random() - 0.5) * 10)),
+          value: Math.max(0, Math.min(100, 20 + (Math.random() - 0.5) * 10))
         },
         {
           name: "growth_rate",
-          value: Math.max(0, 150 + (Math.random() - 0.5) * 20),
+          value: Math.max(0, 150 + (Math.random() - 0.5) * 20)
         },
         {
           name: "community_score",
-          value: Math.max(0, Math.min(100, 94 + (Math.random() - 0.5) * 5)),
+          value: Math.max(0, Math.min(100, 94 + (Math.random() - 0.5) * 5))
         },
       ];
 
@@ -135,7 +135,7 @@ export function RealTimeAdminMetrics() {
       case "server_uptime":
         return value >= 99 ? "text-green-400" : value >= 95 ? "text-yellow-400" : "text-red-400";
       case "system_load":
-        return value <= 30 ? "text-green-400" : value <= 70 ? "text-yellow-400" : "text-red-400";
+        return value <= 30 ? "text-green-400" : value <= 70 ? "text-yellow-400" : "text-red-400";,
       default:
         return "text-blue-400";
     }

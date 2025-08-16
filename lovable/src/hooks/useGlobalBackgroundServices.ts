@@ -149,7 +149,7 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
         globalConnections: 1247 + Math.floor(Math.random() * 100),
         dataPoints: 98752 + Math.floor(Math.random() * 1000),
         threatLevel: Math.random() > 0.9 ? "MEDIUM" : "LOW",
-        ecoProjects: 15784 + Math.floor(Math.random() * 50),
+        ecoProjects: 15784 + Math.floor(Math.random() * 50)
       };
 
       // Store analytics for admin dashboard (invisible to users)
@@ -169,7 +169,7 @@ export function useGlobalBackgroundServices(): GlobalBackgroundState {
         webScanResults: Math.floor(Math.random() * 1000),
         socialMentions: Math.floor(Math.random() * 500),
         blockchainActivity: Math.floor(Math.random() * 100),
-        threatIntelligence: Math.floor(Math.random() * 10),
+        threatIntelligence: Math.floor(Math.random() * 10)
       };
 
       console.log("🔍 GAIA Intelligence: Global scan complete");

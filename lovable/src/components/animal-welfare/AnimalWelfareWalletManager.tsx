@@ -160,7 +160,7 @@ export function AnimalWelfareWalletManager() {
         preferred_fee_destination: config.preferred_fee_destination,
         zero_fee_enabled: config.zero_fee_enabled,
         custom_fee_amount: config.custom_fee_amount,
-        updated_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
       });
 
       if (error) {

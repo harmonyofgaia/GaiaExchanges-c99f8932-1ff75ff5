@@ -51,7 +51,7 @@ export function ensureCrossBrowserCompatibility(): boolean {
     ),
     deviceOrientation: "DeviceOrientationEvent" in window,
     geolocation: "geolocation" in navigator,
-    webRTC: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia),
+    webRTC: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
   };
 
   const requiredFeatures = ["webGL", "canvas", "localStorage", "webSockets"];

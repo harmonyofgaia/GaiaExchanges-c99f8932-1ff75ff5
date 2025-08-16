@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -130,8 +130,8 @@ export function ArtistStreamingPlatform() {
         totalViewers: acc.totalViewers + stream.viewers,
         totalEarnings: acc.totalEarnings + stream.earnings,
         totalTokensBurned: acc.totalTokensBurned + stream.tokensBurned,
-        activeStreams: acc.activeStreams + (stream.isLive ? 1 : 0),
-      }),
+        activeStreams: acc.activeStreams + (stream.isLive ? 1 : 0)
+      })
       {
         totalViewers: 0,
         totalEarnings: 0,
@@ -152,7 +152,7 @@ export function ArtistStreamingPlatform() {
           comments: stream.comments + Math.floor(Math.random() * 5),
           earnings: stream.earnings + Math.random() * 5,
           tokensEarned: stream.tokensEarned + Math.floor(Math.random() * 10),
-          tokensBurned: stream.tokensBurned + Math.floor(Math.random() * 2),
+          tokensBurned: stream.tokensBurned + Math.floor(Math.random() * 2)
         }))
       );
     }, 5000);

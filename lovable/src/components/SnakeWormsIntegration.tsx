@@ -64,7 +64,7 @@ export function SnakeWormsIntegration() {
         segments: [
           {
             x: Math.floor(Math.random() * BOARD_SIZE),
-            y: Math.floor(Math.random() * BOARD_SIZE),
+            y: Math.floor(Math.random() * BOARD_SIZE)
           },
         ],
         health: 100,
@@ -126,7 +126,7 @@ export function SnakeWormsIntegration() {
                   score: stats.score + 100,
                   wormsDestroyed: stats.wormsDestroyed + 1,
                   gaiaTokensEarned: stats.gaiaTokensEarned + 2.5,
-                }, [worm, const, damage]);));
+                }));
 
                 toast.success(`🐍 Snake Victory!`, {
                   description: `Worm destroyed with ${selectedWeapon.icon} ${selectedWeapon.name}! +2.5 GAiA earned!`,

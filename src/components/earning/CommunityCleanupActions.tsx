@@ -47,7 +47,7 @@ export function CommunityCleanupActions() {
         locationArea,
         participantCount: parseInt(participantCount),
         wasteCollected: parseFloat(wasteCollected),
-        duration: parseFloat(duration),
+        duration: parseFloat(duration)
       },
     };
 

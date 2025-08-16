@@ -64,7 +64,7 @@ We may share data only when:
 
 7. CONTACT INFORMATION
 For privacy concerns, contact us at:
-Email: info@cultureofharmony.net
+Email: info@cultureofharmony.net,
 Website: www.cultureofharmony.net
 
 8. UPDATES TO THIS POLICY
@@ -124,7 +124,7 @@ We may terminate accounts for violations of these terms or suspicious activity.
 
 11. CONTACT INFORMATION
 For questions about these terms:
-Email: info@cultureofharmony.net
+Email: info@cultureofharmony.net,
 Website: www.cultureofharmony.net
 
 These terms are governed by applicable laws and designed for international compliance.`;
@@ -171,7 +171,7 @@ Join thousands of eco-conscious traders in the Culture of Harmony community. Tog
 
 Download now and start your journey toward sustainable cryptocurrency trading!
 
-Contact: info@cultureofharmony.net
+Contact: info@cultureofharmony.net,
 Website: www.cultureofharmony.net
 
 #SustainableCrypto #GreenTrading #CultureOfHarmony #EnvironmentalBlockchain`;

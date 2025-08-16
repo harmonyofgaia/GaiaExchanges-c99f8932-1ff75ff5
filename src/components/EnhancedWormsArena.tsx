@@ -172,9 +172,9 @@ export function EnhancedWormsArena() {
         prev.map((tournament) => ({
           ...tournament,
           participants: Math.min(
-            tournament.participants + Math.floor(Math.random() * 3),
+            tournament.participants + Math.floor(Math.random() * 3)
             tournament.maxParticipants
-          ),
+          )
         }))
       );
     }, 5000);
@@ -207,7 +207,7 @@ export function EnhancedWormsArena() {
           loser: opponent,
           tokensWon,
           experienceGained,
-          timestamp: new Date(),
+          timestamp: new Date()
         };
 
         setBattleResults((prev) => [newResult, ...prev.slice(0, 9)]);

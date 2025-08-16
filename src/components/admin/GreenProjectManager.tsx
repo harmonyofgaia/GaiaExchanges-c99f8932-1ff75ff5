@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -99,7 +99,7 @@ export function GreenProjectManager() {
     if (!newProject.title || !newProject.description) return;
 
     const project: GreenProject = {
-      id: Date.now().toString(),
+      id: Date.now().toString()
       ...newProject,
       status: "planning",
       startDate: new Date().toISOString().split("T")[0],
@@ -200,7 +200,7 @@ export function GreenProjectManager() {
                     onChange={(e) =>
                       setNewProject((prev) => ({
                         ...prev,
-                        budget: Number(e.target.value),
+                        budget: Number(e.target.value)
                       }))
                     }
                   />

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -42,14 +42,14 @@ const DrivingToNature = () => {
         ...prev,
         animalsHelped: prev.animalsHelped + Math.floor(Math.random() * 5),
         reefHealthImprovement: Math.min(prev.reefHealthImprovement + Math.random() * 0.5, 100),
-        progressPercentage: Math.min(prev.progressPercentage + Math.random() * 0.1, 100),
+        progressPercentage: Math.min(prev.progressPercentage + Math.random() * 0.1, 100)
       }));
 
       setSoundRiffsStats((prev) => ({
         ...prev,
         activeSignals: 12 + Math.floor(Math.random() * 8),
         marineLifeAttracted: prev.marineLifeAttracted + Math.floor(Math.random() * 3),
-        ecosystemBalance: Math.min(prev.ecosystemBalance + Math.random() * 0.2, 100),
+        ecosystemBalance: Math.min(prev.ecosystemBalance + Math.random() * 0.2, 100)
       }));
     }, 5000);
 

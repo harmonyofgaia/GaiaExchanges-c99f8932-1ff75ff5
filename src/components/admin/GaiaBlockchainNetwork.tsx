@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -101,7 +101,7 @@ export function GaiaBlockchainNetwork() {
           dominanceLevel: Math.min(100, prevStats.dominanceLevel + Math.random() * 2),
           blockHeight: prevStats.blockHeight + Math.floor(Math.random() * 3),
           hashRate: `${(Math.random() * 1000 + 500).toFixed(1)} TH/s`,
-          networkSecurity: Math.min(100, prevStats.networkSecurity + Math.random() * 1.5),
+          networkSecurity: Math.min(100, prevStats.networkSecurity + Math.random() * 1.5)
         }));
       }, 2000);
 

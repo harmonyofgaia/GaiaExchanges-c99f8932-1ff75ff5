@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 
 interface UniversalGaiaLogoProps {
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "responsive";
@@ -72,7 +72,7 @@ export function UniversalGaiaLogo({
       case 1:
         return "animate-bounce";
       case 2:
-        return "hover:scale-110 transition-transform duration-500";
+        return "hover:scale-110 transition-transform duration-500";,
       default:
         return "";
     }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -93,7 +93,7 @@ export function TranscendentIntelligenceCore() {
       setCapabilities((prev) =>
         prev.map((cap) => ({
           ...cap,
-          level: Math.min(100, cap.level + cap.evolutionRate * Math.random()),
+          level: Math.min(100, cap.level + cap.evolutionRate * Math.random())
         }))
       );
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Shield, Layers, Zap, Globe } from "lucide-react";
@@ -45,7 +45,7 @@ export function MultiDimensionalFirewall() {
         prev.map((layer) => ({
           ...layer,
           threats_blocked: layer.threats_blocked + Math.floor(Math.random() * 10),
-          strength: Math.max(95, Math.min(100, layer.strength + (Math.random() - 0.5) * 2)),
+          strength: Math.max(95, Math.min(100, layer.strength + (Math.random() - 0.5) * 2))
         }))
       );
 

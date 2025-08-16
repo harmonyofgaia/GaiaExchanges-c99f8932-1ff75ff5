@@ -35,7 +35,7 @@ function useChart() {
 const ChartContainer = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
-    config: ChartConfig;
+    config: ChartConfig;,
     children: React.ComponentProps<typeof RechartsPrimitive.ResponsiveContainer>["children"];
   }
 >(({ id, className, children, config, ...props }, ref) => {
@@ -84,7 +84,7 @@ ${colorConfig
 }
 `
           )
-          .join("\n"),
+          .join("\n")
       }}
     />
   );

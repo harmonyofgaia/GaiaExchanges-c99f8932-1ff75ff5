@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -133,7 +133,7 @@ export function GaiaFighterGameAdvanced() {
       performance: 98.7,
       specialization: "Combat Mechanics & Movement",
       trainingLevel: 147,
-      lastUsed: new Date(),
+      lastUsed: new Date()
     },
     {
       id: "quantum-engine-2",
@@ -142,7 +142,7 @@ export function GaiaFighterGameAdvanced() {
       performance: 97.2,
       specialization: "Environment & Building Systems",
       trainingLevel: 139,
-      lastUsed: new Date(),
+      lastUsed: new Date()
     },
     {
       id: "quantum-engine-3",
@@ -151,7 +151,7 @@ export function GaiaFighterGameAdvanced() {
       performance: 99.1,
       specialization: "Item & Landscape Transformation",
       trainingLevel: 152,
-      lastUsed: new Date(),
+      lastUsed: new Date()
     },
     {
       id: "quantum-engine-4",
@@ -160,7 +160,7 @@ export function GaiaFighterGameAdvanced() {
       performance: 96.8,
       specialization: "FPS & Latency Optimization",
       trainingLevel: 134,
-      lastUsed: new Date(),
+      lastUsed: new Date()
     },
   ]);
 
@@ -236,7 +236,7 @@ export function GaiaFighterGameAdvanced() {
         ...prev,
         fps: Math.max(240, 300 - Math.floor(Math.random() * 20)),
         ping: Math.max(1, Math.floor(Math.random() * 3)),
-        serverLoad: Math.max(10, Math.min(25, prev.serverLoad + Math.floor(Math.random() * 6 - 3))),
+        serverLoad: Math.max(10, Math.min(25, prev.serverLoad + Math.floor(Math.random() * 6 - 3)))
       }));
 
       // Quantum enhancement notifications
@@ -272,7 +272,7 @@ export function GaiaFighterGameAdvanced() {
       prev.map((engine) => ({
         ...engine,
         status: engine.id === "quantum-engine-1" ? "active" : "supporting",
-        lastUsed: new Date(),
+        lastUsed: new Date()
       }))
     );
 

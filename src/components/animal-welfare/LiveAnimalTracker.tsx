@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -137,7 +137,7 @@ export function LiveAnimalTracker({ animals }: LiveAnimalTrackerProps) {
           vitals: {
             ...animal.vitals,
             heartRate: animal.vitals.heartRate + (Math.random() - 0.5) * 4,
-            stress: Math.max(0, Math.min(100, animal.vitals.stress + (Math.random() - 0.5) * 3)),
+            stress: Math.max(0, Math.min(100, animal.vitals.stress + (Math.random() - 0.5) * 3))
           },
           batteryLevel: Math.max(0, animal.batteryLevel - Math.random() * 0.1),
           lastUpdate: "Just now",

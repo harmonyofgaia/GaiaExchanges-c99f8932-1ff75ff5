@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -266,11 +266,11 @@ export function MissingTacticalOperations() {
 
             return {
               ...op,
-              lastExecution: new Date(),
+              lastExecution: new Date()
               nextExecution,
               targetsNeutralized: op.targetsNeutralized + newTargetsNeutralized,
               threatsDetected: op.threatsDetected + newThreatsDetected,
-              successRate: Math.min(100, op.successRate + Math.random() * 0.1),
+              successRate: Math.min(100, op.successRate + Math.random() * 0.1)
             };
           }
           return op;
@@ -289,7 +289,7 @@ export function MissingTacticalOperations() {
             return {
               ...task,
               status: "running",
-              lastRun: new Date(),
+              lastRun: new Date()
             };
           }
           return task;

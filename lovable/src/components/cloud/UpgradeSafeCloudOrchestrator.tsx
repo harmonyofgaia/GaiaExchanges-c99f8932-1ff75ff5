@@ -174,7 +174,7 @@ export function UpgradeSafeCloudOrchestrator() {
           impossibleToReplicate: true,
           godlikeCapabilities: true,
           beyondComprehension: true,
-          timestamp: Date.now(),
+          timestamp: Date.now()
         })
       );
     };
@@ -207,6 +207,6 @@ export function UpgradeSafeCloudOrchestrator() {
       impossibleToDisrupt: upgradeProtocol.impossibleToDisrupt,
       godlikeCapabilities: true,
       futureReady: true,
-    }),
+    })
   };
 }

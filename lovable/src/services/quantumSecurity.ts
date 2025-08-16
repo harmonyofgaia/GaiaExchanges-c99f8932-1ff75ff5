@@ -101,7 +101,7 @@ class QuantumSecurityService {
       nodeA,
       nodeB,
       correlationStrength: Math.random() * 0.2 + 0.8, // 0.8-1.0 correlation
-      quantumState: this.generateQuantumState(),
+      quantumState: this.generateQuantumState()
     };
 
     this.entanglements.set(id, entanglement);
@@ -110,7 +110,7 @@ class QuantumSecurityService {
       id,
       nodeA,
       nodeB,
-      correlation: entanglement.correlationStrength.toFixed(3),
+      correlation: entanglement.correlationStrength.toFixed(3)
     });
   }
 

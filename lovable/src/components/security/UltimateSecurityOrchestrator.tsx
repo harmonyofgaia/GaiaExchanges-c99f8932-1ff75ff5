@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -107,7 +107,7 @@ export function UltimateSecurityOrchestrator() {
         ...prev,
         threatsNeutralized: prev.threatsNeutralized + Math.floor(Math.random() * 3),
         evolutionRate: prev.evolutionRate + 0.1,
-        quantumUpgrades: prev.quantumUpgrades + (Math.random() > 0.7 ? 1 : 0),
+        quantumUpgrades: prev.quantumUpgrades + (Math.random() > 0.7 ? 1 : 0)
       }));
 
       console.log("✅ MASTER ORCHESTRATOR: BACKGROUND SECURITY ENHANCED");

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -108,7 +108,7 @@ export function MarketDominationSuite() {
           price: market.price + (Math.random() - 0.5) * 0.000001,
           change_24h: market.change_24h + (Math.random() - 0.5) * 2,
           market_cap: market.market_cap + Math.floor(Math.random() * 50000),
-          dominance: Math.min(100, market.dominance + Math.random() * 0.5),
+          dominance: Math.min(100, market.dominance + Math.random() * 0.5)
         }))
       );
 
@@ -119,7 +119,7 @@ export function MarketDominationSuite() {
         holderCount: prev.holderCount + Math.floor(Math.random() * 1000),
         marketDominance: Math.min(100, prev.marketDominance + Math.random() * 0.1),
         burnedTokens: prev.burnedTokens + Math.floor(Math.random() * 10000),
-        stakingRewards: prev.stakingRewards + Math.floor(Math.random() * 5000),
+        stakingRewards: prev.stakingRewards + Math.floor(Math.random() * 5000)
       }));
     }, 3000);
 

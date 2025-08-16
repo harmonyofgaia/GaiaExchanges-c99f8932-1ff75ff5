@@ -89,7 +89,7 @@ export function HabboTycoon() {
       setPlayerData((prev) => ({
         ...prev,
         coins: prev.coins + income,
-        reputation: Math.min(100, prev.reputation + 0.1),
+        reputation: Math.min(100, prev.reputation + 0.1)
       }));
 
       setTotalRevenue((prev) => prev + income);
@@ -107,7 +107,7 @@ export function HabboTycoon() {
 
     if (playerData.coins >= cost) {
       const newBuilding: Building = {
-        id: Date.now().toString(),
+        id: Date.now().toString()
         type,
         name: `${type.charAt(0).toUpperCase() + type.slice(1)} ${buildings.length + 1}`,
         level: 1,

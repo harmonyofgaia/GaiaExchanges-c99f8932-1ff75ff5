@@ -123,7 +123,7 @@ export function MarketingCampaignManager() {
         campaign.id === id
           ? {
               ...campaign,
-              status: campaign.status === "active" ? "paused" : ("active" as const),
+              status: campaign.status === "active" ? "paused" : ("active" as const)
             }
           : campaign
       )

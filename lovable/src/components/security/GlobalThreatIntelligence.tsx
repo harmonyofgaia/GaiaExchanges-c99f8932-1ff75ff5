@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -132,7 +132,7 @@ export function GlobalThreatIntelligence() {
         threatsBlocked: prev.threatsBlocked + Math.floor(Math.random() * 5),
         countriesProtected: 195,
         securityScore: Math.min(99.99, prev.securityScore + Math.random() * 0.01),
-        competitorAdvantage: Math.max(2.0, prev.competitorAdvantage + Math.random() * 0.1),
+        competitorAdvantage: Math.max(2.0, prev.competitorAdvantage + Math.random() * 0.1)
       }));
 
       console.log("🔒 Worldwide Security Status: MAXIMUM PROTECTION ACTIVE");

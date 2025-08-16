@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
@@ -108,7 +108,7 @@ export function AdvancedAnalyticsDashboard() {
           99,
           Math.min(100, prev.securityScore + (Math.random() * 0.1 - 0.05))
         ),
-        systemLoad: Math.max(10, Math.min(90, prev.systemLoad + (Math.random() * 10 - 5))),
+        systemLoad: Math.max(10, Math.min(90, prev.systemLoad + (Math.random() * 10 - 5)))
       }));
     };
 

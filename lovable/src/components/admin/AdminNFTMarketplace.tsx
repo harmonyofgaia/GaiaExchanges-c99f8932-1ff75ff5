@@ -416,7 +416,7 @@ export function AdminNFTMarketplace() {
                     onChange={(e) =>
                       setNewNFT((prev) => ({
                         ...prev,
-                        price: Number(e.target.value),
+                        price: Number(e.target.value)
                       }))
                     }
                     placeholder="Enter price"

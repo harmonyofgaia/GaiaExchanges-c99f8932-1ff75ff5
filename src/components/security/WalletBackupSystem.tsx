@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -81,7 +81,7 @@ export function WalletBackupSystem() {
           prev.map((wallet) => ({
             ...wallet,
             backupStatus: "backing-up" as const,
-            lastBackup: new Date(),
+            lastBackup: new Date()
           }))
         );
 
@@ -136,7 +136,7 @@ export function WalletBackupSystem() {
       prev.map((wallet) => ({
         ...wallet,
         backupStatus: "backing-up",
-        lastBackup: new Date(),
+        lastBackup: new Date()
       }))
     );
 
@@ -156,7 +156,7 @@ export function WalletBackupSystem() {
       setSystemStats((prev) => ({
         ...prev,
         secureBackups: prev.totalWallets,
-        lastSystemBackup: new Date(),
+        lastSystemBackup: new Date()
       }));
 
       toast.success("✅ FULL SYSTEM BACKUP COMPLETE", {

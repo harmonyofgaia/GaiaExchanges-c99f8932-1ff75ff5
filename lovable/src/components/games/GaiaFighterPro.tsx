@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -40,7 +40,7 @@ export function GaiaFighterPro() {
           quantumPower: Math.min(100, prev.quantumPower + 0.5),
           dragonEnergy: Math.min(100, prev.dragonEnergy + 0.3),
           activeQuests: prev.activeQuests + Math.floor(Math.random() * 5),
-          guildsConquered: prev.guildsConquered + Math.floor(Math.random() * 2),
+          guildsConquered: prev.guildsConquered + Math.floor(Math.random() * 2)
         }));
 
         // Epic events simulation

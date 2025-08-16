@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 import { NeuralElectricMatrix } from "@/components/ui/neural-electric-matrix";
 import { PageSpecificNeuralBackground } from "@/components/ui/page-specific-neural-background";
 import { DynamicNeuralCorners } from "@/components/ui/dynamic-neural-corners";

@@ -29,7 +29,7 @@ export function ContactSystem() {
         body: {
           ...formData,
           to: "info@cultureofharmony.net",
-          timestamp: new Date().toISOString(),
+          timestamp: new Date().toISOString()
         },
       });
 

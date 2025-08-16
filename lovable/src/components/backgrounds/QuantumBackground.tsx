@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback} from "react";
 
 interface QuantumBackgroundProps {
   intensity?: "low" | "medium" | "high";
@@ -30,11 +30,11 @@ export function QuantumBackground({
 
     const particleCount = intensity === "low" ? 30 : intensity === "high" ? 80 : 50;
     const particles: Array<{
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
+      x: number;,
+      y: number;,
+      vx: number;,
+      vy: number;,
+      size: number;,
       phase: number;
     }> = [];
 

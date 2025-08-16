@@ -54,9 +54,9 @@ class UniversalDominationService {
 
   // Cosmic Entity Management
   async recruitCosmicEntity(config: {
-    name: string;
-    type: "stellar_being" | "galactic_intelligence" | "cosmic_force" | "universal_consciousness";
-    powerLevel: number;
+    name: string;,
+    type: "stellar_being" | "galactic_intelligence" | "cosmic_force" | "universal_consciousness";,
+    powerLevel: number;,
     influence: string[];
   }): Promise<CosmicEntity> {
     const entity: CosmicEntity = {
@@ -89,7 +89,7 @@ class UniversalDominationService {
 
   // Galactic Domination
   async initiateGalacticDomination(config: {
-    galaxyName: string;
+    galaxyName: string;,
     totalSystems: number;
   }): Promise<GalacticDomination> {
     const domination: GalacticDomination = {
@@ -161,7 +161,7 @@ class UniversalDominationService {
 
   // Universal Command Execution
   async executeUniversalCommand(config: {
-    commandType: "physics_override" | "reality_restructure" | "cosmic_reset" | "universe_creation";
+    commandType: "physics_override" | "reality_restructure" | "cosmic_reset" | "universe_creation";,
     scope: "local" | "galactic" | "universal" | "multiversal";
   }): Promise<UniversalCommand> {
     const command: UniversalCommand = {
@@ -259,7 +259,7 @@ class UniversalDominationService {
 
   // Cosmic Weapon Management
   async deployCosmicWeapon(config: {
-    name: string;
+    name: string;,
     type:
       | "star_destroyer"
       | "galaxy_eater"
@@ -369,7 +369,7 @@ class UniversalDominationService {
       galacticDominations: {
         total: this.galacticDominations.size,
         completed: Array.from(this.galacticDominations.values()).filter((g) => g.isComplete).length,
-        averageDomination: this.calculateAverageDomination(),
+        averageDomination: this.calculateAverageDomination()
       },
       universalCommands: {
         total: this.universalCommands.size,

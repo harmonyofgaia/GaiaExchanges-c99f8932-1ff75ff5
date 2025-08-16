@@ -109,7 +109,7 @@ export function ArtilleryCreatorEngine() {
           effects: [],
         },
         environmentalImpact: currentWeapon.environmentalImpact || "positive",
-        created: new Date(),
+        created: new Date()
       };
 
       setCreatedWeapons((prev) => [newWeapon, ...prev]);
@@ -247,7 +247,7 @@ export function ArtilleryCreatorEngine() {
                       onChange={(e) =>
                         setCurrentWeapon((prev) => ({
                           ...prev,
-                          power: parseInt(e.target.value),
+                          power: parseInt(e.target.value)
                         }))
                       }
                       className="w-full"
@@ -265,7 +265,7 @@ export function ArtilleryCreatorEngine() {
                       onChange={(e) =>
                         setCurrentWeapon((prev) => ({
                           ...prev,
-                          range: parseInt(e.target.value),
+                          range: parseInt(e.target.value)
                         }))
                       }
                       className="w-full"
@@ -283,7 +283,7 @@ export function ArtilleryCreatorEngine() {
                       onChange={(e) =>
                         setCurrentWeapon((prev) => ({
                           ...prev,
-                          accuracy: parseInt(e.target.value),
+                          accuracy: parseInt(e.target.value)
                         }))
                       }
                       className="w-full"

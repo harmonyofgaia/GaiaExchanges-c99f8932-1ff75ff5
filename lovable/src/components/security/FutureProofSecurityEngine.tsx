@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback} from "react";
 import { toast } from "sonner";
 
 interface ThreatIntelligence {
@@ -244,7 +244,7 @@ export function FutureProofSecurityEngine() {
             attacksNeutralized:
               prev.attacksNeutralized +
               newThreats.filter((t) => t.status === "ENHANCED_INVISIBILITY").length,
-            lastUpdate: new Date(),
+            lastUpdate: new Date()
           }));
         }
 

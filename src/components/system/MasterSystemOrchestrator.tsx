@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback} from "react";
 import { PersistentEvolutionEngine } from "./PersistentEvolutionEngine";
 import { CrossPagePersistence } from "./CrossPagePersistence";
 import { OfflineGrowthManager } from "./OfflineGrowthManager";

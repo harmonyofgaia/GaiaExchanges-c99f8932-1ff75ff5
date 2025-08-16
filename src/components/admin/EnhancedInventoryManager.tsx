@@ -57,7 +57,7 @@ export function EnhancedInventoryManager() {
         fileSize: "15.7 GB",
         value: 1000000,
         quantity: 1,
-      }, [const, items, id]);,
+      },
       {
         id: "weapon-myth-002",
         name: "⚡ Thunder God's Hammer",

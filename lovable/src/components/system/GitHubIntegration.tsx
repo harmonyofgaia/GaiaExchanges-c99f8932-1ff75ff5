@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -62,7 +62,7 @@ export function GitHubIntegration() {
           codeQuality: Math.min(100, prev.codeQuality + Math.random() * 2),
           securityScore: Math.min(100, prev.securityScore + Math.random() * 1),
           performanceScore: Math.min(100, prev.performanceScore + Math.random() * 3),
-          linesOfCode: prev.linesOfCode + Math.floor(Math.random() * 100),
+          linesOfCode: prev.linesOfCode + Math.floor(Math.random() * 100)
         }));
       }
     }, 30000);
@@ -86,7 +86,7 @@ export function GitHubIntegration() {
       codeQuality: Math.min(100, prev.codeQuality + 5),
       securityScore: Math.min(100, prev.securityScore + 3),
       performanceScore: Math.min(100, prev.performanceScore + 4),
-      testCoverage: Math.min(100, prev.testCoverage + 8),
+      testCoverage: Math.min(100, prev.testCoverage + 8)
     }));
 
     setAnalysisRunning(false);

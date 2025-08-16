@@ -109,7 +109,7 @@ export function PublicTransportRewards() {
       metadata: {
         transportType,
         distance: parseFloat(distance),
-        duration: parseFloat(duration),
+        duration: parseFloat(duration)
         route,
         ticketType,
       },

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback} from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 export function DatabaseErrorFixer() {

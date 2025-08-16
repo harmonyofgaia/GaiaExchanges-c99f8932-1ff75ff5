@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback} from "react";
 import { TypeValidator } from "@/utils/type-validator";
 import { GAIA_TOKEN, GAIA_METRICS } from "@/constants/gaia";
 

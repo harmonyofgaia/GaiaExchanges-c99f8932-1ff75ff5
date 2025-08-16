@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -59,7 +59,7 @@ export function UltimateResilienceEngine() {
           setMetrics((prev) => ({
             ...prev,
             autoTrainingLevel: Math.min(999999, prev.autoTrainingLevel + 100),
-            neuronNetworkStrength: Math.min(999999, prev.neuronNetworkStrength + 50),
+            neuronNetworkStrength: Math.min(999999, prev.neuronNetworkStrength + 50)
           }));
         }
       };

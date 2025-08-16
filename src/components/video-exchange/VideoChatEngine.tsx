@@ -33,7 +33,7 @@ export function VideoChatEngine() {
 
   const handleSendMessage = useCallback((content: string, replyingTo?: ChatMessage) => {
     const newMessage: ChatMessage = {
-      id: Date.now().toString(),
+      id: Date.now().toString()
       content,
       user: "current-user",
       timestamp: new Date().toISOString(),

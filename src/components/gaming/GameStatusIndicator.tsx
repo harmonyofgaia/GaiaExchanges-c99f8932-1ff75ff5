@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Wifi, WifiOff, Users, Gamepad2, Crown, Trophy, Zap } from "lucide-react";
@@ -28,7 +28,7 @@ export function GameStatusIndicator() {
         playerCount: prev.playerCount + Math.floor(Math.random() * 20) - 10,
         activeGames: prev.activeGames + Math.floor(Math.random() * 10) - 5,
         serverLoad: Math.max(20, Math.min(95, prev.serverLoad + (Math.random() - 0.5) * 10)),
-        latency: Math.max(20, Math.min(200, prev.latency + (Math.random() - 0.5) * 20)),
+        latency: Math.max(20, Math.min(200, prev.latency + (Math.random() - 0.5) * 20))
       }));
     }, 5000);
 

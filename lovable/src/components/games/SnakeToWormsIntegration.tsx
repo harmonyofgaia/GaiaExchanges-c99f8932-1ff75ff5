@@ -89,7 +89,7 @@ export function SnakeToWormsIntegration() {
         setScore((prev) => prev + 10);
         setFood({
           x: Math.floor(Math.random() * 30),
-          y: Math.floor(Math.random() * 20),
+          y: Math.floor(Math.random() * 20)
         });
 
         // Increase speed slightly

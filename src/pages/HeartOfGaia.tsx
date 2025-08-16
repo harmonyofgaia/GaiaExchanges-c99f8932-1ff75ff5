@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -19,7 +19,7 @@ const HeartOfGaia = () => {
       setBattleStats((prev) => ({
         ...prev,
         dragonsDefeated: prev.dragonsDefeated + Math.floor(Math.random() * 3),
-        activeGuardians: 150 + Math.floor(Math.random() * 20),
+        activeGuardians: 150 + Math.floor(Math.random() * 20)
       }));
     }, 5000);
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -83,7 +83,7 @@ export function AdvancedWalletSecurity() {
         setSecurityStatus((prev) => ({
           ...prev,
           threatsBlocked: prev.threatsBlocked + 1,
-          lastScan: new Date(),
+          lastScan: new Date()
         }));
 
         toast.success("Security Threat Neutralized", {
@@ -96,7 +96,7 @@ export function AdvancedWalletSecurity() {
       setSecurityStatus((prev) => ({
         ...prev,
         overallScore: Math.min(100, 99.5 + Math.random() * 0.5),
-        lastScan: new Date(),
+        lastScan: new Date()
       }));
     };
 
@@ -117,7 +117,7 @@ export function AdvancedWalletSecurity() {
       setSecurityStatus((prev) => ({
         ...prev,
         overallScore: 100,
-        lastScan: new Date(),
+        lastScan: new Date()
       }));
     } finally {
       setIsScanning(false);

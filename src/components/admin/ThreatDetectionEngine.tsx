@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -58,7 +58,7 @@ export function ThreatDetectionEngine() {
         status: "healthy",
         icon: Cpu,
         unit: "%",
-        lastChecked: Date.now(),
+        lastChecked: Date.now()
       },
       {
         id: "2",
@@ -68,7 +68,7 @@ export function ThreatDetectionEngine() {
         status: "healthy",
         icon: HardDrive,
         unit: "%",
-        lastChecked: Date.now(),
+        lastChecked: Date.now()
       },
       {
         id: "3",
@@ -78,7 +78,7 @@ export function ThreatDetectionEngine() {
         status: "healthy",
         icon: Database,
         unit: "%",
-        lastChecked: Date.now(),
+        lastChecked: Date.now()
       },
       {
         id: "4",
@@ -88,7 +88,7 @@ export function ThreatDetectionEngine() {
         status: "healthy",
         icon: Network,
         unit: "ms",
-        lastChecked: Date.now(),
+        lastChecked: Date.now()
       },
       {
         id: "5",
@@ -98,7 +98,7 @@ export function ThreatDetectionEngine() {
         status: "healthy",
         icon: Globe,
         unit: "ms",
-        lastChecked: Date.now(),
+        lastChecked: Date.now()
       },
       {
         id: "6",
@@ -108,7 +108,7 @@ export function ThreatDetectionEngine() {
         status: "healthy",
         icon: Users,
         unit: "",
-        lastChecked: Date.now(),
+        lastChecked: Date.now()
       },
       {
         id: "7",
@@ -118,7 +118,7 @@ export function ThreatDetectionEngine() {
         status: "healthy",
         icon: Lock,
         unit: "/hour",
-        lastChecked: Date.now(),
+        lastChecked: Date.now()
       },
       {
         id: "8",
@@ -128,7 +128,7 @@ export function ThreatDetectionEngine() {
         status: "healthy",
         icon: HardDrive,
         unit: "%",
-        lastChecked: Date.now(),
+        lastChecked: Date.now()
       },
       {
         id: "9",
@@ -138,7 +138,7 @@ export function ThreatDetectionEngine() {
         status: "healthy",
         icon: Wifi,
         unit: "MB/s",
-        lastChecked: Date.now(),
+        lastChecked: Date.now()
       },
       {
         id: "10",
@@ -148,7 +148,7 @@ export function ThreatDetectionEngine() {
         status: "healthy",
         icon: AlertTriangle,
         unit: "%",
-        lastChecked: Date.now(),
+        lastChecked: Date.now()
       },
     ];
     setSystemMetrics(initialMetrics);
@@ -221,7 +221,7 @@ export function ThreatDetectionEngine() {
             ...metric,
             value: newValue,
             status,
-            lastChecked: Date.now(),
+            lastChecked: Date.now()
           };
         })
       );

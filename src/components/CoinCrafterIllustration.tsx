@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Coins, Zap, Crown, Shield } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 
 export function CoinCrafterIllustration() {
   const [coinCount, setCoinCount] = useState(0);

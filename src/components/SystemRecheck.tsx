@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -137,7 +137,7 @@ export function SystemRecheck() {
             return {
               ...check,
               status: randomOutcome as SystemCheck["status"],
-              lastChecked: new Date(),
+              lastChecked: new Date()
             };
           }
           return check;

@@ -14,6 +14,6 @@ export function verifyTokenConsistency() {
   return {
     isConsistent,
     tokenData,
-    lastVerified: new Date(),
+    lastVerified: new Date()
   };
 }

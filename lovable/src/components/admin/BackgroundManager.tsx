@@ -43,7 +43,7 @@ function BackgroundManagerContent() {
       cloudUrl: "/lovable-uploads/2ab2dcf8-008f-4f94-9341-9b6fcb25cefb.png",
       isActive: true,
       artisticValue: "High-energy organic neural flow with environmental consciousness",
-      createdAt: new Date("2024-01-15"),
+      createdAt: new Date("2024-01-15")
     },
     {
       id: "style-2",
@@ -54,7 +54,7 @@ function BackgroundManagerContent() {
       cloudUrl: "/lovable-uploads/494a76f3-e002-482a-b606-e7af62367027.png",
       isActive: false,
       artisticValue: "Combines ancient aesthetics with quantum technology harmony",
-      createdAt: new Date("2024-01-16"),
+      createdAt: new Date("2024-01-16")
     },
     {
       id: "style-3",
@@ -65,7 +65,7 @@ function BackgroundManagerContent() {
       cloudUrl: "/lovable-uploads/42ec85dc-42df-4958-96d8-7919a192f629.png",
       isActive: false,
       artisticValue: "Infinite cosmic energy channeled through dragon consciousness",
-      createdAt: new Date("2024-01-17"),
+      createdAt: new Date("2024-01-17")
     },
     {
       id: "style-4",
@@ -76,7 +76,7 @@ function BackgroundManagerContent() {
       cloudUrl: "/lovable-uploads/3ce518f5-75b0-493f-897a-45119793a33d.png",
       isActive: false,
       artisticValue: "Biological electricity merged with symphonic visual harmony",
-      createdAt: new Date("2024-01-18"),
+      createdAt: new Date("2024-01-18")
     },
     {
       id: "style-5",
@@ -87,7 +87,7 @@ function BackgroundManagerContent() {
       cloudUrl: "/lovable-uploads/1087f396-900a-4e0b-be62-7b049d0294ff.png",
       isActive: false,
       artisticValue: "Sacred geometry expressed through logo multiplication and arrangement",
-      createdAt: new Date("2024-01-19"),
+      createdAt: new Date("2024-01-19")
     },
     {
       id: "style-6",
@@ -98,7 +98,7 @@ function BackgroundManagerContent() {
       cloudUrl: "/lovable-uploads/1ed369eb-ecda-422a-af60-8f511aa9aa8e.png",
       isActive: false,
       artisticValue: "Environmental healing energy captured in quantum visual language",
-      createdAt: new Date("2024-01-20"),
+      createdAt: new Date("2024-01-20")
     },
     {
       id: "style-7",
@@ -109,7 +109,7 @@ function BackgroundManagerContent() {
       cloudUrl: "/lovable-uploads/93093efd-1912-4361-987d-424e6cf8e1df.png",
       isActive: false,
       artisticValue: "Dragon consciousness channeled through advanced neural architectures",
-      createdAt: new Date("2024-01-21"),
+      createdAt: new Date("2024-01-21")
     },
   ];
 

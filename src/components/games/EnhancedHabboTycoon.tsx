@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -67,7 +67,7 @@ export function EnhancedHabboTycoon() {
           dailyVisitors: prev.dailyVisitors + Math.floor(Math.random() * 200),
           totalRevenue: prev.totalRevenue + growth,
           reputation: Math.min(100, prev.reputation + 0.1),
-          staff: prev.staff + Math.floor(Math.random() * 5),
+          staff: prev.staff + Math.floor(Math.random() * 5)
         }));
 
         // Strategic events like RollerCoaster Tycoon

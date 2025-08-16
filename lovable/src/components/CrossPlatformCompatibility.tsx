@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -91,7 +91,7 @@ export function CrossPlatformCompatibility() {
             const improvement = Math.min(1, 100 - platform.compatibility);
             return {
               ...platform,
-              compatibility: Math.min(100, platform.compatibility + improvement),
+              compatibility: Math.min(100, platform.compatibility + improvement)
             };
           }
           return platform;

@@ -159,7 +159,7 @@ export function MasterArtworkGenerator() {
           basePrompt: enhancedPrompt,
           artworkType: selectedStyle,
           style: "neural_matrix_fusion_collection",
-        }),
+        })
       });
 
       const result = await response.json();
@@ -192,7 +192,7 @@ export function MasterArtworkGenerator() {
               imageData: result.image,
               artworkType: selectedStyle,
               prompt: enhancedPrompt,
-            }),
+            })
           });
 
           const cloudResult = await cloudResponse.json();

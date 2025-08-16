@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -39,28 +39,28 @@ export function ServerResilienceEngine() {
       name: "Firewall Protection",
       status: "secure",
       strength: 98,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       id: "2",
       name: "DDoS Mitigation",
       status: "secure",
       strength: 95,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       id: "3",
       name: "Intrusion Detection",
       status: "secure",
       strength: 92,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       id: "4",
       name: "SSL/TLS Encryption",
       status: "secure",
       strength: 99,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
   ]);
 
@@ -101,7 +101,7 @@ export function ServerResilienceEngine() {
         prev.map((layer) => ({
           ...layer,
           strength: Math.max(85, Math.min(100, layer.strength + (Math.random() - 0.5) * 2)),
-          lastCheck: new Date(),
+          lastCheck: new Date()
         }))
       );
 
@@ -122,7 +122,7 @@ export function ServerResilienceEngine() {
         prev.map((node) => ({
           ...node,
           load: Math.max(10, Math.min(90, node.load + (Math.random() - 0.5) * 10)),
-          connections: node.connections + Math.floor((Math.random() - 0.5) * 100),
+          connections: node.connections + Math.floor((Math.random() - 0.5) * 100)
         }))
       );
     }, 3000);
@@ -144,7 +144,7 @@ export function ServerResilienceEngine() {
         ...layer,
         status: "secure",
         strength: Math.min(100, layer.strength + 5),
-        lastCheck: new Date(),
+        lastCheck: new Date()
       }))
     );
   };

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback} from "react";
 
 export function InvisibleAdminProtection() {
   const protectionActive = useRef(false);

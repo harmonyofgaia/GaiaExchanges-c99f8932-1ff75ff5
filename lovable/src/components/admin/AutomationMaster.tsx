@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -34,7 +34,7 @@ export function AutomationMaster() {
         ...prev,
         tasksCompleted: prev.tasksCompleted + Math.floor(Math.random() * 5),
         efficiency: Math.min(100, prev.efficiency + (Math.random() - 0.5) * 0.1),
-        uptime: Math.max(99.9, prev.uptime + (Math.random() - 0.5) * 0.001),
+        uptime: Math.max(99.9, prev.uptime + (Math.random() - 0.5) * 0.001)
       }));
     }, 3000);
 

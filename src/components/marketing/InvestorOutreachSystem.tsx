@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -94,7 +94,7 @@ export function InvestorOutreachSystem() {
       setCampaigns((prev) =>
         prev.map((campaign) => ({
           ...campaign,
-          engagement: Math.min(100, campaign.engagement + (Math.random() * 2 - 1)),
+          engagement: Math.min(100, campaign.engagement + (Math.random() * 2 - 1))
         }))
       );
 
@@ -165,7 +165,7 @@ export function InvestorOutreachSystem() {
     We're positioned to become the #1 cryptocurrency exchange globally, with advanced features that no competitor can match.
 
     🔗 LEARN MORE:
-    Visit: cultureofharmony.net
+    Visit: cultureofharmony.net,
     Exchange: gaiaexchanges.com
 
     We'd love to discuss investment opportunities and partnership possibilities.

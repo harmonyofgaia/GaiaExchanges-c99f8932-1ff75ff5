@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -82,7 +82,7 @@ export function AdminLayoutEditor() {
           className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(34, 197, 94, 0.5) 1px, transparent 1px),
+              linear-gradient(rgba(34, 197, 94, 0.5) 1px, transparent 1px)
               linear-gradient(90deg, rgba(34, 197, 94, 0.5) 1px, transparent 1px)
             `,
             backgroundSize: "20px 20px",

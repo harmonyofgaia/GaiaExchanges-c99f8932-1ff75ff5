@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -115,7 +115,7 @@ export function GlobalDominationSuite() {
           control_percentage: Math.min(100, metric.control_percentage + Math.random() * 0.5),
           influence_score: Math.min(100, metric.influence_score + Math.random() * 0.3),
           assets_controlled: metric.assets_controlled + Math.floor(Math.random() * 10),
-          revenue_generated: metric.revenue_generated + Math.floor(Math.random() * 1000000),
+          revenue_generated: metric.revenue_generated + Math.floor(Math.random() * 1000000)
         }))
       );
 
@@ -126,7 +126,7 @@ export function GlobalDominationSuite() {
         economicControl: Math.min(100, prev.economicControl + Math.random() * 0.15),
         informationControl: Math.min(100, prev.informationControl + Math.random() * 0.02),
         populationReach: prev.populationReach + Math.floor(Math.random() * 10000),
-        activeOperations: prev.activeOperations + Math.floor(Math.random() * 5),
+        activeOperations: prev.activeOperations + Math.floor(Math.random() * 5)
       }));
     }, 5000);
 

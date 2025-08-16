@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -148,7 +148,7 @@ export function PsychohistoricalEngine() {
         timeframe: "6-12 months",
         status: "active",
         predictions: 1247,
-        lastRun: new Date(Date.now() - 15 * 60 * 1000),
+        lastRun: new Date(Date.now() - 15 * 60 * 1000)
       },
       {
         id: "model-2",
@@ -159,7 +159,7 @@ export function PsychohistoricalEngine() {
         timeframe: "1-3 years",
         status: "active",
         predictions: 892,
-        lastRun: new Date(Date.now() - 8 * 60 * 1000),
+        lastRun: new Date(Date.now() - 8 * 60 * 1000)
       },
       {
         id: "model-3",
@@ -170,7 +170,7 @@ export function PsychohistoricalEngine() {
         timeframe: "3-6 months",
         status: "training",
         predictions: 634,
-        lastRun: new Date(Date.now() - 25 * 60 * 1000),
+        lastRun: new Date(Date.now() - 25 * 60 * 1000)
       },
     ];
     setPredictionModels(models);
@@ -228,7 +228,7 @@ export function PsychohistoricalEngine() {
         ...prev,
         totalDataPoints: prev.totalDataPoints + Math.floor(Math.random() * 1000),
         activePredictions: prev.activePredictions + Math.floor(Math.random() * 5),
-        dailyIdeas: prev.dailyIdeas + Math.floor(Math.random() * 3),
+        dailyIdeas: prev.dailyIdeas + Math.floor(Math.random() * 3)
       }));
 
       // Update data stream last update times
@@ -236,7 +236,7 @@ export function PsychohistoricalEngine() {
         prev.map((stream) => ({
           ...stream,
           lastUpdate: Math.random() > 0.7 ? new Date() : stream.lastUpdate,
-          dataPoints: stream.dataPoints + Math.floor(Math.random() * 1000),
+          dataPoints: stream.dataPoints + Math.floor(Math.random() * 1000)
         }))
       );
     }, 5000);

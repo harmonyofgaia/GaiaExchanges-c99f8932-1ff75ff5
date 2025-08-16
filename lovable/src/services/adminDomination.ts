@@ -48,8 +48,8 @@ class AdminDominationService {
 
   // Remote System Override Protocol
   async executeRemoteOverride(override: {
-    targetSystem: string;
-    commandType: "shutdown" | "restart" | "quarantine" | "emergency_stop" | "quantum_lock";
+    targetSystem: string;,
+    commandType: "shutdown" | "restart" | "quarantine" | "emergency_stop" | "quantum_lock";,
     adminId: string;
     biometricAuth?: BiometricData;
   }): Promise<RemoteOverride> {
@@ -136,7 +136,7 @@ class AdminDominationService {
       adminId,
       methods: Object.keys(biometricData).filter(
         (k) => k !== "verified" && biometricData[k as keyof BiometricData]
-      ),
+      )
     });
 
     toast.success("👁️ Biometric Authentication Registered", {
@@ -334,8 +334,8 @@ class AdminDominationService {
 
   // Admin Activity Forensics
   async generateAdminForensicsReport(adminId?: string): Promise<{
-    totalSessions: number;
-    activeSessions: number;
+    totalSessions: number;,
+    activeSessions: number;,
     recentActions: unknown[];
     securityAlerts: unknown[];
     privilegeEscalations: unknown[];

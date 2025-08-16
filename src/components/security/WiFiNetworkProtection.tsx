@@ -32,7 +32,7 @@ export function WiFiNetworkProtection() {
     threatsBlocked: 0,
     secureConnections: 0,
     vulnerabilitiesFound: 0,
-    lastScan: new Date(),
+    lastScan: new Date()
   });
 
   const [threats, setThreats] = useState<NetworkThreat[]>([]);
@@ -72,7 +72,7 @@ export function WiFiNetworkProtection() {
               source: `Network Scan - ${threat}`,
               description: `WiFi security threat detected: ${threat.replace(/_/g, " ")}`,
               blocked: true,
-              timestamp: new Date(),
+              timestamp: new Date()
             });
           }
         };
@@ -90,7 +90,7 @@ export function WiFiNetworkProtection() {
                 source: "Encryption Analysis",
                 description: "Weak network connection detected - Enhanced encryption applied",
                 blocked: true,
-                timestamp: new Date(),
+                timestamp: new Date()
               });
             }
           }
@@ -112,7 +112,7 @@ export function WiFiNetworkProtection() {
               source: "Device Protection",
               description: "Advanced device fingerprinting blocked - Privacy protected",
               blocked: true,
-              timestamp: new Date(),
+              timestamp: new Date()
             });
           }
         };
@@ -149,7 +149,7 @@ export function WiFiNetworkProtection() {
             threatsBlocked: prev.threatsBlocked + newThreats.filter((t) => t.blocked).length,
             vulnerabilitiesFound:
               prev.vulnerabilitiesFound + newThreats.filter((t) => !t.blocked).length,
-            lastScan: new Date(),
+            lastScan: new Date()
           }));
 
           // Show notifications for critical threats

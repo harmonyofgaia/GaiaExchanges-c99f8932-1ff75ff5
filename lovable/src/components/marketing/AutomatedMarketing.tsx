@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -74,7 +74,7 @@ export function AutomatedMarketing() {
       hourlyPosts: prev.hourlyPosts + platformsReached,
       totalReach: prev.totalReach + Math.floor(Math.random() * 100000) + 50000,
       engagementRate: Math.min(99.9, prev.engagementRate + Math.random() * 2),
-      platformsCovered: Math.min(13, prev.platformsCovered + 1),
+      platformsCovered: Math.min(13, prev.platformsCovered + 1)
     }));
 
     toast.success("🌍 Global Marketing Blast Executed!", {

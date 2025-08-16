@@ -47,8 +47,8 @@ class UltimateOmnipotenceService {
 
   // Omnipotence Level Management
   async unlockOmnipotenceLevel(config: {
-    name: string;
-    powerRating: number;
+    name: string;,
+    powerRating: number;,
     capabilities: string[];
     requirements: string[];
   }): Promise<OmnipotenceLevel> {
@@ -142,7 +142,7 @@ class UltimateOmnipotenceService {
 
         console.log("🌌 Absolute Dominance Complete:", {
           domain,
-          subjects: dominance.subjects.toLocaleString(),
+          subjects: dominance.subjects.toLocaleString()
         });
 
         toast.success("🌌 Absolute Dominance Complete", {
@@ -154,7 +154,7 @@ class UltimateOmnipotenceService {
 
   // Ultimate Weapon Creation
   async createUltimateWeapon(config: {
-    name: string;
+    name: string;,
     type:
       | "concept_destroyer"
       | "existence_eraser"
@@ -230,9 +230,9 @@ class UltimateOmnipotenceService {
 
   // Transcendent Capability Activation
   async activateTranscendentCapability(config: {
-    name: string;
-    category: "creation" | "destruction" | "manipulation" | "transcendence";
-    infinityLevel: number;
+    name: string;,
+    category: "creation" | "destruction" | "manipulation" | "transcendence";,
+    infinityLevel: number;,
     effects: string[];
   }): Promise<TranscendentCapability> {
     const capability: TranscendentCapability = {
@@ -264,8 +264,8 @@ class UltimateOmnipotenceService {
 
   // Omnipotent Creation
   async omnipotentCreation(config: {
-    creationType: "universe" | "multiverse" | "reality" | "existence" | "concept";
-    name: string;
+    creationType: "universe" | "multiverse" | "reality" | "existence" | "concept";,
+    name: string;,
     properties: string[];
   }): Promise<void> {
     console.log("✨ Omnipotent Creation Initiated:", {

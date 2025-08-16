@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -41,7 +41,7 @@ export default function AdminCraftedTools() {
       description: "Reality-cutting blade forged from quantum crystals",
       marketPrice: 2500,
       onMarketplace: false,
-      createdAt: new Date(),
+      createdAt: new Date()
     },
     {
       id: "2",
@@ -52,7 +52,7 @@ export default function AdminCraftedTools() {
       description: "Mystical protector of environmental realms",
       marketPrice: 1800,
       onMarketplace: false,
-      createdAt: new Date(),
+      createdAt: new Date()
     },
     {
       id: "3",
@@ -63,7 +63,7 @@ export default function AdminCraftedTools() {
       description: "Tracks anything across multiple dimensions",
       marketPrice: 3000,
       onMarketplace: true,
-      createdAt: new Date(),
+      createdAt: new Date()
     },
   ]);
 

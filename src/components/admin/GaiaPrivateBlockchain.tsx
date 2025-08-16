@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -43,7 +43,7 @@ export function GaiaPrivateBlockchain() {
         ...prev,
         currentBlockHeight: prev.currentBlockHeight + Math.floor(Math.random() * 3) + 1,
         transactionsPerSecond: Math.floor(Math.random() * 10000) + 45000,
-        networkHashRate: prev.networkHashRate + Math.floor(Math.random() * 100000 - 50000),
+        networkHashRate: prev.networkHashRate + Math.floor(Math.random() * 100000 - 50000)
       }));
 
       // Generate latest blocks

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -94,7 +94,7 @@ export function GhostAnimalArmy() {
               energy: Math.max(20, ghost.energy - Math.floor(Math.random() * 3)),
               position: {
                 x: Math.max(5, Math.min(95, ghost.position.x + (Math.random() - 0.5) * 10)),
-                y: Math.max(5, Math.min(95, ghost.position.y + (Math.random() - 0.5) * 10)),
+                y: Math.max(5, Math.min(95, ghost.position.y + (Math.random() - 0.5) * 10))
               },
             };
           }
@@ -105,7 +105,7 @@ export function GhostAnimalArmy() {
       setArmyStats((prev) => ({
         ...prev,
         totalHelps: prev.totalHelps + Math.floor(Math.random() * 15),
-        energyLevel: Math.max(70, Math.min(100, prev.energyLevel + (Math.random() - 0.5) * 5)),
+        energyLevel: Math.max(70, Math.min(100, prev.energyLevel + (Math.random() - 0.5) * 5))
       }));
     }, 2000);
 

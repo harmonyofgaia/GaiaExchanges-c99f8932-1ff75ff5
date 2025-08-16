@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -294,7 +294,7 @@ export function PsychohistoricalIntegration() {
       if (Math.random() > 0.8) {
         setUserStats((prev) => ({
           ...prev,
-          totalTokens: prev.totalTokens + Math.floor(Math.random() * 50),
+          totalTokens: prev.totalTokens + Math.floor(Math.random() * 50)
         }));
       }
     }, 10000);

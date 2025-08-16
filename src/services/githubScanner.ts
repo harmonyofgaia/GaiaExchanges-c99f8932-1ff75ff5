@@ -60,8 +60,8 @@ class GitHubScannerService {
 
     try {
       const [issues, pullRequests] = await Promise.all([
-        this.fetchAllIssues(),
-        this.fetchAllPullRequests(),
+        this.fetchAllIssues()
+        this.fetchAllPullRequests()
       ]);
 
       const lostFeatures = this.analyzeLostFeatures(issues, pullRequests);
@@ -72,7 +72,7 @@ class GitHubScannerService {
         pullRequests,
         lostFeatures,
         totalScanned: issues.length + pullRequests.length,
-        lastScanTime: new Date(),
+        lastScanTime: new Date()
         healthScore,
       };
 
@@ -278,7 +278,7 @@ class GitHubScannerService {
           message: issue.title,
           component: "GitHub Repository",
           resolved: false,
-          timestamp: new Date(issue.created_at),
+          timestamp: new Date(issue.created_at)
         });
       });
 
@@ -290,7 +290,7 @@ class GitHubScannerService {
         message: `Missing Feature: ${feature.name}`,
         component: "Feature System",
         resolved: false,
-        timestamp: new Date(feature.lastSeen),
+        timestamp: new Date(feature.lastSeen)
       });
     });
 

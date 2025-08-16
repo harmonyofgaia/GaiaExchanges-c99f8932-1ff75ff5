@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -66,7 +66,7 @@ export function AttackCounterSystem() {
           Math.min(100, prev.threatLevel + Math.floor((Math.random() - 0.5) * 10))
         ),
         responseTime: Math.max(0.1, prev.responseTime + (Math.random() - 0.5) * 0.1),
-        successRate: Math.max(95, Math.min(100, prev.successRate + (Math.random() - 0.5) * 2)),
+        successRate: Math.max(95, Math.min(100, prev.successRate + (Math.random() - 0.5) * 2))
       }));
 
       // Generate counter-attacks
@@ -78,7 +78,7 @@ export function AttackCounterSystem() {
           ],
           target: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
           status: "preparing",
-          timestamp: new Date(),
+          timestamp: new Date()
         };
 
         setCounterAttacks((prev) => [newAttack, ...prev.slice(0, 4)]);
@@ -98,7 +98,7 @@ export function AttackCounterSystem() {
               attack.id === newAttack.id
                 ? {
                     ...attack,
-                    status: Math.random() > 0.1 ? ("completed" as const) : ("failed" as const),
+                    status: Math.random() > 0.1 ? ("completed" as const) : ("failed" as const)
                   }
                 : attack
             )

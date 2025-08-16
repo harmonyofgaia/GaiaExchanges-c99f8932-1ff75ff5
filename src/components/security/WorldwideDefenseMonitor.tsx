@@ -166,7 +166,7 @@ export function WorldwideDefenseMonitor() {
         threatsDetected: prev.threatsDetected + newThreats.length,
         tacticsUpdated: prev.tacticsUpdated + newTactics.length,
         defenseStrength: Math.min(100, prev.defenseStrength + 0.15),
-        globalRanking: Math.max(1, prev.globalRanking - Math.floor(Math.random() * 0.05)),
+        globalRanking: Math.max(1, prev.globalRanking - Math.floor(Math.random() * 0.05))
       }));
 
       // Show critical threat alerts

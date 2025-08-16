@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -53,7 +53,7 @@ export function GlobalRelocationMap() {
   const [mapView, setMapView] = useState<"earth" | "local">("earth");
   const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
   const [userLocation, setUserLocation] = useState<{
-    lat: number;
+    lat: number;,
     lng: number;
   } | null>(null);
   const [vrActive, setVrActive] = useState(false);

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -155,7 +155,7 @@ export function PhoneSecuritySystem() {
         setSecurityStatus((prev) => ({
           ...prev,
           threatsBlocked: prev.threatsBlocked + 1,
-          lastScan: new Date(),
+          lastScan: new Date()
         }));
 
         const channelEmoji = {
@@ -176,7 +176,7 @@ export function PhoneSecuritySystem() {
       setSecurityStatus((prev) => ({
         ...prev,
         overallScore: 100, // Always maximum protection
-        lastScan: new Date(),
+        lastScan: new Date()
       }));
     };
 
@@ -198,7 +198,7 @@ export function PhoneSecuritySystem() {
       setSecurityStatus((prev) => ({
         ...prev,
         overallScore: 100,
-        lastScan: new Date(),
+        lastScan: new Date()
       }));
     } finally {
       setIsScanning(false);

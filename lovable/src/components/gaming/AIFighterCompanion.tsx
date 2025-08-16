@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -96,7 +96,7 @@ export function AIFighterCompanion() {
       setCompanion((prev) => ({
         ...prev,
         experience: prev.experience + Math.floor(Math.random() * 10) + 5,
-        learningProgress: Math.min(100, prev.learningProgress + Math.random() * 2),
+        learningProgress: Math.min(100, prev.learningProgress + Math.random() * 2)
       }));
 
       // AI sends helpful messages occasionally
@@ -166,7 +166,7 @@ export function AIFighterCompanion() {
       setCompanion((prev) => ({
         ...prev,
         level: prev.level + 1,
-        learningProgress: Math.min(100, prev.learningProgress + 15),
+        learningProgress: Math.min(100, prev.learningProgress + 15)
       }));
       toast.success("🎯 Training Complete!", {
         description: "ARIA learned new strategies and leveled up!",

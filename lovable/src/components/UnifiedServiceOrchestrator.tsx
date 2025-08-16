@@ -14,37 +14,37 @@ export function UnifiedServiceOrchestrator() {
       name: "Authentication Service",
       status: "active",
       uptime: 100,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       name: "Database Service",
       status: "active",
       uptime: 100,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       name: "Security Service",
       status: "active",
       uptime: 100,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       name: "Trading Service",
       status: "active",
       uptime: 100,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       name: "Gaming Service",
       status: "active",
       uptime: 100,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       name: "AI Art Service",
       status: "active",
       uptime: 100,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
   ]);
 
@@ -61,7 +61,7 @@ export function UnifiedServiceOrchestrator() {
           ...service,
           status: "active" as const,
           uptime: Math.min(100, service.uptime + Math.random() * 0.1),
-          lastCheck: new Date(),
+          lastCheck: new Date()
         }))
       );
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 
 const ArtisticTitle = () => {
   const [glowIntensity, setGlowIntensity] = useState(1);
@@ -59,8 +59,8 @@ const ArtisticTitle = () => {
               fontFamily: "'Playfair Display', serif",
               letterSpacing: "0.15em",
               textShadow: `
-                0 0 60px rgba(34, 197, 94, 0.8),
-                0 0 120px rgba(22, 163, 74, 0.6),
+                0 0 60px rgba(34, 197, 94, 0.8)
+                0 0 120px rgba(22, 163, 74, 0.6)
                 0 0 180px rgba(21, 128, 61, 0.4)
               `,
               transform: `scale(${glowIntensity})`,
@@ -138,10 +138,10 @@ const ArtisticTitle = () => {
             className="relative"
             style={{
               textShadow: `
-                4px 4px 8px rgba(0,0,0,0.8),
-                0 0 40px rgba(34, 197, 94, ${0.7 * glowIntensity}),
-                0 0 80px rgba(22, 163, 74, ${0.6 * glowIntensity}),
-                0 0 120px rgba(21, 128, 61, ${0.5 * glowIntensity}),
+                4px 4px 8px rgba(0,0,0,0.8)
+                0 0 40px rgba(34, 197, 94, ${0.7 * glowIntensity})
+                0 0 80px rgba(22, 163, 74, ${0.6 * glowIntensity})
+                0 0 120px rgba(21, 128, 61, ${0.5 * glowIntensity})
                 0 0 160px rgba(5, 150, 105, ${0.4 * glowIntensity})
               `,
               background: `

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -95,7 +95,7 @@ export function OmniscientGPSEngine() {
         accuracy: currentLocation.accuracy + i * 2,
         timestamp: Date.now() + i * 60000,
         source: "PREDICTIVE_AI_ALGORITHM",
-        confidence: Math.max(50, 95 - i * 5),
+        confidence: Math.max(50, 95 - i * 5)
       });
     }
 
@@ -112,7 +112,7 @@ export function OmniscientGPSEngine() {
           ...updated[existingIndex],
           currentLocation: location,
           locationHistory: [...updated[existingIndex].locationHistory, location].slice(-50),
-          lastUpdate: Date.now(),
+          lastUpdate: Date.now()
         };
         return updated;
       } else {
@@ -123,7 +123,7 @@ export function OmniscientGPSEngine() {
           locationHistory: [location],
           predictedPath: generatePredictedPath(location),
           trackingMethod: location.source,
-          lastUpdate: Date.now(),
+          lastUpdate: Date.now()
         };
         return [...prev, newTarget];
       }

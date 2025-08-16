@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GAIA_TOKEN } from "@/constants/tokens";
 import { Button } from "@/components/ui/button";
@@ -160,10 +160,10 @@ function AnimalWelfareControlPanel() {
             ),
             hope: Math.min(100, animal.emotionalState.hope + Math.floor(Math.random() * 8 - 2)),
             fear: Math.max(5, animal.emotionalState.fear + Math.floor(Math.random() * 12 - 6)),
-            trust: Math.min(100, animal.emotionalState.trust + Math.floor(Math.random() * 6 - 1)),
+            trust: Math.min(100, animal.emotionalState.trust + Math.floor(Math.random() * 6 - 1))
           },
           rescueProgress: Math.min(100, animal.rescueProgress + Math.floor(Math.random() * 3)),
-          lastUpdate: new Date().toISOString(),
+          lastUpdate: new Date().toISOString()
         }))
       );
     }, 12000);

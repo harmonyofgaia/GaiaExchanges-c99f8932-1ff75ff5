@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback} from "react";
 
 interface BioElectricBackgroundProps {
   intensity?: "low" | "medium" | "high";
@@ -30,10 +30,10 @@ export function BioElectricBackground({
 
     const pulseCount = intensity === "low" ? 3 : intensity === "high" ? 8 : 5;
     const pulses: Array<{
-      x: number;
-      y: number;
-      radius: number;
-      maxRadius: number;
+      x: number;,
+      y: number;,
+      radius: number;,
+      maxRadius: number;,
       alpha: number;
     }> = [];
 
@@ -97,7 +97,7 @@ export function BioElectricBackground({
               pulse.y + Math.sin(angle) * pulse.radius
             );
             ctx.lineTo(
-              pulse.x + Math.cos(angle) * (pulse.radius + arcLength),
+              pulse.x + Math.cos(angle) * (pulse.radius + arcLength)
               pulse.y + Math.sin(angle) * (pulse.radius + arcLength)
             );
             ctx.stroke();

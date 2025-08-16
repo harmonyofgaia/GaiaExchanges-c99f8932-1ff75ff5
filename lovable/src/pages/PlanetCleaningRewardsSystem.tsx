@@ -153,7 +153,7 @@ export default function PlanetCleaningRewardsSystem() {
         totalCleaned: prev.totalCleaned + Math.floor(Math.random() * 100),
         activeCommunities: prev.activeCommunities + Math.floor(Math.random() * 5),
         satelliteVerifications: prev.satelliteVerifications + Math.floor(Math.random() * 3),
-        blockchainTransactions: prev.blockchainTransactions + Math.floor(Math.random() * 10),
+        blockchainTransactions: prev.blockchainTransactions + Math.floor(Math.random() * 10)
       }));
     }, 12000);
 
@@ -221,14 +221,14 @@ export default function PlanetCleaningRewardsSystem() {
             location_data: {
               location: location,
               description: description,
-              timestamp: new Date().toISOString(),
+              timestamp: new Date().toISOString()
             },
             verification_method: "manual_review",
             tokens_earned: tokensEarned,
             environmental_impact: {
               type: activityType,
               amount: parseFloat(impactAmount),
-              unit: getImpactUnit(activityType),
+              unit: getImpactUnit(activityType)
             },
           },
         ])

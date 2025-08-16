@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -88,13 +88,13 @@ export function MobileAppDeployment() {
         ...prev,
         totalDownloads: prev.totalDownloads + Math.floor(Math.random() * 50),
         activeUsers: prev.activeUsers + Math.floor(Math.random() * 10 - 5),
-        performance: Math.max(95, prev.performance + (Math.random() - 0.5) * 2),
+        performance: Math.max(95, prev.performance + (Math.random() - 0.5) * 2)
       }));
 
       setAppStores((prev) =>
         prev.map((store) => ({
           ...store,
-          downloads: store.downloads + Math.floor(Math.random() * 20),
+          downloads: store.downloads + Math.floor(Math.random() * 20)
         }))
       );
     }, 10000);

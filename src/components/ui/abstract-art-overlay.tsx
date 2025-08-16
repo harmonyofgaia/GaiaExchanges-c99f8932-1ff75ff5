@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback} from "react";
 
 interface AbstractArtOverlayProps {
   intensity?: "low" | "medium" | "high";

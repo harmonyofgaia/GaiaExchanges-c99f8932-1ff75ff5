@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -130,19 +130,19 @@ export function GlobalSatelliteSystem() {
         setIntelligence((prev) => ({
           marketTrends: [
             newMarketTrends[Math.floor(Math.random() * newMarketTrends.length)],
-            ...prev.marketTrends.slice(0, 4),
+            ...prev.marketTrends.slice(0, 4)
           ],
           investorActivity: [
             newInvestorActivity[Math.floor(Math.random() * newInvestorActivity.length)],
-            ...prev.investorActivity.slice(0, 4),
+            ...prev.investorActivity.slice(0, 4)
           ],
           competitorAnalysis: [
             newCompetitorAnalysis[Math.floor(Math.random() * newCompetitorAnalysis.length)],
-            ...prev.competitorAnalysis.slice(0, 4),
+            ...prev.competitorAnalysis.slice(0, 4)
           ],
           newsUpdates: [
             newNewsUpdates[Math.floor(Math.random() * newNewsUpdates.length)],
-            ...prev.newsUpdates.slice(0, 4),
+            ...prev.newsUpdates.slice(0, 4)
           ],
         }));
 

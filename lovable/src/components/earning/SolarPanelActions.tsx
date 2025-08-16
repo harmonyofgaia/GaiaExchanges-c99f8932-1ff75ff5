@@ -44,7 +44,7 @@ export function SolarPanelActions() {
       metadata: {
         panelType,
         capacity: parseFloat(capacity),
-        monthlyGeneration: parseFloat(monthlyGeneration),
+        monthlyGeneration: parseFloat(monthlyGeneration)
       },
     };
 

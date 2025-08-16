@@ -41,14 +41,14 @@ class GaiaConsistencyScanner {
   ];
 
   async scanSystemConsistency(): Promise<{
-    overallStatus: "CONSISTENT" | "NEEDS_UPDATE" | "INCONSISTENT";
+    overallStatus: "CONSISTENT" | "NEEDS_UPDATE" | "INCONSISTENT";,
     issues: ConsistencyIssue[];
     componentIntegrations: ComponentIntegration[];
     summary: {
-      totalComponents: number;
-      fullyIntegrated: number;
-      partiallyIntegrated: number;
-      notIntegrated: number;
+      totalComponents: number;,
+      fullyIntegrated: number;,
+      partiallyIntegrated: number;,
+      notIntegrated: number;,
       criticalIssues: number;
     };
   }> {

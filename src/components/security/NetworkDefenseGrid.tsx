@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -156,7 +156,7 @@ export function NetworkDefenseGrid() {
                   100,
                   Math.max(50, node.bandwidthUsed + (Math.random() - 0.5) * 10)
                 ),
-                uptime: Math.min(100, Math.max(95, node.uptime + (Math.random() - 0.5) * 0.2)),
+                uptime: Math.min(100, Math.max(95, node.uptime + (Math.random() - 0.5) * 0.2))
               };
             }
 
@@ -170,7 +170,7 @@ export function NetworkDefenseGrid() {
             ...prev,
             blockedIPs: prev.blockedIPs + Math.floor(Math.random() * 10) + 1,
             threatsStopped: prev.threatsStopped + Math.floor(Math.random() * 5) + 1,
-            globalCoverage: Math.min(100, prev.globalCoverage + (Math.random() - 0.5) * 2),
+            globalCoverage: Math.min(100, prev.globalCoverage + (Math.random() - 0.5) * 2)
           }));
         }
 

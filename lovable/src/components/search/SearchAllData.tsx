@@ -53,7 +53,7 @@ export function SearchAllData() {
     threatsDetected: 0,
     locationsTracked: 0,
     transactionsMonitored: 0,
-    lastUpdate: new Date(),
+    lastUpdate: new Date()
   });
   const [selectedFilter, setSelectedFilter] = useState<string>("all");
   const [autoRefresh, setAutoRefresh] = useState(true);
@@ -69,7 +69,7 @@ export function SearchAllData() {
         threatsDetected: prev.threatsDetected + Math.floor(Math.random() * 3),
         locationsTracked: prev.locationsTracked + Math.floor(Math.random() * 10),
         transactionsMonitored: prev.transactionsMonitored + Math.floor(Math.random() * 100),
-        lastUpdate: new Date(),
+        lastUpdate: new Date()
       }));
     }, 2000);
 

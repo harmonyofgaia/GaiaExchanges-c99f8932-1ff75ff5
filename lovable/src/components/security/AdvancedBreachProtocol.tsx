@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -70,7 +70,7 @@ export function AdvancedBreachProtocol() {
       setBreachSteps((prev) =>
         prev.map((step) => ({
           ...step,
-          defenseStrength: Math.min(100, step.defenseStrength + 0.1),
+          defenseStrength: Math.min(100, step.defenseStrength + 0.1)
         }))
       );
     }, 2000);

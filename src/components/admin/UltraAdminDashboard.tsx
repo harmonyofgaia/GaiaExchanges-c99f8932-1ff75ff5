@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -53,7 +53,7 @@ export function UltraAdminDashboard() {
         communityScore: Math.max(
           90,
           Math.min(100, prev.communityScore + (Math.random() * 1 - 0.5))
-        ),
+        )
       }));
     };
 

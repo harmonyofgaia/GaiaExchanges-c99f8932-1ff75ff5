@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -71,7 +71,7 @@ export function CloudRecoverySystem() {
     totalDevices: 4,
     readyDevices: 3,
     totalDataMirrored: 750, // GB
-    lastFullSync: new Date(),
+    lastFullSync: new Date()
   });
 
   const initiateDeviceRecovery = (deviceId: string) => {
@@ -84,7 +84,7 @@ export function CloudRecoverySystem() {
               ...device,
               recoveryReady: true,
               dataSync: 100,
-              lastAccess: new Date(),
+              lastAccess: new Date()
             }
           : device
       )
@@ -98,7 +98,7 @@ export function CloudRecoverySystem() {
     setRecoveryStats((prev) => ({
       ...prev,
       readyDevices: prev.readyDevices + 1,
-      lastFullSync: new Date(),
+      lastFullSync: new Date()
     }));
   };
 
@@ -110,7 +110,7 @@ export function CloudRecoverySystem() {
         ...device,
         recoveryReady: true,
         dataSync: 100,
-        lastAccess: new Date(),
+        lastAccess: new Date()
       }))
     );
 
@@ -122,7 +122,7 @@ export function CloudRecoverySystem() {
     setRecoveryStats((prev) => ({
       ...prev,
       readyDevices: prev.totalDevices,
-      lastFullSync: new Date(),
+      lastFullSync: new Date()
     }));
   };
 
@@ -145,7 +145,7 @@ export function CloudRecoverySystem() {
       setRecoveryDevices((prev) =>
         prev.map((device) => ({
           ...device,
-          dataSync: Math.max(85, Math.min(100, device.dataSync + (Math.random() - 0.3) * 2)),
+          dataSync: Math.max(85, Math.min(100, device.dataSync + (Math.random() - 0.3) * 2))
         }))
       );
     }, 5000);

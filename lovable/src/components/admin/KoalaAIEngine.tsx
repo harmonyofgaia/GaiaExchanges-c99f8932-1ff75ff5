@@ -82,7 +82,7 @@ export function KoalaAIEngine() {
         security_threats_blocked: prev.security_threats_blocked + Math.floor(Math.random() * 2),
         performance_improvements: prev.performance_improvements + Math.floor(Math.random() * 2),
         revenue_optimized: prev.revenue_optimized + Math.random() * 0.5,
-        user_experience_score: Math.min(100, prev.user_experience_score + Math.random() * 0.3),
+        user_experience_score: Math.min(100, prev.user_experience_score + Math.random() * 0.3)
       }));
 
       // Update AI status
@@ -90,7 +90,7 @@ export function KoalaAIEngine() {
         ...prev,
         optimization: Math.min(100, prev.optimization + Math.random() * 2),
         performance: Math.min(100, prev.performance + Math.random() * 1.5),
-        evolution: Math.min(100, prev.evolution + Math.random() * 1.8),
+        evolution: Math.min(100, prev.evolution + Math.random() * 1.8)
       }));
 
       // Add new activity occasionally
@@ -113,7 +113,7 @@ export function KoalaAIEngine() {
             message: activities[Math.floor(Math.random() * activities.length)],
             time: "Just now",
           },
-          ...prev.slice(0, 9),
+          ...prev.slice(0, 9)
         ]);
       }
     }, 5000);

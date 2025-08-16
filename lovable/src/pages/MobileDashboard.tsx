@@ -44,25 +44,25 @@ export default function MobileDashboard() {
       id: "check-in",
       label: "✅ Daily Check-in",
       color: "bg-green-600",
-      action: () => handleDailyCheckIn(),
+      action: () => handleDailyCheckIn()
     },
     {
       id: "scan-receipt",
       label: "🧾 Scan Receipt",
       color: "bg-blue-600",
-      action: () => handleScanReceipt(),
+      action: () => handleScanReceipt()
     },
     {
       id: "plant-tree",
       label: "🌱 Plant Tree",
       color: "bg-emerald-600",
-      action: () => handlePlantTree(),
+      action: () => handlePlantTree()
     },
     {
       id: "share-impact",
       label: "📤 Share Impact",
       color: "bg-purple-600",
-      action: () => handleShareImpact(),
+      action: () => handleShareImpact()
     },
   ];
 

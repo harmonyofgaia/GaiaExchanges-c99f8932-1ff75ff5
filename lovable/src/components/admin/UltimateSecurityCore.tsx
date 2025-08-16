@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -18,11 +18,11 @@ export function UltimateSecurityCore() {
 
   const [activeThreats, setActiveThreats] = useState<
     Array<{
-      id: string;
-      type: string;
-      ip: string;
-      location: string;
-      severity: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+      id: string;,
+      type: string;,
+      ip: string;,
+      location: string;,
+      severity: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";,
       blocked: boolean;
     }>
   >([]);

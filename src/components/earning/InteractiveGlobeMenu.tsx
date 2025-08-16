@@ -69,7 +69,7 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
         position: {
           x: 200 * Math.sin(phi) * Math.cos(theta),
           y: 200 * Math.sin(phi) * Math.sin(theta),
-          z: 200 * Math.cos(phi),
+          z: 200 * Math.cos(phi)
         },
         difficulty: comp.difficulty,
         points: comp.points,
@@ -90,12 +90,12 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
         start: {
           x: 180 * Math.sin(phi1) * Math.cos(theta1),
           y: 180 * Math.sin(phi1) * Math.sin(theta1),
-          z: 180 * Math.cos(phi1),
+          z: 180 * Math.cos(phi1)
         },
         end: {
           x: 180 * Math.sin(phi2) * Math.cos(theta2),
           y: 180 * Math.sin(phi2) * Math.sin(theta2),
-          z: 180 * Math.cos(phi2),
+          z: 180 * Math.cos(phi2)
         },
       });
     }
@@ -275,7 +275,7 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
                 left: projected.x - 20,
                 top: projected.y - 20,
                 transform: `scale(${projected.scale})`,
-                zIndex: Math.round(projected.scale * 100),
+                zIndex: Math.round(projected.scale * 100)
               }}
               onMouseEnter={() => setHoveredPoint(point.id)}
               onMouseLeave={() => setHoveredPoint(null)}
@@ -380,7 +380,7 @@ export function InteractiveGlobeMenu({ onActivitySelect, categories }: Interacti
                 className="w-3 h-3 rounded-full border"
                 style={{
                   backgroundColor: `${getColorFromCategory(cat.id)}20`,
-                  borderColor: getColorFromCategory(cat.id),
+                  borderColor: getColorFromCategory(cat.id)
                 }}
               />
               <span className="text-white/80">{cat.title}</span>

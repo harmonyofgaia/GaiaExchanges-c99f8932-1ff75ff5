@@ -255,7 +255,7 @@ export function QuantumDefenseWall() {
                 Math.floor(Math.random() * 6)
               ],
               status: "neutralized",
-              timestamp: new Date(),
+              timestamp: new Date()
             };
 
             setThreatIntel((prev) => [newThreat, ...prev.slice(0, 19)]);
@@ -273,14 +273,14 @@ export function QuantumDefenseWall() {
               ...layer,
               threats_blocked: layer.threats_blocked + threatsBlocked,
               last_action: `Blocked ${newThreat.threat_type}`,
-              strength: Math.min(100, layer.strength + Math.random() * 2),
+              strength: Math.min(100, layer.strength + Math.random() * 2)
             };
           }
 
           // Normal fluctuation
           return {
             ...layer,
-            strength: Math.max(85, Math.min(100, layer.strength + (Math.random() - 0.5) * 1)),
+            strength: Math.max(85, Math.min(100, layer.strength + (Math.random() - 0.5) * 1))
           };
         })
       );
@@ -293,7 +293,7 @@ export function QuantumDefenseWall() {
           95,
           Math.min(100, prev.overall_health + (Math.random() - 0.5) * 0.5)
         ),
-        ai_confidence: Math.max(90, Math.min(100, prev.ai_confidence + (Math.random() - 0.5) * 1)),
+        ai_confidence: Math.max(90, Math.min(100, prev.ai_confidence + (Math.random() - 0.5) * 1))
       }));
     };
 

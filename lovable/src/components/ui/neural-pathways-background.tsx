@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 
 interface NeuralNode {
   id: number;
@@ -33,7 +33,7 @@ export function NeuralPathwaysBackground({
       size: Math.random() * 8 + 4,
       pulse: Math.random() * 2 * Math.PI,
       connections: [],
-      activity: Math.random(),
+      activity: Math.random()
     }));
 
     // Create connections between nearby nodes

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Issue } from "./types";
 
@@ -46,7 +46,7 @@ export function useAutoIssueResolver() {
                 message: `🚨 SECURITY ALERT: Suspicious script detected - ${src}`,
                 component: "Security Monitor",
                 resolved: false,
-                timestamp: new Date(),
+                timestamp: new Date()
               });
 
               // Critical security notification
@@ -91,7 +91,7 @@ export function useAutoIssueResolver() {
                 message: "🚨 MALWARE DETECTED: Code injection attempt blocked",
                 component: "File Integrity Monitor",
                 resolved: false,
-                timestamp: new Date(),
+                timestamp: new Date()
               });
 
               toast({
@@ -127,7 +127,7 @@ export function useAutoIssueResolver() {
                   message: "⚠️ WALLET SECURITY: Sensitive data detected in storage",
                   component: "Wallet Security Monitor",
                   resolved: false,
-                  timestamp: new Date(),
+                  timestamp: new Date()
                 });
               }
             }
@@ -229,7 +229,7 @@ export function useAutoIssueResolver() {
                 message: `🚨 PHISHING BLOCKED: Malicious link detected - ${href}`,
                 component: "Community Protection",
                 resolved: false,
-                timestamp: new Date(),
+                timestamp: new Date()
               });
 
               toast({

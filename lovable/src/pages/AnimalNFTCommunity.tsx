@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -234,7 +234,7 @@ const AnimalNFTCommunity = () => {
             calmness: Math.max(
               60,
               Math.min(100, animal.emotions.calmness + Math.floor(Math.random() * 4 - 2))
-            ),
+            )
           },
         }))
       );
@@ -242,7 +242,7 @@ const AnimalNFTCommunity = () => {
       setGlobalStats((prev) => ({
         ...prev,
         totalInvested: prev.totalInvested + Math.random() * 1000,
-        liveViewers: prev.liveViewers + Math.floor(Math.random() * 20 - 10),
+        liveViewers: prev.liveViewers + Math.floor(Math.random() * 20 - 10)
       }));
     };
 

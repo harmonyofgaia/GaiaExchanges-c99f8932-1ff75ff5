@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -35,7 +35,7 @@ export function IAEngine() {
           learning: Math.min(100, prev.learning + Math.random() * 1.5),
           prediction: Math.min(100, prev.prediction + Math.random() * 1.8),
           automation: Math.min(100, prev.automation + Math.random() * 2.2),
-          efficiency: Math.min(100, prev.efficiency + Math.random() * 1.7),
+          efficiency: Math.min(100, prev.efficiency + Math.random() * 1.7)
         }));
 
         setThreatsPrevented((prev) => prev + Math.floor(Math.random() * 3));

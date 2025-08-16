@@ -36,7 +36,7 @@ export default function SnakeArenaGame() {
 
   const generateFood = (): Position => ({
     x: Math.floor(Math.random() * gridSize),
-    y: Math.floor(Math.random() * gridSize),
+    y: Math.floor(Math.random() * gridSize)
   });
 
   const resetGame = () => {
@@ -127,7 +127,7 @@ export default function SnakeArenaGame() {
           case "ArrowLeft":
             return prev.direction !== "RIGHT" ? { ...prev, direction: "LEFT" } : prev;
           case "ArrowRight":
-            return prev.direction !== "LEFT" ? { ...prev, direction: "RIGHT" } : prev;
+            return prev.direction !== "LEFT" ? { ...prev, direction: "RIGHT" } : prev;,
           default:
             return prev;
         }

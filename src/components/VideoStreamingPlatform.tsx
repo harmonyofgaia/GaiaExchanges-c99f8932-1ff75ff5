@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -44,7 +44,7 @@ export function VideoStreamingPlatform() {
       category: "Environmental",
       isLive: true,
       duration: "2:34:12",
-      uploadDate: new Date(Date.now() - 2 * 60 * 60 * 1000),
+      uploadDate: new Date(Date.now() - 2 * 60 * 60 * 1000)
     },
     {
       id: "2",
@@ -58,7 +58,7 @@ export function VideoStreamingPlatform() {
       category: "Gaming",
       isLive: true,
       duration: "1:45:30",
-      uploadDate: new Date(Date.now() - 1 * 60 * 60 * 1000),
+      uploadDate: new Date(Date.now() - 1 * 60 * 60 * 1000)
     },
     {
       id: "3",
@@ -72,7 +72,7 @@ export function VideoStreamingPlatform() {
       category: "Creative",
       isLive: false,
       duration: "45:22",
-      uploadDate: new Date(Date.now() - 12 * 60 * 60 * 1000),
+      uploadDate: new Date(Date.now() - 12 * 60 * 60 * 1000)
     },
   ]);
 
@@ -99,14 +99,14 @@ export function VideoStreamingPlatform() {
           viewers: stream.isLive
             ? stream.viewers + Math.floor(Math.random() * 10) - 5
             : stream.viewers,
-          likes: stream.likes + Math.floor(Math.random() * 3),
+          likes: stream.likes + Math.floor(Math.random() * 3)
         }))
       );
 
       setStats((prev) => ({
         ...prev,
         totalViews: prev.totalViews + Math.floor(Math.random() * 5),
-        gaiaRewards: prev.gaiaRewards + Math.floor(Math.random() * 2),
+        gaiaRewards: prev.gaiaRewards + Math.floor(Math.random() * 2)
       }));
     }, 3000);
 
@@ -131,7 +131,7 @@ export function VideoStreamingPlatform() {
       category: "Live",
       isLive: true,
       duration: "00:00:00",
-      uploadDate: new Date(),
+      uploadDate: new Date()
     };
 
     setStreams((prev) => [newStream, ...prev]);

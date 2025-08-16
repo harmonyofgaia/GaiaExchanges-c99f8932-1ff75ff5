@@ -53,7 +53,7 @@ export default function TaskReverser() {
         .from("feature_toggles")
         .update({
           is_enabled: !currentStatus,
-          updated_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
         })
         .eq("id", featureId);
 

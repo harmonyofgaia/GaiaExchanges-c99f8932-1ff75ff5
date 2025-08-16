@@ -59,7 +59,7 @@ serve(async (req) => {
         top_p: 0.95,
         frequency_penalty: 0.1,
         presence_penalty: 0.1,
-      }),
+      })
     });
 
     const data = await response.json();
@@ -90,7 +90,7 @@ serve(async (req) => {
         neural_core_status: "QUANTUM_ACTIVE",
         processing_power: "100%",
         intelligence_level: "UNLIMITED",
-      }),
+      })
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       }
@@ -102,7 +102,7 @@ serve(async (req) => {
         error: "Neural core temporarily offline",
         details: error.message,
         status: "SELF_HEALING_ACTIVATED",
-      }),
+      })
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },

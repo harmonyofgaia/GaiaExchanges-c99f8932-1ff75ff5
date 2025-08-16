@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 
 interface InvestorLead {
   id: string;
@@ -32,21 +32,21 @@ export function SecurityOrchestrator() {
       name: "Quantum Shield Layer",
       status: "active",
       threatLevel: 0,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       id: "dragon-core",
       name: "Dragon Core Protection",
       status: "active",
       threatLevel: 0,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       id: "ip-fortress",
       name: "IP Fortress System",
       status: "active",
       threatLevel: 0,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
   ]);
   const orchestratorInterval = useRef<NodeJS.Timeout>(undefined);
@@ -94,7 +94,7 @@ export function SecurityOrchestrator() {
         prev.map((layer) => ({
           ...layer,
           lastCheck: new Date(),
-          threatLevel: Math.max(0, layer.threatLevel - 0.1),
+          threatLevel: Math.max(0, layer.threatLevel - 0.1)
         }))
       );
     };

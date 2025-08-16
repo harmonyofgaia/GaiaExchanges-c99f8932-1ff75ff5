@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -171,13 +171,13 @@ export function AdvancedThreatTracker() {
         prev.map((monkey) => ({
           ...monkey,
           level: Math.min(100, monkey.level + 0.01),
-          power: Math.min(10000, monkey.power + Math.floor(Math.random() * 10)),
+          power: Math.min(10000, monkey.power + Math.floor(Math.random() * 10))
         }))
       );
 
       setDolphinDefense((prev) => ({
         ...prev,
-        heavenlyForce: Math.min(100, prev.heavenlyForce + 0.005),
+        heavenlyForce: Math.min(100, prev.heavenlyForce + 0.005)
       }));
     }, 1000);
 

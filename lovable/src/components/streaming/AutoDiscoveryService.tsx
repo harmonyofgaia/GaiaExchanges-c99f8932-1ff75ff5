@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 import { toast } from "sonner";
 
 interface DiscoveredContent {
@@ -49,21 +49,21 @@ export const AutoDiscoveryService = () => {
         title: "1970s: The Last Era of True Community",
         category: "retro-70s-80s",
         source: "RetroLifeChannel",
-        discoveredAt: new Date().toISOString(),
+        discoveredAt: new Date().toISOString()
       },
       {
         id: `disc-${Date.now()}-2`,
         title: "Hidden Behavior of Deep Sea Creatures",
         category: "nature-wildlife",
         source: "WildlifeSecrets",
-        discoveredAt: new Date().toISOString(),
+        discoveredAt: new Date().toISOString()
       },
       {
         id: `disc-${Date.now()}-3`,
         title: "Quantum Experiments That Defy Logic",
         category: "mad-science",
         source: "ScienceUnlocked",
-        discoveredAt: new Date().toISOString(),
+        discoveredAt: new Date().toISOString()
       },
     ];
 

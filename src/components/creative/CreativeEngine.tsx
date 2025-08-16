@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -171,7 +171,7 @@ export function CreativeEngine({
             height: 1080,
             duration: file.type.startsWith("video/") ? 30 : undefined,
             size: file.size,
-            created: new Date(),
+            created: new Date()
           },
         };
 
@@ -191,7 +191,7 @@ export function CreativeEngine({
       abstract: await generateAbstractVariant(asset),
       animated: await generateAnimatedVariant(asset),
       neural: await generateNeuralVariant(asset),
-      liquid: await generateLiquidVariant(asset),
+      liquid: await generateLiquidVariant(asset)
     };
 
     return variants;
@@ -232,13 +232,13 @@ export function CreativeEngine({
           width: 1920,
           height: 1080,
           size: 1024 * 1024, // 1MB simulated
-          created: new Date(),
+          created: new Date()
         },
         processedVariants: {
           abstract: generateProceduralArt(),
           animated: generateProceduralArt(),
           neural: generateProceduralArt(),
-          liquid: generateProceduralArt(),
+          liquid: generateProceduralArt()
         },
       };
 
@@ -297,7 +297,7 @@ export function CreativeEngine({
       colors: extractColorsFromAsset(selectedAsset),
       animations: generateAnimationsFromAsset(selectedAsset),
       effects: generateEffectsFromAsset(selectedAsset),
-      created: new Date(),
+      created: new Date()
     };
 
     setTemplates((prev) => [...prev, template]);

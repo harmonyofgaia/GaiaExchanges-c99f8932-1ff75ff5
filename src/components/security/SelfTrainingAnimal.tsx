@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
@@ -16,25 +16,25 @@ export function SelfTrainingAnimal() {
       path: "src/App.tsx",
       status: "perfect",
       improvements: 0,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       path: "src/pages/*.tsx",
       status: "optimizing",
       improvements: 12,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       path: "src/components/**/*.tsx",
       status: "learning",
       improvements: 34,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
     {
       path: "src/security/**/*.tsx",
       status: "evolving",
       improvements: 89,
-      lastCheck: new Date(),
+      lastCheck: new Date()
     },
   ]);
 
@@ -53,7 +53,7 @@ export function SelfTrainingAnimal() {
           ...file,
           improvements: file.improvements + Math.floor(Math.random() * 5),
           status: file.improvements > 50 ? "perfect" : file.status,
-          lastCheck: new Date(),
+          lastCheck: new Date()
         }))
       );
 

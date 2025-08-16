@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { DollarSign, Users, TrendingUp, Globe, Crown, Star, Zap, Target } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { toast } from "sonner";
 
 export function GlobalInvestorMagnet() {

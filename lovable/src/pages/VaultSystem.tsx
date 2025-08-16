@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -108,7 +108,7 @@ export default function VaultSystem() {
         totalLocked: prev.totalLocked + Math.floor(Math.random() * 1000),
         totalBurned: prev.totalBurned + Math.floor(Math.random() * 50),
         vaultBalance: prev.vaultBalance + Math.floor(Math.random() * 500),
-        userContributions: prev.userContributions + (Math.random() > 0.8 ? 1 : 0),
+        userContributions: prev.userContributions + (Math.random() > 0.8 ? 1 : 0)
       }));
     }, 5000);
 

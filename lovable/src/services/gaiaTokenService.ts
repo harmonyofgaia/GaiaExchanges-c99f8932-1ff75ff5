@@ -97,7 +97,7 @@ class GaiaTokenService {
       isLive: false,
       burnRate: 3.5 + (Math.random() - 0.5) * 0.5,
       totalBurned: 14250000 + Math.floor(Math.random() * 50000),
-      circulatingSupply: 85750000 - Math.floor(Math.random() * 10000),
+      circulatingSupply: 85750000 - Math.floor(Math.random() * 10000)
     };
   }
 

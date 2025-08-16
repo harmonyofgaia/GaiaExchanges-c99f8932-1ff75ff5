@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -91,7 +91,7 @@ export function AutoTacticsGenerator() {
         effectiveness: Math.max(effectiveness, 70),
         auto_generated: true,
         priority: effectiveness > 90 ? "high" : effectiveness > 80 ? "medium" : "low",
-        last_updated: new Date().toISOString(),
+        last_updated: new Date().toISOString()
       });
 
       setGenerationProgress(((i + 1) / tacticTemplates.length) * 100);
@@ -119,7 +119,7 @@ export function AutoTacticsGenerator() {
         tactic.id === tacticId
           ? {
               ...tactic,
-              effectiveness: Math.min(tactic.effectiveness + 5, 100),
+              effectiveness: Math.min(tactic.effectiveness + 5, 100)
             }
           : tactic
       )

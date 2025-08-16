@@ -43,7 +43,7 @@ export function CompostingActions() {
       verified: true,
       metadata: {
         compostType,
-        organicWaste: parseFloat(organicWaste),
+        organicWaste: parseFloat(organicWaste)
         compostMethod,
       },
     };

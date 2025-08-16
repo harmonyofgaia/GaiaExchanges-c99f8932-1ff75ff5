@@ -15,7 +15,7 @@ export function LightningClickEffect() {
       id: Date.now() + Math.random(),
       x: e.clientX,
       y: e.clientY,
-      timestamp: Date.now(),
+      timestamp: Date.now()
     };
 
     setStrikes((prev) => [...prev, newStrike]);
@@ -96,22 +96,22 @@ export function LightningClickEffect() {
           __html: `
           @keyframes lightning {
             0% {
-              opacity: 0;
+              opacity: 0;,
               transform: scale(0.5) rotate(-10deg);
               filter: brightness(2) drop-shadow(0 0 10px rgba(59, 130, 246, 1));
             }
             20% {
-              opacity: 1;
+              opacity: 1;,
               transform: scale(1.2) rotate(5deg);
               filter: brightness(3) drop-shadow(0 0 15px rgba(59, 130, 246, 1));
             }
             40% {
-              opacity: 0.8;
+              opacity: 0.8;,
               transform: scale(1) rotate(-2deg);
               filter: brightness(2.5) drop-shadow(0 0 12px rgba(59, 130, 246, 0.8));
             }
             100% {
-              opacity: 0;
+              opacity: 0;,
               transform: scale(0.3) rotate(0deg);
               filter: brightness(1) drop-shadow(0 0 5px rgba(59, 130, 246, 0.3));
             }
@@ -119,26 +119,26 @@ export function LightningClickEffect() {
 
           @keyframes spark {
             0% {
-              opacity: 1;
+              opacity: 1;,
               transform: translate(0, 0) scale(1);
             }
             100% {
-              opacity: 0;
+              opacity: 0;,
               transform: translate(var(--spark-x, ${Math.random() * 20 - 10}px), var(--spark-y, ${Math.random() * 20 - 10}px)) scale(0);
             }
           }
 
           @keyframes glow {
             0% {
-              opacity: 0.8;
+              opacity: 0.8;,
               transform: scale(0.5);
             }
             50% {
-              opacity: 0.4;
+              opacity: 0.4;,
               transform: scale(2);
             }
             100% {
-              opacity: 0;
+              opacity: 0;,
               transform: scale(3);
             }
           }

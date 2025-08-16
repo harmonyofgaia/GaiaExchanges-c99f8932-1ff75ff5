@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -51,7 +51,7 @@ export function WildfireSandProtection() {
     temperature: 42,
     humidity: 15,
     windSpeed: 25,
-    lastUpdated: new Date().toLocaleTimeString(),
+    lastUpdated: new Date().toLocaleTimeString()
   });
 
   const [protectionZones] = useState<ProtectionZone[]>([
@@ -109,7 +109,7 @@ export function WildfireSandProtection() {
         temperature: Math.max(20, prev.temperature + (Math.random() - 0.5) * 3),
         humidity: Math.max(5, Math.min(80, prev.humidity + (Math.random() - 0.5) * 5)),
         windSpeed: Math.max(0, prev.windSpeed + (Math.random() - 0.5) * 5),
-        lastUpdated: new Date().toLocaleTimeString(),
+        lastUpdated: new Date().toLocaleTimeString()
       }));
     }, 10000); // Update every 10 seconds
 

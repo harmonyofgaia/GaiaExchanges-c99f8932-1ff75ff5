@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Cpu, Zap, Shield, Globe, Brain, Rocket, Crown, Eye } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 
 export function QuantumTechnologicalMastermind() {
   const [globalPower, setGlobalPower] = useState(97);

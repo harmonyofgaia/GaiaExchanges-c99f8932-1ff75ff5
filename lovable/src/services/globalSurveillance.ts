@@ -54,7 +54,7 @@ class GlobalSurveillanceService {
         coverage: ["North America", "Europe"],
         isActive: true,
         threats_detected: 0,
-        lastUpdate: Date.now(),
+        lastUpdate: Date.now()
       },
       {
         id: "gaia-sat-002",
@@ -63,7 +63,7 @@ class GlobalSurveillanceService {
         coverage: ["Asia-Pacific", "Middle East"],
         isActive: true,
         threats_detected: 0,
-        lastUpdate: Date.now(),
+        lastUpdate: Date.now()
       },
       {
         id: "gaia-sat-003",
@@ -72,7 +72,7 @@ class GlobalSurveillanceService {
         coverage: ["Global Coverage"],
         isActive: true,
         threats_detected: 0,
-        lastUpdate: Date.now(),
+        lastUpdate: Date.now()
       },
       {
         id: "gaia-sat-quantum",
@@ -81,7 +81,7 @@ class GlobalSurveillanceService {
         coverage: ["Dimensional Monitoring", "Quantum Threats", "Time-Space Anomalies"],
         isActive: true,
         threats_detected: 0,
-        lastUpdate: Date.now(),
+        lastUpdate: Date.now()
       },
     ];
 
@@ -142,7 +142,7 @@ class GlobalSurveillanceService {
         orbit: s.orbit,
         status: s.isActive ? "ACTIVE" : "OFFLINE",
         threats: s.threats_detected,
-      })),
+      }))
     };
 
     return intelligence;
@@ -251,35 +251,35 @@ class GlobalSurveillanceService {
         classification: "TOP_SECRET",
         feeds: ["SIGINT", "COMINT", "Quantum Intelligence"],
         realTimeAccess: true,
-        lastSync: Date.now(),
+        lastSync: Date.now()
       },
       {
         agency: "CIA",
         classification: "SECRET",
         feeds: ["HUMINT", "Counterintelligence", "Foreign Operations"],
         realTimeAccess: true,
-        lastSync: Date.now(),
+        lastSync: Date.now()
       },
       {
         agency: "FBI",
         classification: "CONFIDENTIAL",
         feeds: ["Cyber Crime", "Domestic Threats", "Criminal Intelligence"],
         realTimeAccess: true,
-        lastSync: Date.now(),
+        lastSync: Date.now()
       },
       {
         agency: "CISA",
         classification: "UNCLASSIFIED",
         feeds: ["Infrastructure Threats", "Vulnerability Alerts", "Incident Reports"],
         realTimeAccess: true,
-        lastSync: Date.now(),
+        lastSync: Date.now()
       },
       {
         agency: "COSMIC_COMMAND",
         classification: "COSMIC",
         feeds: ["Quantum Threats", "Dimensional Incursions", "Reality Breaches"],
         realTimeAccess: true,
-        lastSync: Date.now(),
+        lastSync: Date.now()
       },
     ];
 
@@ -317,9 +317,9 @@ class GlobalSurveillanceService {
 
   // International Threat Coordination
   async coordinateInternationalResponse(threat: {
-    origin: string;
-    threatType: string;
-    severity: number;
+    origin: string;,
+    threatType: string;,
+    severity: number;,
     affectedRegions: string[];
   }): Promise<InternationalThreat> {
     const internationalThreat: InternationalThreat = {
@@ -444,7 +444,7 @@ class GlobalSurveillanceService {
         threats: Array.from(this.satelliteNetwork.values()).reduce(
           (sum, s) => sum + s.threats_detected,
           0
-        ),
+        )
       },
       deepWebMonitoring: {
         layers: this.deepWebMonitors.size,
@@ -455,7 +455,7 @@ class GlobalSurveillanceService {
         intelligence: Array.from(this.deepWebMonitors.values()).reduce(
           (sum, m) => sum + m.intelligence.length,
           0
-        ),
+        )
       },
       governmentIntegration: {
         agencies: this.governmentIntegrations.size,

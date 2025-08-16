@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -160,7 +160,7 @@ export function SearchTrackingSuite() {
       status: "eliminated",
       location: "Moscow, Russia",
       riskLevel: "critical",
-      lastSeen: new Date(Date.now() - 300000),
+      lastSeen: new Date(Date.now() - 300000)
     },
     {
       id: "2",
@@ -169,7 +169,7 @@ export function SearchTrackingSuite() {
       status: "tracking",
       location: "Unknown Wallet",
       riskLevel: "high",
-      lastSeen: new Date(Date.now() - 120000),
+      lastSeen: new Date(Date.now() - 120000)
     },
     {
       id: "3",
@@ -178,7 +178,7 @@ export function SearchTrackingSuite() {
       status: "located",
       location: "Beijing, China",
       riskLevel: "medium",
-      lastSeen: new Date(Date.now() - 600000),
+      lastSeen: new Date(Date.now() - 600000)
     },
   ]);
 

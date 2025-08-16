@@ -68,7 +68,7 @@ export function LiveArtistShow() {
       const newMsg = {
         user: "Admin",
         message: newMessage,
-        time: new Date().toLocaleTimeString().slice(0, 5),
+        time: new Date().toLocaleTimeString().slice(0, 5)
       };
       setChatMessages((prev) => [...prev, newMsg]);
       setNewMessage("");

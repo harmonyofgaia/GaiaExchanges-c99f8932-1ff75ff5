@@ -63,9 +63,9 @@ class TokenWarfareService {
 
   // Dynamic Token Supply Algorithm
   async optimizeTokenSupply(): Promise<{
-    currentSupply: number;
-    recommendedAction: string;
-    supplyChange: number;
+    currentSupply: number;,
+    recommendedAction: string;,
+    supplyChange: number;,
     reasoning: string;
   }> {
     const marketConditions = {
@@ -121,9 +121,9 @@ class TokenWarfareService {
 
   // Token Burn Optimization Engine
   async executeBurnStrategy(strategy: "conservative" | "aggressive" | "adaptive"): Promise<{
-    burnAmount: number;
-    burnReason: string;
-    impact: string;
+    burnAmount: number;,
+    burnReason: string;,
+    impact: string;,
     efficiency: number;
   }> {
     let burnAmount = 0;
@@ -239,9 +239,9 @@ class TokenWarfareService {
 
   // Token Governance Voting System
   async createGovernanceProposal(proposal: {
-    title: string;
-    description: string;
-    proposer: string;
+    title: string;,
+    description: string;,
+    proposer: string;,
     votingPower: number;
   }): Promise<TokenGovernanceProposal> {
     const governanceProposal: TokenGovernanceProposal = {

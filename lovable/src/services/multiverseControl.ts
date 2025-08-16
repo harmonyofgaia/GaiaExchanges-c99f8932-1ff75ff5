@@ -51,9 +51,9 @@ class MultiverseControlService {
 
   // Dimensional Gateway Management
   async createDimensionalGateway(config: {
-    name: string;
-    sourceDimension: string;
-    targetDimension: string;
+    name: string;,
+    sourceDimension: string;,
+    targetDimension: string;,
     energyRequirement: number;
   }): Promise<DimensionalGateway> {
     const gateway: DimensionalGateway = {
@@ -101,8 +101,8 @@ class MultiverseControlService {
 
   // Multiverse Connection Establishment
   async establishMultiverseConnection(config: {
-    universeA: string;
-    universeB: string;
+    universeA: string;,
+    universeB: string;,
     connectionType: "quantum_tunnel" | "dimensional_bridge" | "reality_fold" | "multiverse_portal";
   }): Promise<MultiverseConnection> {
     const connection: MultiverseConnection = {
@@ -136,7 +136,7 @@ class MultiverseControlService {
 
   // Reality Manipulation
   async manipulateReality(config: {
-    targetReality: string;
+    targetReality: string;,
     manipulationType:
       | "physics_alteration"
       | "timeline_modification"
@@ -189,9 +189,9 @@ class MultiverseControlService {
 
   // Timeline Control
   async controlTimeline(config: {
-    timelineId: string;
-    controlType: "temporal_lock" | "causality_manipulation" | "timeline_merge" | "parallel_access";
-    strength: number;
+    timelineId: string;,
+    controlType: "temporal_lock" | "causality_manipulation" | "timeline_merge" | "parallel_access";,
+    strength: number;,
     affectedEvents: string[];
   }): Promise<TimelineControl> {
     const timelineControl: TimelineControl = {
@@ -248,7 +248,7 @@ class MultiverseControlService {
       physicsConstants: {
         speedOfLight: 299792458 * (Math.random() * 0.2 + 0.9), // ±10% variation
         planckConstant: 6.62607015e-34 * (Math.random() * 0.2 + 0.9),
-        gravitationalConstant: 6.6743e-11 * (Math.random() * 0.2 + 0.9),
+        gravitationalConstant: 6.6743e-11 * (Math.random() * 0.2 + 0.9)
       },
       timelineVariations: Math.floor(Math.random() * 1000000),
       inhabitedWorlds: Math.floor(Math.random() * 10000),

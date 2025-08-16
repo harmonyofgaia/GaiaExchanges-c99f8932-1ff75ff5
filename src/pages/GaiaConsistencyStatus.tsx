@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -14,10 +14,10 @@ import { GAIA_TOKEN } from "@/constants/gaia";
 
 const GaiaConsistencyStatus = () => {
   const [scanResult, setScanResult] = useState<{
-    overallScore: number;
+    overallScore: number;,
     issues: Array<{
-      component: string;
-      severity: "low" | "medium" | "high" | "critical";
+      component: string;,
+      severity: "low" | "medium" | "high" | "critical";,
       message: string;
       resolution?: string;
     }>;

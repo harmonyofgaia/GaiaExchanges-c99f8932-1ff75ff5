@@ -12,7 +12,7 @@ import {
   Atom,
   Infinity as InfinityIcon,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 
 export function AlienJusticeProtocol() {
   const [quantumState, setQuantumState] = useState(99.7);

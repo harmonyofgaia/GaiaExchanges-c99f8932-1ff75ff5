@@ -40,7 +40,7 @@ export function SelfTrainingDefenseSystem() {
           level: ["medium", "high", "critical"][Math.floor(Math.random() * 3)] as unknown,
           source: possibleThreats[Math.floor(Math.random() * possibleThreats.length)],
           blocked: true,
-          timestamp: new Date(),
+          timestamp: new Date()
         };
 
         setThreats((prev) => [newThreat, ...prev.slice(0, 9)]);

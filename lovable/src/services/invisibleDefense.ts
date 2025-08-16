@@ -54,7 +54,7 @@ class InvisibleDefenseService {
       payload: await this.encodeMessage(message),
       coverData: await this.generateCoverData(coverType),
       isHidden: true,
-      timestamp: Date.now(),
+      timestamp: Date.now()
     };
 
     // Hide message in cover data using steganographic techniques
@@ -118,8 +118,8 @@ class InvisibleDefenseService {
       network: JSON.stringify({
         protocol: "HTTP",
         headers: {},
-        body: Array.from({ length: 100 }, () => Math.random()).join(""),
-      }),
+        body: Array.from({ length: 100 }, () => Math.random()).join("")
+      })
     };
 
     return coverData[type as keyof typeof coverData] || coverData.text;
@@ -166,7 +166,7 @@ class InvisibleDefenseService {
     const obfuscation: TrafficObfuscation = {
       id: `obf-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       originalTraffic: trafficData,
-      obfuscatedTraffic: await this.applyObfuscation(trafficData, obfuscationType),
+      obfuscatedTraffic: await this.applyObfuscation(trafficData, obfuscationType)
       obfuscationType,
       effectiveness: Math.random() * 0.3 + 0.7, // 70-100% effectiveness
     };
@@ -250,7 +250,7 @@ class InvisibleDefenseService {
 
   // Decoy Node Network
   async deployDecoyNode(nodeConfig: {
-    nodeType: "honeypot" | "mirror" | "phantom" | "quantum_decoy";
+    nodeType: "honeypot" | "mirror" | "phantom" | "quantum_decoy";,
     location: string;
   }): Promise<DecoyNode> {
     const decoyNode: DecoyNode = {
@@ -259,7 +259,7 @@ class InvisibleDefenseService {
       location: nodeConfig.location,
       isActive: true,
       attacksDeflected: 0,
-      lastActivity: Date.now(),
+      lastActivity: Date.now()
     };
 
     this.decoyNodes.set(decoyNode.id, decoyNode);
@@ -423,7 +423,7 @@ class InvisibleDefenseService {
       totalAttacksDeflected: Array.from(this.decoyNodes.values()).reduce(
         (sum, node) => sum + node.attacksDeflected,
         0
-      ),
+      )
     };
   }
 

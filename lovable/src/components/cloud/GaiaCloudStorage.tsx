@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -220,10 +220,10 @@ export function GaiaCloudStorage({
             ...(file.type.startsWith("image/") && {
               width: 1920, // Would be extracted
               height: 1080,
-            }),
+            })
             ...(file.type.startsWith("video/") && {
               duration: 60, // Would be extracted
-            }),
+            })
           },
         };
         resolve(asset);
@@ -307,7 +307,7 @@ export function GaiaCloudStorage({
                 metadata: {
                   ...a.metadata,
                   processingStatus: "completed",
-                  tags: generateSmartTags(a),
+                  tags: generateSmartTags(a)
                 },
               }
             : a

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Download, Eye, Shield, Activity, DollarSign, TrendingUp } from "lucide-react";
 import { MatrixWalletDisplay } from "@/components/MatrixWalletDisplay";
@@ -198,9 +198,9 @@ const Transparency = () => {
       <style>{`
         .matrix-bg {
           background: 
-            radial-gradient(circle at 20% 50%, cyan 1px, transparent 1px),
-            radial-gradient(circle at 80% 50%, cyan 1px, transparent 1px),
-            radial-gradient(circle at 40% 40%, blue 1px, transparent 1px),
+            radial-gradient(circle at 20% 50%, cyan 1px, transparent 1px)
+            radial-gradient(circle at 80% 50%, cyan 1px, transparent 1px)
+            radial-gradient(circle at 40% 40%, blue 1px, transparent 1px)
             radial-gradient(circle at 60% 60%, green 1px, transparent 1px);
           background-size: 50px 50px, 60px 60px, 70px 70px, 80px 80px;
           animation: matrix-flow 20s linear infinite;

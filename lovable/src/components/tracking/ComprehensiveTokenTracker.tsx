@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -39,7 +39,7 @@ export function ComprehensiveTokenTracker() {
         volume: prev.volume * (1 + (Math.random() - 0.5) * 0.05),
         marketCap: prev.marketCap * (1 + (Math.random() - 0.5) * 0.003),
         change24h: prev.change24h + (Math.random() - 0.5) * 0.1,
-        holders: prev.holders + Math.floor(Math.random() * 50),
+        holders: prev.holders + Math.floor(Math.random() * 50)
       }));
     }, trackingSpeed);
 

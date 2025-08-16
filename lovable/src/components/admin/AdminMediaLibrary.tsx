@@ -147,7 +147,7 @@ export function AdminMediaLibrary() {
         mime_type: selectedFile.type,
         storage_path: uploadData.path,
         category: category,
-        is_background_music: isBackgroundMusic && selectedFile.type.startsWith("audio/"),
+        is_background_music: isBackgroundMusic && selectedFile.type.startsWith("audio/")
       });
 
       if (dbError) throw dbError;

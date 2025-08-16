@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback} from "react";
 
 export function InvisibleSecurityCore() {
   const securityActive = useRef(false);
@@ -37,15 +37,15 @@ export function InvisibleSecurityCore() {
           const fakeLoader = document.createElement("div");
           fakeLoader.className = "invisible-shield";
           fakeLoader.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
+            position: fixed;,
+            top: 0;,
+            left: 0;,
+            width: 100%;,
+            height: 100%;,
+            background: black;,
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center;,
             color: red;
             font-size: 24px;
             z-index: 9999;

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback} from "react";
 
 export function SystemMonitor() {
   useEffect(() => {

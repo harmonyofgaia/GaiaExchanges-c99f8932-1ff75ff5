@@ -145,7 +145,7 @@ export function GreenShoppingRewards() {
       metadata: {
         shopType,
         itemCategory,
-        amount: parseFloat(amount),
+        amount: parseFloat(amount)
         certifications,
         packaging,
       },

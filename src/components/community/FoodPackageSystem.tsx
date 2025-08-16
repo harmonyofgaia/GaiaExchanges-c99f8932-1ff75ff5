@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -103,7 +103,7 @@ export function FoodPackageSystem() {
         totalMembers: prev.totalMembers + Math.floor(Math.random() * 50),
         activeRecipients: prev.activeRecipients + Math.floor(Math.random() * 20),
         packagesDelivered: prev.packagesDelivered + Math.floor(Math.random() * 100),
-        carbonOffset: prev.carbonOffset + Math.floor(Math.random() * 10),
+        carbonOffset: prev.carbonOffset + Math.floor(Math.random() * 10)
       }));
 
       if (Math.random() < 0.15) {

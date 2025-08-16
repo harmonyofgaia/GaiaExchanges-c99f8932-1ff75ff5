@@ -61,7 +61,7 @@ export function PrecisionControl({ actionName, actionId }: PrecisionControlProps
         ...prev,
         {
           id: actionIdToUse,
-          timestamp: new Date(),
+          timestamp: new Date()
           parameters,
           status: "success" as const,
           result: `Action executed successfully${actionName ? ` for ${actionName}` : ""}`,

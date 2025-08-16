@@ -139,7 +139,7 @@ export function HabboTycoonGame() {
       setPlayerData((prev) => ({
         ...prev,
         coins: prev.coins + income,
-        reputation: Math.min(100, prev.reputation + 0.1),
+        reputation: Math.min(100, prev.reputation + 0.1)
       }));
 
       setTotalRevenue((prev) => prev + income);
@@ -217,7 +217,7 @@ export function HabboTycoonGame() {
           return {
             ...building,
             level: building.level + 1,
-            income: Math.floor(building.income * 1.5),
+            income: Math.floor(building.income * 1.5)
           };
         }
         return building;

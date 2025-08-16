@@ -90,7 +90,7 @@ export function PartyEventEarning() {
       metadata: {
         eventType,
         attendees: parseInt(attendees),
-        duration: parseFloat(duration),
+        duration: parseFloat(duration)
         theme,
         location,
       },

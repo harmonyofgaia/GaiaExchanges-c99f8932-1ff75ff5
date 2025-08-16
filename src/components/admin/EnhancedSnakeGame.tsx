@@ -116,7 +116,7 @@ export function EnhancedSnakeGame() {
   const generateGaiaCoin = useCallback(() => {
     const newCoin = {
       x: Math.floor(Math.random() * (CANVAS_SIZE / GRID_SIZE)),
-      y: Math.floor(Math.random() * (CANVAS_SIZE / GRID_SIZE)),
+      y: Math.floor(Math.random() * (CANVAS_SIZE / GRID_SIZE))
     };
     setGameState((prev) => ({
       ...prev,
@@ -228,7 +228,7 @@ export function EnhancedSnakeGame() {
         newScore += 10;
         newFood = {
           x: Math.floor(Math.random() * (CANVAS_SIZE / GRID_SIZE)),
-          y: Math.floor(Math.random() * (CANVAS_SIZE / GRID_SIZE)),
+          y: Math.floor(Math.random() * (CANVAS_SIZE / GRID_SIZE))
         };
       } else {
         newSnake.pop();

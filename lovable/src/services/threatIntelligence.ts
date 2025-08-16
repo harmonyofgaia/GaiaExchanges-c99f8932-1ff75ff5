@@ -54,7 +54,7 @@ class ThreatIntelligenceService {
           timeframe: this.calculateTimeframe(pattern.anomalyScore),
           indicators: pattern.patterns,
           recommendedActions: this.generateRecommendedActions(pattern),
-          timestamp: Date.now(),
+          timestamp: Date.now()
         };
         predictions.push(prediction);
       }
@@ -197,9 +197,9 @@ class ThreatIntelligenceService {
 
   // Behavioral Analytics Engine
   analyzeBehavior(request: {
-    ip: string;
-    userAgent: string;
-    path: string;
+    ip: string;,
+    userAgent: string;,
+    path: string;,
     method: string;
     userId?: string;
   }): number {
@@ -216,7 +216,7 @@ class ThreatIntelligenceService {
         anomalyScore: 0,
         isBlocklisted: false,
         firstSeen: Date.now(),
-        lastSeen: Date.now(),
+        lastSeen: Date.now()
       };
     }
 
@@ -328,8 +328,8 @@ class ThreatIntelligenceService {
 
   // Neural Network Threat Classification
   async classifyThreatWithNN(input: unknown): Promise<{
-    classification: string;
-    confidence: number;
+    classification: string;,
+    confidence: number;,
     features: string[];
   }> {
     // Simulate neural network classification
@@ -358,7 +358,7 @@ class ThreatIntelligenceService {
   }
 
   private async neuralNetworkPredict(features: string[]): Promise<{
-    type: string;
+    type: string;,
     confidence: number;
   }> {
     // Simulate neural network prediction

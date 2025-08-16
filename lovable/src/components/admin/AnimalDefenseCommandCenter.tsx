@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -300,7 +300,7 @@ export function AnimalDefenseCommandCenter() {
       description: "Coordinated quantum attack with dragons and phoenix",
       animalTypes: ["digital_dragon", "quantum_phoenix", "alpha_dragon"],
       effectiveness: 99,
-      lastUsed: new Date(Date.now() - 300000),
+      lastUsed: new Date(Date.now() - 300000)
     },
     {
       id: "invisible-strike",
@@ -308,7 +308,7 @@ export function AnimalDefenseCommandCenter() {
       description: "Ghost and chameleon stealth coordinated attack",
       animalTypes: ["ghost_defender", "chameleon_spy", "snake_infiltrator"],
       effectiveness: 96,
-      lastUsed: new Date(Date.now() - 600000),
+      lastUsed: new Date(Date.now() - 600000)
     },
     {
       id: "pack-dominance",
@@ -316,7 +316,7 @@ export function AnimalDefenseCommandCenter() {
       description: "Wolf pack with lion leadership tactical strike",
       animalTypes: ["pack_wolf", "king_lion", "bear_guardian"],
       effectiveness: 94,
-      lastUsed: new Date(Date.now() - 900000),
+      lastUsed: new Date(Date.now() - 900000)
     },
     {
       id: "aquatic-supremacy",
@@ -324,7 +324,7 @@ export function AnimalDefenseCommandCenter() {
       description: "Ocean-based coordinated defense with dolphins and sharks",
       animalTypes: ["ai_dolphin", "shark_patrol", "octopus_controller"],
       effectiveness: 93,
-      lastUsed: new Date(Date.now() - 1200000),
+      lastUsed: new Date(Date.now() - 1200000)
     },
     {
       id: "aerial-domination",
@@ -332,7 +332,7 @@ export function AnimalDefenseCommandCenter() {
       description: "Sky-based defense with eagles and owls",
       animalTypes: ["sky_eagle", "owl_intelligence", "quantum_phoenix"],
       effectiveness: 97,
-      lastUsed: new Date(Date.now() - 450000),
+      lastUsed: new Date(Date.now() - 450000)
     },
     {
       id: "tech-monkey-swarm",
@@ -340,7 +340,7 @@ export function AnimalDefenseCommandCenter() {
       description: "Cyber animals coordinated tech defense",
       animalTypes: ["monkey_alpha", "monkey_beta", "monkey_gamma", "cyber_koala"],
       effectiveness: 91,
-      lastUsed: new Date(Date.now() - 1500000),
+      lastUsed: new Date(Date.now() - 1500000)
     },
   ]);
 

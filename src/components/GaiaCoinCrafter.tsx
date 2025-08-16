@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TokenWarfareSystem } from "./games/TokenWarfareSystem";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

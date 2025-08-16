@@ -2,7 +2,7 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 
 export type Database = {
   // Allows to automatically instanciate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY),
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)";
   };
@@ -3615,7 +3615,7 @@ export type Database = {
       };
       advanced_error_handler: {
         Args: {
-          p_error_type: string;
+          p_error_type: string;,
           p_error_message: string;
           p_severity_level?: string;
           p_error_context?: Json;
@@ -3626,10 +3626,10 @@ export type Database = {
       aggregate_errors: {
         Args: { p_time_window?: unknown; p_severity_threshold?: string };
         Returns: {
-          error_type: string;
-          total_count: number;
-          first_occurrence: string;
-          last_occurrence: string;
+          error_type: string;,
+          total_count: number;,
+          first_occurrence: string;,
+          last_occurrence: string;,
           severity_levels: string[];
         }[];
       };
@@ -3646,43 +3646,43 @@ export type Database = {
       analyze_function_search_paths: {
         Args: { max_risk_level?: number; dry_run?: boolean };
         Returns: {
-          schema_name: string;
-          function_name: string;
-          remediation_status: string;
-          error_message: string;
-          function_risk_level: number;
+          schema_name: string;,
+          function_name: string;,
+          remediation_status: string;,
+          error_message: string;,
+          function_risk_level: number;,
           remediation_sql: string;
         }[];
       };
       analyze_function_security: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          total_high_issues: number;
-          total_medium_issues: number;
+          total_high_issues: number;,
+          total_medium_issues: number;,
           total_issues: number;
         }[];
       };
       analyze_slow_queries: {
         Args: { threshold_ms?: number };
         Returns: {
-          query: string;
-          calls: number;
-          total_time: number;
+          query: string;,
+          calls: number;,
+          total_time: number;,
           mean_time: number;
         }[];
       };
       analyze_unused_indexes: {
         Args: { min_size_mb?: number };
         Returns: {
-          schema_name: string;
-          table_name: string;
-          index_name: string;
-          index_size_mb: number;
-          table_size_mb: number;
-          index_scans: number;
-          is_primary: boolean;
-          is_unique: boolean;
-          is_constraint: boolean;
+          schema_name: string;,
+          table_name: string;,
+          index_name: string;,
+          index_size_mb: number;,
+          table_size_mb: number;,
+          index_scans: number;,
+          is_primary: boolean;,
+          is_unique: boolean;,
+          is_constraint: boolean;,
           drop_statement: string;
         }[];
       };
@@ -3695,13 +3695,13 @@ export type Database = {
       audit_function_security: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          schema_name: string;
-          function_name: string;
-          argument_data_types: string;
-          result_data_type: string;
-          security_definer: boolean;
-          has_search_path: boolean;
-          search_path_value: string;
+          schema_name: string;,
+          function_name: string;,
+          argument_data_types: string;,
+          result_data_type: string;,
+          security_definer: boolean;,
+          has_search_path: boolean;,
+          search_path_value: string;,
           recommendation: string;
         }[];
       };
@@ -3748,18 +3748,18 @@ export type Database = {
       comprehensive_error_test: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          test_scenario: string;
-          error_id: string;
+          test_scenario: string;,
+          error_id: string;,
           status: boolean;
         }[];
       };
       configure_function_search_paths: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          schema_name: string;
-          function_name: string;
-          function_arguments: string;
-          status: string;
+          schema_name: string;,
+          function_name: string;,
+          function_arguments: string;,
+          status: string;,
           error_details: string;
         }[];
       };
@@ -3789,9 +3789,9 @@ export type Database = {
         Args:
           | { p_table_name: string; p_column_name: string }
           | {
-              schema_name: string;
-              table_name: string;
-              index_name: string;
+              schema_name: string;,
+              table_name: string;,
+              index_name: string;,
               index_definition: string;
             };
         Returns: boolean;
@@ -3802,7 +3802,7 @@ export type Database = {
       };
       create_security_alert: {
         Args: {
-          p_alert_type: string;
+          p_alert_type: string;,
           p_description: string;
           p_severity?: string;
         };
@@ -3814,7 +3814,7 @@ export type Database = {
       };
       create_user_rls_policy: {
         Args: {
-          p_table_name: string;
+          p_table_name: string;,
           p_policy_name: string;
           p_action?: string;
           p_user_id_column?: string;
@@ -3828,61 +3828,61 @@ export type Database = {
       debug_auth_context: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          current_user_id: string;
-          current_user_role: string;
-          current_user_email: string;
-          current_app_metadata: Json;
-          current_user_metadata: Json;
+          current_user_id: string;,
+          current_user_role: string;,
+          current_user_email: string;,
+          current_app_metadata: Json;,
+          current_user_metadata: Json;,
           is_authenticated: boolean;
         }[];
       };
       demonstrate_robust_data_insertion: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          method: string;
+          method: string;,
           inserted_id: number;
         }[];
       };
       demonstrate_robust_insertion_scenarios: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          scenario: string;
-          inserted_id: number;
+          scenario: string;,
+          inserted_id: number;,
           owner_used: string;
         }[];
       };
       diagnose_auth_issues: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          check_name: string;
-          check_result: string;
+          check_name: string;,
+          check_result: string;,
           additional_info: string;
         }[];
       };
       diagnose_function_issues: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          schema_name: string;
-          function_name: string;
-          function_arguments: string;
-          prokind: string;
-          prosecdef: boolean;
+          schema_name: string;,
+          function_name: string;,
+          function_arguments: string;,
+          prokind: string;,
+          prosecdef: boolean;,
           provolatile: string;
         }[];
       };
       diagnose_table_dependencies: {
         Args: Record<PropertyKey, never> | { schema_name: string; table_name: string };
         Returns: {
-          dependent_object: string;
-          object_type: string;
+          dependent_object: string;,
+          object_type: string;,
           dependency_type: string;
         }[];
       };
       diagnose_table_dependencies_fixed: {
         Args: { table_name: string; schema_name?: string };
         Returns: {
-          dependent_table: string;
-          dependent_schema: string;
+          dependent_table: string;,
+          dependent_schema: string;,
           dependency_type: string;
         }[];
       };
@@ -3893,15 +3893,15 @@ export type Database = {
       enforce_security_policy: {
         Args: { p_user_id: string; p_action: string; p_context?: Json };
         Returns: {
-          policy_compliant: boolean;
+          policy_compliant: boolean;,
           violation_details: Json;
         }[];
       };
       enhanced_error_correlation: {
         Args: { p_time_window?: unknown; p_min_correlation_threshold?: number };
         Returns: {
-          primary_error_type: string;
-          correlated_errors: Json;
+          primary_error_type: string;,
+          correlated_errors: Json;,
           correlation_strength: number;
         }[];
       };
@@ -3920,47 +3920,47 @@ export type Database = {
       find_unsafe_functions: {
         Args: { p_secure_path?: string };
         Returns: {
-          schema_name: string;
-          function_name: string;
-          arguments: string;
-          return_type: string;
-          language: string;
-          security_type: string;
+          schema_name: string;,
+          function_name: string;,
+          arguments: string;,
+          return_type: string;,
+          language: string;,
+          security_type: string;,
           function_body: string;
         }[];
       };
       fix_all_function_search_paths: {
         Args: Record<PropertyKey, never> | { target_schema?: string };
         Returns: {
-          schema_name: string;
-          function_name: string;
-          parameter_types: string;
+          schema_name: string;,
+          function_name: string;,
+          parameter_types: string;,
           status: string;
         }[];
       };
       fix_backslash_syntax_errors: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          object_type: string;
-          object_name: string;
-          error_type: string;
+          object_type: string;,
+          object_name: string;,
+          error_type: string;,
           status: string;
         }[];
       };
       fix_common_syntax_errors: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          object_type: string;
-          object_name: string;
-          error_type: string;
+          object_type: string;,
+          object_name: string;,
+          error_type: string;,
           status: string;
         }[];
       };
       fix_foreign_tables_location: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          original_schema: string;
-          table_name: string;
+          original_schema: string;,
+          table_name: string;,
           status: string;
         }[];
       };
@@ -3971,32 +3971,32 @@ export type Database = {
       fix_function_search_paths: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          schema_name: string;
-          function_name: string;
+          schema_name: string;,
+          function_name: string;,
           status: string;
         }[];
       };
       fix_incorrect_search_paths: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          function_name: string;
-          old_search_path: string;
+          function_name: string;,
+          old_search_path: string;,
           status: string;
         }[];
       };
       fix_materialized_views_location: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          original_schema: string;
-          view_name: string;
+          original_schema: string;,
+          view_name: string;,
           status: string;
         }[];
       };
       fix_missing_rls: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          schema_name: string;
-          table_name: string;
+          schema_name: string;,
+          table_name: string;,
           status: string;
         }[];
       };
@@ -4019,8 +4019,8 @@ export type Database = {
       fix_schema_function_search_paths: {
         Args: { p_schema_name: string };
         Returns: {
-          function_name: string;
-          parameter_types: string;
+          function_name: string;,
+          parameter_types: string;,
           status: string;
         }[];
       };
@@ -4043,16 +4043,16 @@ export type Database = {
       generate_basic_rls_policies: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          table_schema: string;
-          table_name: string;
+          table_schema: string;,
+          table_name: string;,
           policy_statements: string[];
         }[];
       };
       generate_function_remediation_scripts: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          script_schema_name: string;
-          script_function_name: string;
+          script_schema_name: string;,
+          script_function_name: string;,
           remediation_script: string;
         }[];
       };
@@ -4069,8 +4069,8 @@ export type Database = {
       generate_secure_function_wrapper: {
         Args: { p_schema: string; p_function_name: string };
         Returns: {
-          original_function: string;
-          secure_wrapper: string;
+          original_function: string;,
+          secure_wrapper: string;,
           security_notes: string;
         }[];
       };
@@ -4081,19 +4081,19 @@ export type Database = {
       generate_security_diagnostic_report: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          diagnostic_category: string;
-          diagnostic_name: string;
-          diagnostic_risk_level: string;
+          diagnostic_category: string;,
+          diagnostic_name: string;,
+          diagnostic_risk_level: string;,
           diagnostic_details: Json;
         }[];
       };
       generate_security_report: {
         Args: { p_start_date?: string; p_end_date?: string };
         Returns: {
-          total_events: number;
-          successful_logins: number;
-          failed_logins: number;
-          lockouts: number;
+          total_events: number;,
+          successful_logins: number;,
+          failed_logins: number;,
+          lockouts: number;,
           high_severity_events: number;
         }[];
       };
@@ -4116,17 +4116,17 @@ export type Database = {
       get_current_auth_context: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          user_id: string;
-          user_role: string;
-          is_authenticated: boolean;
+          user_id: string;,
+          user_role: string;,
+          is_authenticated: boolean;,
           email: string;
         }[];
       };
       get_current_user_details: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          user_id: string;
-          email: string;
+          user_id: string;,
+          email: string;,
           created_at: string;
         }[];
       };
@@ -4136,22 +4136,22 @@ export type Database = {
       };
       get_filtered_records: {
         Args: {
-          table_name: string;
-          filter_column: string;
+          table_name: string;,
+          filter_column: string;,
           filter_value: string;
         };
         Returns: {
-          id: number;
-          record_data: Json;
+          id: number;,
+          record_data: Json;,
           tags: string[];
         }[];
       };
       get_rls_policies: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          table_name: string;
-          policy_name: string;
-          cmd: string;
+          table_name: string;,
+          policy_name: string;,
+          cmd: string;,
           permissive: string;
         }[];
       };
@@ -4162,27 +4162,27 @@ export type Database = {
       get_security_insights: {
         Args: { p_start_date?: string; p_end_date?: string };
         Returns: {
-          day: string;
-          event_type: string;
-          severity: string;
-          event_count: number;
-          unique_users: number;
+          day: string;,
+          event_type: string;,
+          severity: string;,
+          event_count: number;,
+          unique_users: number;,
           unique_ips: number;
         }[];
       };
       get_security_remediation_guidance: {
         Args: { p_diagnostic_risk_level?: string };
         Returns: {
-          remediation_risk_level: string;
+          remediation_risk_level: string;,
           remediation_steps: string[];
         }[];
       };
       get_system_health: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          total_connections: number;
-          long_queries: number;
-          blocked_queries: number;
+          total_connections: number;,
+          long_queries: number;,
+          blocked_queries: number;,
           tables_without_pk: number;
         }[];
       };
@@ -4193,9 +4193,9 @@ export type Database = {
       get_table_dependencies: {
         Args: { target_table: unknown };
         Returns: {
-          dependent_schema: string;
-          dependent_object: string;
-          dependency_type: string;
+          dependent_schema: string;,
+          dependent_object: string;,
+          dependency_type: string;,
           object_type: string;
         }[];
       };
@@ -4229,9 +4229,9 @@ export type Database = {
         Args:
           | { p_amount: number; p_description: string }
           | {
-              p_user_id: string;
-              p_transaction_type: string;
-              p_amount: number;
+              p_user_id: string;,
+              p_transaction_type: string;,
+              p_amount: number;,
               p_currency: string;
               p_status?: string;
               p_external_reference?: string;
@@ -4242,18 +4242,18 @@ export type Database = {
       inspect_function_details: {
         Args: { p_function_name: string };
         Returns: {
-          schema_name: string;
-          function_name: string;
-          function_signature: string;
+          schema_name: string;,
+          function_name: string;,
+          function_signature: string;,
           function_definition: string;
         }[];
       };
       inspect_function_search_paths: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          function_schema: string;
-          function_name: string;
-          current_search_path: string;
+          function_schema: string;,
+          function_name: string;,
+          current_search_path: string;,
           function_definition: string;
         }[];
       };
@@ -4268,17 +4268,17 @@ export type Database = {
       list_active_admins: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          user_id: string;
-          email: string;
+          user_id: string;,
+          email: string;,
           created_at: string;
         }[];
       };
       list_admin_users: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          user_uuid: string;
-          user_email: string;
-          user_name: string;
+          user_uuid: string;,
+          user_email: string;,
+          user_name: string;,
           admin_created_at: string;
         }[];
       };
@@ -4289,7 +4289,7 @@ export type Database = {
       list_robust_data_function_signatures: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          function_name: string;
+          function_name: string;,
           argument_types: string;
         }[];
       };
@@ -4310,7 +4310,7 @@ export type Database = {
       log_comprehensive_security_event: {
         Args:
           | {
-              p_event_category: string;
+              p_event_category: string;,
               p_event_type: string;
               p_user_id?: string;
               p_ip_address?: unknown;
@@ -4337,7 +4337,7 @@ export type Database = {
           | { message: string }
           | { p_error_message: string; p_context?: string }
           | {
-              p_error_type: string;
+              p_error_type: string;,
               p_error_message: string;
               p_context?: Json;
               p_is_critical?: boolean;
@@ -4361,13 +4361,13 @@ export type Database = {
             }
           | { event_type: string; event_details?: Json }
           | {
-              p_category: string;
-              p_type: string;
+              p_category: string;,
+              p_type: string;,
               p_details: Json;
               p_risk_score?: number;
             }
           | {
-              p_category: string;
+              p_category: string;,
               p_type: string;
               p_details?: Json;
               p_risk_score?: number;
@@ -4385,20 +4385,20 @@ export type Database = {
               p_additional_context?: Json;
             }
           | {
-              p_log_level: string;
-              p_error_code: string;
+              p_log_level: string;,
+              p_error_code: string;,
               p_error_message: string;
             }
           | {
-              p_log_level: string;
-              p_error_code: string;
+              p_log_level: string;,
+              p_error_code: string;,
               p_error_message: string;
               p_error_context?: Json;
               p_severity_score?: number;
             }
           | {
-              p_log_level: string;
-              p_error_code: string;
+              p_log_level: string;,
+              p_error_code: string;,
               p_error_message: string;
               p_error_context?: string;
               p_severity_score?: number;
@@ -4415,7 +4415,7 @@ export type Database = {
       };
       log_security_event_named: {
         Args: {
-          category: string;
+          category: string;,
           type: string;
           details?: Json;
           risk_score?: number;
@@ -4442,7 +4442,7 @@ export type Database = {
             }
           | { p_role: string; p_permissions: string[]; p_action?: string };
         Returns: {
-          status: boolean;
+          status: boolean;,
           message: string;
         }[];
       };
@@ -4453,8 +4453,8 @@ export type Database = {
       monitor_system_health: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          issue_type: string;
-          issue_description: string;
+          issue_type: string;,
+          issue_description: string;,
           severity: number;
         }[];
       };
@@ -4485,10 +4485,10 @@ export type Database = {
       prepare_error_prediction_dataset: {
         Args: { p_days?: number };
         Returns: {
-          error_type: string;
-          severity_level: string;
-          error_count: number;
-          avg_time_between_errors: unknown;
+          error_type: string;,
+          severity_level: string;,
+          error_count: number;,
+          avg_time_between_errors: unknown;,
           prediction_features: Json;
         }[];
       };
@@ -4511,8 +4511,8 @@ export type Database = {
       remediate_search_path_vulnerabilities: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          function_schema: string;
-          function_name: string;
+          function_schema: string;,
+          function_name: string;,
           remediation_status: string;
         }[];
       };
@@ -4523,9 +4523,9 @@ export type Database = {
       report_search_path_issues: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          schema_name: string;
-          function_name: string;
-          function_args: string;
+          schema_name: string;,
+          function_name: string;,
+          function_args: string;,
           owner: string;
         }[];
       };
@@ -4536,8 +4536,8 @@ export type Database = {
       resolve_timestamp_error: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          connection_time: string;
-          ip_address: unknown;
+          connection_time: string;,
+          ip_address: unknown;,
           connection_details: string;
         }[];
       };
@@ -4562,9 +4562,9 @@ export type Database = {
       run_all_security_fixes: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          fix_type: string;
-          object_schema: string;
-          object_name: string;
+          fix_type: string;,
+          object_schema: string;,
+          object_name: string;,
           status: string;
         }[];
       };
@@ -4579,8 +4579,8 @@ export type Database = {
       secure_function_search_paths: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          function_schema: string;
-          function_name_result: string;
+          function_schema: string;,
+          function_name_result: string;,
           search_path_status: string;
         }[];
       };
@@ -4594,23 +4594,23 @@ export type Database = {
       };
       secure_login: {
         Args: {
-          p_email: string;
+          p_email: string;,
           p_password: string;
           p_ip_address?: unknown;
           p_user_agent?: string;
         };
         Returns: {
-          login_successful: boolean;
-          user_id: string;
+          login_successful: boolean;,
+          user_id: string;,
           error_message: string;
         }[];
       };
       security_diagnostic_report: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          category: string;
-          name: string;
-          risk_level: string;
+          category: string;,
+          name: string;,
+          risk_level: string;,
           details: Json;
         }[];
       };
@@ -4625,7 +4625,7 @@ export type Database = {
       security_remediation_guide: {
         Args: { p_risk_level?: string };
         Returns: {
-          risk_level: string;
+          risk_level: string;,
           remediation_steps: string[];
         }[];
       };
@@ -4648,8 +4648,8 @@ export type Database = {
       set_secure_search_paths: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          schema_name: string;
-          function_name: string;
+          schema_name: string;,
+          function_name: string;,
           status: string;
         }[];
       };
@@ -4668,10 +4668,10 @@ export type Database = {
       simple_table_dependencies: {
         Args: { target_table: unknown };
         Returns: {
-          dependency_type: string;
-          object_schema: string;
-          object_name: string;
-          object_type: string;
+          dependency_type: string;,
+          object_schema: string;,
+          object_name: string;,
+          object_type: string;,
           details: Json;
         }[];
       };
@@ -4682,17 +4682,17 @@ export type Database = {
       table_dependencies_diagnose: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          schema_name: string;
-          table_name: string;
-          dependent_object: string;
+          schema_name: string;,
+          table_name: string;,
+          dependent_object: string;,
           dependent_type: string;
         }[];
       };
       table_dependency_analysis: {
         Args: { table_name: string; schema_name?: string };
         Returns: {
-          dependent_table: string;
-          dependent_schema: string;
+          dependent_table: string;,
+          dependent_schema: string;,
           dependency_type: string;
         }[];
       };
@@ -4712,14 +4712,14 @@ export type Database = {
         Args:
           | { p_error_type: string; p_error_message: string }
           | {
-              p_error_type: string;
-              p_error_message: string;
+              p_error_type: string;,
+              p_error_message: string;,
               p_severity_level: string;
             }
           | {
-              p_error_type: string;
-              p_error_message: string;
-              p_severity_level: string;
+              p_error_type: string;,
+              p_error_message: string;,
+              p_severity_level: string;,
               p_error_context: Json;
             };
         Returns: string;
@@ -4732,7 +4732,7 @@ export type Database = {
         Args:
           | Record<PropertyKey, never>
           | {
-              p_metric_name: string;
+              p_metric_name: string;,
               p_new_value: number;
               p_increment?: boolean;
             };
@@ -4741,8 +4741,8 @@ export type Database = {
       update_function_search_paths: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          schema_name: string;
-          function_name: string;
+          schema_name: string;,
+          function_name: string;,
           update_status: string;
         }[];
       };
@@ -4764,8 +4764,8 @@ export type Database = {
       };
       validate_robust_view_data: {
         Args: {
-          p_column1: string;
-          p_column2: number;
+          p_column1: string;,
+          p_column2: number;,
           p_nullable_column: string;
         };
         Returns: boolean;
@@ -4773,16 +4773,16 @@ export type Database = {
       validate_type_parameters: {
         Args: Record<PropertyKey, never>;
         Returns: {
-          schema_name: string;
-          object_name: string;
-          issue_type: string;
+          schema_name: string;,
+          object_name: string;,
+          issue_type: string;,
           details: string;
         }[];
       };
       your_function_name: {
         Args: { param1: string; param2: number; param3?: string };
         Returns: {
-          result_column1: string;
+          result_column1: string;,
           result_column2: number;
         }[];
       };
@@ -4803,7 +4803,7 @@ export type Database = {
         | "content_admin"
         | "user_management_admin"
         | "billing_admin";
-      order_status: "pending" | "completed" | "cancelled" | "partial";
+      order_status: "pending" | "completed" | "cancelled" | "partial";,
       quantum_security_config_type:
         | "authentication"
         | "authorization"
@@ -4812,9 +4812,9 @@ export type Database = {
         | "compliance"
         | "mobile_integration"
         | "quantum_layer";
-      security_level: "low" | "medium" | "high" | "maximum";
-      trading_pair_status: "active" | "inactive" | "maintenance";
-      transaction_type: "buy" | "sell" | "transfer" | "stake" | "unstake" | "reward" | "burn";
+      security_level: "low" | "medium" | "high" | "maximum";,
+      trading_pair_status: "active" | "inactive" | "maintenance";,
+      transaction_type: "buy" | "sell" | "transfer" | "stake" | "unstake" | "reward" | "burn";,
       user_role: "user" | "trader" | "admin" | "moderator";
     };
     CompositeTypes: {

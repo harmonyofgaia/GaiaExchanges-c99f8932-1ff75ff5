@@ -26,7 +26,7 @@ export function PhotoVerificationSystem() {
       status: "verified",
       tokensEarned: 75,
       submittedDate: new Date("2024-01-20"),
-      verifiedDate: new Date("2024-01-21"),
+      verifiedDate: new Date("2024-01-21")
     },
     {
       id: "2",
@@ -35,7 +35,7 @@ export function PhotoVerificationSystem() {
       category: "planting",
       status: "pending",
       tokensEarned: 0,
-      submittedDate: new Date("2024-01-22"),
+      submittedDate: new Date("2024-01-22")
     },
   ]);
 
@@ -49,7 +49,7 @@ export function PhotoVerificationSystem() {
       category: "cleanup",
       status: "pending",
       tokensEarned: 0,
-      submittedDate: new Date(),
+      submittedDate: new Date()
     };
     setSubmissions((prev) => [newSubmission, ...prev]);
     setUploadCount((prev) => prev + 1);

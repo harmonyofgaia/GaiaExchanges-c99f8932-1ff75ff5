@@ -44,8 +44,8 @@ Total Supply: 1,000,000,000 GAiA
 Decimals: 18
 
 LEGAL ENTITY INFORMATION:
-Company: Harmony of Gaia Projects Creator Business
-Registration: Culture of Harmony Empowered
+Company: Harmony of Gaia Projects Creator Business,
+Registration: Culture of Harmony Empowered,
 Jurisdiction: International Cryptocurrency Standards
 Compliance Level: Maximum Security & Legal Framework
 
@@ -157,7 +157,7 @@ EXCHANGE SECURITY REQUIREMENTS:
 
 This audit confirms GAiA Token exceeds all security requirements for tier-1 exchange listings.
 
-Audit Firm: International Blockchain Security Institute
+Audit Firm: International Blockchain Security Institute,
 Date: ${new Date().toLocaleDateString()}
       `,
     },
@@ -169,7 +169,7 @@ Date: ${new Date().toLocaleDateString()}
       content: `
 LEGAL OPINION LETTER - GAIA TOKEN
 
-TO: Major Cryptocurrency Exchanges
+TO: Major Cryptocurrency Exchanges,
 RE: GAiA Token Legal Analysis and Compliance Opinion
 
 We have conducted a comprehensive legal analysis of the GAiA Token project and provide this opinion for exchange listing purposes.
@@ -194,7 +194,7 @@ JURISDICTION ANALYSIS:
 EXCHANGE LISTING READINESS:
 We confirm that GAiA Token has completed all legal requirements necessary for listing on major cryptocurrency exchanges including Binance, Revolut, Coinbase, and other tier-1 platforms.
 
-Legal Firm: International Cryptocurrency Law Associates
+Legal Firm: International Cryptocurrency Law Associates,
 Partner: Senior Partner, Blockchain Legal Division
 Date: ${new Date().toLocaleDateString()}
       `,

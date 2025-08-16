@@ -85,7 +85,7 @@ const GaiaBikeEcosystem = () => {
   const [bikeType, setBikeType] = useState<"gaia_bike" | "regular_bike">("regular_bike");
   const [foodPlaces, setFoodPlaces] = useState<FoodPlace[]>([]);
   const [userLocation, setUserLocation] = useState<{
-    lat: number;
+    lat: number;,
     lng: number;
   } | null>(null);
   const [ecoMetrics, setEcoMetrics] = useState<EcoMetrics>({
@@ -222,7 +222,7 @@ const GaiaBikeEcosystem = () => {
           calories_burned: totalDistance * 38, // approx 38 calories per km
           air_quality_improvement: Math.floor(totalDistance * 0.75),
           trees_equivalent: totalDistance * 0.002, // 1 tree per 500km
-          eco_score: Math.floor(total * 0.68),
+          eco_score: Math.floor(total * 0.68)
         });
       }
     } catch (error) {
@@ -320,7 +320,7 @@ const GaiaBikeEcosystem = () => {
         calories_burned: prev.calories_burned + ecoImpact.health_benefits,
         air_quality_improvement: prev.air_quality_improvement + ecoImpact.air_quality_points,
         trees_equivalent: prev.trees_equivalent + sessionDistance * 0.002,
-        eco_score: prev.eco_score + Math.floor(tokensEarned * 0.68),
+        eco_score: prev.eco_score + Math.floor(tokensEarned * 0.68)
       }));
 
       // Update challenges

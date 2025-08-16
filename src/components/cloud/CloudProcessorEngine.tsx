@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback} from "react";
 import { toast } from "sonner";
 
 interface CloudProcessor {
@@ -170,7 +170,7 @@ export function CloudProcessorEngine() {
             power: Math.min(newPower, processor.power * 10), // Allow 10x growth maximum
             webScanningCapacity: Math.min(scanningBoost, processor.webScanningCapacity * 5),
             universalKnowledge: Math.min(knowledgeGrowth, 1000000),
-            efficiency: Math.min(100, processor.efficiency + Math.random() * 0.001),
+            efficiency: Math.min(100, processor.efficiency + Math.random() * 0.001)
           };
         })
       );
@@ -223,7 +223,7 @@ export function CloudProcessorEngine() {
         dataProcessed: prev.dataProcessed + Math.floor(totalScanningPower * 2.5),
         knowledgeExtracted: prev.knowledgeExtracted + Math.floor(totalScanningPower / 50),
         threatsDetected: prev.threatsDetected + Math.floor(Math.random() * 10),
-        opportunitiesFound: prev.opportunitiesFound + Math.floor(Math.random() * 25),
+        opportunitiesFound: prev.opportunitiesFound + Math.floor(Math.random() * 25)
       }));
 
       // Web scanning status logging
@@ -270,7 +270,7 @@ export function CloudProcessorEngine() {
             dimensionalProcessing: true,
             impossibleToReplicate: true,
             beyondHumanUnderstanding: true,
-            timestamp: Date.now(),
+            timestamp: Date.now()
           })
         );
       }
@@ -349,6 +349,6 @@ export function CloudProcessorEngine() {
       threatsDetected: webScanResults.threatsDetected,
       opportunitiesFound: webScanResults.opportunitiesFound,
       scanningRate: metrics.webScanningRate,
-    }),
+    })
   };
 }

@@ -38,7 +38,7 @@ serve(async (req) => {
               success: false,
               error: "Admin validation failed",
               details: error.message,
-            }),
+            })
             {
               status: 500,
               headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -51,7 +51,7 @@ serve(async (req) => {
             success: true,
             isAdmin: !!adminUser,
             adminData: adminUser,
-          }),
+          })
           {
             headers: { ...corsHeaders, "Content-Type": "application/json" },
           }
@@ -76,7 +76,7 @@ serve(async (req) => {
               success: false,
               error: "Session creation failed",
               details: error.message,
-            }),
+            })
             {
               status: 500,
               headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -122,7 +122,7 @@ serve(async (req) => {
         success: false,
         error: "Internal server error",
         details: error.message,
-      }),
+      })
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },

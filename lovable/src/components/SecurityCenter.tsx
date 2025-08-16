@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -45,9 +45,9 @@ export function SecurityCenter({ notifications }: SecurityCenterProps) {
 
   const [threatLog, setThreatLog] = useState<
     Array<{
-      time: string;
-      threat: string;
-      status: "Blocked" | "Monitored" | "Resolved";
+      time: string;,
+      threat: string;,
+      status: "Blocked" | "Monitored" | "Resolved";,
       severity: "Low" | "Medium" | "High";
     }>
   >([

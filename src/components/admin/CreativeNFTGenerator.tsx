@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -297,7 +297,7 @@ export function CreativeNFTGenerator() {
         magic: Math.floor(Math.random() * 100),
         speed: Math.floor(Math.random() * 100),
         luck: Math.floor(Math.random() * 100),
-        charm: Math.floor(Math.random() * 100),
+        charm: Math.floor(Math.random() * 100)
       },
       specialAbilities: [`${randomTheme} Power`, "Enhanced Stats", "Special Effect"],
       tags: [randomTheme.toLowerCase(), randomCategory, "ai-generated"],

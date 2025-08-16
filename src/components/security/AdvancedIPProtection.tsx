@@ -60,7 +60,7 @@ export function AdvancedIPProtection() {
                 source: "IP Shield System",
                 description: "IP exposure attempt blocked - Quantum protection active",
                 blocked: true,
-                timestamp: new Date(),
+                timestamp: new Date()
               });
 
               // Return fake protected response
@@ -68,7 +68,7 @@ export function AdvancedIPProtection() {
                 JSON.stringify({
                   ip: "GAIA-QUANTUM-PROTECTED",
                   message: "IP ADDRESS QUANTUM ENCRYPTED - MAXIMUM SECURITY ACTIVE",
-                }),
+                })
                 {
                   status: 200,
                   headers: { "Content-Type": "application/json" },
@@ -125,7 +125,7 @@ export function AdvancedIPProtection() {
               source: "Network Analysis Engine",
               description: `Advanced threat detected and neutralized: ${threatType.replace(/_/g, " ")}`,
               blocked: true,
-              timestamp: new Date(),
+              timestamp: new Date()
             });
           }
         };
@@ -185,7 +185,7 @@ export function AdvancedIPProtection() {
           setMetrics((prev) => ({
             ...prev,
             threatsBlocked: prev.threatsBlocked + newThreats.filter((t) => t.blocked).length,
-            lastSecurityScan: new Date(),
+            lastSecurityScan: new Date()
           }));
 
           // Log to database

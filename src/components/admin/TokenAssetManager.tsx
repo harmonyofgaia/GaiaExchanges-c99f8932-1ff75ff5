@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -185,7 +185,7 @@ export function TokenAssetManager() {
       approved_today: prev.approved_today + (Math.random() > 0.9 ? 1 : 0),
       pending_review: Math.max(0, prev.pending_review + (Math.random() > 0.7 ? 1 : -1)),
       eco_tokens_found: prev.eco_tokens_found + (Math.random() > 0.8 ? 1 : 0),
-      last_scan: new Date(),
+      last_scan: new Date()
     }));
   };
 
@@ -226,7 +226,7 @@ export function TokenAssetManager() {
         total_discovered: prev.total_discovered + newTokens.length,
         pending_review: prev.pending_review + newTokens.length,
         last_scan: new Date(),
-        next_scan: new Date(Date.now() + 3600000),
+        next_scan: new Date(Date.now() + 3600000)
       }));
 
       toast.success(`🎉 Discovery complete!`, {

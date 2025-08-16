@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -113,7 +113,7 @@ export function ExchangeAnalytics() {
           pair: `${GAIA_TOKEN.SYMBOL}/USDT`,
           volume: `${(tokenData.volume24h / 1000000).toFixed(1)}M`,
           change: `+${tokenData.priceChange24h.toFixed(1)}%`,
-          price: formatGaiaPrice(tokenData.price),
+          price: formatGaiaPrice(tokenData.price)
         },
         {
           pair: `${GAIA_TOKEN.SYMBOL}/BTC`,

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -163,7 +163,7 @@ export default function Exchange() {
         nodes: prev.nodes + Math.floor(Math.random() * 5),
         volume: prev.volume + Math.random() * 1000000,
         users: prev.users + Math.floor(Math.random() * 100),
-        trades: prev.trades + Math.floor(Math.random() * 50),
+        trades: prev.trades + Math.floor(Math.random() * 50)
       }));
 
       setMarketData((prev) =>
@@ -171,7 +171,7 @@ export default function Exchange() {
           ...coin,
           price: coin.price * (1 + (Math.random() - 0.5) * 0.002),
           change24h: coin.change24h + (Math.random() - 0.5) * 0.1,
-          volume: coin.volume * (1 + (Math.random() - 0.5) * 0.05),
+          volume: coin.volume * (1 + (Math.random() - 0.5) * 0.05)
         }))
       );
 

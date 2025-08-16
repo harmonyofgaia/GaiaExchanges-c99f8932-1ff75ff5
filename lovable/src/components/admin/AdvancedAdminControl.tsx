@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,10 +35,10 @@ export function AdvancedAdminControl() {
     if (!command.trim()) return;
 
     const newCommand: AICommand = {
-      id: Date.now().toString(),
+      id: Date.now().toString()
       command,
       status: "pending",
-      timestamp: new Date(),
+      timestamp: new Date()
     };
 
     setCommands((prev) => [newCommand, ...prev.slice(0, 9)]);

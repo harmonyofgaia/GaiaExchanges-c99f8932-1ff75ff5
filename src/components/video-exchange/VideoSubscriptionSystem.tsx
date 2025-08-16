@@ -43,7 +43,7 @@ export function VideoSubscriptionSystem() {
             ? resolve("Unsubscribed successfully!")
             : resolve("Subscribed successfully!");
         }, 1000);
-      }),
+      })
       {
         loading: "Updating subscription...",
         success: (data) => `${data}`,

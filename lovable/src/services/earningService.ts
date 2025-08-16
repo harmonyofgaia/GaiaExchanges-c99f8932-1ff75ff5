@@ -83,8 +83,8 @@ export class EarningService {
   }
 
   getLeaderboard(): Array<{
-    userId: string;
-    totalEarned: number;
+    userId: string;,
+    totalEarned: number;,
     streak: number;
   }> {
     return Array.from(this.earnings.values())

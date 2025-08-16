@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback} from "react";
 import { useLocation } from "react-router-dom";
 
 interface BackgroundEffect {
@@ -67,11 +67,11 @@ export function BackgroundManager() {
 
     let time = 0;
     const particles: Array<{
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
+      x: number;,
+      y: number;,
+      vx: number;,
+      vy: number;,
+      size: number;,
       alpha: number;
     }> = [];
 

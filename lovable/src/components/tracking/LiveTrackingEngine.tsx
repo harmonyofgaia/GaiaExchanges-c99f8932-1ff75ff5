@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -106,7 +106,7 @@ export function LiveTrackingEngine() {
         globalReach: Math.min(195, prev.globalReach + Math.floor(Math.random() * 3)),
         gaiaPrice: Math.max(0.00001, prev.gaiaPrice + (Math.random() - 0.5) * 0.000008),
         gaiaMarketCap: Math.max(1000000, prev.gaiaMarketCap + (Math.random() - 0.5) * 15000000),
-        userEngagement: Math.min(99.9, prev.userEngagement + (Math.random() - 0.5) * 0.8),
+        userEngagement: Math.min(99.9, prev.userEngagement + (Math.random() - 0.5) * 0.8)
       }));
 
       console.log("🌍 OFFICIAL GAiA ECOSYSTEM - Live tracking update:", newEvent);

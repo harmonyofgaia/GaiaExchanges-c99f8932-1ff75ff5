@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -76,7 +76,7 @@ export function ViralGrowthEngine() {
         viralCoefficient: Math.max(
           1.0,
           Math.min(5.0, prev.viralCoefficient + (Math.random() * 0.2 - 0.1))
-        ),
+        )
       }));
 
       // Random viral event
@@ -109,7 +109,7 @@ export function ViralGrowthEngine() {
     setViralMetrics((prev) => ({
       ...prev,
       shareScore: Math.min(100, prev.shareScore + 25),
-      viralCoefficient: Math.min(5.0, prev.viralCoefficient * 1.5),
+      viralCoefficient: Math.min(5.0, prev.viralCoefficient * 1.5)
     }));
   };
 

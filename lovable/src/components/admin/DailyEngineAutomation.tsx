@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -101,7 +101,7 @@ export function DailyEngineAutomation() {
         setTacticalMovements((prev) => ({
           defensive: Math.min(100, prev.defensive + Math.random() * 3),
           offensive: Math.min(100, prev.offensive + Math.random() * 2),
-          reconnaissance: Math.min(100, prev.reconnaissance + Math.random() * 4),
+          reconnaissance: Math.min(100, prev.reconnaissance + Math.random() * 4)
         }));
       }, 1000);
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -82,7 +82,7 @@ export function ComprehensiveDefenseOverview() {
         systemIntegrity: Math.max(
           95,
           Math.min(100, prev.systemIntegrity + (Math.random() - 0.5) * 2)
-        ),
+        )
       }));
     };
 

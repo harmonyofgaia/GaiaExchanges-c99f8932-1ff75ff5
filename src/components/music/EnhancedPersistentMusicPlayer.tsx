@@ -258,7 +258,7 @@ export function EnhancedPersistentMusicPlayer() {
         type: isVideo ? "video" : "audio",
         url: URL.createObjectURL(file),
         size: file.size,
-        uploadDate: new Date(),
+        uploadDate: new Date()
       };
 
       // Add to current playlist or create new one

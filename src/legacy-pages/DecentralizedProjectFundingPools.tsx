@@ -146,7 +146,7 @@ export default function DecentralizedProjectFundingPools() {
         votes_for: 8420,
         votes_against: 1230,
         status: "active",
-        deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+        deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
       },
       {
         id: "2",
@@ -157,7 +157,7 @@ export default function DecentralizedProjectFundingPools() {
         votes_for: 12560,
         votes_against: 890,
         status: "active",
-        deadline: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(),
+        deadline: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString()
       },
     ];
     setProposals(mockProposals);
@@ -170,7 +170,7 @@ export default function DecentralizedProjectFundingPools() {
         ...prev,
         totalFunds: prev.totalFunds + Math.floor(Math.random() * 1000),
         activeProjects: prev.activeProjects + (Math.random() > 0.8 ? 1 : 0),
-        communityMembers: prev.communityMembers + Math.floor(Math.random() * 10),
+        communityMembers: prev.communityMembers + Math.floor(Math.random() * 10)
       }));
     }, 10000);
 

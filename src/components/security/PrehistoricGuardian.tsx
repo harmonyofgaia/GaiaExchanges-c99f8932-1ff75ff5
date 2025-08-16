@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -69,7 +69,7 @@ export function PrehistoricGuardian() {
           experience: prev.experience + Math.floor(Math.random() * 10) + 5,
           strength: Math.min(100, prev.strength + Math.random() * 0.1),
           intelligence: Math.min(100, prev.intelligence + Math.random() * 0.15),
-          speed: Math.min(100, prev.speed + Math.random() * 0.12),
+          speed: Math.min(100, prev.speed + Math.random() * 0.12)
         };
 
         // Level up system

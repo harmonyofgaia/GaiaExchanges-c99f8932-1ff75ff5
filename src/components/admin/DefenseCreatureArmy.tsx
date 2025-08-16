@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -246,7 +246,7 @@ export function DefenseCreatureArmy() {
         totalPower,
         activeCreatures,
         totalThreatsEliminated: totalThreats,
-        averageLevel: Math.round(averageLevel),
+        averageLevel: Math.round(averageLevel)
       });
 
       // Simulate creature activity
@@ -257,7 +257,7 @@ export function DefenseCreatureArmy() {
               return {
                 ...creature,
                 threatsEliminated: creature.threatsEliminated + Math.floor(Math.random() * 3),
-                power: creature.power + Math.floor(Math.random() * 1000),
+                power: creature.power + Math.floor(Math.random() * 1000)
               };
             }
             return creature;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback} from "react";
 import { useLocation } from "react-router-dom";
 
 export function EnhancedPageTransitions() {
@@ -6,11 +6,11 @@ export function EnhancedPageTransitions() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [particles, setParticles] = useState<
     Array<{
-      id: number;
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
+      id: number;,
+      x: number;,
+      y: number;,
+      vx: number;,
+      vy: number;,
       life: number;
     }>
   >([]);

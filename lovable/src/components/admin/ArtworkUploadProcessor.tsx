@@ -43,7 +43,7 @@ export function ArtworkUploadProcessor() {
               "Based on uploaded nature image: abstract geometric patterns inspired by nature",
             artworkType: "user_inspired",
             style: "abstract_variation",
-          }),
+          })
         });
 
         if (response.ok) {

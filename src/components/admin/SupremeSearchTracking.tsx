@@ -138,7 +138,7 @@ export function SupremeSearchTracking() {
             status: ["scanning", "breached", "controlled"][
               Math.floor(Math.random() * 3)
             ] as unknown,
-            dataExtracted: Math.floor(Math.random() * 1000),
+            dataExtracted: Math.floor(Math.random() * 1000)
           };
 
           setTargets((prev) => [newTarget, ...prev.slice(0, 14)]);

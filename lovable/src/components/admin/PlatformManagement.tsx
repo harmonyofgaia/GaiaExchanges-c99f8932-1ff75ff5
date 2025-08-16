@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -123,14 +123,14 @@ export function PlatformManagement() {
       setMetrics((prev) => ({
         ...prev,
         totalVolume: prev.totalVolume * (1 + (Math.random() - 0.5) * 0.001),
-        activePartnerships: prev.activePartnerships + (Math.random() < 0.1 ? 1 : 0),
+        activePartnerships: prev.activePartnerships + (Math.random() < 0.1 ? 1 : 0)
       }));
 
       setExchanges((prev) =>
         prev.map((exchange) => ({
           ...exchange,
           volume24h: exchange.volume24h * (1 + (Math.random() - 0.5) * 0.02),
-          uptime: Math.max(95, Math.min(100, exchange.uptime + (Math.random() - 0.5) * 0.1)),
+          uptime: Math.max(95, Math.min(100, exchange.uptime + (Math.random() - 0.5) * 0.1))
         }))
       );
     }, 5000);

@@ -53,7 +53,7 @@ serve(async (req) => {
         artwork_type: artworkType,
         style: style,
         image_data: `data:image/png;base64,${base64}`,
-        generated_at: new Date().toISOString(),
+        generated_at: new Date().toISOString()
       })
       .select();
 
@@ -64,7 +64,7 @@ serve(async (req) => {
         success: true,
         image: `data:image/png;base64,${base64}`,
         artwork_id: data[0].id,
-      }),
+      })
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
@@ -73,7 +73,7 @@ serve(async (req) => {
       JSON.stringify({
         error: "Artwork generation failed",
         details: error.message,
-      }),
+      })
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,

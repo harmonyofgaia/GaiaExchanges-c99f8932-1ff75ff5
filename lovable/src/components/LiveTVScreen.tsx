@@ -110,7 +110,7 @@ export function LiveTVScreen() {
           ...show,
           viewers: show.isLive ? show.viewers + Math.floor(Math.random() * 20) - 10 : show.viewers,
           tokensCollected: show.tokensCollected + Math.floor(Math.random() * 50),
-          ecologyContribution: Math.floor(show.tokensCollected * 0.2),
+          ecologyContribution: Math.floor(show.tokensCollected * 0.2)
         }))
       );
 

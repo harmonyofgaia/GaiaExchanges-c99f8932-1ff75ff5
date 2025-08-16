@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -36,7 +36,7 @@ export function DownloadManager() {
         dailyDownloads: prev.dailyDownloads + Math.floor(Math.random() * 50 + 10),
         totalUsers: prev.totalUsers + Math.floor(Math.random() * 25 + 5),
         newInvestors: prev.newInvestors + Math.floor(Math.random() * 10 + 2),
-        marketCapGrowth: prev.marketCapGrowth + (Math.random() * 5 + 1),
+        marketCapGrowth: prev.marketCapGrowth + (Math.random() * 5 + 1)
       }));
 
       // Notify about growth milestones

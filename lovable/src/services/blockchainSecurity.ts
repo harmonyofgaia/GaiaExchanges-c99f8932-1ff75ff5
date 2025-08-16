@@ -119,11 +119,11 @@ class BlockchainSecurityService {
   }
 
   async secureCrossChainTransaction(tx: {
-    sourceChain: number;
-    targetChain: number;
-    amount: string;
-    token: string;
-    from: string;
+    sourceChain: number;,
+    targetChain: number;,
+    amount: string;,
+    token: string;,
+    from: string;,
     to: string;
   }): Promise<CrossChainTransaction> {
     const txId = `cross-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -291,7 +291,7 @@ class BlockchainSecurityService {
           severity: pattern.severity,
           description: pattern.description,
           line: Math.floor(Math.random() * 100) + 1,
-          recommendation: this.getVulnerabilityRecommendation(pattern.type),
+          recommendation: this.getVulnerabilityRecommendation(pattern.type)
         });
       }
     });

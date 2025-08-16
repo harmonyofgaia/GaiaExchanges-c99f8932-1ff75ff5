@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -110,7 +110,7 @@ export function DAppSystemMonitor() {
                     ? {
                         ...s,
                         status: "healthy",
-                        performance: Math.min(100, s.performance + 5),
+                        performance: Math.min(100, s.performance + 5)
                       }
                     : s
                 )
@@ -133,7 +133,7 @@ export function DAppSystemMonitor() {
             performance: newPerformance,
             uptime: newUptime,
             status: newStatus,
-            lastCheck: new Date(),
+            lastCheck: new Date()
           };
         })
       );
@@ -160,7 +160,7 @@ export function DAppSystemMonitor() {
       prev.map((system) => ({
         ...system,
         status: "maintenance",
-        lastCheck: new Date(),
+        lastCheck: new Date()
       }))
     );
 
@@ -171,7 +171,7 @@ export function DAppSystemMonitor() {
           ...system,
           status: "healthy",
           performance: Math.min(100, system.performance + 3),
-          uptime: Math.min(100, system.uptime + 0.1),
+          uptime: Math.min(100, system.uptime + 0.1)
         }))
       );
 

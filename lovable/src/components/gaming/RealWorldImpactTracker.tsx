@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
@@ -114,7 +114,7 @@ export function RealWorldImpactTracker() {
         treesPlanted: prev.treesPlanted + Math.floor(Math.random() * 3),
         carbonOffset: prev.carbonOffset + Math.random() * 0.5,
         oceanCleanup: prev.oceanCleanup + Math.floor(Math.random() * 5),
-        plasticRecycled: prev.plasticRecycled + Math.floor(Math.random() * 10),
+        plasticRecycled: prev.plasticRecycled + Math.floor(Math.random() * 10)
       }));
     }, 10000);
 

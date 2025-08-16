@@ -51,7 +51,7 @@ export function RealTimeCoinGeneration() {
     supply: 1000000000,
     priceChange24h: 5.67,
     volumeChange24h: 12.34,
-    lastUpdate: new Date(),
+    lastUpdate: new Date()
   });
 
   const [generationMetrics, setGenerationMetrics] = useState<GenerationMetrics>({
@@ -65,10 +65,10 @@ export function RealTimeCoinGeneration() {
 
   const [recentTransactions, setRecentTransactions] = useState<
     Array<{
-      id: string;
-      type: "mint" | "burn" | "trade";
-      amount: number;
-      timestamp: Date;
+      id: string;,
+      type: "mint" | "burn" | "trade";,
+      amount: number;,
+      timestamp: Date;,
       impact: number;
     }>
   >([]);
@@ -102,7 +102,7 @@ export function RealTimeCoinGeneration() {
         transactions24h: newTransactions,
         priceChange24h: prev.priceChange24h + priceChangePct,
         volumeChange24h: prev.volumeChange24h + volumeChangePct,
-        lastUpdate: new Date(),
+        lastUpdate: new Date()
       };
     });
   }, [isActive]);
@@ -124,7 +124,7 @@ export function RealTimeCoinGeneration() {
       // Update supply in market data
       setMarketData((market) => ({
         ...market,
-        supply: Math.max(1000000, market.supply + netChange),
+        supply: Math.max(1000000, market.supply + netChange)
       }));
 
       return {
@@ -134,7 +134,7 @@ export function RealTimeCoinGeneration() {
         burnRate: adaptiveBurnRate,
         netSupplyChange: netChange,
         stabilityScore: Math.max(0, Math.min(100, prev.stabilityScore + (Math.random() - 0.5) * 2)),
-        marketHealth: Math.max(0, Math.min(100, prev.marketHealth + (Math.random() - 0.5) * 1.5)),
+        marketHealth: Math.max(0, Math.min(100, prev.marketHealth + (Math.random() - 0.5) * 1.5))
       };
     });
 
@@ -146,7 +146,7 @@ export function RealTimeCoinGeneration() {
 
       setRecentTransactions((prev) => [
         {
-          id: crypto.randomUUID(),
+          id: crypto.randomUUID()
           type,
           amount,
           timestamp: new Date(),
@@ -192,7 +192,7 @@ export function RealTimeCoinGeneration() {
       supply: 1000000000,
       priceChange24h: 5.67,
       volumeChange24h: 12.34,
-      lastUpdate: new Date(),
+      lastUpdate: new Date()
     });
     setGenerationMetrics({
       totalGenerated: 0,

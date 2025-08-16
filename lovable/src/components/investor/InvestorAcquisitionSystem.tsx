@@ -72,7 +72,7 @@ export function InvestorAcquisitionSystem() {
           source: investorSources[Math.floor(Math.random() * investorSources.length)],
           status:
             Math.random() > 0.7 ? "invested" : Math.random() > 0.5 ? "interested" : "contacted",
-          timestamp: new Date(),
+          timestamp: new Date()
         };
 
         setInvestors((prev) => [...prev, newInvestor]);
@@ -136,7 +136,7 @@ export function InvestorAcquisitionSystem() {
           amount: 100,
           source: "Mass Outreach Campaign",
           status: "contacted",
-          timestamp: new Date(),
+          timestamp: new Date()
         };
         setInvestors((prev) => [...prev, newInvestor]);
       }

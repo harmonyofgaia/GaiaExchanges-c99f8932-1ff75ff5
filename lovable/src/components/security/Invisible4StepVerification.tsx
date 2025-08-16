@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback} from "react";
 
 export function Invisible4StepVerification() {
   const verificationActive = useRef(false);

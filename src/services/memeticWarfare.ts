@@ -57,8 +57,8 @@ class MemeticWarfareService {
 
   // Memetic Weapon Creation
   async createMemeticWeapon(config: {
-    name: string;
-    type: "viral_concept" | "mind_virus" | "reality_meme" | "consciousness_hack" | "cognitive_bomb";
+    name: string;,
+    type: "viral_concept" | "mind_virus" | "reality_meme" | "consciousness_hack" | "cognitive_bomb";,
     payload: string;
   }): Promise<MemeticWeapon> {
     const weapon: MemeticWeapon = {
@@ -142,8 +142,8 @@ class MemeticWarfareService {
 
   // Psychic Network Establishment
   async establishPsychicNetwork(config: {
-    name: string;
-    initialNodes: number;
+    name: string;,
+    initialNodes: number;,
     psychicRange: number;
   }): Promise<PsychicNetwork> {
     const network: PsychicNetwork = {
@@ -205,7 +205,7 @@ class MemeticWarfareService {
 
   // Consciousness Hijacking
   async hijackConsciousness(config: {
-    targetType: "individual" | "collective" | "species" | "planetary" | "universal";
+    targetType: "individual" | "collective" | "species" | "planetary" | "universal";,
     target: string;
   }): Promise<ConsciousnessHijack> {
     const hijack: ConsciousnessHijack = {
@@ -276,7 +276,7 @@ class MemeticWarfareService {
         console.log("🎯 Consciousness Hijack Successful:", {
           target,
           controlLevel: (hijack.controlLevel * 100).toFixed(1) + "%",
-          hijackedEntities: hijack.hijackedEntities.toLocaleString(),
+          hijackedEntities: hijack.hijackedEntities.toLocaleString()
         });
 
         toast.error("🎯 Consciousness Hijack Successful", {
@@ -394,7 +394,7 @@ class MemeticWarfareService {
         totalMindsPenetrated: Array.from(this.memeticWeapons.values()).reduce(
           (sum, w) => sum + w.mindsPenetrated,
           0
-        ),
+        )
       },
       psychicNetworks: {
         total: this.psychicNetworks.size,
@@ -403,7 +403,7 @@ class MemeticWarfareService {
         collectiveIQ: Array.from(this.psychicNetworks.values()).reduce(
           (sum, n) => sum + n.collectiveIQ,
           0
-        ),
+        )
       },
       consciousnessHijacks: {
         total: this.consciousnessHijacks.size,

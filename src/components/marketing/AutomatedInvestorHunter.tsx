@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -47,7 +47,7 @@ export function AutomatedInvestorHunter() {
       status: "negotiating",
       investment: "$500K - $2M",
       location: "Silicon Valley",
-      lastActivity: new Date(),
+      lastActivity: new Date()
     },
     {
       id: "2",
@@ -57,7 +57,7 @@ export function AutomatedInvestorHunter() {
       status: "interested",
       investment: "$1M - $5M",
       location: "New York",
-      lastActivity: new Date(),
+      lastActivity: new Date()
     },
     {
       id: "3",
@@ -67,7 +67,7 @@ export function AutomatedInvestorHunter() {
       status: "contacted",
       investment: "$100K - $500K",
       location: "London",
-      lastActivity: new Date(),
+      lastActivity: new Date()
     },
     {
       id: "4",
@@ -77,7 +77,7 @@ export function AutomatedInvestorHunter() {
       status: "hunting",
       investment: "$2M - $10M",
       location: "Singapore",
-      lastActivity: new Date(),
+      lastActivity: new Date()
     },
     {
       id: "5",
@@ -87,7 +87,7 @@ export function AutomatedInvestorHunter() {
       status: "interested",
       investment: "$750K - $3M",
       location: "Berlin",
-      lastActivity: new Date(),
+      lastActivity: new Date()
     },
   ]);
 
@@ -115,7 +115,7 @@ export function AutomatedInvestorHunter() {
         interestedInvestors: prev.interestedInvestors + (Math.random() < 0.3 ? 1 : 0),
         securedDeals: prev.securedDeals + (Math.random() < 0.1 ? 1 : 0),
         totalFunding: prev.totalFunding + (Math.random() < 0.2 ? Math.random() * 0.5 : 0),
-        huntingPower: Math.min(100, prev.huntingPower + (Math.random() * 2 - 0.5)),
+        huntingPower: Math.min(100, prev.huntingPower + (Math.random() * 2 - 0.5))
       }));
 
       // Random investor discovery
@@ -151,7 +151,7 @@ export function AutomatedInvestorHunter() {
       prev.map((strategy) => ({
         ...strategy,
         active: true,
-        success: Math.min(100, strategy.success * 1.5),
+        success: Math.min(100, strategy.success * 1.5)
       }))
     );
 

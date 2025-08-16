@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -99,7 +99,7 @@ export function QuantumBlockchainCore() {
     setQuantumDefense((prev) => ({
       ...prev,
       threatsPrevented: prev.threatsPrevented + 1000,
-      encryptionLayers: Math.min(prev.encryptionLayers + 1, 10),
+      encryptionLayers: Math.min(prev.encryptionLayers + 1, 10)
     }));
 
     toast.success("🛡️ Defense System Strengthened", {

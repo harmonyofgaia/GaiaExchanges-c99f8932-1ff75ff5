@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -64,7 +64,7 @@ export function QuantumTaskEngine() {
     if (!command.trim()) return;
 
     const newTask: QuantumTask = {
-      id: Date.now().toString(),
+      id: Date.now().toString()
       command,
       phase: phase as 1 | 2 | 3 | 4,
       powerLevel: Math.min(999999, Math.random() * 100000 + 50000),

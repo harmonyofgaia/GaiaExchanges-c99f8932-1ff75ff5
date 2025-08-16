@@ -8,7 +8,7 @@ export interface PatternNode {
 
 export function createPatternNode(x: number, y: number, intensity: number = 0.5): PatternNode {
   return {
-    id: Math.random().toString(36).substr(2, 9),
+    id: Math.random().toString(36).substr(2, 9)
     x,
     y,
     intensity,
@@ -18,7 +18,7 @@ export function createPatternNode(x: number, y: number, intensity: number = 0.5)
 
 export class Quadtree {
   boundary: { x: number; y: number; width: number; height: number };
-  capacity: number;
+  capacity: number;,
   points: PatternNode[];
   divided: boolean;
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -91,7 +91,7 @@ export function InvestorScoutingSystem() {
           specialization: randomInvestor.specialization,
           contactMethod: "Dragon Security Demonstration",
           dragonAttraction: Math.floor(Math.random() * 50) + 50, // 50-100% dragon attraction
-          timestamp: new Date(),
+          timestamp: new Date()
         };
 
         setInvestorLeads((prev) => [newLead, ...prev.slice(0, 9)]); // Keep last 10 leads

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -85,7 +85,7 @@ export function BlockchainRollbackManager() {
       status: "pending",
       progress: 0,
       estimatedTime: Math.floor((currentBlock - targetBlock) * 2.5), // 2.5 seconds per block
-      timestamp: new Date(),
+      timestamp: new Date()
     };
 
     setActiveRollback(rollbackOp);

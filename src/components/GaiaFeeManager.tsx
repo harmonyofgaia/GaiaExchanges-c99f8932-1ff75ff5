@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -51,7 +51,7 @@ export function GaiaFeeManager() {
     network: 0.00001,
     exchange: 0.001,
     total: 0.00101,
-    lastUpdated: new Date(),
+    lastUpdated: new Date()
   });
   const [specialRewards, setSpecialRewards] = useState({
     vaultBalance: 1247500,
@@ -110,7 +110,7 @@ export function GaiaFeeManager() {
         network: Math.max(0.000005, prev.network + (Math.random() - 0.5) * 0.000002),
         exchange: Math.max(0.0005, prev.exchange + (Math.random() - 0.5) * 0.0002),
         total: 0,
-        lastUpdated: new Date(),
+        lastUpdated: new Date()
       }));
     }, 1000);
 

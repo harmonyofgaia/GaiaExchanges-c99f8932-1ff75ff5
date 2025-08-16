@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -430,7 +430,7 @@ export function UltimateDefenseAnimalsSupreme() {
           universalThreatsAnnihilated: prev.universalThreatsAnnihilated + 1,
           realityDistortions: prev.realityDistortions + Math.floor(Math.random() * 5),
           dimensionalIncursions: prev.dimensionalIncursions + Math.floor(Math.random() * 3),
-          timelineProtected: prev.timelineProtected + Math.floor(Math.random() * 10),
+          timelineProtected: prev.timelineProtected + Math.floor(Math.random() * 10)
         }));
       }
 

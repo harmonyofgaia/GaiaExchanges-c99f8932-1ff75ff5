@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -166,7 +166,7 @@ export function ProactiveDefenseSystem() {
                   targetsNeutralized:
                     newStatus === "attacking" ? bot.targetsNeutralized + 1 : bot.targetsNeutralized,
                   attacksBlocked: Math.random() < 0.3 ? bot.attacksBlocked + 1 : bot.attacksBlocked,
-                  powerLevel: Math.min(100, bot.powerLevel + (Math.random() < 0.5 ? 1 : -1)),
+                  powerLevel: Math.min(100, bot.powerLevel + (Math.random() < 0.5 ? 1 : -1))
                 };
               }
               return bot;
@@ -221,7 +221,7 @@ export function ProactiveDefenseSystem() {
             setDefenseMetrics((prev) => ({
               ...prev,
               networkShieldsActive: prev.networkShieldsActive + 1,
-              aiConfidenceLevel: Math.min(100, prev.aiConfidenceLevel + 0.1),
+              aiConfidenceLevel: Math.min(100, prev.aiConfidenceLevel + 0.1)
             }));
           }
         };

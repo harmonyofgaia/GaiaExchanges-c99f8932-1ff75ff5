@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -139,7 +139,7 @@ export function QuantumSearchEngine() {
           description: "Classified government database containing sensitive information",
           type: "database",
           riskLevel: "critical",
-          timestamp: new Date(),
+          timestamp: new Date()
         },
         {
           id: "2",
@@ -148,7 +148,7 @@ export function QuantumSearchEngine() {
           description: "Underground marketplace with relevant data",
           type: "dark",
           riskLevel: "high",
-          timestamp: new Date(),
+          timestamp: new Date()
         },
         {
           id: "3",
@@ -157,7 +157,7 @@ export function QuantumSearchEngine() {
           description: "Cryptocurrency transaction records and wallet analysis",
           type: "blockchain",
           riskLevel: "medium",
-          timestamp: new Date(),
+          timestamp: new Date()
         },
         {
           id: "4",
@@ -166,7 +166,7 @@ export function QuantumSearchEngine() {
           description: "Hidden archives containing historical data",
           type: "deep",
           riskLevel: "medium",
-          timestamp: new Date(),
+          timestamp: new Date()
         },
         {
           id: "5",
@@ -175,7 +175,7 @@ export function QuantumSearchEngine() {
           description: "Public information available on surface web",
           type: "surface",
           riskLevel: "low",
-          timestamp: new Date(),
+          timestamp: new Date()
         },
       ];
 

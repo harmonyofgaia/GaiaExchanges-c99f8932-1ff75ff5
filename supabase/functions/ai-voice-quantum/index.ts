@@ -74,7 +74,7 @@ serve(async (req) => {
         text: text,
         model_id: config.model_id,
         voice_settings: config.voice_settings,
-      }),
+      })
     });
 
     if (!response.ok) {
@@ -98,7 +98,7 @@ serve(async (req) => {
       voice_id: config.voice_id,
       model_id: config.model_id,
       audio_duration: Math.floor(text.length / 10), // Estimate
-      created_at: new Date().toISOString(),
+      created_at: new Date().toISOString()
     });
 
     console.log("🎤 QUANTUM VOICE GENERATED - NEURAL AUDIO ACTIVE");
@@ -111,7 +111,7 @@ serve(async (req) => {
         model_id: config.model_id,
         quantum_voice_status: "ACTIVE",
         neural_audio_quality: "MAXIMUM",
-      }),
+      })
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       }
@@ -123,7 +123,7 @@ serve(async (req) => {
         error: "Voice quantum system temporarily offline",
         details: error.message,
         status: "NEURAL_HEALING_ACTIVE",
-      }),
+      })
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },

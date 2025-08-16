@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -147,7 +147,7 @@ export function HarmonyGamingEngine() {
         gaiaEarned: prev.gaiaEarned + Math.random() * 25,
         quantumEnergy: Math.min(100, prev.quantumEnergy + 1),
         realityIndex: prev.realityIndex + (Math.random() * 2 - 1),
-        animalsSaved: prev.animalsSaved + Math.floor(Math.random() * 3),
+        animalsSaved: prev.animalsSaved + Math.floor(Math.random() * 3)
       }));
 
       // Advanced metrics simulation
@@ -157,7 +157,7 @@ export function HarmonyGamingEngine() {
         ping: Math.max(1, prev.ping + Math.floor(Math.random() * 4 - 2)),
         cpuUsage: Math.max(15, Math.min(35, prev.cpuUsage + Math.floor(Math.random() * 6 - 3))),
         gpuUsage: Math.max(50, Math.min(85, prev.gpuUsage + Math.floor(Math.random() * 10 - 5))),
-        activeNPCs: prev.activeNPCs + Math.floor(Math.random() * 100 - 50),
+        activeNPCs: prev.activeNPCs + Math.floor(Math.random() * 100 - 50)
       }));
 
       // Dynamic world changes

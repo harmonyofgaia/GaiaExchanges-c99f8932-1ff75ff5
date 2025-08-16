@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -266,9 +266,9 @@ export function DesignLibrary({ isLocked }: { isLocked: boolean }) {
         ),
         overlay: getComputedStyle(document.documentElement).getPropertyValue("--custom-overlay"),
         texture: getComputedStyle(document.documentElement).getPropertyValue("--custom-texture"),
-        pattern: getComputedStyle(document.documentElement).getPropertyValue("--custom-pattern"),
+        pattern: getComputedStyle(document.documentElement).getPropertyValue("--custom-pattern")
       },
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toISOString()
     };
 
     const blob = new Blob([JSON.stringify(designData, null, 2)], {

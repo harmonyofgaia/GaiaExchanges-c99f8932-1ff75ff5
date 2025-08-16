@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -358,7 +358,7 @@ export function BackgroundTacticalSystems() {
                 Math.min(95, system.memory_usage + (Math.random() - 0.5) * 8)
               ),
               network_traffic: Math.max(10, system.network_traffic + (Math.random() - 0.5) * 50),
-              uptime: Math.max(85, Math.min(100, system.uptime + (Math.random() - 0.48) * 0.5)),
+              uptime: Math.max(85, Math.min(100, system.uptime + (Math.random() - 0.48) * 0.5))
             };
           }
 
@@ -371,7 +371,7 @@ export function BackgroundTacticalSystems() {
               Math.min(95, system.memory_usage + (Math.random() - 0.5) * 3)
             ),
             network_traffic: Math.max(5, system.network_traffic + (Math.random() - 0.5) * 20),
-            uptime: Math.max(80, Math.min(100, system.uptime + (Math.random() - 0.49) * 0.1)),
+            uptime: Math.max(80, Math.min(100, system.uptime + (Math.random() - 0.49) * 0.1))
           };
         })
       );

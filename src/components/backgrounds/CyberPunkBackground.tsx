@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback} from "react";
 
 interface CyberPunkBackgroundProps {
   intensity?: "low" | "medium" | "high";
@@ -31,9 +31,9 @@ export function CyberPunkBackground({
     // Cyberpunk elements
     const gridSize = intensity === "low" ? 80 : intensity === "high" ? 40 : 60;
     const glitchLines: Array<{
-      x: number;
-      y: number;
-      width: number;
+      x: number;,
+      y: number;,
+      width: number;,
       opacity: number;
     }> = [];
 

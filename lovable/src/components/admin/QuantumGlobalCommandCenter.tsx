@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -147,7 +147,7 @@ export function QuantumGlobalCommandCenter() {
       attackType: attackTypes[Math.floor(Math.random() * attackTypes.length)],
       intensity: 100,
       status: "preparing",
-      timestamp: new Date(),
+      timestamp: new Date()
     };
 
     setCounterAttacks((prev) => [attack, ...prev.slice(0, 9)]);

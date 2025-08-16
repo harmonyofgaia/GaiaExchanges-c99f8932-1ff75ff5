@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -59,7 +59,7 @@ export default function EnhancedLeaderboard() {
         prev.map((entry) => ({
           ...entry,
           points: entry.points + Math.floor(Math.random() * 50),
-          tokens: entry.tokens + Math.floor(Math.random() * 10),
+          tokens: entry.tokens + Math.floor(Math.random() * 10)
         }))
       );
     }, 10000);

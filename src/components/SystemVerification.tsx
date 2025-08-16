@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -43,7 +43,7 @@ export function SystemVerification() {
       status: "checking",
       description: "Primary website hosting and accessibility",
       url: "https://www.gaiaexchange.net",
-      lastChecked: new Date(),
+      lastChecked: new Date()
     },
     {
       id: "lovable-hosting",
@@ -52,7 +52,7 @@ export function SystemVerification() {
       status: "checking",
       description: "Development platform hosting status",
       url: "https://8dfae018-363f-4770-8e5c-27c14bec8426.lovableproject.com",
-      lastChecked: new Date(),
+      lastChecked: new Date()
     },
 
     // Database & Backend
@@ -62,7 +62,7 @@ export function SystemVerification() {
       category: "database",
       status: "checking",
       description: "Primary database connection and health",
-      lastChecked: new Date(),
+      lastChecked: new Date()
     },
     {
       id: "supabase-auth",
@@ -70,7 +70,7 @@ export function SystemVerification() {
       category: "database",
       status: "checking",
       description: "User authentication and session management",
-      lastChecked: new Date(),
+      lastChecked: new Date()
     },
     {
       id: "supabase-storage",
@@ -78,7 +78,7 @@ export function SystemVerification() {
       category: "database",
       status: "checking",
       description: "File storage and artwork management",
-      lastChecked: new Date(),
+      lastChecked: new Date()
     },
 
     // Security Systems
@@ -88,7 +88,7 @@ export function SystemVerification() {
       category: "security",
       status: "checking",
       description: "Advanced security monitoring systems",
-      lastChecked: new Date(),
+      lastChecked: new Date()
     },
     {
       id: "admin-security",
@@ -96,7 +96,7 @@ export function SystemVerification() {
       category: "security",
       status: "checking",
       description: "Administrative access security",
-      lastChecked: new Date(),
+      lastChecked: new Date()
     },
     {
       id: "wallet-protection",
@@ -104,7 +104,7 @@ export function SystemVerification() {
       category: "security",
       status: "checking",
       description: "Cryptocurrency wallet security",
-      lastChecked: new Date(),
+      lastChecked: new Date()
     },
 
     // Apps & Integrations
@@ -114,7 +114,7 @@ export function SystemVerification() {
       category: "apps",
       status: "checking",
       description: "Mobile application deployment status",
-      lastChecked: new Date(),
+      lastChecked: new Date()
     },
     {
       id: "github-integration",
@@ -123,7 +123,7 @@ export function SystemVerification() {
       status: "checking",
       description: "Source code repository access",
       url: "https://github.com/harmonyofgaia/gaia-exchanges",
-      lastChecked: new Date(),
+      lastChecked: new Date()
     },
     {
       id: "huggingface-api",
@@ -131,7 +131,7 @@ export function SystemVerification() {
       category: "integrations",
       status: "checking",
       description: "AI artwork generation service",
-      lastChecked: new Date(),
+      lastChecked: new Date()
     },
   ]);
 

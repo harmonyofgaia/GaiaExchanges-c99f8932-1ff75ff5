@@ -68,12 +68,12 @@ export function DatabaseInspector() {
   const [selectedIssue, setSelectedIssue] = useState<DatabaseIssue | null>(null);
   const [auditLog, setAuditLog] = useState<
     Array<{
-      id: string;
-      timestamp: Date;
-      action: string;
-      table: string;
-      changes: number;
-      user: string;
+      id: string;,
+      timestamp: Date;,
+      action: string;,
+      table: string;,
+      changes: number;,
+      user: string;,
       reversible: boolean;
     }>
   >([]);
@@ -224,7 +224,7 @@ export function DatabaseInspector() {
         status: "healthy",
         dependencies: ["auth_providers", "email_verification"],
         performance: 95,
-        lastUpdated: new Date(),
+        lastUpdated: new Date()
       },
       {
         id: "2",
@@ -233,7 +233,7 @@ export function DatabaseInspector() {
         status: "degraded",
         dependencies: ["users", "organizations"],
         performance: 72,
-        lastUpdated: new Date(Date.now() - 3600000),
+        lastUpdated: new Date(Date.now() - 3600000)
       },
       {
         id: "3",
@@ -242,7 +242,7 @@ export function DatabaseInspector() {
         status: "broken",
         dependencies: ["storage_buckets", "processing_nodes"],
         performance: 45,
-        lastUpdated: new Date(Date.now() - 7200000),
+        lastUpdated: new Date(Date.now() - 7200000)
       },
     ];
 
@@ -292,7 +292,7 @@ export function DatabaseInspector() {
       dataFlows: dataFlows.length,
       brokenFlows: dataFlows.filter((f) => f.status === "broken").length,
       healthScore: stats?.healthScore || 0,
-      recommendations: issues.map((i) => i.suggestion),
+      recommendations: issues.map((i) => i.suggestion)
     };
 
     // Simulate download

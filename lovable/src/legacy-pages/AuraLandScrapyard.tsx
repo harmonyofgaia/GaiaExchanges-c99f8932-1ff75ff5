@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -48,7 +48,7 @@ export default function AuraLandScrapyard() {
         aura_crystals: prev.aura_crystals + Math.floor(Math.random() * 5),
         nano_circuits: prev.nano_circuits + Math.floor(Math.random() * 15),
         energy_cores: prev.energy_cores + Math.floor(Math.random() * 3),
-        reality_fragments: prev.reality_fragments + Math.floor(Math.random() * 2),
+        reality_fragments: prev.reality_fragments + Math.floor(Math.random() * 2)
       }));
     }, 2000);
 

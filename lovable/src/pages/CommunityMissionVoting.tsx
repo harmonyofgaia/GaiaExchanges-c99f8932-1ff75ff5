@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -233,7 +233,7 @@ export default function CommunityMissionVoting() {
         rank_change: 0,
         badges: ["Eco Warrior", "Top Voter", "Mission Leader"],
         location: "Global",
-        join_date: new Date("2024-01-15"),
+        join_date: new Date("2024-01-15")
       },
       {
         id: "user-2",
@@ -247,7 +247,7 @@ export default function CommunityMissionVoting() {
         rank_change: 1,
         badges: ["Conservation Hero", "Active Participant"],
         location: "North America",
-        join_date: new Date("2024-02-03"),
+        join_date: new Date("2024-02-03")
       },
       {
         id: "user-3",
@@ -261,7 +261,7 @@ export default function CommunityMissionVoting() {
         rank_change: -1,
         badges: ["Environmental Advocate", "Community Builder"],
         location: "Europe",
-        join_date: new Date("2024-01-28"),
+        join_date: new Date("2024-01-28")
       },
       {
         id: "user-4",
@@ -275,7 +275,7 @@ export default function CommunityMissionVoting() {
         rank_change: 2,
         badges: ["Sustainability Expert"],
         location: "Asia",
-        join_date: new Date("2024-03-10"),
+        join_date: new Date("2024-03-10")
       },
       {
         id: "user-5",
@@ -289,7 +289,7 @@ export default function CommunityMissionVoting() {
         rank_change: -1,
         badges: ["Wildlife Guardian", "Dedicated Voter"],
         location: "South America",
-        join_date: new Date("2024-02-18"),
+        join_date: new Date("2024-02-18")
       },
     ];
     setLeaderboard(mockLeaderboard);
@@ -316,7 +316,7 @@ export default function CommunityMissionVoting() {
       ...prev,
       votes_cast_today: prev.votes_cast_today + Math.floor(Math.random() * 3),
       community_members: prev.community_members + Math.floor(Math.random() * 2),
-      total_funding: prev.total_funding + Math.floor(Math.random() * 1000),
+      total_funding: prev.total_funding + Math.floor(Math.random() * 1000)
     }));
   };
 

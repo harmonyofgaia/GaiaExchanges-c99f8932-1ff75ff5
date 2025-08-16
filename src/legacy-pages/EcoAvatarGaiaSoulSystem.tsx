@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -83,7 +83,7 @@ export default function EcoAvatarGaiaSoulSystem() {
         spiritual_achievements: ["First Meditation", "Earth Attunement", "Water Harmony"],
         environmental_impact: 1250,
         meditation_streak: 7,
-        last_updated: new Date().toISOString(),
+        last_updated: new Date().toISOString()
       };
 
       setAvatar(mockAvatar);

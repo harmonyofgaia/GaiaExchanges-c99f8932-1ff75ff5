@@ -81,7 +81,7 @@ serve(async (req) => {
         success: true,
         scanId: scanRecord[0].id,
         results: scanResults,
-      }),
+      })
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
@@ -103,7 +103,7 @@ async function performSecurityScan(supabaseClient: unknown) {
     database_indexes: await checkDatabaseIndexes(supabaseClient),
     auth_configuration: await checkAuthConfiguration(supabaseClient),
     api_endpoints: await checkAPIEndpoints(supabaseClient),
-    threat_detection: await checkThreatDetection(supabaseClient),
+    threat_detection: await checkThreatDetection(supabaseClient)
   };
 
   const issues = Object.values(checks).reduce(
@@ -119,7 +119,7 @@ async function performSecurityScan(supabaseClient: unknown) {
 
   const totalIssues = issues.critical + issues.high + issues.medium + issues.low;
   const complianceScore = Math.max(
-    100 - (issues.critical * 25 + issues.high * 10 + issues.medium * 5 + issues.low * 1),
+    100 - (issues.critical * 25 + issues.high * 10 + issues.medium * 5 + issues.low * 1)
     0
   );
 
@@ -132,7 +132,7 @@ async function performSecurityScan(supabaseClient: unknown) {
     lowIssues: issues.low,
     complianceScore,
     duration: Date.now() - startTime,
-    timestamp: new Date().toISOString(),
+    timestamp: new Date().toISOString()
   };
 }
 

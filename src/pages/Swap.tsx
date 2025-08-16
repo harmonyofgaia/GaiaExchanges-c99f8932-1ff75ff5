@@ -111,7 +111,7 @@ export default function Swap() {
     onSelect,
     label,
   }: {
-    token: Token;
+    token: Token;,
     onSelect: (token: Token) => void;
     label: string;
   }) => (

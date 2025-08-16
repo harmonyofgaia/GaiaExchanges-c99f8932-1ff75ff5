@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Coins, TrendingUp, Zap } from "lucide-react";
@@ -20,7 +20,7 @@ export function LiveEarningsDisplay({ userId = "default" }: LiveEarningsDisplayP
       setEarnings((prev) => ({
         totalEarned: prev.totalEarned + Math.floor(Math.random() * 10),
         dailyEarnings: prev.dailyEarnings + Math.floor(Math.random() * 5),
-        currentStreak: Math.max(prev.currentStreak, Math.floor(Math.random() * 30)),
+        currentStreak: Math.max(prev.currentStreak, Math.floor(Math.random() * 30))
       }));
     };
 

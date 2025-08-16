@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -85,7 +85,7 @@ export function ExchangeIntegration() {
         prev.map((exchange) => ({
           ...exchange,
           apiHealth: Math.max(70, exchange.apiHealth + (Math.random() - 0.5) * 10),
-          volume24h: exchange.volume24h + Math.floor(Math.random() * 10000),
+          volume24h: exchange.volume24h + Math.floor(Math.random() * 10000)
         }))
       );
     }, 5000);

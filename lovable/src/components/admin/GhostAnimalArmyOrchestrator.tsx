@@ -358,7 +358,7 @@ export function GhostAnimalArmyOrchestrator() {
           id: `deploy-${Date.now()}`,
           timestamp: Date.now(),
           threatId: threat.id,
-          animalsDeployed: selectedAnimals.map((a) => a.name),
+          animalsDeployed: selectedAnimals.map((a) => a.name)
           deploymentTime,
           status: "ongoing",
           threatsNeutralized: 0,

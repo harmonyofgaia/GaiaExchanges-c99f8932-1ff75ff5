@@ -80,7 +80,7 @@ export function OfflineGrowthManager() {
           landscapeEvolution: prev.landscapeEvolution * 1.001,
           adminPowerLevel: prev.adminPowerLevel * 1.001,
           quantumSecurityGrowth: prev.quantumSecurityGrowth * 1.001,
-          lastOfflineCheck: Date.now(),
+          lastOfflineCheck: Date.now()
         };
 
         // Save to localStorage for offline persistence
@@ -102,7 +102,7 @@ export function OfflineGrowthManager() {
     const saveBeforeUnload = () => {
       const finalState = {
         ...growthState,
-        lastOfflineCheck: Date.now(),
+        lastOfflineCheck: Date.now()
       };
       localStorage.setItem("offline_growth_state", JSON.stringify(finalState));
       console.log("💾 OFFLINE GROWTH STATE SAVED - READY FOR OFFLINE EVOLUTION");

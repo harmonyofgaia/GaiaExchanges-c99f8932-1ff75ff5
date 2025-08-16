@@ -64,7 +64,7 @@ export function SnakeWormsIntegration() {
         segments: [
           {
             x: Math.floor(Math.random() * BOARD_SIZE),
-            y: Math.floor(Math.random() * BOARD_SIZE),
+            y: Math.floor(Math.random() * BOARD_SIZE)
           },
         ],
         health: 100,

@@ -1,6 +1,6 @@
 // This component is deprecated and replaced by SecureAdminLogin
 // Redirecting to secure authentication system
-import { useEffect } from "react";
+import { useEffect, useCallback} from "react";
 import { SecureAdminLogin } from "./SecureAdminLogin";
 
 interface AdminOnlyLoginProps {

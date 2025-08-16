@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
@@ -84,14 +84,14 @@ export function SystemHealthDashboard() {
       setHealthMetrics((prev) =>
         prev.map((metric) => ({
           ...metric,
-          value: Math.max(85, Math.min(100, metric.value + (Math.random() - 0.5) * 2)),
+          value: Math.max(85, Math.min(100, metric.value + (Math.random() - 0.5) * 2))
         }))
       );
 
       setSystemStatus((prev) => ({
         ...prev,
         totalRequests: prev.totalRequests + Math.floor(Math.random() * 50 + 10),
-        activeUsers: prev.activeUsers + Math.floor(Math.random() * 20 - 10),
+        activeUsers: prev.activeUsers + Math.floor(Math.random() * 20 - 10)
       }));
     }, 10000);
 

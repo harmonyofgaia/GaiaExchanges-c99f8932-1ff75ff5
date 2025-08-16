@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -48,7 +48,7 @@ export default function DecentralizedProjectFundingPools() {
             timeline: "",
             technical_specs: {},
             environmental_metrics: {},
-          }),
+          })
         })) || [];
 
       setProjects(typedProjects);

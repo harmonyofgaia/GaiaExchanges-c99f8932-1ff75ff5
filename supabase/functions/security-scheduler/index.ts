@@ -50,7 +50,7 @@ serve(async (req) => {
         success: true,
         tasksExecuted: results.length,
         results: results,
-      }),
+      })
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
@@ -71,7 +71,7 @@ async function runSecurityScan(supabaseClient: unknown, scanType: string) {
         Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ scanType }),
+      body: JSON.stringify({ scanType })
     });
 
     const result = await response.json();

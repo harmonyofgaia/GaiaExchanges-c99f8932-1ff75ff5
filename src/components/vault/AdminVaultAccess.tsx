@@ -86,7 +86,7 @@ export function AdminVaultAccess() {
         .from("admin_vault_access")
         .insert({
           admin_user_id: user.id,
-          session_token: crypto.randomUUID(),
+          session_token: crypto.randomUUID()
         })
         .select()
         .single();

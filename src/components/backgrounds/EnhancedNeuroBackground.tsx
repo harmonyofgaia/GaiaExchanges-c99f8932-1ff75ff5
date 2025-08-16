@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback} from "react";
 
 interface EnhancedNeuroBackgroundProps {
   intensity?: "low" | "medium" | "high";
@@ -89,7 +89,7 @@ export function EnhancedNeuroBackground({
         ? {
             r: parseInt(result[1], 16),
             g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16),
+            b: parseInt(result[3], 16)
           }
         : { r: 79, g: 195, b: 247 };
     }
@@ -178,7 +178,7 @@ export function EnhancedNeuroBackground({
             activitySpeed: 0.01 + Math.random() * 0.02,
             pulse: 0,
             geometric: true,
-            sides: 3 + Math.floor(Math.random() * 5),
+            sides: 3 + Math.floor(Math.random() * 5)
           };
           return node;
         }

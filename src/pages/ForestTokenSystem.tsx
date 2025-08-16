@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback} from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -265,7 +265,7 @@ const ForestTokenSystem = () => {
 
   const totalStaked = useMemo(() => {
     return tokenBalances.reduce(
-      (sum, token) => sum + token.staked * (token.value / token.balance),
+      (sum, token) => sum + token.staked * (token.value / token.balance)
       0
     );
   }, [tokenBalances]);

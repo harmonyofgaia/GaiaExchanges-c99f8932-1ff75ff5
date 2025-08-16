@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Brain, Database, Zap, Shield, Globe, Activity } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 
 export function QuantumDataProcessor() {
   const [processingStats, setProcessingStats] = useState({

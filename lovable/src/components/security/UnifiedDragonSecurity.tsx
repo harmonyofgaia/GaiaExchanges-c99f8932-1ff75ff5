@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Shield, Zap, Lock, Eye, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 
@@ -103,7 +103,7 @@ export function UnifiedDragonSecurity() {
   // This runs in background - dragons protecting silently
   return {
     dragonsActive: dragonDefenses.every((d) => d.isActive),
-    totalThreatsNeutralized: dragonDefenses.reduce((sum, d) => sum + d.threatsNeutralized, 0),
+    totalThreatsNeutralized: dragonDefenses.reduce((sum, d) => sum + d.threatsNeutralized, 0)
     ultimateProtection,
     dragonPowerLevel: 100,
   };

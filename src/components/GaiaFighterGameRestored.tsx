@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -132,7 +132,7 @@ export function GaiaFighterGameRestored() {
         const newState = { ...prev };
         newState.player.health = Math.max(0, newState.player.health - opponentDamage);
         newState.gameLog = [
-          ...newState.gameLog.slice(-4),
+          ...newState.gameLog.slice(-4)
           `💥 Eco Destroyer attacks for ${opponentDamage} damage!`,
         ];
         newState.playerTurn = true;

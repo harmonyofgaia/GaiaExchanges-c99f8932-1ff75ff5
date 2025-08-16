@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -122,7 +122,7 @@ export function HarmonyGamingEngineAdvanced() {
           ...core,
           performance: Math.min(99.9, core.performance + Math.random() * 0.3),
           trainingLevel: core.trainingLevel + Math.floor(Math.random() * 5),
-          selfImprovement: Math.min(99.9, core.selfImprovement + Math.random() * 0.2),
+          selfImprovement: Math.min(99.9, core.selfImprovement + Math.random() * 0.2)
         }))
       );
 
@@ -170,7 +170,7 @@ export function HarmonyGamingEngineAdvanced() {
         ...core,
         trainingLevel: core.trainingLevel + 50,
         performance: Math.min(99.9, core.performance + 1),
-        selfImprovement: Math.min(99.9, core.selfImprovement + 2),
+        selfImprovement: Math.min(99.9, core.selfImprovement + 2)
       }))
     );
 

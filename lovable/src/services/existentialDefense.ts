@@ -190,14 +190,14 @@ class ExistentialDefenseService {
 
   // Void Barrier Deployment
   async deployVoidBarrier(config: {
-    name: string;
+    name: string;,
     barrierType:
       | "dimensional_wall"
       | "existence_shield"
       | "reality_membrane"
       | "concept_barrier"
       | "void_seal";
-    strength: number;
+    strength: number;,
     coverage: string[];
   }): Promise<VoidBarrier> {
     const barrier: VoidBarrier = {
@@ -252,7 +252,7 @@ class ExistentialDefenseService {
           barrierId,
           name: barrier.name,
           attempts: barrier.breachAttempts,
-          newStrength: barrier.strength.toFixed(2),
+          newStrength: barrier.strength.toFixed(2)
         });
 
         toast.warning("⚠️ Barrier Breach Attempt", {
@@ -274,7 +274,7 @@ class ExistentialDefenseService {
 
   // Existence Protection Protocols
   async armExistenceProtocol(config: {
-    protocolName: string;
+    protocolName: string;,
     protocolType:
       | "existence_backup"
       | "reality_checkpoint"
@@ -288,7 +288,7 @@ class ExistentialDefenseService {
       protocolType: config.protocolType,
       triggerConditions: config.triggerConditions,
       isArmed: true,
-      executionProbability: this.calculateExecutionProbability(config.protocolType),
+      executionProbability: this.calculateExecutionProbability(config.protocolType)
     };
 
     this.existenceProtocols.set(protocol.id, protocol);
@@ -372,7 +372,7 @@ class ExistentialDefenseService {
 
   // Conceptual Weapon Management
   async createConceptualWeapon(config: {
-    name: string;
+    name: string;,
     weaponType:
       | "existence_eraser"
       | "void_cannon"
@@ -477,9 +477,9 @@ class ExistentialDefenseService {
         total: this.voidBarriers.size,
         active: Array.from(this.voidBarriers.values()).filter((b) => b.isActive).length,
         totalStrength: Array.from(this.voidBarriers.values()).reduce(
-          (sum, b) => sum + (b.isActive ? b.strength : 0),
+          (sum, b) => sum + (b.isActive ? b.strength : 0)
           0
-        ),
+        )
       },
       existenceProtocols: {
         total: this.existenceProtocols.size,

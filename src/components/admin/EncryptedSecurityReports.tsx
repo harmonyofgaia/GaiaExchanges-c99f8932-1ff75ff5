@@ -57,7 +57,7 @@ export function EncryptedSecurityReports() {
       threats: Math.floor(Math.random() * 50) + 100,
       improvements: selectedImprovements,
       systemHealth: Math.floor(Math.random() * 5) + 95,
-      confidentialData: btoa(`CLASSIFIED_ADMIN_ONLY_${Date.now()}`),
+      confidentialData: btoa(`CLASSIFIED_ADMIN_ONLY_${Date.now()}`)
     };
 
     setCurrentReport(newReport);

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -55,14 +55,14 @@ export function AutomatedGrowthEngine() {
         soulsConnected: prev.soulsConnected + Math.floor(Math.random() * 15 + 5),
         investorsFound: prev.investorsFound + Math.floor(Math.random() * 8 + 2),
         happinessLevel: Math.min(100, prev.happinessLevel + (Math.random() * 3 + 0.5)),
-        globalReach: Math.min(100, prev.globalReach + (Math.random() * 2 + 0.3)),
+        globalReach: Math.min(100, prev.globalReach + (Math.random() * 2 + 0.3))
       }));
 
       // Update strategy power levels
       setActiveStrategies((prev) =>
         prev.map((strategy) => ({
           ...strategy,
-          power: Math.min(100, strategy.power + (Math.random() * 2 - 1)),
+          power: Math.min(100, strategy.power + (Math.random() * 2 - 1))
         }))
       );
 

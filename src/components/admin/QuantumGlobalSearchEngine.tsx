@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -72,7 +72,7 @@ export function QuantumGlobalSearchEngine() {
         encryptedFilesAccessed: prev.encryptedFilesAccessed + Math.floor(Math.random() * 100),
         databasesScanned: prev.databasesScanned + Math.floor(Math.random() * 50),
         hackerTracesFound: prev.hackerTracesFound + Math.floor(Math.random() * 5),
-        globalReachPercentage: Math.min(99.9, prev.globalReachPercentage + Math.random() * 0.1),
+        globalReachPercentage: Math.min(99.9, prev.globalReachPercentage + Math.random() * 0.1)
       }));
     }, 5000);
 

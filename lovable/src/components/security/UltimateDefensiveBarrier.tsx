@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -67,7 +67,7 @@ export function UltimateDefensiveBarrier() {
         setMetrics((prev) => ({
           ...prev,
           cloudPower: prev.cloudPower + 1000,
-          defendersActive: Math.min(15, prev.defendersActive + 1),
+          defendersActive: Math.min(15, prev.defendersActive + 1)
         }));
       }
     };

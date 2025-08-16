@@ -113,7 +113,7 @@ export function LiveTradingCharts() {
           price_history: Array.from({ length: 100 }, (_, i) => ({
             timestamp: Date.now() - (100 - i) * 60000,
             price: 1.2 + Math.sin(i * 0.1) * 0.1 + (Math.random() - 0.5) * 0.05,
-          })),
+          }))
         },
         {
           id: "bitcoin",
@@ -131,7 +131,7 @@ export function LiveTradingCharts() {
           price_history: Array.from({ length: 100 }, (_, i) => ({
             timestamp: Date.now() - (100 - i) * 60000,
             price: 43000 + Math.sin(i * 0.05) * 1000 + (Math.random() - 0.5) * 200,
-          })),
+          }))
         },
         {
           id: "ethereum",
@@ -149,7 +149,7 @@ export function LiveTradingCharts() {
           price_history: Array.from({ length: 100 }, (_, i) => ({
             timestamp: Date.now() - (100 - i) * 60000,
             price: 2500 + Math.sin(i * 0.08) * 100 + (Math.random() - 0.5) * 50,
-          })),
+          }))
         },
       ];
 

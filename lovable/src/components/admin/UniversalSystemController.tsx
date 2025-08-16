@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -84,7 +84,7 @@ export function UniversalSystemController() {
             "AI-Driven Social Engineering",
             "Zero-Day Exploit Deployment",
             "Administrative Privilege Escalation",
-          ].slice(0, Math.floor(Math.random() * 2) + 1),
+          ].slice(0, Math.floor(Math.random() * 2) + 1)
         };
 
         setSystemNodes((prev) => [newSystem, ...prev.slice(0, 19)]);
@@ -163,7 +163,7 @@ export function UniversalSystemController() {
       prev.map((node) => ({
         ...node,
         status: "dominated" as const,
-        powerLevel: Math.min(100, node.powerLevel + 50),
+        powerLevel: Math.min(100, node.powerLevel + 50)
       }))
     );
 

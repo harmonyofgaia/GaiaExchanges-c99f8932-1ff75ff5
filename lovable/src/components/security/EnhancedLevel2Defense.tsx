@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback} from "react";
 import { toast } from "sonner";
 
 export function EnhancedLevel2Defense() {
@@ -120,15 +120,15 @@ export function EnhancedLevel2Defense() {
                       const quantumShield = document.createElement("div");
                       quantumShield.className = "defense-shield";
                       quantumShield.style.cssText = `
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
+                        position: fixed;,
+                        top: 0;,
+                        left: 0;,
+                        width: 100%;,
+                        height: 100%;,
                         background: linear-gradient(45deg, #000, #1a0000, #000066);
                         display: flex;
                         align-items: center;
-                        justify-content: center;
+                        justify-content: center;,
                         color: #ff0000;
                         font-size: 24px;
                         z-index: 99999;

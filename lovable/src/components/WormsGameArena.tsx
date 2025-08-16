@@ -429,7 +429,7 @@ export function WormsGameArena() {
         x: impactX,
         y: impactY,
         radius: weapon.radius,
-        timestamp: Date.now(),
+        timestamp: Date.now()
       },
     ]);
 

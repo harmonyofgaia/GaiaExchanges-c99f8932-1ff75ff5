@@ -1,5 +1,5 @@
 // Eco-Friendly Token Economy and User Missions Integration
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 
 export interface EcoMission {
   id: string;
@@ -131,7 +131,7 @@ class EcoIntegrationService {
         status: "available",
         progress: 0,
         difficulty: "medium",
-        deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
       },
       {
         id: "tree-plant-1",
@@ -353,7 +353,7 @@ class EcoIntegrationService {
       duration,
       carbonSaved,
       tokenEarned,
-      timestamp: new Date(),
+      timestamp: new Date()
     };
 
     this.userProfile.bikeActivities.unshift(activity);
@@ -463,6 +463,6 @@ export function useEcoIntegration() {
       ecoIntegration.updateMissionProgress(id, progress),
     completeMission: (id: string) => ecoIntegration.completeMission(id),
     recordBikeActivity: (distance: number, duration: number) =>
-      ecoIntegration.recordBikeActivity(distance, duration),
+      ecoIntegration.recordBikeActivity(distance, duration)
   };
 }

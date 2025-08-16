@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { toast } from "sonner";
 
 interface SecurityThreat {
@@ -25,7 +25,7 @@ export function EnhancedSecurityEngine() {
     activeThreats: 0,
     resolvedThreats: 0,
     uptime: 100,
-    lastScan: new Date(),
+    lastScan: new Date()
   });
 
   const [threats, setThreats] = useState<SecurityThreat[]>([]);
@@ -107,7 +107,7 @@ export function EnhancedSecurityEngine() {
           overallScore: newScore,
           activeThreats: activeThreats,
           resolvedThreats: threats.filter((t) => t.resolved).length,
-          lastScan: new Date(),
+          lastScan: new Date()
         }));
       } catch (error) {
         console.log("🔒 Security engine self-recovery:", error);

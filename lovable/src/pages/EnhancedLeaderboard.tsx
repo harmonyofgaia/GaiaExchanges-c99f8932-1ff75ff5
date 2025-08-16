@@ -59,7 +59,7 @@ export default function EnhancedLeaderboard() {
         prev.map((entry) => ({
           ...entry,
           points: entry.points + Math.floor(Math.random() * 50),
-          tokens: entry.tokens + Math.floor(Math.random() * 10),
+          tokens: entry.tokens + Math.floor(Math.random() * 10)
         }))
       );
     }, 10000);

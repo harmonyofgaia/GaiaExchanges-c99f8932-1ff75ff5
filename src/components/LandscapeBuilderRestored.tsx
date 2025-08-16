@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,7 +40,7 @@ export function LandscapeBuilderRestored() {
     elements: [],
     backgroundType: "nature",
     backgroundColor: "#87CEEB",
-    timestamp: new Date(),
+    timestamp: new Date()
   });
 
   const [selectedTool, setSelectedTool] = useState<LandscapeElement["type"]>("tree");
@@ -52,8 +52,8 @@ export function LandscapeBuilderRestored() {
 
   const tools: {
     id: LandscapeElement["type"];
-    name: string;
-    icon: React.ElementType;
+    name: string;,
+    icon: React.ElementType;,
     color: string;
   }[] = [
     { id: "tree", name: "Trees", icon: TreePine, color: "#228B22" },
@@ -186,7 +186,7 @@ export function LandscapeBuilderRestored() {
     const projectToSave = {
       ...currentProject,
       id: `project-${Date.now()}`,
-      timestamp: new Date(),
+      timestamp: new Date()
     };
 
     setSavedProjects((prev) => [...prev, projectToSave]);

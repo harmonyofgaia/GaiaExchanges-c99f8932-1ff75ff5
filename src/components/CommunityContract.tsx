@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -132,7 +132,7 @@ By signing this contract, I confirm that I understand and agree to these terms a
 
 Digital Signature Required: YES
 Legal Framework: International Environmental Investment Standards
-Managed By: Culture of Harmony (info@cultureofharmony.net)
+Managed By: Culture of Harmony (info@cultureofharmony.net),
 Contact: +31687758236 for any questions or concerns
     `;
   };
@@ -190,7 +190,7 @@ Contact: +31687758236 for any questions or concerns
         JSON.stringify({
           ...contractData,
           contract_hash: btoa(contractId + Date.now()),
-          signed_at: new Date().toISOString(),
+          signed_at: new Date().toISOString()
         })
       );
 

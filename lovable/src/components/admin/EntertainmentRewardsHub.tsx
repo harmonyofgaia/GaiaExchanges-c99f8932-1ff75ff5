@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -197,7 +197,7 @@ export function EntertainmentRewardsHub() {
       setCommunityVault((prev) => ({
         ...prev,
         totalBalance: prev.totalBalance + Math.floor(Math.random() * 1000),
-        participantsCount: prev.participantsCount + Math.floor(Math.random() * 10),
+        participantsCount: prev.participantsCount + Math.floor(Math.random() * 10)
       }));
 
       console.log("🎬 ENTERTAINMENT & REWARDS HUB - MAXIMUM ENGAGEMENT ACTIVE");

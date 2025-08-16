@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback} from "react";
 
 interface PuzzleBackgroundProps {
   intensity?: "low" | "medium" | "high";
@@ -30,11 +30,11 @@ export function PuzzleBackground({
 
     const pieceSize = intensity === "low" ? 80 : intensity === "high" ? 40 : 60;
     const pieces: Array<{
-      x: number;
-      y: number;
-      targetX: number;
-      targetY: number;
-      rotation: number;
+      x: number;,
+      y: number;,
+      targetX: number;,
+      targetY: number;,
+      rotation: number;,
       alpha: number;
     }> = [];
 

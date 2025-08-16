@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -39,12 +39,12 @@ export function SandProtectInvestmentProject() {
         marineLifeSaved: prev.marineLifeSaved + Math.floor(Math.random() * 10),
         volunteersActive: prev.volunteersActive + Math.floor(Math.random() * 3),
         fundingRaised: Math.min(
-          prev.fundingRaised + Math.floor(Math.random() * 100),
+          prev.fundingRaised + Math.floor(Math.random() * 100)
           prev.fundingGoal
         ),
         investors: prev.investors + Math.floor(Math.random() * 2),
         wildfiresPrevented: prev.wildfiresPrevented + Math.floor(Math.random() * 1),
-        sandBarriersDeployed: prev.sandBarriersDeployed + Math.floor(Math.random() * 2),
+        sandBarriersDeployed: prev.sandBarriersDeployed + Math.floor(Math.random() * 2)
       }));
     }, 5000);
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -30,7 +30,7 @@ export function ChartAnalytics() {
         networkSpeed: Math.max(
           2000,
           Math.min(3000, prev.networkSpeed + (Math.random() - 0.5) * 100)
-        ),
+        )
       }));
     }, 3000);
 

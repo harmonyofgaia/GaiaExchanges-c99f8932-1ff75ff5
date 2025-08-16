@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -53,7 +53,7 @@ export function GaiaCloudSystem() {
         humidity: Math.max(20, Math.min(100, prev.humidity + (Math.random() - 0.5) * 2)),
         temperature: Math.max(-10, Math.min(45, prev.temperature + (Math.random() - 0.5) * 1)),
         windSpeed: Math.max(0, Math.min(50, prev.windSpeed + (Math.random() - 0.5) * 3)),
-        gaiaEnergy: Math.max(100, Math.min(2000, prev.gaiaEnergy + (Math.random() - 0.5) * 50)),
+        gaiaEnergy: Math.max(100, Math.min(2000, prev.gaiaEnergy + (Math.random() - 0.5) * 50))
       }));
     }, 2000);
 

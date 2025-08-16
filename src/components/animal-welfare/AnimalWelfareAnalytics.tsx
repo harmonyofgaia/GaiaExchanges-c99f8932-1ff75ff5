@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -134,7 +134,7 @@ export function AnimalWelfareAnalytics() {
         ...prev,
         totalAnimalsProtected: prev.totalAnimalsProtected + Math.floor(Math.random() * 3),
         fundsRaised: prev.fundsRaised + Math.floor(Math.random() * 100),
-        activeRescues: prev.activeRescues + (Math.random() > 0.8 ? 1 : 0),
+        activeRescues: prev.activeRescues + (Math.random() > 0.8 ? 1 : 0)
       }));
     }, 5000);
     return () => clearInterval(interval);

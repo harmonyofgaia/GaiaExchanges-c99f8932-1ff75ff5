@@ -53,8 +53,8 @@ class RealityManipulationService {
 
   // Probability Manipulation
   async manipulateProbability(config: {
-    targetEvent: string;
-    desiredProbability: number;
+    targetEvent: string;,
+    desiredProbability: number;,
     manipulationStrength: number;
   }): Promise<ProbabilityMatrix> {
     const matrix: ProbabilityMatrix = {
@@ -146,7 +146,7 @@ class RealityManipulationService {
       | "parallel_outcome"
       | "quantum_branch"
       | "probability_cascade";
-    description: string;
+    description: string;,
     targetProbability: number;
   }): Promise<QuantumPossibility> {
     const possibility: QuantumPossibility = {
@@ -211,8 +211,8 @@ class RealityManipulationService {
 
   // Causal Loop Creation
   async createCausalLoop(config: {
-    loopType: "temporal_loop" | "causal_paradox" | "bootstrap_loop" | "predestination_loop";
-    startEvent: string;
+    loopType: "temporal_loop" | "causal_paradox" | "bootstrap_loop" | "predestination_loop";,
+    startEvent: string;,
     endEvent: string;
   }): Promise<CausalLoop> {
     const loop: CausalLoop = {
@@ -284,7 +284,7 @@ class RealityManipulationService {
 
   // Reality Anchoring
   async deployRealityAnchor(config: {
-    anchoredReality: string;
+    anchoredReality: string;,
     stabilizedElements: string[];
     anchorStrength: number;
   }): Promise<RealityAnchor> {
@@ -402,7 +402,7 @@ class RealityManipulationService {
         totalIterations: Array.from(this.causalLoops.values()).reduce(
           (sum, l) => sum + l.iterations,
           0
-        ),
+        )
       },
       realityAnchors: {
         total: this.realityAnchors.size,

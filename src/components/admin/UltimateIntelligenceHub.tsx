@@ -105,7 +105,7 @@ export function UltimateIntelligenceHub() {
         target: `Target-${Math.floor(Math.random() * 9999)}`,
         location: getRandomLocation(),
         details: "Classified intelligence data collected",
-        risk_score: Math.floor(Math.random() * 100),
+        risk_score: Math.floor(Math.random() * 100)
       },
       confidence_level: 85 + Math.random() * 15,
       timestamp: new Date(),
@@ -138,7 +138,7 @@ export function UltimateIntelligenceHub() {
           Math.floor(Math.random() * 3)
         ] as unknown,
         threat_level: Math.floor(Math.random() * 100),
-        last_activity: new Date(),
+        last_activity: new Date()
       };
 
       setGlobalTargets((prev) => [newTarget, ...prev.slice(0, 14)]);
@@ -152,7 +152,7 @@ export function UltimateIntelligenceHub() {
       threatsNeutralized: prev.threatsNeutralized + (Math.random() > 0.8 ? 1 : 0),
       globalCoverage: Math.min(100, prev.globalCoverage + Math.random() * 0.1),
       infiltrationSuccess: Math.min(100, prev.infiltrationSuccess + Math.random() * 0.1),
-      quantumProcessing: Math.min(100, prev.quantumProcessing + Math.random() * 0.05),
+      quantumProcessing: Math.min(100, prev.quantumProcessing + Math.random() * 0.05)
     }));
   };
 

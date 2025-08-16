@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Eye, Fingerprint, Mic, Shield } from "lucide-react";
@@ -21,7 +21,7 @@ export function BiometricAccessControl() {
       type,
       status: "scanning",
       accuracy: 0,
-      timestamp: new Date().toLocaleTimeString(),
+      timestamp: new Date().toLocaleTimeString()
     });
 
     const scanInterval = setInterval(() => {

@@ -107,7 +107,7 @@ export const getOfficialTokenStatus = () => ({
   website: GAIA_TOKEN.OFFICIAL_WEBSITE,
   verified: true,
   active: true,
-  lastVerified: new Date().toISOString(),
+  lastVerified: new Date().toISOString()
 });
 
 

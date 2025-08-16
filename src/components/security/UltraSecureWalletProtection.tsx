@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -112,7 +112,7 @@ export function UltraSecureWalletProtection() {
         location: locations[Math.floor(Math.random() * locations.length)],
         severity: "CRITICAL",
         blocked: true,
-        timestamp: new Date(),
+        timestamp: new Date()
       });
     }
 
@@ -129,7 +129,7 @@ export function UltraSecureWalletProtection() {
         location: "Global Network Scan",
         severity: "CRITICAL",
         blocked: true,
-        timestamp: new Date(),
+        timestamp: new Date()
       });
     }
 
@@ -146,7 +146,7 @@ export function UltraSecureWalletProtection() {
         location: "Competitor Analysis",
         severity: "HIGH",
         blocked: true,
-        timestamp: new Date(),
+        timestamp: new Date()
       });
     }
 
@@ -163,7 +163,7 @@ export function UltraSecureWalletProtection() {
         location: "Data Mining Attempt",
         severity: "CRITICAL",
         blocked: true,
-        timestamp: new Date(),
+        timestamp: new Date()
       });
     }
 

@@ -54,7 +54,7 @@ export function useSecureAdmin() {
         setIsAdmin(true);
         setAdminSession({
           id: sessionData.id,
-          timestamp: sessionData.ts || Date.now(),
+          timestamp: sessionData.ts || Date.now()
         });
       } else {
         // No valid session
@@ -103,7 +103,7 @@ export function useSecureAdmin() {
       setIsAdmin(true);
       setAdminSession({
         id: sessionId,
-        timestamp: Date.now(),
+        timestamp: Date.now()
       });
 
       return true;

@@ -151,7 +151,7 @@ export default function NFTCardGame() {
         ...prev,
         totalVolume: prev.totalVolume + Math.floor(Math.random() * 1000),
         activeTraders: prev.activeTraders + Math.floor(Math.random() * 10) - 5,
-        conservationFunding: prev.conservationFunding + Math.floor(Math.random() * 500),
+        conservationFunding: prev.conservationFunding + Math.floor(Math.random() * 500)
       }));
     }, 8000);
 

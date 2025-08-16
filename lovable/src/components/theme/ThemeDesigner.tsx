@@ -20,8 +20,8 @@ export function ThemeDesigner() {
   });
 
   const backgroundTypes: {
-    id: EnhancedBackgroundType;
-    name: string;
+    id: EnhancedBackgroundType;,
+    name: string;,
     description: string;
   }[] = [
     {

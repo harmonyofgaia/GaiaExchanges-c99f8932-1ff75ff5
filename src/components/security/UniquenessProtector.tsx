@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { toast } from "sonner";
 
 interface CopyAttempt {
@@ -36,7 +36,7 @@ export function UniquenessProtector() {
           id: Date.now().toString(),
           source: sources[Math.floor(Math.random() * sources.length)],
           blocked: true,
-          timestamp: new Date(),
+          timestamp: new Date()
         };
 
         setCopyAttempts((prev) => [newAttempt, ...prev.slice(0, 4)]);

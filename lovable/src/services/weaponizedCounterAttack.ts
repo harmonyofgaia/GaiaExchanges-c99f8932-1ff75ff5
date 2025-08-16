@@ -86,8 +86,8 @@ class WeaponizedCounterAttackService {
       | "honeypot_trap"
       | "quantum_retaliation";
     targetIP: string;
-    targetSystem?: string;
-    intensity: "minimal" | "moderate" | "aggressive" | "overwhelming";
+    targetSystem?: string;,
+    intensity: "minimal" | "moderate" | "aggressive" | "overwhelming";,
     evidence: string[];
   }): Promise<CounterAttack> {
     const counterAttack: CounterAttack = {
@@ -230,7 +230,7 @@ class WeaponizedCounterAttackService {
         "Government Watch Lists",
         "Quantum Security Grid",
       ],
-      lastUpdate: Date.now(),
+      lastUpdate: Date.now()
     };
 
     this.ipReputationWeapons.set(ip, weapon);
@@ -259,8 +259,8 @@ class WeaponizedCounterAttackService {
 
   // Social Engineering Reverse-Attack
   async createSocialEngineeringReversal(originalAttack: {
-    type: "phishing" | "pretexting" | "baiting" | "quid_pro_quo";
-    source: string;
+    type: "phishing" | "pretexting" | "baiting" | "quid_pro_quo";,
+    source: string;,
     content: string;
   }): Promise<SocialEngineeringReversal> {
     const reversal: SocialEngineeringReversal = {
@@ -325,7 +325,7 @@ class WeaponizedCounterAttackService {
 
   // Honeypot Weaponization
   async weaponizeHoneypot(config: {
-    honeypotType: "web" | "ssh" | "database" | "email" | "quantum";
+    honeypotType: "web" | "ssh" | "database" | "email" | "quantum";,
     weaponization:
       | "data_collection"
       | "counter_exploitation"
@@ -409,8 +409,8 @@ class WeaponizedCounterAttackService {
   }
 
   async triggerAutoRetaliation(threatData: {
-    sourceIP: string;
-    attackType: string;
+    sourceIP: string;,
+    attackType: string;,
     severity: number;
   }): Promise<void> {
     if (!this.autoRetaliationEnabled) return;
@@ -453,7 +453,7 @@ class WeaponizedCounterAttackService {
       totalAttackersTrapped: Array.from(this.weaponizedHoneypots.values()).reduce(
         (sum, h) => sum + h.attackersTrapped,
         0
-      ),
+      )
     };
   }
 

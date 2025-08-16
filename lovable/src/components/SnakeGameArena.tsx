@@ -84,7 +84,7 @@ export function SnakeGameArena() {
     return {
       position: {
         x: Math.floor(Math.random() * (CANVAS_SIZE / GRID_SIZE)),
-        y: Math.floor(Math.random() * (CANVAS_SIZE / GRID_SIZE)),
+        y: Math.floor(Math.random() * (CANVAS_SIZE / GRID_SIZE))
       },
       value: values[type],
       type,
@@ -314,7 +314,7 @@ export function SnakeGameArena() {
         ctx.font = "10px Arial";
         ctx.textAlign = "center";
         ctx.fillText(
-          token.value.toString(),
+          token.value.toString()
           token.position.x * GRID_SIZE + GRID_SIZE / 2,
           token.position.y * GRID_SIZE + GRID_SIZE / 2 + 3
         );

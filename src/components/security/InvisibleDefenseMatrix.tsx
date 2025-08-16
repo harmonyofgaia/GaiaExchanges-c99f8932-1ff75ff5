@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -45,7 +45,7 @@ export function InvisibleDefenseMatrix() {
             now: () => Math.random() * 1000,
             timing: {},
             navigation: {},
-          }),
+          })
         });
       }
     };

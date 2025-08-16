@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -176,7 +176,7 @@ export default function Exchange() {
       setMetrics((prev) => ({
         ...prev,
         transactions: prev.transactions + Math.floor(Math.random() * 10) + 1,
-        volume: prev.volume + Math.floor(Math.random() * 10000),
+        volume: prev.volume + Math.floor(Math.random() * 10000)
       }));
 
       setMarketData((prev) =>

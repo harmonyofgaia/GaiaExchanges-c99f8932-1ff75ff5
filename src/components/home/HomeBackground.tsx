@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback} from "react";
 import { EnhancedHomeBackground } from "./EnhancedHomeBackground";
 
 export function HomeBackground() {
@@ -21,13 +21,13 @@ export function HomeBackground() {
 
     // Enhanced particle system with electrical effects
     const particles: Array<{
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-      color: string;
-      alpha: number;
+      x: number;,
+      y: number;,
+      vx: number;,
+      vy: number;,
+      size: number;,
+      color: string;,
+      alpha: number;,
       trail: Array<{ x: number; y: number; alpha: number }>;
     }> = [];
 

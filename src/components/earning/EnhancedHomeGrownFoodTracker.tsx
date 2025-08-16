@@ -137,7 +137,7 @@ export function EnhancedHomeGrownFoodTracker() {
     try {
       await recordHomeGrownFood({
         foodType: cropType,
-        quantity: parseFloat(quantity),
+        quantity: parseFloat(quantity)
         growthStage,
         growingMethod,
         harvestWeight: harvestWeight ? parseFloat(harvestWeight) : 0,

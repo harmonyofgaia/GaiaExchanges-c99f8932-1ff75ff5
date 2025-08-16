@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -168,7 +168,7 @@ export function AdvancedSystemUpgrades() {
         systemPower: prev.systemPower + upgrade.exclusivity * 100,
         exclusivityScore: prev.exclusivityScore + upgrade.exclusivity,
         revolutionaryFeatures:
-          prev.revolutionaryFeatures + (upgrade.impact === "revolutionary" ? 1 : 0),
+          prev.revolutionaryFeatures + (upgrade.impact === "revolutionary" ? 1 : 0)
       }));
     }, 3000);
   };

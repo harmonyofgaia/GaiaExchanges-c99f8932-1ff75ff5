@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -354,7 +354,7 @@ export function TacticalEvolutionAnimals() {
           const updatedModules = animal.selfTrainingModules.map((module) => ({
             ...module,
             progress: Math.min(100, module.progress + Math.random() * 0.5),
-            efficiency: Math.min(100, module.efficiency + Math.random() * 0.1),
+            efficiency: Math.min(100, module.efficiency + Math.random() * 0.1)
           }));
 
           // Evolution stage check
@@ -381,7 +381,7 @@ export function TacticalEvolutionAnimals() {
             selfTrainingModules: updatedModules,
             missionCount: animal.missionCount + newMissions,
             lastMission: `Auto-training evolution: +${powerGrowth.toLocaleString()} power`,
-            successRate: Math.min(100, animal.successRate + Math.random() * 0.01),
+            successRate: Math.min(100, animal.successRate + Math.random() * 0.01)
           };
         })
       );

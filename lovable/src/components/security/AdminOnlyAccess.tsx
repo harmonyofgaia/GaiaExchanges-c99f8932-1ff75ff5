@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useCallback} from "react";
 // Utility to get public IP (IPv4) using external API
 async function getPublicIP() {
   try {

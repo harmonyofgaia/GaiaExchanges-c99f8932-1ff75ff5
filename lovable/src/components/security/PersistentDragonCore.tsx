@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { toast } from "sonner";
 
 interface DragonStats {
@@ -152,7 +152,7 @@ export function PersistentDragonCore() {
           "dragonCore_persistent",
           JSON.stringify({
             ...dragonStats,
-            lastSeen: Date.now(),
+            lastSeen: Date.now()
           })
         );
       } catch (error) {
@@ -197,6 +197,6 @@ export function PersistentDragonCore() {
       const ageDays = Math.floor(ageHours / 24);
       return `${ageDays}d ${ageHours % 24}h ${ageMinutes % 60}m`;
     },
-    getGrowthRate: () => Math.max(1, Math.floor(dragonStats.level / 10) + 1),
+    getGrowthRate: () => Math.max(1, Math.floor(dragonStats.level / 10) + 1)
   };
 }

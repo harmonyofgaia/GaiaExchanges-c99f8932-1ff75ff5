@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -51,7 +51,7 @@ export function MarketingTokenSuite() {
         twitter_followers: prev.twitter_followers + Math.floor(Math.random() * 3),
         reddit_members: prev.reddit_members + Math.floor(Math.random() * 2),
         discord_members: prev.discord_members + Math.floor(Math.random() * 5),
-        telegram_members: prev.telegram_members + Math.floor(Math.random() * 2),
+        telegram_members: prev.telegram_members + Math.floor(Math.random() * 2)
       }));
     }, 5000);
 

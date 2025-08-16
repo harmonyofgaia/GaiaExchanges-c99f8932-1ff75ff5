@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,7 +40,7 @@ export function GlobalCommandCenter() {
         networkStrength: Math.min(100, prev.networkStrength + Math.random() * 0.5),
         commandsExecuted: prev.commandsExecuted + Math.floor(Math.random() * 10),
         securityLevel: Math.min(100, prev.securityLevel + Math.random() * 0.1),
-        globalCoverage: Math.min(100, prev.globalCoverage + Math.random() * 0.2),
+        globalCoverage: Math.min(100, prev.globalCoverage + Math.random() * 0.2)
       }));
     }, 3000);
 

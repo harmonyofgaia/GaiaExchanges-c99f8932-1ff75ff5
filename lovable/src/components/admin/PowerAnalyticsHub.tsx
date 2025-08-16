@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -37,7 +37,7 @@ export function PowerAnalyticsHub() {
           0,
           Math.min(100, prev.networkActivity + (Math.random() - 0.5) * 5)
         ),
-        securityScore: Math.max(0, Math.min(100, prev.securityScore + (Math.random() - 0.5) * 1)),
+        securityScore: Math.max(0, Math.min(100, prev.securityScore + (Math.random() - 0.5) * 1))
       }));
     }, 3000);
 

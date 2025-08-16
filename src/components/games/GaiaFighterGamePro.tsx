@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -193,7 +193,7 @@ export function GaiaFighterGamePro() {
           attack: levelUp ? player.attack + 5 : player.attack,
           defense: levelUp ? player.defense + 3 : player.defense,
           maxHealth: levelUp ? player.maxHealth + 10 : player.maxHealth,
-          health: levelUp ? player.maxHealth + 10 : Math.min(player.maxHealth, player.health + 20),
+          health: levelUp ? player.maxHealth + 10 : Math.min(player.maxHealth, player.health + 20)
         },
         opponent: null,
         battleInProgress: false,

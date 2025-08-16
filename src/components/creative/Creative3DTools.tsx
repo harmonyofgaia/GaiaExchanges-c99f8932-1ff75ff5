@@ -383,7 +383,7 @@ export function Creative3DTools() {
           basePrompt: `3D ${selectedTool} design with ${animationStyle} animation`,
           artworkType: "3d_generated",
           style: "futuristic_3d",
-        }),
+        })
       });
 
       if (response.ok) {

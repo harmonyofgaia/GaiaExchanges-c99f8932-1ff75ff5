@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -43,7 +43,7 @@ export function GAiACommunityProjects() {
                 project.currentFunding + Math.floor(Math.random() * 2000)
               )
             : 0,
-          participants: project.participants + Math.floor(Math.random() * 5),
+          participants: project.participants + Math.floor(Math.random() * 5)
         }))
       );
     }, 8000);

@@ -59,7 +59,7 @@ export function SnakeGame() {
         // Generate new food
         const newFood = {
           x: Math.floor(Math.random() * BOARD_SIZE),
-          y: Math.floor(Math.random() * BOARD_SIZE),
+          y: Math.floor(Math.random() * BOARD_SIZE)
         };
         setFood(newFood);
         setScore((prev) => prev + 10);

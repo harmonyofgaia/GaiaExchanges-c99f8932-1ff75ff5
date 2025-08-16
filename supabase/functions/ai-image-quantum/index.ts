@@ -55,7 +55,7 @@ serve(async (req) => {
         quality: quality || "high",
         output_format: "png",
         background: "auto",
-      }),
+      })
     });
 
     const data = await response.json();
@@ -106,7 +106,7 @@ serve(async (req) => {
         quantum_image_status: "GENERATED",
         neural_creativity_level: "UNLIMITED",
         model: "gpt-image-1",
-      }),
+      })
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       }
@@ -118,7 +118,7 @@ serve(async (req) => {
         error: "Image quantum generator temporarily offline",
         details: error.message,
         status: "NEURAL_CREATIVE_HEALING",
-      }),
+      })
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },

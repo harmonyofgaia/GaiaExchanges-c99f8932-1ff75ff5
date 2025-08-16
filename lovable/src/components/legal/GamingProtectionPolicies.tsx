@@ -142,7 +142,7 @@ export function GamingProtectionPolicies() {
             rights reserved. Protected by international gaming, copyright, and patent laws.
           </p>
           <p className="mt-2 text-xs">
-            Last Updated: {new Date().toLocaleDateString()} | Gaming Security Level: MAXIMUM | Legal
+            Last Updated: {new Date().toLocaleDateString()} | Gaming Security Level: MAXIMUM | Legal,
             Status: ENFORCED
           </p>
         </div>

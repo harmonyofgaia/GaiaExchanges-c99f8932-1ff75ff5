@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -20,15 +20,6 @@ export function EncryptedSecurityReports() {
   const [reports, setReports] = useState<SecurityReport[]>([]);
   const [currentReport, setCurrentReport] = useState<SecurityReport | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-
-  useEffect(() => {
-    generateDailyReport();
-
-    // Generate new report every 24 hours
-    const reportInterval = setInterval(generateDailyReport, 24 * 60 * 60 * 1000);
-
-    return () => clearInterval(reportInterval);
-  }, [generateDailyReport]);
 
   const generateDailyReport = useCallback(() => {
     console.log("📊 GENERATING ENCRYPTED DAILY SECURITY REPORT");
@@ -57,14 +48,23 @@ export function EncryptedSecurityReports() {
       threats: Math.floor(Math.random() * 50) + 100,
       improvements: selectedImprovements,
       systemHealth: Math.floor(Math.random() * 5) + 95,
-      confidentialData: btoa(`CLASSIFIED_ADMIN_ONLY_${Date.now()}`),
+      confidentialData: btoa(`CLASSIFIED_ADMIN_ONLY_${Date.now()}`)
     };
 
     setCurrentReport(newReport);
     setReports((prev) => [newReport, ...prev.slice(0, 9)]);
 
     console.log("🔐 DAILY SECURITY REPORT GENERATED - ENCRYPTED AND SECURED");
-  };
+  }, []);
+
+  useEffect(() => {
+    generateDailyReport();
+
+    // Generate new report every 24 hours
+    const reportInterval = setInterval(generateDailyReport, 24 * 60 * 60 * 1000);
+
+    return () => clearInterval(reportInterval);
+  }, [generateDailyReport]);
 
   const downloadEncryptedPDF = async () => {
     if (!currentReport) return;

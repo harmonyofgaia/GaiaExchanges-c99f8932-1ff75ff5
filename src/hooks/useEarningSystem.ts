@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 
 export interface EarningActivity {
   id: string;
@@ -215,7 +215,7 @@ export function useUserProfile(userId: string) {
     totalTokens: 0,
     level: 1,
     streak: 0,
-    joinDate: new Date(),
+    joinDate: new Date()
   });
   const [isLoading, setIsLoading] = useState(false);
 

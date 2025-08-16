@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback} from "react";
 import { createPatternNode, Quadtree } from "@/utils/patternUtils";
 
 export interface NeuroBackgroundProps {

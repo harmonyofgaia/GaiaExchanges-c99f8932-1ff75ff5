@@ -2,7 +2,7 @@ import { IAEngine } from "./IAEngine";
 import { DailyEngineAutomation } from "./DailyEngineAutomation";
 import { GaiaBlockchainNetwork } from "./GaiaBlockchainNetwork";
 import { MarketingCampaignManager } from "./MarketingCampaignManager";
-import { useState, useEffect, lazy, Suspense } from "react";
+import { useState, useEffect, lazy, Suspense, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

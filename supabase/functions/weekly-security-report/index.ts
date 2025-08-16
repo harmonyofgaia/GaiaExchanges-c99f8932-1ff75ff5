@@ -24,7 +24,7 @@ serve(async (req) => {
       JSON.stringify({
         success: true,
         report: report,
-      }),
+      })
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
@@ -89,13 +89,13 @@ async function generateWeeklySecurityReport(supabaseClient: unknown) {
     reportId: `weekly-${Date.now()}`,
     period: {
       start: startDate.toISOString(),
-      end: endDate.toISOString(),
+      end: endDate.toISOString()
     },
     metrics,
     insights,
     recommendations,
     htmlReport,
-    generatedAt: new Date().toISOString(),
+    generatedAt: new Date().toISOString()
   };
 }
 

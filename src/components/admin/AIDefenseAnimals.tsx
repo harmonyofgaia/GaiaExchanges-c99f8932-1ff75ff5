@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -239,7 +239,7 @@ export function AIDefenseAnimals() {
         prev.map((animal) => ({
           ...animal,
           threatsRepelled: animal.threatsRepelled + Math.floor(Math.random() * 3),
-          activityLevel: Math.min(100, animal.activityLevel + (Math.random() - 0.5) * 2),
+          activityLevel: Math.min(100, animal.activityLevel + (Math.random() - 0.5) * 2)
         }))
       );
     }, 5000);
@@ -507,7 +507,7 @@ export function AIDefenseAnimals() {
                   onChange={(e) =>
                     setEditingAnimal((prev) => ({
                       ...prev,
-                      contributors: parseInt(e.target.value),
+                      contributors: parseInt(e.target.value)
                     }))
                   }
                 />
@@ -522,7 +522,7 @@ export function AIDefenseAnimals() {
                   onChange={(e) =>
                     setEditingAnimal((prev) => ({
                       ...prev,
-                      effectiveness: parseInt(e.target.value),
+                      effectiveness: parseInt(e.target.value)
                     }))
                   }
                 />

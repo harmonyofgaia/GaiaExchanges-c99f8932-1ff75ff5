@@ -35,7 +35,7 @@ function useChart() {
 const ChartContainer = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
-    config: ChartConfig;
+    config: ChartConfig;,
     children: React.ComponentProps<typeof RechartsPrimitive.ResponsiveContainer>["children"];
   }
 >(({ id, className, children, config, ...props }, ref) => {
@@ -84,7 +84,7 @@ ${colorConfig
 }
 `
           )
-          .join("\n"),
+          .join("\n")
       }}
     />
   );
@@ -147,8 +147,8 @@ const ChartTooltipContent = React.forwardRef<
         return (
           <div className={cn("font-medium", labelClassName)}>
             {labelFormatter(
-              typeof value === "string" ? value : String(value),
-              typeof item.name === "string" ? item.name : String(item.name ?? ""),
+              typeof value === "string" ? value : String(value)
+              typeof item.name === "string" ? item.name : String(item.name ?? "")
               item
             )}
           </div>
@@ -199,7 +199,7 @@ const ChartTooltipContent = React.forwardRef<
                 {formatter && item?.value !== undefined && item.name ? (
                   formatter(
                     item.value,
-                    typeof item.name === "string" ? item.name : String(item.name ?? ""),
+                    typeof item.name === "string" ? item.name : String(item.name ?? "")
                     item
                   )
                 ) : (

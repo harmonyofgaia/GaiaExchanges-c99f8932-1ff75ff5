@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -26,11 +26,11 @@ export function QuantumTradingEngine() {
 
   const [investorLeads, setInvestorLeads] = useState<
     Array<{
-      id: string;
-      name: string;
-      platform: string;
-      investment: number;
-      status: "interested" | "negotiating" | "committed";
+      id: string;,
+      name: string;,
+      platform: string;,
+      investment: number;,
+      status: "interested" | "negotiating" | "committed";,
       priority: "high" | "medium" | "low";
     }>
   >([]);
@@ -52,7 +52,7 @@ export function QuantumTradingEngine() {
           totalMarketCap: prev.totalMarketCap * (1 + (Math.random() - 0.5) * 0.01),
           dailyVolume: prev.dailyVolume * buyerReduction,
           investorsAttracted: prev.investorsAttracted + (Math.random() > 0.7 ? 1 : 0),
-          marketingReach: Math.min(100, prev.marketingReach + Math.random() * 0.5),
+          marketingReach: Math.min(100, prev.marketingReach + Math.random() * 0.5)
         };
       });
 
@@ -80,7 +80,7 @@ export function QuantumTradingEngine() {
               ? "high"
               : Math.random() > 0.4
                 ? "medium"
-                : ("low" as "high" | "medium" | "low"),
+                : ("low" as "high" | "medium" | "low")
         };
 
         setInvestorLeads((prev) => [newInvestor, ...prev.slice(0, 9)]);

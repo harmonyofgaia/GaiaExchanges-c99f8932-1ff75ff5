@@ -61,7 +61,7 @@ export function SmartNotificationManager() {
     // Update last shown timestamp
     const updated = {
       ...lastNotifications,
-      [`upgrade_${upgradeType}`]: Date.now(),
+      [`upgrade_${upgradeType}`]: Date.now()
     };
     setLastNotifications(updated);
     localStorage.setItem("last_notifications", JSON.stringify(updated));

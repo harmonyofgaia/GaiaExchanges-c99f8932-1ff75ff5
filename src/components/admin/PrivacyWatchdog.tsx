@@ -259,7 +259,7 @@ export function PrivacyWatchdog() {
       ...prev,
       privacy_events_today: prev.privacy_events_today + Math.floor(Math.random() * 3),
       unauthorized_access_blocked: prev.unauthorized_access_blocked + (Math.random() > 0.9 ? 1 : 0),
-      data_requests_processed: prev.data_requests_processed + (Math.random() > 0.8 ? 1 : 0),
+      data_requests_processed: prev.data_requests_processed + (Math.random() > 0.8 ? 1 : 0)
     }));
   };
 

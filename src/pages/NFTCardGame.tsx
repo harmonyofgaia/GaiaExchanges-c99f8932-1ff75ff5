@@ -65,7 +65,7 @@ export default function NFTCardGame() {
             traits: [],
             conservation_info: "",
             abilities: [],
-          }),
+          })
         }));
 
         setCollection(mappedCards);
@@ -81,7 +81,7 @@ export default function NFTCardGame() {
           totalCards,
           rareCards,
           powerLevel,
-          tradingScore: Math.floor(powerLevel / 10),
+          tradingScore: Math.floor(powerLevel / 10)
         });
       }
     } catch (error) {

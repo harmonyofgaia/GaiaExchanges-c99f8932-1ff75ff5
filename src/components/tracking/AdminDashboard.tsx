@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -63,14 +63,14 @@ export function AdminDashboard() {
         database: Math.min(100, prev.database + (Math.random() - 0.5) * 0.05),
         network: Math.min(100, prev.network + (Math.random() - 0.5) * 0.2),
         security: 100, // Always perfect security
-        performance: Math.min(100, prev.performance + (Math.random() - 0.5) * 0.3),
+        performance: Math.min(100, prev.performance + (Math.random() - 0.5) * 0.3)
       }));
 
       setAdminMetrics((prev) => ({
         ...prev,
         activeUsers: prev.activeUsers + Math.floor(Math.random() * 50 - 25),
         totalTransactions: prev.totalTransactions + Math.floor(Math.random() * 100),
-        systemLoad: Math.max(0, Math.min(100, prev.systemLoad + (Math.random() - 0.5) * 2)),
+        systemLoad: Math.max(0, Math.min(100, prev.systemLoad + (Math.random() - 0.5) * 2))
       }));
 
       // Randomly add alerts

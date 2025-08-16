@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -109,7 +109,7 @@ export function AdvancedSecurityCenter() {
         networkLoad: Math.max(20, Math.min(80, prev.networkLoad + (Math.random() - 0.5) * 15)),
         activeConnections: prev.activeConnections + Math.floor((Math.random() - 0.5) * 20),
         blockedThreats: prev.blockedThreats + Math.floor(Math.random() * 3),
-        dataTransfer: Math.max(1, Math.min(10, prev.dataTransfer + (Math.random() - 0.5) * 0.5)),
+        dataTransfer: Math.max(1, Math.min(10, prev.dataTransfer + (Math.random() - 0.5) * 0.5))
       }));
 
       // Update security metrics occasionally
@@ -117,7 +117,7 @@ export function AdvancedSecurityCenter() {
         setSecurityMetrics((prev) =>
           prev.map((metric) => ({
             ...metric,
-            value: Math.max(85, Math.min(100, metric.value + (Math.random() - 0.5) * 2)),
+            value: Math.max(85, Math.min(100, metric.value + (Math.random() - 0.5) * 2))
           }))
         );
       }

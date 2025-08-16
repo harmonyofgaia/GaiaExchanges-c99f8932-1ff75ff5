@@ -175,7 +175,7 @@ export function RouteCompletenessChecker() {
       missingRoutes,
       errorRoutes,
       coverage: (completeRoutes / totalRoutes) * 100,
-      lastScan: new Date(),
+      lastScan: new Date()
     });
   };
 
@@ -265,7 +265,7 @@ export function RouteCompletenessChecker() {
         lastChecked: new Date(),
         accessibility: Math.max(60, Math.floor(Math.random() * 40) + route.accessibility - 10),
         performance: Math.max(60, Math.floor(Math.random() * 40) + route.performance - 10),
-        seoScore: Math.max(50, Math.floor(Math.random() * 40) + route.seoScore - 10),
+        seoScore: Math.max(50, Math.floor(Math.random() * 40) + route.seoScore - 10)
       }))
     );
 
@@ -273,7 +273,7 @@ export function RouteCompletenessChecker() {
     if (analysis) {
       setAnalysis({
         ...analysis,
-        lastScan: new Date(),
+        lastScan: new Date()
       });
     }
 

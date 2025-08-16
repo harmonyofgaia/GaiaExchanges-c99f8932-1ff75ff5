@@ -141,7 +141,7 @@ export default function EcoMissionGenerator() {
         communityParticipation: Math.min(
           100,
           prev.communityParticipation + (Math.random() - 0.5) * 0.2
-        ),
+        )
       }));
     }, 10000);
 
@@ -321,7 +321,7 @@ export default function EcoMissionGenerator() {
         .from("eco_missions")
         .update({
           status: "completed",
-          completed_at: new Date().toISOString(),
+          completed_at: new Date().toISOString()
         })
         .eq("id", missionId);
 

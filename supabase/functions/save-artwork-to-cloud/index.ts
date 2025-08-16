@@ -57,7 +57,7 @@ serve(async (req) => {
           content_type: "image/png",
           uploaded_at: new Date().toISOString(),
           artwork_type: artworkType,
-          prompt_preview: prompt.substring(0, 100),
+          prompt_preview: prompt.substring(0, 100)
         },
       })
       .eq("id", artworkId);
@@ -89,7 +89,7 @@ serve(async (req) => {
             <hr>
             <p>Access your artwork collection in the Admin Dashboard.</p>
           `,
-        }),
+        })
       });
     } catch (emailError) {
       console.log("Email notification failed:", emailError);
@@ -102,7 +102,7 @@ serve(async (req) => {
         cloud_url: urlData.publicUrl,
         file_path: filePath,
         file_size: imageBuffer.length,
-      }),
+      })
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
@@ -112,7 +112,7 @@ serve(async (req) => {
         success: false,
         error: "Failed to save artwork to cloud",
         details: error.message,
-      }),
+      })
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,

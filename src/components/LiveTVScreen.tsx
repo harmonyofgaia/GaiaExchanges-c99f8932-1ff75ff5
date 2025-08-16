@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -112,7 +112,7 @@ export function LiveTVScreen() {
           ...show,
           viewers: show.isLive ? show.viewers + Math.floor(Math.random() * 20) - 10 : show.viewers,
           tokensCollected: show.tokensCollected + Math.floor(Math.random() * 50),
-          ecologyContribution: Math.floor(show.tokensCollected * 0.2),
+          ecologyContribution: Math.floor(show.tokensCollected * 0.2)
         }))
       );
 

@@ -177,7 +177,7 @@ export function LandscapeBuilderAdvanced() {
       name: landscapeName,
       items: items.length,
       tools: selectedTool,
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toISOString()
     };
 
     console.log("💾 SAVING LANDSCAPE:", landscapeData);

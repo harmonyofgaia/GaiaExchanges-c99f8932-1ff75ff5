@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -54,7 +54,7 @@ export function BigHolderContracts() {
           google_auth_verified: false,
           qr_code_verified: false,
           contract_status: "pending_verification",
-          created_at: new Date().toISOString(),
+          created_at: new Date().toISOString()
         },
         {
           id: "2",
@@ -62,7 +62,7 @@ export function BigHolderContracts() {
           google_auth_verified: true,
           qr_code_verified: false,
           contract_status: "google_verified",
-          created_at: new Date().toISOString(),
+          created_at: new Date().toISOString()
         },
       ];
 
