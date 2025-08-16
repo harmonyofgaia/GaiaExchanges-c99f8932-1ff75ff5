@@ -11,7 +11,7 @@ export class StateStore<S> {
   set(next: S) {
     if (Object.is(this.state, next)) return;
     this.state = next;
-    for (const l of Array.from(this.listeners)) { try { l(this.state); } catch { } }
+    for (const l of Array.from(this.listeners)) { try { l(this.state); } catch (error) { console.warn('State listener error:', error); } }
   }
 
   patch(partial: Partial<S>) {
