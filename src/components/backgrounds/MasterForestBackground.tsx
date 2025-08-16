@@ -13,7 +13,8 @@ export default function MasterForestBackground() {
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
+    if (!canvasRef.current) return;
+    const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d", { alpha: true })!;
     let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
     let width = 0;
