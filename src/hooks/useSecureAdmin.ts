@@ -206,9 +206,18 @@ export function useSecureAdmin() {
     }
   };
 
+  // Helper to generate a secure random string
+  function generateSecureRandomString(length: number): string {
+    const array = new Uint8Array(length);
+    window.crypto.getRandomValues(array);
+    // Convert to base64 for compactness
+    return btoa(String.fromCharCode(...array)).replace(/[^a-zA-Z0-9]/g, '').substr(0, length);
+  }
+
   const grantAdminAccess = async (): Promise<boolean> => {
     // For local username-based access, create local session
-    const sessionToken = `local-session-${Date.now()}-${Math.random().toString(36).substr(2, 16)}`;
+    const randomPart = generateSecureRandomString(22); // 22 chars ~ 132 bits entropy
+    const sessionToken = `local-session-${Date.now()}-${randomPart}`;
     const expiryTime = Date.now() + 8 * 60 * 60 * 1000; // 8 hours
 
     // Store local admin session
