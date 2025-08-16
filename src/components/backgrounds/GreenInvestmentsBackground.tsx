@@ -130,7 +130,7 @@ export default function GreenInvestmentsBackground() {
           ctx.fillText(text, x, y);
           
           // Move drop down slowly
-          drops[i] += 0.3;
+          drops[i] += MATRIX_RAIN_DROP_SPEED;
           
           // Reset drop when it goes off screen
           if (y > height / dpr) {
