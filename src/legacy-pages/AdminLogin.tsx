@@ -61,7 +61,8 @@ export default function AdminLogin() {
       // Enhanced admin credentials check (username-based, case insensitive)
       if (
         credentials.username.toLowerCase() === "synatic" &&
-        credentials.password.length > 0
+        credentials.password === ADMIN_PASSWORD &&
+        isPasswordComplex(credentials.password)
       ) {
         if (!isIPAllowed) {
           toast.error("🚫 IP Access Restricted", {
