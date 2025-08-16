@@ -112,7 +112,7 @@ export default function GreenInvestmentsBackground() {
       lastTime = currentTime;
 
       // Clear canvas with very low opacity for trails
-      // Clear canvas with low opacity for trails (increased from 0.03 to 0.1 for effective clearing)
+      // Clear canvas with low opacity for trails (0.1 chosen for effective clearing)
       ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
       ctx.fillRect(0, 0, width / dpr, height / dpr);
 
