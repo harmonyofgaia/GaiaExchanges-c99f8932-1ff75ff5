@@ -33,10 +33,10 @@ interface EnhancedBackgroundManagerProps {
 
 const DEFAULT_SETTINGS: EnhancedBackgroundSettings = {
   type: "matrix",
-  intensity: "medium",
+  intensity: "low",
   color: "#00ff00",
-  speed: 1,
-  autoGenerate: false,
+  speed: 0.5,
+  autoGenerate: false, // Never auto-generate
   pattern: "default",
   neuralDensity: 50,
 };
@@ -101,11 +101,9 @@ export function EnhancedBackgroundManager({
 
       setTimeout(() => {
         const backgroundTypes: EnhancedBackgroundType[] = [
-          "matrix",
-          "neural",
-          "puzzle",
+          "matrix", // Only matrix is allowed for auto-generation
         ];
-        const colors = ["#00ff00", "#00ffff", "#ff00ff", "#ffff00", "#ff0080"];
+        const colors = ["#00ff00"];
         const intensities: Array<"low" | "medium" | "high"> = [
           "low",
           "medium",

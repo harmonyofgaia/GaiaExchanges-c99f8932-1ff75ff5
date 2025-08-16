@@ -20,22 +20,10 @@ export const EnhancedHomeBackground = () => {
   });
 
   useEffect(() => {
-    // Listen for admin style updates
-    const handleStyleUpdate = (event: CustomEvent) => {
-      const { background } = event.detail;
-      setBackgroundConfig(background);
-    };
-
-    window.addEventListener(
-      "admin-style-update",
-      handleStyleUpdate as EventListener,
-    );
-
+    // Admin style updates disabled for home page background stability
+    // This prevents automatic background changes on the home page
     return () => {
-      window.removeEventListener(
-        "admin-style-update",
-        handleStyleUpdate as EventListener,
-      );
+      // Cleanup placeholder
     };
   }, []);
 

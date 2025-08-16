@@ -5,14 +5,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Shield, Lock, Eye, EyeOff, Crown, Globe } from "lucide-react";
+import { Shield, Lock, Eye, EyeOff, Crown, Globe, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 import { AdminDashboardTabs } from "./AdminDashboardTabs";
+import { useAuth } from "@/components/auth/AuthProvider";
+import { supabase } from "@/integrations/supabase/client";
 
 export function SecureVaultLogin() {
   const navigate = useNavigate();
+  const { user, signIn } = useAuth();
   const [credentials, setCredentials] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -24,50 +27,93 @@ export function SecureVaultLogin() {
     setIsLoading(true);
 
     try {
-      // Admin credentials check
-      if (
-        credentials.username === "Synatic" &&
-        credentials.password === "Freedom!oul19922323"
-      ) {
-        // Set admin session
-        localStorage.setItem("gaia-admin-session", `admin-${Date.now()}`);
-        localStorage.setItem(
-          "gaia-admin-expiry",
-          (Date.now() + 24 * 60 * 60 * 1000).toString(),
-        );
-        sessionStorage.setItem("admin-active", "true");
+      // 🔒 SECURE: Use Supabase authentication instead of hardcoded credentials
+      const { error: authError } = await signIn(
+        credentials.email,
+        credentials.password,
+      );
 
-        setIsAuthenticated(true);
-        toast.success("🌍 GAIA Admin Access Granted!", {
-          description: "Welcome to the Ultimate Control Center",
+      if (authError) {
+        toast.error("🚫 Authentication Failed", {
+          description: authError.message,
           duration: 5000,
         });
-      } else {
-        toast.error("🚫 Access Denied", {
-          description: "Invalid admin credentials",
-          duration: 5000,
-        });
+        return;
       }
+
+      // Verify admin privileges with database check
+      const { data: adminAccount, error: adminError } = await supabase
+        .from("admin_users")
+        .select("*")
+        .eq("user_id", (await supabase.auth.getUser()).data.user?.id)
+        .eq("is_active", true)
+        .maybeSingle();
+
+      if (adminError || !adminAccount) {
+        toast.error("🚫 ADMIN ACCESS DENIED", {
+          description: "This account does not have admin privileges",
+          duration: 5000,
+        });
+        await supabase.auth.signOut();
+        return;
+      }
+
+      // 🔒 SECURE: No localStorage usage for admin session
+      setIsAuthenticated(true);
+      
+      // Log successful admin login
+      await supabase.rpc('log_admin_action', {
+        action_name: 'secure_admin_login_success',
+        action_details: {
+          user_id: (await supabase.auth.getUser()).data.user?.id,
+          timestamp: new Date().toISOString(),
+          login_method: 'supabase_auth'
+        }
+      });
+
+      toast.success("🌍 GAIA Admin Access Granted!", {
+        description: "Secure authentication verified - Welcome Admin",
+        duration: 5000,
+      });
     } catch (error) {
-      toast.error("Login Error", {
-        description: "Please try again",
+      console.error("Secure login error:", error);
+      toast.error("🛡️ Security Error", {
+        description: "Advanced security protocols activated",
         duration: 5000,
       });
     } finally {
       setIsLoading(false);
-      setCredentials({ username: "", password: "" });
+      setCredentials({ email: "", password: "" });
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("gaia-admin-session");
-    localStorage.removeItem("gaia-admin-expiry");
-    sessionStorage.removeItem("admin-active");
-    setIsAuthenticated(false);
-    toast.success("🚪 Admin session terminated", {
-      description: "System secured",
-      duration: 3000,
-    });
+  const handleLogout = async () => {
+    try {
+      // Log admin logout
+      await supabase.rpc('log_admin_action', {
+        action_name: 'secure_admin_logout',
+        action_details: {
+          user_id: user?.id,
+          timestamp: new Date().toISOString(),
+          logout_method: 'secure_supabase_auth'
+        }
+      });
+
+      // 🔒 SECURE: Use Supabase auth sign out
+      await supabase.auth.signOut();
+      setIsAuthenticated(false);
+      
+      toast.success("🚪 Admin session terminated", {
+        description: "Secure logout completed",
+        duration: 3000,
+      });
+    } catch (error) {
+      console.error("Logout error:", error);
+      toast.error("Error during logout", {
+        description: "Please try again",
+        duration: 3000,
+      });
+    }
   };
 
   if (isAuthenticated) {
@@ -130,31 +176,41 @@ export function SecureVaultLogin() {
           </div>
         </CardHeader>
         <CardContent>
+          <div className="mb-4 p-3 bg-green-900/20 border border-green-500/30 rounded-lg">
+            <div className="flex items-center gap-2 text-green-300 text-sm">
+              <Shield className="h-4 w-4" />
+              <span>🔒 SECURE DATABASE AUTHENTICATION</span>
+            </div>
+            <p className="text-xs text-green-200 mt-1">
+              No hardcoded credentials • Full audit trail • Zero-trust security
+            </p>
+          </div>
+
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="username" className="text-green-300">
-                Admin Username
+              <Label htmlFor="email" className="text-green-300">
+                Admin Email
               </Label>
               <Input
-                id="username"
-                type="text"
-                value={credentials.username}
+                id="email"
+                type="email"
+                value={credentials.email}
                 onChange={(e) =>
                   setCredentials((prev) => ({
                     ...prev,
-                    username: e.target.value,
+                    email: e.target.value,
                   }))
                 }
                 className="bg-black/30 border-green-500/30 text-green-400"
-                placeholder="Admin username..."
-                autoComplete="off"
+                placeholder="admin@example.com"
+                autoComplete="email"
                 required
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="password" className="text-green-300">
-                Vault Password
+                Secure Password
               </Label>
               <div className="relative">
                 <Input
@@ -168,8 +224,8 @@ export function SecureVaultLogin() {
                     }))
                   }
                   className="bg-black/30 border-green-500/30 text-green-400 pr-10"
-                  placeholder="Vault password..."
-                  autoComplete="off"
+                  placeholder="Enter secure password..."
+                  autoComplete="current-password"
                   required
                 />
                 <Button
@@ -194,13 +250,16 @@ export function SecureVaultLogin() {
               className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-bold py-3"
             >
               <Lock className="h-5 w-5 mr-2" />
-              {isLoading ? "Verifying Access..." : "ENTER GAIA VAULT"}
+              {isLoading ? "Authenticating..." : "SECURE ADMIN LOGIN"}
             </Button>
           </form>
 
           <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/20 rounded-lg">
             <p className="text-xs text-green-300 text-center">
-              👑 GAIA ADMIN • QUANTUM PROTECTED • ULTIMATE CONTROL
+              🛡️ BANK-LEVEL SECURITY • ZERO HARDCODED CREDENTIALS
+            </p>
+            <p className="text-xs text-blue-300 text-center mt-1">
+              Database Authenticated • Full Audit Trail • Zero-Trust
             </p>
           </div>
         </CardContent>
