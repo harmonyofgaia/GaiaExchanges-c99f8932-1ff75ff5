@@ -147,7 +147,7 @@ export default function GreenInvestmentsBackground() {
         
         for (const root of rootPaths) {
           if (root.growth < root.maxGrowth) {
-            root.growth += 0.02; // Very slow growth
+            root.growth += ROOT_GROWTH_RATE; // Very slow growth
           }
           
           const numSegmentsToDraw = Math.floor(root.growth);
