@@ -4,7 +4,7 @@ Follow these steps:
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
-git clone ```
+git clone https://github.com/your-org/GaiaExchanges.git
 
 ## Development Commands
 
