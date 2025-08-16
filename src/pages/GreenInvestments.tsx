@@ -1,6 +1,9 @@
 import React from "react";
 import GreenInvestmentsBackground from "@/components/backgrounds/GreenInvestmentsBackground";
 import CarFreeProjectCard from "@/components/green-investments/CarFreeProjectCard";
+import { GAiACommunityProjects } from "@/components/green-investments/GAiACommunityProjects";
+import { SandProtectInvestmentProject } from "@/components/green-investments/SandProtectInvestmentProject";
+import { WildfireSandProtection } from "@/components/green-investments/WildfireSandProtection";
 import "@/styles/green-investments-new-background.css";
 
 export default function GreenInvestments() {
@@ -17,14 +20,33 @@ export default function GreenInvestments() {
           </p>
         </header>
 
-        {/* Glass/contrast container for readability */}
-        <div className="grid gap-6 lg:grid-cols-3">
+        {/* GAiA Community Projects Section */}
+        <div className="mb-12">
+          <GAiACommunityProjects />
+        </div>
+
+        {/* Environmental Protection Projects */}
+        <div className="mb-12 space-y-8">
+          <h2 className="text-2xl font-bold text-emerald-300 mb-6">Environmental Protection Initiatives</h2>
+          
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div className="space-y-6">
+              <SandProtectInvestmentProject />
+            </div>
+            <div className="space-y-6">
+              <WildfireSandProtection />
+            </div>
+          </div>
+        </div>
+
+        {/* Glass/contrast container for other opportunities */}
+        <div className="grid gap-6 lg:grid-cols-3 mb-8">
           <section className="lg:col-span-2 rounded-xl border border-white/10 bg-neutral-900/60 p-6 shadow-xl backdrop-blur-md">
-            <h2 className="text-xl font-semibold text-emerald-200">Opportunities</h2>
+            <h2 className="text-xl font-semibold text-emerald-200">Additional Opportunities</h2>
             <p className="mt-2 text-sm text-emerald-50/90">
               Explore curated green assets with verified climate and biodiversity outcomes.
             </p>
-            {/* Existing content / list / cards go here */}
+            {/* Project cards */}
             <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
               <CarFreeProjectCard />
               {/* Example card */}

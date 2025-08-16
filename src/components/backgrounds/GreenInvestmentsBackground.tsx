@@ -33,68 +33,12 @@ export default function GreenInvestmentsBackground() {
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      width = rect.width * dpr;
-      height = rect.height * dpr;
-      canvas.width = width;
-      canvas.height = height;
-      ctx.scale(dpr, dpr);
-    };
-
-    const resizeObserver = new ResizeObserver(resize);
-    resizeObserver.observe(canvas);
-    resize();
-
     // Matrix rain setup (very subtle)
     const matrixChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZぁいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん";
     const fontSize = 12;
-    const columns = Math.floor((width / dpr) / fontSize);
-    const drops: number[] = [];
-    
-    // Initialize drops
-    for (let i = 0; i < columns; i++) {
-      drops[i] = Math.random() * -500; // Start with staggered timing
-    }
-    // columns and drops are initialized in resize()
-    
-    let columns: number = 0;
+    let columns = 0;
     let drops: number[] = [];
-    // columns and drops are initialized in resize()
-    
-    
-    
-    let columns: number = 0;
-    let columns: number = 0;
-    let drops: number[] = [];
-    
-    // columns and drops are initialized in resize()
-    // columns and drops are initialized in resize()
-    
-    let columns: number = 0;
-    let columns: number = Math.floor((width / dpr) / fontSize);
-    let drops: number[] = [];
-    
-    // Initialize drops
-    for (let i = 0; i < columns; i++) {
-      drops[i] = Math.random() * -500; // Start with staggered timing
-    // columns and drops are initialized in resize()
-    
-    // columns and drops are initialized in resize()
-    // columns and drops are initialized in resize()
-    // columns and drops are initialized in resize()
-    
-    
-    
-    // (removed duplicate declarations)
-    // (removed duplicate declarations)
-    // columns and drops are initialized in resize()
-    let columns: number = 0;
-    let drops: number[] = [];
-    
-    // columns and drops are initialized in resize()
-    
-    // Recalculate columns and drops on resize
+
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
       width = rect.width * dpr;
@@ -103,83 +47,18 @@ export default function GreenInvestmentsBackground() {
       canvas.height = height;
       ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform before scaling
       ctx.scale(dpr, dpr);
+      
+      // Recalculate columns and drops on resize
       columns = Math.floor(rect.width / fontSize);
       drops = [];
       for (let i = 0; i < columns; i++) {
         drops[i] = Math.random() * -500; // Start with staggered timing
       }
-    }
-    function drawMatrixRain() {
-      if (prefersReducedMotion) return;
-      ctx.clearRect(0, 0, width, height);
-      ctx.globalAlpha = 0.15;
-      ctx.fillStyle = "#0f0";
-      ctx.fillRect(0, 0, width, height);
-      ctx.globalAlpha = 1;
-      ctx.font = `${fontSize}px monospace`;
-      for (let i = 0; i < columns; i++) {
-        // Pick a random character
-        const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-        ctx.fillStyle = "#b6ffb6";
-        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-        // Move drop down
-        if (drops[i] * fontSize > height && Math.random() > 0.975) {
-          drops[i] = 0;
-        } else {
-          drops[i]++;
-        }
-      }
-    }
-
-    // Animation loop
-    function animate() {
-      drawMatrixRain();
-      rafRef.current = requestAnimationFrame(animate);
-    }
-    if (!prefersReducedMotion) {
-      animate();
-    }
-
-    // Cleanup
-    return () => {
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-      resizeObserver.disconnect();
     };
-    let drops: number[];
-    
-    // columns and drops are initialized in resize()
-    
-    // columns and drops are initialized in resize()
-    
-    // columns and drops are initialized in resize()
-    
-    // columns and drops are initialized in resize()
-    
-    
-    // columns and drops are initialized in resize()
-    
-    
-    
-    
-    }
-    // columns and drops are initialized in resize()
-    // columns and drops are initialized in resize()
-    
-    // columns and drops are initialized in resize()
-    
-    // columns and drops are initialized in resize()
-    
-    
-    // columns and drops are initialized in resize()
-    
-    
-    
-    
-    
-    
-    
+
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(canvas);
+    resize();
 
     // Growing roots paths (SVG-like paths)
     const rootPaths: Array<{
@@ -229,9 +108,7 @@ export default function GreenInvestmentsBackground() {
 
     function animate(currentTime: number) {
       if (currentTime - lastTime < frameInterval) {
-    function animateRoots(currentTime: number) {
-      if (currentTime - lastTime < frameInterval) {
-        rafRef.current = requestAnimationFrame(animateRoots);
+        rafRef.current = requestAnimationFrame(animate);
         return;
       }
       lastTime = currentTime;
@@ -256,10 +133,6 @@ export default function GreenInvestmentsBackground() {
           drops[i] += 0.3;
           
           // Reset drop when it goes off screen
-          // Reset drop when it goes off screen (deterministic)
-          // Reset drop when it goes off screen (deterministic: based on drop index and font size)
-            // Reset drop when it goes off screen (deterministic: based on drop index and font size)
-          // Reset drop when it goes off screen (deterministic: based on drop index and font size)
           if (y > height / dpr) {
             drops[i] = -Math.random() * 20;
           }
@@ -298,7 +171,9 @@ export default function GreenInvestmentsBackground() {
       rafRef.current = requestAnimationFrame(animate);
     }
 
-    rafRef.current = requestAnimationFrame(animate);
+    if (!prefersReducedMotion) {
+      rafRef.current = requestAnimationFrame(animate);
+    }
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
