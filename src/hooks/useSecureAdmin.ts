@@ -9,8 +9,7 @@ try {
     useAuth = authModule.useAuth;
   }
 } catch (error) {
-  // AuthProvider not available, use fallback
-  console.warn("AuthProvider not available, using fallback");
+  console.error("AuthProvider not available:", error);
 }
 
 interface AdminSession {
