@@ -15,16 +15,16 @@ interface CategoryProps {
 export function EarningCategories({ onBack, category }: CategoryProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedActivity, setSelectedActivity] = useState<string | null>(null);
-  
+
   const filteredComponents = category.components.filter((comp: any) =>
-    comp.title.toLowerCase().includes(searchQuery.toLowerCase())
+    comp.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   if (selectedActivity) {
     const selectedComponent = category.components.find(
-      (comp: any) => comp.title === selectedActivity
+      (comp: any) => comp.title === selectedActivity,
     );
-    
+
     if (selectedComponent) {
       const Component = selectedComponent.component;
       return (
@@ -42,15 +42,17 @@ export function EarningCategories({ onBack, category }: CategoryProps) {
               {selectedComponent.title}
             </h2>
           </div>
-          
-          <Suspense fallback={
-            <Card className="border-green-500/30">
-              <CardContent className="p-8 text-center">
-                <Zap className="h-12 w-12 text-green-400 mx-auto mb-4 animate-pulse" />
-                <p className="text-green-400">Loading activity...</p>
-              </CardContent>
-            </Card>
-          }>
+
+          <Suspense
+            fallback={
+              <Card className="border-green-500/30">
+                <CardContent className="p-8 text-center">
+                  <Zap className="h-12 w-12 text-green-400 mx-auto mb-4 animate-pulse" />
+                  <p className="text-green-400">Loading activity...</p>
+                </CardContent>
+              </Card>
+            }
+          >
             <Component />
           </Suspense>
         </div>
@@ -124,10 +126,10 @@ export function EarningCategories({ onBack, category }: CategoryProps) {
                     component.difficulty === "Easy"
                       ? "border-green-500/50 text-green-400"
                       : component.difficulty === "Medium"
-                      ? "border-yellow-500/50 text-yellow-400"
-                      : component.difficulty === "Hard"
-                      ? "border-red-500/50 text-red-400"
-                      : "border-purple-500/50 text-purple-400"
+                        ? "border-yellow-500/50 text-yellow-400"
+                        : component.difficulty === "Hard"
+                          ? "border-red-500/50 text-red-400"
+                          : "border-purple-500/50 text-purple-400"
                   }`}
                 >
                   {component.difficulty}
@@ -137,12 +139,14 @@ export function EarningCategories({ onBack, category }: CategoryProps) {
             <CardContent>
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Potential Rewards:</span>
+                  <span className="text-muted-foreground">
+                    Potential Rewards:
+                  </span>
                   <span className="text-green-400 font-medium">
                     {component.points} {GAIA_TOKEN.SYMBOL}
                   </span>
                 </div>
-                
+
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Difficulty:</span>
                   <div className="flex items-center gap-1">
@@ -154,10 +158,10 @@ export function EarningCategories({ onBack, category }: CategoryProps) {
                           (component.difficulty === "Easy"
                             ? 2
                             : component.difficulty === "Medium"
-                            ? 3
-                            : component.difficulty === "Hard"
-                            ? 4
-                            : 5)
+                              ? 3
+                              : component.difficulty === "Hard"
+                                ? 4
+                                : 5)
                             ? "text-yellow-400 fill-current"
                             : "text-gray-600"
                         }`}

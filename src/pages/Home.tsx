@@ -29,7 +29,6 @@ import { ThemeSelector } from "@/components/ThemeSelector";
 import { EnhancedPersistentMusicPlayer } from "@/components/music/EnhancedPersistentMusicPlayer";
 import { UpgradedVisualControlButton } from "@/components/visual/UpgradedVisualControlButton";
 
-
 export default function Home() {
   const [stats, setStats] = useState({
     totalUsers: 12589,

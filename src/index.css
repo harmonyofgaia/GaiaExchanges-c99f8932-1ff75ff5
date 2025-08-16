@@ -141,10 +141,10 @@
     --ring: 190 80% 55%;
   }
 
-:root {
-  --background: 222.2 84% 4.9%; /* Force dark theme globally */
-  --radius: 0.5rem;
-}
+  :root {
+    --background: 222.2 84% 4.9%; /* Force dark theme globally */
+    --radius: 0.5rem;
+  }
 }
 
 @layer base {
@@ -160,5 +160,3 @@
       sans-serif;
   }
 }
-
-

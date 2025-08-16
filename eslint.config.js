@@ -8,6 +8,7 @@ export default tseslint.config(
   {
     ignores: [
       "dist",
+      "coverage/**/*",
       "supabase/functions/**/*",
       "*.config.ts",
       "*.config.js",

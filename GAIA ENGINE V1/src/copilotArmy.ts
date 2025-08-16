@@ -49,7 +49,15 @@ export class CopilotArmy {
 const army = new CopilotArmy();
 army.addAgent(new CopilotAgent("agent1", ["TypeScript", "AI"]));
 army.addAgent(new CopilotAgent("agent2", ["Cloud", "Security"]));
-army.addTask({ id: "task1", description: "Build edge compute module", status: "pending" });
-army.addTask({ id: "task2", description: "Integrate plugin marketplace", status: "pending" });
+army.addTask({
+  id: "task1",
+  description: "Build edge compute module",
+  status: "pending",
+});
+army.addTask({
+  id: "task2",
+  description: "Integrate plugin marketplace",
+  status: "pending",
+});
 army.runParallel();
 console.log("CopilotArmy Tasks:", army.tasks);

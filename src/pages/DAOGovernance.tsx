@@ -325,7 +325,8 @@ export default function DAOGovernance() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-sm font-medium mb-2 block">Type</label>
-                <select title="Proposal Type"
+                <select
+                  title="Proposal Type"
                   className="w-full p-2 border rounded-md bg-background"
                   value={newProposal.type}
                   onChange={(e) =>
