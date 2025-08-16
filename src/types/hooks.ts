@@ -1,6 +1,5 @@
 // Hook-specific types and utilities
 import { useCallback, useEffect, useMemo } from 'react';
-
 // Generic hook return types
 export interface AsyncState<T> {
   data: T | null;
