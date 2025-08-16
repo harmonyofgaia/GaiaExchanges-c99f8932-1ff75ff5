@@ -41,7 +41,9 @@ export interface MigrationHistoryEntry {
   migratedAt: string;
 }
 
-export const fetchMigrationHistory = async (): Promise<MigrationHistoryEntry[]> => {
+export const fetchMigrationHistory = async (): Promise<
+  MigrationHistoryEntry[]
+> => {
   try {
     // Mock implementation - return empty array since we don't have the table
     console.log("Fetching migration history");

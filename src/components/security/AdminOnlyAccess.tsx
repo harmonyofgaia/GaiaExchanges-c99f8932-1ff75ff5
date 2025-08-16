@@ -29,7 +29,9 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
           <div className="w-16 h-16 bg-green-500/20 rounded-full mx-auto animate-pulse flex items-center justify-center">
             <div className="w-8 h-8 bg-green-400 rounded-full animate-bounce"></div>
           </div>
-          <p className="text-green-400 font-medium">Validating Admin Access...</p>
+          <p className="text-green-400 font-medium">
+            Validating Admin Access...
+          </p>
         </div>
       </div>
     );
@@ -42,7 +44,9 @@ export function AdminOnlyAccess({ children }: AdminOnlyAccessProps) {
         <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/30 rounded-lg">
           <div className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-green-400" />
-            <span className="text-green-400 font-bold">🛡️ ADMIN MODE ACTIVE</span>
+            <span className="text-green-400 font-bold">
+              🛡️ ADMIN MODE ACTIVE
+            </span>
             <Badge className="bg-green-600 animate-pulse">SECURE ACCESS</Badge>
           </div>
           <Button

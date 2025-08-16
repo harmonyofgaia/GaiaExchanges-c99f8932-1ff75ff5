@@ -2,7 +2,16 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Shield, AlertTriangle, CheckCircle, TrendingUp, Users, Eye, Clock, Ban } from "lucide-react";
+import {
+  Shield,
+  AlertTriangle,
+  CheckCircle,
+  TrendingUp,
+  Users,
+  Eye,
+  Clock,
+  Ban,
+} from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -35,7 +44,7 @@ export function SecurityMonitoringDashboard() {
 
   useEffect(() => {
     loadSecurityData();
-    
+
     // Refresh data every 30 seconds
     const interval = setInterval(loadSecurityData, 30000);
     return () => clearInterval(interval);
@@ -62,9 +71,9 @@ export function SecurityMonitoringDashboard() {
 
       // Get recent security events
       const { data: eventsData, error: eventsError } = await supabase
-        .from('security_monitoring')
-        .select('*')
-        .order('created_at', { ascending: false })
+        .from("security_monitoring")
+        .select("*")
+        .order("created_at", { ascending: false })
         .limit(20);
 
       if (eventsError) {
@@ -72,15 +81,16 @@ export function SecurityMonitoringDashboard() {
       }
 
       // Transform the data to match our interface
-      const transformedEvents: SecurityEvent[] = (eventsData || []).map((event: any) => ({
-        ...event,
-        ip_address: event.ip_address?.toString() || '',
-      }));
+      const transformedEvents: SecurityEvent[] = (eventsData || []).map(
+        (event: any) => ({
+          ...event,
+          ip_address: event.ip_address?.toString() || "",
+        }),
+      );
 
       setRecentEvents(transformedEvents);
-
     } catch (error: any) {
-      console.error('Error loading security data:', error);
+      console.error("Error loading security data:", error);
       setError(error.message);
       toast.error("🛡️ Security Dashboard Error", {
         description: "Failed to load security monitoring data",
@@ -93,27 +103,27 @@ export function SecurityMonitoringDashboard() {
 
   const getSeverityColor = (severity: string) => {
     switch (severity.toLowerCase()) {
-      case 'critical':
-        return 'bg-red-600 text-white';
-      case 'error':
-        return 'bg-red-500 text-white';
-      case 'warning':
-        return 'bg-yellow-500 text-black';
-      case 'info':
-        return 'bg-blue-500 text-white';
+      case "critical":
+        return "bg-red-600 text-white";
+      case "error":
+        return "bg-red-500 text-white";
+      case "warning":
+        return "bg-yellow-500 text-black";
+      case "info":
+        return "bg-blue-500 text-white";
       default:
-        return 'bg-gray-500 text-white';
+        return "bg-gray-500 text-white";
     }
   };
 
   const getSeverityIcon = (severity: string) => {
     switch (severity.toLowerCase()) {
-      case 'critical':
-      case 'error':
+      case "critical":
+      case "error":
         return <AlertTriangle className="h-4 w-4" />;
-      case 'warning':
+      case "warning":
         return <Eye className="h-4 w-4" />;
-      case 'info':
+      case "info":
         return <CheckCircle className="h-4 w-4" />;
       default:
         return <Shield className="h-4 w-4" />;
@@ -123,9 +133,9 @@ export function SecurityMonitoringDashboard() {
   const resolveEvent = async (eventId: string) => {
     try {
       const { error } = await supabase
-        .from('security_monitoring')
+        .from("security_monitoring")
         .update({ resolved: true })
-        .eq('id', eventId);
+        .eq("id", eventId);
 
       if (error) throw error;
 
@@ -164,7 +174,11 @@ export function SecurityMonitoringDashboard() {
               <AlertTriangle className="h-12 w-12 text-red-400 mx-auto" />
               <p className="text-red-400">Failed to load security data</p>
               <p className="text-red-300 text-sm">{error}</p>
-              <Button onClick={loadSecurityData} variant="outline" className="border-red-500/30">
+              <Button
+                onClick={loadSecurityData}
+                variant="outline"
+                className="border-red-500/30"
+              >
                 Retry
               </Button>
             </div>
@@ -183,12 +197,14 @@ export function SecurityMonitoringDashboard() {
             <Shield className="h-6 w-6" />
             Security Monitoring Dashboard
           </h2>
-          <p className="text-green-300 text-sm mt-1">Real-time security events and system statistics</p>
+          <p className="text-green-300 text-sm mt-1">
+            Real-time security events and system statistics
+          </p>
         </div>
-        <Button 
-          onClick={loadSecurityData} 
+        <Button
+          onClick={loadSecurityData}
           disabled={isLoading}
-          variant="outline" 
+          variant="outline"
           className="border-green-500/30"
         >
           {isLoading ? "Refreshing..." : "Refresh Data"}
@@ -204,7 +220,9 @@ export function SecurityMonitoringDashboard() {
                 <Users className="h-5 w-5 text-blue-400" />
                 <div>
                   <p className="text-blue-300 text-sm">Total Users</p>
-                  <p className="text-2xl font-bold text-blue-400">{stats.total_users}</p>
+                  <p className="text-2xl font-bold text-blue-400">
+                    {stats.total_users}
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -216,7 +234,9 @@ export function SecurityMonitoringDashboard() {
                 <CheckCircle className="h-5 w-5 text-green-400" />
                 <div>
                   <p className="text-green-300 text-sm">Verified Users</p>
-                  <p className="text-2xl font-bold text-green-400">{stats.verified_users}</p>
+                  <p className="text-2xl font-bold text-green-400">
+                    {stats.verified_users}
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -227,8 +247,12 @@ export function SecurityMonitoringDashboard() {
               <div className="flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5 text-yellow-400" />
                 <div>
-                  <p className="text-yellow-300 text-sm">Security Events Today</p>
-                  <p className="text-2xl font-bold text-yellow-400">{stats.security_events_today}</p>
+                  <p className="text-yellow-300 text-sm">
+                    Security Events Today
+                  </p>
+                  <p className="text-2xl font-bold text-yellow-400">
+                    {stats.security_events_today}
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -240,7 +264,9 @@ export function SecurityMonitoringDashboard() {
                 <Ban className="h-5 w-5 text-red-400" />
                 <div>
                   <p className="text-red-300 text-sm">Rate Limited Today</p>
-                  <p className="text-2xl font-bold text-red-400">{stats.rate_limited_today}</p>
+                  <p className="text-2xl font-bold text-red-400">
+                    {stats.rate_limited_today}
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -269,9 +295,9 @@ export function SecurityMonitoringDashboard() {
                 <div
                   key={event.id}
                   className={`flex items-center gap-3 p-3 rounded-lg border ${
-                    event.resolved 
-                      ? 'bg-gray-900/20 border-gray-500/30' 
-                      : 'bg-black/20 border-green-500/20'
+                    event.resolved
+                      ? "bg-gray-900/20 border-gray-500/30"
+                      : "bg-black/20 border-green-500/20"
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -280,12 +306,17 @@ export function SecurityMonitoringDashboard() {
                       {event.severity}
                     </Badge>
                   </div>
-                  
+
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="font-medium text-green-300">{event.event_type}</span>
+                      <span className="font-medium text-green-300">
+                        {event.event_type}
+                      </span>
                       {event.resolved && (
-                        <Badge variant="outline" className="border-green-500/30 text-green-400">
+                        <Badge
+                          variant="outline"
+                          className="border-green-500/30 text-green-400"
+                        >
                           Resolved
                         </Badge>
                       )}
@@ -300,11 +331,16 @@ export function SecurityMonitoringDashboard() {
                           <span>IP: {event.ip_address}</span>
                         )}
                       </div>
-                      {event.event_data && Object.keys(event.event_data).length > 0 && (
-                        <div className="mt-1 text-xs text-green-100">
-                          {JSON.stringify(event.event_data, null, 2).slice(0, 100)}...
-                        </div>
-                      )}
+                      {event.event_data &&
+                        Object.keys(event.event_data).length > 0 && (
+                          <div className="mt-1 text-xs text-green-100">
+                            {JSON.stringify(event.event_data, null, 2).slice(
+                              0,
+                              100,
+                            )}
+                            ...
+                          </div>
+                        )}
                     </div>
                   </div>
 

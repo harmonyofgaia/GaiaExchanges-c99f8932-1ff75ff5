@@ -6,7 +6,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Mail, Send, Shield } from "lucide-react";
-import { validateEmail, validateTextInput, rateLimiter, generateCSRFToken } from "@/utils/inputSanitization";
+import {
+  validateEmail,
+  validateTextInput,
+  rateLimiter,
+  generateCSRFToken,
+} from "@/utils/inputSanitization";
 
 export function SecureContactForm() {
   const [formData, setFormData] = useState({
@@ -76,9 +81,12 @@ export function SecureContactForm() {
 
     // Rate limiting check
     const userIP = "user"; // In a real app, you'd get the actual IP
-    if (!rateLimiter.isAllowed(userIP, 3, 300000)) { // 3 attempts per 5 minutes
+    if (!rateLimiter.isAllowed(userIP, 3, 300000)) {
+      // 3 attempts per 5 minutes
       const remainingTime = rateLimiter.getRemainingTime(userIP, 300000);
-      toast.error(`Too many attempts. Please wait ${Math.ceil(remainingTime / 60000)} minutes.`);
+      toast.error(
+        `Too many attempts. Please wait ${Math.ceil(remainingTime / 60000)} minutes.`,
+      );
       return;
     }
 
@@ -94,7 +102,8 @@ export function SecureContactForm() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       toast.success("Message sent successfully! We'll get back to you soon.", {
-        description: "Thank you for contacting us. Your message has been received.",
+        description:
+          "Thank you for contacting us. Your message has been received.",
         duration: 5000,
       });
 
@@ -117,7 +126,7 @@ export function SecureContactForm() {
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    
+
     // Clear error when user starts typing
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }));
@@ -131,9 +140,7 @@ export function SecureContactForm() {
           <Mail className="h-8 w-8 text-green-400" />
           <Shield className="h-6 w-6 text-green-400" />
         </div>
-        <CardTitle className="text-2xl text-green-400">
-          Get in Touch
-        </CardTitle>
+        <CardTitle className="text-2xl text-green-400">Get in Touch</CardTitle>
         <p className="text-green-300 text-sm">
           Send us a secure message and we'll respond as soon as possible
         </p>

@@ -11,17 +11,21 @@ export interface PlayerConnection {
 export class UniversalMultiplayer {
   connections: PlayerConnection[] = [];
 
-  connect(id: string, device: string, reality: "physical" | "virtual" | "augmented") {
+  connect(
+    id: string,
+    device: string,
+    reality: "physical" | "virtual" | "augmented",
+  ) {
     this.connections.push({ id, device, reality, status: "connected" });
   }
 
   disconnect(id: string) {
-    const conn = this.connections.find(c => c.id === id);
+    const conn = this.connections.find((c) => c.id === id);
     if (conn) conn.status = "disconnected";
   }
 
   broadcast(message: string) {
-    this.connections.forEach(conn => {
+    this.connections.forEach((conn) => {
       if (conn.status === "connected") {
         // Simulate sending message
         console.log(`[Broadcast to ${conn.id}]: ${message}`);

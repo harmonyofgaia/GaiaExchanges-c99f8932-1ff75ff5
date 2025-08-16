@@ -7,7 +7,9 @@ interface LiveStatsPanelProps {
   liveStats: LiveStats;
 }
 
-export const LiveStatsPanel: React.FC<LiveStatsPanelProps> = ({ liveStats }) => {
+export const LiveStatsPanel: React.FC<LiveStatsPanelProps> = ({
+  liveStats,
+}) => {
   const [stats, setStats] = useState<Stat[]>([]);
 
   useEffect(() => {
@@ -18,12 +20,13 @@ export const LiveStatsPanel: React.FC<LiveStatsPanelProps> = ({ liveStats }) => 
   }, [liveStats]);
 
   return (
-  <div className={styles.panel}>
+    <div className={styles.panel}>
       <h2>Live Stats</h2>
       <ul>
         {stats.map((stat, idx) => (
           <li key={idx}>
-            <strong>{stat.key}:</strong> {stat.value} <em>({new Date(stat.timestamp).toLocaleTimeString()})</em>
+            <strong>{stat.key}:</strong> {stat.value}{" "}
+            <em>({new Date(stat.timestamp).toLocaleTimeString()})</em>
           </li>
         ))}
       </ul>

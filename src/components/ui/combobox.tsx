@@ -37,7 +37,11 @@ export const Combobox: React.FC<ComboboxProps> = ({
           aria-expanded={open}
           className={cn("w-full justify-between", className)}
         >
-          {selected ? selected.label : <span className="text-muted-foreground">{placeholder}</span>}
+          {selected ? (
+            selected.label
+          ) : (
+            <span className="text-muted-foreground">{placeholder}</span>
+          )}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverPrimitive.Trigger>
@@ -48,7 +52,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
               key={option.value}
               className={cn(
                 "flex items-center px-2 py-1.5 rounded hover:bg-accent text-left",
-                value === option.value && "bg-accent"
+                value === option.value && "bg-accent",
               )}
               onClick={() => {
                 onChange(option.value);
@@ -58,7 +62,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
               <Check
                 className={cn(
                   "mr-2 h-4 w-4",
-                  value === option.value ? "opacity-100" : "opacity-0"
+                  value === option.value ? "opacity-100" : "opacity-0",
                 )}
               />
               {option.label}

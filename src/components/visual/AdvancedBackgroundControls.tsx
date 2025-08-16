@@ -76,7 +76,7 @@ export function AdvancedBackgroundControls({
           ...parsed,
           type: "matrix",
           autoChange: false,
-          isLocked: true
+          isLocked: true,
         };
         setSettings(secureSettings);
         setTimeRemaining(secureSettings.changeInterval);
