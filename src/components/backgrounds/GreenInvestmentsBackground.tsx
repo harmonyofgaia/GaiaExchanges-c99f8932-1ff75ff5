@@ -68,7 +68,22 @@ export default function GreenInvestmentsBackground() {
     // columns and drops are initialized in resize()
     
     let columns: number = 0;
+    let columns: number = Math.floor((width / dpr) / fontSize);
     let drops: number[] = [];
+    
+    // Initialize drops
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.random() * -500; // Start with staggered timing
+    // columns and drops are initialized in resize()
+    
+    // columns and drops are initialized in resize()
+    // columns and drops are initialized in resize()
+    // columns and drops are initialized in resize()
+    
+    
+    
+    // (removed duplicate declarations)
+    // (removed duplicate declarations)
     // columns and drops are initialized in resize()
     let columns: number = 0;
     let drops: number[] = [];
