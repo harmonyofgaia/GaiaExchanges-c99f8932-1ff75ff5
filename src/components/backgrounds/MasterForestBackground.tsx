@@ -200,7 +200,7 @@ export default function MasterForestBackground() {
         ctx.stroke();
 
         // Soft glow halo
-        ctx.shadowColor = "rgba(0,255,190,0.3);";
+        ctx.shadowColor = "rgba(0,255,190,0.3)";
         ctx.shadowBlur = 12;
         ctx.beginPath();
         ctx.moveTo(s.x, s.y);
