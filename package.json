@@ -29,11 +29,11 @@
     "tailwind:build": "npx tailwindcss -i ./src/index.css -o ./src/tailwind.output.css --minify",
     "deploy:complete": "sh ./scripts/deploy.sh && sh ./scripts/post-deploy-validate.sh",
     "deploy:doctor": "powershell -ExecutionPolicy Bypass -File ./scripts/deployment-doctor.ps1",
-    "deploy": "npm run build && npm run deploy:vercel",
+    "deploy": "npm run build && npm run deploy:netlify",
     "deploy:validate": "sh ./scripts/post-deploy-validate.sh",
     "deploy:auto": "sh ./scripts/deploy.sh",
     "deploy:vercel": "npx vercel --prod --yes --archive=tgz",
-    "deploy:netlify": "npx netlify deploy --prod",
+    "deploy:netlify": "npx netlify deploy --prod --dir=dist",
     "deploy:static": "npm run build && echo 'Static build complete'"
   },
   "dependencies": {

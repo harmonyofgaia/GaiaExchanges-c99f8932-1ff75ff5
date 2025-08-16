@@ -7,7 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+
+# Builds
 dist
 dist-ssr
 *.local
@@ -40,6 +43,10 @@ coverage/**/*.png
 *.njsproj
 *.sln
 *.sw?
+
+# Platform-specific
+.vercel/
+.netlify/
 
 # Deployment files
 gaiaexchanges-*.zip
