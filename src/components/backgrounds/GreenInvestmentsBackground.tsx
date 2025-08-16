@@ -223,7 +223,9 @@ export default function GreenInvestmentsBackground() {
 
     function animate(currentTime: number) {
       if (currentTime - lastTime < frameInterval) {
-        rafRef.current = requestAnimationFrame(animate);
+    function animateRoots(currentTime: number) {
+      if (currentTime - lastTime < frameInterval) {
+        rafRef.current = requestAnimationFrame(animateRoots);
         return;
       }
       lastTime = currentTime;
