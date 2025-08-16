@@ -12,6 +12,7 @@ export interface GaiaEngineConfig {
 
 interface GaiaModule {
   init?(engine: GaiaEngine): void;
+  shutdown?(): void;
   listPlugins?(): unknown[];
 }
 
@@ -48,8 +49,8 @@ export class GaiaEngine {
     this.status = "ready";
     // Graceful shutdown: call shutdown on all modules if available
     for (const mod of Object.values(this.modules)) {
-      if (mod && typeof (mod as any).shutdown === "function") {
-        (mod as any).shutdown();
+      if (mod && mod.shutdown) {
+        mod.shutdown();
       }
     }
   }

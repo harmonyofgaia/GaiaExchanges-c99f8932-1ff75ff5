@@ -16,7 +16,7 @@ export interface PaginationState {
 }
 
 // Stable reference utility for useEffect dependencies
-export const useStableCallback = <T extends (...args: any[]) => any>(
+export const useStableCallback = <T extends (...args: unknown[]) => unknown>(
   callback: T,
   deps: React.DependencyList
 ): T => {
@@ -48,8 +48,8 @@ export interface UseFormHookState<T> {
 }
 
 // Event handler types for hooks
-export type AsyncFunction<T = unknown> = (...args: any[]) => Promise<T>;
-export type SyncFunction<T = unknown> = (...args: any[]) => T;
+export type AsyncFunction<T = unknown> = (...args: unknown[]) => Promise<T>;
+export type SyncFunction<T = unknown> = (...args: unknown[]) => T;
 
 // Common hook patterns
 export interface UseLocalStorageHook<T> {

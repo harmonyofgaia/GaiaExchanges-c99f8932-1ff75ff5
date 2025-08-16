@@ -1,7 +1,7 @@
 // Common TypeScript interfaces used across the application
 
 // Generic component type for React components with optional props
-export type ReactComponentType<T = {}> = React.ComponentType<T>;
+export type ReactComponentType<T = Record<string, never>> = React.ComponentType<T>;
 
 // Generic event handler type
 export type EventHandler<T = Event> = (event: T) => void;

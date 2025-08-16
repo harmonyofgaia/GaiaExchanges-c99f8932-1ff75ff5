@@ -14,11 +14,11 @@ interface StatsObject {
   completedQuests?: unknown[];
 }
 
-interface InventoryComponent extends Component {
+interface InventoryComponentData extends Component {
   items: unknown[];
 }
 
-interface QuestComponent extends Component {
+interface QuestComponentData extends Component {
   activeQuests: unknown[];
   completedQuests: unknown[];
 }

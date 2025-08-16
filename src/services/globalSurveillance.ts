@@ -37,6 +37,15 @@ interface ThreatEvent {
   timestamp: number;
 }
 
+interface SecurityAlert {
+  satellite?: string;
+  threat: string;
+  coverage?: string[];
+  severity?: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+  timestamp?: number;
+  data?: Record<string, unknown>;
+}
+
 interface DeepWebMonitor {
   id: string;
   layer: "surface" | "deep" | "dark" | "marianas" | "quantum_void";
@@ -489,7 +498,7 @@ class GlobalSurveillanceService {
     return activatedPartners;
   }
 
-  private async coordinateGlobalResponse(alert: any): Promise<void> {
+  private async coordinateGlobalResponse(alert: SecurityAlert): Promise<void> {
     console.log("🌐 Coordinating Global Response:", alert);
 
     // Automatically escalate to international coordination if severe

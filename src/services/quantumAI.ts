@@ -54,6 +54,8 @@ interface AITrainingData {
   parameters?: Record<string, unknown>;
   metadata?: Record<string, unknown>;
 }
+
+interface AISystem {
   isOperational: boolean;
   tasks: string[];
 }

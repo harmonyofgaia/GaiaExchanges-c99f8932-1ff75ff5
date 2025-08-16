@@ -161,6 +161,7 @@ export function ArtistStreamingPlatform() {
     }, 5000);
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleTipArtist = async (stream: LiveStream) => {
