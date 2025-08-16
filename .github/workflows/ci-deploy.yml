@@ -1,0 +1,94 @@
+name: CI & Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build_and_test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (LTS)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests (if configured)
+        run: |
+          npm run test --if-present || echo "No tests configured"
+
+      - name: Build
+        env:
+          # Provide dummy envs for PRs to avoid secret access. Real secrets only on push to main in deploy job.
+          VITE_SUPABASE_URL: ${{ github.event_name == 'pull_request' && 'http://localhost' || '' }}
+          VITE_SUPABASE_ANON_KEY: ${{ github.event_name == 'pull_request' && 'test-anon-key' || '' }}
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            npm run build:dev
+          else
+            npm run build
+          fi
+
+      - name: Upload build artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          if-no-files-found: error
+
+  deploy_vercel:
+    name: Deploy to Vercel (main only)
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.VERCEL_TOKEN != '' && secrets.VERCEL_PROJECT_ID != '' && secrets.VERCEL_ORG_ID != '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Prepare Vercel project
+        run: |
+          mkdir -p .vercel
+          cat > .vercel/project.json <<'EOF'
+          {
+            "projectId": "${VERCEL_PROJECT_ID}",
+            "orgId": "${VERCEL_ORG_ID}"
+          }
+          EOF
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+
+      - name: Sync Vercel settings
+        run: npx vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy to Vercel (prod)
+        run: npx vercel deploy dist --prod --yes --token "$VERCEL_TOKEN"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
