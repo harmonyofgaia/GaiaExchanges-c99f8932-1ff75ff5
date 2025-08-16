@@ -134,7 +134,9 @@ export default function GreenInvestmentsBackground() {
           // Reset drop when it goes off screen
           // Reset drop when it goes off screen (deterministic)
           if (y > height / dpr) {
-            drops[i] = -10;
+          // Reset drop when it goes off screen (deterministic: based on drop index and font size)
+          if (y > height / dpr) {
+            drops[i] = -(i * fontSize);
           }
         }
 
