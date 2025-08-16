@@ -24,15 +24,6 @@ export function IPControlCenter() {
       userCount: 1,
       riskLevel: "low",
     },
-    {
-      ip: "192.168.1.102", 
-      location: "United States, California",
-      status: "approved",
-      firstSeen: "2024-01-10",
-      lastActivity: "5 min ago",
-      userCount: 1,
-      riskLevel: "low",
-    },
   ]);
 
   const getStatusColor = (status: string) => {

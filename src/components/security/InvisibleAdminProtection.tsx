@@ -15,14 +15,11 @@ export function InvisibleAdminProtection() {
 
       // Block all keyboard input for non-admin users
       const blockKeyboardInput = (event: KeyboardEvent) => {
-        // Allow admin access (invisible detection) - Firefox only + session check
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
+        // Allow admin access - check for admin session only (removed browser restriction)
         const hasAdminSession =
           sessionStorage.getItem("admin-session-active") === "true";
 
-        if (!isAdminBrowser || !hasAdminSession) {
+        if (!hasAdminSession) {
           console.log("🚨 UNAUTHORIZED KEYBOARD ACCESS BLOCKED");
           console.log("💀 HACKER INPUT NEUTRALIZED - SYSTEM PROTECTED");
           event.preventDefault();
@@ -34,13 +31,10 @@ export function InvisibleAdminProtection() {
 
       // Block mouse interactions for non-admin users
       const blockMouseInput = (event: MouseEvent) => {
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
         const hasAdminSession =
           sessionStorage.getItem("admin-session-active") === "true";
 
-        if (!isAdminBrowser || !hasAdminSession) {
+        if (!hasAdminSession) {
           console.log("🚨 UNAUTHORIZED MOUSE ACCESS BLOCKED");
           console.log("🔒 CLICK PROTECTION ACTIVE - ADMIN ONLY ACCESS");
           event.preventDefault();
@@ -52,13 +46,10 @@ export function InvisibleAdminProtection() {
 
       // Block form submissions for non-admin users
       const blockFormSubmission = (event: Event) => {
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
         const hasAdminSession =
           sessionStorage.getItem("admin-session-active") === "true";
 
-        if (!isAdminBrowser || !hasAdminSession) {
+        if (!hasAdminSession) {
           console.log("🚨 UNAUTHORIZED FORM SUBMISSION BLOCKED");
           console.log("🛡️ MESSAGE SENDING DISABLED FOR HACKERS");
           event.preventDefault();
@@ -72,13 +63,10 @@ export function InvisibleAdminProtection() {
       const blockNetworkRequests = () => {
         const originalFetch = window.fetch;
         window.fetch = async (...args) => {
-          const isAdminBrowser = navigator.userAgent
-            .toLowerCase()
-            .includes("firefox");
           const hasAdminSession =
             sessionStorage.getItem("admin-session-active") === "true";
 
-          if (!isAdminBrowser || !hasAdminSession) {
+          if (!hasAdminSession) {
             console.log("🚨 UNAUTHORIZED NETWORK REQUEST BLOCKED");
             console.log("🌐 ADMIN-ONLY NETWORK ACCESS ENFORCED");
             throw new Error("Network access denied - Admin only");
@@ -104,13 +92,10 @@ export function InvisibleAdminProtection() {
 
       // Invisible admin session monitoring
       const monitorAdminSession = setInterval(() => {
-        const isAdminBrowser = navigator.userAgent
-          .toLowerCase()
-          .includes("firefox");
         const hasAdminSession =
           sessionStorage.getItem("admin-session-active") === "true";
 
-        if (isAdminBrowser && hasAdminSession) {
+        if (hasAdminSession) {
           console.log("👑 ADMIN SESSION VERIFIED - FULL ACCESS GRANTED");
           console.log("🌍 HARMONY OF GAIA PROTECTION ACTIVE");
           console.log("♾️ PARABOLIC UNIVERSE ACCESS CONFIRMED");
