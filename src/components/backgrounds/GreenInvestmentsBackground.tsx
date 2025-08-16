@@ -136,6 +136,20 @@ export default function GreenInvestmentsBackground() {
     
     
     
+    }
+    // columns and drops are initialized in resize()
+    // columns and drops are initialized in resize()
+    
+    // columns and drops are initialized in resize()
+    
+    // columns and drops are initialized in resize()
+    
+    
+    // columns and drops are initialized in resize()
+    
+    
+    
+    
     
 
     // Growing roots paths (SVG-like paths)
