@@ -18,8 +18,8 @@ export class StateStore<S> {
     for (const l of Array.from(this.listeners)) {
       try {
         l(this.state);
-      } catch {
-        /* Silent error handling */
+      } catch (error) {
+        console.warn('State listener error:', error);
       }
     }
   }

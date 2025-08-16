@@ -37,8 +37,8 @@ export class EventBus<
     for (const h of Array.from(set)) {
       try {
         h(event);
-      } catch {
-        /* Silent error handling */
+      } catch (error) {
+        console.warn('Event handler error:', error);
       }
     }
     return set.size;
@@ -51,8 +51,8 @@ export class EventBus<
       Array.from(set).map(async (h) => {
         try {
           await h(event);
-        } catch {
-          /* Silent error handling */
+        } catch (error) {
+          console.warn('Async event handler error:', error);
         }
       }),
     );
