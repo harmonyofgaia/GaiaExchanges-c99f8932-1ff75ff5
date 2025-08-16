@@ -95,7 +95,6 @@ function PlanRecoverySystem() {
     startRealTimeMonitoring();
   }, [initializePlanRecovery, startRealTimeMonitoring]);
 
-
   const scanGitHubRepository = async () => {
     // Simulate GitHub API integration
     const mockPlans: PlanRecord[] = [
@@ -206,7 +205,6 @@ function PlanRecoverySystem() {
 
     setPlans((prevPlans) => [...prevPlans, ...hiddenIdeas]);
   };
-
 
   const checkForUpdates = async () => {
     // Simulate real-time updates

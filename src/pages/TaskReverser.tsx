@@ -132,7 +132,7 @@ export default function TaskReverser() {
   };
 
   const getCategoryIcon = (category: string) => {
-  const icons: Record<string, React.ElementType> = {
+    const icons: Record<string, React.ElementType> = {
       admin: Shield,
       ai: Zap,
       general: Settings,
@@ -150,7 +150,7 @@ export default function TaskReverser() {
         acc[feature.category].push(feature);
         return acc;
       },
-  {} as Record<string, unknown[]>,
+      {} as Record<string, unknown[]>,
     ) || {};
 
   if (!user) {
@@ -298,7 +298,8 @@ export default function TaskReverser() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="category">Category</Label>
-                  <select title="Feature Category"
+                  <select
+                    title="Feature Category"
                     id="category"
                     value={newFeature.category}
                     onChange={(e) =>

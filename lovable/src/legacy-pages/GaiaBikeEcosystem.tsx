@@ -80,7 +80,9 @@ interface Challenge {
 const GaiaBikeEcosystem = () => {
   const { user } = useAuth();
   const [isTracking, setIsTracking] = useState(false);
-  const [currentSession, setCurrentSession] = useState<BikeSession | null>(null);
+  const [currentSession, setCurrentSession] = useState<BikeSession | null>(
+    null,
+  );
   const [totalTokens, setTotalTokens] = useState(0);
   const [bikeType, setBikeType] = useState<"gaia_bike" | "regular_bike">(
     "regular_bike",

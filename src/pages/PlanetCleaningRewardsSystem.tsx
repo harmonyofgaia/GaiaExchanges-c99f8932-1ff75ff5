@@ -1,4 +1,7 @@
-type CleaningRewardRaw = Omit<CleaningReward, 'location_data' | 'environmental_impact'> & {
+type CleaningRewardRaw = Omit<
+  CleaningReward,
+  "location_data" | "environmental_impact"
+> & {
   location_data: any;
   environmental_impact: any;
 };
@@ -107,15 +110,19 @@ export default function PlanetCleaningRewardsSystem() {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      setRewards((data || []).map((reward: CleaningRewardRaw) => ({
-        ...reward,
-        location_data: typeof reward.location_data === 'string'
-          ? JSON.parse(reward.location_data)
-          : reward.location_data,
-        environmental_impact: typeof reward.environmental_impact === 'string'
-          ? JSON.parse(reward.environmental_impact)
-          : reward.environmental_impact,
-      })));
+      setRewards(
+        (data || []).map((reward: CleaningRewardRaw) => ({
+          ...reward,
+          location_data:
+            typeof reward.location_data === "string"
+              ? JSON.parse(reward.location_data)
+              : reward.location_data,
+          environmental_impact:
+            typeof reward.environmental_impact === "string"
+              ? JSON.parse(reward.environmental_impact)
+              : reward.environmental_impact,
+        })),
+      );
     } catch (error) {
       console.error("Error loading rewards:", error);
       toast.error("Failed to load cleaning rewards");
@@ -745,7 +752,13 @@ export default function PlanetCleaningRewardsSystem() {
                             .replace(/\b\w/g, (l) => l.toUpperCase())}
                         </h4>
                         <p className="text-sm text-muted-foreground">
-                          {typeof reward.location_data?.location === 'string' ? reward.location_data.location : Array.isArray(reward.location_data?.location) ? reward.location_data.location.join(', ') : JSON.stringify(reward.location_data?.location) || "Unknown location"}
+                          {typeof reward.location_data?.location === "string"
+                            ? reward.location_data.location
+                            : Array.isArray(reward.location_data?.location)
+                              ? reward.location_data.location.join(", ")
+                              : JSON.stringify(
+                                  reward.location_data?.location,
+                                ) || "Unknown location"}
                         </p>
                         <div className="flex items-center gap-2 mt-1">
                           <MapPin className="h-3 w-3 text-muted-foreground" />

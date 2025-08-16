@@ -70,7 +70,7 @@ export function useSecurityMonitoring() {
   const logSecurityEvent = async (
     action: string,
     details: Record<string, any> = {},
-    riskScore: number = 0
+    riskScore: number = 0,
   ): Promise<void> => {
     try {
       const { error } = await supabase.rpc("log_security_event", {
@@ -93,11 +93,11 @@ export function useSecurityMonitoring() {
   const createSecurityIncident = async (
     incidentType: string,
     severity: "low" | "medium" | "high" | "critical",
-    details: Record<string, any> = {}
+    details: Record<string, any> = {},
   ): Promise<void> => {
     try {
       const user = (await supabase.auth.getUser()).data.user;
-      
+
       const { error } = await supabase.from("security_incidents").insert([
         {
           incident_type: incidentType,
@@ -122,7 +122,7 @@ export function useSecurityMonitoring() {
   const resolveIncident = async (incidentId: string): Promise<void> => {
     try {
       const user = (await supabase.auth.getUser()).data.user;
-      
+
       const { error } = await supabase
         .from("security_incidents")
         .update({
@@ -146,7 +146,7 @@ export function useSecurityMonitoring() {
     identifier: string,
     actionType: string,
     maxAttempts: number = 5,
-    windowMinutes: number = 60
+    windowMinutes: number = 60,
   ): Promise<boolean> => {
     try {
       const { data, error } = await supabase.rpc("check_rate_limit", {
@@ -157,13 +157,14 @@ export function useSecurityMonitoring() {
       });
 
       if (error) throw error;
-      
+
       if (!data) {
-        await createSecurityIncident(
-          "rate_limit_exceeded",
-          "medium",
-          { identifier, actionType, maxAttempts, windowMinutes }
-        );
+        await createSecurityIncident("rate_limit_exceeded", "medium", {
+          identifier,
+          actionType,
+          maxAttempts,
+          windowMinutes,
+        });
       }
 
       return data;

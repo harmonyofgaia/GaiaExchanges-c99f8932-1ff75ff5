@@ -6,7 +6,8 @@ import { Shield, AlertTriangle, Activity, CheckCircle, X } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
 export function SecurityDashboard() {
-  const { events, incidents, loading, resolveIncident, refreshData } = useSecurityMonitoring();
+  const { events, incidents, loading, resolveIncident, refreshData } =
+    useSecurityMonitoring();
 
   if (loading) {
     return (
@@ -16,16 +17,23 @@ export function SecurityDashboard() {
     );
   }
 
-  const unresolvedIncidents = incidents.filter(incident => !incident.resolved);
-  const highRiskEvents = events.filter(event => event.risk_score > 5);
-  
+  const unresolvedIncidents = incidents.filter(
+    (incident) => !incident.resolved,
+  );
+  const highRiskEvents = events.filter((event) => event.risk_score > 5);
+
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case "critical": return "bg-red-500";
-      case "high": return "bg-orange-500";
-      case "medium": return "bg-yellow-500";
-      case "low": return "bg-blue-500";
-      default: return "bg-gray-500";
+      case "critical":
+        return "bg-red-500";
+      case "high":
+        return "bg-orange-500";
+      case "medium":
+        return "bg-yellow-500";
+      case "low":
+        return "bg-blue-500";
+      default:
+        return "bg-gray-500";
     }
   };
 
@@ -46,22 +54,30 @@ export function SecurityDashboard() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Incidents</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Active Incidents
+            </CardTitle>
             <AlertTriangle className="h-4 w-4 text-orange-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-orange-500">{unresolvedIncidents.length}</div>
+            <div className="text-2xl font-bold text-orange-500">
+              {unresolvedIncidents.length}
+            </div>
             <p className="text-xs text-muted-foreground">Requires attention</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">High Risk Events</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              High Risk Events
+            </CardTitle>
             <Shield className="h-4 w-4 text-red-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-red-500">{highRiskEvents.length}</div>
+            <div className="text-2xl font-bold text-red-500">
+              {highRiskEvents.length}
+            </div>
             <p className="text-xs text-muted-foreground">Risk score &gt; 5</p>
           </CardContent>
         </Card>
@@ -73,7 +89,9 @@ export function SecurityDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-green-500">Secure</div>
-            <p className="text-xs text-muted-foreground">All systems operational</p>
+            <p className="text-xs text-muted-foreground">
+              All systems operational
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -98,16 +116,23 @@ export function SecurityDashboard() {
                 </p>
               ) : (
                 unresolvedIncidents.map((incident) => (
-                  <div key={incident.id} className="flex items-center justify-between p-3 border rounded-lg">
+                  <div
+                    key={incident.id}
+                    className="flex items-center justify-between p-3 border rounded-lg"
+                  >
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <Badge className={getSeverityColor(incident.severity)}>
                           {incident.severity.toUpperCase()}
                         </Badge>
-                        <span className="font-medium">{incident.incident_type}</span>
+                        <span className="font-medium">
+                          {incident.incident_type}
+                        </span>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        {formatDistanceToNow(new Date(incident.created_at), { addSuffix: true })}
+                        {formatDistanceToNow(new Date(incident.created_at), {
+                          addSuffix: true,
+                        })}
                       </p>
                     </div>
                     <Button
@@ -136,7 +161,10 @@ export function SecurityDashboard() {
           <CardContent>
             <div className="space-y-3 max-h-96 overflow-y-auto">
               {events.slice(0, 10).map((event) => (
-                <div key={event.id} className="flex items-center justify-between p-2 border rounded">
+                <div
+                  key={event.id}
+                  className="flex items-center justify-between p-2 border rounded"
+                >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       {event.success ? (
@@ -144,7 +172,9 @@ export function SecurityDashboard() {
                       ) : (
                         <X className="h-4 w-4 text-red-500" />
                       )}
-                      <span className="text-sm font-medium">{event.action}</span>
+                      <span className="text-sm font-medium">
+                        {event.action}
+                      </span>
                       {event.risk_score > 5 && (
                         <Badge variant="destructive" className="text-xs">
                           High Risk
@@ -152,7 +182,9 @@ export function SecurityDashboard() {
                       )}
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      {formatDistanceToNow(new Date(event.created_at), { addSuffix: true })}
+                      {formatDistanceToNow(new Date(event.created_at), {
+                        addSuffix: true,
+                      })}
                     </p>
                   </div>
                   <div className="text-right">

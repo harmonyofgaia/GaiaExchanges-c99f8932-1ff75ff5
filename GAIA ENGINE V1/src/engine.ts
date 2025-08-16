@@ -60,7 +60,10 @@ class MovementComponent implements Component {
   update(dt: number) {
     this.x += this.vx * dt;
     this.y += this.vy * dt;
-    liveStats.report("player1:position", `(${this.x.toFixed(2)}, ${this.y.toFixed(2)})`);
+    liveStats.report(
+      "player1:position",
+      `(${this.x.toFixed(2)}, ${this.y.toFixed(2)})`,
+    );
     console.log(`Entity moved to (${this.x.toFixed(2)}, ${this.y.toFixed(2)})`);
   }
 }
@@ -138,13 +141,13 @@ aiNPC.addComponent(new EquipmentComponent(["Cloak"]));
 // Example: Add/complete quest, add/remove inventory item
 function addQuest(entity: Entity, quest: string) {
   const comp = entity.getComponent("quest");
-  if (comp && 'activeQuests' in comp) {
+  if (comp && "activeQuests" in comp) {
     (comp as QuestComponent).activeQuests.push(quest);
   }
 }
 function completeQuest(entity: Entity, quest: string) {
   const comp = entity.getComponent("quest");
-  if (comp && 'activeQuests' in comp && 'completedQuests' in comp) {
+  if (comp && "activeQuests" in comp && "completedQuests" in comp) {
     const idx = (comp as QuestComponent).activeQuests.indexOf(quest);
     if (idx !== -1) {
       (comp as QuestComponent).activeQuests.splice(idx, 1);
@@ -154,13 +157,13 @@ function completeQuest(entity: Entity, quest: string) {
 }
 function addInventoryItem(entity: Entity, item: string) {
   const comp = entity.getComponent("inventory");
-  if (comp && 'items' in comp) {
+  if (comp && "items" in comp) {
     (comp as InventoryComponent).items.push(item);
   }
 }
 function removeInventoryItem(entity: Entity, item: string) {
   const comp = entity.getComponent("inventory");
-  if (comp && 'items' in comp) {
+  if (comp && "items" in comp) {
     const idx = (comp as InventoryComponent).items.indexOf(item);
     if (idx !== -1) (comp as InventoryComponent).items.splice(idx, 1);
   }
@@ -168,7 +171,7 @@ function removeInventoryItem(entity: Entity, item: string) {
 // --- AI NPC Behavior Expansion ---
 function updateAINPCBehavior(entity: Entity) {
   const comp = entity.getComponent("ai-npc");
-  if (comp && 'personality' in comp) {
+  if (comp && "personality" in comp) {
     // Example: Adaptive behavior
     if ((comp as AINPCComponent).personality === "curious") {
       addInventoryItem(entity, "Mystery Box");
@@ -220,13 +223,17 @@ const liveStatsPanelComponent: UIComponent = {
     }
     // Add inventory and quest stats
     const inventoryComp = player.getComponent("inventory");
-    if (inventoryComp && 'items' in inventoryComp) {
+    if (inventoryComp && "items" in inventoryComp) {
       statsObj.inventory = (inventoryComp as any).items;
     } else {
       statsObj.inventory = [];
     }
     const questComp = player.getComponent("quest");
-    if (questComp && 'activeQuests' in questComp && 'completedQuests' in questComp) {
+    if (
+      questComp &&
+      "activeQuests" in questComp &&
+      "completedQuests" in questComp
+    ) {
       statsObj.activeQuests = (questComp as any).activeQuests;
       statsObj.completedQuests = (questComp as any).completedQuests;
     } else {
@@ -246,4 +253,3 @@ engine.start();
 uiFramework.renderAll();
 
 console.log("GAIA Engine started:", engine.status);
-

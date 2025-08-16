@@ -14,7 +14,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         const sanitized = sanitizeInput(e.target.value);
         const syntheticEvent = {
           ...e,
-          target: { ...e.target, value: sanitized }
+          target: { ...e.target, value: sanitized },
         } as React.ChangeEvent<HTMLTextAreaElement>;
         onChange(syntheticEvent);
       } else if (onChange) {
