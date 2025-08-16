@@ -1,12 +1,13 @@
 import React from "react";
-import NeonTreeBackground from "@/components/backgrounds/NeonTreeBackground";
+import GreenInvestmentsBackground from "@/components/backgrounds/GreenInvestmentsBackground";
 import CarFreeProjectCard from "@/components/green-investments/CarFreeProjectCard";
+import "@/styles/green-investments-new-background.css";
 
 export default function GreenInvestments() {
   return (
-    <div className="relative min-h-[100svh]">
-      <NeonTreeBackground />
-      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="green-investments relative min-h-[100svh]">
+      <GreenInvestmentsBackground />
+      <div className="gi-content relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <header className="mb-8">
           <h1 className="text-3xl font-bold tracking-tight text-emerald-300 drop-shadow-[0_0_8px_rgba(16,185,129,0.45)]">
             Green Investments
