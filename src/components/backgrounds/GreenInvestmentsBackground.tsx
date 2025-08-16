@@ -65,6 +65,23 @@ export default function GreenInvestmentsBackground() {
     
     
     
+    let columns: number;
+    let drops: number[];
+    
+    // columns and drops are initialized in resize()
+    
+    // columns and drops are initialized in resize()
+    
+    // columns and drops are initialized in resize()
+    
+    // columns and drops are initialized in resize()
+    
+    
+    // columns and drops are initialized in resize()
+    
+    
+    
+    
     
 
     // Growing roots paths (SVG-like paths)
