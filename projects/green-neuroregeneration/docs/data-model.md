@@ -11,7 +11,7 @@ Idea (projects/green-neuroregeneration/ideas/<slug>/meta.json)
   "tags": ["CRISPRa", "iPSC", "MEA"],
   "indications": ["SCI", "stroke"],
   "trl": 2,
-  "status": "proposal|in-validation|replicating|archived",
+  "status": "proposal",
   "links": {"docs": "projects/green-neuroregeneration/ideas/axon-growth-crispr-combo/README.md"},
   "created_at": "2025-08-16T00:00:00Z"
 }
