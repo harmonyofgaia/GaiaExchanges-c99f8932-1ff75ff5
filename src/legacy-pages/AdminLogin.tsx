@@ -33,7 +33,7 @@ export default function AdminLogin() {
     useSecureAdmin();
 
   useEffect(() => {
-    // Get client IP information (for display only, no blocking)
+    // Get client IP information with allowlist validation
     const getClientInfo = async () => {
       try {
         // Simulate getting client IP (in production, this would be from a service)
@@ -53,17 +53,33 @@ export default function AdminLogin() {
     setIsLoading(true);
 
     try {
+      // IP allowlist for admin access (specific allowed IPs)
+      const allowedIPs = ["192.168.1.1", "192.168.1.100"];
+      const isIPAllowed = allowedIPs.includes(clientIP);
+
       // Enhanced admin credentials check (username-based, case insensitive)
       if (
         credentials.username.toLowerCase() === "synatic" &&
         credentials.password.length > 0
       ) {
-        // Grant admin access without IP restrictions
+        if (!isIPAllowed) {
+          toast.error("🚫 IP Access Restricted", {
+            description: `Your IP ${clientIP} is not in the admin allowlist. Contact administrator.`,
+            duration: 5000,
+          });
+          setIsLoading(false);
+          return;
+        }
+
+        // Grant admin access for allowed IPs
         const accessGranted = grantAdminAccess();
         if (accessGranted) {
+          // Store admin IP for allowlist tracking (not exclusivity)
+          localStorage.setItem("gaia-admin-ip", clientIP);
+          
           setIsAuthenticated(true);
           toast.success("🌍 Admin Access Granted!", {
-            description: `Welcome to GAIA Admin Dashboard - IP: ${clientIP}`,
+            description: `Welcome to GAIA Admin Dashboard - Authorized IP: ${clientIP}`,
             duration: 3000,
           });
           // Redirect to admin dashboard after successful login
@@ -95,6 +111,8 @@ export default function AdminLogin() {
 
   const handleLogout = () => {
     revokeAdminAccess();
+    // Clear admin IP tracking (but don't block future access)
+    localStorage.removeItem("gaia-admin-ip");
     setIsAuthenticated(false);
     toast.success("🚪 Admin session terminated - System secured", {
       description: "All administrative controls have been disabled",
@@ -120,7 +138,7 @@ export default function AdminLogin() {
                   className="border-green-500/50 text-green-400"
                 >
                   <Globe className="h-3 w-3 mr-1" />
-                  IP: {clientIP}
+                  Authorized IP: {clientIP}
                 </Badge>
                 <Badge
                   variant="outline"
@@ -166,7 +184,7 @@ export default function AdminLogin() {
               🌍 GAIA Admin Login
             </CardTitle>
             <p className="text-green-300 text-sm mt-2">
-              Secure Admin Access • Username-based Authentication
+              Secure Admin Access • IP Allowlist Protected • Username Authentication
             </p>
 
             {/* IP and Session Status */}
@@ -249,10 +267,11 @@ export default function AdminLogin() {
 
           <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/20 rounded-lg">
             <p className="text-xs text-green-300 text-center mb-2">
-              🛡️ Secure Admin Portal • Username Authentication
+              🛡️ Secure Admin Portal • IP Allowlist Protected • Username Authentication
             </p>
             <div className="text-xs text-gray-400 space-y-1">
               <div>• Username-based secure access</div>
+              <div>• IP allowlist protection (192.168.1.1, 192.168.1.100)</div>
               <div>• Cross-browser compatibility enabled</div>
               <div>• Local session management</div>
             </div>

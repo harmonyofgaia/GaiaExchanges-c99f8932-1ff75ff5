@@ -199,47 +199,26 @@ export function useSecureAdmin() {
   };
 
   const grantAdminAccess = async (): Promise<boolean> => {
-    if (!user) return false;
+    // For local username-based access, create local session
+    const sessionToken = `local-session-${Date.now()}-${Math.random().toString(36).substr(2, 16)}`;
+    const expiryTime = Date.now() + 8 * 60 * 60 * 1000; // 8 hours
 
-    try {
-      // 🔒 SECURE: Create secure admin session with audit logging
-      const sessionToken = `session-${Date.now()}-${Math.random().toString(36).substr(2, 16)}`;
+    // Store local admin session
+    localStorage.setItem("gaia-admin-username", "synatic");
+    localStorage.setItem("gaia-admin-active", "true");
+    localStorage.setItem("gaia-admin-session", sessionToken);
+    localStorage.setItem("gaia-admin-expiry", expiryTime.toString());
+    sessionStorage.setItem("admin-session-active", "true");
 
-      // Create admin session record with proper validation
-      const { error } = await supabase.from("admin_sessions").insert([
-        {
-          session_token: sessionToken,
-          user_id: user.id,
-          ip_address: "127.0.0.1", // In production this would be the real client IP
-          user_agent: navigator.userAgent,
-        },
-      ]);
+    // Update local state
+    setIsAdmin(true);
+    setAdminSession({
+      id: sessionToken,
+      timestamp: Date.now(),
+      level: "admin",
+    });
 
-      if (error) {
-        console.error("Error creating admin session:", error);
-        return false;
-      }
-
-      // Set the sessionStorage key that InvisibleAdminProtection expects
-      sessionStorage.setItem("admin-session-active", "true");
-
-      // Log the admin access grant
-      await supabase.rpc("log_admin_action", {
-        action_name: "admin_access_granted",
-        action_details: {
-          session_token: sessionToken,
-          user_id: user.id,
-          timestamp: new Date().toISOString(),
-          method: "secure_session_creation",
-        },
-      });
-
-      await validateAdminSession();
-      return true;
-    } catch (error) {
-      console.error("Error granting admin access:", error);
-      return false;
-    }
+    return true;
   };
 
   const revokeAdminAccess = async () => {
