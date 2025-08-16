@@ -105,45 +105,6 @@ fi
 PLATFORM=${1:-"manual"}
 
 case $PLATFORM in
-    "vercel")
-        print_status "Deploying to Vercel..."
-        
-        # Check if project is linked to Vercel
-        if [ ! -f .vercel/project.json ]; then
-            print_status "Project not linked to Vercel. Setting up..."
-            print_status "You may need to run 'vercel link' first for team projects"
-        fi
-        
-        if command -v vercel &> /dev/null; then
-            print_status "Using local Vercel CLI..."
-            if vercel --prod; then
-                print_success "Deployed to Vercel successfully"
-            else
-                print_error "Vercel deployment failed with local CLI"
-                exit 1
-            fi
-        elif npx vercel --version &> /dev/null; then
-            print_status "Using npx vercel..."
-            if npx vercel --prod; then
-                print_success "Deployed to Vercel successfully"
-            else
-                print_error "Vercel deployment failed with npx"
-                exit 1
-            fi
-        else
-            print_warning "Vercel CLI not found locally. Attempting to install via npx..."
-            if npx vercel@latest --prod; then
-                print_success "Deployed to Vercel successfully"
-            else
-                print_error "Vercel deployment failed. Please ensure:"
-                print_error "1. Install CLI: npm install -g vercel"
-                print_error "2. Login: vercel login"
-                print_error "3. Link project: vercel link"
-                print_status "Or deploy manually: Upload dist/ folder to Vercel dashboard"
-                exit 1
-            fi
-        fi
-        ;;
     "netlify")
         print_status "Deploying to Netlify..."
         
@@ -203,11 +164,10 @@ case $PLATFORM in
     "manual")
         print_success "Build completed successfully!"
         print_status "Manual deployment options:"
-        echo "  1. Vercel: ./scripts/deploy.sh vercel"
-        echo "  2. Netlify: ./scripts/deploy.sh netlify"
-        echo "  3. GitHub Pages: ./scripts/deploy.sh github-pages"
-        echo "  4. Custom server: Upload dist/ folder contents"
-        echo "  5. Static hosting: Drag dist/ folder to hosting service"
+        echo "  1. Netlify: ./scripts/deploy.sh netlify"
+        echo "  2. GitHub Pages: ./scripts/deploy.sh github-pages"
+        echo "  3. Custom server: Upload dist/ folder contents"
+        echo "  4. Static hosting: Drag dist/ folder to hosting service"
         ;;
     "static")
         print_status "Preparing for static hosting deployment..."
@@ -227,7 +187,7 @@ case $PLATFORM in
         ;;
     *)
         print_error "Unknown deployment platform: $PLATFORM"
-        print_status "Available platforms: vercel, netlify, github-pages, manual, static"
+        print_status "Available platforms: netlify, github-pages, manual, static"
         exit 1
         ;;
 esac

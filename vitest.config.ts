@@ -23,7 +23,6 @@ export default defineConfig({
       "**/coverage/**",
       "**/.output/**",
       "**/.next/**",
-      "**/.vercel/**",
       "**/.netlify/**",
       "**/test/integration/supabase.integration.test.ts",
       "**/test/e2e/smoke.spec.ts",

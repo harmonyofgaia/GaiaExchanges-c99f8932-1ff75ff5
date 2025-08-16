@@ -35,7 +35,7 @@ VITE_SUPABASE_ANON_KEY=your-actual-anonymous-key
 
 ### 2. CLI Tools Not Found
 
-**Problem**: `netlify: command not found` or `vercel: command not found`
+**Problem**: `netlify: command not found`
 
 **Solutions**:
 
@@ -44,7 +44,6 @@ VITE_SUPABASE_ANON_KEY=your-actual-anonymous-key
 ```bash
 # These scripts automatically handle CLI tool installation
 npm run deploy:netlify    # Uses npx if CLI not installed (primary)
-npm run deploy:vercel     # Uses npx if CLI not installed (optional)
 npm run deploy:auto       # Runs checks and deploys
 ```
 
@@ -52,13 +51,11 @@ npm run deploy:auto       # Runs checks and deploys
 
 ```bash
 npm install -g netlify-cli
-npm install -g vercel      # optional for manual deployments
 ```
 
 **Option 3 - Use npx directly**:
 
 ```bash
-npx vercel --prod
 npx netlify-cli deploy --prod --dir=dist
 ```
 
@@ -177,19 +174,6 @@ npm run preview
 
 ## Platform-Specific Instructions
 
-### Vercel Deployment
-
-```bash
-# Method 1: Using Vercel CLI
-npx vercel --prod
-
-# Method 2: Using our script
-npm run deploy:vercel
-
-# Method 3: GitHub integration (recommended)
-# Connect repository to Vercel dashboard
-```
-
 ### Netlify Deployment
 
 ```bash
@@ -254,7 +238,6 @@ npm run deploy:doctor
 npm run deploy:validate
 
 # Platform-specific deployments
-npm run deploy:vercel
 npm run deploy:netlify
 npm run deploy:github-pages
 npm run deploy:static

@@ -110,7 +110,7 @@ else
 fi
 
 # Check deployment configuration files
-DEPLOYMENT_CONFIGS="vercel.json netlify.toml"
+DEPLOYMENT_CONFIGS="netlify.toml"
 for config in $DEPLOYMENT_CONFIGS; do
     if [ -f "$config" ]; then
         print_success "$config exists"
@@ -178,7 +178,7 @@ fi
 print_header "DEPLOYMENT PLATFORM READINESS"
 
 # Check CLI tools
-DEPLOYMENT_TOOLS="vercel netlify"
+DEPLOYMENT_TOOLS="netlify"
 for tool in $DEPLOYMENT_TOOLS; do
     if command -v $tool &> /dev/null; then
         print_success "$tool CLI is available"
@@ -273,12 +273,6 @@ print_header "DEPLOYMENT RECOMMENDATIONS"
 
 # Provide platform-specific recommendations
 echo "🎯 Platform-specific recommendations:"
-
-echo ""
-echo "📋 For Vercel:"
-echo "   1. Ensure vercel.json is configured"
-echo "   2. Set environment variables in Vercel dashboard"
-echo "   3. Use: npm run deploy:vercel"
 
 echo ""
 echo "📋 For Netlify:"
