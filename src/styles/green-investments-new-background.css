@@ -1,0 +1,82 @@
+/* Green Investments Background Styles */
+
+.green-investments {
+  position: relative;
+  overflow: clip;
+  background: #04170e;
+}
+
+.gi-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gi-hallway {
+  position: absolute;
+  inset: 0;
+}
+
+#gi-matrix {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  mix-blend-mode: screen;
+}
+
+.gi-roots {
+  position: absolute;
+  inset: 0;
+}
+
+.gi-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Growing roots animation */
+@keyframes grow-roots {
+  0% {
+    stroke-dashoffset: 200;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -200;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .gi-root-path {
+    animation: none !important;
+  }
+  
+  #gi-matrix {
+    display: none;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .gi-bg {
+    opacity: 0.7;
+  }
+  
+  #gi-matrix {
+    opacity: 0.1;
+  }
+}
+
+/* Performance optimization for low-end devices */
+@media (max-resolution: 1dppx) {
+  #gi-matrix {
+    opacity: 0.1;
+  }
+  
+  .gi-roots svg {
+    filter: none;
+  }
+}

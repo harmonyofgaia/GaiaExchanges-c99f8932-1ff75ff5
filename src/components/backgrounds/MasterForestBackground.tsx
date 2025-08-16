@@ -19,7 +19,7 @@ export default function MasterForestBackground() {
     if (!canvas) return;
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
-    let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
     let width = 0;
     let height = 0;
 
