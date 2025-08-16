@@ -163,7 +163,27 @@ export function ArtistStreamingPlatform() {
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  }, []);
 
+  // Effect to update streaming stats whenever liveStreams changes
+  useEffect(() => {
+    const stats = liveStreams.reduce(
+      (acc, stream) => ({
+        totalViewers: acc.totalViewers + stream.viewers,
+        totalEarnings: acc.totalEarnings + stream.earnings,
+        totalTokensBurned: acc.totalTokensBurned + stream.tokensBurned,
+        activeStreams: acc.activeStreams + (stream.isLive ? 1 : 0),
+      }),
+      {
+        totalViewers: 0,
+        totalEarnings: 0,
+        totalTokensBurned: 0,
+        activeStreams: 0,
+      },
+    );
+
+    setStreamingStats(stats);
+  }, [liveStreams]);
   const handleTipArtist = async (stream: LiveStream) => {
     try {
       // Burn tokens as part of the tipping process
