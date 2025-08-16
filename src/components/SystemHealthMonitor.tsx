@@ -56,7 +56,7 @@ export function SystemHealthMonitor() {
         console.log(
           "💚 SYSTEM HEALTH: OPTIMAL - All security systems operating perfectly",
         );
-        console.log(`🛡️ Threats Blocked: ${(quantumCore.metrics.quantumKeysActive ? 1 : 0).toLocaleString()}`);
+        console.log(`🛡️ Threats Blocked: ${(systemHealth.threats_blocked).toLocaleString()}`);
         console.log(
           `⚡ Quantum Protection: ${quantumCore.metrics.isQuantumSecure ? "ACTIVE" : "STANDBY"}`,
         );
