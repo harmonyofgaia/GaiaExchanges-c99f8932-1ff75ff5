@@ -205,7 +205,7 @@ export default function EarningActivities() {
   const [searchQuery, setSearchQuery] = useState("");
   // State for selected activity
   const [selectedActivity, setSelectedActivity] = useState<{
-    category: string;,
+    category: string;
     activityId: string;
   } | null>(null);
   // State for active tab
