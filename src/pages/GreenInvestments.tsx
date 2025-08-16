@@ -1,5 +1,6 @@
 import React from "react";
 import SupabaseBackground from "@/components/backgrounds/SupabaseBackground";
+import CarFreeProjectCard from "@/components/green-investments/CarFreeProjectCard";
 
 export default function GreenInvestments() {
   return (
@@ -23,6 +24,7 @@ export default function GreenInvestments() {
             </p>
             {/* Existing content / list / cards go here */}
             <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+              <CarFreeProjectCard />
               {/* Example card */}
               <div className="rounded-lg border border-white/10 bg-neutral-950/50 p-4 shadow-md backdrop-blur">
                 <h3 className="font-medium text-emerald-200">Urban Canopy Bonds</h3>
