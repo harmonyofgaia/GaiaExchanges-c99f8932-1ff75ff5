@@ -46,7 +46,8 @@ export default function NeonTreeBackground() {
 
     // Initial seed near bottom center, slightly randomized
     const baseX = (width / devicePixelRatio) * 0.5 + rand(-40, 40);
-    const baseY = (height / devicePixelRatio) * 0.92;
+    const baseX = canvas.offsetWidth * 0.5 + rand(-40, 40);
+    const baseY = canvas.offsetHeight * 0.92;
 
     const branches: Branch[] = [];
     const makeBranch = (x: number, y: number, angle: number, widthPx: number, life: number) => {
