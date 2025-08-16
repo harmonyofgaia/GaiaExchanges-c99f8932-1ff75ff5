@@ -395,7 +395,7 @@ export function AdminNFTMarketplace() {
                     onChange={(e) =>
                       setNewNFT((prev) => ({
                         ...prev,
-                        rarity: e.target.value as unknown,
+                        rarity: e.target.value as NFTRarity,
                       }))
                     }
                     className="w-full px-3 py-2 bg-muted border border-border rounded-md"
