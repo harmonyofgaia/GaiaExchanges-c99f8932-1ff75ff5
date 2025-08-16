@@ -14,7 +14,7 @@ Adapter Contract (abstract)
   - `proof`: The cryptographic proof data (string or object).
   - `publicSignals`: Any public signals or inputs required for verification.
   - `protocol`: (optional) The protocol or scheme used (e.g., zkSNARK, zkSTARK).
-- For more details, refer to the [ZKProof specification](https://zkproof.org/) or your project's implementation.
+- For the required structure and validation rules of a `ZKProof` object, refer to the [ZKProof specification](https://zkproof.org/).
 - Treasury.proposePayout(awardId, amount, recipient): submits to multisig/treasury.
 - Treasury.executePayout(proposalId): executes after approvals/timelock.
 - Identity.getReputation(user): returns sybil resistance signals.
