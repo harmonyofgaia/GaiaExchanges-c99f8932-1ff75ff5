@@ -7,6 +7,7 @@ function useSafeAuth() {
   try {
     return useAuth();
   } catch (error) {
+    console.error("Error in useSafeAuth: AuthProvider may be missing or useAuth threw an error.", error);
     // Return null user if AuthProvider is not available
     return { user: null };
   }
