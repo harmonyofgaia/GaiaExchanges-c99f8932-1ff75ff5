@@ -12,6 +12,18 @@ interface SecureAdminLoginProps {
   onAdminLogin: () => void;
 }
 
+// Helper to generate a cryptographically secure random string
+function generateSecureRandomString(length: number): string {
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const values = new Uint8Array(length);
+  window.crypto.getRandomValues(values);
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    result += charset[values[i] % charset.length];
+  }
+  return result;
+}
+
 export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
   const [credentials, setCredentials] = useState({
     emailOrUsername: "",
@@ -32,7 +44,7 @@ export function SecureAdminLogin({ onAdminLogin }: SecureAdminLoginProps) {
         credentials.password.length > 0
       ) {
         // Username-based login path - create local admin session
-        const sessionToken = `local-session-${Date.now()}-${Math.random().toString(36).substr(2, 16)}`;
+        const sessionToken = `local-session-${Date.now()}-${generateSecureRandomString(16)}`;
         const expiryTime = Date.now() + 8 * 60 * 60 * 1000; // 8 hours
 
         // Set local storage keys for admin session
