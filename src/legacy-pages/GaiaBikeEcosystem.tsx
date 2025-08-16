@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -125,7 +125,7 @@ const GaiaBikeEcosystem = () => {
       initializeChallenges();
       getCurrentLocation();
     }
-  }, [user]);
+  }, [user, fetchUserStats]);
 
   // Real-time session tracking
   useEffect(() => {
@@ -202,7 +202,7 @@ const GaiaBikeEcosystem = () => {
     }
   };
 
-  const fetchUserStats = async () => {
+  const fetchUserStats = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from("bike_sessions")
@@ -247,7 +247,7 @@ const GaiaBikeEcosystem = () => {
     } catch (error) {
       console.error("Error fetching stats:", error);
     }
-  };
+  }, [user]);
 
   const startBikeSession = async () => {
     if (!user) {
