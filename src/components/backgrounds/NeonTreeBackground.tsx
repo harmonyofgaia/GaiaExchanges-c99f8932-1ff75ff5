@@ -43,7 +43,6 @@ export default function NeonTreeBackground() {
     // Neon palette
     const greens = ["#00ffa6", "#36ffd6", "#14ffb0"];
     const roots = ["#15c9ff22", "#00ff6e15", "#00b3ff20"];
-    const particleCount = 45; // Number of background neural/matrix particles
 
     // Initial seed near bottom center, slightly randomized
     const baseX = canvas.offsetWidth * 0.5 + rand(-40, 40);
