@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="800" viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Enhanced glow filter for the tree -->
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Intense glow filter -->
+    <filter id="intenseGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="20" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Soft glow filter -->
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Enhanced tree gradient -->
+    <radialGradient id="treeGradient" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#22c55e;stop-opacity:0.9" />
+      <stop offset="60%" style="stop-color:#16a34a;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#15803d;stop-opacity:0.6" />
+    </radialGradient>
+
+    <!-- Magical tree gradient -->
+    <radialGradient id="magicalGradient" cx="50%" cy="30%" r="80%">
+      <stop offset="0%" style="stop-color:#34d399;stop-opacity:1" />
+      <stop offset="20%" style="stop-color:#10b981;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#059669;stop-opacity:0.8" />
+      <stop offset="80%" style="stop-color:#047857;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#064e3b;stop-opacity:0.4" />
+    </radialGradient>
+
+    <!-- Enhanced trunk gradient -->
+    <linearGradient id="trunkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8a29e;stop-opacity:0.8" />
+      <stop offset="30%" style="stop-color:#78716c;stop-opacity:0.7" />
+      <stop offset="70%" style="stop-color:#57534e;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#44403c;stop-opacity:0.5" />
+    </linearGradient>
+
+    <!-- Root gradient -->
+    <radialGradient id="rootGradient" cx="50%" cy="0%" r="100%">
+      <stop offset="0%" style="stop-color:#78716c;stop-opacity:0.6" />
+      <stop offset="50%" style="stop-color:#57534e;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#44403c;stop-opacity:0.2" />
+    </radialGradient>
+  </defs>
+
+  <!-- Tree roots spreading out -->
+  <ellipse cx="300" cy="720" rx="180" ry="40" fill="url(#rootGradient)" opacity="0.3"/>
+  <ellipse cx="200" cy="730" rx="80" ry="20" fill="url(#rootGradient)" opacity="0.4"/>
+  <ellipse cx="400" cy="735" rx="90" ry="25" fill="url(#rootGradient)" opacity="0.4"/>
+  <ellipse cx="120" cy="740" rx="60" ry="15" fill="url(#rootGradient)" opacity="0.3"/>
+  <ellipse cx="480" cy="742" rx="70" ry="18" fill="url(#rootGradient)" opacity="0.3"/>
+
+  <!-- Main tree trunk with more realistic shape -->
+  <path d="M 280 600 Q 285 650 290 700 Q 295 750 300 770 Q 300 780 300 790 
+           L 320 790 Q 320 780 320 770 Q 325 750 330 700 Q 335 650 340 600 
+           Q 335 580 330 560 Q 325 540 320 520 Q 315 500 310 480 
+           L 290 480 Q 285 500 280 520 Q 275 540 270 560 Q 275 580 280 600 Z" 
+        fill="url(#trunkGradient)" filter="url(#softGlow)" opacity="0.8"/>
+  
+  <!-- Tree branches extending from trunk -->
+  <path d="M 290 520 Q 250 510 220 500 Q 200 495 180 490" stroke="url(#trunkGradient)" stroke-width="8" fill="none" opacity="0.6"/>
+  <path d="M 310 540 Q 350 530 380 520 Q 400 515 420 510" stroke="url(#trunkGradient)" stroke-width="6" fill="none" opacity="0.6"/>
+  <path d="M 295 500 Q 280 470 270 450 Q 265 440 260 430" stroke="url(#trunkGradient)" stroke-width="5" fill="none" opacity="0.5"/>
+  <path d="M 305 510 Q 320 480 330 460 Q 335 450 340 440" stroke="url(#trunkGradient)" stroke-width="5" fill="none" opacity="0.5"/>
+
+  <!-- Massive main canopy with layered effect -->
+  <ellipse cx="300" cy="450" rx="140" ry="90" fill="url(#magicalGradient)" filter="url(#intenseGlow)" opacity="0.9"/>
+  <ellipse cx="300" cy="420" rx="120" ry="80" fill="url(#treeGradient)" filter="url(#glow)" opacity="0.8"/>
+  <ellipse cx="300" cy="390" rx="100" ry="70" fill="url(#magicalGradient)" filter="url(#glow)" opacity="0.7"/>
+  <ellipse cx="300" cy="360" rx="85" ry="60" fill="url(#treeGradient)" filter="url(#glow)" opacity="0.6"/>
+  
+  <!-- Secondary massive branches -->
+  <ellipse cx="200" cy="420" rx="70" ry="50" fill="url(#treeGradient)" filter="url(#glow)" opacity="0.7"/>
+  <ellipse cx="400" cy="430" rx="80" ry="55" fill="url(#magicalGradient)" filter="url(#glow)" opacity="0.7"/>
+  <ellipse cx="170" cy="380" rx="50" ry="35" fill="url(#treeGradient)" filter="url(#glow)" opacity="0.6"/>
+  <ellipse cx="430" cy="390" rx="60" ry="40" fill="url(#magicalGradient)" filter="url(#glow)" opacity="0.6"/>
+  
+  <!-- Mid-level foliage -->
+  <ellipse cx="240" cy="360" rx="40" ry="30" fill="url(#treeGradient)" filter="url(#glow)" opacity="0.6"/>
+  <ellipse cx="360" cy="370" rx="45" ry="35" fill="url(#magicalGradient)" filter="url(#glow)" opacity="0.6"/>
+  <ellipse cx="200" cy="340" rx="35" ry="25" fill="url(#treeGradient)" filter="url(#softGlow)" opacity="0.5"/>
+  <ellipse cx="400" cy="350" rx="40" ry="30" fill="url(#magicalGradient)" filter="url(#softGlow)" opacity="0.5"/>
+  
+  <!-- Upper crown layers -->
+  <ellipse cx="300" cy="320" rx="70" ry="50" fill="url(#magicalGradient)" filter="url(#glow)" opacity="0.8"/>
+  <ellipse cx="300" cy="290" rx="60" ry="45" fill="url(#treeGradient)" filter="url(#glow)" opacity="0.7"/>
+  <ellipse cx="300" cy="260" rx="50" ry="40" fill="url(#magicalGradient)" filter="url(#glow)" opacity="0.6"/>
+  
+  <!-- Top smaller branches and leaves -->
+  <ellipse cx="280" cy="240" rx="25" ry="20" fill="url(#treeGradient)" filter="url(#glow)" opacity="0.6"/>
+  <ellipse cx="320" cy="245" rx="30" ry="25" fill="url(#magicalGradient)" filter="url(#glow)" opacity="0.6"/>
+  <ellipse cx="260" cy="220" rx="20" ry="15" fill="url(#treeGradient)" filter="url(#softGlow)" opacity="0.5"/>
+  <ellipse cx="340" cy="225" rx="22" ry="18" fill="url(#magicalGradient)" filter="url(#softGlow)" opacity="0.5"/>
+  
+  <!-- Outer extending foliage for natural asymmetry -->
+  <ellipse cx="120" cy="460" rx="40" ry="30" fill="url(#treeGradient)" filter="url(#softGlow)" opacity="0.4"/>
+  <ellipse cx="480" cy="470" rx="45" ry="35" fill="url(#magicalGradient)" filter="url(#softGlow)" opacity="0.4"/>
+  <ellipse cx="90" cy="400" rx="25" ry="20" fill="url(#treeGradient)" filter="url(#softGlow)" opacity="0.3"/>
+  <ellipse cx="510" cy="410" rx="30" ry="25" fill="url(#magicalGradient)" filter="url(#softGlow)" opacity="0.3"/>
+  
+  <!-- Small floating leaves and magical particles -->
+  <circle cx="150" cy="300" r="3" fill="#22c55e" opacity="0.6" filter="url(#softGlow)"/>
+  <circle cx="450" cy="310" r="4" fill="#10b981" opacity="0.7" filter="url(#softGlow)"/>
+  <circle cx="100" cy="350" r="2" fill="#34d399" opacity="0.5" filter="url(#softGlow)"/>
+  <circle cx="500" cy="360" r="3" fill="#059669" opacity="0.6" filter="url(#softGlow)"/>
+  <circle cx="180" cy="250" r="2" fill="#22c55e" opacity="0.4" filter="url(#softGlow)"/>
+  <circle cx="420" cy="260" r="3" fill="#10b981" opacity="0.5" filter="url(#softGlow)"/>
+  
+  <!-- Top mystical crown with intense glow -->
+  <ellipse cx="300" cy="200" rx="35" ry="30" fill="url(#magicalGradient)" filter="url(#intenseGlow)" opacity="0.9"/>
+  <ellipse cx="300" cy="180" rx="25" ry="20" fill="#10b981" filter="url(#intenseGlow)" opacity="0.8"/>
+</svg>
