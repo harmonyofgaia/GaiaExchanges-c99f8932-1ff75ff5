@@ -85,10 +85,11 @@ Culture of Harmony Team
         description: `Successfully notified ${notificationData.recipient}`,
         duration: 5000,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("❌ Notification sending failed:", error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       toast.error("Notification Failed", {
-        description: `Error: ${error.message}`,
+        description: `Error: ${errorMessage}`,
         duration: 5000,
       });
     } finally {
@@ -123,9 +124,10 @@ Culture of Harmony Team
         description: "Resend API is properly configured",
         duration: 5000,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       toast.error("❌ Email Connection Test Failed", {
-        description: `Please check Resend API configuration: ${error.message}`,
+        description: `Please check Resend API configuration: ${errorMessage}`,
         duration: 8000,
       });
     } finally {

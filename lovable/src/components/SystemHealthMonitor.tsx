@@ -67,7 +67,7 @@ export function SystemHealthMonitor() {
     return () => {
       if (healthInterval.current) clearInterval(healthInterval.current);
     };
-  }, [quantumCore, masterSecurity]);
+  }, [quantumCore, masterSecurity, systemHealth.threats_blocked]);
 
   return {
     systemHealth,

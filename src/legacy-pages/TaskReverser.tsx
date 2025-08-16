@@ -13,6 +13,17 @@ import { useAuth } from "@/components/auth/AuthProvider";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 
+interface FeatureToggle {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  is_enabled: boolean;
+  admin_only?: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export default function TaskReverser() {
   const { user } = useAuth();
   const [newFeature, setNewFeature] = useState({
@@ -124,7 +135,7 @@ export default function TaskReverser() {
   };
 
   const getCategoryIcon = (category: string) => {
-    const icons: Record<string, any> = {
+    const icons: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
       admin: Shield,
       ai: Zap,
       general: Settings,
@@ -142,7 +153,7 @@ export default function TaskReverser() {
         acc[feature.category].push(feature);
         return acc;
       },
-      {} as Record<string, any[]>,
+      {} as Record<string, FeatureToggle[]>,
     ) || {};
 
   if (!user) {

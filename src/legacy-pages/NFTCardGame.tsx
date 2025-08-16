@@ -31,6 +31,29 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { toast } from "sonner";
 
+interface CardMetadata {
+  image_url?: string;
+  description?: string;
+  attributes?: Array<{
+    trait_type: string;
+    value: string | number;
+  }>;
+  artist?: string;
+  habitat?: string;
+  conservation_status?: string;
+  scientific_name?: string;
+}
+
+interface TradingHistoryEntry {
+  id: string;
+  buyer_id: string;
+  seller_id: string;
+  price: number;
+  currency: string;
+  timestamp: string;
+  transaction_hash?: string;
+}
+
 interface NFTCard {
   id: string;
   user_id: string;
@@ -39,7 +62,7 @@ interface NFTCard {
   rarity: string;
   power_level: number;
   biodiversity_category: string;
-  card_metadata: any;
+  card_metadata: CardMetadata;
   minted_at: string;
   is_tradeable: boolean;
   ecosystem_interactions?: string[];
@@ -47,7 +70,8 @@ interface NFTCard {
   real_world_impact?: number;
   evolution_stage?: number;
   max_evolution?: number;
-  trading_history?: any[];
+  trading_history?: TradingHistoryEntry[];
+}
   market_value?: number;
 }
 
@@ -70,8 +94,21 @@ interface ConservationPartnership {
 interface MarketplaceData {
   totalVolume: number;
   activeTraders: number;
-  topCollections: any[];
-  recentSales: any[];
+  topCollections: Array<{
+    id: string;
+    name: string;
+    volume: number;
+    floor_price: number;
+    items: number;
+  }>;
+  recentSales: Array<{
+    id: string;
+    card_name: string;
+    price: number;
+    buyer: string;
+    seller: string;
+    timestamp: string;
+  }>;
   conservationFunding: number;
 }
 

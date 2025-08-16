@@ -34,18 +34,46 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { toast } from "sonner";
 
+interface LocationData {
+  lat: number;
+  lng: number;
+  address?: string;
+  area_cleaned?: number; // in square meters
+  before_photos?: string[];
+  after_photos?: string[];
+  gps_accuracy?: number;
+}
+
+interface EnvironmentalImpact {
+  waste_collected_kg?: number;
+  trees_planted?: number;
+  carbon_offset_kg?: number;
+  biodiversity_score?: number;
+  air_quality_improvement?: number;
+  water_quality_improvement?: number;
+}
+
+interface IoTSensorData {
+  sensor_id?: string;
+  air_quality_reading?: number;
+  noise_level?: number;
+  temperature?: number;
+  humidity?: number;
+  timestamp?: string;
+}
+
 interface CleaningReward {
   id: string;
   user_id: string;
   activity_type: string;
-  location_data: any;
+  location_data: LocationData;
   verification_method: string;
   tokens_earned: number;
-  environmental_impact: any;
+  environmental_impact: EnvironmentalImpact;
   verified_at: string | null;
   created_at: string;
   satellite_verified?: boolean;
-  iot_sensor_data?: any;
+  iot_sensor_data?: IoTSensorData;
   blockchain_hash?: string;
   community_validation_score?: number;
   real_time_tracking?: boolean;
