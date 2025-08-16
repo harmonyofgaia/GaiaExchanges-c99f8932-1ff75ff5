@@ -1,0 +1,149 @@
+/* Green Investments page-only background 
+ * Creates a three-layer background effect with animated tree
+ */
+
+/* Keyframes for the tree zoom-in animation */
+@keyframes treeZoomIn {
+  from {
+    background-size: 60% auto;
+    background-position: center 110%;
+  }
+  to {
+    background-size: 120% auto;
+    background-position: center 85%;
+  }
+}
+
+/* Keyframes for ambient aura pulse */
+@keyframes auraGlow {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+/* Main page class for Green Investments background */
+.page-green-investments {
+  position: relative;
+  /* Three-layer background composition */
+  background-image: 
+    /* Layer 1 (top): Tree SVG with animation */
+    url('/assets/green-tree.svg'),
+    /* Layer 2 (middle): Ambient green aura */
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 40%, transparent 70%),
+    /* Layer 3 (bottom): Page gradient matching existing Tailwind colors */
+    linear-gradient(135deg, #000000 0%, #111827 35%, #064e3b 100%);
+  
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-attachment: fixed, fixed, fixed;
+  
+  /* Tree positioning and animation */
+  background-position: 
+    center 95%,     /* Tree positioned lower initially */
+    center center,  /* Aura centered */
+    center center;  /* Gradient covers full area */
+  
+  background-size: 
+    80% auto,       /* Tree starts smaller */
+    100% 100%,      /* Aura covers full area */
+    100% 100%;      /* Gradient covers full area */
+  
+  /* Apply the slow zoom animation to the tree layer */
+  animation: treeZoomIn 120s ease-in-out infinite alternate;
+  
+  /* Ensure background doesn't interfere with content */
+  background-clip: padding-box;
+}
+
+/* Pseudo-element for additional ambient effects */
+.page-green-investments::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 70%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 70% 30%, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
+  animation: auraGlow 90s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .page-green-investments {
+    /* Disable tree animation */
+    animation: none;
+    /* Set tree to final static position */
+    background-position: 
+      center 85%,     /* Tree final position */
+      center center,  /* Aura centered */
+      center center;  /* Gradient covers full area */
+    
+    background-size: 
+      100% auto,      /* Tree final size */
+      100% 100%,      /* Aura covers full area */
+      100% 100%;      /* Gradient covers full area */
+  }
+  
+  .page-green-investments::before {
+    /* Disable aura animation */
+    animation: none;
+    opacity: 0.3;
+    transform: none;
+  }
+}
+
+/* Ensure content is always above the background */
+.page-green-investments > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fine-tune for different screen sizes */
+@media (max-width: 768px) {
+  .page-green-investments {
+    background-size: 
+      120% auto,      /* Larger tree on mobile */
+      100% 100%,
+      100% 100%;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .page-green-investments {
+      background-size: 
+        140% auto,    /* Adjusted for mobile static view */
+        100% 100%,
+        100% 100%;
+    }
+  }
+}
+
+@media (min-width: 1920px) {
+  .page-green-investments {
+    background-size: 
+      60% auto,       /* Smaller tree on very large screens */
+      100% 100%,
+      100% 100%;
+  }
+  
+  @keyframes treeZoomIn {
+    from {
+      background-size: 50% auto;
+      background-position: center 110%;
+    }
+    to {
+      background-size: 100% auto;
+      background-position: center 85%;
+    }
+  }
+}

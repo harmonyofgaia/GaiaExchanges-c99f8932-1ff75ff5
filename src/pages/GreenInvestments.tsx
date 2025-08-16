@@ -25,6 +25,9 @@ import {
   Wallet,
 } from "lucide-react";
 
+// Page-only background CSS import
+import "@/styles/green-investments-background.css";
+
 const GreenInvestments = () => {
   // Your original projects data
   const originalProjects = [
@@ -163,7 +166,7 @@ const GreenInvestments = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
+    <div className="page-green-investments min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
