@@ -76,13 +76,16 @@ export function useSecureAdmin() {
               },
             ]);
 
-          if (!sessionError) {
-            setIsAdmin(true);
-            setAdminSession({
-              id: sessionToken,
-              timestamp: Date.now(),
-              level: "admin",
-            });
+        if (!sessionError) {
+          // Set the sessionStorage key that InvisibleAdminProtection expects
+          sessionStorage.setItem("admin-session-active", "true");
+          
+          setIsAdmin(true);
+          setAdminSession({
+            id: sessionToken,
+            timestamp: Date.now(),
+            level: "admin",
+          });
 
             // Log successful admin session creation
             await supabase.rpc("log_security_event", {
@@ -154,6 +157,9 @@ export function useSecureAdmin() {
         return false;
       }
 
+      // Set the sessionStorage key that InvisibleAdminProtection expects
+      sessionStorage.setItem("admin-session-active", "true");
+
       // Log the admin access grant
       await supabase.rpc("log_admin_action", {
         action_name: "admin_access_granted",
@@ -177,6 +183,9 @@ export function useSecureAdmin() {
     if (!user || !adminSession) return;
 
     try {
+      // Clear the sessionStorage key that InvisibleAdminProtection expects
+      sessionStorage.removeItem("admin-session-active");
+      
       // Deactivate admin security session
       if (adminSession.id) {
         await supabase
