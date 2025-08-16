@@ -33,18 +33,12 @@ export default function AdminLogin() {
     useSecureAdmin();
 
   useEffect(() => {
-    // Get client IP information
+    // Get client IP information (for display only, no blocking)
     const getClientInfo = async () => {
       try {
         // Simulate getting client IP (in production, this would be from a service)
         const ip = `192.168.1.${Math.floor(Math.random() * 255)}`;
         setClientIP(ip);
-
-        // Check for existing admin sessions
-        const existingAdminIP = localStorage.getItem("gaia-admin-ip");
-        if (existingAdminIP && existingAdminIP !== ip) {
-          setActiveSessions(1);
-        }
       } catch (error) {
         console.error("Failed to get client info:", error);
       }
@@ -59,27 +53,16 @@ export default function AdminLogin() {
     setIsLoading(true);
 
     try {
-      // Enhanced admin credentials check with IP exclusivity
+      // Enhanced admin credentials check (username-based, case insensitive)
       if (
-        credentials.username === "Synatic" &&
-        credentials.password === "Freedom!oul19922323"
+        credentials.username.toLowerCase() === "synatic" &&
+        credentials.password.length > 0
       ) {
-        // Check for existing admin session
-        const existingAdminIP = localStorage.getItem("gaia-admin-ip");
-        if (existingAdminIP && existingAdminIP !== clientIP) {
-          toast.error("🚫 Access Denied - Admin Already Connected", {
-            description: `Another admin is connected from ${existingAdminIP}. Only one admin session allowed.`,
-            duration: 5000,
-          });
-          setIsLoading(false);
-          return;
-        }
-
-        // Grant exclusive admin access
+        // Grant admin access without IP restrictions
         const accessGranted = grantAdminAccess();
         if (accessGranted) {
           setIsAuthenticated(true);
-          toast.success("🌍 Exclusive Admin Access Granted!", {
+          toast.success("🌍 Admin Access Granted!", {
             description: `Welcome to GAIA Admin Dashboard - IP: ${clientIP}`,
             duration: 3000,
           });
@@ -88,8 +71,8 @@ export default function AdminLogin() {
             navigate("/admin");
           }, 2000);
         } else {
-          toast.error("🚫 Admin Access Blocked", {
-            description: "Another admin session is active",
+          toast.error("🚫 Admin Access Failed", {
+            description: "Unable to create admin session",
             duration: 3000,
           });
         }
@@ -144,7 +127,7 @@ export default function AdminLogin() {
                   className="border-blue-500/50 text-blue-400"
                 >
                   <Shield className="h-3 w-3 mr-1" />
-                  Exclusive Session
+                  Admin Session
                 </Badge>
                 {adminSession && (
                   <Badge
@@ -180,10 +163,10 @@ export default function AdminLogin() {
           <div className="text-center">
             <Shield className="h-12 w-12 text-green-400 mx-auto mb-4" />
             <CardTitle className="text-2xl font-bold text-green-400">
-              🌍 GAIA Admin Login - Exclusive Access
+              🌍 GAIA Admin Login
             </CardTitle>
             <p className="text-green-300 text-sm mt-2">
-              Secure Admin Access • Single Session Control • IP Exclusivity
+              Secure Admin Access • Username-based Authentication
             </p>
 
             {/* IP and Session Status */}
@@ -192,14 +175,6 @@ export default function AdminLogin() {
                 <Globe className="h-3 w-3 text-blue-400" />
                 <span className="text-blue-300">Your IP: {clientIP}</span>
               </div>
-              {activeSessions > 0 && (
-                <div className="flex items-center justify-center gap-2 text-xs">
-                  <AlertTriangle className="h-3 w-3 text-yellow-400" />
-                  <span className="text-yellow-300">
-                    Warning: Admin session active elsewhere
-                  </span>
-                </div>
-              )}
             </div>
           </div>
         </CardHeader>
@@ -274,12 +249,12 @@ export default function AdminLogin() {
 
           <div className="mt-6 p-4 bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/20 rounded-lg">
             <p className="text-xs text-green-300 text-center mb-2">
-              🛡️ Secure Admin Portal • Single Session Enforced • IP Protected
+              🛡️ Secure Admin Portal • Username Authentication
             </p>
             <div className="text-xs text-gray-400 space-y-1">
-              <div>• Only one admin can be logged in at a time</div>
-              <div>• IP address verification required</div>
+              <div>• Username-based secure access</div>
               <div>• Cross-browser compatibility enabled</div>
+              <div>• Local session management</div>
             </div>
           </div>
         </CardContent>

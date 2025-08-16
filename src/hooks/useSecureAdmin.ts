@@ -28,8 +28,38 @@ export function useSecureAdmin() {
     if (user) {
       validateAdminSession();
     } else {
-      setIsAdmin(false);
-      setAdminSession(null);
+      // Check for local admin session even without user
+      const localSessionActive = sessionStorage.getItem("admin-session-active") === "true";
+      const localUsername = localStorage.getItem("gaia-admin-username")?.toLowerCase();
+      const localSession = localStorage.getItem("gaia-admin-session");
+      const localExpiry = localStorage.getItem("gaia-admin-expiry");
+
+      if (
+        localSessionActive &&
+        localUsername === "synatic" &&
+        localSession &&
+        localExpiry &&
+        Date.now() < parseInt(localExpiry)
+      ) {
+        // Valid local admin session found
+        setIsAdmin(true);
+        setAdminSession({
+          id: localSession,
+          timestamp: parseInt(localExpiry) - 8 * 60 * 60 * 1000, // Original creation time
+          level: "admin",
+        });
+      } else {
+        // Clean up expired local sessions
+        if (localSessionActive && localUsername === "synatic" && localExpiry && Date.now() >= parseInt(localExpiry)) {
+          sessionStorage.removeItem("admin-session-active");
+          localStorage.removeItem("gaia-admin-username");
+          localStorage.removeItem("gaia-admin-active");
+          localStorage.removeItem("gaia-admin-session");
+          localStorage.removeItem("gaia-admin-expiry");
+        }
+        setIsAdmin(false);
+        setAdminSession(null);
+      }
       setIsValidating(false);
     }
   }, [user]);
@@ -41,6 +71,40 @@ export function useSecureAdmin() {
     }
 
     try {
+      // First check for local "Synatic" admin session (fallback)
+      const localSessionActive = sessionStorage.getItem("admin-session-active") === "true";
+      const localUsername = localStorage.getItem("gaia-admin-username")?.toLowerCase();
+      const localSession = localStorage.getItem("gaia-admin-session");
+      const localExpiry = localStorage.getItem("gaia-admin-expiry");
+
+      if (
+        localSessionActive &&
+        localUsername === "synatic" &&
+        localSession &&
+        localExpiry &&
+        Date.now() < parseInt(localExpiry)
+      ) {
+        // Valid local admin session found
+        setIsAdmin(true);
+        setAdminSession({
+          id: localSession,
+          timestamp: parseInt(localExpiry) - 8 * 60 * 60 * 1000, // Original creation time
+          level: "admin",
+        });
+        setIsValidating(false);
+        return;
+      }
+
+      // If local session expired, clean it up
+      if (localSessionActive && localUsername === "synatic" && localExpiry && Date.now() >= parseInt(localExpiry)) {
+        sessionStorage.removeItem("admin-session-active");
+        localStorage.removeItem("gaia-admin-username");
+        localStorage.removeItem("gaia-admin-active");
+        localStorage.removeItem("gaia-admin-session");
+        localStorage.removeItem("gaia-admin-expiry");
+      }
+
+      // Fall back to Supabase-based validation
       // 🔒 SECURE: Use the enhanced security validation function
       const { data: isValidAdmin, error } = await supabase.rpc(
         "validate_admin_session_security",
@@ -179,48 +243,54 @@ export function useSecureAdmin() {
   };
 
   const revokeAdminAccess = async () => {
-    if (!user || !adminSession) return;
-
     try {
       // Clear the sessionStorage key that InvisibleAdminProtection expects
       sessionStorage.removeItem("admin-session-active");
       
-      // Deactivate admin security session
-      if (adminSession.id) {
+      // Clear local admin session data
+      localStorage.removeItem("gaia-admin-username");
+      localStorage.removeItem("gaia-admin-active");
+      localStorage.removeItem("gaia-admin-session");
+      localStorage.removeItem("gaia-admin-expiry");
+      
+      // Deactivate admin security session (if Supabase user exists)
+      if (user && adminSession?.id) {
         await supabase
           .from("admin_security_sessions")
           .update({ is_active: false })
           .eq("session_token", adminSession.id);
-      }
 
-      // 🔒 SECURE: Log admin session revocation for audit trail
-      await supabase.rpc("log_security_event", {
-        p_user_id: user.id,
-        p_action: "admin_access_revoked",
-        p_details: {
-          session_id: adminSession.id,
-          timestamp: new Date().toISOString(),
-          method: "secure_revocation",
-        },
-        p_risk_score: 1,
-      });
+        // 🔒 SECURE: Log admin session revocation for audit trail
+        await supabase.rpc("log_security_event", {
+          p_user_id: user.id,
+          p_action: "admin_access_revoked",
+          p_details: {
+            session_id: adminSession.id,
+            timestamp: new Date().toISOString(),
+            method: "secure_revocation",
+          },
+          p_risk_score: 1,
+        });
+      }
 
       console.log("Admin session securely revoked with audit logging");
     } catch (error) {
       console.error("Error revoking admin access:", error);
 
-      // Log security incident for revocation failures
-      try {
-        await supabase.from("security_incidents").insert([
-          {
-            incident_type: "admin_revocation_failure",
-            severity: "high",
-            user_id: user.id,
-            details: { error: error.message, session_id: adminSession.id },
-          },
-        ]);
-      } catch (logError) {
-        console.error("Failed to log security incident:", logError);
+      // Log security incident for revocation failures (if user exists)
+      if (user) {
+        try {
+          await supabase.from("security_incidents").insert([
+            {
+              incident_type: "admin_revocation_failure",
+              severity: "high",
+              user_id: user.id,
+              details: { error: error.message, session_id: adminSession?.id },
+            },
+          ]);
+        } catch (logError) {
+          console.error("Failed to log security incident:", logError);
+        }
       }
     }
 
