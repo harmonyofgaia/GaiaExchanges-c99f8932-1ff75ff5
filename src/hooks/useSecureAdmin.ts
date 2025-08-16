@@ -1,16 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 // Use Web Crypto API for browser compatibility instead of Node.js crypto
-// Try to import useAuth safely, falling back to a no-op
-let useAuth: () => { user: any } = () => ({ user: null });
-try {
-  const authModule = require("@/components/auth/AuthProvider");
-  if (authModule?.useAuth) {
-    useAuth = authModule.useAuth;
-  }
-} catch (error) {
-  console.error("AuthProvider not available:", error);
-}
+import { useAuth } from "@/components/auth/AuthProvider";
 
 interface AdminSession {
   id: string;
@@ -210,8 +201,10 @@ export function useSecureAdmin() {
   function generateSecureRandomString(length: number): string {
     const array = new Uint8Array(length);
     window.crypto.getRandomValues(array);
-    // Convert to base64 for compactness
-    return btoa(String.fromCharCode(...array)).replace(/[^a-zA-Z0-9]/g, '').substr(0, length);
+    // Convert to hex for safety and avoid call stack issues
+    return Array.from(array, byte => byte.toString(16).padStart(2, '0'))
+      .join('')
+      .substring(0, length);
   }
 
   const grantAdminAccess = async (): Promise<boolean> => {
