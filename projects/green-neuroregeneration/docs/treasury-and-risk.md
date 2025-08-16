@@ -19,7 +19,7 @@ Annual Award Calculation (safe envelope)
 - PriceStabilityFactor = clamp(P_t / EMA(P_t, 365d), floor=0.7, ceil=1.3)
 
 Award_t = min(BaseCap, RunwayCap, DrawCap) * PriceStabilityFactor
-
+Award_t = min(BaseCap, RunwayCap, DrawCap) * PriceDamp
 Default k values:
 - k1 = 0.01 (max 1% of average treasury)
 - k2 = min(1.0, (Runway_t - 24) / target_runway)  # ensures runway remains ≥ 24 months post-award
