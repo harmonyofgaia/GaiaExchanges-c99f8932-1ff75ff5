@@ -100,86 +100,62 @@ export default function NeonTreeBackground() {
       }
       ctx.restore();
 
-      // Background neural particles (glitching pathways)
-      ctx.save();
+      // Update neural particles
       for (const p of particles) {
-        p.y += p.vy;
+        p.y -= p.vy;
         p.x += p.vx;
-        if (p.y > height / devicePixelRatio) {
-          p.y = -2;
+        if (p.y < -10) {
+          p.y = height / devicePixelRatio + 10;
           p.x = rand(0, width / devicePixelRatio);
         }
-        if (p.x < -2) p.x = width / devicePixelRatio + 2;
-        if (p.x > width / devicePixelRatio + 2) p.x = -2;
-
-        ctx.strokeStyle = p.a;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x + rand(-3, 3), p.y + rand(6, 12));
-        ctx.stroke();
+        if (p.x < -10 || p.x > width / devicePixelRatio + 10) {
+          p.x = rand(0, width / devicePixelRatio);
+        }
+        
+        ctx.fillStyle = p.a;
+        ctx.fillRect(p.x, p.y, 2, 2);
       }
-      ctx.restore();
 
       // Grow tree branches
-      const next: Branch[] = [];
-      for (const b of branches) {
-        if (b.life <= 0 || b.width < 0.25) continue;
+      for (let i = branches.length - 1; i >= 0; i--) {
+        const b = branches[i];
+        if (b.life <= 0) continue;
 
-        const len = clamp(b.speed, 0.6, 2.6);
-        const nx = b.x + Math.cos(b.angle) * len;
-        const ny = b.y + Math.sin(b.angle) * len;
+        const dx = Math.cos(b.angle) * b.speed;
+        const dy = Math.sin(b.angle) * b.speed;
 
-        // Glow
         ctx.save();
-        ctx.shadowColor = b.neon;
-        ctx.shadowBlur = 12;
+        ctx.globalCompositeOperation = "lighter";
         ctx.strokeStyle = b.neon;
         ctx.lineWidth = b.width;
+        ctx.lineCap = "round";
+        ctx.shadowColor = b.neon;
+        ctx.shadowBlur = b.width * 2;
+
         ctx.beginPath();
         ctx.moveTo(b.x, b.y);
-        ctx.lineTo(nx, ny);
+        b.x += dx;
+        b.y += dy;
+        ctx.lineTo(b.x, b.y);
         ctx.stroke();
         ctx.restore();
 
-        b.x = nx;
-        b.y = ny;
-        b.life -= 1;
+        b.life--;
 
-        // Slight sway
-        b.angle += rand(-0.02, 0.02);
+        // Occasionally branch out
+        if (b.life > 20 && Math.random() < 0.08 && b.width > 0.8) {
+          const variation = rand(-0.6, 0.6);
+          const newAngle = b.angle + variation;
+          const newWidth = b.width * rand(0.65, 0.9);
+          const newLife = Math.floor(b.life * rand(0.4, 0.85));
+          makeBranch(b.x, b.y, newAngle, newWidth, newLife);
+        }
 
-        // Branching
-        if (Math.random() < 0.02 && b.width > 0.6) {
-          // fork
-          next.push({
-            ...b,
-            angle: b.angle + rand(0.25, 0.55),
-            width: b.width * rand(0.68, 0.78),
-            life: b.life * rand(0.6, 0.9),
-            neon: greens[Math.floor(rand(0, greens.length))]
-          });
-          next.push({
-            ...b,
-            angle: b.angle - rand(0.25, 0.55),
-            width: b.width * rand(0.68, 0.78),
-            life: b.life * rand(0.6, 0.9),
-            neon: greens[Math.floor(rand(0, greens.length))]
-          });
-        } else if (Math.random() < 0.06) {
-          // slight split
-          next.push({
-            ...b,
-            angle: b.angle + rand(-0.18, 0.18),
-            width: b.width * rand(0.82, 0.92),
-            life: b.life * rand(0.95, 1.02)
-          });
-        } else {
-          next.push(b);
+        // Gradual width reduction for organic taper
+        if (b.life % 8 === 0 && b.width > 0.3) {
+          b.width *= 0.98;
         }
       }
-      branches.length = 0;
-      branches.push(...next);
     }
 
     rafRef.current = requestAnimationFrame(step);
@@ -199,8 +175,6 @@ export default function NeonTreeBackground() {
             "radial-gradient(1200px 600px at 50% 100%, rgba(0,10,8,0.75) 0%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,1) 100%)",
         }}
       />
-      {/* Soft vignette for column readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent" />
     </div>
   );
 }
