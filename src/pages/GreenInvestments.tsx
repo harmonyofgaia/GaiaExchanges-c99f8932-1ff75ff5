@@ -3,7 +3,7 @@ import { GaiaCommunityProjects } from "@/components/GaiaCommunityProjects";
 import { WildfireSandProtection } from "@/components/green-investments/WildfireSandProtection";
 import { SandProtectInvestmentProject } from "@/components/green-investments/SandProtectInvestmentProject";
 import { GreenInvestmentWalletManager } from "@/components/green-investments/GreenInvestmentWalletManager";
-import GreenInvestmentsBackground from "@/components/backgrounds/GreenInvestmentsBackground";
+// Note: GreenInvestmentsBackground handles devicePixelRatio compatibility internally for crisp rendering on high-DPI screens.
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
