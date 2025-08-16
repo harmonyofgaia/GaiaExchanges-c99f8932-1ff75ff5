@@ -16,7 +16,9 @@ Annual Award Calculation (safe envelope)
 - DrawCap = k3 * max(0, EMA(R_t, 180d))
 - PriceDamp = clamp(P_t / EMA(P_t, 365d), floor=0.7, ceil=1.3)
 
-Award_t = min(BaseCap, RunwayCap, DrawCap) * PriceDamp
+- PriceStabilityFactor = clamp(P_t / EMA(P_t, 365d), floor=0.7, ceil=1.3)
+
+Award_t = min(BaseCap, RunwayCap, DrawCap) * PriceStabilityFactor
 
 Default k values:
 - k1 = 0.01 (max 1% of average treasury)
