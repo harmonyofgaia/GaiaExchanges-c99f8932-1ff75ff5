@@ -94,7 +94,7 @@ if (Test-Path ".env") {
 }
 
 # Deployment configs
-$deploymentConfigs = @("vercel.json", "netlify.toml")
+$deploymentConfigs = @("netlify.toml")
 foreach ($config in $deploymentConfigs) {
     if (Test-Path $config) {
     Write-Success "$config exists"
@@ -143,7 +143,7 @@ try {
 
 Write-Header "DEPLOYMENT PLATFORM READINESS"
 
-$deploymentTools = @("vercel", "netlify")
+$deploymentTools = @("netlify")
 foreach ($tool in $deploymentTools) {
     $toolPath = (Get-Command $tool -ErrorAction SilentlyContinue)
     if ($toolPath) {
@@ -203,10 +203,6 @@ if (Test-Path "dist") {
 }
 
 Write-Header "DEPLOYMENT RECOMMENDATIONS"
-Write-Host "\n📚 For Vercel:"
-Write-Host "   1. Ensure vercel.json is configured"
-Write-Host "   2. Set environment variables in Vercel dashboard"
-Write-Host "   3. Use: npm run deploy:vercel"
 Write-Host "\n📚 For Netlify:"
 Write-Host "   1. Ensure netlify.toml is configured"
 Write-Host "   2. Set environment variables in Netlify dashboard"

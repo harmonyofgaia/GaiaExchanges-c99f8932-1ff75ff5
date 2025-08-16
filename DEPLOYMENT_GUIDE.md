@@ -11,8 +11,6 @@ If the primary deployment fails, you can deploy to:
 1. Netlify (Primary) → Deploy first
 2. GitHub Pages (Fallback) → If Netlify fails or is unavailable
 
-Vercel is supported as an optional manual deployment path but is not wired into CI by default.
-
 ## Key Features
 
 - ✅ No double deployments: Only one platform deploys via CI
@@ -29,7 +27,6 @@ npm run deploy
 
 # Or deploy to specific platforms
 npm run deploy:netlify     # Deploy to Netlify (default)
-npm run deploy:vercel      # Optional: Deploy to Vercel (manual)
 npm run deploy:github-pages # Prepare for GitHub Pages
 ```
 
@@ -61,19 +58,6 @@ npm run deploy:github-pages
 
 # Then push the dist/ folder to gh-pages branch
 # Or use GitHub Actions workflow
-```
-
-### Optional: Vercel (Manual)
-
-```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# Deploy to Vercel (requires a linked project in your environment)
-vercel --prod
-
-# Or use the script
-npm run deploy:vercel
 ```
 
 ### Environment Variables
