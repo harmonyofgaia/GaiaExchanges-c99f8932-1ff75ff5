@@ -33,6 +33,19 @@ interface StorageFile {
   metadata?: Record<string, unknown>;
 }
 
+// Utility function to determine file type from file name
+const getFileType = (fileName: string): StorageFile["type"] => {
+  const ext = fileName.split(".").pop()?.toLowerCase();
+  if (["jpg", "jpeg", "png", "gif", "webp", "svg"].includes(ext || ""))
+    return "image";
+  if (["mp4", "avi", "mov", "wmv", "flv", "webm"].includes(ext || ""))
+    return "video";
+  if (["mp3", "wav", "ogg", "m4a", "aac"].includes(ext || "")) return "audio";
+  if (["pdf", "doc", "docx", "txt", "rtf"].includes(ext || ""))
+    return "document";
+  return "other";
+};
+
 export default function StorageManagement() {
   const [files, setFiles] = useState<StorageFile[]>([]);
   const [loading, setLoading] = useState(true);
@@ -50,18 +63,6 @@ export default function StorageManagement() {
     ],
     [],
   );
-
-  const getFileType = (fileName: string): StorageFile["type"] => {
-    const ext = fileName.split(".").pop()?.toLowerCase();
-    if (["jpg", "jpeg", "png", "gif", "webp", "svg"].includes(ext || ""))
-      return "image";
-    if (["mp4", "avi", "mov", "wmv", "flv", "webm"].includes(ext || ""))
-      return "video";
-    if (["mp3", "wav", "ogg", "m4a", "aac"].includes(ext || "")) return "audio";
-    if (["pdf", "doc", "docx", "txt", "rtf"].includes(ext || ""))
-      return "document";
-    return "other";
-  };
 
   const loadFiles = useCallback(async () => {
     setLoading(true);
@@ -100,7 +101,7 @@ export default function StorageManagement() {
     } finally {
       setLoading(false);
     }
-  }, [buckets, selectedBucket, getFileType]);
+  }, [buckets, selectedBucket]);
 
   useEffect(() => {
     loadFiles();

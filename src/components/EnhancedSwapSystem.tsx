@@ -61,7 +61,8 @@ export function EnhancedSwapSystem() {
     // Fetch user configuration
     const fetchUserConfig = async () => {
       console.log("📊 Enhanced Swap System: Fetching user configuration");
-      return userConfig;
+      // TODO: Implement actual user config fetching from API/storage
+      return;
     };
 
     fetchUserConfig();

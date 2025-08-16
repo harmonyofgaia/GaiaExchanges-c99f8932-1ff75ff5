@@ -2,7 +2,7 @@
 
 export function createTicker(targetFps: number, onTick: (t: GaiaTick) => void) {
   const interval = Math.max(1, Math.floor(1000 / Math.max(1, targetFps)));
-  let timer: any = null;
+  let timer: NodeJS.Timeout | null = null;
   let frame = 0;
   let last = globalThis.performance?.now?.() ?? Date.now();
 

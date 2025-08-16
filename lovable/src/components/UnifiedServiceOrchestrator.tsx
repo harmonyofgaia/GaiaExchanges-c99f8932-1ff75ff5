@@ -102,7 +102,7 @@ export function UnifiedServiceOrchestrator() {
       if (orchestratorInterval.current)
         clearInterval(orchestratorInterval.current);
     };
-  }, [services.length]);
+  }, [services]);
 
   return {
     services,

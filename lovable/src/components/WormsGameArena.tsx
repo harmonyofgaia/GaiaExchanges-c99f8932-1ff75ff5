@@ -360,7 +360,7 @@ export function WormsGameArena() {
 
       return () => clearInterval(timer);
     }
-  }, [gameState, currentPlayer]);
+  }, [gameState, currentPlayer, switchTurn]);
 
   useEffect(() => {
     // Generate random wind strength every 15 seconds
@@ -404,7 +404,7 @@ export function WormsGameArena() {
     });
   };
 
-  const switchTurn = () => {
+  const switchTurn = useCallback(() => {
     setCurrentPlayer((prev) => {
       const newPlayer = prev === "player" ? "enemy" : "player";
 
@@ -424,7 +424,7 @@ export function WormsGameArena() {
       return newPlayer;
     });
     setTurnTimer(45);
-  };
+  }, [worms]);
 
   const fireWeapon = async () => {
     const weapon = weapons.find((w) => w.id === selectedWeapon);

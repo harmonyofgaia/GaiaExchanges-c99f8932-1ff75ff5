@@ -2,16 +2,16 @@ import { lazy, Suspense, Component, ReactNode } from "react";
 // ErrorBoundary component to catch runtime errors
 class ErrorBoundary extends Component<
   { children: ReactNode },
-  { hasError: boolean; error: any }
+  { hasError: boolean; error: Error | null }
 > {
   constructor(props: { children: ReactNode }) {
     super(props);
     this.state = { hasError: false, error: null };
   }
-  static getDerivedStateFromError(error: any) {
+  static getDerivedStateFromError(error: Error) {
     return { hasError: true, error };
   }
-  componentDidCatch(error: any, errorInfo: any) {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // You can log errorInfo to an error reporting service here
     // console.error(error, errorInfo);
   }

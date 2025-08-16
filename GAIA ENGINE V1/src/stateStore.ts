@@ -27,8 +27,8 @@ export class StateStore<S> {
   patch(partial: Partial<S>) {
     this.set(
       Object.assign(
-        Array.isArray(this.state) ? ([] as any) : {},
-        this.state as any,
+        Array.isArray(this.state) ? ([] as S) : ({} as S),
+        this.state,
         partial,
       ),
     );

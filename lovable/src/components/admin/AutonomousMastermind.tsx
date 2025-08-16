@@ -140,7 +140,7 @@ export function AutonomousMastermind() {
       setCountdownTimer(null);
       setPendingFeature(null);
     };
-  }, [features, autoApplyEnabled]);
+  }, [features, autoApplyEnabled, applyFeature]);
 
   const applyFeature = (featureId: string, isAutomatic = false) => {
     setFeatures((prev) =>

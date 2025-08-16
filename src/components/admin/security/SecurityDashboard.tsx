@@ -60,6 +60,17 @@ interface ThreatData {
   behavioral_indicators?: string[];
 }
 
+// Geolocation data interface
+interface GeolocationData {
+  country?: string;
+  region?: string;
+  city?: string;
+  latitude?: number;
+  longitude?: number;
+  timezone?: string;
+  [key: string]: unknown; // Allow additional geolocation properties
+}
+
 interface ThreatIntelligence {
   id: string;
   threat_type: string;
@@ -67,7 +78,7 @@ interface ThreatIntelligence {
   severity_level: string;
   ip_address: string | null;
   user_agent: string | null;
-  geolocation: any;
+  geolocation: GeolocationData | null;
   detected_at: string;
   resolved_at: string | null;
   status: string;
@@ -96,7 +107,7 @@ export function SecurityDashboard() {
       if (!scanError && scanData) {
         const typedScans = scanData.map((scan) => ({
           ...scan,
-          scan_results: (scan.scan_results as any) || {},
+          scan_results: (scan.scan_results as SecurityScanResults) || {},
         })) as SecurityScan[];
         setScans(typedScans);
       }
@@ -111,10 +122,10 @@ export function SecurityDashboard() {
       if (!threatError && threatData) {
         const typedThreats = threatData.map((threat) => ({
           ...threat,
-          threat_data: (threat.threat_data as any) || {},
+          threat_data: (threat.threat_data as ThreatData) || {},
           ip_address: (threat.ip_address as string) || null,
           user_agent: (threat.user_agent as string) || null,
-          geolocation: threat.geolocation as any,
+          geolocation: threat.geolocation as GeolocationData | null,
         })) as ThreatIntelligence[];
         setThreats(typedThreats);
       }
