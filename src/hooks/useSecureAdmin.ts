@@ -88,7 +88,7 @@ export function useSecureAdmin() {
         setIsAdmin(true);
         setAdminSession({
           id: localSession,
-          timestamp: parseInt(localExpiry) - 8 * 60 * 60 * 1000, // Original creation time
+          timestamp: getAdminSessionTimestamp(localExpiry), // Original creation time
           level: "admin",
         });
         setIsValidating(false);
