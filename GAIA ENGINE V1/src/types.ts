@@ -6,7 +6,7 @@ export type GaiaEvent<T extends string = string, P = unknown> = {
   at: number;
 };
 
-export interface GaiaBehavior<S = any, C = any> {
+export interface GaiaBehavior<S = unknown, C = unknown> {
   id: string;
   describe?(state: S, ctx: C): string;
   step(state: S, tick: GaiaTick, ctx: C): S;

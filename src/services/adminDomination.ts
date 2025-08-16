@@ -44,6 +44,25 @@ interface RemoteOverride {
   status: "pending" | "executed" | "failed";
 }
 
+interface SecurityAlert {
+  id: string;
+  type: string;
+  severity: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+  message: string;
+  timestamp: number;
+  resolved: boolean;
+}
+
+interface PrivilegeEscalation {
+  id: string;
+  adminId: string;
+  fromLevel: string;
+  toLevel: string;
+  reason: string;
+  timestamp: number;
+  approved: boolean;
+}
+
 class AdminDominationService {
   private adminSessions: Map<string, AdminSession> = new Map();
   private emergencyProtocols: Map<string, EmergencyProtocol> = new Map();
@@ -362,9 +381,9 @@ class AdminDominationService {
   async generateAdminForensicsReport(adminId?: string): Promise<{
     totalSessions: number;
     activeSessions: number;
-    recentActions: any[];
-    securityAlerts: any[];
-    privilegeEscalations: any[];
+    recentActions: RemoteOverride[];
+    securityAlerts: SecurityAlert[];
+    privilegeEscalations: PrivilegeEscalation[];
   }> {
     const sessions = adminId
       ? Array.from(this.adminSessions.values()).filter(
