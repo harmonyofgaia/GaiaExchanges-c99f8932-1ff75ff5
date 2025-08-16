@@ -42,7 +42,6 @@ npm run deploy:complete    # Full deployment with diagnosis and validation
 npm run deploy:doctor      # Diagnose deployment issues
 npm run deploy:validate    # Validate deployment success
 npm run deploy:auto        # Standard deployment with checks
-npm run deploy:vercel      # Deploy to Vercel
 npm run deploy:netlify     # Deploy to Netlify
 npm run deploy:static      # Build for static hosting
 ```
@@ -87,7 +86,7 @@ npm run deploy:static      # Build for static hosting
 ### For Quick Deployment:
 
 1. **Standard deployment**: `npm run deploy:auto`
-2. **Platform-specific**: `npm run deploy:vercel` or `npm run deploy:netlify`
+2. **Platform-specific**: `npm run deploy:netlify`
 
 ## 🎉 Result
 
